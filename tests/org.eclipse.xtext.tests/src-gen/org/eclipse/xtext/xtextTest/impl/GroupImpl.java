@@ -26,7 +26,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.impl.GroupImpl#getTokens <em>Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.impl.GroupImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,14 +34,14 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
 public class GroupImpl extends AbstractElementImpl implements Group
 {
   /**
-   * The cached value of the '{@link #getTokens() <em>Tokens</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTokens()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<AbstractElement> tokens;
+  protected EList<AbstractElement> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,13 +69,13 @@ public class GroupImpl extends AbstractElementImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractElement> getTokens()
+  public EList<AbstractElement> getElements()
   {
-    if (tokens == null)
+    if (elements == null)
     {
-      tokens = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextTestPackage.GROUP__TOKENS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextTestPackage.GROUP__ELEMENTS);
     }
-    return tokens;
+    return elements;
   }
 
   /**
@@ -88,8 +88,8 @@ public class GroupImpl extends AbstractElementImpl implements Group
   {
     switch (featureID)
     {
-      case XtextTestPackage.GROUP__TOKENS:
-        return ((InternalEList<?>)getTokens()).basicRemove(otherEnd, msgs);
+      case XtextTestPackage.GROUP__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -104,8 +104,8 @@ public class GroupImpl extends AbstractElementImpl implements Group
   {
     switch (featureID)
     {
-      case XtextTestPackage.GROUP__TOKENS:
-        return getTokens();
+      case XtextTestPackage.GROUP__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,9 +121,9 @@ public class GroupImpl extends AbstractElementImpl implements Group
   {
     switch (featureID)
     {
-      case XtextTestPackage.GROUP__TOKENS:
-        getTokens().clear();
-        getTokens().addAll((Collection<? extends AbstractElement>)newValue);
+      case XtextTestPackage.GROUP__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -139,8 +139,8 @@ public class GroupImpl extends AbstractElementImpl implements Group
   {
     switch (featureID)
     {
-      case XtextTestPackage.GROUP__TOKENS:
-        getTokens().clear();
+      case XtextTestPackage.GROUP__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -156,8 +156,8 @@ public class GroupImpl extends AbstractElementImpl implements Group
   {
     switch (featureID)
     {
-      case XtextTestPackage.GROUP__TOKENS:
-        return tokens != null && !tokens.isEmpty();
+      case XtextTestPackage.GROUP__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -169,12 +169,12 @@ protected class Root_TrickyGParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule Op ****************
  *
- * Op returns Expression:
- * 	Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*;
+ * Op Expression:
+ * 	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
  *
  **/
 
-// Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*
+// Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 protected class Op_Group extends GroupToken {
 	
 	public Op_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -240,7 +240,7 @@ protected class Op_TermParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*
+// ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 protected class Op_Alternatives_1 extends AlternativesToken {
 
 	public Op_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -271,7 +271,7 @@ protected class Op_Alternatives_1 extends AlternativesToken {
 
 }
 
-// {Add.addOperands+=current} "+" addOperands+=Term
+// {Add.addOperands+=current} '+' addOperands+=Term
 protected class Op_Group_1_0 extends GroupToken {
 	
 	public Op_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -330,7 +330,7 @@ protected class Op_AddAddOperandsAction_1_0_0 extends ActionToken  {
 	}
 }
 
-// "+"
+// '+'
 protected class Op_PlusSignKeyword_1_0_1 extends KeywordToken  {
 	
 	public Op_PlusSignKeyword_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -399,7 +399,7 @@ protected class Op_AddOperandsAssignment_1_0_2 extends AssignmentToken  {
 }
 
 
-// {Minus.minusOperands+=current} "-" minusOperands+=Term
+// {Minus.minusOperands+=current} '-' minusOperands+=Term
 protected class Op_Group_1_1 extends GroupToken {
 	
 	public Op_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -458,7 +458,7 @@ protected class Op_MinusMinusOperandsAction_1_1_0 extends ActionToken  {
 	}
 }
 
-// "-"
+// '-'
 protected class Op_HyphenMinusKeyword_1_1_1 extends KeywordToken  {
 	
 	public Op_HyphenMinusKeyword_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -534,8 +534,8 @@ protected class Op_MinusOperandsAssignment_1_1_2 extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression:
- * 	Atom | Parens;
+ * Term Expression:
+ * 	Atom | Parens
  *
  **/
 
@@ -692,12 +692,12 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * / * SuppressWarnings[potentialOverride] * / Parens returns Expression:
- * 	"(" Op ")" em="!"?;
+ * / * SuppressWarnings[potentialOverride] * / Parens Expression:
+ * 	'(' Op ')' em='!'?
  *
  **/
 
-// "(" Op ")" em="!"?
+// '(' Op ')' em='!'?
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -729,7 +729,7 @@ protected class Parens_Group extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 	
 	public Parens_LeftParenthesisKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -785,7 +785,7 @@ protected class Parens_OpParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// ")"
+// ')'
 protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 	
 	public Parens_RightParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -807,7 +807,7 @@ protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 
 }
 
-// em="!"?
+// em='!'?
 protected class Parens_EmAssignment_3 extends AssignmentToken  {
 	
 	public Parens_EmAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -854,11 +854,11 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
  * //TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
  * //TrickyA1 returns TypeD: name+=ID;
  * / * SuppressWarnings[noInstantiation] * / TrickyB:
- * 	"TB" (name=ID type+=INT)? type+=INT*;
+ * 	'TB' (name=ID type+=INT)? type+=INT*;
  *
  **/
 
-// "TB" (name=ID type+=INT)? type+=INT*
+// 'TB' (name=ID type+=INT)? type+=INT*
 protected class TrickyB_Group extends GroupToken {
 	
 	public TrickyB_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -889,7 +889,7 @@ protected class TrickyB_Group extends GroupToken {
 
 }
 
-// "TB"
+// 'TB'
 protected class TrickyB_TBKeyword_0 extends KeywordToken  {
 	
 	public TrickyB_TBKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1044,11 +1044,11 @@ protected class TrickyB_TypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule TrickyC ****************
  *
  * TrickyC:
- * 	"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+ * 	'TC' name=ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?;
  *
  **/
 
-// "TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?
+// 'TC' name=ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?
 protected class TrickyC_Group extends GroupToken {
 	
 	public TrickyC_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1083,7 +1083,7 @@ protected class TrickyC_Group extends GroupToken {
 
 }
 
-// "TC"
+// 'TC'
 protected class TrickyC_TCKeyword_0 extends KeywordToken  {
 	
 	public TrickyC_TCKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1140,7 +1140,7 @@ protected class TrickyC_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ({C1.x=current} "x")?
+// ({C1.x=current} 'x')?
 protected class TrickyC_Group_2 extends GroupToken {
 	
 	public TrickyC_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1198,7 +1198,7 @@ protected class TrickyC_C1XAction_2_0 extends ActionToken  {
 	}
 }
 
-// "x"
+// 'x'
 protected class TrickyC_XKeyword_2_1 extends KeywordToken  {
 	
 	public TrickyC_XKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1221,7 +1221,7 @@ protected class TrickyC_XKeyword_2_1 extends KeywordToken  {
 }
 
 
-// ({C2.y=current} "y")?
+// ({C2.y=current} 'y')?
 protected class TrickyC_Group_3 extends GroupToken {
 	
 	public TrickyC_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1280,7 +1280,7 @@ protected class TrickyC_C2YAction_3_0 extends ActionToken  {
 	}
 }
 
-// "y"
+// 'y'
 protected class TrickyC_YKeyword_3_1 extends KeywordToken  {
 	
 	public TrickyC_YKeyword_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1303,7 +1303,7 @@ protected class TrickyC_YKeyword_3_1 extends KeywordToken  {
 }
 
 
-// ({C3.z=current} "z")?
+// ({C3.z=current} 'z')?
 protected class TrickyC_Group_4 extends GroupToken {
 	
 	public TrickyC_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1363,7 +1363,7 @@ protected class TrickyC_C3ZAction_4_0 extends ActionToken  {
 	}
 }
 
-// "z"
+// 'z'
 protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 	
 	public TrickyC_ZKeyword_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1393,11 +1393,11 @@ protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 /************ begin Rule TrickyD ****************
  *
  * / * SuppressWarnings[noInstantiation] * / TrickyD:
- * 	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
+ * 	'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
  *
  **/
 
-// "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
+// 'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
 protected class TrickyD_Group extends GroupToken {
 	
 	public TrickyD_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1429,7 +1429,7 @@ protected class TrickyD_Group extends GroupToken {
 
 }
 
-// "TD"
+// 'TD'
 protected class TrickyD_TDKeyword_0 extends KeywordToken  {
 	
 	public TrickyD_TDKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1712,11 +1712,11 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
  *
  * // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
  * / * SuppressWarnings[noInstantiation] * / TrickyE:
- * 	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
+ * 	'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
  *
  **/
 
-// "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*
+// 'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*
 protected class TrickyE_Group extends GroupToken {
 	
 	public TrickyE_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1746,7 +1746,7 @@ protected class TrickyE_Group extends GroupToken {
 
 }
 
-// "TE"
+// 'TE'
 protected class TrickyE_TEKeyword_0 extends KeywordToken  {
 	
 	public TrickyE_TEKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1893,7 +1893,7 @@ protected class TrickyE_TypeAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "x"
+// 'x'
 protected class TrickyE_XKeyword_2 extends KeywordToken  {
 	
 	public TrickyE_XKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2016,11 +2016,11 @@ protected class TrickyE_TypeAssignment_3_1 extends AssignmentToken  {
  *
  * // 
  * TrickyF:
- * 	"TF" (name+=ID type+=INT)* (name+=ID | type+=INT);
+ * 	'TF' (name+=ID type+=INT)* (name+=ID | type+=INT);
  *
  **/
 
-// "TF" (name+=ID type+=INT)* (name+=ID | type+=INT)
+// 'TF' (name+=ID type+=INT)* (name+=ID | type+=INT)
 protected class TrickyF_Group extends GroupToken {
 	
 	public TrickyF_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2049,7 +2049,7 @@ protected class TrickyF_Group extends GroupToken {
 
 }
 
-// "TF"
+// 'TF'
 protected class TrickyF_TFKeyword_0 extends KeywordToken  {
 	
 	public TrickyF_TFKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2162,7 +2162,7 @@ protected class TrickyF_TypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// name+=ID | type+=INT
+// (name+=ID | type+=INT)
 protected class TrickyF_Alternatives_2 extends AlternativesToken {
 
 	public TrickyF_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2263,11 +2263,11 @@ protected class TrickyF_TypeAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule TrickyG ****************
  *
  * TrickyG:
- * 	"TG" tree=TrickyG1;
+ * 	'TG' tree=TrickyG1;
  *
  **/
 
-// "TG" tree=TrickyG1
+// 'TG' tree=TrickyG1
 protected class TrickyG_Group extends GroupToken {
 	
 	public TrickyG_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2296,7 +2296,7 @@ protected class TrickyG_Group extends GroupToken {
 
 }
 
-// "TG"
+// 'TG'
 protected class TrickyG_TGKeyword_0 extends KeywordToken  {
 	
 	public TrickyG_TGKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2370,11 +2370,11 @@ protected class TrickyG_TreeAssignment_1 extends AssignmentToken  {
 /************ begin Rule TrickyG1 ****************
  *
  * / * SuppressWarnings[noInstantiation] * / TrickyG1:
- * 	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
+ * 	'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
  *
  **/
 
-// "[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]"
+// '[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']'
 protected class TrickyG1_Group extends GroupToken {
 	
 	public TrickyG1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2403,7 +2403,7 @@ protected class TrickyG1_Group extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class TrickyG1_LeftSquareBracketKeyword_0 extends KeywordToken  {
 	
 	public TrickyG1_LeftSquareBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2424,7 +2424,7 @@ protected class TrickyG1_LeftSquareBracketKeyword_0 extends KeywordToken  {
 
 }
 
-// (vals+=TrickyG2 ("," vals+=TrickyG2)*)?
+// (vals+=TrickyG2 (',' vals+=TrickyG2)*)?
 protected class TrickyG1_Group_1 extends GroupToken {
 	
 	public TrickyG1_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2493,7 +2493,7 @@ protected class TrickyG1_ValsAssignment_1_0 extends AssignmentToken  {
 	}	
 }
 
-// ("," vals+=TrickyG2)*
+// (',' vals+=TrickyG2)*
 protected class TrickyG1_Group_1_1 extends GroupToken {
 	
 	public TrickyG1_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2515,7 +2515,7 @@ protected class TrickyG1_Group_1_1 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class TrickyG1_CommaKeyword_1_1_0 extends KeywordToken  {
 	
 	public TrickyG1_CommaKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2586,7 +2586,7 @@ protected class TrickyG1_ValsAssignment_1_1_1 extends AssignmentToken  {
 
 
 
-// "]"
+// ']'
 protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
 	
 	public TrickyG1_RightSquareBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2615,22 +2615,12 @@ protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
 
 /************ begin Rule TrickyG2 ****************
  *
- * //TrickyH: x+='a' TrickyH?; 
- * // TrickyG: TrickyG1 | TrickyG2;
- * // TrickyG1: name=TrickyG3;
- * // TrickyG2: name=TrickyG4;
- * // TrickyG3: val=ID {T.x=current} 'x';
- * // TrickyG4: val=INT {T.x=current} 'y'; TrickyG2:
+ * TrickyG2:
  * 	TrickyG1 | val=INT;
  *
  **/
 
-// TrickyG1 //TrickyH: x+='a' TrickyH?; 
-// // TrickyG: TrickyG1 | TrickyG2;
-// // TrickyG1: name=TrickyG3;
-// // TrickyG2: name=TrickyG4;
-// // TrickyG3: val=ID {T.x=current} 'x';
-// // TrickyG4: val=INT {T.x=current} 'y'; | val=INT
+// TrickyG1 | val=INT
 protected class TrickyG2_Alternatives extends AlternativesToken {
 
 	public TrickyG2_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2697,12 +2687,7 @@ protected class TrickyG2_TrickyG1ParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// //TrickyH: x+='a' TrickyH?; 
-// // TrickyG: TrickyG1 | TrickyG2;
-// // TrickyG1: name=TrickyG3;
-// // TrickyG2: name=TrickyG4;
-// // TrickyG3: val=ID {T.x=current} 'x';
-// // TrickyG4: val=INT {T.x=current} 'y'; val=INT
+// val=INT
 protected class TrickyG2_ValAssignment_1 extends AssignmentToken  {
 	
 	public TrickyG2_ValAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

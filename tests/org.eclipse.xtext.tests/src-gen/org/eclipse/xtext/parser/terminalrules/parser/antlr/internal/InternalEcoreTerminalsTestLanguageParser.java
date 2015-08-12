@@ -176,7 +176,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"intValues",
             	            		lv_intValues_1_0, 
-            	            		"EINT");
+            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
             	    	    
 
             	    }
@@ -218,7 +218,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"doubleValues",
             	            		lv_doubleValues_3_0, 
-            	            		"EDOUBLE");
+            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
             	    	    
 
             	    }
@@ -260,7 +260,7 @@ public class InternalEcoreTerminalsTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"dateValues",
             	            		lv_dateValues_5_0, 
-            	            		"EDATE");
+            	            		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
             	    	    
 
             	    }

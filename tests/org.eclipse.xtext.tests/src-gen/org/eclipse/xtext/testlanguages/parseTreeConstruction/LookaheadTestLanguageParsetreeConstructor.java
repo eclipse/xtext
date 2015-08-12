@@ -254,11 +254,11 @@ protected class Alts_LookAhead3ParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule LookAhead0 ****************
  *
  * LookAhead0:
- * 	"bar" x="a";
+ * 	'bar' x='a';
  *
  **/
 
-// "bar" x="a"
+// 'bar' x='a'
 protected class LookAhead0_Group extends GroupToken {
 	
 	public LookAhead0_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -287,7 +287,7 @@ protected class LookAhead0_Group extends GroupToken {
 
 }
 
-// "bar"
+// 'bar'
 protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 	
 	public LookAhead0_BarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -308,7 +308,7 @@ protected class LookAhead0_BarKeyword_0 extends KeywordToken  {
 
 }
 
-// x="a"
+// x='a'
 protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 	
 	public LookAhead0_XAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -349,11 +349,11 @@ protected class LookAhead0_XAssignment_1 extends AssignmentToken  {
 /************ begin Rule LookAhead1 ****************
  *
  * LookAhead1:
- * 	"foo" y=LookAhead2 x="b" z="d";
+ * 	'foo' y=LookAhead2 x='b' z='d';
  *
  **/
 
-// "foo" y=LookAhead2 x="b" z="d"
+// 'foo' y=LookAhead2 x='b' z='d'
 protected class LookAhead1_Group extends GroupToken {
 	
 	public LookAhead1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -382,7 +382,7 @@ protected class LookAhead1_Group extends GroupToken {
 
 }
 
-// "foo"
+// 'foo'
 protected class LookAhead1_FooKeyword_0 extends KeywordToken  {
 	
 	public LookAhead1_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -449,7 +449,7 @@ protected class LookAhead1_YAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// x="b"
+// x='b'
 protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 	
 	public LookAhead1_XAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -483,7 +483,7 @@ protected class LookAhead1_XAssignment_2 extends AssignmentToken  {
 
 }
 
-// z="d"
+// z='d'
 protected class LookAhead1_ZAssignment_3 extends AssignmentToken  {
 	
 	public LookAhead1_ZAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -524,11 +524,11 @@ protected class LookAhead1_ZAssignment_3 extends AssignmentToken  {
 /************ begin Rule LookAhead2 ****************
  *
  * LookAhead2:
- * 	(z="foo" | z="bar") "c";
+ * 	(z='foo' | z='bar') 'c';
  *
  **/
 
-// (z="foo" | z="bar") "c"
+// (z='foo' | z='bar') 'c'
 protected class LookAhead2_Group extends GroupToken {
 	
 	public LookAhead2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -557,7 +557,7 @@ protected class LookAhead2_Group extends GroupToken {
 
 }
 
-// z="foo" | z="bar"
+// (z='foo' | z='bar')
 protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 
 	public LookAhead2_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -580,7 +580,7 @@ protected class LookAhead2_Alternatives_0 extends AlternativesToken {
 
 }
 
-// z="foo"
+// z='foo'
 protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 	
 	public LookAhead2_ZAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -613,7 +613,7 @@ protected class LookAhead2_ZAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// z="bar"
+// z='bar'
 protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 	
 	public LookAhead2_ZAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -647,7 +647,7 @@ protected class LookAhead2_ZAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "c"
+// 'c'
 protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 	
 	public LookAhead2_CKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -676,11 +676,11 @@ protected class LookAhead2_CKeyword_1 extends KeywordToken  {
 /************ begin Rule LookAhead3 ****************
  *
  * LookAhead3:
- * 	"foo" "bar" x="b" z=LookAhead4;
+ * 	'foo' 'bar' x='b' z=LookAhead4;
  *
  **/
 
-// "foo" "bar" x="b" z=LookAhead4
+// 'foo' 'bar' x='b' z=LookAhead4
 protected class LookAhead3_Group extends GroupToken {
 	
 	public LookAhead3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -709,7 +709,7 @@ protected class LookAhead3_Group extends GroupToken {
 
 }
 
-// "foo"
+// 'foo'
 protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 	
 	public LookAhead3_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -730,7 +730,7 @@ protected class LookAhead3_FooKeyword_0 extends KeywordToken  {
 
 }
 
-// "bar"
+// 'bar'
 protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 	
 	public LookAhead3_BarKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -752,7 +752,7 @@ protected class LookAhead3_BarKeyword_1 extends KeywordToken  {
 
 }
 
-// x="b"
+// x='b'
 protected class LookAhead3_XAssignment_2 extends AssignmentToken  {
 	
 	public LookAhead3_XAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -839,11 +839,11 @@ protected class LookAhead3_ZAssignment_3 extends AssignmentToken  {
 /************ begin Rule LookAhead4 ****************
  *
  * LookAhead4:
- * 	x="c" | x="d";
+ * 	x='c' | x='d';
  *
  **/
 
-// x="c" | x="d"
+// x='c' | x='d'
 protected class LookAhead4_Alternatives extends AlternativesToken {
 
 	public LookAhead4_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -873,7 +873,7 @@ protected class LookAhead4_Alternatives extends AlternativesToken {
 
 }
 
-// x="c"
+// x='c'
 protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 	
 	public LookAhead4_XAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -906,7 +906,7 @@ protected class LookAhead4_XAssignment_0 extends AssignmentToken  {
 
 }
 
-// x="d"
+// x='d'
 protected class LookAhead4_XAssignment_1 extends AssignmentToken  {
 	
 	public LookAhead4_XAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

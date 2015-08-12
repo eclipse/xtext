@@ -19,7 +19,7 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.keywords.KeywordsTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cFirstAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final Keyword cFirstFooBarKeyword_0_0 = (Keyword)cFirstAssignment_0.eContents().get(0);
@@ -39,12 +39,12 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		private final Keyword cEighthDKeyword_7_0 = (Keyword)cEighthAssignment_7.eContents().get(0);
 		
 		//Model:
-		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" |
-		//	seventh?="\'c\'" | eighth?="\"d\"";
+		//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
+		//	| eighth?='"d"';
 		@Override public ParserRule getRule() { return rule; }
 
-		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" | seventh?="\'c\'"
-		//| eighth?="\"d\""
+		//first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'" |
+		//eighth?='"d"'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//first?="foo\\bar"
@@ -77,22 +77,22 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		//"\"a\""
 		public Keyword getFifthAKeyword_4_0() { return cFifthAKeyword_4_0; }
 
-		//sixth?="\'b\'"
+		//sixth?='\'b\''
 		public Assignment getSixthAssignment_5() { return cSixthAssignment_5; }
 
-		//"\'b\'"
+		//'\'b\''
 		public Keyword getSixthBKeyword_5_0() { return cSixthBKeyword_5_0; }
 
-		//seventh?="\'c\'"
+		//seventh?="'c'"
 		public Assignment getSeventhAssignment_6() { return cSeventhAssignment_6; }
 
-		//"\'c\'"
+		//"'c'"
 		public Keyword getSeventhCKeyword_6_0() { return cSeventhCKeyword_6_0; }
 
-		//eighth?="\"d\""
+		//eighth?='"d"'
 		public Assignment getEighthAssignment_7() { return cEighthAssignment_7; }
 
-		//"\"d\""
+		//'"d"'
 		public Keyword getEighthDKeyword_7_0() { return cEighthDKeyword_7_0; }
 	}
 	
@@ -139,8 +139,8 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	
 	//Model:
-	//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" |
-	//	seventh?="\'c\'" | eighth?="\"d\"";
+	//	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
+	//	| eighth?='"d"';
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -150,38 +150,38 @@ public class KeywordsTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

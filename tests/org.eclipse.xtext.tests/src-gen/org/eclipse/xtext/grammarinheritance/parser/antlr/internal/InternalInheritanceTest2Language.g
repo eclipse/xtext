@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -116,7 +116,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_3_0, 
-        		"Element");
+        		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"ids",
         		lv_ids_4_0, 
-        		"FQN");
+        		"org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -182,7 +182,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

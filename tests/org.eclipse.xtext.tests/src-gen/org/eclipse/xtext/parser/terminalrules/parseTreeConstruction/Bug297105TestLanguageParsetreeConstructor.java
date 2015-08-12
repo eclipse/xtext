@@ -100,11 +100,11 @@ protected class Model_ExpressionsAssignment extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- * 	left=Literal "+" right=Literal;
+ * 	left=Literal '+' right=Literal;
  *
  **/
 
-// left=Literal "+" right=Literal
+// left=Literal '+' right=Literal
 protected class Expression_Group extends GroupToken {
 	
 	public Expression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -178,7 +178,7 @@ protected class Expression_LeftAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// "+"
+// '+'
 protected class Expression_PlusSignKeyword_1 extends KeywordToken  {
 	
 	public Expression_PlusSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

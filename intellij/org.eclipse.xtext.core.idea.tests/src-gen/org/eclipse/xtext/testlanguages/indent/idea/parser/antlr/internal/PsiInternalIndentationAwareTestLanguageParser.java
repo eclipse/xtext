@@ -20,8 +20,8 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NL", "RULE_BEGIN", "RULE_END", "RULE_OTHER"
     };
-    public static final int RULE_OTHER=7;
     public static final int RULE_END=6;
+    public static final int RULE_OTHER=7;
     public static final int RULE_BEGIN=5;
     public static final int RULE_NL=4;
     public static final int EOF=-1;

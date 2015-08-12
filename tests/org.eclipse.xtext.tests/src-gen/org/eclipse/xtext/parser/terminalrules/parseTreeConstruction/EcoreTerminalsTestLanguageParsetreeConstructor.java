@@ -40,11 +40,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*;
+ * 	'int' intValues+=EINT
+ * 	| 'double' doubleValues+=EDOUBLE
+ * 	| 'date' dateValues+=EDATE*;
  *
  **/
 
-// ("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*
+// 'int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -68,7 +70,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "int" intValues+=EINT
+// 'int' intValues+=EINT
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -90,7 +92,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "int"
+// 'int'
 protected class Model_IntKeyword_0_0 extends KeywordToken  {
 	
 	public Model_IntKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -147,7 +149,7 @@ protected class Model_IntValuesAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "double" doubleValues+=EDOUBLE
+// 'double' doubleValues+=EDOUBLE
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,7 +171,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "double"
+// 'double'
 protected class Model_DoubleKeyword_1_0 extends KeywordToken  {
 	
 	public Model_DoubleKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -226,7 +228,7 @@ protected class Model_DoubleValuesAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "date" dateValues+=EDATE
+// 'date' dateValues+=EDATE
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -248,7 +250,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "date"
+// 'date'
 protected class Model_DateKeyword_2_0 extends KeywordToken  {
 	
 	public Model_DateKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

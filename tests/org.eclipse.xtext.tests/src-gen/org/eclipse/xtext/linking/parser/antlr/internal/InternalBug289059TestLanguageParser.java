@@ -144,7 +144,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -182,7 +182,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"enabled",
                             		lv_enabled_1_0, 
-                            		"UnassignedAction");
+                            		"org.eclipse.xtext.linking.Bug289059TestLanguage.UnassignedAction");
                     	        afterParserOrEnumRuleCall();
                     	    
 

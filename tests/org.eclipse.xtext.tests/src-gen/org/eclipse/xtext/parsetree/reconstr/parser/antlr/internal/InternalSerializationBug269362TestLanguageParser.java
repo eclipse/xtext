@@ -171,7 +171,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
                            			current, 
                            			"foo",
                             		lv_foo_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -212,7 +212,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
                                    			current, 
                                    			"bar",
                                     		lv_bar_3_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -260,7 +260,7 @@ public class InternalSerializationBug269362TestLanguageParser extends AbstractIn
                            			current, 
                            			"bar",
                             		lv_bar_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }

@@ -1,0 +1,8 @@
+org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.NoParametersTestLanguageFileImpl:a.noparameterstestlanguage(0,10)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)(0,10)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ELEMENT_TYPE)(0,0)
+      <empty list>
+    PsiErrorElement:no viable alternative at input '#6'(0,2)
+      PsiElement('#6')('#6')(0,2)
+    PsiWhiteSpace(' ')(2,3)
+    PsiElement('keyword')('keyword')(3,10)

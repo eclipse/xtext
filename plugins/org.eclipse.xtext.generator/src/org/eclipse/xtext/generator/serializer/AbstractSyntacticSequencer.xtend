@@ -119,13 +119,13 @@ class AbstractSyntacticSequencer extends GeneratedFile {
 	def List<AbstractRule> unassignedCalledTokenRules() {
 		val rules = grammar.allRules.filter[EObjectRule]
 		val calls = rules.map(r|r.containedRuleCalls.filter(e|isUnassignedRuleCall(e))).flatten
-		calls.map[rule].toSet.sortBy[name]
+		return calls.map[rule].toSet.sortBy[name]
 	}
 
 	def boolean isUnassignedRuleCall(RuleCall c) {
 		if(c.isEObjectRuleCall()) return false
 		val ass = c.containingAssignment
-		ass == null || ass.isBooleanAssignment
+		return ass == null || ass.isBooleanAssignment
 	}
 
 	def unassignedCalledTokenRuleName(AbstractRule rule) '''get«rule.name»Token'''

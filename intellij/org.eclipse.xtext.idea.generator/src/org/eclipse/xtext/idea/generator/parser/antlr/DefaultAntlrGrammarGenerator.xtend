@@ -129,15 +129,15 @@ class DefaultAntlrGrammarGenerator {
 		«ENDFOR»
 	'''
 	
-	protected dispatch def compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
+	protected def compileRule(EnumRule it, Grammar grammar, AntlrOptions options) {
 		compileEBNF(options)
 	}
 	
-	protected dispatch def compileRule(ParserRule it, Grammar grammar, AntlrOptions options) {
+	protected def compileRule(ParserRule it, Grammar grammar, AntlrOptions options) {
 		compileEBNF(options)
 	}
 	
-	protected dispatch def compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
+	protected def compileRule(TerminalRule it, Grammar grammar, AntlrOptions options) '''
 		«IF fragment»fragment «ENDIF»«ruleName» : «toLexerBody»«IF shouldBeSkipped(grammar)» {skip();}«ENDIF»;'''
 		
 	protected def shouldBeSkipped(TerminalRule it, Grammar grammar) {
@@ -257,10 +257,10 @@ class DefaultAntlrGrammarGenerator {
 				throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule")
 			}
 		}
-		rule.crossrefEbnf(ref, supportActions)
+		rule.crossrefEbnf(it, ref, supportActions)
 	}
 	
-	protected dispatch def String crossrefEbnf(AbstractRule it, CrossReference ref, boolean supportActions) {
+	protected def String crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {
 		switch it {
 			EnumRule,
 			ParserRule,

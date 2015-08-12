@@ -258,167 +258,167 @@ public class SimpleExpressionsTestLanguageElementTypeProvider implements IElemen
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSequenceElementType() {
 		return Sequence_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_GroupElementType() {
 		return Sequence_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_AdditionParserRuleCall_0ElementType() {
 		return Sequence_AdditionParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_Group_1ElementType() {
 		return Sequence_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_SequenceExpressionsAction_1_0ElementType() {
 		return Sequence_SequenceExpressionsAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_ExpressionsAssignment_1_1ElementType() {
 		return Sequence_ExpressionsAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSequence_ExpressionsAdditionParserRuleCall_1_1_0ElementType() {
 		return Sequence_ExpressionsAdditionParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAdditionElementType() {
 		return Addition_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_GroupElementType() {
 		return Addition_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_MultiplicationParserRuleCall_0ElementType() {
 		return Addition_MultiplicationParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_Group_1ElementType() {
 		return Addition_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_OpValuesAction_1_0ElementType() {
 		return Addition_OpValuesAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_OperatorAssignment_1_1ElementType() {
 		return Addition_OperatorAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_OperatorAlternatives_1_1_0ElementType() {
 		return Addition_OperatorAlternatives_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_OperatorPlusSignKeyword_1_1_0_0ElementType() {
 		return Addition_OperatorPlusSignKeyword_1_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_OperatorHyphenMinusKeyword_1_1_0_1ElementType() {
 		return Addition_OperatorHyphenMinusKeyword_1_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_ValuesAssignment_1_2ElementType() {
 		return Addition_ValuesAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAddition_ValuesMultiplicationParserRuleCall_1_2_0ElementType() {
 		return Addition_ValuesMultiplicationParserRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplicationElementType() {
 		return Multiplication_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_GroupElementType() {
 		return Multiplication_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_TermParserRuleCall_0ElementType() {
 		return Multiplication_TermParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_Group_1ElementType() {
 		return Multiplication_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_OpValuesAction_1_0ElementType() {
 		return Multiplication_OpValuesAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_OperatorAssignment_1_1ElementType() {
 		return Multiplication_OperatorAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_OperatorAlternatives_1_1_0ElementType() {
 		return Multiplication_OperatorAlternatives_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_OperatorAsteriskKeyword_1_1_0_0ElementType() {
 		return Multiplication_OperatorAsteriskKeyword_1_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_OperatorSolidusKeyword_1_1_0_1ElementType() {
 		return Multiplication_OperatorSolidusKeyword_1_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_ValuesAssignment_1_2ElementType() {
 		return Multiplication_ValuesAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMultiplication_ValuesTermParserRuleCall_1_2_0ElementType() {
 		return Multiplication_ValuesTermParserRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTermElementType() {
 		return Term_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_AlternativesElementType() {
 		return Term_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_AtomParserRuleCall_0ElementType() {
 		return Term_AtomParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_ParensParserRuleCall_1ElementType() {
 		return Term_ParensParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtomElementType() {
 		return Atom_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtom_NameAssignmentElementType() {
 		return Atom_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtom_NameIDTerminalRuleCall_0ElementType() {
 		return Atom_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParensElementType() {
 		return Parens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_GroupElementType() {
 		return Parens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_LeftParenthesisKeyword_0ElementType() {
 		return Parens_LeftParenthesisKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_AdditionParserRuleCall_1ElementType() {
 		return Parens_AdditionParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_RightParenthesisKeyword_2ElementType() {
 		return Parens_RightParenthesisKeyword_2_ELEMENT_TYPE;
 	}

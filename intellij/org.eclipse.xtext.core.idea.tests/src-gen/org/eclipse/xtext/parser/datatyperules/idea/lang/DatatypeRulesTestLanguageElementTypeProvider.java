@@ -369,251 +369,251 @@ public class DatatypeRulesTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getCompositeModelElementType() {
 		return CompositeModel_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getCompositeModel_ModelAssignmentElementType() {
 		return CompositeModel_ModelAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getCompositeModel_ModelModelParserRuleCall_0ElementType() {
 		return CompositeModel_ModelModelParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_IdAssignment_0ElementType() {
 		return Model_IdAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_IdNestedModelIdParserRuleCall_0_0ElementType() {
 		return Model_IdNestedModelIdParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ColonKeyword_1_0ElementType() {
 		return Model_ColonKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_1_1ElementType() {
 		return Model_ValueAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueFractionParserRuleCall_1_1_0ElementType() {
 		return Model_ValueFractionParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2ElementType() {
 		return Model_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NumberSignKeyword_2_0ElementType() {
 		return Model_NumberSignKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_VectorAssignment_2_1ElementType() {
 		return Model_VectorAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_VectorVectorParserRuleCall_2_1_0ElementType() {
 		return Model_VectorVectorParserRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_3ElementType() {
 		return Model_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_PlusSignKeyword_3_0ElementType() {
 		return Model_PlusSignKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DotsAssignment_3_1ElementType() {
 		return Model_DotsAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DotsDotsParserRuleCall_3_1_0ElementType() {
 		return Model_DotsDotsParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_4ElementType() {
 		return Model_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AsteriskKeyword_4_0ElementType() {
 		return Model_AsteriskKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DoubleAssignment_4_1ElementType() {
 		return Model_DoubleAssignment_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DoubleDoubleParserRuleCall_4_1_0ElementType() {
 		return Model_DoubleDoubleParserRuleCall_4_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SemicolonKeyword_5ElementType() {
 		return Model_SemicolonKeyword_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelIdElementType() {
 		return ModelId_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelId_GroupElementType() {
 		return ModelId_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelId_IDTerminalRuleCall_0ElementType() {
 		return ModelId_IDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelId_FullStopKeyword_1ElementType() {
 		return ModelId_FullStopKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelId_IDTerminalRuleCall_2ElementType() {
 		return ModelId_IDTerminalRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelIdElementType() {
 		return NestedModelId_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelId_GroupElementType() {
 		return NestedModelId_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelId_ModelIdParserRuleCall_0ElementType() {
 		return NestedModelId_ModelIdParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelId_FullStopKeyword_1ElementType() {
 		return NestedModelId_FullStopKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelId_ModelIdParserRuleCall_2ElementType() {
 		return NestedModelId_ModelIdParserRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFractionElementType() {
 		return Fraction_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFraction_GroupElementType() {
 		return Fraction_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFraction_INTTerminalRuleCall_0ElementType() {
 		return Fraction_INTTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFraction_Group_1ElementType() {
 		return Fraction_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFraction_SolidusKeyword_1_0ElementType() {
 		return Fraction_SolidusKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFraction_INTTerminalRuleCall_1_1ElementType() {
 		return Fraction_INTTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVectorElementType() {
 		return Vector_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVector_GroupElementType() {
 		return Vector_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVector_LeftParenthesisKeyword_0ElementType() {
 		return Vector_LeftParenthesisKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVector_INTTerminalRuleCall_1ElementType() {
 		return Vector_INTTerminalRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVector_INTTerminalRuleCall_2ElementType() {
 		return Vector_INTTerminalRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVector_RightParenthesisKeyword_3ElementType() {
 		return Vector_RightParenthesisKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDotsElementType() {
 		return Dots_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDots_AlternativesElementType() {
 		return Dots_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDots_Group_0ElementType() {
 		return Dots_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDots_FullStopKeyword_0_0ElementType() {
 		return Dots_FullStopKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDots_FullStopKeyword_0_1ElementType() {
 		return Dots_FullStopKeyword_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDots_FullStopFullStopKeyword_1ElementType() {
 		return Dots_FullStopFullStopKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDoubleElementType() {
 		return Double_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_GroupElementType() {
 		return Double_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_HyphenMinusKeyword_0ElementType() {
 		return Double_HyphenMinusKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_INTTerminalRuleCall_1ElementType() {
 		return Double_INTTerminalRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_FullStopKeyword_2ElementType() {
 		return Double_FullStopKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_INTTerminalRuleCall_3ElementType() {
 		return Double_INTTerminalRuleCall_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_Group_4ElementType() {
 		return Double_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_EKeyword_4_0ElementType() {
 		return Double_EKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_HyphenMinusKeyword_4_1ElementType() {
 		return Double_HyphenMinusKeyword_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDouble_INTTerminalRuleCall_4_2ElementType() {
 		return Double_INTTerminalRuleCall_4_2_ELEMENT_TYPE;
 	}

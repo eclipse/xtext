@@ -39,12 +39,12 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Second ****************
  *
- * Second returns second::Second:
- * 	name=ID "first" first=[first::First];
+ * Second second::Second:
+ * 	name=ID 'first' first=[first::First]
  *
  **/
 
-// name=ID "first" first=[first::First]
+// name=ID 'first' first=[first::First]
 protected class Second_Group extends GroupToken {
 	
 	public Second_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -106,7 +106,7 @@ protected class Second_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// "first"
+// 'first'
 protected class Second_FirstKeyword_1 extends KeywordToken  {
 	
 	public Second_FirstKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

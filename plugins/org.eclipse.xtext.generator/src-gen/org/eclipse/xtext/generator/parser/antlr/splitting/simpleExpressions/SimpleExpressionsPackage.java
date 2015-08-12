@@ -141,6 +141,34 @@ public interface SimpleExpressionsPackage extends EPackage
   int NUMBER_LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.BooleanLiteralImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getBooleanLiteral()
+   * @generated
+   */
+  int BOOLEAN_LITERAL = 3;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_LITERAL__VALUE = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Boolean Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOLEAN_LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl <em>Method Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -148,7 +176,7 @@ public interface SimpleExpressionsPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getMethodCall()
    * @generated
    */
-  int METHOD_CALL = 3;
+  int METHOD_CALL = 4;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -176,7 +204,7 @@ public interface SimpleExpressionsPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getOrExpression()
    * @generated
    */
-  int OR_EXPRESSION = 4;
+  int OR_EXPRESSION = 5;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -213,7 +241,7 @@ public interface SimpleExpressionsPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getAndExpression()
    * @generated
    */
-  int AND_EXPRESSION = 5;
+  int AND_EXPRESSION = 6;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -250,7 +278,7 @@ public interface SimpleExpressionsPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getComparison()
    * @generated
    */
-  int COMPARISON = 6;
+  int COMPARISON = 7;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -296,7 +324,7 @@ public interface SimpleExpressionsPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getNotExpression()
    * @generated
    */
-  int NOT_EXPRESSION = 7;
+  int NOT_EXPRESSION = 8;
 
   /**
    * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -379,6 +407,27 @@ public interface SimpleExpressionsPackage extends EPackage
    * @generated
    */
   EAttribute getNumberLiteral_Value();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral <em>Boolean Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Literal</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral
+   * @generated
+   */
+  EClass getBooleanLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral#isValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral#isValue()
+   * @see #getBooleanLiteral()
+   * @generated
+   */
+  EAttribute getBooleanLiteral_Value();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall <em>Method Call</em>}'.
@@ -605,6 +654,24 @@ public interface SimpleExpressionsPackage extends EPackage
      * @generated
      */
     EAttribute NUMBER_LITERAL__VALUE = eINSTANCE.getNumberLiteral_Value();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.BooleanLiteralImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl#getBooleanLiteral()
+     * @generated
+     */
+    EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOLEAN_LITERAL__VALUE = eINSTANCE.getBooleanLiteral_Value();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl <em>Method Call</em>}' class.

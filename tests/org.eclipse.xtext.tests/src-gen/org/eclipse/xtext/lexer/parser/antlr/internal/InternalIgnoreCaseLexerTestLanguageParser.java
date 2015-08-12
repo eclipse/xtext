@@ -26,8 +26,8 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
     public static final int Foo=5;
     public static final int Case=4;
     public static final int RULE_WS=6;
-    public static final int RULE_SL_COMMENT=7;
     public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=7;
 
     // delegates
     // delegators

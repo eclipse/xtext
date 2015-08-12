@@ -19,7 +19,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
@@ -27,7 +27,8 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cElementsElementParserRuleCall_1_0 = (RuleCall)cElementsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	imports+=Import* elements+=Element+;
+		//	imports+=Import*
+		//	elements+=Element+;
 		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* elements+=Element+
@@ -47,7 +48,7 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguage.Import");
 		private final Assignment cImportedNamespaceAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cImportedNamespaceSTRINGTerminalRuleCall_0 = (RuleCall)cImportedNamespaceAssignment.eContents().get(0);
 		
@@ -107,7 +108,8 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 
 	
 	//Model:
-	//	imports+=Import* elements+=Element+;
+	//	imports+=Import*
+	//	elements+=Element+;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -127,7 +129,9 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//Element:
-	//	name=ID reference=[Element]? "{" elements+=Element* "}";
+	//	name=ID reference=[Element]? '{'
+	//	elements+=Element*
+	//	'}';
 	public AbstractIgnoreCaseLinkingTestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getElementAccess();
 	}
@@ -137,38 +141,38 @@ public class IgnoreCaseNamespacesTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaAbstractIgnoreCaseLinkingTestLanguage.getWSRule();
 	} 

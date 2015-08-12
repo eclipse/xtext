@@ -194,7 +194,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"strings",
             	                    		lv_strings_2_0, 
-            	                    		"STRING");
+            	                    		"org.eclipse.xtext.common.Terminals.STRING");
             	            	    
 
             	            }
@@ -270,7 +270,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    	           			current, 
             	    	           			"keys",
             	    	            		lv_keys_5_0, 
-            	    	            		"STRING");
+            	    	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    	    
 
             	    	    }
@@ -296,7 +296,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	    	           			current, 
             	    	           			"values",
             	    	            		lv_values_6_0, 
-            	    	            		"STRING");
+            	    	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    	    
 
             	    	    }
@@ -363,7 +363,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"subModel",
                             		lv_subModel_9_0, 
-                            		"SubModel");
+                            		"org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguage.SubModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -512,7 +512,7 @@ public class InternalBug299395TestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"strings",
             	                    		lv_strings_3_0, 
-            	                    		"STRING");
+            	                    		"org.eclipse.xtext.common.Terminals.STRING");
             	            	    
 
             	            }

@@ -300,7 +300,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"ids",
             	            		lv_ids_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }

@@ -90,7 +90,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Type");
+        		"org.eclipse.xtext.generator.grammarAccess.GrammarAccessTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 

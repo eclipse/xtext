@@ -170,7 +170,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"expressions",
             	              		lv_expressions_0_0, 
-            	              		"Expression");
+            	              		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Expression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -290,7 +290,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"left",
                       		lv_left_0_0, 
-                      		"Literal");
+                      		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Literal");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -331,7 +331,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"right",
                       		lv_right_2_0, 
-                      		"Literal");
+                      		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Literal");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -606,7 +606,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"value",
                       		lv_value_0_0, 
-                      		"IntValue");
+                      		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.IntValue");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -714,7 +714,7 @@ public class InternalBug297105TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"value",
                       		lv_value_0_0, 
-                      		"RealValue");
+                      		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.RealValue");
               	        afterParserOrEnumRuleCall();
               	    
             }

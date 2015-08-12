@@ -103,7 +103,7 @@ import «usedGrammar.gaFQName()»;
 
 «DEFINE parseRuleClasses(String lineDelimiter) FOR ParserRule»
 	public class «gaRuleAccessorClassName()» extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "«containingGrammar().name».«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
 «ENDFOREACH-»
@@ -119,7 +119,7 @@ import «usedGrammar.gaFQName()»;
 
 «DEFINE parseRuleClasses(String lineDelimiter) FOR EnumRule»
 	public class «gaRuleAccessorClassName()» extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "«containingGrammar().name».«name»");
 «FOREACH containedAbstractElements() AS e-»
 		private final «e.getClassName()» «e.gaElementAccessorLocalVarName()» = «e.loadElementStatement()»;
 «ENDFOREACH-»
@@ -162,7 +162,7 @@ import «usedGrammar.gaFQName()»;
 «ENDDEFINE»
 
 «DEFINE initializer FOR TerminalRule-»
-		this.«gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«name»");
+		this.«gaRuleAccessorLocalVarName()» = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "«containingGrammar().name».«name»");
 «ENDDEFINE»
 
 «DEFINE getter(Grammar original, String lineDelimiter) FOR AbstractRule»
@@ -176,8 +176,8 @@ import «usedGrammar.gaFQName()»;
 		return «gaRuleAccessorLocalVarName()»;
 	}
 «ELSE-»	
-	public «containingGrammar().gaSimpleName()».«gaRuleAccessorClassName()» «gaElementsAccessor()» {
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
+	public «containingGrammar().gaSimpleName()».«gaBaseRuleAccessorClassName()» «gaElementsAccessor()» {
+		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
 	}
 «ENDIF-»
 	
@@ -193,8 +193,8 @@ import «usedGrammar.gaFQName()»;
 		return «gaRuleAccessorLocalVarName()»;
 	}
 «ELSE-»	
-	public «containingGrammar().gaSimpleName()».«gaRuleAccessorClassName()» «gaElementsAccessor()» {
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaElementsAccessor()»;
+	public «containingGrammar().gaSimpleName()».«gaBaseRuleAccessorClassName()» «gaElementsAccessor()» {
+		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseElementsAccessor()»;
 	}
 «ENDIF-»
 	
@@ -209,7 +209,7 @@ import «usedGrammar.gaFQName()»;
 «IF containingGrammar() == original-»
 		return «gaRuleAccessorLocalVarName()»;
 «ELSE-»
-		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaRuleAccessor()»;
+		return «usedGrammar(original).gaGrammarAccessLocalVarName()».«gaBaseRuleAccessor()»;
 «ENDIF-»
 	} 
 «ENDDEFINE»

@@ -19,7 +19,7 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug443221TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cDummyKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -33,16 +33,23 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cDollarSignKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//Model:
-		//	{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign";
+		//	{Model}
+		//	'dummy' name=ID
+		//	'_'
+		//	'_dummy_'
+		//	'__dummy__'
+		//	'$__dummy__'
+		//	'$'
+		//	'DollarSign';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign"
+		//{Model} 'dummy' name=ID '_' '_dummy_' '__dummy__' '$__dummy__' '$' 'DollarSign'
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"dummy"
+		//'dummy'
 		public Keyword getDummyKeyword_1() { return cDummyKeyword_1; }
 
 		//name=ID
@@ -51,22 +58,22 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"_"
+		//'_'
 		public Keyword get_Keyword_3() { return c_Keyword_3; }
 
-		//"_dummy_"
+		//'_dummy_'
 		public Keyword get_dummy_Keyword_4() { return c_dummy_Keyword_4; }
 
-		//"__dummy__"
+		//'__dummy__'
 		public Keyword get__dummy__Keyword_5() { return c__dummy__Keyword_5; }
 
-		//"$__dummy__"
+		//'$__dummy__'
 		public Keyword get__dummy__Keyword_6() { return c__dummy__Keyword_6; }
 
-		//"$"
+		//'$'
 		public Keyword getDollarSignKeyword_7() { return cDollarSignKeyword_7; }
 
-		//"DollarSign"
+		//'DollarSign'
 		public Keyword getDollarSignKeyword_8() { return cDollarSignKeyword_8; }
 	}
 	
@@ -113,7 +120,14 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign";
+	//	{Model}
+	//	'dummy' name=ID
+	//	'_'
+	//	'_dummy_'
+	//	'__dummy__'
+	//	'$__dummy__'
+	//	'$'
+	//	'DollarSign';
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -123,38 +137,38 @@ public class Bug443221TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

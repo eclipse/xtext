@@ -7,30 +7,38 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
+import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.GenericSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
+import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
 import org.eclipse.xtext.xtextTest.Action;
 import org.eclipse.xtext.xtextTest.Alternatives;
 import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.CharacterRange;
+import org.eclipse.xtext.xtextTest.ConditionalBranch;
 import org.eclipse.xtext.xtextTest.CrossReference;
+import org.eclipse.xtext.xtextTest.EOF;
 import org.eclipse.xtext.xtextTest.EnumLiteralDeclaration;
 import org.eclipse.xtext.xtextTest.EnumRule;
 import org.eclipse.xtext.xtextTest.GeneratedMetamodel;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Group;
 import org.eclipse.xtext.xtextTest.Keyword;
+import org.eclipse.xtext.xtextTest.NamedArgument;
 import org.eclipse.xtext.xtextTest.NegatedToken;
+import org.eclipse.xtext.xtextTest.Parameter;
 import org.eclipse.xtext.xtextTest.ParserRule;
 import org.eclipse.xtext.xtextTest.ReferencedMetamodel;
 import org.eclipse.xtext.xtextTest.RuleCall;
 import org.eclipse.xtext.xtextTest.TerminalRule;
 import org.eclipse.xtext.xtextTest.TypeRef;
+import org.eclipse.xtext.xtextTest.UnorderedGroup;
 import org.eclipse.xtext.xtextTest.UntilToken;
 import org.eclipse.xtext.xtextTest.Wildcard;
 import org.eclipse.xtext.xtextTest.XtextTestPackage;
@@ -46,17 +54,20 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 		if(semanticObject.eClass().getEPackage() == XtextTestPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case XtextTestPackage.ACTION:
 				if(context == grammarAccess.getAbstractTokenWithCardinalityRule()) {
-					sequence_AbstractTokenWithCardinality_Action(context, (Action) semanticObject); 
+					sequence_AbstractTokenWithCardinality_Action_Cardinalities(context, (Action) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAbstractTerminalRule() ||
 				   context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getActionRule() ||
 				   context == grammarAccess.getAlternativesRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getParenthesizedElementRule()) {
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
 					sequence_Action(context, (Action) semanticObject); 
 					return; 
 				}
@@ -64,10 +75,13 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 			case XtextTestPackage.ALTERNATIVES:
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0()) {
-					sequence_AbstractTokenWithCardinality_Alternatives(context, (Alternatives) semanticObject); 
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTokenWithCardinality_Alternatives_Cardinalities(context, (Alternatives) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAbstractTerminalRule() ||
@@ -77,17 +91,17 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 					return; 
 				}
 				else if(context == grammarAccess.getAssignableAlternativesRule() ||
-				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getAssignableTerminalRule() ||
 				   context == grammarAccess.getParenthesizedAssignableElementRule()) {
 					sequence_AssignableAlternatives(context, (Alternatives) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getCrossReferenceableAlternativesRule() ||
-				   context == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getCrossReferenceableTerminalRule() ||
-				   context == grammarAccess.getParenthesizedCrossReferenceableElementRule()) {
-					sequence_CrossReferenceableAlternatives(context, (Alternatives) semanticObject); 
+				else if(context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupRule() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalTokenRule()) {
+					sequence_Cardinalities_TerminalAlternatives_TerminalToken(context, (Alternatives) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getEnumLiteralsRule()) {
@@ -100,88 +114,125 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 					sequence_TerminalAlternatives(context, (Alternatives) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_TerminalAlternatives_TerminalToken(context, (Alternatives) semanticObject); 
-					return; 
-				}
 				else break;
 			case XtextTestPackage.ASSIGNMENT:
 				if(context == grammarAccess.getAbstractTerminalRule() ||
 				   context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
 				   context == grammarAccess.getAlternativesRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getParenthesizedElementRule()) {
-					sequence_AbstractTokenWithCardinality_Assignment(context, (Assignment) semanticObject); 
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTokenWithCardinality_Assignment_Cardinalities_Predicate(context, (Assignment) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAssignmentRule()) {
-					sequence_Assignment(context, (Assignment) semanticObject); 
+					sequence_Assignment_Predicate(context, (Assignment) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtextTestPackage.CHARACTER_RANGE:
-				if(context == grammarAccess.getCharacterRangeRule() ||
+				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
+				   context == grammarAccess.getTerminalAlternativesRule() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupRule() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalTokenRule()) {
+					sequence_Cardinalities_CharacterRange_TerminalToken(context, (CharacterRange) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getCharacterRangeRule() ||
 				   context == grammarAccess.getTerminalTokenElementRule()) {
 					sequence_CharacterRange(context, (CharacterRange) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
-				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_CharacterRange_TerminalToken(context, (CharacterRange) semanticObject); 
+				else break;
+			case XtextTestPackage.CONDITIONAL_BRANCH:
+				if(context == grammarAccess.getAbstractTokenRule() ||
+				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
+				   context == grammarAccess.getGroupRule() ||
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTokenWithCardinality_Cardinalities_ConditionalBranch(context, (ConditionalBranch) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAbstractTerminalRule() ||
+				   context == grammarAccess.getAlternativesRule() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
+				   context == grammarAccess.getParenthesizedElementRule()) {
+					sequence_ConditionalBranch(context, (ConditionalBranch) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtextTestPackage.CROSS_REFERENCE:
 				sequence_CrossReference(context, (CrossReference) semanticObject); 
 				return; 
+			case XtextTestPackage.EOF:
+				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
+				   context == grammarAccess.getTerminalAlternativesRule() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupRule() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalTokenRule()) {
+					sequence_Cardinalities_TerminalToken(context, (EOF) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getEOFRule() ||
+				   context == grammarAccess.getTerminalTokenElementRule()) {
+					sequence_EOF(context, (EOF) semanticObject); 
+					return; 
+				}
+				else break;
 			case XtextTestPackage.ENUM_LITERAL_DECLARATION:
 				sequence_EnumLiteralDeclaration(context, (EnumLiteralDeclaration) semanticObject); 
 				return; 
 			case XtextTestPackage.ENUM_RULE:
-				sequence_EnumRule(context, (EnumRule) semanticObject); 
+				sequence_EnumRule_ReturnsClause(context, (EnumRule) semanticObject); 
 				return; 
 			case XtextTestPackage.GENERATED_METAMODEL:
 				sequence_GeneratedMetamodel(context, (GeneratedMetamodel) semanticObject); 
 				return; 
 			case XtextTestPackage.GRAMMAR:
-				sequence_Grammar(context, (Grammar) semanticObject); 
+				sequence_Grammar_HiddenClause(context, (Grammar) semanticObject); 
 				return; 
 			case XtextTestPackage.GROUP:
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0()) {
-					sequence_AbstractTokenWithCardinality_Group(context, (Group) semanticObject); 
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0()) {
+					sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Group_Predicate_PredicatedGroup(context, (Group) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAbstractTerminalRule() ||
-				   context == grammarAccess.getAlternativesRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				else if(context == grammarAccess.getAbstractTerminalRule()) {
+					sequence_AbstractTerminal_Group_Predicate_PredicatedGroup(context, (Group) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAlternativesRule() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getParenthesizedElementRule()) {
-					sequence_Group(context, (Group) semanticObject); 
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTokenWithCardinality_Cardinalities_Group_Predicate_PredicatedGroup(context, (Group) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalTokenRule()) {
+					sequence_Cardinalities_TerminalGroup_TerminalToken(context, (Group) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
 				   context == grammarAccess.getTerminalTokenElementRule()) {
 					sequence_TerminalGroup(context, (Group) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_TerminalGroup_TerminalToken(context, (Group) semanticObject); 
 					return; 
 				}
 				else break;
@@ -189,58 +240,67 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
 				   context == grammarAccess.getAlternativesRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getParenthesizedElementRule()) {
-					sequence_AbstractTokenWithCardinality_Keyword(context, (Keyword) semanticObject); 
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Keyword_Predicate_PredicatedKeyword(context, (Keyword) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAbstractTerminalRule() ||
-				   context == grammarAccess.getAssignableAlternativesRule() ||
-				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getAssignableTerminalRule() ||
-				   context == grammarAccess.getCharacterRangeRule() ||
-				   context == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0() ||
-				   context == grammarAccess.getCrossReferenceableAlternativesRule() ||
-				   context == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getCrossReferenceableTerminalRule() ||
-				   context == grammarAccess.getKeywordRule() ||
-				   context == grammarAccess.getParenthesizedAssignableElementRule() ||
-				   context == grammarAccess.getParenthesizedCrossReferenceableElementRule() ||
-				   context == grammarAccess.getTerminalTokenElementRule()) {
-					sequence_Keyword(context, (Keyword) semanticObject); 
+				else if(context == grammarAccess.getAbstractTerminalRule()) {
+					sequence_AbstractTerminal_Keyword_Predicate_PredicatedKeyword(context, (Keyword) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_Keyword_TerminalToken(context, (Keyword) semanticObject); 
+					sequence_Cardinalities_Keyword_TerminalToken(context, (Keyword) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAssignableAlternativesRule() ||
+				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getAssignableTerminalRule() ||
+				   context == grammarAccess.getCharacterRangeRule() ||
+				   context == grammarAccess.getCharacterRangeAccess().getCharacterRangeLeftAction_1_0() ||
+				   context == grammarAccess.getCrossReferenceableTerminalRule() ||
+				   context == grammarAccess.getKeywordRule() ||
+				   context == grammarAccess.getParenthesizedAssignableElementRule() ||
+				   context == grammarAccess.getTerminalTokenElementRule()) {
+					sequence_Keyword(context, (Keyword) semanticObject); 
 					return; 
 				}
 				else break;
+			case XtextTestPackage.NAMED_ARGUMENT:
+				sequence_NamedArgument(context, (NamedArgument) semanticObject); 
+				return; 
 			case XtextTestPackage.NEGATED_TOKEN:
-				if(context == grammarAccess.getAbstractNegatedTokenRule() ||
+				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
+				   context == grammarAccess.getTerminalAlternativesRule() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupRule() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getTerminalTokenRule()) {
+					sequence_Cardinalities_NegatedToken_TerminalToken(context, (NegatedToken) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAbstractNegatedTokenRule() ||
 				   context == grammarAccess.getNegatedTokenRule() ||
 				   context == grammarAccess.getTerminalTokenElementRule()) {
 					sequence_NegatedToken(context, (NegatedToken) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
-				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_NegatedToken_TerminalToken(context, (NegatedToken) semanticObject); 
-					return; 
-				}
 				else break;
+			case XtextTestPackage.PARAMETER:
+				sequence_Parameter(context, (Parameter) semanticObject); 
+				return; 
 			case XtextTestPackage.PARSER_RULE:
-				sequence_ParserRule(context, (ParserRule) semanticObject); 
+				sequence_HiddenClause_ParserRule_ReturnsClause_RuleNameAndParams(context, (ParserRule) semanticObject); 
 				return; 
 			case XtextTestPackage.REFERENCED_METAMODEL:
 				sequence_ReferencedMetamodel(context, (ReferencedMetamodel) semanticObject); 
@@ -249,51 +309,77 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 				if(context == grammarAccess.getAbstractTokenRule() ||
 				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
 				   context == grammarAccess.getAlternativesRule() ||
-				   context == grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
 				   context == grammarAccess.getGroupRule() ||
-				   context == grammarAccess.getGroupAccess().getGroupTokensAction_1_0() ||
-				   context == grammarAccess.getParenthesizedElementRule()) {
-					sequence_AbstractTokenWithCardinality_RuleCall(context, (RuleCall) semanticObject); 
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Predicate_PredicatedRuleCall_RuleCall(context, (RuleCall) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getAbstractTerminalRule() ||
-				   context == grammarAccess.getAssignableAlternativesRule() ||
-				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getAssignableTerminalRule() ||
-				   context == grammarAccess.getCrossReferenceableAlternativesRule() ||
-				   context == grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0() ||
-				   context == grammarAccess.getCrossReferenceableTerminalRule() ||
-				   context == grammarAccess.getParenthesizedAssignableElementRule() ||
-				   context == grammarAccess.getParenthesizedCrossReferenceableElementRule() ||
-				   context == grammarAccess.getRuleCallRule() ||
-				   context == grammarAccess.getTerminalTokenElementRule()) {
-					sequence_RuleCall(context, (RuleCall) semanticObject); 
+				else if(context == grammarAccess.getAbstractTerminalRule()) {
+					sequence_AbstractTerminal_Predicate_PredicatedRuleCall_RuleCall(context, (RuleCall) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_RuleCall_TerminalToken(context, (RuleCall) semanticObject); 
+					sequence_Cardinalities_TerminalRuleCall_TerminalToken(context, (RuleCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAssignableAlternativesRule() ||
+				   context == grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getAssignableTerminalRule() ||
+				   context == grammarAccess.getCrossReferenceableTerminalRule() ||
+				   context == grammarAccess.getParenthesizedAssignableElementRule() ||
+				   context == grammarAccess.getRuleCallRule()) {
+					sequence_RuleCall(context, (RuleCall) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTerminalRuleCallRule() ||
+				   context == grammarAccess.getTerminalTokenElementRule()) {
+					sequence_TerminalRuleCall(context, (RuleCall) semanticObject); 
 					return; 
 				}
 				else break;
 			case XtextTestPackage.TERMINAL_RULE:
-				sequence_TerminalRule(context, (TerminalRule) semanticObject); 
+				sequence_ReturnsClause_TerminalRule(context, (TerminalRule) semanticObject); 
 				return; 
 			case XtextTestPackage.TYPE_REF:
 				sequence_TypeRef(context, (TypeRef) semanticObject); 
 				return; 
+			case XtextTestPackage.UNORDERED_GROUP:
+				if(context == grammarAccess.getAbstractTokenRule() ||
+				   context == grammarAccess.getAbstractTokenWithCardinalityRule() ||
+				   context == grammarAccess.getGroupRule() ||
+				   context == grammarAccess.getGroupAccess().getGroupElementsAction_1_0() ||
+				   context == grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0()) {
+					sequence_AbstractTokenWithCardinality_Cardinalities_UnorderedGroup(context, (UnorderedGroup) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getAbstractTerminalRule() ||
+				   context == grammarAccess.getAlternativesRule() ||
+				   context == grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0() ||
+				   context == grammarAccess.getConditionalBranchRule() ||
+				   context == grammarAccess.getParenthesizedElementRule() ||
+				   context == grammarAccess.getUnorderedGroupRule()) {
+					sequence_UnorderedGroup(context, (UnorderedGroup) semanticObject); 
+					return; 
+				}
+				else break;
 			case XtextTestPackage.UNTIL_TOKEN:
 				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_TerminalToken_UntilToken(context, (UntilToken) semanticObject); 
+					sequence_Cardinalities_TerminalToken_UntilToken(context, (UntilToken) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getAbstractNegatedTokenRule() ||
@@ -306,11 +392,11 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 			case XtextTestPackage.WILDCARD:
 				if(context == grammarAccess.getParenthesizedTerminalElementRule() ||
 				   context == grammarAccess.getTerminalAlternativesRule() ||
-				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0() ||
+				   context == grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalGroupRule() ||
-				   context == grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0() ||
+				   context == grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0() ||
 				   context == grammarAccess.getTerminalTokenRule()) {
-					sequence_TerminalToken(context, (Wildcard) semanticObject); 
+					sequence_Cardinalities_TerminalToken(context, (Wildcard) semanticObject); 
 					return; 
 				}
 				else if(context == grammarAccess.getTerminalTokenElementRule() ||
@@ -325,54 +411,129 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
+	 *     (
+	 *         ((elements+=Group_Group_1_0 elements+=AbstractToken+) | ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives)) 
+	 *         (cardinality='?' | cardinality='*' | cardinality='+')?
+	 *     )
+	 */
+	protected void sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Group_Predicate_PredicatedGroup(EObject context, Group semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((value=STRING | ((predicated?='=>' | firstSetPredicated?='->') value=STRING)) (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Keyword_Predicate_PredicatedKeyword(EObject context, Keyword semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (
+	 *             (rule=[AbstractRule|RuleID] (arguments+=NamedArgument arguments+=NamedArgument*)?) | 
+	 *             ((predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|ID])
+	 *         ) 
+	 *         (cardinality='?' | cardinality='*' | cardinality='+')?
+	 *     )
+	 */
+	protected void sequence_AbstractTerminal_AbstractTokenWithCardinality_Cardinalities_Predicate_PredicatedRuleCall_RuleCall(EObject context, RuleCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((elements+=Group_Group_1_0 elements+=AbstractToken+) | ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives))
+	 */
+	protected void sequence_AbstractTerminal_Group_Predicate_PredicatedGroup(EObject context, Group semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (value=STRING | ((predicated?='=>' | firstSetPredicated?='->') value=STRING))
+	 */
+	protected void sequence_AbstractTerminal_Keyword_Predicate_PredicatedKeyword(EObject context, Keyword semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (rule=[AbstractRule|RuleID] (arguments+=NamedArgument arguments+=NamedArgument*)?) | 
+	 *         ((predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|ID])
+	 *     )
+	 */
+	protected void sequence_AbstractTerminal_Predicate_PredicatedRuleCall_RuleCall(EObject context, RuleCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (type=TypeRef (feature=ID (operator='=' | operator='+='))? (cardinality='?' | cardinality='*' | cardinality='+')?)
 	 */
-	protected void sequence_AbstractTokenWithCardinality_Action(EObject context, Action semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Action_Cardinalities(EObject context, Action semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+ (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (elements+=Alternatives_Alternatives_1_0 elements+=ConditionalBranch+ (cardinality='?' | cardinality='*' | cardinality='+')?)
 	 */
-	protected void sequence_AbstractTokenWithCardinality_Alternatives(EObject context, Alternatives semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Alternatives_Cardinalities(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (
+	 *         (predicated?='=>' | firstSetPredicated?='->')? 
+	 *         feature=ID 
+	 *         (operator='+=' | operator='=' | operator='?=') 
+	 *         terminal=AssignableTerminal 
+	 *         (cardinality='?' | cardinality='*' | cardinality='+')?
+	 *     )
 	 */
-	protected void sequence_AbstractTokenWithCardinality_Assignment(EObject context, Assignment semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Assignment_Cardinalities_Predicate(EObject context, Assignment semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+ (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (filtered=InverseLiteralValue parameter=[Parameter|ID] guardedElement=UnorderedGroup (cardinality='?' | cardinality='*' | cardinality='+')?)
 	 */
-	protected void sequence_AbstractTokenWithCardinality_Group(EObject context, Group semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Cardinalities_ConditionalBranch(EObject context, ConditionalBranch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (
+	 *         (elements+=Group_Group_1_0 elements+=AbstractToken+) | 
+	 *         ((predicated?='=>' | firstSetPredicated?='->') elements+=Alternatives (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     )
 	 */
-	protected void sequence_AbstractTokenWithCardinality_Keyword(EObject context, Keyword semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Cardinalities_Group_Predicate_PredicatedGroup(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (elements+=UnorderedGroup_UnorderedGroup_1_0 elements+=Group+ (cardinality='?' | cardinality='*' | cardinality='+')?)
 	 */
-	protected void sequence_AbstractTokenWithCardinality_RuleCall(EObject context, RuleCall semanticObject) {
+	protected void sequence_AbstractTokenWithCardinality_Cardinalities_UnorderedGroup(EObject context, UnorderedGroup semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -388,7 +549,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (groups+=Alternatives_Alternatives_1_0 groups+=Group+)
+	 *     (elements+=Alternatives_Alternatives_1_0 elements+=ConditionalBranch+)
 	 */
 	protected void sequence_Alternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -397,7 +558,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (groups+=AssignableAlternatives_Alternatives_1_0 groups+=AssignableTerminal+)
+	 *     (elements+=AssignableAlternatives_Alternatives_1_0 elements+=AssignableTerminal+)
 	 */
 	protected void sequence_AssignableAlternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -406,9 +567,90 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
+	 *     ((predicated?='=>' | firstSetPredicated?='->')? feature=ID (operator='+=' | operator='=' | operator='?=') terminal=AssignableTerminal)
 	 */
-	protected void sequence_Assignment(EObject context, Assignment semanticObject) {
+	protected void sequence_Assignment_Predicate(EObject context, Assignment semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_CharacterRange_TerminalToken(EObject context, CharacterRange semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_Keyword_TerminalToken(EObject context, Keyword semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_NegatedToken_TerminalToken(EObject context, NegatedToken semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (elements+=TerminalAlternatives_Alternatives_1_0 elements+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalAlternatives_TerminalToken(EObject context, Alternatives semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalGroup_TerminalToken(EObject context, Group semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (rule=[AbstractRule|RuleID] (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalRuleCall_TerminalToken(EObject context, RuleCall semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalToken(EObject context, EOF semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalToken_UntilToken(EObject context, UntilToken semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((cardinality='?' | cardinality='*' | cardinality='+')?)
+	 */
+	protected void sequence_Cardinalities_TerminalToken(EObject context, Wildcard semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -424,9 +666,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (left=CharacterRange_CharacterRange_1_0 right=Keyword (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     (filtered=InverseLiteralValue parameter=[Parameter|ID] guardedElement=UnorderedGroup)
 	 */
-	protected void sequence_CharacterRange_TerminalToken(EObject context, CharacterRange semanticObject) {
+	protected void sequence_ConditionalBranch(EObject context, ConditionalBranch semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -442,9 +684,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (groups+=CrossReferenceableAlternatives_Alternatives_1_0 groups+=CrossReferenceableTerminal+)
+	 *     {EOF}
 	 */
-	protected void sequence_CrossReferenceableAlternatives(EObject context, Alternatives semanticObject) {
+	protected void sequence_EOF(EObject context, EOF semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -460,7 +702,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (groups+=EnumLiterals_Alternatives_1_0 groups+=EnumLiteralDeclaration+)
+	 *     (elements+=EnumLiterals_Alternatives_1_0 elements+=EnumLiteralDeclaration+)
 	 */
 	protected void sequence_EnumLiterals(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -471,7 +713,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	 * Constraint:
 	 *     (name=ID type=TypeRef? alternatives=EnumLiterals)
 	 */
-	protected void sequence_EnumRule(EObject context, EnumRule semanticObject) {
+	protected void sequence_EnumRule_ReturnsClause(EObject context, EnumRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -495,16 +737,23 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *         rules+=AbstractRule+
 	 *     )
 	 */
-	protected void sequence_Grammar(EObject context, Grammar semanticObject) {
+	protected void sequence_Grammar_HiddenClause(EObject context, Grammar semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (tokens+=Group_Group_1_0 tokens+=AbstractToken+)
+	 *     (
+	 *         (
+	 *             (fragment?='fragment' name=ID (parameters+=Parameter parameters+=Parameter*)? (wildcard?='*' | type=TypeRef?)) | 
+	 *             (name=ID (parameters+=Parameter parameters+=Parameter*)? type=TypeRef?)
+	 *         ) 
+	 *         (definesHiddenTokens?='hidden' (hiddenTokens+=[AbstractRule|ID] hiddenTokens+=[AbstractRule|ID]*)?)? 
+	 *         alternatives=Alternatives
+	 *     )
 	 */
-	protected void sequence_Group(EObject context, Group semanticObject) {
+	protected void sequence_HiddenClause_ParserRule_ReturnsClause_RuleNameAndParams(EObject context, ParserRule semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -520,9 +769,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (value=STRING (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     ((literalValue=LiteralValue? parameter=[Parameter|ID]) | (parameter=[Parameter|ID] value=[Parameter|ID]))
 	 */
-	protected void sequence_Keyword_TerminalToken(EObject context, Keyword semanticObject) {
+	protected void sequence_NamedArgument(EObject context, NamedArgument semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -538,24 +787,17 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     name=ID
 	 */
-	protected void sequence_NegatedToken_TerminalToken(EObject context, NegatedToken semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (
-	 *         name=ID 
-	 *         type=TypeRef? 
-	 *         (definesHiddenTokens?='hidden' (hiddenTokens+=[AbstractRule|ID] hiddenTokens+=[AbstractRule|ID]*)?)? 
-	 *         alternatives=Alternatives
-	 *     )
-	 */
-	protected void sequence_ParserRule(EObject context, ParserRule semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_Parameter(EObject context, Parameter semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, XtextTestPackage.Literals.PARAMETER__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, XtextTestPackage.Literals.PARAMETER__NAME));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0(), semanticObject.getName());
+		feeder.finish();
 	}
 	
 	
@@ -570,7 +812,16 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     rule=[AbstractRule|ID]
+	 *     (((fragment?='fragment' name=ID) | (name=ID type=TypeRef?)) alternatives=TerminalAlternatives)
+	 */
+	protected void sequence_ReturnsClause_TerminalRule(EObject context, TerminalRule semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (rule=[AbstractRule|RuleID] (arguments+=NamedArgument arguments+=NamedArgument*)?)
 	 */
 	protected void sequence_RuleCall(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -579,16 +830,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (rule=[AbstractRule|ID] (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 */
-	protected void sequence_RuleCall_TerminalToken(EObject context, RuleCall semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+)
+	 *     (elements+=TerminalAlternatives_Alternatives_1_0 elements+=TerminalGroup+)
 	 */
 	protected void sequence_TerminalAlternatives(EObject context, Alternatives semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -597,16 +839,7 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (groups+=TerminalAlternatives_Alternatives_1_0 groups+=TerminalGroup+ (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 */
-	protected void sequence_TerminalAlternatives_TerminalToken(EObject context, Alternatives semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+)
+	 *     (elements+=TerminalGroup_Group_1_0 elements+=TerminalToken+)
 	 */
 	protected void sequence_TerminalGroup(EObject context, Group semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -615,36 +848,9 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	
 	/**
 	 * Constraint:
-	 *     (tokens+=TerminalGroup_Group_1_0 tokens+=TerminalToken+ (cardinality='?' | cardinality='*' | cardinality='+')?)
+	 *     rule=[AbstractRule|RuleID]
 	 */
-	protected void sequence_TerminalGroup_TerminalToken(EObject context, Group semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (name=ID type=TypeRef? alternatives=TerminalAlternatives)
-	 */
-	protected void sequence_TerminalRule(EObject context, TerminalRule semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (terminal=TerminalTokenElement (cardinality='?' | cardinality='*' | cardinality='+')?)
-	 */
-	protected void sequence_TerminalToken_UntilToken(EObject context, UntilToken semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     ((cardinality='?' | cardinality='*' | cardinality='+')?)
-	 */
-	protected void sequence_TerminalToken(EObject context, Wildcard semanticObject) {
+	protected void sequence_TerminalRuleCall(EObject context, RuleCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -654,6 +860,15 @@ public class XtextGrammarTestLanguageSemanticSequencer extends AbstractDelegatin
 	 *     (metamodel=[AbstractMetamodelDeclaration|ID]? classifier=[EClassifier|ID])
 	 */
 	protected void sequence_TypeRef(EObject context, TypeRef semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (elements+=UnorderedGroup_UnorderedGroup_1_0 elements+=Group+)
+	 */
+	protected void sequence_UnorderedGroup(EObject context, UnorderedGroup semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

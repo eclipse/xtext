@@ -142,7 +142,7 @@ public class InternalBug301935TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }
@@ -172,7 +172,7 @@ public class InternalBug301935TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }
@@ -209,7 +209,7 @@ public class InternalBug301935TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value2",
                     		lv_value2_4_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }

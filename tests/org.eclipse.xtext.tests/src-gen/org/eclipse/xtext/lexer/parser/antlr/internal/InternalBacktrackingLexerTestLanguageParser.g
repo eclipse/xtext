@@ -92,7 +92,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"enums",
         		lv_enums_0_0, 
-        		"EnumName");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.EnumName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -111,7 +111,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"ycs",
         		lv_ycs_1_0, 
-        		"Yc");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Yc");
 	    }
 
 )
@@ -128,7 +128,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"abs",
         		lv_abs_2_0, 
-        		"Ab");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Ab");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -146,7 +146,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"xbs",
         		lv_xbs_3_0, 
-        		"Xb");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Xb");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -165,7 +165,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"ys",
         		lv_ys_4_0, 
-        		"CharY");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharY");
 	    }
 
 )
@@ -183,7 +183,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"as",
         		lv_as_5_0, 
-        		"CharA");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharA");
 	    }
 
 )
@@ -222,7 +222,7 @@ ruleAb returns [EObject current=null]
        			$current, 
        			"x",
         		lv_x_0_0, 
-        		"CharA");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharA");
 	    }
 
 )
@@ -240,7 +240,7 @@ ruleAb returns [EObject current=null]
        			$current, 
        			"y",
         		lv_y_1_0, 
-        		"Charb");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Charb");
 	    }
 
 )
@@ -279,7 +279,7 @@ ruleXb returns [EObject current=null]
        			$current, 
        			"x",
         		lv_x_0_0, 
-        		"CharX");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharX");
 	    }
 
 )
@@ -297,7 +297,7 @@ ruleXb returns [EObject current=null]
        			$current, 
        			"y",
         		lv_y_1_0, 
-        		"Charb");
+        		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Charb");
 	    }
 
 )

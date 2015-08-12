@@ -44,10 +44,13 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	 */
 	private Set<AbstractRule> permanentlyVisited;
 	
+	private Set<RuleCall> fragmentStack;
+	
 	public OverriddenValueInspector(ValidationMessageAcceptor acceptor) {
 		super(acceptor);
 		assignedFeatures = newMultimap();
 		permanentlyVisited = Sets.newHashSet();
+		fragmentStack = Sets.newHashSet();
 	}
 	
 	@Override
@@ -102,20 +105,34 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 			Collection<AbstractElement> sources = Lists.newArrayList(assignedFeatures.get(feature));
 			assignedFeatures.replaceValues(feature, Collections.<AbstractElement> emptyList());
 			if (sources != null && sources.equals(Collections.singletonList(object))) {
-				if (getNestingLevel() == 0)
-					acceptWarning("The assigned value of feature '" + feature
-							+ "' will possibly override itself because it is used inside of a loop.", object, null);
+				if (getNestingLevel() == 0 && fragmentStack.isEmpty()) {
+					if (object instanceof RuleCall) {
+						acceptWarning("The fragment will possibly override the assigned value of feature '" + feature
+								+ "' it is used inside of a loop.", object, null);
+					} else {
+						acceptWarning("The assigned value of feature '" + feature
+								+ "' will possibly override itself because it is used inside of a loop.", object, null);
+					}
+				}
 			}
 			else {
 				if (sources != null) {
-					if (getNestingLevel() == 0)
-						for (AbstractElement source : sources)
+					if (getNestingLevel() == 0 && fragmentStack.isEmpty()) {
+						for (AbstractElement source : sources) {
 							acceptWarning("The possibly assigned value of feature '" + feature
 									+ "' may be overridden by subsequent assignments.", source, null);
+						}
+					}
 				}
-				if (getNestingLevel() == 0)
-					acceptWarning("This assignment will override the possibly assigned value of feature '"
-							+ feature + "'.", object, null);
+				if (getNestingLevel() == 0 && fragmentStack.isEmpty()) {
+					if (object instanceof RuleCall) {
+						acceptWarning("The fragment will potentially override the possibly assigned value of feature '"
+								+ feature + "'.", object, null);
+					} else {
+						acceptWarning("This assignment will override the possibly assigned value of feature '"
+								+ feature + "'.", object, null);
+					}
+				}
 			}
 		}
 		else {
@@ -131,6 +148,11 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 		ParserRule parserRule = (ParserRule) calledRule;
 		if (GrammarUtil.isDatatypeRule(parserRule))
 			return Boolean.FALSE;
+		if (parserRule.isFragment()) {
+			visitFragment(object);
+			if (GrammarUtil.isMultipleCardinality(object))
+				visitFragment(object);
+		}
 		if (!addVisited(parserRule))
 			return Boolean.FALSE;
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
@@ -141,6 +163,22 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 		assignedFeatures = prevAssignedFeatures;
 		removeVisited(parserRule);
 		return Boolean.FALSE;
+	}
+
+	private void visitFragment(RuleCall object) {
+		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
+		assignedFeatures = newMultimap();
+		if (fragmentStack.add(object)) {
+			try {
+				doSwitch(object.getRule().getAlternatives());
+			} finally {
+				fragmentStack.remove(object);
+			}
+		}
+		Multimap<String, AbstractElement> assignedByFragment = assignedFeatures;
+		assignedFeatures = prevAssignedFeatures;
+		for (String feature : assignedByFragment.keySet())
+			checkAssignment(object, feature);
 	}
 
 	@Override

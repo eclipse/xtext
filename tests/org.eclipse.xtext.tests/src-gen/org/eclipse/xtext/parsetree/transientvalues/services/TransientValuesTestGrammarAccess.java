@@ -19,7 +19,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -37,7 +37,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestRequired | TestOptional | TestList
+		//(TestRequired | TestOptional | TestList)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestRequired
@@ -51,7 +51,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class TestRequiredElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestRequired");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestRequiredAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cRequiredKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -87,7 +87,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class TestOptionalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestOptional");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestOptionalAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cOptionalKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -131,7 +131,7 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class TestListElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestList");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.transientvalues.TransientValuesTest.TestList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestListAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cListKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -247,38 +247,38 @@ public class TransientValuesTestGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

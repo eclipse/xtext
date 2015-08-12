@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"strings",
         		lv_strings_0_0, 
-        		"AbstractString");
+        		"org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.AbstractString");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -170,7 +170,7 @@ ruleGString returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"GERMAN_STRING");
+        		"org.eclipse.xtext.parser.terminalrules.UnicodeTestLanguage.GERMAN_STRING");
 	    }
 
 )
@@ -209,7 +209,7 @@ ruleQuotedString returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

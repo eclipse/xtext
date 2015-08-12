@@ -41,11 +41,12 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	greetings+=Greeting* "favourite" favourite=[Greeting|MyId];
+ * 	greetings+=Greeting*
+ * 	'favourite' favourite=[Greeting|MyId];
  *
  **/
 
-// greetings+=Greeting* "favourite" favourite=[Greeting|MyId]
+// greetings+=Greeting* 'favourite' favourite=[Greeting|MyId]
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -120,7 +121,7 @@ protected class Model_GreetingsAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// "favourite"
+// 'favourite'
 protected class Model_FavouriteKeyword_1 extends KeywordToken  {
 	
 	public Model_FavouriteKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -186,11 +187,11 @@ protected class Model_FavouriteAssignment_2 extends AssignmentToken  {
 /************ begin Rule Greeting ****************
  *
  * Greeting:
- * 	"Hello" name=MyId "!";
+ * 	'Hello' name=MyId '!';
  *
  **/
 
-// "Hello" name=MyId "!"
+// 'Hello' name=MyId '!'
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -219,7 +220,7 @@ protected class Greeting_Group extends GroupToken {
 
 }
 
-// "Hello"
+// 'Hello'
 protected class Greeting_HelloKeyword_0 extends KeywordToken  {
 	
 	public Greeting_HelloKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -274,7 +275,7 @@ protected class Greeting_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "!"
+// '!'
 protected class Greeting_ExclamationMarkKeyword_2 extends KeywordToken  {
 	
 	public Greeting_ExclamationMarkKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

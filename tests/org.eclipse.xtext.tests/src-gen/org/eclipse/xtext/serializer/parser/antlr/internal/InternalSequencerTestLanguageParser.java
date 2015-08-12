@@ -43,8 +43,8 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
     public static final int T__51=51;
     public static final int T__15=15;
     public static final int T__52=52;
-    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__53=53;
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__14=14;
@@ -424,7 +424,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x1",
                             		lv_x1_0_0, 
-                            		"SimpleGroup");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleGroup");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -461,7 +461,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x2",
                             		lv_x2_1_0, 
-                            		"SimpleAlternative");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleAlternative");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -498,7 +498,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x3",
                             		lv_x3_2_0, 
-                            		"SimpleMultiplicities");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -535,7 +535,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x4",
                             		lv_x4_3_0, 
-                            		"GroupMultiplicities");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.GroupMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -572,7 +572,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x5",
                             		lv_x5_4_0, 
-                            		"AlternativeMultiplicities");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.AlternativeMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -609,7 +609,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x6",
                             		lv_x6_5_0, 
-                            		"List1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.List1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -646,7 +646,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x7",
                             		lv_x7_6_0, 
-                            		"List2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.List2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -683,7 +683,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x8",
                             		lv_x8_7_0, 
-                            		"AltList1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.AltList1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -720,7 +720,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x9",
                             		lv_x9_8_0, 
-                            		"AltList2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.AltList2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -757,7 +757,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x10",
                             		lv_x10_9_0, 
-                            		"SingleKeywords");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywords");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -794,7 +794,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x11",
                             		lv_x11_10_0, 
-                            		"SingleKeywordsOrID");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywordsOrID");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -831,7 +831,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x12",
                             		lv_x12_11_0, 
-                            		"SingleTerminals");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleTerminals");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -868,7 +868,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x10",
                             		lv_x10_12_0, 
-                            		"MultiKeywords");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywords");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -905,7 +905,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x11",
                             		lv_x11_13_0, 
-                            		"MultiKeywordsOrID");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywordsOrID");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -942,7 +942,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x12",
                             		lv_x12_14_0, 
-                            		"MultiTerminals");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiTerminals");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -979,7 +979,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x13",
                             		lv_x13_15_0, 
-                            		"SingleEnum");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleEnum");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1016,7 +1016,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x14",
                             		lv_x14_16_0, 
-                            		"SingleCrossReference");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleCrossReference");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1053,7 +1053,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x15",
                             		lv_x15_17_0, 
-                            		"SingleContainmentReference");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReference");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1090,7 +1090,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x19",
                             		lv_x19_18_0, 
-                            		"DependentAlternative1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1127,7 +1127,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x20",
                             		lv_x20_19_0, 
-                            		"DependentAlternative2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1164,7 +1164,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x21",
                             		lv_x21_20_0, 
-                            		"Optional");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.Optional");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1201,7 +1201,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x22",
                             		lv_x22_21_0, 
-                            		"Float");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.Float");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1238,7 +1238,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x23",
                             		lv_x23_22_0, 
-                            		"UnorderedAlternative");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternative");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1275,7 +1275,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x24",
                             		lv_x24_23_0, 
-                            		"UnorderedGroup");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroup");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1312,7 +1312,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x25",
                             		lv_x25_24_0, 
-                            		"UnorderedGroupOptional");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupOptional");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1349,7 +1349,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x26",
                             		lv_x26_25_0, 
-                            		"UnorderedGroupBoolean");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupBoolean");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1386,7 +1386,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x27",
                             		lv_x27_26_0, 
-                            		"Complex1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.Complex1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1423,7 +1423,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x28",
                             		lv_x28_27_0, 
-                            		"OptionalDouble");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.OptionalDouble");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1460,7 +1460,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x29",
                             		lv_x29_28_0, 
-                            		"NullValueGenerated");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueGenerated");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1497,7 +1497,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x30",
                             		lv_x30_29_0, 
-                            		"NullValueInterpreted");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueInterpreted");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1534,7 +1534,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x31",
                             		lv_x31_30_0, 
-                            		"NullCrossRefGenerated");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefGenerated");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1571,7 +1571,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"x32",
                             		lv_x32_31_0, 
-                            		"NullCrossRefInterpreted");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefInterpreted");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1679,7 +1679,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1705,7 +1705,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val2",
                     		lv_val2_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1838,7 +1838,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1880,7 +1880,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1998,7 +1998,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2036,7 +2036,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2082,7 +2082,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val3",
             	            		lv_val3_5_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2134,7 +2134,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2252,7 +2252,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2293,7 +2293,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2319,7 +2319,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val3",
                             		lv_val3_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2371,7 +2371,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_6_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2397,7 +2397,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val5",
             	            		lv_val5_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2455,7 +2455,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val6",
             	            		lv_val6_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2481,7 +2481,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val7",
             	            		lv_val7_10_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2617,7 +2617,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2656,7 +2656,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val3",
                             		lv_val3_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2714,7 +2714,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_5_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2753,7 +2753,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val5",
             	            		lv_val5_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2817,7 +2817,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val6",
             	            		lv_val6_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2856,7 +2856,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val7",
             	            		lv_val7_11_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2973,7 +2973,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3018,7 +3018,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val1",
             	            		lv_val1_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -3154,7 +3154,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3199,7 +3199,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_4_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -3356,7 +3356,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3382,7 +3382,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3424,7 +3424,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3450,7 +3450,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val3",
                             		lv_val3_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3492,7 +3492,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_7_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3526,7 +3526,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                                    			current, 
                                    			"val4",
                                     		lv_val4_8_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -3670,7 +3670,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3696,7 +3696,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3738,7 +3738,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3783,7 +3783,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_6_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -3818,7 +3818,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val3",
                             		lv_val3_7_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -4183,7 +4183,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_4, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -4313,7 +4313,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_1, 
-                            		"ID1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
                     	    
 
                     }
@@ -4333,7 +4333,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_2, 
-                            		"ID2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
                     	    
 
                     }
@@ -4480,7 +4480,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_1, 
-                            		"DefEnum1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4505,7 +4505,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_2, 
-                            		"DefEnum2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4530,7 +4530,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_3, 
-                            		"DefEnum3");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4674,7 +4674,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"name",
                             		lv_name_1_1, 
-                            		"ID1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
                     	    
 
                     }
@@ -4694,7 +4694,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"name",
                             		lv_name_1_2, 
-                            		"ID2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
                     	    
 
                     }
@@ -4714,7 +4714,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"name",
                             		lv_name_1_3, 
-                            		"ID3");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID3");
                     	    
 
                     }
@@ -4971,7 +4971,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"child",
                             		lv_child_1_1, 
-                            		"SingleContainmentReferenceChild1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4996,7 +4996,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"child",
                             		lv_child_1_2, 
-                            		"SingleContainmentReferenceChild2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -5021,7 +5021,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"child",
                             		lv_child_1_3, 
-                            		"SingleContainmentReferenceChild3");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -5648,7 +5648,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_4, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5778,7 +5778,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_1, 
-                            		"ID1");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
                     	    
 
                     }
@@ -5798,7 +5798,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_2, 
-                            		"ID2");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
                     	    
 
                     }
@@ -5939,7 +5939,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5974,7 +5974,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6121,7 +6121,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6160,7 +6160,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"val",
                     	            		lv_val_2_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -6221,7 +6221,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"val",
                     	            		lv_val_3_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -6367,7 +6367,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"int0",
                     		lv_int0_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -6404,7 +6404,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"int1",
                             		lv_int1_2_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -6430,7 +6430,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"int2",
                             		lv_int2_3_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -6679,7 +6679,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val1",
             	            		lv_val1_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -6711,7 +6711,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val2",
             	            		lv_val2_3_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -6747,7 +6747,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val3",
             	            		lv_val3_4_0, 
-            	            		"UnorderedAlternativeVal");
+            	            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeVal");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6784,7 +6784,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_5_0, 
-            	            		"UnorderedAlternativeValDelegate");
+            	            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeValDelegate");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6897,7 +6897,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7079,7 +7079,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7188,16 +7188,16 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                 int alt35=5;
                 int LA35_0 = input.LA(1);
 
-                if ( LA35_0 ==RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 0) ) {
+                if ( LA35_0 == RULE_ID && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 0) ) {
                     alt35=1;
                 }
-                else if ( LA35_0 ==RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 1) ) {
+                else if ( LA35_0 == RULE_INT && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 1) ) {
                     alt35=2;
                 }
-                else if ( LA35_0 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 2) ) {
+                else if ( LA35_0 == 16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 2) ) {
                     alt35=3;
                 }
-                else if ( LA35_0 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 3) ) {
+                else if ( LA35_0 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupAccess().getUnorderedGroup_1(), 3) ) {
                     alt35=4;
                 }
 
@@ -7242,7 +7242,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val1",
             	            		lv_val1_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -7304,7 +7304,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val2",
             	            		lv_val2_3_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -7370,7 +7370,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val3",
             	            		lv_val3_4_0, 
-            	            		"UnorderedGroupVal");
+            	            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupVal");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -7437,7 +7437,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_5_0, 
-            	            		"UnorderedGroupValDelegate");
+            	            		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupValDelegate");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -7581,7 +7581,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7763,7 +7763,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7882,13 +7882,13 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                 int alt36=4;
                 int LA36_0 = input.LA(1);
 
-                if ( LA36_0 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 0) ) {
+                if ( LA36_0 == 16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 0) ) {
                     alt36=1;
                 }
-                else if ( LA36_0 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 1) ) {
+                else if ( LA36_0 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 1) ) {
                     alt36=2;
                 }
-                else if ( LA36_0 ==19 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 2) ) {
+                else if ( LA36_0 == 19 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupOptionalAccess().getUnorderedGroup_2(), 2) ) {
                     alt36=3;
                 }
 
@@ -7940,7 +7940,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val1",
             	            		lv_val1_4_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8012,7 +8012,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"va2",
             	            		lv_va2_6_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8084,7 +8084,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val3",
             	            		lv_val3_8_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8236,13 +8236,13 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                 int alt37=4;
                 int LA37_0 = input.LA(1);
 
-                if ( LA37_0 ==16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 0) ) {
+                if ( LA37_0 == 16 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 0) ) {
                     alt37=1;
                 }
-                else if ( LA37_0 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 1) ) {
+                else if ( LA37_0 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 1) ) {
                     alt37=2;
                 }
-                else if ( LA37_0 ==19 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 2) ) {
+                else if ( LA37_0 == 19 && getUnorderedGroupHelper().canSelect(grammarAccess.getUnorderedGroupBooleanAccess().getUnorderedGroup_2(), 2) ) {
                     alt37=3;
                 }
 
@@ -8572,7 +8572,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val1",
                             		lv_val1_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8619,7 +8619,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val2",
                             		lv_val2_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8690,7 +8690,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val3",
             	            		lv_val3_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8732,7 +8732,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val4",
             	            		lv_val4_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8774,7 +8774,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val5",
             	            		lv_val5_11_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8816,7 +8816,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val6",
             	            		lv_val6_13_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8940,7 +8940,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"double0",
                     		lv_double0_1_0, 
-                    		"DOUBLE");
+                    		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -8982,7 +8982,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"double1",
                             		lv_double1_2_0, 
-                            		"DOUBLE");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -9013,7 +9013,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"double2",
                             		lv_double2_3_0, 
-                            		"DOUBLE");
+                            		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -9238,7 +9238,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_1_0, 
-                    		"NULL_STRING");
+                    		"org.eclipse.xtext.serializer.SequencerTestLanguage.NULL_STRING");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -9348,7 +9348,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_1_0, 
-                    		"NULL_STRING");
+                    		"org.eclipse.xtext.serializer.SequencerTestLanguage.NULL_STRING");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -9383,7 +9383,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"foo",
                             		lv_foo_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -9690,7 +9690,7 @@ public class InternalSequencerTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"foo",
                             		lv_foo_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }

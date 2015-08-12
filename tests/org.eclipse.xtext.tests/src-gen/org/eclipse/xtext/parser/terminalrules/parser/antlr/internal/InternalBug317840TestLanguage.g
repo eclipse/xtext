@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,7 +133,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"first",
         		lv_first_1_0, 
-        		"Named");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -151,7 +151,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"second",
         		lv_second_2_0, 
-        		"Named");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -169,7 +169,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"third",
         		lv_third_3_0, 
-        		"Named");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -187,7 +187,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"forth",
         		lv_forth_4_0, 
-        		"Named");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -226,7 +226,7 @@ ruleNamed returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"NAME");
+        		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.NAME");
 	        afterParserOrEnumRuleCall();
 	    }
 

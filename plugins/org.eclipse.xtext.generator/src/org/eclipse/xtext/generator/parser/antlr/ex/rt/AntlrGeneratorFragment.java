@@ -136,7 +136,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 			Iterator<Entry<Integer, String>> entries = provider.getTokenDefMap().entrySet().iterator();
 			while(entries.hasNext()) {
 				String value = entries.next().getValue();
-				if (!value.startsWith("KEYWORD_") && !value.startsWith("RULE_"))
+				if (!value.startsWith("KEYWORD_") && !value.startsWith("RULE_") && !value.startsWith("SUPER_"))
 					entries.remove();
 			}
 			try {
@@ -157,7 +157,7 @@ public class AntlrGeneratorFragment extends AbstractAntlrGeneratorFragmentEx {
 			Iterator<Entry<Integer, String>> entries = provider.getTokenDefMap().entrySet().iterator();
 			while(entries.hasNext()) {
 				String value = entries.next().getValue();
-				if (!helper.isKeywordRule(value) && !value.startsWith("RULE_"))
+				if (!helper.isKeywordRule(value) && !value.startsWith("RULE_") && !value.startsWith("SUPER_"))
 					entries.remove();
 			}
 			try {

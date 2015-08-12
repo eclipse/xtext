@@ -9,13 +9,16 @@ ruleGrammar :
 		'with' ruleGrammarID (
 			',' ruleGrammarID
 		)*
-	)? (
-		'hidden' '(' (
-			RULE_ID (
-				',' RULE_ID
-			)*
-		)? ')'
-	)? ruleAbstractMetamodelDeclaration* ruleAbstractRule+
+	)? ruleHiddenClause? ruleAbstractMetamodelDeclaration* ruleAbstractRule+
+;
+
+// Rule HiddenClause
+ruleHiddenClause :
+	'hidden' '(' (
+		RULE_ID (
+			',' RULE_ID
+		)*
+	)? ')'
 ;
 
 // Rule GrammarID
@@ -54,15 +57,34 @@ ruleReferencedMetamodel :
 
 // Rule ParserRule
 ruleParserRule :
+	(
+		'fragment' ruleRuleNameAndParams (
+			'*' |
+			ruleReturnsClause?
+		) |
+		ruleRuleNameAndParams ruleReturnsClause?
+	) ruleHiddenClause? ':' ruleAlternatives ';'
+;
+
+// Rule RuleNameAndParams
+ruleRuleNameAndParams :
 	RULE_ID (
-		'returns' ruleTypeRef
-	)? (
-		'hidden' '(' (
-			RULE_ID (
-				',' RULE_ID
+		'[' (
+			ruleParameter (
+				',' ruleParameter
 			)*
-		)? ')'
-	)? ':' ruleAlternatives ';'
+		)? ']'
+	)?
+;
+
+// Rule ReturnsClause
+ruleReturnsClause :
+	'returns' ruleTypeRef
+;
+
+// Rule Parameter
+ruleParameter :
+	RULE_ID
 ;
 
 // Rule TypeRef
@@ -74,9 +96,24 @@ ruleTypeRef :
 
 // Rule Alternatives
 ruleAlternatives :
+	ruleConditionalBranch (
+		(
+			'|' ruleConditionalBranch
+		)+
+	)?
+;
+
+// Rule ConditionalBranch
+ruleConditionalBranch :
+	ruleUnorderedGroup |
+	'[' ruleInverseLiteralValue RULE_ID ']' ruleUnorderedGroup
+;
+
+// Rule UnorderedGroup
+ruleUnorderedGroup :
 	ruleGroup (
 		(
-			'|' ruleGroup
+			'&' ruleGroup
 		)+
 	)?
 ;
@@ -99,11 +136,14 @@ ruleAbstractTokenWithCardinality :
 	(
 		ruleAssignment |
 		ruleAbstractTerminal
-	) (
-		'?' |
-		'*' |
-		'+'
-	)?
+	) ruleCardinalities?
+;
+
+// Rule Cardinalities
+ruleCardinalities :
+	'?' |
+	'*' |
+	'+'
 ;
 
 // Rule Action
@@ -120,7 +160,10 @@ ruleAction :
 ruleAbstractTerminal :
 	ruleKeyword |
 	ruleRuleCall |
-	ruleParenthesizedElement
+	ruleParenthesizedElement |
+	rulePredicatedKeyword |
+	rulePredicatedRuleCall |
+	rulePredicatedGroup
 ;
 
 // Rule Keyword
@@ -130,16 +173,65 @@ ruleKeyword :
 
 // Rule RuleCall
 ruleRuleCall :
-	RULE_ID
+	ruleRuleID (
+		'[' ruleNamedArgument (
+			',' ruleNamedArgument
+		)* ']'
+	)?
+;
+
+// Rule LiteralValue
+ruleLiteralValue :
+	'!' |
+	'+'
+;
+
+// Rule InverseLiteralValue
+ruleInverseLiteralValue :
+	ruleLiteralValue
+;
+
+// Rule NamedArgument
+ruleNamedArgument :
+	ruleLiteralValue? RULE_ID |
+	RULE_ID '=' RULE_ID
+;
+
+// Rule TerminalRuleCall
+ruleTerminalRuleCall :
+	ruleRuleID
+;
+
+// Rule RuleID
+ruleRuleID :
+	RULE_ID (
+		'::' RULE_ID
+	)*
+;
+
+// Rule PredicatedKeyword
+rulePredicatedKeyword :
+	rulePredicate RULE_STRING
+;
+
+// Rule PredicatedRuleCall
+rulePredicatedRuleCall :
+	rulePredicate RULE_ID
 ;
 
 // Rule Assignment
 ruleAssignment :
-	RULE_ID (
+	rulePredicate? RULE_ID (
 		'+=' |
 		'=' |
 		'?='
 	) ruleAssignableTerminal
+;
+
+// Rule Predicate
+rulePredicate :
+	'=>' |
+	'->'
 ;
 
 // Rule AssignableTerminal
@@ -174,22 +266,7 @@ ruleCrossReference :
 // Rule CrossReferenceableTerminal
 ruleCrossReferenceableTerminal :
 	ruleKeyword |
-	ruleRuleCall |
-	ruleParenthesizedCrossReferenceableElement
-;
-
-// Rule ParenthesizedCrossReferenceableElement
-ruleParenthesizedCrossReferenceableElement :
-	'(' ruleCrossReferenceableAlternatives ')'
-;
-
-// Rule CrossReferenceableAlternatives
-ruleCrossReferenceableAlternatives :
-	ruleCrossReferenceableTerminal (
-		(
-			'|' ruleCrossReferenceableTerminal
-		)+
-	)?
+	ruleRuleCall
 ;
 
 // Rule ParenthesizedElement
@@ -197,11 +274,17 @@ ruleParenthesizedElement :
 	'(' ruleAlternatives ')'
 ;
 
+// Rule PredicatedGroup
+rulePredicatedGroup :
+	rulePredicate '(' ruleAlternatives ')'
+;
+
 // Rule TerminalRule
 ruleTerminalRule :
-	'terminal' RULE_ID (
-		'returns' ruleTypeRef
-	)? ':' ruleTerminalAlternatives ';'
+	'terminal' (
+		'fragment' RULE_ID |
+		RULE_ID ruleReturnsClause?
+	) ':' ruleTerminalAlternatives ';'
 ;
 
 // Rule TerminalAlternatives
@@ -222,20 +305,17 @@ ruleTerminalGroup :
 
 // Rule TerminalToken
 ruleTerminalToken :
-	ruleTerminalTokenElement (
-		'?' |
-		'*' |
-		'+'
-	)?
+	ruleTerminalTokenElement ruleCardinalities?
 ;
 
 // Rule TerminalTokenElement
 ruleTerminalTokenElement :
 	ruleCharacterRange |
-	ruleRuleCall |
+	ruleTerminalRuleCall |
 	ruleParenthesizedTerminalElement |
 	ruleAbstractNegatedToken |
-	ruleWildcard
+	ruleWildcard |
+	ruleEOF
 ;
 
 // Rule ParenthesizedTerminalElement
@@ -264,6 +344,11 @@ ruleWildcard :
 	'.'
 ;
 
+// Rule EOF
+ruleEOF :
+	'EOF'
+;
+
 // Rule CharacterRange
 ruleCharacterRange :
 	ruleKeyword (
@@ -273,9 +358,7 @@ ruleCharacterRange :
 
 // Rule EnumRule
 ruleEnumRule :
-	'enum' RULE_ID (
-		'returns' ruleTypeRef
-	)? ':' ruleEnumLiterals ';'
+	'enum' RULE_ID ruleReturnsClause? ':' ruleEnumLiterals ';'
 ;
 
 // Rule EnumLiterals
@@ -331,7 +414,7 @@ RULE_STRING :
 RULE_ML_COMMENT :
 	'/*' (
 		options { greedy = false ; } : .
-	)* '*/' {skip();}
+	)* '*/' { skip(); }
 ;
 
 RULE_SL_COMMENT :
@@ -340,7 +423,7 @@ RULE_SL_COMMENT :
 		'\r'
 	)* (
 		'\r'? '\n'
-	)? {skip();}
+	)? { skip(); }
 ;
 
 RULE_WS :
@@ -349,7 +432,7 @@ RULE_WS :
 		'\t' |
 		'\r' |
 		'\n'
-	)+ {skip();}
+	)+ { skip(); }
 ;
 
 RULE_ANY_OTHER :

@@ -12,13 +12,22 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
+
 /**
- * @author Sven Efftinge - Initial contribution and API
- *
+ * Annotate methods in your own {@link AbstractDeclarativeValueConverterService}
+ * to mark them as contributions to all known value converters.
  * 
+ * @author Sven Efftinge - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
 public @interface ValueConverter {
+	/**
+	 * The name of the rule that is converted by this value converter.
+	 * May be a qualified name, e.g. {@code com.acme.MySuperLang.MyDataTypeRule} to
+	 * provide value converters for inherited rules that are called with the explicit
+	 * notation {@code super::MyDataTypeRule} or {@code com::acme::MySuperLang::MyDataTypeRule}.
+	 */
 	String rule();
 }

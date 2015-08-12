@@ -90,6 +90,36 @@ public class XtextOutlineTreeProviderTest extends AbstractXtextTests {
 		assertNode(grammar.getChildren().get(8), "WS (org.eclipse.xtext.common.Terminals)", 0);
 		assertNode(grammar.getChildren().get(9), "ANY_OTHER (org.eclipse.xtext.common.Terminals)", 0);	
 	}
+	
+	@Test public void testInheritModeWithOverride() throws Exception{
+		setShowInherited(true);
+		String model = "grammar Foo with org.eclipse.xtext.common.Terminals " +
+				"generate foo 'Foo' " +
+				"Foo: 'foo'; " +
+				"terminal ID: 'bar';";
+		IOutlineNode node = assertNoException(model);
+		assertEquals(1, node.getChildren().size());
+		IOutlineNode grammar = node.getChildren().get(0);
+		assertNode(grammar, "grammar Foo", 10);
+		assertNode(grammar.getChildren().get(0), "generate foo", 0);
+		IOutlineNode foo = grammar.getChildren().get(1);
+		assertNode(foo, "Foo", 0);
+		assertEquals(model.lastIndexOf("Foo"), foo.getFullTextRegion().getOffset());
+		assertEquals(11, foo.getFullTextRegion().getLength());
+		assertEquals(model.lastIndexOf("Foo"), foo.getSignificantTextRegion().getOffset());
+		assertEquals(3, foo.getSignificantTextRegion().getLength());
+		assertNode(grammar.getChildren().get(2), "ID", 0);
+		IOutlineNode id = grammar.getChildren().get(3);
+		assertNode(id, "ID (org.eclipse.xtext.common.Terminals)", 0);
+		assertNull(id.getSignificantTextRegion());
+		assertEquals(ITextRegion.EMPTY_REGION, id.getFullTextRegion());
+		assertNode(grammar.getChildren().get(4), "INT (org.eclipse.xtext.common.Terminals)", 0);
+		assertNode(grammar.getChildren().get(5), "STRING (org.eclipse.xtext.common.Terminals)", 0);
+		assertNode(grammar.getChildren().get(6), "ML_COMMENT (org.eclipse.xtext.common.Terminals)", 0);
+		assertNode(grammar.getChildren().get(7), "SL_COMMENT (org.eclipse.xtext.common.Terminals)", 0);
+		assertNode(grammar.getChildren().get(8), "WS (org.eclipse.xtext.common.Terminals)", 0);
+		assertNode(grammar.getChildren().get(9), "ANY_OTHER (org.eclipse.xtext.common.Terminals)", 0);	
+	}
 
 	protected void assertNode(IOutlineNode node, String text, int numChildren) {
 		assertEquals(numChildren, node.getChildren().size());

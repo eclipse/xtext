@@ -12,6 +12,7 @@ import static org.eclipse.xtext.serializer.impl.FeatureFinderUtil.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Grammar;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -23,6 +24,8 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	protected String message;
 
 	protected EObject semanticObject;
+	
+	protected Grammar grammar;
 
 	protected EObject context;
 
@@ -30,41 +33,44 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	
 	private Throwable throwable;
 
-	public SerializationDiagnostic(String id, EObject semantic, AbstractElement element, String msg, Throwable exc) {
-		this(id, semantic, semantic != null ? getFeature(element, semantic.eClass()) : null, msg, exc);
+	public SerializationDiagnostic(String id, EObject semantic, AbstractElement element, Grammar grammar, String msg, Throwable exc) {
+		this(id, semantic, semantic != null ? getFeature(element, semantic.eClass()) : null, grammar, msg, exc);
 	}
 
-	public SerializationDiagnostic(String id, EObject semanticObject, AbstractElement element, String message) {
-		this(id, semanticObject, semanticObject != null ? getFeature(element, semanticObject.eClass()) : null, message);
+	public SerializationDiagnostic(String id, EObject semanticObject, AbstractElement element, Grammar grammar, String message) {
+		this(id, semanticObject, semanticObject != null ? getFeature(element, semanticObject.eClass()) : null, grammar, message);
 	}
 
-	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, String message) {
+	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, Grammar grammar, String message) {
 		super();
 		this.id = id;
 		this.semanticObject = semanticObject;
+		this.grammar = grammar;
 		this.message = message;
 		this.feature = feature;
 	}
 	
-	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, String message, Throwable throwable) {
+	public SerializationDiagnostic(String id, EObject semanticObject, EStructuralFeature feature, Grammar grammar, String message, Throwable throwable) {
 		super();
 		this.id = id;
 		this.semanticObject = semanticObject;
+		this.grammar = grammar;
 		this.throwable = throwable;
 		this.feature = feature;
 		this.message = message;
 	}
 
-	public SerializationDiagnostic(String id, EObject semanticObject, EObject context, String message) {
+	public SerializationDiagnostic(String id, EObject semanticObject, EObject context, Grammar grammar, String message) {
 		super();
 		this.id = id;
 		this.semanticObject = semanticObject;
+		this.grammar = grammar;
 		this.message = message;
 		this.context = context;
 	}
 
-	public SerializationDiagnostic(String id, EObject semanticObject, String message) {
-		this(id, semanticObject, (EStructuralFeature) null, message);
+	public SerializationDiagnostic(String id, EObject semanticObject, Grammar grammar, String message) {
+		this(id, semanticObject, (EStructuralFeature) null, grammar, message);
 	}
 
 	@Override
@@ -90,6 +96,11 @@ public class SerializationDiagnostic implements ISerializationDiagnostic {
 	@Override
 	public EObject getContext() {
 		return context;
+	}
+	
+	@Override
+	public Grammar getGrammar() {
+		return grammar;
 	}
 
 	@Override

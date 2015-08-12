@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"existing",
         		lv_existing_1_0, 
-        		"ExistingEnum");
+        		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.ExistingEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -117,7 +117,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"generated",
         		lv_generated_3_0, 
-        		"GeneratedEnum");
+        		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -140,7 +140,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"generated",
         		lv_generated_5_0, 
-        		"GeneratedEnum");
+        		"org.eclipse.xtext.enumrules.EnumRulesTestLanguage.GeneratedEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 

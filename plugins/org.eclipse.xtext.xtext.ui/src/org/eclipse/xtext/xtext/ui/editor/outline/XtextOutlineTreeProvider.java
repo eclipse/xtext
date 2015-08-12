@@ -41,8 +41,8 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	public static final String NAME_TYPE_SEPARATOR = " - ";
 
-	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited rules");
-	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited rules");
+	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "Show inherited rules");
+	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "Hide inherited rules");
 	private static final List<OutlineMode> MODES = newArrayList(HIDE_INHERITED_MODE, SHOW_INHERITED_MODE);
 	
 	@Override
@@ -128,14 +128,15 @@ public class XtextOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 			createNode(parentNode, rule);
 		}
 		if (getCurrentMode() == SHOW_INHERITED_MODE) {
-			for (AbstractRule rule : GrammarUtil.allRules(grammar)) {
-				if (rule.eContainer() != grammar) {
+			List<Grammar> usedGrammars = GrammarUtil.allUsedGrammars(grammar);
+			for(Grammar usedGrammar: usedGrammars) {
+				for (AbstractRule rule : usedGrammar.getRules()) {
 					createRuleNode(parentNode, rule, true, false);
 				}
 			}
 		}
 	}
-
+	
 	protected boolean _isLeaf(AbstractRule rule) {
 		return true;
 	}

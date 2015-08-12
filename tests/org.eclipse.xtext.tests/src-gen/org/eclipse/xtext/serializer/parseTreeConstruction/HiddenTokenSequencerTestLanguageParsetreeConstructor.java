@@ -99,11 +99,13 @@ protected class Model_DomainModelAssignment extends AssignmentToken  {
 /************ begin Rule DomainModel ****************
  *
  * / * SuppressWarnings[noInstantiation] * / DomainModel:
- * 	"entities" entities+=Entity* "end";
+ * 	'entities'
+ * 	entities+=Entity*
+ * 	'end';
  *
  **/
 
-// "entities" entities+=Entity* "end"
+// 'entities' entities+=Entity* 'end'
 protected class DomainModel_Group extends GroupToken {
 	
 	public DomainModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -132,7 +134,7 @@ protected class DomainModel_Group extends GroupToken {
 
 }
 
-// "entities"
+// 'entities'
 protected class DomainModel_EntitiesKeyword_0 extends KeywordToken  {
 	
 	public DomainModel_EntitiesKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -200,7 +202,7 @@ protected class DomainModel_EntitiesAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "end"
+// 'end'
 protected class DomainModel_EndKeyword_2 extends KeywordToken  {
 	
 	public DomainModel_EndKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -230,7 +232,8 @@ protected class DomainModel_EndKeyword_2 extends KeywordToken  {
 /************ begin Rule Entity ****************
  *
  * Entity:
- * 	name=ID description=STRING;
+ * 	name=ID
+ * 	description=STRING;
  *
  **/
 

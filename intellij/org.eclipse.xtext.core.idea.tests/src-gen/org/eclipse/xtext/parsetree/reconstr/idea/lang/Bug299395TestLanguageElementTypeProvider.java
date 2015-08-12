@@ -181,115 +181,115 @@ public class Bug299395TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelAction_0ElementType() {
 		return Model_ModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_LeftCurlyBracketKeyword_1_0ElementType() {
 		return Model_LeftCurlyBracketKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_StringsAssignment_1_1ElementType() {
 		return Model_StringsAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_StringsSTRINGTerminalRuleCall_1_1_0ElementType() {
 		return Model_StringsSTRINGTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RightCurlyBracketKeyword_1_2ElementType() {
 		return Model_RightCurlyBracketKeyword_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2ElementType() {
 		return Model_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_LeftSquareBracketKeyword_2_0ElementType() {
 		return Model_LeftSquareBracketKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2_1ElementType() {
 		return Model_Group_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_KeysAssignment_2_1_0ElementType() {
 		return Model_KeysAssignment_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_KeysSTRINGTerminalRuleCall_2_1_0_0ElementType() {
 		return Model_KeysSTRINGTerminalRuleCall_2_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuesAssignment_2_1_1ElementType() {
 		return Model_ValuesAssignment_2_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuesSTRINGTerminalRuleCall_2_1_1_0ElementType() {
 		return Model_ValuesSTRINGTerminalRuleCall_2_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RightSquareBracketKeyword_2_2ElementType() {
 		return Model_RightSquareBracketKeyword_2_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_3ElementType() {
 		return Model_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SubModelKeyword_3_0ElementType() {
 		return Model_SubModelKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SubModelAssignment_3_1ElementType() {
 		return Model_SubModelAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SubModelSubModelParserRuleCall_3_1_0ElementType() {
 		return Model_SubModelSubModelParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModelElementType() {
 		return SubModel_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_GroupElementType() {
 		return SubModel_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_SubModelAction_0ElementType() {
 		return SubModel_SubModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_Group_1ElementType() {
 		return SubModel_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_DigitOneKeyword_1_0ElementType() {
 		return SubModel_DigitOneKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_DigitTwoKeyword_1_1ElementType() {
 		return SubModel_DigitTwoKeyword_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_StringsAssignment_1_2ElementType() {
 		return SubModel_StringsAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubModel_StringsSTRINGTerminalRuleCall_1_2_0ElementType() {
 		return SubModel_StringsSTRINGTerminalRuleCall_1_2_0_ELEMENT_TYPE;
 	}

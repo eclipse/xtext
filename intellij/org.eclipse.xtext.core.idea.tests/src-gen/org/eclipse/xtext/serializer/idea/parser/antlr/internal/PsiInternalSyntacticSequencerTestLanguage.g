@@ -1456,6 +1456,7 @@ ruleActionOnly:
 			}
 		)?
 		(
+			(RULE_ID)=>
 			{
 				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_2ElementType());
 			}

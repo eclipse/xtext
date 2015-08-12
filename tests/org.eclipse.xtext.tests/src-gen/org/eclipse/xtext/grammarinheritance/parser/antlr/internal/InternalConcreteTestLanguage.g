@@ -155,7 +155,7 @@ ruleConcreteParserRule returns [EObject current=null]
        			$current, 
        			"magicNumber",
         		lv_magicNumber_1_0, 
-        		"REAL");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.REAL");
 	    }
 
 )
@@ -176,7 +176,7 @@ ruleConcreteParserRule returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_3_0, 
-        		"InheritedParserRule");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.InheritedParserRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -220,7 +220,7 @@ ruleOverridableParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -258,7 +258,7 @@ ruleCallOverridenParserRule returns [EObject current=null]
        			$current, 
        			"call",
         		lv_call_0_0, 
-        		"AbstractCallOverridenParserRule");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallOverridenParserRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -302,7 +302,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -324,7 +324,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
        			$current, 
        			"age",
         		lv_age_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -417,7 +417,7 @@ ruleSubrule1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -435,7 +435,7 @@ ruleSubrule1 returns [EObject current=null]
        			$current, 
        			"sub1",
         		lv_sub1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -478,7 +478,7 @@ ruleSubrule2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -496,7 +496,7 @@ ruleSubrule2 returns [EObject current=null]
        			$current, 
        			"sub2",
         		lv_sub2_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -539,7 +539,7 @@ ruleSubrule3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -557,7 +557,7 @@ ruleSubrule3 returns [EObject current=null]
        			$current, 
        			"sub1",
         		lv_sub1_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -595,7 +595,7 @@ ruleCallExtendedParserRule returns [EObject current=null]
        			$current, 
        			"call",
         		lv_call_0_0, 
-        		"AbstractCallExtendedParserRule");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallExtendedParserRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -639,7 +639,7 @@ ruleInheritedParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -681,7 +681,7 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_1_0, 
-        		"OverridableParserRule");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.OverridableParserRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -724,7 +724,7 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_1_0, 
-        		"ExtendableParserRule");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ExtendableParserRule");
 	        afterParserOrEnumRuleCall();
 	    }
 

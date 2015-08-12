@@ -100,7 +100,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_1_0, 
-        		"Expression");
+        		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -123,7 +123,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_3_0, 
-        		"DataTypeExpression");
+        		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -232,7 +232,7 @@ rulePreop returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_2_0, 
-        		"Variable");
+        		"org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Variable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -338,7 +338,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

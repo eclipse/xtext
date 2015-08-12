@@ -140,22 +140,13 @@ public interface XtextTestPackage extends EPackage
   int ABSTRACT_RULE = 1;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ABSTRACT_RULE__NAME = 0;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_RULE__TYPE = 1;
+  int ABSTRACT_RULE__TYPE = 0;
 
   /**
    * The feature id for the '<em><b>Alternatives</b></em>' containment reference.
@@ -164,7 +155,16 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ABSTRACT_RULE__ALTERNATIVES = 2;
+  int ABSTRACT_RULE__ALTERNATIVES = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_RULE__NAME = 2;
 
   /**
    * The number of structural features of the '<em>Abstract Rule</em>' class.
@@ -306,15 +306,6 @@ public interface XtextTestPackage extends EPackage
   int PARSER_RULE = 5;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
-
-  /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -333,13 +324,40 @@ public interface XtextTestPackage extends EPackage
   int PARSER_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARSER_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Fragment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARSER_RULE__FRAGMENT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Wildcard</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARSER_RULE__WILDCARD = ABSTRACT_RULE_FEATURE_COUNT + 1;
+
+  /**
    * The feature id for the '<em><b>Defines Hidden Tokens</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PARSER_RULE__DEFINES_HIDDEN_TOKENS = ABSTRACT_RULE_FEATURE_COUNT + 0;
+  int PARSER_RULE__DEFINES_HIDDEN_TOKENS = ABSTRACT_RULE_FEATURE_COUNT + 2;
 
   /**
    * The feature id for the '<em><b>Hidden Tokens</b></em>' reference list.
@@ -348,7 +366,16 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARSER_RULE__HIDDEN_TOKENS = ABSTRACT_RULE_FEATURE_COUNT + 1;
+  int PARSER_RULE__HIDDEN_TOKENS = ABSTRACT_RULE_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARSER_RULE__PARAMETERS = ABSTRACT_RULE_FEATURE_COUNT + 4;
 
   /**
    * The number of structural features of the '<em>Parser Rule</em>' class.
@@ -357,7 +384,35 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 2;
+  int PARSER_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 5;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.ParameterImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getParameter()
+   * @generated
+   */
+  int PARAMETER = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.TypeRefImpl <em>Type Ref</em>}' class.
@@ -367,7 +422,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTypeRef()
    * @generated
    */
-  int TYPE_REF = 6;
+  int TYPE_REF = 7;
 
   /**
    * The feature id for the '<em><b>Metamodel</b></em>' reference.
@@ -404,7 +459,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAbstractElement()
    * @generated
    */
-  int ABSTRACT_ELEMENT = 7;
+  int ABSTRACT_ELEMENT = 8;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -416,13 +471,31 @@ public interface XtextTestPackage extends EPackage
   int ABSTRACT_ELEMENT__CARDINALITY = 0;
 
   /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__PREDICATED = 1;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_ELEMENT__FIRST_SET_PREDICATED = 2;
+
+  /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ABSTRACT_ELEMENT_FEATURE_COUNT = 1;
+  int ABSTRACT_ELEMENT_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
@@ -432,7 +505,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAction()
    * @generated
    */
-  int ACTION = 8;
+  int ACTION = 9;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -442,6 +515,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int ACTION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ACTION__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -487,7 +578,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getKeyword()
    * @generated
    */
-  int KEYWORD = 9;
+  int KEYWORD = 10;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -497,6 +588,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int KEYWORD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -524,7 +633,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getRuleCall()
    * @generated
    */
-  int RULE_CALL = 10;
+  int RULE_CALL = 11;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -536,6 +645,24 @@ public interface XtextTestPackage extends EPackage
   int RULE_CALL__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
    * The feature id for the '<em><b>Rule</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -545,13 +672,68 @@ public interface XtextTestPackage extends EPackage
   int RULE_CALL__RULE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__ARGUMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Rule Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int RULE_CALL_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.NamedArgumentImpl <em>Named Argument</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.NamedArgumentImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getNamedArgument()
+   * @generated
+   */
+  int NAMED_ARGUMENT = 12;
+
+  /**
+   * The feature id for the '<em><b>Literal Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_ARGUMENT__LITERAL_VALUE = 0;
+
+  /**
+   * The feature id for the '<em><b>Parameter</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_ARGUMENT__PARAMETER = 1;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_ARGUMENT__VALUE = 2;
+
+  /**
+   * The number of structural features of the '<em>Named Argument</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NAMED_ARGUMENT_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.AssignmentImpl <em>Assignment</em>}' class.
@@ -561,7 +743,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 11;
+  int ASSIGNMENT = 13;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -571,6 +753,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int ASSIGNMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNMENT__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ASSIGNMENT__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Feature</b></em>' attribute.
@@ -616,7 +816,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCrossReference()
    * @generated
    */
-  int CROSS_REFERENCE = 12;
+  int CROSS_REFERENCE = 14;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -626,6 +826,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int CROSS_REFERENCE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REFERENCE__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CROSS_REFERENCE__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -655,6 +873,61 @@ public interface XtextTestPackage extends EPackage
   int CROSS_REFERENCE_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.GroupImpl <em>Group</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.GroupImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getGroup()
+   * @generated
+   */
+  int GROUP = 15;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Group</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -662,16 +935,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getTerminalRule()
    * @generated
    */
-  int TERMINAL_RULE = 13;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TERMINAL_RULE__NAME = ABSTRACT_RULE__NAME;
+  int TERMINAL_RULE = 16;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -692,13 +956,31 @@ public interface XtextTestPackage extends EPackage
   int TERMINAL_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Fragment</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TERMINAL_RULE__FRAGMENT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+
+  /**
    * The number of structural features of the '<em>Terminal Rule</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 0;
+  int TERMINAL_RULE_FEATURE_COUNT = ABSTRACT_RULE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
@@ -708,7 +990,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAbstractNegatedToken()
    * @generated
    */
-  int ABSTRACT_NEGATED_TOKEN = 14;
+  int ABSTRACT_NEGATED_TOKEN = 17;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -718,6 +1000,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int ABSTRACT_NEGATED_TOKEN__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_NEGATED_TOKEN__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ABSTRACT_NEGATED_TOKEN__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Terminal</b></em>' containment reference.
@@ -745,7 +1045,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getNegatedToken()
    * @generated
    */
-  int NEGATED_TOKEN = 15;
+  int NEGATED_TOKEN = 18;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -755,6 +1055,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int NEGATED_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATED_TOKEN__PREDICATED = ABSTRACT_NEGATED_TOKEN__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATED_TOKEN__FIRST_SET_PREDICATED = ABSTRACT_NEGATED_TOKEN__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Terminal</b></em>' containment reference.
@@ -782,7 +1100,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUntilToken()
    * @generated
    */
-  int UNTIL_TOKEN = 16;
+  int UNTIL_TOKEN = 19;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -792,6 +1110,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int UNTIL_TOKEN__CARDINALITY = ABSTRACT_NEGATED_TOKEN__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNTIL_TOKEN__PREDICATED = ABSTRACT_NEGATED_TOKEN__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNTIL_TOKEN__FIRST_SET_PREDICATED = ABSTRACT_NEGATED_TOKEN__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Terminal</b></em>' containment reference.
@@ -819,7 +1155,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getWildcard()
    * @generated
    */
-  int WILDCARD = 17;
+  int WILDCARD = 20;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -831,6 +1167,24 @@ public interface XtextTestPackage extends EPackage
   int WILDCARD__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WILDCARD__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WILDCARD__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
    * The number of structural features of the '<em>Wildcard</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -840,6 +1194,52 @@ public interface XtextTestPackage extends EPackage
   int WILDCARD_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.EOFImpl <em>EOF</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.EOFImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getEOF()
+   * @generated
+   */
+  int EOF = 21;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOF__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOF__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOF__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
+   * The number of structural features of the '<em>EOF</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EOF_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -847,16 +1247,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getEnumRule()
    * @generated
    */
-  int ENUM_RULE = 18;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENUM_RULE__NAME = ABSTRACT_RULE__NAME;
+  int ENUM_RULE = 22;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -877,6 +1268,15 @@ public interface XtextTestPackage extends EPackage
   int ENUM_RULE__ALTERNATIVES = ABSTRACT_RULE__ALTERNATIVES;
 
   /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_RULE__NAME = ABSTRACT_RULE__NAME;
+
+  /**
    * The number of structural features of the '<em>Enum Rule</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -893,7 +1293,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getEnumLiteralDeclaration()
    * @generated
    */
-  int ENUM_LITERAL_DECLARATION = 19;
+  int ENUM_LITERAL_DECLARATION = 23;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -903,6 +1303,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int ENUM_LITERAL_DECLARATION__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENUM_LITERAL_DECLARATION__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Enum Literal</b></em>' reference.
@@ -939,7 +1357,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getAlternatives()
    * @generated
    */
-  int ALTERNATIVES = 20;
+  int ALTERNATIVES = 24;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -951,13 +1369,31 @@ public interface XtextTestPackage extends EPackage
   int ALTERNATIVES__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ALTERNATIVES__GROUPS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int ALTERNATIVES__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVES__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVES__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Alternatives</em>' class.
@@ -969,14 +1405,14 @@ public interface XtextTestPackage extends EPackage
   int ALTERNATIVES_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.GroupImpl <em>Group</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.ConditionalBranchImpl <em>Conditional Branch</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.xtextTest.impl.GroupImpl
-   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getGroup()
+   * @see org.eclipse.xtext.xtextTest.impl.ConditionalBranchImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getConditionalBranch()
    * @generated
    */
-  int GROUP = 21;
+  int CONDITIONAL_BRANCH = 25;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -985,25 +1421,116 @@ public interface XtextTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int CONDITIONAL_BRANCH__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP__TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int CONDITIONAL_BRANCH__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
 
   /**
-   * The number of structural features of the '<em>Group</em>' class.
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int CONDITIONAL_BRANCH__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>Filtered</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITIONAL_BRANCH__FILTERED = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Parameter</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITIONAL_BRANCH__PARAMETER = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Guarded Element</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITIONAL_BRANCH__GUARDED_ELEMENT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Conditional Branch</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITIONAL_BRANCH_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.xtextTest.impl.UnorderedGroupImpl
+   * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUnorderedGroup()
+   * @generated
+   */
+  int UNORDERED_GROUP = 26;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtextTest.impl.CharacterRangeImpl <em>Character Range</em>}' class.
@@ -1013,7 +1540,7 @@ public interface XtextTestPackage extends EPackage
    * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getCharacterRange()
    * @generated
    */
-  int CHARACTER_RANGE = 22;
+  int CHARACTER_RANGE = 27;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1023,6 +1550,24 @@ public interface XtextTestPackage extends EPackage
    * @ordered
    */
   int CHARACTER_RANGE__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHARACTER_RANGE__PREDICATED = ABSTRACT_ELEMENT__PREDICATED;
+
+  /**
+   * The feature id for the '<em><b>First Set Predicated</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CHARACTER_RANGE__FIRST_SET_PREDICATED = ABSTRACT_ELEMENT__FIRST_SET_PREDICATED;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1139,17 +1684,6 @@ public interface XtextTestPackage extends EPackage
   EClass getAbstractRule();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.AbstractRule#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.xtextTest.AbstractRule#getName()
-   * @see #getAbstractRule()
-   * @generated
-   */
-  EAttribute getAbstractRule_Name();
-
-  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.AbstractRule#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1170,6 +1704,17 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EReference getAbstractRule_Alternatives();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.AbstractRule#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.xtextTest.AbstractRule#getName()
+   * @see #getAbstractRule()
+   * @generated
+   */
+  EAttribute getAbstractRule_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.AbstractMetamodelDeclaration <em>Abstract Metamodel Declaration</em>}'.
@@ -1245,6 +1790,28 @@ public interface XtextTestPackage extends EPackage
   EClass getParserRule();
 
   /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.ParserRule#isFragment <em>Fragment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Fragment</em>'.
+   * @see org.eclipse.xtext.xtextTest.ParserRule#isFragment()
+   * @see #getParserRule()
+   * @generated
+   */
+  EAttribute getParserRule_Fragment();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.ParserRule#isWildcard <em>Wildcard</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Wildcard</em>'.
+   * @see org.eclipse.xtext.xtextTest.ParserRule#isWildcard()
+   * @see #getParserRule()
+   * @generated
+   */
+  EAttribute getParserRule_Wildcard();
+
+  /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.ParserRule#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1265,6 +1832,38 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EReference getParserRule_HiddenTokens();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.ParserRule#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see org.eclipse.xtext.xtextTest.ParserRule#getParameters()
+   * @see #getParserRule()
+   * @generated
+   */
+  EReference getParserRule_Parameters();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.xtextTest.Parameter
+   * @generated
+   */
+  EClass getParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.Parameter#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.xtextTest.Parameter#getName()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.TypeRef <em>Type Ref</em>}'.
@@ -1318,6 +1917,28 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EAttribute getAbstractElement_Cardinality();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.AbstractElement#isPredicated <em>Predicated</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Predicated</em>'.
+   * @see org.eclipse.xtext.xtextTest.AbstractElement#isPredicated()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_Predicated();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.AbstractElement#isFirstSetPredicated <em>First Set Predicated</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>First Set Predicated</em>'.
+   * @see org.eclipse.xtext.xtextTest.AbstractElement#isFirstSetPredicated()
+   * @see #getAbstractElement()
+   * @generated
+   */
+  EAttribute getAbstractElement_FirstSetPredicated();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Action <em>Action</em>}'.
@@ -1405,6 +2026,60 @@ public interface XtextTestPackage extends EPackage
   EReference getRuleCall_Rule();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.RuleCall#getArguments <em>Arguments</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Arguments</em>'.
+   * @see org.eclipse.xtext.xtextTest.RuleCall#getArguments()
+   * @see #getRuleCall()
+   * @generated
+   */
+  EReference getRuleCall_Arguments();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.NamedArgument <em>Named Argument</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Named Argument</em>'.
+   * @see org.eclipse.xtext.xtextTest.NamedArgument
+   * @generated
+   */
+  EClass getNamedArgument();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.NamedArgument#isLiteralValue <em>Literal Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Literal Value</em>'.
+   * @see org.eclipse.xtext.xtextTest.NamedArgument#isLiteralValue()
+   * @see #getNamedArgument()
+   * @generated
+   */
+  EAttribute getNamedArgument_LiteralValue();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.NamedArgument#getParameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.xtextTest.NamedArgument#getParameter()
+   * @see #getNamedArgument()
+   * @generated
+   */
+  EReference getNamedArgument_Parameter();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.NamedArgument#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Value</em>'.
+   * @see org.eclipse.xtext.xtextTest.NamedArgument#getValue()
+   * @see #getNamedArgument()
+   * @generated
+   */
+  EReference getNamedArgument_Value();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Assignment <em>Assignment</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1480,6 +2155,27 @@ public interface XtextTestPackage extends EPackage
   EReference getCrossReference_Terminal();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Group <em>Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Group</em>'.
+   * @see org.eclipse.xtext.xtextTest.Group
+   * @generated
+   */
+  EClass getGroup();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Group#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.xtextTest.Group#getElements()
+   * @see #getGroup()
+   * @generated
+   */
+  EReference getGroup_Elements();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.TerminalRule <em>Terminal Rule</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1488,6 +2184,17 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EClass getTerminalRule();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.TerminalRule#isFragment <em>Fragment</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Fragment</em>'.
+   * @see org.eclipse.xtext.xtextTest.TerminalRule#isFragment()
+   * @see #getTerminalRule()
+   * @generated
+   */
+  EAttribute getTerminalRule_Fragment();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.AbstractNegatedToken <em>Abstract Negated Token</em>}'.
@@ -1539,6 +2246,16 @@ public interface XtextTestPackage extends EPackage
    * @generated
    */
   EClass getWildcard();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.EOF <em>EOF</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EOF</em>'.
+   * @see org.eclipse.xtext.xtextTest.EOF
+   * @generated
+   */
+  EClass getEOF();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.EnumRule <em>Enum Rule</em>}'.
@@ -1593,36 +2310,79 @@ public interface XtextTestPackage extends EPackage
   EClass getAlternatives();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Alternatives#getGroups <em>Groups</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Alternatives#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Groups</em>'.
-   * @see org.eclipse.xtext.xtextTest.Alternatives#getGroups()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.xtextTest.Alternatives#getElements()
    * @see #getAlternatives()
    * @generated
    */
-  EReference getAlternatives_Groups();
+  EReference getAlternatives_Elements();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.Group <em>Group</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.ConditionalBranch <em>Conditional Branch</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Group</em>'.
-   * @see org.eclipse.xtext.xtextTest.Group
+   * @return the meta object for class '<em>Conditional Branch</em>'.
+   * @see org.eclipse.xtext.xtextTest.ConditionalBranch
    * @generated
    */
-  EClass getGroup();
+  EClass getConditionalBranch();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.Group#getTokens <em>Tokens</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtextTest.ConditionalBranch#isFiltered <em>Filtered</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tokens</em>'.
-   * @see org.eclipse.xtext.xtextTest.Group#getTokens()
-   * @see #getGroup()
+   * @return the meta object for the attribute '<em>Filtered</em>'.
+   * @see org.eclipse.xtext.xtextTest.ConditionalBranch#isFiltered()
+   * @see #getConditionalBranch()
    * @generated
    */
-  EReference getGroup_Tokens();
+  EAttribute getConditionalBranch_Filtered();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.xtextTest.ConditionalBranch#getParameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.xtextTest.ConditionalBranch#getParameter()
+   * @see #getConditionalBranch()
+   * @generated
+   */
+  EReference getConditionalBranch_Parameter();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtextTest.ConditionalBranch#getGuardedElement <em>Guarded Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Guarded Element</em>'.
+   * @see org.eclipse.xtext.xtextTest.ConditionalBranch#getGuardedElement()
+   * @see #getConditionalBranch()
+   * @generated
+   */
+  EReference getConditionalBranch_GuardedElement();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group</em>'.
+   * @see org.eclipse.xtext.xtextTest.UnorderedGroup
+   * @generated
+   */
+  EClass getUnorderedGroup();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtextTest.UnorderedGroup#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.xtextTest.UnorderedGroup#getElements()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EReference getUnorderedGroup_Elements();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.xtextTest.CharacterRange <em>Character Range</em>}'.
@@ -1748,14 +2508,6 @@ public interface XtextTestPackage extends EPackage
     EClass ABSTRACT_RULE = eINSTANCE.getAbstractRule();
 
     /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ABSTRACT_RULE__NAME = eINSTANCE.getAbstractRule_Name();
-
-    /**
      * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1770,6 +2522,14 @@ public interface XtextTestPackage extends EPackage
      * @generated
      */
     EReference ABSTRACT_RULE__ALTERNATIVES = eINSTANCE.getAbstractRule_Alternatives();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_RULE__NAME = eINSTANCE.getAbstractRule_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractMetamodelDeclarationImpl <em>Abstract Metamodel Declaration</em>}' class.
@@ -1836,6 +2596,22 @@ public interface XtextTestPackage extends EPackage
     EClass PARSER_RULE = eINSTANCE.getParserRule();
 
     /**
+     * The meta object literal for the '<em><b>Fragment</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARSER_RULE__FRAGMENT = eINSTANCE.getParserRule_Fragment();
+
+    /**
+     * The meta object literal for the '<em><b>Wildcard</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARSER_RULE__WILDCARD = eINSTANCE.getParserRule_Wildcard();
+
+    /**
      * The meta object literal for the '<em><b>Defines Hidden Tokens</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1850,6 +2626,32 @@ public interface XtextTestPackage extends EPackage
      * @generated
      */
     EReference PARSER_RULE__HIDDEN_TOKENS = eINSTANCE.getParserRule_HiddenTokens();
+
+    /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PARSER_RULE__PARAMETERS = eINSTANCE.getParserRule_Parameters();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.ParameterImpl <em>Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.ParameterImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getParameter()
+     * @generated
+     */
+    EClass PARAMETER = eINSTANCE.getParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.TypeRefImpl <em>Type Ref</em>}' class.
@@ -1894,6 +2696,22 @@ public interface XtextTestPackage extends EPackage
      * @generated
      */
     EAttribute ABSTRACT_ELEMENT__CARDINALITY = eINSTANCE.getAbstractElement_Cardinality();
+
+    /**
+     * The meta object literal for the '<em><b>Predicated</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__PREDICATED = eINSTANCE.getAbstractElement_Predicated();
+
+    /**
+     * The meta object literal for the '<em><b>First Set Predicated</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ABSTRACT_ELEMENT__FIRST_SET_PREDICATED = eINSTANCE.getAbstractElement_FirstSetPredicated();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.ActionImpl <em>Action</em>}' class.
@@ -1966,6 +2784,48 @@ public interface XtextTestPackage extends EPackage
     EReference RULE_CALL__RULE = eINSTANCE.getRuleCall_Rule();
 
     /**
+     * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALL__ARGUMENTS = eINSTANCE.getRuleCall_Arguments();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.NamedArgumentImpl <em>Named Argument</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.NamedArgumentImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getNamedArgument()
+     * @generated
+     */
+    EClass NAMED_ARGUMENT = eINSTANCE.getNamedArgument();
+
+    /**
+     * The meta object literal for the '<em><b>Literal Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NAMED_ARGUMENT__LITERAL_VALUE = eINSTANCE.getNamedArgument_LiteralValue();
+
+    /**
+     * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAMED_ARGUMENT__PARAMETER = eINSTANCE.getNamedArgument_Parameter();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NAMED_ARGUMENT__VALUE = eINSTANCE.getNamedArgument_Value();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AssignmentImpl <em>Assignment</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2026,6 +2886,24 @@ public interface XtextTestPackage extends EPackage
     EReference CROSS_REFERENCE__TERMINAL = eINSTANCE.getCrossReference_Terminal();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.GroupImpl <em>Group</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.GroupImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getGroup()
+     * @generated
+     */
+    EClass GROUP = eINSTANCE.getGroup();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GROUP__ELEMENTS = eINSTANCE.getGroup_Elements();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.TerminalRuleImpl <em>Terminal Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2034,6 +2912,14 @@ public interface XtextTestPackage extends EPackage
      * @generated
      */
     EClass TERMINAL_RULE = eINSTANCE.getTerminalRule();
+
+    /**
+     * The meta object literal for the '<em><b>Fragment</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TERMINAL_RULE__FRAGMENT = eINSTANCE.getTerminalRule_Fragment();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.AbstractNegatedTokenImpl <em>Abstract Negated Token</em>}' class.
@@ -2084,6 +2970,16 @@ public interface XtextTestPackage extends EPackage
     EClass WILDCARD = eINSTANCE.getWildcard();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.EOFImpl <em>EOF</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.EOFImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getEOF()
+     * @generated
+     */
+    EClass EOF = eINSTANCE.getEOF();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.EnumRuleImpl <em>Enum Rule</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2130,30 +3026,64 @@ public interface XtextTestPackage extends EPackage
     EClass ALTERNATIVES = eINSTANCE.getAlternatives();
 
     /**
-     * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ALTERNATIVES__GROUPS = eINSTANCE.getAlternatives_Groups();
+    EReference ALTERNATIVES__ELEMENTS = eINSTANCE.getAlternatives_Elements();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.GroupImpl <em>Group</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.ConditionalBranchImpl <em>Conditional Branch</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.xtextTest.impl.GroupImpl
-     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getGroup()
+     * @see org.eclipse.xtext.xtextTest.impl.ConditionalBranchImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getConditionalBranch()
      * @generated
      */
-    EClass GROUP = eINSTANCE.getGroup();
+    EClass CONDITIONAL_BRANCH = eINSTANCE.getConditionalBranch();
 
     /**
-     * The meta object literal for the '<em><b>Tokens</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Filtered</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference GROUP__TOKENS = eINSTANCE.getGroup_Tokens();
+    EAttribute CONDITIONAL_BRANCH__FILTERED = eINSTANCE.getConditionalBranch_Filtered();
+
+    /**
+     * The meta object literal for the '<em><b>Parameter</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITIONAL_BRANCH__PARAMETER = eINSTANCE.getConditionalBranch_Parameter();
+
+    /**
+     * The meta object literal for the '<em><b>Guarded Element</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITIONAL_BRANCH__GUARDED_ELEMENT = eINSTANCE.getConditionalBranch_GuardedElement();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.xtextTest.impl.UnorderedGroupImpl
+     * @see org.eclipse.xtext.xtextTest.impl.XtextTestPackageImpl#getUnorderedGroup()
+     * @generated
+     */
+    EClass UNORDERED_GROUP = eINSTANCE.getUnorderedGroup();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_GROUP__ELEMENTS = eINSTANCE.getUnorderedGroup_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.xtextTest.impl.CharacterRangeImpl <em>Character Range</em>}' class.

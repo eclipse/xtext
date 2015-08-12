@@ -169,7 +169,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"foos",
             	            		lv_foos_0_0, 
-            	            		"Foo");
+            	            		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.Foo");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -206,7 +206,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"bars",
             	            		lv_bars_1_0, 
-            	            		"AbstractBar");
+            	            		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.AbstractBar");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -546,7 +546,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -738,7 +738,7 @@ public class InternalEObjectAtOffsetTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"QualifiedNameWithOtherDelim");
+                    		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.QualifiedNameWithOtherDelim");
             	        afterParserOrEnumRuleCall();
             	    
 

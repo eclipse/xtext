@@ -17,7 +17,8 @@ import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Map;
+import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalSyntacticSequencerTestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -112,14 +113,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
-             newCompositeNode(grammarAccess.getModelRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getModelRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
-
-             current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleModel; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); if (state.failed) return current;
 
             }
 
@@ -250,6 +255,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 }
                 break;
             default:
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 1, 0, input);
 
@@ -266,25 +272,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:81:1: (lv_x1_0_0= ruleMandatoryKeywords )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:82:3: lv_x1_0_0= ruleMandatoryKeywords
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX1MandatoryKeywordsParserRuleCall_0_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX1MandatoryKeywordsParserRuleCall_0_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_ruleModel131);
                     lv_x1_0_0=ruleMandatoryKeywords();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x1",
-                            		lv_x1_0_0, 
-                            		"MandatoryKeywords");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x1",
+                              		lv_x1_0_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.MandatoryKeywords");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -303,25 +313,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:100:1: (lv_x2_1_0= ruleExp0 )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:101:3: lv_x2_1_0= ruleExp0
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX2Exp0ParserRuleCall_1_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX2Exp0ParserRuleCall_1_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp0_in_ruleModel158);
                     lv_x2_1_0=ruleExp0();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x2",
-                            		lv_x2_1_0, 
-                            		"Exp0");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x2",
+                              		lv_x2_1_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp0");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -340,25 +354,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:119:1: (lv_x3_2_0= ruleExp1 )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:120:3: lv_x3_2_0= ruleExp1
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX3Exp1ParserRuleCall_2_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX3Exp1ParserRuleCall_2_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp1_in_ruleModel185);
                     lv_x3_2_0=ruleExp1();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x3",
-                            		lv_x3_2_0, 
-                            		"Exp1");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x3",
+                              		lv_x3_2_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp1");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -377,25 +395,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:138:1: (lv_x4_3_0= ruleExp2 )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:139:3: lv_x4_3_0= ruleExp2
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX4Exp2ParserRuleCall_3_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX4Exp2ParserRuleCall_3_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp2_in_ruleModel212);
                     lv_x4_3_0=ruleExp2();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x4",
-                            		lv_x4_3_0, 
-                            		"Exp2");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x4",
+                              		lv_x4_3_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp2");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -414,25 +436,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:157:1: (lv_x5_4_0= ruleSingleCrossReference )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:158:3: lv_x5_4_0= ruleSingleCrossReference
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX5SingleCrossReferenceParserRuleCall_4_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX5SingleCrossReferenceParserRuleCall_4_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_ruleModel239);
                     lv_x5_4_0=ruleSingleCrossReference();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x5",
-                            		lv_x5_4_0, 
-                            		"SingleCrossReference");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x5",
+                              		lv_x5_4_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.SingleCrossReference");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -451,25 +477,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:176:1: (lv_x6_5_0= ruleBooleanAlternative )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:177:3: lv_x6_5_0= ruleBooleanAlternative
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX6BooleanAlternativeParserRuleCall_5_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX6BooleanAlternativeParserRuleCall_5_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_ruleModel266);
                     lv_x6_5_0=ruleBooleanAlternative();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x6",
-                            		lv_x6_5_0, 
-                            		"BooleanAlternative");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x6",
+                              		lv_x6_5_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanAlternative");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -488,25 +518,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:195:1: (lv_x7_6_0= ruleUnassignedDatatype )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:196:3: lv_x7_6_0= ruleUnassignedDatatype
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX7UnassignedDatatypeParserRuleCall_6_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX7UnassignedDatatypeParserRuleCall_6_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_ruleModel293);
                     lv_x7_6_0=ruleUnassignedDatatype();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x7",
-                            		lv_x7_6_0, 
-                            		"UnassignedDatatype");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x7",
+                              		lv_x7_6_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.UnassignedDatatype");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -525,25 +559,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:214:1: (lv_x8_7_0= ruleOptionalSingleTransition )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:215:3: lv_x8_7_0= ruleOptionalSingleTransition
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX8OptionalSingleTransitionParserRuleCall_7_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX8OptionalSingleTransitionParserRuleCall_7_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_ruleModel320);
                     lv_x8_7_0=ruleOptionalSingleTransition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x8",
-                            		lv_x8_7_0, 
-                            		"OptionalSingleTransition");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x8",
+                              		lv_x8_7_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.OptionalSingleTransition");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -562,25 +600,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:233:1: (lv_x9_8_0= ruleOptionalManyTransition )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:234:3: lv_x9_8_0= ruleOptionalManyTransition
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX9OptionalManyTransitionParserRuleCall_8_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX9OptionalManyTransitionParserRuleCall_8_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_ruleModel347);
                     lv_x9_8_0=ruleOptionalManyTransition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x9",
-                            		lv_x9_8_0, 
-                            		"OptionalManyTransition");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x9",
+                              		lv_x9_8_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.OptionalManyTransition");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -599,25 +641,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:252:1: (lv_x10_9_0= ruleMandatoryManyTransition )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:253:3: lv_x10_9_0= ruleMandatoryManyTransition
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX10MandatoryManyTransitionParserRuleCall_9_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX10MandatoryManyTransitionParserRuleCall_9_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_ruleModel374);
                     lv_x10_9_0=ruleMandatoryManyTransition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x10",
-                            		lv_x10_9_0, 
-                            		"MandatoryManyTransition");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x10",
+                              		lv_x10_9_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.MandatoryManyTransition");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -636,25 +682,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:271:1: (lv_x11_10_0= ruleAlternativeTransition )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:272:3: lv_x11_10_0= ruleAlternativeTransition
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX11AlternativeTransitionParserRuleCall_10_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX11AlternativeTransitionParserRuleCall_10_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_ruleModel401);
                     lv_x11_10_0=ruleAlternativeTransition();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x11",
-                            		lv_x11_10_0, 
-                            		"AlternativeTransition");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x11",
+                              		lv_x11_10_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.AlternativeTransition");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -673,25 +723,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:290:1: (lv_x12_11_0= ruleBooleanValues )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:291:3: lv_x12_11_0= ruleBooleanValues
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX12BooleanValuesParserRuleCall_11_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX12BooleanValuesParserRuleCall_11_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_ruleModel428);
                     lv_x12_11_0=ruleBooleanValues();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x12",
-                            		lv_x12_11_0, 
-                            		"BooleanValues");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x12",
+                              		lv_x12_11_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanValues");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -710,25 +764,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:309:1: (lv_x13_12_0= ruleLongAlternative )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:310:3: lv_x13_12_0= ruleLongAlternative
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX13LongAlternativeParserRuleCall_12_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX13LongAlternativeParserRuleCall_12_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_ruleModel455);
                     lv_x13_12_0=ruleLongAlternative();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x13",
-                            		lv_x13_12_0, 
-                            		"LongAlternative");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x13",
+                              		lv_x13_12_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.LongAlternative");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -747,25 +805,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:328:1: (lv_x14_13_0= ruleActionOnly )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:329:3: lv_x14_13_0= ruleActionOnly
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getModelAccess().getX14ActionOnlyParserRuleCall_13_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getModelAccess().getX14ActionOnlyParserRuleCall_13_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_ruleModel482);
                     lv_x14_13_0=ruleActionOnly();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getModelRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"x14",
-                            		lv_x14_13_0, 
-                            		"ActionOnly");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getModelRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"x14",
+                              		lv_x14_13_0, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.ActionOnly");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -781,7 +843,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -807,14 +871,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:354:2: (iv_ruleMandatoryKeywords= ruleMandatoryKeywords EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:355:2: iv_ruleMandatoryKeywords= ruleMandatoryKeywords EOF
             {
-             newCompositeNode(grammarAccess.getMandatoryKeywordsRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMandatoryKeywordsRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords518);
             iv_ruleMandatoryKeywords=ruleMandatoryKeywords();
 
             state._fsp--;
-
-             current =iv_ruleMandatoryKeywords; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords528); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMandatoryKeywords; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords528); if (state.failed) return current;
 
             }
 
@@ -854,111 +922,135 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:366:1: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:366:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
             {
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords565); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords565); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getMandatoryKeywordsAccess().getNumberSignDigitOneKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getMandatoryKeywordsAccess().getNumberSignDigitOneKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:370:1: ( (lv_val1_1_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:371:1: (lv_val1_1_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:371:1: (lv_val1_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:372:3: lv_val1_1_0= RULE_ID
             {
-            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords582); 
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords582); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val1_1_0, grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0()); 
-            		
+              			newLeafNode(lv_val1_1_0, grammarAccess.getMandatoryKeywordsAccess().getVal1IDTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val1",
-                    		lv_val1_1_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val1",
+                      		lv_val1_1_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
 
             }
 
-            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords599); 
+            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords599); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_2, grammarAccess.getMandatoryKeywordsAccess().getKw1Keyword_2());
-                
+                  	newLeafNode(otherlv_2, grammarAccess.getMandatoryKeywordsAccess().getKw1Keyword_2());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:392:1: ( (lv_val2_3_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:393:1: (lv_val2_3_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:393:1: (lv_val2_3_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:394:3: lv_val2_3_0= RULE_ID
             {
-            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords616); 
+            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords616); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val2_3_0, grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0()); 
-            		
+              			newLeafNode(lv_val2_3_0, grammarAccess.getMandatoryKeywordsAccess().getVal2IDTerminalRuleCall_3_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val2",
-                    		lv_val2_3_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val2",
+                      		lv_val2_3_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
 
             }
 
-            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords633); 
+            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords633); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_4, grammarAccess.getMandatoryKeywordsAccess().getKw2Keyword_4());
-                
-            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords645); 
+                  	newLeafNode(otherlv_4, grammarAccess.getMandatoryKeywordsAccess().getKw2Keyword_4());
+                  
+            }
+            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords645); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_5, grammarAccess.getMandatoryKeywordsAccess().getKw3Keyword_5());
-                
+                  	newLeafNode(otherlv_5, grammarAccess.getMandatoryKeywordsAccess().getKw3Keyword_5());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:418:1: ( (lv_val3_6_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:419:1: (lv_val3_6_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:419:1: (lv_val3_6_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:420:3: lv_val3_6_0= RULE_ID
             {
-            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords662); 
+            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords662); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val3_6_0, grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0()); 
-            		
+              			newLeafNode(lv_val3_6_0, grammarAccess.getMandatoryKeywordsAccess().getVal3IDTerminalRuleCall_6_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val3",
-                    		lv_val3_6_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getMandatoryKeywordsRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val3",
+                      		lv_val3_6_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
 
             }
 
-            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords679); 
+            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords679); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_7, grammarAccess.getMandatoryKeywordsAccess().getKw4Keyword_7());
-                
+                  	newLeafNode(otherlv_7, grammarAccess.getMandatoryKeywordsAccess().getKw4Keyword_7());
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -984,14 +1076,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:449:2: (iv_ruleExp0= ruleExp0 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:450:2: iv_ruleExp0= ruleExp0 EOF
             {
-             newCompositeNode(grammarAccess.getExp0Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExp0Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp0_in_entryRuleExp0715);
             iv_ruleExp0=ruleExp0();
 
             state._fsp--;
-
-             current =iv_ruleExp0; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0725); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExp0; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0725); if (state.failed) return current;
 
             }
 
@@ -1026,29 +1122,37 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:461:1: (otherlv_0= '#2' this_Addition0_1= ruleAddition0 )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:461:3: otherlv_0= '#2' this_Addition0_1= ruleAddition0
             {
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0762); 
+            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0762); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getExp0Access().getNumberSignDigitTwoKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getExp0Access().getAddition0ParserRuleCall_1()); 
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getExp0Access().getNumberSignDigitTwoKeyword_0());
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getExp0Access().getAddition0ParserRuleCall_1()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_ruleExp0784);
             this_Addition0_1=ruleAddition0();
 
             state._fsp--;
-
-             
-                    current = this_Addition0_1; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Addition0_1; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1074,14 +1178,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:483:2: (iv_ruleAddition0= ruleAddition0 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:484:2: iv_ruleAddition0= ruleAddition0 EOF
             {
-             newCompositeNode(grammarAccess.getAddition0Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAddition0Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_entryRuleAddition0819);
             iv_ruleAddition0=ruleAddition0();
 
             state._fsp--;
-
-             current =iv_ruleAddition0; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0829); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAddition0; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0829); if (state.failed) return current;
 
             }
 
@@ -1118,18 +1226,22 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:495:1: (this_Prim0_0= rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:496:5: this_Prim0_0= rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getAddition0Access().getPrim0ParserRuleCall_0()); 
-                
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getAddition0Access().getPrim0ParserRuleCall_0()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition0876);
             this_Prim0_0=rulePrim0();
 
             state._fsp--;
-
-             
-                    current = this_Prim0_0; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Prim0_0; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:504:1: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             loop2:
             do {
@@ -1148,43 +1260,51 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:504:2: ()
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:505:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	            current = forceCreateModelElementAndSet(
-            	                grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(),
-            	                current);
-            	        
+            	              current = forceCreateModelElementAndSet(
+            	                  grammarAccess.getAddition0Access().getAdd0LeftAction_1_0(),
+            	                  current);
+            	          
+            	    }
 
             	    }
 
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition0897); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition0897); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getAddition0Access().getPlusSignKeyword_1_1());
-            	        
+            	          	newLeafNode(otherlv_2, grammarAccess.getAddition0Access().getPlusSignKeyword_1_1());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:514:1: ( (lv_right_3_0= rulePrim0 ) )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:515:1: (lv_right_3_0= rulePrim0 )
             	    {
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:515:1: (lv_right_3_0= rulePrim0 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:516:3: lv_right_3_0= rulePrim0
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0()); 
-            	    	    
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getAddition0Access().getRightPrim0ParserRuleCall_1_2_0()); 
+            	      	    
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition0918);
             	    lv_right_3_0=rulePrim0();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getAddition0Rule());
-            	    	        }
-            	           		set(
-            	           			current, 
-            	           			"right",
-            	            		lv_right_3_0, 
-            	            		"Prim0");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getAddition0Rule());
+            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"right",
+            	              		lv_right_3_0, 
+            	              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim0");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
 
             	    }
 
@@ -1206,7 +1326,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1232,14 +1354,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:541:2: (iv_rulePrim0= rulePrim0 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:542:2: iv_rulePrim0= rulePrim0 EOF
             {
-             newCompositeNode(grammarAccess.getPrim0Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getPrim0Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim0_in_entryRulePrim0956);
             iv_rulePrim0=rulePrim0();
 
             state._fsp--;
-
-             current =iv_rulePrim0; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim0966); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_rulePrim0; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim0966); if (state.failed) return current;
 
             }
 
@@ -1275,11 +1401,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:553:2: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:554:5: 
             {
+            if ( state.backtracking==0 ) {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getPrim0Access().getVal0Action_0(),
-                        current);
-                
+                      current = forceCreateModelElement(
+                          grammarAccess.getPrim0Access().getVal0Action_0(),
+                          current);
+                  
+            }
 
             }
 
@@ -1289,20 +1417,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:560:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:561:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01017); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01017); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_name_1_0, grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0()); 
-            		
+              			newLeafNode(lv_name_1_0, grammarAccess.getPrim0Access().getNameIDTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getPrim0Rule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"name",
-                    		lv_name_1_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getPrim0Rule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"name",
+                      		lv_name_1_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -1315,7 +1447,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1341,14 +1475,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:586:2: (iv_ruleExp1= ruleExp1 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:587:2: iv_ruleExp1= ruleExp1 EOF
             {
-             newCompositeNode(grammarAccess.getExp1Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExp1Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp1_in_entryRuleExp11058);
             iv_ruleExp1=ruleExp1();
 
             state._fsp--;
-
-             current =iv_ruleExp1; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11068); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExp1; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11068); if (state.failed) return current;
 
             }
 
@@ -1383,29 +1521,37 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:598:1: (otherlv_0= '#3' this_Addition1_1= ruleAddition1 )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:598:3: otherlv_0= '#3' this_Addition1_1= ruleAddition1
             {
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11105); 
+            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11105); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getExp1Access().getNumberSignDigitThreeKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getExp1Access().getAddition1ParserRuleCall_1()); 
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getExp1Access().getNumberSignDigitThreeKeyword_0());
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getExp1Access().getAddition1ParserRuleCall_1()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_ruleExp11127);
             this_Addition1_1=ruleAddition1();
 
             state._fsp--;
-
-             
-                    current = this_Addition1_1; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Addition1_1; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1431,14 +1577,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:620:2: (iv_ruleAddition1= ruleAddition1 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:621:2: iv_ruleAddition1= ruleAddition1 EOF
             {
-             newCompositeNode(grammarAccess.getAddition1Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAddition1Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_entryRuleAddition11162);
             iv_ruleAddition1=ruleAddition1();
 
             state._fsp--;
-
-             current =iv_ruleAddition1; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11172); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAddition1; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11172); if (state.failed) return current;
 
             }
 
@@ -1475,18 +1625,22 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:632:1: (this_Prim1_0= rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:633:5: this_Prim1_0= rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getAddition1Access().getPrim1ParserRuleCall_0()); 
-                
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getAddition1Access().getPrim1ParserRuleCall_0()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11219);
             this_Prim1_0=rulePrim1();
 
             state._fsp--;
-
-             
-                    current = this_Prim1_0; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Prim1_0; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:641:1: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             loop3:
             do {
@@ -1505,43 +1659,51 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:641:2: ()
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:642:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	            current = forceCreateModelElementAndSet(
-            	                grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(),
-            	                current);
-            	        
+            	              current = forceCreateModelElementAndSet(
+            	                  grammarAccess.getAddition1Access().getAdd1LeftAction_1_0(),
+            	                  current);
+            	          
+            	    }
 
             	    }
 
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11240); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11240); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getAddition1Access().getPlusSignKeyword_1_1());
-            	        
+            	          	newLeafNode(otherlv_2, grammarAccess.getAddition1Access().getPlusSignKeyword_1_1());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:651:1: ( (lv_right_3_0= rulePrim1 ) )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:652:1: (lv_right_3_0= rulePrim1 )
             	    {
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:652:1: (lv_right_3_0= rulePrim1 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:653:3: lv_right_3_0= rulePrim1
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0()); 
-            	    	    
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getAddition1Access().getRightPrim1ParserRuleCall_1_2_0()); 
+            	      	    
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11261);
             	    lv_right_3_0=rulePrim1();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getAddition1Rule());
-            	    	        }
-            	           		set(
-            	           			current, 
-            	           			"right",
-            	            		lv_right_3_0, 
-            	            		"Prim1");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getAddition1Rule());
+            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"right",
+            	              		lv_right_3_0, 
+            	              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim1");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
 
             	    }
 
@@ -1563,7 +1725,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1589,14 +1753,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:678:2: (iv_rulePrim1= rulePrim1 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:679:2: iv_rulePrim1= rulePrim1 EOF
             {
-             newCompositeNode(grammarAccess.getPrim1Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getPrim1Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim1_in_entryRulePrim11299);
             iv_rulePrim1=rulePrim1();
 
             state._fsp--;
-
-             current =iv_rulePrim1; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11309); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_rulePrim1; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11309); if (state.failed) return current;
 
             }
 
@@ -1641,6 +1809,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt4=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 4, 0, input);
 
@@ -1656,11 +1825,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:690:3: ()
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:691:5: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                            current = forceCreateModelElement(
-                                grammarAccess.getPrim1Access().getVal1Action_0_0(),
-                                current);
-                        
+                              current = forceCreateModelElement(
+                                  grammarAccess.getPrim1Access().getVal1Action_0_0(),
+                                  current);
+                          
+                    }
 
                     }
 
@@ -1670,20 +1841,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:697:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:698:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11361); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11361); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newLeafNode(lv_name_1_0, grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0()); 
-                    		
+                      			newLeafNode(lv_name_1_0, grammarAccess.getPrim1Access().getNameIDTerminalRuleCall_0_1_0()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getPrim1Rule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_1_0, 
-                            		"ID");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getPrim1Rule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"name",
+                              		lv_name_1_0, 
+                              		"org.eclipse.xtext.common.Terminals.ID");
+                      	    
+                    }
 
                     }
 
@@ -1702,26 +1877,34 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:715:6: (otherlv_2= '(' this_Addition1_3= ruleAddition1 otherlv_4= ')' )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:715:8: otherlv_2= '(' this_Addition1_3= ruleAddition1 otherlv_4= ')'
                     {
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11386); 
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11386); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_2, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
-                        
-                     
-                            newCompositeNode(grammarAccess.getPrim1Access().getAddition1ParserRuleCall_1_1()); 
-                        
+                          	newLeafNode(otherlv_2, grammarAccess.getPrim1Access().getLeftParenthesisKeyword_1_0());
+                          
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getPrim1Access().getAddition1ParserRuleCall_1_1()); 
+                          
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_rulePrim11408);
                     this_Addition1_3=ruleAddition1();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              current = this_Addition1_3; 
+                              afterParserOrEnumRuleCall();
+                          
+                    }
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11419); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                     
-                            current = this_Addition1_3; 
-                            afterParserOrEnumRuleCall();
-                        
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11419); 
-
-                        	newLeafNode(otherlv_4, grammarAccess.getPrim1Access().getRightParenthesisKeyword_1_2());
-                        
+                          	newLeafNode(otherlv_4, grammarAccess.getPrim1Access().getRightParenthesisKeyword_1_2());
+                          
+                    }
 
                     }
 
@@ -1734,7 +1917,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1760,14 +1945,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:741:2: (iv_ruleExp2= ruleExp2 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:742:2: iv_ruleExp2= ruleExp2 EOF
             {
-             newCompositeNode(grammarAccess.getExp2Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getExp2Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp2_in_entryRuleExp21456);
             iv_ruleExp2=ruleExp2();
 
             state._fsp--;
-
-             current =iv_ruleExp2; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21466); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleExp2; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21466); if (state.failed) return current;
 
             }
 
@@ -1802,29 +1991,37 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:753:1: (otherlv_0= '#4' this_Addition2_1= ruleAddition2 )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:753:3: otherlv_0= '#4' this_Addition2_1= ruleAddition2
             {
-            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21503); 
+            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21503); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getExp2Access().getNumberSignDigitFourKeyword_0());
-                
-             
-                    newCompositeNode(grammarAccess.getExp2Access().getAddition2ParserRuleCall_1()); 
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getExp2Access().getNumberSignDigitFourKeyword_0());
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getExp2Access().getAddition2ParserRuleCall_1()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_ruleExp21525);
             this_Addition2_1=ruleAddition2();
 
             state._fsp--;
-
-             
-                    current = this_Addition2_1; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Addition2_1; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -1850,14 +2047,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:775:2: (iv_ruleAddition2= ruleAddition2 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:776:2: iv_ruleAddition2= ruleAddition2 EOF
             {
-             newCompositeNode(grammarAccess.getAddition2Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAddition2Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_entryRuleAddition21560);
             iv_ruleAddition2=ruleAddition2();
 
             state._fsp--;
-
-             current =iv_ruleAddition2; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21570); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAddition2; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21570); if (state.failed) return current;
 
             }
 
@@ -1894,18 +2095,22 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:787:1: (this_Multiplication2_0= ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:788:5: this_Multiplication2_0= ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getAddition2Access().getMultiplication2ParserRuleCall_0()); 
-                
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getAddition2Access().getMultiplication2ParserRuleCall_0()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21617);
             this_Multiplication2_0=ruleMultiplication2();
 
             state._fsp--;
-
-             
-                    current = this_Multiplication2_0; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Multiplication2_0; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:796:1: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             loop5:
             do {
@@ -1924,43 +2129,51 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:796:2: ()
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:797:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	            current = forceCreateModelElementAndSet(
-            	                grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(),
-            	                current);
-            	        
+            	              current = forceCreateModelElementAndSet(
+            	                  grammarAccess.getAddition2Access().getAdd2LeftAction_1_0(),
+            	                  current);
+            	          
+            	    }
 
             	    }
 
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21638); 
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21638); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getAddition2Access().getPlusSignKeyword_1_1());
-            	        
+            	          	newLeafNode(otherlv_2, grammarAccess.getAddition2Access().getPlusSignKeyword_1_1());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:806:1: ( (lv_right_3_0= ruleMultiplication2 ) )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:807:1: (lv_right_3_0= ruleMultiplication2 )
             	    {
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:807:1: (lv_right_3_0= ruleMultiplication2 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:808:3: lv_right_3_0= ruleMultiplication2
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0()); 
-            	    	    
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getAddition2Access().getRightMultiplication2ParserRuleCall_1_2_0()); 
+            	      	    
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21659);
             	    lv_right_3_0=ruleMultiplication2();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getAddition2Rule());
-            	    	        }
-            	           		set(
-            	           			current, 
-            	           			"right",
-            	            		lv_right_3_0, 
-            	            		"Multiplication2");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getAddition2Rule());
+            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"right",
+            	              		lv_right_3_0, 
+            	              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Multiplication2");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
 
             	    }
 
@@ -1982,7 +2195,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2008,14 +2223,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:833:2: (iv_ruleMultiplication2= ruleMultiplication2 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:834:2: iv_ruleMultiplication2= ruleMultiplication2 EOF
             {
-             newCompositeNode(grammarAccess.getMultiplication2Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMultiplication2Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21697);
             iv_ruleMultiplication2=ruleMultiplication2();
 
             state._fsp--;
-
-             current =iv_ruleMultiplication2; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21707); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMultiplication2; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21707); if (state.failed) return current;
 
             }
 
@@ -2052,18 +2271,22 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:845:1: (this_Prim2_0= rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:846:5: this_Prim2_0= rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             {
-             
-                    newCompositeNode(grammarAccess.getMultiplication2Access().getPrim2ParserRuleCall_0()); 
-                
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getMultiplication2Access().getPrim2ParserRuleCall_0()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21754);
             this_Prim2_0=rulePrim2();
 
             state._fsp--;
-
-             
-                    current = this_Prim2_0; 
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      current = this_Prim2_0; 
+                      afterParserOrEnumRuleCall();
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:854:1: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             loop6:
             do {
@@ -2082,43 +2305,51 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:854:2: ()
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:855:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	            current = forceCreateModelElementAndSet(
-            	                grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(),
-            	                current);
-            	        
+            	              current = forceCreateModelElementAndSet(
+            	                  grammarAccess.getMultiplication2Access().getMult2LeftAction_1_0(),
+            	                  current);
+            	          
+            	    }
 
             	    }
 
-            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21775); 
+            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21775); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getMultiplication2Access().getAsteriskKeyword_1_1());
-            	        
+            	          	newLeafNode(otherlv_2, grammarAccess.getMultiplication2Access().getAsteriskKeyword_1_1());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:864:1: ( (lv_right_3_0= rulePrim2 ) )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:865:1: (lv_right_3_0= rulePrim2 )
             	    {
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:865:1: (lv_right_3_0= rulePrim2 )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:866:3: lv_right_3_0= rulePrim2
             	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0()); 
-            	    	    
+            	    if ( state.backtracking==0 ) {
+            	       
+            	      	        newCompositeNode(grammarAccess.getMultiplication2Access().getRightPrim2ParserRuleCall_1_2_0()); 
+            	      	    
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21796);
             	    lv_right_3_0=rulePrim2();
 
             	    state._fsp--;
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getMultiplication2Rule());
-            	    	        }
-            	           		set(
-            	           			current, 
-            	           			"right",
-            	            		lv_right_3_0, 
-            	            		"Prim2");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+            	      	        if (current==null) {
+            	      	            current = createModelElementForParent(grammarAccess.getMultiplication2Rule());
+            	      	        }
+            	             		set(
+            	             			current, 
+            	             			"right",
+            	              		lv_right_3_0, 
+            	              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim2");
+            	      	        afterParserOrEnumRuleCall();
+            	      	    
+            	    }
 
             	    }
 
@@ -2140,7 +2371,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2166,14 +2399,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:891:2: (iv_rulePrim2= rulePrim2 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:892:2: iv_rulePrim2= rulePrim2 EOF
             {
-             newCompositeNode(grammarAccess.getPrim2Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getPrim2Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim2_in_entryRulePrim21834);
             iv_rulePrim2=rulePrim2();
 
             state._fsp--;
-
-             current =iv_rulePrim2; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21844); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_rulePrim2; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21844); if (state.failed) return current;
 
             }
 
@@ -2218,6 +2455,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt7=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 7, 0, input);
 
@@ -2233,11 +2471,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:903:3: ()
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:904:5: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                            current = forceCreateModelElement(
-                                grammarAccess.getPrim2Access().getVal2Action_0_0(),
-                                current);
-                        
+                              current = forceCreateModelElement(
+                                  grammarAccess.getPrim2Access().getVal2Action_0_0(),
+                                  current);
+                          
+                    }
 
                     }
 
@@ -2247,20 +2487,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:910:1: (lv_name_1_0= RULE_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:911:3: lv_name_1_0= RULE_ID
                     {
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21896); 
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21896); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newLeafNode(lv_name_1_0, grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0()); 
-                    		
+                      			newLeafNode(lv_name_1_0, grammarAccess.getPrim2Access().getNameIDTerminalRuleCall_0_1_0()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getPrim2Rule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_1_0, 
-                            		"ID");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getPrim2Rule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"name",
+                              		lv_name_1_0, 
+                              		"org.eclipse.xtext.common.Terminals.ID");
+                      	    
+                    }
 
                     }
 
@@ -2279,26 +2523,34 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:928:6: (otherlv_2= '(' this_Addition2_3= ruleAddition2 otherlv_4= ')' )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:928:8: otherlv_2= '(' this_Addition2_3= ruleAddition2 otherlv_4= ')'
                     {
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21921); 
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21921); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_2, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
-                        
-                     
-                            newCompositeNode(grammarAccess.getPrim2Access().getAddition2ParserRuleCall_1_1()); 
-                        
+                          	newLeafNode(otherlv_2, grammarAccess.getPrim2Access().getLeftParenthesisKeyword_1_0());
+                          
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getPrim2Access().getAddition2ParserRuleCall_1_1()); 
+                          
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_rulePrim21943);
                     this_Addition2_3=ruleAddition2();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              current = this_Addition2_3; 
+                              afterParserOrEnumRuleCall();
+                          
+                    }
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21954); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                     
-                            current = this_Addition2_3; 
-                            afterParserOrEnumRuleCall();
-                        
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21954); 
-
-                        	newLeafNode(otherlv_4, grammarAccess.getPrim2Access().getRightParenthesisKeyword_1_2());
-                        
+                          	newLeafNode(otherlv_4, grammarAccess.getPrim2Access().getRightParenthesisKeyword_1_2());
+                          
+                    }
 
                     }
 
@@ -2311,7 +2563,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2337,14 +2591,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:954:2: (iv_ruleDatatypeID= ruleDatatypeID EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:955:2: iv_ruleDatatypeID= ruleDatatypeID EOF
             {
-             newCompositeNode(grammarAccess.getDatatypeIDRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getDatatypeIDRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID1992);
             iv_ruleDatatypeID=ruleDatatypeID();
 
             state._fsp--;
-
-             current =iv_ruleDatatypeID.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID2003); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleDatatypeID.getText(); 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID2003); if (state.failed) return current;
 
             }
 
@@ -2374,17 +2632,23 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:965:28: (this_ID_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:966:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID2042); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID2042); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getDatatypeIDAccess().getIDTerminalRuleCall()); 
-                
+              		current.merge(this_ID_0);
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                  newLeafNode(this_ID_0, grammarAccess.getDatatypeIDAccess().getIDTerminalRuleCall()); 
+                  
+            }
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2410,14 +2674,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:982:2: (iv_ruleSingleCrossReference= ruleSingleCrossReference EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:983:2: iv_ruleSingleCrossReference= ruleSingleCrossReference EOF
             {
-             newCompositeNode(grammarAccess.getSingleCrossReferenceRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getSingleCrossReferenceRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference2086);
             iv_ruleSingleCrossReference=ruleSingleCrossReference();
 
             state._fsp--;
-
-             current =iv_ruleSingleCrossReference; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference2096); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleSingleCrossReference; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference2096); if (state.failed) return current;
 
             }
 
@@ -2459,10 +2727,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:994:1: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:994:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             {
-            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2133); 
+            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2133); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getSingleCrossReferenceAccess().getNumberSignDigitFiveKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getSingleCrossReferenceAccess().getNumberSignDigitFiveKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:998:1: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:999:1: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
             {
@@ -2480,6 +2750,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt8=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 8, 0, input);
 
@@ -2489,40 +2760,48 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1001:3: lv_name_1_1= RULE_TERMINAL_ID
                     {
-                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2152); 
+                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2152); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newLeafNode(lv_name_1_1, grammarAccess.getSingleCrossReferenceAccess().getNameTERMINAL_IDTerminalRuleCall_1_0_0()); 
-                    		
+                      			newLeafNode(lv_name_1_1, grammarAccess.getSingleCrossReferenceAccess().getNameTERMINAL_IDTerminalRuleCall_1_0_0()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_1_1, 
-                            		"TERMINAL_ID");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"name",
+                              		lv_name_1_1, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.TERMINAL_ID");
+                      	    
+                    }
 
                     }
                     break;
                 case 2 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1016:8: lv_name_1_2= RULE_ID
                     {
-                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2172); 
+                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2172); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newLeafNode(lv_name_1_2, grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1()); 
-                    		
+                      			newLeafNode(lv_name_1_2, grammarAccess.getSingleCrossReferenceAccess().getNameIDTerminalRuleCall_1_0_1()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"name",
-                            		lv_name_1_2, 
-                            		"ID");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"name",
+                              		lv_name_1_2, 
+                              		"org.eclipse.xtext.common.Terminals.ID");
+                      	    
+                    }
 
                     }
                     break;
@@ -2546,25 +2825,31 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1034:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
                     {
-                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2193); 
+                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2193); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_2, grammarAccess.getSingleCrossReferenceAccess().getKw1Keyword_2_0());
-                        
+                          	newLeafNode(otherlv_2, grammarAccess.getSingleCrossReferenceAccess().getKw1Keyword_2_0());
+                          
+                    }
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1038:1: ( (otherlv_3= RULE_TERMINAL_ID ) )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1039:1: (otherlv_3= RULE_TERMINAL_ID )
                     {
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1039:1: (otherlv_3= RULE_TERMINAL_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1040:3: otherlv_3= RULE_TERMINAL_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                            
-                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2213); 
+                      			if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                              
+                    }
+                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2213); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    		newLeafNode(otherlv_3, grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0()); 
-                    	
+                      		newLeafNode(otherlv_3, grammarAccess.getSingleCrossReferenceAccess().getRef1SingleCrossReferenceCrossReference_2_1_0()); 
+                      	
+                    }
 
                     }
 
@@ -2588,32 +2873,40 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1051:6: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
                     {
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2228); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2228); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_4, grammarAccess.getSingleCrossReferenceAccess().getKw2Keyword_3_0());
-                        
+                          	newLeafNode(otherlv_4, grammarAccess.getSingleCrossReferenceAccess().getKw2Keyword_3_0());
+                          
+                    }
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1055:1: ( ( ruleDatatypeID ) )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1056:1: ( ruleDatatypeID )
                     {
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1056:1: ( ruleDatatypeID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1057:3: ruleDatatypeID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                            
-                     
-                    	        newCompositeNode(grammarAccess.getSingleCrossReferenceAccess().getRef2SingleCrossReferenceCrossReference_3_1_0()); 
-                    	    
+                      			if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                              
+                    }
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getSingleCrossReferenceAccess().getRef2SingleCrossReferenceCrossReference_3_1_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2251);
                     ruleDatatypeID();
 
                     state._fsp--;
-
-                     
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -2637,25 +2930,31 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1070:6: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
                     {
-                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2266); 
+                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2266); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_6, grammarAccess.getSingleCrossReferenceAccess().getKw3Keyword_4_0());
-                        
+                          	newLeafNode(otherlv_6, grammarAccess.getSingleCrossReferenceAccess().getKw3Keyword_4_0());
+                          
+                    }
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1074:1: ( (otherlv_7= RULE_ID ) )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1075:1: (otherlv_7= RULE_ID )
                     {
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1075:1: (otherlv_7= RULE_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1076:3: otherlv_7= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                            
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2286); 
+                      			if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                              
+                    }
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2286); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    		newLeafNode(otherlv_7, grammarAccess.getSingleCrossReferenceAccess().getRef3SingleCrossReferenceCrossReference_4_1_0()); 
-                    	
+                      		newLeafNode(otherlv_7, grammarAccess.getSingleCrossReferenceAccess().getRef3SingleCrossReferenceCrossReference_4_1_0()); 
+                      	
+                    }
 
                     }
 
@@ -2679,25 +2978,31 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1087:6: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
                     {
-                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2301); 
+                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2301); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_8, grammarAccess.getSingleCrossReferenceAccess().getKw4Keyword_5_0());
-                        
+                          	newLeafNode(otherlv_8, grammarAccess.getSingleCrossReferenceAccess().getKw4Keyword_5_0());
+                          
+                    }
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1091:1: ( (otherlv_9= RULE_ID ) )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1092:1: (otherlv_9= RULE_ID )
                     {
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1092:1: (otherlv_9= RULE_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1093:3: otherlv_9= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			if (current==null) {
-                    	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
-                    	        }
-                            
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2321); 
+                      			if (current==null) {
+                      	            current = createModelElement(grammarAccess.getSingleCrossReferenceRule());
+                      	        }
+                              
+                    }
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2321); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    		newLeafNode(otherlv_9, grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0()); 
-                    	
+                      		newLeafNode(otherlv_9, grammarAccess.getSingleCrossReferenceAccess().getRef4SingleCrossReferenceCrossReference_5_1_0()); 
+                      	
+                    }
 
                     }
 
@@ -2716,7 +3021,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2742,14 +3049,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1113:2: (iv_ruleBooleanAlternative= ruleBooleanAlternative EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1114:2: iv_ruleBooleanAlternative= ruleBooleanAlternative EOF
             {
-             newCompositeNode(grammarAccess.getBooleanAlternativeRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBooleanAlternativeRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2359);
             iv_ruleBooleanAlternative=ruleBooleanAlternative();
 
             state._fsp--;
-
-             current =iv_ruleBooleanAlternative; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2369); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBooleanAlternative; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2369); if (state.failed) return current;
 
             }
 
@@ -2784,35 +3095,41 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1125:1: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1125:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             {
-            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2406); 
+            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2406); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getBooleanAlternativeAccess().getNumberSignDigitSixKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getBooleanAlternativeAccess().getNumberSignDigitSixKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1129:1: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1130:1: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1130:1: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1131:3: lv_bool_1_0= ruleBooleanAlternativeLiteral
             {
-             
-            	        newCompositeNode(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0()); 
-            	    
+            if ( state.backtracking==0 ) {
+               
+              	        newCompositeNode(grammarAccess.getBooleanAlternativeAccess().getBoolBooleanAlternativeLiteralParserRuleCall_1_0()); 
+              	    
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2427);
             lv_bool_1_0=ruleBooleanAlternativeLiteral();
 
             state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getBooleanAlternativeRule());
-            	        }
-                   		set(
-                   			current, 
-                   			"bool",
-                    		lv_bool_1_0, 
-                    		"BooleanAlternativeLiteral");
-            	        afterParserOrEnumRuleCall();
-            	    
+              	        if (current==null) {
+              	            current = createModelElementForParent(grammarAccess.getBooleanAlternativeRule());
+              	        }
+                     		set(
+                     			current, 
+                     			"bool",
+                      		lv_bool_1_0, 
+                      		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanAlternativeLiteral");
+              	        afterParserOrEnumRuleCall();
+              	    
+            }
 
             }
 
@@ -2825,7 +3142,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2851,14 +3170,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1156:2: (iv_ruleBooleanAlternativeLiteral= ruleBooleanAlternativeLiteral EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1157:2: iv_ruleBooleanAlternativeLiteral= ruleBooleanAlternativeLiteral EOF
             {
-             newCompositeNode(grammarAccess.getBooleanAlternativeLiteralRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBooleanAlternativeLiteralRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2463);
             iv_ruleBooleanAlternativeLiteral=ruleBooleanAlternativeLiteral();
 
             state._fsp--;
-
-             current =iv_ruleBooleanAlternativeLiteral; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2473); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBooleanAlternativeLiteral; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2473); if (state.failed) return current;
 
             }
 
@@ -2895,11 +3218,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1168:2: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1169:5: 
             {
+            if ( state.backtracking==0 ) {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getBooleanAlternativeLiteralAccess().getBooleanAlternativeLiteralAction_0(),
-                        current);
-                
+                      current = forceCreateModelElement(
+                          grammarAccess.getBooleanAlternativeLiteralAccess().getBooleanAlternativeLiteralAction_0(),
+                          current);
+                  
+            }
 
             }
 
@@ -2914,6 +3239,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt13=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 13, 0, input);
 
@@ -2923,10 +3249,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1174:4: otherlv_1= 'kw1'
                     {
-                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2520); 
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2520); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_1, grammarAccess.getBooleanAlternativeLiteralAccess().getKw1Keyword_1_0());
-                        
+                          	newLeafNode(otherlv_1, grammarAccess.getBooleanAlternativeLiteralAccess().getKw1Keyword_1_0());
+                          
+                    }
 
                     }
                     break;
@@ -2939,16 +3267,20 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1180:1: (lv_isTrue_2_0= 'kw2' )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1181:3: lv_isTrue_2_0= 'kw2'
                     {
-                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2544); 
+                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2544); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                            newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanAlternativeLiteralAccess().getIsTrueKw2Keyword_1_1_0());
-                        
+                              newLeafNode(lv_isTrue_2_0, grammarAccess.getBooleanAlternativeLiteralAccess().getIsTrueKw2Keyword_1_1_0());
+                          
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBooleanAlternativeLiteralRule());
-                    	        }
-                           		setWithLastConsumed(current, "isTrue", true, "kw2");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getBooleanAlternativeLiteralRule());
+                      	        }
+                             		setWithLastConsumed(current, "isTrue", true, "kw2");
+                      	    
+                    }
 
                     }
 
@@ -2967,7 +3299,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -2993,14 +3327,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1203:2: (iv_ruleUnassignedDatatype= ruleUnassignedDatatype EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1204:2: iv_ruleUnassignedDatatype= ruleUnassignedDatatype EOF
             {
-             newCompositeNode(grammarAccess.getUnassignedDatatypeRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getUnassignedDatatypeRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2594);
             iv_ruleUnassignedDatatype=ruleUnassignedDatatype();
 
             state._fsp--;
-
-             current =iv_ruleUnassignedDatatype; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2604); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleUnassignedDatatype; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2604); if (state.failed) return current;
 
             }
 
@@ -3034,54 +3372,66 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1215:1: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1215:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
             {
-            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2641); 
+            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2641); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getUnassignedDatatypeAccess().getNumberSignDigitSevenKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getUnassignedDatatypeAccess().getNumberSignDigitSevenKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1219:1: ( (lv_val_1_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1220:1: (lv_val_1_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1220:1: (lv_val_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1221:3: lv_val_1_0= RULE_ID
             {
-            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2658); 
+            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2658); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val_1_0, grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0()); 
-            		
+              			newLeafNode(lv_val_1_0, grammarAccess.getUnassignedDatatypeAccess().getValIDTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getUnassignedDatatypeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_1_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getUnassignedDatatypeRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val",
+                      		lv_val_1_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
 
             }
 
-             
-                    newCompositeNode(grammarAccess.getUnassignedDatatypeAccess().getKW1ParserRuleCall_2()); 
-                
+            if ( state.backtracking==0 ) {
+               
+                      newCompositeNode(grammarAccess.getUnassignedDatatypeAccess().getKW1ParserRuleCall_2()); 
+                  
+            }
             pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleUnassignedDatatype2679);
             ruleKW1();
 
             state._fsp--;
-
-             
-                    afterParserOrEnumRuleCall();
-                
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               
+                      afterParserOrEnumRuleCall();
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3107,14 +3457,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1254:2: (iv_ruleKW1= ruleKW1 EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1255:2: iv_ruleKW1= ruleKW1 EOF
             {
-             newCompositeNode(grammarAccess.getKW1Rule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getKW1Rule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleKW1_in_entryRuleKW12715);
             iv_ruleKW1=ruleKW1();
 
             state._fsp--;
-
-             current =iv_ruleKW1.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12726); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleKW1.getText(); 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12726); if (state.failed) return current;
 
             }
 
@@ -3156,6 +3510,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt15=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 15, 0, input);
 
@@ -3165,11 +3520,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1267:2: kw= 'kw1'
                     {
-                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12764); 
+                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12764); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getKW1Access().getKw1Keyword_0()); 
-                        
+                              current.merge(kw);
+                              newLeafNode(kw, grammarAccess.getKW1Access().getKw1Keyword_0()); 
+                          
+                    }
 
                     }
                     break;
@@ -3179,11 +3536,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1273:6: (kw= 'matched' (this_INT_2= RULE_INT )? )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1274:2: kw= 'matched' (this_INT_2= RULE_INT )?
                     {
-                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12784); 
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12784); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                            current.merge(kw);
-                            newLeafNode(kw, grammarAccess.getKW1Access().getMatchedKeyword_1_0()); 
-                        
+                              current.merge(kw);
+                              newLeafNode(kw, grammarAccess.getKW1Access().getMatchedKeyword_1_0()); 
+                          
+                    }
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1279:1: (this_INT_2= RULE_INT )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
@@ -3195,13 +3554,17 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                         case 1 :
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1279:6: this_INT_2= RULE_INT
                             {
-                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12800); 
+                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12800); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
 
-                            		current.merge(this_INT_2);
-                                
-                             
-                                newLeafNode(this_INT_2, grammarAccess.getKW1Access().getINTTerminalRuleCall_1_1()); 
-                                
+                              		current.merge(this_INT_2);
+                                  
+                            }
+                            if ( state.backtracking==0 ) {
+                               
+                                  newLeafNode(this_INT_2, grammarAccess.getKW1Access().getINTTerminalRuleCall_1_1()); 
+                                  
+                            }
 
                             }
                             break;
@@ -3220,7 +3583,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3246,14 +3611,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1295:2: (iv_ruleOptionalSingleTransition= ruleOptionalSingleTransition EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1296:2: iv_ruleOptionalSingleTransition= ruleOptionalSingleTransition EOF
             {
-             newCompositeNode(grammarAccess.getOptionalSingleTransitionRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getOptionalSingleTransitionRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2848);
             iv_ruleOptionalSingleTransition=ruleOptionalSingleTransition();
 
             state._fsp--;
-
-             current =iv_ruleOptionalSingleTransition; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2858); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleOptionalSingleTransition; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2858); if (state.failed) return current;
 
             }
 
@@ -3287,10 +3656,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1307:1: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1307:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2895); 
+            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2895); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getOptionalSingleTransitionAccess().getNumberSignDigitEightKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getOptionalSingleTransitionAccess().getNumberSignDigitEightKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1311:1: ( ruleKW1 )?
             int alt16=2;
             int LA16_0 = input.LA(1);
@@ -3302,17 +3673,21 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1312:5: ruleKW1
                     {
-                     
-                            newCompositeNode(grammarAccess.getOptionalSingleTransitionAccess().getKW1ParserRuleCall_1()); 
-                        
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getOptionalSingleTransitionAccess().getKW1ParserRuleCall_1()); 
+                          
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2912);
                     ruleKW1();
 
                     state._fsp--;
-
-                     
-                            afterParserOrEnumRuleCall();
-                        
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              afterParserOrEnumRuleCall();
+                          
+                    }
 
                     }
                     break;
@@ -3325,20 +3700,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1320:1: (lv_val_2_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1321:3: lv_val_2_0= RULE_ID
             {
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2930); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2930); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val_2_0, grammarAccess.getOptionalSingleTransitionAccess().getValIDTerminalRuleCall_2_0()); 
-            		
+              			newLeafNode(lv_val_2_0, grammarAccess.getOptionalSingleTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getOptionalSingleTransitionRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_2_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getOptionalSingleTransitionRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val",
+                      		lv_val_2_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -3351,7 +3730,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3377,14 +3758,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1346:2: (iv_ruleOptionalManyTransition= ruleOptionalManyTransition EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1347:2: iv_ruleOptionalManyTransition= ruleOptionalManyTransition EOF
             {
-             newCompositeNode(grammarAccess.getOptionalManyTransitionRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getOptionalManyTransitionRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2971);
             iv_ruleOptionalManyTransition=ruleOptionalManyTransition();
 
             state._fsp--;
-
-             current =iv_ruleOptionalManyTransition; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2981); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleOptionalManyTransition; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2981); if (state.failed) return current;
 
             }
 
@@ -3418,10 +3803,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1358:1: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1358:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition3018); 
+            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition3018); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getOptionalManyTransitionAccess().getNumberSignDigitNineKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getOptionalManyTransitionAccess().getNumberSignDigitNineKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1362:1: ( ruleKW1 )*
             loop17:
             do {
@@ -3437,17 +3824,21 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	case 1 :
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1363:5: ruleKW1
             	    {
-            	     
-            	            newCompositeNode(grammarAccess.getOptionalManyTransitionAccess().getKW1ParserRuleCall_1()); 
-            	        
+            	    if ( state.backtracking==0 ) {
+            	       
+            	              newCompositeNode(grammarAccess.getOptionalManyTransitionAccess().getKW1ParserRuleCall_1()); 
+            	          
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalManyTransition3035);
             	    ruleKW1();
 
             	    state._fsp--;
-
-            	     
-            	            afterParserOrEnumRuleCall();
-            	        
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+            	       
+            	              afterParserOrEnumRuleCall();
+            	          
+            	    }
 
             	    }
             	    break;
@@ -3463,20 +3854,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1371:1: (lv_val_2_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1372:3: lv_val_2_0= RULE_ID
             {
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition3053); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition3053); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val_2_0, grammarAccess.getOptionalManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
-            		
+              			newLeafNode(lv_val_2_0, grammarAccess.getOptionalManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getOptionalManyTransitionRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_2_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getOptionalManyTransitionRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val",
+                      		lv_val_2_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -3489,7 +3884,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3515,14 +3912,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1397:2: (iv_ruleMandatoryManyTransition= ruleMandatoryManyTransition EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1398:2: iv_ruleMandatoryManyTransition= ruleMandatoryManyTransition EOF
             {
-             newCompositeNode(grammarAccess.getMandatoryManyTransitionRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getMandatoryManyTransitionRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3094);
             iv_ruleMandatoryManyTransition=ruleMandatoryManyTransition();
 
             state._fsp--;
-
-             current =iv_ruleMandatoryManyTransition; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3104); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleMandatoryManyTransition; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3104); if (state.failed) return current;
 
             }
 
@@ -3556,10 +3957,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1409:1: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1409:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3141); 
+            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3141); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getMandatoryManyTransitionAccess().getNumberSignDigitOneDigitZeroKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getMandatoryManyTransitionAccess().getNumberSignDigitOneDigitZeroKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1413:1: ( ruleKW1 )+
             int cnt18=0;
             loop18:
@@ -3576,23 +3979,28 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	case 1 :
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1414:5: ruleKW1
             	    {
-            	     
-            	            newCompositeNode(grammarAccess.getMandatoryManyTransitionAccess().getKW1ParserRuleCall_1()); 
-            	        
+            	    if ( state.backtracking==0 ) {
+            	       
+            	              newCompositeNode(grammarAccess.getMandatoryManyTransitionAccess().getKW1ParserRuleCall_1()); 
+            	          
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3158);
             	    ruleKW1();
 
             	    state._fsp--;
-
-            	     
-            	            afterParserOrEnumRuleCall();
-            	        
+            	    if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
+            	       
+            	              afterParserOrEnumRuleCall();
+            	          
+            	    }
 
             	    }
             	    break;
 
             	default :
             	    if ( cnt18 >= 1 ) break loop18;
+            	    if (state.backtracking>0) {state.failed=true; return current;}
                         EarlyExitException eee =
                             new EarlyExitException(18, input);
                         throw eee;
@@ -3606,20 +4014,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1422:1: (lv_val_2_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1423:3: lv_val_2_0= RULE_ID
             {
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3176); 
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3176); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val_2_0, grammarAccess.getMandatoryManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
-            		
+              			newLeafNode(lv_val_2_0, grammarAccess.getMandatoryManyTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getMandatoryManyTransitionRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_2_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getMandatoryManyTransitionRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val",
+                      		lv_val_2_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -3632,7 +4044,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3658,14 +4072,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1448:2: (iv_ruleAlternativeTransition= ruleAlternativeTransition EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1449:2: iv_ruleAlternativeTransition= ruleAlternativeTransition EOF
             {
-             newCompositeNode(grammarAccess.getAlternativeTransitionRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getAlternativeTransitionRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3217);
             iv_ruleAlternativeTransition=ruleAlternativeTransition();
 
             state._fsp--;
-
-             current =iv_ruleAlternativeTransition; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3227); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleAlternativeTransition; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3227); if (state.failed) return current;
 
             }
 
@@ -3700,10 +4118,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1460:1: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1460:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3264); 
+            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3264); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getAlternativeTransitionAccess().getNumberSignDigitOneDigitOneKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getAlternativeTransitionAccess().getNumberSignDigitOneDigitOneKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1464:1: ( ruleKW1 | otherlv_2= 'kw2' )
             int alt19=2;
             int LA19_0 = input.LA(1);
@@ -3715,6 +4135,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 alt19=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 19, 0, input);
 
@@ -3724,27 +4145,33 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1465:5: ruleKW1
                     {
-                     
-                            newCompositeNode(grammarAccess.getAlternativeTransitionAccess().getKW1ParserRuleCall_1_0()); 
-                        
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getAlternativeTransitionAccess().getKW1ParserRuleCall_1_0()); 
+                          
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleAlternativeTransition3281);
                     ruleKW1();
 
                     state._fsp--;
-
-                     
-                            afterParserOrEnumRuleCall();
-                        
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              afterParserOrEnumRuleCall();
+                          
+                    }
 
                     }
                     break;
                 case 2 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1473:7: otherlv_2= 'kw2'
                     {
-                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3298); 
+                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3298); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_2, grammarAccess.getAlternativeTransitionAccess().getKw2Keyword_1_1());
-                        
+                          	newLeafNode(otherlv_2, grammarAccess.getAlternativeTransitionAccess().getKw2Keyword_1_1());
+                          
+                    }
 
                     }
                     break;
@@ -3757,20 +4184,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1478:1: (lv_val_3_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1479:3: lv_val_3_0= RULE_ID
             {
-            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3316); 
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3316); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_val_3_0, grammarAccess.getAlternativeTransitionAccess().getValIDTerminalRuleCall_2_0()); 
-            		
+              			newLeafNode(lv_val_3_0, grammarAccess.getAlternativeTransitionAccess().getValIDTerminalRuleCall_2_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getAlternativeTransitionRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"val",
-                    		lv_val_3_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getAlternativeTransitionRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"val",
+                      		lv_val_3_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -3783,7 +4214,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3809,14 +4242,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1504:2: (iv_ruleBooleanDatatypeID= ruleBooleanDatatypeID EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1505:2: iv_ruleBooleanDatatypeID= ruleBooleanDatatypeID EOF
             {
-             newCompositeNode(grammarAccess.getBooleanDatatypeIDRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBooleanDatatypeIDRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3358);
             iv_ruleBooleanDatatypeID=ruleBooleanDatatypeID();
 
             state._fsp--;
-
-             current =iv_ruleBooleanDatatypeID.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3369); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBooleanDatatypeID.getText(); 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3369); if (state.failed) return current;
 
             }
 
@@ -3846,17 +4283,23 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1515:28: (this_ID_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1516:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3408); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3408); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            		current.merge(this_ID_0);
-                
-             
-                newLeafNode(this_ID_0, grammarAccess.getBooleanDatatypeIDAccess().getIDTerminalRuleCall()); 
-                
+              		current.merge(this_ID_0);
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                  newLeafNode(this_ID_0, grammarAccess.getBooleanDatatypeIDAccess().getIDTerminalRuleCall()); 
+                  
+            }
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -3882,14 +4325,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1532:2: (iv_ruleBooleanValues= ruleBooleanValues EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1533:2: iv_ruleBooleanValues= ruleBooleanValues EOF
             {
-             newCompositeNode(grammarAccess.getBooleanValuesRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBooleanValuesRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3452);
             iv_ruleBooleanValues=ruleBooleanValues();
 
             state._fsp--;
-
-             current =iv_ruleBooleanValues; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3462); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBooleanValues; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3462); if (state.failed) return current;
 
             }
 
@@ -3929,18 +4376,22 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1544:2: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1545:5: 
             {
+            if ( state.backtracking==0 ) {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getBooleanValuesAccess().getBooleanValuesAction_0(),
-                        current);
-                
+                      current = forceCreateModelElement(
+                          grammarAccess.getBooleanValuesAccess().getBooleanValuesAction_0(),
+                          current);
+                  
+            }
 
             }
 
-            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3508); 
+            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3508); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_1, grammarAccess.getBooleanValuesAccess().getNumberSignDigitOneDigitTwoKeyword_1());
-                
+                  	newLeafNode(otherlv_1, grammarAccess.getBooleanValuesAccess().getNumberSignDigitOneDigitTwoKeyword_1());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1554:1: ( (lv_val1_2_0= 'kw1' ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
@@ -3955,16 +4406,20 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1555:1: (lv_val1_2_0= 'kw1' )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1556:3: lv_val1_2_0= 'kw1'
                     {
-                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3526); 
+                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3526); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                            newLeafNode(lv_val1_2_0, grammarAccess.getBooleanValuesAccess().getVal1Kw1Keyword_2_0());
-                        
+                              newLeafNode(lv_val1_2_0, grammarAccess.getBooleanValuesAccess().getVal1Kw1Keyword_2_0());
+                          
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBooleanValuesRule());
-                    	        }
-                           		setWithLastConsumed(current, "val1", true, "kw1");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getBooleanValuesRule());
+                      	        }
+                             		setWithLastConsumed(current, "val1", true, "kw1");
+                      	    
+                    }
 
                     }
 
@@ -3988,20 +4443,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1570:1: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1571:3: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
                     {
-                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3557); 
+                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3557); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                    			newLeafNode(lv_val2_3_0, grammarAccess.getBooleanValuesAccess().getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0()); 
-                    		
+                      			newLeafNode(lv_val2_3_0, grammarAccess.getBooleanValuesAccess().getVal2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0()); 
+                      		
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    	        if (current==null) {
-                    	            current = createModelElement(grammarAccess.getBooleanValuesRule());
-                    	        }
-                           		setWithLastConsumed(
-                           			current, 
-                           			"val2",
-                            		true, 
-                            		"BOOLEAN_TERMINAL_ID");
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElement(grammarAccess.getBooleanValuesRule());
+                      	        }
+                             		setWithLastConsumed(
+                             			current, 
+                             			"val2",
+                              		true, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BOOLEAN_TERMINAL_ID");
+                      	    
+                    }
 
                     }
 
@@ -4025,25 +4484,29 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1588:1: (lv_val3_4_0= ruleBooleanDatatypeID )
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1589:3: lv_val3_4_0= ruleBooleanDatatypeID
                     {
-                     
-                    	        newCompositeNode(grammarAccess.getBooleanValuesAccess().getVal3BooleanDatatypeIDParserRuleCall_4_0()); 
-                    	    
+                    if ( state.backtracking==0 ) {
+                       
+                      	        newCompositeNode(grammarAccess.getBooleanValuesAccess().getVal3BooleanDatatypeIDParserRuleCall_4_0()); 
+                      	    
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3584);
                     lv_val3_4_0=ruleBooleanDatatypeID();
 
                     state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-
-                    	        if (current==null) {
-                    	            current = createModelElementForParent(grammarAccess.getBooleanValuesRule());
-                    	        }
-                           		set(
-                           			current, 
-                           			"val3",
-                            		true, 
-                            		"BooleanDatatypeID");
-                    	        afterParserOrEnumRuleCall();
-                    	    
+                      	        if (current==null) {
+                      	            current = createModelElementForParent(grammarAccess.getBooleanValuesRule());
+                      	        }
+                             		set(
+                             			current, 
+                             			"val3",
+                              		true, 
+                              		"org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanDatatypeID");
+                      	        afterParserOrEnumRuleCall();
+                      	    
+                    }
 
                     }
 
@@ -4059,7 +4522,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -4085,14 +4550,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1614:2: (iv_ruleLongAlternative= ruleLongAlternative EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1615:2: iv_ruleLongAlternative= ruleLongAlternative EOF
             {
-             newCompositeNode(grammarAccess.getLongAlternativeRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getLongAlternativeRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3621);
             iv_ruleLongAlternative=ruleLongAlternative();
 
             state._fsp--;
-
-             current =iv_ruleLongAlternative; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3631); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleLongAlternative; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3631); if (state.failed) return current;
 
             }
 
@@ -4143,30 +4612,36 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1626:1: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1626:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
             {
-            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3668); 
+            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3668); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getLongAlternativeAccess().getNumberSignDigitOneDigitThreeKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getLongAlternativeAccess().getNumberSignDigitOneDigitThreeKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1630:1: ( (lv_foo_1_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1631:1: (lv_foo_1_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1631:1: (lv_foo_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1632:3: lv_foo_1_0= RULE_ID
             {
-            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3685); 
+            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3685); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-            			newLeafNode(lv_foo_1_0, grammarAccess.getLongAlternativeAccess().getFooIDTerminalRuleCall_1_0()); 
-            		
+              			newLeafNode(lv_foo_1_0, grammarAccess.getLongAlternativeAccess().getFooIDTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            	        if (current==null) {
-            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	        }
-                   		setWithLastConsumed(
-                   			current, 
-                   			"foo",
-                    		lv_foo_1_0, 
-                    		"ID");
-            	    
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"foo",
+                      		lv_foo_1_0, 
+                      		"org.eclipse.xtext.common.Terminals.ID");
+              	    
+            }
 
             }
 
@@ -4228,10 +4703,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1648:3: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1648:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
             	    {
-            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3704); 
+            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3704); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_2, grammarAccess.getLongAlternativeAccess().getKw1Keyword_2_0_0());
-            	        
+            	          	newLeafNode(otherlv_2, grammarAccess.getLongAlternativeAccess().getKw1Keyword_2_0_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1652:1: ( (lv_val1_3_0= RULE_ID ) )?
             	    int alt23=2;
             	    int LA23_0 = input.LA(1);
@@ -4246,20 +4723,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1653:1: (lv_val1_3_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1654:3: lv_val1_3_0= RULE_ID
             	            {
-            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3721); 
+            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3721); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val1_3_0, grammarAccess.getLongAlternativeAccess().getVal1IDTerminalRuleCall_2_0_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val1_3_0, grammarAccess.getLongAlternativeAccess().getVal1IDTerminalRuleCall_2_0_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val1",
-            	                    		lv_val1_3_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val1",
+            	                      		lv_val1_3_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4281,10 +4762,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1671:6: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1671:8: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
             	    {
-            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3747); 
+            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3747); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_4, grammarAccess.getLongAlternativeAccess().getKw2Keyword_2_1_0());
-            	        
+            	          	newLeafNode(otherlv_4, grammarAccess.getLongAlternativeAccess().getKw2Keyword_2_1_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1675:1: ( (lv_val2_5_0= RULE_ID ) )?
             	    int alt24=2;
             	    int LA24_0 = input.LA(1);
@@ -4299,20 +4782,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1676:1: (lv_val2_5_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1677:3: lv_val2_5_0= RULE_ID
             	            {
-            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3764); 
+            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3764); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val2_5_0, grammarAccess.getLongAlternativeAccess().getVal2IDTerminalRuleCall_2_1_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val2_5_0, grammarAccess.getLongAlternativeAccess().getVal2IDTerminalRuleCall_2_1_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val2",
-            	                    		lv_val2_5_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val2",
+            	                      		lv_val2_5_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4334,10 +4821,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1694:6: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1694:8: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
             	    {
-            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3790); 
+            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3790); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_6, grammarAccess.getLongAlternativeAccess().getKw3Keyword_2_2_0());
-            	        
+            	          	newLeafNode(otherlv_6, grammarAccess.getLongAlternativeAccess().getKw3Keyword_2_2_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1698:1: ( (lv_val3_7_0= RULE_ID ) )?
             	    int alt25=2;
             	    int LA25_0 = input.LA(1);
@@ -4352,20 +4841,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1699:1: (lv_val3_7_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1700:3: lv_val3_7_0= RULE_ID
             	            {
-            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3807); 
+            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3807); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val3_7_0, grammarAccess.getLongAlternativeAccess().getVal3IDTerminalRuleCall_2_2_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val3_7_0, grammarAccess.getLongAlternativeAccess().getVal3IDTerminalRuleCall_2_2_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val3",
-            	                    		lv_val3_7_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val3",
+            	                      		lv_val3_7_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4387,10 +4880,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1717:6: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1717:8: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
             	    {
-            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3833); 
+            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3833); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_8, grammarAccess.getLongAlternativeAccess().getKw4Keyword_2_3_0());
-            	        
+            	          	newLeafNode(otherlv_8, grammarAccess.getLongAlternativeAccess().getKw4Keyword_2_3_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1721:1: ( (lv_val4_9_0= RULE_ID ) )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
@@ -4405,20 +4900,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1722:1: (lv_val4_9_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1723:3: lv_val4_9_0= RULE_ID
             	            {
-            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3850); 
+            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3850); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val4_9_0, grammarAccess.getLongAlternativeAccess().getVal4IDTerminalRuleCall_2_3_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val4_9_0, grammarAccess.getLongAlternativeAccess().getVal4IDTerminalRuleCall_2_3_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val4",
-            	                    		lv_val4_9_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val4",
+            	                      		lv_val4_9_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4440,10 +4939,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1740:6: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1740:8: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
             	    {
-            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3876); 
+            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3876); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_10, grammarAccess.getLongAlternativeAccess().getKw5Keyword_2_4_0());
-            	        
+            	          	newLeafNode(otherlv_10, grammarAccess.getLongAlternativeAccess().getKw5Keyword_2_4_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1744:1: ( (lv_val5_11_0= RULE_ID ) )?
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
@@ -4458,20 +4959,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1745:1: (lv_val5_11_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1746:3: lv_val5_11_0= RULE_ID
             	            {
-            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3893); 
+            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3893); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val5_11_0, grammarAccess.getLongAlternativeAccess().getVal5IDTerminalRuleCall_2_4_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val5_11_0, grammarAccess.getLongAlternativeAccess().getVal5IDTerminalRuleCall_2_4_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val5",
-            	                    		lv_val5_11_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val5",
+            	                      		lv_val5_11_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4493,10 +4998,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1763:6: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1763:8: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
             	    {
-            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative3919); 
+            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative3919); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_12, grammarAccess.getLongAlternativeAccess().getKw6Keyword_2_5_0());
-            	        
+            	          	newLeafNode(otherlv_12, grammarAccess.getLongAlternativeAccess().getKw6Keyword_2_5_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1767:1: ( (lv_val6_13_0= RULE_ID ) )?
             	    int alt28=2;
             	    int LA28_0 = input.LA(1);
@@ -4511,20 +5018,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1768:1: (lv_val6_13_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1769:3: lv_val6_13_0= RULE_ID
             	            {
-            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3936); 
+            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3936); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val6_13_0, grammarAccess.getLongAlternativeAccess().getVal6IDTerminalRuleCall_2_5_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val6_13_0, grammarAccess.getLongAlternativeAccess().getVal6IDTerminalRuleCall_2_5_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val6",
-            	                    		lv_val6_13_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val6",
+            	                      		lv_val6_13_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4546,10 +5057,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1786:6: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1786:8: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
             	    {
-            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative3962); 
+            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative3962); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_14, grammarAccess.getLongAlternativeAccess().getKw7Keyword_2_6_0());
-            	        
+            	          	newLeafNode(otherlv_14, grammarAccess.getLongAlternativeAccess().getKw7Keyword_2_6_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1790:1: ( (lv_val7_15_0= RULE_ID ) )?
             	    int alt29=2;
             	    int LA29_0 = input.LA(1);
@@ -4564,20 +5077,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1791:1: (lv_val7_15_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1792:3: lv_val7_15_0= RULE_ID
             	            {
-            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3979); 
+            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3979); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val7_15_0, grammarAccess.getLongAlternativeAccess().getVal7IDTerminalRuleCall_2_6_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val7_15_0, grammarAccess.getLongAlternativeAccess().getVal7IDTerminalRuleCall_2_6_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val7",
-            	                    		lv_val7_15_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val7",
+            	                      		lv_val7_15_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4599,10 +5116,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1809:6: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1809:8: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
             	    {
-            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4005); 
+            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4005); if (state.failed) return current;
+            	    if ( state.backtracking==0 ) {
 
-            	        	newLeafNode(otherlv_16, grammarAccess.getLongAlternativeAccess().getKw8Keyword_2_7_0());
-            	        
+            	          	newLeafNode(otherlv_16, grammarAccess.getLongAlternativeAccess().getKw8Keyword_2_7_0());
+            	          
+            	    }
             	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1813:1: ( (lv_val8_17_0= RULE_ID ) )?
             	    int alt30=2;
             	    int LA30_0 = input.LA(1);
@@ -4617,20 +5136,24 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1814:1: (lv_val8_17_0= RULE_ID )
             	            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1815:3: lv_val8_17_0= RULE_ID
             	            {
-            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4022); 
+            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4022); if (state.failed) return current;
+            	            if ( state.backtracking==0 ) {
 
-            	            			newLeafNode(lv_val8_17_0, grammarAccess.getLongAlternativeAccess().getVal8IDTerminalRuleCall_2_7_1_0()); 
-            	            		
+            	              			newLeafNode(lv_val8_17_0, grammarAccess.getLongAlternativeAccess().getVal8IDTerminalRuleCall_2_7_1_0()); 
+            	              		
+            	            }
+            	            if ( state.backtracking==0 ) {
 
-            	            	        if (current==null) {
-            	            	            current = createModelElement(grammarAccess.getLongAlternativeRule());
-            	            	        }
-            	                   		addWithLastConsumed(
-            	                   			current, 
-            	                   			"val8",
-            	                    		lv_val8_17_0, 
-            	                    		"ID");
-            	            	    
+            	              	        if (current==null) {
+            	              	            current = createModelElement(grammarAccess.getLongAlternativeRule());
+            	              	        }
+            	                     		addWithLastConsumed(
+            	                     			current, 
+            	                     			"val8",
+            	                      		lv_val8_17_0, 
+            	                      		"org.eclipse.xtext.common.Terminals.ID");
+            	              	    
+            	            }
 
             	            }
 
@@ -4652,17 +5175,21 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 }
             } while (true);
 
-            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4043); 
+            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4043); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_18, grammarAccess.getLongAlternativeAccess().getExclamationMarkKeyword_3());
-                
+                  	newLeafNode(otherlv_18, grammarAccess.getLongAlternativeAccess().getExclamationMarkKeyword_3());
+                  
+            }
 
             }
 
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -4688,14 +5215,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1844:2: (iv_ruleActionOnly= ruleActionOnly EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1845:2: iv_ruleActionOnly= ruleActionOnly EOF
             {
-             newCompositeNode(grammarAccess.getActionOnlyRule()); 
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getActionOnlyRule()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_entryRuleActionOnly4079);
             iv_ruleActionOnly=ruleActionOnly();
 
             state._fsp--;
-
-             current =iv_ruleActionOnly; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleActionOnly4089); 
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleActionOnly; 
+            }
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleActionOnly4089); if (state.failed) return current;
 
             }
 
@@ -4713,7 +5244,7 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start "ruleActionOnly"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1852:1: ruleActionOnly returns [EObject current=null] : (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1852:1: ruleActionOnly returns [EObject current=null] : (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
     public final EObject ruleActionOnly() throws RecognitionException {
         EObject current = null;
 
@@ -4726,16 +5257,18 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1855:28: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:1: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1855:28: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:1: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:1: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:1: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1856:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
             {
-            otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleActionOnly4126); 
+            otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleActionOnly4126); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
 
-                	newLeafNode(otherlv_0, grammarAccess.getActionOnlyAccess().getNumberSignDigitOneDigitFourKeyword_0());
-                
+                  	newLeafNode(otherlv_0, grammarAccess.getActionOnlyAccess().getNumberSignDigitOneDigitFourKeyword_0());
+                  
+            }
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1860:1: (otherlv_1= 'kw1' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
@@ -4747,31 +5280,39 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1860:3: otherlv_1= 'kw1'
                     {
-                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleActionOnly4139); 
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleActionOnly4139); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_1, grammarAccess.getActionOnlyAccess().getKw1Keyword_1());
-                        
+                          	newLeafNode(otherlv_1, grammarAccess.getActionOnlyAccess().getKw1Keyword_1());
+                          
+                    }
 
                     }
                     break;
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:3: (this_ID_2= RULE_ID )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:3: ( ( RULE_ID )=>this_ID_2= RULE_ID )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
             if ( (LA33_0==RULE_ID) ) {
-                alt33=1;
+                int LA33_1 = input.LA(2);
+
+                if ( (synpred1_InternalSyntacticSequencerTestLanguage()) ) {
+                    alt33=1;
+                }
             }
             switch (alt33) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:4: this_ID_2= RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:4: ( RULE_ID )=>this_ID_2= RULE_ID
                     {
-                    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4153); 
-                     
-                        newLeafNode(this_ID_2, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_2()); 
-                        
+                    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4158); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                          newLeafNode(this_ID_2, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_2()); 
+                          
+                    }
 
                     }
                     break;
@@ -4781,11 +5322,13 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1868:3: ()
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1869:5: 
             {
+            if ( state.backtracking==0 ) {
 
-                    current = forceCreateModelElement(
-                        grammarAccess.getActionOnlyAccess().getActionOnlyAction_3(),
-                        current);
-                
+                      current = forceCreateModelElement(
+                          grammarAccess.getActionOnlyAccess().getActionOnlyAction_3(),
+                          current);
+                  
+            }
 
             }
 
@@ -4800,10 +5343,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1874:4: otherlv_4= 'kw2'
                     {
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleActionOnly4176); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleActionOnly4181); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
 
-                        	newLeafNode(otherlv_4, grammarAccess.getActionOnlyAccess().getKw2Keyword_4());
-                        
+                          	newLeafNode(otherlv_4, grammarAccess.getActionOnlyAccess().getKw2Keyword_4());
+                          
+                    }
 
                     }
                     break;
@@ -4821,10 +5366,12 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1878:4: this_ID_5= RULE_ID
                     {
-                    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4190); 
-                     
-                        newLeafNode(this_ID_5, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_5()); 
-                        
+                    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4195); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                          newLeafNode(this_ID_5, grammarAccess.getActionOnlyAccess().getIDTerminalRuleCall_5()); 
+                          
+                    }
 
                     }
                     break;
@@ -4837,7 +5384,9 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
 
             }
 
-             leaveRule(); 
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
         }
          
             catch (RecognitionException re) { 
@@ -4850,7 +5399,33 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
     }
     // $ANTLR end "ruleActionOnly"
 
+    // $ANTLR start synpred1_InternalSyntacticSequencerTestLanguage
+    public final void synpred1_InternalSyntacticSequencerTestLanguage_fragment() throws RecognitionException {   
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:4: ( RULE_ID )
+        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSyntacticSequencerTestLanguage.g:1864:6: RULE_ID
+        {
+        match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred1_InternalSyntacticSequencerTestLanguage4153); if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred1_InternalSyntacticSequencerTestLanguage
+
     // Delegated rules
+
+    public final boolean synpred1_InternalSyntacticSequencerTestLanguage() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred1_InternalSyntacticSequencerTestLanguage_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
 
 
  
@@ -5019,9 +5594,10 @@ public class InternalSyntacticSequencerTestLanguageParser extends AbstractIntern
         public static final BitSet FOLLOW_EOF_in_entryRuleActionOnly4089 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_40_in_ruleActionOnly4126 = new BitSet(new long[]{0x000000000000C012L});
         public static final BitSet FOLLOW_14_in_ruleActionOnly4139 = new BitSet(new long[]{0x0000000000008012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4153 = new BitSet(new long[]{0x0000000000008012L});
-        public static final BitSet FOLLOW_15_in_ruleActionOnly4176 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4190 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4158 = new BitSet(new long[]{0x0000000000008012L});
+        public static final BitSet FOLLOW_15_in_ruleActionOnly4181 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4195 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred1_InternalSyntacticSequencerTestLanguage4153 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

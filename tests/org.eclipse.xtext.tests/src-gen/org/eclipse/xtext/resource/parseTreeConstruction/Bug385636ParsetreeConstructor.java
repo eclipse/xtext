@@ -45,11 +45,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Program ****************
  *
  * Program:
- * 	define=DefineVariables statements+=Statement* "END";
+ * 	define=DefineVariables statements+=Statement* 'END';
  *
  **/
 
-// define=DefineVariables statements+=Statement* "END"
+// define=DefineVariables statements+=Statement* 'END'
 protected class Program_Group extends GroupToken {
 	
 	public Program_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -170,7 +170,7 @@ protected class Program_StatementsAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "END"
+// 'END'
 protected class Program_ENDKeyword_2 extends KeywordToken  {
 	
 	public Program_ENDKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -200,11 +200,11 @@ protected class Program_ENDKeyword_2 extends KeywordToken  {
 /************ begin Rule DefineVariables ****************
  *
  * DefineVariables:
- * 	"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES";
+ * 	'VARIABLES' variables+=DefineVariable+ 'ENDVARIABLES';
  *
  **/
 
-// "VARIABLES" variables+=DefineVariable+ "ENDVARIABLES"
+// 'VARIABLES' variables+=DefineVariable+ 'ENDVARIABLES'
 protected class DefineVariables_Group extends GroupToken {
 	
 	public DefineVariables_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -233,7 +233,7 @@ protected class DefineVariables_Group extends GroupToken {
 
 }
 
-// "VARIABLES"
+// 'VARIABLES'
 protected class DefineVariables_VARIABLESKeyword_0 extends KeywordToken  {
 	
 	public DefineVariables_VARIABLESKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,7 +301,7 @@ protected class DefineVariables_VariablesAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "ENDVARIABLES"
+// 'ENDVARIABLES'
 protected class DefineVariables_ENDVARIABLESKeyword_2 extends KeywordToken  {
 	
 	public DefineVariables_ENDVARIABLESKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -330,11 +330,11 @@ protected class DefineVariables_ENDVARIABLESKeyword_2 extends KeywordToken  {
 /************ begin Rule DefineVariable ****************
  *
  * DefineVariable:
- * 	"NAME" name=ID;
+ * 	'NAME' name=ID;
  *
  **/
 
-// "NAME" name=ID
+// 'NAME' name=ID
 protected class DefineVariable_Group extends GroupToken {
 	
 	public DefineVariable_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -363,7 +363,7 @@ protected class DefineVariable_Group extends GroupToken {
 
 }
 
-// "NAME"
+// 'NAME'
 protected class DefineVariable_NAMEKeyword_0 extends KeywordToken  {
 	
 	public DefineVariable_NAMEKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -473,20 +473,20 @@ protected class NVariableAccess_VariableAssignment extends AssignmentToken  {
 /************ begin Rule Statement ****************
  *
  * // Comparisons: left associative, priority 2
- * Statement returns Expression:
- * 	Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
- * 	{Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
- * 	right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
- * 	{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
- * 	right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
+ * Statement Expression:
+ * 	Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
+ * 	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+ * 	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+ * 	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+ * 	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
  *
  **/
 
-// Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
-// {Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
-// right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
-// {Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
-// right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+// Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
+// {Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+// right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+// {Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+// right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 protected class Statement_Group extends GroupToken {
 	
 	public Statement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -559,11 +559,11 @@ protected class Statement_Expression_VariableNameParserRuleCall_0 extends RuleCa
 	}	
 }
 
-// ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2" {Expression_Smaller.left=current}
-// right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current} right=Expression_VariableName | "C4"
-// {Expression_Equal.left=current} right=Expression_VariableName | "C5" {Expression_Not_Equal.left=current}
-// right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current} right=Expression_VariableName | ("C6"
-// "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+// ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2' {Expression_Smaller.left=current}
+// right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
+// {Expression_Equal.left=current} right=Expression_VariableName | 'C5' {Expression_Not_Equal.left=current}
+// right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName | ('C6'
+// 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 protected class Statement_Alternatives_1 extends AlternativesToken {
 
 	public Statement_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -604,7 +604,7 @@ protected class Statement_Alternatives_1 extends AlternativesToken {
 
 }
 
-// "C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName
+// 'C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName
 protected class Statement_Group_1_0 extends GroupToken {
 	
 	public Statement_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -633,7 +633,7 @@ protected class Statement_Group_1_0 extends GroupToken {
 
 }
 
-// "C1"
+// 'C1'
 protected class Statement_C1Keyword_1_0_0 extends KeywordToken  {
 	
 	public Statement_C1Keyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -732,7 +732,7 @@ protected class Statement_RightAssignment_1_0_2 extends AssignmentToken  {
 }
 
 
-// "C2" {Expression_Smaller.left=current} right=Expression_VariableName
+// 'C2' {Expression_Smaller.left=current} right=Expression_VariableName
 protected class Statement_Group_1_1 extends GroupToken {
 	
 	public Statement_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -761,7 +761,7 @@ protected class Statement_Group_1_1 extends GroupToken {
 
 }
 
-// "C2"
+// 'C2'
 protected class Statement_C2Keyword_1_1_0 extends KeywordToken  {
 	
 	public Statement_C2Keyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -860,7 +860,7 @@ protected class Statement_RightAssignment_1_1_2 extends AssignmentToken  {
 }
 
 
-// "C3" {Expression_Smaller_Equal.left=current} right=Expression_VariableName
+// 'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName
 protected class Statement_Group_1_2 extends GroupToken {
 	
 	public Statement_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -889,7 +889,7 @@ protected class Statement_Group_1_2 extends GroupToken {
 
 }
 
-// "C3"
+// 'C3'
 protected class Statement_C3Keyword_1_2_0 extends KeywordToken  {
 	
 	public Statement_C3Keyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -988,7 +988,7 @@ protected class Statement_RightAssignment_1_2_2 extends AssignmentToken  {
 }
 
 
-// "C4" {Expression_Equal.left=current} right=Expression_VariableName
+// 'C4' {Expression_Equal.left=current} right=Expression_VariableName
 protected class Statement_Group_1_3 extends GroupToken {
 	
 	public Statement_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1017,7 +1017,7 @@ protected class Statement_Group_1_3 extends GroupToken {
 
 }
 
-// "C4"
+// 'C4'
 protected class Statement_C4Keyword_1_3_0 extends KeywordToken  {
 	
 	public Statement_C4Keyword_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1116,7 +1116,7 @@ protected class Statement_RightAssignment_1_3_2 extends AssignmentToken  {
 }
 
 
-// "C5" {Expression_Not_Equal.left=current} right=Expression_VariableName
+// 'C5' {Expression_Not_Equal.left=current} right=Expression_VariableName
 protected class Statement_Group_1_4 extends GroupToken {
 	
 	public Statement_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1145,7 +1145,7 @@ protected class Statement_Group_1_4 extends GroupToken {
 
 }
 
-// "C5"
+// 'C5'
 protected class Statement_C5Keyword_1_4_0 extends KeywordToken  {
 	
 	public Statement_C5Keyword_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1244,7 +1244,7 @@ protected class Statement_RightAssignment_1_4_2 extends AssignmentToken  {
 }
 
 
-// ("C6" "C7") {Expression_Not_Less.left=current} right=Expression_VariableName
+// ('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName
 protected class Statement_Group_1_5 extends GroupToken {
 	
 	public Statement_Group_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1273,7 +1273,7 @@ protected class Statement_Group_1_5 extends GroupToken {
 
 }
 
-// "C6" "C7"
+// ('C6' 'C7')
 protected class Statement_Group_1_5_0 extends GroupToken {
 	
 	public Statement_Group_1_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1295,7 +1295,7 @@ protected class Statement_Group_1_5_0 extends GroupToken {
 
 }
 
-// "C6"
+// 'C6'
 protected class Statement_C6Keyword_1_5_0_0 extends KeywordToken  {
 	
 	public Statement_C6Keyword_1_5_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1318,7 +1318,7 @@ protected class Statement_C6Keyword_1_5_0_0 extends KeywordToken  {
 
 }
 
-// "C7"
+// 'C7'
 protected class Statement_C7Keyword_1_5_0_1 extends KeywordToken  {
 	
 	public Statement_C7Keyword_1_5_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1417,7 +1417,7 @@ protected class Statement_RightAssignment_1_5_2 extends AssignmentToken  {
 }
 
 
-// ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName
+// ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName
 protected class Statement_Group_1_6 extends GroupToken {
 	
 	public Statement_Group_1_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1446,7 +1446,7 @@ protected class Statement_Group_1_6 extends GroupToken {
 
 }
 
-// "C6" "C8"
+// ('C6' 'C8')
 protected class Statement_Group_1_6_0 extends GroupToken {
 	
 	public Statement_Group_1_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1468,7 +1468,7 @@ protected class Statement_Group_1_6_0 extends GroupToken {
 
 }
 
-// "C6"
+// 'C6'
 protected class Statement_C6Keyword_1_6_0_0 extends KeywordToken  {
 	
 	public Statement_C6Keyword_1_6_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1491,7 +1491,7 @@ protected class Statement_C6Keyword_1_6_0_0 extends KeywordToken  {
 
 }
 
-// "C8"
+// 'C8'
 protected class Statement_C8Keyword_1_6_0_1 extends KeywordToken  {
 	
 	public Statement_C8Keyword_1_6_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -40,11 +40,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
+ * 	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
  *
  **/
 
-// "foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID
+// 'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -74,7 +74,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "foo" foo=ID ("bar" bar=ID)?
+// 'foo' foo=ID ('bar' bar=ID)?
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -97,7 +97,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "foo"
+// 'foo'
 protected class Model_FooKeyword_0_0 extends KeywordToken  {
 	
 	public Model_FooKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -152,7 +152,7 @@ protected class Model_FooAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// ("bar" bar=ID)?
+// ('bar' bar=ID)?
 protected class Model_Group_0_2 extends GroupToken {
 	
 	public Model_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -174,7 +174,7 @@ protected class Model_Group_0_2 extends GroupToken {
 
 }
 
-// "bar"
+// 'bar'
 protected class Model_BarKeyword_0_2_0 extends KeywordToken  {
 	
 	public Model_BarKeyword_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -232,7 +232,7 @@ protected class Model_BarAssignment_0_2_1 extends AssignmentToken  {
 
 
 
-// "bar" bar=ID
+// 'bar' bar=ID
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -254,7 +254,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "bar"
+// 'bar'
 protected class Model_BarKeyword_1_0 extends KeywordToken  {
 	
 	public Model_BarKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

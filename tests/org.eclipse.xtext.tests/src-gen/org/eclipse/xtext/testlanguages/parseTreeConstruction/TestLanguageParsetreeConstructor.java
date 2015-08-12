@@ -43,8 +43,8 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule EntryRule ****************
  *
- * EntryRule returns Model:
- * 	multiFeature+=AbstractRule*;
+ * EntryRule Model:
+ * 	multiFeature+=AbstractRule*
  *
  **/
 
@@ -99,8 +99,8 @@ protected class EntryRule_MultiFeatureAssignment extends AssignmentToken  {
 
 /************ begin Rule AbstractRule ****************
  *
- * AbstractRule returns AbstractElement:
- * 	ChoiceRule | ReducibleRule;
+ * AbstractRule AbstractElement:
+ * 	ChoiceRule | ReducibleRule
  *
  **/
 
@@ -215,12 +215,12 @@ protected class AbstractRule_ReducibleRuleParserRuleCall_1 extends RuleCallToken
 
 /************ begin Rule ChoiceRule ****************
  *
- * ChoiceRule returns ChoiceElement:
- * 	"choice" optionalKeyword?="optional"? name=ID;
+ * ChoiceRule ChoiceElement:
+ * 	"choice" optionalKeyword?='optional'? name=ID
  *
  **/
 
-// "choice" optionalKeyword?="optional"? name=ID
+// "choice" optionalKeyword?='optional'? name=ID
 protected class ChoiceRule_Group extends GroupToken {
 	
 	public ChoiceRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -270,7 +270,7 @@ protected class ChoiceRule_ChoiceKeyword_0 extends KeywordToken  {
 
 }
 
-// optionalKeyword?="optional"?
+// optionalKeyword?='optional'?
 protected class ChoiceRule_OptionalKeywordAssignment_1 extends AssignmentToken  {
 	
 	public ChoiceRule_OptionalKeywordAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -345,8 +345,8 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule ReducibleRule ****************
  *
- * ReducibleRule returns ReducibleElement:
- * 	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
+ * ReducibleRule ReducibleElement:
+ * 	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
  *
  **/
 
@@ -550,8 +550,8 @@ protected class ReducibleRule_ActionFeatureAssignment_2_1 extends AssignmentToke
 
 /************ begin Rule TerminalRule ****************
  *
- * TerminalRule returns TerminalElement:
- * 	stringFeature=STRING;
+ * TerminalRule TerminalElement:
+ * 	stringFeature=STRING
  *
  **/
 

@@ -91,43 +91,43 @@ public class SuperTestLanguageElementTypeProvider implements IElementTypeProvide
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSuperMainElementType() {
 		return SuperMain_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_GroupElementType() {
 		return SuperMain_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_SuperKeyword_0ElementType() {
 		return SuperMain_SuperKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_NameAssignment_1ElementType() {
 		return SuperMain_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_NameIDTerminalRuleCall_1_0ElementType() {
 		return SuperMain_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMainElementType() {
 		return AnotherSuperMain_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_GroupElementType() {
 		return AnotherSuperMain_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_AnotherKeyword_0ElementType() {
 		return AnotherSuperMain_AnotherKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_NameAssignment_1ElementType() {
 		return AnotherSuperMain_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType() {
 		return AnotherSuperMain_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

@@ -95,7 +95,7 @@ ruleInheritedParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -140,7 +140,7 @@ ruleOverridableParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )
@@ -187,7 +187,7 @@ ruleExtendableParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
 	    }
 
 )

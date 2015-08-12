@@ -1,24 +1,25 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: ParserRuleImpl.java,v 1.16 2010/04/06 14:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextPackage;
 
@@ -32,6 +33,9 @@ import org.eclipse.xtext.XtextPackage;
  * <ul>
  *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#isDefinesHiddenTokens <em>Defines Hidden Tokens</em>}</li>
  *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getHiddenTokens <em>Hidden Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#isFragment <em>Fragment</em>}</li>
+ *   <li>{@link org.eclipse.xtext.impl.ParserRuleImpl#isWildcard <em>Wildcard</em>}</li>
  * </ul>
  *
  * @generated
@@ -66,6 +70,61 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 	 * @ordered
 	 */
 	protected EList<AbstractRule> hiddenTokens;
+
+	/**
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Parameter> parameters;
+
+	/**
+	 * The default value of the '{@link #isFragment() <em>Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @see #isFragment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean FRAGMENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isFragment() <em>Fragment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @see #isFragment()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean fragment = FRAGMENT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isWildcard() <em>Wildcard</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @see #isWildcard()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WILDCARD_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isWildcard() <em>Wildcard</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @see #isWildcard()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean wildcard = WILDCARD_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +180,79 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Parameter> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, XtextPackage.PARSER_RULE__PARAMETERS);
+		}
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isFragment() {
+		return fragment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFragment(boolean newFragment) {
+		boolean oldFragment = fragment;
+		fragment = newFragment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__FRAGMENT, oldFragment, fragment));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isWildcard() {
+		return wildcard;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWildcard(boolean newWildcard) {
+		boolean oldWildcard = wildcard;
+		wildcard = newWildcard;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtextPackage.PARSER_RULE__WILDCARD, oldWildcard, wildcard));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case XtextPackage.PARSER_RULE__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -131,6 +263,12 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 				return isDefinesHiddenTokens();
 			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
 				return getHiddenTokens();
+			case XtextPackage.PARSER_RULE__PARAMETERS:
+				return getParameters();
+			case XtextPackage.PARSER_RULE__FRAGMENT:
+				return isFragment();
+			case XtextPackage.PARSER_RULE__WILDCARD:
+				return isWildcard();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,6 +289,16 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 				getHiddenTokens().clear();
 				getHiddenTokens().addAll((Collection<? extends AbstractRule>)newValue);
 				return;
+			case XtextPackage.PARSER_RULE__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				return;
+			case XtextPackage.PARSER_RULE__FRAGMENT:
+				setFragment((Boolean)newValue);
+				return;
+			case XtextPackage.PARSER_RULE__WILDCARD:
+				setWildcard((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -169,6 +317,15 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
 				getHiddenTokens().clear();
 				return;
+			case XtextPackage.PARSER_RULE__PARAMETERS:
+				getParameters().clear();
+				return;
+			case XtextPackage.PARSER_RULE__FRAGMENT:
+				setFragment(FRAGMENT_EDEFAULT);
+				return;
+			case XtextPackage.PARSER_RULE__WILDCARD:
+				setWildcard(WILDCARD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -185,6 +342,12 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 				return definesHiddenTokens != DEFINES_HIDDEN_TOKENS_EDEFAULT;
 			case XtextPackage.PARSER_RULE__HIDDEN_TOKENS:
 				return hiddenTokens != null && !hiddenTokens.isEmpty();
+			case XtextPackage.PARSER_RULE__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case XtextPackage.PARSER_RULE__FRAGMENT:
+				return fragment != FRAGMENT_EDEFAULT;
+			case XtextPackage.PARSER_RULE__WILDCARD:
+				return wildcard != WILDCARD_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -201,6 +364,10 @@ public class ParserRuleImpl extends AbstractRuleImpl implements ParserRule {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (definesHiddenTokens: ");
 		result.append(definesHiddenTokens);
+		result.append(", fragment: ");
+		result.append(fragment);
+		result.append(", wildcard: ");
+		result.append(wildcard);
 		result.append(')');
 		return result.toString();
 	}

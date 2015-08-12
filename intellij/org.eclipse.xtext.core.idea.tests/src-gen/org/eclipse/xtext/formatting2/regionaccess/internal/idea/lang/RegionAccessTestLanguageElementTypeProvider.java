@@ -619,439 +619,439 @@ public class RegionAccessTestLanguageElementTypeProvider implements IElementType
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_AlternativesElementType() {
 		return Root_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_SimpleParserRuleCall_0ElementType() {
 		return Root_SimpleParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DelegationParserRuleCall_1ElementType() {
 		return Root_DelegationParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_UnassignedParserRuleCall_2ElementType() {
 		return Root_UnassignedParserRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_PrefixedUnassignedParserRuleCall_3ElementType() {
 		return Root_PrefixedUnassignedParserRuleCall_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_4ElementType() {
 		return Root_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitFiveKeyword_4_0ElementType() {
 		return Root_DigitFiveKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ExpressionParserRuleCall_4_1ElementType() {
 		return Root_ExpressionParserRuleCall_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_5ElementType() {
 		return Root_Group_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitSixKeyword_5_0ElementType() {
 		return Root_DigitSixKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_MixedParserRuleCall_5_1ElementType() {
 		return Root_MixedParserRuleCall_5_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_6ElementType() {
 		return Root_Group_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitSevenKeyword_6_0ElementType() {
 		return Root_DigitSevenKeyword_6_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_MixedAssignment_6_1ElementType() {
 		return Root_MixedAssignment_6_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_MixedMixedParserRuleCall_6_1_0ElementType() {
 		return Root_MixedMixedParserRuleCall_6_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSimpleElementType() {
 		return Simple_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSimple_GroupElementType() {
 		return Simple_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSimple_DigitOneKeyword_0ElementType() {
 		return Simple_DigitOneKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSimple_NameAssignment_1ElementType() {
 		return Simple_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSimple_NameIDTerminalRuleCall_1_0ElementType() {
 		return Simple_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegationElementType() {
 		return Delegation_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegation_GroupElementType() {
 		return Delegation_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegation_DigitTwoKeyword_0ElementType() {
 		return Delegation_DigitTwoKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegation_DelegateAssignment_1ElementType() {
 		return Delegation_DelegateAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegation_DelegateDelegateParserRuleCall_1_0ElementType() {
 		return Delegation_DelegateDelegateParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassignedElementType() {
 		return Unassigned_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassigned_GroupElementType() {
 		return Unassigned_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassigned_DigitThreeKeyword_0ElementType() {
 		return Unassigned_DigitThreeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassigned_DelegateParserRuleCall_1ElementType() {
 		return Unassigned_DelegateParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedUnassignedElementType() {
 		return PrefixedUnassigned_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedUnassigned_GroupElementType() {
 		return PrefixedUnassigned_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedUnassigned_DigitFourKeyword_0ElementType() {
 		return PrefixedUnassigned_DigitFourKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedUnassigned_DelegateAssignment_1ElementType() {
 		return PrefixedUnassigned_DelegateAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedUnassigned_DelegatePrefixedDelegateParserRuleCall_1_0ElementType() {
 		return PrefixedUnassigned_DelegatePrefixedDelegateParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedDelegateElementType() {
 		return PrefixedDelegate_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedDelegate_GroupElementType() {
 		return PrefixedDelegate_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedDelegate_PrefixKeyword_0ElementType() {
 		return PrefixedDelegate_PrefixKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrefixedDelegate_DelegateParserRuleCall_1ElementType() {
 		return PrefixedDelegate_DelegateParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegateElementType() {
 		return Delegate_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegate_NameAssignmentElementType() {
 		return Delegate_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegate_NameIDTerminalRuleCall_0ElementType() {
 		return Delegate_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpressionElementType() {
 		return Expression_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_GroupElementType() {
 		return Expression_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_PrimaryParserRuleCall_0ElementType() {
 		return Expression_PrimaryParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_Group_1ElementType() {
 		return Expression_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_AddLeftAction_1_0ElementType() {
 		return Expression_AddLeftAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_PlusSignKeyword_1_1ElementType() {
 		return Expression_PlusSignKeyword_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_RightAssignment_1_2ElementType() {
 		return Expression_RightAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_RightPrimaryParserRuleCall_1_2_0ElementType() {
 		return Expression_RightPrimaryParserRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimaryElementType() {
 		return Primary_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_AlternativesElementType() {
 		return Primary_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_Group_0ElementType() {
 		return Primary_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_NamedAction_0_0ElementType() {
 		return Primary_NamedAction_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_NameAssignment_0_1ElementType() {
 		return Primary_NameAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_NameIDTerminalRuleCall_0_1_0ElementType() {
 		return Primary_NameIDTerminalRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPrimary_ParenthesizedParserRuleCall_1ElementType() {
 		return Primary_ParenthesizedParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParenthesizedElementType() {
 		return Parenthesized_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParenthesized_GroupElementType() {
 		return Parenthesized_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParenthesized_LeftParenthesisKeyword_0ElementType() {
 		return Parenthesized_LeftParenthesisKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParenthesized_ExpressionParserRuleCall_1ElementType() {
 		return Parenthesized_ExpressionParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParenthesized_RightParenthesisKeyword_2ElementType() {
 		return Parenthesized_RightParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixedElementType() {
 		return Mixed_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_GroupElementType() {
 		return Mixed_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_LeftParenthesisKeyword_0ElementType() {
 		return Mixed_LeftParenthesisKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Group_1ElementType() {
 		return Mixed_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_UnassignedKeyword_1_0ElementType() {
 		return Mixed_UnassignedKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Alternatives_1_1ElementType() {
 		return Mixed_Alternatives_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_IDTerminalRuleCall_1_1_0ElementType() {
 		return Mixed_IDTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_DatatypeParserRuleCall_1_1_1ElementType() {
 		return Mixed_DatatypeParserRuleCall_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Alternatives_2ElementType() {
 		return Mixed_Alternatives_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_ActionAction_2_0ElementType() {
 		return Mixed_ActionAction_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_MixedParserRuleCall_2_1ElementType() {
 		return Mixed_MixedParserRuleCall_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Alternatives_2_2ElementType() {
 		return Mixed_Alternatives_2_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_NameAssignment_2_2_0ElementType() {
 		return Mixed_NameAssignment_2_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_NameIDTerminalRuleCall_2_2_0_0ElementType() {
 		return Mixed_NameIDTerminalRuleCall_2_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Group_2_2_1ElementType() {
 		return Mixed_Group_2_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_ChildKeyword_2_2_1_0ElementType() {
 		return Mixed_ChildKeyword_2_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_EobjAssignment_2_2_1_1ElementType() {
 		return Mixed_EobjAssignment_2_2_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_EobjMixedParserRuleCall_2_2_1_1_0ElementType() {
 		return Mixed_EobjMixedParserRuleCall_2_2_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_DatatypeAssignment_2_2_2ElementType() {
 		return Mixed_DatatypeAssignment_2_2_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_DatatypeDatatypeParserRuleCall_2_2_2_0ElementType() {
 		return Mixed_DatatypeDatatypeParserRuleCall_2_2_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Group_2_2_3ElementType() {
 		return Mixed_Group_2_2_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_RefKeyword_2_2_3_0ElementType() {
 		return Mixed_RefKeyword_2_2_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_RefAssignment_2_2_3_1ElementType() {
 		return Mixed_RefAssignment_2_2_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_RefMixedCrossReference_2_2_3_1_0ElementType() {
 		return Mixed_RefMixedCrossReference_2_2_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_RefMixedIDTerminalRuleCall_2_2_3_1_0_1ElementType() {
 		return Mixed_RefMixedIDTerminalRuleCall_2_2_3_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_LitAssignment_2_2_4ElementType() {
 		return Mixed_LitAssignment_2_2_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_LitEnumEnumRuleCall_2_2_4_0ElementType() {
 		return Mixed_LitEnumEnumRuleCall_2_2_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_RightParenthesisKeyword_3ElementType() {
 		return Mixed_RightParenthesisKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Group_4ElementType() {
 		return Mixed_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_AssignedActionChildAction_4_0ElementType() {
 		return Mixed_AssignedActionChildAction_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_ActionKeyword_4_1ElementType() {
 		return Mixed_ActionKeyword_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_Group_4_2ElementType() {
 		return Mixed_Group_4_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_BodyAssignment_4_2_0ElementType() {
 		return Mixed_BodyAssignment_4_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_BodyMixedParserRuleCall_4_2_0_0ElementType() {
 		return Mixed_BodyMixedParserRuleCall_4_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMixed_EndKeyword_4_2_1ElementType() {
 		return Mixed_EndKeyword_4_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeElementType() {
 		return Datatype_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatype_GroupElementType() {
 		return Datatype_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatype_DatatypeKeyword_0ElementType() {
 		return Datatype_DatatypeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatype_Alternatives_1ElementType() {
 		return Datatype_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatype_DatatypeParserRuleCall_1_0ElementType() {
 		return Datatype_DatatypeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatype_IDTerminalRuleCall_1_1ElementType() {
 		return Datatype_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumElementType() {
 		return Enum_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnum_AlternativesElementType() {
 		return Enum_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnum_Lit1EnumLiteralDeclaration_0ElementType() {
 		return Enum_Lit1EnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnum_Lit1Lit1Keyword_0_0ElementType() {
 		return Enum_Lit1Lit1Keyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnum_Lit2EnumLiteralDeclaration_1ElementType() {
 		return Enum_Lit2EnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnum_Lit2Lit2Keyword_1_0ElementType() {
 		return Enum_Lit2Lit2Keyword_1_0_ELEMENT_TYPE;
 	}

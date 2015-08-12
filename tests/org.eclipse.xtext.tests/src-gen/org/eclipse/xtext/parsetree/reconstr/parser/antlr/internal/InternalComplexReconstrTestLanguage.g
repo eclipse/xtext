@@ -149,7 +149,7 @@ ruleOp returns [EObject current=null]
        			$current, 
        			"addOperands",
         		lv_addOperands_3_0, 
-        		"Term");
+        		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Term");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -178,7 +178,7 @@ ruleOp returns [EObject current=null]
        			$current, 
        			"minusOperands",
         		lv_minusOperands_6_0, 
-        		"Term");
+        		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Term");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -258,7 +258,7 @@ ruleAtom returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -363,7 +363,7 @@ ruleTrickyG returns [EObject current=null]
        			$current, 
        			"tree",
         		lv_tree_1_0, 
-        		"TrickyG1");
+        		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -406,7 +406,7 @@ ruleTrickyG1 returns [EObject current=null]
        			$current, 
        			"vals",
         		lv_vals_1_0, 
-        		"TrickyG2");
+        		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -428,7 +428,7 @@ ruleTrickyG1 returns [EObject current=null]
        			$current, 
        			"vals",
         		lv_vals_3_0, 
-        		"TrickyG2");
+        		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -482,7 +482,7 @@ ruleTrickyG2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )

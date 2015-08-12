@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_2, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
     |		{ 
@@ -122,7 +122,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_3, 
-        		"NestedDatatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -137,7 +137,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_4, 
-        		"Datatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -153,7 +153,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_5, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -191,7 +191,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_3_2, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
     |		{ 
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_3_3, 
-        		"NestedDatatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -220,7 +220,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_3_4, 
-        		"Datatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -236,7 +236,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_3_5, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -261,7 +261,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -284,7 +284,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_7_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -306,7 +306,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_9_0, 
-        		"Datatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -329,7 +329,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_11_0, 
-        		"Datatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -352,7 +352,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_13_0, 
-        		"NestedDatatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -375,7 +375,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multiValue",
         		lv_multiValue_15_0, 
-        		"NestedDatatype");
+        		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -398,7 +398,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_17_0, 
-        		"Child");
+        		"org.eclipse.xtext.valueconverter.Bug250313.Child");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -594,7 +594,7 @@ ruleChild1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -633,7 +633,7 @@ ruleChild2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

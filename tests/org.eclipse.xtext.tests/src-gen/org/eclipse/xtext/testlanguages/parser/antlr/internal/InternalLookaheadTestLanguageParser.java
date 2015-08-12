@@ -160,7 +160,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"contents",
             	            		lv_contents_0_0, 
-            	            		"Alts");
+            	            		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Alts");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -544,7 +544,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"y",
                     		lv_y_1_0, 
-                    		"LookAhead2");
+                    		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead2");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -879,7 +879,7 @@ public class InternalLookaheadTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"z",
                     		lv_z_3_0, 
-                    		"LookAhead4");
+                    		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead4");
             	        afterParserOrEnumRuleCall();
             	    
 

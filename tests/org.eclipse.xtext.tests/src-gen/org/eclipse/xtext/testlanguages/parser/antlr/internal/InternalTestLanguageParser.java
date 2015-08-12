@@ -157,7 +157,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"multiFeature",
             	            		lv_multiFeature_0_0, 
-            	            		"AbstractRule");
+            	            		"org.eclipse.xtext.testlanguages.TestLanguage.AbstractRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -423,7 +423,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -567,7 +567,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"actionFeature",
                             		lv_actionFeature_3_0, 
-                            		"TerminalRule");
+                            		"org.eclipse.xtext.testlanguages.TestLanguage.TerminalRule");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -669,7 +669,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"stringFeature",
                     		lv_stringFeature_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }

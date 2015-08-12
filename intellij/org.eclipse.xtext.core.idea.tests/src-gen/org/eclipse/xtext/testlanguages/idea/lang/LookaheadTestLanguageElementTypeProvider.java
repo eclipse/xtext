@@ -276,179 +276,179 @@ public class LookaheadTestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getEntryElementType() {
 		return Entry_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntry_ContentsAssignmentElementType() {
 		return Entry_ContentsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntry_ContentsAltsParserRuleCall_0ElementType() {
 		return Entry_ContentsAltsParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAltsElementType() {
 		return Alts_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAlts_AlternativesElementType() {
 		return Alts_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAlts_LookAhead0ParserRuleCall_0ElementType() {
 		return Alts_LookAhead0ParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAlts_LookAhead1ParserRuleCall_1ElementType() {
 		return Alts_LookAhead1ParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAlts_LookAhead3ParserRuleCall_2ElementType() {
 		return Alts_LookAhead3ParserRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead0ElementType() {
 		return LookAhead0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead0_GroupElementType() {
 		return LookAhead0_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead0_BarKeyword_0ElementType() {
 		return LookAhead0_BarKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead0_XAssignment_1ElementType() {
 		return LookAhead0_XAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead0_XAKeyword_1_0ElementType() {
 		return LookAhead0_XAKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1ElementType() {
 		return LookAhead1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_GroupElementType() {
 		return LookAhead1_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_FooKeyword_0ElementType() {
 		return LookAhead1_FooKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_YAssignment_1ElementType() {
 		return LookAhead1_YAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_YLookAhead2ParserRuleCall_1_0ElementType() {
 		return LookAhead1_YLookAhead2ParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_XAssignment_2ElementType() {
 		return LookAhead1_XAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_XBKeyword_2_0ElementType() {
 		return LookAhead1_XBKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_ZAssignment_3ElementType() {
 		return LookAhead1_ZAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead1_ZDKeyword_3_0ElementType() {
 		return LookAhead1_ZDKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2ElementType() {
 		return LookAhead2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_GroupElementType() {
 		return LookAhead2_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_Alternatives_0ElementType() {
 		return LookAhead2_Alternatives_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_ZAssignment_0_0ElementType() {
 		return LookAhead2_ZAssignment_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_ZFooKeyword_0_0_0ElementType() {
 		return LookAhead2_ZFooKeyword_0_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_ZAssignment_0_1ElementType() {
 		return LookAhead2_ZAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_ZBarKeyword_0_1_0ElementType() {
 		return LookAhead2_ZBarKeyword_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead2_CKeyword_1ElementType() {
 		return LookAhead2_CKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3ElementType() {
 		return LookAhead3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_GroupElementType() {
 		return LookAhead3_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_FooKeyword_0ElementType() {
 		return LookAhead3_FooKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_BarKeyword_1ElementType() {
 		return LookAhead3_BarKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_XAssignment_2ElementType() {
 		return LookAhead3_XAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_XBKeyword_2_0ElementType() {
 		return LookAhead3_XBKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_ZAssignment_3ElementType() {
 		return LookAhead3_ZAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead3_ZLookAhead4ParserRuleCall_3_0ElementType() {
 		return LookAhead3_ZLookAhead4ParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4ElementType() {
 		return LookAhead4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4_AlternativesElementType() {
 		return LookAhead4_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4_XAssignment_0ElementType() {
 		return LookAhead4_XAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4_XCKeyword_0_0ElementType() {
 		return LookAhead4_XCKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4_XAssignment_1ElementType() {
 		return LookAhead4_XAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLookAhead4_XDKeyword_1_0ElementType() {
 		return LookAhead4_XDKeyword_1_0_ELEMENT_TYPE;
 	}

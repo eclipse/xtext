@@ -455,7 +455,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -496,7 +496,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"optional",
                             		lv_optional_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -532,7 +532,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"datatype",
                     		lv_datatype_4_0, 
-                    		"FQN");
+                    		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.FQN");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -753,7 +753,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -791,7 +791,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"call1",
                             		lv_call1_3_0, 
-                            		"RuleCallsAss1");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCallsAss1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -833,7 +833,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"call2",
                             		lv_call2_4_0, 
-                            		"RuleCallsAss2");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCallsAss2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1028,7 +1028,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1131,7 +1131,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1259,7 +1259,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"opt1",
                             		lv_opt1_2_0, 
-                            		"OptionalCallsSub1");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1289,7 +1289,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1414,7 +1414,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"opt2",
                             		lv_opt2_1_0, 
-                            		"OptionalCallsSub2");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1460,7 +1460,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"opt3",
                             		lv_opt3_3_0, 
-                            		"OptionalCallsSub3");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1567,7 +1567,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1670,7 +1670,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1900,7 +1900,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"sub",
             	            		lv_sub_2_0, 
-            	            		"RecursionSub");
+            	            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RecursionSub");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1933,7 +1933,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"vals",
             	            		lv_vals_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2099,7 +2099,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"names",
             	            		lv_names_1_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2154,7 +2154,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"gr",
             	            		lv_gr_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2207,7 +2207,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"ints",
             	            		lv_ints_4_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -2239,7 +2239,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"strings",
             	            		lv_strings_5_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -2486,7 +2486,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"right",
             	            		lv_right_3_0, 
-            	            		"Mult");
+            	            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Mult");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -2644,7 +2644,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"right",
             	            		lv_right_3_0, 
-            	            		"Prim");
+            	            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Prim");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -2812,7 +2812,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -2861,7 +2861,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"func",
                             		lv_func_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2895,7 +2895,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"param",
                             		lv_param_5_0, 
-                            		"Add");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Add");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2945,7 +2945,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"param",
                     	            		lv_param_7_0, 
-                    	            		"Add");
+                    	            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Add");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -3016,7 +3016,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"target",
                             		lv_target_11_0, 
-                            		"Prim");
+                            		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Prim");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -3166,7 +3166,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"constructor",
                     		lv_constructor_1_0, 
-                    		"Constructor");
+                    		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Constructor");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3197,7 +3197,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"fields",
                     		lv_fields_2_0, 
-                    		"Field");
+                    		"org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Field");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3636,7 +3636,7 @@ public class InternalElementMatcherTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

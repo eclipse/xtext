@@ -19,7 +19,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	
 	
 	public class SequenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Sequence");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Sequence");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -51,7 +51,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class AdditionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Addition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -63,32 +63,32 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Assignment cValuesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cValuesMultiplicationParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
-		//Addition returns Expression:
-		//	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
+		//Addition Expression:
+		//	Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
+		//Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		//({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
+		//({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
 		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 
-		//operator=("+" | "-")
+		//operator=('+' | '-')
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		//"+" | "-"
+		//('+' | '-')
 		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getOperatorPlusSignKeyword_1_1_0_0() { return cOperatorPlusSignKeyword_1_1_0_0; }
 
-		//"-"
+		//'-'
 		public Keyword getOperatorHyphenMinusKeyword_1_1_0_1() { return cOperatorHyphenMinusKeyword_1_1_0_1; }
 
 		//values+=Multiplication
@@ -99,7 +99,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class MultiplicationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -111,32 +111,32 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Assignment cValuesAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cValuesTermParserRuleCall_1_2_0 = (RuleCall)cValuesAssignment_1_2.eContents().get(0);
 		
-		//Multiplication returns Expression:
-		//	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
+		//Multiplication Expression:
+		//	Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Term ({Op.values+=current} operator=("*" | "/") values+=Term)*
+		//Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
 		public Group getGroup() { return cGroup; }
 
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//({Op.values+=current} operator=("*" | "/") values+=Term)*
+		//({Op.values+=current} operator=('*' | '/') values+=Term)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Op.values+=current}
 		public Action getOpValuesAction_1_0() { return cOpValuesAction_1_0; }
 
-		//operator=("*" | "/")
+		//operator=('*' | '/')
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		//"*" | "/"
+		//('*' | '/')
 		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getOperatorAsteriskKeyword_1_1_0_0() { return cOperatorAsteriskKeyword_1_1_0_0; }
 
-		//"/"
+		//'/'
 		public Keyword getOperatorSolidusKeyword_1_1_0_1() { return cOperatorSolidusKeyword_1_1_0_1; }
 
 		//values+=Term
@@ -147,13 +147,13 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class TermElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cParensParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Term returns Expression:
-		//	Atom | Parens;
+		//Term Expression:
+		//	Atom | Parens
 		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | Parens
@@ -167,7 +167,7 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -183,26 +183,26 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class ParensElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cAdditionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Parens returns Expression:
-		//	"(" Addition ")";
+		//Parens Expression:
+		//	'(' Addition ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Addition ")"
+		//'(' Addition ')'
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//Addition
 		public RuleCall getAdditionParserRuleCall_1() { return cAdditionParserRuleCall_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 	
@@ -268,8 +268,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		return getSequenceAccess().getRule();
 	}
 
-	//Addition returns Expression:
-	//	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
+	//Addition Expression:
+	//	Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 	public AdditionElements getAdditionAccess() {
 		return pAddition;
 	}
@@ -278,8 +278,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		return getAdditionAccess().getRule();
 	}
 
-	//Multiplication returns Expression:
-	//	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
+	//Multiplication Expression:
+	//	Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
 	public MultiplicationElements getMultiplicationAccess() {
 		return pMultiplication;
 	}
@@ -288,8 +288,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		return getMultiplicationAccess().getRule();
 	}
 
-	//Term returns Expression:
-	//	Atom | Parens;
+	//Term Expression:
+	//	Atom | Parens
 	public TermElements getTermAccess() {
 		return pTerm;
 	}
@@ -308,8 +308,8 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 		return getAtomAccess().getRule();
 	}
 
-	//Parens returns Expression:
-	//	"(" Addition ")";
+	//Parens Expression:
+	//	'(' Addition ')'
 	public ParensElements getParensAccess() {
 		return pParens;
 	}
@@ -319,38 +319,38 @@ public class SimpleExpressionsTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -42,7 +42,12 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
+ * 	enums+=EnumName*
+ * 	ycs+=Yc*
+ * 	abs+=Ab*
+ * 	xbs+=Xb*
+ * 	ys+=CharY*
+ * 	^as+=CharA*;
  *
  **/
 

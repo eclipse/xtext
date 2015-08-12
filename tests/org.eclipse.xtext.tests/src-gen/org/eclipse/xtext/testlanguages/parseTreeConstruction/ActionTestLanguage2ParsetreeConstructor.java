@@ -42,11 +42,11 @@ protected class ThisRootNode extends RootToken {
  *
  * // see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
  * ORing:
- * 	Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*;
+ * 	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
  *
  **/
 
-// Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*
+// Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 protected class ORing_Group extends GroupToken {
 	
 	public ORing_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -113,7 +113,7 @@ protected class ORing_ValueParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({ORing.disjuncts+=current} "|" disjuncts+=Value)*
+// ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 protected class ORing_Group_1 extends GroupToken {
 	
 	public ORing_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -172,7 +172,7 @@ protected class ORing_ORingDisjunctsAction_1_0 extends ActionToken  {
 	}
 }
 
-// "|"
+// '|'
 protected class ORing_VerticalLineKeyword_1_1 extends KeywordToken  {
 	
 	public ORing_VerticalLineKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -248,11 +248,11 @@ protected class ORing_DisjunctsAssignment_1_2 extends AssignmentToken  {
 /************ begin Rule Value ****************
  *
  * Value:
- * 	value="a";
+ * 	value='a';
  *
  **/
 
-// value="a"
+// value='a'
 protected class Value_ValueAssignment extends AssignmentToken  {
 	
 	public Value_ValueAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

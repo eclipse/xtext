@@ -181,7 +181,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                            			current, 
                            			"right",
                             		lv_right_2_0, 
-                            		"Child");
+                            		"org.eclipse.xtext.testlanguages.ActionTestLanguage.Child");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -283,7 +283,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

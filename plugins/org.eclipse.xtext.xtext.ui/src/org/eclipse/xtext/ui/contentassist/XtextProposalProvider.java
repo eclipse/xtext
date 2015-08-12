@@ -637,10 +637,10 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	}
 
 	@Override
-	public void completeParserRule_Name(EObject model, Assignment assignment, ContentAssistContext context,
+	public void completeRuleNameAndParams_Name(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		completeParserRule(model, context, acceptor);
-		super.completeParserRule_Name(model, assignment, context, acceptor);
+		super.completeRuleNameAndParams_Name(model, assignment, context, acceptor);
 	}
 
 	private void completeParserRule(EObject model, final ContentAssistContext context,
@@ -719,39 +719,53 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			}
 		});
 	}
+	
+	/**
+	 * Do not propose enum and parser rules inside of terminal rules.
+	 */
+	@Override
+	public void completeTerminalRuleCall_Rule(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		CrossReference crossReference = (CrossReference) assignment.getTerminal();
+		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+			final Set<URI> seenProposals = Sets.newHashSet();
+
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				if (!seenProposals.add(input.getEObjectURI())) {
+					return false;
+				}
+				return input.getEClass() == XtextPackage.Literals.TERMINAL_RULE;
+			}
+		});
+	}
 
 	/**
-	 * Do not propose enum and parser rules inside of terminal rules, do not propose terminal fragments in parser rules.
+	 * Do not propose terminal fragments in parser rules.
 	 */
 	@Override
 	public void completeRuleCall_Rule(EObject model, Assignment assignment, final ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		AbstractRule containingRule = EcoreUtil2.getContainerOfType(model, AbstractRule.class);
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
-		if (containingRule instanceof TerminalRule) {
-			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
-				@Override
-				public boolean apply(IEObjectDescription input) {
-					return input.getEClass() == XtextPackage.Literals.TERMINAL_RULE;
+		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
+			final Set<URI> seenProposals = Sets.newHashSet();
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				if (!seenProposals.add(input.getEObjectURI())) {
+					return false;
 				}
-			});
-		} else {
-			lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
-				@Override
-				public boolean apply(IEObjectDescription input) {
-					if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
-						EObject object = input.getEObjectOrProxy();
-						if (object.eIsProxy())
-							object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
-						if (object instanceof TerminalRule)
-							return !((TerminalRule) object).isFragment();
-					}
-					return true;
+				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
+					EObject object = input.getEObjectOrProxy();
+					if (object.eIsProxy())
+						object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+					if (object instanceof TerminalRule)
+						return !((TerminalRule) object).isFragment();
 				}
-			});
-		}
+				return true;
+			}
+		});
 	}
-
+	
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());

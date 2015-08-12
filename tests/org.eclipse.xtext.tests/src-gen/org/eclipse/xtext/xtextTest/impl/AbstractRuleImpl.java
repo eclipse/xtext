@@ -24,35 +24,15 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getAlternatives <em>Alternatives</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.impl.AbstractRuleImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements AbstractRule
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -74,6 +54,26 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   protected AbstractElement alternatives;
 
   /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -92,29 +92,6 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   protected EClass eStaticClass()
   {
     return XtextTestPackage.Literals.ABSTRACT_RULE;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.ABSTRACT_RULE__NAME, oldName, name));
   }
 
   /**
@@ -218,6 +195,29 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
    * <!-- end-user-doc -->
    * @generated
    */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XtextTestPackage.ABSTRACT_RULE__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -241,12 +241,12 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   {
     switch (featureID)
     {
-      case XtextTestPackage.ABSTRACT_RULE__NAME:
-        return getName();
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         return getType();
       case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
         return getAlternatives();
+      case XtextTestPackage.ABSTRACT_RULE__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -261,14 +261,14 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   {
     switch (featureID)
     {
-      case XtextTestPackage.ABSTRACT_RULE__NAME:
-        setName((String)newValue);
-        return;
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         setType((TypeRef)newValue);
         return;
       case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
         setAlternatives((AbstractElement)newValue);
+        return;
+      case XtextTestPackage.ABSTRACT_RULE__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -284,14 +284,14 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   {
     switch (featureID)
     {
-      case XtextTestPackage.ABSTRACT_RULE__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         setType((TypeRef)null);
         return;
       case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
         setAlternatives((AbstractElement)null);
+        return;
+      case XtextTestPackage.ABSTRACT_RULE__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -307,12 +307,12 @@ public class AbstractRuleImpl extends MinimalEObjectImpl.Container implements Ab
   {
     switch (featureID)
     {
-      case XtextTestPackage.ABSTRACT_RULE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case XtextTestPackage.ABSTRACT_RULE__TYPE:
         return type != null;
       case XtextTestPackage.ABSTRACT_RULE__ALTERNATIVES:
         return alternatives != null;
+      case XtextTestPackage.ABSTRACT_RULE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }

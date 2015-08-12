@@ -103,11 +103,11 @@ protected class File_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" importedNamespace=QualifiedNameWithWildCard;
+ * 	'import' importedNamespace=QualifiedNameWithWildCard;
  *
  **/
 
-// "import" importedNamespace=QualifiedNameWithWildCard
+// 'import' importedNamespace=QualifiedNameWithWildCard
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -136,7 +136,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -200,11 +200,13 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- * 	name=QualifiedName "{" elements+=Element* "}";
+ * 	name=QualifiedName '{'
+ * 	elements+=Element*
+ * 	'}';
  *
  **/
 
-// name=QualifiedName "{" elements+=Element* "}"
+// name=QualifiedName '{' elements+=Element* '}'
 protected class Namespace_Group extends GroupToken {
 	
 	public Namespace_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -266,7 +268,7 @@ protected class Namespace_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Namespace_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
 	public Namespace_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -335,7 +337,7 @@ protected class Namespace_ElementsAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Namespace_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Namespace_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -633,11 +635,13 @@ protected class Type_DatatypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Entity ****************
  *
  * Entity:
- * 	"entity" name=ID "{" properties+=Property* "}";
+ * 	'entity' name=ID '{'
+ * 	properties+=Property*
+ * 	'}';
  *
  **/
 
-// "entity" name=ID "{" properties+=Property* "}"
+// 'entity' name=ID '{' properties+=Property* '}'
 protected class Entity_Group extends GroupToken {
 	
 	public Entity_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -666,7 +670,7 @@ protected class Entity_Group extends GroupToken {
 
 }
 
-// "entity"
+// 'entity'
 protected class Entity_EntityKeyword_0 extends KeywordToken  {
 	
 	public Entity_EntityKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -721,7 +725,7 @@ protected class Entity_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Entity_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Entity_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -790,7 +794,7 @@ protected class Entity_PropertiesAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Entity_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Entity_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -820,11 +824,11 @@ protected class Entity_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Datatype ****************
  *
  * Datatype:
- * 	"datatype" name=ID;
+ * 	'datatype' name=ID;
  *
  **/
 
-// "datatype" name=ID
+// 'datatype' name=ID
 protected class Datatype_Group extends GroupToken {
 	
 	public Datatype_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -853,7 +857,7 @@ protected class Datatype_Group extends GroupToken {
 
 }
 
-// "datatype"
+// 'datatype'
 protected class Datatype_DatatypeKeyword_0 extends KeywordToken  {
 	
 	public Datatype_DatatypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

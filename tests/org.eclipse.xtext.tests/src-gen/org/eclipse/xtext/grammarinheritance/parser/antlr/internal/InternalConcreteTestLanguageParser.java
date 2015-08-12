@@ -27,8 +27,8 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
     public static final int RULE_ANY_OTHER=11;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_SL_COMMENT=9;
     public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=9;
     public static final int RULE_ML_COMMENT=8;
     public static final int T__19=19;
     public static final int RULE_STRING=7;
@@ -338,7 +338,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"magicNumber",
                     		lv_magicNumber_1_0, 
-                    		"REAL");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.REAL");
             	    
 
             }
@@ -384,7 +384,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	           			current, 
             	           			"elements",
             	            		lv_elements_3_0, 
-            	            		"InheritedParserRule");
+            	            		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.InheritedParserRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -494,7 +494,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -594,7 +594,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"call",
                     		lv_call_0_0, 
-                    		"AbstractCallOverridenParserRule");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallOverridenParserRule");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -697,7 +697,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -727,7 +727,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"age",
                     		lv_age_3_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -999,7 +999,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -1025,7 +1025,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"sub1",
                     		lv_sub1_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -1129,7 +1129,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -1155,7 +1155,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"sub2",
                     		lv_sub2_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -1259,7 +1259,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -1285,7 +1285,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"sub1",
                     		lv_sub1_2_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -1385,7 +1385,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"call",
                     		lv_call_0_0, 
-                    		"AbstractCallExtendedParserRule");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.AbstractCallExtendedParserRule");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1486,7 +1486,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -1606,7 +1606,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	           			current, 
             	           			"elements",
             	            		lv_elements_1_0, 
-            	            		"OverridableParserRule");
+            	            		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.OverridableParserRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1733,7 +1733,7 @@ public class InternalConcreteTestLanguageParser extends AbstractInternalAntlrPar
             	           			current, 
             	           			"elements",
             	            		lv_elements_1_0, 
-            	            		"ExtendableParserRule");
+            	            		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ExtendableParserRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

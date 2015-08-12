@@ -26,10 +26,10 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OptionsImpl#getOptionValues <em>Option Values</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,8 +71,7 @@ public class OptionsImpl extends MinimalEObjectImpl.Container implements Options
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<OptionValue> getOptionValues()
+  public EList<OptionValue> getOptionValues()
   {
     if (optionValues == null)
     {

@@ -40,11 +40,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule EntityWithEnumAndReference ****************
  *
  * EntityWithEnumAndReference:
- * 	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+ * 	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
  *
  **/
 
-// type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
+// type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference]
 protected class EntityWithEnumAndReference_Group extends GroupToken {
 	
 	public EntityWithEnumAndReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -140,7 +140,7 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 
 }
 
-// "reference"
+// 'reference'
 protected class EntityWithEnumAndReference_ReferenceKeyword_2 extends KeywordToken  {
 	
 	public EntityWithEnumAndReference_ReferenceKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

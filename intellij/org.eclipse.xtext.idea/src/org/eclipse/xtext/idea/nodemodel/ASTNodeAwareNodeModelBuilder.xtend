@@ -15,6 +15,7 @@ import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.IGrammarAccess
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
@@ -24,7 +25,6 @@ import org.eclipse.xtext.nodemodel.impl.NodeModelBuilder
 import org.eclipse.xtext.nodemodel.impl.RootNode
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 
-import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.parser.antlr.TokenTool.*
 
 class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeAwareNodeModelBuilder {
@@ -88,7 +88,7 @@ class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IASTNodeA
 					val tokenName = tokenType.toString
 					if (tokenName.lexerRule) {
 						val ruleName = tokenName.lexerRuleName
-						grammarAccess.grammar.allRules.findFirst[name == ruleName]
+						GrammarUtil.findRuleForName(grammarAccess.grammar, ruleName)
 					}
 				}
 			}

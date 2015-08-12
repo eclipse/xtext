@@ -281,9 +281,13 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			return true;
 		if (candidate.getGrammarElement() instanceof RuleCall) {
 			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
-			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
+			if (!(rule instanceof ParserRule))
 				return true;
-			else if (isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement()))
+			ParserRule casted = (ParserRule) rule;
+			if (GrammarUtil.isDatatypeRule(casted) || casted.isFragment() || !casted.getParameters().isEmpty()) {
+				return true;
+			}
+			if (isInvalidDueToPredicates((AbstractElement) candidate.getGrammarElement()))
 				return true;
 		}
 		if (candidate.getGrammarElement() instanceof Action) {

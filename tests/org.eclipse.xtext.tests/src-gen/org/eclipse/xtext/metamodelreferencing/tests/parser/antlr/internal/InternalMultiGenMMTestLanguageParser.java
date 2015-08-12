@@ -142,7 +142,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -184,7 +184,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	           			current, 
             	           			"nameRefs",
             	            		lv_nameRefs_1_0, 
-            	            		"NameRef");
+            	            		"org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTestLanguage.NameRef");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -286,7 +286,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }

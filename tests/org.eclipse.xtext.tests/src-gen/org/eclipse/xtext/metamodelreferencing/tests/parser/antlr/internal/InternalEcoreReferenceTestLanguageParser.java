@@ -156,7 +156,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"extends",
                     		lv_extends_0_0, 
-                    		"ExtendsNsURIEObject");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsNsURIEObject");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -187,7 +187,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"extends",
                     		lv_extends_1_0, 
-                    		"ExtendsPluginEObject");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsPluginEObject");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -218,7 +218,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"extends",
                     		lv_extends_2_0, 
-                    		"ExtendsResourceEObject");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsResourceEObject");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -352,7 +352,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ValidID");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ValidID");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -680,7 +680,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_15_0, 
-                                    		"ExtendsNsURIEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsNsURIEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -722,7 +722,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_16_0, 
-                                    		"ExtendsPluginEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsPluginEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -764,7 +764,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_17_0, 
-                                    		"ExtendsResourceEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsResourceEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -798,7 +798,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_18_0, 
-                            		"EObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -829,7 +829,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_19_0, 
-                            		"EAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -860,7 +860,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_20_0, 
-                            		"MyEAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.MyEAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1173,7 +1173,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ValidID");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ValidID");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1472,7 +1472,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_14_0, 
-                                    		"ExtendsNsURIEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsNsURIEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1514,7 +1514,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_15_0, 
-                                    		"ExtendsPluginEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsPluginEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1556,7 +1556,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"eObjectContainment",
                                     		lv_eObjectContainment_16_0, 
-                                    		"ExtendsResourceEObject");
+                                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsResourceEObject");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1590,7 +1590,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_17_0, 
-                            		"EObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1621,7 +1621,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_18_0, 
-                            		"EAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1652,7 +1652,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_19_0, 
-                            		"MyEAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.MyEAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1791,7 +1791,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ValidID");
+                    		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ValidID");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2082,7 +2082,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_14_0, 
-                            		"ExtendsNsURIEObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsNsURIEObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2113,7 +2113,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_15_0, 
-                            		"ExtendsPluginEObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsPluginEObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2144,7 +2144,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_16_0, 
-                            		"ExtendsResourceEObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.ExtendsResourceEObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2175,7 +2175,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_17_0, 
-                            		"EObject");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2206,7 +2206,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_18_0, 
-                            		"EAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.EAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2237,7 +2237,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"eObjectContainment",
                             		lv_eObjectContainment_19_0, 
-                            		"MyEAttribute");
+                            		"org.eclipse.xtext.metamodelreferencing.tests.EcoreReferenceTestLanguage.MyEAttribute");
                     	        afterParserOrEnumRuleCall();
                     	    
 

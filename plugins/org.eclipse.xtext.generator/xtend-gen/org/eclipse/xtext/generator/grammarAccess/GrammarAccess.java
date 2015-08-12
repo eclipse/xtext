@@ -7,6 +7,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil;
@@ -55,8 +56,9 @@ public class GrammarAccess {
    * @return the identifier
    */
   public String gaRuleIdentifyer(final AbstractRule rule) {
-    String _name = rule.getName();
-    return this.toJavaIdentifier(_name, true);
+    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
+    final String plainName = _ruleNames.getUniqueRuleName(rule);
+    return this.toJavaIdentifier(plainName, true);
   }
   
   /**

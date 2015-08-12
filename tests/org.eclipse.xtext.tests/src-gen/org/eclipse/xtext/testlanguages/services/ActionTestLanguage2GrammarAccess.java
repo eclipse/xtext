@@ -19,7 +19,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	
 	
 	public class ORingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ORing");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage2.ORing");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cValueParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -30,22 +30,22 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 		
 		//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
 		//ORing:
-		//	Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*;
+		//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*
+		//Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup() { return cGroup; }
 
 		//Value
 		public RuleCall getValueParserRuleCall_0() { return cValueParserRuleCall_0; }
 
-		//({ORing.disjuncts+=current} "|" disjuncts+=Value)*
+		//({ORing.disjuncts+=current} '|' disjuncts+=Value)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{ORing.disjuncts+=current}
 		public Action getORingDisjunctsAction_1_0() { return cORingDisjunctsAction_1_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_1_1() { return cVerticalLineKeyword_1_1; }
 
 		//disjuncts+=Value
@@ -56,18 +56,18 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueAKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
 		//Value:
-		//	value="a";
+		//	value='a';
 		@Override public ParserRule getRule() { return rule; }
 
-		//value="a"
+		//value='a'
 		public Assignment getValueAssignment() { return cValueAssignment; }
 
-		//"a"
+		//'a'
 		public Keyword getValueAKeyword_0() { return cValueAKeyword_0; }
 	}
 	
@@ -117,7 +117,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	
 	//// see https://www.eclipse.org/forums/index.php/mv/msg/798729/1407452/#msg_1407452
 	//ORing:
-	//	Value ({ORing.disjuncts+=current} "|" disjuncts+=Value)*;
+	//	Value ({ORing.disjuncts+=current} '|' disjuncts+=Value)*;
 	public ORingElements getORingAccess() {
 		return pORing;
 	}
@@ -127,7 +127,7 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Value:
-	//	value="a";
+	//	value='a';
 	public ValueElements getValueAccess() {
 		return pValue;
 	}
@@ -137,38 +137,38 @@ public class ActionTestLanguage2GrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

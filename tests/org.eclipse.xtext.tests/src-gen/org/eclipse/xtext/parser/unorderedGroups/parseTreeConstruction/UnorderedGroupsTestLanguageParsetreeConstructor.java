@@ -42,25 +42,29 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	{Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"?
- * 	& second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
- * 	secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
- * 	"9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
- * 	second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
- * 	(firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
- * 	secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
- * 	serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*);
+ * 	{Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'?
+ * 	& second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ &
+ * 	secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') |
+ * 	'9' (firstAsList+='a' & secondAsList+='b')+
+ * 	| '10' (firstAsList+='a' & secondAsList+='b')*
+ * 	| '11' (first?='a' & second?='b')?
+ * 	| '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13' (firstAsList+='a' &
+ * 	secondAsList+='b')? firstAsList+='a' secondAsList+='b'
+ * 	| '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+
+ * 	| 'datatypes' value=UnorderedDatatype
+ * 	| 'serialization' serialized=UnorderedSerialization
+ * 	| 'bug302585' nestedModel+=NestedModel*);
  *
  **/
 
-// {Model} ("1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"? &
-// second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
-// secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
-// "9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
-// second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
-// (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
-// secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
-// serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*)
+// {Model} ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'? &
+// second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ &
+// secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') |
+// '9' (firstAsList+='a' & secondAsList+='b')+ | '10' (firstAsList+='a' & secondAsList+='b')* | '11' (first?='a' &
+// second?='b')? | '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13'
+// (firstAsList+='a' & secondAsList+='b')? firstAsList+='a' secondAsList+='b' | '14' ((firstAsList+='a' &
+// secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+ | 'datatypes' value=UnorderedDatatype | 'serialization'
+// serialized=UnorderedSerialization | 'bug302585' nestedModel+=NestedModel*)
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -115,14 +119,14 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "1" (first?="a" & second?="b") | "2" (first?="a" & second?="b" & third?="c" & forth?="d") | "3" (first?="a"? &
-// second?="b"?) | "4" (first?="a" & second?="b"?) | "5" (first?="a"? & second?="b") | "6" (firstAsList+="a"+ &
-// secondAsList+="b"*) | "7" (firstAsList+="a"* & secondAsList+="b"+) | "8" ("a" "b" first?="c" & "a" "b" second?="d") |
-// "9" (firstAsList+="a" & secondAsList+="b")+ | "10" (firstAsList+="a" & secondAsList+="b")* | "11" (first?="a" &
-// second?="b")? | "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b") | "13"
-// (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b" | "14" ((firstAsList+="a" &
-// secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+ | "datatypes" value=UnorderedDatatype | "serialization"
-// serialized=UnorderedSerialization | "bug302585" nestedModel+=NestedModel*
+// ('1' (first?='a' & second?='b') | '2' (first?='a' & second?='b' & third?='c' & forth?='d') | '3' (first?='a'? &
+// second?='b'?) | '4' (first?='a' & second?='b'?) | '5' (first?='a'? & second?='b') | '6' (firstAsList+='a'+ &
+// secondAsList+='b'*) | '7' (firstAsList+='a'* & secondAsList+='b'+) | '8' ('a' 'b' first?='c' & 'a' 'b' second?='d') |
+// '9' (firstAsList+='a' & secondAsList+='b')+ | '10' (firstAsList+='a' & secondAsList+='b')* | '11' (first?='a' &
+// second?='b')? | '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b') | '13'
+// (firstAsList+='a' & secondAsList+='b')? firstAsList+='a' secondAsList+='b' | '14' ((firstAsList+='a' &
+// secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+ | 'datatypes' value=UnorderedDatatype | 'serialization'
+// serialized=UnorderedSerialization | 'bug302585' nestedModel+=NestedModel*)
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -160,7 +164,7 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 
 }
 
-// "1" (first?="a" & second?="b")
+// '1' (first?='a' & second?='b')
 protected class Model_Group_1_0 extends GroupToken {
 	
 	public Model_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -182,7 +186,7 @@ protected class Model_Group_1_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 	
 	public Model_DigitOneKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -204,7 +208,7 @@ protected class Model_DigitOneKeyword_1_0_0 extends KeywordToken  {
 
 }
 
-// first?="a" & second?="b"
+// (first?='a' & second?='b')
 protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -226,7 +230,7 @@ protected class Model_UnorderedGroup_1_0_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"
+// first?='a'
 protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_0_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -260,7 +264,7 @@ protected class Model_FirstAssignment_1_0_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"
+// second?='b'
 protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -296,7 +300,7 @@ protected class Model_SecondAssignment_1_0_1_1 extends AssignmentToken  {
 
 
 
-// "2" (first?="a" & second?="b" & third?="c" & forth?="d")
+// '2' (first?='a' & second?='b' & third?='c' & forth?='d')
 protected class Model_Group_1_1 extends GroupToken {
 	
 	public Model_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -318,7 +322,7 @@ protected class Model_Group_1_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 	
 	public Model_DigitTwoKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -340,7 +344,7 @@ protected class Model_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 
 }
 
-// first?="a" & second?="b" & third?="c" & forth?="d"
+// (first?='a' & second?='b' & third?='c' & forth?='d')
 protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -362,7 +366,7 @@ protected class Model_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"
+// first?='a'
 protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -396,7 +400,7 @@ protected class Model_FirstAssignment_1_1_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"
+// second?='b'
 protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -430,7 +434,7 @@ protected class Model_SecondAssignment_1_1_1_1 extends AssignmentToken  {
 
 }
 
-// third?="c"
+// third?='c'
 protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 	
 	public Model_ThirdAssignment_1_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -464,7 +468,7 @@ protected class Model_ThirdAssignment_1_1_1_2 extends AssignmentToken  {
 
 }
 
-// forth?="d"
+// forth?='d'
 protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 	
 	public Model_ForthAssignment_1_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -500,7 +504,7 @@ protected class Model_ForthAssignment_1_1_1_3 extends AssignmentToken  {
 
 
 
-// "3" (first?="a"? & second?="b"?)
+// '3' (first?='a'? & second?='b'?)
 protected class Model_Group_1_2 extends GroupToken {
 	
 	public Model_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -522,7 +526,7 @@ protected class Model_Group_1_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 	
 	public Model_DigitThreeKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -544,7 +548,7 @@ protected class Model_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 
 }
 
-// first?="a"? & second?="b"?
+// (first?='a'? & second?='b'?)
 protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -568,7 +572,7 @@ protected class Model_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"?
+// first?='a'?
 protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -602,7 +606,7 @@ protected class Model_FirstAssignment_1_2_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"?
+// second?='b'?
 protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -639,7 +643,7 @@ protected class Model_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 
 
 
-// "4" (first?="a" & second?="b"?)
+// '4' (first?='a' & second?='b'?)
 protected class Model_Group_1_3 extends GroupToken {
 	
 	public Model_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -661,7 +665,7 @@ protected class Model_Group_1_3 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 	
 	public Model_DigitFourKeyword_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -683,7 +687,7 @@ protected class Model_DigitFourKeyword_1_3_0 extends KeywordToken  {
 
 }
 
-// first?="a" & second?="b"?
+// (first?='a' & second?='b'?)
 protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -706,7 +710,7 @@ protected class Model_UnorderedGroup_1_3_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"
+// first?='a'
 protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -740,7 +744,7 @@ protected class Model_FirstAssignment_1_3_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"?
+// second?='b'?
 protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -776,7 +780,7 @@ protected class Model_SecondAssignment_1_3_1_1 extends AssignmentToken  {
 
 
 
-// "5" (first?="a"? & second?="b")
+// '5' (first?='a'? & second?='b')
 protected class Model_Group_1_4 extends GroupToken {
 	
 	public Model_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -798,7 +802,7 @@ protected class Model_Group_1_4 extends GroupToken {
 
 }
 
-// "5"
+// '5'
 protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 	
 	public Model_DigitFiveKeyword_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -820,7 +824,7 @@ protected class Model_DigitFiveKeyword_1_4_0 extends KeywordToken  {
 
 }
 
-// first?="a"? & second?="b"
+// (first?='a'? & second?='b')
 protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -842,7 +846,7 @@ protected class Model_UnorderedGroup_1_4_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"?
+// first?='a'?
 protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -876,7 +880,7 @@ protected class Model_FirstAssignment_1_4_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"
+// second?='b'
 protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_4_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -913,7 +917,7 @@ protected class Model_SecondAssignment_1_4_1_1 extends AssignmentToken  {
 
 
 
-// "6" (firstAsList+="a"+ & secondAsList+="b"*)
+// '6' (firstAsList+='a'+ & secondAsList+='b'*)
 protected class Model_Group_1_5 extends GroupToken {
 	
 	public Model_Group_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -935,7 +939,7 @@ protected class Model_Group_1_5 extends GroupToken {
 
 }
 
-// "6"
+// '6'
 protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 	
 	public Model_DigitSixKeyword_1_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -957,7 +961,7 @@ protected class Model_DigitSixKeyword_1_5_0 extends KeywordToken  {
 
 }
 
-// firstAsList+="a"+ & secondAsList+="b"*
+// (firstAsList+='a'+ & secondAsList+='b'*)
 protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -980,7 +984,7 @@ protected class Model_UnorderedGroup_1_5_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"+
+// firstAsList+='a'+
 protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_5_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1015,7 +1019,7 @@ protected class Model_FirstAsListAssignment_1_5_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"*
+// secondAsList+='b'*
 protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_5_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1052,7 +1056,7 @@ protected class Model_SecondAsListAssignment_1_5_1_1 extends AssignmentToken  {
 
 
 
-// "7" (firstAsList+="a"* & secondAsList+="b"+)
+// '7' (firstAsList+='a'* & secondAsList+='b'+)
 protected class Model_Group_1_6 extends GroupToken {
 	
 	public Model_Group_1_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1074,7 +1078,7 @@ protected class Model_Group_1_6 extends GroupToken {
 
 }
 
-// "7"
+// '7'
 protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 	
 	public Model_DigitSevenKeyword_1_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1096,7 +1100,7 @@ protected class Model_DigitSevenKeyword_1_6_0 extends KeywordToken  {
 
 }
 
-// firstAsList+="a"* & secondAsList+="b"+
+// (firstAsList+='a'* & secondAsList+='b'+)
 protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1118,7 +1122,7 @@ protected class Model_UnorderedGroup_1_6_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"*
+// firstAsList+='a'*
 protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_6_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1153,7 +1157,7 @@ protected class Model_FirstAsListAssignment_1_6_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"+
+// secondAsList+='b'+
 protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_6_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1191,7 +1195,7 @@ protected class Model_SecondAsListAssignment_1_6_1_1 extends AssignmentToken  {
 
 
 
-// "8" ("a" "b" first?="c" & "a" "b" second?="d")
+// '8' ('a' 'b' first?='c' & 'a' 'b' second?='d')
 protected class Model_Group_1_7 extends GroupToken {
 	
 	public Model_Group_1_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1213,7 +1217,7 @@ protected class Model_Group_1_7 extends GroupToken {
 
 }
 
-// "8"
+// '8'
 protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 	
 	public Model_DigitEightKeyword_1_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1235,7 +1239,7 @@ protected class Model_DigitEightKeyword_1_7_0 extends KeywordToken  {
 
 }
 
-// "a" "b" first?="c" & "a" "b" second?="d"
+// ('a' 'b' first?='c' & 'a' 'b' second?='d')
 protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1257,7 +1261,7 @@ protected class Model_UnorderedGroup_1_7_1 extends UnorderedGroupToken {
 
 }
 
-// "a" "b" first?="c"
+// 'a' 'b' first?='c'
 protected class Model_Group_1_7_1_0 extends GroupToken {
 	
 	public Model_Group_1_7_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1279,7 +1283,7 @@ protected class Model_Group_1_7_1_0 extends GroupToken {
 
 }
 
-// "a"
+// 'a'
 protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 	
 	public Model_AKeyword_1_7_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1301,7 +1305,7 @@ protected class Model_AKeyword_1_7_1_0_0 extends KeywordToken  {
 
 }
 
-// "b"
+// 'b'
 protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 	
 	public Model_BKeyword_1_7_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1323,7 +1327,7 @@ protected class Model_BKeyword_1_7_1_0_1 extends KeywordToken  {
 
 }
 
-// first?="c"
+// first?='c'
 protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_7_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1358,7 +1362,7 @@ protected class Model_FirstAssignment_1_7_1_0_2 extends AssignmentToken  {
 }
 
 
-// "a" "b" second?="d"
+// 'a' 'b' second?='d'
 protected class Model_Group_1_7_1_1 extends GroupToken {
 	
 	public Model_Group_1_7_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1380,7 +1384,7 @@ protected class Model_Group_1_7_1_1 extends GroupToken {
 
 }
 
-// "a"
+// 'a'
 protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 	
 	public Model_AKeyword_1_7_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1402,7 +1406,7 @@ protected class Model_AKeyword_1_7_1_1_0 extends KeywordToken  {
 
 }
 
-// "b"
+// 'b'
 protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 	
 	public Model_BKeyword_1_7_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1424,7 +1428,7 @@ protected class Model_BKeyword_1_7_1_1_1 extends KeywordToken  {
 
 }
 
-// second?="d"
+// second?='d'
 protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_7_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1461,7 +1465,7 @@ protected class Model_SecondAssignment_1_7_1_1_2 extends AssignmentToken  {
 
 
 
-// "9" (firstAsList+="a" & secondAsList+="b")+
+// '9' (firstAsList+='a' & secondAsList+='b')+
 protected class Model_Group_1_8 extends GroupToken {
 	
 	public Model_Group_1_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1483,7 +1487,7 @@ protected class Model_Group_1_8 extends GroupToken {
 
 }
 
-// "9"
+// '9'
 protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 	
 	public Model_DigitNineKeyword_1_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1505,7 +1509,7 @@ protected class Model_DigitNineKeyword_1_8_0 extends KeywordToken  {
 
 }
 
-// (firstAsList+="a" & secondAsList+="b")+
+// (firstAsList+='a' & secondAsList+='b')+
 protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1527,7 +1531,7 @@ protected class Model_UnorderedGroup_1_8_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_8_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1562,7 +1566,7 @@ protected class Model_FirstAsListAssignment_1_8_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_8_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1598,7 +1602,7 @@ protected class Model_SecondAsListAssignment_1_8_1_1 extends AssignmentToken  {
 
 
 
-// "10" (firstAsList+="a" & secondAsList+="b")*
+// '10' (firstAsList+='a' & secondAsList+='b')*
 protected class Model_Group_1_9 extends GroupToken {
 	
 	public Model_Group_1_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1621,7 +1625,7 @@ protected class Model_Group_1_9 extends GroupToken {
 
 }
 
-// "10"
+// '10'
 protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 	
 	public Model_DigitOneDigitZeroKeyword_1_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1643,7 +1647,7 @@ protected class Model_DigitOneDigitZeroKeyword_1_9_0 extends KeywordToken  {
 
 }
 
-// (firstAsList+="a" & secondAsList+="b")*
+// (firstAsList+='a' & secondAsList+='b')*
 protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_9_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1665,7 +1669,7 @@ protected class Model_UnorderedGroup_1_9_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_9_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1700,7 +1704,7 @@ protected class Model_FirstAsListAssignment_1_9_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_9_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1736,7 +1740,7 @@ protected class Model_SecondAsListAssignment_1_9_1_1 extends AssignmentToken  {
 
 
 
-// "11" (first?="a" & second?="b")?
+// '11' (first?='a' & second?='b')?
 protected class Model_Group_1_10 extends GroupToken {
 	
 	public Model_Group_1_10(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1759,7 +1763,7 @@ protected class Model_Group_1_10 extends GroupToken {
 
 }
 
-// "11"
+// '11'
 protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 	
 	public Model_DigitOneDigitOneKeyword_1_10_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1781,7 +1785,7 @@ protected class Model_DigitOneDigitOneKeyword_1_10_0 extends KeywordToken  {
 
 }
 
-// (first?="a" & second?="b")?
+// (first?='a' & second?='b')?
 protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_10_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1803,7 +1807,7 @@ protected class Model_UnorderedGroup_1_10_1 extends UnorderedGroupToken {
 
 }
 
-// first?="a"
+// first?='a'
 protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAssignment_1_10_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1837,7 +1841,7 @@ protected class Model_FirstAssignment_1_10_1_0 extends AssignmentToken  {
 
 }
 
-// second?="b"
+// second?='b'
 protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAssignment_1_10_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1873,7 +1877,7 @@ protected class Model_SecondAssignment_1_10_1_1 extends AssignmentToken  {
 
 
 
-// "12" (firstAsList+="a" & secondAsList+="b") (firstAsList+="a" & secondAsList+="b")
+// '12' (firstAsList+='a' & secondAsList+='b') (firstAsList+='a' & secondAsList+='b')
 protected class Model_Group_1_11 extends GroupToken {
 	
 	public Model_Group_1_11(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1895,7 +1899,7 @@ protected class Model_Group_1_11 extends GroupToken {
 
 }
 
-// "12"
+// '12'
 protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 	
 	public Model_DigitOneDigitTwoKeyword_1_11_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1917,7 +1921,7 @@ protected class Model_DigitOneDigitTwoKeyword_1_11_0 extends KeywordToken  {
 
 }
 
-// firstAsList+="a" & secondAsList+="b"
+// (firstAsList+='a' & secondAsList+='b')
 protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_11_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1939,7 +1943,7 @@ protected class Model_UnorderedGroup_1_11_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_11_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1973,7 +1977,7 @@ protected class Model_FirstAsListAssignment_1_11_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_11_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2008,7 +2012,7 @@ protected class Model_SecondAsListAssignment_1_11_1_1 extends AssignmentToken  {
 }
 
 
-// firstAsList+="a" & secondAsList+="b"
+// (firstAsList+='a' & secondAsList+='b')
 protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_11_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2030,7 +2034,7 @@ protected class Model_UnorderedGroup_1_11_2 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_11_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2064,7 +2068,7 @@ protected class Model_FirstAsListAssignment_1_11_2_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_11_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2100,7 +2104,7 @@ protected class Model_SecondAsListAssignment_1_11_2_1 extends AssignmentToken  {
 
 
 
-// "13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a" secondAsList+="b"
+// '13' (firstAsList+='a' & secondAsList+='b')? firstAsList+='a' secondAsList+='b'
 protected class Model_Group_1_12 extends GroupToken {
 	
 	public Model_Group_1_12(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2122,7 +2126,7 @@ protected class Model_Group_1_12 extends GroupToken {
 
 }
 
-// "13"
+// '13'
 protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 	
 	public Model_DigitOneDigitThreeKeyword_1_12_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2144,7 +2148,7 @@ protected class Model_DigitOneDigitThreeKeyword_1_12_0 extends KeywordToken  {
 
 }
 
-// (firstAsList+="a" & secondAsList+="b")?
+// (firstAsList+='a' & secondAsList+='b')?
 protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_12_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2166,7 +2170,7 @@ protected class Model_UnorderedGroup_1_12_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_12_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2200,7 +2204,7 @@ protected class Model_FirstAsListAssignment_1_12_1_0 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_12_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2235,7 +2239,7 @@ protected class Model_SecondAsListAssignment_1_12_1_1 extends AssignmentToken  {
 }
 
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_12_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2270,7 +2274,7 @@ protected class Model_FirstAsListAssignment_1_12_2 extends AssignmentToken  {
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_12_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2305,7 +2309,7 @@ protected class Model_SecondAsListAssignment_1_12_3 extends AssignmentToken  {
 }
 
 
-// "14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
+// '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+
 protected class Model_Group_1_13 extends GroupToken {
 	
 	public Model_Group_1_13(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2327,7 +2331,7 @@ protected class Model_Group_1_13 extends GroupToken {
 
 }
 
-// "14"
+// '14'
 protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 	
 	public Model_DigitOneDigitFourKeyword_1_13_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2349,7 +2353,7 @@ protected class Model_DigitOneDigitFourKeyword_1_13_0 extends KeywordToken  {
 
 }
 
-// ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" & forthAsList+="d"))+
+// ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+
 protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_13_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2371,7 +2375,7 @@ protected class Model_UnorderedGroup_1_13_1 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a" & secondAsList+="b"
+// (firstAsList+='a' & secondAsList+='b')
 protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_13_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2393,7 +2397,7 @@ protected class Model_UnorderedGroup_1_13_1_0 extends UnorderedGroupToken {
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  {
 	
 	public Model_FirstAsListAssignment_1_13_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2428,7 +2432,7 @@ protected class Model_FirstAsListAssignment_1_13_1_0_0 extends AssignmentToken  
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken  {
 	
 	public Model_SecondAsListAssignment_1_13_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2463,7 +2467,7 @@ protected class Model_SecondAsListAssignment_1_13_1_0_1 extends AssignmentToken 
 }
 
 
-// thirdAsList+="c" & forthAsList+="d"
+// (thirdAsList+='c' & forthAsList+='d')
 protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 	
 	public Model_UnorderedGroup_1_13_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2485,7 +2489,7 @@ protected class Model_UnorderedGroup_1_13_1_1 extends UnorderedGroupToken {
 
 }
 
-// thirdAsList+="c"
+// thirdAsList+='c'
 protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  {
 	
 	public Model_ThirdAsListAssignment_1_13_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2519,7 +2523,7 @@ protected class Model_ThirdAsListAssignment_1_13_1_1_0 extends AssignmentToken  
 
 }
 
-// forthAsList+="d"
+// forthAsList+='d'
 protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  {
 	
 	public Model_ForthAsListAssignment_1_13_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2556,7 +2560,7 @@ protected class Model_ForthAsListAssignment_1_13_1_1_1 extends AssignmentToken  
 
 
 
-// "datatypes" value=UnorderedDatatype
+// 'datatypes' value=UnorderedDatatype
 protected class Model_Group_1_14 extends GroupToken {
 	
 	public Model_Group_1_14(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2578,7 +2582,7 @@ protected class Model_Group_1_14 extends GroupToken {
 
 }
 
-// "datatypes"
+// 'datatypes'
 protected class Model_DatatypesKeyword_1_14_0 extends KeywordToken  {
 	
 	public Model_DatatypesKeyword_1_14_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2635,7 +2639,7 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 }
 
 
-// "serialization" serialized=UnorderedSerialization
+// 'serialization' serialized=UnorderedSerialization
 protected class Model_Group_1_15 extends GroupToken {
 	
 	public Model_Group_1_15(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2657,7 +2661,7 @@ protected class Model_Group_1_15 extends GroupToken {
 
 }
 
-// "serialization"
+// 'serialization'
 protected class Model_SerializationKeyword_1_15_0 extends KeywordToken  {
 	
 	public Model_SerializationKeyword_1_15_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2726,7 +2730,7 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 }
 
 
-// "bug302585" nestedModel+=NestedModel*
+// 'bug302585' nestedModel+=NestedModel*
 protected class Model_Group_1_16 extends GroupToken {
 	
 	public Model_Group_1_16(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2749,7 +2753,7 @@ protected class Model_Group_1_16 extends GroupToken {
 
 }
 
-// "bug302585"
+// 'bug302585'
 protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
 	
 	public Model_Bug302585Keyword_1_16_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2827,11 +2831,12 @@ protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
 /************ begin Rule NestedModel ****************
  *
  * NestedModel:
- * 	{NestedModel} (first?="a" & second?="b")? "nested";
+ * 	{NestedModel} (first?="a" & second?="b")?
+ * 	'nested';
  *
  **/
 
-// {NestedModel} (first?="a" & second?="b")? "nested"
+// {NestedModel} (first?="a" & second?="b")? 'nested'
 protected class NestedModel_Group extends GroupToken {
 	
 	public NestedModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2977,7 +2982,7 @@ protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "nested"
+// 'nested'
 protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 	
 	public NestedModel_NestedKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3008,13 +3013,14 @@ protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
 /************ begin Rule UnorderedSerialization ****************
  *
  * / * SuppressWarnings[potentialOverride] * / UnorderedSerialization:
- * 	{UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
- * 	secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*);
+ * 	{UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
+ * 	| '2' (firstAsList+='a' & secondAsList+='b')*
+ * 	| '3' (firstAsList+='a'+ & second?='b')*);
  *
  **/
 
-// {UnorderedSerialization} ("1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" &
-// secondAsList+="b")* | "3" (firstAsList+="a"+ & second?="b")*)
+// {UnorderedSerialization} ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'? | '2' (firstAsList+='a' &
+// secondAsList+='b')* | '3' (firstAsList+='a'+ & second?='b')*)
 protected class UnorderedSerialization_Group extends GroupToken {
 	
 	public UnorderedSerialization_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3069,8 +3075,8 @@ protected class UnorderedSerialization_UnorderedSerializationAction_0 extends Ac
 	}
 }
 
-// "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"? | "2" (firstAsList+="a" & secondAsList+="b")* | "3"
-// (firstAsList+="a"+ & second?="b")*
+// ('1' first?='a'? & second?='b'? & third?='c'? & forth?='d'? | '2' (firstAsList+='a' & secondAsList+='b')* | '3'
+// (firstAsList+='a'+ & second?='b')*)
 protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken {
 
 	public UnorderedSerialization_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3094,7 +3100,7 @@ protected class UnorderedSerialization_Alternatives_1 extends AlternativesToken 
 
 }
 
-// "1" first?="a"? & second?="b"? & third?="c"? & forth?="d"?
+// '1' first?='a'? & second?='b'? & third?='c'? & forth?='d'?
 protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroupToken {
 	
 	public UnorderedSerialization_UnorderedGroup_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3119,7 +3125,7 @@ protected class UnorderedSerialization_UnorderedGroup_1_0 extends UnorderedGroup
 
 }
 
-// "1" first?="a"?
+// '1' first?='a'?
 protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 	
 	public UnorderedSerialization_Group_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3142,7 +3148,7 @@ protected class UnorderedSerialization_Group_1_0_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordToken  {
 	
 	public UnorderedSerialization_DigitOneKeyword_1_0_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3164,7 +3170,7 @@ protected class UnorderedSerialization_DigitOneKeyword_1_0_0_0 extends KeywordTo
 
 }
 
-// first?="a"?
+// first?='a'?
 protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends AssignmentToken  {
 	
 	public UnorderedSerialization_FirstAssignment_1_0_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3199,7 +3205,7 @@ protected class UnorderedSerialization_FirstAssignment_1_0_0_1 extends Assignmen
 }
 
 
-// second?="b"?
+// second?='b'?
 protected class UnorderedSerialization_SecondAssignment_1_0_1 extends AssignmentToken  {
 	
 	public UnorderedSerialization_SecondAssignment_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3233,7 +3239,7 @@ protected class UnorderedSerialization_SecondAssignment_1_0_1 extends Assignment
 
 }
 
-// third?="c"?
+// third?='c'?
 protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentToken  {
 	
 	public UnorderedSerialization_ThirdAssignment_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3268,7 +3274,7 @@ protected class UnorderedSerialization_ThirdAssignment_1_0_2 extends AssignmentT
 
 }
 
-// forth?="d"?
+// forth?='d'?
 protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentToken  {
 	
 	public UnorderedSerialization_ForthAssignment_1_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3305,7 +3311,7 @@ protected class UnorderedSerialization_ForthAssignment_1_0_3 extends AssignmentT
 }
 
 
-// "2" (firstAsList+="a" & secondAsList+="b")*
+// '2' (firstAsList+='a' & secondAsList+='b')*
 protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 	
 	public UnorderedSerialization_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3328,7 +3334,7 @@ protected class UnorderedSerialization_Group_1_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToken  {
 	
 	public UnorderedSerialization_DigitTwoKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3350,7 +3356,7 @@ protected class UnorderedSerialization_DigitTwoKeyword_1_1_0 extends KeywordToke
 
 }
 
-// (firstAsList+="a" & secondAsList+="b")*
+// (firstAsList+='a' & secondAsList+='b')*
 protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGroupToken {
 	
 	public UnorderedSerialization_UnorderedGroup_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3372,7 +3378,7 @@ protected class UnorderedSerialization_UnorderedGroup_1_1_1 extends UnorderedGro
 
 }
 
-// firstAsList+="a"
+// firstAsList+='a'
 protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends AssignmentToken  {
 	
 	public UnorderedSerialization_FirstAsListAssignment_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3407,7 +3413,7 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_1_1_0 extends Ass
 
 }
 
-// secondAsList+="b"
+// secondAsList+='b'
 protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends AssignmentToken  {
 	
 	public UnorderedSerialization_SecondAsListAssignment_1_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3443,7 +3449,7 @@ protected class UnorderedSerialization_SecondAsListAssignment_1_1_1_1 extends As
 
 
 
-// "3" (firstAsList+="a"+ & second?="b")*
+// '3' (firstAsList+='a'+ & second?='b')*
 protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 	
 	public UnorderedSerialization_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3466,7 +3472,7 @@ protected class UnorderedSerialization_Group_1_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordToken  {
 	
 	public UnorderedSerialization_DigitThreeKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3488,7 +3494,7 @@ protected class UnorderedSerialization_DigitThreeKeyword_1_2_0 extends KeywordTo
 
 }
 
-// (firstAsList+="a"+ & second?="b")*
+// (firstAsList+='a'+ & second?='b')*
 protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGroupToken {
 	
 	public UnorderedSerialization_UnorderedGroup_1_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3510,7 +3516,7 @@ protected class UnorderedSerialization_UnorderedGroup_1_2_1 extends UnorderedGro
 
 }
 
-// firstAsList+="a"+
+// firstAsList+='a'+
 protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends AssignmentToken  {
 	
 	public UnorderedSerialization_FirstAsListAssignment_1_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3546,7 +3552,7 @@ protected class UnorderedSerialization_FirstAsListAssignment_1_2_1_0 extends Ass
 
 }
 
-// second?="b"
+// second?='b'
 protected class UnorderedSerialization_SecondAssignment_1_2_1_1 extends AssignmentToken  {
 	
 	public UnorderedSerialization_SecondAssignment_1_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

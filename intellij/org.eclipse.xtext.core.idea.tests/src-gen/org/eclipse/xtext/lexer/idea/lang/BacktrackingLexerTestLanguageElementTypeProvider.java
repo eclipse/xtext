@@ -207,131 +207,131 @@ public class BacktrackingLexerTestLanguageElementTypeProvider implements IElemen
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EnumsAssignment_0ElementType() {
 		return Model_EnumsAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EnumsEnumNameEnumRuleCall_0_0ElementType() {
 		return Model_EnumsEnumNameEnumRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_YcsAssignment_1ElementType() {
 		return Model_YcsAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_YcsYcTerminalRuleCall_1_0ElementType() {
 		return Model_YcsYcTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AbsAssignment_2ElementType() {
 		return Model_AbsAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AbsAbParserRuleCall_2_0ElementType() {
 		return Model_AbsAbParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_XbsAssignment_3ElementType() {
 		return Model_XbsAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_XbsXbParserRuleCall_3_0ElementType() {
 		return Model_XbsXbParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_YsAssignment_4ElementType() {
 		return Model_YsAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_YsCharYTerminalRuleCall_4_0ElementType() {
 		return Model_YsCharYTerminalRuleCall_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AsAssignment_5ElementType() {
 		return Model_AsAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AsCharATerminalRuleCall_5_0ElementType() {
 		return Model_AsCharATerminalRuleCall_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbElementType() {
 		return Ab_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAb_GroupElementType() {
 		return Ab_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAb_XAssignment_0ElementType() {
 		return Ab_XAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAb_XCharATerminalRuleCall_0_0ElementType() {
 		return Ab_XCharATerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAb_YAssignment_1ElementType() {
 		return Ab_YAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAb_YCharbTerminalRuleCall_1_0ElementType() {
 		return Ab_YCharbTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXbElementType() {
 		return Xb_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXb_GroupElementType() {
 		return Xb_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXb_XAssignment_0ElementType() {
 		return Xb_XAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXb_XCharXTerminalRuleCall_0_0ElementType() {
 		return Xb_XCharXTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXb_YAssignment_1ElementType() {
 		return Xb_YAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getXb_YCharbTerminalRuleCall_1_0ElementType() {
 		return Xb_YCharbTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumNameElementType() {
 		return EnumName_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumName_AlternativesElementType() {
 		return EnumName_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumName_AbcEnumLiteralDeclaration_0ElementType() {
 		return EnumName_AbcEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumName_AbcAbcKeyword_0_0ElementType() {
 		return EnumName_AbcAbcKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumName_EfgEnumLiteralDeclaration_1ElementType() {
 		return EnumName_EfgEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumName_EfgEfgKeyword_1_0ElementType() {
 		return EnumName_EfgEfgKeyword_1_0_ELEMENT_TYPE;
 	}

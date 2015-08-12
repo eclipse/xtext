@@ -156,7 +156,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -202,7 +202,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
             	           			current, 
             	           			"elements",
             	            		lv_elements_3_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.grammarinheritance.InheritanceTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -239,7 +239,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                    			current, 
                    			"ids",
                     		lv_ids_4_0, 
-                    		"FQN");
+                    		"org.eclipse.xtext.grammarinheritance.BaseInheritanceTestLanguage.FQN");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -347,7 +347,7 @@ public class InternalInheritanceTest2LanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

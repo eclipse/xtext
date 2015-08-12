@@ -40,11 +40,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model hidden(WS):
- * 	("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*;
+ * 	'FIX' fix+=Fix+
+ * 	| 'ERROR' error+=Error+
+ * 	| 'TICK' tick+=Apostrophe+*;
  *
  **/
 
-// ("FIX" fix+=Fix+ | "ERROR" error+=Error+ | "TICK" tick+=Apostrophe+)*
+// 'FIX' fix+=Fix+ | 'ERROR' error+=Error+ | 'TICK' tick+=Apostrophe+*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -68,7 +70,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "FIX" fix+=Fix+
+// 'FIX' fix+=Fix+
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -90,7 +92,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "FIX"
+// 'FIX'
 protected class Model_FIXKeyword_0_0 extends KeywordToken  {
 	
 	public Model_FIXKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -148,7 +150,7 @@ protected class Model_FixAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "ERROR" error+=Error+
+// 'ERROR' error+=Error+
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -170,7 +172,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "ERROR"
+// 'ERROR'
 protected class Model_ERRORKeyword_1_0 extends KeywordToken  {
 	
 	public Model_ERRORKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -228,7 +230,7 @@ protected class Model_ErrorAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "TICK" tick+=Apostrophe+
+// 'TICK' tick+=Apostrophe+
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -250,7 +252,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "TICK"
+// 'TICK'
 protected class Model_TICKKeyword_2_0 extends KeywordToken  {
 	
 	public Model_TICKKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

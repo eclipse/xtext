@@ -42,7 +42,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- * 	imports+=Import* types+=Type*;
+ * 	imports+=Import*
+ * 	types+=Type*;
  *
  **/
 
@@ -176,11 +177,11 @@ protected class Main_TypesAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" uri=STRING;
+ * 	'import' uri=STRING;
  *
  **/
 
-// "import" uri=STRING
+// 'import' uri=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -209,7 +210,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -271,11 +272,11 @@ protected class Import_UriAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- * 	"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?;
+ * 	'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?
+// 'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -306,7 +307,7 @@ protected class Type_Group extends GroupToken {
 
 }
 
-// "type"
+// 'type'
 protected class Type_TypeKeyword_0 extends KeywordToken  {
 	
 	public Type_TypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -361,7 +362,7 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("extends" extends=[Type])?
+// ('extends' ^extends=[Type])?
 protected class Type_Group_2 extends GroupToken {
 	
 	public Type_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -383,7 +384,7 @@ protected class Type_Group_2 extends GroupToken {
 
 }
 
-// "extends"
+// 'extends'
 protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 	
 	public Type_ExtendsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -405,7 +406,7 @@ protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 
 }
 
-// extends=[Type]
+// ^extends=[Type]
 protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 	
 	public Type_ExtendsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -443,7 +444,7 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// ("implements" implements+=[Type] ("," implements+=[Type])*)?
+// ('implements' implements+=[Type] (',' implements+=[Type])*)?
 protected class Type_Group_3 extends GroupToken {
 	
 	public Type_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -466,7 +467,7 @@ protected class Type_Group_3 extends GroupToken {
 
 }
 
-// "implements"
+// 'implements'
 protected class Type_ImplementsKeyword_3_0 extends KeywordToken  {
 	
 	public Type_ImplementsKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -526,7 +527,7 @@ protected class Type_ImplementsAssignment_3_1 extends AssignmentToken  {
 
 }
 
-// ("," implements+=[Type])*
+// (',' implements+=[Type])*
 protected class Type_Group_3_2 extends GroupToken {
 	
 	public Type_Group_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -548,7 +549,7 @@ protected class Type_Group_3_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Type_CommaKeyword_3_2_0 extends KeywordToken  {
 	
 	public Type_CommaKeyword_3_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -168,107 +168,107 @@ public class Bug289515TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0ElementType() {
 		return Model_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneKeyword_0_0ElementType() {
 		return Model_DigitOneKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_0_1ElementType() {
 		return Model_ValueAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuePercentSignKeyword_0_1_0ElementType() {
 		return Model_ValuePercentSignKeyword_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitTwoKeyword_1_0ElementType() {
 		return Model_DigitTwoKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_1_1ElementType() {
 		return Model_ValueAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuePercentSignKeyword_1_1_0ElementType() {
 		return Model_ValuePercentSignKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2ElementType() {
 		return Model_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitThreeKeyword_2_0ElementType() {
 		return Model_DigitThreeKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_2_1ElementType() {
 		return Model_ValueAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueReverseSolidusPercentSignKeyword_2_1_0ElementType() {
 		return Model_ValueReverseSolidusPercentSignKeyword_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_3ElementType() {
 		return Model_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitFourKeyword_3_0ElementType() {
 		return Model_DigitFourKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_3_1ElementType() {
 		return Model_ValueAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueReverseSolidusPercentSignKeyword_3_1_0ElementType() {
 		return Model_ValueReverseSolidusPercentSignKeyword_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_4ElementType() {
 		return Model_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitFiveKeyword_4_0ElementType() {
 		return Model_DigitFiveKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_4_1ElementType() {
 		return Model_ValueAssignment_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuePercentSignPercentSignKeyword_4_1_0ElementType() {
 		return Model_ValuePercentSignPercentSignKeyword_4_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_5ElementType() {
 		return Model_Group_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitSixKeyword_5_0ElementType() {
 		return Model_DigitSixKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_5_1ElementType() {
 		return Model_ValueAssignment_5_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValuePercentSignPercentSignKeyword_5_1_0ElementType() {
 		return Model_ValuePercentSignPercentSignKeyword_5_1_0_ELEMENT_TYPE;
 	}

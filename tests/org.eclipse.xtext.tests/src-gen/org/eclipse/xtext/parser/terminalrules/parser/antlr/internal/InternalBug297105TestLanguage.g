@@ -96,7 +96,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_0_0, 
-        		"Expression");
+        		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -135,7 +135,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"left",
         		lv_left_0_0, 
-        		"Literal");
+        		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -157,7 +157,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_2_0, 
-        		"Literal");
+        		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -242,7 +242,7 @@ ruleIntLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"IntValue");
+        		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.IntValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -281,7 +281,7 @@ ruleRealLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"RealValue");
+        		"org.eclipse.xtext.parser.terminalrules.Bug297105TestLanguage.RealValue");
 	        afterParserOrEnumRuleCall();
 	    }
 

@@ -40,11 +40,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"someEnum" a=EnumRuleA b=EnumRuleB c=EnumRuleC;
+ * 	'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC;
  *
  **/
 
-// "someEnum" a=EnumRuleA b=EnumRuleB c=EnumRuleC
+// 'someEnum' a=EnumRuleA b=EnumRuleB c=EnumRuleC
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -73,7 +73,7 @@ protected class Model_Group extends GroupToken {
 
 }
 
-// "someEnum"
+// 'someEnum'
 protected class Model_SomeEnumKeyword_0 extends KeywordToken  {
 	
 	public Model_SomeEnumKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

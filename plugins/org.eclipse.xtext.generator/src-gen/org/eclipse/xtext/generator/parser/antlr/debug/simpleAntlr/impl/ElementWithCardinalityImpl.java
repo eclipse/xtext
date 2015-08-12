@@ -20,11 +20,11 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ElementWithCardinalityImpl#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ElementWithCardinalityImpl#getCardinality <em>Cardinality</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -86,8 +86,7 @@ public class ElementWithCardinalityImpl extends RuleElementImpl implements Eleme
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getElement()
+  public RuleElement getElement()
   {
     return element;
   }
@@ -114,8 +113,7 @@ public RuleElement getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(RuleElement newElement)
+  public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {
@@ -136,8 +134,7 @@ public void setElement(RuleElement newElement)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getCardinality()
+  public String getCardinality()
   {
     return cardinality;
   }
@@ -147,8 +144,7 @@ public String getCardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCardinality(String newCardinality)
+  public void setCardinality(String newCardinality)
   {
     String oldCardinality = cardinality;
     cardinality = newCardinality;

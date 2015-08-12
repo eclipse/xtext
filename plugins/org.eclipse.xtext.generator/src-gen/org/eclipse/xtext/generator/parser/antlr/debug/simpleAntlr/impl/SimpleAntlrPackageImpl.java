@@ -10,14 +10,20 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Alternatives;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AntlrGrammar;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Group;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NegatedElement;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OptionValue;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Options;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated;
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
@@ -69,7 +75,28 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass parameterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass ruleElementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass referenceOrLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -146,6 +173,27 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass orExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass andExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass notExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass skipEClass = null;
 
   /**
@@ -216,8 +264,7 @@ public class SimpleAntlrPackageImpl extends EPackageImpl implements SimpleAntlrP
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAntlrGrammar()
+  public EClass getAntlrGrammar()
   {
     return antlrGrammarEClass;
   }
@@ -227,8 +274,7 @@ public EClass getAntlrGrammar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getAntlrGrammar_Name()
+  public EAttribute getAntlrGrammar_Name()
   {
     return (EAttribute)antlrGrammarEClass.getEStructuralFeatures().get(0);
   }
@@ -238,8 +284,7 @@ public EAttribute getAntlrGrammar_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAntlrGrammar_Options()
+  public EReference getAntlrGrammar_Options()
   {
     return (EReference)antlrGrammarEClass.getEStructuralFeatures().get(1);
   }
@@ -249,8 +294,7 @@ public EReference getAntlrGrammar_Options()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAntlrGrammar_Rules()
+  public EReference getAntlrGrammar_Rules()
   {
     return (EReference)antlrGrammarEClass.getEStructuralFeatures().get(2);
   }
@@ -260,8 +304,7 @@ public EReference getAntlrGrammar_Rules()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOptions()
+  public EClass getOptions()
   {
     return optionsEClass;
   }
@@ -271,8 +314,7 @@ public EClass getOptions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOptions_OptionValues()
+  public EReference getOptions_OptionValues()
   {
     return (EReference)optionsEClass.getEStructuralFeatures().get(0);
   }
@@ -282,8 +324,7 @@ public EReference getOptions_OptionValues()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOptionValue()
+  public EClass getOptionValue()
   {
     return optionValueEClass;
   }
@@ -293,8 +334,7 @@ public EClass getOptionValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getOptionValue_Key()
+  public EAttribute getOptionValue_Key()
   {
     return (EAttribute)optionValueEClass.getEStructuralFeatures().get(0);
   }
@@ -304,8 +344,7 @@ public EAttribute getOptionValue_Key()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getOptionValue_Value()
+  public EAttribute getOptionValue_Value()
   {
     return (EAttribute)optionValueEClass.getEStructuralFeatures().get(1);
   }
@@ -315,8 +354,7 @@ public EAttribute getOptionValue_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRule()
+  public EClass getRule()
   {
     return ruleEClass;
   }
@@ -326,8 +364,7 @@ public EClass getRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRule_Fragment()
+  public EAttribute getRule_Fragment()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(0);
   }
@@ -337,8 +374,7 @@ public EAttribute getRule_Fragment()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRule_Name()
+  public EAttribute getRule_Name()
   {
     return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
   }
@@ -348,8 +384,7 @@ public EAttribute getRule_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRule_Body()
+  public EReference getRule_Parameters()
   {
     return (EReference)ruleEClass.getEStructuralFeatures().get(2);
   }
@@ -359,8 +394,47 @@ public EReference getRule_Body()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRuleElement()
+  public EReference getRule_Body()
+  {
+    return (EReference)ruleEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameter()
+  {
+    return parameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameter_Type()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameter_Name()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRuleElement()
   {
     return ruleElementEClass;
   }
@@ -370,8 +444,57 @@ public EClass getRuleElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getPredicated()
+  public EReference getRuleElement_Guard()
+  {
+    return (EReference)ruleElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRuleElement_Guarded()
+  {
+    return (EReference)ruleElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExpression()
+  {
+    return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getReferenceOrLiteral()
+  {
+    return referenceOrLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getReferenceOrLiteral_Name()
+  {
+    return (EAttribute)referenceOrLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPredicated()
   {
     return predicatedEClass;
   }
@@ -381,8 +504,7 @@ public EClass getPredicated()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPredicated_Predicate()
+  public EReference getPredicated_Predicate()
   {
     return (EReference)predicatedEClass.getEStructuralFeatures().get(0);
   }
@@ -392,8 +514,7 @@ public EReference getPredicated_Predicate()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getPredicated_Element()
+  public EReference getPredicated_Element()
   {
     return (EReference)predicatedEClass.getEStructuralFeatures().get(1);
   }
@@ -403,8 +524,7 @@ public EReference getPredicated_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRuleOptions()
+  public EClass getRuleOptions()
   {
     return ruleOptionsEClass;
   }
@@ -414,8 +534,7 @@ public EClass getRuleOptions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRuleOptions_Options()
+  public EReference getRuleOptions_Options()
   {
     return (EReference)ruleOptionsEClass.getEStructuralFeatures().get(0);
   }
@@ -425,8 +544,7 @@ public EReference getRuleOptions_Options()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getRuleOptions_Element()
+  public EReference getRuleOptions_Element()
   {
     return (EReference)ruleOptionsEClass.getEStructuralFeatures().get(1);
   }
@@ -436,8 +554,7 @@ public EReference getRuleOptions_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getRuleCall()
+  public EClass getRuleCall()
   {
     return ruleCallEClass;
   }
@@ -447,8 +564,7 @@ public EClass getRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getRuleCall_Rule()
+  public EAttribute getRuleCall_Rule()
   {
     return (EAttribute)ruleCallEClass.getEStructuralFeatures().get(0);
   }
@@ -458,8 +574,17 @@ public EAttribute getRuleCall_Rule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getKeyword()
+  public EReference getRuleCall_Arguments()
+  {
+    return (EReference)ruleCallEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getKeyword()
   {
     return keywordEClass;
   }
@@ -469,8 +594,7 @@ public EClass getKeyword()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getKeyword_Value()
+  public EAttribute getKeyword_Value()
   {
     return (EAttribute)keywordEClass.getEStructuralFeatures().get(0);
   }
@@ -480,8 +604,7 @@ public EAttribute getKeyword_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getWildcard()
+  public EClass getWildcard()
   {
     return wildcardEClass;
   }
@@ -491,8 +614,7 @@ public EClass getWildcard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAlternatives()
+  public EClass getAlternatives()
   {
     return alternativesEClass;
   }
@@ -502,8 +624,7 @@ public EClass getAlternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAlternatives_Groups()
+  public EReference getAlternatives_Groups()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
   }
@@ -513,8 +634,7 @@ public EReference getAlternatives_Groups()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGroup()
+  public EClass getGroup()
   {
     return groupEClass;
   }
@@ -524,8 +644,7 @@ public EClass getGroup()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getGroup_Elements()
+  public EReference getGroup_Elements()
   {
     return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
@@ -535,8 +654,7 @@ public EReference getGroup_Elements()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getElementWithCardinality()
+  public EClass getElementWithCardinality()
   {
     return elementWithCardinalityEClass;
   }
@@ -546,8 +664,7 @@ public EClass getElementWithCardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getElementWithCardinality_Element()
+  public EReference getElementWithCardinality_Element()
   {
     return (EReference)elementWithCardinalityEClass.getEStructuralFeatures().get(0);
   }
@@ -557,8 +674,7 @@ public EReference getElementWithCardinality_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getElementWithCardinality_Cardinality()
+  public EAttribute getElementWithCardinality_Cardinality()
   {
     return (EAttribute)elementWithCardinalityEClass.getEStructuralFeatures().get(1);
   }
@@ -568,8 +684,7 @@ public EAttribute getElementWithCardinality_Cardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNegatedElement()
+  public EClass getNegatedElement()
   {
     return negatedElementEClass;
   }
@@ -579,8 +694,7 @@ public EClass getNegatedElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNegatedElement_Element()
+  public EReference getNegatedElement_Element()
   {
     return (EReference)negatedElementEClass.getEStructuralFeatures().get(0);
   }
@@ -590,8 +704,7 @@ public EReference getNegatedElement_Element()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getUntilElement()
+  public EClass getUntilElement()
   {
     return untilElementEClass;
   }
@@ -601,8 +714,7 @@ public EClass getUntilElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUntilElement_Left()
+  public EReference getUntilElement_Left()
   {
     return (EReference)untilElementEClass.getEStructuralFeatures().get(0);
   }
@@ -612,8 +724,7 @@ public EReference getUntilElement_Left()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getUntilElement_Right()
+  public EReference getUntilElement_Right()
   {
     return (EReference)untilElementEClass.getEStructuralFeatures().get(1);
   }
@@ -623,8 +734,87 @@ public EReference getUntilElement_Right()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getSkip()
+  public EClass getOrExpression()
+  {
+    return orExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOrExpression_Left()
+  {
+    return (EReference)orExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getOrExpression_Right()
+  {
+    return (EReference)orExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAndExpression()
+  {
+    return andExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAndExpression_Left()
+  {
+    return (EReference)andExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAndExpression_Right()
+  {
+    return (EReference)andExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNotExpression()
+  {
+    return notExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNotExpression_Value()
+  {
+    return (EReference)notExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSkip()
   {
     return skipEClass;
   }
@@ -634,8 +824,7 @@ public EClass getSkip()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleAntlrFactory getSimpleAntlrFactory()
+  public SimpleAntlrFactory getSimpleAntlrFactory()
   {
     return (SimpleAntlrFactory)getEFactoryInstance();
   }
@@ -675,9 +864,21 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     ruleEClass = createEClass(RULE);
     createEAttribute(ruleEClass, RULE__FRAGMENT);
     createEAttribute(ruleEClass, RULE__NAME);
+    createEReference(ruleEClass, RULE__PARAMETERS);
     createEReference(ruleEClass, RULE__BODY);
 
+    parameterEClass = createEClass(PARAMETER);
+    createEAttribute(parameterEClass, PARAMETER__TYPE);
+    createEAttribute(parameterEClass, PARAMETER__NAME);
+
     ruleElementEClass = createEClass(RULE_ELEMENT);
+    createEReference(ruleElementEClass, RULE_ELEMENT__GUARD);
+    createEReference(ruleElementEClass, RULE_ELEMENT__GUARDED);
+
+    expressionEClass = createEClass(EXPRESSION);
+
+    referenceOrLiteralEClass = createEClass(REFERENCE_OR_LITERAL);
+    createEAttribute(referenceOrLiteralEClass, REFERENCE_OR_LITERAL__NAME);
 
     predicatedEClass = createEClass(PREDICATED);
     createEReference(predicatedEClass, PREDICATED__PREDICATE);
@@ -689,6 +890,7 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
 
     ruleCallEClass = createEClass(RULE_CALL);
     createEAttribute(ruleCallEClass, RULE_CALL__RULE);
+    createEReference(ruleCallEClass, RULE_CALL__ARGUMENTS);
 
     keywordEClass = createEClass(KEYWORD);
     createEAttribute(keywordEClass, KEYWORD__VALUE);
@@ -711,6 +913,17 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     untilElementEClass = createEClass(UNTIL_ELEMENT);
     createEReference(untilElementEClass, UNTIL_ELEMENT__LEFT);
     createEReference(untilElementEClass, UNTIL_ELEMENT__RIGHT);
+
+    orExpressionEClass = createEClass(OR_EXPRESSION);
+    createEReference(orExpressionEClass, OR_EXPRESSION__LEFT);
+    createEReference(orExpressionEClass, OR_EXPRESSION__RIGHT);
+
+    andExpressionEClass = createEClass(AND_EXPRESSION);
+    createEReference(andExpressionEClass, AND_EXPRESSION__LEFT);
+    createEReference(andExpressionEClass, AND_EXPRESSION__RIGHT);
+
+    notExpressionEClass = createEClass(NOT_EXPRESSION);
+    createEReference(notExpressionEClass, NOT_EXPRESSION__VALUE);
 
     skipEClass = createEClass(SKIP);
   }
@@ -744,6 +957,7 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    referenceOrLiteralEClass.getESuperTypes().add(this.getExpression());
     predicatedEClass.getESuperTypes().add(this.getRuleElement());
     ruleOptionsEClass.getESuperTypes().add(this.getRuleElement());
     ruleCallEClass.getESuperTypes().add(this.getRuleElement());
@@ -754,6 +968,9 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     elementWithCardinalityEClass.getESuperTypes().add(this.getRuleElement());
     negatedElementEClass.getESuperTypes().add(this.getRuleElement());
     untilElementEClass.getESuperTypes().add(this.getRuleElement());
+    orExpressionEClass.getESuperTypes().add(this.getExpression());
+    andExpressionEClass.getESuperTypes().add(this.getExpression());
+    notExpressionEClass.getESuperTypes().add(this.getExpression());
     skipEClass.getESuperTypes().add(this.getRuleOptions());
 
     // Initialize classes and features; add operations and parameters
@@ -772,9 +989,21 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     initEClass(ruleEClass, Rule.class, "Rule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRule_Fragment(), ecorePackage.getEBoolean(), "fragment", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getRule_Name(), ecorePackage.getEString(), "name", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRule_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getRule_Body(), this.getRuleElement(), null, "body", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameter_Type(), ecorePackage.getEString(), "type", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(ruleElementEClass, RuleElement.class, "RuleElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getRuleElement_Guard(), this.getExpression(), null, "guard", null, 0, 1, RuleElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleElement_Guarded(), this.getRuleElement(), null, "guarded", null, 0, 1, RuleElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(referenceOrLiteralEClass, ReferenceOrLiteral.class, "ReferenceOrLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getReferenceOrLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, ReferenceOrLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(predicatedEClass, Predicated.class, "Predicated", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPredicated_Predicate(), this.getRuleElement(), null, "predicate", null, 0, 1, Predicated.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -786,6 +1015,7 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
 
     initEClass(ruleCallEClass, RuleCall.class, "RuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRuleCall_Rule(), ecorePackage.getEString(), "rule", null, 0, 1, RuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleCall_Arguments(), this.getExpression(), null, "arguments", null, 0, -1, RuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(keywordEClass, Keyword.class, "Keyword", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getKeyword_Value(), ecorePackage.getEString(), "value", null, 0, 1, Keyword.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -808,6 +1038,17 @@ public SimpleAntlrFactory getSimpleAntlrFactory()
     initEClass(untilElementEClass, UntilElement.class, "UntilElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getUntilElement_Left(), this.getRuleElement(), null, "left", null, 0, 1, UntilElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getUntilElement_Right(), this.getRuleElement(), null, "right", null, 0, 1, UntilElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(orExpressionEClass, OrExpression.class, "OrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getOrExpression_Left(), this.getExpression(), null, "left", null, 0, 1, OrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getOrExpression_Right(), this.getExpression(), null, "right", null, 0, 1, OrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(andExpressionEClass, AndExpression.class, "AndExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAndExpression_Left(), this.getExpression(), null, "left", null, 0, 1, AndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAndExpression_Right(), this.getExpression(), null, "right", null, 0, 1, AndExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(notExpressionEClass, NotExpression.class, "NotExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getNotExpression_Value(), this.getExpression(), null, "value", null, 0, 1, NotExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(skipEClass, Skip.class, "Skip", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

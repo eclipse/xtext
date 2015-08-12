@@ -146,7 +146,7 @@ public class InternalBaseInheritanceTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

@@ -19,7 +19,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Model");
 		private final Assignment cDomainModelAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cDomainModelDomainModelParserRuleCall_0 = (RuleCall)cDomainModelAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class DomainModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DomainModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEntitiesKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cEntitiesAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -43,13 +43,15 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		/// * SuppressWarnings[noInstantiation] * / DomainModel:
-		//	"entities" entities+=Entity* "end";
+		//	'entities'
+		//	entities+=Entity*
+		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"entities" entities+=Entity* "end"
+		//'entities' entities+=Entity* 'end'
 		public Group getGroup() { return cGroup; }
 
-		//"entities"
+		//'entities'
 		public Keyword getEntitiesKeyword_0() { return cEntitiesKeyword_0; }
 
 		//entities+=Entity*
@@ -58,12 +60,12 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		//Entity
 		public RuleCall getEntitiesEntityParserRuleCall_1_0() { return cEntitiesEntityParserRuleCall_1_0; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
 	}
 
 	public class EntityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entity");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -71,7 +73,8 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
 		
 		//Entity:
-		//	name=ID description=STRING;
+		//	name=ID
+		//	description=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID description=STRING
@@ -147,7 +150,9 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	/// * SuppressWarnings[noInstantiation] * / DomainModel:
-	//	"entities" entities+=Entity* "end";
+	//	'entities'
+	//	entities+=Entity*
+	//	'end';
 	public DomainModelElements getDomainModelAccess() {
 		return pDomainModel;
 	}
@@ -157,7 +162,8 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//Entity:
-	//	name=ID description=STRING;
+	//	name=ID
+	//	description=STRING;
 	public EntityElements getEntityAccess() {
 		return pEntity;
 	}
@@ -167,38 +173,38 @@ public class HiddenTokenSequencerTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

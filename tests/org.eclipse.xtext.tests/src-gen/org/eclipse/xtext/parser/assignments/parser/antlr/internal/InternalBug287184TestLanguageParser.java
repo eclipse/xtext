@@ -162,7 +162,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"FQN");
+                    		"org.eclipse.xtext.parser.assignments.Bug287184TestLanguage.FQN");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -226,7 +226,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"detail",
             	                    		lv_detail_2_1, 
-            	                    		"Detail");
+            	                    		"org.eclipse.xtext.parser.assignments.Bug287184TestLanguage.Detail");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 
@@ -251,7 +251,7 @@ public class InternalBug287184TestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"detail",
             	                    		lv_detail_2_2, 
-            	                    		"AssociatedDetail");
+            	                    		"org.eclipse.xtext.parser.assignments.Bug287184TestLanguage.AssociatedDetail");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: KeywordImpl.java,v 1.14 2010/04/06 14:09:57 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

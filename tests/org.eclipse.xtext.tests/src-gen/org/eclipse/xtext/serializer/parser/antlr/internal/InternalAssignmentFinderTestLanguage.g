@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"keywordVal",
         		lv_keywordVal_1_0, 
-        		"KeywordVal");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordVal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -118,7 +118,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"terminalVal",
         		lv_terminalVal_3_0, 
-        		"TerminalVal");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalVal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -141,7 +141,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"enumVal",
         		lv_enumVal_5_0, 
-        		"EnumVal");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumVal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -164,7 +164,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"keywordBool",
         		lv_keywordBool_7_0, 
-        		"KeywordBool");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordBool");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -187,7 +187,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"terminalBool",
         		lv_terminalBool_9_0, 
-        		"TerminalBool");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalBool");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -210,7 +210,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"enumBool",
         		lv_enumBool_11_0, 
-        		"EnumBool");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumBool");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -233,7 +233,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"mixedBool",
         		lv_mixedBool_13_0, 
-        		"MixedBool");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedBool");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -256,7 +256,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"mixedValue",
         		lv_mixedValue_15_0, 
-        		"MixedValue");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -279,7 +279,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"containmentRef",
         		lv_containmentRef_17_0, 
-        		"ContainmentRef");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -302,7 +302,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"crossRef",
         		lv_crossRef_19_0, 
-        		"CrossRef");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.CrossRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -394,7 +394,7 @@ ruleTerminalVal returns [EObject current=null]
        			$current, 
        			"term",
         		lv_term_0_0, 
-        		"Terminal1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
 	    }
 
 )
@@ -413,7 +413,7 @@ ruleTerminalVal returns [EObject current=null]
        			$current, 
        			"term",
         		lv_term_1_0, 
-        		"Terminal2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
 	    }
 
 )
@@ -467,7 +467,7 @@ ruleEnumVal returns [EObject current=null]
        			$current, 
        			"en",
         		lv_en_0_0, 
-        		"Enum1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -486,7 +486,7 @@ ruleEnumVal returns [EObject current=null]
        			$current, 
        			"en",
         		lv_en_1_0, 
-        		"Enum2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -578,7 +578,7 @@ ruleTerminalBool returns [EObject current=null]
        			$current, 
        			"term",
         		true, 
-        		"Terminal1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
 	    }
 
 )
@@ -597,7 +597,7 @@ ruleTerminalBool returns [EObject current=null]
        			$current, 
        			"term",
         		true, 
-        		"Terminal2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
 	    }
 
 )
@@ -651,7 +651,7 @@ ruleEnumBool returns [EObject current=null]
        			$current, 
        			"en",
         		true, 
-        		"Enum1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -670,7 +670,7 @@ ruleEnumBool returns [EObject current=null]
        			$current, 
        			"en",
         		true, 
-        		"Enum2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -725,7 +725,7 @@ ruleMixedBool returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"Boolean");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Boolean");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -798,7 +798,7 @@ ruleMixedValue returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_0_0, 
-        		"Enum1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -817,7 +817,7 @@ ruleMixedValue returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"DatEnum");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.DatEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -883,7 +883,7 @@ ruleContainmentRef returns [EObject current=null]
        			$current, 
        			"ctx",
         		lv_ctx_0_0, 
-        		"ContainmentRef1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -902,7 +902,7 @@ ruleContainmentRef returns [EObject current=null]
        			$current, 
        			"ctx",
         		lv_ctx_1_0, 
-        		"ContainmentRef2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -946,7 +946,7 @@ ruleContainmentRef1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -989,7 +989,7 @@ ruleContainmentRef2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1029,7 +1029,7 @@ ruleCrossRef returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_1, 
-        		"Terminal1");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
 	    }
 
     |		lv_name_0_2=RULE_TERMINAL2
@@ -1044,7 +1044,7 @@ ruleCrossRef returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_2, 
-        		"Terminal2");
+        		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
 	    }
 
 )

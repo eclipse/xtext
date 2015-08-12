@@ -90,7 +90,7 @@ ruleProgram returns [EObject current=null]
        			$current, 
        			"define",
         		lv_define_0_0, 
-        		"DefineVariables");
+        		"org.eclipse.xtext.resource.Bug385636.DefineVariables");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +108,7 @@ ruleProgram returns [EObject current=null]
        			$current, 
        			"statements",
         		lv_statements_1_0, 
-        		"Statement");
+        		"org.eclipse.xtext.resource.Bug385636.Statement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -155,7 +155,7 @@ ruleDefineVariables returns [EObject current=null]
        			$current, 
        			"variables",
         		lv_variables_1_0, 
-        		"DefineVariable");
+        		"org.eclipse.xtext.resource.Bug385636.DefineVariable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -203,7 +203,7 @@ ruleDefineVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -294,7 +294,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_3_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -323,7 +323,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_6_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -352,7 +352,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_9_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -381,7 +381,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_12_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -410,7 +410,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_15_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -443,7 +443,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_19_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -476,7 +476,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_23_0, 
-        		"Expression_VariableName");
+        		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -515,7 +515,7 @@ ruleExpression_VariableName returns [EObject current=null]
        			$current, 
        			"variable",
         		lv_variable_0_0, 
-        		"NVariableAccess");
+        		"org.eclipse.xtext.resource.Bug385636.NVariableAccess");
 	        afterParserOrEnumRuleCall();
 	    }
 

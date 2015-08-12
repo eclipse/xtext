@@ -193,14 +193,32 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       final Collection<IGrammarConstraintProvider.IConstraint> localConstraints = this.sequencerUtil.getGrammarConstraints(this.grammar);
       Grammar _superGrammar = this.sequencerUtil.getSuperGrammar(this.grammar);
       final Collection<IGrammarConstraintProvider.IConstraint> superConstraints = this.sequencerUtil.getGrammarConstraints(_superGrammar);
-      String _xifexpression = null;
       final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_3 = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
+        @Override
+        public Boolean apply(final IGrammarConstraintProvider.IConstraint e) {
+          boolean _and = false;
+          EClass _type = e.getType();
+          boolean _notEquals = (!Objects.equal(_type, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            boolean _contains = superConstraints.contains(e);
+            boolean _not = (!_contains);
+            _and = _not;
+          }
+          return Boolean.valueOf(_and);
+        }
+      };
+      Iterable<IGrammarConstraintProvider.IConstraint> _filter_1 = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function_3);
+      final List<IGrammarConstraintProvider.IConstraint> newLocalConstraints = IterableExtensions.<IGrammarConstraintProvider.IConstraint>toList(_filter_1);
+      String _xifexpression = null;
+      final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_4 = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
         @Override
         public Boolean apply(final IGrammarConstraintProvider.IConstraint it) {
           return Boolean.valueOf(superConstraints.contains(it));
         }
       };
-      boolean _exists = IterableExtensions.<IGrammarConstraintProvider.IConstraint>exists(localConstraints, _function_3);
+      boolean _exists = IterableExtensions.<IGrammarConstraintProvider.IConstraint>exists(localConstraints, _function_4);
       if (_exists) {
         SerializerGenFileNames.GenFileName _semanticSequencer = this.names.getSemanticSequencer();
         EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
@@ -253,24 +271,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("\t");
       _builder.newLine();
       _builder.append("\t");
-      final Function1<IGrammarConstraintProvider.IConstraint, Boolean> _function_4 = new Function1<IGrammarConstraintProvider.IConstraint, Boolean>() {
-        @Override
-        public Boolean apply(final IGrammarConstraintProvider.IConstraint e) {
-          boolean _and = false;
-          EClass _type = e.getType();
-          boolean _notEquals = (!Objects.equal(_type, null));
-          if (!_notEquals) {
-            _and = false;
-          } else {
-            boolean _contains = superConstraints.contains(e);
-            boolean _not = (!_contains);
-            _and = _not;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterable<IGrammarConstraintProvider.IConstraint> _filter_1 = IterableExtensions.<IGrammarConstraintProvider.IConstraint>filter(localConstraints, _function_4);
-      List<IGrammarConstraintProvider.IConstraint> _sort = IterableExtensions.<IGrammarConstraintProvider.IConstraint>sort(_filter_1);
+      List<IGrammarConstraintProvider.IConstraint> _sort = IterableExtensions.<IGrammarConstraintProvider.IConstraint>sort(newLocalConstraints);
       final Function1<IGrammarConstraintProvider.IConstraint, CharSequence> _function_5 = new Function1<IGrammarConstraintProvider.IConstraint, CharSequence>() {
         @Override
         public CharSequence apply(final IGrammarConstraintProvider.IConstraint e) {
@@ -402,7 +403,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
               final Function1<EObject, String> _function_1 = new Function1<EObject, String>() {
                 @Override
                 public String apply(final EObject e) {
-                  return AbstractSemanticSequencer.this.ctx2name.getContextName(e);
+                  return AbstractSemanticSequencer.this.ctx2name.getContextName(AbstractSemanticSequencer.this.grammar, e);
                 }
               };
               List<EObject> _sortBy = IterableExtensions.<EObject, String>sortBy(_value, _function_1);

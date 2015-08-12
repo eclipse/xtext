@@ -78,35 +78,35 @@ public class EcoreFragmentTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSecondElementType() {
 		return Second_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_GroupElementType() {
 		return Second_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_NameAssignment_0ElementType() {
 		return Second_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_NameIDTerminalRuleCall_0_0ElementType() {
 		return Second_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_FirstKeyword_1ElementType() {
 		return Second_FirstKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_FirstAssignment_2ElementType() {
 		return Second_FirstAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_FirstFirstCrossReference_2_0ElementType() {
 		return Second_FirstFirstCrossReference_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecond_FirstFirstIDTerminalRuleCall_2_0_1ElementType() {
 		return Second_FirstFirstIDTerminalRuleCall_2_0_1_ELEMENT_TYPE;
 	}

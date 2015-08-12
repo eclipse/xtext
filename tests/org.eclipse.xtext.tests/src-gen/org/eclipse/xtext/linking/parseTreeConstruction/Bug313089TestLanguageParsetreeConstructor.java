@@ -108,7 +108,7 @@ protected class Foo_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// bar=Bar | baz=Baz
+// (bar=Bar | baz=Baz)
 protected class Foo_Alternatives_1 extends AlternativesToken {
 
 	public Foo_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -368,11 +368,11 @@ protected class Bar_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Baz ****************
  *
  * Baz:
- * 	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+ * 	'baz' name=ID ({Baz.child=current} 'baz' name=ID)*;
  *
  **/
 
-// "baz" name=ID ({Baz.child=current} "baz" name=ID)*
+// 'baz' name=ID ({Baz.child=current} 'baz' name=ID)*
 protected class Baz_Group extends GroupToken {
 	
 	public Baz_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -402,7 +402,7 @@ protected class Baz_Group extends GroupToken {
 
 }
 
-// "baz"
+// 'baz'
 protected class Baz_BazKeyword_0 extends KeywordToken  {
 	
 	public Baz_BazKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -457,7 +457,7 @@ protected class Baz_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ({Baz.child=current} "baz" name=ID)*
+// ({Baz.child=current} 'baz' name=ID)*
 protected class Baz_Group_2 extends GroupToken {
 	
 	public Baz_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -509,7 +509,7 @@ protected class Baz_BazChildAction_2_0 extends ActionToken  {
 	}
 }
 
-// "baz"
+// 'baz'
 protected class Baz_BazKeyword_2_1 extends KeywordToken  {
 	
 	public Baz_BazKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

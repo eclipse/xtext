@@ -59,6 +59,15 @@ public interface SimpleAntlrFactory extends EFactory
   Rule createRule();
 
   /**
+   * Returns a new object of class '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter</em>'.
+   * @generated
+   */
+  Parameter createParameter();
+
+  /**
    * Returns a new object of class '<em>Rule Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,6 +75,24 @@ public interface SimpleAntlrFactory extends EFactory
    * @generated
    */
   RuleElement createRuleElement();
+
+  /**
+   * Returns a new object of class '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Expression</em>'.
+   * @generated
+   */
+  Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Reference Or Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Reference Or Literal</em>'.
+   * @generated
+   */
+  ReferenceOrLiteral createReferenceOrLiteral();
 
   /**
    * Returns a new object of class '<em>Predicated</em>'.
@@ -156,6 +183,33 @@ public interface SimpleAntlrFactory extends EFactory
    * @generated
    */
   UntilElement createUntilElement();
+
+  /**
+   * Returns a new object of class '<em>Or Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Or Expression</em>'.
+   * @generated
+   */
+  OrExpression createOrExpression();
+
+  /**
+   * Returns a new object of class '<em>And Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>And Expression</em>'.
+   * @generated
+   */
+  AndExpression createAndExpression();
+
+  /**
+   * Returns a new object of class '<em>Not Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Not Expression</em>'.
+   * @generated
+   */
+  NotExpression createNotExpression();
 
   /**
    * Returns a new object of class '<em>Skip</em>'.

@@ -14,15 +14,29 @@ extension org::eclipse::xtext::Extensions reexport;
 extension org::eclipse::xtext::GrammarUtil reexport;
 extension org::eclipse::xtext::EcoreUtils;
 
-ruleName(ParserRule this) : 'rule'+name;
-ruleName(EnumRule this) : 'rule'+name;
-ruleName(TerminalRule this) : 'RULE_'+name.toUpperCase();
-ruleName(AbstractRule this) : "Unsupported";
+ruleName(AbstractRule this) : 
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getRuleName(org.eclipse.xtext.AbstractRule)
+;
+
+parameterList(ParserRule this, boolean debug) : 
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(org.eclipse.xtext.ParserRule, java.lang.Boolean)
+;
+
+defaultArgumentList(ParserRule this) : 
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getDefaultArgumentList(org.eclipse.xtext.ParserRule)
+;
+
+argumentList(RuleCall this, boolean debug) : 
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getArgumentList(org.eclipse.xtext.RuleCall, java.lang.Boolean)
+;
+
+guardCondition(Group this) : 
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.guardConditionToAntlr(org.eclipse.xtext.Group)
+;
 
 List[AbstractElement] firstSet(AbstractElement this):
   JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getFirstSet(org.eclipse.xtext.AbstractElement)
 ;
-
 
 predicated(AbstractElement this):
   this.predicated
@@ -37,18 +51,10 @@ predicated(RuleCall this):
 ;
 
 predicatedElement(AbstractElement this):
-  this
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getPredicatedElement(org.eclipse.xtext.AbstractElement)
 ;
 
-predicatedElement(Assignment this):
-  if predicated then this else this.terminal.predicatedElement()
-;
-
-predicatedElement(RuleCall this):
-  if predicated then this else ((Group)this.rule.alternatives).elements.first().predicatedElement()
-;
-
-entryRuleName(ParserRule this) : 'entryRule'+name;
+entryRuleName(ParserRule this) : 'entry' + this.ruleName().toFirstUpper();
 
 setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
@@ -89,7 +95,7 @@ String toJavaStringImpl(String this):
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.toStringInAntlrAction(java.lang.String);
 	
 toStringLiteral(RuleCall this) :
-	rule!=null ? '"'+this.rule.name+'"' :  "null";
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getQualifiedNameAsString(org.eclipse.xtext.RuleCall);
 
 toStringLiteral(Keyword this) :
 	'"'+this.value.toJavaStringImpl()+'"';

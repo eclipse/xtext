@@ -372,8 +372,8 @@ protected class Expression_PreopParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule Preop ****************
  *
- * Preop returns Expression:
- * 	{Preop} functionName="--" expr=Variable;
+ * Preop Expression:
+ * 	{Preop} functionName="--" expr=Variable
  *
  **/
 
@@ -518,8 +518,8 @@ protected class Preop_ExprAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Postop ****************
  *
- * Postop returns Expression:
- * 	Variable ({Postop.expr=current} functionName="--")?;
+ * Postop Expression:
+ * 	Variable ({Postop.expr=current} functionName="--")?
  *
  **/
 
@@ -689,8 +689,8 @@ protected class Postop_FunctionNameAssignment_1_1 extends AssignmentToken  {
 
 /************ begin Rule Variable ****************
  *
- * Variable returns Expression:
- * 	{Variable} name=ID;
+ * Variable Expression:
+ * 	{Variable} name=ID
  *
  **/
 

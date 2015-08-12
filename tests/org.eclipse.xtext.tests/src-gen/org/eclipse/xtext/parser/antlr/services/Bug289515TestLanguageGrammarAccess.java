@@ -19,7 +19,7 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug289515TestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cDigitOneKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -47,16 +47,21 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cValuePercentSignPercentSignKeyword_5_1_0 = (Keyword)cValueAssignment_5_1.eContents().get(0);
 		
 		//Model:
-		//	"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%";
+		//	'1' value="%"
+		//	| '2' value='%'
+		//	| '3' value="\\%"
+		//	| '4' value='\\%'
+		//	| '5' value="%%"
+		//	| '6' value='%%';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%"
+		//'1' value="%" | '2' value='%' | '3' value="\\%" | '4' value='\\%' | '5' value="%%" | '6' value='%%'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"1" value="%"
+		//'1' value="%"
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"1"
+		//'1'
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 
 		//value="%"
@@ -65,22 +70,22 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"%"
 		public Keyword getValuePercentSignKeyword_0_1_0() { return cValuePercentSignKeyword_0_1_0; }
 
-		//"2" value="%"
+		//'2' value='%'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_1_0() { return cDigitTwoKeyword_1_0; }
 
-		//value="%"
+		//value='%'
 		public Assignment getValueAssignment_1_1() { return cValueAssignment_1_1; }
 
-		//"%"
+		//'%'
 		public Keyword getValuePercentSignKeyword_1_1_0() { return cValuePercentSignKeyword_1_1_0; }
 
-		//"3" value="\\%"
+		//'3' value="\\%"
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"3"
+		//'3'
 		public Keyword getDigitThreeKeyword_2_0() { return cDigitThreeKeyword_2_0; }
 
 		//value="\\%"
@@ -89,22 +94,22 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"\\%"
 		public Keyword getValueReverseSolidusPercentSignKeyword_2_1_0() { return cValueReverseSolidusPercentSignKeyword_2_1_0; }
 
-		//"4" value="\\%"
+		//'4' value='\\%'
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"4"
+		//'4'
 		public Keyword getDigitFourKeyword_3_0() { return cDigitFourKeyword_3_0; }
 
-		//value="\\%"
+		//value='\\%'
 		public Assignment getValueAssignment_3_1() { return cValueAssignment_3_1; }
 
-		//"\\%"
+		//'\\%'
 		public Keyword getValueReverseSolidusPercentSignKeyword_3_1_0() { return cValueReverseSolidusPercentSignKeyword_3_1_0; }
 
-		//"5" value="%%"
+		//'5' value="%%"
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"5"
+		//'5'
 		public Keyword getDigitFiveKeyword_4_0() { return cDigitFiveKeyword_4_0; }
 
 		//value="%%"
@@ -113,16 +118,16 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"%%"
 		public Keyword getValuePercentSignPercentSignKeyword_4_1_0() { return cValuePercentSignPercentSignKeyword_4_1_0; }
 
-		//"6" value="%%"
+		//'6' value='%%'
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"6"
+		//'6'
 		public Keyword getDigitSixKeyword_5_0() { return cDigitSixKeyword_5_0; }
 
-		//value="%%"
+		//value='%%'
 		public Assignment getValueAssignment_5_1() { return cValueAssignment_5_1; }
 
-		//"%%"
+		//'%%'
 		public Keyword getValuePercentSignPercentSignKeyword_5_1_0() { return cValuePercentSignPercentSignKeyword_5_1_0; }
 	}
 	
@@ -169,7 +174,12 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%";
+	//	'1' value="%"
+	//	| '2' value='%'
+	//	| '3' value="\\%"
+	//	| '4' value='\\%'
+	//	| '5' value="%%"
+	//	| '6' value='%%';
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -179,38 +189,38 @@ public class Bug289515TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

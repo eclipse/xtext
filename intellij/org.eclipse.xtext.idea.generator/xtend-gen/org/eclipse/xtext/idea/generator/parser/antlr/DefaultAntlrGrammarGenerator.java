@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
@@ -200,7 +199,7 @@ public class DefaultAntlrGrammarGenerator {
       Iterable<ParserRule> _filter = IterableExtensions.<ParserRule>filter(_allParserRules, _function);
       for(final ParserRule rule : _filter) {
         _builder.newLine();
-        CharSequence _compileRule = this.compileRule(rule, it, options);
+        String _compileRule = this.compileRule(rule, it, options);
         _builder.append(_compileRule, "");
         _builder.newLineIfNotEmpty();
       }
@@ -216,7 +215,7 @@ public class DefaultAntlrGrammarGenerator {
       Iterable<EnumRule> _filter_1 = IterableExtensions.<EnumRule>filter(_allEnumRules, _function_1);
       for(final EnumRule rule_1 : _filter_1) {
         _builder.newLine();
-        CharSequence _compileRule_1 = this.compileRule(rule_1, it, options);
+        String _compileRule_1 = this.compileRule(rule_1, it, options);
         _builder.append(_compileRule_1, "");
         _builder.newLineIfNotEmpty();
       }
@@ -233,15 +232,15 @@ public class DefaultAntlrGrammarGenerator {
     return _builder;
   }
   
-  protected CharSequence _compileRule(final EnumRule it, final Grammar grammar, final AntlrOptions options) {
+  protected String compileRule(final EnumRule it, final Grammar grammar, final AntlrOptions options) {
     return this.compileEBNF(it, options);
   }
   
-  protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
+  protected String compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     return this.compileEBNF(it, options);
   }
   
-  protected CharSequence _compileRule(final TerminalRule it, final Grammar grammar, final AntlrOptions options) {
+  protected CharSequence compileRule(final TerminalRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
       boolean _isFragment = it.isFragment();
@@ -664,12 +663,12 @@ public class DefaultAntlrGrammarGenerator {
           throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule");
         }
       }
-      _xblockexpression = this.crossrefEbnf(rule, ref, supportActions);
+      _xblockexpression = this.crossrefEbnf(rule, it, ref, supportActions);
     }
     return _xblockexpression;
   }
   
-  protected String _crossrefEbnf(final AbstractRule it, final CrossReference ref, final boolean supportActions) {
+  protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
@@ -770,19 +769,6 @@ public class DefaultAntlrGrammarGenerator {
     return this.ebnf(it, options, supportActions);
   }
   
-  protected CharSequence compileRule(final AbstractRule it, final Grammar grammar, final AntlrOptions options) {
-    if (it instanceof EnumRule) {
-      return _compileRule((EnumRule)it, grammar, options);
-    } else if (it instanceof ParserRule) {
-      return _compileRule((ParserRule)it, grammar, options);
-    } else if (it instanceof TerminalRule) {
-      return _compileRule((TerminalRule)it, grammar, options);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, grammar, options).toString());
-    }
-  }
-  
   protected String dataTypeEbnf2(final AbstractElement it, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _dataTypeEbnf2((Alternatives)it, supportActions);
@@ -827,15 +813,13 @@ public class DefaultAntlrGrammarGenerator {
     }
   }
   
-  protected String crossrefEbnf(final EObject it, final CrossReference ref, final boolean supportActions) {
+  protected String crossrefEbnf(final AbstractElement it, final CrossReference ref, final boolean supportActions) {
     if (it instanceof Alternatives) {
       return _crossrefEbnf((Alternatives)it, ref, supportActions);
     } else if (it instanceof RuleCall) {
       return _crossrefEbnf((RuleCall)it, ref, supportActions);
-    } else if (it instanceof AbstractElement) {
-      return _crossrefEbnf((AbstractElement)it, ref, supportActions);
-    } else if (it instanceof AbstractRule) {
-      return _crossrefEbnf((AbstractRule)it, ref, supportActions);
+    } else if (it != null) {
+      return _crossrefEbnf(it, ref, supportActions);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, ref, supportActions).toString());

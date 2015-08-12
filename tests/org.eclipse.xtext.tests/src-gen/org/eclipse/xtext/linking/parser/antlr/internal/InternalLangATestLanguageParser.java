@@ -164,7 +164,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"imports",
             	            		lv_imports_0_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.linking.LangATestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -213,7 +213,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"types",
             	            		lv_types_1_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.linking.LangATestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -323,7 +323,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"uri",
                     		lv_uri_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -432,7 +432,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

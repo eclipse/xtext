@@ -99,11 +99,11 @@ protected class Model_DefAssignment extends AssignmentToken  {
 /************ begin Rule Definition ****************
  *
  * Definition:
- * 	"(def)" name=ID ":" child+=Child ref+=Reference?;
+ * 	'(def)' name=ID ':' child+=Child ref+=Reference?;
  *
  **/
 
-// "(def)" name=ID ":" child+=Child ref+=Reference?
+// '(def)' name=ID ':' child+=Child ref+=Reference?
 protected class Definition_Group extends GroupToken {
 	
 	public Definition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -133,7 +133,7 @@ protected class Definition_Group extends GroupToken {
 
 }
 
-// "(def)"
+// '(def)'
 protected class Definition_DefKeyword_0 extends KeywordToken  {
 	
 	public Definition_DefKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -188,7 +188,7 @@ protected class Definition_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Definition_ColonKeyword_2 extends KeywordToken  {
 	
 	public Definition_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -309,11 +309,11 @@ protected class Definition_RefAssignment_4 extends AssignmentToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- * 	"(child)" name=ID ":" link=[Definition]?;
+ * 	'(child)' name=ID ':' link=[Definition]?;
  *
  **/
 
-// "(child)" name=ID ":" link=[Definition]?
+// '(child)' name=ID ':' link=[Definition]?
 protected class Child_Group extends GroupToken {
 	
 	public Child_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -343,7 +343,7 @@ protected class Child_Group extends GroupToken {
 
 }
 
-// "(child)"
+// '(child)'
 protected class Child_ChildKeyword_0 extends KeywordToken  {
 	
 	public Child_ChildKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -398,7 +398,7 @@ protected class Child_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child_ColonKeyword_2 extends KeywordToken  {
 	
 	public Child_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -464,11 +464,11 @@ protected class Child_LinkAssignment_3 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- * 	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+ * 	'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
  *
  **/
 
-// "(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*
+// '(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*
 protected class Reference_Group extends GroupToken {
 	
 	public Reference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -499,7 +499,7 @@ protected class Reference_Group extends GroupToken {
 
 }
 
-// "(ref)"
+// '(ref)'
 protected class Reference_RefKeyword_0 extends KeywordToken  {
 	
 	public Reference_RefKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -559,7 +559,7 @@ protected class Reference_RefChildAssignment_1 extends AssignmentToken  {
 
 }
 
-// (":" {NestedRef.left=current} refChild=[Child])*
+// (':' {NestedRef.left=current} refChild=[Child])*
 protected class Reference_Group_2 extends GroupToken {
 	
 	public Reference_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -588,7 +588,7 @@ protected class Reference_Group_2 extends GroupToken {
 
 }
 
-// ":"
+// ':'
 protected class Reference_ColonKeyword_2_0 extends KeywordToken  {
 	
 	public Reference_ColonKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

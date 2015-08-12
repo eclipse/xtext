@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -204,31 +203,33 @@ public class Xtext2EcoreTransformer {
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
 				EClassifierInfo generatedEClass = findOrCreateEClassifierInfo(rule);
-				if (rule instanceof ParserRule) {
-					ParserRule parserRule = (ParserRule) rule;
-					if (parserRule.getAlternatives() != null) {
-						if (!GrammarUtil.isDatatypeRule(parserRule)) {
-							deriveTypesAndHierarchy(parserRule, generatedEClass, parserRule.getAlternatives());
-						} else {
+				if (generatedEClass != null || !isWildcardFragment(rule)) {
+					if (rule instanceof ParserRule) {
+						ParserRule parserRule = (ParserRule) rule;
+						if (parserRule.getAlternatives() != null) {
+							if (!GrammarUtil.isDatatypeRule(parserRule)) {
+								deriveTypesAndHierarchy(parserRule, generatedEClass, parserRule.getAlternatives());
+							} else {
+								checkSupertypeOfOverriddenDatatypeRule(rule);
+							}
+						}
+					} else if (rule instanceof TerminalRule) {
+						if (rule.getType() != null) {
+							if (!(rule.getType().getClassifier() instanceof EDataType))
+								throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
+										"Return type of a terminal rule must be an EDataType.", rule.getType());
 							checkSupertypeOfOverriddenDatatypeRule(rule);
 						}
+					} else if (rule instanceof EnumRule) {
+						if (rule.getType() != null) {
+							if (!(rule.getType().getClassifier() instanceof EEnum))
+								throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
+										"Return type of an enum rule must be an EEnum.", rule.getType());
+							checkSupertypeOfOverriddenDatatypeRule(rule);
+						}
+					} else {
+						throw new IllegalStateException("Unknown rule type: " + rule.eClass().getName());
 					}
-				} else if (rule instanceof TerminalRule) {
-					if (rule.getType() != null) {
-						if (!(rule.getType().getClassifier() instanceof EDataType))
-							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
-									"Return type of a terminal rule must be an EDataType.", rule.getType());
-						checkSupertypeOfOverriddenDatatypeRule(rule);
-					}
-				} else if (rule instanceof EnumRule) {
-					if (rule.getType() != null) {
-						if (!(rule.getType().getClassifier() instanceof EEnum))
-							throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable,
-									"Return type of an enum rule must be an EEnum.", rule.getType());
-						checkSupertypeOfOverriddenDatatypeRule(rule);
-					}
-				} else {
-					throw new IllegalStateException("Unknown rule type: " + rule.eClass().getName());
 				}
 			}
 			catch (TransformationException e) {
@@ -320,7 +321,7 @@ public class Xtext2EcoreTransformer {
 		boolean result = true;
 		for (AbstractRule rule : grammar.getRules()) {
 			try {
-				if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule)) {
+				if (rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule) && !isWildcardFragment(rule)) {
 					deriveFeatures((ParserRule) rule);
 				} else if (rule instanceof EnumRule) {
 					deriveEnums((EnumRule) rule);
@@ -420,11 +421,15 @@ public class Xtext2EcoreTransformer {
 
 			@Override
 			public Xtext2EcoreInterpretationContext caseGroup(Group object) {
-				Xtext2EcoreInterpretationContext result = deriveFeatures(context.spawnContextForGroup(), object.getElements());
-				if (GrammarUtil.isMultipleCardinality(object)) {
-					result = deriveFeatures(result.spawnContextForGroup(), object.getElements());
+				return visitElements(object, object.getElements());
+			}
+
+			private Xtext2EcoreInterpretationContext visitElements(AbstractElement caller, List<AbstractElement> elementsToProcess) {
+				Xtext2EcoreInterpretationContext result = deriveFeatures(context.spawnContextForGroup(), elementsToProcess);
+				if (GrammarUtil.isMultipleCardinality(caller)) {
+					result = deriveFeatures(result.spawnContextForGroup(), elementsToProcess);
 				}
-				if (GrammarUtil.isOptionalCardinality(object)) {
+				if (GrammarUtil.isOptionalCardinality(caller)) {
 					result = result.mergeSpawnedContexts(Arrays.asList(context, result));
 				}
 				return result;
@@ -450,8 +455,14 @@ public class Xtext2EcoreTransformer {
 			
 			@Override
 			public Xtext2EcoreInterpretationContext caseRuleCall(RuleCall object) {
+				AbstractRule calledRule = object.getRule();
+				if (isWildcardFragment(calledRule)) {
+					return visitElements(object, Collections.singletonList(calledRule.getAlternatives()));
+				}
+				if (isParserRuleFragment(calledRule)) {
+					return context;
+				}
 				if (!GrammarUtil.isOptionalCardinality(object)) {
-					AbstractRule calledRule = object.getRule();
 					// do not throw an exception for missing rules, these have been
 					// announced during the first iteration
 					if (calledRule != null && calledRule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) calledRule)) {
@@ -495,7 +506,7 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private Xtext2EcoreInterpretationContext deriveFeatures(Xtext2EcoreInterpretationContext context,
-			EList<AbstractElement> elements) {
+			List<AbstractElement> elements) {
 		Xtext2EcoreInterpretationContext result = context;
 		for (AbstractElement element : elements) {
 			result = deriveFeatures(result, element);
@@ -605,19 +616,14 @@ public class Xtext2EcoreTransformer {
 		final TypeHierarchyHelper helper = new TypeHierarchyHelper(grammar, this.eClassifierInfos, this.errorAcceptor);
 		helper.liftUpFeaturesRecursively();
 		helper.removeDuplicateDerivedFeatures();
-//		helper.detectEClassesWithCyclesInTypeHierachy();
-
-		// duplicated features can occur in rare cases when alternatives produce
-		// different types of a feature
-		// If the internal structure (Set) of the underlying algorithm
-		// produces the features for the subtype first the implementation of EClassInfo
-		// wont find a conflict
-//		helper.detectDuplicatedFeatures();
 	}
 
 	private void deriveTypesAndHierarchy(final ParserRule rule, final EClassifierInfo ruleReturnType,
 			AbstractElement element) throws TransformationException {
 		TransformationException ex = new XtextSwitch<TransformationException>() {
+			
+			Set<AbstractRule> visiting = Sets.newHashSet();
+			
 			@Override
 			public TransformationException caseAction(Action action) {
 				final TypeRef actionTypeRef = action.getType();
@@ -633,10 +639,8 @@ public class Xtext2EcoreTransformer {
 			@Override
 			public TransformationException caseCompoundElement(CompoundElement object) {
 				for (AbstractElement ele : object.getElements()) {
-					try {
-						deriveTypesAndHierarchy(rule, ruleReturnType, ele);
-					}
-					catch (TransformationException ex) {
+					TransformationException ex = doSwitch(ele);
+					if (ex != null) {
 						return ex;
 					}
 				}
@@ -656,19 +660,38 @@ public class Xtext2EcoreTransformer {
 							"Cannot find called rule.", ruleCall);
 				}
 				if (calledRule instanceof TerminalRule ||
-						calledRule instanceof ParserRule && (GrammarUtil.isDatatypeRule((ParserRule) calledRule)))
+						calledRule instanceof ParserRule && (GrammarUtil.isDatatypeRule((ParserRule) calledRule))
+						|| isWildcardFragment(calledRule))
 					return null;
 				if (calledRule instanceof EnumRule) {
 					return new TransformationException(TransformationErrorCode.NoSuchRuleAvailable,
 							"Cannot call enum rule without assignment.", ruleCall);
 				}
-				final TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
 				try {
-					addSuperType(rule, calledRuleReturnTypeRef, ruleReturnType);
-				}
-				catch (TransformationException ex) {
+					if (isParserRuleFragment(calledRule)) {
+						TypeRef subTypeRef = getOrComputeReturnType(rule);
+						addSuperType(rule, subTypeRef, findOrCreateEClassifierInfo(calledRule));
+						if (visiting.add(calledRule)) {
+							try {
+								AbstractElement fragment = calledRule.getAlternatives();
+								doSwitch(fragment);
+							} finally {
+								visiting.remove(calledRule);
+							}
+						}
+					} else {
+						final TypeRef calledRuleReturnTypeRef = getOrComputeReturnType(calledRule);
+						addSuperType(rule, calledRuleReturnTypeRef, ruleReturnType);
+					}
+				} catch (TransformationException ex) {
 					return ex;
 				}
+				return null;
+			}
+			
+			@Override
+			public TransformationException defaultCase(EObject object) {
+				// ignore
 				return null;
 			}
 
@@ -684,18 +707,78 @@ public class Xtext2EcoreTransformer {
 
 	private boolean deriveTypeHierarchyFromOverridden(ParserRule rule, Grammar grammar) throws TransformationException {
 		AbstractRule parentRule = GrammarUtil.findRuleForName(grammar, rule.getName());
-		if (parentRule != null && parentRule.getType() != null && parentRule != rule) {
-			if (parentRule.getType().getClassifier() instanceof EDataType)
-				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-						"Cannot inherit from datatype rule and return another type.", rule.getType());
-			EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
-			if (parentTypeInfo == null)
-				throw new TransformationException(TransformationErrorCode.InvalidSupertype,
-						"Cannot determine return type of overridden rule.", rule.getType());
-			addSuperType(rule, rule.getType(), parentTypeInfo);
-			return true;
+		if (parentRule != null) {
+			if (parentRule != rule && parentRule instanceof ParserRule) {
+				ParserRule casted = (ParserRule) parentRule;
+				if (casted.isFragment() != rule.isFragment()) {
+					if (rule.isFragment()) {
+						throw new TransformationException(TransformationErrorCode.InvalidFragmentOverride,
+								"A fragment rule cannot override a production rule.", rule);
+					} else {
+						throw new TransformationException(TransformationErrorCode.InvalidFragmentOverride,
+								"Only fragment rule can override other fragment rules.", rule);
+					}
+				}
+				if (casted.isWildcard() != rule.isWildcard()) {
+					if (rule.isWildcard()) {
+						throw new TransformationException(TransformationErrorCode.InvalidFragmentOverride,
+								"A wildcard fragment rule cannot override a typed fragment rule.", rule);
+					} else {
+						throw new TransformationException(TransformationErrorCode.InvalidFragmentOverride,
+								"Only wildcard fragment rules can override other wildcard fragments.", rule);
+					}
+				}
+				if (rule.isFragment() && !rule.isWildcard() && parentRule.getType() != null) {
+					if (rule.getType().getClassifier() != parentRule.getType().getClassifier()) {
+						throw new TransformationException(TransformationErrorCode.InvalidFragmentOverride,
+								"Overriding fragment rules cannot redeclare their type.", rule.getType());
+					}
+				}
+				checkParameterLists(rule, casted);
+			}
+			if (parentRule.getType() != null && parentRule != rule) {			
+				if (parentRule.getType().getClassifier() instanceof EDataType)
+					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
+							"Cannot inherit from datatype rule and return another type.", rule.getType());
+				EClassifierInfo parentTypeInfo = eClassifierInfos.getInfoOrNull(parentRule.getType());
+				if (parentTypeInfo == null)
+					throw new TransformationException(TransformationErrorCode.InvalidSupertype,
+							"Cannot determine return type of overridden rule.", rule.getType());
+				addSuperType(rule, rule.getType(), parentTypeInfo);
+				return true;
+			}
 		}
 		return false;
+	}
+
+	private void checkParameterLists(ParserRule rule, ParserRule overridden) throws TransformationException {
+		int inherited = overridden.getParameters().size();
+		if (inherited == rule.getParameters().size()) {
+			boolean ok = true;
+			for(int i = 0; ok && i < inherited; i++) {
+				if (!Strings.equal(rule.getParameters().get(i).getName(), overridden.getParameters().get(i).getName())) {
+					ok = false;
+				}
+			}
+			if (ok) {
+				return;
+			}
+		}
+		if (inherited == 0) {
+			throw new TransformationException(TransformationErrorCode.InvalidRuleOverride,
+					"Overridden rule " + rule.getName() + " does not declare any parameters", rule);
+		}
+		StringBuilder message = new StringBuilder("Parameter list is incompatible with inherited ");
+		message.append(rule.getName()).append("[");
+		for(int i = 0; i < overridden.getParameters().size(); i++) {
+			if (i != 0) {
+				message.append(", ");
+			}
+			message.append(overridden.getParameters().get(i).getName());
+		}
+		message.append("]");
+		throw new TransformationException(TransformationErrorCode.InvalidRuleOverride,
+				message.toString(), rule);
 	}
 
 	private void addSuperType(ParserRule rule, TypeRef subTypeRef, EClassifierInfo superTypeInfo) throws TransformationException {
@@ -841,12 +924,32 @@ public class Xtext2EcoreTransformer {
 	}
 
 	private EClassifierInfo findOrCreateEClassifierInfo(AbstractRule rule) throws TransformationException {
+		if (isWildcardFragment(rule)) {
+			return null;
+		}
 		final TypeRef typeRef = getOrComputeReturnType(rule);
-		if (typeRef == null)
+		if (typeRef == null) {
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "Cannot create type for unnamed rule.", rule);
+		}
 		if (typeRef.getMetamodel() != null && typeRef.getMetamodel().getEPackage() == null)
 			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias, "Cannot create type without declared package.", typeRef);
 		return findOrCreateEClassifierInfo(typeRef, rule.getName(), grammar.getRules().contains(rule));
+	}
+
+	private boolean isWildcardFragment(AbstractRule rule) {
+		if (rule instanceof ParserRule) {
+			ParserRule casted = (ParserRule) rule;
+			return casted.isFragment() && casted.isWildcard();
+		}
+		return false;
+	}
+	
+	private boolean isParserRuleFragment(AbstractRule rule) {
+		if (rule instanceof ParserRule) {
+			ParserRule casted = (ParserRule) rule;
+			return casted.isFragment() && !casted.isWildcard();
+		}
+		return false;
 	}
 
 	private EClassifierInfo findEClassifierInfo(AbstractRule rule) {
@@ -884,8 +987,7 @@ public class Xtext2EcoreTransformer {
 					+ typeRef.getClassifier().getName());
 		//					+ GrammarUtil.getQualifiedName(typeRef));
 
-		String classifierName = null;
-		classifierName = GrammarUtil.getTypeRefName(typeRef);
+		String classifierName = GrammarUtil.getTypeRefName(typeRef);
 		if (classifierName == null)
 			classifierName = name;
 		if (classifierName == null)

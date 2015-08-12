@@ -19,11 +19,11 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DelegateModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.SimpleBacktrackingBug325745TestLanguage.DelegateModel");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//DelegateModel returns Model:
-		//	Model;
+		//DelegateModel Model:
+		//	Model
 		@Override public ParserRule getRule() { return rule; }
 
 		//Model
@@ -72,8 +72,8 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	
-	//DelegateModel returns Model:
-	//	Model;
+	//DelegateModel Model:
+	//	Model
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}
@@ -93,7 +93,9 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	//Element:
-	//	name=ID dataType=DataType? expression=Expression ".";
+	//	name=ID
+	//	dataType=DataType?
+	//	expression=Expression '.';
 	public BacktrackingBug325745TestLanguageGrammarAccess.ElementElements getElementAccess() {
 		return gaBacktrackingBug325745TestLanguage.getElementAccess();
 	}
@@ -103,7 +105,7 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	//DataType:
-	//	baseType=ID (":=" defaultValue=STRING)?;
+	//	baseType=ID (':=' defaultValue=STRING)?;
 	public BacktrackingBug325745TestLanguageGrammarAccess.DataTypeElements getDataTypeAccess() {
 		return gaBacktrackingBug325745TestLanguage.getDataTypeAccess();
 	}
@@ -113,7 +115,7 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	//Expression:
-	//	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
+	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 	public BacktrackingBug325745TestLanguageGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaBacktrackingBug325745TestLanguage.getExpressionAccess();
 	}
@@ -123,7 +125,11 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	//SimpleTerm:
-	//	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
+	//	lineCount=INT
+	//	'*'?
+	//	charCount=INT?
+	//	'!'?
+	//	charSet=ID? | refChar=ID;
 	public BacktrackingBug325745TestLanguageGrammarAccess.SimpleTermElements getSimpleTermAccess() {
 		return gaBacktrackingBug325745TestLanguage.getSimpleTermAccess();
 	}
@@ -133,38 +139,38 @@ public class SimpleBacktrackingBug325745TestLanguageGrammarAccess extends Abstra
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaBacktrackingBug325745TestLanguage.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaBacktrackingBug325745TestLanguage.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaBacktrackingBug325745TestLanguage.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaBacktrackingBug325745TestLanguage.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaBacktrackingBug325745TestLanguage.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaBacktrackingBug325745TestLanguage.getWSRule();
 	} 

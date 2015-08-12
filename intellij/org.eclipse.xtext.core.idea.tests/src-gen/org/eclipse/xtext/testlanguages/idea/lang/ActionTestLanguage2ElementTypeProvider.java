@@ -96,47 +96,47 @@ public class ActionTestLanguage2ElementTypeProvider implements IElementTypeProvi
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getORingElementType() {
 		return ORing_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_GroupElementType() {
 		return ORing_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_ValueParserRuleCall_0ElementType() {
 		return ORing_ValueParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_Group_1ElementType() {
 		return ORing_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_ORingDisjunctsAction_1_0ElementType() {
 		return ORing_ORingDisjunctsAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_VerticalLineKeyword_1_1ElementType() {
 		return ORing_VerticalLineKeyword_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_DisjunctsAssignment_1_2ElementType() {
 		return ORing_DisjunctsAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getORing_DisjunctsValueParserRuleCall_1_2_0ElementType() {
 		return ORing_DisjunctsValueParserRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getValueElementType() {
 		return Value_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getValue_ValueAssignmentElementType() {
 		return Value_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getValue_ValueAKeyword_0ElementType() {
 		return Value_ValueAKeyword_0_ELEMENT_TYPE;
 	}

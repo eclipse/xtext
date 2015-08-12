@@ -262,7 +262,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"keywordVal",
                             		lv_keywordVal_1_0, 
-                            		"KeywordVal");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordVal");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -309,7 +309,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"terminalVal",
                             		lv_terminalVal_3_0, 
-                            		"TerminalVal");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalVal");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -356,7 +356,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"enumVal",
                             		lv_enumVal_5_0, 
-                            		"EnumVal");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumVal");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -403,7 +403,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"keywordBool",
                             		lv_keywordBool_7_0, 
-                            		"KeywordBool");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.KeywordBool");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -450,7 +450,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"terminalBool",
                             		lv_terminalBool_9_0, 
-                            		"TerminalBool");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.TerminalBool");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -497,7 +497,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"enumBool",
                             		lv_enumBool_11_0, 
-                            		"EnumBool");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.EnumBool");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -544,7 +544,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"mixedBool",
                             		lv_mixedBool_13_0, 
-                            		"MixedBool");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedBool");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -591,7 +591,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"mixedValue",
                             		lv_mixedValue_15_0, 
-                            		"MixedValue");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.MixedValue");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -638,7 +638,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"containmentRef",
                             		lv_containmentRef_17_0, 
-                            		"ContainmentRef");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -685,7 +685,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"crossRef",
                             		lv_crossRef_19_0, 
-                            		"CrossRef");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.CrossRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -961,7 +961,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"term",
                             		lv_term_0_0, 
-                            		"Terminal1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
                     	    
 
                     }
@@ -993,7 +993,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"term",
                             		lv_term_1_0, 
-                            		"Terminal2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
                     	    
 
                     }
@@ -1146,7 +1146,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"en",
                             		lv_en_0_0, 
-                            		"Enum1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1183,7 +1183,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"en",
                             		lv_en_1_0, 
-                            		"Enum2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1456,7 +1456,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"term",
                             		true, 
-                            		"Terminal1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
                     	    
 
                     }
@@ -1488,7 +1488,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"term",
                             		true, 
-                            		"Terminal2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
                     	    
 
                     }
@@ -1641,7 +1641,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"en",
                             		true, 
-                            		"Enum1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1678,7 +1678,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"en",
                             		true, 
-                            		"Enum2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1831,7 +1831,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"Boolean");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Boolean");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2065,7 +2065,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"val",
                             		lv_val_0_0, 
-                            		"Enum1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Enum1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2102,7 +2102,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"DatEnum");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.DatEnum");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2299,7 +2299,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"ctx",
                             		lv_ctx_0_0, 
-                            		"ContainmentRef1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2336,7 +2336,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"ctx",
                             		lv_ctx_1_0, 
-                            		"ContainmentRef2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.ContainmentRef2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2443,7 +2443,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2546,7 +2546,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"val2",
                     		lv_val2_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2667,7 +2667,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"name",
                             		lv_name_0_1, 
-                            		"Terminal1");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal1");
                     	    
 
                     }
@@ -2687,7 +2687,7 @@ public class InternalAssignmentFinderTestLanguageParser extends AbstractInternal
                            			current, 
                            			"name",
                             		lv_name_0_2, 
-                            		"Terminal2");
+                            		"org.eclipse.xtext.serializer.AssignmentFinderTestLanguage.Terminal2");
                     	    
 
                     }

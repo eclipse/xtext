@@ -112,7 +112,7 @@ public class TransformationTest {
 	
 	@Test
 	public void testAlternative() throws Exception {
-		getBuilder("Foo: 'foo' | 'bar';").hasChildren(1)
+		getBuilder("Foo: 'foo' | 'bar';").hasChildren(1)
 			.child(0).isType(RailroadTrack.class).as("t").hasChildren(5)
 				.child(0).isType(LabelNode.class).as("label").parent()
 				.child(1).isType(ParallelSegment.class).as("parallel").hasChildren(8)

@@ -143,7 +143,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

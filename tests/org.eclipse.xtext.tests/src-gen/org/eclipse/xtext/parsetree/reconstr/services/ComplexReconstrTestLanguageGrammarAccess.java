@@ -19,7 +19,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Root");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cOpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTrickyGParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -39,7 +39,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class OpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Op");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Op");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -54,26 +54,26 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cMinusOperandsAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final RuleCall cMinusOperandsTermParserRuleCall_1_1_2_0 = (RuleCall)cMinusOperandsAssignment_1_1_2.eContents().get(0);
 		
-		//Op returns Expression:
-		//	Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*;
+		//Op Expression:
+		//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*
+		//Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		public Group getGroup() { return cGroup; }
 
 		//Term
 		public RuleCall getTermParserRuleCall_0() { return cTermParserRuleCall_0; }
 
-		//({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*
+		//({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//{Add.addOperands+=current} "+" addOperands+=Term
+		//{Add.addOperands+=current} '+' addOperands+=Term
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{Add.addOperands+=current}
 		public Action getAddAddOperandsAction_1_0_0() { return cAddAddOperandsAction_1_0_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_0_1() { return cPlusSignKeyword_1_0_1; }
 
 		//addOperands+=Term
@@ -82,13 +82,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Term
 		public RuleCall getAddOperandsTermParserRuleCall_1_0_2_0() { return cAddOperandsTermParserRuleCall_1_0_2_0; }
 
-		//{Minus.minusOperands+=current} "-" minusOperands+=Term
+		//{Minus.minusOperands+=current} '-' minusOperands+=Term
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{Minus.minusOperands+=current}
 		public Action getMinusMinusOperandsAction_1_1_0() { return cMinusMinusOperandsAction_1_1_0; }
 
-		//"-"
+		//'-'
 		public Keyword getHyphenMinusKeyword_1_1_1() { return cHyphenMinusKeyword_1_1_1; }
 
 		//minusOperands+=Term
@@ -99,13 +99,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TermElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cParensParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Term returns Expression:
-		//	Atom | Parens;
+		//Term Expression:
+		//	Atom | Parens
 		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | Parens
@@ -119,7 +119,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -135,7 +135,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class ParensElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cOpParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -143,31 +143,31 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Assignment cEmAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
-		/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
-		//	"(" Op ")" em="!"?;
+		/// * SuppressWarnings[potentialOverride] * / Parens Expression:
+		//	'(' Op ')' em='!'?
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Op ")" em="!"?
+		//'(' Op ')' em='!'?
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//Op
 		public RuleCall getOpParserRuleCall_1() { return cOpParserRuleCall_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
-		//em="!"?
+		//em='!'?
 		public Assignment getEmAssignment_3() { return cEmAssignment_3; }
 
-		//"!"
+		//'!'
 		public Keyword getEmExclamationMarkKeyword_3_0() { return cEmExclamationMarkKeyword_3_0; }
 	}
 
 	public class TrickyBElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyB");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTBKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -185,13 +185,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 		////TrickyA1 returns TypeD: name+=ID;
 		/// * SuppressWarnings[noInstantiation] * / TrickyB:
-		//	"TB" (name=ID type+=INT)? type+=INT*;
+		//	'TB' (name=ID type+=INT)? type+=INT*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TB" (name=ID type+=INT)? type+=INT*
+		//'TB' (name=ID type+=INT)? type+=INT*
 		public Group getGroup() { return cGroup; }
 
-		//"TB"
+		//'TB'
 		public Keyword getTBKeyword_0() { return cTBKeyword_0; }
 
 		//(name=ID type+=INT)?
@@ -217,7 +217,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TrickyCElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyC");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyC");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTCKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -233,13 +233,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cZKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		
 		//TrickyC:
-		//	"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+		//	'TC' name=ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?
+		//'TC' name=ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?
 		public Group getGroup() { return cGroup; }
 
-		//"TC"
+		//'TC'
 		public Keyword getTCKeyword_0() { return cTCKeyword_0; }
 
 		//name=ID
@@ -248,36 +248,36 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//({C1.x=current} "x")?
+		//({C1.x=current} 'x')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{C1.x=current}
 		public Action getC1XAction_2_0() { return cC1XAction_2_0; }
 
-		//"x"
+		//'x'
 		public Keyword getXKeyword_2_1() { return cXKeyword_2_1; }
 
-		//({C2.y=current} "y")?
+		//({C2.y=current} 'y')?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//{C2.y=current}
 		public Action getC2YAction_3_0() { return cC2YAction_3_0; }
 
-		//"y"
+		//'y'
 		public Keyword getYKeyword_3_1() { return cYKeyword_3_1; }
 
-		//({C3.z=current} "z")?
+		//({C3.z=current} 'z')?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//{C3.z=current}
 		public Action getC3ZAction_4_0() { return cC3ZAction_4_0; }
 
-		//"z"
+		//'z'
 		public Keyword getZKeyword_4_1() { return cZKeyword_4_1; }
 	}
 
 	public class TrickyDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyD");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyD");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTDKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -296,13 +296,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cTypeIDTerminalRuleCall_3_0 = (RuleCall)cTypeAssignment_3.eContents().get(0);
 		
 		/// * SuppressWarnings[noInstantiation] * / TrickyD:
-		//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
+		//	'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
+		//'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*
 		public Group getGroup() { return cGroup; }
 
-		//"TD"
+		//'TD'
 		public Keyword getTDKeyword_0() { return cTDKeyword_0; }
 
 		//(name+=INT foo=STRING type+=ID)?
@@ -349,7 +349,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TrickyEElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyE");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyE");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTEKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -368,13 +368,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
 		/// * SuppressWarnings[noInstantiation] * / TrickyE:
-		//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
+		//	'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*
+		//'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*
 		public Group getGroup() { return cGroup; }
 
-		//"TE"
+		//'TE'
 		public Keyword getTEKeyword_0() { return cTEKeyword_0; }
 
 		//(name+=INT foo+=STRING type+=ID)*
@@ -398,7 +398,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getTypeIDTerminalRuleCall_1_2_0() { return cTypeIDTerminalRuleCall_1_2_0; }
 
-		//"x"
+		//'x'
 		public Keyword getXKeyword_2() { return cXKeyword_2; }
 
 		//(name+=INT type+=ID)*
@@ -418,7 +418,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TrickyFElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyF");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyF");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTFKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -434,13 +434,13 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		
 		//// 
 		//TrickyF:
-		//	"TF" (name+=ID type+=INT)* (name+=ID | type+=INT);
+		//	'TF' (name+=ID type+=INT)* (name+=ID | type+=INT);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TF" (name+=ID type+=INT)* (name+=ID | type+=INT)
+		//'TF' (name+=ID type+=INT)* (name+=ID | type+=INT)
 		public Group getGroup() { return cGroup; }
 
-		//"TF"
+		//'TF'
 		public Keyword getTFKeyword_0() { return cTFKeyword_0; }
 
 		//(name+=ID type+=INT)*
@@ -458,7 +458,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//INT
 		public RuleCall getTypeINTTerminalRuleCall_1_1_0() { return cTypeINTTerminalRuleCall_1_1_0; }
 
-		//name+=ID | type+=INT
+		//(name+=ID | type+=INT)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//name+=ID
@@ -475,20 +475,20 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TrickyGElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTGKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTreeAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cTreeTrickyG1ParserRuleCall_1_0 = (RuleCall)cTreeAssignment_1.eContents().get(0);
 		
 		//TrickyG:
-		//	"TG" tree=TrickyG1;
+		//	'TG' tree=TrickyG1;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"TG" tree=TrickyG1
+		//'TG' tree=TrickyG1
 		public Group getGroup() { return cGroup; }
 
-		//"TG"
+		//'TG'
 		public Keyword getTGKeyword_0() { return cTGKeyword_0; }
 
 		//tree=TrickyG1
@@ -499,7 +499,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class TrickyG1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -512,16 +512,16 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightSquareBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		/// * SuppressWarnings[noInstantiation] * / TrickyG1:
-		//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
+		//	'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]"
+		//'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']'
 		public Group getGroup() { return cGroup; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_0() { return cLeftSquareBracketKeyword_0; }
 
-		//(vals+=TrickyG2 ("," vals+=TrickyG2)*)?
+		//(vals+=TrickyG2 (',' vals+=TrickyG2)*)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//vals+=TrickyG2
@@ -530,10 +530,10 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//TrickyG2
 		public RuleCall getValsTrickyG2ParserRuleCall_1_0_0() { return cValsTrickyG2ParserRuleCall_1_0_0; }
 
-		//("," vals+=TrickyG2)*
+		//(',' vals+=TrickyG2)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_0() { return cCommaKeyword_1_1_0; }
 
 		//vals+=TrickyG2
@@ -542,51 +542,31 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		//TrickyG2
 		public RuleCall getValsTrickyG2ParserRuleCall_1_1_1_0() { return cValsTrickyG2ParserRuleCall_1_1_1_0; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_2() { return cRightSquareBracketKeyword_2; }
 	}
 
 	public class TrickyG2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TrickyG2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG2");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTrickyG1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
 		private final RuleCall cValINTTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
-		////TrickyH: x+='a' TrickyH?; 
-		//// TrickyG: TrickyG1 | TrickyG2;
-		//// TrickyG1: name=TrickyG3;
-		//// TrickyG2: name=TrickyG4;
-		//// TrickyG3: val=ID {T.x=current} 'x';
-		//// TrickyG4: val=INT {T.x=current} 'y'; TrickyG2:
+		//TrickyG2:
 		//	TrickyG1 | val=INT;
 		@Override public ParserRule getRule() { return rule; }
 
-		//TrickyG1 //TrickyH: x+='a' TrickyH?; 
-		//// TrickyG: TrickyG1 | TrickyG2;
-		//// TrickyG1: name=TrickyG3;
-		//// TrickyG2: name=TrickyG4;
-		//// TrickyG3: val=ID {T.x=current} 'x';
-		//// TrickyG4: val=INT {T.x=current} 'y'; | val=INT
+		//TrickyG1 | val=INT
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//TrickyG1
 		public RuleCall getTrickyG1ParserRuleCall_0() { return cTrickyG1ParserRuleCall_0; }
 
-		////TrickyH: x+='a' TrickyH?; 
-		//// TrickyG: TrickyG1 | TrickyG2;
-		//// TrickyG1: name=TrickyG3;
-		//// TrickyG2: name=TrickyG4;
-		//// TrickyG3: val=ID {T.x=current} 'x';
-		//// TrickyG4: val=INT {T.x=current} 'y'; val=INT
+		//val=INT
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		////TrickyH: x+='a' TrickyH?; 
-		//// TrickyG: TrickyG1 | TrickyG2;
-		//// TrickyG1: name=TrickyG3;
-		//// TrickyG2: name=TrickyG4;
-		//// TrickyG3: val=ID {T.x=current} 'x';
-		//// TrickyG4: val=INT {T.x=current} 'y'; INT
+		//INT
 		public RuleCall getValINTTerminalRuleCall_1_0() { return cValINTTerminalRuleCall_1_0; }
 	}
 	
@@ -666,8 +646,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getRootAccess().getRule();
 	}
 
-	//Op returns Expression:
-	//	Term ({Add.addOperands+=current} "+" addOperands+=Term | {Minus.minusOperands+=current} "-" minusOperands+=Term)*;
+	//Op Expression:
+	//	Term ({Add.addOperands+=current} '+' addOperands+=Term | {Minus.minusOperands+=current} '-' minusOperands+=Term)*
 	public OpElements getOpAccess() {
 		return pOp;
 	}
@@ -676,8 +656,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getOpAccess().getRule();
 	}
 
-	//Term returns Expression:
-	//	Atom | Parens;
+	//Term Expression:
+	//	Atom | Parens
 	public TermElements getTermAccess() {
 		return pTerm;
 	}
@@ -696,8 +676,8 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getAtomAccess().getRule();
 	}
 
-	/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
-	//	"(" Op ")" em="!"?;
+	/// * SuppressWarnings[potentialOverride] * / Parens Expression:
+	//	'(' Op ')' em='!'?
 	public ParensElements getParensAccess() {
 		return pParens;
 	}
@@ -713,7 +693,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	////TrickyA returns TypeA1: 'TA' TrickyA1 (name += ID)* ({TypeB.x=current} 'x' | {TypeC.x=current} 'y')? name+=STRING;
 	////TrickyA1 returns TypeD: name+=ID;
 	/// * SuppressWarnings[noInstantiation] * / TrickyB:
-	//	"TB" (name=ID type+=INT)? type+=INT*;
+	//	'TB' (name=ID type+=INT)? type+=INT*;
 	public TrickyBElements getTrickyBAccess() {
 		return pTrickyB;
 	}
@@ -723,7 +703,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//TrickyC:
-	//	"TC" name=ID ({C1.x=current} "x")? ({C2.y=current} "y")? ({C3.z=current} "z")?;
+	//	'TC' name=ID ({C1.x=current} 'x')? ({C2.y=current} 'y')? ({C3.z=current} 'z')?;
 	public TrickyCElements getTrickyCAccess() {
 		return pTrickyC;
 	}
@@ -733,7 +713,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	/// * SuppressWarnings[noInstantiation] * / TrickyD:
-	//	"TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
+	//	'TD' (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
 	public TrickyDElements getTrickyDAccess() {
 		return pTrickyD;
 	}
@@ -744,7 +724,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	//// 34 "abc" XX 123 "de" YY x 34 DD 45 CC
 	/// * SuppressWarnings[noInstantiation] * / TrickyE:
-	//	"TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
+	//	'TE' (name+=INT foo+=STRING type+=ID)* 'x' (name+=INT type+=ID)*;
 	public TrickyEElements getTrickyEAccess() {
 		return pTrickyE;
 	}
@@ -755,7 +735,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	//// 
 	//TrickyF:
-	//	"TF" (name+=ID type+=INT)* (name+=ID | type+=INT);
+	//	'TF' (name+=ID type+=INT)* (name+=ID | type+=INT);
 	public TrickyFElements getTrickyFAccess() {
 		return pTrickyF;
 	}
@@ -765,7 +745,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//TrickyG:
-	//	"TG" tree=TrickyG1;
+	//	'TG' tree=TrickyG1;
 	public TrickyGElements getTrickyGAccess() {
 		return pTrickyG;
 	}
@@ -775,7 +755,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	/// * SuppressWarnings[noInstantiation] * / TrickyG1:
-	//	"[" (vals+=TrickyG2 ("," vals+=TrickyG2)*)? "]";
+	//	'[' (vals+=TrickyG2 (',' vals+=TrickyG2)*)? ']';
 	public TrickyG1Elements getTrickyG1Access() {
 		return pTrickyG1;
 	}
@@ -784,12 +764,7 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 		return getTrickyG1Access().getRule();
 	}
 
-	////TrickyH: x+='a' TrickyH?; 
-	//// TrickyG: TrickyG1 | TrickyG2;
-	//// TrickyG1: name=TrickyG3;
-	//// TrickyG2: name=TrickyG4;
-	//// TrickyG3: val=ID {T.x=current} 'x';
-	//// TrickyG4: val=INT {T.x=current} 'y'; TrickyG2:
+	//TrickyG2:
 	//	TrickyG1 | val=INT;
 	public TrickyG2Elements getTrickyG2Access() {
 		return pTrickyG2;
@@ -800,38 +775,38 @@ public class ComplexReconstrTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

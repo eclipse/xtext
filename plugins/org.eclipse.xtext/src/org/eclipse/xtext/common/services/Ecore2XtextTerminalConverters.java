@@ -14,9 +14,12 @@ import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class Ecore2XtextTerminalConverters extends DefaultTerminalConverters {
 
 	private static final Pattern ID_PATTERN = Pattern.compile("\\p{Alpha}\\w*");

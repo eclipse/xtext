@@ -106,55 +106,55 @@ public class DummyTestLanguageElementTypeProvider implements IElementTypeProvide
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsAssignmentElementType() {
 		return Model_ElementsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsElementParserRuleCall_0ElementType() {
 		return Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElementElementType() {
 		return Element_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_GroupElementType() {
 		return Element_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_OptionalAssignment_0ElementType() {
 		return Element_OptionalAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_OptionalOptionalKeyword_0_0ElementType() {
 		return Element_OptionalOptionalKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ElementKeyword_1ElementType() {
 		return Element_ElementKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameAssignment_2ElementType() {
 		return Element_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameIDTerminalRuleCall_2_0ElementType() {
 		return Element_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_DescriptionsAssignment_3ElementType() {
 		return Element_DescriptionsAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_DescriptionsSTRINGTerminalRuleCall_3_0ElementType() {
 		return Element_DescriptionsSTRINGTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_SemicolonKeyword_4ElementType() {
 		return Element_SemicolonKeyword_4_ELEMENT_TYPE;
 	}

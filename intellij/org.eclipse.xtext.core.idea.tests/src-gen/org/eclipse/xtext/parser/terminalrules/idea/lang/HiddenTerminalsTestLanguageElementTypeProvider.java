@@ -435,299 +435,299 @@ public class HiddenTerminalsTestLanguageElementTypeProvider implements IElementT
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_WithoutHiddensParserRuleCall_0ElementType() {
 		return Model_WithoutHiddensParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_WithHiddensParserRuleCall_1ElementType() {
 		return Model_WithHiddensParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_OverridingHiddensParserRuleCall_2ElementType() {
 		return Model_OverridingHiddensParserRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_InheritingHiddensParserRuleCall_3ElementType() {
 		return Model_InheritingHiddensParserRuleCall_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DatatypeHiddensParserRuleCall_4ElementType() {
 		return Model_DatatypeHiddensParserRuleCall_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddensElementType() {
 		return WithoutHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_GroupElementType() {
 		return WithoutHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_WithoutKeyword_0ElementType() {
 		return WithoutHiddens_WithoutKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_SpacesAssignment_1ElementType() {
 		return WithoutHiddens_SpacesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_SpacesWSTerminalRuleCall_1_0ElementType() {
 		return WithoutHiddens_SpacesWSTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_HiddensKeyword_2ElementType() {
 		return WithoutHiddens_HiddensKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_SpacesAssignment_3ElementType() {
 		return WithoutHiddens_SpacesAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_SpacesWSTerminalRuleCall_3_0ElementType() {
 		return WithoutHiddens_SpacesWSTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_ValidAssignment_4ElementType() {
 		return WithoutHiddens_ValidAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithoutHiddens_ValidSemicolonKeyword_4_0ElementType() {
 		return WithoutHiddens_ValidSemicolonKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddensElementType() {
 		return WithHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddens_GroupElementType() {
 		return WithHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddens_WithKeyword_0ElementType() {
 		return WithHiddens_WithKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddens_HiddensKeyword_1ElementType() {
 		return WithHiddens_HiddensKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddens_ValidAssignment_2ElementType() {
 		return WithHiddens_ValidAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWithHiddens_ValidSemicolonKeyword_2_0ElementType() {
 		return WithHiddens_ValidSemicolonKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensElementType() {
 		return OverridingHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_GroupElementType() {
 		return OverridingHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_OverridingKeyword_0ElementType() {
 		return OverridingHiddens_OverridingKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_HiddensKeyword_1ElementType() {
 		return OverridingHiddens_HiddensKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_LeftParenthesisKeyword_2ElementType() {
 		return OverridingHiddens_LeftParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_CalledAssignment_3ElementType() {
 		return OverridingHiddens_CalledAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_CalledOverridingHiddensCallParserRuleCall_3_0ElementType() {
 		return OverridingHiddens_CalledOverridingHiddensCallParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_RightParenthesisKeyword_4ElementType() {
 		return OverridingHiddens_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_ValidAssignment_5ElementType() {
 		return OverridingHiddens_ValidAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddens_ValidSemicolonKeyword_5_0ElementType() {
 		return OverridingHiddens_ValidSemicolonKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCallElementType() {
 		return OverridingHiddensCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_GroupElementType() {
 		return OverridingHiddensCall_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_CallKeyword_0ElementType() {
 		return OverridingHiddensCall_CallKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_SpacesAssignment_1ElementType() {
 		return OverridingHiddensCall_SpacesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_SpacesWSTerminalRuleCall_1_0ElementType() {
 		return OverridingHiddensCall_SpacesWSTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_ValidAssignment_2ElementType() {
 		return OverridingHiddensCall_ValidAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOverridingHiddensCall_ValidSemicolonKeyword_2_0ElementType() {
 		return OverridingHiddensCall_ValidSemicolonKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensElementType() {
 		return InheritingHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_GroupElementType() {
 		return InheritingHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_InheritingKeyword_0ElementType() {
 		return InheritingHiddens_InheritingKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_HiddensKeyword_1ElementType() {
 		return InheritingHiddens_HiddensKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_LeftParenthesisKeyword_2ElementType() {
 		return InheritingHiddens_LeftParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_Alternatives_3ElementType() {
 		return InheritingHiddens_Alternatives_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_CalledAssignment_3_0ElementType() {
 		return InheritingHiddens_CalledAssignment_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_CalledInheritingHiddensCallParserRuleCall_3_0_0ElementType() {
 		return InheritingHiddens_CalledInheritingHiddensCallParserRuleCall_3_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_HidingCalledAssignment_3_1ElementType() {
 		return InheritingHiddens_HidingCalledAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_HidingCalledHidingHiddensParserRuleCall_3_1_0ElementType() {
 		return InheritingHiddens_HidingCalledHidingHiddensParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_RightParenthesisKeyword_4ElementType() {
 		return InheritingHiddens_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_ValidAssignment_5ElementType() {
 		return InheritingHiddens_ValidAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddens_ValidSemicolonKeyword_5_0ElementType() {
 		return InheritingHiddens_ValidSemicolonKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeHiddensElementType() {
 		return DatatypeHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeHiddens_GroupElementType() {
 		return DatatypeHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeHiddens_DatatypeKeyword_0ElementType() {
 		return DatatypeHiddens_DatatypeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeHiddens_ValidAssignment_1ElementType() {
 		return DatatypeHiddens_ValidAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeHiddens_ValidDatatypeRuleParserRuleCall_1_0ElementType() {
 		return DatatypeHiddens_ValidDatatypeRuleParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeRuleElementType() {
 		return DatatypeRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeRule_GroupElementType() {
 		return DatatypeRule_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeRule_RuleKeyword_0ElementType() {
 		return DatatypeRule_RuleKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDatatypeRule_SemicolonKeyword_1ElementType() {
 		return DatatypeRule_SemicolonKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddensElementType() {
 		return HidingHiddens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_GroupElementType() {
 		return HidingHiddens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_HidingKeyword_0ElementType() {
 		return HidingHiddens_HidingKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_SpaceAssignment_1ElementType() {
 		return HidingHiddens_SpaceAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_SpaceWSTerminalRuleCall_1_0ElementType() {
 		return HidingHiddens_SpaceWSTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_CalledAssignment_2ElementType() {
 		return HidingHiddens_CalledAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getHidingHiddens_CalledInheritingHiddensCallParserRuleCall_2_0ElementType() {
 		return HidingHiddens_CalledInheritingHiddensCallParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensCallElementType() {
 		return InheritingHiddensCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensCall_GroupElementType() {
 		return InheritingHiddensCall_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensCall_CallKeyword_0ElementType() {
 		return InheritingHiddensCall_CallKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensCall_ValidAssignment_1ElementType() {
 		return InheritingHiddensCall_ValidAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getInheritingHiddensCall_ValidSemicolonKeyword_1_0ElementType() {
 		return InheritingHiddensCall_ValidSemicolonKeyword_1_0_ELEMENT_TYPE;
 	}

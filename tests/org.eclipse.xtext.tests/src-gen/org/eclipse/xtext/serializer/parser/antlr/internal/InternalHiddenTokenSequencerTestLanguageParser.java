@@ -144,7 +144,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
                    			current, 
                    			"domainModel",
                     		lv_domainModel_0_0, 
-                    		"DomainModel");
+                    		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -263,7 +263,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"entities",
             	            		lv_entities_1_0, 
-            	            		"Entity");
+            	            		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -373,7 +373,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -399,7 +399,7 @@ public class InternalHiddenTokenSequencerTestLanguageParser extends AbstractInte
                    			current, 
                    			"description",
                     		lv_description_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }

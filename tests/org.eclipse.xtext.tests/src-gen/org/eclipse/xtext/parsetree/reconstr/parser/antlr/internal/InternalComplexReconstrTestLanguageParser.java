@@ -23,8 +23,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'+'", "'-'", "'('", "')'", "'!'", "'TG'", "'['", "','", "']'"
     };
-    public static final int T__19=19;
     public static final int RULE_ID=4;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -34,12 +38,8 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_INT=5;
     public static final int RULE_WS=9;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -333,7 +333,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"addOperands",
             	            		lv_addOperands_3_0, 
-            	            		"Term");
+            	            		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Term");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -391,7 +391,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"minusOperands",
             	            		lv_minusOperands_6_0, 
-            	            		"Term");
+            	            		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.Term");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -624,7 +624,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -858,7 +858,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"tree",
                     		lv_tree_1_0, 
-                    		"TrickyG1");
+                    		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG1");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -982,7 +982,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"vals",
                             		lv_vals_1_0, 
-                            		"TrickyG2");
+                            		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1032,7 +1032,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	           			current, 
                     	           			"vals",
                     	            		lv_vals_3_0, 
-                    	            		"TrickyG2");
+                    	            		"org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTestLanguage.TrickyG2");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -1187,7 +1187,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"val",
                             		lv_val_1_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }

@@ -19,12 +19,12 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class EntryRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TestLanguage.EntryRule");
 		private final Assignment cMultiFeatureAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cMultiFeatureAbstractRuleParserRuleCall_0 = (RuleCall)cMultiFeatureAssignment.eContents().get(0);
 		
-		//EntryRule returns Model:
-		//	multiFeature+=AbstractRule*;
+		//EntryRule Model:
+		//	multiFeature+=AbstractRule*
 		@Override public ParserRule getRule() { return rule; }
 
 		//multiFeature+=AbstractRule*
@@ -35,13 +35,13 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class AbstractRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TestLanguage.AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cChoiceRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cReducibleRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//AbstractRule returns AbstractElement:
-		//	ChoiceRule | ReducibleRule;
+		//AbstractRule AbstractElement:
+		//	ChoiceRule | ReducibleRule
 		@Override public ParserRule getRule() { return rule; }
 
 		//ChoiceRule | ReducibleRule
@@ -55,7 +55,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ChoiceRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ChoiceRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TestLanguage.ChoiceRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChoiceKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOptionalKeywordAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -63,20 +63,20 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//ChoiceRule returns ChoiceElement:
-		//	"choice" optionalKeyword?="optional"? name=ID;
+		//ChoiceRule ChoiceElement:
+		//	"choice" optionalKeyword?='optional'? name=ID
 		@Override public ParserRule getRule() { return rule; }
 
-		//"choice" optionalKeyword?="optional"? name=ID
+		//"choice" optionalKeyword?='optional'? name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"choice"
 		public Keyword getChoiceKeyword_0() { return cChoiceKeyword_0; }
 
-		//optionalKeyword?="optional"?
+		//optionalKeyword?='optional'?
 		public Assignment getOptionalKeywordAssignment_1() { return cOptionalKeywordAssignment_1; }
 
-		//"optional"
+		//'optional'
 		public Keyword getOptionalKeywordOptionalKeyword_1_0() { return cOptionalKeywordOptionalKeyword_1_0; }
 
 		//name=ID
@@ -87,7 +87,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ReducibleRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReducibleRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TestLanguage.ReducibleRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cReducibleKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cTerminalRuleParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -96,8 +96,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cActionFeatureAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cActionFeatureTerminalRuleParserRuleCall_2_1_0 = (RuleCall)cActionFeatureAssignment_2_1.eContents().get(0);
 		
-		//ReducibleRule returns ReducibleElement:
-		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
+		//ReducibleRule ReducibleElement:
+		//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 		@Override public ParserRule getRule() { return rule; }
 
 		//"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
@@ -123,12 +123,12 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class TerminalRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TerminalRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.TestLanguage.TerminalRule");
 		private final Assignment cStringFeatureAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cStringFeatureSTRINGTerminalRuleCall_0 = (RuleCall)cStringFeatureAssignment.eContents().get(0);
 		
-		//TerminalRule returns TerminalElement:
-		//	stringFeature=STRING;
+		//TerminalRule TerminalElement:
+		//	stringFeature=STRING
 		@Override public ParserRule getRule() { return rule; }
 
 		//stringFeature=STRING
@@ -188,8 +188,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//EntryRule returns Model:
-	//	multiFeature+=AbstractRule*;
+	//EntryRule Model:
+	//	multiFeature+=AbstractRule*
 	public EntryRuleElements getEntryRuleAccess() {
 		return pEntryRule;
 	}
@@ -198,8 +198,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getEntryRuleAccess().getRule();
 	}
 
-	//AbstractRule returns AbstractElement:
-	//	ChoiceRule | ReducibleRule;
+	//AbstractRule AbstractElement:
+	//	ChoiceRule | ReducibleRule
 	public AbstractRuleElements getAbstractRuleAccess() {
 		return pAbstractRule;
 	}
@@ -208,8 +208,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractRuleAccess().getRule();
 	}
 
-	//ChoiceRule returns ChoiceElement:
-	//	"choice" optionalKeyword?="optional"? name=ID;
+	//ChoiceRule ChoiceElement:
+	//	"choice" optionalKeyword?='optional'? name=ID
 	public ChoiceRuleElements getChoiceRuleAccess() {
 		return pChoiceRule;
 	}
@@ -218,8 +218,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getChoiceRuleAccess().getRule();
 	}
 
-	//ReducibleRule returns ReducibleElement:
-	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?;
+	//ReducibleRule ReducibleElement:
+	//	"reducible" TerminalRule ({ReducibleComposite.actionFeature+=current} actionFeature+=TerminalRule)?
 	public ReducibleRuleElements getReducibleRuleAccess() {
 		return pReducibleRule;
 	}
@@ -228,8 +228,8 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		return getReducibleRuleAccess().getRule();
 	}
 
-	//TerminalRule returns TerminalElement:
-	//	stringFeature=STRING;
+	//TerminalRule TerminalElement:
+	//	stringFeature=STRING
 	public TerminalRuleElements getTerminalRuleAccess() {
 		return pTerminalRule;
 	}
@@ -239,38 +239,38 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

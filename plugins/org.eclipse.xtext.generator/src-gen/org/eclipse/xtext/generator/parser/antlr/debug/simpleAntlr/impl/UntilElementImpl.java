@@ -20,11 +20,11 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.UntilElement;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.UntilElementImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.UntilElementImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -76,8 +76,7 @@ public class UntilElementImpl extends RuleElementImpl implements UntilElement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getLeft()
+  public RuleElement getLeft()
   {
     return left;
   }
@@ -104,8 +103,7 @@ public RuleElement getLeft()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLeft(RuleElement newLeft)
+  public void setLeft(RuleElement newLeft)
   {
     if (newLeft != left)
     {
@@ -126,8 +124,7 @@ public void setLeft(RuleElement newLeft)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getRight()
+  public RuleElement getRight()
   {
     return right;
   }
@@ -154,8 +151,7 @@ public RuleElement getRight()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRight(RuleElement newRight)
+  public void setRight(RuleElement newRight)
   {
     if (newRight != right)
     {

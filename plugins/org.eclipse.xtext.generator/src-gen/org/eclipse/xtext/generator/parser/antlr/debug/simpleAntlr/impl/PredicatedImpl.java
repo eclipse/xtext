@@ -20,11 +20,11 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -76,8 +76,7 @@ public class PredicatedImpl extends RuleElementImpl implements Predicated
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getPredicate()
+  public RuleElement getPredicate()
   {
     return predicate;
   }
@@ -104,8 +103,7 @@ public RuleElement getPredicate()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setPredicate(RuleElement newPredicate)
+  public void setPredicate(RuleElement newPredicate)
   {
     if (newPredicate != predicate)
     {
@@ -126,8 +124,7 @@ public void setPredicate(RuleElement newPredicate)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getElement()
+  public RuleElement getElement()
   {
     return element;
   }
@@ -154,8 +151,7 @@ public RuleElement getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(RuleElement newElement)
+  public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {

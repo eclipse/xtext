@@ -90,7 +90,7 @@ ruleEntry returns [EObject current=null]
        			$current, 
        			"contents",
         		lv_contents_0_0, 
-        		"Alts");
+        		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.Alts");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -223,7 +223,7 @@ ruleLookAhead1 returns [EObject current=null]
        			$current, 
        			"y",
         		lv_y_1_0, 
-        		"LookAhead2");
+        		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -371,7 +371,7 @@ ruleLookAhead3 returns [EObject current=null]
        			$current, 
        			"z",
         		lv_z_3_0, 
-        		"LookAhead4");
+        		"org.eclipse.xtext.testlanguages.LookaheadTestLanguage.LookAhead4");
 	        afterParserOrEnumRuleCall();
 	    }
 

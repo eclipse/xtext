@@ -20,7 +20,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EcoreUtil2;
@@ -32,7 +31,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess;
 import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
@@ -42,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -108,29 +108,17 @@ public class GrammarAccessExtensions {
     return _xblockexpression;
   }
   
-  protected String _ruleName(final ParserRule it) {
-    String _name = it.getName();
-    return ("rule" + _name);
+  public String ruleName(final AbstractRule rule) {
+    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
+    final String result = _ruleNames.getAntlrRuleName(rule);
+    return result;
   }
   
-  protected String _ruleName(final EnumRule it) {
-    String _name = it.getName();
-    return ("rule" + _name);
-  }
-  
-  protected String _ruleName(final TerminalRule it) {
-    String _name = it.getName();
-    String _upperCase = _name.toUpperCase();
-    return ("RULE_" + _upperCase);
-  }
-  
-  protected String _ruleName(final AbstractRule it) {
-    return "Unsupported";
-  }
-  
-  public String entryRuleName(final ParserRule it) {
-    String _name = it.getName();
-    return ("entryRule" + _name);
+  public String entryRuleName(final ParserRule rule) {
+    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
+    final String result = _ruleNames.getAntlrRuleName(rule);
+    String _firstUpper = StringExtensions.toFirstUpper(result);
+    return ("entry" + _firstUpper);
   }
   
   public boolean isCalled(final AbstractRule rule, final Grammar grammar) {
@@ -143,33 +131,23 @@ public class GrammarAccessExtensions {
       if (_equals) {
         _or = true;
       } else {
-        final Function1<AbstractRule, List<EObject>> _function = new Function1<AbstractRule, List<EObject>>() {
+        final Function1<AbstractRule, List<RuleCall>> _function = new Function1<AbstractRule, List<RuleCall>>() {
           @Override
-          public List<EObject> apply(final AbstractRule it) {
-            return EcoreUtil2.eAllContentsAsList(it);
+          public List<RuleCall> apply(final AbstractRule it) {
+            return GrammarUtil.containedRuleCalls(it);
           }
         };
-        List<List<EObject>> _map = ListExtensions.<AbstractRule, List<EObject>>map(allRules, _function);
-        Iterable<EObject> _flatten = Iterables.<EObject>concat(_map);
-        Iterable<RuleCall> _filter = Iterables.<RuleCall>filter(_flatten, RuleCall.class);
+        List<List<RuleCall>> _map = ListExtensions.<AbstractRule, List<RuleCall>>map(allRules, _function);
+        Iterable<RuleCall> _flatten = Iterables.<RuleCall>concat(_map);
         final Function1<RuleCall, Boolean> _function_1 = new Function1<RuleCall, Boolean>() {
           @Override
           public Boolean apply(final RuleCall ruleCall) {
             AbstractRule _rule = ruleCall.getRule();
-            return Boolean.valueOf((!Objects.equal(_rule, null)));
+            return Boolean.valueOf(Objects.equal(_rule, rule));
           }
         };
-        Iterable<RuleCall> _filter_1 = IterableExtensions.<RuleCall>filter(_filter, _function_1);
-        final Function1<RuleCall, AbstractRule> _function_2 = new Function1<RuleCall, AbstractRule>() {
-          @Override
-          public AbstractRule apply(final RuleCall ruleCall) {
-            return ruleCall.getRule();
-          }
-        };
-        Iterable<AbstractRule> _map_1 = IterableExtensions.<RuleCall, AbstractRule>map(_filter_1, _function_2);
-        List<AbstractRule> _list = IterableExtensions.<AbstractRule>toList(_map_1);
-        boolean _contains = _list.contains(rule);
-        _or = _contains;
+        boolean _exists = IterableExtensions.<RuleCall>exists(_flatten, _function_1);
+        _or = _exists;
       }
       _xblockexpression = _or;
     }
@@ -192,22 +170,6 @@ public class GrammarAccessExtensions {
   }
   
   protected boolean _mustBeParenthesized(final AbstractElement it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final Group it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final UnorderedGroup it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final Alternatives it) {
-    return true;
-  }
-  
-  protected boolean _mustBeParenthesized(final EnumLiteralDeclaration it) {
     return true;
   }
   
@@ -293,35 +255,8 @@ public class GrammarAccessExtensions {
     return _or;
   }
   
-  protected AbstractElement _predicatedElement(final AbstractElement it) {
-    return it;
-  }
-  
-  protected AbstractElement _predicatedElement(final Assignment it) {
-    AbstractElement _xifexpression = null;
-    boolean _isPredicated = it.isPredicated();
-    if (_isPredicated) {
-      _xifexpression = it;
-    } else {
-      AbstractElement _terminal = it.getTerminal();
-      _xifexpression = this.predicatedElement(_terminal);
-    }
-    return _xifexpression;
-  }
-  
-  protected AbstractElement _predicatedElement(final RuleCall it) {
-    AbstractElement _xifexpression = null;
-    boolean _isPredicated = it.isPredicated();
-    if (_isPredicated) {
-      _xifexpression = it;
-    } else {
-      AbstractRule _rule = it.getRule();
-      AbstractElement _alternatives = _rule.getAlternatives();
-      EList<AbstractElement> _elements = ((Group) _alternatives).getElements();
-      AbstractElement _head = IterableExtensions.<AbstractElement>head(_elements);
-      _xifexpression = this.predicatedElement(_head);
-    }
-    return _xifexpression;
+  public AbstractElement predicatedElement(final AbstractElement it) {
+    return AntlrGrammarGenUtil.getPredicatedElement(it);
   }
   
   public String localVar(final Assignment it, final AbstractElement terminal) {
@@ -434,11 +369,6 @@ public class GrammarAccessExtensions {
     return _xifexpression;
   }
   
-  public boolean isBoolean(final Assignment it) {
-    String _operator = it.getOperator();
-    return Objects.equal(_operator, "?=");
-  }
-  
   public CharSequence toStringLiteral(final AbstractElement it) {
     CharSequence _switchResult = null;
     boolean _matched = false;
@@ -502,31 +432,8 @@ public class GrammarAccessExtensions {
     }
   }
   
-  public String ruleName(final AbstractRule it) {
-    if (it instanceof EnumRule) {
-      return _ruleName((EnumRule)it);
-    } else if (it instanceof ParserRule) {
-      return _ruleName((ParserRule)it);
-    } else if (it instanceof TerminalRule) {
-      return _ruleName((TerminalRule)it);
-    } else if (it != null) {
-      return _ruleName(it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
-  }
-  
   public boolean mustBeParenthesized(final AbstractElement it) {
-    if (it instanceof Alternatives) {
-      return _mustBeParenthesized((Alternatives)it);
-    } else if (it instanceof Group) {
-      return _mustBeParenthesized((Group)it);
-    } else if (it instanceof UnorderedGroup) {
-      return _mustBeParenthesized((UnorderedGroup)it);
-    } else if (it instanceof EnumLiteralDeclaration) {
-      return _mustBeParenthesized((EnumLiteralDeclaration)it);
-    } else if (it instanceof Keyword) {
+    if (it instanceof Keyword) {
       return _mustBeParenthesized((Keyword)it);
     } else if (it instanceof RuleCall) {
       return _mustBeParenthesized((RuleCall)it);
@@ -545,19 +452,6 @@ public class GrammarAccessExtensions {
       return _predicated((RuleCall)it);
     } else if (it != null) {
       return _predicated(it);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it).toString());
-    }
-  }
-  
-  public AbstractElement predicatedElement(final AbstractElement it) {
-    if (it instanceof Assignment) {
-      return _predicatedElement((Assignment)it);
-    } else if (it instanceof RuleCall) {
-      return _predicatedElement((RuleCall)it);
-    } else if (it != null) {
-      return _predicatedElement(it);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it).toString());

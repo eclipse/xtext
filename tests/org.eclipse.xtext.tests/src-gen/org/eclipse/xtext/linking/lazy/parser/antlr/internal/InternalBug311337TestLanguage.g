@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"def",
         		lv_def_0_0, 
-        		"Definition");
+        		"org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Definition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -155,7 +155,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child");
+        		"org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Child");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -173,7 +173,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"ref",
         		lv_ref_4_0, 
-        		"Reference");
+        		"org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Reference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -217,7 +217,7 @@ ruleChild returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

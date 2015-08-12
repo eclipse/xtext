@@ -99,7 +99,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 }
 
-// TestRequired | TestOptional | TestList
+// (TestRequired | TestOptional | TestList)
 protected class Root_Alternatives_1 extends AlternativesToken {
 
 	public Root_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

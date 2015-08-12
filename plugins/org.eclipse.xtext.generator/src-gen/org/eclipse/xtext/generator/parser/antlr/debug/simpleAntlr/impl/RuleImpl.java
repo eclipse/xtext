@@ -2,8 +2,12 @@
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -11,6 +15,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement;
 import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage;
@@ -21,12 +29,13 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#isFragment <em>Fragment</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleImpl#getBody <em>Body</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -73,6 +82,16 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
   protected String name = NAME_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getParameters()
+   * @generated
+   * @ordered
+   */
+  protected EList<Parameter> parameters;
+
+  /**
    * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -108,8 +127,7 @@ public class RuleImpl extends MinimalEObjectImpl.Container implements Rule
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isFragment()
+  public boolean isFragment()
   {
     return fragment;
   }
@@ -119,8 +137,7 @@ public boolean isFragment()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setFragment(boolean newFragment)
+  public void setFragment(boolean newFragment)
   {
     boolean oldFragment = fragment;
     fragment = newFragment;
@@ -133,8 +150,7 @@ public void setFragment(boolean newFragment)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -144,8 +160,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -158,8 +173,21 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getBody()
+  public EList<Parameter> getParameters()
+  {
+    if (parameters == null)
+    {
+      parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, SimpleAntlrPackage.RULE__PARAMETERS);
+    }
+    return parameters;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleElement getBody()
   {
     return body;
   }
@@ -186,8 +214,7 @@ public RuleElement getBody()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setBody(RuleElement newBody)
+  public void setBody(RuleElement newBody)
   {
     if (newBody != body)
     {
@@ -213,6 +240,8 @@ public void setBody(RuleElement newBody)
   {
     switch (featureID)
     {
+      case SimpleAntlrPackage.RULE__PARAMETERS:
+        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
       case SimpleAntlrPackage.RULE__BODY:
         return basicSetBody(null, msgs);
     }
@@ -233,6 +262,8 @@ public void setBody(RuleElement newBody)
         return isFragment();
       case SimpleAntlrPackage.RULE__NAME:
         return getName();
+      case SimpleAntlrPackage.RULE__PARAMETERS:
+        return getParameters();
       case SimpleAntlrPackage.RULE__BODY:
         return getBody();
     }
@@ -244,6 +275,7 @@ public void setBody(RuleElement newBody)
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -254,6 +286,10 @@ public void setBody(RuleElement newBody)
         return;
       case SimpleAntlrPackage.RULE__NAME:
         setName((String)newValue);
+        return;
+      case SimpleAntlrPackage.RULE__PARAMETERS:
+        getParameters().clear();
+        getParameters().addAll((Collection<? extends Parameter>)newValue);
         return;
       case SimpleAntlrPackage.RULE__BODY:
         setBody((RuleElement)newValue);
@@ -278,6 +314,9 @@ public void setBody(RuleElement newBody)
       case SimpleAntlrPackage.RULE__NAME:
         setName(NAME_EDEFAULT);
         return;
+      case SimpleAntlrPackage.RULE__PARAMETERS:
+        getParameters().clear();
+        return;
       case SimpleAntlrPackage.RULE__BODY:
         setBody((RuleElement)null);
         return;
@@ -299,6 +338,8 @@ public void setBody(RuleElement newBody)
         return fragment != FRAGMENT_EDEFAULT;
       case SimpleAntlrPackage.RULE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case SimpleAntlrPackage.RULE__PARAMETERS:
+        return parameters != null && !parameters.isEmpty();
       case SimpleAntlrPackage.RULE__BODY:
         return body != null;
     }

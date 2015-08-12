@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: CharacterRangeImpl.java,v 1.3 2010/04/06 14:09:52 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

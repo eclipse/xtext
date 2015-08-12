@@ -122,6 +122,7 @@ import «gaFQName()»;
 «IF isCalled(original,this)»
 «IF !isDatatypeRule()»
 «IF !debugGrammar-»
+«IF !fragment-»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [EObject current=null] 
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
@@ -140,7 +141,7 @@ import «gaFQName()»;
 «ENDIF-»
 	:
 	{ «EXPAND newCompositeNode» }
-	 iv_«ruleName()»=«ruleName()» 
+	 iv_«ruleName()»=«ruleName()»«defaultArgumentList()» 
 	 { $current=$iv_«ruleName()».current; } 
 	 EOF 
 ;
@@ -155,9 +156,12 @@ finally {
 }
 «ENDIF-»
 «ENDIF-»
+«ENDIF-»
 
 // Rule «name»
-«ruleName()» «IF !debugGrammar-»returns [EObject current=null] 
+«ruleName()» «parameterList(debugGrammar)-»
+«IF !debugGrammar-»
+returns [EObject current=«IF fragment-»in_current«ELSE»null«ENDIF»] 
     @init { enterRule(); 
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
@@ -187,6 +191,7 @@ finally {
 «ENDIF-»
 «ELSE»
 «IF !debugGrammar-»
+«IF !fragment-»
 // Entry rule «entryRuleName()»
 «entryRuleName()» returns [String current=null] 
 «IF definesHiddenTokens || (options.backtrack && !allContents().typeSelect(UnorderedGroup).isEmpty)-»
@@ -205,7 +210,7 @@ finally {
 «ENDIF-»
 	:
 	{ «EXPAND newCompositeNode» } 
-	 iv_«ruleName()»=«ruleName()» 
+	 iv_«ruleName()»=«ruleName()»«defaultArgumentList()» 
 	 { $current=$iv_«ruleName()».current.getText(); }  
 	 EOF 
 ;
@@ -220,9 +225,12 @@ finally {
 }
 «ENDIF-»
 «ENDIF-»
+«ENDIF-»
 
 // Rule «name»
-«ruleName()» «IF !debugGrammar-»returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+«ruleName()» «parameterList(debugGrammar)-»
+«IF !debugGrammar-»
+returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
 «IF definesHiddenTokens-»
 		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens(«FOREACH hiddenTokens AS hidden SEPARATOR ", "»"«hidden.ruleName()»"«ENDFOREACH-»);
@@ -298,7 +306,11 @@ finally {
 
 «DEFINE dataTypeEbnf2(boolean debugGrammar) FOR Alternatives-»«EXPAND dataTypeEbnf(debugGrammar) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
 
-«DEFINE dataTypeEbnf2(boolean debugGrammar) FOR Group»«EXPAND dataTypeEbnf(debugGrammar) FOREACH elements»«ENDDEFINE»
+«DEFINE dataTypeEbnf2(boolean debugGrammar) FOR Group-»
+«IF guardCondition!=null-»
+«guardCondition()»(«EXPAND dataTypeEbnf(debugGrammar) FOREACH elements-»)
+«ELSE-»«EXPAND dataTypeEbnf(debugGrammar) FOREACH elements-»«ENDIF-»
+«ENDDEFINE»
 
 «DEFINE dataTypeEbnf2(boolean debugGrammar) FOR UnorderedGroup»
 «IF debugGrammar-»
@@ -353,7 +365,7 @@ finally {
         «EXPAND newCompositeNode» 
     }
 «ENDIF-»
-    «localVar()»=«ELSE» «ENDIF-»«rule.ruleName()-»«IF !debugGrammar-»
+    «localVar()»=«ELSE» «ENDIF-»«rule.ruleName()-»«argumentList(debugGrammar)»«IF !debugGrammar-»
     {
 		$current.merge(«localVar()»);
     }
@@ -374,7 +386,11 @@ finally {
 
 «DEFINE ebnf2(AntlrOptions options, boolean debugGrammar) FOR Alternatives-»«EXPAND ebnf(options, debugGrammar) FOREACH elements SEPARATOR '\n    |'»«ENDDEFINE»
 
-«DEFINE ebnf2(AntlrOptions options, boolean debugGrammar) FOR Group-»«EXPAND ebnf(options, debugGrammar) FOREACH elements»«ENDDEFINE»
+«DEFINE ebnf2(AntlrOptions options, boolean debugGrammar) FOR Group-»
+«IF guardCondition!=null-»
+«guardCondition()»(«EXPAND ebnf(options, debugGrammar) FOREACH elements»)
+«ELSE-»«EXPAND ebnf(options, debugGrammar) FOREACH elements»«ENDIF-»
+«ENDDEFINE»
 
 «DEFINE ebnf2(AntlrOptions options, boolean debugGrammar) FOR UnorderedGroup»
 «IF debugGrammar-»
@@ -421,14 +437,14 @@ finally {
 «ENDDEFINE»
 
 «DEFINE crossrefEbnf(CrossReference ref, boolean debugGrammar) FOR RuleCall-»
-«EXPAND crossrefEbnf(ref, debugGrammar) FOR rule-»
+«EXPAND crossrefEbnf(ref, this, debugGrammar) FOR rule-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(CrossReference ref, boolean debugGrammar) FOR AbstractRule-»
+«DEFINE crossrefEbnf(CrossReference ref, RuleCall call, boolean debugGrammar) FOR AbstractRule-»
 «ERROR "crossrefEbnf is not supported for AbstractRule"»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(CrossReference ref, boolean debugGrammar) FOR ParserRule-»
+«DEFINE crossrefEbnf(CrossReference ref, RuleCall call, boolean debugGrammar) FOR ParserRule-»
 «IF !isDatatypeRule()-»
 «ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
 «ELSE-»
@@ -437,7 +453,7 @@ finally {
 	        «EXPAND newCompositeNode FOR ref» 
 	    }
 «ENDIF-»
-		«ruleName()-»
+		«ruleName()»«call.argumentList(debugGrammar)-»
 «IF !debugGrammar-»
 		{ 
 	        afterParserOrEnumRuleCall();
@@ -446,7 +462,7 @@ finally {
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(CrossReference ref, boolean debugGrammar) FOR EnumRule-»
+«DEFINE crossrefEbnf(CrossReference ref, RuleCall call, boolean debugGrammar) FOR EnumRule-»
 «IF !debugGrammar-»
 		{ 
 	        «EXPAND newCompositeNode FOR ref» 
@@ -460,7 +476,7 @@ finally {
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE crossrefEbnf(CrossReference ref, boolean debugGrammar) FOR TerminalRule-»
+«DEFINE crossrefEbnf(CrossReference ref, RuleCall call, boolean debugGrammar) FOR TerminalRule-»
 	«IF !debugGrammar»«ref.containingAssignment().localVar()»=«ENDIF»«ruleName()»
 «IF !debugGrammar-»
 	{
@@ -515,7 +531,7 @@ finally {
 		{ 
 	        «EXPAND newCompositeNode FOR call» 
 	    }
-		«assignment.localVar(call)»=«ENDIF»«ruleName()-»
+		«assignment.localVar(call)»=«ENDIF»«ruleName()»«call.argumentList(debugGrammar)-»
 «IF !debugGrammar-»
 		{
 	        if ($current==null) {
@@ -627,7 +643,7 @@ finally {
 
 «DEFINE ebnf2(AntlrOptions options, boolean debugGrammar) FOR RuleCall-»
 «IF debugGrammar-»
-	«rule.ruleName()-»
+	«rule.ruleName()»«argumentList(debugGrammar)-»
 «ELSE-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
 «IF options.backtrack-»
@@ -636,11 +652,16 @@ finally {
 	}
 «ENDIF-»
     { 
+«IF rule.fragment-»
+		if ($current==null) {
+			$current = createModelElement(grammarAccess.«containingParserRule().grammarElementAccess()»);
+		}
+«ENDIF-»
         «EXPAND newCompositeNode» 
     }
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»
     «localVar()»=«ENDIF-»«ENDIF-»«IF TerminalRule.isInstance(rule)-»«localVar()»=«ENDIF-»
-«rule.ruleName()-»
+«rule.ruleName()»«argumentList(debugGrammar)-»
 «IF (ParserRule.isInstance(rule) || EnumRule.isInstance(rule)) && !isAssigned()»
     { 
 «IF (ParserRule.isInstance(rule) && !isDatatypeRule((ParserRule)rule) && !EnumRule.isInstance(rule))-»

@@ -45,7 +45,7 @@ public class ParseTreeConstructorUtil {
 		for (AbstractRule r : GrammarUtil.allRules(g))
 			if (r instanceof ParserRule) {
 				ParserRule pr = (ParserRule) r;
-				if (!GrammarUtil.isDatatypeRule(pr))
+				if (!GrammarUtil.isDatatypeRule(pr) && !pr.isFragment())
 					callees.add(pr.getAlternatives());
 			}
 		return callees;

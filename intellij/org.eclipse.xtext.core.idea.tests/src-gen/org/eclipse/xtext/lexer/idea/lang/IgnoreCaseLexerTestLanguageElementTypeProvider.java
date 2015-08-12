@@ -68,27 +68,27 @@ public class IgnoreCaseLexerTestLanguageElementTypeProvider implements IElementT
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_CaseKeyword_0ElementType() {
 		return Model_CaseKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FooKeyword_1ElementType() {
 		return Model_FooKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_2ElementType() {
 		return Model_ValueAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueCaSeKeyword_2_0ElementType() {
 		return Model_ValueCaSeKeyword_2_0_ELEMENT_TYPE;
 	}

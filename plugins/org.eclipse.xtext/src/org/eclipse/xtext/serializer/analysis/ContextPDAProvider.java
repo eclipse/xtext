@@ -10,7 +10,6 @@ package org.eclipse.xtext.serializer.analysis;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -116,7 +115,7 @@ public class ContextPDAProvider implements IContextPDAProvider {
 		@Override
 		public AbstractElement getCall(AbstractElement ele) {
 			if (ele instanceof RuleCall && !GrammarUtil.isAssigned(ele)
-					&& ((RuleCall) ele).getRule().getType().getClassifier() instanceof EClass)
+					&& GrammarUtil.isEObjectRuleCall(ele))
 				return ((RuleCall) ele).getRule().getAlternatives();
 			return null;
 		}

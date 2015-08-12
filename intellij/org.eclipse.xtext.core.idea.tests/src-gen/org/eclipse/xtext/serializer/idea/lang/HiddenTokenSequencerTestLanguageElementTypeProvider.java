@@ -119,63 +119,63 @@ public class HiddenTokenSequencerTestLanguageElementTypeProvider implements IEle
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DomainModelAssignmentElementType() {
 		return Model_DomainModelAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DomainModelDomainModelParserRuleCall_0ElementType() {
 		return Model_DomainModelDomainModelParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModelElementType() {
 		return DomainModel_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModel_GroupElementType() {
 		return DomainModel_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModel_EntitiesKeyword_0ElementType() {
 		return DomainModel_EntitiesKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModel_EntitiesAssignment_1ElementType() {
 		return DomainModel_EntitiesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModel_EntitiesEntityParserRuleCall_1_0ElementType() {
 		return DomainModel_EntitiesEntityParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDomainModel_EndKeyword_2ElementType() {
 		return DomainModel_EndKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityElementType() {
 		return Entity_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntity_GroupElementType() {
 		return Entity_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntity_NameAssignment_0ElementType() {
 		return Entity_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntity_NameIDTerminalRuleCall_0_0ElementType() {
 		return Entity_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntity_DescriptionAssignment_1ElementType() {
 		return Entity_DescriptionAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntity_DescriptionSTRINGTerminalRuleCall_1_0ElementType() {
 		return Entity_DescriptionSTRINGTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

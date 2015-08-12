@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: TypeRefImpl.java,v 1.17 2010/04/06 14:09:53 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

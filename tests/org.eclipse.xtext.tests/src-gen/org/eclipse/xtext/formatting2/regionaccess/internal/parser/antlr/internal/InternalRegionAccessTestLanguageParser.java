@@ -361,7 +361,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                            			current, 
                            			"mixed",
                             		lv_mixed_9_0, 
-                            		"Mixed");
+                            		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -471,7 +471,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -579,7 +579,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"delegate",
                     		lv_delegate_1_0, 
-                    		"Delegate");
+                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Delegate");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -778,7 +778,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"delegate",
                     		lv_delegate_1_0, 
-                    		"PrefixedDelegate");
+                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.PrefixedDelegate");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -964,7 +964,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1109,7 +1109,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
             	           			current, 
             	           			"right",
             	            		lv_right_3_0, 
-            	            		"Primary");
+            	            		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Primary");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1250,7 +1250,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                            			current, 
                            			"name",
                             		lv_name_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1667,7 +1667,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                                    			current, 
                                    			"name",
                                     		lv_name_6_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -1710,7 +1710,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                                    			current, 
                                    			"eobj",
                                     		lv_eobj_8_0, 
-                                    		"Mixed");
+                                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1750,7 +1750,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                                    			current, 
                                    			"datatype",
                                     		lv_datatype_9_0, 
-                                    		"Datatype");
+                                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Datatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1824,7 +1824,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
                                    			current, 
                                    			"lit",
                                     		lv_lit_12_0, 
-                                    		"Enum");
+                                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Enum");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1912,7 +1912,7 @@ public class InternalRegionAccessTestLanguageParser extends AbstractInternalAntl
             	                   			current, 
             	                   			"body",
             	                    		lv_body_16_0, 
-            	                    		"Mixed");
+            	                    		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 

@@ -188,7 +188,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
                    			current, 
                    			"modelFeatures",
                     		lv_modelFeatures_2_0, 
-                    		"ModelFeatures");
+                    		"org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.ModelFeatures");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -293,7 +293,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

@@ -28,11 +28,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
@@ -110,11 +112,11 @@ public class LazyLinker extends AbstractCleaningLinker {
 		ICompositeNode node = NodeModelUtils.getNode(obj);
 		if (node == null)
 			return;
-		installProxies(obj, producer, settingsToLink, node);
+		installProxies(obj, producer, settingsToLink, node, false);
 	}
 
 	private void installProxies(EObject obj, IDiagnosticProducer producer,
-			Multimap<EStructuralFeature.Setting, INode> settingsToLink, ICompositeNode parentNode) {
+			Multimap<EStructuralFeature.Setting, INode> settingsToLink, ICompositeNode parentNode, boolean dontCheckParent) {
 		final EClass eClass = obj.eClass();
 		if (eClass.getEAllReferences().size() - eClass.getEAllContainments().size() == 0)
 			return;
@@ -137,10 +139,16 @@ public class LazyLinker extends AbstractCleaningLinker {
 					createAndSetProxy(obj, node, eRef);
 					afterCreateAndSetProxy(obj, node, eRef, crossReference, producer);
 				}
+			} else if (grammarElement instanceof RuleCall && node instanceof ICompositeNode) {
+				RuleCall ruleCall = (RuleCall) grammarElement;
+				AbstractRule calledRule = ruleCall.getRule();
+				if (calledRule instanceof ParserRule && ((ParserRule) calledRule).isFragment()) {
+					installProxies(obj, producer, settingsToLink, (ICompositeNode) node, true);
+				}
 			}
 		}
-		if (shouldCheckParentNode(parentNode)) {
-			installProxies(obj, producer, settingsToLink, parentNode.getParent());
+		if (!dontCheckParent && shouldCheckParentNode(parentNode)) {
+			installProxies(obj, producer, settingsToLink, parentNode.getParent(), dontCheckParent);
 		}
 	}
 

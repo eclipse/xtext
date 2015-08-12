@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.Alternatives#getGroups <em>Groups</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.Alternatives#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getAlternatives()
@@ -23,19 +23,19 @@ import org.eclipse.emf.common.util.EList;
 public interface Alternatives extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Groups</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.xtextTest.AbstractElement}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Groups</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Groups</em>' containment reference list.
-   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getAlternatives_Groups()
+   * @return the value of the '<em>Elements</em>' containment reference list.
+   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getAlternatives_Elements()
    * @model containment="true"
    * @generated
    */
-  EList<AbstractElement> getGroups();
+  EList<AbstractElement> getElements();
 
 } // Alternatives

@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"domainModel",
         		lv_domainModel_0_0, 
-        		"DomainModel");
+        		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.DomainModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,7 +133,7 @@ ruleDomainModel returns [EObject current=null]
        			$current, 
        			"entities",
         		lv_entities_1_0, 
-        		"Entity");
+        		"org.eclipse.xtext.serializer.HiddenTokenSequencerTestLanguage.Entity");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -177,7 +177,7 @@ ruleEntity returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -195,7 +195,7 @@ ruleEntity returns [EObject current=null]
        			$current, 
        			"description",
         		lv_description_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

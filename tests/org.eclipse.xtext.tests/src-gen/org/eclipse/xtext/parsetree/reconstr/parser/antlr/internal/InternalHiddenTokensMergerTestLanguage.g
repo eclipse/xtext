@@ -195,7 +195,7 @@ ruleDatatypeBug286557 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"FQN");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -306,7 +306,7 @@ ruleEnumBug returns [EObject current=null]
        			$current, 
        			"return",
         		lv_return_2_0, 
-        		"EnumBugEnum");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.EnumBugEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -325,7 +325,7 @@ ruleEnumBug returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -367,7 +367,7 @@ ruleCommentable returns [EObject current=null]
        			$current, 
        			"item",
         		lv_item_1_0, 
-        		"CommentableItem");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.CommentableItem");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -411,7 +411,7 @@ ruleCommentableItem returns [EObject current=null]
        			$current, 
        			"id",
         		lv_id_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -453,7 +453,7 @@ ruleValueList returns [EObject current=null]
        			$current, 
        			"ids",
         		lv_ids_1_0, 
-        		"FQN");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -496,7 +496,7 @@ ruleRefList returns [EObject current=null]
        			$current, 
        			"objs",
         		lv_objs_1_0, 
-        		"RefObj");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.RefObj");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -554,7 +554,7 @@ ruleRefObj returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"FQN");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -597,7 +597,7 @@ ruleSingleRef returns [EObject current=null]
        			$current, 
        			"obj",
         		lv_obj_1_0, 
-        		"RefObj");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.RefObj");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -659,7 +659,7 @@ ruleAppendToFileEnd returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_1_0, 
-        		"AppendToFileEndItem");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.AppendToFileEndItem");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -703,7 +703,7 @@ ruleAppendToFileEndItem returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -756,7 +756,7 @@ ruleAction1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -773,7 +773,7 @@ ruleAction1 returns [EObject current=null]
        			$current, 
        			"actions2",
         		lv_actions2_3_0, 
-        		"Action1Sub1");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Action1Sub1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -791,7 +791,7 @@ ruleAction1 returns [EObject current=null]
        			$current, 
        			"actions2",
         		lv_actions2_4_0, 
-        		"Action1Sub2");
+        		"org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTestLanguage.Action1Sub2");
 	        afterParserOrEnumRuleCall();
 	    }
 

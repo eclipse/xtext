@@ -378,251 +378,251 @@ public class Bug378967TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_AlternativesElementType() {
 		return Root_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_0ElementType() {
 		return Root_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitOneKeyword_0_0ElementType() {
 		return Root_DigitOneKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementAssignment_0_1ElementType() {
 		return Root_ElementAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementRule1ParserRuleCall_0_1_0ElementType() {
 		return Root_ElementRule1ParserRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_1ElementType() {
 		return Root_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitTwoKeyword_1_0ElementType() {
 		return Root_DigitTwoKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementAssignment_1_1ElementType() {
 		return Root_ElementAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementRule2ParserRuleCall_1_1_0ElementType() {
 		return Root_ElementRule2ParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_2ElementType() {
 		return Root_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitThreeKeyword_2_0ElementType() {
 		return Root_DigitThreeKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementAssignment_2_1ElementType() {
 		return Root_ElementAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementRule3ParserRuleCall_2_1_0ElementType() {
 		return Root_ElementRule3ParserRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Group_3ElementType() {
 		return Root_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_DigitFourKeyword_3_0ElementType() {
 		return Root_DigitFourKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementAssignment_3_1ElementType() {
 		return Root_ElementAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementRule4ParserRuleCall_3_1_0ElementType() {
 		return Root_ElementRule4ParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1ElementType() {
 		return Rule1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_GroupElementType() {
 		return Rule1_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_TypeAssignment_0ElementType() {
 		return Rule1_TypeAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_TypeFirstEnumEnumRuleCall_0_0ElementType() {
 		return Rule1_TypeFirstEnumEnumRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_ValueAssignment_1ElementType() {
 		return Rule1_ValueAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_ValueINTTerminalRuleCall_1_0ElementType() {
 		return Rule1_ValueINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_UnitAssignment_2ElementType() {
 		return Rule1_UnitAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule1_UnitSecondEnumEnumRuleCall_2_0ElementType() {
 		return Rule1_UnitSecondEnumEnumRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2ElementType() {
 		return Rule2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2_GroupElementType() {
 		return Rule2_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2_AfterKeyword_0ElementType() {
 		return Rule2_AfterKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2_ValueAssignment_1ElementType() {
 		return Rule2_ValueAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2_ValueINTTerminalRuleCall_1_0ElementType() {
 		return Rule2_ValueINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule2_SKeyword_2ElementType() {
 		return Rule2_SKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3ElementType() {
 		return Rule3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3_GroupElementType() {
 		return Rule3_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3_AfterParserRuleCall_0ElementType() {
 		return Rule3_AfterParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3_ValueAssignment_1ElementType() {
 		return Rule3_ValueAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3_ValueINTTerminalRuleCall_1_0ElementType() {
 		return Rule3_ValueINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule3_SParserRuleCall_2ElementType() {
 		return Rule3_SParserRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4ElementType() {
 		return Rule4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_GroupElementType() {
 		return Rule4_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_AfterAssignment_0ElementType() {
 		return Rule4_AfterAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_AfterAfterObjParserRuleCall_0_0ElementType() {
 		return Rule4_AfterAfterObjParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_ValueAssignment_1ElementType() {
 		return Rule4_ValueAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_ValueINTTerminalRuleCall_1_0ElementType() {
 		return Rule4_ValueINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_SAssignment_2ElementType() {
 		return Rule4_SAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRule4_SSObjParserRuleCall_2_0ElementType() {
 		return Rule4_SSObjParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstEnumElementType() {
 		return FirstEnum_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstEnum_ValueEnumLiteralDeclarationElementType() {
 		return FirstEnum_ValueEnumLiteralDeclaration_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstEnum_ValueAfterKeyword_0ElementType() {
 		return FirstEnum_ValueAfterKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondEnumElementType() {
 		return SecondEnum_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondEnum_ValueEnumLiteralDeclarationElementType() {
 		return SecondEnum_ValueEnumLiteralDeclaration_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondEnum_ValueSKeyword_0ElementType() {
 		return SecondEnum_ValueSKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAfterObjElementType() {
 		return AfterObj_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAfterObj_ValueAssignmentElementType() {
 		return AfterObj_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAfterObj_ValueAfterKeyword_0ElementType() {
 		return AfterObj_ValueAfterKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSObjElementType() {
 		return SObj_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSObj_ValueAssignmentElementType() {
 		return SObj_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSObj_ValueSKeyword_0ElementType() {
 		return SObj_ValueSKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAfterElementType() {
 		return After_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAfter_AfterKeywordElementType() {
 		return After_AfterKeyword_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSElementType() {
 		return S_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getS_SKeywordElementType() {
 		return S_SKeyword_ELEMENT_TYPE;
 	}

@@ -49,11 +49,12 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule SomeContainer ****************
  *
  * SomeContainer:
- * 	"container" name=ID "{" (nested+=Nested | content+=Content)* "}";
+ * 	'container' name=ID '{' (nested+=Nested | content+=Content)*
+ * 	'}';
  *
  **/
 
-// "container" name=ID "{" (nested+=Nested | content+=Content)* "}"
+// 'container' name=ID '{' (nested+=Nested | content+=Content)* '}'
 protected class SomeContainer_Group extends GroupToken {
 	
 	public SomeContainer_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -82,7 +83,7 @@ protected class SomeContainer_Group extends GroupToken {
 
 }
 
-// "container"
+// 'container'
 protected class SomeContainer_ContainerKeyword_0 extends KeywordToken  {
 	
 	public SomeContainer_ContainerKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -137,7 +138,7 @@ protected class SomeContainer_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class SomeContainer_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public SomeContainer_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -277,7 +278,7 @@ protected class SomeContainer_ContentAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class SomeContainer_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public SomeContainer_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -307,11 +308,13 @@ protected class SomeContainer_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Nested ****************
  *
  * Nested:
- * 	"nested" "{" nested+=SomeContainer+ "}";
+ * 	'nested' '{'
+ * 	nested+=SomeContainer+
+ * 	'}';
  *
  **/
 
-// "nested" "{" nested+=SomeContainer+ "}"
+// 'nested' '{' nested+=SomeContainer+ '}'
 protected class Nested_Group extends GroupToken {
 	
 	public Nested_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -340,7 +343,7 @@ protected class Nested_Group extends GroupToken {
 
 }
 
-// "nested"
+// 'nested'
 protected class Nested_NestedKeyword_0 extends KeywordToken  {
 	
 	public Nested_NestedKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -361,7 +364,7 @@ protected class Nested_NestedKeyword_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Nested_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
 	public Nested_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -430,7 +433,7 @@ protected class Nested_NestedAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Nested_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Nested_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -573,11 +576,13 @@ protected class Content_AbstractChildrenParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Children ****************
  *
  * Children:
- * 	"children" "{" children+=Child ("," children+=Child)* "}";
+ * 	'children' '{'
+ * 	children+=Child (',' children+=Child)*
+ * 	'}';
  *
  **/
 
-// "children" "{" children+=Child ("," children+=Child)* "}"
+// 'children' '{' children+=Child (',' children+=Child)* '}'
 protected class Children_Group extends GroupToken {
 	
 	public Children_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -606,7 +611,7 @@ protected class Children_Group extends GroupToken {
 
 }
 
-// "children"
+// 'children'
 protected class Children_ChildrenKeyword_0 extends KeywordToken  {
 	
 	public Children_ChildrenKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -627,7 +632,7 @@ protected class Children_ChildrenKeyword_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Children_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
 	public Children_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -695,7 +700,7 @@ protected class Children_ChildrenAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// ("," children+=Child)*
+// (',' children+=Child)*
 protected class Children_Group_3 extends GroupToken {
 	
 	public Children_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -717,7 +722,7 @@ protected class Children_Group_3 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Children_CommaKeyword_3_0 extends KeywordToken  {
 	
 	public Children_CommaKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -787,7 +792,7 @@ protected class Children_ChildrenAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class Children_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Children_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -817,11 +822,11 @@ protected class Children_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Child ****************
  *
  * Child:
- * 	"->" "C" "(" value=Named ")";
+ * 	'->' 'C' '(' value=Named ')';
  *
  **/
 
-// "->" "C" "(" value=Named ")"
+// '->' 'C' '(' value=Named ')'
 protected class Child_Group extends GroupToken {
 	
 	public Child_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -850,7 +855,7 @@ protected class Child_Group extends GroupToken {
 
 }
 
-// "->"
+// '->'
 protected class Child_HyphenMinusGreaterThanSignKeyword_0 extends KeywordToken  {
 	
 	public Child_HyphenMinusGreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -871,7 +876,7 @@ protected class Child_HyphenMinusGreaterThanSignKeyword_0 extends KeywordToken  
 
 }
 
-// "C"
+// 'C'
 protected class Child_CKeyword_1 extends KeywordToken  {
 	
 	public Child_CKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -893,7 +898,7 @@ protected class Child_CKeyword_1 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class Child_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
 	public Child_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -961,7 +966,7 @@ protected class Child_ValueAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class Child_RightParenthesisKeyword_4 extends KeywordToken  {
 	
 	public Child_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -990,11 +995,13 @@ protected class Child_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule AbstractChildren ****************
  *
  * AbstractChildren:
- * 	"abstract children" "{" abstractChildren+=AbstractChild+ "}";
+ * 	'abstract children' '{'
+ * 	abstractChildren+=AbstractChild+
+ * 	'}';
  *
  **/
 
-// "abstract children" "{" abstractChildren+=AbstractChild+ "}"
+// 'abstract children' '{' abstractChildren+=AbstractChild+ '}'
 protected class AbstractChildren_Group extends GroupToken {
 	
 	public AbstractChildren_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1023,7 +1030,7 @@ protected class AbstractChildren_Group extends GroupToken {
 
 }
 
-// "abstract children"
+// 'abstract children'
 protected class AbstractChildren_AbstractChildrenKeyword_0 extends KeywordToken  {
 	
 	public AbstractChildren_AbstractChildrenKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1044,7 +1051,7 @@ protected class AbstractChildren_AbstractChildrenKeyword_0 extends KeywordToken 
 
 }
 
-// "{"
+// '{'
 protected class AbstractChildren_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
 	public AbstractChildren_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1113,7 +1120,7 @@ protected class AbstractChildren_AbstractChildrenAssignment_2 extends Assignment
 	}	
 }
 
-// "}"
+// '}'
 protected class AbstractChildren_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public AbstractChildren_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1256,11 +1263,11 @@ protected class AbstractChild_SecondConcreteParserRuleCall_1 extends RuleCallTok
 /************ begin Rule FirstConcrete ****************
  *
  * FirstConcrete:
- * 	"->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")";
+ * 	'->' 'F' '(' value=Named referencedContainer=[SomeContainer]? ')';
  *
  **/
 
-// "->" "F" "(" value=Named referencedContainer=[SomeContainer]? ")"
+// '->' 'F' '(' value=Named referencedContainer=[SomeContainer]? ')'
 protected class FirstConcrete_Group extends GroupToken {
 	
 	public FirstConcrete_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1289,7 +1296,7 @@ protected class FirstConcrete_Group extends GroupToken {
 
 }
 
-// "->"
+// '->'
 protected class FirstConcrete_HyphenMinusGreaterThanSignKeyword_0 extends KeywordToken  {
 	
 	public FirstConcrete_HyphenMinusGreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1310,7 +1317,7 @@ protected class FirstConcrete_HyphenMinusGreaterThanSignKeyword_0 extends Keywor
 
 }
 
-// "F"
+// 'F'
 protected class FirstConcrete_FKeyword_1 extends KeywordToken  {
 	
 	public FirstConcrete_FKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1332,7 +1339,7 @@ protected class FirstConcrete_FKeyword_1 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class FirstConcrete_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
 	public FirstConcrete_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1437,7 +1444,7 @@ protected class FirstConcrete_ReferencedContainerAssignment_4 extends Assignment
 
 }
 
-// ")"
+// ')'
 protected class FirstConcrete_RightParenthesisKeyword_5 extends KeywordToken  {
 	
 	public FirstConcrete_RightParenthesisKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1467,11 +1474,11 @@ protected class FirstConcrete_RightParenthesisKeyword_5 extends KeywordToken  {
 /************ begin Rule SecondConcrete ****************
  *
  * SecondConcrete:
- * 	"->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")";
+ * 	'->' 'F' 'S' '(' value=Named referencedChildren+=[Child]? ')';
  *
  **/
 
-// "->" "F" "S" "(" value=Named referencedChildren+=[Child]? ")"
+// '->' 'F' 'S' '(' value=Named referencedChildren+=[Child]? ')'
 protected class SecondConcrete_Group extends GroupToken {
 	
 	public SecondConcrete_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1500,7 +1507,7 @@ protected class SecondConcrete_Group extends GroupToken {
 
 }
 
-// "->"
+// '->'
 protected class SecondConcrete_HyphenMinusGreaterThanSignKeyword_0 extends KeywordToken  {
 	
 	public SecondConcrete_HyphenMinusGreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1521,7 +1528,7 @@ protected class SecondConcrete_HyphenMinusGreaterThanSignKeyword_0 extends Keywo
 
 }
 
-// "F"
+// 'F'
 protected class SecondConcrete_FKeyword_1 extends KeywordToken  {
 	
 	public SecondConcrete_FKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1543,7 +1550,7 @@ protected class SecondConcrete_FKeyword_1 extends KeywordToken  {
 
 }
 
-// "S"
+// 'S'
 protected class SecondConcrete_SKeyword_2 extends KeywordToken  {
 	
 	public SecondConcrete_SKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1565,7 +1572,7 @@ protected class SecondConcrete_SKeyword_2 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class SecondConcrete_LeftParenthesisKeyword_3 extends KeywordToken  {
 	
 	public SecondConcrete_LeftParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1670,7 +1677,7 @@ protected class SecondConcrete_ReferencedChildrenAssignment_5 extends Assignment
 
 }
 
-// ")"
+// ')'
 protected class SecondConcrete_RightParenthesisKeyword_6 extends KeywordToken  {
 	
 	public SecondConcrete_RightParenthesisKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

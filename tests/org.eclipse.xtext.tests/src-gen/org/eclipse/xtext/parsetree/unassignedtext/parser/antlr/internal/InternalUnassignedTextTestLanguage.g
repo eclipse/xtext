@@ -165,7 +165,7 @@ ruleCaseInsensitiveKeywordRule returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -208,7 +208,7 @@ rulePluralRule returns [EObject current=null]
        			$current, 
        			"count",
         		lv_count_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -255,7 +255,7 @@ ruleMultiRule returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -310,7 +310,7 @@ ruleDatatypeRule returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -448,7 +448,7 @@ this_STRING_3=RULE_STRING
        			$current, 
        			"val",
         		lv_val_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

@@ -53,15 +53,15 @@ public class MultiValueFeatureTestLanguageElementTypeProvider implements IElemen
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getStartElementType() {
 		return Start_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getStart_FeatureAAssignmentElementType() {
 		return Start_FeatureAAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getStart_FeatureAIDTerminalRuleCall_0ElementType() {
 		return Start_FeatureAIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}

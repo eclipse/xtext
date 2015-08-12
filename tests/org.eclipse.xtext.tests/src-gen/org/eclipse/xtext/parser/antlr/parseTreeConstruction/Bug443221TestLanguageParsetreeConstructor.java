@@ -40,11 +40,18 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	{Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign";
+ * 	{Model}
+ * 	'dummy' name=ID
+ * 	'_'
+ * 	'_dummy_'
+ * 	'__dummy__'
+ * 	'$__dummy__'
+ * 	'$'
+ * 	'DollarSign';
  *
  **/
 
-// {Model} "dummy" name=ID "_" "_dummy_" "__dummy__" "$__dummy__" "$" "DollarSign"
+// {Model} 'dummy' name=ID '_' '_dummy_' '__dummy__' '$__dummy__' '$' 'DollarSign'
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -99,7 +106,7 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "dummy"
+// 'dummy'
 protected class Model_DummyKeyword_1 extends KeywordToken  {
 	
 	public Model_DummyKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -155,7 +162,7 @@ protected class Model_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "_"
+// '_'
 protected class Model__Keyword_3 extends KeywordToken  {
 	
 	public Model__Keyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -177,7 +184,7 @@ protected class Model__Keyword_3 extends KeywordToken  {
 
 }
 
-// "_dummy_"
+// '_dummy_'
 protected class Model__dummy_Keyword_4 extends KeywordToken  {
 	
 	public Model__dummy_Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -199,7 +206,7 @@ protected class Model__dummy_Keyword_4 extends KeywordToken  {
 
 }
 
-// "__dummy__"
+// '__dummy__'
 protected class Model___dummy__Keyword_5 extends KeywordToken  {
 	
 	public Model___dummy__Keyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -221,7 +228,7 @@ protected class Model___dummy__Keyword_5 extends KeywordToken  {
 
 }
 
-// "$__dummy__"
+// '$__dummy__'
 protected class Model___dummy__Keyword_6 extends KeywordToken  {
 	
 	public Model___dummy__Keyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -243,7 +250,7 @@ protected class Model___dummy__Keyword_6 extends KeywordToken  {
 
 }
 
-// "$"
+// '$'
 protected class Model_DollarSignKeyword_7 extends KeywordToken  {
 	
 	public Model_DollarSignKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -265,7 +272,7 @@ protected class Model_DollarSignKeyword_7 extends KeywordToken  {
 
 }
 
-// "DollarSign"
+// 'DollarSign'
 protected class Model_DollarSignKeyword_8 extends KeywordToken  {
 	
 	public Model_DollarSignKeyword_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -157,7 +157,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"superMains",
                     		lv_superMains_1_0, 
-                    		"SuperMain");
+                    		"org.eclipse.xtext.generator.ecore.SuperTestLanguage.SuperMain");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -200,7 +200,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"another",
                             		lv_another_3_0, 
-                            		"AnotherSuperMain");
+                            		"org.eclipse.xtext.generator.ecore.SubTestLanguage.AnotherSuperMain");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -307,7 +307,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -410,7 +410,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

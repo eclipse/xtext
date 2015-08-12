@@ -29,12 +29,12 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AntlrGrammarImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AntlrGrammarImpl#getOptions <em>Options</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AntlrGrammarImpl#getRules <em>Rules</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -106,8 +106,7 @@ public class AntlrGrammarImpl extends MinimalEObjectImpl.Container implements An
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -117,8 +116,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -131,8 +129,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Options getOptions()
+  public Options getOptions()
   {
     return options;
   }
@@ -159,8 +156,7 @@ public Options getOptions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOptions(Options newOptions)
+  public void setOptions(Options newOptions)
   {
     if (newOptions != options)
     {
@@ -181,8 +177,7 @@ public void setOptions(Options newOptions)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Rule> getRules()
+  public EList<Rule> getRules()
   {
     if (rules == null)
     {

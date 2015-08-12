@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: AlternativesImpl.java,v 1.13 2010/04/06 14:10:00 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

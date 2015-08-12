@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: GrammarImpl.java,v 1.21 2010/04/06 14:10:03 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

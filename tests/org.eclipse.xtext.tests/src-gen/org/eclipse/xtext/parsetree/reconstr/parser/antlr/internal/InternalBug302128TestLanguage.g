@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -129,7 +129,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Variable");
+        		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Variable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,7 +148,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"Value");
+        		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Value");
 	    }
 
 )

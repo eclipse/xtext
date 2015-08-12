@@ -19,7 +19,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Root");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSimpleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDelegationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -87,7 +87,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Simple");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Simple");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -111,7 +111,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class DelegationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Delegation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Delegation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDelegateAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -135,7 +135,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class UnassignedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Unassigned");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Unassigned");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cDelegateParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -155,7 +155,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class PrefixedUnassignedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrefixedUnassigned");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.PrefixedUnassigned");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDelegateAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -179,7 +179,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class PrefixedDelegateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrefixedDelegate");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.PrefixedDelegate");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPrefixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cDelegateParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -199,7 +199,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class DelegateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Delegate");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Delegate");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -215,7 +215,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Expression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimaryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -251,7 +251,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class PrimaryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Primary");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Primary");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cNamedAction_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -259,8 +259,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cNameIDTerminalRuleCall_0_1_0 = (RuleCall)cNameAssignment_0_1.eContents().get(0);
 		private final RuleCall cParenthesizedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Primary returns Expression:
-		//	{Named} name=ID | Parenthesized;
+		//Primary Expression:
+		//	{Named} name=ID | Parenthesized
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Named} name=ID | Parenthesized
@@ -283,14 +283,14 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class ParenthesizedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parenthesized");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Parenthesized");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Parenthesized returns Expression:
-		//	"(" Expression ")";
+		//Parenthesized Expression:
+		//	"(" Expression ")"
 		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Expression ")"
@@ -307,7 +307,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class MixedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mixed");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -345,7 +345,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		
 		//Mixed:
 		//	"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
-		//	ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+		//	ref=[Mixed] | lit=Enum))
+		//	")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
@@ -361,7 +362,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"unassigned"
 		public Keyword getUnassignedKeyword_1_0() { return cUnassignedKeyword_1_0; }
 
-		//ID | Datatype
+		//(ID | Datatype)
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//ID
@@ -370,7 +371,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Datatype
 		public RuleCall getDatatypeParserRuleCall_1_1_1() { return cDatatypeParserRuleCall_1_1_1; }
 
-		//{Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
+		//({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//{Action}
@@ -379,7 +380,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//Mixed
 		public RuleCall getMixedParserRuleCall_2_1() { return cMixedParserRuleCall_2_1; }
 
-		//name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum
+		//(name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
 		public Alternatives getAlternatives_2_2() { return cAlternatives_2_2; }
 
 		//name=ID
@@ -453,7 +454,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class DatatypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Datatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -470,7 +471,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//"datatype"
 		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
 
-		//Datatype | ID
+		//(Datatype | ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//Datatype
@@ -482,7 +483,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	
 	public class EnumElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Enum");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Enum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
@@ -654,8 +655,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getExpressionAccess().getRule();
 	}
 
-	//Primary returns Expression:
-	//	{Named} name=ID | Parenthesized;
+	//Primary Expression:
+	//	{Named} name=ID | Parenthesized
 	public PrimaryElements getPrimaryAccess() {
 		return pPrimary;
 	}
@@ -664,8 +665,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getPrimaryAccess().getRule();
 	}
 
-	//Parenthesized returns Expression:
-	//	"(" Expression ")";
+	//Parenthesized Expression:
+	//	"(" Expression ")"
 	public ParenthesizedElements getParenthesizedAccess() {
 		return pParenthesized;
 	}
@@ -676,7 +677,8 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 
 	//Mixed:
 	//	"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
-	//	ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+	//	ref=[Mixed] | lit=Enum))
+	//	")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
 	public MixedElements getMixedAccess() {
 		return pMixed;
 	}
@@ -706,38 +708,38 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

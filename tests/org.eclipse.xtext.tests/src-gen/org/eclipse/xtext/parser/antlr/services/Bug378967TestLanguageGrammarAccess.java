@@ -19,7 +19,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Root");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cDigitOneKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -39,16 +39,16 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cElementRule4ParserRuleCall_3_1_0 = (RuleCall)cElementAssignment_3_1.eContents().get(0);
 		
 		//Root:
-		//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
+		//	'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4
+		//'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"1" element=Rule1
+		//'1' element=Rule1
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"1"
+		//'1'
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 
 		//element=Rule1
@@ -57,10 +57,10 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Rule1
 		public RuleCall getElementRule1ParserRuleCall_0_1_0() { return cElementRule1ParserRuleCall_0_1_0; }
 
-		//"2" element=Rule2
+		//'2' element=Rule2
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_1_0() { return cDigitTwoKeyword_1_0; }
 
 		//element=Rule2
@@ -69,10 +69,10 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Rule2
 		public RuleCall getElementRule2ParserRuleCall_1_1_0() { return cElementRule2ParserRuleCall_1_1_0; }
 
-		//"3" element=Rule3
+		//'3' element=Rule3
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"3"
+		//'3'
 		public Keyword getDigitThreeKeyword_2_0() { return cDigitThreeKeyword_2_0; }
 
 		//element=Rule3
@@ -81,10 +81,10 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Rule3
 		public RuleCall getElementRule3ParserRuleCall_2_1_0() { return cElementRule3ParserRuleCall_2_1_0; }
 
-		//"4" element=Rule4
+		//'4' element=Rule4
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"4"
+		//'4'
 		public Keyword getDigitFourKeyword_3_0() { return cDigitFourKeyword_3_0; }
 
 		//element=Rule4
@@ -95,7 +95,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Rule1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rule1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeFirstEnumEnumRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
@@ -131,7 +131,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Rule2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rule2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAfterKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -139,13 +139,13 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Rule2:
-		//	"after" value=INT "s";
+		//	'after' value=INT 's';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"after" value=INT "s"
+		//'after' value=INT 's'
 		public Group getGroup() { return cGroup; }
 
-		//"after"
+		//'after'
 		public Keyword getAfterKeyword_0() { return cAfterKeyword_0; }
 
 		//value=INT
@@ -154,12 +154,12 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getValueINTTerminalRuleCall_1_0() { return cValueINTTerminalRuleCall_1_0; }
 
-		//"s"
+		//'s'
 		public Keyword getSKeyword_2() { return cSKeyword_2; }
 	}
 
 	public class Rule3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rule3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAfterParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -187,7 +187,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Rule4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Rule4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.Rule4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAfterAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAfterAfterObjParserRuleCall_0_0 = (RuleCall)cAfterAssignment_0.eContents().get(0);
@@ -223,91 +223,91 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AfterObjElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AfterObj");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.AfterObj");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
 		//AfterObj:
-		//	value="after";
+		//	value='after';
 		@Override public ParserRule getRule() { return rule; }
 
-		//value="after"
+		//value='after'
 		public Assignment getValueAssignment() { return cValueAssignment; }
 
-		//"after"
+		//'after'
 		public Keyword getValueAfterKeyword_0() { return cValueAfterKeyword_0; }
 	}
 
 	public class SObjElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SObj");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SObj");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueAssignment.eContents().get(0);
 		
 		//SObj:
-		//	value="s";
+		//	value='s';
 		@Override public ParserRule getRule() { return rule; }
 
-		//value="s"
+		//value='s'
 		public Assignment getValueAssignment() { return cValueAssignment; }
 
-		//"s"
+		//'s'
 		public Keyword getValueSKeyword_0() { return cValueSKeyword_0; }
 	}
 
 	public class AfterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "After");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.After");
 		private final Keyword cAfterKeyword = (Keyword)rule.eContents().get(1);
 		
 		//After:
-		//	"after";
+		//	'after';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"after"
+		//'after'
 		public Keyword getAfterKeyword() { return cAfterKeyword; }
 	}
 
 	public class SElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "S");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.S");
 		private final Keyword cSKeyword = (Keyword)rule.eContents().get(1);
 		
 		//S:
-		//	"s";
+		//	's';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"s"
+		//'s'
 		public Keyword getSKeyword() { return cSKeyword; }
 	}
 	
 	
 	public class FirstEnumElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "FirstEnum");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.FirstEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueAfterKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
 		
 		//enum FirstEnum:
-		//	value="after";
+		//	value='after';
 		public EnumRule getRule() { return rule; }
 
-		//value="after"
+		//value='after'
 		public EnumLiteralDeclaration getValueEnumLiteralDeclaration() { return cValueEnumLiteralDeclaration; }
 
-		//"after"
+		//'after'
 		public Keyword getValueAfterKeyword_0() { return cValueAfterKeyword_0; }
 	}
 
 	public class SecondEnumElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "SecondEnum");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug378967TestLanguage.SecondEnum");
 		private final EnumLiteralDeclaration cValueEnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cValueSKeyword_0 = (Keyword)cValueEnumLiteralDeclaration.eContents().get(0);
 		
 		//enum SecondEnum:
-		//	value="s";
+		//	value='s';
 		public EnumRule getRule() { return rule; }
 
-		//value="s"
+		//value='s'
 		public EnumLiteralDeclaration getValueEnumLiteralDeclaration() { return cValueEnumLiteralDeclaration; }
 
-		//"s"
+		//'s'
 		public Keyword getValueSKeyword_0() { return cValueSKeyword_0; }
 	}
 	
@@ -373,7 +373,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Root:
-	//	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
+	//	'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4;
 	public RootElements getRootAccess() {
 		return pRoot;
 	}
@@ -393,7 +393,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Rule2:
-	//	"after" value=INT "s";
+	//	'after' value=INT 's';
 	public Rule2Elements getRule2Access() {
 		return pRule2;
 	}
@@ -423,7 +423,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum FirstEnum:
-	//	value="after";
+	//	value='after';
 	public FirstEnumElements getFirstEnumAccess() {
 		return unknownRuleFirstEnum;
 	}
@@ -433,7 +433,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum SecondEnum:
-	//	value="s";
+	//	value='s';
 	public SecondEnumElements getSecondEnumAccess() {
 		return unknownRuleSecondEnum;
 	}
@@ -443,7 +443,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AfterObj:
-	//	value="after";
+	//	value='after';
 	public AfterObjElements getAfterObjAccess() {
 		return pAfterObj;
 	}
@@ -453,7 +453,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SObj:
-	//	value="s";
+	//	value='s';
 	public SObjElements getSObjAccess() {
 		return pSObj;
 	}
@@ -463,7 +463,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//After:
-	//	"after";
+	//	'after';
 	public AfterElements getAfterAccess() {
 		return pAfter;
 	}
@@ -473,7 +473,7 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//S:
-	//	"s";
+	//	's';
 	public SElements getSAccess() {
 		return pS;
 	}
@@ -483,38 +483,38 @@ public class Bug378967TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

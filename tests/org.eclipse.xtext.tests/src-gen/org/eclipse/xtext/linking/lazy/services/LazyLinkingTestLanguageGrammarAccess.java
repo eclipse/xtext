@@ -19,7 +19,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Model");
 		private final Assignment cTypesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -69,15 +69,18 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		// * SuppressWarnings[BidirectionalReference]
 		// * SuppressWarnings[potentialOverride]
 		// * / Type:
-		//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
-		//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+		//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
+		//	'{'
+		//	properties+=Property*
+		//	unresolvedProxyProperty+=UnresolvedProxyProperty*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{"
-		//properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
+		//'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
+		//'{' properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* '}'
 		public Group getGroup() { return cGroup; }
 
-		//"type"
+		//'type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
 
 		//name=ID
@@ -86,13 +89,13 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("extends" extends=[Type] "." parentId=[Property])?
+		//('extends' ^extends=[Type] '.' parentId=[Property])?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 
-		//extends=[Type]
+		//^extends=[Type]
 		public Assignment getExtendsAssignment_2_1() { return cExtendsAssignment_2_1; }
 
 		//[Type]
@@ -101,7 +104,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getExtendsTypeIDTerminalRuleCall_2_1_0_1() { return cExtendsTypeIDTerminalRuleCall_2_1_0_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_2_2() { return cFullStopKeyword_2_2; }
 
 		//parentId=[Property]
@@ -113,10 +116,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getParentIdPropertyIDTerminalRuleCall_2_3_0_1() { return cParentIdPropertyIDTerminalRuleCall_2_3_0_1; }
 
-		//("for" parentId=[Property] "in" extends=[Type])?
+		//('for' parentId=[Property] 'in' ^extends=[Type])?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"for"
+		//'for'
 		public Keyword getForKeyword_3_0() { return cForKeyword_3_0; }
 
 		//parentId=[Property]
@@ -128,10 +131,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getParentIdPropertyIDTerminalRuleCall_3_1_0_1() { return cParentIdPropertyIDTerminalRuleCall_3_1_0_1; }
 
-		//"in"
+		//'in'
 		public Keyword getInKeyword_3_2() { return cInKeyword_3_2; }
 
-		//extends=[Type]
+		//^extends=[Type]
 		public Assignment getExtendsAssignment_3_3() { return cExtendsAssignment_3_3; }
 
 		//[Type]
@@ -140,7 +143,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getExtendsTypeIDTerminalRuleCall_3_3_0_1() { return cExtendsTypeIDTerminalRuleCall_3_3_0_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//properties+=Property*
@@ -155,12 +158,12 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//UnresolvedProxyProperty
 		public RuleCall getUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0() { return cUnresolvedProxyPropertyUnresolvedProxyPropertyParserRuleCall_6_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class PropertyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Property");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Property");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cTypeTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
@@ -170,10 +173,10 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Property:
-		//	type+=[Type]+ name=ID ";";
+		//	type+=[Type]+ name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//type+=[Type]+ name=ID ";"
+		//type+=[Type]+ name=ID ';'
 		public Group getGroup() { return cGroup; }
 
 		//type+=[Type]+
@@ -191,12 +194,12 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class UnresolvedProxyPropertyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnresolvedProxyProperty");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.UnresolvedProxyProperty");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cUnresolvedKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cTypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -207,13 +210,13 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//UnresolvedProxyProperty:
-		//	"unresolved" type+=[Type]+ name=ID ";";
+		//	'unresolved' type+=[Type]+ name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"unresolved" type+=[Type]+ name=ID ";"
+		//'unresolved' type+=[Type]+ name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"unresolved"
+		//'unresolved'
 		public Keyword getUnresolvedKeyword_0() { return cUnresolvedKeyword_0; }
 
 		//type+=[Type]+
@@ -231,7 +234,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 	
@@ -297,8 +300,11 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	// * SuppressWarnings[BidirectionalReference]
 	// * SuppressWarnings[potentialOverride]
 	// * / Type:
-	//	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
-	//	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+	//	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
+	//	'{'
+	//	properties+=Property*
+	//	unresolvedProxyProperty+=UnresolvedProxyProperty*
+	//	'}';
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -308,7 +314,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Property:
-	//	type+=[Type]+ name=ID ";";
+	//	type+=[Type]+ name=ID ';';
 	public PropertyElements getPropertyAccess() {
 		return pProperty;
 	}
@@ -318,7 +324,7 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//UnresolvedProxyProperty:
-	//	"unresolved" type+=[Type]+ name=ID ";";
+	//	'unresolved' type+=[Type]+ name=ID ';';
 	public UnresolvedProxyPropertyElements getUnresolvedProxyPropertyAccess() {
 		return pUnresolvedProxyProperty;
 	}
@@ -328,38 +334,38 @@ public class LazyLinkingTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

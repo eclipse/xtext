@@ -110,7 +110,7 @@ public class DebugGraphGenerator {
           } catch (final Throwable _t) {
             if (_t instanceof Throwable) {
               final Throwable t = (Throwable)_t;
-              String _contextName = this.nameFunction.getContextName(context);
+              String _contextName = this.nameFunction.getContextName(this.grammar, context);
               String _plus = ("Context: " + _contextName);
               String _plus_1 = (_plus + " Type:");
               String _name = null;
@@ -128,7 +128,7 @@ public class DebugGraphGenerator {
       } catch (final Throwable _t_1) {
         if (_t_1 instanceof Throwable) {
           final Throwable t_1 = (Throwable)_t_1;
-          String _contextName_1 = this.nameFunction.getContextName(context);
+          String _contextName_1 = this.nameFunction.getContextName(this.grammar, context);
           String _plus_3 = ("Context: " + _contextName_1);
           System.out.println(_plus_3);
           t_1.printStackTrace();
@@ -227,7 +227,7 @@ public class DebugGraphGenerator {
   
   public String file(final String name, final EObject ctx, final EClass type) {
     String _directory = this.directory(name);
-    String _contextName = this.nameFunction.getContextName(ctx);
+    String _contextName = this.nameFunction.getContextName(this.grammar, ctx);
     String _plus = (_directory + _contextName);
     String _plus_1 = (_plus + "_");
     String _name = null;
@@ -240,7 +240,7 @@ public class DebugGraphGenerator {
   
   public String file(final String name, final EObject ctx) {
     String _directory = this.directory(name);
-    String _contextName = this.nameFunction.getContextName(ctx);
+    String _contextName = this.nameFunction.getContextName(this.grammar, ctx);
     String _plus = (_directory + _contextName);
     return (_plus + ".dot");
   }

@@ -167,7 +167,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"model",
             	            		lv_model_0_0, 
-            	            		"Model");
+            	            		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Model");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -291,7 +291,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"id",
                     		lv_id_0_0, 
-                    		"NestedModelId");
+                    		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.NestedModelId");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -337,7 +337,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"value",
                             		lv_value_2_0, 
-                            		"Fraction");
+                            		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Fraction");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -389,7 +389,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"vector",
                             		lv_vector_4_0, 
-                            		"Vector");
+                            		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Vector");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -441,7 +441,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"dots",
                             		lv_dots_6_0, 
-                            		"Dots");
+                            		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Dots");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -493,7 +493,7 @@ public class InternalDatatypeRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"double",
                             		lv_double_8_0, 
-                            		"Double");
+                            		"org.eclipse.xtext.parser.datatyperules.DatatypeRulesTestLanguage.Double");
                     	        afterParserOrEnumRuleCall();
                     	    
 

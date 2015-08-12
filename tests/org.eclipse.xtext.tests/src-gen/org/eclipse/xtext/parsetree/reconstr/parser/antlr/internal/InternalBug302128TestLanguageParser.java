@@ -157,7 +157,7 @@ public class InternalBug302128TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -265,7 +265,7 @@ public class InternalBug302128TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"Variable");
+                    		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Variable");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -300,7 +300,7 @@ public class InternalBug302128TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"value",
                             		lv_value_1_0, 
-                            		"Value");
+                            		"org.eclipse.xtext.parsetree.reconstr.Bug302128TestLanguage.Value");
                     	    
 
                     }

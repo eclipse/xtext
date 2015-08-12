@@ -291,7 +291,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	             			current, 
             	             			"fields",
             	              		lv_fields_1_0, 
-            	              		"Element");
+            	              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Element");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -416,7 +416,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -462,7 +462,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                              			current, 
                              			"dataType",
                               		lv_dataType_1_0, 
-                              		"DataType");
+                              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.DataType");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -500,7 +500,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                      			current, 
                      			"expression",
                       		lv_expression_2_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -617,7 +617,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                      			current, 
                      			"baseType",
                       		lv_baseType_0_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -664,7 +664,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                              			current, 
                              			"defaultValue",
                               		lv_defaultValue_2_0, 
-                              		"STRING");
+                              		"org.eclipse.xtext.common.Terminals.STRING");
                       	    
                     }
 
@@ -920,7 +920,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	             			current, 
             	             			"prefix",
             	              		lv_prefix_3_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -1021,7 +1021,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	             			current, 
             	             			"terms",
             	              		lv_terms_5_0, 
-            	              		"SimpleTerm");
+            	              		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.SimpleTerm");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1083,10 +1083,10 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                 int alt8=3;
                 int LA8_0 = input.LA(1);
 
-                if ( LA8_0 ==RightSquareBracket && getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
+                if ( LA8_0 == RightSquareBracket && getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 0) ) {
                     alt8=1;
                 }
-                else if ( LA8_0 ==RULE_STRING && getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
+                else if ( LA8_0 == RULE_STRING && getUnorderedGroupHelper().canSelect(grammarAccess.getExpressionAccess().getUnorderedGroup_3(), 1) ) {
                     alt8=2;
                 }
 
@@ -1180,7 +1180,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
             	             			current, 
             	             			"postfix",
             	              		lv_postfix_9_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -1346,7 +1346,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                              			current, 
                              			"lineCount",
                               		lv_lineCount_0_0, 
-                              		"INT");
+                              		"org.eclipse.xtext.common.Terminals.INT");
                       	    
                     }
 
@@ -1411,7 +1411,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                                      			current, 
                                      			"charCount",
                                       		lv_charCount_2_0, 
-                                      		"INT");
+                                      		"org.eclipse.xtext.common.Terminals.INT");
                               	    
                             }
 
@@ -1479,7 +1479,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                                      			current, 
                                      			"charSet",
                                       		lv_charSet_4_0, 
-                                      		"ID");
+                                      		"org.eclipse.xtext.common.Terminals.ID");
                               	    
                             }
 
@@ -1521,7 +1521,7 @@ public class InternalExBacktrackingBug325745TestLanguageParser extends AbstractI
                              			current, 
                              			"refChar",
                               		lv_refChar_5_0, 
-                              		"ID");
+                              		"org.eclipse.xtext.common.Terminals.ID");
                       	    
                     }
 

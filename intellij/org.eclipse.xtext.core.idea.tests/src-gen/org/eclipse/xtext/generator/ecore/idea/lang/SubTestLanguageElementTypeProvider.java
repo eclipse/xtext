@@ -134,75 +134,75 @@ public class SubTestLanguageElementTypeProvider implements IElementTypeProvider 
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSubMainElementType() {
 		return SubMain_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_GroupElementType() {
 		return SubMain_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_LeftCurlyBracketKeyword_0ElementType() {
 		return SubMain_LeftCurlyBracketKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_SuperMainsAssignment_1ElementType() {
 		return SubMain_SuperMainsAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_SuperMainsSuperMainParserRuleCall_1_0ElementType() {
 		return SubMain_SuperMainsSuperMainParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_RightCurlyBracketKeyword_2ElementType() {
 		return SubMain_RightCurlyBracketKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_AnotherAssignment_3ElementType() {
 		return SubMain_AnotherAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSubMain_AnotherAnotherSuperMainParserRuleCall_3_0ElementType() {
 		return SubMain_AnotherAnotherSuperMainParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMainElementType() {
 		return AnotherSuperMain_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_GroupElementType() {
 		return AnotherSuperMain_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_UpsKeyword_0ElementType() {
 		return AnotherSuperMain_UpsKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_NameAssignment_1ElementType() {
 		return AnotherSuperMain_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherSuperMain_NameIDTerminalRuleCall_1_0ElementType() {
 		return AnotherSuperMain_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMainElementType() {
 		return SuperMain_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_GroupElementType() {
 		return SuperMain_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_SuperKeyword_0ElementType() {
 		return SuperMain_SuperKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_NameAssignment_1ElementType() {
 		return SuperMain_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSuperMain_NameIDTerminalRuleCall_1_0ElementType() {
 		return SuperMain_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

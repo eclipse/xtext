@@ -111,59 +111,59 @@ public class QualifiedNameTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getElementElementType() {
 		return Element_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_GroupElementType() {
 		return Element_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_KeywordKeyword_0ElementType() {
 		return Element_KeywordKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_QualifiedNameAssignment_1ElementType() {
 		return Element_QualifiedNameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_QualifiedNameQualifiedNameParserRuleCall_1_0ElementType() {
 		return Element_QualifiedNameQualifiedNameParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedNameElementType() {
 		return QualifiedName_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_GroupElementType() {
 		return QualifiedName_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_IDTerminalRuleCall_0ElementType() {
 		return QualifiedName_IDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_Group_1ElementType() {
 		return QualifiedName_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_FullStopKeyword_1_0ElementType() {
 		return QualifiedName_FullStopKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_IDTerminalRuleCall_1_1ElementType() {
 		return QualifiedName_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_Group_2ElementType() {
 		return QualifiedName_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_FullStopKeyword_2_0ElementType() {
 		return QualifiedName_FullStopKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQualifiedName_AsteriskKeyword_2_1ElementType() {
 		return QualifiedName_AsteriskKeyword_2_1_ELEMENT_TYPE;
 	}

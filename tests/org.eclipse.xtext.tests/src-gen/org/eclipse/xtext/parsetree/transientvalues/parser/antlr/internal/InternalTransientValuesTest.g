@@ -155,7 +155,7 @@ ruleTestRequired returns [EObject current=null]
        			$current, 
        			"required1",
         		lv_required1_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -173,7 +173,7 @@ ruleTestRequired returns [EObject current=null]
        			$current, 
        			"required2",
         		lv_required2_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -222,7 +222,7 @@ ruleTestOptional returns [EObject current=null]
        			$current, 
        			"opt1",
         		lv_opt1_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -244,7 +244,7 @@ ruleTestOptional returns [EObject current=null]
        			$current, 
        			"opt2",
         		lv_opt2_4_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -293,7 +293,7 @@ ruleTestList returns [EObject current=null]
        			$current, 
        			"item",
         		lv_item_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )

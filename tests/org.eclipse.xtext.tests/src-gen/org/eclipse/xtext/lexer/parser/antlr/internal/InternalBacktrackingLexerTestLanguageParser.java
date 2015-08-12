@@ -33,8 +33,8 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
     public static final int RULE_WS=12;
     public static final int RULE_CHARA=6;
     public static final int RULE_SL_COMMENT=13;
-    public static final int RULE_CHARB=7;
     public static final int EOF=-1;
+    public static final int RULE_CHARB=7;
     public static final int RULE_CHARC=11;
 
     // delegates
@@ -187,7 +187,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"enums",
             	              		lv_enums_0_0, 
-            	              		"EnumName");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.EnumName");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -236,7 +236,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"ycs",
             	              		lv_ycs_1_0, 
-            	              		"Yc");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Yc");
             	      	    
             	    }
 
@@ -294,7 +294,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"abs",
             	              		lv_abs_2_0, 
-            	              		"Ab");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Ab");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -347,7 +347,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"xbs",
             	              		lv_xbs_3_0, 
-            	              		"Xb");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Xb");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -396,7 +396,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"ys",
             	              		lv_ys_4_0, 
-            	              		"CharY");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharY");
             	      	    
             	    }
 
@@ -444,7 +444,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	             			current, 
             	             			"as",
             	              		lv_as_5_0, 
-            	              		"CharA");
+            	              		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharA");
             	      	    
             	    }
 
@@ -563,7 +563,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                      			current, 
                      			"x",
                       		lv_x_0_0, 
-                      		"CharA");
+                      		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharA");
               	    
             }
 
@@ -593,7 +593,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                      			current, 
                      			"y",
                       		lv_y_1_0, 
-                      		"Charb");
+                      		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Charb");
               	    
             }
 
@@ -706,7 +706,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                      			current, 
                      			"x",
                       		lv_x_0_0, 
-                      		"CharX");
+                      		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharX");
               	    
             }
 
@@ -736,7 +736,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                      			current, 
                      			"y",
                       		lv_y_1_0, 
-                      		"Charb");
+                      		"org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Charb");
               	    
             }
 

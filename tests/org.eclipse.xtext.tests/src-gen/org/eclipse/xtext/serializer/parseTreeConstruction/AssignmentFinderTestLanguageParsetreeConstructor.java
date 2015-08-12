@@ -2061,8 +2061,8 @@ protected class ContainmentRef_CtxAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule ContainmentRef1 ****************
  *
- * ContainmentRef1 returns ContainmentRefN:
- * 	"kw1" val1=ID;
+ * ContainmentRef1 ContainmentRefN:
+ * 	"kw1" val1=ID
  *
  **/
 
@@ -2156,8 +2156,8 @@ protected class ContainmentRef1_Val1Assignment_1 extends AssignmentToken  {
 
 /************ begin Rule ContainmentRef2 ****************
  *
- * ContainmentRef2 returns ContainmentRefN:
- * 	"kw2" val2=ID;
+ * ContainmentRef2 ContainmentRefN:
+ * 	"kw2" val2=ID
  *
  **/
 
@@ -2323,7 +2323,7 @@ protected class CrossRef_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2]
+// (crossRef=[CrossRef|Terminal1] | crossRef=[CrossRef|Terminal2])
 protected class CrossRef_Alternatives_1 extends AlternativesToken {
 
 	public CrossRef_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

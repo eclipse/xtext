@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"types",
         		lv_types_0_0, 
-        		"Type");
+        		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -223,7 +223,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"properties",
         		lv_properties_11_0, 
-        		"Property");
+        		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Property");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -241,7 +241,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"unresolvedProxyProperty",
         		lv_unresolvedProxyProperty_12_0, 
-        		"UnresolvedProxyProperty");
+        		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.UnresolvedProxyProperty");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -298,7 +298,7 @@ ruleProperty returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -358,7 +358,7 @@ ruleUnresolvedProxyProperty returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

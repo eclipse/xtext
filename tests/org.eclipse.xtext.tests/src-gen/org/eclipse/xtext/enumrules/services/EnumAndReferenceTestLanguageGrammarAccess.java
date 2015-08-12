@@ -19,7 +19,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	
 	public class EntityWithEnumAndReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntityWithEnumAndReference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage.EntityWithEnumAndReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeKindOfKeywordEnumRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
@@ -31,10 +31,10 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cRefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEntityWithEnumAndReferenceCrossReference_3_0.eContents().get(1);
 		
 		//EntityWithEnumAndReference:
-		//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+		//	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
 		@Override public ParserRule getRule() { return rule; }
 
-		//type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference]
+		//type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference]
 		public Group getGroup() { return cGroup; }
 
 		//type=KindOfKeyword
@@ -49,7 +49,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"reference"
+		//'reference'
 		public Keyword getReferenceKeyword_2() { return cReferenceKeyword_2; }
 
 		//ref=[EntityWithEnumAndReference]
@@ -64,7 +64,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	
 	public class KindOfKeywordElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "KindOfKeyword");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage.KindOfKeyword");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cKindOfKeywordEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cKindOfKeywordKindOfKeywordKeyword_0_0 = (Keyword)cKindOfKeywordEnumLiteralDeclaration_0.eContents().get(0);
@@ -135,7 +135,7 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//EntityWithEnumAndReference:
-	//	type=KindOfKeyword name=ID "reference" ref=[EntityWithEnumAndReference];
+	//	type=KindOfKeyword name=ID 'reference' ref=[EntityWithEnumAndReference];
 	public EntityWithEnumAndReferenceElements getEntityWithEnumAndReferenceAccess() {
 		return pEntityWithEnumAndReference;
 	}
@@ -155,38 +155,38 @@ public class EnumAndReferenceTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -19,7 +19,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cModelKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -63,7 +63,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Expression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPostopParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cPreopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -83,7 +83,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class PreopElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Preop");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Preop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cPreopAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFunctionNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -91,8 +91,8 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cExprAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cExprVariableParserRuleCall_2_0 = (RuleCall)cExprAssignment_2.eContents().get(0);
 		
-		//Preop returns Expression:
-		//	{Preop} functionName="--" expr=Variable;
+		//Preop Expression:
+		//	{Preop} functionName="--" expr=Variable
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Preop} functionName="--" expr=Variable
@@ -115,7 +115,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class PostopElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Postop");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Postop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cVariableParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -123,8 +123,8 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cFunctionNameAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Keyword cFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0 = (Keyword)cFunctionNameAssignment_1_1.eContents().get(0);
 		
-		//Postop returns Expression:
-		//	Variable ({Postop.expr=current} functionName="--")?;
+		//Postop Expression:
+		//	Variable ({Postop.expr=current} functionName="--")?
 		@Override public ParserRule getRule() { return rule; }
 
 		//Variable ({Postop.expr=current} functionName="--")?
@@ -147,14 +147,14 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class VariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Variable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVariableAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Variable returns Expression:
-		//	{Variable} name=ID;
+		//Variable Expression:
+		//	{Variable} name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Variable} name=ID
@@ -171,7 +171,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DataTypeExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDataTypePostopParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDataTypePreopParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -191,7 +191,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DataTypePreopElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypePreop");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypePreop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHyphenMinusHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cDataTypeVariableParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -211,7 +211,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DataTypePostopElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypePostop");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypePostop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cDataTypeVariableParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cHyphenMinusHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -231,7 +231,7 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DataTypeVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeVariable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug296889TestLanguage.DataTypeVariable");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DataTypeVariable:
@@ -320,8 +320,8 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getExpressionAccess().getRule();
 	}
 
-	//Preop returns Expression:
-	//	{Preop} functionName="--" expr=Variable;
+	//Preop Expression:
+	//	{Preop} functionName="--" expr=Variable
 	public PreopElements getPreopAccess() {
 		return pPreop;
 	}
@@ -330,8 +330,8 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getPreopAccess().getRule();
 	}
 
-	//Postop returns Expression:
-	//	Variable ({Postop.expr=current} functionName="--")?;
+	//Postop Expression:
+	//	Variable ({Postop.expr=current} functionName="--")?
 	public PostopElements getPostopAccess() {
 		return pPostop;
 	}
@@ -340,8 +340,8 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getPostopAccess().getRule();
 	}
 
-	//Variable returns Expression:
-	//	{Variable} name=ID;
+	//Variable Expression:
+	//	{Variable} name=ID
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}
@@ -391,38 +391,38 @@ public class Bug296889TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -19,7 +19,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.dummy.DummyTestLanguage.Model");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.dummy.DummyTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cOptionalAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cOptionalOptionalKeyword_0_0 = (Keyword)cOptionalAssignment_0.eContents().get(0);
@@ -47,16 +47,16 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Element:
-		//	optional?="optional"? "element" name=ID descriptions+=STRING* ";";
+		//	optional?='optional'? "element" name=ID descriptions+=STRING* ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//optional?="optional"? "element" name=ID descriptions+=STRING* ";"
+		//optional?='optional'? "element" name=ID descriptions+=STRING* ';'
 		public Group getGroup() { return cGroup; }
 
-		//optional?="optional"?
+		//optional?='optional'?
 		public Assignment getOptionalAssignment_0() { return cOptionalAssignment_0; }
 
-		//"optional"
+		//'optional'
 		public Keyword getOptionalOptionalKeyword_0_0() { return cOptionalOptionalKeyword_0_0; }
 
 		//"element"
@@ -74,7 +74,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//STRING
 		public RuleCall getDescriptionsSTRINGTerminalRuleCall_3_0() { return cDescriptionsSTRINGTerminalRuleCall_3_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 	
@@ -133,7 +133,7 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Element:
-	//	optional?="optional"? "element" name=ID descriptions+=STRING* ";";
+	//	optional?='optional'? "element" name=ID descriptions+=STRING* ';';
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -143,38 +143,38 @@ public class DummyTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

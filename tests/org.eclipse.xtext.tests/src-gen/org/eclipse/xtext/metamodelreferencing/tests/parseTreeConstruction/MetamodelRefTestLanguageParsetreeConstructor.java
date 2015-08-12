@@ -162,8 +162,8 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns xtext::RuleCall:
- * 	rule=[xtext::ParserRule];
+ * NameRef xtext::RuleCall:
+ * 	rule=[xtext::ParserRule]
  *
  **/
 
@@ -210,8 +210,8 @@ protected class NameRef_RuleAssignment extends AssignmentToken  {
 
 /************ begin Rule MyRule ****************
  *
- * MyRule returns xtext::ParserRule:
- * 	name=ID;
+ * MyRule xtext::ParserRule:
+ * 	name=ID
  *
  **/
 

@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
-    public static final int RULE_OTHER=7;
     public static final int RULE_END=6;
+    public static final int RULE_OTHER=7;
     public static final int RULE_BEGIN=5;
     public static final int RULE_NL=4;
     public static final int EOF=-1;

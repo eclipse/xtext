@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import javax.inject.Provider;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -115,6 +116,9 @@ public class PsiToEcoreTransformationContext {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private ICompositeNode currentNode;
   
+  @Accessors
+  private boolean createModelInParentNode;
+  
   @Extension
   private IASTNodeAwareNodeModelBuilder nodeModelBuilder;
   
@@ -133,9 +137,16 @@ public class PsiToEcoreTransformationContext {
       childTransformationContext.currentNode = this.currentNode;
       childTransformationContext.lastConsumedNode = this.lastConsumedNode;
       childTransformationContext.nodeModelBuilder = this.nodeModelBuilder;
+      childTransformationContext.createModelInParentNode = this.createModelInParentNode;
       _xblockexpression = childTransformationContext;
     }
     return _xblockexpression;
+  }
+  
+  public PsiToEcoreTransformationContext branchAndKeepCurrent() {
+    final PsiToEcoreTransformationContext result = this.branch();
+    result.current = this.current;
+    return result;
   }
   
   public PsiToEcoreTransformationContext withDatatypeRule() {
@@ -162,10 +173,20 @@ public class PsiToEcoreTransformationContext {
   }
   
   public PsiToEcoreTransformationContext merge(final PsiToEcoreTransformationContext childTransformationContext) {
+    return this.merge(childTransformationContext, false);
+  }
+  
+  public PsiToEcoreTransformationContext merge(final PsiToEcoreTransformationContext childTransformationContext, final boolean forced) {
     PsiToEcoreTransformationContext _xblockexpression = null;
     {
+      boolean _or = false;
       boolean _equals = Objects.equal(this.current, null);
       if (_equals) {
+        _or = true;
+      } else {
+        _or = forced;
+      }
+      if (_or) {
         this.current = childTransformationContext.current;
       }
       boolean _and = false;
@@ -228,7 +249,12 @@ public class PsiToEcoreTransformationContext {
     this.currentNode = _newCompositeNode;
   }
   
-  public boolean ensureModelElementCreated(final EObject grammarElement) {
+  public boolean ensureModelElementCreatedInParent(final EObject grammarElement) {
+    ICompositeNode _parent = this.currentNode.getParent();
+    return this.ensureModelElementCreated(grammarElement, _parent);
+  }
+  
+  private boolean ensureModelElementCreated(final EObject grammarElement, final ICompositeNode currentNode) {
     boolean _xblockexpression = false;
     {
       boolean _equals = Objects.equal(grammarElement, null);
@@ -240,25 +266,71 @@ public class PsiToEcoreTransformationContext {
         EClassifier _classifier = _type.getClassifier();
         EObject _create = this.semanticModelBuilder.create(_classifier);
         this.current = _create;
-        this.associateWithSemanticElement(this.currentNode);
+        this.associateWithSemanticElement(currentNode);
         return true;
       }
       boolean _isAssigned = GrammarUtil.isAssigned(grammarElement);
       boolean _not = (!_isAssigned);
       if (_not) {
+        boolean _isEObjectFragmentRuleCall = GrammarUtil.isEObjectFragmentRuleCall(grammarElement);
+        if (_isEObjectFragmentRuleCall) {
+          boolean _notEquals = (!Objects.equal(this.current, null));
+          if (_notEquals) {
+            return true;
+          }
+          ParserRule _containingParserRule = GrammarUtil.containingParserRule(grammarElement);
+          TypeRef _type_1 = _containingParserRule.getType();
+          final EClassifier classifier = _type_1.getClassifier();
+          if ((classifier instanceof EClass)) {
+            ICompositeNode node = currentNode;
+            if (this.createModelInParentNode) {
+              ICompositeNode _parent = node.getParent();
+              node = _parent;
+              while ((node.getGrammarElement() instanceof Action)) {
+                ICompositeNode _parent_1 = node.getParent();
+                node = _parent_1;
+              }
+            }
+            boolean _hasDirectSemanticElement = node.hasDirectSemanticElement();
+            if (_hasDirectSemanticElement) {
+              EObject _semanticElement = node.getSemanticElement();
+              this.current = _semanticElement;
+            } else {
+              EObject _create_1 = this.semanticModelBuilder.create(classifier);
+              this.current = _create_1;
+              this.associateWithSemanticElement(node);
+            }
+            return true;
+          }
+        }
         return false;
       }
-      boolean _notEquals = (!Objects.equal(this.current, null));
-      if (_notEquals) {
+      boolean _notEquals_1 = (!Objects.equal(this.current, null));
+      if (_notEquals_1) {
         return true;
       }
-      ParserRule _containingParserRule = GrammarUtil.containingParserRule(grammarElement);
-      TypeRef _type_1 = _containingParserRule.getType();
-      final EClassifier classifier = _type_1.getClassifier();
-      EObject _create_1 = this.semanticModelBuilder.create(classifier);
-      this.current = _create_1;
+      ParserRule _containingParserRule_1 = GrammarUtil.containingParserRule(grammarElement);
+      TypeRef _type_2 = _containingParserRule_1.getType();
+      final EClassifier classifier_1 = _type_2.getClassifier();
+      EObject _create_2 = this.semanticModelBuilder.create(classifier_1);
+      this.current = _create_2;
       ICompositeNode _switchResult = null;
       boolean _matched = false;
+      if (!_matched) {
+        if (this.createModelInParentNode) {
+          _matched=true;
+          ICompositeNode _xblockexpression_1 = null;
+          {
+            ICompositeNode node_1 = currentNode.getParent();
+            while ((node_1.getGrammarElement() instanceof Action)) {
+              ICompositeNode _parent_1 = node_1.getParent();
+              node_1 = _parent_1;
+            }
+            _xblockexpression_1 = node_1;
+          }
+          _switchResult = _xblockexpression_1;
+        }
+      }
       if (!_matched) {
         boolean _isTerminalRuleCall = GrammarUtil.isTerminalRuleCall(grammarElement);
         if (_isTerminalRuleCall) {
@@ -287,16 +359,20 @@ public class PsiToEcoreTransformationContext {
           }
         }
         if (_matched) {
-          _switchResult = this.currentNode;
+          _switchResult = currentNode;
         }
       }
       if (!_matched) {
-        _switchResult = this.currentNode.getParent();
+        _switchResult = currentNode.getParent();
       }
       this.associateWithSemanticElement(_switchResult);
       _xblockexpression = true;
     }
     return _xblockexpression;
+  }
+  
+  public boolean ensureModelElementCreated(final EObject grammarElement) {
+    return this.ensureModelElementCreated(grammarElement, this.currentNode);
   }
   
   protected void mergeDatatypeRuleToken(final LeafElement it) {
@@ -567,5 +643,14 @@ public class PsiToEcoreTransformationContext {
   @Pure
   public ICompositeNode getCurrentNode() {
     return this.currentNode;
+  }
+  
+  @Pure
+  public boolean isCreateModelInParentNode() {
+    return this.createModelInParentNode;
+  }
+  
+  public void setCreateModelInParentNode(final boolean createModelInParentNode) {
+    this.createModelInParentNode = createModelInParentNode;
   }
 }

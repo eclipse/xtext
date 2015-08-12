@@ -32,6 +32,7 @@ import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.NamedArgument;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -40,10 +41,10 @@ import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -132,7 +133,8 @@ public class XtextLinker extends Linker {
 
 	@Override
 	protected boolean canSetDefaultValues(EReference ref) {
-		return super.canSetDefaultValues(ref) || ref == XtextPackage.Literals.CROSS_REFERENCE__TERMINAL;
+		return super.canSetDefaultValues(ref)
+				|| ref == XtextPackage.Literals.CROSS_REFERENCE__TERMINAL;
 	}
 
 	@Override
@@ -154,6 +156,20 @@ public class XtextLinker extends Linker {
 				RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
 				call.setRule(rule);
 				((CrossReference) obj).setTerminal(call);
+			}
+		} else if (XtextPackage.eINSTANCE.getNamedArgument_Parameter() == ref) {
+			final NamedArgument argument = (NamedArgument) obj;
+			if (!argument.isCalledByName()) {
+				RuleCall ruleCall = EcoreUtil2.getContainerOfType(argument, RuleCall.class);
+				AbstractRule calledRule = ruleCall.getRule();
+				if (calledRule instanceof ParserRule && !calledRule.eIsProxy()) {
+					ParserRule casted = (ParserRule) calledRule;
+					int idx = ruleCall.getArguments().indexOf(argument);
+					if (idx < casted.getParameters().size()) {
+						argument.setParameter(casted.getParameters().get(idx));
+						return;
+					}
+				}
 			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
@@ -393,7 +409,7 @@ public class XtextLinker extends Linker {
 		}
 		final List<RuleCall> allRuleCalls = EcoreUtil2.getAllContentsOfType(grammar, RuleCall.class);
 		for (RuleCall call : allRuleCalls) {
-			if (call.getRule() != null) {
+			if (call.getRule() != null && !call.isExplicitlyCalled()) {
 				AbstractRule rule = rulePerName.get(call.getRule().getName());
 				if (rule != null)
 					call.setRule(rule);
@@ -425,6 +441,9 @@ public class XtextLinker extends Linker {
 			INode node = NodeModelUtils.getNode((EObject) obj.eGet(ref));
 			if (node == null)
 				obj.eUnset(ref);
+		}
+		if (ref == XtextPackage.Literals.RULE_CALL__RULE) {
+			obj.eUnset(XtextPackage.Literals.RULE_CALL__EXPLICITLY_CALLED);
 		}
 	}
 

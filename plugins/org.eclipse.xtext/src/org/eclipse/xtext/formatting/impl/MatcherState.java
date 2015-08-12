@@ -10,7 +10,6 @@ package org.eclipse.xtext.formatting.impl;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -108,8 +107,7 @@ public class MatcherState extends AbstractNFAState<MatcherState, MatcherTransiti
 	}
 
 	public boolean isParserRuleCall() {
-		return element instanceof RuleCall
-				&& ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass;
+		return GrammarUtil.isEObjectRuleCall(element);
 	}
 
 	public boolean isParserRuleCallOptional() {

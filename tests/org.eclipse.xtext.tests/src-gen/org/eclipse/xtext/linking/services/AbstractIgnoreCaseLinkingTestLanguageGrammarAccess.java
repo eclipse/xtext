@@ -19,7 +19,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Model");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -48,10 +48,12 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Element:
-		//	name=ID reference=[Element]? "{" elements+=Element* "}";
+		//	name=ID reference=[Element]? '{'
+		//	elements+=Element*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID reference=[Element]? "{" elements+=Element* "}"
+		//name=ID reference=[Element]? '{' elements+=Element* '}'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -69,7 +71,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		//ID
 		public RuleCall getReferenceElementIDTerminalRuleCall_1_0_1() { return cReferenceElementIDTerminalRuleCall_1_0_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
 		//elements+=Element*
@@ -78,7 +80,7 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 		//Element
 		public RuleCall getElementsElementParserRuleCall_3_0() { return cElementsElementParserRuleCall_3_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	
@@ -137,7 +139,9 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Element:
-	//	name=ID reference=[Element]? "{" elements+=Element* "}";
+	//	name=ID reference=[Element]? '{'
+	//	elements+=Element*
+	//	'}';
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -147,38 +151,38 @@ public class AbstractIgnoreCaseLinkingTestLanguageGrammarAccess extends Abstract
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

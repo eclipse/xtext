@@ -106,55 +106,55 @@ public class Bug289059TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameAssignment_0ElementType() {
 		return Model_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameIDTerminalRuleCall_0_0ElementType() {
 		return Model_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EnabledAssignment_1ElementType() {
 		return Model_EnabledAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EnabledUnassignedActionParserRuleCall_1_0ElementType() {
 		return Model_EnabledUnassignedActionParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ReferenceAssignment_2ElementType() {
 		return Model_ReferenceAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ReferenceModelCrossReference_2_0ElementType() {
 		return Model_ReferenceModelCrossReference_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ReferenceModelIDTerminalRuleCall_2_0_1ElementType() {
 		return Model_ReferenceModelIDTerminalRuleCall_2_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassignedActionElementType() {
 		return UnassignedAction_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassignedAction_GroupElementType() {
 		return UnassignedAction_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassignedAction_UnassignedActionAction_0ElementType() {
 		return UnassignedAction_UnassignedActionAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnassignedAction_EnabledKeyword_1ElementType() {
 		return UnassignedAction_EnabledKeyword_1_ELEMENT_TYPE;
 	}

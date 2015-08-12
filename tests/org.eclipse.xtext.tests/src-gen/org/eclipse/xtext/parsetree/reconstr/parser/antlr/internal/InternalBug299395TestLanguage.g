@@ -101,7 +101,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"strings",
         		lv_strings_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -127,7 +127,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"keys",
         		lv_keys_5_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -145,7 +145,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_6_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -170,7 +170,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"subModel",
         		lv_subModel_9_0, 
-        		"SubModel");
+        		"org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguage.SubModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -224,7 +224,7 @@ ruleSubModel returns [EObject current=null]
        			$current, 
        			"strings",
         		lv_strings_3_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

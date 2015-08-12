@@ -179,111 +179,111 @@ public class Bug289524ExTestLanguageElementTypeProvider implements IElementTypeP
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelAction_0ElementType() {
 		return Model_ModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelKeyword_1ElementType() {
 		return Model_ModelKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RefsAssignment_2ElementType() {
 		return Model_RefsAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RefsModelElementParserRuleCall_2_0ElementType() {
 		return Model_RefsModelElementParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElementElementType() {
 		return ModelElement_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_GroupElementType() {
 		return ModelElement_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_ModelElementAction_0ElementType() {
 		return ModelElement_ModelElementAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_Alternatives_1ElementType() {
 		return ModelElement_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_ContainmentsAssignment_1_0ElementType() {
 		return ModelElement_ContainmentsAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_ContainmentsContainedParserRuleCall_1_0_0ElementType() {
 		return ModelElement_ContainmentsContainedParserRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_Group_1_1ElementType() {
 		return ModelElement_Group_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_ReferenceKeyword_1_1_0ElementType() {
 		return ModelElement_ReferenceKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsAssignment_1_1_1ElementType() {
 		return ModelElement_RefsAssignment_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsContainedCrossReference_1_1_1_0ElementType() {
 		return ModelElement_RefsContainedCrossReference_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsContainedIDTerminalRuleCall_1_1_1_0_1ElementType() {
 		return ModelElement_RefsContainedIDTerminalRuleCall_1_1_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_Group_1_1_2ElementType() {
 		return ModelElement_Group_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_DollarSignKeyword_1_1_2_0ElementType() {
 		return ModelElement_DollarSignKeyword_1_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsAssignment_1_1_2_1ElementType() {
 		return ModelElement_RefsAssignment_1_1_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsContainedCrossReference_1_1_2_1_0ElementType() {
 		return ModelElement_RefsContainedCrossReference_1_1_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElement_RefsContainedIDTerminalRuleCall_1_1_2_1_0_1ElementType() {
 		return ModelElement_RefsContainedIDTerminalRuleCall_1_1_2_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContainedElementType() {
 		return Contained_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContained_GroupElementType() {
 		return Contained_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContained_ContainmentKeyword_0ElementType() {
 		return Contained_ContainmentKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContained_NameAssignment_1ElementType() {
 		return Contained_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContained_NameIDTerminalRuleCall_1_0ElementType() {
 		return Contained_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

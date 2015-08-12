@@ -164,7 +164,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -216,7 +216,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"nested",
             	            		lv_nested_3_0, 
-            	            		"Nested");
+            	            		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Nested");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -253,7 +253,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"content",
             	            		lv_content_4_0, 
-            	            		"Content");
+            	            		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Content");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -394,7 +394,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"nested",
             	            		lv_nested_2_0, 
-            	            		"SomeContainer");
+            	            		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.SomeContainer");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -651,7 +651,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"children",
                     		lv_children_2_0, 
-                    		"Child");
+                    		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Child");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -701,7 +701,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"children",
             	            		lv_children_4_0, 
-            	            		"Child");
+            	            		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Child");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -834,7 +834,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"value",
                     		lv_value_3_0, 
-                    		"Named");
+                    		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Named");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -966,7 +966,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"abstractChildren",
             	            		lv_abstractChildren_2_0, 
-            	            		"AbstractChild");
+            	            		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.AbstractChild");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1246,7 +1246,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"value",
                     		lv_value_3_0, 
-                    		"Named");
+                    		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Named");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1408,7 +1408,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"value",
                     		lv_value_4_0, 
-                    		"Named");
+                    		"org.eclipse.xtext.testlanguages.PartialParserTestLanguage.Named");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1540,7 +1540,7 @@ public class InternalPartialParserTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

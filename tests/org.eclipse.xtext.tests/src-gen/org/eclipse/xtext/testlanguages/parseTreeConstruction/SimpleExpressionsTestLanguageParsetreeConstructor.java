@@ -230,12 +230,12 @@ protected class Sequence_ExpressionsAssignment_1_1 extends AssignmentToken  {
 
 /************ begin Rule Addition ****************
  *
- * Addition returns Expression:
- * 	Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*;
+ * Addition Expression:
+ * 	Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
  *
  **/
 
-// Multiplication ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
+// Multiplication ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 protected class Addition_Group extends GroupToken {
 	
 	public Addition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -300,7 +300,7 @@ protected class Addition_MultiplicationParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Op.values+=current} operator=("+" | "-") values+=Multiplication)*
+// ({Op.values+=current} operator=('+' | '-') values+=Multiplication)*
 protected class Addition_Group_1 extends GroupToken {
 	
 	public Addition_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -359,7 +359,7 @@ protected class Addition_OpValuesAction_1_0 extends ActionToken  {
 	}
 }
 
-// operator=("+" | "-")
+// operator=('+' | '-')
 protected class Addition_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public Addition_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -451,12 +451,12 @@ protected class Addition_ValuesAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule Multiplication ****************
  *
- * Multiplication returns Expression:
- * 	Term ({Op.values+=current} operator=("*" | "/") values+=Term)*;
+ * Multiplication Expression:
+ * 	Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
  *
  **/
 
-// Term ({Op.values+=current} operator=("*" | "/") values+=Term)*
+// Term ({Op.values+=current} operator=('*' | '/') values+=Term)*
 protected class Multiplication_Group extends GroupToken {
 	
 	public Multiplication_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -521,7 +521,7 @@ protected class Multiplication_TermParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Op.values+=current} operator=("*" | "/") values+=Term)*
+// ({Op.values+=current} operator=('*' | '/') values+=Term)*
 protected class Multiplication_Group_1 extends GroupToken {
 	
 	public Multiplication_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -580,7 +580,7 @@ protected class Multiplication_OpValuesAction_1_0 extends ActionToken  {
 	}
 }
 
-// operator=("*" | "/")
+// operator=('*' | '/')
 protected class Multiplication_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public Multiplication_OperatorAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -672,8 +672,8 @@ protected class Multiplication_ValuesAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule Term ****************
  *
- * Term returns Expression:
- * 	Atom | Parens;
+ * Term Expression:
+ * 	Atom | Parens
  *
  **/
 
@@ -829,12 +829,12 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Parens ****************
  *
- * Parens returns Expression:
- * 	"(" Addition ")";
+ * Parens Expression:
+ * 	'(' Addition ')'
  *
  **/
 
-// "(" Addition ")"
+// '(' Addition ')'
 protected class Parens_Group extends GroupToken {
 	
 	public Parens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -864,7 +864,7 @@ protected class Parens_Group extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class Parens_LeftParenthesisKeyword_0 extends KeywordToken  {
 	
 	public Parens_LeftParenthesisKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -920,7 +920,7 @@ protected class Parens_AdditionParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// ")"
+// ')'
 protected class Parens_RightParenthesisKeyword_2 extends KeywordToken  {
 	
 	public Parens_RightParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

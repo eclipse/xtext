@@ -90,6 +90,11 @@ public class SimpleExpressionsAdapterFactory extends AdapterFactoryImpl
         return createNumberLiteralAdapter();
       }
       @Override
+      public Adapter caseBooleanLiteral(BooleanLiteral object)
+      {
+        return createBooleanLiteralAdapter();
+      }
+      @Override
       public Adapter caseMethodCall(MethodCall object)
       {
         return createMethodCallAdapter();
@@ -177,6 +182,21 @@ public class SimpleExpressionsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNumberLiteralAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral <em>Boolean Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral
+   * @generated
+   */
+  public Adapter createBooleanLiteralAdapter()
   {
     return null;
   }

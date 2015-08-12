@@ -91,7 +91,7 @@ ruleFoo returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -108,7 +108,7 @@ ruleFoo returns [EObject current=null]
        			$current, 
        			"bar",
         		lv_bar_1_0, 
-        		"Bar");
+        		"org.eclipse.xtext.linking.Bug313089TestLanguage.Bar");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -127,7 +127,7 @@ ruleFoo returns [EObject current=null]
        			$current, 
        			"baz",
         		lv_baz_2_0, 
-        		"Baz");
+        		"org.eclipse.xtext.linking.Bug313089TestLanguage.Baz");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -186,7 +186,7 @@ ruleBar returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -229,7 +229,7 @@ ruleBaz returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -257,7 +257,7 @@ ruleBaz returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

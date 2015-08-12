@@ -18,7 +18,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -31,7 +31,8 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cWSTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//Model:
-		//	name=ID WS value=ID NL value2=ID WS;
+		//	name=ID WS value=ID NL
+		//	value2=ID WS;
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID WS value=ID NL value2=ID WS
@@ -66,7 +67,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NLElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NL");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.NL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -75,22 +76,22 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cWSTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NL:
-		//	WS* ("\r"? "\n") WS*;
+		//	WS* ('\r'? '\n') WS*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//WS* ("\r"? "\n") WS*
+		//WS* ('\r'? '\n') WS*
 		public Group getGroup() { return cGroup; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_0() { return cWSTerminalRuleCall_0; }
 
-		//"\r"? "\n"
+		//('\r'? '\n')
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"\r"?
+		//'\r'?
 		public Keyword getControl000dKeyword_1_0() { return cControl000dKeyword_1_0; }
 
-		//"\n"
+		//'\n'
 		public Keyword getControl000aKeyword_1_1() { return cControl000aKeyword_1_1; }
 
 		//WS*
@@ -111,9 +112,9 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pModel = new ModelElements();
 		this.pNL = new NLElements();
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -140,7 +141,8 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	name=ID WS value=ID NL value2=ID WS;
+	//	name=ID WS value=ID NL
+	//	value2=ID WS;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -150,7 +152,7 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//NL:
-	//	WS* ("\r"? "\n") WS*;
+	//	WS* ('\r'? '\n') WS*;
 	public NLElements getNLAccess() {
 		return pNL;
 	}
@@ -160,13 +162,13 @@ public class Bug301935TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t")+;
+	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

@@ -276,11 +276,11 @@ protected class Model_DatatypeHiddensParserRuleCall_4 extends RuleCallToken {
 /************ begin Rule WithoutHiddens ****************
  *
  * WithoutHiddens:
- * 	"without" spaces+=WS "hiddens" spaces+=WS? valid?=";";
+ * 	'without' spaces+=WS 'hiddens' spaces+=WS? valid?=';';
  *
  **/
 
-// "without" spaces+=WS "hiddens" spaces+=WS? valid?=";"
+// 'without' spaces+=WS 'hiddens' spaces+=WS? valid?=';'
 protected class WithoutHiddens_Group extends GroupToken {
 	
 	public WithoutHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -309,7 +309,7 @@ protected class WithoutHiddens_Group extends GroupToken {
 
 }
 
-// "without"
+// 'without'
 protected class WithoutHiddens_WithoutKeyword_0 extends KeywordToken  {
 	
 	public WithoutHiddens_WithoutKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -364,7 +364,7 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 
 }
 
-// "hiddens"
+// 'hiddens'
 protected class WithoutHiddens_HiddensKeyword_2 extends KeywordToken  {
 	
 	public WithoutHiddens_HiddensKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -420,7 +420,7 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 	
 	public WithoutHiddens_ValidAssignment_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -462,11 +462,11 @@ protected class WithoutHiddens_ValidAssignment_4 extends AssignmentToken  {
 /************ begin Rule WithHiddens ****************
  *
  * WithHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
- * 	"with" "hiddens" valid?=";";
+ * 	'with' 'hiddens' valid?=';';
  *
  **/
 
-// "with" "hiddens" valid?=";"
+// 'with' 'hiddens' valid?=';'
 protected class WithHiddens_Group extends GroupToken {
 	
 	public WithHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -495,7 +495,7 @@ protected class WithHiddens_Group extends GroupToken {
 
 }
 
-// "with"
+// 'with'
 protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 	
 	public WithHiddens_WithKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -516,7 +516,7 @@ protected class WithHiddens_WithKeyword_0 extends KeywordToken  {
 
 }
 
-// "hiddens"
+// 'hiddens'
 protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
 	public WithHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -538,7 +538,7 @@ protected class WithHiddens_HiddensKeyword_1 extends KeywordToken  {
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 	
 	public WithHiddens_ValidAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -579,11 +579,11 @@ protected class WithHiddens_ValidAssignment_2 extends AssignmentToken  {
 /************ begin Rule OverridingHiddens ****************
  *
  * OverridingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
- * 	"overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";";
+ * 	'overriding' 'hiddens' '(' called=OverridingHiddensCall ')' valid?=';';
  *
  **/
 
-// "overriding" "hiddens" "(" called=OverridingHiddensCall ")" valid?=";"
+// 'overriding' 'hiddens' '(' called=OverridingHiddensCall ')' valid?=';'
 protected class OverridingHiddens_Group extends GroupToken {
 	
 	public OverridingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -612,7 +612,7 @@ protected class OverridingHiddens_Group extends GroupToken {
 
 }
 
-// "overriding"
+// 'overriding'
 protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 	
 	public OverridingHiddens_OverridingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -633,7 +633,7 @@ protected class OverridingHiddens_OverridingKeyword_0 extends KeywordToken  {
 
 }
 
-// "hiddens"
+// 'hiddens'
 protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
 	public OverridingHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -655,7 +655,7 @@ protected class OverridingHiddens_HiddensKeyword_1 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class OverridingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
 	public OverridingHiddens_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -723,7 +723,7 @@ protected class OverridingHiddens_CalledAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
 	public OverridingHiddens_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -745,7 +745,7 @@ protected class OverridingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
 	public OverridingHiddens_ValidAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -786,11 +786,11 @@ protected class OverridingHiddens_ValidAssignment_5 extends AssignmentToken  {
 /************ begin Rule OverridingHiddensCall ****************
  *
  * OverridingHiddensCall hidden():
- * 	"call" spaces+=WS? valid?=";";
+ * 	'call' spaces+=WS? valid?=';';
  *
  **/
 
-// "call" spaces+=WS? valid?=";"
+// 'call' spaces+=WS? valid?=';'
 protected class OverridingHiddensCall_Group extends GroupToken {
 	
 	public OverridingHiddensCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -819,7 +819,7 @@ protected class OverridingHiddensCall_Group extends GroupToken {
 
 }
 
-// "call"
+// 'call'
 protected class OverridingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
 	public OverridingHiddensCall_CallKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -874,7 +874,7 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken  {
 	
 	public OverridingHiddensCall_ValidAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -916,11 +916,11 @@ protected class OverridingHiddensCall_ValidAssignment_2 extends AssignmentToken 
 /************ begin Rule InheritingHiddens ****************
  *
  * InheritingHiddens hidden(WS, ML_COMMENT, SL_COMMENT):
- * 	"inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";";
+ * 	'inheriting' 'hiddens' '(' (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ')' valid?=';';
  *
  **/
 
-// "inheriting" "hiddens" "(" (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ")" valid?=";"
+// 'inheriting' 'hiddens' '(' (called=InheritingHiddensCall | hidingCalled=HidingHiddens) ')' valid?=';'
 protected class InheritingHiddens_Group extends GroupToken {
 	
 	public InheritingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -949,7 +949,7 @@ protected class InheritingHiddens_Group extends GroupToken {
 
 }
 
-// "inheriting"
+// 'inheriting'
 protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 	
 	public InheritingHiddens_InheritingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -970,7 +970,7 @@ protected class InheritingHiddens_InheritingKeyword_0 extends KeywordToken  {
 
 }
 
-// "hiddens"
+// 'hiddens'
 protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 	
 	public InheritingHiddens_HiddensKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -992,7 +992,7 @@ protected class InheritingHiddens_HiddensKeyword_1 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken  {
 	
 	public InheritingHiddens_LeftParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1014,7 +1014,7 @@ protected class InheritingHiddens_LeftParenthesisKeyword_2 extends KeywordToken 
 
 }
 
-// called=InheritingHiddensCall | hidingCalled=HidingHiddens
+// (called=InheritingHiddensCall | hidingCalled=HidingHiddens)
 protected class InheritingHiddens_Alternatives_3 extends AlternativesToken {
 
 	public InheritingHiddens_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1130,7 +1130,7 @@ protected class InheritingHiddens_HidingCalledAssignment_3_1 extends AssignmentT
 }
 
 
-// ")"
+// ')'
 protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken  {
 	
 	public InheritingHiddens_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1152,7 +1152,7 @@ protected class InheritingHiddens_RightParenthesisKeyword_4 extends KeywordToken
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 	
 	public InheritingHiddens_ValidAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1193,11 +1193,11 @@ protected class InheritingHiddens_ValidAssignment_5 extends AssignmentToken  {
 /************ begin Rule DatatypeHiddens ****************
  *
  * DatatypeHiddens:
- * 	"datatype" valid?=DatatypeRule;
+ * 	'datatype' valid?=DatatypeRule;
  *
  **/
 
-// "datatype" valid?=DatatypeRule
+// 'datatype' valid?=DatatypeRule
 protected class DatatypeHiddens_Group extends GroupToken {
 	
 	public DatatypeHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1226,7 +1226,7 @@ protected class DatatypeHiddens_Group extends GroupToken {
 
 }
 
-// "datatype"
+// 'datatype'
 protected class DatatypeHiddens_DatatypeKeyword_0 extends KeywordToken  {
 	
 	public DatatypeHiddens_DatatypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1289,11 +1289,11 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 /************ begin Rule HidingHiddens ****************
  *
  * HidingHiddens hidden():
- * 	"hiding" space=WS called=InheritingHiddensCall;
+ * 	'hiding' space=WS called=InheritingHiddensCall;
  *
  **/
 
-// "hiding" space=WS called=InheritingHiddensCall
+// 'hiding' space=WS called=InheritingHiddensCall
 protected class HidingHiddens_Group extends GroupToken {
 	
 	public HidingHiddens_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1322,7 +1322,7 @@ protected class HidingHiddens_Group extends GroupToken {
 
 }
 
-// "hiding"
+// 'hiding'
 protected class HidingHiddens_HidingKeyword_0 extends KeywordToken  {
 	
 	public HidingHiddens_HidingKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1430,11 +1430,11 @@ protected class HidingHiddens_CalledAssignment_2 extends AssignmentToken  {
 /************ begin Rule InheritingHiddensCall ****************
  *
  * InheritingHiddensCall:
- * 	"call" valid?=";";
+ * 	'call' valid?=';';
  *
  **/
 
-// "call" valid?=";"
+// 'call' valid?=';'
 protected class InheritingHiddensCall_Group extends GroupToken {
 	
 	public InheritingHiddensCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1463,7 +1463,7 @@ protected class InheritingHiddensCall_Group extends GroupToken {
 
 }
 
-// "call"
+// 'call'
 protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 	
 	public InheritingHiddensCall_CallKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1484,7 +1484,7 @@ protected class InheritingHiddensCall_CallKeyword_0 extends KeywordToken  {
 
 }
 
-// valid?=";"
+// valid?=';'
 protected class InheritingHiddensCall_ValidAssignment_1 extends AssignmentToken  {
 	
 	public InheritingHiddensCall_ValidAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

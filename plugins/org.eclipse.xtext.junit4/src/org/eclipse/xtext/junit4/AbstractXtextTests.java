@@ -44,6 +44,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -261,9 +262,9 @@ public abstract class AbstractXtextTests extends Assert implements ResourceLoadH
 		checkNodeModel(resource);
 		if (expectedErrors != UNKNOWN_EXPECTATION) {
 			if (expectedErrors == EXPECT_ERRORS)
-				assertFalse(resource.getErrors().toString(), resource.getErrors().isEmpty());
+				assertFalse(Joiner.on('\n').join(resource.getErrors()), resource.getErrors().isEmpty());
 			else
-				assertEquals(resource.getErrors().toString(), expectedErrors, resource.getErrors().size());
+				assertEquals(Joiner.on('\n').join(resource.getErrors()), expectedErrors, resource.getErrors().size());
 		}
 		for(Diagnostic d: resource.getErrors()) {
 			if (d instanceof ExceptionDiagnostic)

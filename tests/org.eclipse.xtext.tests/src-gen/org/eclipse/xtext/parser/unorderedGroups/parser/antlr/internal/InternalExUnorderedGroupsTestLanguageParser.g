@@ -1525,7 +1525,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_73_0, 
-        		"UnorderedDatatype");
+        		"org.eclipse.xtext.parser.unorderedGroups.UnorderedGroupsTestLanguage.UnorderedDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1549,7 +1549,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"serialized",
         		lv_serialized_75_0, 
-        		"UnorderedSerialization");
+        		"org.eclipse.xtext.parser.unorderedGroups.UnorderedGroupsTestLanguage.UnorderedSerialization");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1573,7 +1573,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedModel",
         		lv_nestedModel_77_0, 
-        		"NestedModel");
+        		"org.eclipse.xtext.parser.unorderedGroups.UnorderedGroupsTestLanguage.NestedModel");
 	        afterParserOrEnumRuleCall();
 	    }
 

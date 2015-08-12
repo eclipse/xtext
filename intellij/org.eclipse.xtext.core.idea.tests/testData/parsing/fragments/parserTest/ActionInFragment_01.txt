@@ -1,0 +1,12 @@
+org.eclipse.xtext.parser.fragments.idea.lang.psi.impl.FragmentTestLanguageFileImpl:a.fragmenttestlanguage(0,15)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ParserRuleFragmentsAction_0_ELEMENT_TYPE)(0,15)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ELEMENT_TYPE)(0,0)
+      <empty list>
+    PsiElement(ParserRuleFragments_NumberSignDigitFiveKeyword_1_4_0_ELEMENT_TYPE)('#5')(0,2)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ElementPRFNamedWithActionInFragmentParserRuleCall_1_4_1_0_ELEMENT_TYPE)(2,15)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(FragmentWithAction_PRFNamedWithActionPrevAction_1_ELEMENT_TYPE)(2,15)
+        org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(PRFNamedWithActionInFragment_FragmentWithActionParserRuleCall_0_ELEMENT_TYPE)(2,7)
+          PsiWhiteSpace(' ')(2,3)
+          PsiElement(FragmentWithAction_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE)('prev')(3,7)
+        PsiWhiteSpace(' ')(7,8)
+        PsiElement(FragmentWithAction_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE)('current')(8,15)

@@ -161,7 +161,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.index.IndexTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -273,7 +273,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"importedNamespace",
                     		lv_importedNamespace_1_0, 
-                    		"QualifiedNameWithWildCard");
+                    		"org.eclipse.xtext.index.IndexTestLanguage.QualifiedNameWithWildCard");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -608,7 +608,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"QualifiedName");
+                    		"org.eclipse.xtext.index.IndexTestLanguage.QualifiedName");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -655,7 +655,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"elements",
             	            		lv_elements_2_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.index.IndexTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1053,7 +1053,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1099,7 +1099,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"properties",
             	            		lv_properties_3_0, 
-            	            		"Property");
+            	            		"org.eclipse.xtext.index.IndexTestLanguage.Property");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1213,7 +1213,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1339,7 +1339,7 @@ public class InternalIndexTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

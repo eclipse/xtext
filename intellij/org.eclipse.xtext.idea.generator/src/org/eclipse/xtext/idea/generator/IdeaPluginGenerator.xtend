@@ -18,7 +18,6 @@ import org.eclipse.xpand2.output.Output
 import org.eclipse.xpand2.output.OutputImpl
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractElement
-import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.GeneratedMetamodel
@@ -322,9 +321,9 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		public class «grammar.psiParserName.toSimpleName» extends AbstractXtextPsiParser {
 
 			«IF !grammar.initialHiddenTokens.empty»
-			private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
+				private static final Set<String> INITIAL_HIDDEN_TOKENS = new HashSet<String>(Arrays.asList(«FOR hidden:grammar.initialHiddenTokens SEPARATOR ', '»"«hidden»"«ENDFOR»));
 			«ELSE»
-			private static final Set<String> INITIAL_HIDDEN_TOKENS = emptySet();
+				private static final Set<String> INITIAL_HIDDEN_TOKENS = emptySet();
 			«ENDIF»
 
 			@Inject 
@@ -461,26 +460,6 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 		<«extensionPointId» language="«grammar.languageID»"
 								factoryClass="«grammar.extensionFactoryName»"
 								implementationClass="«implementationClass»"/>
-	'''
-	
-	def compilePsiElement(Grammar grammar, AbstractRule rule)'''
-		package «grammar.psiPackageName»;
-		«IF rule.hasMultipleAssigment»
-		
-		import java.util.List;
-		«ENDIF»
-		
-		import com.intellij.psi.«rule.psiElementSuperClassName»;
-		
-		public interface «rule.psiElementClassName» extends «rule.psiElementSuperClassName» {
-			«FOR assignment:rule.assignmentsWithoutName»
-			
-			«assignment.typeName» «assignment.getter»();
-			
-			void «assignment.setter»(«assignment.typeName» «assignment.feature»);
-			«ENDFOR»
-		
-		}
 	'''
 	
 	def compileFileImpl(Grammar grammar)'''
@@ -672,24 +651,24 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			}
 		
 			private static final «grammar.grammarAccessName.toSimpleName» GRAMMAR_ACCESS = «grammar.languageName.toSimpleName».INSTANCE.getInstance(«grammar.grammarAccessName.toSimpleName».class);
-			«FOR rule:grammar.allRules»
+			«FOR rule:grammar.allNonTerminalRules»
 
-			private static class «rule.grammarElementIdentifier»Factory {
-				public static IGrammarAwareElementType create«rule.grammarElementIdentifier»ElementType() {
-					return new IGrammarAwareElementType("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaRuleAccessor»);
+				private static class «rule.grammarElementIdentifier»Factory {
+					public static IGrammarAwareElementType create«rule.grammarElementIdentifier»ElementType() {
+						return new IGrammarAwareElementType("«rule.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaRuleAccessor»);
+					}
+					«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
+					public static IGrammarAwareElementType create«element.grammarElementIdentifier»ElementType() {
+						return new IGrammarAwareElementType("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaElementsAccessor».«element.gaElementAccessor»);
+					}
+					«ENDFOR»
 				}
+
+				public static final IGrammarAwareElementType «rule.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«rule.grammarElementIdentifier»ElementType());
 				«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-				public static IGrammarAwareElementType create«element.grammarElementIdentifier»ElementType() {
-					return new IGrammarAwareElementType("«element.grammarElementIdentifier»_ELEMENT_TYPE", «grammar.languageName.toSimpleName».INSTANCE, GRAMMAR_ACCESS.«rule.gaElementsAccessor».«element.gaElementAccessor»);
-				}
+
+					public static final IGrammarAwareElementType «element.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«element.grammarElementIdentifier»ElementType());
 				«ENDFOR»
-			}
-
-			public static final IGrammarAwareElementType «rule.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«rule.grammarElementIdentifier»ElementType());
-			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-
-			public static final IGrammarAwareElementType «element.grammarElementIdentifier»_ELEMENT_TYPE = associate(«rule.grammarElementIdentifier»Factory.create«element.grammarElementIdentifier»ElementType());
-			«ENDFOR»
 			«ENDFOR»
 		
 			@Override
@@ -701,17 +680,17 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			public IGrammarAwareElementType findElementType(EObject grammarElement) {
 				return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 			}
-			«FOR rule:grammar.allRules»
-			
-			public IGrammarAwareElementType get«rule.grammarElementIdentifier»ElementType() {
-				return «rule.grammarElementIdentifier»_ELEMENT_TYPE;
-			}
-			«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
-			
-			public IGrammarAwareElementType get«element.grammarElementIdentifier»ElementType() {
-				return «element.grammarElementIdentifier»_ELEMENT_TYPE;
-			}
-			«ENDFOR»
+			«FOR rule:grammar.allNonTerminalRules»
+
+				public IGrammarAwareElementType get«rule.grammarElementIdentifier»ElementType() {
+					return «rule.grammarElementIdentifier»_ELEMENT_TYPE;
+				}
+				«FOR element:rule.eAllContents.filter(AbstractElement).toIterable»
+
+					public IGrammarAwareElementType get«element.grammarElementIdentifier»ElementType() {
+						return «element.grammarElementIdentifier»_ELEMENT_TYPE;
+					}
+				«ENDFOR»
 			«ENDFOR»
 		
 		}
@@ -863,18 +842,18 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 				public PsiElement createElement(ASTNode node) {
 					IElementType elementType = node.getElementType();
 					«FOR namedElementType:namedGrammarElement.keySet»
-					if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
-						return new PsiNamedEObjectImpl(node,
-							«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
-							elementTypeProvider.get«nameType»ElementType()
-							«ENDFOR»
-						);
-					}
+						if (elementType == elementTypeProvider.get«namedElementType»ElementType()) {
+							return new PsiNamedEObjectImpl(node,
+								«FOR nameType:namedGrammarElement.get(namedElementType) SEPARATOR ','»
+								elementTypeProvider.get«nameType»ElementType()
+								«ENDFOR»
+							);
+						}
 					«ENDFOR»
 					«FOR crossReference : crossReferences»
-					if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
-						return new PsiEObjectReference(node);
-					}
+						if (elementType == elementTypeProvider.get«crossReference.grammarElementIdentifier»ElementType()) {
+							return new PsiEObjectReference(node);
+						}
 					«ENDFOR»
 					return super.createElement(node);
 				}
@@ -884,7 +863,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	protected def getCrossReferences(Grammar grammar) {
-		grammar.allRules.map[
+		grammar.allNonTerminalRules.map[
 			eAllContents.filter(CrossReference).filter[assigned].toIterable
 		].flatten
 	}
@@ -904,7 +883,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	protected def getRuleCallsWithName(Grammar grammar, RuleCall nameRuleCall) {
-		grammar.allRules.map[getRuleCallsWithName(nameRuleCall)].flatten
+		grammar.allNonTerminalRules.map[getRuleCallsWithName(nameRuleCall)].flatten
 	}
 	
 	protected def getRuleCallsWithName(EObject element, RuleCall nameRuleCall) {
@@ -914,7 +893,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	}
 	
 	protected def getNameRuleCalls(Grammar grammar) {
-		grammar.allRules.map[nameRuleCalls].flatten
+		grammar.allNonTerminalRules.map[nameRuleCalls].flatten
 	}
 	
 	protected def getNameRuleCalls(EObject element) {
@@ -958,73 +937,74 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	'''
 	
 	def CharSequence compileFacetConfiguration(Grammar grammar) '''
-	package «grammar.facetConfiguration.toPackageName»;
-	
-	import com.intellij.openapi.components.PersistentStateComponent;
-	import com.intellij.openapi.components.State;
-	import com.intellij.openapi.components.Storage;
-	import com.intellij.openapi.components.StoragePathMacros;
-	import com.intellij.openapi.components.StorageScheme;
-	«IF grammar.doesUseXbase»
-		import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration;
-		import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
-	«ELSE»
-		import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
-		import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
-	«ENDIF»
-	
-	@State(name = "«grammar.name»Generator", storages = {
-			@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
-			@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
-					+ "/«grammar.name.toSimpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
-	public class «grammar.facetConfiguration.toSimpleName» extends «IF grammar.doesUseXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
-	
-	}
+		package «grammar.facetConfiguration.toPackageName»;
+		
+		import com.intellij.openapi.components.PersistentStateComponent;
+		import com.intellij.openapi.components.State;
+		import com.intellij.openapi.components.Storage;
+		import com.intellij.openapi.components.StoragePathMacros;
+		import com.intellij.openapi.components.StorageScheme;
+		«IF grammar.doesUseXbase»
+			import org.eclipse.xtext.xbase.idea.facet.XbaseFacetConfiguration;
+			import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
+		«ELSE»
+			import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+			import org.eclipse.xtext.idea.facet.GeneratorConfigurationState;
+		«ENDIF»
+		
+		@State(name = "«grammar.name»Generator", storages = {
+				@Storage(id = "default", file = StoragePathMacros.PROJECT_FILE),
+				@Storage(id = "dir", file = StoragePathMacros.PROJECT_CONFIG_DIR
+						+ "/«grammar.name.toSimpleName»GeneratorConfig.xml", scheme = StorageScheme.DIRECTORY_BASED)})
+		public class «grammar.facetConfiguration.toSimpleName» extends «IF grammar.doesUseXbase»XbaseFacetConfiguration implements PersistentStateComponent<XbaseGeneratorConfigurationState>«ELSE»AbstractFacetConfiguration implements PersistentStateComponent<GeneratorConfigurationState>«ENDIF»{
+		
+		}
 	'''
 	
 	def CharSequence compileFacetType(Grammar grammar) '''
-	package «grammar.facetTypeName.toPackageName»;
-	
-	import com.intellij.facet.Facet;
-	import com.intellij.facet.FacetTypeId;
-	import org.eclipse.xtext.idea.facet.AbstractFacetType;
-	
-	public class «grammar.facetTypeName.toSimpleName»  extends AbstractFacetType<«grammar.facetConfiguration.toSimpleName»> {
-	
-		public static final FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>> TYPEID = new FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>>("«grammar.name»");
-	
-		public «grammar.facetTypeName.toSimpleName»() {
-			super(TYPEID, "«grammar.name»", "«grammar.name.toSimpleName»");
-			«grammar.languageName».INSTANCE.injectMembers(this);
+		package «grammar.facetTypeName.toPackageName»;
+		
+		import com.intellij.facet.Facet;
+		import com.intellij.facet.FacetTypeId;
+		import org.eclipse.xtext.idea.facet.AbstractFacetType;
+		
+		public class «grammar.facetTypeName.toSimpleName»  extends AbstractFacetType<«grammar.facetConfiguration.toSimpleName»> {
+		
+			public static final FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>> TYPEID = new FacetTypeId<Facet<«grammar.facetConfiguration.toSimpleName»>>("«grammar.name»");
+		
+			public «grammar.facetTypeName.toSimpleName»() {
+				super(TYPEID, "«grammar.name»", "«grammar.name.toSimpleName»");
+				«grammar.languageName».INSTANCE.injectMembers(this);
+			}
+		
 		}
-	
-	}
 	'''
 	
 	def CharSequence compileBaseColorSettingsPage(Grammar grammar) '''
-	package «grammar.baseColorSettingsPage.toPackageName»;
-	
-	import «grammar.languageName»;
-	import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
-	
-	
-	public class «grammar.baseColorSettingsPage.toSimpleName» extends AbstractColorSettingsPage {
+		package «grammar.baseColorSettingsPage.toPackageName»;
 		
-		public «grammar.baseColorSettingsPage.toSimpleName»() {
-			«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
+		import «grammar.languageName»;
+		import org.eclipse.xtext.idea.highlighting.AbstractColorSettingsPage;
+		
+		
+		public class «grammar.baseColorSettingsPage.toSimpleName» extends AbstractColorSettingsPage {
+			
+			public «grammar.baseColorSettingsPage.toSimpleName»() {
+				«grammar.languageName.toSimpleName».INSTANCE.injectMembers(this);
+			}
+		
+			@Override
+			public String getDisplayName() {
+				return «grammar.languageName.toSimpleName».INSTANCE.getDisplayName();
+			}
 		}
-	
-		@Override
-		public String getDisplayName() {
-			return «grammar.languageName.toSimpleName».INSTANCE.getDisplayName();
-		}
-	}'''
-	
-	def CharSequence compileColorSettingsPage(Grammar grammar)
 	'''
-	package «grammar.colorSettingsPage.toPackageName»
 	
-	class «grammar.colorSettingsPage.toSimpleName» extends «grammar.baseColorSettingsPage.toSimpleName» {
-	}'''
+	def CharSequence compileColorSettingsPage(Grammar grammar) '''
+		package «grammar.colorSettingsPage.toPackageName»
+		
+		class «grammar.colorSettingsPage.toSimpleName» extends «grammar.baseColorSettingsPage.toSimpleName» {
+		}
+	'''
 	
 }

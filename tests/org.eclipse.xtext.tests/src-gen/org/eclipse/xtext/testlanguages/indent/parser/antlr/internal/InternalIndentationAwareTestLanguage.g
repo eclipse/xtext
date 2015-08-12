@@ -90,7 +90,7 @@ ruleNodeList returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_0_0, 
-        		"Node");
+        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -112,7 +112,7 @@ ruleNodeList returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_2_0, 
-        		"Node");
+        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -151,7 +151,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"String");
+        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -177,7 +177,7 @@ this_BEGIN_2=RULE_BEGIN
        			$current, 
        			"children",
         		lv_children_3_0, 
-        		"NodeList");
+        		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.NodeList");
 	        afterParserOrEnumRuleCall();
 	    }
 

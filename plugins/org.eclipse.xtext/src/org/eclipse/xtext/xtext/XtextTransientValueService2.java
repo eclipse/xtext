@@ -19,6 +19,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.NamedArgument;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
@@ -77,6 +78,13 @@ public class XtextTransientValueService2 extends TransientValueService {
 			if (decl.getEnumLiteral() != null && decl.getLiteral() != null) {
 				if (Strings.equal(decl.getLiteral().getValue(), decl.getEnumLiteral().getName()))
 					return PREFERABLY;
+				return NO;
+			}
+			return YES;
+		} else if (feature == XtextPackage.eINSTANCE.getRuleCall_ExplicitlyCalled()) {
+			return YES;
+		} else if (feature == XtextPackage.eINSTANCE.getNamedArgument_Parameter()) {
+			if (((NamedArgument)owner).isCalledByName()) {
 				return NO;
 			}
 			return YES;

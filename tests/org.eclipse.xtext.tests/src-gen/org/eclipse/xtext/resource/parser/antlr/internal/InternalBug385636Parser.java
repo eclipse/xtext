@@ -160,7 +160,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"define",
                     		lv_define_0_0, 
-                    		"DefineVariables");
+                    		"org.eclipse.xtext.resource.Bug385636.DefineVariables");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -203,7 +203,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"statements",
             	            		lv_statements_1_0, 
-            	            		"Statement");
+            	            		"org.eclipse.xtext.resource.Bug385636.Statement");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -336,7 +336,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"variables",
             	            		lv_variables_1_0, 
-            	            		"DefineVariable");
+            	            		"org.eclipse.xtext.resource.Bug385636.DefineVariable");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -454,7 +454,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -706,7 +706,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_3_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -764,7 +764,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_6_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -822,7 +822,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_9_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -880,7 +880,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_12_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -938,7 +938,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_15_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1006,7 +1006,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_19_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1074,7 +1074,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"right",
             	            		lv_right_23_0, 
-            	            		"Expression_VariableName");
+            	            		"org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1187,7 +1187,7 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"variable",
                     		lv_variable_0_0, 
-                    		"NVariableAccess");
+                    		"org.eclipse.xtext.resource.Bug385636.NVariableAccess");
             	        afterParserOrEnumRuleCall();
             	    
 

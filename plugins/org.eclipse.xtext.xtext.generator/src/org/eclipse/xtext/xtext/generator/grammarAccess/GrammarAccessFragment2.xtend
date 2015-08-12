@@ -77,6 +77,10 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 		writeGrammar(language)
 	}
 	
+	def protected String getQualifiedName(AbstractRule rule) {
+		return GrammarUtil.getGrammar(rule).name + '.' + rule.name
+	}
+	
 	protected def void writeGrammar(LanguageConfig2 language) {
 		val isSaving = Wrapper.wrap(false)
 		val ResourceSet cloneInto = new ResourceSetImpl
@@ -246,7 +250,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def StringConcatenationClient parserRuleClasses(ParserRule it) '''
 		public class «gaRuleAccessorClassName» extends «AbstractParserRuleElementFinder» {
-			private final «ParserRule» rule = («ParserRule») «GrammarUtil».findRuleForName(getGrammar(), "«name»");
+			private final «ParserRule» rule = («ParserRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 			«FOR e : containedAbstractElements»
 				private final «e.eClass» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
 			«ENDFOR»
@@ -263,7 +267,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def StringConcatenationClient parserRuleClasses(EnumRule it) '''
 		public class «gaRuleAccessorClassName» extends «AbstractEnumRuleElementFinder» {
-			private final «EnumRule» rule = («EnumRule») «GrammarUtil».findRuleForName(getGrammar(), "«name»");
+			private final «EnumRule» rule = («EnumRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 			«FOR e : containedAbstractElements»
 				private final «e.eClass» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
 			«ENDFOR»
@@ -299,7 +303,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	'''
 	
 	protected def dispatch StringConcatenationClient initializer(TerminalRule it) '''
-		this.«gaRuleAccessorLocalVarName» = («TerminalRule») «GrammarUtil».findRuleForName(getGrammar(), "«name»");
+		this.«gaRuleAccessorLocalVarName» = («TerminalRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 	'''
 	
 	protected def dispatch StringConcatenationClient getter(ParserRule it, Grammar original) '''
@@ -309,8 +313,8 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 				return «gaRuleAccessorLocalVarName»;
 			}
 		«ELSE»	
-			public «grammar.grammarAccess».«gaRuleAccessorClassName» «gaElementsAccessor» {
-				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaElementsAccessor»;
+			public «grammar.grammarAccess».«gaBaseRuleAccessorClassName» «gaElementsAccessor» {
+				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseElementsAccessor»;
 			}
 		«ENDIF»
 		
@@ -342,7 +346,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 			«IF grammar === original»
 				return «gaRuleAccessorLocalVarName»;
 			«ELSE»
-				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaRuleAccessor»;
+				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseRuleAccessor»;
 			«ENDIF»
 		}
 	'''

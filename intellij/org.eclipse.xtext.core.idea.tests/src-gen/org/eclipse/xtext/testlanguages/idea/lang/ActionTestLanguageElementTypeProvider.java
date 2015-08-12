@@ -91,43 +91,43 @@ public class ActionTestLanguageElementTypeProvider implements IElementTypeProvid
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ChildParserRuleCall_0ElementType() {
 		return Model_ChildParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ParentLeftAction_1_0ElementType() {
 		return Model_ParentLeftAction_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RightAssignment_1_1ElementType() {
 		return Model_RightAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_RightChildParserRuleCall_1_1_0ElementType() {
 		return Model_RightChildParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildElementType() {
 		return Child_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_NameAssignmentElementType() {
 		return Child_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_NameIDTerminalRuleCall_0ElementType() {
 		return Child_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}

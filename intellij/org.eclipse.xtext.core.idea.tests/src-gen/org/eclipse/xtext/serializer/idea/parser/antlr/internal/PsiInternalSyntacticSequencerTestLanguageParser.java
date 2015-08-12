@@ -14,7 +14,8 @@ import org.antlr.runtime.*;
 import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Map;
+import java.util.HashMap;
 @SuppressWarnings("all")
 public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
@@ -103,13 +104,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:52:15: ( ruleModel EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:53:2: ruleModel EOF
             {
-             markComposite(elementTypeProvider.getModelElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getModelElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
             ruleModel();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); if (state.failed) return ;
 
             }
 
@@ -206,6 +209,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 }
                 break;
             default:
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 1, 0, input);
 
@@ -222,17 +226,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:61:4: (lv_x1_0_0= ruleMandatoryKeywords )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:62:5: lv_x1_0_0= ruleMandatoryKeywords
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X1MandatoryKeywordsParserRuleCall_0_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X1MandatoryKeywordsParserRuleCall_0_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_ruleModel89);
                     ruleMandatoryKeywords();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -251,17 +259,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:73:4: (lv_x2_1_0= ruleExp0 )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:74:5: lv_x2_1_0= ruleExp0
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X2Exp0ParserRuleCall_1_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X2Exp0ParserRuleCall_1_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp0_in_ruleModel135);
                     ruleExp0();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -280,17 +292,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:85:4: (lv_x3_2_0= ruleExp1 )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:86:5: lv_x3_2_0= ruleExp1
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X3Exp1ParserRuleCall_2_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X3Exp1ParserRuleCall_2_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp1_in_ruleModel181);
                     ruleExp1();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -309,17 +325,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:97:4: (lv_x4_3_0= ruleExp2 )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:98:5: lv_x4_3_0= ruleExp2
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X4Exp2ParserRuleCall_3_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X4Exp2ParserRuleCall_3_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleExp2_in_ruleModel227);
                     ruleExp2();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -338,17 +358,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:109:4: (lv_x5_4_0= ruleSingleCrossReference )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:110:5: lv_x5_4_0= ruleSingleCrossReference
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X5SingleCrossReferenceParserRuleCall_4_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X5SingleCrossReferenceParserRuleCall_4_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_ruleModel273);
                     ruleSingleCrossReference();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -367,17 +391,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:121:4: (lv_x6_5_0= ruleBooleanAlternative )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:122:5: lv_x6_5_0= ruleBooleanAlternative
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X6BooleanAlternativeParserRuleCall_5_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X6BooleanAlternativeParserRuleCall_5_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_ruleModel319);
                     ruleBooleanAlternative();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -396,17 +424,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:133:4: (lv_x7_6_0= ruleUnassignedDatatype )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:134:5: lv_x7_6_0= ruleUnassignedDatatype
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X7UnassignedDatatypeParserRuleCall_6_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X7UnassignedDatatypeParserRuleCall_6_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_ruleModel365);
                     ruleUnassignedDatatype();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -425,17 +457,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:145:4: (lv_x8_7_0= ruleOptionalSingleTransition )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:146:5: lv_x8_7_0= ruleOptionalSingleTransition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X8OptionalSingleTransitionParserRuleCall_7_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X8OptionalSingleTransitionParserRuleCall_7_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_ruleModel411);
                     ruleOptionalSingleTransition();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -454,17 +490,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:157:4: (lv_x9_8_0= ruleOptionalManyTransition )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:158:5: lv_x9_8_0= ruleOptionalManyTransition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X9OptionalManyTransitionParserRuleCall_8_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X9OptionalManyTransitionParserRuleCall_8_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_ruleModel457);
                     ruleOptionalManyTransition();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -483,17 +523,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:169:4: (lv_x10_9_0= ruleMandatoryManyTransition )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:170:5: lv_x10_9_0= ruleMandatoryManyTransition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X10MandatoryManyTransitionParserRuleCall_9_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X10MandatoryManyTransitionParserRuleCall_9_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_ruleModel503);
                     ruleMandatoryManyTransition();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -512,17 +556,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:181:4: (lv_x11_10_0= ruleAlternativeTransition )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:182:5: lv_x11_10_0= ruleAlternativeTransition
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X11AlternativeTransitionParserRuleCall_10_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X11AlternativeTransitionParserRuleCall_10_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_ruleModel549);
                     ruleAlternativeTransition();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -541,17 +589,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:193:4: (lv_x12_11_0= ruleBooleanValues )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:194:5: lv_x12_11_0= ruleBooleanValues
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X12BooleanValuesParserRuleCall_11_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X12BooleanValuesParserRuleCall_11_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_ruleModel595);
                     ruleBooleanValues();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -570,17 +622,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:205:4: (lv_x13_12_0= ruleLongAlternative )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:206:5: lv_x13_12_0= ruleLongAlternative
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X13LongAlternativeParserRuleCall_12_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X13LongAlternativeParserRuleCall_12_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_ruleModel641);
                     ruleLongAlternative();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -599,17 +655,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:217:4: (lv_x14_13_0= ruleActionOnly )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:218:5: lv_x14_13_0= ruleActionOnly
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getModel_X14ActionOnlyParserRuleCall_13_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getModel_X14ActionOnlyParserRuleCall_13_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_ruleModel687);
                     ruleActionOnly();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -644,13 +704,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:231:27: ( ruleMandatoryKeywords EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:232:2: ruleMandatoryKeywords EOF
             {
-             markComposite(elementTypeProvider.getMandatoryKeywordsElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getMandatoryKeywordsElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMandatoryKeywords_in_entryRuleMandatoryKeywords718);
             ruleMandatoryKeywords();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords721); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryKeywords721); if (state.failed) return ;
 
             }
 
@@ -685,98 +747,130 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:238:2: (otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4' )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:239:3: otherlv_0= '#1' ( (lv_val1_1_0= RULE_ID ) ) otherlv_2= 'kw1' ( (lv_val2_3_0= RULE_ID ) ) otherlv_4= 'kw2' otherlv_5= 'kw3' ( (lv_val3_6_0= RULE_ID ) ) otherlv_7= 'kw4'
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryKeywords_NumberSignDigitOneKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords740); 
+              			markLeaf(elementTypeProvider.getMandatoryKeywords_NumberSignDigitOneKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleMandatoryKeywords740); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:246:3: ( (lv_val1_1_0= RULE_ID ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:247:4: (lv_val1_1_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:248:5: lv_val1_1_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
-            				
-            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords767); 
+              					markLeaf(elementTypeProvider.getMandatoryKeywords_Val1IDTerminalRuleCall_1_0ElementType());
+              				
+            }
+            lv_val1_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords767); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val1_1_0);
-            				
+              					doneLeaf(lv_val1_1_0);
+              				
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw1Keyword_2ElementType());
-            		
-            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords792); 
+              			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw1Keyword_2ElementType());
+              		
+            }
+            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleMandatoryKeywords792); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_2);
-            		
+              			doneLeaf(otherlv_2);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:264:3: ( (lv_val2_3_0= RULE_ID ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:265:4: (lv_val2_3_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:266:5: lv_val2_3_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
-            				
-            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords819); 
+              					markLeaf(elementTypeProvider.getMandatoryKeywords_Val2IDTerminalRuleCall_3_0ElementType());
+              				
+            }
+            lv_val2_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords819); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val2_3_0);
-            				
+              					doneLeaf(lv_val2_3_0);
+              				
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw2Keyword_4ElementType());
-            		
-            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords844); 
+              			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw2Keyword_4ElementType());
+              		
+            }
+            otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMandatoryKeywords844); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_4);
-            		
+              			doneLeaf(otherlv_4);
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw3Keyword_5ElementType());
-            		
-            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords858); 
+              			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw3Keyword_5ElementType());
+              		
+            }
+            otherlv_5=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMandatoryKeywords858); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_5);
-            		
+              			doneLeaf(otherlv_5);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:289:3: ( (lv_val3_6_0= RULE_ID ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:290:4: (lv_val3_6_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:291:5: lv_val3_6_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
-            				
-            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords885); 
+              					markLeaf(elementTypeProvider.getMandatoryKeywords_Val3IDTerminalRuleCall_6_0ElementType());
+              				
+            }
+            lv_val3_6_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryKeywords885); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val3_6_0);
-            				
+              					doneLeaf(lv_val3_6_0);
+              				
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw4Keyword_7ElementType());
-            		
-            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords910); 
+              			markLeaf(elementTypeProvider.getMandatoryKeywords_Kw4Keyword_7ElementType());
+              		
+            }
+            otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMandatoryKeywords910); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_7);
-            		
+              			doneLeaf(otherlv_7);
+              		
+            }
 
             }
 
@@ -802,13 +896,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:311:14: ( ruleExp0 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:312:2: ruleExp0 EOF
             {
-             markComposite(elementTypeProvider.getExp0ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getExp0ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp0_in_entryRuleExp0930);
             ruleExp0();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0933); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp0933); if (state.failed) return ;
 
             }
 
@@ -836,24 +932,32 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:318:2: (otherlv_0= '#2' ruleAddition0 )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:319:3: otherlv_0= '#2' ruleAddition0
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getExp0_NumberSignDigitTwoKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0952); 
+              			markLeaf(elementTypeProvider.getExp0_NumberSignDigitTwoKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleExp0952); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getExp0_Addition0ParserRuleCall_1ElementType());
-            		
+              			markComposite(elementTypeProvider.getExp0_Addition0ParserRuleCall_1ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_ruleExp0964);
             ruleAddition0();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
 
             }
 
@@ -879,13 +983,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:337:19: ( ruleAddition0 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:338:2: ruleAddition0 EOF
             {
-             markComposite(elementTypeProvider.getAddition0ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getAddition0ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition0_in_entryRuleAddition0984);
             ruleAddition0();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0987); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition0987); if (state.failed) return ;
 
             }
 
@@ -913,17 +1019,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:344:2: ( rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )* )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:345:3: rulePrim0 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             {
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getAddition0_Prim0ParserRuleCall_0ElementType());
-            		
+              			markComposite(elementTypeProvider.getAddition0_Prim0ParserRuleCall_0ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition01004);
             rulePrim0();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:352:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim0 ) ) )*
             loop2:
             do {
@@ -942,37 +1052,47 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:353:4: ()
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:354:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					precedeComposite(elementTypeProvider.getAddition0_Add0LeftAction_1_0ElementType());
-            	    					doneComposite();
-            	    				
+            	      					precedeComposite(elementTypeProvider.getAddition0_Add0LeftAction_1_0ElementType());
+            	      					doneComposite();
+            	      				
+            	    }
 
             	    }
 
+            	    if ( state.backtracking==0 ) {
 
-            	    				markLeaf(elementTypeProvider.getAddition0_PlusSignKeyword_1_1ElementType());
-            	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition01040); 
+            	      				markLeaf(elementTypeProvider.getAddition0_PlusSignKeyword_1_1ElementType());
+            	      			
+            	    }
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition01040); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    				doneLeaf(otherlv_2);
-            	    			
+            	      				doneLeaf(otherlv_2);
+            	      			
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:366:4: ( (lv_right_3_0= rulePrim0 ) )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
             	    {
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:367:5: (lv_right_3_0= rulePrim0 )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:368:6: lv_right_3_0= rulePrim0
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    						markComposite(elementTypeProvider.getAddition0_RightPrim0ParserRuleCall_1_2_0ElementType());
-            	    					
+            	      						markComposite(elementTypeProvider.getAddition0_RightPrim0ParserRuleCall_1_2_0ElementType());
+            	      					
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim0_in_ruleAddition01072);
             	    rulePrim0();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    						doneComposite();
-            	    					
+            	      						doneComposite();
+            	      					
+            	    }
 
             	    }
 
@@ -1013,13 +1133,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:382:15: ( rulePrim0 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:383:2: rulePrim0 EOF
             {
-             markComposite(elementTypeProvider.getPrim0ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getPrim0ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim0_in_entryRulePrim01111);
             rulePrim0();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim01114); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim01114); if (state.failed) return ;
 
             }
 
@@ -1050,10 +1172,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:390:3: ()
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:391:4: 
             {
+            if ( state.backtracking==0 ) {
 
-            				precedeComposite(elementTypeProvider.getPrim0_Val0Action_0ElementType());
-            				doneComposite();
-            			
+              				precedeComposite(elementTypeProvider.getPrim0_Val0Action_0ElementType());
+              				doneComposite();
+              			
+            }
 
             }
 
@@ -1063,13 +1187,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:397:4: (lv_name_1_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:398:5: lv_name_1_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
-            				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01159); 
+              					markLeaf(elementTypeProvider.getPrim0_NameIDTerminalRuleCall_1_0ElementType());
+              				
+            }
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim01159); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_name_1_0);
-            				
+              					doneLeaf(lv_name_1_0);
+              				
+            }
 
             }
 
@@ -1101,13 +1229,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:411:14: ( ruleExp1 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:412:2: ruleExp1 EOF
             {
-             markComposite(elementTypeProvider.getExp1ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getExp1ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp1_in_entryRuleExp11190);
             ruleExp1();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11193); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp11193); if (state.failed) return ;
 
             }
 
@@ -1135,24 +1265,32 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:418:2: (otherlv_0= '#3' ruleAddition1 )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:419:3: otherlv_0= '#3' ruleAddition1
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getExp1_NumberSignDigitThreeKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11212); 
+              			markLeaf(elementTypeProvider.getExp1_NumberSignDigitThreeKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleExp11212); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getExp1_Addition1ParserRuleCall_1ElementType());
-            		
+              			markComposite(elementTypeProvider.getExp1_Addition1ParserRuleCall_1ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_ruleExp11224);
             ruleAddition1();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
 
             }
 
@@ -1178,13 +1316,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:437:19: ( ruleAddition1 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:438:2: ruleAddition1 EOF
             {
-             markComposite(elementTypeProvider.getAddition1ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getAddition1ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_entryRuleAddition11244);
             ruleAddition1();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11247); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition11247); if (state.failed) return ;
 
             }
 
@@ -1212,17 +1352,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:444:2: ( rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )* )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:445:3: rulePrim1 ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             {
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getAddition1_Prim1ParserRuleCall_0ElementType());
-            		
+              			markComposite(elementTypeProvider.getAddition1_Prim1ParserRuleCall_0ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11264);
             rulePrim1();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:452:3: ( () otherlv_2= '+' ( (lv_right_3_0= rulePrim1 ) ) )*
             loop3:
             do {
@@ -1241,37 +1385,47 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:453:4: ()
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:454:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					precedeComposite(elementTypeProvider.getAddition1_Add1LeftAction_1_0ElementType());
-            	    					doneComposite();
-            	    				
+            	      					precedeComposite(elementTypeProvider.getAddition1_Add1LeftAction_1_0ElementType());
+            	      					doneComposite();
+            	      				
+            	    }
 
             	    }
 
+            	    if ( state.backtracking==0 ) {
 
-            	    				markLeaf(elementTypeProvider.getAddition1_PlusSignKeyword_1_1ElementType());
-            	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11300); 
+            	      				markLeaf(elementTypeProvider.getAddition1_PlusSignKeyword_1_1ElementType());
+            	      			
+            	    }
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition11300); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    				doneLeaf(otherlv_2);
-            	    			
+            	      				doneLeaf(otherlv_2);
+            	      			
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:466:4: ( (lv_right_3_0= rulePrim1 ) )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
             	    {
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:467:5: (lv_right_3_0= rulePrim1 )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:468:6: lv_right_3_0= rulePrim1
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    						markComposite(elementTypeProvider.getAddition1_RightPrim1ParserRuleCall_1_2_0ElementType());
-            	    					
+            	      						markComposite(elementTypeProvider.getAddition1_RightPrim1ParserRuleCall_1_2_0ElementType());
+            	      					
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim1_in_ruleAddition11332);
             	    rulePrim1();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    						doneComposite();
-            	    					
+            	      						doneComposite();
+            	      					
+            	    }
 
             	    }
 
@@ -1312,13 +1466,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:482:15: ( rulePrim1 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:483:2: rulePrim1 EOF
             {
-             markComposite(elementTypeProvider.getPrim1ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getPrim1ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim1_in_entryRulePrim11371);
             rulePrim1();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11374); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim11374); if (state.failed) return ;
 
             }
 
@@ -1356,6 +1512,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt4=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 4, 0, input);
 
@@ -1371,10 +1528,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:491:4: ()
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:492:5: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					precedeComposite(elementTypeProvider.getPrim1_Val1Action_0_0ElementType());
-                    					doneComposite();
-                    				
+                      					precedeComposite(elementTypeProvider.getPrim1_Val1Action_0_0ElementType());
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -1384,13 +1543,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:498:5: (lv_name_1_0= RULE_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:499:6: lv_name_1_0= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
-                    					
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11430); 
+                      						markLeaf(elementTypeProvider.getPrim1_NameIDTerminalRuleCall_0_1_0ElementType());
+                      					
+                    }
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim11430); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(lv_name_1_0);
-                    					
+                      						doneLeaf(lv_name_1_0);
+                      					
+                    }
 
                     }
 
@@ -1409,31 +1572,43 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:510:3: (otherlv_2= '(' ruleAddition1 otherlv_4= ')' )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:511:4: otherlv_2= '(' ruleAddition1 otherlv_4= ')'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getPrim1_LeftParenthesisKeyword_1_0ElementType());
-                    			
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11476); 
+                      				markLeaf(elementTypeProvider.getPrim1_LeftParenthesisKeyword_1_0ElementType());
+                      			
+                    }
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim11476); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_2);
-                    			
+                      				doneLeaf(otherlv_2);
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    				markComposite(elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType());
-                    			
+                      				markComposite(elementTypeProvider.getPrim1_Addition1ParserRuleCall_1_1ElementType());
+                      			
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAddition1_in_rulePrim11491);
                     ruleAddition1();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
+                      				doneComposite();
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    				doneComposite();
-                    			
+                      				markLeaf(elementTypeProvider.getPrim1_RightParenthesisKeyword_1_2ElementType());
+                      			
+                    }
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11508); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getPrim1_RightParenthesisKeyword_1_2ElementType());
-                    			
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim11508); 
-
-                    				doneLeaf(otherlv_4);
-                    			
+                      				doneLeaf(otherlv_4);
+                      			
+                    }
 
                     }
 
@@ -1465,13 +1640,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:537:14: ( ruleExp2 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:538:2: ruleExp2 EOF
             {
-             markComposite(elementTypeProvider.getExp2ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getExp2ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleExp2_in_entryRuleExp21533);
             ruleExp2();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21536); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExp21536); if (state.failed) return ;
 
             }
 
@@ -1499,24 +1676,32 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:544:2: (otherlv_0= '#4' ruleAddition2 )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:545:3: otherlv_0= '#4' ruleAddition2
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getExp2_NumberSignDigitFourKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21555); 
+              			markLeaf(elementTypeProvider.getExp2_NumberSignDigitFourKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleExp21555); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getExp2_Addition2ParserRuleCall_1ElementType());
-            		
+              			markComposite(elementTypeProvider.getExp2_Addition2ParserRuleCall_1ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_ruleExp21567);
             ruleAddition2();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
 
             }
 
@@ -1542,13 +1727,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:563:19: ( ruleAddition2 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:564:2: ruleAddition2 EOF
             {
-             markComposite(elementTypeProvider.getAddition2ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getAddition2ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_entryRuleAddition21587);
             ruleAddition2();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21590); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAddition21590); if (state.failed) return ;
 
             }
 
@@ -1576,17 +1763,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:570:2: ( ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )* )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:571:3: ruleMultiplication2 ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             {
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getAddition2_Multiplication2ParserRuleCall_0ElementType());
-            		
+              			markComposite(elementTypeProvider.getAddition2_Multiplication2ParserRuleCall_0ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21607);
             ruleMultiplication2();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:578:3: ( () otherlv_2= '+' ( (lv_right_3_0= ruleMultiplication2 ) ) )*
             loop5:
             do {
@@ -1605,37 +1796,47 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:579:4: ()
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:580:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					precedeComposite(elementTypeProvider.getAddition2_Add2LeftAction_1_0ElementType());
-            	    					doneComposite();
-            	    				
+            	      					precedeComposite(elementTypeProvider.getAddition2_Add2LeftAction_1_0ElementType());
+            	      					doneComposite();
+            	      				
+            	    }
 
             	    }
 
+            	    if ( state.backtracking==0 ) {
 
-            	    				markLeaf(elementTypeProvider.getAddition2_PlusSignKeyword_1_1ElementType());
-            	    			
-            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21643); 
+            	      				markLeaf(elementTypeProvider.getAddition2_PlusSignKeyword_1_1ElementType());
+            	      			
+            	    }
+            	    otherlv_2=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleAddition21643); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    				doneLeaf(otherlv_2);
-            	    			
+            	      				doneLeaf(otherlv_2);
+            	      			
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:592:4: ( (lv_right_3_0= ruleMultiplication2 ) )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
             	    {
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:593:5: (lv_right_3_0= ruleMultiplication2 )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:594:6: lv_right_3_0= ruleMultiplication2
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    						markComposite(elementTypeProvider.getAddition2_RightMultiplication2ParserRuleCall_1_2_0ElementType());
-            	    					
+            	      						markComposite(elementTypeProvider.getAddition2_RightMultiplication2ParserRuleCall_1_2_0ElementType());
+            	      					
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_ruleAddition21675);
             	    ruleMultiplication2();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    						doneComposite();
-            	    					
+            	      						doneComposite();
+            	      					
+            	    }
 
             	    }
 
@@ -1676,13 +1877,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:608:25: ( ruleMultiplication2 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:609:2: ruleMultiplication2 EOF
             {
-             markComposite(elementTypeProvider.getMultiplication2ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getMultiplication2ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMultiplication2_in_entryRuleMultiplication21714);
             ruleMultiplication2();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21717); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiplication21717); if (state.failed) return ;
 
             }
 
@@ -1710,17 +1913,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:615:2: ( rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )* )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:616:3: rulePrim2 ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             {
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getMultiplication2_Prim2ParserRuleCall_0ElementType());
-            		
+              			markComposite(elementTypeProvider.getMultiplication2_Prim2ParserRuleCall_0ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21734);
             rulePrim2();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:623:3: ( () otherlv_2= '*' ( (lv_right_3_0= rulePrim2 ) ) )*
             loop6:
             do {
@@ -1739,37 +1946,47 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:624:4: ()
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:625:5: 
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					precedeComposite(elementTypeProvider.getMultiplication2_Mult2LeftAction_1_0ElementType());
-            	    					doneComposite();
-            	    				
+            	      					precedeComposite(elementTypeProvider.getMultiplication2_Mult2LeftAction_1_0ElementType());
+            	      					doneComposite();
+            	      				
+            	    }
 
             	    }
 
+            	    if ( state.backtracking==0 ) {
 
-            	    				markLeaf(elementTypeProvider.getMultiplication2_AsteriskKeyword_1_1ElementType());
-            	    			
-            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21770); 
+            	      				markLeaf(elementTypeProvider.getMultiplication2_AsteriskKeyword_1_1ElementType());
+            	      			
+            	    }
+            	    otherlv_2=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiplication21770); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    				doneLeaf(otherlv_2);
-            	    			
+            	      				doneLeaf(otherlv_2);
+            	      			
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:637:4: ( (lv_right_3_0= rulePrim2 ) )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
             	    {
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:638:5: (lv_right_3_0= rulePrim2 )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:639:6: lv_right_3_0= rulePrim2
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    						markComposite(elementTypeProvider.getMultiplication2_RightPrim2ParserRuleCall_1_2_0ElementType());
-            	    					
+            	      						markComposite(elementTypeProvider.getMultiplication2_RightPrim2ParserRuleCall_1_2_0ElementType());
+            	      					
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_rulePrim2_in_ruleMultiplication21802);
             	    rulePrim2();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    						doneComposite();
-            	    					
+            	      						doneComposite();
+            	      					
+            	    }
 
             	    }
 
@@ -1810,13 +2027,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:653:15: ( rulePrim2 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:654:2: rulePrim2 EOF
             {
-             markComposite(elementTypeProvider.getPrim2ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getPrim2ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_rulePrim2_in_entryRulePrim21841);
             rulePrim2();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21844); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRulePrim21844); if (state.failed) return ;
 
             }
 
@@ -1854,6 +2073,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt7=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 7, 0, input);
 
@@ -1869,10 +2089,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:662:4: ()
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:663:5: 
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					precedeComposite(elementTypeProvider.getPrim2_Val2Action_0_0ElementType());
-                    					doneComposite();
-                    				
+                      					precedeComposite(elementTypeProvider.getPrim2_Val2Action_0_0ElementType());
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -1882,13 +2104,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:669:5: (lv_name_1_0= RULE_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:670:6: lv_name_1_0= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
-                    					
-                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21900); 
+                      						markLeaf(elementTypeProvider.getPrim2_NameIDTerminalRuleCall_0_1_0ElementType());
+                      					
+                    }
+                    lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePrim21900); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(lv_name_1_0);
-                    					
+                      						doneLeaf(lv_name_1_0);
+                      					
+                    }
 
                     }
 
@@ -1907,31 +2133,43 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:681:3: (otherlv_2= '(' ruleAddition2 otherlv_4= ')' )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:682:4: otherlv_2= '(' ruleAddition2 otherlv_4= ')'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getPrim2_LeftParenthesisKeyword_1_0ElementType());
-                    			
-                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21946); 
+                      				markLeaf(elementTypeProvider.getPrim2_LeftParenthesisKeyword_1_0ElementType());
+                      			
+                    }
+                    otherlv_2=(Token)match(input,21,FollowSets000.FOLLOW_21_in_rulePrim21946); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_2);
-                    			
+                      				doneLeaf(otherlv_2);
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    				markComposite(elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType());
-                    			
+                      				markComposite(elementTypeProvider.getPrim2_Addition2ParserRuleCall_1_1ElementType());
+                      			
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleAddition2_in_rulePrim21961);
                     ruleAddition2();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
+                      				doneComposite();
+                      			
+                    }
+                    if ( state.backtracking==0 ) {
 
-                    				doneComposite();
-                    			
+                      				markLeaf(elementTypeProvider.getPrim2_RightParenthesisKeyword_1_2ElementType());
+                      			
+                    }
+                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21978); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getPrim2_RightParenthesisKeyword_1_2ElementType());
-                    			
-                    otherlv_4=(Token)match(input,22,FollowSets000.FOLLOW_22_in_rulePrim21978); 
-
-                    				doneLeaf(otherlv_4);
-                    			
+                      				doneLeaf(otherlv_4);
+                      			
+                    }
 
                     }
 
@@ -1963,13 +2201,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:708:20: ( ruleDatatypeID EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:709:2: ruleDatatypeID EOF
             {
-             markComposite(elementTypeProvider.getDatatypeIDElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getDatatypeIDElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_entryRuleDatatypeID2003);
             ruleDatatypeID();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID2006); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDatatypeID2006); if (state.failed) return ;
 
             }
 
@@ -1994,13 +2234,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:714:15: (this_ID_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:715:2: this_ID_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            		markLeaf(elementTypeProvider.getDatatypeID_IDTerminalRuleCallElementType());
-            	
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID2020); 
+              		markLeaf(elementTypeProvider.getDatatypeID_IDTerminalRuleCallElementType());
+              	
+            }
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDatatypeID2020); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            		doneLeaf(this_ID_0);
-            	
+              		doneLeaf(this_ID_0);
+              	
+            }
 
             }
 
@@ -2023,13 +2267,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:725:30: ( ruleSingleCrossReference EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:726:2: ruleSingleCrossReference EOF
             {
-             markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getSingleCrossReferenceElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleSingleCrossReference_in_entryRuleSingleCrossReference2036);
             ruleSingleCrossReference();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference2039); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleCrossReference2039); if (state.failed) return ;
 
             }
 
@@ -2066,13 +2312,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:732:2: (otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )? )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:733:3: otherlv_0= '#5' ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) ) (otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) ) )? (otherlv_4= 'kw2' ( ( ruleDatatypeID ) ) )? (otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) ) )? (otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) ) )?
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getSingleCrossReference_NumberSignDigitFiveKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2058); 
+              			markLeaf(elementTypeProvider.getSingleCrossReference_NumberSignDigitFiveKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleSingleCrossReference2058); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:740:3: ( ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:741:4: ( (lv_name_1_1= RULE_TERMINAL_ID | lv_name_1_2= RULE_ID ) )
             {
@@ -2090,6 +2340,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt8=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 8, 0, input);
 
@@ -2099,26 +2350,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:743:6: lv_name_1_1= RULE_TERMINAL_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
-                    					
-                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2093); 
+                      						markLeaf(elementTypeProvider.getSingleCrossReference_NameTERMINAL_IDTerminalRuleCall_1_0_0ElementType());
+                      					
+                    }
+                    lv_name_1_1=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2093); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(lv_name_1_1);
-                    					
+                      						doneLeaf(lv_name_1_1);
+                      					
+                    }
 
                     }
                     break;
                 case 2 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:751:6: lv_name_1_2= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
-                    					
-                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2127); 
+                      						markLeaf(elementTypeProvider.getSingleCrossReference_NameIDTerminalRuleCall_1_0_1ElementType());
+                      					
+                    }
+                    lv_name_1_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2127); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(lv_name_1_2);
-                    					
+                      						doneLeaf(lv_name_1_2);
+                      					
+                    }
 
                     }
                     break;
@@ -2142,26 +2401,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:762:4: otherlv_2= 'kw1' ( (otherlv_3= RULE_TERMINAL_ID ) )
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getSingleCrossReference_Kw1Keyword_2_0ElementType());
-                    			
-                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2165); 
+                      				markLeaf(elementTypeProvider.getSingleCrossReference_Kw1Keyword_2_0ElementType());
+                      			
+                    }
+                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleCrossReference2165); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_2);
-                    			
+                      				doneLeaf(otherlv_2);
+                      			
+                    }
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:769:4: ( (otherlv_3= RULE_TERMINAL_ID ) )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
                     {
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:770:5: (otherlv_3= RULE_TERMINAL_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:771:6: otherlv_3= RULE_TERMINAL_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceCrossReference_2_1_0ElementType());
-                    					
-                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2197); 
+                      						markLeaf(elementTypeProvider.getSingleCrossReference_Ref1SingleCrossReferenceCrossReference_2_1_0ElementType());
+                      					
+                    }
+                    otherlv_3=(Token)match(input,RULE_TERMINAL_ID,FollowSets000.FOLLOW_RULE_TERMINAL_ID_in_ruleSingleCrossReference2197); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(otherlv_3);
-                    					
+                      						doneLeaf(otherlv_3);
+                      					
+                    }
 
                     }
 
@@ -2185,30 +2452,38 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:782:4: otherlv_4= 'kw2' ( ( ruleDatatypeID ) )
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getSingleCrossReference_Kw2Keyword_3_0ElementType());
-                    			
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2236); 
+                      				markLeaf(elementTypeProvider.getSingleCrossReference_Kw2Keyword_3_0ElementType());
+                      			
+                    }
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleCrossReference2236); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_4);
-                    			
+                      				doneLeaf(otherlv_4);
+                      			
+                    }
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:789:4: ( ( ruleDatatypeID ) )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
                     {
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:790:5: ( ruleDatatypeID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:791:6: ruleDatatypeID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markComposite(elementTypeProvider.getSingleCrossReference_Ref2SingleCrossReferenceCrossReference_3_1_0ElementType());
-                    					
+                      						markComposite(elementTypeProvider.getSingleCrossReference_Ref2SingleCrossReferenceCrossReference_3_1_0ElementType());
+                      					
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleDatatypeID_in_ruleSingleCrossReference2266);
                     ruleDatatypeID();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    						doneComposite();
-                    					
+                      						doneComposite();
+                      					
+                    }
 
                     }
 
@@ -2232,26 +2507,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:802:4: otherlv_6= 'kw3' ( (otherlv_7= RULE_ID ) )
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getSingleCrossReference_Kw3Keyword_4_0ElementType());
-                    			
-                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2305); 
+                      				markLeaf(elementTypeProvider.getSingleCrossReference_Kw3Keyword_4_0ElementType());
+                      			
+                    }
+                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSingleCrossReference2305); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_6);
-                    			
+                      				doneLeaf(otherlv_6);
+                      			
+                    }
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:809:4: ( (otherlv_7= RULE_ID ) )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
                     {
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:810:5: (otherlv_7= RULE_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:811:6: otherlv_7= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceCrossReference_4_1_0ElementType());
-                    					
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2337); 
+                      						markLeaf(elementTypeProvider.getSingleCrossReference_Ref3SingleCrossReferenceCrossReference_4_1_0ElementType());
+                      					
+                    }
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2337); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(otherlv_7);
-                    					
+                      						doneLeaf(otherlv_7);
+                      					
+                    }
 
                     }
 
@@ -2275,26 +2558,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:822:4: otherlv_8= 'kw4' ( (otherlv_9= RULE_ID ) )
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getSingleCrossReference_Kw4Keyword_5_0ElementType());
-                    			
-                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2376); 
+                      				markLeaf(elementTypeProvider.getSingleCrossReference_Kw4Keyword_5_0ElementType());
+                      			
+                    }
+                    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleSingleCrossReference2376); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_8);
-                    			
+                      				doneLeaf(otherlv_8);
+                      			
+                    }
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:829:4: ( (otherlv_9= RULE_ID ) )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
                     {
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:830:5: (otherlv_9= RULE_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:831:6: otherlv_9= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceCrossReference_5_1_0ElementType());
-                    					
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2408); 
+                      						markLeaf(elementTypeProvider.getSingleCrossReference_Ref4SingleCrossReferenceCrossReference_5_1_0ElementType());
+                      					
+                    }
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleCrossReference2408); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(otherlv_9);
-                    					
+                      						doneLeaf(otherlv_9);
+                      					
+                    }
 
                     }
 
@@ -2332,13 +2623,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:845:28: ( ruleBooleanAlternative EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:846:2: ruleBooleanAlternative EOF
             {
-             markComposite(elementTypeProvider.getBooleanAlternativeElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getBooleanAlternativeElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternative_in_entryRuleBooleanAlternative2447);
             ruleBooleanAlternative();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2450); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternative2450); if (state.failed) return ;
 
             }
 
@@ -2366,30 +2659,38 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:852:2: (otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:853:3: otherlv_0= '#6' ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getBooleanAlternative_NumberSignDigitSixKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2469); 
+              			markLeaf(elementTypeProvider.getBooleanAlternative_NumberSignDigitSixKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleBooleanAlternative2469); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:860:3: ( (lv_bool_1_0= ruleBooleanAlternativeLiteral ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:861:4: (lv_bool_1_0= ruleBooleanAlternativeLiteral )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:862:5: lv_bool_1_0= ruleBooleanAlternativeLiteral
             {
+            if ( state.backtracking==0 ) {
 
-            					markComposite(elementTypeProvider.getBooleanAlternative_BoolBooleanAlternativeLiteralParserRuleCall_1_0ElementType());
-            				
+              					markComposite(elementTypeProvider.getBooleanAlternative_BoolBooleanAlternativeLiteralParserRuleCall_1_0ElementType());
+              				
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_ruleBooleanAlternative2496);
             ruleBooleanAlternativeLiteral();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            					doneComposite();
-            				
+              					doneComposite();
+              				
+            }
 
             }
 
@@ -2421,13 +2722,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:875:35: ( ruleBooleanAlternativeLiteral EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:876:2: ruleBooleanAlternativeLiteral EOF
             {
-             markComposite(elementTypeProvider.getBooleanAlternativeLiteralElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getBooleanAlternativeLiteralElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanAlternativeLiteral_in_entryRuleBooleanAlternativeLiteral2527);
             ruleBooleanAlternativeLiteral();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2530); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanAlternativeLiteral2530); if (state.failed) return ;
 
             }
 
@@ -2459,10 +2762,12 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:883:3: ()
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:884:4: 
             {
+            if ( state.backtracking==0 ) {
 
-            				precedeComposite(elementTypeProvider.getBooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0ElementType());
-            				doneComposite();
-            			
+              				precedeComposite(elementTypeProvider.getBooleanAlternativeLiteral_BooleanAlternativeLiteralAction_0ElementType());
+              				doneComposite();
+              			
+            }
 
             }
 
@@ -2477,6 +2782,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt13=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 13, 0, input);
 
@@ -2486,13 +2792,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:890:4: otherlv_1= 'kw1'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_Kw1Keyword_1_0ElementType());
-                    			
-                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2568); 
+                      				markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_Kw1Keyword_1_0ElementType());
+                      			
+                    }
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanAlternativeLiteral2568); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_1);
-                    			
+                      				doneLeaf(otherlv_1);
+                      			
+                    }
 
                     }
                     break;
@@ -2505,13 +2815,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:899:5: (lv_isTrue_2_0= 'kw2' )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:900:6: lv_isTrue_2_0= 'kw2'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    						markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_IsTrueKw2Keyword_1_1_0ElementType());
-                    					
-                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2609); 
+                      						markLeaf(elementTypeProvider.getBooleanAlternativeLiteral_IsTrueKw2Keyword_1_1_0ElementType());
+                      					
+                    }
+                    lv_isTrue_2_0=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleBooleanAlternativeLiteral2609); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    						doneLeaf(lv_isTrue_2_0);
-                    					
+                      						doneLeaf(lv_isTrue_2_0);
+                      					
+                    }
 
                     }
 
@@ -2549,13 +2863,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:914:28: ( ruleUnassignedDatatype EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:915:2: ruleUnassignedDatatype EOF
             {
-             markComposite(elementTypeProvider.getUnassignedDatatypeElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getUnassignedDatatypeElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleUnassignedDatatype_in_entryRuleUnassignedDatatype2647);
             ruleUnassignedDatatype();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2650); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedDatatype2650); if (state.failed) return ;
 
             }
 
@@ -2584,43 +2900,55 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:921:2: (otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1 )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:922:3: otherlv_0= '#7' ( (lv_val_1_0= RULE_ID ) ) ruleKW1
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getUnassignedDatatype_NumberSignDigitSevenKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2669); 
+              			markLeaf(elementTypeProvider.getUnassignedDatatype_NumberSignDigitSevenKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleUnassignedDatatype2669); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:929:3: ( (lv_val_1_0= RULE_ID ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:930:4: (lv_val_1_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:931:5: lv_val_1_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
-            				
-            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2696); 
+              					markLeaf(elementTypeProvider.getUnassignedDatatype_ValIDTerminalRuleCall_1_0ElementType());
+              				
+            }
+            lv_val_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleUnassignedDatatype2696); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val_1_0);
-            				
+              					doneLeaf(lv_val_1_0);
+              				
+            }
 
             }
 
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            			markComposite(elementTypeProvider.getUnassignedDatatype_KW1ParserRuleCall_2ElementType());
-            		
+              			markComposite(elementTypeProvider.getUnassignedDatatype_KW1ParserRuleCall_2ElementType());
+              		
+            }
             pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleUnassignedDatatype2719);
             ruleKW1();
 
             state._fsp--;
+            if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-
-            			doneComposite();
-            		
+              			doneComposite();
+              		
+            }
 
             }
 
@@ -2646,13 +2974,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:951:13: ( ruleKW1 EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:952:2: ruleKW1 EOF
             {
-             markComposite(elementTypeProvider.getKW1ElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getKW1ElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleKW1_in_entryRuleKW12739);
             ruleKW1();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12742); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKW12742); if (state.failed) return ;
 
             }
 
@@ -2689,6 +3019,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt15=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 15, 0, input);
 
@@ -2698,13 +3029,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:959:3: kw= 'kw1'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    			markLeaf(elementTypeProvider.getKW1_Kw1Keyword_0ElementType());
-                    		
-                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12761); 
+                      			markLeaf(elementTypeProvider.getKW1_Kw1Keyword_0ElementType());
+                      		
+                    }
+                    kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleKW12761); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    			doneLeaf(kw);
-                    		
+                      			doneLeaf(kw);
+                      		
+                    }
 
                     }
                     break;
@@ -2714,13 +3049,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:967:3: (kw= 'matched' (this_INT_2= RULE_INT )? )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:968:4: kw= 'matched' (this_INT_2= RULE_INT )?
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getKW1_MatchedKeyword_1_0ElementType());
-                    			
-                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12789); 
+                      				markLeaf(elementTypeProvider.getKW1_MatchedKeyword_1_0ElementType());
+                      			
+                    }
+                    kw=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleKW12789); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(kw);
-                    			
+                      				doneLeaf(kw);
+                      			
+                    }
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:975:4: (this_INT_2= RULE_INT )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
@@ -2732,13 +3071,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                         case 1 :
                             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:976:5: this_INT_2= RULE_INT
                             {
+                            if ( state.backtracking==0 ) {
 
-                            					markLeaf(elementTypeProvider.getKW1_INTTerminalRuleCall_1_1ElementType());
-                            				
-                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12813); 
+                              					markLeaf(elementTypeProvider.getKW1_INTTerminalRuleCall_1_1ElementType());
+                              				
+                            }
+                            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKW12813); if (state.failed) return ;
+                            if ( state.backtracking==0 ) {
 
-                            					doneLeaf(this_INT_2);
-                            				
+                              					doneLeaf(this_INT_2);
+                              				
+                            }
 
                             }
                             break;
@@ -2776,13 +3119,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:989:34: ( ruleOptionalSingleTransition EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:990:2: ruleOptionalSingleTransition EOF
             {
-             markComposite(elementTypeProvider.getOptionalSingleTransitionElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getOptionalSingleTransitionElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleOptionalSingleTransition_in_entryRuleOptionalSingleTransition2845);
             ruleOptionalSingleTransition();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2848); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalSingleTransition2848); if (state.failed) return ;
 
             }
 
@@ -2811,13 +3156,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:996:2: (otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:997:3: otherlv_0= '#8' ( ruleKW1 )? ( (lv_val_2_0= RULE_ID ) )
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getOptionalSingleTransition_NumberSignDigitEightKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2867); 
+              			markLeaf(elementTypeProvider.getOptionalSingleTransition_NumberSignDigitEightKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,29,FollowSets000.FOLLOW_29_in_ruleOptionalSingleTransition2867); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1004:3: ( ruleKW1 )?
             int alt16=2;
             int LA16_0 = input.LA(1);
@@ -2829,17 +3178,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1005:4: ruleKW1
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markComposite(elementTypeProvider.getOptionalSingleTransition_KW1ParserRuleCall_1ElementType());
-                    			
+                      				markComposite(elementTypeProvider.getOptionalSingleTransition_KW1ParserRuleCall_1ElementType());
+                      			
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalSingleTransition2885);
                     ruleKW1();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    				doneComposite();
-                    			
+                      				doneComposite();
+                      			
+                    }
 
                     }
                     break;
@@ -2852,13 +3205,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1014:4: (lv_val_2_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1015:5: lv_val_2_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
-            				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2918); 
+              					markLeaf(elementTypeProvider.getOptionalSingleTransition_ValIDTerminalRuleCall_2_0ElementType());
+              				
+            }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalSingleTransition2918); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val_2_0);
-            				
+              					doneLeaf(lv_val_2_0);
+              				
+            }
 
             }
 
@@ -2890,13 +3247,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1028:32: ( ruleOptionalManyTransition EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1029:2: ruleOptionalManyTransition EOF
             {
-             markComposite(elementTypeProvider.getOptionalManyTransitionElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getOptionalManyTransitionElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleOptionalManyTransition_in_entryRuleOptionalManyTransition2949);
             ruleOptionalManyTransition();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2952); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOptionalManyTransition2952); if (state.failed) return ;
 
             }
 
@@ -2925,13 +3284,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1035:2: (otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1036:3: otherlv_0= '#9' ( ruleKW1 )* ( (lv_val_2_0= RULE_ID ) )
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getOptionalManyTransition_NumberSignDigitNineKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition2971); 
+              			markLeaf(elementTypeProvider.getOptionalManyTransition_NumberSignDigitNineKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,30,FollowSets000.FOLLOW_30_in_ruleOptionalManyTransition2971); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1043:3: ( ruleKW1 )*
             loop17:
             do {
@@ -2947,17 +3310,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	case 1 :
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1044:4: ruleKW1
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    				markComposite(elementTypeProvider.getOptionalManyTransition_KW1ParserRuleCall_1ElementType());
-            	    			
+            	      				markComposite(elementTypeProvider.getOptionalManyTransition_KW1ParserRuleCall_1ElementType());
+            	      			
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleOptionalManyTransition2989);
             	    ruleKW1();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    				doneComposite();
-            	    			
+            	      				doneComposite();
+            	      			
+            	    }
 
             	    }
             	    break;
@@ -2973,13 +3340,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1053:4: (lv_val_2_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1054:5: lv_val_2_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
-            				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition3022); 
+              					markLeaf(elementTypeProvider.getOptionalManyTransition_ValIDTerminalRuleCall_2_0ElementType());
+              				
+            }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleOptionalManyTransition3022); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val_2_0);
-            				
+              					doneLeaf(lv_val_2_0);
+              				
+            }
 
             }
 
@@ -3011,13 +3382,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1067:33: ( ruleMandatoryManyTransition EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1068:2: ruleMandatoryManyTransition EOF
             {
-             markComposite(elementTypeProvider.getMandatoryManyTransitionElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getMandatoryManyTransitionElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleMandatoryManyTransition_in_entryRuleMandatoryManyTransition3053);
             ruleMandatoryManyTransition();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3056); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMandatoryManyTransition3056); if (state.failed) return ;
 
             }
 
@@ -3046,13 +3419,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1074:2: (otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1075:3: otherlv_0= '#10' ( ruleKW1 )+ ( (lv_val_2_0= RULE_ID ) )
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getMandatoryManyTransition_NumberSignDigitOneDigitZeroKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3075); 
+              			markLeaf(elementTypeProvider.getMandatoryManyTransition_NumberSignDigitOneDigitZeroKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,31,FollowSets000.FOLLOW_31_in_ruleMandatoryManyTransition3075); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1082:3: ( ruleKW1 )+
             int cnt18=0;
             loop18:
@@ -3069,23 +3446,28 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	case 1 :
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1083:4: ruleKW1
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    				markComposite(elementTypeProvider.getMandatoryManyTransition_KW1ParserRuleCall_1ElementType());
-            	    			
+            	      				markComposite(elementTypeProvider.getMandatoryManyTransition_KW1ParserRuleCall_1ElementType());
+            	      			
+            	    }
             	    pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleMandatoryManyTransition3093);
             	    ruleKW1();
 
             	    state._fsp--;
+            	    if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-
-            	    				doneComposite();
-            	    			
+            	      				doneComposite();
+            	      			
+            	    }
 
             	    }
             	    break;
 
             	default :
             	    if ( cnt18 >= 1 ) break loop18;
+            	    if (state.backtracking>0) {state.failed=true; return ;}
                         EarlyExitException eee =
                             new EarlyExitException(18, input);
                         throw eee;
@@ -3099,13 +3481,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1092:4: (lv_val_2_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1093:5: lv_val_2_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
-            				
-            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3126); 
+              					markLeaf(elementTypeProvider.getMandatoryManyTransition_ValIDTerminalRuleCall_2_0ElementType());
+              				
+            }
+            lv_val_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMandatoryManyTransition3126); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val_2_0);
-            				
+              					doneLeaf(lv_val_2_0);
+              				
+            }
 
             }
 
@@ -3137,13 +3523,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1106:31: ( ruleAlternativeTransition EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1107:2: ruleAlternativeTransition EOF
             {
-             markComposite(elementTypeProvider.getAlternativeTransitionElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getAlternativeTransitionElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleAlternativeTransition_in_entryRuleAlternativeTransition3157);
             ruleAlternativeTransition();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3160); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternativeTransition3160); if (state.failed) return ;
 
             }
 
@@ -3173,13 +3561,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1113:2: (otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1114:3: otherlv_0= '#11' ( ruleKW1 | otherlv_2= 'kw2' ) ( (lv_val_3_0= RULE_ID ) )
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getAlternativeTransition_NumberSignDigitOneDigitOneKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3179); 
+              			markLeaf(elementTypeProvider.getAlternativeTransition_NumberSignDigitOneDigitOneKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,32,FollowSets000.FOLLOW_32_in_ruleAlternativeTransition3179); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1121:3: ( ruleKW1 | otherlv_2= 'kw2' )
             int alt19=2;
             int LA19_0 = input.LA(1);
@@ -3191,6 +3583,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 alt19=2;
             }
             else {
+                if (state.backtracking>0) {state.failed=true; return ;}
                 NoViableAltException nvae =
                     new NoViableAltException("", 19, 0, input);
 
@@ -3200,30 +3593,38 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1122:4: ruleKW1
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markComposite(elementTypeProvider.getAlternativeTransition_KW1ParserRuleCall_1_0ElementType());
-                    			
+                      				markComposite(elementTypeProvider.getAlternativeTransition_KW1ParserRuleCall_1_0ElementType());
+                      			
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleKW1_in_ruleAlternativeTransition3197);
                     ruleKW1();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    				doneComposite();
-                    			
+                      				doneComposite();
+                      			
+                    }
 
                     }
                     break;
                 case 2 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1130:4: otherlv_2= 'kw2'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getAlternativeTransition_Kw2Keyword_1_1ElementType());
-                    			
-                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3223); 
+                      				markLeaf(elementTypeProvider.getAlternativeTransition_Kw2Keyword_1_1ElementType());
+                      			
+                    }
+                    otherlv_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleAlternativeTransition3223); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_2);
-                    			
+                      				doneLeaf(otherlv_2);
+                      			
+                    }
 
                     }
                     break;
@@ -3236,13 +3637,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1139:4: (lv_val_3_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1140:5: lv_val_3_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
-            				
-            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3255); 
+              					markLeaf(elementTypeProvider.getAlternativeTransition_ValIDTerminalRuleCall_2_0ElementType());
+              				
+            }
+            lv_val_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAlternativeTransition3255); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_val_3_0);
-            				
+              					doneLeaf(lv_val_3_0);
+              				
+            }
 
             }
 
@@ -3274,13 +3679,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1153:27: ( ruleBooleanDatatypeID EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1154:2: ruleBooleanDatatypeID EOF
             {
-             markComposite(elementTypeProvider.getBooleanDatatypeIDElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getBooleanDatatypeIDElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_entryRuleBooleanDatatypeID3286);
             ruleBooleanDatatypeID();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3289); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanDatatypeID3289); if (state.failed) return ;
 
             }
 
@@ -3305,13 +3712,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1159:22: (this_ID_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1160:2: this_ID_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            		markLeaf(elementTypeProvider.getBooleanDatatypeID_IDTerminalRuleCallElementType());
-            	
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3303); 
+              		markLeaf(elementTypeProvider.getBooleanDatatypeID_IDTerminalRuleCallElementType());
+              	
+            }
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleBooleanDatatypeID3303); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            		doneLeaf(this_ID_0);
-            	
+              		doneLeaf(this_ID_0);
+              	
+            }
 
             }
 
@@ -3334,13 +3745,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1170:23: ( ruleBooleanValues EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1171:2: ruleBooleanValues EOF
             {
-             markComposite(elementTypeProvider.getBooleanValuesElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getBooleanValuesElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleBooleanValues_in_entryRuleBooleanValues3319);
             ruleBooleanValues();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3322); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleBooleanValues3322); if (state.failed) return ;
 
             }
 
@@ -3373,20 +3786,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1178:3: ()
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1179:4: 
             {
+            if ( state.backtracking==0 ) {
 
-            				precedeComposite(elementTypeProvider.getBooleanValues_BooleanValuesAction_0ElementType());
-            				doneComposite();
-            			
+              				precedeComposite(elementTypeProvider.getBooleanValues_BooleanValuesAction_0ElementType());
+              				doneComposite();
+              			
+            }
 
             }
 
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getBooleanValues_NumberSignDigitOneDigitTwoKeyword_1ElementType());
-            		
-            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3354); 
+              			markLeaf(elementTypeProvider.getBooleanValues_NumberSignDigitOneDigitTwoKeyword_1ElementType());
+              		
+            }
+            otherlv_1=(Token)match(input,33,FollowSets000.FOLLOW_33_in_ruleBooleanValues3354); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_1);
-            		
+              			doneLeaf(otherlv_1);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1191:3: ( (lv_val1_2_0= 'kw1' ) )?
             int alt20=2;
             int LA20_0 = input.LA(1);
@@ -3401,13 +3820,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1192:4: (lv_val1_2_0= 'kw1' )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1193:5: lv_val1_2_0= 'kw1'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markLeaf(elementTypeProvider.getBooleanValues_Val1Kw1Keyword_2_0ElementType());
-                    				
-                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3381); 
+                      					markLeaf(elementTypeProvider.getBooleanValues_Val1Kw1Keyword_2_0ElementType());
+                      				
+                    }
+                    lv_val1_2_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleBooleanValues3381); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    					doneLeaf(lv_val1_2_0);
-                    				
+                      					doneLeaf(lv_val1_2_0);
+                      				
+                    }
 
                     }
 
@@ -3431,13 +3854,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1203:4: (lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1204:5: lv_val2_3_0= RULE_BOOLEAN_TERMINAL_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markLeaf(elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
-                    				
-                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3420); 
+                      					markLeaf(elementTypeProvider.getBooleanValues_Val2BOOLEAN_TERMINAL_IDTerminalRuleCall_3_0ElementType());
+                      				
+                    }
+                    lv_val2_3_0=(Token)match(input,RULE_BOOLEAN_TERMINAL_ID,FollowSets000.FOLLOW_RULE_BOOLEAN_TERMINAL_ID_in_ruleBooleanValues3420); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    					doneLeaf(lv_val2_3_0);
-                    				
+                      					doneLeaf(lv_val2_3_0);
+                      				
+                    }
 
                     }
 
@@ -3461,17 +3888,21 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1214:4: (lv_val3_4_0= ruleBooleanDatatypeID )
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1215:5: lv_val3_4_0= ruleBooleanDatatypeID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    					markComposite(elementTypeProvider.getBooleanValues_Val3BooleanDatatypeIDParserRuleCall_4_0ElementType());
-                    				
+                      					markComposite(elementTypeProvider.getBooleanValues_Val3BooleanDatatypeIDParserRuleCall_4_0ElementType());
+                      				
+                    }
                     pushFollow(FollowSets000.FOLLOW_ruleBooleanDatatypeID_in_ruleBooleanValues3459);
                     ruleBooleanDatatypeID();
 
                     state._fsp--;
+                    if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-
-                    					doneComposite();
-                    				
+                      					doneComposite();
+                      				
+                    }
 
                     }
 
@@ -3506,13 +3937,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1228:25: ( ruleLongAlternative EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1229:2: ruleLongAlternative EOF
             {
-             markComposite(elementTypeProvider.getLongAlternativeElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getLongAlternativeElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleLongAlternative_in_entryRuleLongAlternative3491);
             ruleLongAlternative();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3494); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLongAlternative3494); if (state.failed) return ;
 
             }
 
@@ -3558,26 +3991,34 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1235:2: (otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!' )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1236:3: otherlv_0= '#13' ( (lv_foo_1_0= RULE_ID ) ) ( (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? ) | (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? ) | (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? ) | (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? ) | (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? ) | (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? ) | (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? ) | (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? ) )* otherlv_18= '!'
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getLongAlternative_NumberSignDigitOneDigitThreeKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3513); 
+              			markLeaf(elementTypeProvider.getLongAlternative_NumberSignDigitOneDigitThreeKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,34,FollowSets000.FOLLOW_34_in_ruleLongAlternative3513); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1243:3: ( (lv_foo_1_0= RULE_ID ) )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
             {
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1244:4: (lv_foo_1_0= RULE_ID )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1245:5: lv_foo_1_0= RULE_ID
             {
+            if ( state.backtracking==0 ) {
 
-            					markLeaf(elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
-            				
-            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3540); 
+              					markLeaf(elementTypeProvider.getLongAlternative_FooIDTerminalRuleCall_1_0ElementType());
+              				
+            }
+            lv_foo_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3540); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            					doneLeaf(lv_foo_1_0);
-            				
+              					doneLeaf(lv_foo_1_0);
+              				
+            }
 
             }
 
@@ -3639,13 +4080,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1255:4: (otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1256:5: otherlv_2= 'kw1' ( (lv_val1_3_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw1Keyword_2_0_0ElementType());
-            	    				
-            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3578); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw1Keyword_2_0_0ElementType());
+            	      				
+            	    }
+            	    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleLongAlternative3578); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_2);
-            	    				
+            	      					doneLeaf(otherlv_2);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1263:5: ( (lv_val1_3_0= RULE_ID ) )?
             	    int alt23=2;
             	    int LA23_0 = input.LA(1);
@@ -3660,13 +4105,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1264:6: (lv_val1_3_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1265:7: lv_val1_3_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
-            	            						
-            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3615); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val1IDTerminalRuleCall_2_0_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val1_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3615); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val1_3_0);
-            	            						
+            	              							doneLeaf(lv_val1_3_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3688,13 +4137,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1276:4: (otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1277:5: otherlv_4= 'kw2' ( (lv_val2_5_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw2Keyword_2_1_0ElementType());
-            	    				
-            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3670); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw2Keyword_2_1_0ElementType());
+            	      				
+            	    }
+            	    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleLongAlternative3670); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_4);
-            	    				
+            	      					doneLeaf(otherlv_4);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1284:5: ( (lv_val2_5_0= RULE_ID ) )?
             	    int alt24=2;
             	    int LA24_0 = input.LA(1);
@@ -3709,13 +4162,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1285:6: (lv_val2_5_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1286:7: lv_val2_5_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
-            	            						
-            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3707); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val2IDTerminalRuleCall_2_1_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val2_5_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3707); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val2_5_0);
-            	            						
+            	              							doneLeaf(lv_val2_5_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3737,13 +4194,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1297:4: (otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1298:5: otherlv_6= 'kw3' ( (lv_val3_7_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw3Keyword_2_2_0ElementType());
-            	    				
-            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3762); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw3Keyword_2_2_0ElementType());
+            	      				
+            	    }
+            	    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleLongAlternative3762); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_6);
-            	    				
+            	      					doneLeaf(otherlv_6);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1305:5: ( (lv_val3_7_0= RULE_ID ) )?
             	    int alt25=2;
             	    int LA25_0 = input.LA(1);
@@ -3758,13 +4219,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1306:6: (lv_val3_7_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1307:7: lv_val3_7_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
-            	            						
-            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3799); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val3IDTerminalRuleCall_2_2_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val3_7_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3799); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val3_7_0);
-            	            						
+            	              							doneLeaf(lv_val3_7_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3786,13 +4251,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1318:4: (otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1319:5: otherlv_8= 'kw4' ( (lv_val4_9_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw4Keyword_2_3_0ElementType());
-            	    				
-            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3854); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw4Keyword_2_3_0ElementType());
+            	      				
+            	    }
+            	    otherlv_8=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleLongAlternative3854); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_8);
-            	    				
+            	      					doneLeaf(otherlv_8);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1326:5: ( (lv_val4_9_0= RULE_ID ) )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
@@ -3807,13 +4276,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1327:6: (lv_val4_9_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1328:7: lv_val4_9_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
-            	            						
-            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3891); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val4IDTerminalRuleCall_2_3_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val4_9_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3891); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val4_9_0);
-            	            						
+            	              							doneLeaf(lv_val4_9_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3835,13 +4308,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1339:4: (otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1340:5: otherlv_10= 'kw5' ( (lv_val5_11_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw5Keyword_2_4_0ElementType());
-            	    				
-            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3946); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw5Keyword_2_4_0ElementType());
+            	      				
+            	    }
+            	    otherlv_10=(Token)match(input,35,FollowSets000.FOLLOW_35_in_ruleLongAlternative3946); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_10);
-            	    				
+            	      					doneLeaf(otherlv_10);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1347:5: ( (lv_val5_11_0= RULE_ID ) )?
             	    int alt27=2;
             	    int LA27_0 = input.LA(1);
@@ -3856,13 +4333,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1348:6: (lv_val5_11_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1349:7: lv_val5_11_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
-            	            						
-            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3983); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val5IDTerminalRuleCall_2_4_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val5_11_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative3983); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val5_11_0);
-            	            						
+            	              							doneLeaf(lv_val5_11_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3884,13 +4365,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1360:4: (otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1361:5: otherlv_12= 'kw6' ( (lv_val6_13_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw6Keyword_2_5_0ElementType());
-            	    				
-            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative4038); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw6Keyword_2_5_0ElementType());
+            	      				
+            	    }
+            	    otherlv_12=(Token)match(input,36,FollowSets000.FOLLOW_36_in_ruleLongAlternative4038); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_12);
-            	    				
+            	      					doneLeaf(otherlv_12);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1368:5: ( (lv_val6_13_0= RULE_ID ) )?
             	    int alt28=2;
             	    int LA28_0 = input.LA(1);
@@ -3905,13 +4390,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1369:6: (lv_val6_13_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1370:7: lv_val6_13_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
-            	            						
-            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4075); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val6IDTerminalRuleCall_2_5_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val6_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4075); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val6_13_0);
-            	            						
+            	              							doneLeaf(lv_val6_13_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3933,13 +4422,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1381:4: (otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1382:5: otherlv_14= 'kw7' ( (lv_val7_15_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw7Keyword_2_6_0ElementType());
-            	    				
-            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative4130); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw7Keyword_2_6_0ElementType());
+            	      				
+            	    }
+            	    otherlv_14=(Token)match(input,37,FollowSets000.FOLLOW_37_in_ruleLongAlternative4130); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_14);
-            	    				
+            	      					doneLeaf(otherlv_14);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1389:5: ( (lv_val7_15_0= RULE_ID ) )?
             	    int alt29=2;
             	    int LA29_0 = input.LA(1);
@@ -3954,13 +4447,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1390:6: (lv_val7_15_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1391:7: lv_val7_15_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
-            	            						
-            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4167); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val7IDTerminalRuleCall_2_6_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val7_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4167); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val7_15_0);
-            	            						
+            	              							doneLeaf(lv_val7_15_0);
+            	              						
+            	            }
 
             	            }
 
@@ -3982,13 +4479,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1402:4: (otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )? )
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1403:5: otherlv_16= 'kw8' ( (lv_val8_17_0= RULE_ID ) )?
             	    {
+            	    if ( state.backtracking==0 ) {
 
-            	    					markLeaf(elementTypeProvider.getLongAlternative_Kw8Keyword_2_7_0ElementType());
-            	    				
-            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4222); 
+            	      					markLeaf(elementTypeProvider.getLongAlternative_Kw8Keyword_2_7_0ElementType());
+            	      				
+            	    }
+            	    otherlv_16=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleLongAlternative4222); if (state.failed) return ;
+            	    if ( state.backtracking==0 ) {
 
-            	    					doneLeaf(otherlv_16);
-            	    				
+            	      					doneLeaf(otherlv_16);
+            	      				
+            	    }
             	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1410:5: ( (lv_val8_17_0= RULE_ID ) )?
             	    int alt30=2;
             	    int LA30_0 = input.LA(1);
@@ -4003,13 +4504,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1411:6: (lv_val8_17_0= RULE_ID )
             	            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1412:7: lv_val8_17_0= RULE_ID
             	            {
+            	            if ( state.backtracking==0 ) {
 
-            	            							markLeaf(elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
-            	            						
-            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4259); 
+            	              							markLeaf(elementTypeProvider.getLongAlternative_Val8IDTerminalRuleCall_2_7_1_0ElementType());
+            	              						
+            	            }
+            	            lv_val8_17_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleLongAlternative4259); if (state.failed) return ;
+            	            if ( state.backtracking==0 ) {
 
-            	            							doneLeaf(lv_val8_17_0);
-            	            						
+            	              							doneLeaf(lv_val8_17_0);
+            	              						
+            	            }
 
             	            }
 
@@ -4031,13 +4536,17 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 }
             } while (true);
 
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getLongAlternative_ExclamationMarkKeyword_3ElementType());
-            		
-            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4301); 
+              			markLeaf(elementTypeProvider.getLongAlternative_ExclamationMarkKeyword_3ElementType());
+              		
+            }
+            otherlv_18=(Token)match(input,39,FollowSets000.FOLLOW_39_in_ruleLongAlternative4301); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_18);
-            		
+              			doneLeaf(otherlv_18);
+              		
+            }
 
             }
 
@@ -4063,13 +4572,15 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1434:20: ( ruleActionOnly EOF )
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1435:2: ruleActionOnly EOF
             {
-             markComposite(elementTypeProvider.getActionOnlyElementType()); 
+            if ( state.backtracking==0 ) {
+               markComposite(elementTypeProvider.getActionOnlyElementType()); 
+            }
             pushFollow(FollowSets000.FOLLOW_ruleActionOnly_in_entryRuleActionOnly4321);
             ruleActionOnly();
 
             state._fsp--;
-
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleActionOnly4324); 
+            if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleActionOnly4324); if (state.failed) return ;
 
             }
 
@@ -4086,7 +4597,7 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleActionOnly"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:1: ruleActionOnly : (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
+    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:1: ruleActionOnly : (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) ;
     public final void ruleActionOnly() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_1=null;
@@ -4095,19 +4606,23 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         Token this_ID_5=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:15: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1440:15: ( (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? ) )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1442:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? (this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1441:2: (otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )? )
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1442:3: otherlv_0= '#14' (otherlv_1= 'kw1' )? ( ( RULE_ID )=>this_ID_2= RULE_ID )? () (otherlv_4= 'kw2' )? (this_ID_5= RULE_ID )?
             {
+            if ( state.backtracking==0 ) {
 
-            			markLeaf(elementTypeProvider.getActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType());
-            		
-            otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleActionOnly4343); 
+              			markLeaf(elementTypeProvider.getActionOnly_NumberSignDigitOneDigitFourKeyword_0ElementType());
+              		
+            }
+            otherlv_0=(Token)match(input,40,FollowSets000.FOLLOW_40_in_ruleActionOnly4343); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
 
-            			doneLeaf(otherlv_0);
-            		
+              			doneLeaf(otherlv_0);
+              		
+            }
             // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1449:3: (otherlv_1= 'kw1' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
@@ -4119,54 +4634,68 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
                 case 1 :
                     // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1450:4: otherlv_1= 'kw1'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getActionOnly_Kw1Keyword_1ElementType());
-                    			
-                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleActionOnly4363); 
+                      				markLeaf(elementTypeProvider.getActionOnly_Kw1Keyword_1ElementType());
+                      			
+                    }
+                    otherlv_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleActionOnly4363); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_1);
-                    			
+                      				doneLeaf(otherlv_1);
+                      			
+                    }
 
                     }
                     break;
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1458:3: (this_ID_2= RULE_ID )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1458:3: ( ( RULE_ID )=>this_ID_2= RULE_ID )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
             if ( (LA33_0==RULE_ID) ) {
-                alt33=1;
+                int LA33_1 = input.LA(2);
+
+                if ( (synpred1_PsiInternalSyntacticSequencerTestLanguage()) ) {
+                    alt33=1;
+                }
             }
             switch (alt33) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1459:4: this_ID_2= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1459:4: ( RULE_ID )=>this_ID_2= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_2ElementType());
-                    			
-                    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4389); 
+                      				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_2ElementType());
+                      			
+                    }
+                    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4397); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(this_ID_2);
-                    			
+                      				doneLeaf(this_ID_2);
+                      			
+                    }
 
                     }
                     break;
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1467:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1468:4: 
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1468:3: ()
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1469:4: 
             {
+            if ( state.backtracking==0 ) {
 
-            				precedeComposite(elementTypeProvider.getActionOnly_ActionOnlyAction_3ElementType());
-            				doneComposite();
-            			
+              				precedeComposite(elementTypeProvider.getActionOnly_ActionOnlyAction_3ElementType());
+              				doneComposite();
+              			
+            }
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1473:3: (otherlv_4= 'kw2' )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1474:3: (otherlv_4= 'kw2' )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -4175,22 +4704,26 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt34) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1474:4: otherlv_4= 'kw2'
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1475:4: otherlv_4= 'kw2'
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getActionOnly_Kw2Keyword_4ElementType());
-                    			
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleActionOnly4428); 
+                      				markLeaf(elementTypeProvider.getActionOnly_Kw2Keyword_4ElementType());
+                      			
+                    }
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleActionOnly4436); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(otherlv_4);
-                    			
+                      				doneLeaf(otherlv_4);
+                      			
+                    }
 
                     }
                     break;
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1482:3: (this_ID_5= RULE_ID )?
+            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1483:3: (this_ID_5= RULE_ID )?
             int alt35=2;
             int LA35_0 = input.LA(1);
 
@@ -4199,15 +4732,19 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
             }
             switch (alt35) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1483:4: this_ID_5= RULE_ID
+                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1484:4: this_ID_5= RULE_ID
                     {
+                    if ( state.backtracking==0 ) {
 
-                    				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_5ElementType());
-                    			
-                    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4454); 
+                      				markLeaf(elementTypeProvider.getActionOnly_IDTerminalRuleCall_5ElementType());
+                      			
+                    }
+                    this_ID_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleActionOnly4462); if (state.failed) return ;
+                    if ( state.backtracking==0 ) {
 
-                    				doneLeaf(this_ID_5);
-                    			
+                      				doneLeaf(this_ID_5);
+                      			
+                    }
 
                     }
                     break;
@@ -4231,7 +4768,33 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
     }
     // $ANTLR end "ruleActionOnly"
 
+    // $ANTLR start synpred1_PsiInternalSyntacticSequencerTestLanguage
+    public final void synpred1_PsiInternalSyntacticSequencerTestLanguage_fragment() throws RecognitionException {   
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1459:4: ( RULE_ID )
+        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalSyntacticSequencerTestLanguage.g:1459:5: RULE_ID
+        {
+        match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_synpred1_PsiInternalSyntacticSequencerTestLanguage4383); if (state.failed) return ;
+
+        }
+    }
+    // $ANTLR end synpred1_PsiInternalSyntacticSequencerTestLanguage
+
     // Delegated rules
+
+    public final boolean synpred1_PsiInternalSyntacticSequencerTestLanguage() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred1_PsiInternalSyntacticSequencerTestLanguage_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
 
 
  
@@ -4400,9 +4963,10 @@ public class PsiInternalSyntacticSequencerTestLanguageParser extends AbstractPsi
         public static final BitSet FOLLOW_EOF_in_entryRuleActionOnly4324 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_40_in_ruleActionOnly4343 = new BitSet(new long[]{0x000000000000C012L});
         public static final BitSet FOLLOW_14_in_ruleActionOnly4363 = new BitSet(new long[]{0x0000000000008012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4389 = new BitSet(new long[]{0x0000000000008012L});
-        public static final BitSet FOLLOW_15_in_ruleActionOnly4428 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4397 = new BitSet(new long[]{0x0000000000008012L});
+        public static final BitSet FOLLOW_15_in_ruleActionOnly4436 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleActionOnly4462 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_synpred1_PsiInternalSyntacticSequencerTestLanguage4383 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

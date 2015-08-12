@@ -20,10 +20,10 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -65,8 +65,7 @@ public class NotExpressionImpl extends ExpressionImpl implements NotExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getExpression()
+  public Expression getExpression()
   {
     return expression;
   }
@@ -93,8 +92,7 @@ public Expression getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setExpression(Expression newExpression)
+  public void setExpression(Expression newExpression)
   {
     if (newExpression != expression)
     {

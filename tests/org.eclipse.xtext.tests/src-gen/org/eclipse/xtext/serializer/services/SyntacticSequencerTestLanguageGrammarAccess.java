@@ -19,7 +19,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cX1Assignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cX1MandatoryKeywordsParserRuleCall_0_0 = (RuleCall)cX1Assignment_0.eContents().get(0);
@@ -147,7 +147,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class MandatoryKeywordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MandatoryKeywords");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.MandatoryKeywords");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -203,7 +203,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Exp0Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Exp0");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cAddition0ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -223,7 +223,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Addition0Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition0");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Addition0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrim0ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -232,23 +232,23 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim0ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition0 returns Exp0:
-		//	Prim0 ({Add0.left=current} "+" right=Prim0)*;
+		//Addition0 Exp0:
+		//	Prim0 ({Add0.left=current} '+' right=Prim0)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Prim0 ({Add0.left=current} "+" right=Prim0)*
+		//Prim0 ({Add0.left=current} '+' right=Prim0)*
 		public Group getGroup() { return cGroup; }
 
 		//Prim0
 		public RuleCall getPrim0ParserRuleCall_0() { return cPrim0ParserRuleCall_0; }
 
-		//({Add0.left=current} "+" right=Prim0)*
+		//({Add0.left=current} '+' right=Prim0)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add0.left=current}
 		public Action getAdd0LeftAction_1_0() { return cAdd0LeftAction_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
 
 		//right=Prim0
@@ -259,14 +259,14 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Prim0Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Prim0");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim0");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVal0Action_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Prim0 returns Exp0:
-		//	{Val0} name=ID;
+		//Prim0 Exp0:
+		//	{Val0} name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Val0} name=ID
@@ -283,7 +283,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Exp1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Exp1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cAddition1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -303,7 +303,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Addition1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Addition1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrim1ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -312,23 +312,23 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim1ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition1 returns Exp1:
-		//	Prim1 ({Add1.left=current} "+" right=Prim1)*;
+		//Addition1 Exp1:
+		//	Prim1 ({Add1.left=current} '+' right=Prim1)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Prim1 ({Add1.left=current} "+" right=Prim1)*
+		//Prim1 ({Add1.left=current} '+' right=Prim1)*
 		public Group getGroup() { return cGroup; }
 
 		//Prim1
 		public RuleCall getPrim1ParserRuleCall_0() { return cPrim1ParserRuleCall_0; }
 
-		//({Add1.left=current} "+" right=Prim1)*
+		//({Add1.left=current} '+' right=Prim1)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add1.left=current}
 		public Action getAdd1LeftAction_1_0() { return cAdd1LeftAction_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
 
 		//right=Prim1
@@ -339,7 +339,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Prim1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Prim1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim1");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cVal1Action_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -350,11 +350,11 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cAddition1ParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//Prim1 returns Exp1:
-		//	{Val1} name=ID | "(" Addition1 ")";
+		//Prim1 Exp1:
+		//	{Val1} name=ID | '(' Addition1 ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Val1} name=ID | "(" Addition1 ")"
+		//{Val1} name=ID | '(' Addition1 ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Val1} name=ID
@@ -369,21 +369,21 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 
-		//"(" Addition1 ")"
+		//'(' Addition1 ')'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 
 		//Addition1
 		public RuleCall getAddition1ParserRuleCall_1_1() { return cAddition1ParserRuleCall_1_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 	}
 
 	public class Exp2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Exp2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Exp2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cAddition2ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -403,7 +403,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Addition2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Addition2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplication2ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -412,23 +412,23 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightMultiplication2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Addition2 returns Exp2:
-		//	Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*;
+		//Addition2 Exp2:
+		//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*
+		//Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication2
 		public RuleCall getMultiplication2ParserRuleCall_0() { return cMultiplication2ParserRuleCall_0; }
 
-		//({Add2.left=current} "+" right=Multiplication2)*
+		//({Add2.left=current} '+' right=Multiplication2)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add2.left=current}
 		public Action getAdd2LeftAction_1_0() { return cAdd2LeftAction_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
 
 		//right=Multiplication2
@@ -439,7 +439,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Multiplication2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Multiplication2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrim2ParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -448,23 +448,23 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrim2ParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Multiplication2 returns Exp2:
-		//	Prim2 ({Mult2.left=current} "*" right=Prim2)*;
+		//Multiplication2 Exp2:
+		//	Prim2 ({Mult2.left=current} '*' right=Prim2)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Prim2 ({Mult2.left=current} "*" right=Prim2)*
+		//Prim2 ({Mult2.left=current} '*' right=Prim2)*
 		public Group getGroup() { return cGroup; }
 
 		//Prim2
 		public RuleCall getPrim2ParserRuleCall_0() { return cPrim2ParserRuleCall_0; }
 
-		//({Mult2.left=current} "*" right=Prim2)*
+		//({Mult2.left=current} '*' right=Prim2)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Mult2.left=current}
 		public Action getMult2LeftAction_1_0() { return cMult2LeftAction_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 
 		//right=Prim2
@@ -475,7 +475,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class Prim2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Prim2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.Prim2");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cVal2Action_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -486,11 +486,11 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cAddition2ParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
-		//Prim2 returns Exp2:
-		//	{Val2} name=ID | "(" Addition2 ")";
+		//Prim2 Exp2:
+		//	{Val2} name=ID | '(' Addition2 ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Val2} name=ID | "(" Addition2 ")"
+		//{Val2} name=ID | '(' Addition2 ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Val2} name=ID
@@ -505,21 +505,21 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 
-		//"(" Addition2 ")"
+		//'(' Addition2 ')'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 
 		//Addition2
 		public RuleCall getAddition2ParserRuleCall_1_1() { return cAddition2ParserRuleCall_1_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 	}
 
 	public class DatatypeIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.DatatypeID");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//DatatypeID:
@@ -531,7 +531,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class SingleCrossReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleCrossReference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.SingleCrossReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -574,7 +574,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//name=(TERMINAL_ID | ID)
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//TERMINAL_ID | ID
+		//(TERMINAL_ID | ID)
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 
 		//TERMINAL_ID
@@ -645,7 +645,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class BooleanAlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAlternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanAlternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cBoolAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -669,7 +669,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class BooleanAlternativeLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAlternativeLiteral");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanAlternativeLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBooleanAlternativeLiteralAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -687,7 +687,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//{BooleanAlternativeLiteral}
 		public Action getBooleanAlternativeLiteralAction_0() { return cBooleanAlternativeLiteralAction_0; }
 
-		//"kw1" | isTrue?="kw2"
+		//("kw1" | isTrue?="kw2")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1"
@@ -701,7 +701,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class UnassignedDatatypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedDatatype");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.UnassignedDatatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -729,7 +729,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class KW1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "KW1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.KW1");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cKw1Keyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
@@ -757,7 +757,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class OptionalSingleTransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalSingleTransition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.OptionalSingleTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cKW1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -785,7 +785,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class OptionalManyTransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalManyTransition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.OptionalManyTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cKW1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -813,7 +813,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class MandatoryManyTransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MandatoryManyTransition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.MandatoryManyTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cKW1ParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -841,7 +841,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class AlternativeTransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AlternativeTransition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.AlternativeTransition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -860,7 +860,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"#11"
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 
-		//KW1 | "kw2"
+		//(KW1 | "kw2")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//KW1
@@ -877,7 +877,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class BooleanDatatypeIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanDatatypeID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanDatatypeID");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//BooleanDatatypeID:
@@ -889,7 +889,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class BooleanValuesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanValues");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BooleanValues");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBooleanValuesAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cNumberSignDigitOneDigitTwoKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -933,7 +933,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class LongAlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LongAlternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.LongAlternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cFooAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -974,15 +974,22 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cExclamationMarkKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//LongAlternative:
-		//	"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6"
-		//	val6+=ID? | "kw7" val7+=ID? | "kw8" val8+=ID?)* "!";
+		//	'#13' foo=ID ("kw1" val1+=ID? |
+		//	"kw2" val2+=ID? |
+		//	"kw3" val3+=ID? |
+		//	"kw4" val4+=ID? |
+		//	"kw5" val5+=ID? |
+		//	"kw6" val6+=ID? |
+		//	"kw7" val7+=ID? |
+		//	"kw8" val8+=ID?)*
+		//	'!';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID?
-		//| "kw7" val7+=ID? | "kw8" val8+=ID?)* "!"
+		//'#13' foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6" val6+=ID?
+		//| "kw7" val7+=ID? | "kw8" val8+=ID?)* '!'
 		public Group getGroup() { return cGroup; }
 
-		//"#13"
+		//'#13'
 		public Keyword getNumberSignDigitOneDigitThreeKeyword_0() { return cNumberSignDigitOneDigitThreeKeyword_0; }
 
 		//foo=ID
@@ -1091,12 +1098,12 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getVal8IDTerminalRuleCall_2_7_1_0() { return cVal8IDTerminalRuleCall_2_7_1_0; }
 
-		//"!"
+		//'!'
 		public Keyword getExclamationMarkKeyword_3() { return cExclamationMarkKeyword_3; }
 	}
 
 	public class ActionOnlyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ActionOnly");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.ActionOnly");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cKw1Keyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1106,10 +1113,10 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cIDTerminalRuleCall_5 = (RuleCall)cGroup.eContents().get(5);
 		
 		//ActionOnly:
-		//	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+		//	"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?
+		//"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?
 		public Group getGroup() { return cGroup; }
 
 		//"#14"
@@ -1118,7 +1125,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		//"kw1"?
 		public Keyword getKw1Keyword_1() { return cKw1Keyword_1; }
 
-		//ID?
+		//=> ID?
 		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 
 		//{ActionOnly}
@@ -1182,7 +1189,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pAddition2 = new Addition2Elements();
 		this.pMultiplication2 = new Multiplication2Elements();
 		this.pPrim2 = new Prim2Elements();
-		this.tTERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "TERMINAL_ID");
+		this.tTERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.TERMINAL_ID");
 		this.pDatatypeID = new DatatypeIDElements();
 		this.pSingleCrossReference = new SingleCrossReferenceElements();
 		this.pBooleanAlternative = new BooleanAlternativeElements();
@@ -1193,7 +1200,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		this.pOptionalManyTransition = new OptionalManyTransitionElements();
 		this.pMandatoryManyTransition = new MandatoryManyTransitionElements();
 		this.pAlternativeTransition = new AlternativeTransitionElements();
-		this.tBOOLEAN_TERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOLEAN_TERMINAL_ID");
+		this.tBOOLEAN_TERMINAL_ID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SyntacticSequencerTestLanguage.BOOLEAN_TERMINAL_ID");
 		this.pBooleanDatatypeID = new BooleanDatatypeIDElements();
 		this.pBooleanValues = new BooleanValuesElements();
 		this.pLongAlternative = new LongAlternativeElements();
@@ -1259,8 +1266,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getExp0Access().getRule();
 	}
 
-	//Addition0 returns Exp0:
-	//	Prim0 ({Add0.left=current} "+" right=Prim0)*;
+	//Addition0 Exp0:
+	//	Prim0 ({Add0.left=current} '+' right=Prim0)*
 	public Addition0Elements getAddition0Access() {
 		return pAddition0;
 	}
@@ -1269,8 +1276,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getAddition0Access().getRule();
 	}
 
-	//Prim0 returns Exp0:
-	//	{Val0} name=ID;
+	//Prim0 Exp0:
+	//	{Val0} name=ID
 	public Prim0Elements getPrim0Access() {
 		return pPrim0;
 	}
@@ -1289,8 +1296,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getExp1Access().getRule();
 	}
 
-	//Addition1 returns Exp1:
-	//	Prim1 ({Add1.left=current} "+" right=Prim1)*;
+	//Addition1 Exp1:
+	//	Prim1 ({Add1.left=current} '+' right=Prim1)*
 	public Addition1Elements getAddition1Access() {
 		return pAddition1;
 	}
@@ -1299,8 +1306,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getAddition1Access().getRule();
 	}
 
-	//Prim1 returns Exp1:
-	//	{Val1} name=ID | "(" Addition1 ")";
+	//Prim1 Exp1:
+	//	{Val1} name=ID | '(' Addition1 ')'
 	public Prim1Elements getPrim1Access() {
 		return pPrim1;
 	}
@@ -1319,8 +1326,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getExp2Access().getRule();
 	}
 
-	//Addition2 returns Exp2:
-	//	Multiplication2 ({Add2.left=current} "+" right=Multiplication2)*;
+	//Addition2 Exp2:
+	//	Multiplication2 ({Add2.left=current} '+' right=Multiplication2)*
 	public Addition2Elements getAddition2Access() {
 		return pAddition2;
 	}
@@ -1329,8 +1336,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getAddition2Access().getRule();
 	}
 
-	//Multiplication2 returns Exp2:
-	//	Prim2 ({Mult2.left=current} "*" right=Prim2)*;
+	//Multiplication2 Exp2:
+	//	Prim2 ({Mult2.left=current} '*' right=Prim2)*
 	public Multiplication2Elements getMultiplication2Access() {
 		return pMultiplication2;
 	}
@@ -1339,8 +1346,8 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 		return getMultiplication2Access().getRule();
 	}
 
-	//Prim2 returns Exp2:
-	//	{Val2} name=ID | "(" Addition2 ")";
+	//Prim2 Exp2:
+	//	{Val2} name=ID | '(' Addition2 ')'
 	public Prim2Elements getPrim2Access() {
 		return pPrim2;
 	}
@@ -1350,7 +1357,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal TERMINAL_ID:
-	//	"$1" ID;
+	//	'$1' ID;
 	public TerminalRule getTERMINAL_IDRule() {
 		return tTERMINAL_ID;
 	} 
@@ -1457,7 +1464,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal BOOLEAN_TERMINAL_ID:
-	//	"%1" ID;
+	//	'%1' ID;
 	public TerminalRule getBOOLEAN_TERMINAL_IDRule() {
 		return tBOOLEAN_TERMINAL_ID;
 	} 
@@ -1483,8 +1490,15 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//LongAlternative:
-	//	"#13" foo=ID ("kw1" val1+=ID? | "kw2" val2+=ID? | "kw3" val3+=ID? | "kw4" val4+=ID? | "kw5" val5+=ID? | "kw6"
-	//	val6+=ID? | "kw7" val7+=ID? | "kw8" val8+=ID?)* "!";
+	//	'#13' foo=ID ("kw1" val1+=ID? |
+	//	"kw2" val2+=ID? |
+	//	"kw3" val3+=ID? |
+	//	"kw4" val4+=ID? |
+	//	"kw5" val5+=ID? |
+	//	"kw6" val6+=ID? |
+	//	"kw7" val7+=ID? |
+	//	"kw8" val8+=ID?)*
+	//	'!';
 	public LongAlternativeElements getLongAlternativeAccess() {
 		return pLongAlternative;
 	}
@@ -1494,7 +1508,7 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//ActionOnly:
-	//	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+	//	"#14" "kw1"? => ID? {ActionOnly} "kw2"? ID?;
 	public ActionOnlyElements getActionOnlyAccess() {
 		return pActionOnly;
 	}
@@ -1504,38 +1518,38 @@ public class SyntacticSequencerTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

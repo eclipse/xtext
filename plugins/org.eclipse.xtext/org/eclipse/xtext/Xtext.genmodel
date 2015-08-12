@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="Xtext" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.edit" editorPluginID="org.eclipse.xtext.editor"
-    usedGenPackages="../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>Xtext.ecore</foreignModel>
   <genPackages prefix="Xtext" basePackage="org.eclipse" disposableProviderFactory="true"
       ecorePackage="Xtext.ecore#/">
@@ -33,6 +33,9 @@
     <genClasses ecoreClass="Xtext.ecore#//ParserRule">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/definesHiddenTokens"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParserRule/hiddenTokens"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParserRule/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/fragment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ParserRule/wildcard"/>
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//TypeRef">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//TypeRef/metamodel"/>
@@ -53,6 +56,8 @@
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//RuleCall">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//RuleCall/rule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//RuleCall/arguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//RuleCall/explicitlyCalled"/>
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//Assignment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Assignment/feature"/>
@@ -88,5 +93,17 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompoundElement/elements"/>
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//EOF"/>
+    <genClasses ecoreClass="Xtext.ecore#//Parameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Parameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//ConditionalBranch">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ConditionalBranch/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ConditionalBranch/filtered"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//NamedArgument">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/parameter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//NamedArgument/literalValue"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

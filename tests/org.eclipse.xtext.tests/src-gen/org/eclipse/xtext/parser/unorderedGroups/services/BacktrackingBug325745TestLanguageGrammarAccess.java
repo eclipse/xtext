@@ -19,7 +19,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFieldsAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -43,7 +43,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -54,10 +54,12 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		private final Keyword cFullStopKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Element:
-		//	name=ID dataType=DataType? expression=Expression ".";
+		//	name=ID
+		//	dataType=DataType?
+		//	expression=Expression '.';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID dataType=DataType? expression=Expression "."
+		//name=ID dataType=DataType? expression=Expression '.'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -78,12 +80,12 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//Expression
 		public RuleCall getExpressionExpressionParserRuleCall_2_0() { return cExpressionExpressionParserRuleCall_2_0; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_3() { return cFullStopKeyword_3; }
 	}
 
 	public class DataTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.DataType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cBaseTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cBaseTypeIDTerminalRuleCall_0_0 = (RuleCall)cBaseTypeAssignment_0.eContents().get(0);
@@ -93,10 +95,10 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		private final RuleCall cDefaultValueSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cDefaultValueAssignment_1_1.eContents().get(0);
 		
 		//DataType:
-		//	baseType=ID (":=" defaultValue=STRING)?;
+		//	baseType=ID (':=' defaultValue=STRING)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//baseType=ID (":=" defaultValue=STRING)?
+		//baseType=ID (':=' defaultValue=STRING)?
 		public Group getGroup() { return cGroup; }
 
 		//baseType=ID
@@ -105,10 +107,10 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//ID
 		public RuleCall getBaseTypeIDTerminalRuleCall_0_0() { return cBaseTypeIDTerminalRuleCall_0_0; }
 
-		//(":=" defaultValue=STRING)?
+		//(':=' defaultValue=STRING)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":="
+		//':='
 		public Keyword getColonEqualsSignKeyword_1_0() { return cColonEqualsSignKeyword_1_0; }
 
 		//defaultValue=STRING
@@ -119,7 +121,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Expression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
@@ -137,19 +139,19 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		private final RuleCall cPostfixSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cPostfixAssignment_3_1.eContents().get(0);
 		
 		//Expression:
-		//	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
+		//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?)
+		//{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?)
 		public Group getGroup() { return cGroup; }
 
 		//{Expression}
 		public Action getExpressionAction_0() { return cExpressionAction_0; }
 
-		//"["? & prefix=STRING?
+		//('['? & prefix=STRING?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
-		//"["?
+		//'['?
 		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
 
 		//prefix=STRING?
@@ -158,10 +160,10 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//STRING
 		public RuleCall getPrefixSTRINGTerminalRuleCall_1_1_0() { return cPrefixSTRINGTerminalRuleCall_1_1_0; }
 
-		//("["? terms+=SimpleTerm "]"?)*
+		//('['? terms+=SimpleTerm ']'?)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"["?
+		//'['?
 		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 
 		//terms+=SimpleTerm
@@ -170,13 +172,13 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//SimpleTerm
 		public RuleCall getTermsSimpleTermParserRuleCall_2_1_0() { return cTermsSimpleTermParserRuleCall_2_1_0; }
 
-		//"]"?
+		//']'?
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
-		//"]"? & postfix=STRING?
+		//(']'? & postfix=STRING?)
 		public UnorderedGroup getUnorderedGroup_3() { return cUnorderedGroup_3; }
 
-		//"]"?
+		//']'?
 		public Keyword getRightSquareBracketKeyword_3_0() { return cRightSquareBracketKeyword_3_0; }
 
 		//postfix=STRING?
@@ -187,7 +189,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	public class SimpleTermElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleTerm");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.SimpleTerm");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cLineCountAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -202,13 +204,17 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		private final RuleCall cRefCharIDTerminalRuleCall_1_0 = (RuleCall)cRefCharAssignment_1.eContents().get(0);
 		
 		//SimpleTerm:
-		//	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
+		//	lineCount=INT
+		//	'*'?
+		//	charCount=INT?
+		//	'!'?
+		//	charSet=ID? | refChar=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID
+		//lineCount=INT '*'? charCount=INT? '!'? charSet=ID? | refChar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//lineCount=INT "*"? charCount=INT? "!"? charSet=ID?
+		//lineCount=INT '*'? charCount=INT? '!'? charSet=ID?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//lineCount=INT
@@ -217,7 +223,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//INT
 		public RuleCall getLineCountINTTerminalRuleCall_0_0_0() { return cLineCountINTTerminalRuleCall_0_0_0; }
 
-		//"*"?
+		//'*'?
 		public Keyword getAsteriskKeyword_0_1() { return cAsteriskKeyword_0_1; }
 
 		//charCount=INT?
@@ -226,7 +232,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 		//INT
 		public RuleCall getCharCountINTTerminalRuleCall_0_2_0() { return cCharCountINTTerminalRuleCall_0_2_0; }
 
-		//"!"?
+		//'!'?
 		public Keyword getExclamationMarkKeyword_0_3() { return cExclamationMarkKeyword_0_3; }
 
 		//charSet=ID?
@@ -303,7 +309,9 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	//Element:
-	//	name=ID dataType=DataType? expression=Expression ".";
+	//	name=ID
+	//	dataType=DataType?
+	//	expression=Expression '.';
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -313,7 +321,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	//DataType:
-	//	baseType=ID (":=" defaultValue=STRING)?;
+	//	baseType=ID (':=' defaultValue=STRING)?;
 	public DataTypeElements getDataTypeAccess() {
 		return pDataType;
 	}
@@ -323,7 +331,7 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	//Expression:
-	//	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
+	//	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -333,7 +341,11 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	//SimpleTerm:
-	//	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
+	//	lineCount=INT
+	//	'*'?
+	//	charCount=INT?
+	//	'!'?
+	//	charSet=ID? | refChar=ID;
 	public SimpleTermElements getSimpleTermAccess() {
 		return pSimpleTerm;
 	}
@@ -343,38 +355,38 @@ public class BacktrackingBug325745TestLanguageGrammarAccess extends AbstractGram
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -1077,8 +1077,8 @@ protected class Model_NodeExclusionListAssignment_8_2 extends AssignmentToken  {
 
 /************ begin Rule Model2 ****************
  *
- * Model2 returns Model:
- * 	{Model} "model";
+ * Model2 Model:
+ * 	{Model} "model"
  *
  **/
 
@@ -1165,8 +1165,8 @@ protected class Model2_ModelKeyword_1 extends KeywordToken  {
 
 /************ begin Rule AttributeExclusionTest1 ****************
  *
- * AttributeExclusionTest1 returns AttributeExclusionTest:
- * 	"kw1" attr1=ID;
+ * AttributeExclusionTest1 AttributeExclusionTest:
+ * 	"kw1" attr1=ID
  *
  **/
 
@@ -1260,8 +1260,8 @@ protected class AttributeExclusionTest1_Attr1Assignment_1 extends AssignmentToke
 
 /************ begin Rule AttributeExclusionTest2 ****************
  *
- * AttributeExclusionTest2 returns AttributeExclusionTest:
- * 	"kw2" attr2=ID;
+ * AttributeExclusionTest2 AttributeExclusionTest:
+ * 	"kw2" attr2=ID
  *
  **/
 
@@ -1355,8 +1355,8 @@ protected class AttributeExclusionTest2_Attr2Assignment_1 extends AssignmentToke
 
 /************ begin Rule NestedTypeTest1 ****************
  *
- * NestedTypeTest1 returns NestedTypeTest:
- * 	nested=NestedTypeChild1;
+ * NestedTypeTest1 NestedTypeTest:
+ * 	nested=NestedTypeChild1
  *
  **/
 
@@ -1412,8 +1412,8 @@ protected class NestedTypeTest1_NestedAssignment extends AssignmentToken  {
 
 /************ begin Rule NestedTypeTest2 ****************
  *
- * NestedTypeTest2 returns NestedTypeTest:
- * 	nested=NestedTypeChild2;
+ * NestedTypeTest2 NestedTypeTest:
+ * 	nested=NestedTypeChild2
  *
  **/
 
@@ -1773,8 +1773,8 @@ protected class NestedTypeChild2_ValAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule NestedTypeRecursiveTest1 ****************
  *
- * NestedTypeRecursiveTest1 returns NestedTypeRecursiveTest:
- * 	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+;
+ * NestedTypeRecursiveTest1 NestedTypeRecursiveTest:
+ * 	{NestedTypeRecursiveTest1} "kw1" ({NestedTypeRecursiveTest.left=current} ".")+
  *
  **/
 
@@ -1943,8 +1943,8 @@ protected class NestedTypeRecursiveTest1_FullStopKeyword_2_1 extends KeywordToke
 
 /************ begin Rule NestedTypeRecursiveTest2 ****************
  *
- * NestedTypeRecursiveTest2 returns NestedTypeRecursiveTest:
- * 	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+;
+ * NestedTypeRecursiveTest2 NestedTypeRecursiveTest:
+ * 	{NestedTypeRecursiveTest2} "kw2" ({NestedTypeRecursiveTest.left=current} ".")+
  *
  **/
 
@@ -2327,8 +2327,8 @@ protected class ParentRefTest2_Child2Assignment_1 extends AssignmentToken  {
 
 /************ begin Rule ParentRefTestChild1 ****************
  *
- * ParentRefTestChild1 returns ParentRefTestChild:
- * 	{ParentRefTestChild} "foo" child=ParentRefTestChild1?;
+ * ParentRefTestChild1 ParentRefTestChild:
+ * 	{ParentRefTestChild} "foo" child=ParentRefTestChild1?
  *
  **/
 
@@ -2462,8 +2462,8 @@ protected class ParentRefTestChild1_ChildAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule ParentRefTestChild2 ****************
  *
- * ParentRefTestChild2 returns ParentRefTestChild:
- * 	{ParentRefTestChild} "foo" child=ParentRefTestChild2?;
+ * ParentRefTestChild2 ParentRefTestChild:
+ * 	{ParentRefTestChild} "foo" child=ParentRefTestChild2?
  *
  **/
 
@@ -2597,8 +2597,8 @@ protected class ParentRefTestChild2_ChildAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule QuantityExclusionTest1 ****************
  *
- * QuantityExclusionTest1 returns QuantityExclusionTest:
- * 	"kw1" attr1=ID attr2=ID?;
+ * QuantityExclusionTest1 QuantityExclusionTest:
+ * 	"kw1" attr1=ID attr2=ID?
  *
  **/
 
@@ -2727,8 +2727,8 @@ protected class QuantityExclusionTest1_Attr2Assignment_2 extends AssignmentToken
 
 /************ begin Rule QuantityExclusionTest2 ****************
  *
- * QuantityExclusionTest2 returns QuantityExclusionTest:
- * 	"kw2" attr1=ID? attr2=ID;
+ * QuantityExclusionTest2 QuantityExclusionTest:
+ * 	"kw2" attr1=ID? attr2=ID
  *
  **/
 
@@ -2857,8 +2857,8 @@ protected class QuantityExclusionTest2_Attr2Assignment_2 extends AssignmentToken
 
 /************ begin Rule ValueExclusionTest1 ****************
  *
- * ValueExclusionTest1 returns ValueExclusionTest:
- * 	val=ValueExclusionTestEn1;
+ * ValueExclusionTest1 ValueExclusionTest:
+ * 	val=ValueExclusionTestEn1
  *
  **/
 
@@ -2902,8 +2902,8 @@ protected class ValueExclusionTest1_ValAssignment extends AssignmentToken  {
 
 /************ begin Rule ValueExclusionTest2 ****************
  *
- * ValueExclusionTest2 returns ValueExclusionTest:
- * 	val=ValueExclusionTestEn2;
+ * ValueExclusionTest2 ValueExclusionTest:
+ * 	val=ValueExclusionTestEn2
  *
  **/
 
@@ -2947,8 +2947,8 @@ protected class ValueExclusionTest2_ValAssignment extends AssignmentToken  {
 
 /************ begin Rule NodeExclusion1 ****************
  *
- * NodeExclusion1 returns NodeExclusion:
- * 	ref=[Model];
+ * NodeExclusion1 NodeExclusion:
+ * 	ref=[Model]
  *
  **/
 
@@ -2995,8 +2995,8 @@ protected class NodeExclusion1_RefAssignment extends AssignmentToken  {
 
 /************ begin Rule NodeExclusion2 ****************
  *
- * NodeExclusion2 returns NodeExclusion:
- * 	ref=[Model|STRING];
+ * NodeExclusion2 NodeExclusion:
+ * 	ref=[Model|STRING]
  *
  **/
 
@@ -3043,8 +3043,8 @@ protected class NodeExclusion2_RefAssignment extends AssignmentToken  {
 
 /************ begin Rule NodeExclusion1List ****************
  *
- * NodeExclusion1List returns NodeExclusionList:
- * 	ref+=[Model]+;
+ * NodeExclusion1List NodeExclusionList:
+ * 	ref+=[Model]+
  *
  **/
 
@@ -3090,8 +3090,8 @@ protected class NodeExclusion1List_RefAssignment extends AssignmentToken  {
 
 /************ begin Rule NodeExclusion2List ****************
  *
- * NodeExclusion2List returns NodeExclusionList:
- * 	ref+=[Model|STRING]+;
+ * NodeExclusion2List NodeExclusionList:
+ * 	ref+=[Model|STRING]+
  *
  **/
 

@@ -97,11 +97,11 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";";
+ * 	id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';';
  *
  **/
 
-// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double=Double)? ";"
+// id=NestedModelId (':' value=Fraction)? ('#' vector=Vector)? ('+' dots=Dots)? ('*' double=Double)? ';'
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -163,7 +163,7 @@ protected class Model_IdAssignment_0 extends AssignmentToken  {
 
 }
 
-// (":" value=Fraction)?
+// (':' value=Fraction)?
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -185,7 +185,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// ":"
+// ':'
 protected class Model_ColonKeyword_1_0 extends KeywordToken  {
 	
 	public Model_ColonKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -242,7 +242,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// ("#" vector=Vector)?
+// ('#' vector=Vector)?
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -264,7 +264,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "#"
+// '#'
 protected class Model_NumberSignKeyword_2_0 extends KeywordToken  {
 	
 	public Model_NumberSignKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -322,7 +322,7 @@ protected class Model_VectorAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// ("+" dots=Dots)?
+// ('+' dots=Dots)?
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -344,7 +344,7 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "+"
+// '+'
 protected class Model_PlusSignKeyword_3_0 extends KeywordToken  {
 	
 	public Model_PlusSignKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -403,7 +403,7 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// ("*" double=Double)?
+// ('*' double=Double)?
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -425,7 +425,7 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "*"
+// '*'
 protected class Model_AsteriskKeyword_4_0 extends KeywordToken  {
 	
 	public Model_AsteriskKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -485,7 +485,7 @@ protected class Model_DoubleAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// ";"
+// ';'
 protected class Model_SemicolonKeyword_5 extends KeywordToken  {
 	
 	public Model_SemicolonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

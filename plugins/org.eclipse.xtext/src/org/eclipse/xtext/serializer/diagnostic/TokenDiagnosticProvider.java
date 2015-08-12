@@ -15,6 +15,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.scoping.IScope;
@@ -31,6 +32,9 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 
 	@Inject
 	private LinkingHelper linkingHelper;
+	
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	protected String getFullReferenceName(EObject semanticObject, CrossReference reference) {
 		EReference ref = GrammarUtil.getReference(reference);
@@ -49,7 +53,7 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		StringBuilder msg = new StringBuilder();
 		msg.append("The value '" + value + "' is invalid for enum " + rc.getRule().getName() + "\n");
 		msg.append("Valid values are: " + Joiner.on(", ").join(valid));
-		return new SerializationDiagnostic(INVALID_ENUM_VALUE, semanticObject, rc, msg.toString());
+		return new SerializationDiagnostic(INVALID_ENUM_VALUE, semanticObject, rc, grammarAccess.getGrammar(), msg.toString());
 	}
 
 	@Override
@@ -57,19 +61,19 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 			CrossReference element, EObject target, IScope scope) {
 		String msg = "No EObjectDescription could be found in Scope " + getFullReferenceName(semanticObject, element)
 				+ " for " + EmfFormatter.objPath(target);
-		return new SerializationDiagnostic(NO_EOBJECT_DESCRIPTION_FOUND, semanticObject, element, msg);
+		return new SerializationDiagnostic(NO_EOBJECT_DESCRIPTION_FOUND, semanticObject, element, grammarAccess.getGrammar(), msg);
 	}
 
 	@Override
 	public ISerializationDiagnostic getNoScopeFoundDiagnostic(EObject semanticObject, CrossReference element,
 			EObject target) {
 		String msg = "Could not create Scope for EReference " + getFullReferenceName(semanticObject, element);
-		return new SerializationDiagnostic(NO_SCOPE_FOUND, semanticObject, element, msg);
+		return new SerializationDiagnostic(NO_SCOPE_FOUND, semanticObject, element, grammarAccess.getGrammar(), msg);
 	}
 
 	@Override
 	public ISerializationDiagnostic getNullNotAllowedDiagnostic(EObject semanticObject, AbstractElement ele) {
-		return new SerializationDiagnostic(NULL_NOT_ALLOWED, semanticObject, ele, "Must not be null");
+		return new SerializationDiagnostic(NULL_NOT_ALLOWED, semanticObject, ele, grammarAccess.getGrammar(), "Must not be null");
 	}
 
 	@Override
@@ -82,7 +86,7 @@ public class TokenDiagnosticProvider implements ITokenDiagnosticProvider {
 		msg.append("' for grammar rule '");
 		msg.append(ruleName);
 		msg.append("' to string via ValueConverter.");
-		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semantic, element, msg.toString(), exception);
+		return new SerializationDiagnostic(VALUE_CONVERSION_EXCEPTION, semantic, element, grammarAccess.getGrammar(), msg.toString(), exception);
 	}
 
 }

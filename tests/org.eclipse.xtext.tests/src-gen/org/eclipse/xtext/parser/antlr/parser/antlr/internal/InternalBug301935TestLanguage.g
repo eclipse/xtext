@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
 	    }
 
 )
@@ -113,7 +113,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
 	    }
 
 )
@@ -139,7 +139,7 @@ ruleNL
        			$current, 
        			"value2",
         		lv_value2_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
 	    }
 
 )

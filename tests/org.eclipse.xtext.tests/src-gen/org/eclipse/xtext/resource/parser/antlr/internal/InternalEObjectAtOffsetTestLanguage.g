@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"foos",
         		lv_foos_0_0, 
-        		"Foo");
+        		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.Foo");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -109,7 +109,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"bars",
         		lv_bars_1_0, 
-        		"AbstractBar");
+        		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.AbstractBar");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -231,7 +231,7 @@ ruleBar returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -307,7 +307,7 @@ ruleFoo returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"QualifiedNameWithOtherDelim");
+        		"org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.QualifiedNameWithOtherDelim");
 	        afterParserOrEnumRuleCall();
 	    }
 

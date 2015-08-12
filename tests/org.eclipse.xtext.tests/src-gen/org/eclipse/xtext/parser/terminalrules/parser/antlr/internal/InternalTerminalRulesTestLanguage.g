@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"idValue",
         		lv_idValue_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ID");
 	    }
 
 )
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"intValue",
         		lv_intValue_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.INT");
 	    }
 
 )
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"stringValue",
         		lv_stringValue_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.STRING");
 	    }
 
 )
@@ -148,7 +148,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"richStringValue",
         		lv_richStringValue_3_0, 
-        		"RICH_STRING");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.RICH_STRING");
 	    }
 
 )
@@ -167,7 +167,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"mlCommentValue",
         		lv_mlCommentValue_4_0, 
-        		"ML_COMMENT");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ML_COMMENT");
 	    }
 
 )
@@ -186,7 +186,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"slCommentValue",
         		lv_slCommentValue_5_0, 
-        		"SL_COMMENT");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.SL_COMMENT");
 	    }
 
 )
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"wsValue",
         		lv_wsValue_6_0, 
-        		"WS");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.WS");
 	    }
 
 )
@@ -224,7 +224,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"anyValue",
         		lv_anyValue_7_0, 
-        		"ANY_OTHER");
+        		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ANY_OTHER");
 	    }
 
 )

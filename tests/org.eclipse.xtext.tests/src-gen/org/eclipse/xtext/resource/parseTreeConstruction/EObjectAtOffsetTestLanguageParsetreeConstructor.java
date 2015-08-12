@@ -43,11 +43,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	(foos+=Foo | bars+=AbstractBar)*;
+ * 	foos+=Foo | bars+=AbstractBar*;
  *
  **/
 
-// (foos+=Foo | bars+=AbstractBar)*
+// foos+=Foo | bars+=AbstractBar*
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,12 +169,12 @@ protected class Model_BarsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AbstractBar ****************
  *
  * AbstractBar:
- * 	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+ * 	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
  * 	foo+=[Foo|QualifiedNameWithOtherDelim]?;
  *
  **/
 
-// "zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+// 'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 // foo+=[Foo|QualifiedNameWithOtherDelim]?
 protected class AbstractBar_Group extends GroupToken {
 	
@@ -243,7 +243,7 @@ protected class AbstractBar_BarParserRuleCall_2 extends RuleCallToken {
 	}	
 }
 
-// ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+// ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 protected class AbstractBar_Group_3 extends GroupToken {
 	
 	public AbstractBar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,7 +301,7 @@ protected class AbstractBar_FooBarBarAction_3_0 extends ActionToken  {
 	}
 }
 
-// "foobar"
+// 'foobar'
 protected class AbstractBar_FoobarKeyword_3_1 extends KeywordToken  {
 	
 	public AbstractBar_FoobarKeyword_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -406,11 +406,11 @@ protected class AbstractBar_FooAssignment_4 extends AssignmentToken  {
 /************ begin Rule Bar ****************
  *
  * Bar:
- * 	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
+ * 	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
  *
  **/
 
-// "bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
+// 'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*
 protected class Bar_Group extends GroupToken {
 	
 	public Bar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -440,7 +440,7 @@ protected class Bar_Group extends GroupToken {
 
 }
 
-// "bar"
+// 'bar'
 protected class Bar_BarKeyword_0 extends KeywordToken  {
 	
 	public Bar_BarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -532,7 +532,7 @@ protected class Bar_FooAssignment_2 extends AssignmentToken  {
 
 }
 
-// ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
+// (',' foo+=[Foo|QualifiedNameWithOtherDelim])*
 protected class Bar_Group_3 extends GroupToken {
 	
 	public Bar_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -554,7 +554,7 @@ protected class Bar_Group_3 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Bar_CommaKeyword_3_0 extends KeywordToken  {
 	
 	public Bar_CommaKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -622,11 +622,11 @@ protected class Bar_FooAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule Foo ****************
  *
  * Foo:
- * 	"foo" name=QualifiedNameWithOtherDelim;
+ * 	'foo' name=QualifiedNameWithOtherDelim;
  *
  **/
 
-// "foo" name=QualifiedNameWithOtherDelim
+// 'foo' name=QualifiedNameWithOtherDelim
 protected class Foo_Group extends GroupToken {
 	
 	public Foo_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -655,7 +655,7 @@ protected class Foo_Group extends GroupToken {
 
 }
 
-// "foo"
+// 'foo'
 protected class Foo_FooKeyword_0 extends KeywordToken  {
 	
 	public Foo_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

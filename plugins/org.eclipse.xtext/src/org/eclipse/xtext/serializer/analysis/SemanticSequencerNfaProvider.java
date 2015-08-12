@@ -25,8 +25,8 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.SynAbsorberNfaAdapter;
@@ -179,7 +179,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 	protected Map<AbstractElement, Integer> elementIDCache;
 
 	@Inject
-	protected IGrammarAccess grammar;
+	protected RuleNames ruleNames;
 
 	@Inject
 	protected ISyntacticSequencerPDAProvider pdaProvider;
@@ -200,7 +200,7 @@ public class SemanticSequencerNfaProvider implements ISemanticSequencerNfaProvid
 		if (elementIDCache == null) {
 			elementIDCache = Maps.newHashMap();
 			int counter = 0;
-			for (ParserRule pr : GrammarUtil.allParserRules(grammar.getGrammar()))
+			for (ParserRule pr : ruleNames.getAllParserRules())
 				for (AbstractElement e : EcoreUtil2.getAllContentsOfType(pr, AbstractElement.class))
 					elementIDCache.put(e, counter++);
 		}

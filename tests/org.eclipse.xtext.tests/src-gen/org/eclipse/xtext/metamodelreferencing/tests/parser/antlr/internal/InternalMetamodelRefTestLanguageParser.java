@@ -142,7 +142,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -184,7 +184,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	           			current, 
             	           			"nameRefs",
             	            		lv_nameRefs_1_0, 
-            	            		"NameRef");
+            	            		"org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.NameRef");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

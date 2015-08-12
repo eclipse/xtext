@@ -146,7 +146,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -196,7 +196,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"bar",
                             		lv_bar_1_0, 
-                            		"Bar");
+                            		"org.eclipse.xtext.linking.Bug313089TestLanguage.Bar");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -233,7 +233,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"baz",
                             		lv_baz_2_0, 
-                            		"Baz");
+                            		"org.eclipse.xtext.linking.Bug313089TestLanguage.Baz");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -370,7 +370,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -475,7 +475,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -531,7 +531,7 @@ public class InternalBug313089TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"name",
             	            		lv_name_4_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }

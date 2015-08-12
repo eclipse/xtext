@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: XtextFactory.java,v 1.16 2010/04/06 14:10:12 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -12,10 +8,11 @@ import org.eclipse.emf.ecore.EFactory;
  * <!-- begin-user-doc -->
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
- * @noimplement This interface is not intended to be implemented by clients.
  * <!-- end-user-doc -->
  * @see org.eclipse.xtext.XtextPackage
  * @generated
+ * @noextend This interface is not intended to be extended by clients.
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface XtextFactory extends EFactory {
 	/**
@@ -189,16 +186,6 @@ public interface XtextFactory extends EFactory {
 	Wildcard createWildcard();
 
 	/**
-	 * Returns a new object of class '<em>EOF</em>'.
-	 * <!-- begin-user-doc -->
-	 * @since 2.0
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>EOF</em>'.
-	 * @generated
-	 */
-	EOF createEOF();
-
-	/**
 	 * Returns a new object of class '<em>Enum Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,6 +247,105 @@ public interface XtextFactory extends EFactory {
 	 * @generated
 	 */
 	CompoundElement createCompoundElement();
+
+	/**
+	 * Returns a new object of class '<em>EOF</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>EOF</em>'.
+	 * @generated
+	 */
+	EOF createEOF();
+
+	/**
+	 * Returns a new object of class '<em>Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter</em>'.
+	 * @generated
+	 */
+	Parameter createParameter();
+
+	/**
+	 * Returns a new object of class '<em>Named Argument</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Named Argument</em>'.
+	 * @generated
+	 */
+	NamedArgument createNamedArgument();
+
+	/**
+	 * Returns a new object of class '<em>Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Condition</em>'.
+	 * @generated
+	 */
+	Condition createCondition();
+
+	/**
+	 * Returns a new object of class '<em>Conjunction</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Conjunction</em>'.
+	 * @generated
+	 */
+	Conjunction createConjunction();
+
+	/**
+	 * Returns a new object of class '<em>Negation</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Negation</em>'.
+	 * @generated
+	 */
+	Negation createNegation();
+
+	/**
+	 * Returns a new object of class '<em>Disjunction</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Disjunction</em>'.
+	 * @generated
+	 */
+	Disjunction createDisjunction();
+
+	/**
+	 * Returns a new object of class '<em>Composite Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Composite Condition</em>'.
+	 * @generated
+	 */
+	CompositeCondition createCompositeCondition();
+
+	/**
+	 * Returns a new object of class '<em>Parameter Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Reference</em>'.
+	 * @generated
+	 */
+	ParameterReference createParameterReference();
+
+	/**
+	 * Returns a new object of class '<em>Literal Condition</em>'.
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Literal Condition</em>'.
+	 * @generated
+	 */
+	LiteralCondition createLiteralCondition();
 
 	/**
 	 * Returns the package supported by this factory.

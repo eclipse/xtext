@@ -18,11 +18,11 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OptionValueImpl#getKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OptionValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -94,8 +94,7 @@ public class OptionValueImpl extends MinimalEObjectImpl.Container implements Opt
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getKey()
+  public String getKey()
   {
     return key;
   }
@@ -105,8 +104,7 @@ public String getKey()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setKey(String newKey)
+  public void setKey(String newKey)
   {
     String oldKey = key;
     key = newKey;
@@ -119,8 +117,7 @@ public void setKey(String newKey)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getValue()
+  public String getValue()
   {
     return value;
   }
@@ -130,8 +127,7 @@ public String getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(String newValue)
+  public void setValue(String newValue)
   {
     String oldValue = value;
     value = newValue;

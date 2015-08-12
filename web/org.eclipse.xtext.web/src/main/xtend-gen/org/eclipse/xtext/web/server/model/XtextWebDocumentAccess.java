@@ -235,33 +235,29 @@ public class XtextWebDocumentAccess {
             @Override
             public void run() {
               try {
-                try {
-                  if ((asynchronousWork != null)) {
-                    asynchronousWork.setCancelIndicator(synchronizer);
-                    asynchronousWork.exec(documentAccess);
-                  }
-                  XtextResource _resource = documentAccess.getResource();
-                  EcoreUtil2.resolveLazyCrossReferences(_resource, synchronizer);
-                } catch (final Throwable _t) {
-                  if (_t instanceof VirtualMachineError) {
-                    final VirtualMachineError error = (VirtualMachineError)_t;
-                    throw error;
-                  } else if (_t instanceof Throwable) {
-                    final Throwable throwable = (Throwable)_t;
-                    boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
-                    if (_isOperationCanceledException) {
-                      XtextWebDocumentAccess.LOG.trace("Canceling background work.");
-                    } else {
-                      XtextWebDocumentAccess.LOG.error("Error during background work.", throwable);
-                    }
-                  } else {
-                    throw Exceptions.sneakyThrow(_t);
-                  }
-                } finally {
-                  synchronizer.releaseLock();
+                if ((asynchronousWork != null)) {
+                  asynchronousWork.setCancelIndicator(synchronizer);
+                  asynchronousWork.exec(documentAccess);
                 }
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+                XtextResource _resource = documentAccess.getResource();
+                EcoreUtil2.resolveLazyCrossReferences(_resource, synchronizer);
+              } catch (final Throwable _t) {
+                if (_t instanceof VirtualMachineError) {
+                  final VirtualMachineError error = (VirtualMachineError)_t;
+                  throw error;
+                } else if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
+                  if (_isOperationCanceledException) {
+                    XtextWebDocumentAccess.LOG.trace("Canceling background work.");
+                  } else {
+                    XtextWebDocumentAccess.LOG.error("Error during background work.", throwable);
+                  }
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
+                }
+              } finally {
+                synchronizer.releaseLock();
               }
             }
           };
@@ -271,29 +267,25 @@ public class XtextWebDocumentAccess {
             @Override
             public void run() {
               try {
-                try {
-                  XtextWebDocumentAccess.this.performPrecomputation(synchronizer);
-                } catch (final Throwable _t) {
-                  if (_t instanceof VirtualMachineError) {
-                    final VirtualMachineError error = (VirtualMachineError)_t;
-                    throw error;
-                  } else if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
-                    final InvalidRequestException.InvalidDocumentStateException idse = (InvalidRequestException.InvalidDocumentStateException)_t;
-                    return;
-                  } else if (_t instanceof Throwable) {
-                    final Throwable throwable = (Throwable)_t;
-                    boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
-                    if (_isOperationCanceledException) {
-                      XtextWebDocumentAccess.LOG.trace("Canceling precomputation.");
-                    } else {
-                      XtextWebDocumentAccess.LOG.error("Error during precomputation.", throwable);
-                    }
+                XtextWebDocumentAccess.this.performPrecomputation(synchronizer);
+              } catch (final Throwable _t) {
+                if (_t instanceof VirtualMachineError) {
+                  final VirtualMachineError error = (VirtualMachineError)_t;
+                  throw error;
+                } else if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
+                  final InvalidRequestException.InvalidDocumentStateException idse = (InvalidRequestException.InvalidDocumentStateException)_t;
+                  return;
+                } else if (_t instanceof Throwable) {
+                  final Throwable throwable = (Throwable)_t;
+                  boolean _isOperationCanceledException = XtextWebDocumentAccess.this.operationCanceledManager.isOperationCanceledException(throwable);
+                  if (_isOperationCanceledException) {
+                    XtextWebDocumentAccess.LOG.trace("Canceling precomputation.");
                   } else {
-                    throw Exceptions.sneakyThrow(_t);
+                    XtextWebDocumentAccess.LOG.error("Error during precomputation.", throwable);
                   }
+                } else {
+                  throw Exceptions.sneakyThrow(_t);
                 }
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
               }
             }
           };

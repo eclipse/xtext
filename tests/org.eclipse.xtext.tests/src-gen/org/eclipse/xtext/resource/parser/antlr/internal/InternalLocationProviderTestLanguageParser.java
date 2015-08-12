@@ -172,7 +172,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -221,7 +221,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"components",
             	            		lv_components_1_0, 
-            	            		"Component");
+            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Component");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -335,7 +335,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -628,7 +628,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                     	           			current, 
                     	           			"mode",
                     	            		lv_mode_3_0, 
-                    	            		"Mode");
+                    	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Mode");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -665,7 +665,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                     	           			current, 
                     	           			"transition",
                     	            		lv_transition_4_0, 
-                    	            		"Transition");
+                    	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Transition");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -798,7 +798,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -840,7 +840,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"port",
             	            		lv_port_2_0, 
-            	            		"Port");
+            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Port");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -952,7 +952,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -994,7 +994,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"data",
             	            		lv_data_2_0, 
-            	            		"Data");
+            	            		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Data");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1105,7 +1105,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1212,7 +1212,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1370,7 +1370,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1478,7 +1478,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

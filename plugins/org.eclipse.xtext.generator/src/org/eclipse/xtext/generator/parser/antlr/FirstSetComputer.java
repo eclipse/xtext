@@ -74,7 +74,8 @@ public class FirstSetComputer {
 		
 		@Override
 		public Boolean caseAssignment(Assignment object) {
-			return doSwitch(object.getTerminal());
+			doSwitch(object.getTerminal());
+			return GrammarUtil.isOptionalCardinality(object);
 		}
 		
 		@Override
@@ -105,7 +106,7 @@ public class FirstSetComputer {
 					result = true;
 				}
 			}
-			return GrammarUtil.isOptionalCardinality(object) || result;
+			return result || GrammarUtil.isOptionalCardinality(object);
 		}
 		
 		@Override
@@ -116,7 +117,7 @@ public class FirstSetComputer {
 					result = false;
 				}
 			}
-			return GrammarUtil.isOptionalCardinality(object) || result;
+			return result || GrammarUtil.isOptionalCardinality(object);
 		}
 		
 	}
