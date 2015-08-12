@@ -7,12 +7,16 @@
  */
 package org.eclipse.xtend.core.idea.config;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.framework.FrameworkTypeEx;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import org.eclipse.xtend.core.idea.config.XtendFrameworkType;
 import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
+import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder;
@@ -24,6 +28,13 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
 @SuppressWarnings("all")
 public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
   private final static String XTEND_GRADLE_PLUGIN_VERSION = "0.4.7";
+  
+  @Inject
+  private Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider;
+  
+  public XtendGradleFrameworkSupportProvider() {
+    XtendLanguage.INSTANCE.injectMembers(this);
+  }
   
   @Override
   public FrameworkTypeEx getFrameworkType() {
@@ -82,5 +93,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
       _builder_2.append("}");
       script.addRepositoriesDefinition(_builder_2.toString());
     }
+    XtendSupportConfigurable _get = this.xtendSupportConfigurableProvider.get();
+    _get.addSupport(module, rootModel, modifiableModelsProvider);
   }
 }

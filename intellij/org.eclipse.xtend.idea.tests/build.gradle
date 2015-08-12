@@ -5,9 +5,11 @@ dependencies {
 
 ideaDevelopment {
 	pluginDependencies {
-		id 'junit' // id is Junit
-		id 'maven' // id is org.jetbrains.idea.maven
-		id 'gradle'// is is org.jetbrains.plugins.gradle
+		id 'junit'  // id is Junit
+		id 'maven'  // id is org.jetbrains.idea.maven
+		id 'gradle' // id is org.jetbrains.plugins.gradle
+		id 'Groovy' // id is org.jetbrains.plugins.gradle
+		id 'properties'
 		
 		project ':intellij:org.eclipse.xtext.idea'
 		project ':intellij:org.eclipse.xtend.idea'
