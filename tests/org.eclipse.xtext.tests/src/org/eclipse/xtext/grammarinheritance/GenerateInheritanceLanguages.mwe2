@@ -18,6 +18,7 @@ var lineDelimiter = '\n'
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 		scanClassPath = true
 		uriMap = {
@@ -36,14 +37,18 @@ Workflow {
 	component = DirectoryCleaner {
 		directory="${runtimeProject}/src-gen/org/eclipse/xtext/grammarinheritance"
 	}
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea"
+	}
 	
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
-		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
@@ -55,10 +60,16 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragments {
+				srcGenOnly = false
+			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
 			fragment = @TestLanguagesFragments {}
 		}
 	}

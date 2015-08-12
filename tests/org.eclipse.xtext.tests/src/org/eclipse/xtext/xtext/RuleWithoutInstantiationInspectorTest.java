@@ -22,6 +22,28 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		return new RuleWithoutInstantiationInspector(this);
 	}
 	
+	@Test public void testFragment_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: name=ID X;\n" +
+				"fragment X : 'x';";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	@Test public void testFragment_02() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: name=ID X;\n" +
+				"fragment X*: 'x';";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
 	@Test public void testDatatypes() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +

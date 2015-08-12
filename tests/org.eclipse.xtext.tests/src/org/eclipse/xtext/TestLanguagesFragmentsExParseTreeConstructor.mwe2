@@ -20,6 +20,7 @@ var memoize = false
 var ignoreCase = false
 var backtrackLexer = false
 var generateDotDiagram = false
+var srcGenOnly = true
 var graphvizCommand = ""
 var emfRuntimeVersion = "2.9"
 
