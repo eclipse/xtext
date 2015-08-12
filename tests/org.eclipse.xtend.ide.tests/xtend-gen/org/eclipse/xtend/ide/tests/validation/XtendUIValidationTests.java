@@ -81,6 +81,40 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testWrongFile() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      this.helper.assertWarning(xtendFile, XtendPackage.Literals.XTEND_TYPE_DECLARATION, IssueCodes.WRONG_FILE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testNoWrongFile() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("class Bar {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      this.helper.assertNoWarnings(xtendFile, XtendPackage.Literals.XTEND_FILE, IssueCodes.WRONG_FILE);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testForbiddenImport() {
     try {
       StringConcatenation _builder = new StringConcatenation();
@@ -173,7 +207,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      final XtendFile xtendFile = this.testHelper.xtendFile("Foo.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
@@ -617,7 +651,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       }
       String otherSeverity = "warning";
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class Foo {");
+      _builder.append("class ValidationClazz {");
       _builder.newLine();
       _builder.append("\t");
       _builder.append("/**");

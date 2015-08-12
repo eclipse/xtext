@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.quickfix;
 
 import com.google.inject.Inject;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -415,6 +417,41 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void fixWrongFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo|1 {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String model = _builder.toString();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", model);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Rename file to \'Foo1.xtend\'");
+    String _replace = model.replace("|", "");
+    _assertResolutionLabels.assertModelAfterQuickfix(_replace);
+    IFile _file = this._workbenchTestHelper.getFile("Foo1.xtend");
+    Assert.assertNotNull(_file);
+    IFile _file_1 = this._workbenchTestHelper.getFile("Foo1.xtend");
+    boolean _exists = _file_1.exists();
+    Assert.assertTrue(_exists);
+    IFile _file_2 = this._workbenchTestHelper.getFile("Foo.xtend");
+    boolean _exists_1 = _file_2.exists();
+    Assert.assertFalse(_exists_1);
+  }
+  
+  @Test
+  public void fixCantMoveWrongFile() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo|2{} class Foo3{}");
+    this.builder.create("Foo1.xtend", _builder);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo|1 {}");
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder_1);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtend.core.validation.IssueCodes.WRONG_FILE);
+    _assertIssueCodes.assertResolutionLabels("");
   }
   
   @Test
@@ -6696,7 +6733,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   
   /**
    * This test is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
-   * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+   * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link Assume})
    */
   @Ignore
   @Test

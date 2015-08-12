@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.tests.validation;
 
+import com.google.common.base.Objects;
 import java.util.Map;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
 import org.junit.Assert;
@@ -67,11 +69,12 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       IMarker _head = IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(firstFileMarkers)));
       Object _attribute = _head.getAttribute(IMarker.MESSAGE);
       Assert.assertEquals("The type A is already defined in B.xtend.", _attribute);
-      final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker_1 = IResourcesSetupUtil.printMarker(secondFileMarkers);
-      int _length_1 = secondFileMarkers.length;
+      IMarker[] _findMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)));
+      String _printMarker_1 = IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class)));
+      int _length_1 = ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length;
       Assert.assertEquals(_printMarker_1, 1, _length_1);
-      IMarker _head_1 = IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(secondFileMarkers)));
+      IMarker _head_1 = IterableExtensions.<IMarker>head(secondFileMarkers);
       Object _attribute_1 = _head_1.getAttribute(IMarker.MESSAGE);
       Assert.assertEquals("The type A is already defined in A.xtend.", _attribute_1);
     } catch (Throwable _e) {
@@ -136,11 +139,12 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
       this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, _emptyStringMap, null);
       Map<String, String> _emptyStringMap_1 = UniqueClassNameValidatorUITest.emptyStringMap();
       this.first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, _emptyStringMap_1, null);
-      final IMarker[] secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-      String _printMarker = IResourcesSetupUtil.printMarker(secondFileMarkers);
-      int _length = secondFileMarkers.length;
+      IMarker[] _findMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+      final Iterable<IMarker> secondFileMarkers = this.onlyErrors(((Iterable<IMarker>)Conversions.doWrapArray(_findMarkers)));
+      String _printMarker = IResourcesSetupUtil.printMarker(((IMarker[])Conversions.unwrapArray(secondFileMarkers, IMarker.class)));
+      int _length = ((Object[])Conversions.unwrapArray(secondFileMarkers, Object.class)).length;
       Assert.assertEquals(_printMarker, 1, _length);
-      IMarker _head = IterableExtensions.<IMarker>head(((Iterable<IMarker>)Conversions.doWrapArray(secondFileMarkers)));
+      IMarker _head = IterableExtensions.<IMarker>head(secondFileMarkers);
       Object _attribute = _head.getAttribute(IMarker.MESSAGE);
       Assert.assertEquals("The type A is already defined in A.java.", _attribute);
     } catch (Throwable _e) {
@@ -226,6 +230,21 @@ public class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
   
   private static Map<String, String> emptyStringMap() {
     return CollectionLiterals.<String, String>emptyMap();
+  }
+  
+  public Iterable<IMarker> onlyErrors(final Iterable<IMarker> markers) {
+    final Function1<IMarker, Boolean> _function = new Function1<IMarker, Boolean>() {
+      @Override
+      public Boolean apply(final IMarker it) {
+        try {
+          Object _attribute = it.getAttribute(IMarker.SEVERITY);
+          return Boolean.valueOf(Objects.equal(Integer.valueOf(IMarker.SEVERITY_ERROR), _attribute));
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    return IterableExtensions.<IMarker>filter(markers, _function);
   }
   
   @Before
