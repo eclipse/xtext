@@ -60,7 +60,7 @@ public class ContextFinderTest extends AbstractXtextTests {
 	private String contexts2names(Iterable<EObject> contexts) {
 		List<String> result = Lists.newArrayList();
 		for (EObject ctx : contexts)
-			result.add(context2name.apply(ctx));
+			result.add(context2name.toFunction(getGrammarAccess().getGrammar()).apply(ctx));
 		Collections.sort(result);
 		return Joiner.on(", ").join(result);
 	}
