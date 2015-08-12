@@ -457,4 +457,11 @@ public class AutoEditInCodeBlockTest extends AutoEditTest {
 		pressKey(editor, '\n');
 		assertState("/* \n\t * | /**/", editor);
 	}
+	
+	@Override
+	public void testWindowsLineDelimiter() throws Exception {
+		XtextEditor editor = openEditor("'''|'''");
+		pasteText(editor, "\r\n");
+		assertState("'''" + "\r\n" + "\t|'''", editor);
+	}
 }
