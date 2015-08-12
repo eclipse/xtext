@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"intValues",
         		lv_intValues_1_0, 
-        		"EINT");
+        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
 	    }
 
 )
@@ -118,7 +118,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"doubleValues",
         		lv_doubleValues_3_0, 
-        		"EDOUBLE");
+        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
 	    }
 
 )
@@ -141,7 +141,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"dateValues",
         		lv_dateValues_5_0, 
-        		"EDATE");
+        		"org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
 	    }
 
 )

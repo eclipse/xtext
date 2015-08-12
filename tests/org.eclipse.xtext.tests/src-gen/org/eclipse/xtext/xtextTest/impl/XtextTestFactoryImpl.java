@@ -70,22 +70,27 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
       case XtextTestPackage.GENERATED_METAMODEL: return createGeneratedMetamodel();
       case XtextTestPackage.REFERENCED_METAMODEL: return createReferencedMetamodel();
       case XtextTestPackage.PARSER_RULE: return createParserRule();
+      case XtextTestPackage.PARAMETER: return createParameter();
       case XtextTestPackage.TYPE_REF: return createTypeRef();
       case XtextTestPackage.ABSTRACT_ELEMENT: return createAbstractElement();
       case XtextTestPackage.ACTION: return createAction();
       case XtextTestPackage.KEYWORD: return createKeyword();
       case XtextTestPackage.RULE_CALL: return createRuleCall();
+      case XtextTestPackage.NAMED_ARGUMENT: return createNamedArgument();
       case XtextTestPackage.ASSIGNMENT: return createAssignment();
       case XtextTestPackage.CROSS_REFERENCE: return createCrossReference();
+      case XtextTestPackage.GROUP: return createGroup();
       case XtextTestPackage.TERMINAL_RULE: return createTerminalRule();
       case XtextTestPackage.ABSTRACT_NEGATED_TOKEN: return createAbstractNegatedToken();
       case XtextTestPackage.NEGATED_TOKEN: return createNegatedToken();
       case XtextTestPackage.UNTIL_TOKEN: return createUntilToken();
       case XtextTestPackage.WILDCARD: return createWildcard();
+      case XtextTestPackage.EOF: return createEOF();
       case XtextTestPackage.ENUM_RULE: return createEnumRule();
       case XtextTestPackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
       case XtextTestPackage.ALTERNATIVES: return createAlternatives();
-      case XtextTestPackage.GROUP: return createGroup();
+      case XtextTestPackage.CONDITIONAL_BRANCH: return createConditionalBranch();
+      case XtextTestPackage.UNORDERED_GROUP: return createUnorderedGroup();
       case XtextTestPackage.CHARACTER_RANGE: return createCharacterRange();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -163,6 +168,17 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public TypeRef createTypeRef()
   {
     TypeRefImpl typeRef = new TypeRefImpl();
@@ -218,6 +234,17 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  public NamedArgument createNamedArgument()
+  {
+    NamedArgumentImpl namedArgument = new NamedArgumentImpl();
+    return namedArgument;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Assignment createAssignment()
   {
     AssignmentImpl assignment = new AssignmentImpl();
@@ -233,6 +260,17 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
   {
     CrossReferenceImpl crossReference = new CrossReferenceImpl();
     return crossReference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Group createGroup()
+  {
+    GroupImpl group = new GroupImpl();
+    return group;
   }
 
   /**
@@ -295,6 +333,17 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  public EOF createEOF()
+  {
+    EOFImpl eof = new EOFImpl();
+    return eof;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EnumRule createEnumRule()
   {
     EnumRuleImpl enumRule = new EnumRuleImpl();
@@ -328,10 +377,21 @@ public class XtextTestFactoryImpl extends EFactoryImpl implements XtextTestFacto
    * <!-- end-user-doc -->
    * @generated
    */
-  public Group createGroup()
+  public ConditionalBranch createConditionalBranch()
   {
-    GroupImpl group = new GroupImpl();
-    return group;
+    ConditionalBranchImpl conditionalBranch = new ConditionalBranchImpl();
+    return conditionalBranch;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroup createUnorderedGroup()
+  {
+    UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
+    return unorderedGroup;
   }
 
   /**

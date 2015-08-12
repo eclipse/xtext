@@ -1,0 +1,11 @@
+org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.ParametersTestLanguageFileImpl:a.parameterstestlanguage(0,14)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)(0,14)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ELEMENT_TYPE)(0,0)
+      <empty list>
+    PsiElement(ParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0_ELEMENT_TYPE)('#11')(0,3)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario4ParserRuleCall_1_10_1_0_0_ELEMENT_TYPE)(3,14)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Scenario4_SecondIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE)(3,6)
+        PsiWhiteSpace(' ')(3,4)
+        PsiElement(IdOrKeyword_IDTerminalRuleCall_1_ELEMENT_TYPE)('id')(4,6)
+      PsiWhiteSpace(' ')(6,7)
+      PsiElement(Scenario4_KeywordKeyword_1_ELEMENT_TYPE)('keyword')(7,14)

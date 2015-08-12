@@ -40,11 +40,16 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%";
+ * 	'1' value="%"
+ * 	| '2' value='%'
+ * 	| '3' value="\\%"
+ * 	| '4' value='\\%'
+ * 	| '5' value="%%"
+ * 	| '6' value='%%';
  *
  **/
 
-// "1" value="%" | "2" value="%" | "3" value="\\%" | "4" value="\\%" | "5" value="%%" | "6" value="%%"
+// '1' value="%" | '2' value='%' | '3' value="\\%" | '4' value='\\%' | '5' value="%%" | '6' value='%%'
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -78,7 +83,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "1" value="%"
+// '1' value="%"
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -100,7 +105,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 	
 	public Model_DigitOneKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -156,7 +161,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "2" value="%"
+// '2' value='%'
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -178,7 +183,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 	
 	public Model_DigitTwoKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -199,7 +204,7 @@ protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 
 }
 
-// value="%"
+// value='%'
 protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 	
 	public Model_ValueAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -234,7 +239,7 @@ protected class Model_ValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "3" value="\\%"
+// '3' value="\\%"
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -256,7 +261,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Model_DigitThreeKeyword_2_0 extends KeywordToken  {
 	
 	public Model_DigitThreeKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -312,7 +317,7 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "4" value="\\%"
+// '4' value='\\%'
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -334,7 +339,7 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Model_DigitFourKeyword_3_0 extends KeywordToken  {
 	
 	public Model_DigitFourKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -355,7 +360,7 @@ protected class Model_DigitFourKeyword_3_0 extends KeywordToken  {
 
 }
 
-// value="\\%"
+// value='\\%'
 protected class Model_ValueAssignment_3_1 extends AssignmentToken  {
 	
 	public Model_ValueAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -390,7 +395,7 @@ protected class Model_ValueAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "5" value="%%"
+// '5' value="%%"
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -412,7 +417,7 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "5"
+// '5'
 protected class Model_DigitFiveKeyword_4_0 extends KeywordToken  {
 	
 	public Model_DigitFiveKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -468,7 +473,7 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// "6" value="%%"
+// '6' value='%%'
 protected class Model_Group_5 extends GroupToken {
 	
 	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -490,7 +495,7 @@ protected class Model_Group_5 extends GroupToken {
 
 }
 
-// "6"
+// '6'
 protected class Model_DigitSixKeyword_5_0 extends KeywordToken  {
 	
 	public Model_DigitSixKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -511,7 +516,7 @@ protected class Model_DigitSixKeyword_5_0 extends KeywordToken  {
 
 }
 
-// value="%%"
+// value='%%'
 protected class Model_ValueAssignment_5_1 extends AssignmentToken  {
 	
 	public Model_ValueAssignment_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

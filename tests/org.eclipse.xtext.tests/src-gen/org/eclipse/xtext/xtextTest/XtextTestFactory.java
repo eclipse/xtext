@@ -77,6 +77,15 @@ public interface XtextTestFactory extends EFactory
   ParserRule createParserRule();
 
   /**
+   * Returns a new object of class '<em>Parameter</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parameter</em>'.
+   * @generated
+   */
+  Parameter createParameter();
+
+  /**
    * Returns a new object of class '<em>Type Ref</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -122,6 +131,15 @@ public interface XtextTestFactory extends EFactory
   RuleCall createRuleCall();
 
   /**
+   * Returns a new object of class '<em>Named Argument</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Named Argument</em>'.
+   * @generated
+   */
+  NamedArgument createNamedArgument();
+
+  /**
    * Returns a new object of class '<em>Assignment</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -138,6 +156,15 @@ public interface XtextTestFactory extends EFactory
    * @generated
    */
   CrossReference createCrossReference();
+
+  /**
+   * Returns a new object of class '<em>Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Group</em>'.
+   * @generated
+   */
+  Group createGroup();
 
   /**
    * Returns a new object of class '<em>Terminal Rule</em>'.
@@ -185,6 +212,15 @@ public interface XtextTestFactory extends EFactory
   Wildcard createWildcard();
 
   /**
+   * Returns a new object of class '<em>EOF</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EOF</em>'.
+   * @generated
+   */
+  EOF createEOF();
+
+  /**
    * Returns a new object of class '<em>Enum Rule</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -212,13 +248,22 @@ public interface XtextTestFactory extends EFactory
   Alternatives createAlternatives();
 
   /**
-   * Returns a new object of class '<em>Group</em>'.
+   * Returns a new object of class '<em>Conditional Branch</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Group</em>'.
+   * @return a new object of class '<em>Conditional Branch</em>'.
    * @generated
    */
-  Group createGroup();
+  ConditionalBranch createConditionalBranch();
+
+  /**
+   * Returns a new object of class '<em>Unordered Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group</em>'.
+   * @generated
+   */
+  UnorderedGroup createUnorderedGroup();
 
   /**
    * Returns a new object of class '<em>Character Range</em>'.

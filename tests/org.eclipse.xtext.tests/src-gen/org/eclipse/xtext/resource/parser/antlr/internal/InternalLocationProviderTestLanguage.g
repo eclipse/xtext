@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"components",
         		lv_components_1_0, 
-        		"Component");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Component");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -152,7 +152,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -247,7 +247,7 @@ ruleComponent returns [EObject current=null]
        			$current, 
        			"mode",
         		lv_mode_3_0, 
-        		"Mode");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Mode");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -266,7 +266,7 @@ ruleComponent returns [EObject current=null]
        			$current, 
        			"transition",
         		lv_transition_4_0, 
-        		"Transition");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Transition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -318,7 +318,7 @@ ruleBus returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -335,7 +335,7 @@ ruleBus returns [EObject current=null]
        			$current, 
        			"port",
         		lv_port_2_0, 
-        		"Port");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Port");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -379,7 +379,7 @@ ruleProcessor returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -396,7 +396,7 @@ ruleProcessor returns [EObject current=null]
        			$current, 
        			"data",
         		lv_data_2_0, 
-        		"Data");
+        		"org.eclipse.xtext.resource.LocationProviderTestLanguage.Data");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -440,7 +440,7 @@ ruleMode returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -483,7 +483,7 @@ ruleTransition returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -564,7 +564,7 @@ rulePort returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -611,7 +611,7 @@ ruleData returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

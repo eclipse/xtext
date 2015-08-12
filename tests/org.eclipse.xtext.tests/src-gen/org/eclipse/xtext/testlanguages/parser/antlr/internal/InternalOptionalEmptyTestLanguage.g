@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_0_0, 
-        		"Greeting");
+        		"org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage.Greeting");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleGreeting returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

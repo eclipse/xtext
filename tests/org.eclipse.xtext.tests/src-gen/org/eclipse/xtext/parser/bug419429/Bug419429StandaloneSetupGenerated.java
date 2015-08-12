@@ -10,9 +10,6 @@ import org.eclipse.xtext.ISetup;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import java.util.List;
-import java.util.Arrays;
-
 /**
  * Generated from StandaloneSetup.xpt!
  */

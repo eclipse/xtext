@@ -18,7 +18,7 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cIntKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -34,16 +34,18 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDateValuesEDATETerminalRuleCall_2_1_0 = (RuleCall)cDateValuesAssignment_2_1.eContents().get(0);
 		
 		//Model:
-		//	("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*;
+		//	'int' intValues+=EINT
+		//	| 'double' doubleValues+=EDOUBLE
+		//	| 'date' dateValues+=EDATE*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*
+		//'int' intValues+=EINT | 'double' doubleValues+=EDOUBLE | 'date' dateValues+=EDATE*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"int" intValues+=EINT
+		//'int' intValues+=EINT
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"int"
+		//'int'
 		public Keyword getIntKeyword_0_0() { return cIntKeyword_0_0; }
 
 		//intValues+=EINT
@@ -52,10 +54,10 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		//EINT
 		public RuleCall getIntValuesEINTTerminalRuleCall_0_1_0() { return cIntValuesEINTTerminalRuleCall_0_1_0; }
 
-		//"double" doubleValues+=EDOUBLE
+		//'double' doubleValues+=EDOUBLE
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"double"
+		//'double'
 		public Keyword getDoubleKeyword_1_0() { return cDoubleKeyword_1_0; }
 
 		//doubleValues+=EDOUBLE
@@ -64,10 +66,10 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		//EDOUBLE
 		public RuleCall getDoubleValuesEDOUBLETerminalRuleCall_1_1_0() { return cDoubleValuesEDOUBLETerminalRuleCall_1_1_0; }
 
-		//"date" dateValues+=EDATE
+		//'date' dateValues+=EDATE
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"date"
+		//'date'
 		public Keyword getDateKeyword_2_0() { return cDateKeyword_2_0; }
 
 		//dateValues+=EDATE
@@ -90,10 +92,10 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	public EcoreTerminalsTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pModel = new ModelElements();
-		this.tEDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDOUBLE");
-		this.tEDATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EDATE");
-		this.tEINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EINT");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tEDOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDOUBLE");
+		this.tEDATE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EDATE");
+		this.tEINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.EINT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.EcoreTerminalsTestLanguage.WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -120,7 +122,9 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 
 	
 	//Model:
-	//	("int" intValues+=EINT | "double" doubleValues+=EDOUBLE | "date" dateValues+=EDATE)*;
+	//	'int' intValues+=EINT
+	//	| 'double' doubleValues+=EDOUBLE
+	//	| 'date' dateValues+=EDATE*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -130,27 +134,26 @@ public class EcoreTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal EDOUBLE returns ecore::EDouble:
-	//	("." "0".."9"+ | "0".."9"+ "." "0".."9"*) (("E" | "e") ("-" | "+"?) "0".."9"+)?;
+	//	('.' '0'..'9'+ | '0'..'9'+ '.' '0'..'9'*) (('E' | 'e') ('-' | '+'?) '0'..'9'+)?;
 	public TerminalRule getEDOUBLERule() {
 		return tEDOUBLE;
 	} 
 
-	//// the default ecore date format is  "yyyy-MM-dd'T'HH:mm:ss'.'SSSZ"
 	//terminal EDATE returns ecore::EDate:
-	//	"0".."9" "0".."9" "0".."9" "0".."9" "-" "0".."9" "0".."9" "-" "0".."9" "0".."9" "T" "0".."9" "0".."9" ":" "0".."9"
-	//	"0".."9" ":" "0".."9" "0".."9" "." "0".."9" "0".."9" "0".."9" ("+" | "-") "0".."9" "0".."9" "0".."9" "0".."9";
+	//	'0'..'9' '0'..'9' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' '-' '0'..'9' '0'..'9' 'T' '0'..'9' '0'..'9' ':' '0'..'9'
+	//	'0'..'9' ':' '0'..'9' '0'..'9' '.' '0'..'9' '0'..'9' '0'..'9' ('+' | '-') '0'..'9' '0'..'9' '0'..'9' '0'..'9';
 	public TerminalRule getEDATERule() {
 		return tEDATE;
 	} 
 
 	//terminal EINT returns ecore::EInt:
-	//	"-"? "0".."9"+;
+	//	'-'? '0'..'9'+;
 	public TerminalRule getEINTRule() {
 		return tEINT;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

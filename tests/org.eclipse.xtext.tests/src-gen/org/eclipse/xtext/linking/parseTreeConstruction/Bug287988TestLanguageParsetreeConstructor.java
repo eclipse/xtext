@@ -52,14 +52,14 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * / * SuppressWarnings[noInstantiation] * / Model:
- * 	"actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall"
- * 	attributes+=RuleCallAttribute* | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3"
- * 	attributes+=RuleCallAttribute3* | "inlinedActions" attributes+=ActionAttribute*;
+ * 	'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall'
+ * 	attributes+=RuleCallAttribute* | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3'
+ * 	attributes+=RuleCallAttribute3* | 'inlinedActions' attributes+=ActionAttribute*;
  *
  **/
 
-// "actions" attributes+=BaseAttribute* | "simple" attributes+=SimpleAttribute* | "rulecall" attributes+=RuleCallAttribute*
-// | "rulecall2" attributes+=RuleCallAttribute2* | "rulecall3" attributes+=RuleCallAttribute3* | "inlinedActions"
+// 'actions' attributes+=BaseAttribute* | 'simple' attributes+=SimpleAttribute* | 'rulecall' attributes+=RuleCallAttribute*
+// | 'rulecall2' attributes+=RuleCallAttribute2* | 'rulecall3' attributes+=RuleCallAttribute3* | 'inlinedActions'
 // attributes+=ActionAttribute*
 protected class Model_Alternatives extends AlternativesToken {
 
@@ -94,7 +94,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "actions" attributes+=BaseAttribute*
+// 'actions' attributes+=BaseAttribute*
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -117,7 +117,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "actions"
+// 'actions'
 protected class Model_ActionsKeyword_0_0 extends KeywordToken  {
 	
 	public Model_ActionsKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -186,7 +186,7 @@ protected class Model_AttributesAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "simple" attributes+=SimpleAttribute*
+// 'simple' attributes+=SimpleAttribute*
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -209,7 +209,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "simple"
+// 'simple'
 protected class Model_SimpleKeyword_1_0 extends KeywordToken  {
 	
 	public Model_SimpleKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -278,7 +278,7 @@ protected class Model_AttributesAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "rulecall" attributes+=RuleCallAttribute*
+// 'rulecall' attributes+=RuleCallAttribute*
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,7 +301,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "rulecall"
+// 'rulecall'
 protected class Model_RulecallKeyword_2_0 extends KeywordToken  {
 	
 	public Model_RulecallKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -370,7 +370,7 @@ protected class Model_AttributesAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "rulecall2" attributes+=RuleCallAttribute2*
+// 'rulecall2' attributes+=RuleCallAttribute2*
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -393,7 +393,7 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "rulecall2"
+// 'rulecall2'
 protected class Model_Rulecall2Keyword_3_0 extends KeywordToken  {
 	
 	public Model_Rulecall2Keyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -462,7 +462,7 @@ protected class Model_AttributesAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "rulecall3" attributes+=RuleCallAttribute3*
+// 'rulecall3' attributes+=RuleCallAttribute3*
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -485,7 +485,7 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "rulecall3"
+// 'rulecall3'
 protected class Model_Rulecall3Keyword_4_0 extends KeywordToken  {
 	
 	public Model_Rulecall3Keyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -554,7 +554,7 @@ protected class Model_AttributesAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// "inlinedActions" attributes+=ActionAttribute*
+// 'inlinedActions' attributes+=ActionAttribute*
 protected class Model_Group_5 extends GroupToken {
 	
 	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -577,7 +577,7 @@ protected class Model_Group_5 extends GroupToken {
 
 }
 
-// "inlinedActions"
+// 'inlinedActions'
 protected class Model_InlinedActionsKeyword_5_0 extends KeywordToken  {
 	
 	public Model_InlinedActionsKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -687,7 +687,7 @@ protected class BaseAttribute_Group extends GroupToken {
 
 }
 
-// Attribute | Master
+// (Attribute | Master)
 protected class BaseAttribute_Alternatives_0 extends AlternativesToken {
 
 	public BaseAttribute_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -783,7 +783,7 @@ protected class BaseAttribute_MasterParserRuleCall_0_1 extends RuleCallToken {
 }
 
 
-// "ref" typeRef=[BaseAttribute] | type=ID
+// ("ref" typeRef=[BaseAttribute] | type=ID)
 protected class BaseAttribute_Alternatives_1 extends AlternativesToken {
 
 	public BaseAttribute_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1161,8 +1161,8 @@ protected class Master_MasterKeyword_1 extends KeywordToken  {
 
 /************ begin Rule ActionAttribute ****************
  *
- * ActionAttribute returns BaseAttribute:
- * 	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+ * ActionAttribute BaseAttribute:
+ * 	({Attribute} "attribute" | {Master} "master") ("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
  *
  **/
 
@@ -1196,7 +1196,7 @@ protected class ActionAttribute_Group extends GroupToken {
 
 }
 
-// {Attribute} "attribute" | {Master} "master"
+// ({Attribute} "attribute" | {Master} "master")
 protected class ActionAttribute_Alternatives_0 extends AlternativesToken {
 
 	public ActionAttribute_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1376,7 +1376,7 @@ protected class ActionAttribute_MasterKeyword_0_1_1 extends KeywordToken  {
 
 
 
-// "ref" typeRef=[BaseAttribute] | type=ID
+// ("ref" typeRef=[BaseAttribute] | type=ID)
 protected class ActionAttribute_Alternatives_1 extends AlternativesToken {
 
 	public ActionAttribute_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1578,8 +1578,8 @@ protected class ActionAttribute_SemicolonKeyword_3 extends KeywordToken  {
 
 /************ begin Rule SimpleAttribute ****************
  *
- * SimpleAttribute returns Attribute:
- * 	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";";
+ * SimpleAttribute Attribute:
+ * 	("ref" typeRef=[BaseAttribute] | type=ID) name=ID ";"
  *
  **/
 
@@ -1612,7 +1612,7 @@ protected class SimpleAttribute_Group extends GroupToken {
 
 }
 
-// "ref" typeRef=[BaseAttribute] | type=ID
+// ("ref" typeRef=[BaseAttribute] | type=ID)
 protected class SimpleAttribute_Alternatives_0 extends AlternativesToken {
 
 	public SimpleAttribute_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1812,8 +1812,8 @@ protected class SimpleAttribute_SemicolonKeyword_2 extends KeywordToken  {
 
 /************ begin Rule RuleCallAttribute ****************
  *
- * RuleCallAttribute returns Attribute:
- * 	CallMe name=ID ";";
+ * RuleCallAttribute Attribute:
+ * 	CallMe name=ID ";"
  *
  **/
 
@@ -1942,8 +1942,8 @@ protected class RuleCallAttribute_SemicolonKeyword_2 extends KeywordToken  {
 
 /************ begin Rule CallMe ****************
  *
- * CallMe returns Attribute:
- * 	"ref" typeRef=[BaseAttribute] | type=ID;
+ * CallMe Attribute:
+ * 	"ref" typeRef=[BaseAttribute] | type=ID
  *
  **/
 
@@ -2097,8 +2097,8 @@ protected class CallMe_TypeAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule RuleCallAttribute2 ****************
  *
- * RuleCallAttribute2 returns Attribute:
- * 	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+ * RuleCallAttribute2 Attribute:
+ * 	CallMe2 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
  *
  **/
 
@@ -2165,7 +2165,7 @@ protected class RuleCallAttribute2_CallMe2ParserRuleCall_0 extends RuleCallToken
 	}	
 }
 
-// "ref" typeRef=[BaseAttribute] | type=ID
+// ("ref" typeRef=[BaseAttribute] | type=ID)
 protected class RuleCallAttribute2_Alternatives_1 extends AlternativesToken {
 
 	public RuleCallAttribute2_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2333,8 +2333,8 @@ protected class RuleCallAttribute2_SemicolonKeyword_2 extends KeywordToken  {
 
 /************ begin Rule CallMe2 ****************
  *
- * CallMe2 returns Attribute:
- * 	name=ID;
+ * CallMe2 Attribute:
+ * 	name=ID
  *
  **/
 
@@ -2378,8 +2378,8 @@ protected class CallMe2_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule RuleCallAttribute3 ****************
  *
- * RuleCallAttribute3 returns Attribute:
- * 	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";";
+ * RuleCallAttribute3 Attribute:
+ * 	CallMe3 ("ref" typeRef=[BaseAttribute] | type=ID) ";"
  *
  **/
 
@@ -2446,7 +2446,7 @@ protected class RuleCallAttribute3_CallMe3ParserRuleCall_0 extends RuleCallToken
 	}	
 }
 
-// "ref" typeRef=[BaseAttribute] | type=ID
+// ("ref" typeRef=[BaseAttribute] | type=ID)
 protected class RuleCallAttribute3_Alternatives_1 extends AlternativesToken {
 
 	public RuleCallAttribute3_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2614,8 +2614,8 @@ protected class RuleCallAttribute3_SemicolonKeyword_2 extends KeywordToken  {
 
 /************ begin Rule CallMe3 ****************
  *
- * CallMe3 returns Attribute:
- * 	"call" "me" CallMe4;
+ * CallMe3 Attribute:
+ * 	"call" "me" CallMe4
  *
  **/
 
@@ -2732,8 +2732,8 @@ protected class CallMe3_CallMe4ParserRuleCall_2 extends RuleCallToken {
 
 /************ begin Rule CallMe4 ****************
  *
- * CallMe4 returns Attribute:
- * 	name=ID;
+ * CallMe4 Attribute:
+ * 	name=ID
  *
  **/
 

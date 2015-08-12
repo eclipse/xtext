@@ -27,12 +27,12 @@ public class PsiInternalSequencerTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T__55=55;
     public static final int T__19=19;
-    public static final int T__16=16;
     public static final int T__51=51;
+    public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__52=52;
-    public static final int T__53=53;
     public static final int T__18=18;
+    public static final int T__53=53;
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__14=14;

@@ -18,7 +18,7 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cIdValueAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cIdValueIDTerminalRuleCall_0_0 = (RuleCall)cIdValueAssignment_0.eContents().get(0);
@@ -114,16 +114,16 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	public TerminalRulesTestLanguageGrammarAccess(GrammarProvider grammarProvider) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pModel = new ModelElements();
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
-		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
-		this.tRICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_STRING");
-		this.tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "IN_RICH_STRING");
-		this.tESCAPED_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ESCAPED_CHAR");
-		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
-		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ID");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.INT");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.STRING");
+		this.tRICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.RICH_STRING");
+		this.tIN_RICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.IN_RICH_STRING");
+		this.tESCAPED_CHAR = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ESCAPED_CHAR");
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ML_COMMENT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -161,55 +161,56 @@ public class TerminalRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal INT:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return tINT;
 	} 
 
 	//terminal STRING:
-	//	"\"" (ESCAPED_CHAR | !("\\" | "\""))* "\"" | "\'" (ESCAPED_CHAR | !("\\" | "\'"))* "\'";
+	//	'"' (ESCAPED_CHAR | !('\\' | '"'))* '"' |
+	//	"'" (ESCAPED_CHAR | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	} 
 
 	//terminal RICH_STRING:
-	//	"\'\'\'" IN_RICH_STRING* ("\'\'\'" | ("\'" "\'"?)? EOF);
+	//	"'''" IN_RICH_STRING* ("'''" | ("'" "'"?)? EOF);
 	public TerminalRule getRICH_STRINGRule() {
 		return tRICH_STRING;
 	} 
 
 	//terminal fragment IN_RICH_STRING:
-	//	"\'\'" !("«" | "\'") | "\'" !("«" | "\'") | !("«" | "\'");
+	//	"''" !('«' | "'") | "'" !('«' | "'") | !('«' | "'");
 	public TerminalRule getIN_RICH_STRINGRule() {
 		return tIN_RICH_STRING;
 	} 
 
 	//terminal fragment ESCAPED_CHAR:
-	//	"\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\");
+	//	'\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\');
 	public TerminalRule getESCAPED_CHARRule() {
 		return tESCAPED_CHAR;
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

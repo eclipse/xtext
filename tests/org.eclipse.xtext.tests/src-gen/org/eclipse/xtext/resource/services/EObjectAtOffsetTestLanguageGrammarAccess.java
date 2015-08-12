@@ -19,7 +19,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cFoosAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cFoosFooParserRuleCall_0_0 = (RuleCall)cFoosAssignment_0.eContents().get(0);
@@ -27,10 +27,10 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cBarsAbstractBarParserRuleCall_1_0 = (RuleCall)cBarsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	(foos+=Foo | bars+=AbstractBar)*;
+		//	foos+=Foo | bars+=AbstractBar*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(foos+=Foo | bars+=AbstractBar)*
+		//foos+=Foo | bars+=AbstractBar*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//foos+=Foo
@@ -47,7 +47,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class AbstractBarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractBar");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.AbstractBar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cZonkKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -63,15 +63,15 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cFooFooQualifiedNameWithOtherDelimParserRuleCall_4_0_1 = (RuleCall)cFooFooCrossReference_4_0.eContents().get(1);
 		
 		//AbstractBar:
-		//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+		//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 		//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+		//'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 		//foo+=[Foo|QualifiedNameWithOtherDelim]?
 		public Group getGroup() { return cGroup; }
 
-		//"zonk"?
+		//'zonk'?
 		public Keyword getZonkKeyword_0() { return cZonkKeyword_0; }
 
 		//INT?
@@ -80,13 +80,13 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//Bar
 		public RuleCall getBarParserRuleCall_2() { return cBarParserRuleCall_2; }
 
-		//({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+		//({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//{FooBar.bar=current}
 		public Action getFooBarBarAction_3_0() { return cFooBarBarAction_3_0; }
 
-		//"foobar"
+		//'foobar'
 		public Keyword getFoobarKeyword_3_1() { return cFoobarKeyword_3_1; }
 
 		//foo+=[Foo|QualifiedNameWithOtherDelim]
@@ -109,7 +109,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class BarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bar");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.Bar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cBarKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -124,13 +124,13 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cFooFooQualifiedNameWithOtherDelimParserRuleCall_3_1_0_1 = (RuleCall)cFooFooCrossReference_3_1_0.eContents().get(1);
 		
 		//Bar:
-		//	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
+		//	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*
+		//'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*
 		public Group getGroup() { return cGroup; }
 
-		//"bar"
+		//'bar'
 		public Keyword getBarKeyword_0() { return cBarKeyword_0; }
 
 		//name=ID
@@ -148,10 +148,10 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		//QualifiedNameWithOtherDelim
 		public RuleCall getFooFooQualifiedNameWithOtherDelimParserRuleCall_2_0_1() { return cFooFooQualifiedNameWithOtherDelimParserRuleCall_2_0_1; }
 
-		//("," foo+=[Foo|QualifiedNameWithOtherDelim])*
+		//(',' foo+=[Foo|QualifiedNameWithOtherDelim])*
 		public Group getGroup_3() { return cGroup_3; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
 		//foo+=[Foo|QualifiedNameWithOtherDelim]
@@ -165,20 +165,20 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class FooElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.Foo");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFooKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameQualifiedNameWithOtherDelimParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Foo:
-		//	"foo" name=QualifiedNameWithOtherDelim;
+		//	'foo' name=QualifiedNameWithOtherDelim;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"foo" name=QualifiedNameWithOtherDelim
+		//'foo' name=QualifiedNameWithOtherDelim
 		public Group getGroup() { return cGroup; }
 
-		//"foo"
+		//'foo'
 		public Keyword getFooKeyword_0() { return cFooKeyword_0; }
 
 		//name=QualifiedNameWithOtherDelim
@@ -189,7 +189,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class QualifiedNameWithOtherDelimElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithOtherDelim");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.QualifiedNameWithOtherDelim");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -197,19 +197,19 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cQualifiedNameParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedNameWithOtherDelim:
-		//	QualifiedName ("=" QualifiedName)*;
+		//	QualifiedName ('=' QualifiedName)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//QualifiedName ("=" QualifiedName)*
+		//QualifiedName ('=' QualifiedName)*
 		public Group getGroup() { return cGroup; }
 
 		//QualifiedName
 		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
 
-		//("=" QualifiedName)*
+		//('=' QualifiedName)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_1_0() { return cEqualsSignKeyword_1_0; }
 
 		//QualifiedName
@@ -217,7 +217,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.EObjectAtOffsetTestLanguage.QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -225,19 +225,19 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -297,7 +297,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//	(foos+=Foo | bars+=AbstractBar)*;
+	//	foos+=Foo | bars+=AbstractBar*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -307,7 +307,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//AbstractBar:
-	//	"zonk"? INT? Bar ({FooBar.bar=current} "foobar" foo+=[Foo|QualifiedNameWithOtherDelim])?
+	//	'zonk'? INT? Bar ({FooBar.bar=current} 'foobar' foo+=[Foo|QualifiedNameWithOtherDelim])?
 	//	foo+=[Foo|QualifiedNameWithOtherDelim]?;
 	public AbstractBarElements getAbstractBarAccess() {
 		return pAbstractBar;
@@ -318,7 +318,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Bar:
-	//	"bar" name=ID foo+=[Foo|QualifiedNameWithOtherDelim] ("," foo+=[Foo|QualifiedNameWithOtherDelim])*;
+	//	'bar' name=ID foo+=[Foo|QualifiedNameWithOtherDelim] (',' foo+=[Foo|QualifiedNameWithOtherDelim])*;
 	public BarElements getBarAccess() {
 		return pBar;
 	}
@@ -328,7 +328,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Foo:
-	//	"foo" name=QualifiedNameWithOtherDelim;
+	//	'foo' name=QualifiedNameWithOtherDelim;
 	public FooElements getFooAccess() {
 		return pFoo;
 	}
@@ -338,7 +338,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//QualifiedNameWithOtherDelim:
-	//	QualifiedName ("=" QualifiedName)*;
+	//	QualifiedName ('=' QualifiedName)*;
 	public QualifiedNameWithOtherDelimElements getQualifiedNameWithOtherDelimAccess() {
 		return pQualifiedNameWithOtherDelim;
 	}
@@ -348,7 +348,7 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//QualifiedName:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -358,38 +358,38 @@ public class EObjectAtOffsetTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

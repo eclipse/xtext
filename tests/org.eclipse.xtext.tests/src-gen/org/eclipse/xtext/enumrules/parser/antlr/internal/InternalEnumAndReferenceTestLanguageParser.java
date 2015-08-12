@@ -152,7 +152,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                    			current, 
                    			"type",
                     		lv_type_0_0, 
-                    		"KindOfKeyword");
+                    		"org.eclipse.xtext.enumrules.EnumAndReferenceTestLanguage.KindOfKeyword");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -179,7 +179,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

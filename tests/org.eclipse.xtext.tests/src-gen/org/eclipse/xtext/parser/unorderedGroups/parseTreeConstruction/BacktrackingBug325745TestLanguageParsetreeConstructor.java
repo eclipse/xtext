@@ -157,11 +157,13 @@ protected class Model_FieldsAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	name=ID dataType=DataType? expression=Expression ".";
+ * 	name=ID
+ * 	dataType=DataType?
+ * 	expression=Expression '.';
  *
  **/
 
-// name=ID dataType=DataType? expression=Expression "."
+// name=ID dataType=DataType? expression=Expression '.'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -316,7 +318,7 @@ protected class Element_ExpressionAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// "."
+// '.'
 protected class Element_FullStopKeyword_3 extends KeywordToken  {
 	
 	public Element_FullStopKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -345,11 +347,11 @@ protected class Element_FullStopKeyword_3 extends KeywordToken  {
 /************ begin Rule DataType ****************
  *
  * DataType:
- * 	baseType=ID (":=" defaultValue=STRING)?;
+ * 	baseType=ID (':=' defaultValue=STRING)?;
  *
  **/
 
-// baseType=ID (":=" defaultValue=STRING)?
+// baseType=ID (':=' defaultValue=STRING)?
 protected class DataType_Group extends GroupToken {
 	
 	public DataType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -412,7 +414,7 @@ protected class DataType_BaseTypeAssignment_0 extends AssignmentToken  {
 
 }
 
-// (":=" defaultValue=STRING)?
+// (':=' defaultValue=STRING)?
 protected class DataType_Group_1 extends GroupToken {
 	
 	public DataType_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -434,7 +436,7 @@ protected class DataType_Group_1 extends GroupToken {
 
 }
 
-// ":="
+// ':='
 protected class DataType_ColonEqualsSignKeyword_1_0 extends KeywordToken  {
 	
 	public DataType_ColonEqualsSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -498,11 +500,11 @@ protected class DataType_DefaultValueAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- * 	{Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?);
+ * 	{Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?);
  *
  **/
 
-// {Expression} ("["? & prefix=STRING?) ("["? terms+=SimpleTerm "]"?)* ("]"? & postfix=STRING?)
+// {Expression} ('['? & prefix=STRING?) ('['? terms+=SimpleTerm ']'?)* (']'? & postfix=STRING?)
 protected class Expression_Group extends GroupToken {
 	
 	public Expression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -557,7 +559,7 @@ protected class Expression_ExpressionAction_0 extends ActionToken  {
 	}
 }
 
-// "["? & prefix=STRING?
+// ('['? & prefix=STRING?)
 protected class Expression_UnorderedGroup_1 extends UnorderedGroupToken {
 	
 	public Expression_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -615,7 +617,7 @@ protected class Expression_PrefixAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// ("["? terms+=SimpleTerm "]"?)*
+// ('['? terms+=SimpleTerm ']'?)*
 protected class Expression_Group_2 extends GroupToken {
 	
 	public Expression_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -685,7 +687,7 @@ protected class Expression_TermsAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "]"? & postfix=STRING?
+// (']'? & postfix=STRING?)
 protected class Expression_UnorderedGroup_3 extends UnorderedGroupToken {
 	
 	public Expression_UnorderedGroup_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -752,11 +754,15 @@ protected class Expression_PostfixAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule SimpleTerm ****************
  *
  * SimpleTerm:
- * 	lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID;
+ * 	lineCount=INT
+ * 	'*'?
+ * 	charCount=INT?
+ * 	'!'?
+ * 	charSet=ID? | refChar=ID;
  *
  **/
 
-// lineCount=INT "*"? charCount=INT? "!"? charSet=ID? | refChar=ID
+// lineCount=INT '*'? charCount=INT? '!'? charSet=ID? | refChar=ID
 protected class SimpleTerm_Alternatives extends AlternativesToken {
 
 	public SimpleTerm_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -786,7 +792,7 @@ protected class SimpleTerm_Alternatives extends AlternativesToken {
 
 }
 
-// lineCount=INT "*"? charCount=INT? "!"? charSet=ID?
+// lineCount=INT '*'? charCount=INT? '!'? charSet=ID?
 protected class SimpleTerm_Group_0 extends GroupToken {
 	
 	public SimpleTerm_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

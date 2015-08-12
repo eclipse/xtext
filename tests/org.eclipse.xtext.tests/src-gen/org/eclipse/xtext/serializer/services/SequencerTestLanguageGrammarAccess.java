@@ -19,7 +19,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cX1Assignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cX1SimpleGroupParserRuleCall_0_0 = (RuleCall)cX1Assignment_0.eContents().get(0);
@@ -299,7 +299,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleGroup");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleGroup");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -331,7 +331,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SimpleAlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleAlternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleAlternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -354,7 +354,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
-		//"kw1" val1=ID | "kw2" val2=ID
+		//("kw1" val1=ID | "kw2" val2=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" val1=ID
@@ -383,7 +383,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SimpleMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -443,7 +443,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class GroupMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GroupMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.GroupMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -539,7 +539,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AlternativeMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AlternativeMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.AlternativeMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -647,7 +647,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class List1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.List1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -687,7 +687,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class List2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.List2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cList2Action_1 = (Action)cGroup.eContents().get(1);
@@ -735,7 +735,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AltList1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.AltList1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -767,7 +767,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#8"
 		public Keyword getNumberSignDigitEightKeyword_0() { return cNumberSignDigitEightKeyword_0; }
 
-		//val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
+		//(val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1=ID val2=ID
@@ -823,7 +823,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AltList2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.AltList2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -853,7 +853,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#9"
 		public Keyword getNumberSignDigitNineKeyword_0() { return cNumberSignDigitNineKeyword_0; }
 
-		//val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
+		//(val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1+=ID val2=ID
@@ -903,7 +903,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleKeywordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleKeywords");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywords");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -925,7 +925,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val=("kw1" | "kw2" | "kw3")
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//"kw1" | "kw2" | "kw3"
+		//("kw1" | "kw2" | "kw3")
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//"kw1"
@@ -939,7 +939,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleKeywordsOrIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleKeywordsOrID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywordsOrID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -962,7 +962,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val=("kw1" | "kw2" | "kw3" | ID)
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//"kw1" | "kw2" | "kw3" | ID
+		//("kw1" | "kw2" | "kw3" | ID)
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//"kw1"
@@ -979,7 +979,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleTerminalsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleTerminals");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleTerminals");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1000,7 +1000,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val=(ID1 | ID2)
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//ID1 | ID2
+		//(ID1 | ID2)
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//ID1
@@ -1011,7 +1011,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleEnumElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleEnum");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleEnum");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1033,7 +1033,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val=(DefEnum1 | DefEnum2 | DefEnum3)
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//DefEnum1 | DefEnum2 | DefEnum3
+		//(DefEnum1 | DefEnum2 | DefEnum3)
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//DefEnum1
@@ -1047,7 +1047,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleCrossReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleCrossReference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleCrossReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1081,7 +1081,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//name=(ID1 | ID2 | ID3)
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//ID1 | ID2 | ID3
+		//(ID1 | ID2 | ID3)
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 
 		//ID1
@@ -1093,7 +1093,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID3
 		public RuleCall getNameID3TerminalRuleCall_1_0_2() { return cNameID3TerminalRuleCall_1_0_2; }
 
-		//ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3]
+		//(ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3])
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//ref=[SingleCrossReference|ID1]
@@ -1125,7 +1125,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleContainmentReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleContainmentReference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cChildAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1147,7 +1147,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//child=(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3)
 		public Assignment getChildAssignment_1() { return cChildAssignment_1; }
 
-		//SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3
+		//(SingleContainmentReferenceChild1 | SingleContainmentReferenceChild2 | SingleContainmentReferenceChild3)
 		public Alternatives getChildAlternatives_1_0() { return cChildAlternatives_1_0; }
 
 		//SingleContainmentReferenceChild1
@@ -1161,55 +1161,55 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SingleContainmentReferenceChild1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleContainmentReferenceChild1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild1");
 		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValKw1Keyword_0 = (Keyword)cValAssignment.eContents().get(0);
 		
 		//SingleContainmentReferenceChild1:
-		//	val="kw1";
+		//	val='kw1';
 		@Override public ParserRule getRule() { return rule; }
 
-		//val="kw1"
+		//val='kw1'
 		public Assignment getValAssignment() { return cValAssignment; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getValKw1Keyword_0() { return cValKw1Keyword_0; }
 	}
 
 	public class SingleContainmentReferenceChild2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleContainmentReferenceChild2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild2");
 		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValKw2Keyword_0 = (Keyword)cValAssignment.eContents().get(0);
 		
 		//SingleContainmentReferenceChild2:
-		//	val="kw2";
+		//	val='kw2';
 		@Override public ParserRule getRule() { return rule; }
 
-		//val="kw2"
+		//val='kw2'
 		public Assignment getValAssignment() { return cValAssignment; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getValKw2Keyword_0() { return cValKw2Keyword_0; }
 	}
 
 	public class SingleContainmentReferenceChild3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleContainmentReferenceChild3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild3");
 		private final Assignment cValAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cValKw3Keyword_0 = (Keyword)cValAssignment.eContents().get(0);
 		
 		//SingleContainmentReferenceChild3:
-		//	val="kw3";
+		//	val='kw3';
 		@Override public ParserRule getRule() { return rule; }
 
-		//val="kw3"
+		//val='kw3'
 		public Assignment getValAssignment() { return cValAssignment; }
 
-		//"kw3"
+		//'kw3'
 		public Keyword getValKw3Keyword_0() { return cValKw3Keyword_0; }
 	}
 
 	public class MultiKeywordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiKeywords");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywords");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1231,7 +1231,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val+=("kw1" | "kw2" | "kw3")
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//"kw1" | "kw2" | "kw3"
+		//("kw1" | "kw2" | "kw3")
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//"kw1"
@@ -1245,7 +1245,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class MultiKeywordsOrIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiKeywordsOrID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywordsOrID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1268,7 +1268,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val+=("kw1" | "kw2" | "kw3" | ID)
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//"kw1" | "kw2" | "kw3" | ID
+		//("kw1" | "kw2" | "kw3" | ID)
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//"kw1"
@@ -1285,7 +1285,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class MultiTerminalsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiTerminals");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.MultiTerminals");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1306,7 +1306,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//val+=(ID1 | ID2)
 		public Assignment getValAssignment_1() { return cValAssignment_1; }
 
-		//ID1 | ID2
+		//(ID1 | ID2)
 		public Alternatives getValAlternatives_1_0() { return cValAlternatives_1_0; }
 
 		//ID1
@@ -1317,7 +1317,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DependentAlternative1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DependentAlternative1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1339,7 +1339,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 
-		//val=ID | val=ID flag?="kw1"
+		//(val=ID | val=ID flag?="kw1")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val=ID
@@ -1365,7 +1365,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DependentAlternative2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DependentAlternative2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1390,7 +1390,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
 
-		//val+=ID val+=ID+ | val+=ID+ flag?="kw1"
+		//(val+=ID val+=ID+ | val+=ID+ flag?="kw1")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val+=ID val+=ID+
@@ -1425,7 +1425,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class OptionalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Optional");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Optional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cInt0Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1469,17 +1469,17 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FloatElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Float");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Float");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cFloatAction_1 = (Action)cGroup.eContents().get(1);
 		private final Keyword cByeKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Float:
-		//	"#22" {Float} "Bye";
+		//	"#22" {Float} 'Bye';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#22" {Float} "Bye"
+		//"#22" {Float} 'Bye'
 		public Group getGroup() { return cGroup; }
 
 		//"#22"
@@ -1488,12 +1488,12 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Float}
 		public Action getFloatAction_1() { return cFloatAction_1; }
 
-		//"Bye"
+		//'Bye'
 		public Keyword getByeKeyword_2() { return cByeKeyword_2; }
 	}
 
 	public class UnorderedAlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cUnorderedAlternativeAction_1 = (Action)cGroup.eContents().get(1);
@@ -1551,7 +1551,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedAlternativeValElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeVal");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeVal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw1Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1575,7 +1575,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedAlternativeValDelegateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeValDelegate");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeValDelegate");
 		private final RuleCall cUnorderedAlternativeVal2ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//UnorderedAlternativeValDelegate:
@@ -1587,7 +1587,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedAlternativeVal2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedAlternativeVal2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeVal2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1611,7 +1611,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroup");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroup");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
@@ -1634,7 +1634,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"#24"
 		public Keyword getNumberSignDigitTwoDigitFourKeyword_0() { return cNumberSignDigitTwoDigitFourKeyword_0; }
 
-		//val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate
+		//(val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
 		//val1=ID
@@ -1663,7 +1663,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupValElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroupVal");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupVal");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw1Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1687,7 +1687,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupValDelegateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroupValDelegate");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupValDelegate");
 		private final RuleCall cUnorderedGroupVal2ParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//UnorderedGroupValDelegate:
@@ -1699,7 +1699,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupVal2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroupVal2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupVal2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1723,7 +1723,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupOptionalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroupOptional");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupOptional");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cUnorderedGroupOptionalAction_1 = (Action)cGroup.eContents().get(1);
@@ -1742,10 +1742,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cVal3IDTerminalRuleCall_2_2_1_0 = (RuleCall)cVal3Assignment_2_2_1.eContents().get(0);
 		
 		//UnorderedGroupOptional:
-		//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
+		//	"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
+		//"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?)
 		public Group getGroup() { return cGroup; }
 
 		//"#25"
@@ -1754,10 +1754,10 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{UnorderedGroupOptional}
 		public Action getUnorderedGroupOptionalAction_1() { return cUnorderedGroupOptionalAction_1; }
 
-		//("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?
+		//("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//("kw1" val1=ID)?
+		//"kw1" val1=ID?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"kw1"
@@ -1769,7 +1769,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_2_0_1_0() { return cVal1IDTerminalRuleCall_2_0_1_0; }
 
-		//("kw2" va2=ID)?
+		//"kw2" va2=ID?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"kw2"
@@ -1781,7 +1781,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getVa2IDTerminalRuleCall_2_1_1_0() { return cVa2IDTerminalRuleCall_2_1_1_0; }
 
-		//("kw3" val3=ID)?
+		//"kw3" val3=ID?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"kw3"
@@ -1795,7 +1795,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedGroupBooleanElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroupBoolean");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupBoolean");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cUnorderedGroupBooleanAction_1 = (Action)cGroup.eContents().get(1);
@@ -1808,42 +1808,42 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cVal3Kw3Keyword_2_2_0 = (Keyword)cVal3Assignment_2_2.eContents().get(0);
 		
 		//UnorderedGroupBoolean:
-		//	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
+		//	'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?)
+		//'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 		public Group getGroup() { return cGroup; }
 
-		//"#26"
+		//'#26'
 		public Keyword getNumberSignDigitTwoDigitSixKeyword_0() { return cNumberSignDigitTwoDigitSixKeyword_0; }
 
 		//{UnorderedGroupBoolean}
 		public Action getUnorderedGroupBooleanAction_1() { return cUnorderedGroupBooleanAction_1; }
 
-		//val1?="kw1"? & val2?="kw2"? & val3?="kw3"?
+		//(val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//val1?="kw1"?
+		//val1?='kw1'?
 		public Assignment getVal1Assignment_2_0() { return cVal1Assignment_2_0; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getVal1Kw1Keyword_2_0_0() { return cVal1Kw1Keyword_2_0_0; }
 
-		//val2?="kw2"?
+		//val2?='kw2'?
 		public Assignment getVal2Assignment_2_1() { return cVal2Assignment_2_1; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getVal2Kw2Keyword_2_1_0() { return cVal2Kw2Keyword_2_1_0; }
 
-		//val3?="kw3"?
+		//val3?='kw3'?
 		public Assignment getVal3Assignment_2_2() { return cVal3Assignment_2_2; }
 
-		//"kw3"
+		//'kw3'
 		public Keyword getVal3Kw3Keyword_2_2_0() { return cVal3Kw3Keyword_2_2_0; }
 	}
 
 	public class Complex1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Complex1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.Complex1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cComplex1Action_1 = (Action)cGroup.eContents().get(1);
@@ -1874,14 +1874,14 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cVal6IDTerminalRuleCall_4_3_1_0 = (RuleCall)cVal6Assignment_4_3_1.eContents().get(0);
 		
 		//Complex1:
-		//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
+		//	'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
 		//	val6+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
+		//'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
 		public Group getGroup() { return cGroup; }
 
-		//"#27"
+		//'#27'
 		public Keyword getNumberSignDigitTwoDigitSevenKeyword_0() { return cNumberSignDigitTwoDigitSevenKeyword_0; }
 
 		//{Complex1}
@@ -1964,7 +1964,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class OptionalDoubleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalDouble");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.OptionalDouble");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDouble0Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2008,15 +2008,15 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DOUBLEElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DOUBLE");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
-		//DOUBLE returns ecore::EDouble:
-		//	INT ("." INT)?;
+		//DOUBLE ecore::EDouble:
+		//	INT ("." INT)?
 		@Override public ParserRule getRule() { return rule; }
 
 		//INT ("." INT)?
@@ -2036,14 +2036,14 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NullValueGeneratedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullValueGenerated");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueGenerated");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValueNULL_STRINGParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
-		//NullValueGenerated returns NullValue:
-		//	"#29" value=NULL_STRING;
+		//NullValueGenerated NullValue:
+		//	"#29" value=NULL_STRING
 		@Override public ParserRule getRule() { return rule; }
 
 		//"#29" value=NULL_STRING
@@ -2060,7 +2060,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NullValueInterpretedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullValueInterpreted");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueInterpreted");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2068,8 +2068,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cFooAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
 		
-		//NullValueInterpreted returns NullValue:
-		//	"#30" value=NULL_STRING foo=ID?;
+		//NullValueInterpreted NullValue:
+		//	"#30" value=NULL_STRING foo=ID?
 		@Override public ParserRule getRule() { return rule; }
 
 		//"#30" value=NULL_STRING foo=ID?
@@ -2092,7 +2092,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NULL_STRINGElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NULL_STRING");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.NULL_STRING");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//NULL_STRING:
@@ -2104,15 +2104,15 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NullCrossRefGeneratedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullCrossRefGenerated");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefGenerated");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cRefEObjectCrossReference_1_0 = (CrossReference)cRefAssignment_1.eContents().get(0);
 		private final RuleCall cRefEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cRefEObjectCrossReference_1_0.eContents().get(1);
 		
-		//NullCrossRefGenerated returns NullCrossRef:
-		//	"#31" ref=[ecore::EObject];
+		//NullCrossRefGenerated NullCrossRef:
+		//	"#31" ref=[ecore::EObject]
 		@Override public ParserRule getRule() { return rule; }
 
 		//"#31" ref=[ecore::EObject]
@@ -2132,7 +2132,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NullCrossRefInterpretedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullCrossRefInterpreted");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefInterpreted");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2141,8 +2141,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cFooAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cFooIDTerminalRuleCall_2_0 = (RuleCall)cFooAssignment_2.eContents().get(0);
 		
-		//NullCrossRefInterpreted returns NullCrossRef:
-		//	"#32" ref=[ecore::EObject] foo=ID?;
+		//NullCrossRefInterpreted NullCrossRef:
+		//	"#32" ref=[ecore::EObject] foo=ID?
 		@Override public ParserRule getRule() { return rule; }
 
 		//"#32" ref=[ecore::EObject] foo=ID?
@@ -2169,7 +2169,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class DefEnum1Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "DefEnum1");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum1");
 		private final EnumLiteralDeclaration cKw1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw1Kw1Keyword_0 = (Keyword)cKw1EnumLiteralDeclaration.eContents().get(0);
 		
@@ -2185,7 +2185,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DefEnum2Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "DefEnum2");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum2");
 		private final EnumLiteralDeclaration cKw2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw2Kw2Keyword_0 = (Keyword)cKw2EnumLiteralDeclaration.eContents().get(0);
 		
@@ -2201,7 +2201,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DefEnum3Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "DefEnum3");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum3");
 		private final EnumLiteralDeclaration cKw3EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cKw3Kw3Keyword_0 = (Keyword)cKw3EnumLiteralDeclaration.eContents().get(0);
 		
@@ -2289,9 +2289,9 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pSingleKeywords = new SingleKeywordsElements();
 		this.pSingleKeywordsOrID = new SingleKeywordsOrIDElements();
 		this.pSingleTerminals = new SingleTerminalsElements();
-		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1");
-		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2");
-		this.tID3 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID3");
+		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
+		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
+		this.tID3 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.serializer.SequencerTestLanguage.ID3");
 		this.pSingleEnum = new SingleEnumElements();
 		this.unknownRuleDefEnum1 = new DefEnum1Elements();
 		this.unknownRuleDefEnum2 = new DefEnum2Elements();
@@ -2492,19 +2492,19 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID1:
-	//	"$1" ID;
+	//	'$1' ID;
 	public TerminalRule getID1Rule() {
 		return tID1;
 	} 
 
 	//terminal ID2:
-	//	"$2" ID;
+	//	'$2' ID;
 	public TerminalRule getID2Rule() {
 		return tID2;
 	} 
 
 	//terminal ID3:
-	//	"$3" ID;
+	//	'$3' ID;
 	public TerminalRule getID3Rule() {
 		return tID3;
 	} 
@@ -2571,7 +2571,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SingleContainmentReferenceChild1:
-	//	val="kw1";
+	//	val='kw1';
 	public SingleContainmentReferenceChild1Elements getSingleContainmentReferenceChild1Access() {
 		return pSingleContainmentReferenceChild1;
 	}
@@ -2581,7 +2581,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SingleContainmentReferenceChild2:
-	//	val="kw2";
+	//	val='kw2';
 	public SingleContainmentReferenceChild2Elements getSingleContainmentReferenceChild2Access() {
 		return pSingleContainmentReferenceChild2;
 	}
@@ -2591,7 +2591,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SingleContainmentReferenceChild3:
-	//	val="kw3";
+	//	val='kw3';
 	public SingleContainmentReferenceChild3Elements getSingleContainmentReferenceChild3Access() {
 		return pSingleContainmentReferenceChild3;
 	}
@@ -2661,7 +2661,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Float:
-	//	"#22" {Float} "Bye";
+	//	"#22" {Float} 'Bye';
 	public FloatElements getFloatAccess() {
 		return pFloat;
 	}
@@ -2752,7 +2752,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//UnorderedGroupOptional:
-	//	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
+	//	"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?);
 	public UnorderedGroupOptionalElements getUnorderedGroupOptionalAccess() {
 		return pUnorderedGroupOptional;
 	}
@@ -2762,7 +2762,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//UnorderedGroupBoolean:
-	//	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
+	//	'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?);
 	public UnorderedGroupBooleanElements getUnorderedGroupBooleanAccess() {
 		return pUnorderedGroupBoolean;
 	}
@@ -2772,7 +2772,7 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Complex1:
-	//	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
+	//	'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
 	//	val6+=ID)*;
 	public Complex1Elements getComplex1Access() {
 		return pComplex1;
@@ -2792,8 +2792,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getOptionalDoubleAccess().getRule();
 	}
 
-	//DOUBLE returns ecore::EDouble:
-	//	INT ("." INT)?;
+	//DOUBLE ecore::EDouble:
+	//	INT ("." INT)?
 	public DOUBLEElements getDOUBLEAccess() {
 		return pDOUBLE;
 	}
@@ -2802,8 +2802,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getDOUBLEAccess().getRule();
 	}
 
-	//NullValueGenerated returns NullValue:
-	//	"#29" value=NULL_STRING;
+	//NullValueGenerated NullValue:
+	//	"#29" value=NULL_STRING
 	public NullValueGeneratedElements getNullValueGeneratedAccess() {
 		return pNullValueGenerated;
 	}
@@ -2812,8 +2812,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getNullValueGeneratedAccess().getRule();
 	}
 
-	//NullValueInterpreted returns NullValue:
-	//	"#30" value=NULL_STRING foo=ID?;
+	//NullValueInterpreted NullValue:
+	//	"#30" value=NULL_STRING foo=ID?
 	public NullValueInterpretedElements getNullValueInterpretedAccess() {
 		return pNullValueInterpreted;
 	}
@@ -2832,8 +2832,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getNULL_STRINGAccess().getRule();
 	}
 
-	//NullCrossRefGenerated returns NullCrossRef:
-	//	"#31" ref=[ecore::EObject];
+	//NullCrossRefGenerated NullCrossRef:
+	//	"#31" ref=[ecore::EObject]
 	public NullCrossRefGeneratedElements getNullCrossRefGeneratedAccess() {
 		return pNullCrossRefGenerated;
 	}
@@ -2842,8 +2842,8 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getNullCrossRefGeneratedAccess().getRule();
 	}
 
-	//NullCrossRefInterpreted returns NullCrossRef:
-	//	"#32" ref=[ecore::EObject] foo=ID?;
+	//NullCrossRefInterpreted NullCrossRef:
+	//	"#32" ref=[ecore::EObject] foo=ID?
 	public NullCrossRefInterpretedElements getNullCrossRefInterpretedAccess() {
 		return pNullCrossRefInterpreted;
 	}
@@ -2853,38 +2853,38 @@ public class SequencerTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

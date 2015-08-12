@@ -98,11 +98,11 @@ protected class Model_ChildAssignment extends AssignmentToken  {
 /************ begin Rule Greeting ****************
  *
  * Greeting:
- * 	"hallo" name=ID;
+ * 	'hallo' name=ID;
  *
  **/
 
-// "hallo" name=ID
+// 'hallo' name=ID
 protected class Greeting_Group extends GroupToken {
 	
 	public Greeting_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -131,7 +131,7 @@ protected class Greeting_Group extends GroupToken {
 
 }
 
-// "hallo"
+// 'hallo'
 protected class Greeting_HalloKeyword_0 extends KeywordToken  {
 	
 	public Greeting_HalloKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

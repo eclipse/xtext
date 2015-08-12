@@ -111,59 +111,59 @@ public class AbstractIgnoreCaseLinkingTestLanguageElementTypeProvider implements
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsAssignmentElementType() {
 		return Model_ElementsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsElementParserRuleCall_0ElementType() {
 		return Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElementElementType() {
 		return Element_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_GroupElementType() {
 		return Element_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameAssignment_0ElementType() {
 		return Element_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameIDTerminalRuleCall_0_0ElementType() {
 		return Element_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ReferenceAssignment_1ElementType() {
 		return Element_ReferenceAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ReferenceElementCrossReference_1_0ElementType() {
 		return Element_ReferenceElementCrossReference_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ReferenceElementIDTerminalRuleCall_1_0_1ElementType() {
 		return Element_ReferenceElementIDTerminalRuleCall_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_LeftCurlyBracketKeyword_2ElementType() {
 		return Element_LeftCurlyBracketKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ElementsAssignment_3ElementType() {
 		return Element_ElementsAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ElementsElementParserRuleCall_3_0ElementType() {
 		return Element_ElementsElementParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_RightCurlyBracketKeyword_4ElementType() {
 		return Element_RightCurlyBracketKeyword_4_ELEMENT_TYPE;
 	}

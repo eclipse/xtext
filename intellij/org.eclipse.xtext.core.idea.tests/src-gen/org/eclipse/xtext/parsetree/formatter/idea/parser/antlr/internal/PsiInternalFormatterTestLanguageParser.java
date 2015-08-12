@@ -29,8 +29,8 @@ public class PsiInternalFormatterTestLanguageParser extends AbstractPsiAntlrPars
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__21=21;
+    public static final int RULE_ANY_OTHER=10;
     public static final int T__20=20;
     public static final int EOF=-1;
     public static final int T__19=19;

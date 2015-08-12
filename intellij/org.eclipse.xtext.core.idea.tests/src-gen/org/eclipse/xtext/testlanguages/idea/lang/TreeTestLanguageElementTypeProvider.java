@@ -116,63 +116,63 @@ public class TreeTestLanguageElementTypeProvider implements IElementTypeProvider
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ChildrenAssignmentElementType() {
 		return Model_ChildrenAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ChildrenNodeParserRuleCall_0ElementType() {
 		return Model_ChildrenNodeParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeElementType() {
 		return Node_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_GroupElementType() {
 		return Node_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_NameAssignment_0ElementType() {
 		return Node_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_NameIDTerminalRuleCall_0_0ElementType() {
 		return Node_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_LeftParenthesisKeyword_1ElementType() {
 		return Node_LeftParenthesisKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_AttribAssignment_2ElementType() {
 		return Node_AttribAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_AttribSTRINGTerminalRuleCall_2_0ElementType() {
 		return Node_AttribSTRINGTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_RightParenthesisKeyword_3ElementType() {
 		return Node_RightParenthesisKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_LeftCurlyBracketKeyword_4ElementType() {
 		return Node_LeftCurlyBracketKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_ChildrenAssignment_5ElementType() {
 		return Node_ChildrenAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_ChildrenNodeParserRuleCall_5_0ElementType() {
 		return Node_ChildrenNodeParserRuleCall_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_RightCurlyBracketSemicolonKeyword_6ElementType() {
 		return Node_RightCurlyBracketSemicolonKeyword_6_ELEMENT_TYPE;
 	}

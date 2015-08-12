@@ -147,7 +147,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -250,7 +250,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }
@@ -353,7 +353,7 @@ public class InternalAbstractTestLanguageParser extends AbstractInternalAntlrPar
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
             	    
 
             }

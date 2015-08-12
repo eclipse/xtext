@@ -151,7 +151,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"child",
                             		lv_child_0_0, 
-                            		"Greeting");
+                            		"org.eclipse.xtext.testlanguages.OptionalEmptyTestLanguage.Greeting");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -255,7 +255,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

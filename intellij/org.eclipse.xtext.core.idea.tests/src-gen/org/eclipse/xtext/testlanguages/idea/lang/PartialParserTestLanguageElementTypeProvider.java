@@ -460,319 +460,319 @@ public class PartialParserTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainerElementType() {
 		return SomeContainer_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_GroupElementType() {
 		return SomeContainer_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_ContainerKeyword_0ElementType() {
 		return SomeContainer_ContainerKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_NameAssignment_1ElementType() {
 		return SomeContainer_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_NameIDTerminalRuleCall_1_0ElementType() {
 		return SomeContainer_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_LeftCurlyBracketKeyword_2ElementType() {
 		return SomeContainer_LeftCurlyBracketKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_Alternatives_3ElementType() {
 		return SomeContainer_Alternatives_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_NestedAssignment_3_0ElementType() {
 		return SomeContainer_NestedAssignment_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_NestedNestedParserRuleCall_3_0_0ElementType() {
 		return SomeContainer_NestedNestedParserRuleCall_3_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_ContentAssignment_3_1ElementType() {
 		return SomeContainer_ContentAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_ContentContentParserRuleCall_3_1_0ElementType() {
 		return SomeContainer_ContentContentParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSomeContainer_RightCurlyBracketKeyword_4ElementType() {
 		return SomeContainer_RightCurlyBracketKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedElementType() {
 		return Nested_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_GroupElementType() {
 		return Nested_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_NestedKeyword_0ElementType() {
 		return Nested_NestedKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_LeftCurlyBracketKeyword_1ElementType() {
 		return Nested_LeftCurlyBracketKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_NestedAssignment_2ElementType() {
 		return Nested_NestedAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_NestedSomeContainerParserRuleCall_2_0ElementType() {
 		return Nested_NestedSomeContainerParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNested_RightCurlyBracketKeyword_3ElementType() {
 		return Nested_RightCurlyBracketKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContentElementType() {
 		return Content_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContent_AlternativesElementType() {
 		return Content_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContent_ChildrenParserRuleCall_0ElementType() {
 		return Content_ChildrenParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getContent_AbstractChildrenParserRuleCall_1ElementType() {
 		return Content_AbstractChildrenParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildrenElementType() {
 		return Children_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_GroupElementType() {
 		return Children_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_ChildrenKeyword_0ElementType() {
 		return Children_ChildrenKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_LeftCurlyBracketKeyword_1ElementType() {
 		return Children_LeftCurlyBracketKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_ChildrenAssignment_2ElementType() {
 		return Children_ChildrenAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_ChildrenChildParserRuleCall_2_0ElementType() {
 		return Children_ChildrenChildParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_Group_3ElementType() {
 		return Children_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_CommaKeyword_3_0ElementType() {
 		return Children_CommaKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_ChildrenAssignment_3_1ElementType() {
 		return Children_ChildrenAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_ChildrenChildParserRuleCall_3_1_0ElementType() {
 		return Children_ChildrenChildParserRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildren_RightCurlyBracketKeyword_4ElementType() {
 		return Children_RightCurlyBracketKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChildElementType() {
 		return Child_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_GroupElementType() {
 		return Child_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_HyphenMinusGreaterThanSignKeyword_0ElementType() {
 		return Child_HyphenMinusGreaterThanSignKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_CKeyword_1ElementType() {
 		return Child_CKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_LeftParenthesisKeyword_2ElementType() {
 		return Child_LeftParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_ValueAssignment_3ElementType() {
 		return Child_ValueAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_ValueNamedParserRuleCall_3_0ElementType() {
 		return Child_ValueNamedParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChild_RightParenthesisKeyword_4ElementType() {
 		return Child_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildrenElementType() {
 		return AbstractChildren_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_GroupElementType() {
 		return AbstractChildren_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_AbstractChildrenKeyword_0ElementType() {
 		return AbstractChildren_AbstractChildrenKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_LeftCurlyBracketKeyword_1ElementType() {
 		return AbstractChildren_LeftCurlyBracketKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_AbstractChildrenAssignment_2ElementType() {
 		return AbstractChildren_AbstractChildrenAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_AbstractChildrenAbstractChildParserRuleCall_2_0ElementType() {
 		return AbstractChildren_AbstractChildrenAbstractChildParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildren_RightCurlyBracketKeyword_3ElementType() {
 		return AbstractChildren_RightCurlyBracketKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChildElementType() {
 		return AbstractChild_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChild_AlternativesElementType() {
 		return AbstractChild_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChild_FirstConcreteParserRuleCall_0ElementType() {
 		return AbstractChild_FirstConcreteParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractChild_SecondConcreteParserRuleCall_1ElementType() {
 		return AbstractChild_SecondConcreteParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcreteElementType() {
 		return FirstConcrete_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_GroupElementType() {
 		return FirstConcrete_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType() {
 		return FirstConcrete_HyphenMinusGreaterThanSignKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_FKeyword_1ElementType() {
 		return FirstConcrete_FKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_LeftParenthesisKeyword_2ElementType() {
 		return FirstConcrete_LeftParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_ValueAssignment_3ElementType() {
 		return FirstConcrete_ValueAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_ValueNamedParserRuleCall_3_0ElementType() {
 		return FirstConcrete_ValueNamedParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_ReferencedContainerAssignment_4ElementType() {
 		return FirstConcrete_ReferencedContainerAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_ReferencedContainerSomeContainerCrossReference_4_0ElementType() {
 		return FirstConcrete_ReferencedContainerSomeContainerCrossReference_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_ReferencedContainerSomeContainerIDTerminalRuleCall_4_0_1ElementType() {
 		return FirstConcrete_ReferencedContainerSomeContainerIDTerminalRuleCall_4_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFirstConcrete_RightParenthesisKeyword_5ElementType() {
 		return FirstConcrete_RightParenthesisKeyword_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcreteElementType() {
 		return SecondConcrete_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_GroupElementType() {
 		return SecondConcrete_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_HyphenMinusGreaterThanSignKeyword_0ElementType() {
 		return SecondConcrete_HyphenMinusGreaterThanSignKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_FKeyword_1ElementType() {
 		return SecondConcrete_FKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_SKeyword_2ElementType() {
 		return SecondConcrete_SKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_LeftParenthesisKeyword_3ElementType() {
 		return SecondConcrete_LeftParenthesisKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_ValueAssignment_4ElementType() {
 		return SecondConcrete_ValueAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_ValueNamedParserRuleCall_4_0ElementType() {
 		return SecondConcrete_ValueNamedParserRuleCall_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_ReferencedChildrenAssignment_5ElementType() {
 		return SecondConcrete_ReferencedChildrenAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_ReferencedChildrenChildCrossReference_5_0ElementType() {
 		return SecondConcrete_ReferencedChildrenChildCrossReference_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_ReferencedChildrenChildIDTerminalRuleCall_5_0_1ElementType() {
 		return SecondConcrete_ReferencedChildrenChildIDTerminalRuleCall_5_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSecondConcrete_RightParenthesisKeyword_6ElementType() {
 		return SecondConcrete_RightParenthesisKeyword_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNamedElementType() {
 		return Named_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNamed_NameAssignmentElementType() {
 		return Named_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNamed_NameIDTerminalRuleCall_0ElementType() {
 		return Named_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}

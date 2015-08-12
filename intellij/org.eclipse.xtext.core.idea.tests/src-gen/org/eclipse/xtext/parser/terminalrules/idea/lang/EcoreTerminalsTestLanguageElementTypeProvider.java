@@ -108,59 +108,59 @@ public class EcoreTerminalsTestLanguageElementTypeProvider implements IElementTy
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0ElementType() {
 		return Model_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_IntKeyword_0_0ElementType() {
 		return Model_IntKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_IntValuesAssignment_0_1ElementType() {
 		return Model_IntValuesAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_IntValuesEINTTerminalRuleCall_0_1_0ElementType() {
 		return Model_IntValuesEINTTerminalRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DoubleKeyword_1_0ElementType() {
 		return Model_DoubleKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DoubleValuesAssignment_1_1ElementType() {
 		return Model_DoubleValuesAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DoubleValuesEDOUBLETerminalRuleCall_1_1_0ElementType() {
 		return Model_DoubleValuesEDOUBLETerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2ElementType() {
 		return Model_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DateKeyword_2_0ElementType() {
 		return Model_DateKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DateValuesAssignment_2_1ElementType() {
 		return Model_DateValuesAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DateValuesEDATETerminalRuleCall_2_1_0ElementType() {
 		return Model_DateValuesEDATETerminalRuleCall_2_1_0_ELEMENT_TYPE;
 	}

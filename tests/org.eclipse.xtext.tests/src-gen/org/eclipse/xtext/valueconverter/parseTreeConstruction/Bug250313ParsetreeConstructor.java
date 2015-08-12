@@ -43,16 +43,16 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
- * 	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
- * 	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+ * 	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
+ * 	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
+ * 	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
  * 	ref=([Child1|STRING] | [Child2]))?;
  *
  **/
 
-// "1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
-// NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
-// multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+// '1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
+// NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
+// multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
 // ref=([Child1|STRING] | [Child2]))?
 protected class Model_Alternatives extends AlternativesToken {
 
@@ -90,7 +90,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+// '1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -112,7 +112,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+// value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 	
 	public Model_ValueAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -166,7 +166,7 @@ protected class Model_ValueAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "1+" multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+// '1+' multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -188,7 +188,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "1+"
+// '1+'
 protected class Model_DigitOnePlusSignKeyword_1_0 extends KeywordToken  {
 	
 	public Model_DigitOnePlusSignKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -209,7 +209,7 @@ protected class Model_DigitOnePlusSignKeyword_1_0 extends KeywordToken  {
 
 }
 
-// multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+// multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 	
 	public Model_MultiValueAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -264,7 +264,7 @@ protected class Model_MultiValueAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "2" value=STRING
+// '2' value=STRING
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -286,7 +286,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Model_DigitTwoKeyword_2_0 extends KeywordToken  {
 	
 	public Model_DigitTwoKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -342,7 +342,7 @@ protected class Model_ValueAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "2+" multiValue+=STRING
+// '2+' multiValue+=STRING
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -364,7 +364,7 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "2+"
+// '2+'
 protected class Model_DigitTwoPlusSignKeyword_3_0 extends KeywordToken  {
 	
 	public Model_DigitTwoPlusSignKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -420,7 +420,7 @@ protected class Model_MultiValueAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "3" value=Datatype
+// '3' value=Datatype
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -442,7 +442,7 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Model_DigitThreeKeyword_4_0 extends KeywordToken  {
 	
 	public Model_DigitThreeKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -498,7 +498,7 @@ protected class Model_ValueAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// "3+" multiValue+=Datatype
+// '3+' multiValue+=Datatype
 protected class Model_Group_5 extends GroupToken {
 	
 	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -520,7 +520,7 @@ protected class Model_Group_5 extends GroupToken {
 
 }
 
-// "3+"
+// '3+'
 protected class Model_DigitThreePlusSignKeyword_5_0 extends KeywordToken  {
 	
 	public Model_DigitThreePlusSignKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -576,7 +576,7 @@ protected class Model_MultiValueAssignment_5_1 extends AssignmentToken  {
 }
 
 
-// "4" value=NestedDatatype
+// '4' value=NestedDatatype
 protected class Model_Group_6 extends GroupToken {
 	
 	public Model_Group_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -598,7 +598,7 @@ protected class Model_Group_6 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Model_DigitFourKeyword_6_0 extends KeywordToken  {
 	
 	public Model_DigitFourKeyword_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -654,7 +654,7 @@ protected class Model_ValueAssignment_6_1 extends AssignmentToken  {
 }
 
 
-// "4+" multiValue+=NestedDatatype
+// '4+' multiValue+=NestedDatatype
 protected class Model_Group_7 extends GroupToken {
 	
 	public Model_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -676,7 +676,7 @@ protected class Model_Group_7 extends GroupToken {
 
 }
 
-// "4+"
+// '4+'
 protected class Model_DigitFourPlusSignKeyword_7_0 extends KeywordToken  {
 	
 	public Model_DigitFourPlusSignKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -732,7 +732,7 @@ protected class Model_MultiValueAssignment_7_1 extends AssignmentToken  {
 }
 
 
-// ("content" children=Child) ("ref" ref=([Child1|STRING] | [Child2]))?
+// ('content' children=Child) ('ref' ref=([Child1|STRING] | [Child2]))?
 protected class Model_Group_8 extends GroupToken {
 	
 	public Model_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -755,7 +755,7 @@ protected class Model_Group_8 extends GroupToken {
 
 }
 
-// "content" children=Child
+// ('content' children=Child)
 protected class Model_Group_8_0 extends GroupToken {
 	
 	public Model_Group_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -777,7 +777,7 @@ protected class Model_Group_8_0 extends GroupToken {
 
 }
 
-// "content"
+// 'content'
 protected class Model_ContentKeyword_8_0_0 extends KeywordToken  {
 	
 	public Model_ContentKeyword_8_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -845,7 +845,7 @@ protected class Model_ChildrenAssignment_8_0_1 extends AssignmentToken  {
 }
 
 
-// ("ref" ref=([Child1|STRING] | [Child2]))?
+// ('ref' ref=([Child1|STRING] | [Child2]))?
 protected class Model_Group_8_1 extends GroupToken {
 	
 	public Model_Group_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -867,7 +867,7 @@ protected class Model_Group_8_1 extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Model_RefKeyword_8_1_0 extends KeywordToken  {
 	
 	public Model_RefKeyword_8_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1113,15 +1113,11 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Child2 ****************
  *
- * // TODO rename test language to ValueConverterTestLanguage
- * // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
  * Child2:
  * 	name=STRING;
  *
  **/
 
-// // TODO rename test language to ValueConverterTestLanguage
-// // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 // name=STRING
 protected class Child2_NameAssignment extends AssignmentToken  {
 	

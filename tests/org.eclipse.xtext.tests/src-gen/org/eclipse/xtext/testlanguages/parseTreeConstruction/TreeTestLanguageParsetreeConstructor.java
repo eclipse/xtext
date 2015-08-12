@@ -97,11 +97,13 @@ protected class Model_ChildrenAssignment extends AssignmentToken  {
 /************ begin Rule Node ****************
  *
  * Node:
- * 	name=ID "(" attrib=STRING ")" "{" children+=Node* "};";
+ * 	name=ID
+ * 	'(' attrib=STRING ')'
+ * 	'{' children+=Node* '};';
  *
  **/
 
-// name=ID "(" attrib=STRING ")" "{" children+=Node* "};"
+// name=ID '(' attrib=STRING ')' '{' children+=Node* '};'
 protected class Node_Group extends GroupToken {
 	
 	public Node_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -163,7 +165,7 @@ protected class Node_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// "("
+// '('
 protected class Node_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
 	public Node_LeftParenthesisKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -219,7 +221,7 @@ protected class Node_AttribAssignment_2 extends AssignmentToken  {
 
 }
 
-// ")"
+// ')'
 protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 	
 	public Node_RightParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -241,7 +243,7 @@ protected class Node_RightParenthesisKeyword_3 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Node_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Node_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -310,7 +312,7 @@ protected class Node_ChildrenAssignment_5 extends AssignmentToken  {
 	}	
 }
 
-// "};"
+// '};'
 protected class Node_RightCurlyBracketSemicolonKeyword_6 extends KeywordToken  {
 	
 	public Node_RightCurlyBracketSemicolonKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

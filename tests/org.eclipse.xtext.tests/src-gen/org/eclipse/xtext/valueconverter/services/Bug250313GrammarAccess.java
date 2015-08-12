@@ -19,7 +19,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cDigitOneKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -78,31 +78,31 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRefChild2IDTerminalRuleCall_8_1_1_0_1_1 = (RuleCall)cRefChild2CrossReference_8_1_1_0_1.eContents().get(1);
 		
 		//Model:
-		//	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
-		//	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
-		//	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+		//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
+		//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
+		//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
 		//	ref=([Child1|STRING] | [Child2]))?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
-		//NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
-		//multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
+		//NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
+		//multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
 		//ref=([Child1|STRING] | [Child2]))?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+		//'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"1"?
+		//'1'?
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 
-		//value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+		//value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Assignment getValueAssignment_0_1() { return cValueAssignment_0_1; }
 
-		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID
+		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Alternatives getValueAlternatives_0_1_0() { return cValueAlternatives_0_1_0; }
 
-		//"mykeyword1"
+		//'mykeyword1'
 		public Keyword getValueMykeyword1Keyword_0_1_0_0() { return cValueMykeyword1Keyword_0_1_0_0; }
 
 		//STRING
@@ -117,19 +117,19 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_0_1_0_4() { return cValueIDTerminalRuleCall_0_1_0_4; }
 
-		//"1+" multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+		//'1+' multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"1+"
+		//'1+'
 		public Keyword getDigitOnePlusSignKeyword_1_0() { return cDigitOnePlusSignKeyword_1_0; }
 
-		//multiValue+=("mykeyword1" | STRING | NestedDatatype | Datatype | ID)
+		//multiValue+=('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Assignment getMultiValueAssignment_1_1() { return cMultiValueAssignment_1_1; }
 
-		//"mykeyword1" | STRING | NestedDatatype | Datatype | ID
+		//('mykeyword1' | STRING | NestedDatatype | Datatype | ID)
 		public Alternatives getMultiValueAlternatives_1_1_0() { return cMultiValueAlternatives_1_1_0; }
 
-		//"mykeyword1"
+		//'mykeyword1'
 		public Keyword getMultiValueMykeyword1Keyword_1_1_0_0() { return cMultiValueMykeyword1Keyword_1_1_0_0; }
 
 		//STRING
@@ -144,10 +144,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getMultiValueIDTerminalRuleCall_1_1_0_4() { return cMultiValueIDTerminalRuleCall_1_1_0_4; }
 
-		//"2" value=STRING
+		//'2' value=STRING
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_2_0() { return cDigitTwoKeyword_2_0; }
 
 		//value=STRING
@@ -156,10 +156,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getValueSTRINGTerminalRuleCall_2_1_0() { return cValueSTRINGTerminalRuleCall_2_1_0; }
 
-		//"2+" multiValue+=STRING
+		//'2+' multiValue+=STRING
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"2+"
+		//'2+'
 		public Keyword getDigitTwoPlusSignKeyword_3_0() { return cDigitTwoPlusSignKeyword_3_0; }
 
 		//multiValue+=STRING
@@ -168,10 +168,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getMultiValueSTRINGTerminalRuleCall_3_1_0() { return cMultiValueSTRINGTerminalRuleCall_3_1_0; }
 
-		//"3" value=Datatype
+		//'3' value=Datatype
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"3"
+		//'3'
 		public Keyword getDigitThreeKeyword_4_0() { return cDigitThreeKeyword_4_0; }
 
 		//value=Datatype
@@ -180,10 +180,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Datatype
 		public RuleCall getValueDatatypeParserRuleCall_4_1_0() { return cValueDatatypeParserRuleCall_4_1_0; }
 
-		//"3+" multiValue+=Datatype
+		//'3+' multiValue+=Datatype
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"3+"
+		//'3+'
 		public Keyword getDigitThreePlusSignKeyword_5_0() { return cDigitThreePlusSignKeyword_5_0; }
 
 		//multiValue+=Datatype
@@ -192,10 +192,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Datatype
 		public RuleCall getMultiValueDatatypeParserRuleCall_5_1_0() { return cMultiValueDatatypeParserRuleCall_5_1_0; }
 
-		//"4" value=NestedDatatype
+		//'4' value=NestedDatatype
 		public Group getGroup_6() { return cGroup_6; }
 
-		//"4"
+		//'4'
 		public Keyword getDigitFourKeyword_6_0() { return cDigitFourKeyword_6_0; }
 
 		//value=NestedDatatype
@@ -204,10 +204,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//NestedDatatype
 		public RuleCall getValueNestedDatatypeParserRuleCall_6_1_0() { return cValueNestedDatatypeParserRuleCall_6_1_0; }
 
-		//"4+" multiValue+=NestedDatatype
+		//'4+' multiValue+=NestedDatatype
 		public Group getGroup_7() { return cGroup_7; }
 
-		//"4+"
+		//'4+'
 		public Keyword getDigitFourPlusSignKeyword_7_0() { return cDigitFourPlusSignKeyword_7_0; }
 
 		//multiValue+=NestedDatatype
@@ -216,13 +216,13 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//NestedDatatype
 		public RuleCall getMultiValueNestedDatatypeParserRuleCall_7_1_0() { return cMultiValueNestedDatatypeParserRuleCall_7_1_0; }
 
-		//("content" children=Child) ("ref" ref=([Child1|STRING] | [Child2]))?
+		//('content' children=Child) ('ref' ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//"content" children=Child
+		//('content' children=Child)
 		public Group getGroup_8_0() { return cGroup_8_0; }
 
-		//"content"
+		//'content'
 		public Keyword getContentKeyword_8_0_0() { return cContentKeyword_8_0_0; }
 
 		//children=Child
@@ -231,10 +231,10 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		//Child
 		public RuleCall getChildrenChildParserRuleCall_8_0_1_0() { return cChildrenChildParserRuleCall_8_0_1_0; }
 
-		//("ref" ref=([Child1|STRING] | [Child2]))?
+		//('ref' ref=([Child1|STRING] | [Child2]))?
 		public Group getGroup_8_1() { return cGroup_8_1; }
 
-		//"ref"
+		//'ref'
 		public Keyword getRefKeyword_8_1_0() { return cRefKeyword_8_1_0; }
 
 		//ref=([Child1|STRING] | [Child2])
@@ -257,23 +257,23 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class DatatypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Datatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Datatype:
-		//	ID "-" ID;
+		//	ID '-' ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID "-" ID
+		//ID '-' ID
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"-"
+		//'-'
 		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
 
 		//ID
@@ -281,23 +281,23 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class NestedDatatypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedDatatype");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cPlusSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//NestedDatatype:
-		//	ID "+" Datatype?;
+		//	ID '+' Datatype?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID "+" Datatype?
+		//ID '+' Datatype?
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1() { return cPlusSignKeyword_1; }
 
 		//Datatype?
@@ -305,7 +305,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ChildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Child");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cChild1ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cChild2ParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -325,7 +325,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class Child1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Child1");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -341,23 +341,17 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class Child2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.Bug250313.Child2");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//// TODO rename test language to ValueConverterTestLanguage
-		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//Child2:
 		//	name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//// TODO rename test language to ValueConverterTestLanguage
-		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//name=STRING
 		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		//// TODO rename test language to ValueConverterTestLanguage
-		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 		//STRING
 		public RuleCall getNameSTRINGTerminalRuleCall_0() { return cNameSTRINGTerminalRuleCall_0; }
 	}
@@ -415,9 +409,9 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	"1"? value=("mykeyword1" | STRING | NestedDatatype | Datatype | ID) | "1+" multiValue+=("mykeyword1" | STRING |
-	//	NestedDatatype | Datatype | ID) | "2" value=STRING | "2+" multiValue+=STRING | "3" value=Datatype | "3+"
-	//	multiValue+=Datatype | "4" value=NestedDatatype | "4+" multiValue+=NestedDatatype | ("content" children=Child) ("ref"
+	//	'1'? value=('mykeyword1' | STRING | NestedDatatype | Datatype | ID) | '1+' multiValue+=('mykeyword1' | STRING |
+	//	NestedDatatype | Datatype | ID) | '2' value=STRING | '2+' multiValue+=STRING | '3' value=Datatype | '3+'
+	//	multiValue+=Datatype | '4' value=NestedDatatype | '4+' multiValue+=NestedDatatype | ('content' children=Child) ('ref'
 	//	ref=([Child1|STRING] | [Child2]))?;
 	public ModelElements getModelAccess() {
 		return pModel;
@@ -428,7 +422,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Datatype:
-	//	ID "-" ID;
+	//	ID '-' ID;
 	public DatatypeElements getDatatypeAccess() {
 		return pDatatype;
 	}
@@ -438,7 +432,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NestedDatatype:
-	//	ID "+" Datatype?;
+	//	ID '+' Datatype?;
 	public NestedDatatypeElements getNestedDatatypeAccess() {
 		return pNestedDatatype;
 	}
@@ -467,8 +461,6 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		return getChild1Access().getRule();
 	}
 
-	//// TODO rename test language to ValueConverterTestLanguage
-	//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
 	//Child2:
 	//	name=STRING;
 	public Child2Elements getChild2Access() {
@@ -480,38 +472,38 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

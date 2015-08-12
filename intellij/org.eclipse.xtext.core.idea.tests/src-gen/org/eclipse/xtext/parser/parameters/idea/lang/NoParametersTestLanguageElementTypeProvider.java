@@ -1,0 +1,1356 @@
+package org.eclipse.xtext.parser.parameters.idea.lang;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
+import org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.NoParametersTestLanguageFileImpl;
+import org.eclipse.xtext.parser.parameters.services.NoParametersTestLanguageGrammarAccess;
+import org.eclipse.xtext.psi.stubs.XtextFileElementType;
+import org.eclipse.xtext.psi.stubs.XtextFileStub;
+import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
+
+import com.intellij.psi.tree.IFileElementType;
+
+public class NoParametersTestLanguageElementTypeProvider implements IElementTypeProvider {
+
+	public static final IFileElementType FILE_TYPE = new XtextFileElementType<XtextFileStub<NoParametersTestLanguageFileImpl>>(NoParametersTestLanguageLanguage.INSTANCE);
+
+	private static final Map<EObject, IGrammarAwareElementType> GRAMMAR_ELEMENT_TYPE = new HashMap<EObject, IGrammarAwareElementType>();
+
+	private static IGrammarAwareElementType associate(IGrammarAwareElementType grammarAwareElementType) {
+		GRAMMAR_ELEMENT_TYPE.put(grammarAwareElementType.getGrammarElement(), grammarAwareElementType);
+		return grammarAwareElementType;
+	}
+
+	private static final NoParametersTestLanguageGrammarAccess GRAMMAR_ACCESS = NoParametersTestLanguageLanguage.INSTANCE.getInstance(NoParametersTestLanguageGrammarAccess.class);
+
+	private static class ParserRuleParametersFactory {
+		public static IGrammarAwareElementType createParserRuleParametersElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersRule());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_GroupElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ParserRuleParametersAction_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getParserRuleParametersAction_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Alternatives_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Alternatives_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getAlternatives_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitOneKeyword_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitOneKeyword_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitOneKeyword_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_0_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_0_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_0_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario1_TrueParserRuleCall_1_0_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitTwoKeyword_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario1_FalseParserRuleCall_1_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_2ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_2_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_2());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitThreeKeyword_1_2_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_2_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_2_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_2_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_TrueParserRuleCall_1_2_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_3ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_3_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_3());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitFourKeyword_1_3_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitFourKeyword_1_3_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitFourKeyword_1_3_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_3_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_3_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_3_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_FalseParserRuleCall_1_3_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_4ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_4_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_4());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_4_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_4_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_4_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitFiveKeyword_1_4_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_4_0_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_4_0_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_4_0_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_TrueParserRuleCall_1_4_0_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_5ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_5_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_5());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_5_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_5_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_5_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitSixKeyword_1_5_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_5_0_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_5_0_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_5_0_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_FalseParserRuleCall_1_5_0_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_6ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_6_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_6());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitSevenKeyword_1_6_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_6_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_6_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_6_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario3_TrueParserRuleCall_1_6_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_7ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_7_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_7());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitEightKeyword_1_7_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitEightKeyword_1_7_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitEightKeyword_1_7_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_7_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_7_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_7_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario3_FalseParserRuleCall_1_7_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_8ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_8_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_8());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitNineKeyword_1_8_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitNineKeyword_1_8_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitNineKeyword_1_8_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Alternatives_1_8_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Alternatives_1_8_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getAlternatives_1_8_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_8_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_8_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_8_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario4_TrueParserRuleCall_1_8_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_8_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_8_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_8_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_8_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_8_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_8_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_KeywordKeyword_1_8_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_KeywordKeyword_1_8_1_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getKeywordKeyword_1_8_1_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_9ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_9_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_9());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitOneDigitZeroKeyword_1_9_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Alternatives_1_9_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Alternatives_1_9_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getAlternatives_1_9_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_9_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_9_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_9_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario4_TrueParserRuleCall_1_9_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_9_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_9_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_9_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_9_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_9_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_9_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_KeywordKeyword_1_9_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_KeywordKeyword_1_9_1_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getKeywordKeyword_1_9_1_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_10ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_10_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_10());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitOneDigitOneKeyword_1_10_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Alternatives_1_10_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Alternatives_1_10_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getAlternatives_1_10_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_10_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_10_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_10_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario4_FalseParserRuleCall_1_10_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_10_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_10_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_10_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_10_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_10_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_10_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_KeywordKeyword_1_10_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_KeywordKeyword_1_10_1_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getKeywordKeyword_1_10_1_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_11ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_11_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_11());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getNumberSignDigitOneDigitTwoKeyword_1_11_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Alternatives_1_11_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Alternatives_1_11_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getAlternatives_1_11_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_11_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_11_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_11_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario4_FalseParserRuleCall_1_11_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_Group_1_11_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_Group_1_11_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getGroup_1_11_1_1());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioAssignment_1_11_1_1_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioAssignment_1_11_1_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioAssignment_1_11_1_1_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0());
+		}
+		public static IGrammarAwareElementType createParserRuleParameters_KeywordKeyword_1_11_1_1_1ElementType() {
+			return new IGrammarAwareElementType("ParserRuleParameters_KeywordKeyword_1_11_1_1_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getParserRuleParametersAccess().getKeywordKeyword_1_11_1_1_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParametersElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_GroupElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ParserRuleParametersAction_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Alternatives_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Alternatives_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitOneKeyword_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitOneKeyword_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_0_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_0_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_2_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_2ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_2_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_2_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_3_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_3ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitFourKeyword_1_3_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitFourKeyword_1_3_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_3_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_3_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_4_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_4ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_4_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_4_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_4_0_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_4_0_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_5_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_5ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_5_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_5_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_5_0_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_5_0_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_6_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_6ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_6_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_6_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_7_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_7ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitEightKeyword_1_7_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitEightKeyword_1_7_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_7_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_7_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_8_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_8ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitNineKeyword_1_8_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitNineKeyword_1_8_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Alternatives_1_8_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Alternatives_1_8_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_8_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_8_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_8_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_8_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_8_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_8_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_KeywordKeyword_1_8_1_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_KeywordKeyword_1_8_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_9_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_9ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Alternatives_1_9_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Alternatives_1_9_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_9_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_9_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_9_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_9_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_9_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_9_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_KeywordKeyword_1_9_1_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_KeywordKeyword_1_9_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_10_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_10ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Alternatives_1_10_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Alternatives_1_10_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_10_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_10_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_10_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_10_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_10_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_10_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_KeywordKeyword_1_10_1_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_KeywordKeyword_1_10_1_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_11_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_11ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Alternatives_1_11_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Alternatives_1_11_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_11_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_11_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_Group_1_11_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_Group_1_11_1_1ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioAssignment_1_11_1_1_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioAssignment_1_11_1_1_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0ElementType());
+
+	public static final IGrammarAwareElementType ParserRuleParameters_KeywordKeyword_1_11_1_1_1_ELEMENT_TYPE = associate(ParserRuleParametersFactory.createParserRuleParameters_KeywordKeyword_1_11_1_1_1ElementType());
+
+	private static class Scenario1_TrueFactory {
+		public static IGrammarAwareElementType createScenario1_TrueElementType() {
+			return new IGrammarAwareElementType("Scenario1_True_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_TrueRule());
+		}
+		public static IGrammarAwareElementType createScenario1_True_FirstAssignmentElementType() {
+			return new IGrammarAwareElementType("Scenario1_True_FirstAssignment_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_TrueAccess().getFirstAssignment());
+		}
+		public static IGrammarAwareElementType createScenario1_True_FirstIDTerminalRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_True_FirstIDTerminalRuleCall_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_TrueAccess().getFirstIDTerminalRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario1_True_ELEMENT_TYPE = associate(Scenario1_TrueFactory.createScenario1_TrueElementType());
+
+	public static final IGrammarAwareElementType Scenario1_True_FirstAssignment_ELEMENT_TYPE = associate(Scenario1_TrueFactory.createScenario1_True_FirstAssignmentElementType());
+
+	public static final IGrammarAwareElementType Scenario1_True_FirstIDTerminalRuleCall_0_ELEMENT_TYPE = associate(Scenario1_TrueFactory.createScenario1_True_FirstIDTerminalRuleCall_0ElementType());
+
+	private static class Scenario1_FalseFactory {
+		public static IGrammarAwareElementType createScenario1_FalseElementType() {
+			return new IGrammarAwareElementType("Scenario1_False_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_FalseRule());
+		}
+		public static IGrammarAwareElementType createScenario1_False_SecondAssignmentElementType() {
+			return new IGrammarAwareElementType("Scenario1_False_SecondAssignment_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_FalseAccess().getSecondAssignment());
+		}
+		public static IGrammarAwareElementType createScenario1_False_SecondIDTerminalRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_False_SecondIDTerminalRuleCall_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1_FalseAccess().getSecondIDTerminalRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario1_False_ELEMENT_TYPE = associate(Scenario1_FalseFactory.createScenario1_FalseElementType());
+
+	public static final IGrammarAwareElementType Scenario1_False_SecondAssignment_ELEMENT_TYPE = associate(Scenario1_FalseFactory.createScenario1_False_SecondAssignmentElementType());
+
+	public static final IGrammarAwareElementType Scenario1_False_SecondIDTerminalRuleCall_0_ELEMENT_TYPE = associate(Scenario1_FalseFactory.createScenario1_False_SecondIDTerminalRuleCall_0ElementType());
+
+	private static class Scenario2_TrueFactory {
+		public static IGrammarAwareElementType createScenario2_TrueElementType() {
+			return new IGrammarAwareElementType("Scenario2_True_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_TrueRule());
+		}
+		public static IGrammarAwareElementType createScenario2_True_FirstAssignmentElementType() {
+			return new IGrammarAwareElementType("Scenario2_True_FirstAssignment_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_TrueAccess().getFirstAssignment());
+		}
+		public static IGrammarAwareElementType createScenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Scenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_TrueAccess().getFirstIdOrKeyword_TrueParserRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario2_True_ELEMENT_TYPE = associate(Scenario2_TrueFactory.createScenario2_TrueElementType());
+
+	public static final IGrammarAwareElementType Scenario2_True_FirstAssignment_ELEMENT_TYPE = associate(Scenario2_TrueFactory.createScenario2_True_FirstAssignmentElementType());
+
+	public static final IGrammarAwareElementType Scenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0_ELEMENT_TYPE = associate(Scenario2_TrueFactory.createScenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0ElementType());
+
+	private static class Scenario2_FalseFactory {
+		public static IGrammarAwareElementType createScenario2_FalseElementType() {
+			return new IGrammarAwareElementType("Scenario2_False_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_FalseRule());
+		}
+		public static IGrammarAwareElementType createScenario2_False_FirstAssignmentElementType() {
+			return new IGrammarAwareElementType("Scenario2_False_FirstAssignment_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_FalseAccess().getFirstAssignment());
+		}
+		public static IGrammarAwareElementType createScenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Scenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2_FalseAccess().getFirstIdOrKeyword_FalseParserRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario2_False_ELEMENT_TYPE = associate(Scenario2_FalseFactory.createScenario2_FalseElementType());
+
+	public static final IGrammarAwareElementType Scenario2_False_FirstAssignment_ELEMENT_TYPE = associate(Scenario2_FalseFactory.createScenario2_False_FirstAssignmentElementType());
+
+	public static final IGrammarAwareElementType Scenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0_ELEMENT_TYPE = associate(Scenario2_FalseFactory.createScenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0ElementType());
+
+	private static class Scenario3_TrueFactory {
+		public static IGrammarAwareElementType createScenario3_TrueElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueRule());
+		}
+		public static IGrammarAwareElementType createScenario3_True_AlternativesElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createScenario3_True_FirstAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_FirstAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueAccess().getFirstAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueAccess().getFirstIdOrKeyword_TrueParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario3_True_SecondAssignment_1ElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_SecondAssignment_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueAccess().getSecondAssignment_1());
+		}
+		public static IGrammarAwareElementType createScenario3_True_SecondKeywordKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_True_SecondKeywordKeyword_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_TrueAccess().getSecondKeywordKeyword_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario3_True_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_TrueElementType());
+
+	public static final IGrammarAwareElementType Scenario3_True_Alternatives_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_True_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Scenario3_True_FirstAssignment_0_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_True_FirstAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_True_SecondAssignment_1_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_True_SecondAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_True_SecondKeywordKeyword_1_0_ELEMENT_TYPE = associate(Scenario3_TrueFactory.createScenario3_True_SecondKeywordKeyword_1_0ElementType());
+
+	private static class Scenario3_FalseFactory {
+		public static IGrammarAwareElementType createScenario3_FalseElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseRule());
+		}
+		public static IGrammarAwareElementType createScenario3_False_AlternativesElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createScenario3_False_FirstAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_FirstAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseAccess().getFirstAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseAccess().getFirstIdOrKeyword_FalseParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario3_False_SecondAssignment_1ElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_SecondAssignment_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseAccess().getSecondAssignment_1());
+		}
+		public static IGrammarAwareElementType createScenario3_False_SecondKeywordKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_False_SecondKeywordKeyword_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3_FalseAccess().getSecondKeywordKeyword_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario3_False_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_FalseElementType());
+
+	public static final IGrammarAwareElementType Scenario3_False_Alternatives_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_False_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Scenario3_False_FirstAssignment_0_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_False_FirstAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_False_SecondAssignment_1_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_False_SecondAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_False_SecondKeywordKeyword_1_0_ELEMENT_TYPE = associate(Scenario3_FalseFactory.createScenario3_False_SecondKeywordKeyword_1_0ElementType());
+
+	private static class Scenario4_TrueFactory {
+		public static IGrammarAwareElementType createScenario4_TrueElementType() {
+			return new IGrammarAwareElementType("Scenario4_True_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_TrueRule());
+		}
+		public static IGrammarAwareElementType createScenario4_True_GroupElementType() {
+			return new IGrammarAwareElementType("Scenario4_True_Group_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_TrueAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createScenario4_True_SecondAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_True_SecondAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_TrueAccess().getSecondAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_TrueAccess().getSecondIdOrKeyword_TrueParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario4_True_KeywordKeyword_1ElementType() {
+			return new IGrammarAwareElementType("Scenario4_True_KeywordKeyword_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_TrueAccess().getKeywordKeyword_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario4_True_ELEMENT_TYPE = associate(Scenario4_TrueFactory.createScenario4_TrueElementType());
+
+	public static final IGrammarAwareElementType Scenario4_True_Group_ELEMENT_TYPE = associate(Scenario4_TrueFactory.createScenario4_True_GroupElementType());
+
+	public static final IGrammarAwareElementType Scenario4_True_SecondAssignment_0_ELEMENT_TYPE = associate(Scenario4_TrueFactory.createScenario4_True_SecondAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario4_TrueFactory.createScenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_True_KeywordKeyword_1_ELEMENT_TYPE = associate(Scenario4_TrueFactory.createScenario4_True_KeywordKeyword_1ElementType());
+
+	private static class Scenario4_FalseFactory {
+		public static IGrammarAwareElementType createScenario4_FalseElementType() {
+			return new IGrammarAwareElementType("Scenario4_False_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_FalseRule());
+		}
+		public static IGrammarAwareElementType createScenario4_False_GroupElementType() {
+			return new IGrammarAwareElementType("Scenario4_False_Group_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_FalseAccess().getGroup());
+		}
+		public static IGrammarAwareElementType createScenario4_False_SecondAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_False_SecondAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_FalseAccess().getSecondAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_FalseAccess().getSecondIdOrKeyword_FalseParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario4_False_KeywordKeyword_1ElementType() {
+			return new IGrammarAwareElementType("Scenario4_False_KeywordKeyword_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4_FalseAccess().getKeywordKeyword_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario4_False_ELEMENT_TYPE = associate(Scenario4_FalseFactory.createScenario4_FalseElementType());
+
+	public static final IGrammarAwareElementType Scenario4_False_Group_ELEMENT_TYPE = associate(Scenario4_FalseFactory.createScenario4_False_GroupElementType());
+
+	public static final IGrammarAwareElementType Scenario4_False_SecondAssignment_0_ELEMENT_TYPE = associate(Scenario4_FalseFactory.createScenario4_False_SecondAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario4_FalseFactory.createScenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_False_KeywordKeyword_1_ELEMENT_TYPE = associate(Scenario4_FalseFactory.createScenario4_False_KeywordKeyword_1ElementType());
+
+	private static class IdOrKeyword_TrueFactory {
+		public static IGrammarAwareElementType createIdOrKeyword_TrueElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_True_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_TrueRule());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_True_AlternativesElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_True_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_TrueAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_True_KeywordKeyword_0ElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_True_KeywordKeyword_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_TrueAccess().getKeywordKeyword_0());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_True_IDTerminalRuleCall_1ElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_True_IDTerminalRuleCall_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_TrueAccess().getIDTerminalRuleCall_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType IdOrKeyword_True_ELEMENT_TYPE = associate(IdOrKeyword_TrueFactory.createIdOrKeyword_TrueElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_True_Alternatives_ELEMENT_TYPE = associate(IdOrKeyword_TrueFactory.createIdOrKeyword_True_AlternativesElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_True_KeywordKeyword_0_ELEMENT_TYPE = associate(IdOrKeyword_TrueFactory.createIdOrKeyword_True_KeywordKeyword_0ElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_True_IDTerminalRuleCall_1_ELEMENT_TYPE = associate(IdOrKeyword_TrueFactory.createIdOrKeyword_True_IDTerminalRuleCall_1ElementType());
+
+	private static class IdOrKeyword_FalseFactory {
+		public static IGrammarAwareElementType createIdOrKeyword_FalseElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_False_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_FalseRule());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_False_IDTerminalRuleCallElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_False_IDTerminalRuleCall_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeyword_FalseAccess().getIDTerminalRuleCall());
+		}
+	}
+
+	public static final IGrammarAwareElementType IdOrKeyword_False_ELEMENT_TYPE = associate(IdOrKeyword_FalseFactory.createIdOrKeyword_FalseElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_False_IDTerminalRuleCall_ELEMENT_TYPE = associate(IdOrKeyword_FalseFactory.createIdOrKeyword_False_IDTerminalRuleCallElementType());
+
+	private static class Scenario1Factory {
+		public static IGrammarAwareElementType createScenario1ElementType() {
+			return new IGrammarAwareElementType("Scenario1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Rule());
+		}
+		public static IGrammarAwareElementType createScenario1_AlternativesElementType() {
+			return new IGrammarAwareElementType("Scenario1_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getAlternatives());
+		}
+		public static IGrammarAwareElementType createScenario1_Group_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_Group_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getGroup_0());
+		}
+		public static IGrammarAwareElementType createScenario1_FirstAssignment_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_FirstAssignment_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getFirstAssignment_0_0());
+		}
+		public static IGrammarAwareElementType createScenario1_FirstIDTerminalRuleCall_0_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_FirstIDTerminalRuleCall_0_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getFirstIDTerminalRuleCall_0_0_0());
+		}
+		public static IGrammarAwareElementType createScenario1_Group_1ElementType() {
+			return new IGrammarAwareElementType("Scenario1_Group_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getGroup_1());
+		}
+		public static IGrammarAwareElementType createScenario1_SecondAssignment_1_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_SecondAssignment_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getSecondAssignment_1_0());
+		}
+		public static IGrammarAwareElementType createScenario1_SecondIDTerminalRuleCall_1_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario1_SecondIDTerminalRuleCall_1_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario1Access().getSecondIDTerminalRuleCall_1_0_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario1_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_Alternatives_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Scenario1_Group_0_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_Group_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_FirstAssignment_0_0_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_FirstAssignment_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_FirstIDTerminalRuleCall_0_0_0_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_Group_1_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_Group_1ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_SecondAssignment_1_0_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_SecondAssignment_1_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario1_SecondIDTerminalRuleCall_1_0_0_ELEMENT_TYPE = associate(Scenario1Factory.createScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
+
+	private static class Scenario2Factory {
+		public static IGrammarAwareElementType createScenario2ElementType() {
+			return new IGrammarAwareElementType("Scenario2_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2Rule());
+		}
+		public static IGrammarAwareElementType createScenario2_FirstAssignmentElementType() {
+			return new IGrammarAwareElementType("Scenario2_FirstAssignment_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2Access().getFirstAssignment());
+		}
+		public static IGrammarAwareElementType createScenario2_FirstIdOrKeywordParserRuleCall_0ElementType() {
+			return new IGrammarAwareElementType("Scenario2_FirstIdOrKeywordParserRuleCall_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario2Access().getFirstIdOrKeywordParserRuleCall_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario2_ELEMENT_TYPE = associate(Scenario2Factory.createScenario2ElementType());
+
+	public static final IGrammarAwareElementType Scenario2_FirstAssignment_ELEMENT_TYPE = associate(Scenario2Factory.createScenario2_FirstAssignmentElementType());
+
+	public static final IGrammarAwareElementType Scenario2_FirstIdOrKeywordParserRuleCall_0_ELEMENT_TYPE = associate(Scenario2Factory.createScenario2_FirstIdOrKeywordParserRuleCall_0ElementType());
+
+	private static class Scenario3Factory {
+		public static IGrammarAwareElementType createScenario3ElementType() {
+			return new IGrammarAwareElementType("Scenario3_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Rule());
+		}
+		public static IGrammarAwareElementType createScenario3_AlternativesElementType() {
+			return new IGrammarAwareElementType("Scenario3_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Access().getAlternatives());
+		}
+		public static IGrammarAwareElementType createScenario3_FirstAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_FirstAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Access().getFirstAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario3_FirstIdOrKeywordParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_FirstIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Access().getFirstIdOrKeywordParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario3_SecondAssignment_1ElementType() {
+			return new IGrammarAwareElementType("Scenario3_SecondAssignment_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Access().getSecondAssignment_1());
+		}
+		public static IGrammarAwareElementType createScenario3_SecondKeywordKeyword_1_0ElementType() {
+			return new IGrammarAwareElementType("Scenario3_SecondKeywordKeyword_1_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario3Access().getSecondKeywordKeyword_1_0());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario3_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_Alternatives_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3_AlternativesElementType());
+
+	public static final IGrammarAwareElementType Scenario3_FirstAssignment_0_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3_FirstAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_FirstIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3_FirstIdOrKeywordParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_SecondAssignment_1_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3_SecondAssignment_1ElementType());
+
+	public static final IGrammarAwareElementType Scenario3_SecondKeywordKeyword_1_0_ELEMENT_TYPE = associate(Scenario3Factory.createScenario3_SecondKeywordKeyword_1_0ElementType());
+
+	private static class Scenario4Factory {
+		public static IGrammarAwareElementType createScenario4ElementType() {
+			return new IGrammarAwareElementType("Scenario4_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4Rule());
+		}
+		public static IGrammarAwareElementType createScenario4_GroupElementType() {
+			return new IGrammarAwareElementType("Scenario4_Group_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4Access().getGroup());
+		}
+		public static IGrammarAwareElementType createScenario4_SecondAssignment_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_SecondAssignment_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4Access().getSecondAssignment_0());
+		}
+		public static IGrammarAwareElementType createScenario4_SecondIdOrKeywordParserRuleCall_0_0ElementType() {
+			return new IGrammarAwareElementType("Scenario4_SecondIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0());
+		}
+		public static IGrammarAwareElementType createScenario4_KeywordKeyword_1ElementType() {
+			return new IGrammarAwareElementType("Scenario4_KeywordKeyword_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getScenario4Access().getKeywordKeyword_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType Scenario4_ELEMENT_TYPE = associate(Scenario4Factory.createScenario4ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_Group_ELEMENT_TYPE = associate(Scenario4Factory.createScenario4_GroupElementType());
+
+	public static final IGrammarAwareElementType Scenario4_SecondAssignment_0_ELEMENT_TYPE = associate(Scenario4Factory.createScenario4_SecondAssignment_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_SecondIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE = associate(Scenario4Factory.createScenario4_SecondIdOrKeywordParserRuleCall_0_0ElementType());
+
+	public static final IGrammarAwareElementType Scenario4_KeywordKeyword_1_ELEMENT_TYPE = associate(Scenario4Factory.createScenario4_KeywordKeyword_1ElementType());
+
+	private static class IdOrKeywordFactory {
+		public static IGrammarAwareElementType createIdOrKeywordElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeywordRule());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_AlternativesElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_Alternatives_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeywordAccess().getAlternatives());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_Group_0ElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_Group_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeywordAccess().getGroup_0());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_KeywordKeyword_0_0ElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_KeywordKeyword_0_0_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeywordAccess().getKeywordKeyword_0_0());
+		}
+		public static IGrammarAwareElementType createIdOrKeyword_IDTerminalRuleCall_1ElementType() {
+			return new IGrammarAwareElementType("IdOrKeyword_IDTerminalRuleCall_1_ELEMENT_TYPE", NoParametersTestLanguageLanguage.INSTANCE, GRAMMAR_ACCESS.getIdOrKeywordAccess().getIDTerminalRuleCall_1());
+		}
+	}
+
+	public static final IGrammarAwareElementType IdOrKeyword_ELEMENT_TYPE = associate(IdOrKeywordFactory.createIdOrKeywordElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_Alternatives_ELEMENT_TYPE = associate(IdOrKeywordFactory.createIdOrKeyword_AlternativesElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_Group_0_ELEMENT_TYPE = associate(IdOrKeywordFactory.createIdOrKeyword_Group_0ElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_KeywordKeyword_0_0_ELEMENT_TYPE = associate(IdOrKeywordFactory.createIdOrKeyword_KeywordKeyword_0_0ElementType());
+
+	public static final IGrammarAwareElementType IdOrKeyword_IDTerminalRuleCall_1_ELEMENT_TYPE = associate(IdOrKeywordFactory.createIdOrKeyword_IDTerminalRuleCall_1ElementType());
+
+	@Override
+	public IFileElementType getFileType() {
+		return FILE_TYPE;
+	}
+
+	@Override
+	public IGrammarAwareElementType findElementType(EObject grammarElement) {
+		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
+	}
+
+	public IGrammarAwareElementType getParserRuleParametersElementType() {
+		return ParserRuleParameters_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_GroupElementType() {
+		return ParserRuleParameters_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ParserRuleParametersAction_0ElementType() {
+		return ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Alternatives_1ElementType() {
+		return ParserRuleParameters_Alternatives_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_0ElementType() {
+		return ParserRuleParameters_Group_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitOneKeyword_1_0_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitOneKeyword_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_0_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario1_TrueParserRuleCall_1_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_1ElementType() {
+		return ParserRuleParameters_Group_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_1_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario1_FalseParserRuleCall_1_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_2ElementType() {
+		return ParserRuleParameters_Group_1_2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_2_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_2_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_2_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_3ElementType() {
+		return ParserRuleParameters_Group_1_3_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitFourKeyword_1_3_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitFourKeyword_1_3_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_3_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_3_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_3_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_4ElementType() {
+		return ParserRuleParameters_Group_1_4_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_4_0ElementType() {
+		return ParserRuleParameters_Group_1_4_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_4_0_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_4_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_4_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_5ElementType() {
+		return ParserRuleParameters_Group_1_5_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_5_0ElementType() {
+		return ParserRuleParameters_Group_1_5_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_5_0_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_5_0_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_5_0_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_6ElementType() {
+		return ParserRuleParameters_Group_1_6_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_6_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_6_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario3_TrueParserRuleCall_1_6_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_7ElementType() {
+		return ParserRuleParameters_Group_1_7_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitEightKeyword_1_7_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitEightKeyword_1_7_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_7_1ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_7_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario3_FalseParserRuleCall_1_7_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_8ElementType() {
+		return ParserRuleParameters_Group_1_8_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitNineKeyword_1_8_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitNineKeyword_1_8_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Alternatives_1_8_1ElementType() {
+		return ParserRuleParameters_Alternatives_1_8_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_8_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_8_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_8_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_8_1_1ElementType() {
+		return ParserRuleParameters_Group_1_8_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_8_1_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_8_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_8_1_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_KeywordKeyword_1_8_1_1_1ElementType() {
+		return ParserRuleParameters_KeywordKeyword_1_8_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_9ElementType() {
+		return ParserRuleParameters_Group_1_9_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Alternatives_1_9_1ElementType() {
+		return ParserRuleParameters_Alternatives_1_9_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_9_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_9_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario4_TrueParserRuleCall_1_9_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_9_1_1ElementType() {
+		return ParserRuleParameters_Group_1_9_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_9_1_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_9_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_9_1_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_KeywordKeyword_1_9_1_1_1ElementType() {
+		return ParserRuleParameters_KeywordKeyword_1_9_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_10ElementType() {
+		return ParserRuleParameters_Group_1_10_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Alternatives_1_10_1ElementType() {
+		return ParserRuleParameters_Alternatives_1_10_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_10_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_10_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_10_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_10_1_1ElementType() {
+		return ParserRuleParameters_Group_1_10_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_10_1_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_10_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_TrueParserRuleCall_1_10_1_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_KeywordKeyword_1_10_1_1_1ElementType() {
+		return ParserRuleParameters_KeywordKeyword_1_10_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_11ElementType() {
+		return ParserRuleParameters_Group_1_11_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0ElementType() {
+		return ParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Alternatives_1_11_1ElementType() {
+		return ParserRuleParameters_Alternatives_1_11_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_11_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_11_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario4_FalseParserRuleCall_1_11_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_Group_1_11_1_1ElementType() {
+		return ParserRuleParameters_Group_1_11_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioAssignment_1_11_1_1_0ElementType() {
+		return ParserRuleParameters_ScenarioAssignment_1_11_1_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0ElementType() {
+		return ParserRuleParameters_ScenarioScenario2_FalseParserRuleCall_1_11_1_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getParserRuleParameters_KeywordKeyword_1_11_1_1_1ElementType() {
+		return ParserRuleParameters_KeywordKeyword_1_11_1_1_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_TrueElementType() {
+		return Scenario1_True_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_True_FirstAssignmentElementType() {
+		return Scenario1_True_FirstAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_True_FirstIDTerminalRuleCall_0ElementType() {
+		return Scenario1_True_FirstIDTerminalRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_FalseElementType() {
+		return Scenario1_False_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_False_SecondAssignmentElementType() {
+		return Scenario1_False_SecondAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_False_SecondIDTerminalRuleCall_0ElementType() {
+		return Scenario1_False_SecondIDTerminalRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_TrueElementType() {
+		return Scenario2_True_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_True_FirstAssignmentElementType() {
+		return Scenario2_True_FirstAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0ElementType() {
+		return Scenario2_True_FirstIdOrKeyword_TrueParserRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_FalseElementType() {
+		return Scenario2_False_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_False_FirstAssignmentElementType() {
+		return Scenario2_False_FirstAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0ElementType() {
+		return Scenario2_False_FirstIdOrKeyword_FalseParserRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_TrueElementType() {
+		return Scenario3_True_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_True_AlternativesElementType() {
+		return Scenario3_True_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_True_FirstAssignment_0ElementType() {
+		return Scenario3_True_FirstAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0ElementType() {
+		return Scenario3_True_FirstIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_True_SecondAssignment_1ElementType() {
+		return Scenario3_True_SecondAssignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_True_SecondKeywordKeyword_1_0ElementType() {
+		return Scenario3_True_SecondKeywordKeyword_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_FalseElementType() {
+		return Scenario3_False_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_False_AlternativesElementType() {
+		return Scenario3_False_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_False_FirstAssignment_0ElementType() {
+		return Scenario3_False_FirstAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0ElementType() {
+		return Scenario3_False_FirstIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_False_SecondAssignment_1ElementType() {
+		return Scenario3_False_SecondAssignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_False_SecondKeywordKeyword_1_0ElementType() {
+		return Scenario3_False_SecondKeywordKeyword_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_TrueElementType() {
+		return Scenario4_True_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_True_GroupElementType() {
+		return Scenario4_True_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_True_SecondAssignment_0ElementType() {
+		return Scenario4_True_SecondAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0ElementType() {
+		return Scenario4_True_SecondIdOrKeyword_TrueParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_True_KeywordKeyword_1ElementType() {
+		return Scenario4_True_KeywordKeyword_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_FalseElementType() {
+		return Scenario4_False_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_False_GroupElementType() {
+		return Scenario4_False_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_False_SecondAssignment_0ElementType() {
+		return Scenario4_False_SecondAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0ElementType() {
+		return Scenario4_False_SecondIdOrKeyword_FalseParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_False_KeywordKeyword_1ElementType() {
+		return Scenario4_False_KeywordKeyword_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_TrueElementType() {
+		return IdOrKeyword_True_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_True_AlternativesElementType() {
+		return IdOrKeyword_True_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_True_KeywordKeyword_0ElementType() {
+		return IdOrKeyword_True_KeywordKeyword_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_True_IDTerminalRuleCall_1ElementType() {
+		return IdOrKeyword_True_IDTerminalRuleCall_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_FalseElementType() {
+		return IdOrKeyword_False_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_False_IDTerminalRuleCallElementType() {
+		return IdOrKeyword_False_IDTerminalRuleCall_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1ElementType() {
+		return Scenario1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_AlternativesElementType() {
+		return Scenario1_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_Group_0ElementType() {
+		return Scenario1_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_FirstAssignment_0_0ElementType() {
+		return Scenario1_FirstAssignment_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_FirstIDTerminalRuleCall_0_0_0ElementType() {
+		return Scenario1_FirstIDTerminalRuleCall_0_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_Group_1ElementType() {
+		return Scenario1_Group_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_SecondAssignment_1_0ElementType() {
+		return Scenario1_SecondAssignment_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario1_SecondIDTerminalRuleCall_1_0_0ElementType() {
+		return Scenario1_SecondIDTerminalRuleCall_1_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2ElementType() {
+		return Scenario2_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_FirstAssignmentElementType() {
+		return Scenario2_FirstAssignment_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario2_FirstIdOrKeywordParserRuleCall_0ElementType() {
+		return Scenario2_FirstIdOrKeywordParserRuleCall_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3ElementType() {
+		return Scenario3_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_AlternativesElementType() {
+		return Scenario3_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_FirstAssignment_0ElementType() {
+		return Scenario3_FirstAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_FirstIdOrKeywordParserRuleCall_0_0ElementType() {
+		return Scenario3_FirstIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_SecondAssignment_1ElementType() {
+		return Scenario3_SecondAssignment_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario3_SecondKeywordKeyword_1_0ElementType() {
+		return Scenario3_SecondKeywordKeyword_1_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4ElementType() {
+		return Scenario4_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_GroupElementType() {
+		return Scenario4_Group_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_SecondAssignment_0ElementType() {
+		return Scenario4_SecondAssignment_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_SecondIdOrKeywordParserRuleCall_0_0ElementType() {
+		return Scenario4_SecondIdOrKeywordParserRuleCall_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getScenario4_KeywordKeyword_1ElementType() {
+		return Scenario4_KeywordKeyword_1_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeywordElementType() {
+		return IdOrKeyword_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_AlternativesElementType() {
+		return IdOrKeyword_Alternatives_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_Group_0ElementType() {
+		return IdOrKeyword_Group_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_KeywordKeyword_0_0ElementType() {
+		return IdOrKeyword_KeywordKeyword_0_0_ELEMENT_TYPE;
+	}
+
+	public IGrammarAwareElementType getIdOrKeyword_IDTerminalRuleCall_1ElementType() {
+		return IdOrKeyword_IDTerminalRuleCall_1_ELEMENT_TYPE;
+	}
+
+}

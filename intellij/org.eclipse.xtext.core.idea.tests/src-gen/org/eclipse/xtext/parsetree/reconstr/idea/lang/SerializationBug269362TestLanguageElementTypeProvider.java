@@ -108,59 +108,59 @@ public class SerializationBug269362TestLanguageElementTypeProvider implements IE
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0ElementType() {
 		return Model_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FooKeyword_0_0ElementType() {
 		return Model_FooKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FooAssignment_0_1ElementType() {
 		return Model_FooAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FooIDTerminalRuleCall_0_1_0ElementType() {
 		return Model_FooIDTerminalRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0_2ElementType() {
 		return Model_Group_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarKeyword_0_2_0ElementType() {
 		return Model_BarKeyword_0_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarAssignment_0_2_1ElementType() {
 		return Model_BarAssignment_0_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarIDTerminalRuleCall_0_2_1_0ElementType() {
 		return Model_BarIDTerminalRuleCall_0_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarKeyword_1_0ElementType() {
 		return Model_BarKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarAssignment_1_1ElementType() {
 		return Model_BarAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BarIDTerminalRuleCall_1_1_0ElementType() {
 		return Model_BarIDTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}

@@ -129,71 +129,71 @@ public class PartialSerializationTestLanguageElementTypeProvider implements IEle
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NodeRootParserRuleCallElementType() {
 		return Model_NodeRootParserRuleCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeRootElementType() {
 		return NodeRoot_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeRoot_GroupElementType() {
 		return NodeRoot_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeRoot_NumberSignDigitOneKeyword_0ElementType() {
 		return NodeRoot_NumberSignDigitOneKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeRoot_NodeAssignment_1ElementType() {
 		return NodeRoot_NodeAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeRoot_NodeNodeParserRuleCall_1_0ElementType() {
 		return NodeRoot_NodeNodeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNodeElementType() {
 		return Node_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_GroupElementType() {
 		return Node_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_NodeKeyword_0ElementType() {
 		return Node_NodeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_NameAssignment_1ElementType() {
 		return Node_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_NameIDTerminalRuleCall_1_0ElementType() {
 		return Node_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_Group_2ElementType() {
 		return Node_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_LeftParenthesisKeyword_2_0ElementType() {
 		return Node_LeftParenthesisKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_ChildrenAssignment_2_1ElementType() {
 		return Node_ChildrenAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_ChildrenNodeParserRuleCall_2_1_0ElementType() {
 		return Node_ChildrenNodeParserRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNode_RightParenthesisKeyword_2_2ElementType() {
 		return Node_RightParenthesisKeyword_2_2_ELEMENT_TYPE;
 	}

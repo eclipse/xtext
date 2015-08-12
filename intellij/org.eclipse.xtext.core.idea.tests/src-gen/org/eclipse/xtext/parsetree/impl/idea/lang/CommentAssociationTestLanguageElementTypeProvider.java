@@ -106,55 +106,55 @@ public class CommentAssociationTestLanguageElementTypeProvider implements IEleme
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsAssignmentElementType() {
 		return Model_ElementsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsElementParserRuleCall_0ElementType() {
 		return Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElementElementType() {
 		return Element_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_GroupElementType() {
 		return Element_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ElementKeyword_0ElementType() {
 		return Element_ElementKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameAssignment_1ElementType() {
 		return Element_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameIDTerminalRuleCall_1_0ElementType() {
 		return Element_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_Group_2ElementType() {
 		return Element_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ElementChildAction_2_0ElementType() {
 		return Element_ElementChildAction_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ParentKeyword_2_1ElementType() {
 		return Element_ParentKeyword_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameAssignment_2_2ElementType() {
 		return Element_NameAssignment_2_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameIDTerminalRuleCall_2_2_0ElementType() {
 		return Element_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE;
 	}

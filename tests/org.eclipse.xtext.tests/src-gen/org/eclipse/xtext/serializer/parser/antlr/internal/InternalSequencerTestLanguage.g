@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x1",
         		lv_x1_0_0, 
-        		"SimpleGroup");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleGroup");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x2",
         		lv_x2_1_0, 
-        		"SimpleAlternative");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleAlternative");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x3",
         		lv_x3_2_0, 
-        		"SimpleMultiplicities");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SimpleMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,7 +148,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x4",
         		lv_x4_3_0, 
-        		"GroupMultiplicities");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.GroupMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -167,7 +167,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x5",
         		lv_x5_4_0, 
-        		"AlternativeMultiplicities");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.AlternativeMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -186,7 +186,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x6",
         		lv_x6_5_0, 
-        		"List1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.List1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x7",
         		lv_x7_6_0, 
-        		"List2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.List2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -224,7 +224,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x8",
         		lv_x8_7_0, 
-        		"AltList1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.AltList1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -243,7 +243,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x9",
         		lv_x9_8_0, 
-        		"AltList2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.AltList2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -262,7 +262,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x10",
         		lv_x10_9_0, 
-        		"SingleKeywords");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywords");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -281,7 +281,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x11",
         		lv_x11_10_0, 
-        		"SingleKeywordsOrID");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleKeywordsOrID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -300,7 +300,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x12",
         		lv_x12_11_0, 
-        		"SingleTerminals");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleTerminals");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -319,7 +319,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x10",
         		lv_x10_12_0, 
-        		"MultiKeywords");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywords");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -338,7 +338,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x11",
         		lv_x11_13_0, 
-        		"MultiKeywordsOrID");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiKeywordsOrID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -357,7 +357,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x12",
         		lv_x12_14_0, 
-        		"MultiTerminals");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.MultiTerminals");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -376,7 +376,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x13",
         		lv_x13_15_0, 
-        		"SingleEnum");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleEnum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -395,7 +395,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x14",
         		lv_x14_16_0, 
-        		"SingleCrossReference");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleCrossReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -414,7 +414,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x15",
         		lv_x15_17_0, 
-        		"SingleContainmentReference");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -433,7 +433,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x19",
         		lv_x19_18_0, 
-        		"DependentAlternative1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -452,7 +452,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x20",
         		lv_x20_19_0, 
-        		"DependentAlternative2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DependentAlternative2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -471,7 +471,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x21",
         		lv_x21_20_0, 
-        		"Optional");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Optional");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -490,7 +490,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x22",
         		lv_x22_21_0, 
-        		"Float");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Float");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -509,7 +509,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x23",
         		lv_x23_22_0, 
-        		"UnorderedAlternative");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternative");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -528,7 +528,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x24",
         		lv_x24_23_0, 
-        		"UnorderedGroup");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroup");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -547,7 +547,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x25",
         		lv_x25_24_0, 
-        		"UnorderedGroupOptional");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupOptional");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -566,7 +566,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x26",
         		lv_x26_25_0, 
-        		"UnorderedGroupBoolean");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupBoolean");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -585,7 +585,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x27",
         		lv_x27_26_0, 
-        		"Complex1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.Complex1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -604,7 +604,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x28",
         		lv_x28_27_0, 
-        		"OptionalDouble");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.OptionalDouble");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -623,7 +623,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x29",
         		lv_x29_28_0, 
-        		"NullValueGenerated");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueGenerated");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -642,7 +642,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x30",
         		lv_x30_29_0, 
-        		"NullValueInterpreted");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullValueInterpreted");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -661,7 +661,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x31",
         		lv_x31_30_0, 
-        		"NullCrossRefGenerated");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefGenerated");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -680,7 +680,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x32",
         		lv_x32_31_0, 
-        		"NullCrossRefInterpreted");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NullCrossRefInterpreted");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -724,7 +724,7 @@ ruleSimpleGroup returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -742,7 +742,7 @@ ruleSimpleGroup returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -789,7 +789,7 @@ ruleSimpleAlternative returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -812,7 +812,7 @@ ruleSimpleAlternative returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -855,7 +855,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -877,7 +877,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -899,7 +899,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -921,7 +921,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -964,7 +964,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -986,7 +986,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1004,7 +1004,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1026,7 +1026,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1044,7 +1044,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val5",
         		lv_val5_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1066,7 +1066,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val6",
         		lv_val6_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1084,7 +1084,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val7",
         		lv_val7_10_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1127,7 +1127,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1150,7 +1150,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1172,7 +1172,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1195,7 +1195,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val5",
         		lv_val5_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1217,7 +1217,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val6",
         		lv_val6_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1240,7 +1240,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val7",
         		lv_val7_11_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1283,7 +1283,7 @@ ruleList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1305,7 +1305,7 @@ ruleList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1354,7 +1354,7 @@ ruleList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1376,7 +1376,7 @@ ruleList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1419,7 +1419,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1437,7 +1437,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1460,7 +1460,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1478,7 +1478,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1501,7 +1501,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1519,7 +1519,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1562,7 +1562,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1580,7 +1580,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1603,7 +1603,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1625,7 +1625,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1643,7 +1643,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1790,7 +1790,7 @@ ruleSingleKeywordsOrID returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_4, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1836,7 +1836,7 @@ ruleSingleTerminals returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_1, 
-        		"ID1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
 	    }
 
     |		lv_val_1_2=RULE_ID2
@@ -1851,7 +1851,7 @@ ruleSingleTerminals returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_2, 
-        		"ID2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
 	    }
 
 )
@@ -1896,7 +1896,7 @@ ruleSingleEnum returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_1, 
-        		"DefEnum1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1911,7 +1911,7 @@ ruleSingleEnum returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_2, 
-        		"DefEnum2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1926,7 +1926,7 @@ ruleSingleEnum returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_3, 
-        		"DefEnum3");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DefEnum3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1973,7 +1973,7 @@ ruleSingleCrossReference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_1, 
-        		"ID1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
 	    }
 
     |		lv_name_1_2=RULE_ID2
@@ -1988,7 +1988,7 @@ ruleSingleCrossReference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_2, 
-        		"ID2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
 	    }
 
     |		lv_name_1_3=RULE_ID3
@@ -2003,7 +2003,7 @@ ruleSingleCrossReference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_3, 
-        		"ID3");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID3");
 	    }
 
 )
@@ -2089,7 +2089,7 @@ ruleSingleContainmentReference returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_1, 
-        		"SingleContainmentReferenceChild1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2104,7 +2104,7 @@ ruleSingleContainmentReference returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_2, 
-        		"SingleContainmentReferenceChild2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2119,7 +2119,7 @@ ruleSingleContainmentReference returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_3, 
-        		"SingleContainmentReferenceChild3");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.SingleContainmentReferenceChild3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2377,7 +2377,7 @@ ruleMultiKeywordsOrID returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_4, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2423,7 +2423,7 @@ ruleMultiTerminals returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_1, 
-        		"ID1");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID1");
 	    }
 
     |		lv_val_1_2=RULE_ID2
@@ -2438,7 +2438,7 @@ ruleMultiTerminals returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_2, 
-        		"ID2");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.ID2");
 	    }
 
 )
@@ -2483,7 +2483,7 @@ ruleDependentAlternative1 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2502,7 +2502,7 @@ ruleDependentAlternative1 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2560,7 +2560,7 @@ ruleDependentAlternative2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2578,7 +2578,7 @@ ruleDependentAlternative2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2597,7 +2597,7 @@ ruleDependentAlternative2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2655,7 +2655,7 @@ ruleOptional returns [EObject current=null]
        			$current, 
        			"int0",
         		lv_int0_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -2673,7 +2673,7 @@ ruleOptional returns [EObject current=null]
        			$current, 
        			"int1",
         		lv_int1_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -2691,7 +2691,7 @@ ruleOptional returns [EObject current=null]
        			$current, 
        			"int2",
         		lv_int2_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -2775,7 +2775,7 @@ ruleUnorderedAlternative returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2794,7 +2794,7 @@ ruleUnorderedAlternative returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -2812,7 +2812,7 @@ ruleUnorderedAlternative returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"UnorderedAlternativeVal");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeVal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2831,7 +2831,7 @@ ruleUnorderedAlternative returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_5_0, 
-        		"UnorderedAlternativeValDelegate");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedAlternativeValDelegate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2875,7 +2875,7 @@ ruleUnorderedAlternativeVal returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2948,7 +2948,7 @@ ruleUnorderedAlternativeVal2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3005,7 +3005,7 @@ ruleUnorderedGroup returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3035,7 +3035,7 @@ ruleUnorderedGroup returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -3064,7 +3064,7 @@ ruleUnorderedGroup returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"UnorderedGroupVal");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupVal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3094,7 +3094,7 @@ ruleUnorderedGroup returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_5_0, 
-        		"UnorderedGroupValDelegate");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.UnorderedGroupValDelegate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3153,7 +3153,7 @@ ruleUnorderedGroupVal returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3226,7 +3226,7 @@ ruleUnorderedGroupVal2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3293,7 +3293,7 @@ ruleUnorderedGroupOptional returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3327,7 +3327,7 @@ ruleUnorderedGroupOptional returns [EObject current=null]
        			$current, 
        			"va2",
         		lv_va2_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3361,7 +3361,7 @@ ruleUnorderedGroupOptional returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3556,7 +3556,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3578,7 +3578,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3600,7 +3600,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3623,7 +3623,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3646,7 +3646,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val5",
         		lv_val5_11_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3669,7 +3669,7 @@ ruleComplex1 returns [EObject current=null]
        			$current, 
        			"val6",
         		lv_val6_13_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3711,7 +3711,7 @@ ruleOptionalDouble returns [EObject current=null]
        			$current, 
        			"double0",
         		lv_double0_1_0, 
-        		"DOUBLE");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3729,7 +3729,7 @@ ruleOptionalDouble returns [EObject current=null]
        			$current, 
        			"double1",
         		lv_double1_2_0, 
-        		"DOUBLE");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3747,7 +3747,7 @@ ruleOptionalDouble returns [EObject current=null]
        			$current, 
        			"double2",
         		lv_double2_3_0, 
-        		"DOUBLE");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.DOUBLE");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3831,7 +3831,7 @@ ruleNullValueGenerated returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"NULL_STRING");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NULL_STRING");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3874,7 +3874,7 @@ ruleNullValueInterpreted returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"NULL_STRING");
+        		"org.eclipse.xtext.serializer.SequencerTestLanguage.NULL_STRING");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3893,7 +3893,7 @@ ruleNullValueInterpreted returns [EObject current=null]
        			$current, 
        			"foo",
         		lv_foo_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4015,7 +4015,7 @@ ruleNullCrossRefInterpreted returns [EObject current=null]
        			$current, 
        			"foo",
         		lv_foo_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

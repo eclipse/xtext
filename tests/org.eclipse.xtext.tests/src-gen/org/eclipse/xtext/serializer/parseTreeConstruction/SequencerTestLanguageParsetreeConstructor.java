@@ -1787,7 +1787,7 @@ protected class SimpleAlternative_NumberSignDigitTwoKeyword_0 extends KeywordTok
 
 }
 
-// "kw1" val1=ID | "kw2" val2=ID
+// ("kw1" val1=ID | "kw2" val2=ID)
 protected class SimpleAlternative_Alternatives_1 extends AlternativesToken {
 
 	public SimpleAlternative_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3660,7 +3660,7 @@ protected class AltList1_NumberSignDigitEightKeyword_0 extends KeywordToken  {
 
 }
 
-// val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
+// (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 protected class AltList1_Alternatives_1 extends AlternativesToken {
 
 	public AltList1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4064,7 +4064,7 @@ protected class AltList2_NumberSignDigitNineKeyword_0 extends KeywordToken  {
 
 }
 
-// val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
+// (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 protected class AltList2_Alternatives_1 extends AlternativesToken {
 
 	public AltList2_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4900,7 +4900,7 @@ protected class SingleCrossReference_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3]
+// (ref=[SingleCrossReference|ID1] | ref=[SingleCrossReference|ID2] | ref=[SingleCrossReference|ID3])
 protected class SingleCrossReference_Alternatives_2 extends AlternativesToken {
 
 	public SingleCrossReference_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5170,11 +5170,11 @@ protected class SingleContainmentReference_ChildAssignment_1 extends AssignmentT
 /************ begin Rule SingleContainmentReferenceChild1 ****************
  *
  * SingleContainmentReferenceChild1:
- * 	val="kw1";
+ * 	val='kw1';
  *
  **/
 
-// val="kw1"
+// val='kw1'
 protected class SingleContainmentReferenceChild1_ValAssignment extends AssignmentToken  {
 	
 	public SingleContainmentReferenceChild1_ValAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5215,11 +5215,11 @@ protected class SingleContainmentReferenceChild1_ValAssignment extends Assignmen
 /************ begin Rule SingleContainmentReferenceChild2 ****************
  *
  * SingleContainmentReferenceChild2:
- * 	val="kw2";
+ * 	val='kw2';
  *
  **/
 
-// val="kw2"
+// val='kw2'
 protected class SingleContainmentReferenceChild2_ValAssignment extends AssignmentToken  {
 	
 	public SingleContainmentReferenceChild2_ValAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5260,11 +5260,11 @@ protected class SingleContainmentReferenceChild2_ValAssignment extends Assignmen
 /************ begin Rule SingleContainmentReferenceChild3 ****************
  *
  * SingleContainmentReferenceChild3:
- * 	val="kw3";
+ * 	val='kw3';
  *
  **/
 
-// val="kw3"
+// val='kw3'
 protected class SingleContainmentReferenceChild3_ValAssignment extends AssignmentToken  {
 	
 	public SingleContainmentReferenceChild3_ValAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5674,7 +5674,7 @@ protected class DependentAlternative1_NumberSignDigitOneDigitNineKeyword_0 exten
 
 }
 
-// val=ID | val=ID flag?="kw1"
+// (val=ID | val=ID flag?="kw1")
 protected class DependentAlternative1_Alternatives_1 extends AlternativesToken {
 
 	public DependentAlternative1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5884,7 +5884,7 @@ protected class DependentAlternative2_NumberSignDigitTwoDigitZeroKeyword_0 exten
 
 }
 
-// val+=ID val+=ID+ | val+=ID+ flag?="kw1"
+// (val+=ID val+=ID+ | val+=ID+ flag?="kw1")
 protected class DependentAlternative2_Alternatives_1 extends AlternativesToken {
 
 	public DependentAlternative2_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6286,11 +6286,11 @@ protected class Optional_Int2Assignment_2_1 extends AssignmentToken  {
 /************ begin Rule Float ****************
  *
  * Float:
- * 	"#22" {Float} "Bye";
+ * 	"#22" {Float} 'Bye';
  *
  **/
 
-// "#22" {Float} "Bye"
+// "#22" {Float} 'Bye'
 protected class Float_Group extends GroupToken {
 	
 	public Float_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6367,7 +6367,7 @@ protected class Float_FloatAction_1 extends ActionToken  {
 	}
 }
 
-// "Bye"
+// 'Bye'
 protected class Float_ByeKeyword_2 extends KeywordToken  {
 	
 	public Float_ByeKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6967,7 +6967,7 @@ protected class UnorderedGroup_NumberSignDigitTwoDigitFourKeyword_0 extends Keyw
 
 }
 
-// val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate
+// (val1=ID & val2=INT & val3=UnorderedGroupVal & val4=UnorderedGroupValDelegate)
 protected class UnorderedGroup_UnorderedGroup_1 extends UnorderedGroupToken {
 	
 	public UnorderedGroup_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7393,11 +7393,11 @@ protected class UnorderedGroupVal2_ValAssignment_1 extends AssignmentToken  {
 /************ begin Rule UnorderedGroupOptional ****************
  *
  * UnorderedGroupOptional:
- * 	"#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?);
+ * 	"#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?);
  *
  **/
 
-// "#25" {UnorderedGroupOptional} (("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?)
+// "#25" {UnorderedGroupOptional} ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?)
 protected class UnorderedGroupOptional_Group extends GroupToken {
 	
 	public UnorderedGroupOptional_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7474,7 +7474,7 @@ protected class UnorderedGroupOptional_UnorderedGroupOptionalAction_1 extends Ac
 	}
 }
 
-// ("kw1" val1=ID)? & ("kw2" va2=ID)? & ("kw3" val3=ID)?
+// ("kw1" val1=ID? & "kw2" va2=ID? & "kw3" val3=ID?)
 protected class UnorderedGroupOptional_UnorderedGroup_2 extends UnorderedGroupToken {
 	
 	public UnorderedGroupOptional_UnorderedGroup_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7499,7 +7499,7 @@ protected class UnorderedGroupOptional_UnorderedGroup_2 extends UnorderedGroupTo
 
 }
 
-// ("kw1" val1=ID)?
+// "kw1" val1=ID?
 protected class UnorderedGroupOptional_Group_2_0 extends GroupToken {
 	
 	public UnorderedGroupOptional_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7578,7 +7578,7 @@ protected class UnorderedGroupOptional_Val1Assignment_2_0_1 extends AssignmentTo
 }
 
 
-// ("kw2" va2=ID)?
+// "kw2" va2=ID?
 protected class UnorderedGroupOptional_Group_2_1 extends GroupToken {
 	
 	public UnorderedGroupOptional_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7658,7 +7658,7 @@ protected class UnorderedGroupOptional_Va2Assignment_2_1_1 extends AssignmentTok
 }
 
 
-// ("kw3" val3=ID)?
+// "kw3" val3=ID?
 protected class UnorderedGroupOptional_Group_2_2 extends GroupToken {
 	
 	public UnorderedGroupOptional_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7747,11 +7747,11 @@ protected class UnorderedGroupOptional_Val3Assignment_2_2_1 extends AssignmentTo
 /************ begin Rule UnorderedGroupBoolean ****************
  *
  * UnorderedGroupBoolean:
- * 	"#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?);
+ * 	'#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?);
  *
  **/
 
-// "#26" {UnorderedGroupBoolean} (val1?="kw1"? & val2?="kw2"? & val3?="kw3"?)
+// '#26' {UnorderedGroupBoolean} (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 protected class UnorderedGroupBoolean_Group extends GroupToken {
 	
 	public UnorderedGroupBoolean_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7780,7 +7780,7 @@ protected class UnorderedGroupBoolean_Group extends GroupToken {
 
 }
 
-// "#26"
+// '#26'
 protected class UnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0 extends KeywordToken  {
 	
 	public UnorderedGroupBoolean_NumberSignDigitTwoDigitSixKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7828,7 +7828,7 @@ protected class UnorderedGroupBoolean_UnorderedGroupBooleanAction_1 extends Acti
 	}
 }
 
-// val1?="kw1"? & val2?="kw2"? & val3?="kw3"?
+// (val1?='kw1'? & val2?='kw2'? & val3?='kw3'?)
 protected class UnorderedGroupBoolean_UnorderedGroup_2 extends UnorderedGroupToken {
 	
 	public UnorderedGroupBoolean_UnorderedGroup_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7853,7 +7853,7 @@ protected class UnorderedGroupBoolean_UnorderedGroup_2 extends UnorderedGroupTok
 
 }
 
-// val1?="kw1"?
+// val1?='kw1'?
 protected class UnorderedGroupBoolean_Val1Assignment_2_0 extends AssignmentToken  {
 	
 	public UnorderedGroupBoolean_Val1Assignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7887,7 +7887,7 @@ protected class UnorderedGroupBoolean_Val1Assignment_2_0 extends AssignmentToken
 
 }
 
-// val2?="kw2"?
+// val2?='kw2'?
 protected class UnorderedGroupBoolean_Val2Assignment_2_1 extends AssignmentToken  {
 	
 	public UnorderedGroupBoolean_Val2Assignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7922,7 +7922,7 @@ protected class UnorderedGroupBoolean_Val2Assignment_2_1 extends AssignmentToken
 
 }
 
-// val3?="kw3"?
+// val3?='kw3'?
 protected class UnorderedGroupBoolean_Val3Assignment_2_2 extends AssignmentToken  {
 	
 	public UnorderedGroupBoolean_Val3Assignment_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -7966,12 +7966,12 @@ protected class UnorderedGroupBoolean_Val3Assignment_2_2 extends AssignmentToken
 /************ begin Rule Complex1 ****************
  *
  * Complex1:
- * 	"#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
+ * 	'#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6"
  * 	val6+=ID)*;
  *
  **/
 
-// "#27" {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
+// '#27' {Complex1} ("kw1" val1=ID)? ("kw2" val2=ID)? ("kw3" val3+=ID | "kw4" val4+=ID | "kw5" val5+=ID | "kw6" val6+=ID)*
 protected class Complex1_Group extends GroupToken {
 	
 	public Complex1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8003,7 +8003,7 @@ protected class Complex1_Group extends GroupToken {
 
 }
 
-// "#27"
+// '#27'
 protected class Complex1_NumberSignDigitTwoDigitSevenKeyword_0 extends KeywordToken  {
 	
 	public Complex1_NumberSignDigitTwoDigitSevenKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -8758,8 +8758,8 @@ protected class OptionalDouble_Double2Assignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule NullValueGenerated ****************
  *
- * NullValueGenerated returns NullValue:
- * 	"#29" value=NULL_STRING;
+ * NullValueGenerated NullValue:
+ * 	"#29" value=NULL_STRING
  *
  **/
 
@@ -8853,8 +8853,8 @@ protected class NullValueGenerated_ValueAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule NullValueInterpreted ****************
  *
- * NullValueInterpreted returns NullValue:
- * 	"#30" value=NULL_STRING foo=ID?;
+ * NullValueInterpreted NullValue:
+ * 	"#30" value=NULL_STRING foo=ID?
  *
  **/
 
@@ -8984,8 +8984,8 @@ protected class NullValueInterpreted_FooAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule NullCrossRefGenerated ****************
  *
- * NullCrossRefGenerated returns NullCrossRef:
- * 	"#31" ref=[ecore::EObject];
+ * NullCrossRefGenerated NullCrossRef:
+ * 	"#31" ref=[ecore::EObject]
  *
  **/
 
@@ -9082,8 +9082,8 @@ protected class NullCrossRefGenerated_RefAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule NullCrossRefInterpreted ****************
  *
- * NullCrossRefInterpreted returns NullCrossRef:
- * 	"#32" ref=[ecore::EObject] foo=ID?;
+ * NullCrossRefInterpreted NullCrossRef:
+ * 	"#32" ref=[ecore::EObject] foo=ID?
  *
  **/
 

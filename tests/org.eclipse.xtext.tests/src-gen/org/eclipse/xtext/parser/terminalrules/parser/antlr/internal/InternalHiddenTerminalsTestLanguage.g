@@ -165,7 +165,7 @@ ruleWithoutHiddens returns [EObject current=null]
        			$current, 
        			"spaces",
         		lv_spaces_1_0, 
-        		"WS");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WS");
 	    }
 
 )
@@ -187,7 +187,7 @@ ruleWithoutHiddens returns [EObject current=null]
        			$current, 
        			"spaces",
         		lv_spaces_3_0, 
-        		"WS");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WS");
 	    }
 
 )
@@ -313,7 +313,7 @@ ruleOverridingHiddens returns [EObject current=null]
        			$current, 
        			"called",
         		lv_called_3_0, 
-        		"OverridingHiddensCall");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.OverridingHiddensCall");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -386,7 +386,7 @@ ruleOverridingHiddensCall returns [EObject current=null]
        			$current, 
        			"spaces",
         		lv_spaces_1_0, 
-        		"WS");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WS");
 	    }
 
 )
@@ -461,7 +461,7 @@ ruleInheritingHiddens returns [EObject current=null]
        			$current, 
        			"called",
         		lv_called_3_0, 
-        		"InheritingHiddensCall");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.InheritingHiddensCall");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -480,7 +480,7 @@ ruleInheritingHiddens returns [EObject current=null]
        			$current, 
        			"hidingCalled",
         		lv_hidingCalled_4_0, 
-        		"HidingHiddens");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.HidingHiddens");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -545,7 +545,7 @@ ruleDatatypeHiddens returns [EObject current=null]
        			$current, 
        			"valid",
         		true, 
-        		"DatatypeRule");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.DatatypeRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -639,7 +639,7 @@ ruleHidingHiddens returns [EObject current=null]
        			$current, 
        			"space",
         		lv_space_1_0, 
-        		"WS");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.WS");
 	    }
 
 )
@@ -656,7 +656,7 @@ ruleHidingHiddens returns [EObject current=null]
        			$current, 
        			"called",
         		lv_called_2_0, 
-        		"InheritingHiddensCall");
+        		"org.eclipse.xtext.parser.terminalrules.HiddenTerminalsTestLanguage.InheritingHiddensCall");
 	        afterParserOrEnumRuleCall();
 	    }
 

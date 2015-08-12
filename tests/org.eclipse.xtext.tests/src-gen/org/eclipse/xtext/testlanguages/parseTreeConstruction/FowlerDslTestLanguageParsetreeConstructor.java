@@ -44,11 +44,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Statemachine ****************
  *
  * / * SuppressWarnings[noInstantiation] * / Statemachine:
- * 	"events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*;
+ * 	'events'
+ * 	events+=Event*
+ * 	'end'
+ * 	'commands'
+ * 	commands+=Command*
+ * 	'end'
+ * 	states+=State*;
  *
  **/
 
-// "events" events+=Event* "end" "commands" commands+=Command* "end" states+=State*
+// 'events' events+=Event* 'end' 'commands' commands+=Command* 'end' states+=State*
 protected class Statemachine_Group extends GroupToken {
 	
 	public Statemachine_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -78,7 +84,7 @@ protected class Statemachine_Group extends GroupToken {
 
 }
 
-// "events"
+// 'events'
 protected class Statemachine_EventsKeyword_0 extends KeywordToken  {
 	
 	public Statemachine_EventsKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -146,7 +152,7 @@ protected class Statemachine_EventsAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "end"
+// 'end'
 protected class Statemachine_EndKeyword_2 extends KeywordToken  {
 	
 	public Statemachine_EndKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -169,7 +175,7 @@ protected class Statemachine_EndKeyword_2 extends KeywordToken  {
 
 }
 
-// "commands"
+// 'commands'
 protected class Statemachine_CommandsKeyword_3 extends KeywordToken  {
 	
 	public Statemachine_CommandsKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -238,7 +244,7 @@ protected class Statemachine_CommandsAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// "end"
+// 'end'
 protected class Statemachine_EndKeyword_5 extends KeywordToken  {
 	
 	public Statemachine_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -315,11 +321,11 @@ protected class Statemachine_StatesAssignment_6 extends AssignmentToken  {
 /************ begin Rule Event ****************
  *
  * Event:
- * 	resetting?="resetting"? name=ID code=ID;
+ * 	resetting?='resetting'? name=ID code=ID;
  *
  **/
 
-// resetting?="resetting"? name=ID code=ID
+// resetting?='resetting'? name=ID code=ID
 protected class Event_Group extends GroupToken {
 	
 	public Event_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -348,7 +354,7 @@ protected class Event_Group extends GroupToken {
 
 }
 
-// resetting?="resetting"?
+// resetting?='resetting'?
 protected class Event_ResettingAssignment_0 extends AssignmentToken  {
 	
 	public Event_ResettingAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -563,11 +569,13 @@ protected class Command_CodeAssignment_1 extends AssignmentToken  {
 /************ begin Rule State ****************
  *
  * State:
- * 	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+ * 	'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
+ * 	transitions+=Transition*
+ * 	'end';
  *
  **/
 
-// "state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+// 'state' name=ID ('actions' '{' actions+=[Command]+ '}')? transitions+=Transition* 'end'
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -596,7 +604,7 @@ protected class State_Group extends GroupToken {
 
 }
 
-// "state"
+// 'state'
 protected class State_StateKeyword_0 extends KeywordToken  {
 	
 	public State_StateKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -651,7 +659,7 @@ protected class State_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("actions" "{" actions+=[Command]+ "}")?
+// ('actions' '{' actions+=[Command]+ '}')?
 protected class State_Group_2 extends GroupToken {
 	
 	public State_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -673,7 +681,7 @@ protected class State_Group_2 extends GroupToken {
 
 }
 
-// "actions"
+// 'actions'
 protected class State_ActionsKeyword_2_0 extends KeywordToken  {
 	
 	public State_ActionsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -695,7 +703,7 @@ protected class State_ActionsKeyword_2_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class State_LeftCurlyBracketKeyword_2_1 extends KeywordToken  {
 	
 	public State_LeftCurlyBracketKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -755,7 +763,7 @@ protected class State_ActionsAssignment_2_2 extends AssignmentToken  {
 
 }
 
-// "}"
+// '}'
 protected class State_RightCurlyBracketKeyword_2_3 extends KeywordToken  {
 	
 	public State_RightCurlyBracketKeyword_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -826,7 +834,7 @@ protected class State_TransitionsAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "end"
+// 'end'
 protected class State_EndKeyword_4 extends KeywordToken  {
 	
 	public State_EndKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -857,11 +865,11 @@ protected class State_EndKeyword_4 extends KeywordToken  {
 /************ begin Rule Transition ****************
  *
  * Transition:
- * 	event=[Event] "=>" state=[State];
+ * 	event=[Event] '=>' state=[State];
  *
  **/
 
-// event=[Event] "=>" state=[State]
+// event=[Event] '=>' state=[State]
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -926,7 +934,7 @@ protected class Transition_EventAssignment_0 extends AssignmentToken  {
 
 }
 
-// "=>"
+// '=>'
 protected class Transition_EqualsSignGreaterThanSignKeyword_1 extends KeywordToken  {
 	
 	public Transition_EqualsSignGreaterThanSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

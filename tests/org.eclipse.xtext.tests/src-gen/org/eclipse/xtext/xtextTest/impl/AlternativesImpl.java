@@ -26,7 +26,7 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.impl.AlternativesImpl#getGroups <em>Groups</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.impl.AlternativesImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -34,14 +34,14 @@ import org.eclipse.xtext.xtextTest.XtextTestPackage;
 public class AlternativesImpl extends AbstractElementImpl implements Alternatives
 {
   /**
-   * The cached value of the '{@link #getGroups() <em>Groups</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getGroups()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<AbstractElement> groups;
+  protected EList<AbstractElement> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,13 +69,13 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<AbstractElement> getGroups()
+  public EList<AbstractElement> getElements()
   {
-    if (groups == null)
+    if (elements == null)
     {
-      groups = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextTestPackage.ALTERNATIVES__GROUPS);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, XtextTestPackage.ALTERNATIVES__ELEMENTS);
     }
-    return groups;
+    return elements;
   }
 
   /**
@@ -88,8 +88,8 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
   {
     switch (featureID)
     {
-      case XtextTestPackage.ALTERNATIVES__GROUPS:
-        return ((InternalEList<?>)getGroups()).basicRemove(otherEnd, msgs);
+      case XtextTestPackage.ALTERNATIVES__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -104,8 +104,8 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
   {
     switch (featureID)
     {
-      case XtextTestPackage.ALTERNATIVES__GROUPS:
-        return getGroups();
+      case XtextTestPackage.ALTERNATIVES__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -121,9 +121,9 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
   {
     switch (featureID)
     {
-      case XtextTestPackage.ALTERNATIVES__GROUPS:
-        getGroups().clear();
-        getGroups().addAll((Collection<? extends AbstractElement>)newValue);
+      case XtextTestPackage.ALTERNATIVES__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -139,8 +139,8 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
   {
     switch (featureID)
     {
-      case XtextTestPackage.ALTERNATIVES__GROUPS:
-        getGroups().clear();
+      case XtextTestPackage.ALTERNATIVES__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -156,8 +156,8 @@ public class AlternativesImpl extends AbstractElementImpl implements Alternative
   {
     switch (featureID)
     {
-      case XtextTestPackage.ALTERNATIVES__GROUPS:
-        return groups != null && !groups.isEmpty();
+      case XtextTestPackage.ALTERNATIVES__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

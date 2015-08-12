@@ -19,7 +19,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cTestAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cTestTestParserRuleCall_0_0 = (RuleCall)cTestAssignment_0.eContents().get(0);
@@ -47,14 +47,14 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class ParenthesisElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parenthesis");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Parenthesis");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cTestParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//Parenthesis returns Test:
-		//	"(" Test ")";
+		//Parenthesis Test:
+		//	"(" Test ")"
 		@Override public ParserRule getRule() { return rule; }
 
 		//"(" Test ")"
@@ -71,7 +71,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class TestElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Test");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Test");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTwoRequiredParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTwoOptionsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -95,7 +95,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class TwoRequiredElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoRequired");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoRequired");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTworequiredKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOneAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -127,7 +127,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class TwoOptionsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoOptions");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoOptions");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTwooptionsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -150,7 +150,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		//"twooptions"
 		public Keyword getTwooptionsKeyword_0() { return cTwooptionsKeyword_0; }
 
-		//"one" one=ID | "two" two=ID
+		//("one" one=ID | "two" two=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"one" one=ID
@@ -179,7 +179,7 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class IndentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Indent");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Indent");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cReqAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -284,8 +284,8 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 		return getModelAccess().getRule();
 	}
 
-	//Parenthesis returns Test:
-	//	"(" Test ")";
+	//Parenthesis Test:
+	//	"(" Test ")"
 	public ParenthesisElements getParenthesisAccess() {
 		return pParenthesis;
 	}
@@ -335,38 +335,38 @@ public class SerializationErrorTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

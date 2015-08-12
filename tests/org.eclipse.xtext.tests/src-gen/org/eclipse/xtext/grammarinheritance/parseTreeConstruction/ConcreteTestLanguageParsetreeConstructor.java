@@ -243,11 +243,11 @@ protected class RootRule_OverridableParserRule2ParserRuleCall_3 extends RuleCall
  *
  * // call InheritedParserRule
  * ConcreteParserRule:
- * 	"model" magicNumber=REAL ":" elements+=InheritedParserRule*;
+ * 	'model' magicNumber=REAL ':' elements+=InheritedParserRule*;
  *
  **/
 
-// "model" magicNumber=REAL ":" elements+=InheritedParserRule*
+// 'model' magicNumber=REAL ':' elements+=InheritedParserRule*
 protected class ConcreteParserRule_Group extends GroupToken {
 	
 	public ConcreteParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -277,7 +277,7 @@ protected class ConcreteParserRule_Group extends GroupToken {
 
 }
 
-// "model"
+// 'model'
 protected class ConcreteParserRule_ModelKeyword_0 extends KeywordToken  {
 	
 	public ConcreteParserRule_ModelKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -332,7 +332,7 @@ protected class ConcreteParserRule_MagicNumberAssignment_1 extends AssignmentTok
 
 }
 
-// ":"
+// ':'
 protected class ConcreteParserRule_ColonKeyword_2 extends KeywordToken  {
 	
 	public ConcreteParserRule_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -408,12 +408,12 @@ protected class ConcreteParserRule_ElementsAssignment_3 extends AssignmentToken 
 /************ begin Rule OverridableParserRule ****************
  *
  * // override OverridableParserRule and call it
- * OverridableParserRule returns mm::AType:
- * 	"overriddenelement" name=ID;
+ * OverridableParserRule mm::AType:
+ * 	'overriddenelement' name=ID
  *
  **/
 
-// "overriddenelement" name=ID
+// 'overriddenelement' name=ID
 protected class OverridableParserRule_Group extends GroupToken {
 	
 	public OverridableParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -442,7 +442,7 @@ protected class OverridableParserRule_Group extends GroupToken {
 
 }
 
-// "overriddenelement"
+// 'overriddenelement'
 protected class OverridableParserRule_OverriddenelementKeyword_0 extends KeywordToken  {
 	
 	public OverridableParserRule_OverriddenelementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -561,12 +561,12 @@ protected class CallOverridenParserRule_CallAssignment extends AssignmentToken  
 /************ begin Rule OverridableParserRule2 ****************
  *
  * // override parser rule and change return type
- * OverridableParserRule2 returns AType2:
- * 	"overridden other element" name=ID "-" age=INT;
+ * OverridableParserRule2 AType2:
+ * 	'overridden other element' name=ID '-' age=INT
  *
  **/
 
-// "overridden other element" name=ID "-" age=INT
+// 'overridden other element' name=ID '-' age=INT
 protected class OverridableParserRule2_Group extends GroupToken {
 	
 	public OverridableParserRule2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -595,7 +595,7 @@ protected class OverridableParserRule2_Group extends GroupToken {
 
 }
 
-// "overridden other element"
+// 'overridden other element'
 protected class OverridableParserRule2_OverriddenOtherElementKeyword_0 extends KeywordToken  {
 	
 	public OverridableParserRule2_OverriddenOtherElementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -650,7 +650,7 @@ protected class OverridableParserRule2_NameAssignment_1 extends AssignmentToken 
 
 }
 
-// "-"
+// '-'
 protected class OverridableParserRule2_HyphenMinusKeyword_2 extends KeywordToken  {
 	
 	public OverridableParserRule2_HyphenMinusKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -713,8 +713,8 @@ protected class OverridableParserRule2_AgeAssignment_3 extends AssignmentToken  
 /************ begin Rule ExtendableParserRule ****************
  *
  * // override and extend ExtendableParserRule and call it
- * ExtendableParserRule returns mm::AType:
- * 	Subrule1 | Subrule2 | Subrule3;
+ * ExtendableParserRule mm::AType:
+ * 	Subrule1 | Subrule2 | Subrule3
  *
  **/
 
@@ -866,11 +866,11 @@ protected class ExtendableParserRule_Subrule3ParserRuleCall_2 extends RuleCallTo
 /************ begin Rule Subrule1 ****************
  *
  * Subrule1:
- * 	"subrule1" name=ID sub1=ID;
+ * 	'subrule1' name=ID sub1=ID;
  *
  **/
 
-// "subrule1" name=ID sub1=ID
+// 'subrule1' name=ID sub1=ID
 protected class Subrule1_Group extends GroupToken {
 	
 	public Subrule1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -899,7 +899,7 @@ protected class Subrule1_Group extends GroupToken {
 
 }
 
-// "subrule1"
+// 'subrule1'
 protected class Subrule1_Subrule1Keyword_0 extends KeywordToken  {
 	
 	public Subrule1_Subrule1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -995,11 +995,11 @@ protected class Subrule1_Sub1Assignment_2 extends AssignmentToken  {
 /************ begin Rule Subrule2 ****************
  *
  * Subrule2:
- * 	"subrule3" name=ID sub2=STRING;
+ * 	'subrule3' name=ID sub2=STRING;
  *
  **/
 
-// "subrule3" name=ID sub2=STRING
+// 'subrule3' name=ID sub2=STRING
 protected class Subrule2_Group extends GroupToken {
 	
 	public Subrule2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1028,7 +1028,7 @@ protected class Subrule2_Group extends GroupToken {
 
 }
 
-// "subrule3"
+// 'subrule3'
 protected class Subrule2_Subrule3Keyword_0 extends KeywordToken  {
 	
 	public Subrule2_Subrule3Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1124,11 +1124,11 @@ protected class Subrule2_Sub2Assignment_2 extends AssignmentToken  {
 /************ begin Rule Subrule3 ****************
  *
  * Subrule3:
- * 	"subrule3" name=ID sub1=INT;
+ * 	'subrule3' name=ID sub1=INT;
  *
  **/
 
-// "subrule3" name=ID sub1=INT
+// 'subrule3' name=ID sub1=INT
 protected class Subrule3_Group extends GroupToken {
 	
 	public Subrule3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1157,7 +1157,7 @@ protected class Subrule3_Group extends GroupToken {
 
 }
 
-// "subrule3"
+// 'subrule3'
 protected class Subrule3_Subrule3Keyword_0 extends KeywordToken  {
 	
 	public Subrule3_Subrule3Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1309,12 +1309,12 @@ protected class CallExtendedParserRule_CallAssignment extends AssignmentToken  {
 
 /************ begin Rule InheritedParserRule ****************
  *
- * InheritedParserRule returns mm::AType:
- * 	"element" name=ID;
+ * InheritedParserRule mm::AType:
+ * 	'element' name=ID
  *
  **/
 
-// "element" name=ID
+// 'element' name=ID
 protected class InheritedParserRule_Group extends GroupToken {
 	
 	public InheritedParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1343,7 +1343,7 @@ protected class InheritedParserRule_Group extends GroupToken {
 
 }
 
-// "element"
+// 'element'
 protected class InheritedParserRule_ElementKeyword_0 extends KeywordToken  {
 	
 	public InheritedParserRule_ElementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1404,12 +1404,12 @@ protected class InheritedParserRule_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule AbstractCallOverridenParserRule ****************
  *
- * / * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule returns mm::AModel:
- * 	"overridemodel" elements+=OverridableParserRule*;
+ * / * SuppressWarnings[noInstantiation] * / AbstractCallOverridenParserRule mm::AModel:
+ * 	'overridemodel' elements+=super::OverridableParserRule*
  *
  **/
 
-// "overridemodel" elements+=OverridableParserRule*
+// 'overridemodel' elements+=super::OverridableParserRule*
 protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 	
 	public AbstractCallOverridenParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1439,7 +1439,7 @@ protected class AbstractCallOverridenParserRule_Group extends GroupToken {
 
 }
 
-// "overridemodel"
+// 'overridemodel'
 protected class AbstractCallOverridenParserRule_OverridemodelKeyword_0 extends KeywordToken  {
 	
 	public AbstractCallOverridenParserRule_OverridemodelKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1460,7 +1460,7 @@ protected class AbstractCallOverridenParserRule_OverridemodelKeyword_0 extends K
 
 }
 
-// elements+=OverridableParserRule*
+// elements+=super::OverridableParserRule*
 protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends AssignmentToken  {
 	
 	public AbstractCallOverridenParserRule_ElementsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1513,12 +1513,12 @@ protected class AbstractCallOverridenParserRule_ElementsAssignment_1 extends Ass
 
 /************ begin Rule AbstractCallExtendedParserRule ****************
  *
- * / * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule returns mm::AModel:
- * 	"extendedmodel" elements+=ExtendableParserRule*;
+ * / * SuppressWarnings[noInstantiation] * / AbstractCallExtendedParserRule mm::AModel:
+ * 	'extendedmodel' elements+=super::ExtendableParserRule*
  *
  **/
 
-// "extendedmodel" elements+=ExtendableParserRule*
+// 'extendedmodel' elements+=super::ExtendableParserRule*
 protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 	
 	public AbstractCallExtendedParserRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1548,7 +1548,7 @@ protected class AbstractCallExtendedParserRule_Group extends GroupToken {
 
 }
 
-// "extendedmodel"
+// 'extendedmodel'
 protected class AbstractCallExtendedParserRule_ExtendedmodelKeyword_0 extends KeywordToken  {
 	
 	public AbstractCallExtendedParserRule_ExtendedmodelKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1569,7 +1569,7 @@ protected class AbstractCallExtendedParserRule_ExtendedmodelKeyword_0 extends Ke
 
 }
 
-// elements+=ExtendableParserRule*
+// elements+=super::ExtendableParserRule*
 protected class AbstractCallExtendedParserRule_ElementsAssignment_1 extends AssignmentToken  {
 	
 	public AbstractCallExtendedParserRule_ElementsAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

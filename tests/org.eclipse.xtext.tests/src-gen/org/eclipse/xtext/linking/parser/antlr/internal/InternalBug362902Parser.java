@@ -161,7 +161,7 @@ public class InternalBug362902Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"greetings",
             	            		lv_greetings_0_0, 
-            	            		"Greeting");
+            	            		"org.eclipse.xtext.linking.Bug362902.Greeting");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -309,7 +309,7 @@ public class InternalBug362902Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"MyId");
+                    		"org.eclipse.xtext.linking.Bug362902.MyId");
             	        afterParserOrEnumRuleCall();
             	    
 

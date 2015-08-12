@@ -19,7 +19,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cX1Assignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cX1SimpleGroupParserRuleCall_0_0 = (RuleCall)cX1Assignment_0.eContents().get(0);
@@ -264,7 +264,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleGroup");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleGroup");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -296,7 +296,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class SimpleAlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleAlternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleAlternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -319,7 +319,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#2"
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
-		//"kw1" val1=ID | "kw2" val2=ID
+		//("kw1" val1=ID | "kw2" val2=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" val1=ID
@@ -348,7 +348,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class SimpleMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -408,7 +408,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class GroupMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GroupMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.GroupMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -504,7 +504,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class AlternativeMultiplicitiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AlternativeMultiplicities");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AlternativeMultiplicities");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -612,7 +612,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class AssignedActionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignedAction");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedAction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -652,7 +652,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class AssignedActionSecondElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignedActionSecond");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedActionSecond");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -661,8 +661,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final Assignment cVal2Assignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cVal2IDTerminalRuleCall_3_0 = (RuleCall)cVal2Assignment_3.eContents().get(0);
 		
-		//AssignedActionSecond returns AssignedAction:
-		//	"#7" val1=ID "kw1" val2=ID;
+		//AssignedActionSecond AssignedAction:
+		//	"#7" val1=ID "kw1" val2=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//"#7" val1=ID "kw1" val2=ID
@@ -688,7 +688,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedAction1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedAction1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnassignedAction1Action_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cNumberSignDigitEightKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -724,7 +724,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedAction2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedAction2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnassignedAction2SubAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cNumberSignDigitNineKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -760,7 +760,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedAction3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedAction3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -785,7 +785,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#10"
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_0() { return cNumberSignDigitOneDigitZeroKeyword_0; }
 
-		//"kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2}
+		//("kw1" {UnassignedAction2Sub1} | "kw2" {UnassignedAction2Sub2})
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1" {UnassignedAction2Sub1}
@@ -820,7 +820,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedRuleCall1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedRuleCall1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cUnassignedRuleCall1SubParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -848,7 +848,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedRuleCall1SubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedRuleCall1Sub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall1Sub");
 		private final Assignment cVal1Assignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cVal1IDTerminalRuleCall_0 = (RuleCall)cVal1Assignment.eContents().get(0);
 		
@@ -864,7 +864,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedRuleCall2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedRuleCall2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cUnassignedRuleCall2SubParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -892,7 +892,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class UnassignedRuleCall2SubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnassignedRuleCall2Sub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall2Sub");
 		private final Action cUnassignedRuleCall2SubActionAction = (Action)rule.eContents().get(1);
 		
 		//UnassignedRuleCall2Sub:
@@ -904,7 +904,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class Combination1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Combination1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -949,7 +949,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
 
-		//"kw2" val3=ID | val4=ID
+		//("kw2" val3=ID | val4=ID)
 		public Alternatives getAlternatives_2_2() { return cAlternatives_2_2; }
 
 		//"kw2" val3=ID
@@ -972,7 +972,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class Combination2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Combination2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -989,10 +989,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cVal4IDTerminalRuleCall_2_1_1_0 = (RuleCall)cVal4Assignment_2_1_1.eContents().get(0);
 		
 		//Combination2:
-		//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
+		//	"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*)
+		//"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*)
 		public Group getGroup() { return cGroup; }
 
 		//"#14"
@@ -1004,7 +1004,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_0() { return cVal1IDTerminalRuleCall_1_0; }
 
-		//"kw1" val2=ID | (val3+=ID val4+=ID)*
+		//("kw1" val2=ID | val3+=ID val4+=ID*)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw1" val2=ID
@@ -1019,7 +1019,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_0_1_0() { return cVal2IDTerminalRuleCall_2_0_1_0; }
 
-		//(val3+=ID val4+=ID)*
+		//val3+=ID val4+=ID*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//val3+=ID
@@ -1036,7 +1036,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class Combination3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Combination3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1080,7 +1080,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class Combination4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Combination4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1128,7 +1128,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class List1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1168,7 +1168,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class List2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1212,7 +1212,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class List3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List3");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cNumberSignDigitOneDigitNineKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -1241,7 +1241,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0_0() { return cNumberSignDigitOneDigitNineKeyword_0_0; }
 
-		//val1+=ID ("," val1+=ID)*
+		//(val1+=ID ("," val1+=ID)*)
 		public Group getGroup_0_1() { return cGroup_0_1; }
 
 		//val1+=ID
@@ -1276,7 +1276,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class List4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1328,7 +1328,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class List5Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "List5");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List5");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1355,7 +1355,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 
-		//val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID
+		//(val1+=ID ("," val1+=ID)* "kw3" val2=ID | val3=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1+=ID ("," val1+=ID)* "kw3" val2=ID
@@ -1396,7 +1396,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class AltList1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1428,7 +1428,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#22"
 		public Keyword getNumberSignDigitTwoDigitTwoKeyword_0() { return cNumberSignDigitTwoDigitTwoKeyword_0; }
 
-		//val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?
+		//(val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1=ID val2=ID
@@ -1484,7 +1484,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class AltList2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1514,7 +1514,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#23"
 		public Keyword getNumberSignDigitTwoDigitThreeKeyword_0() { return cNumberSignDigitTwoDigitThreeKeyword_0; }
 
-		//val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID
+		//(val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//val1+=ID val2=ID
@@ -1564,7 +1564,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TransientObjectElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientObject");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObject");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1600,7 +1600,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TransientObjectSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientObjectSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObjectSub");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVal2Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cVal2IDTerminalRuleCall_0_0 = (RuleCall)cVal2Assignment_0.eContents().get(0);
@@ -1628,7 +1628,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TransientSerializeables1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientSerializeables1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1684,7 +1684,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class StaticSimplificationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticSimplification");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.StaticSimplification");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1713,7 +1713,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#26"
 		public Keyword getNumberSignDigitTwoDigitSixKeyword_0() { return cNumberSignDigitTwoDigitSixKeyword_0; }
 
-		//"kw1" | {EmptyAlternativeSub} | val1=ID
+		//("kw1" | {EmptyAlternativeSub} | val1=ID)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"kw1"
@@ -1728,7 +1728,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal1IDTerminalRuleCall_1_2_0() { return cVal1IDTerminalRuleCall_1_2_0; }
 
-		//"kw2" | val2=ID
+		//("kw2" | val2=ID)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//"kw2"
@@ -1740,7 +1740,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
 
-		//"kw3" ("kw4" val3=ID+)?
+		//("kw3" ("kw4" val3=ID+)?)
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"kw3"
@@ -1760,7 +1760,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TwoVersionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersion");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TwoVersion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1777,7 +1777,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//"#27"
 		public Keyword getNumberSignDigitTwoDigitSevenKeyword_0() { return cNumberSignDigitTwoDigitSevenKeyword_0; }
 
-		//TwoVersionNo1 | TwoVersionNo2
+		//(TwoVersionNo1 | TwoVersionNo2)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TwoVersionNo1
@@ -1788,7 +1788,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TwoVersionNo1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersionNo1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TwoVersionNo1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cShared1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cShared1IDTerminalRuleCall_0_0 = (RuleCall)cShared1Assignment_0.eContents().get(0);
@@ -1804,8 +1804,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final Assignment cVersion1Assignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cVersion1IDTerminalRuleCall_5_0 = (RuleCall)cVersion1Assignment_5.eContents().get(0);
 		
-		//TwoVersionNo1 returns TwoVersion:
-		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+		//TwoVersionNo1 TwoVersion:
+		//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
 		@Override public ParserRule getRule() { return rule; }
 
 		//shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
@@ -1852,7 +1852,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TwoVersionNo2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersionNo2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TwoVersionNo2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cShared1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cShared1IDTerminalRuleCall_0_0 = (RuleCall)cShared1Assignment_0.eContents().get(0);
@@ -1878,8 +1878,9 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final Assignment cExtra4Assignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
 		private final RuleCall cExtra4IDTerminalRuleCall_6_1_1_0 = (RuleCall)cExtra4Assignment_6_1_1.eContents().get(0);
 		
-		//TwoVersionNo2 returns TwoVersion:
-		//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
+		//TwoVersionNo2 TwoVersion:
+		//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+		//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
 		@Override public ParserRule getRule() { return rule; }
 
 		//shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
@@ -1956,7 +1957,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class Heuristic1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Heuristic1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Heuristic1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2045,7 +2046,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	
 	public class TransientSerializeables1EnumElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "TransientSerializeables1Enum");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1Enum");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
@@ -2256,8 +2257,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return getAssignedActionAccess().getRule();
 	}
 
-	//AssignedActionSecond returns AssignedAction:
-	//	"#7" val1=ID "kw1" val2=ID;
+	//AssignedActionSecond AssignedAction:
+	//	"#7" val1=ID "kw1" val2=ID
 	public AssignedActionSecondElements getAssignedActionSecondAccess() {
 		return pAssignedActionSecond;
 	}
@@ -2347,7 +2348,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//Combination2:
-	//	"#14" val1=ID ("kw1" val2=ID | (val3+=ID val4+=ID)*);
+	//	"#14" val1=ID ("kw1" val2=ID | val3+=ID val4+=ID*);
 	public Combination2Elements getCombination2Access() {
 		return pCombination2;
 	}
@@ -2506,8 +2507,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return getTwoVersionAccess().getRule();
 	}
 
-	//TwoVersionNo1 returns TwoVersion:
-	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+	//TwoVersionNo1 TwoVersion:
+	//	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
 	public TwoVersionNo1Elements getTwoVersionNo1Access() {
 		return pTwoVersionNo1;
 	}
@@ -2516,8 +2517,9 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		return getTwoVersionNo1Access().getRule();
 	}
 
-	//TwoVersionNo2 returns TwoVersion:
-	//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?;
+	//TwoVersionNo2 TwoVersion:
+	//	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+	//	"extra" extra1=ID? (extra2=ID extra3=ID | "two" extra4=ID)?
 	public TwoVersionNo2Elements getTwoVersionNo2Access() {
 		return pTwoVersionNo2;
 	}
@@ -2537,38 +2539,38 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -124,67 +124,67 @@ public class Bug362902ElementTypeProvider implements IElementTypeProvider {
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GreetingsAssignment_0ElementType() {
 		return Model_GreetingsAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GreetingsGreetingParserRuleCall_0_0ElementType() {
 		return Model_GreetingsGreetingParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FavouriteKeyword_1ElementType() {
 		return Model_FavouriteKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FavouriteAssignment_2ElementType() {
 		return Model_FavouriteAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FavouriteGreetingCrossReference_2_0ElementType() {
 		return Model_FavouriteGreetingCrossReference_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FavouriteGreetingMyIdParserRuleCall_2_0_1ElementType() {
 		return Model_FavouriteGreetingMyIdParserRuleCall_2_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreetingElementType() {
 		return Greeting_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_GroupElementType() {
 		return Greeting_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_HelloKeyword_0ElementType() {
 		return Greeting_HelloKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_NameAssignment_1ElementType() {
 		return Greeting_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_NameMyIdParserRuleCall_1_0ElementType() {
 		return Greeting_NameMyIdParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_ExclamationMarkKeyword_2ElementType() {
 		return Greeting_ExclamationMarkKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMyIdElementType() {
 		return MyId_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMyId_IDTerminalRuleCallElementType() {
 		return MyId_IDTerminalRuleCall_ELEMENT_TYPE;
 	}

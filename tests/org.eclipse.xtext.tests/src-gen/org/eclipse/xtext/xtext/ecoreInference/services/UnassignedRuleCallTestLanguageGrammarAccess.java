@@ -19,7 +19,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -27,13 +27,13 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cModelFeaturesModelFeaturesParserRuleCall_2_0 = (RuleCall)cModelFeaturesAssignment_2.eContents().get(0);
 		
 		//Model:
-		//	"model" INT+ modelFeatures=ModelFeatures;
+		//	'model' INT+ modelFeatures=ModelFeatures;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"model" INT+ modelFeatures=ModelFeatures
+		//'model' INT+ modelFeatures=ModelFeatures
 		public Group getGroup() { return cGroup; }
 
-		//"model"
+		//'model'
 		public Keyword getModelKeyword_0() { return cModelKeyword_0; }
 
 		//INT+
@@ -47,7 +47,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	public class ModelFeaturesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelFeatures");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.ModelFeatures");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFeatureKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -56,13 +56,13 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ModelFeatures:
-		//	"feature" name=ID DataTypeRule ";";
+		//	'feature' name=ID DataTypeRule ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"feature" name=ID DataTypeRule ";"
+		//'feature' name=ID DataTypeRule ';'
 		public Group getGroup() { return cGroup; }
 
-		//"feature"
+		//'feature'
 		public Keyword getFeatureKeyword_0() { return cFeatureKeyword_0; }
 
 		//name=ID
@@ -74,12 +74,12 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		//DataTypeRule
 		public RuleCall getDataTypeRuleParserRuleCall_2() { return cDataTypeRuleParserRuleCall_2; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class DataTypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DataTypeRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.DataTypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cKeywordKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -87,16 +87,16 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cSTRINGTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		
 		//DataTypeRule:
-		//	INT "keyword" INT STRING?;
+		//	INT 'keyword' INT STRING?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//INT "keyword" INT STRING?
+		//INT 'keyword' INT STRING?
 		public Group getGroup() { return cGroup; }
 
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//"keyword"
+		//'keyword'
 		public Keyword getKeywordKeyword_1() { return cKeywordKeyword_1; }
 
 		//INT
@@ -153,7 +153,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//	"model" INT+ modelFeatures=ModelFeatures;
+	//	'model' INT+ modelFeatures=ModelFeatures;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -163,7 +163,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//ModelFeatures:
-	//	"feature" name=ID DataTypeRule ";";
+	//	'feature' name=ID DataTypeRule ';';
 	public ModelFeaturesElements getModelFeaturesAccess() {
 		return pModelFeatures;
 	}
@@ -173,7 +173,7 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//DataTypeRule:
-	//	INT "keyword" INT STRING?;
+	//	INT 'keyword' INT STRING?;
 	public DataTypeRuleElements getDataTypeRuleAccess() {
 		return pDataTypeRule;
 	}
@@ -183,38 +183,38 @@ public class UnassignedRuleCallTestLanguageGrammarAccess extends AbstractGrammar
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

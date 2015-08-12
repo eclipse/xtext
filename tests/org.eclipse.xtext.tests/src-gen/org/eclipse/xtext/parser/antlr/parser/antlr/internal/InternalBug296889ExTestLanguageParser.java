@@ -25,9 +25,9 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "DataType", "Model", "HyphenMinusHyphenMinus", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=7;
-    public static final int Model=5;
     public static final int RULE_STRING=9;
     public static final int DataType=4;
+    public static final int Model=5;
     public static final int HyphenMinusHyphenMinus=6;
     public static final int RULE_ANY_OTHER=13;
     public static final int RULE_INT=8;
@@ -205,7 +205,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     	             			current, 
                     	             			"expressions",
                     	              		lv_expressions_1_0, 
-                    	              		"Expression");
+                    	              		"org.eclipse.xtext.parser.antlr.Bug296889ExTestLanguage.Expression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -276,7 +276,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                     	             			current, 
                     	             			"values",
                     	              		lv_values_3_0, 
-                    	              		"DataTypeExpression");
+                    	              		"org.eclipse.xtext.parser.antlr.Bug296889ExTestLanguage.DataTypeExpression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -597,7 +597,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                      			current, 
                      			"expr",
                       		lv_expr_2_0, 
-                      		"Variable");
+                      		"org.eclipse.xtext.parser.antlr.Bug296889ExTestLanguage.Variable");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -897,7 +897,7 @@ public class InternalBug296889ExTestLanguageParser extends AbstractInternalAntlr
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 

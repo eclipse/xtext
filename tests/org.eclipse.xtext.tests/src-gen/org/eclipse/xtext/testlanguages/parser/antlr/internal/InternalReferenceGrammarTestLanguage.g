@@ -95,7 +95,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"groesse",
         		lv_groesse_1_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -113,7 +113,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"beschreibung",
         		lv_beschreibung_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -134,7 +134,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"kinder",
         		lv_kinder_4_0, 
-        		"Kind");
+        		"org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Kind");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -153,7 +153,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"erzieher",
         		lv_erzieher_5_0, 
-        		"Erwachsener");
+        		"org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Erwachsener");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -172,7 +172,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"spielzeuge",
         		lv_spielzeuge_6_0, 
-        		"Spielzeug");
+        		"org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Spielzeug");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -191,7 +191,7 @@ ruleSpielplatz returns [EObject current=null]
        			$current, 
        			"familie",
         		lv_familie_7_0, 
-        		"Familie");
+        		"org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Familie");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -245,7 +245,7 @@ ruleKind returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -263,7 +263,7 @@ ruleKind returns [EObject current=null]
        			$current, 
        			"age",
         		lv_age_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -314,7 +314,7 @@ ruleErwachsener returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -332,7 +332,7 @@ ruleErwachsener returns [EObject current=null]
        			$current, 
        			"age",
         		lv_age_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -383,7 +383,7 @@ ruleSpielzeug returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -400,7 +400,7 @@ ruleSpielzeug returns [EObject current=null]
        			$current, 
        			"farbe",
         		lv_farbe_3_0, 
-        		"Farbe");
+        		"org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguage.Farbe");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -540,7 +540,7 @@ ruleFamilie returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_2, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
     |		lv_name_2_3=RULE_ID
@@ -555,7 +555,7 @@ ruleFamilie returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_3, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

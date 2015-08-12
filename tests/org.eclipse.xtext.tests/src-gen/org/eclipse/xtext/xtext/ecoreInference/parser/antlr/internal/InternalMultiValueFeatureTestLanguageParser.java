@@ -150,7 +150,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	           			current, 
             	           			"featureA",
             	            		lv_featureA_0_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }

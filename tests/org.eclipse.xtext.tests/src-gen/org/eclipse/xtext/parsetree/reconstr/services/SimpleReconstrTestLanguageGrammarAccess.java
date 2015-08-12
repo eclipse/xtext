@@ -19,7 +19,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	
 	public class OpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Op");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Op");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cTermParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -27,8 +27,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cValuesAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cValuesTermParserRuleCall_1_1_0 = (RuleCall)cValuesAssignment_1_1.eContents().get(0);
 		
-		//Op returns Expression:
-		//	Term ({Op.values+=current} values+=Term)*;
+		//Op Expression:
+		//	Term ({Op.values+=current} values+=Term)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//Term ({Op.values+=current} values+=Term)*
@@ -51,7 +51,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TermElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Term");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Term");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cAtomParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTwoNumbersParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -80,10 +80,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cBug310435EnumParserRuleCall_24 = (RuleCall)cAlternatives.eContents().get(24);
 		private final RuleCall cCrossRefNameTestParserRuleCall_25 = (RuleCall)cAlternatives.eContents().get(25);
 		
-		//Term returns Expression:
+		//Term Expression:
 		//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 		//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
+		//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest
 		@Override public ParserRule getRule() { return rule; }
 
 		//Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
@@ -171,7 +171,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class AtomElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Atom");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Atom");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -187,7 +187,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ParensElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parens");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Parens");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cOpParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -195,31 +195,31 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cEmAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final Keyword cEmExclamationMarkKeyword_3_0 = (Keyword)cEmAssignment_3.eContents().get(0);
 		
-		/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
-		//	"(" Op ")" em="!"?;
+		/// * SuppressWarnings[potentialOverride] * / Parens Expression:
+		//	'(' Op ')' em='!'?
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Op ")" em="!"?
+		//'(' Op ')' em='!'?
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//Op
 		public RuleCall getOpParserRuleCall_1() { return cOpParserRuleCall_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
-		//em="!"?
+		//em='!'?
 		public Assignment getEmAssignment_3() { return cEmAssignment_3; }
 
-		//"!"
+		//'!'
 		public Keyword getEmExclamationMarkKeyword_3_0() { return cEmExclamationMarkKeyword_3_0; }
 	}
 
 	public class TwoNumbersElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoNumbers");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TwoNumbers");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNum1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNum1INTTerminalRuleCall_0_0 = (RuleCall)cNum1Assignment_0.eContents().get(0);
@@ -231,10 +231,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNum3INTTerminalRuleCall_2_1_0 = (RuleCall)cNum3Assignment_2_1.eContents().get(0);
 		
 		//TwoNumbers:
-		//	num1=INT num2=INT ("#" num3+=INT)*;
+		//	num1=INT num2=INT ('#' num3+=INT)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//num1=INT num2=INT ("#" num3+=INT)*
+		//num1=INT num2=INT ('#' num3+=INT)*
 		public Group getGroup() { return cGroup; }
 
 		//num1=INT
@@ -249,10 +249,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getNum2INTTerminalRuleCall_1_0() { return cNum2INTTerminalRuleCall_1_0; }
 
-		//("#" num3+=INT)*
+		//('#' num3+=INT)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"#"
+		//'#'
 		public Keyword getNumberSignKeyword_2_0() { return cNumberSignKeyword_2_0; }
 
 		//num3+=INT
@@ -263,7 +263,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ManyStringsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ManyStrings");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ManyStrings");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cStr1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -272,13 +272,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cStr2STRINGTerminalRuleCall_2_0 = (RuleCall)cStr2Assignment_2.eContents().get(0);
 		
 		//ManyStrings:
-		//	"=" str1+=STRING* str2+=STRING;
+		//	'=' str1+=STRING* str2+=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"=" str1+=STRING* str2+=STRING
+		//'=' str1+=STRING* str2+=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
 
 		//str1+=STRING*
@@ -295,7 +295,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -306,13 +306,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
 		
 		//Type:
-		//	"type" name=ID "extends" extends=[Type];
+		//	'type' name=ID 'extends' ^extends=[Type];
 		@Override public ParserRule getRule() { return rule; }
 
-		//"type" name=ID "extends" extends=[Type]
+		//'type' name=ID 'extends' ^extends=[Type]
 		public Group getGroup() { return cGroup; }
 
-		//"type"
+		//'type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
 
 		//name=ID
@@ -321,10 +321,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_2() { return cExtendsKeyword_2; }
 
-		//extends=[Type]
+		//^extends=[Type]
 		public Assignment getExtendsAssignment_3() { return cExtendsAssignment_3; }
 
 		//[Type]
@@ -335,7 +335,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Ref2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Ref2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Ref2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRef2Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -345,33 +345,33 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cRef2Mykeyword2Keyword_1_0_2 = (Keyword)cRef2Alternatives_1_0.eContents().get(2);
 		
 		//Ref2:
-		//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
+		//	'#2' ref2=('mykeyword1' | STRING | 'mykeyword2');
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#2" ref2=("mykeyword1" | STRING | "mykeyword2")
+		//'#2' ref2=('mykeyword1' | STRING | 'mykeyword2')
 		public Group getGroup() { return cGroup; }
 
-		//"#2"
+		//'#2'
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
-		//ref2=("mykeyword1" | STRING | "mykeyword2")
+		//ref2=('mykeyword1' | STRING | 'mykeyword2')
 		public Assignment getRef2Assignment_1() { return cRef2Assignment_1; }
 
-		//"mykeyword1" | STRING | "mykeyword2"
+		//('mykeyword1' | STRING | 'mykeyword2')
 		public Alternatives getRef2Alternatives_1_0() { return cRef2Alternatives_1_0; }
 
-		//"mykeyword1"
+		//'mykeyword1'
 		public Keyword getRef2Mykeyword1Keyword_1_0_0() { return cRef2Mykeyword1Keyword_1_0_0; }
 
 		//STRING
 		public RuleCall getRef2STRINGTerminalRuleCall_1_0_1() { return cRef2STRINGTerminalRuleCall_1_0_1; }
 
-		//"mykeyword2"
+		//'mykeyword2'
 		public Keyword getRef2Mykeyword2Keyword_1_0_2() { return cRef2Mykeyword2Keyword_1_0_2; }
 	}
 
 	public class SpareElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Spare");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Spare");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -382,13 +382,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cIdIDTerminalRuleCall_2_1_0 = (RuleCall)cIdAssignment_2_1.eContents().get(0);
 		
 		//Spare:
-		//	"#3" id+=ID ("." id+=ID)*;
+		//	'#3' id+=ID ('.' id+=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#3" id+=ID ("." id+=ID)*
+		//'#3' id+=ID ('.' id+=ID)*
 		public Group getGroup() { return cGroup; }
 
-		//"#3"
+		//'#3'
 		public Keyword getNumberSignDigitThreeKeyword_0() { return cNumberSignDigitThreeKeyword_0; }
 
 		//id+=ID
@@ -397,10 +397,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 
-		//("." id+=ID)*
+		//('.' id+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
 
 		//id+=ID
@@ -411,7 +411,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class BooleanElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Boolean");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Boolean");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cBoolAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -421,22 +421,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValueIDTerminalRuleCall_3_0 = (RuleCall)cValueAssignment_3.eContents().get(0);
 		
 		//Boolean:
-		//	"#4" bool?="myoption"? "kw" value=ID;
+		//	'#4' bool?='myoption'? 'kw' value=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#4" bool?="myoption"? "kw" value=ID
+		//'#4' bool?='myoption'? 'kw' value=ID
 		public Group getGroup() { return cGroup; }
 
-		//"#4"
+		//'#4'
 		public Keyword getNumberSignDigitFourKeyword_0() { return cNumberSignDigitFourKeyword_0; }
 
-		//bool?="myoption"?
+		//bool?='myoption'?
 		public Assignment getBoolAssignment_1() { return cBoolAssignment_1; }
 
-		//"myoption"
+		//'myoption'
 		public Keyword getBoolMyoptionKeyword_1_0() { return cBoolMyoptionKeyword_1_0; }
 
-		//"kw"
+		//'kw'
 		public Keyword getKwKeyword_2() { return cKwKeyword_2; }
 
 		//value=ID
@@ -447,7 +447,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Transient1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transient1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Transient1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -464,22 +464,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cScaleINTTerminalRuleCall_2_1_1_0 = (RuleCall)cScaleAssignment_2_1_1.eContents().get(0);
 		
 		//Transient1:
-		//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
+		//	'#5' (precStar?='*' | prec=INT) (',' (scaleStar?='*' | scale=INT))?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?
+		//'#5' (precStar?='*' | prec=INT) (',' (scaleStar?='*' | scale=INT))?
 		public Group getGroup() { return cGroup; }
 
-		//"#5"
+		//'#5'
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
-		//precStar?="*" | prec=INT
+		//(precStar?='*' | prec=INT)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//precStar?="*"
+		//precStar?='*'
 		public Assignment getPrecStarAssignment_1_0() { return cPrecStarAssignment_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getPrecStarAsteriskKeyword_1_0_0() { return cPrecStarAsteriskKeyword_1_0_0; }
 
 		//prec=INT
@@ -488,19 +488,19 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getPrecINTTerminalRuleCall_1_1_0() { return cPrecINTTerminalRuleCall_1_1_0; }
 
-		//("," (scaleStar?="*" | scale=INT))?
+		//(',' (scaleStar?='*' | scale=INT))?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
-		//scaleStar?="*" | scale=INT
+		//(scaleStar?='*' | scale=INT)
 		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
-		//scaleStar?="*"
+		//scaleStar?='*'
 		public Assignment getScaleStarAssignment_2_1_0() { return cScaleStarAssignment_2_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getScaleStarAsteriskKeyword_2_1_0_0() { return cScaleStarAsteriskKeyword_2_1_0_0; }
 
 		//scale=INT
@@ -511,7 +511,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Consumed1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Consumed1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -529,22 +529,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cV1INTTerminalRuleCall_1_1_2_0 = (RuleCall)cV1Assignment_1_1_2.eContents().get(0);
 		
 		//Consumed1:
-		//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
+		//	'#6' ('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT)
+		//'#6' ('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT)
 		public Group getGroup() { return cGroup; }
 
-		//"#6"
+		//'#6'
 		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
 
-		//"v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT
+		//('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"v1" v1+=INT* v2+=ID
+		//'v1' v1+=INT* v2+=ID
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"v1"
+		//'v1'
 		public Keyword getV1Keyword_1_0_0() { return cV1Keyword_1_0_0; }
 
 		//v1+=INT*
@@ -559,10 +559,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getV2IDTerminalRuleCall_1_0_2_0() { return cV2IDTerminalRuleCall_1_0_2_0; }
 
-		//"v2" v2+=ID* v1+=INT
+		//'v2' v2+=ID* v1+=INT
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"v2"
+		//'v2'
 		public Keyword getV2Keyword_1_1_0() { return cV2Keyword_1_1_0; }
 
 		//v2+=ID*
@@ -579,20 +579,20 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Consumed2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Consumed2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Consumed2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cChildAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cChildConsumed1ParserRuleCall_1_0 = (RuleCall)cChildAssignment_1.eContents().get(0);
 		
 		//Consumed2:
-		//	"#7" child=Consumed1;
+		//	'#7' child=Consumed1;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#7" child=Consumed1
+		//'#7' child=Consumed1
 		public Group getGroup() { return cGroup; }
 
-		//"#7"
+		//'#7'
 		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
 
 		//child=Consumed1
@@ -603,7 +603,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Loop1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Loop1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKw0Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cNumberSignDigitEightKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -617,16 +617,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw30Keyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
 		
 		//Loop1:
-		//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+		//	'kw0'? '#8' id+=ID 'kw1'? id+=ID ('kw2'* 'kw30')+;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+
+		//'kw0'? '#8' id+=ID 'kw1'? id+=ID ('kw2'* 'kw30')+
 		public Group getGroup() { return cGroup; }
 
-		//"kw0"?
+		//'kw0'?
 		public Keyword getKw0Keyword_0() { return cKw0Keyword_0; }
 
-		//"#8"
+		//'#8'
 		public Keyword getNumberSignDigitEightKeyword_1() { return cNumberSignDigitEightKeyword_1; }
 
 		//id+=ID
@@ -635,7 +635,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//"kw1"?
+		//'kw1'?
 		public Keyword getKw1Keyword_3() { return cKw1Keyword_3; }
 
 		//id+=ID
@@ -644,18 +644,18 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_4_0() { return cIdIDTerminalRuleCall_4_0; }
 
-		//("kw2"* "kw30")+
+		//('kw2'* 'kw30')+
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"kw2"*
+		//'kw2'*
 		public Keyword getKw2Keyword_5_0() { return cKw2Keyword_5_0; }
 
-		//"kw30"
+		//'kw30'
 		public Keyword getKw30Keyword_5_1() { return cKw30Keyword_5_1; }
 	}
 
 	public class Loop2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Loop2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -677,13 +677,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw6Keyword_4_1 = (Keyword)cAlternatives_4.eContents().get(1);
 		
 		//Loop2:
-		//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
+		//	'#9' id+=ID ('kw1' | id+=ID 'kw2') ('kw3' | id+=ID 'kw4')? ('kw5' | 'kw6');
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6")
+		//'#9' id+=ID ('kw1' | id+=ID 'kw2') ('kw3' | id+=ID 'kw4')? ('kw5' | 'kw6')
 		public Group getGroup() { return cGroup; }
 
-		//"#9"
+		//'#9'
 		public Keyword getNumberSignDigitNineKeyword_0() { return cNumberSignDigitNineKeyword_0; }
 
 		//id+=ID
@@ -692,13 +692,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
 
-		//"kw1" | id+=ID "kw2"
+		//('kw1' | id+=ID 'kw2')
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
 
-		//id+=ID "kw2"
+		//id+=ID 'kw2'
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//id+=ID
@@ -707,16 +707,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_1_0_0() { return cIdIDTerminalRuleCall_2_1_0_0; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getKw2Keyword_2_1_1() { return cKw2Keyword_2_1_1; }
 
-		//("kw3" | id+=ID "kw4")?
+		//('kw3' | id+=ID 'kw4')?
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		//"kw3"
+		//'kw3'
 		public Keyword getKw3Keyword_3_0() { return cKw3Keyword_3_0; }
 
-		//id+=ID "kw4"
+		//id+=ID 'kw4'
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
 		//id+=ID
@@ -725,21 +725,21 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_3_1_0_0() { return cIdIDTerminalRuleCall_3_1_0_0; }
 
-		//"kw4"
+		//'kw4'
 		public Keyword getKw4Keyword_3_1_1() { return cKw4Keyword_3_1_1; }
 
-		//"kw5" | "kw6"
+		//('kw5' | 'kw6')
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
-		//"kw5"
+		//'kw5'
 		public Keyword getKw5Keyword_4_0() { return cKw5Keyword_4_0; }
 
-		//"kw6"
+		//'kw6'
 		public Keyword getKw6Keyword_4_1() { return cKw6Keyword_4_1; }
 	}
 
 	public class Loop3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Loop3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Keyword cKw1Keyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
@@ -755,25 +755,25 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw5Keyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//Loop3:
-		//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+		//	('kw1' | 'kw2' | 'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*
+		//('kw1' | 'kw2' | 'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*
 		public Group getGroup() { return cGroup; }
 
-		//"kw1" | "kw2" | "kw3"
+		//('kw1' | 'kw2' | 'kw3')
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_0_0() { return cKw1Keyword_0_0; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getKw2Keyword_0_1() { return cKw2Keyword_0_1; }
 
-		//"kw3"
+		//'kw3'
 		public Keyword getKw3Keyword_0_2() { return cKw3Keyword_0_2; }
 
-		//"#10"
+		//'#10'
 		public Keyword getNumberSignDigitOneDigitZeroKeyword_1() { return cNumberSignDigitOneDigitZeroKeyword_1; }
 
 		//id+=ID
@@ -782,10 +782,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//("kw4" id+=ID "kw5")*
+		//('kw4' id+=ID 'kw5')*
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"kw4"
+		//'kw4'
 		public Keyword getKw4Keyword_3_0() { return cKw4Keyword_3_0; }
 
 		//id+=ID
@@ -794,12 +794,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_3_1_0() { return cIdIDTerminalRuleCall_3_1_0; }
 
-		//"kw5"
+		//'kw5'
 		public Keyword getKw5Keyword_3_2() { return cKw5Keyword_3_2; }
 	}
 
 	public class Loop4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Loop4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -817,31 +817,31 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cKw7Keyword_3_1_1 = (Keyword)cGroup_3_1.eContents().get(1);
 		
 		//Loop4:
-		//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+		//	'#11' ('kw1' | 'kw2' | 'kw3' 'kw4') id+=ID ('kw5' ('kw6' 'kw7'?)?)+;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+
+		//'#11' ('kw1' | 'kw2' | 'kw3' 'kw4') id+=ID ('kw5' ('kw6' 'kw7'?)?)+
 		public Group getGroup() { return cGroup; }
 
-		//"#11"
+		//'#11'
 		public Keyword getNumberSignDigitOneDigitOneKeyword_0() { return cNumberSignDigitOneDigitOneKeyword_0; }
 
-		//"kw1" | "kw2" | "kw3" "kw4"
+		//('kw1' | 'kw2' | 'kw3' 'kw4')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_1_0() { return cKw1Keyword_1_0; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getKw2Keyword_1_1() { return cKw2Keyword_1_1; }
 
-		//"kw3" "kw4"
+		//'kw3' 'kw4'
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//"kw3"
+		//'kw3'
 		public Keyword getKw3Keyword_1_2_0() { return cKw3Keyword_1_2_0; }
 
-		//"kw4"
+		//'kw4'
 		public Keyword getKw4Keyword_1_2_1() { return cKw4Keyword_1_2_1; }
 
 		//id+=ID
@@ -850,24 +850,24 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//("kw5" ("kw6" "kw7"?)?)+
+		//('kw5' ('kw6' 'kw7'?)?)+
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"kw5"
+		//'kw5'
 		public Keyword getKw5Keyword_3_0() { return cKw5Keyword_3_0; }
 
-		//("kw6" "kw7"?)?
+		//('kw6' 'kw7'?)?
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//"kw6"
+		//'kw6'
 		public Keyword getKw6Keyword_3_1_0() { return cKw6Keyword_3_1_0; }
 
-		//"kw7"?
+		//'kw7'?
 		public Keyword getKw7Keyword_3_1_1() { return cKw7Keyword_3_1_1; }
 	}
 
 	public class LoopBug285452Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LoopBug285452");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.LoopBug285452");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -878,16 +878,16 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//LoopBug285452:
-		//	"#12" (interface?="interface" | "class") name=ID;
+		//	'#12' (interface?="interface" | "class") name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#12" (interface?="interface" | "class") name=ID
+		//'#12' (interface?="interface" | "class") name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"#12"
+		//'#12'
 		public Keyword getNumberSignDigitOneDigitTwoKeyword_0() { return cNumberSignDigitOneDigitTwoKeyword_0; }
 
-		//interface?="interface" | "class"
+		//(interface?="interface" | "class")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//interface?="interface"
@@ -907,7 +907,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class DuplicateBug284491Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DuplicateBug284491");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.DuplicateBug284491");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -919,52 +919,52 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cTransientTransientKeyword_1_2_0 = (Keyword)cTransientAssignment_1_2.eContents().get(0);
 		
 		/// * SuppressWarnings[noInstantiation, potentialOverride] * / DuplicateBug284491:
-		//	"#13" (static?="static" | final?="final" | transient?="transient")*;
+		//	'#13' (static?='static' | final?='final' | transient?='transient')*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#13" (static?="static" | final?="final" | transient?="transient")*
+		//'#13' (static?='static' | final?='final' | transient?='transient')*
 		public Group getGroup() { return cGroup; }
 
-		//"#13"
+		//'#13'
 		public Keyword getNumberSignDigitOneDigitThreeKeyword_0() { return cNumberSignDigitOneDigitThreeKeyword_0; }
 
-		//(static?="static" | final?="final" | transient?="transient")*
+		//(static?='static' | final?='final' | transient?='transient')*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//static?="static"
+		//static?='static'
 		public Assignment getStaticAssignment_1_0() { return cStaticAssignment_1_0; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_1_0_0() { return cStaticStaticKeyword_1_0_0; }
 
-		//final?="final"
+		//final?='final'
 		public Assignment getFinalAssignment_1_1() { return cFinalAssignment_1_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_1_1_0() { return cFinalFinalKeyword_1_1_0; }
 
-		//transient?="transient"
+		//transient?='transient'
 		public Assignment getTransientAssignment_1_2() { return cTransientAssignment_1_2; }
 
-		//"transient"
+		//'transient'
 		public Keyword getTransientTransientKeyword_1_2_0() { return cTransientTransientKeyword_1_2_0; }
 	}
 
 	public class EmptyObjectBug284850Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectBug284850");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectBug284850");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cItemsEmptyObjectItemsParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
 		
 		//EmptyObjectBug284850:
-		//	"#14" items=EmptyObjectItems;
+		//	'#14' items=EmptyObjectItems;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#14" items=EmptyObjectItems
+		//'#14' items=EmptyObjectItems
 		public Group getGroup() { return cGroup; }
 
-		//"#14"
+		//'#14'
 		public Keyword getNumberSignDigitOneDigitFourKeyword_0() { return cNumberSignDigitOneDigitFourKeyword_0; }
 
 		//items=EmptyObjectItems
@@ -975,7 +975,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class EmptyObjectItemsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItems");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItems");
 		private final Assignment cListAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cListEmptyObjectItemParserRuleCall_0 = (RuleCall)cListAssignment.eContents().get(0);
 		
@@ -991,20 +991,20 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class EmptyObjectItemElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EmptyObjectItem");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItem");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cItemKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//EmptyObjectItem:
-		//	"item" name=ID;
+		//	'item' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"item" name=ID
+		//'item' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"item"
+		//'item'
 		public Keyword getItemKeyword_0() { return cItemKeyword_0; }
 
 		//name=ID
@@ -1015,20 +1015,20 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class MultiInheritanceBug280439Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiInheritanceBug280439");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.MultiInheritanceBug280439");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cValConcreteMultiParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
 		
 		//MultiInheritanceBug280439:
-		//	"#15" val=ConcreteMulti;
+		//	'#15' val=ConcreteMulti;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#15" val=ConcreteMulti
+		//'#15' val=ConcreteMulti
 		public Group getGroup() { return cGroup; }
 
-		//"#15"
+		//'#15'
 		public Keyword getNumberSignDigitOneDigitFiveKeyword_0() { return cNumberSignDigitOneDigitFiveKeyword_0; }
 
 		//val=ConcreteMulti
@@ -1039,7 +1039,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class AbstractMulti1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.AbstractMulti1");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Assignment cM1Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
@@ -1063,7 +1063,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class AbstractMulti2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractMulti2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.AbstractMulti2");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cConcreteMultiParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Assignment cM2Assignment_1 = (Assignment)cAlternatives.eContents().get(1);
@@ -1087,7 +1087,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ConcreteMultiElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteMulti");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ConcreteMulti");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cM1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cM1IDTerminalRuleCall_0_0 = (RuleCall)cM1Assignment_0.eContents().get(0);
@@ -1115,7 +1115,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class EObjectRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EObjectRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EObjectRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cObjAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1126,13 +1126,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cRefEObjectIDTerminalRuleCall_3_0_1 = (RuleCall)cRefEObjectCrossReference_3_0.eContents().get(1);
 		
 		//EObjectRef:
-		//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+		//	'#16' obj=EObjectElement 'refs' ref=[ecore::EObject];
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#16" obj=EObjectElement "refs" ref=[ecore::EObject]
+		//'#16' obj=EObjectElement 'refs' ref=[ecore::EObject]
 		public Group getGroup() { return cGroup; }
 
-		//"#16"
+		//'#16'
 		public Keyword getNumberSignDigitOneDigitSixKeyword_0() { return cNumberSignDigitOneDigitSixKeyword_0; }
 
 		//obj=EObjectElement
@@ -1141,7 +1141,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//EObjectElement
 		public RuleCall getObjEObjectElementParserRuleCall_1_0() { return cObjEObjectElementParserRuleCall_1_0; }
 
-		//"refs"
+		//'refs'
 		public Keyword getRefsKeyword_2() { return cRefsKeyword_2; }
 
 		//ref=[ecore::EObject]
@@ -1155,7 +1155,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class EObjectElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EObjectElement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EObjectElement");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -1171,7 +1171,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug305577_1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug305577_1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug305577_1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1188,7 +1188,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#17"
 		public Keyword getNumberSignDigitOneDigitSevenKeyword_0() { return cNumberSignDigitOneDigitSevenKeyword_0; }
 
-		//TypeBug1A | TypeBug1B
+		//(TypeBug1A | TypeBug1B)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug1A
@@ -1199,7 +1199,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug305577_2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug305577_2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug305577_2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1216,7 +1216,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//"#18"
 		public Keyword getNumberSignDigitOneDigitEightKeyword_0() { return cNumberSignDigitOneDigitEightKeyword_0; }
 
-		//TypeBug2B | TypeBug2A
+		//(TypeBug2B | TypeBug2A)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TypeBug2B
@@ -1227,11 +1227,11 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug1AInhElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug1AInh");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug1AInh");
 		private final RuleCall cTypeBug1BParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//TypeBug1AInh returns TypeBug1A:
-		//	TypeBug1B;
+		//TypeBug1AInh TypeBug1A:
+		//	TypeBug1B
 		@Override public ParserRule getRule() { return rule; }
 
 		//TypeBug1B
@@ -1239,7 +1239,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug1AElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug1A");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug1A");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTypeBug1AAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cKaKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1267,7 +1267,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug1BElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug1B");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug1B");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTypeBug1BAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cKbKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1295,11 +1295,11 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug2AInhElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug2AInh");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug2AInh");
 		private final RuleCall cTypeBug2BParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//TypeBug2AInh returns TypeBug2A:
-		//	TypeBug2B;
+		//TypeBug2AInh TypeBug2A:
+		//	TypeBug2B
 		@Override public ParserRule getRule() { return rule; }
 
 		//TypeBug2B
@@ -1307,7 +1307,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug2AElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug2A");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug2A");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTypeBug2AAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cKaKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1335,7 +1335,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class TypeBug2BElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeBug2B");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.TypeBug2B");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTypeBug2BAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cKbKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1363,7 +1363,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Bug305171Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug305171");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Bug305171");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneDigitNineKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1396,22 +1396,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Bug305171:
-		//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
+		//	"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID
+		//"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID
 		public Group getGroup() { return cGroup; }
 
 		//"#19"
 		public Keyword getNumberSignDigitOneDigitNineKeyword_0() { return cNumberSignDigitOneDigitNineKeyword_0; }
 
-		//("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)
+		//(('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?))
 		public Group getGroup_1() { return cGroup_1; }
 
-		//("kx" x+=ID ("," x+=ID)*)?
+		//('kx' x+=ID (',' x+=ID)*)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"kx"
+		//'kx'
 		public Keyword getKxKeyword_1_0_0() { return cKxKeyword_1_0_0; }
 
 		//x+=ID
@@ -1420,10 +1420,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getXIDTerminalRuleCall_1_0_1_0() { return cXIDTerminalRuleCall_1_0_1_0; }
 
-		//("," x+=ID)*
+		//(',' x+=ID)*
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_0_2_0() { return cCommaKeyword_1_0_2_0; }
 
 		//x+=ID
@@ -1432,13 +1432,13 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getXIDTerminalRuleCall_1_0_2_1_0() { return cXIDTerminalRuleCall_1_0_2_1_0; }
 
-		//("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?
+		//(('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//("ky" y+=ID ("," y+=ID)*)?
+		//('ky' y+=ID (',' y+=ID)*)?
 		public Group getGroup_1_1_0() { return cGroup_1_1_0; }
 
-		//"ky"
+		//'ky'
 		public Keyword getKyKeyword_1_1_0_0() { return cKyKeyword_1_1_0_0; }
 
 		//y+=ID
@@ -1447,10 +1447,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getYIDTerminalRuleCall_1_1_0_1_0() { return cYIDTerminalRuleCall_1_1_0_1_0; }
 
-		//("," y+=ID)*
+		//(',' y+=ID)*
 		public Group getGroup_1_1_0_2() { return cGroup_1_1_0_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_0_2_0() { return cCommaKeyword_1_1_0_2_0; }
 
 		//y+=ID
@@ -1459,10 +1459,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getYIDTerminalRuleCall_1_1_0_2_1_0() { return cYIDTerminalRuleCall_1_1_0_2_1_0; }
 
-		//("kz" z+=ID ("," z+=ID)*)?
+		//('kz' z+=ID (',' z+=ID)*)?
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
-		//"kz"
+		//'kz'
 		public Keyword getKzKeyword_1_1_1_0() { return cKzKeyword_1_1_1_0; }
 
 		//z+=ID
@@ -1471,10 +1471,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getZIDTerminalRuleCall_1_1_1_1_0() { return cZIDTerminalRuleCall_1_1_1_1_0; }
 
-		//("," z+=ID)*
+		//(',' z+=ID)*
 		public Group getGroup_1_1_1_2() { return cGroup_1_1_1_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_1_2_0() { return cCommaKeyword_1_1_1_2_0; }
 
 		//z+=ID
@@ -1491,7 +1491,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Bug310435EnumElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug310435Enum");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Bug310435Enum");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitZeroKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1505,22 +1505,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cLitsEnumBug310435Lit2EnumRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
 		/// * SuppressWarnings[noInstantiation] * / Bug310435Enum:
-		//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
+		//	"#20" ('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*
+		//"#20" ('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*
 		public Group getGroup() { return cGroup; }
 
 		//"#20"
 		public Keyword getNumberSignDigitTwoDigitZeroKeyword_0() { return cNumberSignDigitTwoDigitZeroKeyword_0; }
 
-		//("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*
+		//('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"kw1" lits+=EnumBug310435Lit1
+		//'kw1' lits+=EnumBug310435Lit1
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_1_0_0() { return cKw1Keyword_1_0_0; }
 
 		//lits+=EnumBug310435Lit1
@@ -1529,10 +1529,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//EnumBug310435Lit1
 		public RuleCall getLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0() { return cLitsEnumBug310435Lit1EnumRuleCall_1_0_1_0; }
 
-		//"kw2" lits+=EnumBug310435Lit2
+		//'kw2' lits+=EnumBug310435Lit2
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getKw2Keyword_1_1_0() { return cKw2Keyword_1_1_0; }
 
 		//lits+=EnumBug310435Lit2
@@ -1543,7 +1543,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Bug310435ValElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug310435Val");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Bug310435Val");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1557,22 +1557,22 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cLitsSTRINGTerminalRuleCall_1_1_1_0 = (RuleCall)cLitsAssignment_1_1_1.eContents().get(0);
 		
 		/// * SuppressWarnings[noInstantiation] * / Bug310435Val:
-		//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
+		//	"#21" ('kw1' lits+=ID | 'kw2' lits+=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*
+		//"#21" ('kw1' lits+=ID | 'kw2' lits+=STRING)*
 		public Group getGroup() { return cGroup; }
 
 		//"#21"
 		public Keyword getNumberSignDigitTwoDigitOneKeyword_0() { return cNumberSignDigitTwoDigitOneKeyword_0; }
 
-		//("kw1" lits+=ID | "kw2" lits+=STRING)*
+		//('kw1' lits+=ID | 'kw2' lits+=STRING)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"kw1" lits+=ID
+		//'kw1' lits+=ID
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_1_0_0() { return cKw1Keyword_1_0_0; }
 
 		//lits+=ID
@@ -1581,10 +1581,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getLitsIDTerminalRuleCall_1_0_1_0() { return cLitsIDTerminalRuleCall_1_0_1_0; }
 
-		//"kw2" lits+=STRING
+		//'kw2' lits+=STRING
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"kw2"
+		//'kw2'
 		public Keyword getKw2Keyword_1_1_0() { return cKw2Keyword_1_1_0; }
 
 		//lits+=STRING
@@ -1595,7 +1595,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class CrossRefNameTestElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CrossRefNameTest");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.CrossRefNameTest");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNamedAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1667,7 +1667,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class CrossRefNamedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CrossRefNamed");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.CrossRefNamed");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final Alternatives cNameAlternatives_0 = (Alternatives)cNameAssignment.eContents().get(0);
 		private final RuleCall cNameID1TerminalRuleCall_0_0 = (RuleCall)cNameAlternatives_0.eContents().get(0);
@@ -1680,7 +1680,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//name=(ID1 | ID2)
 		public Assignment getNameAssignment() { return cNameAssignment; }
 
-		//ID1 | ID2
+		//(ID1 | ID2)
 		public Alternatives getNameAlternatives_0() { return cNameAlternatives_0; }
 
 		//ID1
@@ -1692,7 +1692,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	
 	public class EnumBug310435Lit1Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBug310435Lit1");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit1");
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit1Lit1Keyword_0 = (Keyword)cLit1EnumLiteralDeclaration.eContents().get(0);
 		
@@ -1703,12 +1703,12 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//lit1
 		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration() { return cLit1EnumLiteralDeclaration; }
 
-		//"lit1"
+		//'lit1'
 		public Keyword getLit1Lit1Keyword_0() { return cLit1Lit1Keyword_0; }
 	}
 
 	public class EnumBug310435Lit2Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumBug310435Lit2");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit2");
 		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration = (EnumLiteralDeclaration)rule.eContents().get(1);
 		private final Keyword cLit2Lit2Keyword_0 = (Keyword)cLit2EnumLiteralDeclaration.eContents().get(0);
 		
@@ -1719,7 +1719,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		//lit2
 		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration() { return cLit2EnumLiteralDeclaration; }
 
-		//"lit2"
+		//'lit2'
 		public Keyword getLit2Lit2Keyword_0() { return cLit2Lit2Keyword_0; }
 	}
 	
@@ -1821,8 +1821,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		this.unknownRuleEnumBug310435Lit2 = new EnumBug310435Lit2Elements();
 		this.pCrossRefNameTest = new CrossRefNameTestElements();
 		this.pCrossRefNamed = new CrossRefNamedElements();
-		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID1");
-		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID2");
+		this.tID1 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID1");
+		this.tID2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID2");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1852,8 +1852,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	
-	//Op returns Expression:
-	//	Term ({Op.values+=current} values+=Term)*;
+	//Op Expression:
+	//	Term ({Op.values+=current} values+=Term)*
 	public OpElements getOpAccess() {
 		return pOp;
 	}
@@ -1862,10 +1862,10 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getOpAccess().getRule();
 	}
 
-	//Term returns Expression:
+	//Term Expression:
 	//	Atom | TwoNumbers | ManyStrings | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 |
 	//	Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef |
-	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest;
+	//	TypeBug305577_1 | TypeBug305577_2 | Parens | Bug305171 | Bug310435Val | Bug310435Enum | CrossRefNameTest
 	public TermElements getTermAccess() {
 		return pTerm;
 	}
@@ -1884,8 +1884,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getAtomAccess().getRule();
 	}
 
-	/// * SuppressWarnings[potentialOverride] * / Parens returns Expression:
-	//	"(" Op ")" em="!"?;
+	/// * SuppressWarnings[potentialOverride] * / Parens Expression:
+	//	'(' Op ')' em='!'?
 	public ParensElements getParensAccess() {
 		return pParens;
 	}
@@ -1895,7 +1895,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//TwoNumbers:
-	//	num1=INT num2=INT ("#" num3+=INT)*;
+	//	num1=INT num2=INT ('#' num3+=INT)*;
 	public TwoNumbersElements getTwoNumbersAccess() {
 		return pTwoNumbers;
 	}
@@ -1905,7 +1905,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//ManyStrings:
-	//	"=" str1+=STRING* str2+=STRING;
+	//	'=' str1+=STRING* str2+=STRING;
 	public ManyStringsElements getManyStringsAccess() {
 		return pManyStrings;
 	}
@@ -1915,7 +1915,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Type:
-	//	"type" name=ID "extends" extends=[Type];
+	//	'type' name=ID 'extends' ^extends=[Type];
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -1925,7 +1925,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Ref2:
-	//	"#2" ref2=("mykeyword1" | STRING | "mykeyword2");
+	//	'#2' ref2=('mykeyword1' | STRING | 'mykeyword2');
 	public Ref2Elements getRef2Access() {
 		return pRef2;
 	}
@@ -1935,7 +1935,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Spare:
-	//	"#3" id+=ID ("." id+=ID)*;
+	//	'#3' id+=ID ('.' id+=ID)*;
 	public SpareElements getSpareAccess() {
 		return pSpare;
 	}
@@ -1945,7 +1945,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Boolean:
-	//	"#4" bool?="myoption"? "kw" value=ID;
+	//	'#4' bool?='myoption'? 'kw' value=ID;
 	public BooleanElements getBooleanAccess() {
 		return pBoolean;
 	}
@@ -1955,7 +1955,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Transient1:
-	//	"#5" (precStar?="*" | prec=INT) ("," (scaleStar?="*" | scale=INT))?;
+	//	'#5' (precStar?='*' | prec=INT) (',' (scaleStar?='*' | scale=INT))?;
 	public Transient1Elements getTransient1Access() {
 		return pTransient1;
 	}
@@ -1965,7 +1965,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Consumed1:
-	//	"#6" ("v1" v1+=INT* v2+=ID | "v2" v2+=ID* v1+=INT);
+	//	'#6' ('v1' v1+=INT* v2+=ID | 'v2' v2+=ID* v1+=INT);
 	public Consumed1Elements getConsumed1Access() {
 		return pConsumed1;
 	}
@@ -1975,7 +1975,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Consumed2:
-	//	"#7" child=Consumed1;
+	//	'#7' child=Consumed1;
 	public Consumed2Elements getConsumed2Access() {
 		return pConsumed2;
 	}
@@ -1985,7 +1985,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop1:
-	//	"kw0"? "#8" id+=ID "kw1"? id+=ID ("kw2"* "kw30")+;
+	//	'kw0'? '#8' id+=ID 'kw1'? id+=ID ('kw2'* 'kw30')+;
 	public Loop1Elements getLoop1Access() {
 		return pLoop1;
 	}
@@ -1995,7 +1995,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop2:
-	//	"#9" id+=ID ("kw1" | id+=ID "kw2") ("kw3" | id+=ID "kw4")? ("kw5" | "kw6");
+	//	'#9' id+=ID ('kw1' | id+=ID 'kw2') ('kw3' | id+=ID 'kw4')? ('kw5' | 'kw6');
 	public Loop2Elements getLoop2Access() {
 		return pLoop2;
 	}
@@ -2005,7 +2005,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop3:
-	//	("kw1" | "kw2" | "kw3") "#10" id+=ID ("kw4" id+=ID "kw5")*;
+	//	('kw1' | 'kw2' | 'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*;
 	public Loop3Elements getLoop3Access() {
 		return pLoop3;
 	}
@@ -2015,7 +2015,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop4:
-	//	"#11" ("kw1" | "kw2" | "kw3" "kw4") id+=ID ("kw5" ("kw6" "kw7"?)?)+;
+	//	'#11' ('kw1' | 'kw2' | 'kw3' 'kw4') id+=ID ('kw5' ('kw6' 'kw7'?)?)+;
 	public Loop4Elements getLoop4Access() {
 		return pLoop4;
 	}
@@ -2025,7 +2025,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//LoopBug285452:
-	//	"#12" (interface?="interface" | "class") name=ID;
+	//	'#12' (interface?="interface" | "class") name=ID;
 	public LoopBug285452Elements getLoopBug285452Access() {
 		return pLoopBug285452;
 	}
@@ -2035,7 +2035,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	/// * SuppressWarnings[noInstantiation, potentialOverride] * / DuplicateBug284491:
-	//	"#13" (static?="static" | final?="final" | transient?="transient")*;
+	//	'#13' (static?='static' | final?='final' | transient?='transient')*;
 	public DuplicateBug284491Elements getDuplicateBug284491Access() {
 		return pDuplicateBug284491;
 	}
@@ -2045,7 +2045,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EmptyObjectBug284850:
-	//	"#14" items=EmptyObjectItems;
+	//	'#14' items=EmptyObjectItems;
 	public EmptyObjectBug284850Elements getEmptyObjectBug284850Access() {
 		return pEmptyObjectBug284850;
 	}
@@ -2065,7 +2065,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EmptyObjectItem:
-	//	"item" name=ID;
+	//	'item' name=ID;
 	public EmptyObjectItemElements getEmptyObjectItemAccess() {
 		return pEmptyObjectItem;
 	}
@@ -2075,7 +2075,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//MultiInheritanceBug280439:
-	//	"#15" val=ConcreteMulti;
+	//	'#15' val=ConcreteMulti;
 	public MultiInheritanceBug280439Elements getMultiInheritanceBug280439Access() {
 		return pMultiInheritanceBug280439;
 	}
@@ -2115,7 +2115,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//EObjectRef:
-	//	"#16" obj=EObjectElement "refs" ref=[ecore::EObject];
+	//	'#16' obj=EObjectElement 'refs' ref=[ecore::EObject];
 	public EObjectRefElements getEObjectRefAccess() {
 		return pEObjectRef;
 	}
@@ -2154,8 +2154,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getTypeBug305577_2Access().getRule();
 	}
 
-	//TypeBug1AInh returns TypeBug1A:
-	//	TypeBug1B;
+	//TypeBug1AInh TypeBug1A:
+	//	TypeBug1B
 	public TypeBug1AInhElements getTypeBug1AInhAccess() {
 		return pTypeBug1AInh;
 	}
@@ -2184,8 +2184,8 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getTypeBug1BAccess().getRule();
 	}
 
-	//TypeBug2AInh returns TypeBug2A:
-	//	TypeBug2B;
+	//TypeBug2AInh TypeBug2A:
+	//	TypeBug2B
 	public TypeBug2AInhElements getTypeBug2AInhAccess() {
 		return pTypeBug2AInh;
 	}
@@ -2215,7 +2215,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Bug305171:
-	//	"#19" (("kx" x+=ID ("," x+=ID)*)? (("ky" y+=ID ("," y+=ID)*)? ("kz" z+=ID ("," z+=ID)*)?)) name=ID;
+	//	"#19" (('kx' x+=ID (',' x+=ID)*)? (('ky' y+=ID (',' y+=ID)*)? ('kz' z+=ID (',' z+=ID)*)?)) name=ID;
 	public Bug305171Elements getBug305171Access() {
 		return pBug305171;
 	}
@@ -2225,7 +2225,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	/// * SuppressWarnings[noInstantiation] * / Bug310435Enum:
-	//	"#20" ("kw1" lits+=EnumBug310435Lit1 | "kw2" lits+=EnumBug310435Lit2)*;
+	//	"#20" ('kw1' lits+=EnumBug310435Lit1 | 'kw2' lits+=EnumBug310435Lit2)*;
 	public Bug310435EnumElements getBug310435EnumAccess() {
 		return pBug310435Enum;
 	}
@@ -2235,7 +2235,7 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	/// * SuppressWarnings[noInstantiation] * / Bug310435Val:
-	//	"#21" ("kw1" lits+=ID | "kw2" lits+=STRING)*;
+	//	"#21" ('kw1' lits+=ID | 'kw2' lits+=STRING)*;
 	public Bug310435ValElements getBug310435ValAccess() {
 		return pBug310435Val;
 	}
@@ -2285,50 +2285,50 @@ public class SimpleReconstrTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID1:
-	//	"i" "d" "0".."9"*;
+	//	'i' 'd' '0'..'9'*;
 	public TerminalRule getID1Rule() {
 		return tID1;
 	} 
 
 	//terminal ID2:
-	//	"I" "D" "0".."9"*;
+	//	'I' 'D' '0'..'9'*;
 	public TerminalRule getID2Rule() {
 		return tID2;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -139,7 +139,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"fields",
         		lv_fields_1_0, 
-        		"Element");
+        		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -179,7 +179,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -196,7 +196,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"dataType",
         		lv_dataType_1_0, 
-        		"DataType");
+        		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.DataType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -214,7 +214,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -258,7 +258,7 @@ ruleDataType returns [EObject current=null]
        			$current, 
        			"baseType",
         		lv_baseType_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -280,7 +280,7 @@ ruleDataType returns [EObject current=null]
        			$current, 
        			"defaultValue",
         		lv_defaultValue_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -371,7 +371,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"prefix",
         		lv_prefix_3_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -406,7 +406,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"terms",
         		lv_terms_5_0, 
-        		"SimpleTerm");
+        		"org.eclipse.xtext.parser.unorderedGroups.BacktrackingBug325745TestLanguage.SimpleTerm");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -459,7 +459,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"postfix",
         		lv_postfix_9_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -515,7 +515,7 @@ ruleSimpleTerm returns [EObject current=null]
        			$current, 
        			"lineCount",
         		lv_lineCount_0_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -537,7 +537,7 @@ ruleSimpleTerm returns [EObject current=null]
        			$current, 
        			"charCount",
         		lv_charCount_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -559,7 +559,7 @@ ruleSimpleTerm returns [EObject current=null]
        			$current, 
        			"charSet",
         		lv_charSet_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -578,7 +578,7 @@ ruleSimpleTerm returns [EObject current=null]
        			$current, 
        			"refChar",
         		lv_refChar_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

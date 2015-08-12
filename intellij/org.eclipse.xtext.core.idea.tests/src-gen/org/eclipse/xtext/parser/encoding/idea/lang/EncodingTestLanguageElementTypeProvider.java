@@ -71,27 +71,27 @@ public class EncodingTestLanguageElementTypeProvider implements IElementTypeProv
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_WordsAssignmentElementType() {
 		return Model_WordsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_WordsWordParserRuleCall_0ElementType() {
 		return Model_WordsWordParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWordElementType() {
 		return Word_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWord_ValueAssignmentElementType() {
 		return Word_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getWord_ValueLEXEMETerminalRuleCall_0ElementType() {
 		return Word_ValueLEXEMETerminalRuleCall_0_ELEMENT_TYPE;
 	}

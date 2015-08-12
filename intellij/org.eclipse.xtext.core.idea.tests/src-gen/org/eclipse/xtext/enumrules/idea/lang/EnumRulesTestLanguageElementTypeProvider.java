@@ -184,115 +184,115 @@ public class EnumRulesTestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0ElementType() {
 		return Model_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ExistingKeyword_0_0ElementType() {
 		return Model_ExistingKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ExistingAssignment_0_1ElementType() {
 		return Model_ExistingAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ExistingExistingEnumEnumRuleCall_0_1_0ElementType() {
 		return Model_ExistingExistingEnumEnumRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0_2ElementType() {
 		return Model_Group_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedKeyword_0_2_0ElementType() {
 		return Model_GeneratedKeyword_0_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedAssignment_0_2_1ElementType() {
 		return Model_GeneratedAssignment_0_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedGeneratedEnumEnumRuleCall_0_2_1_0ElementType() {
 		return Model_GeneratedGeneratedEnumEnumRuleCall_0_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedKeyword_1_0ElementType() {
 		return Model_GeneratedKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedAssignment_1_1ElementType() {
 		return Model_GeneratedAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GeneratedGeneratedEnumEnumRuleCall_1_1_0ElementType() {
 		return Model_GeneratedGeneratedEnumEnumRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnumElementType() {
 		return ExistingEnum_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_AlternativesElementType() {
 		return ExistingEnum_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_SameNameEnumLiteralDeclaration_0ElementType() {
 		return ExistingEnum_SameNameEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_SameNameSameNameKeyword_0_0ElementType() {
 		return ExistingEnum_SameNameSameNameKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1ElementType() {
 		return ExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_OverriddenLiteralOverriddenKeyword_1_0ElementType() {
 		return ExistingEnum_OverriddenLiteralOverriddenKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_DifferentNameEnumLiteralDeclaration_2ElementType() {
 		return ExistingEnum_DifferentNameEnumLiteralDeclaration_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExistingEnum_DifferentNameDifferentLiteralKeyword_2_0ElementType() {
 		return ExistingEnum_DifferentNameDifferentLiteralKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnumElementType() {
 		return GeneratedEnum_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnum_AlternativesElementType() {
 		return GeneratedEnum_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnum_SameNameEnumLiteralDeclaration_0ElementType() {
 		return GeneratedEnum_SameNameEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnum_SameNameSameNameKeyword_0_0ElementType() {
 		return GeneratedEnum_SameNameSameNameKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnum_DifferentNameEnumLiteralDeclaration_1ElementType() {
 		return GeneratedEnum_DifferentNameEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGeneratedEnum_DifferentNameDifferentLiteralKeyword_1_0ElementType() {
 		return GeneratedEnum_DifferentNameDifferentLiteralKeyword_1_0_ELEMENT_TYPE;
 	}

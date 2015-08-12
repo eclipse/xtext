@@ -19,7 +19,7 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	
 	public class FooElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.Foo");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -47,13 +47,13 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class NameRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.NameRef");
 		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cRuleParserRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
 		private final RuleCall cRuleParserRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleParserRuleCrossReference_0.eContents().get(1);
 		
-		//NameRef returns xtext::RuleCall:
-		//	rule=[xtext::ParserRule];
+		//NameRef xtext::RuleCall:
+		//	rule=[xtext::ParserRule]
 		@Override public ParserRule getRule() { return rule; }
 
 		//rule=[xtext::ParserRule]
@@ -67,12 +67,12 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class MyRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTestLanguage.MyRule");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
-		//MyRule returns xtext::ParserRule:
-		//	name=ID;
+		//MyRule xtext::ParserRule:
+		//	name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=ID
@@ -138,8 +138,8 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getFooAccess().getRule();
 	}
 
-	//NameRef returns xtext::RuleCall:
-	//	rule=[xtext::ParserRule];
+	//NameRef xtext::RuleCall:
+	//	rule=[xtext::ParserRule]
 	public NameRefElements getNameRefAccess() {
 		return pNameRef;
 	}
@@ -148,8 +148,8 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 		return getNameRefAccess().getRule();
 	}
 
-	//MyRule returns xtext::ParserRule:
-	//	name=ID;
+	//MyRule xtext::ParserRule:
+	//	name=ID
 	public MyRuleElements getMyRuleAccess() {
 		return pMyRule;
 	}
@@ -159,38 +159,38 @@ public class MetamodelRefTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

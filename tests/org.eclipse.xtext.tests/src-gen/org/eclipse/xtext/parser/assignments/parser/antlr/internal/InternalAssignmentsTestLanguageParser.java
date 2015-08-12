@@ -241,7 +241,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"single",
                                     		lv_single_1_0, 
-                                    		"SingleValue");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleValue");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -278,7 +278,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"multi",
                                     		lv_multi_2_0, 
-                                    		"MultiValue");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiValue");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -315,7 +315,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"single",
                                     		lv_single_3_0, 
-                                    		"SingleDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -352,7 +352,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"multi",
                                     		lv_multi_4_0, 
-                                    		"MultiDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -447,7 +447,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"object",
                                     		lv_object_6_1, 
-                                    		"SingleValue");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleValue");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -472,7 +472,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"object",
                                     		lv_object_6_2, 
-                                    		"MultiValue");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiValue");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -497,7 +497,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"object",
                                     		lv_object_6_3, 
-                                    		"SingleDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -522,7 +522,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"object",
                                     		lv_object_6_4, 
-                                    		"MultiDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -672,7 +672,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -734,7 +734,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_1, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -754,7 +754,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_2, 
-                                    		"STRING");
+                                    		"org.eclipse.xtext.common.Terminals.STRING");
                             	    
 
                             }
@@ -802,7 +802,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_5_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -945,7 +945,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1007,7 +1007,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_1, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -1027,7 +1027,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_2, 
-                                    		"STRING");
+                                    		"org.eclipse.xtext.common.Terminals.STRING");
                             	    
 
                             }
@@ -1075,7 +1075,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_5_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -1226,7 +1226,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_1_0, 
-                            		"IdDatatype");
+                            		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1293,7 +1293,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_1, 
-                                    		"IdDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1318,7 +1318,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_2, 
-                                    		"StringDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1371,7 +1371,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_5_0, 
-                            		"StringDatatype");
+                            		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1523,7 +1523,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_1_0, 
-                            		"IdDatatype");
+                            		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1590,7 +1590,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_1, 
-                                    		"IdDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1615,7 +1615,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"value",
                                     		lv_value_3_2, 
-                                    		"StringDatatype");
+                                    		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -1668,7 +1668,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"value",
                             		lv_value_5_0, 
-                            		"StringDatatype");
+                            		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 

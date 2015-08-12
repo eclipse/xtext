@@ -97,11 +97,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	"element" name=ID ({Element.child=current} "parent" name=ID)?;
+ * 	'element' name=ID ({Element.child=current} 'parent' name=ID)?;
  *
  **/
 
-// "element" name=ID ({Element.child=current} "parent" name=ID)?
+// 'element' name=ID ({Element.child=current} 'parent' name=ID)?
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -131,7 +131,7 @@ protected class Element_Group extends GroupToken {
 
 }
 
-// "element"
+// 'element'
 protected class Element_ElementKeyword_0 extends KeywordToken  {
 	
 	public Element_ElementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -186,7 +186,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ({Element.child=current} "parent" name=ID)?
+// ({Element.child=current} 'parent' name=ID)?
 protected class Element_Group_2 extends GroupToken {
 	
 	public Element_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -237,7 +237,7 @@ protected class Element_ElementChildAction_2_0 extends ActionToken  {
 	}
 }
 
-// "parent"
+// 'parent'
 protected class Element_ParentKeyword_2_1 extends KeywordToken  {
 	
 	public Element_ParentKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

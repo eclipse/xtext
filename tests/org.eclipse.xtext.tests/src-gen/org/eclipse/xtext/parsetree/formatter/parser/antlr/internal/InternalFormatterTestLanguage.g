@@ -274,7 +274,7 @@ ruleDecl returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -292,7 +292,7 @@ ruleDecl returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -331,7 +331,7 @@ ruleAssign returns [EObject current=null]
        			$current, 
        			"var",
         		lv_var_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -383,7 +383,7 @@ ruleAssign returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_3_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -405,7 +405,7 @@ ruleAssign returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_5_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -452,7 +452,7 @@ ruleMeth returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -473,7 +473,7 @@ ruleMeth returns [EObject current=null]
        			$current, 
        			"param",
         		lv_param_3_0, 
-        		"Param");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -495,7 +495,7 @@ ruleMeth returns [EObject current=null]
        			$current, 
        			"param",
         		lv_param_5_0, 
-        		"Param");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -539,7 +539,7 @@ ruleParam returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -561,7 +561,7 @@ ruleParam returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -604,7 +604,7 @@ ruleSpace returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -652,7 +652,7 @@ ruleTestLinewrap returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_2_0, 
-        		"Line");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -701,7 +701,7 @@ ruleTestLinewrapMinMax returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_2_0, 
-        		"Line");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -755,7 +755,7 @@ ruleTestIndentation returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_3_1, 
-        		"Line");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -770,7 +770,7 @@ ruleTestIndentation returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_3_2, 
-        		"TestIndentation");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestIndentation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -834,7 +834,7 @@ ruleFqnObj returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"FQN");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -958,7 +958,7 @@ ruleEnumeration returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"Enum1");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -980,7 +980,7 @@ ruleEnumeration returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_3_0, 
-        		"Enum1");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1036,7 +1036,7 @@ ruleSuppressedHidden returns [EObject current=null]
        			$current, 
        			"vals",
         		lv_vals_2_0, 
-        		"SuppressedHiddenSub");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1058,7 +1058,7 @@ ruleSuppressedHidden returns [EObject current=null]
        			$current, 
        			"vals",
         		lv_vals_4_0, 
-        		"SuppressedHiddenSub");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1156,7 +1156,7 @@ ruleSuppressedHiddenSubSub returns [EObject current=null]
        			$current, 
        			"idval",
         		lv_idval_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1202,7 +1202,7 @@ ruleSuppressedHiddenSubID returns [EObject current=null]
        			$current, 
        			"idval",
         		lv_idval_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1340,7 +1340,7 @@ ruleDatatypes returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"Datatype1");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1362,7 +1362,7 @@ ruleDatatypes returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"Datatype2");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1380,7 +1380,7 @@ ruleDatatypes returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"Datatype3");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1427,7 +1427,7 @@ ruleWrappingDataTypeTest returns [EObject current=null]
        			$current, 
        			"datatype",
         		lv_datatype_1_0, 
-        		"WrappingDataType");
+        		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataType");
 	        afterParserOrEnumRuleCall();
 	    }
 

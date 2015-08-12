@@ -203,7 +203,7 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             	    	           			current, 
             	    	           			"fix",
             	    	            		lv_fix_1_0, 
-            	    	            		"Fix");
+            	    	            		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Fix");
             	    	    	        afterParserOrEnumRuleCall();
             	    	    	    
 
@@ -273,7 +273,7 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             	    	           			current, 
             	    	           			"error",
             	    	            		lv_error_3_0, 
-            	    	            		"Error");
+            	    	            		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Error");
             	    	    	        afterParserOrEnumRuleCall();
             	    	    	    
 
@@ -343,7 +343,7 @@ public class InternalBug292245TestLanguageParser extends AbstractInternalAntlrPa
             	    	           			current, 
             	    	           			"tick",
             	    	            		lv_tick_5_0, 
-            	    	            		"Apostrophe");
+            	    	            		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Apostrophe");
             	    	    	        afterParserOrEnumRuleCall();
             	    	    	    
 

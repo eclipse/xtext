@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalBug292245TestLanguageLexer extends Lexer {
-    public static final int RULE_CHAR=5;
     public static final int RULE_APOSTROPHE_CHAR=4;
+    public static final int T__10=10;
+    public static final int RULE_CHAR=5;
     public static final int RULE_WS=6;
     public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__8=8;
     public static final int T__7=7;
-    public static final int T__10=10;
 
     // delegates
     // delegators

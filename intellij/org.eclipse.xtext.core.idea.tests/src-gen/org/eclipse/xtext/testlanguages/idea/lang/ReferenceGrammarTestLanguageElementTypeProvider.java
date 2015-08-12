@@ -456,323 +456,323 @@ public class ReferenceGrammarTestLanguageElementTypeProvider implements IElement
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatzElementType() {
 		return Spielplatz_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_GroupElementType() {
 		return Spielplatz_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_SpielplatzKeyword_0ElementType() {
 		return Spielplatz_SpielplatzKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_GroesseAssignment_1ElementType() {
 		return Spielplatz_GroesseAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_GroesseINTTerminalRuleCall_1_0ElementType() {
 		return Spielplatz_GroesseINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_BeschreibungAssignment_2ElementType() {
 		return Spielplatz_BeschreibungAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_BeschreibungSTRINGTerminalRuleCall_2_0ElementType() {
 		return Spielplatz_BeschreibungSTRINGTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_LeftCurlyBracketKeyword_3ElementType() {
 		return Spielplatz_LeftCurlyBracketKeyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_Alternatives_4ElementType() {
 		return Spielplatz_Alternatives_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_KinderAssignment_4_0ElementType() {
 		return Spielplatz_KinderAssignment_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_KinderKindParserRuleCall_4_0_0ElementType() {
 		return Spielplatz_KinderKindParserRuleCall_4_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_ErzieherAssignment_4_1ElementType() {
 		return Spielplatz_ErzieherAssignment_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_ErzieherErwachsenerParserRuleCall_4_1_0ElementType() {
 		return Spielplatz_ErzieherErwachsenerParserRuleCall_4_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_SpielzeugeAssignment_4_2ElementType() {
 		return Spielplatz_SpielzeugeAssignment_4_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_SpielzeugeSpielzeugParserRuleCall_4_2_0ElementType() {
 		return Spielplatz_SpielzeugeSpielzeugParserRuleCall_4_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_FamilieAssignment_4_3ElementType() {
 		return Spielplatz_FamilieAssignment_4_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_FamilieFamilieParserRuleCall_4_3_0ElementType() {
 		return Spielplatz_FamilieFamilieParserRuleCall_4_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielplatz_RightCurlyBracketKeyword_5ElementType() {
 		return Spielplatz_RightCurlyBracketKeyword_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPersonElementType() {
 		return Person_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPerson_AlternativesElementType() {
 		return Person_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPerson_KindParserRuleCall_0ElementType() {
 		return Person_KindParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getPerson_ErwachsenerParserRuleCall_1ElementType() {
 		return Person_ErwachsenerParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindElementType() {
 		return Kind_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_GroupElementType() {
 		return Kind_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_KindKeyword_0ElementType() {
 		return Kind_KindKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_LeftParenthesisKeyword_1ElementType() {
 		return Kind_LeftParenthesisKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_NameAssignment_2ElementType() {
 		return Kind_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_NameIDTerminalRuleCall_2_0ElementType() {
 		return Kind_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_AgeAssignment_3ElementType() {
 		return Kind_AgeAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_AgeINTTerminalRuleCall_3_0ElementType() {
 		return Kind_AgeINTTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKind_RightParenthesisKeyword_4ElementType() {
 		return Kind_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsenerElementType() {
 		return Erwachsener_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_GroupElementType() {
 		return Erwachsener_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_ErwachsenerKeyword_0ElementType() {
 		return Erwachsener_ErwachsenerKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_LeftParenthesisKeyword_1ElementType() {
 		return Erwachsener_LeftParenthesisKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_NameAssignment_2ElementType() {
 		return Erwachsener_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_NameIDTerminalRuleCall_2_0ElementType() {
 		return Erwachsener_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_AgeAssignment_3ElementType() {
 		return Erwachsener_AgeAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_AgeINTTerminalRuleCall_3_0ElementType() {
 		return Erwachsener_AgeINTTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErwachsener_RightParenthesisKeyword_4ElementType() {
 		return Erwachsener_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeugElementType() {
 		return Spielzeug_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_GroupElementType() {
 		return Spielzeug_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_SpielzeugKeyword_0ElementType() {
 		return Spielzeug_SpielzeugKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_LeftParenthesisKeyword_1ElementType() {
 		return Spielzeug_LeftParenthesisKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_NameAssignment_2ElementType() {
 		return Spielzeug_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_NameIDTerminalRuleCall_2_0ElementType() {
 		return Spielzeug_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_FarbeAssignment_3ElementType() {
 		return Spielzeug_FarbeAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_FarbeFarbeParserRuleCall_3_0ElementType() {
 		return Spielzeug_FarbeFarbeParserRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getSpielzeug_RightParenthesisKeyword_4ElementType() {
 		return Spielzeug_RightParenthesisKeyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbeElementType() {
 		return Farbe_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertAssignmentElementType() {
 		return Farbe_WertAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertAlternatives_0ElementType() {
 		return Farbe_WertAlternatives_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertROTKeyword_0_0ElementType() {
 		return Farbe_WertROTKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertBLAUKeyword_0_1ElementType() {
 		return Farbe_WertBLAUKeyword_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertGELBKeyword_0_2ElementType() {
 		return Farbe_WertGELBKeyword_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFarbe_WertGRÜNKeyword_0_3ElementType() {
 		return Farbe_WertGRÜNKeyword_0_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilieElementType() {
 		return Familie_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_GroupElementType() {
 		return Familie_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_FamilieKeyword_0ElementType() {
 		return Familie_FamilieKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_LeftParenthesisKeyword_1ElementType() {
 		return Familie_LeftParenthesisKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_NameAssignment_2ElementType() {
 		return Familie_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_NameAlternatives_2_0ElementType() {
 		return Familie_NameAlternatives_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_NameKeywordKeyword_2_0_0ElementType() {
 		return Familie_NameKeywordKeyword_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_NameSTRINGTerminalRuleCall_2_0_1ElementType() {
 		return Familie_NameSTRINGTerminalRuleCall_2_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_NameIDTerminalRuleCall_2_0_2ElementType() {
 		return Familie_NameIDTerminalRuleCall_2_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_MutterAssignment_3ElementType() {
 		return Familie_MutterAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_MutterErwachsenerCrossReference_3_0ElementType() {
 		return Familie_MutterErwachsenerCrossReference_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_MutterErwachsenerIDTerminalRuleCall_3_0_1ElementType() {
 		return Familie_MutterErwachsenerIDTerminalRuleCall_3_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_VaterAssignment_4ElementType() {
 		return Familie_VaterAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_VaterErwachsenerCrossReference_4_0ElementType() {
 		return Familie_VaterErwachsenerCrossReference_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_VaterErwachsenerIDTerminalRuleCall_4_0_1ElementType() {
 		return Familie_VaterErwachsenerIDTerminalRuleCall_4_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderAssignment_5ElementType() {
 		return Familie_KinderAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderKindCrossReference_5_0ElementType() {
 		return Familie_KinderKindCrossReference_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderKindIDTerminalRuleCall_5_0_1ElementType() {
 		return Familie_KinderKindIDTerminalRuleCall_5_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_Group_6ElementType() {
 		return Familie_Group_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_CommaKeyword_6_0ElementType() {
 		return Familie_CommaKeyword_6_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderAssignment_6_1ElementType() {
 		return Familie_KinderAssignment_6_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderKindCrossReference_6_1_0ElementType() {
 		return Familie_KinderKindCrossReference_6_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_KinderKindIDTerminalRuleCall_6_1_0_1ElementType() {
 		return Familie_KinderKindIDTerminalRuleCall_6_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFamilie_RightParenthesisKeyword_7ElementType() {
 		return Familie_RightParenthesisKeyword_7_ELEMENT_TYPE;
 	}

@@ -41,11 +41,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"model" INT+ modelFeatures=ModelFeatures;
+ * 	'model' INT+ modelFeatures=ModelFeatures;
  *
  **/
 
-// "model" INT+ modelFeatures=ModelFeatures
+// 'model' INT+ modelFeatures=ModelFeatures
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -74,7 +74,7 @@ protected class Model_Group extends GroupToken {
 
 }
 
-// "model"
+// 'model'
 protected class Model_ModelKeyword_0 extends KeywordToken  {
 	
 	public Model_ModelKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -170,11 +170,11 @@ protected class Model_ModelFeaturesAssignment_2 extends AssignmentToken  {
 /************ begin Rule ModelFeatures ****************
  *
  * ModelFeatures:
- * 	"feature" name=ID DataTypeRule ";";
+ * 	'feature' name=ID DataTypeRule ';';
  *
  **/
 
-// "feature" name=ID DataTypeRule ";"
+// 'feature' name=ID DataTypeRule ';'
 protected class ModelFeatures_Group extends GroupToken {
 	
 	public ModelFeatures_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -203,7 +203,7 @@ protected class ModelFeatures_Group extends GroupToken {
 
 }
 
-// "feature"
+// 'feature'
 protected class ModelFeatures_FeatureKeyword_0 extends KeywordToken  {
 	
 	public ModelFeatures_FeatureKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -280,7 +280,7 @@ protected class ModelFeatures_DataTypeRuleParserRuleCall_2 extends UnassignedTex
 
 }
 
-// ";"
+// ';'
 protected class ModelFeatures_SemicolonKeyword_3 extends KeywordToken  {
 	
 	public ModelFeatures_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

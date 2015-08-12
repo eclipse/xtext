@@ -202,127 +202,127 @@ public class TransientValuesTestElementTypeProvider implements IElementTypeProvi
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_GroupElementType() {
 		return Root_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_TestKeyword_0ElementType() {
 		return Root_TestKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_Alternatives_1ElementType() {
 		return Root_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_TestRequiredParserRuleCall_1_0ElementType() {
 		return Root_TestRequiredParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_TestOptionalParserRuleCall_1_1ElementType() {
 		return Root_TestOptionalParserRuleCall_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_TestListParserRuleCall_1_2ElementType() {
 		return Root_TestListParserRuleCall_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequiredElementType() {
 		return TestRequired_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_GroupElementType() {
 		return TestRequired_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_TestRequiredAction_0ElementType() {
 		return TestRequired_TestRequiredAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_RequiredKeyword_1ElementType() {
 		return TestRequired_RequiredKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_Required1Assignment_2ElementType() {
 		return TestRequired_Required1Assignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_Required1INTTerminalRuleCall_2_0ElementType() {
 		return TestRequired_Required1INTTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_Required2Assignment_3ElementType() {
 		return TestRequired_Required2Assignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestRequired_Required2INTTerminalRuleCall_3_0ElementType() {
 		return TestRequired_Required2INTTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptionalElementType() {
 		return TestOptional_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_GroupElementType() {
 		return TestOptional_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_TestOptionalAction_0ElementType() {
 		return TestOptional_TestOptionalAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_OptionalKeyword_1ElementType() {
 		return TestOptional_OptionalKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_Opt1Assignment_2ElementType() {
 		return TestOptional_Opt1Assignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_Opt1INTTerminalRuleCall_2_0ElementType() {
 		return TestOptional_Opt1INTTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_Group_3ElementType() {
 		return TestOptional_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_ColonKeyword_3_0ElementType() {
 		return TestOptional_ColonKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_Opt2Assignment_3_1ElementType() {
 		return TestOptional_Opt2Assignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestOptional_Opt2INTTerminalRuleCall_3_1_0ElementType() {
 		return TestOptional_Opt2INTTerminalRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestListElementType() {
 		return TestList_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestList_GroupElementType() {
 		return TestList_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestList_TestListAction_0ElementType() {
 		return TestList_TestListAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestList_ListKeyword_1ElementType() {
 		return TestList_ListKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestList_ItemAssignment_2ElementType() {
 		return TestList_ItemAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTestList_ItemINTTerminalRuleCall_2_0ElementType() {
 		return TestList_ItemINTTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}

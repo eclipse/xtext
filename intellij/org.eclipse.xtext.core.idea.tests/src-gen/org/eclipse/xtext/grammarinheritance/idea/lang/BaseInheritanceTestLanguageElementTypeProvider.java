@@ -96,47 +96,47 @@ public class BaseInheritanceTestLanguageElementTypeProvider implements IElementT
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelKeyword_0ElementType() {
 		return Model_ModelKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameAssignment_1ElementType() {
 		return Model_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameIDTerminalRuleCall_1_0ElementType() {
 		return Model_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQNElementType() {
 		return FQN_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQN_GroupElementType() {
 		return FQN_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQN_IDTerminalRuleCall_0ElementType() {
 		return FQN_IDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQN_Group_1ElementType() {
 		return FQN_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQN_FullStopKeyword_1_0ElementType() {
 		return FQN_FullStopKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFQN_IDTerminalRuleCall_1_1ElementType() {
 		return FQN_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}

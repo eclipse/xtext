@@ -128,75 +128,75 @@ public class KeywordsTestLanguageElementTypeProvider implements IElementTypeProv
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_0ElementType() {
 		return Model_FirstAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstFooBarKeyword_0_0ElementType() {
 		return Model_FirstFooBarKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1ElementType() {
 		return Model_SecondAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondFooKeyword_1_0ElementType() {
 		return Model_SecondFooKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdAssignment_2ElementType() {
 		return Model_ThirdAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdBarKeyword_2_0ElementType() {
 		return Model_ThirdBarKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthAssignment_3ElementType() {
 		return Model_ForthAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthReverseSolidusKeyword_3_0ElementType() {
 		return Model_ForthReverseSolidusKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FifthAssignment_4ElementType() {
 		return Model_FifthAssignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FifthAKeyword_4_0ElementType() {
 		return Model_FifthAKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SixthAssignment_5ElementType() {
 		return Model_SixthAssignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SixthBKeyword_5_0ElementType() {
 		return Model_SixthBKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SeventhAssignment_6ElementType() {
 		return Model_SeventhAssignment_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SeventhCKeyword_6_0ElementType() {
 		return Model_SeventhCKeyword_6_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EighthAssignment_7ElementType() {
 		return Model_EighthAssignment_7_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_EighthDKeyword_7_0ElementType() {
 		return Model_EighthDKeyword_7_0_ELEMENT_TYPE;
 	}

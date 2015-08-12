@@ -161,7 +161,7 @@ public class InternalMultiRuleEnumTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"a",
                     		lv_a_1_0, 
-                    		"EnumRuleA");
+                    		"org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleA");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -192,7 +192,7 @@ public class InternalMultiRuleEnumTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"b",
                     		lv_b_2_0, 
-                    		"EnumRuleB");
+                    		"org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleB");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -223,7 +223,7 @@ public class InternalMultiRuleEnumTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"c",
                     		lv_c_3_0, 
-                    		"EnumRuleC");
+                    		"org.eclipse.xtext.enumrules.MultiRuleEnumTestLanguage.EnumRuleC");
             	        afterParserOrEnumRuleCall();
             	    
 

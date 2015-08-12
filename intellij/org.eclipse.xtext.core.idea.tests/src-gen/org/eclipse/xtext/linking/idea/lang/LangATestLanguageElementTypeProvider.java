@@ -199,127 +199,127 @@ public class LangATestLanguageElementTypeProvider implements IElementTypeProvide
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getMainElementType() {
 		return Main_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_GroupElementType() {
 		return Main_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_ImportsAssignment_0ElementType() {
 		return Main_ImportsAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_ImportsImportParserRuleCall_0_0ElementType() {
 		return Main_ImportsImportParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_TypesAssignment_1ElementType() {
 		return Main_TypesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_TypesTypeParserRuleCall_1_0ElementType() {
 		return Main_TypesTypeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImportElementType() {
 		return Import_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_GroupElementType() {
 		return Import_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_ImportKeyword_0ElementType() {
 		return Import_ImportKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_UriAssignment_1ElementType() {
 		return Import_UriAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_UriSTRINGTerminalRuleCall_1_0ElementType() {
 		return Import_UriSTRINGTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTypeElementType() {
 		return Type_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_GroupElementType() {
 		return Type_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_TypeKeyword_0ElementType() {
 		return Type_TypeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_NameAssignment_1ElementType() {
 		return Type_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_NameIDTerminalRuleCall_1_0ElementType() {
 		return Type_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_Group_2ElementType() {
 		return Type_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsKeyword_2_0ElementType() {
 		return Type_ExtendsKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsAssignment_2_1ElementType() {
 		return Type_ExtendsAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsTypeCrossReference_2_1_0ElementType() {
 		return Type_ExtendsTypeCrossReference_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsTypeIDTerminalRuleCall_2_1_0_1ElementType() {
 		return Type_ExtendsTypeIDTerminalRuleCall_2_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_Group_3ElementType() {
 		return Type_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsKeyword_3_0ElementType() {
 		return Type_ImplementsKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsAssignment_3_1ElementType() {
 		return Type_ImplementsAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsTypeCrossReference_3_1_0ElementType() {
 		return Type_ImplementsTypeCrossReference_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsTypeIDTerminalRuleCall_3_1_0_1ElementType() {
 		return Type_ImplementsTypeIDTerminalRuleCall_3_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_Group_3_2ElementType() {
 		return Type_Group_3_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_CommaKeyword_3_2_0ElementType() {
 		return Type_CommaKeyword_3_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsAssignment_3_2_1ElementType() {
 		return Type_ImplementsAssignment_3_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsTypeCrossReference_3_2_1_0ElementType() {
 		return Type_ImplementsTypeCrossReference_3_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ImplementsTypeIDTerminalRuleCall_3_2_1_0_1ElementType() {
 		return Type_ImplementsTypeIDTerminalRuleCall_3_2_1_0_1_ELEMENT_TYPE;
 	}

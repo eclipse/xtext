@@ -112,55 +112,55 @@ public class UnicodeTestLanguageElementTypeProvider implements IElementTypeProvi
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_StringsAssignmentElementType() {
 		return Model_StringsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_StringsAbstractStringParserRuleCall_0ElementType() {
 		return Model_StringsAbstractStringParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractStringElementType() {
 		return AbstractString_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractString_AlternativesElementType() {
 		return AbstractString_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractString_GStringParserRuleCall_0ElementType() {
 		return AbstractString_GStringParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractString_QuotedStringParserRuleCall_1ElementType() {
 		return AbstractString_QuotedStringParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGStringElementType() {
 		return GString_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGString_NameAssignmentElementType() {
 		return GString_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGString_NameGERMAN_STRINGTerminalRuleCall_0ElementType() {
 		return GString_NameGERMAN_STRINGTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQuotedStringElementType() {
 		return QuotedString_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQuotedString_NameAssignmentElementType() {
 		return QuotedString_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getQuotedString_NameSTRINGTerminalRuleCall_0ElementType() {
 		return QuotedString_NameSTRINGTerminalRuleCall_0_ELEMENT_TYPE;
 	}

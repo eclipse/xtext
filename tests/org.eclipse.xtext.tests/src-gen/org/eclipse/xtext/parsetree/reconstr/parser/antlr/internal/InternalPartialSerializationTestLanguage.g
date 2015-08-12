@@ -124,7 +124,7 @@ ruleNodeRoot returns [EObject current=null]
        			$current, 
        			"node",
         		lv_node_1_0, 
-        		"Node");
+        		"org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -168,7 +168,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -189,7 +189,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_3_0, 
-        		"Node");
+        		"org.eclipse.xtext.parsetree.reconstr.PartialSerializationTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 

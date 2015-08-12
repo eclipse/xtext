@@ -19,20 +19,20 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cKeywordKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cQualifiedNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cQualifiedNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cQualifiedNameAssignment_1.eContents().get(0);
 		
 		//Element:
-		//	"keyword" qualifiedName=QualifiedName;
+		//	'keyword' qualifiedName=QualifiedName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"keyword" qualifiedName=QualifiedName
+		//'keyword' qualifiedName=QualifiedName
 		public Group getGroup() { return cGroup; }
 
-		//"keyword"
+		//'keyword'
 		public Keyword getKeywordKeyword_0() { return cKeywordKeyword_0; }
 
 		//qualifiedName=QualifiedName
@@ -43,7 +43,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage.QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -54,31 +54,31 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cAsteriskKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ("." ID)* ("." "*")?;
+		//	ID ('.' ID)* ('.' '*')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)* ("." "*")?
+		//ID ('.' ID)* ('.' '*')?
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
 
-		//("." "*")?
+		//('.' '*')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
 
-		//"*"
+		//'*'
 		public Keyword getAsteriskKeyword_2_1() { return cAsteriskKeyword_2_1; }
 	}
 	
@@ -127,7 +127,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Element:
-	//	"keyword" qualifiedName=QualifiedName;
+	//	'keyword' qualifiedName=QualifiedName;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -137,7 +137,7 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//QualifiedName:
-	//	ID ("." ID)* ("." "*")?;
+	//	ID ('.' ID)* ('.' '*')?;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -147,38 +147,38 @@ public class QualifiedNameTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

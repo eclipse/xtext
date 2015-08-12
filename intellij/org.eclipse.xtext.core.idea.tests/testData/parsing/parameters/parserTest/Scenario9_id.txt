@@ -1,0 +1,9 @@
+org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.ParametersTestLanguageFileImpl:a.parameterstestlanguage(0,5)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ParserRuleParametersAction_0_ELEMENT_TYPE)(0,5)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ELEMENT_TYPE)(0,0)
+      <empty list>
+    PsiElement(ParserRuleParameters_NumberSignDigitNineKeyword_1_8_0_ELEMENT_TYPE)('#9')(0,2)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario2ParserRuleCall_1_8_1_1_0_0_ELEMENT_TYPE)(2,5)
+      org.eclipse.xtext.psi.impl.PsiEObjectImpl(Scenario2_FirstIdOrKeywordParserRuleCall_0_ELEMENT_TYPE)(2,5)
+        PsiWhiteSpace(' ')(2,3)
+        PsiElement(IdOrKeyword_IDTerminalRuleCall_1_ELEMENT_TYPE)('id')(3,5)

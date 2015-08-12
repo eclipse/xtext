@@ -109,55 +109,55 @@ public class MetamodelRefTestLanguageElementTypeProvider implements IElementType
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getFooElementType() {
 		return Foo_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_GroupElementType() {
 		return Foo_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameAssignment_0ElementType() {
 		return Foo_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameIDTerminalRuleCall_0_0ElementType() {
 		return Foo_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameRefsAssignment_1ElementType() {
 		return Foo_NameRefsAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameRefsNameRefParserRuleCall_1_0ElementType() {
 		return Foo_NameRefsNameRefParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNameRefElementType() {
 		return NameRef_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNameRef_RuleAssignmentElementType() {
 		return NameRef_RuleAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNameRef_RuleParserRuleCrossReference_0ElementType() {
 		return NameRef_RuleParserRuleCrossReference_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNameRef_RuleParserRuleIDTerminalRuleCall_0_1ElementType() {
 		return NameRef_RuleParserRuleIDTerminalRuleCall_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMyRuleElementType() {
 		return MyRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMyRule_NameAssignmentElementType() {
 		return MyRule_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMyRule_NameIDTerminalRuleCall_0ElementType() {
 		return MyRule_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}

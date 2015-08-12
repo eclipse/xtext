@@ -179,111 +179,111 @@ public class Bug313089TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getFooElementType() {
 		return Foo_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_GroupElementType() {
 		return Foo_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameAssignment_0ElementType() {
 		return Foo_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_NameIDTerminalRuleCall_0_0ElementType() {
 		return Foo_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_Alternatives_1ElementType() {
 		return Foo_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_BarAssignment_1_0ElementType() {
 		return Foo_BarAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_BarBarParserRuleCall_1_0_0ElementType() {
 		return Foo_BarBarParserRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_BazAssignment_1_1ElementType() {
 		return Foo_BazAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_BazBazParserRuleCall_1_1_0ElementType() {
 		return Foo_BazBazParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_RefAssignment_2ElementType() {
 		return Foo_RefAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_RefFooCrossReference_2_0ElementType() {
 		return Foo_RefFooCrossReference_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFoo_RefFooIDTerminalRuleCall_2_0_1ElementType() {
 		return Foo_RefFooIDTerminalRuleCall_2_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBarElementType() {
 		return Bar_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBar_GroupElementType() {
 		return Bar_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBar_BarAction_0ElementType() {
 		return Bar_BarAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBar_NameAssignment_1ElementType() {
 		return Bar_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBar_NameIDTerminalRuleCall_1_0ElementType() {
 		return Bar_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBazElementType() {
 		return Baz_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_GroupElementType() {
 		return Baz_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_BazKeyword_0ElementType() {
 		return Baz_BazKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_NameAssignment_1ElementType() {
 		return Baz_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_NameIDTerminalRuleCall_1_0ElementType() {
 		return Baz_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_Group_2ElementType() {
 		return Baz_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_BazChildAction_2_0ElementType() {
 		return Baz_BazChildAction_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_BazKeyword_2_1ElementType() {
 		return Baz_BazKeyword_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_NameAssignment_2_2ElementType() {
 		return Baz_NameAssignment_2_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getBaz_NameIDTerminalRuleCall_2_2_0ElementType() {
 		return Baz_NameIDTerminalRuleCall_2_2_0_ELEMENT_TYPE;
 	}

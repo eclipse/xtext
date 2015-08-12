@@ -47,12 +47,14 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Body ****************
  *
  * Body:
- * 	("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+
- * 	"end body";
+ * 	('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
+ * 	'body'
+ * 	content=(Content | ParameterRef) foo+=Foo+
+ * 	'end body';
  *
  **/
 
-// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")? "body" content=(Content | ParameterRef) foo+=Foo+ "end body"
+// ('(' parameter+=Parameter (',' parameter+=Parameter)* ')')? 'body' content=(Content | ParameterRef) foo+=Foo+ 'end body'
 protected class Body_Group extends GroupToken {
 	
 	public Body_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -81,7 +83,7 @@ protected class Body_Group extends GroupToken {
 
 }
 
-// ("(" parameter+=Parameter ("," parameter+=Parameter)* ")")?
+// ('(' parameter+=Parameter (',' parameter+=Parameter)* ')')?
 protected class Body_Group_0 extends GroupToken {
 	
 	public Body_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -103,7 +105,7 @@ protected class Body_Group_0 extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class Body_LeftParenthesisKeyword_0_0 extends KeywordToken  {
 	
 	public Body_LeftParenthesisKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -170,7 +172,7 @@ protected class Body_ParameterAssignment_0_1 extends AssignmentToken  {
 	}	
 }
 
-// ("," parameter+=Parameter)*
+// (',' parameter+=Parameter)*
 protected class Body_Group_0_2 extends GroupToken {
 	
 	public Body_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -192,7 +194,7 @@ protected class Body_Group_0_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Body_CommaKeyword_0_2_0 extends KeywordToken  {
 	
 	public Body_CommaKeyword_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -262,7 +264,7 @@ protected class Body_ParameterAssignment_0_2_1 extends AssignmentToken  {
 }
 
 
-// ")"
+// ')'
 protected class Body_RightParenthesisKeyword_0_3 extends KeywordToken  {
 	
 	public Body_RightParenthesisKeyword_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -286,7 +288,7 @@ protected class Body_RightParenthesisKeyword_0_3 extends KeywordToken  {
 }
 
 
-// "body"
+// 'body'
 protected class Body_BodyKeyword_1 extends KeywordToken  {
 	
 	public Body_BodyKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -411,7 +413,7 @@ protected class Body_FooAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "end body"
+// 'end body'
 protected class Body_EndBodyKeyword_4 extends KeywordToken  {
 	
 	public Body_EndBodyKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -485,11 +487,11 @@ protected class Foo_FooValueAssignment extends AssignmentToken  {
 /************ begin Rule Content ****************
  *
  * Content:
- * 	"content" MyElement "end content";
+ * 	'content' MyElement 'end content';
  *
  **/
 
-// "content" MyElement "end content"
+// 'content' MyElement 'end content'
 protected class Content_Group extends GroupToken {
 	
 	public Content_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -518,7 +520,7 @@ protected class Content_Group extends GroupToken {
 
 }
 
-// "content"
+// 'content'
 protected class Content_ContentKeyword_0 extends KeywordToken  {
 	
 	public Content_ContentKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -574,7 +576,7 @@ protected class Content_MyElementParserRuleCall_1 extends RuleCallToken {
 	}	
 }
 
-// "end content"
+// 'end content'
 protected class Content_EndContentKeyword_2 extends KeywordToken  {
 	
 	public Content_EndContentKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -603,11 +605,11 @@ protected class Content_EndContentKeyword_2 extends KeywordToken  {
 /************ begin Rule MyElement ****************
  *
  * MyElement:
- * 	"element" bar=(MyInt | ParameterRef);
+ * 	'element' bar=(MyInt | ParameterRef);
  *
  **/
 
-// "element" bar=(MyInt | ParameterRef)
+// 'element' bar=(MyInt | ParameterRef)
 protected class MyElement_Group extends GroupToken {
 	
 	public MyElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -636,7 +638,7 @@ protected class MyElement_Group extends GroupToken {
 
 }
 
-// "element"
+// 'element'
 protected class MyElement_ElementKeyword_0 extends KeywordToken  {
 	
 	public MyElement_ElementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -872,7 +874,8 @@ protected class ParameterObject_ParameterRefParserRuleCall_2 extends RuleCallTok
 /************ begin Rule Parameter ****************
  *
  * Parameter:
- * 	name=ID value=[ParameterObject]?;
+ * 	name=ID
+ * 	value=[ParameterObject]?;
  *
  **/
 

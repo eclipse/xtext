@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"test",
         		lv_test_0_0, 
-        		"Test");
+        		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Test");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -109,7 +109,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"test",
         		lv_test_1_0, 
-        		"Parenthesis");
+        		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Parenthesis");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -241,7 +241,7 @@ ruleTwoRequired returns [EObject current=null]
        			$current, 
        			"one",
         		lv_one_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -259,7 +259,7 @@ ruleTwoRequired returns [EObject current=null]
        			$current, 
        			"two",
         		lv_two_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -306,7 +306,7 @@ ruleTwoOptions returns [EObject current=null]
        			$current, 
        			"one",
         		lv_one_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -329,7 +329,7 @@ ruleTwoOptions returns [EObject current=null]
        			$current, 
        			"two",
         		lv_two_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -371,7 +371,7 @@ ruleIndent returns [EObject current=null]
        			$current, 
        			"req",
         		lv_req_1_0, 
-        		"TwoRequired");
+        		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoRequired");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -389,7 +389,7 @@ ruleIndent returns [EObject current=null]
        			$current, 
        			"opt",
         		lv_opt_2_0, 
-        		"TwoOptions");
+        		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoOptions");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -407,7 +407,7 @@ ruleIndent returns [EObject current=null]
        			$current, 
        			"indent",
         		lv_indent_3_0, 
-        		"Indent");
+        		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Indent");
 	        afterParserOrEnumRuleCall();
 	    }
 

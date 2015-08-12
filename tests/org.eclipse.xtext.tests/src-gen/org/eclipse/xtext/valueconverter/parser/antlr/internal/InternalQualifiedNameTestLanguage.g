@@ -94,7 +94,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"qualifiedName",
         		lv_qualifiedName_1_0, 
-        		"QualifiedName");
+        		"org.eclipse.xtext.valueconverter.QualifiedNameTestLanguage.QualifiedName");
 	        afterParserOrEnumRuleCall();
 	    }
 

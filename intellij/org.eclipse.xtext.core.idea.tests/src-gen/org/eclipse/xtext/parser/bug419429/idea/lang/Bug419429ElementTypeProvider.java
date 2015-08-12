@@ -58,19 +58,19 @@ public class Bug419429ElementTypeProvider implements IElementTypeProvider {
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getEReferenceElementType() {
 		return EReference_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEReference_ETypeAssignmentElementType() {
 		return EReference_ETypeAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEReference_ETypeEClassifierCrossReference_0ElementType() {
 		return EReference_ETypeEClassifierCrossReference_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEReference_ETypeEClassifierIDTerminalRuleCall_0_1ElementType() {
 		return EReference_ETypeEClassifierIDTerminalRuleCall_0_1_ELEMENT_TYPE;
 	}

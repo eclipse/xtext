@@ -13,7 +13,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.xtext.xtextTest.Group#getTokens <em>Tokens</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xtextTest.Group#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getGroup()
@@ -23,19 +23,19 @@ import org.eclipse.emf.common.util.EList;
 public interface Group extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Tokens</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.xtext.xtextTest.AbstractElement}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Tokens</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Elements</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Tokens</em>' containment reference list.
-   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getGroup_Tokens()
+   * @return the value of the '<em>Elements</em>' containment reference list.
+   * @see org.eclipse.xtext.xtextTest.XtextTestPackage#getGroup_Elements()
    * @model containment="true"
    * @generated
    */
-  EList<AbstractElement> getTokens();
+  EList<AbstractElement> getElements();
 
 } // Group

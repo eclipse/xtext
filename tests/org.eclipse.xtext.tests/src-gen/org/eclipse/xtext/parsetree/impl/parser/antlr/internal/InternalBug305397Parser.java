@@ -157,7 +157,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.parsetree.impl.Bug305397.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -320,7 +320,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"name",
                             		lv_name_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -365,7 +365,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"elements",
             	            		lv_elements_4_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.parsetree.impl.Bug305397.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

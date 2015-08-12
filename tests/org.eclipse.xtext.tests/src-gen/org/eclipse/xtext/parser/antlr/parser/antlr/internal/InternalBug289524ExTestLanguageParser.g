@@ -104,7 +104,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"refs",
         		lv_refs_2_0, 
-        		"ModelElement");
+        		"org.eclipse.xtext.parser.antlr.Bug289524ExTestLanguage.ModelElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -152,7 +152,7 @@ ruleModelElement returns [EObject current=null]
        			$current, 
        			"containments",
         		lv_containments_1_0, 
-        		"Contained");
+        		"org.eclipse.xtext.parser.antlr.Bug289524ExTestLanguage.Contained");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -240,7 +240,7 @@ ruleContained returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

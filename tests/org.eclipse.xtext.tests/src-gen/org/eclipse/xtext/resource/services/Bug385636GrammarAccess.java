@@ -19,7 +19,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class ProgramElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Program");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.Program");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cDefineAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cDefineDefineVariablesParserRuleCall_0_0 = (RuleCall)cDefineAssignment_0.eContents().get(0);
@@ -28,10 +28,10 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cENDKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Program:
-		//	define=DefineVariables statements+=Statement* "END";
+		//	define=DefineVariables statements+=Statement* 'END';
 		@Override public ParserRule getRule() { return rule; }
 
-		//define=DefineVariables statements+=Statement* "END"
+		//define=DefineVariables statements+=Statement* 'END'
 		public Group getGroup() { return cGroup; }
 
 		//define=DefineVariables
@@ -46,12 +46,12 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Statement
 		public RuleCall getStatementsStatementParserRuleCall_1_0() { return cStatementsStatementParserRuleCall_1_0; }
 
-		//"END"
+		//'END'
 		public Keyword getENDKeyword_2() { return cENDKeyword_2; }
 	}
 
 	public class DefineVariablesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DefineVariables");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.DefineVariables");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVARIABLESKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVariablesAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -59,13 +59,13 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cENDVARIABLESKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//DefineVariables:
-		//	"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES";
+		//	'VARIABLES' variables+=DefineVariable+ 'ENDVARIABLES';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES"
+		//'VARIABLES' variables+=DefineVariable+ 'ENDVARIABLES'
 		public Group getGroup() { return cGroup; }
 
-		//"VARIABLES"
+		//'VARIABLES'
 		public Keyword getVARIABLESKeyword_0() { return cVARIABLESKeyword_0; }
 
 		//variables+=DefineVariable+
@@ -74,25 +74,25 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//DefineVariable
 		public RuleCall getVariablesDefineVariableParserRuleCall_1_0() { return cVariablesDefineVariableParserRuleCall_1_0; }
 
-		//"ENDVARIABLES"
+		//'ENDVARIABLES'
 		public Keyword getENDVARIABLESKeyword_2() { return cENDVARIABLESKeyword_2; }
 	}
 
 	public class DefineVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DefineVariable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.DefineVariable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNAMEKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//DefineVariable:
-		//	"NAME" name=ID;
+		//	'NAME' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"NAME" name=ID
+		//'NAME' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"NAME"
+		//'NAME'
 		public Keyword getNAMEKeyword_0() { return cNAMEKeyword_0; }
 
 		//name=ID
@@ -103,7 +103,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class NVariableAccessElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NVariableAccess");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.NVariableAccess");
 		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cVariableDefineVariableCrossReference_0 = (CrossReference)cVariableAssignment.eContents().get(0);
 		private final RuleCall cVariableDefineVariableIDTerminalRuleCall_0_1 = (RuleCall)cVariableDefineVariableCrossReference_0.eContents().get(1);
@@ -123,7 +123,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.Statement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cExpression_VariableNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -168,35 +168,35 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRightExpression_VariableNameParserRuleCall_1_6_2_0 = (RuleCall)cRightAssignment_1_6_2.eContents().get(0);
 		
 		//// Comparisons: left associative, priority 2
-		//Statement returns Expression:
-		//	Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
-		//	{Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
-		//	right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
-		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
-		//	right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
+		//Statement Expression:
+		//	Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
+		//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+		//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+		//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+		//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
-		//{Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
-		//right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
-		//{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
-		//right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
+		//{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+		//right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+		//{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+		//right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 		public Group getGroup() { return cGroup; }
 
 		//Expression_VariableName
 		public RuleCall getExpression_VariableNameParserRuleCall_0() { return cExpression_VariableNameParserRuleCall_0; }
 
-		//("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2" {Expression_Smaller.left=current}
-		//right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current} right=Expression_VariableName | "C4"
-		//{Expression_Equal.left=current} right=Expression_VariableName | "C5" {Expression_Not_Equal.left=current}
-		//right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current} right=Expression_VariableName | ("C6"
-		//"C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*
+		//('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2' {Expression_Smaller.left=current}
+		//right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName | 'C4'
+		//{Expression_Equal.left=current} right=Expression_VariableName | 'C5' {Expression_Not_Equal.left=current}
+		//right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName | ('C6'
+		//'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName
+		//'C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"C1"
+		//'C1'
 		public Keyword getC1Keyword_1_0_0() { return cC1Keyword_1_0_0; }
 
 		//{Expression_Larger_Equal.left=current}
@@ -208,10 +208,10 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_0_2_0() { return cRightExpression_VariableNameParserRuleCall_1_0_2_0; }
 
-		//"C2" {Expression_Smaller.left=current} right=Expression_VariableName
+		//'C2' {Expression_Smaller.left=current} right=Expression_VariableName
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"C2"
+		//'C2'
 		public Keyword getC2Keyword_1_1_0() { return cC2Keyword_1_1_0; }
 
 		//{Expression_Smaller.left=current}
@@ -223,10 +223,10 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_1_2_0() { return cRightExpression_VariableNameParserRuleCall_1_1_2_0; }
 
-		//"C3" {Expression_Smaller_Equal.left=current} right=Expression_VariableName
+		//'C3' {Expression_Smaller_Equal.left=current} right=Expression_VariableName
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//"C3"
+		//'C3'
 		public Keyword getC3Keyword_1_2_0() { return cC3Keyword_1_2_0; }
 
 		//{Expression_Smaller_Equal.left=current}
@@ -238,10 +238,10 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_2_2_0() { return cRightExpression_VariableNameParserRuleCall_1_2_2_0; }
 
-		//"C4" {Expression_Equal.left=current} right=Expression_VariableName
+		//'C4' {Expression_Equal.left=current} right=Expression_VariableName
 		public Group getGroup_1_3() { return cGroup_1_3; }
 
-		//"C4"
+		//'C4'
 		public Keyword getC4Keyword_1_3_0() { return cC4Keyword_1_3_0; }
 
 		//{Expression_Equal.left=current}
@@ -253,10 +253,10 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_3_2_0() { return cRightExpression_VariableNameParserRuleCall_1_3_2_0; }
 
-		//"C5" {Expression_Not_Equal.left=current} right=Expression_VariableName
+		//'C5' {Expression_Not_Equal.left=current} right=Expression_VariableName
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
-		//"C5"
+		//'C5'
 		public Keyword getC5Keyword_1_4_0() { return cC5Keyword_1_4_0; }
 
 		//{Expression_Not_Equal.left=current}
@@ -268,16 +268,16 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_4_2_0() { return cRightExpression_VariableNameParserRuleCall_1_4_2_0; }
 
-		//("C6" "C7") {Expression_Not_Less.left=current} right=Expression_VariableName
+		//('C6' 'C7') {Expression_Not_Less.left=current} right=Expression_VariableName
 		public Group getGroup_1_5() { return cGroup_1_5; }
 
-		//"C6" "C7"
+		//('C6' 'C7')
 		public Group getGroup_1_5_0() { return cGroup_1_5_0; }
 
-		//"C6"
+		//'C6'
 		public Keyword getC6Keyword_1_5_0_0() { return cC6Keyword_1_5_0_0; }
 
-		//"C7"
+		//'C7'
 		public Keyword getC7Keyword_1_5_0_1() { return cC7Keyword_1_5_0_1; }
 
 		//{Expression_Not_Less.left=current}
@@ -289,16 +289,16 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 		//Expression_VariableName
 		public RuleCall getRightExpression_VariableNameParserRuleCall_1_5_2_0() { return cRightExpression_VariableNameParserRuleCall_1_5_2_0; }
 
-		//("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName
+		//('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName
 		public Group getGroup_1_6() { return cGroup_1_6; }
 
-		//"C6" "C8"
+		//('C6' 'C8')
 		public Group getGroup_1_6_0() { return cGroup_1_6_0; }
 
-		//"C6"
+		//'C6'
 		public Keyword getC6Keyword_1_6_0_0() { return cC6Keyword_1_6_0_0; }
 
-		//"C8"
+		//'C8'
 		public Keyword getC8Keyword_1_6_0_1() { return cC8Keyword_1_6_0_1; }
 
 		//{Expression_Not_Greater.left=current}
@@ -312,7 +312,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class Expression_VariableNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression_VariableName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.Bug385636.Expression_VariableName");
 		private final Assignment cVariableAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cVariableNVariableAccessParserRuleCall_0 = (RuleCall)cVariableAssignment.eContents().get(0);
 		
@@ -380,7 +380,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Program:
-	//	define=DefineVariables statements+=Statement* "END";
+	//	define=DefineVariables statements+=Statement* 'END';
 	public ProgramElements getProgramAccess() {
 		return pProgram;
 	}
@@ -390,7 +390,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DefineVariables:
-	//	"VARIABLES" variables+=DefineVariable+ "ENDVARIABLES";
+	//	'VARIABLES' variables+=DefineVariable+ 'ENDVARIABLES';
 	public DefineVariablesElements getDefineVariablesAccess() {
 		return pDefineVariables;
 	}
@@ -400,7 +400,7 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DefineVariable:
-	//	"NAME" name=ID;
+	//	'NAME' name=ID;
 	public DefineVariableElements getDefineVariableAccess() {
 		return pDefineVariable;
 	}
@@ -420,12 +420,12 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Comparisons: left associative, priority 2
-	//Statement returns Expression:
-	//	Expression_VariableName ("C1" {Expression_Larger_Equal.left=current} right=Expression_VariableName | "C2"
-	//	{Expression_Smaller.left=current} right=Expression_VariableName | "C3" {Expression_Smaller_Equal.left=current}
-	//	right=Expression_VariableName | "C4" {Expression_Equal.left=current} right=Expression_VariableName | "C5"
-	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ("C6" "C7") {Expression_Not_Less.left=current}
-	//	right=Expression_VariableName | ("C6" "C8") {Expression_Not_Greater.left=current} right=Expression_VariableName)*;
+	//Statement Expression:
+	//	Expression_VariableName ('C1' {Expression_Larger_Equal.left=current} right=Expression_VariableName | 'C2'
+	//	{Expression_Smaller.left=current} right=Expression_VariableName | 'C3' {Expression_Smaller_Equal.left=current}
+	//	right=Expression_VariableName | 'C4' {Expression_Equal.left=current} right=Expression_VariableName | 'C5'
+	//	{Expression_Not_Equal.left=current} right=Expression_VariableName | ('C6' 'C7') {Expression_Not_Less.left=current}
+	//	right=Expression_VariableName | ('C6' 'C8') {Expression_Not_Greater.left=current} right=Expression_VariableName)*
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -445,38 +445,38 @@ public class Bug385636GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

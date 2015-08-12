@@ -129,71 +129,71 @@ public class Bug302128TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsAssignmentElementType() {
 		return Model_ElementsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ElementsElementParserRuleCall_0ElementType() {
 		return Model_ElementsElementParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElementElementType() {
 		return Element_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_GroupElementType() {
 		return Element_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameAssignment_0ElementType() {
 		return Element_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_NameVariableParserRuleCall_0_0ElementType() {
 		return Element_NameVariableParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ValueAssignment_1ElementType() {
 		return Element_ValueAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getElement_ValueValueTerminalRuleCall_1_0ElementType() {
 		return Element_ValueValueTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariableElementType() {
 		return Variable_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_GroupElementType() {
 		return Variable_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_IDTerminalRuleCall_0ElementType() {
 		return Variable_IDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_Group_1ElementType() {
 		return Variable_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_Alternatives_1_0ElementType() {
 		return Variable_Alternatives_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_FullStopKeyword_1_0_0ElementType() {
 		return Variable_FullStopKeyword_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_HyphenMinusKeyword_1_0_1ElementType() {
 		return Variable_HyphenMinusKeyword_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getVariable_IDTerminalRuleCall_1_1ElementType() {
 		return Variable_IDTerminalRuleCall_1_1_ELEMENT_TYPE;
 	}

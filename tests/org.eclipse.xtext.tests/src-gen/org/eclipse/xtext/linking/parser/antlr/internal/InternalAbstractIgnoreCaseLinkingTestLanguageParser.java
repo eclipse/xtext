@@ -157,7 +157,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -268,7 +268,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -346,7 +346,7 @@ public class InternalAbstractIgnoreCaseLinkingTestLanguageParser extends Abstrac
             	           			current, 
             	           			"elements",
             	            		lv_elements_3_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

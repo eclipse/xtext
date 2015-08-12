@@ -13,11 +13,11 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalBug301935ExTestLanguageLexer extends Lexer {
     public static final int RULE_ID=6;
+    public static final int Control000d=5;
+    public static final int RULE_ANY_OTHER=8;
     public static final int Control000a=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int Control000d=5;
-    public static final int RULE_ANY_OTHER=8;
 
     // delegates
     // delegators

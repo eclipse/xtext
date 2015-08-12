@@ -111,59 +111,59 @@ public class IndentationAwareTestLanguageElementTypeProvider implements IElement
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getTreeElementType() {
 		return Tree_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTree_GroupElementType() {
 		return Tree_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTree_TreeAction_0ElementType() {
 		return Tree_TreeAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTree_NodesAssignment_1ElementType() {
 		return Tree_NodesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTree_NodesTreeNodeParserRuleCall_1_0ElementType() {
 		return Tree_NodesTreeNodeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNodeElementType() {
 		return TreeNode_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_GroupElementType() {
 		return TreeNode_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_NameAssignment_0ElementType() {
 		return TreeNode_NameAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_NameIDTerminalRuleCall_0_0ElementType() {
 		return TreeNode_NameIDTerminalRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_Group_1ElementType() {
 		return TreeNode_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_INDENTTerminalRuleCall_1_0ElementType() {
 		return TreeNode_INDENTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_ChildrenAssignment_1_1ElementType() {
 		return TreeNode_ChildrenAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_ChildrenTreeNodeParserRuleCall_1_1_0ElementType() {
 		return TreeNode_ChildrenTreeNodeParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTreeNode_DEDENTTerminalRuleCall_1_2ElementType() {
 		return TreeNode_DEDENTTerminalRuleCall_1_2_ELEMENT_TYPE;
 	}

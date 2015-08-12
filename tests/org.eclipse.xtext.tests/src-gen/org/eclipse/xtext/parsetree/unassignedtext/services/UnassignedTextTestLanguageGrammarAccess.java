@@ -19,7 +19,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cCaseInsensitiveKeywordRuleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cPluralRuleParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -51,7 +51,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class CaseInsensitiveKeywordRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeywordRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.CaseInsensitiveKeywordRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCaseInsensitiveKeywordTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -75,7 +75,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class PluralRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PluralRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.PluralRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContentsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cCountAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -83,13 +83,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cPluralTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//PluralRule:
-		//	"contents:" count=INT Plural;
+		//	'contents:' count=INT Plural;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"contents:" count=INT Plural
+		//'contents:' count=INT Plural
 		public Group getGroup() { return cGroup; }
 
-		//"contents:"
+		//'contents:'
 		public Keyword getContentsKeyword_0() { return cContentsKeyword_0; }
 
 		//count=INT
@@ -103,7 +103,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class MultiRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.MultiRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMultiKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -113,13 +113,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cMultiTerminalRuleCall_4 = (RuleCall)cGroup.eContents().get(4);
 		
 		//MultiRule:
-		//	"multi" val=INT Multi Multi Multi;
+		//	'multi' val=INT Multi Multi Multi;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"multi" val=INT Multi Multi Multi
+		//'multi' val=INT Multi Multi Multi
 		public Group getGroup() { return cGroup; }
 
-		//"multi"
+		//'multi'
 		public Keyword getMultiKeyword_0() { return cMultiKeyword_0; }
 
 		//val=INT
@@ -139,7 +139,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class DatatypeRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DatatypeRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.DatatypeRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -147,13 +147,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDatatypeParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//DatatypeRule:
-		//	"datatype" val=INT Datatype;
+		//	'datatype' val=INT Datatype;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"datatype" val=INT Datatype
+		//'datatype' val=INT Datatype
 		public Group getGroup() { return cGroup; }
 
-		//"datatype"
+		//'datatype'
 		public Keyword getDatatypeKeyword_0() { return cDatatypeKeyword_0; }
 
 		//val=INT
@@ -167,20 +167,20 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class DatatypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Datatype");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cStrKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cDatatype2ParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//Datatype returns ecore::EString:
-		//	"str" | INT | Datatype2;
+		//Datatype:
+		//	'str' | INT | Datatype2;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"str" | INT | Datatype2
+		//'str' | INT | Datatype2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"str"
+		//'str'
 		public Keyword getStrKeyword_0() { return cStrKeyword_0; }
 
 		//INT
@@ -191,10 +191,10 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class Datatype2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Datatype2");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//Datatype2 returns ecore::EString:
+		//Datatype2:
 		//	STRING;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -203,7 +203,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class CommonTerminalsRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CommonTerminalsRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.CommonTerminalsRule");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTerminalsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -213,13 +213,13 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cValIDTerminalRuleCall_4_0 = (RuleCall)cValAssignment_4.eContents().get(0);
 		
 		//CommonTerminalsRule:
-		//	"terminals" ID INT STRING val=ID;
+		//	'terminals' ID INT STRING val=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"terminals" ID INT STRING val=ID
+		//'terminals' ID INT STRING val=ID
 		public Group getGroup() { return cGroup; }
 
-		//"terminals"
+		//'terminals'
 		public Keyword getTerminalsKeyword_0() { return cTerminalsKeyword_0; }
 
 		//ID
@@ -263,12 +263,12 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		this.gaTerminals = gaTerminals;
 		this.pModel = new ModelElements();
 		this.pCaseInsensitiveKeywordRule = new CaseInsensitiveKeywordRuleElements();
-		this.tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CaseInsensitiveKeyword");
+		this.tCaseInsensitiveKeyword = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.CaseInsensitiveKeyword");
 		this.pPluralRule = new PluralRuleElements();
-		this.tPlural = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Plural");
+		this.tPlural = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Plural");
 		this.pMultiRule = new MultiRuleElements();
-		this.tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi");
-		this.tMulti2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Multi2");
+		this.tMulti = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Multi");
+		this.tMulti2 = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.unassignedtext.UnassignedTextTestLanguage.Multi2");
 		this.pDatatypeRule = new DatatypeRuleElements();
 		this.pDatatype = new DatatypeElements();
 		this.pDatatype2 = new Datatype2Elements();
@@ -322,14 +322,14 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getCaseInsensitiveKeywordRuleAccess().getRule();
 	}
 
-	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal CaseInsensitiveKeyword:
-	//	("k" | "K") ("e" | "E") ("y" | "Y") ("w" | "W") ("o" | "O") ("r" | "R") ("d" | "D");
+	//terminal CaseInsensitiveKeyword:
+	//	('k' | 'K') ('e' | 'E') ('y' | 'Y') ('w' | 'W') ('o' | 'O') ('r' | 'R') ('d' | 'D');
 	public TerminalRule getCaseInsensitiveKeywordRule() {
 		return tCaseInsensitiveKeyword;
 	} 
 
 	//PluralRule:
-	//	"contents:" count=INT Plural;
+	//	'contents:' count=INT Plural;
 	public PluralRuleElements getPluralRuleAccess() {
 		return pPluralRule;
 	}
@@ -338,14 +338,14 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getPluralRuleAccess().getRule();
 	}
 
-	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Plural:
-	//	"item" | "items";
+	//terminal Plural:
+	//	'item' | 'items';
 	public TerminalRule getPluralRule() {
 		return tPlural;
 	} 
 
 	//MultiRule:
-	//	"multi" val=INT Multi Multi Multi;
+	//	'multi' val=INT Multi Multi Multi;
 	public MultiRuleElements getMultiRuleAccess() {
 		return pMultiRule;
 	}
@@ -354,20 +354,20 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getMultiRuleAccess().getRule();
 	}
 
-	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Multi:
-	//	"a" "b"? "c"+ "d"* ("e" | "f") (("g" | "h") | "i"+) Multi2 "0".."9" "0".."9"+;
+	//terminal Multi:
+	//	'a' 'b'? 'c'+ 'd'* ('e' | 'f') (('g' | 'h') | 'i'+) Multi2 '0'..'9' '0'..'9'+;
 	public TerminalRule getMultiRule() {
 		return tMulti;
 	} 
 
-	/// * SuppressWarnings[InvalidTerminalruleName] * / terminal Multi2:
-	//	"j";
+	//terminal Multi2:
+	//	'j';
 	public TerminalRule getMulti2Rule() {
 		return tMulti2;
 	} 
 
 	//DatatypeRule:
-	//	"datatype" val=INT Datatype;
+	//	'datatype' val=INT Datatype;
 	public DatatypeRuleElements getDatatypeRuleAccess() {
 		return pDatatypeRule;
 	}
@@ -376,8 +376,8 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getDatatypeRuleAccess().getRule();
 	}
 
-	//Datatype returns ecore::EString:
-	//	"str" | INT | Datatype2;
+	//Datatype:
+	//	'str' | INT | Datatype2;
 	public DatatypeElements getDatatypeAccess() {
 		return pDatatype;
 	}
@@ -386,7 +386,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getDatatypeAccess().getRule();
 	}
 
-	//Datatype2 returns ecore::EString:
+	//Datatype2:
 	//	STRING;
 	public Datatype2Elements getDatatype2Access() {
 		return pDatatype2;
@@ -397,7 +397,7 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//CommonTerminalsRule:
-	//	"terminals" ID INT STRING val=ID;
+	//	'terminals' ID INT STRING val=ID;
 	public CommonTerminalsRuleElements getCommonTerminalsRuleAccess() {
 		return pCommonTerminalsRule;
 	}
@@ -407,38 +407,38 @@ public class UnassignedTextTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -23,8 +23,12 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'type'", "'extends'", "'.'", "'for'", "'in'", "'{'", "'}'", "';'", "'unresolved'"
     };
-    public static final int T__19=19;
     public static final int RULE_ID=4;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -34,12 +38,8 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_INT=5;
     public static final int RULE_WS=9;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -163,7 +163,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"types",
             	            		lv_types_0_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -284,7 +284,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -464,7 +464,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"properties",
             	            		lv_properties_11_0, 
-            	            		"Property");
+            	            		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.Property");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -513,7 +513,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"unresolvedProxyProperty",
             	            		lv_unresolvedProxyProperty_12_0, 
-            	            		"UnresolvedProxyProperty");
+            	            		"org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguage.UnresolvedProxyProperty");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -674,7 +674,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -833,7 +833,7 @@ public class InternalLazyLinkingTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

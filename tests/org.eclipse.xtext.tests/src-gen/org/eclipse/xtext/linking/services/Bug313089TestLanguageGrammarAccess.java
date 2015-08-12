@@ -19,7 +19,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class FooElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Foo");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug313089TestLanguage.Foo");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -45,7 +45,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//bar=Bar | baz=Baz
+		//(bar=Bar | baz=Baz)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//bar=Bar
@@ -71,7 +71,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class BarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bar");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug313089TestLanguage.Bar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBarAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -95,7 +95,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class BazElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Baz");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug313089TestLanguage.Baz");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cBazKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -107,13 +107,13 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_2_0 = (RuleCall)cNameAssignment_2_2.eContents().get(0);
 		
 		//Baz:
-		//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+		//	'baz' name=ID ({Baz.child=current} 'baz' name=ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"baz" name=ID ({Baz.child=current} "baz" name=ID)*
+		//'baz' name=ID ({Baz.child=current} 'baz' name=ID)*
 		public Group getGroup() { return cGroup; }
 
-		//"baz"
+		//'baz'
 		public Keyword getBazKeyword_0() { return cBazKeyword_0; }
 
 		//name=ID
@@ -122,13 +122,13 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//({Baz.child=current} "baz" name=ID)*
+		//({Baz.child=current} 'baz' name=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{Baz.child=current}
 		public Action getBazChildAction_2_0() { return cBazChildAction_2_0; }
 
-		//"baz"
+		//'baz'
 		public Keyword getBazKeyword_2_1() { return cBazKeyword_2_1; }
 
 		//name=ID
@@ -205,7 +205,7 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Baz:
-	//	"baz" name=ID ({Baz.child=current} "baz" name=ID)*;
+	//	'baz' name=ID ({Baz.child=current} 'baz' name=ID)*;
 	public BazElements getBazAccess() {
 		return pBaz;
 	}
@@ -215,38 +215,38 @@ public class Bug313089TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

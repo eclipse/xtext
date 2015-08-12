@@ -19,7 +19,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSimpleParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRuleCallsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -63,7 +63,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class SimpleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Simple");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Simple");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitOneKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -76,13 +76,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cDatatypeFQNParserRuleCall_3_0 = (RuleCall)cDatatypeAssignment_3.eContents().get(0);
 		
 		//Simple:
-		//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
+		//	'#1' name=ID ('kw1' optional=ID)? datatype=FQN;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#1" name=ID ("kw1" optional=ID)? datatype=FQN
+		//'#1' name=ID ('kw1' optional=ID)? datatype=FQN
 		public Group getGroup() { return cGroup; }
 
-		//"#1"
+		//'#1'
 		public Keyword getNumberSignDigitOneKeyword_0() { return cNumberSignDigitOneKeyword_0; }
 
 		//name=ID
@@ -91,10 +91,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("kw1" optional=ID)?
+		//('kw1' optional=ID)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"kw1"
+		//'kw1'
 		public Keyword getKw1Keyword_2_0() { return cKw1Keyword_2_0; }
 
 		//optional=ID
@@ -111,7 +111,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -119,19 +119,19 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID);
+		//	ID ('.' ID);
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)
+		//ID ('.' ID)
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"." ID
+		//('.' ID)
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -139,7 +139,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class RuleCallsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCalls");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCalls");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cRuleCallsSubParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -151,13 +151,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cCall2RuleCallsAss2ParserRuleCall_4_0 = (RuleCall)cCall2Assignment_4.eContents().get(0);
 		
 		//RuleCalls:
-		//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+		//	'#2' RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?
+		//'#2' RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?
 		public Group getGroup() { return cGroup; }
 
-		//"#2"
+		//'#2'
 		public Keyword getNumberSignDigitTwoKeyword_0() { return cNumberSignDigitTwoKeyword_0; }
 
 		//RuleCallsSub
@@ -183,36 +183,36 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class RuleCallsSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallsSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCallsSub");
 		private final Assignment cSubAssignment = (Assignment)rule.eContents().get(1);
 		private final Keyword cSubSubKeyword_0 = (Keyword)cSubAssignment.eContents().get(0);
 		
 		//RuleCallsSub:
-		//	sub="sub";
+		//	sub='sub';
 		@Override public ParserRule getRule() { return rule; }
 
-		//sub="sub"
+		//sub='sub'
 		public Assignment getSubAssignment() { return cSubAssignment; }
 
-		//"sub"
+		//'sub'
 		public Keyword getSubSubKeyword_0() { return cSubSubKeyword_0; }
 	}
 
 	public class RuleCallsAss1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallsAss1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCallsAss1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAss1Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//RuleCallsAss1:
-		//	"ass1" name=ID;
+		//	'ass1' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"ass1" name=ID
+		//'ass1' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"ass1"
+		//'ass1'
 		public Keyword getAss1Keyword_0() { return cAss1Keyword_0; }
 
 		//name=ID
@@ -223,20 +223,20 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class RuleCallsAss2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCallsAss2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCallsAss2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAss2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//RuleCallsAss2:
-		//	"ass2" name=ID;
+		//	'ass2' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"ass2" name=ID
+		//'ass2' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"ass2"
+		//'ass2'
 		public Keyword getAss2Keyword_0() { return cAss2Keyword_0; }
 
 		//name=ID
@@ -247,7 +247,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class OptionalCallsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalCalls");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCalls");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cOptionalCallsAction_1 = (Action)cGroup.eContents().get(1);
@@ -257,13 +257,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//OptionalCalls:
-		//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+		//	'#3' {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID
+		//'#3' {OptionalCalls} opt1=OptionalCallsSub1? name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"#3"
+		//'#3'
 		public Keyword getNumberSignDigitThreeKeyword_0() { return cNumberSignDigitThreeKeyword_0; }
 
 		//{OptionalCalls}
@@ -283,7 +283,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class OptionalCallsSub1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalCallsSub1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cOptionalCallsSub1Action_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cOpt2Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -293,10 +293,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cOpt3OptionalCallsSub3ParserRuleCall_3_0 = (RuleCall)cOpt3Assignment_3.eContents().get(0);
 		
 		//OptionalCallsSub1:
-		//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
+		//	{OptionalCallsSub1} opt2=OptionalCallsSub2? 'sub' opt3=OptionalCallsSub3?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?
+		//{OptionalCallsSub1} opt2=OptionalCallsSub2? 'sub' opt3=OptionalCallsSub3?
 		public Group getGroup() { return cGroup; }
 
 		//{OptionalCallsSub1}
@@ -308,7 +308,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//OptionalCallsSub2
 		public RuleCall getOpt2OptionalCallsSub2ParserRuleCall_1_0() { return cOpt2OptionalCallsSub2ParserRuleCall_1_0; }
 
-		//"sub"
+		//'sub'
 		public Keyword getSubKeyword_2() { return cSubKeyword_2; }
 
 		//opt3=OptionalCallsSub3?
@@ -319,20 +319,20 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class OptionalCallsSub2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalCallsSub2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSub2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OptionalCallsSub2:
-		//	"sub2" name=ID;
+		//	'sub2' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"sub2" name=ID
+		//'sub2' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"sub2"
+		//'sub2'
 		public Keyword getSub2Keyword_0() { return cSub2Keyword_0; }
 
 		//name=ID
@@ -343,20 +343,20 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class OptionalCallsSub3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OptionalCallsSub3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.OptionalCallsSub3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSub3Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//OptionalCallsSub3:
-		//	"sub3" name=ID;
+		//	'sub3' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"sub3" name=ID
+		//'sub3' name=ID
 		public Group getGroup() { return cGroup; }
 
-		//"sub3"
+		//'sub3'
 		public Keyword getSub3Keyword_0() { return cSub3Keyword_0; }
 
 		//name=ID
@@ -367,19 +367,19 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class RecursionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Recursion");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Recursion");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cRecursionSubParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Recursion:
-		//	"#4" RecursionSub;
+		//	'#4' RecursionSub;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#4" RecursionSub
+		//'#4' RecursionSub
 		public Group getGroup() { return cGroup; }
 
-		//"#4"
+		//'#4'
 		public Keyword getNumberSignDigitFourKeyword_0() { return cNumberSignDigitFourKeyword_0; }
 
 		//RecursionSub
@@ -387,7 +387,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class RecursionSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RecursionSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RecursionSub");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRecursionSubAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -401,16 +401,16 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Keyword cSemiSemicolonKeyword_4_0 = (Keyword)cSemiAssignment_4.eContents().get(0);
 		
 		//RecursionSub:
-		//	{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?;
+		//	{RecursionSub} '{' (sub+=RecursionSub | vals+=ID)* '}' semi?=';'?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?
+		//{RecursionSub} '{' (sub+=RecursionSub | vals+=ID)* '}' semi?=';'?
 		public Group getGroup() { return cGroup; }
 
 		//{RecursionSub}
 		public Action getRecursionSubAction_0() { return cRecursionSubAction_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//(sub+=RecursionSub | vals+=ID)*
@@ -428,18 +428,18 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getValsIDTerminalRuleCall_2_1_0() { return cValsIDTerminalRuleCall_2_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 
-		//semi?=";"?
+		//semi?=';'?
 		public Assignment getSemiAssignment_4() { return cSemiAssignment_4; }
 
-		//";"
+		//';'
 		public Keyword getSemiSemicolonKeyword_4_0() { return cSemiSemicolonKeyword_4_0; }
 	}
 
 	public class LoopElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Loop");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Loop");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNamesAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -455,13 +455,13 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cStringsSTRINGTerminalRuleCall_3_1_0 = (RuleCall)cStringsAssignment_3_1.eContents().get(0);
 		
 		//Loop:
-		//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*;
+		//	'#5' names+=ID+ ('gr' gr+=ID)* (ints+=INT | strings+=STRING)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*
+		//'#5' names+=ID+ ('gr' gr+=ID)* (ints+=INT | strings+=STRING)*
 		public Group getGroup() { return cGroup; }
 
-		//"#5"
+		//'#5'
 		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
 
 		//names+=ID+
@@ -470,10 +470,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getNamesIDTerminalRuleCall_1_0() { return cNamesIDTerminalRuleCall_1_0; }
 
-		//("gr" gr+=ID)*
+		//('gr' gr+=ID)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"gr"
+		//'gr'
 		public Keyword getGrKeyword_2_0() { return cGrKeyword_2_0; }
 
 		//gr+=ID
@@ -499,19 +499,19 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Expression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cAddParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		
 		//Expression:
-		//	"#6" Add;
+		//	'#6' Add;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"#6" Add
+		//'#6' Add
 		public Group getGroup() { return cGroup; }
 
-		//"#6"
+		//'#6'
 		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
 
 		//Add
@@ -519,7 +519,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class AddElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Add");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Add");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -528,23 +528,23 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightMultParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Add returns Expression:
-		//	Mult ({Add.left=current} "+" right=Mult)*;
+		//Add Expression:
+		//	Mult ({Add.left=current} '+' right=Mult)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Mult ({Add.left=current} "+" right=Mult)*
+		//Mult ({Add.left=current} '+' right=Mult)*
 		public Group getGroup() { return cGroup; }
 
 		//Mult
 		public RuleCall getMultParserRuleCall_0() { return cMultParserRuleCall_0; }
 
-		//({Add.left=current} "+" right=Mult)*
+		//({Add.left=current} '+' right=Mult)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Add.left=current}
 		public Action getAddLeftAction_1_0() { return cAddLeftAction_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_1() { return cPlusSignKeyword_1_1; }
 
 		//right=Mult
@@ -555,7 +555,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class MultElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mult");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Mult");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -564,23 +564,23 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrimParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Mult returns Expression:
-		//	Prim ({Mult.left=current} "*" right=Prim)*;
+		//Mult Expression:
+		//	Prim ({Mult.left=current} '*' right=Prim)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Prim ({Mult.left=current} "*" right=Prim)*
+		//Prim ({Mult.left=current} '*' right=Prim)*
 		public Group getGroup() { return cGroup; }
 
 		//Prim
 		public RuleCall getPrimParserRuleCall_0() { return cPrimParserRuleCall_0; }
 
-		//({Mult.left=current} "*" right=Prim)*
+		//({Mult.left=current} '*' right=Prim)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Mult.left=current}
 		public Action getMultLeftAction_1_0() { return cMultLeftAction_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 
 		//right=Prim
@@ -591,7 +591,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class PrimElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Prim");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Prim");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cValueAction_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -619,11 +619,12 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final RuleCall cAddParserRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
-		//Prim returns Expression:
-		//	{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")";
+		//Prim Expression:
+		//	{Value} val=INT | {Function} func=ID '(' param+=Add (',' param+=Add)* ')' | {Pointer} '=>' target=Prim |
+		//	'(' Add ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")"
+		//{Value} val=INT | {Function} func=ID '(' param+=Add (',' param+=Add)* ')' | {Pointer} '=>' target=Prim | '(' Add ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Value} val=INT
@@ -638,7 +639,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//INT
 		public RuleCall getValINTTerminalRuleCall_0_1_0() { return cValINTTerminalRuleCall_0_1_0; }
 
-		//{Function} func=ID "(" param+=Add ("," param+=Add)* ")"
+		//{Function} func=ID '(' param+=Add (',' param+=Add)* ')'
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Function}
@@ -650,7 +651,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//ID
 		public RuleCall getFuncIDTerminalRuleCall_1_1_0() { return cFuncIDTerminalRuleCall_1_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_2() { return cLeftParenthesisKeyword_1_2; }
 
 		//param+=Add
@@ -659,10 +660,10 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Add
 		public RuleCall getParamAddParserRuleCall_1_3_0() { return cParamAddParserRuleCall_1_3_0; }
 
-		//("," param+=Add)*
+		//(',' param+=Add)*
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_4_0() { return cCommaKeyword_1_4_0; }
 
 		//param+=Add
@@ -671,16 +672,16 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Add
 		public RuleCall getParamAddParserRuleCall_1_4_1_0() { return cParamAddParserRuleCall_1_4_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_5() { return cRightParenthesisKeyword_1_5; }
 
-		//{Pointer} "=>" target=Prim
+		//{Pointer} '=>' target=Prim
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{Pointer}
 		public Action getPointerAction_2_0() { return cPointerAction_2_0; }
 
-		//"=>"
+		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_2_1() { return cEqualsSignGreaterThanSignKeyword_2_1; }
 
 		//target=Prim
@@ -689,21 +690,21 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		//Prim
 		public RuleCall getTargetPrimParserRuleCall_2_2_0() { return cTargetPrimParserRuleCall_2_2_0; }
 
-		//"(" Add ")"
+		//'(' Add ')'
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
 
 		//Add
 		public RuleCall getAddParserRuleCall_3_1() { return cAddParserRuleCall_3_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 	}
 
 	public class RuleCalls12Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RuleCalls12");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.RuleCalls12");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConstructorAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -739,7 +740,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ConstructorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Constructor");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Constructor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cConstructorAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cKw1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -763,7 +764,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class FieldElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Field");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Field");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final RuleCall cParameterParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -783,7 +784,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cParameterAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cKw2Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -807,7 +808,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class NestedStartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedStart");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.NestedStart");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cNestedStartSubParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -831,7 +832,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	public class NestedStartSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedStartSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.ElementMatcherTestLanguage.NestedStartSub");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNumberSignDigitEightKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cNestedStartSubAction_1 = (Action)cGroup.eContents().get(1);
@@ -949,7 +950,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Simple:
-	//	"#1" name=ID ("kw1" optional=ID)? datatype=FQN;
+	//	'#1' name=ID ('kw1' optional=ID)? datatype=FQN;
 	public SimpleElements getSimpleAccess() {
 		return pSimple;
 	}
@@ -959,7 +960,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//FQN:
-	//	ID ("." ID);
+	//	ID ('.' ID);
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -969,7 +970,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCalls:
-	//	"#2" RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
+	//	'#2' RuleCallsSub name=ID call1=RuleCallsAss1? call2=RuleCallsAss2?;
 	public RuleCallsElements getRuleCallsAccess() {
 		return pRuleCalls;
 	}
@@ -979,7 +980,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsSub:
-	//	sub="sub";
+	//	sub='sub';
 	public RuleCallsSubElements getRuleCallsSubAccess() {
 		return pRuleCallsSub;
 	}
@@ -989,7 +990,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsAss1:
-	//	"ass1" name=ID;
+	//	'ass1' name=ID;
 	public RuleCallsAss1Elements getRuleCallsAss1Access() {
 		return pRuleCallsAss1;
 	}
@@ -999,7 +1000,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RuleCallsAss2:
-	//	"ass2" name=ID;
+	//	'ass2' name=ID;
 	public RuleCallsAss2Elements getRuleCallsAss2Access() {
 		return pRuleCallsAss2;
 	}
@@ -1009,7 +1010,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCalls:
-	//	"#3" {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
+	//	'#3' {OptionalCalls} opt1=OptionalCallsSub1? name=ID;
 	public OptionalCallsElements getOptionalCallsAccess() {
 		return pOptionalCalls;
 	}
@@ -1019,7 +1020,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub1:
-	//	{OptionalCallsSub1} opt2=OptionalCallsSub2? "sub" opt3=OptionalCallsSub3?;
+	//	{OptionalCallsSub1} opt2=OptionalCallsSub2? 'sub' opt3=OptionalCallsSub3?;
 	public OptionalCallsSub1Elements getOptionalCallsSub1Access() {
 		return pOptionalCallsSub1;
 	}
@@ -1029,7 +1030,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub2:
-	//	"sub2" name=ID;
+	//	'sub2' name=ID;
 	public OptionalCallsSub2Elements getOptionalCallsSub2Access() {
 		return pOptionalCallsSub2;
 	}
@@ -1039,7 +1040,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//OptionalCallsSub3:
-	//	"sub3" name=ID;
+	//	'sub3' name=ID;
 	public OptionalCallsSub3Elements getOptionalCallsSub3Access() {
 		return pOptionalCallsSub3;
 	}
@@ -1049,7 +1050,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Recursion:
-	//	"#4" RecursionSub;
+	//	'#4' RecursionSub;
 	public RecursionElements getRecursionAccess() {
 		return pRecursion;
 	}
@@ -1059,7 +1060,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//RecursionSub:
-	//	{RecursionSub} "{" (sub+=RecursionSub | vals+=ID)* "}" semi?=";"?;
+	//	{RecursionSub} '{' (sub+=RecursionSub | vals+=ID)* '}' semi?=';'?;
 	public RecursionSubElements getRecursionSubAccess() {
 		return pRecursionSub;
 	}
@@ -1069,7 +1070,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Loop:
-	//	"#5" names+=ID+ ("gr" gr+=ID)* (ints+=INT | strings+=STRING)*;
+	//	'#5' names+=ID+ ('gr' gr+=ID)* (ints+=INT | strings+=STRING)*;
 	public LoopElements getLoopAccess() {
 		return pLoop;
 	}
@@ -1079,7 +1080,7 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//Expression:
-	//	"#6" Add;
+	//	'#6' Add;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -1088,8 +1089,8 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getExpressionAccess().getRule();
 	}
 
-	//Add returns Expression:
-	//	Mult ({Add.left=current} "+" right=Mult)*;
+	//Add Expression:
+	//	Mult ({Add.left=current} '+' right=Mult)*
 	public AddElements getAddAccess() {
 		return pAdd;
 	}
@@ -1098,8 +1099,8 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getAddAccess().getRule();
 	}
 
-	//Mult returns Expression:
-	//	Prim ({Mult.left=current} "*" right=Prim)*;
+	//Mult Expression:
+	//	Prim ({Mult.left=current} '*' right=Prim)*
 	public MultElements getMultAccess() {
 		return pMult;
 	}
@@ -1108,8 +1109,9 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 		return getMultAccess().getRule();
 	}
 
-	//Prim returns Expression:
-	//	{Value} val=INT | {Function} func=ID "(" param+=Add ("," param+=Add)* ")" | {Pointer} "=>" target=Prim | "(" Add ")";
+	//Prim Expression:
+	//	{Value} val=INT | {Function} func=ID '(' param+=Add (',' param+=Add)* ')' | {Pointer} '=>' target=Prim |
+	//	'(' Add ')'
 	public PrimElements getPrimAccess() {
 		return pPrim;
 	}
@@ -1179,38 +1181,38 @@ public class ElementMatcherTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

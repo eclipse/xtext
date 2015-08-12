@@ -157,7 +157,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.dummy.DummyTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -300,7 +300,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -338,7 +338,7 @@ public class InternalDummyTestLanguageParser extends AbstractInternalAntlrParser
             	           			current, 
             	           			"descriptions",
             	            		lv_descriptions_3_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }

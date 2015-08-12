@@ -23,23 +23,23 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_CASEINSENSITIVEKEYWORD", "RULE_INT", "RULE_PLURAL", "RULE_MULTI", "RULE_STRING", "RULE_ID", "RULE_MULTI2", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'contents:'", "'multi'", "'datatype'", "'str'", "'terminals'"
     };
-    public static final int T__19=19;
     public static final int RULE_ID=9;
+    public static final int RULE_ANY_OTHER=14;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=12;
+    public static final int RULE_PLURAL=6;
+    public static final int RULE_ML_COMMENT=11;
+    public static final int T__19=19;
     public static final int RULE_STRING=8;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int RULE_CASEINSENSITIVEKEYWORD=4;
-    public static final int RULE_ANY_OTHER=14;
     public static final int RULE_MULTI2=10;
     public static final int RULE_INT=5;
     public static final int RULE_WS=13;
-    public static final int RULE_SL_COMMENT=12;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=11;
     public static final int RULE_MULTI=7;
-    public static final int RULE_PLURAL=6;
 
     // delegates
     // delegators
@@ -358,7 +358,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -462,7 +462,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"count",
                     		lv_count_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -572,7 +572,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -687,7 +687,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -1031,7 +1031,7 @@ public class InternalUnassignedTextTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"val",
                     		lv_val_4_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

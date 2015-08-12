@@ -158,7 +158,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             	           			current, 
             	           			"children",
             	            		lv_children_0_0, 
-            	            		"Node");
+            	            		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -267,7 +267,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -297,7 +297,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
                    			current, 
                    			"attrib",
                     		lv_attrib_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -347,7 +347,7 @@ public class InternalTreeTestLanguageParser extends AbstractInternalAntlrParser 
             	           			current, 
             	           			"children",
             	            		lv_children_5_0, 
-            	            		"Node");
+            	            		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

@@ -25,8 +25,8 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Containment", "Reference", "Model", "DollarSign", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=8;
-    public static final int Model=6;
     public static final int RULE_STRING=10;
+    public static final int Model=6;
     public static final int DollarSign=7;
     public static final int RULE_ANY_OTHER=14;
     public static final int RULE_INT=9;
@@ -200,7 +200,7 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
             	             			current, 
             	             			"refs",
             	              		lv_refs_2_0, 
-            	              		"ModelElement");
+            	              		"org.eclipse.xtext.parser.antlr.Bug289524ExTestLanguage.ModelElement");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -373,7 +373,7 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
             	             			current, 
             	             			"containments",
             	              		lv_containments_1_0, 
-            	              		"Contained");
+            	              		"org.eclipse.xtext.parser.antlr.Bug289524ExTestLanguage.Contained");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -611,7 +611,7 @@ public class InternalBug289524ExTestLanguageParser extends AbstractInternalAntlr
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 

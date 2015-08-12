@@ -19,7 +19,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.SerializationBug269362TestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cFooKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -35,16 +35,16 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		private final RuleCall cBarIDTerminalRuleCall_1_1_0 = (RuleCall)cBarAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
+		//	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID
+		//'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"foo" foo=ID ("bar" bar=ID)?
+		//'foo' foo=ID ('bar' bar=ID)?
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"foo"
+		//'foo'
 		public Keyword getFooKeyword_0_0() { return cFooKeyword_0_0; }
 
 		//foo=ID
@@ -53,10 +53,10 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		//ID
 		public RuleCall getFooIDTerminalRuleCall_0_1_0() { return cFooIDTerminalRuleCall_0_1_0; }
 
-		//("bar" bar=ID)?
+		//('bar' bar=ID)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
-		//"bar"
+		//'bar'
 		public Keyword getBarKeyword_0_2_0() { return cBarKeyword_0_2_0; }
 
 		//bar=ID
@@ -65,10 +65,10 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 		//ID
 		public RuleCall getBarIDTerminalRuleCall_0_2_1_0() { return cBarIDTerminalRuleCall_0_2_1_0; }
 
-		//"bar" bar=ID
+		//'bar' bar=ID
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"bar"
+		//'bar'
 		public Keyword getBarKeyword_1_0() { return cBarKeyword_1_0; }
 
 		//bar=ID
@@ -121,7 +121,7 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 
 	
 	//Model:
-	//	"foo" foo=ID ("bar" bar=ID)? | "bar" bar=ID;
+	//	'foo' foo=ID ('bar' bar=ID)? | 'bar' bar=ID;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -131,38 +131,38 @@ public class SerializationBug269362TestLanguageGrammarAccess extends AbstractGra
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

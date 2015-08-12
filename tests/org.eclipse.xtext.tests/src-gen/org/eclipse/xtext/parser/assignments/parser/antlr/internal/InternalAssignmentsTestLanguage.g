@@ -94,7 +94,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"single",
         		lv_single_1_0, 
-        		"SingleValue");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -113,7 +113,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multi",
         		lv_multi_2_0, 
-        		"MultiValue");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -132,7 +132,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"single",
         		lv_single_3_0, 
-        		"SingleDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -151,7 +151,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"multi",
         		lv_multi_4_0, 
-        		"MultiDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -175,7 +175,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_1, 
-        		"SingleValue");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -190,7 +190,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_2, 
-        		"MultiValue");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiValue");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_3, 
-        		"SingleDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.SingleDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -220,7 +220,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"object",
         		lv_object_6_4, 
-        		"MultiDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.MultiDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -266,7 +266,7 @@ ruleSingleValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -290,7 +290,7 @@ ruleSingleValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
     |		lv_value_3_2=RULE_STRING
@@ -305,7 +305,7 @@ ruleSingleValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -330,7 +330,7 @@ ruleSingleValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -373,7 +373,7 @@ ruleMultiValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -397,7 +397,7 @@ ruleMultiValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
     |		lv_value_3_2=RULE_STRING
@@ -412,7 +412,7 @@ ruleMultiValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -437,7 +437,7 @@ ruleMultiValue returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -479,7 +479,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"IdDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -503,7 +503,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"IdDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -518,7 +518,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"StringDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -543,7 +543,7 @@ ruleSingleDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"StringDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -586,7 +586,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"IdDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -610,7 +610,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_1, 
-        		"IdDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.IdDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -625,7 +625,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_3_2, 
-        		"StringDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -650,7 +650,7 @@ ruleMultiDatatype returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_5_0, 
-        		"StringDatatype");
+        		"org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage.StringDatatype");
 	        afterParserOrEnumRuleCall();
 	    }
 

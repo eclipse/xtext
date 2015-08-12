@@ -181,7 +181,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"parameter",
                             		lv_parameter_1_0, 
-                            		"Parameter");
+                            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Parameter");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -231,7 +231,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"parameter",
                     	            		lv_parameter_3_0, 
-                    	            		"Parameter");
+                    	            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Parameter");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -305,7 +305,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"content",
                             		lv_content_6_1, 
-                            		"Content");
+                            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Content");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -330,7 +330,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"content",
                             		lv_content_6_2, 
-                            		"ParameterRef");
+                            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.ParameterRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -380,7 +380,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"foo",
             	            		lv_foo_7_0, 
-            	            		"Foo");
+            	            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.Foo");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -490,7 +490,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"fooValue",
                     		lv_fooValue_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -712,7 +712,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"bar",
                             		lv_bar_1_1, 
-                            		"MyInt");
+                            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.MyInt");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -737,7 +737,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"bar",
                             		lv_bar_1_2, 
-                            		"ParameterRef");
+                            		"org.eclipse.xtext.parser.assignments.Bug288432TestLanguage.ParameterRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -843,7 +843,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1057,7 +1057,7 @@ public class InternalBug288432TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"int",
                     		lv_int_0_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }

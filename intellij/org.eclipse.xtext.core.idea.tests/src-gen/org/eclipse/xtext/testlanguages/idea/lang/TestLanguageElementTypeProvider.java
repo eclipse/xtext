@@ -175,103 +175,103 @@ public class TestLanguageElementTypeProvider implements IElementTypeProvider {
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getEntryRuleElementType() {
 		return EntryRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntryRule_MultiFeatureAssignmentElementType() {
 		return EntryRule_MultiFeatureAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntryRule_MultiFeatureAbstractRuleParserRuleCall_0ElementType() {
 		return EntryRule_MultiFeatureAbstractRuleParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractRuleElementType() {
 		return AbstractRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractRule_AlternativesElementType() {
 		return AbstractRule_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractRule_ChoiceRuleParserRuleCall_0ElementType() {
 		return AbstractRule_ChoiceRuleParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAbstractRule_ReducibleRuleParserRuleCall_1ElementType() {
 		return AbstractRule_ReducibleRuleParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRuleElementType() {
 		return ChoiceRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_GroupElementType() {
 		return ChoiceRule_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_ChoiceKeyword_0ElementType() {
 		return ChoiceRule_ChoiceKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_OptionalKeywordAssignment_1ElementType() {
 		return ChoiceRule_OptionalKeywordAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_OptionalKeywordOptionalKeyword_1_0ElementType() {
 		return ChoiceRule_OptionalKeywordOptionalKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_NameAssignment_2ElementType() {
 		return ChoiceRule_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getChoiceRule_NameIDTerminalRuleCall_2_0ElementType() {
 		return ChoiceRule_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRuleElementType() {
 		return ReducibleRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_GroupElementType() {
 		return ReducibleRule_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_ReducibleKeyword_0ElementType() {
 		return ReducibleRule_ReducibleKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_TerminalRuleParserRuleCall_1ElementType() {
 		return ReducibleRule_TerminalRuleParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_Group_2ElementType() {
 		return ReducibleRule_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_ReducibleCompositeActionFeatureAction_2_0ElementType() {
 		return ReducibleRule_ReducibleCompositeActionFeatureAction_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_ActionFeatureAssignment_2_1ElementType() {
 		return ReducibleRule_ActionFeatureAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReducibleRule_ActionFeatureTerminalRuleParserRuleCall_2_1_0ElementType() {
 		return ReducibleRule_ActionFeatureTerminalRuleParserRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerminalRuleElementType() {
 		return TerminalRule_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerminalRule_StringFeatureAssignmentElementType() {
 		return TerminalRule_StringFeatureAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerminalRule_StringFeatureSTRINGTerminalRuleCall_0ElementType() {
 		return TerminalRule_StringFeatureSTRINGTerminalRuleCall_0_ELEMENT_TYPE;
 	}

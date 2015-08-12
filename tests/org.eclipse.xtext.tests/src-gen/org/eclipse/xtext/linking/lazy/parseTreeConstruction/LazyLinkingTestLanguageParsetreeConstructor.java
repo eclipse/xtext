@@ -102,13 +102,16 @@ protected class Model_TypesAssignment extends AssignmentToken  {
  *  * SuppressWarnings[BidirectionalReference]
  *  * SuppressWarnings[potentialOverride]
  *  * / Type:
- * 	"type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])?
- * 	"{" properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}";
+ * 	'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
+ * 	'{'
+ * 	properties+=Property*
+ * 	unresolvedProxyProperty+=UnresolvedProxyProperty*
+ * 	'}';
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type] "." parentId=[Property])? ("for" parentId=[Property] "in" extends=[Type])? "{"
-// properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* "}"
+// 'type' name=ID ('extends' ^extends=[Type] '.' parentId=[Property])? ('for' parentId=[Property] 'in' ^extends=[Type])?
+// '{' properties+=Property* unresolvedProxyProperty+=UnresolvedProxyProperty* '}'
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -137,7 +140,7 @@ protected class Type_Group extends GroupToken {
 
 }
 
-// "type"
+// 'type'
 protected class Type_TypeKeyword_0 extends KeywordToken  {
 	
 	public Type_TypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -192,7 +195,7 @@ protected class Type_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("extends" extends=[Type] "." parentId=[Property])?
+// ('extends' ^extends=[Type] '.' parentId=[Property])?
 protected class Type_Group_2 extends GroupToken {
 	
 	public Type_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -214,7 +217,7 @@ protected class Type_Group_2 extends GroupToken {
 
 }
 
-// "extends"
+// 'extends'
 protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 	
 	public Type_ExtendsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -236,7 +239,7 @@ protected class Type_ExtendsKeyword_2_0 extends KeywordToken  {
 
 }
 
-// extends=[Type]
+// ^extends=[Type]
 protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 	
 	public Type_ExtendsAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -273,7 +276,7 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 
 }
 
-// "."
+// '.'
 protected class Type_FullStopKeyword_2_2 extends KeywordToken  {
 	
 	public Type_FullStopKeyword_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -333,7 +336,7 @@ protected class Type_ParentIdAssignment_2_3 extends AssignmentToken  {
 }
 
 
-// ("for" parentId=[Property] "in" extends=[Type])?
+// ('for' parentId=[Property] 'in' ^extends=[Type])?
 protected class Type_Group_3 extends GroupToken {
 	
 	public Type_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -355,7 +358,7 @@ protected class Type_Group_3 extends GroupToken {
 
 }
 
-// "for"
+// 'for'
 protected class Type_ForKeyword_3_0 extends KeywordToken  {
 	
 	public Type_ForKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -415,7 +418,7 @@ protected class Type_ParentIdAssignment_3_1 extends AssignmentToken  {
 
 }
 
-// "in"
+// 'in'
 protected class Type_InKeyword_3_2 extends KeywordToken  {
 	
 	public Type_InKeyword_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -437,7 +440,7 @@ protected class Type_InKeyword_3_2 extends KeywordToken  {
 
 }
 
-// extends=[Type]
+// ^extends=[Type]
 protected class Type_ExtendsAssignment_3_3 extends AssignmentToken  {
 	
 	public Type_ExtendsAssignment_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -475,7 +478,7 @@ protected class Type_ExtendsAssignment_3_3 extends AssignmentToken  {
 }
 
 
-// "{"
+// '{'
 protected class Type_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Type_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -594,7 +597,7 @@ protected class Type_UnresolvedProxyPropertyAssignment_6 extends AssignmentToken
 	}	
 }
 
-// "}"
+// '}'
 protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
 	
 	public Type_RightCurlyBracketKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -625,11 +628,11 @@ protected class Type_RightCurlyBracketKeyword_7 extends KeywordToken  {
 /************ begin Rule Property ****************
  *
  * Property:
- * 	type+=[Type]+ name=ID ";";
+ * 	type+=[Type]+ name=ID ';';
  *
  **/
 
-// type+=[Type]+ name=ID ";"
+// type+=[Type]+ name=ID ';'
 protected class Property_Group extends GroupToken {
 	
 	public Property_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -729,7 +732,7 @@ protected class Property_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Property_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -758,11 +761,11 @@ protected class Property_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule UnresolvedProxyProperty ****************
  *
  * UnresolvedProxyProperty:
- * 	"unresolved" type+=[Type]+ name=ID ";";
+ * 	'unresolved' type+=[Type]+ name=ID ';';
  *
  **/
 
-// "unresolved" type+=[Type]+ name=ID ";"
+// 'unresolved' type+=[Type]+ name=ID ';'
 protected class UnresolvedProxyProperty_Group extends GroupToken {
 	
 	public UnresolvedProxyProperty_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -791,7 +794,7 @@ protected class UnresolvedProxyProperty_Group extends GroupToken {
 
 }
 
-// "unresolved"
+// 'unresolved'
 protected class UnresolvedProxyProperty_UnresolvedKeyword_0 extends KeywordToken  {
 	
 	public UnresolvedProxyProperty_UnresolvedKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -884,7 +887,7 @@ protected class UnresolvedProxyProperty_NameAssignment_2 extends AssignmentToken
 
 }
 
-// ";"
+// ';'
 protected class UnresolvedProxyProperty_SemicolonKeyword_3 extends KeywordToken  {
 	
 	public UnresolvedProxyProperty_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
