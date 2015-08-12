@@ -12,6 +12,7 @@ var skipGenerate = false
 var backtrack = false
 var memoize = false
 var generateDotDiagram = false
+var srcGenOnly = true
 var graphvizCommand = ""
 var emfRuntimeVersion = "2.9"
 

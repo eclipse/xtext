@@ -51,7 +51,7 @@ public class ContextProviderTest extends AbstractXtextTests {
 			for (EClass type : contextProvider.getTypesForContext(context))
 				types.add(type == null ? "null" : type.getName());
 			Collections.sort(types);
-			result.add(Tuples.create(names.getContextName(context), types));
+			result.add(Tuples.create(names.getContextName(grammar, context), types));
 		}
 		Collections.sort(result, new Comparator<Pair<String, List<String>>>() {
 			@Override

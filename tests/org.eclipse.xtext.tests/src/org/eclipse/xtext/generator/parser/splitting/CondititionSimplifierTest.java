@@ -12,6 +12,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier;
 import org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Test;
 
@@ -24,6 +25,11 @@ public class CondititionSimplifierTest extends AbstractXtextTests {
 	private ConditionSimplifier conditionSimplifier;
 
 	@Override
+	protected boolean shouldTestSerializer(XtextResource resource) {
+		return false;
+	}
+	
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 		with(SimpleExpressionsStandaloneSetup.class);
@@ -33,6 +39,30 @@ public class CondititionSimplifierTest extends AbstractXtextTests {
 	@Test public void testAorA() throws Exception {
 		String model = "if (a||a) {";
 		String expectation = "if (a) {";
+		check(expectation, model);
+	}
+	
+	@Test public void testAorNotA() throws Exception {
+		String model = "if (a||!a) {";
+		String expectation = "if (true) {";
+		check(expectation, model);
+	}
+	
+	@Test public void testNotAorA() throws Exception {
+		String model = "if (!a||a) {";
+		String expectation = "if (true) {";
+		check(expectation, model);
+	}
+
+	@Test public void testAandNotA() throws Exception {
+		String model = "if (a&&!a) {";
+		String expectation = "if (false) {";
+		check(expectation, model);
+	}
+	
+	@Test public void testNotAandA() throws Exception {
+		String model = "if (!a&&a) {";
+		String expectation = "if (false) {";
 		check(expectation, model);
 	}
 	
