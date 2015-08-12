@@ -52,6 +52,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
@@ -698,7 +699,14 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		completeHiddenTokens(assignment, context, acceptor);
 	}
-
+	
+	@Override
+	public void complete_ValidID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		complete_ID(model, ruleCall, context, acceptor);
+		super.complete_ValidID(model, ruleCall, context, acceptor);
+	}
+	
 	/**
 	 * Do not propose terminal fragments in hidden token sections.
 	 */
