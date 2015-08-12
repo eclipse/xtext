@@ -8,20 +8,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src-gen/org/eclipse/xtext/xbase/XbaseStandaloneSetupGenerated.java" type="org.eclipse.xtext.xbase.XbaseStandaloneSetupGenerated">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="getFileExtensions()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/xbase/XtypeStandaloneSetupGenerated.java" type="org.eclipse.xtext.xbase.XtypeStandaloneSetupGenerated">
-        <filter id="1143996420">
-            <message_arguments>
-                <message_argument value="getFileExtensions()"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/xbase/DefaultXbaseRuntimeModule.java" type="org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule">
         <filter id="338792546">
             <message_arguments>

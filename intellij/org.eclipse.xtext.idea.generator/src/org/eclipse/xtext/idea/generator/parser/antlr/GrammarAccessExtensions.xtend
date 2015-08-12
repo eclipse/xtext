@@ -14,17 +14,16 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
-import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Assignment
 import org.eclipse.xtext.CompoundElement
 import org.eclipse.xtext.EnumLiteralDeclaration
-import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
-import org.eclipse.xtext.TerminalRule
+import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.generator.grammarAccess.GrammarAccess
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
@@ -32,6 +31,7 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil
 
 @Singleton
 class GrammarAccessExtensions {
@@ -73,21 +73,21 @@ class GrammarAccessExtensions {
 		emptyList
 	}
 
-	dispatch def ruleName(ParserRule it) { 'rule' + name }
+	def ruleName(AbstractRule rule) {
+		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
+		return result;
+	}
 
-	dispatch def ruleName(EnumRule it) { 'rule' + name }
-
-	dispatch def ruleName(TerminalRule it) { 'RULE_' + name.toUpperCase() }
-
-	dispatch def ruleName(AbstractRule it) { 'Unsupported' }
-
-	def entryRuleName(ParserRule it) { 'entryRule' + name }
+	def entryRuleName(ParserRule rule) {
+		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
+		return 'entry' + result.toFirstUpper;
+	}
 
 	def isCalled(AbstractRule rule, Grammar grammar) {
 		val allRules = grammar.allRules
 		allRules.indexOf(rule) == 0 || allRules.map [
-			eAllContentsAsList
-		].flatten.filter(RuleCall).filter[ruleCall | ruleCall.rule != null].map[ruleCall | ruleCall.rule].toList.contains(rule)
+			GrammarUtil.containedRuleCalls(it)
+		].flatten.exists[ruleCall | ruleCall.rule == rule]
 	}
 
 	def definesUnorderedGroups(ParserRule it, AntlrOptions options) {
@@ -95,14 +95,6 @@ class GrammarAccessExtensions {
 	}
 
 	dispatch def mustBeParenthesized(AbstractElement it) { true }
-
-	dispatch def mustBeParenthesized(Group it) { true }
-
-	dispatch def mustBeParenthesized(UnorderedGroup it) { true }
-
-	dispatch def mustBeParenthesized(Alternatives it) { true }
-
-	dispatch def mustBeParenthesized(EnumLiteralDeclaration it) { true }
 
 	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality != null }
 
@@ -127,16 +119,8 @@ class GrammarAccessExtensions {
 		}
 	}
 
-	dispatch def AbstractElement predicatedElement(AbstractElement it) { it }
-
-	dispatch def AbstractElement predicatedElement(Assignment it) { if(predicated) it else terminal.predicatedElement }
-
-	dispatch def AbstractElement predicatedElement(RuleCall it) {
-		if (predicated) {
-			it
-		} else {
-			(rule.alternatives as Group).elements.head.predicatedElement
-		}
+	def AbstractElement predicatedElement(AbstractElement it) {
+		return AntlrGrammarGenUtil.getPredicatedElement(it)
 	}
 
 	def localVar(Assignment it, AbstractElement terminal) {
@@ -182,10 +166,6 @@ class GrammarAccessExtensions {
 
 	def setOrAdd(Assignment it) {
 		if(operator == '+=') 'add' else 'set'
-	}
-
-	def isBoolean(Assignment it) {
-		operator == "?="
 	}
 
 	def toStringLiteral(AbstractElement it) {

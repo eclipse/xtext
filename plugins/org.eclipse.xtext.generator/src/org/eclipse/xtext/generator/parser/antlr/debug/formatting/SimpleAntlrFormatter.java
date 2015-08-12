@@ -28,14 +28,14 @@ public class SimpleAntlrFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap(0, 1, 2).before(getGrammarAccess().getML_COMMENTRule());
 		c.setLinewrap(0, 1, 1).after(getGrammarAccess().getML_COMMENTRule());
 		c.setSpace("\n\n").before(getGrammarAccess().getSL_COMMENTRule());
-		c.setIndentation(getGrammarAccess().getParenthesizedAccess().getLeftParenthesisKeyword_0(), getGrammarAccess().getParenthesizedAccess().getRightParenthesisKeyword_3());
-		c.setIndentation(getGrammarAccess().getRuleAccess().getColonKeyword_2(), getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
+		c.setIndentation(getGrammarAccess().getParenthesizedAccess().getOPENTerminalRuleCall_0(), getGrammarAccess().getParenthesizedAccess().getRightParenthesisKeyword_2());
+		c.setIndentation(getGrammarAccess().getRuleAccess().getColonKeyword_3(), getGrammarAccess().getRuleAccess().getSemicolonKeyword_5());
 		c.setLinewrap().after(getGrammarAccess().getAlternativesAccess().getVerticalLineKeyword_1_1_0());
 		c.setNoSpace().before(getGrammarAccess().getAtomAccess().getCardinalityAssignment_0_1_1());
 		c.setLinewrap().around(getGrammarAccess().getAlternativesRule());
-		c.setLinewrap().after(getGrammarAccess().getRuleAccess().getColonKeyword_2());
-		c.setLinewrap().before(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
-		c.setLinewrap(2).after(getGrammarAccess().getRuleAccess().getSemicolonKeyword_4());
+		c.setLinewrap().after(getGrammarAccess().getRuleAccess().getColonKeyword_3());
+		c.setLinewrap().before(getGrammarAccess().getRuleAccess().getSemicolonKeyword_5());
+		c.setLinewrap(2).after(getGrammarAccess().getRuleAccess().getSemicolonKeyword_5());
 		c.setLinewrap().between(getGrammarAccess().getML_COMMENTRule(),	getGrammarAccess().getAntlrGrammarAccess().getGrammarKeyword_0());
 	}
 

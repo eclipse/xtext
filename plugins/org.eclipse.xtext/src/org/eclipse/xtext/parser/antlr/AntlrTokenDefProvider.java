@@ -62,7 +62,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 						antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef, true);
 						antlrTokenDef = "'" + antlrTokenDef + "'";
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
-					} else if (antlrTokenDef.startsWith("RULE_") || isKeywordToken(antlrTokenDef)) {
+					} else if (antlrTokenDef.startsWith("RULE_") || isKeywordToken(antlrTokenDef) || antlrTokenDef.startsWith("SUPER_")) {
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
 					}
 					line = br.readLine();

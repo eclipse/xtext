@@ -19,15 +19,25 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.psi.stubs.PsiEObjectStub
+import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.AbstractRule
 
 class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, PsiEObject> {
 
 	@Accessors
 	val EObject grammarElement
+	
+	@Accessors
+	val boolean inFragmentRule
 
 	new(String debugName, Language language, EObject grammarElement) {
 		super(debugName, language)
 		this.grammarElement = grammarElement
+		this.inFragmentRule = GrammarUtil.isEObjectFragmentRule(GrammarUtil.containingRule(grammarElement))
+	}
+	
+	def AbstractRule getRule() {
+		return GrammarUtil.containingRule(grammarElement)
 	}
 	
 	override createPsi(PsiEObjectStub stub) {

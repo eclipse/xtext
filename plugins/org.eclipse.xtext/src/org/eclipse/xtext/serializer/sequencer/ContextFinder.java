@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
@@ -55,7 +55,7 @@ public class ContextFinder implements IContextFinder {
 	protected Map<Pair<EObject, EClass>, IConstraint> constraints;
 
 	@Inject
-	protected IGrammarAccess grammar;
+	protected RuleNames ruleNames;
 
 	@Inject
 	protected IGrammarConstraintProvider grammarConstraintProvider;
@@ -223,7 +223,7 @@ public class ContextFinder implements IContextFinder {
 	}
 
 	protected EObject getRootContext() {
-		for (AbstractRule rule : grammar.getGrammar().getRules())
+		for (AbstractRule rule : ruleNames.getAllRules())
 			if (GrammarUtil.isEObjectRule(rule))
 				return rule;
 		throw new RuntimeException("There is no parser rule in the grammar.");
@@ -232,7 +232,7 @@ public class ContextFinder implements IContextFinder {
 	protected void initConstraints() {
 		if (constraintContexts == null) {
 			constraints = Maps.newLinkedHashMap();
-			constraintContexts = grammarConstraintProvider.getConstraints(grammar.getGrammar());
+			constraintContexts = grammarConstraintProvider.getConstraints(ruleNames.getContextGrammar());
 			//			System.out.println(Joiner.on("\n").join(constraintContexts));
 			for (IConstraintContext ctx : constraintContexts)
 				for (IConstraint constraint : ctx.getConstraints())

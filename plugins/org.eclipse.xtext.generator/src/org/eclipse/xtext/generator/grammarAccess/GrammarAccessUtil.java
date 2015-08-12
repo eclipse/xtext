@@ -24,6 +24,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.formatting.ILineSeparatorInformation;
 import org.eclipse.xtext.generator.Naming;
@@ -169,6 +170,14 @@ public class GrammarAccessUtil {
 
 	public static String getGrammarAccessFQName(Grammar grammar, Naming naming) {
 		return naming.basePackageRuntime(grammar) + ".services." +GrammarUtil.getName(grammar) + "GrammarAccess";
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static String getUniqueRuleName(AbstractRule rule) {
+		String plainName = RuleNames.getRuleNames(rule).getUniqueRuleName(rule);
+		return toJavaIdentifier(plainName, true);
 	}
 
 	public static String getUniqueElementName(AbstractElement ele) {

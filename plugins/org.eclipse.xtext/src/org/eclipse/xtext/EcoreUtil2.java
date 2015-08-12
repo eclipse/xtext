@@ -55,6 +55,9 @@ import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
 import com.google.common.collect.AbstractIterator;
 import com.google.common.collect.MapMaker;
 
@@ -179,27 +182,12 @@ public class EcoreUtil2 extends EcoreUtil {
 		return target;
 	}
 
-	@SuppressWarnings("unchecked")
 	public static <T extends EObject> List<T> getAllContentsOfType(EObject ele, Class<T> type) {
-		List<T> result = new ArrayList<T>();
-		TreeIterator<EObject> allContents = ele.eAllContents();
-		while (allContents.hasNext()) {
-			EObject object = allContents.next();
-			if (type.isAssignableFrom(object.getClass())) {
-				result.add((T) object);
-			}
-		}
-		return result;
+		return Lists.newArrayList(Iterators.filter(ele.eAllContents(), type));
 	}
 
 	public static <T> List<T> typeSelect(List<?> elements, Class<T> clazz) {
-		List<T> result = new ArrayList<T>();
-		for (Object ele : elements) {
-			if (ele != null && clazz.isAssignableFrom(ele.getClass())) {
-				result.add(clazz.cast(ele));
-			}
-		}
-		return result;
+		return Lists.newArrayList(Iterables.filter(elements, clazz));
 	}
 
 	public static <T> List<T> collect(Collection<? extends EObject> instances, int featureId, Class<T> type) {
@@ -217,19 +205,8 @@ public class EcoreUtil2 extends EcoreUtil {
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static <T extends EObject> List<T> eAllOfType(EObject ele, Class<T> type) {
-		List<T> result = new ArrayList<T>();
-		if (type.isAssignableFrom(ele.getClass()))
-			result.add((T) ele);
-		TreeIterator<EObject> allContents = ele.eAllContents();
-		while (allContents.hasNext()) {
-			EObject object = allContents.next();
-			if (type.isAssignableFrom(object.getClass())) {
-				result.add((T) object);
-			}
-		}
-		return result;
+		return Lists.newArrayList(Iterators.filter(eAll(ele), type));
 	}
 
 	public static TreeIterator<EObject> eAll(final EObject obj) {
@@ -291,20 +268,11 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	public static List<EObject> eAllContentsAsList(EObject ele) {
-		List<EObject> result = new ArrayList<EObject>();
-		TreeIterator<EObject> iterator = ele.eAllContents();
-		while (iterator.hasNext())
-			result.add(iterator.next());
-		return result;
+		return Lists.newArrayList(ele.eAllContents());
 	}
 
 	public static List<EObject> eAllContentsAsList(Resource resource) {
-		List<EObject> result = new ArrayList<EObject>();
-		TreeIterator<EObject> iterator = resource.getAllContents();
-		while (iterator.hasNext()) {
-			result.add(iterator.next());
-		}
-		return result;
+		return Lists.newArrayList(resource.getAllContents());
 	}
 
 	public static final EPackage loadEPackage(String uriAsString, ClassLoader classLoader) {
@@ -412,10 +380,11 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	private static void collectAllSuperTypes(Set<EClass> collectedTypes, EClass eClass) {
-		for (EClass superType : eClass.getESuperTypes())
+		for (EClass superType : eClass.getESuperTypes()) {
 			if (collectedTypes.add(superType)) {
 				collectAllSuperTypes(collectedTypes, superType);
 			}
+		}
 	}
 
 	/**

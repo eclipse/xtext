@@ -83,12 +83,12 @@ class PsiEObjectFactoryImpl implements PsiEObjectFactory {
 		val tokenSource = name.createTokenSource
 		var token = tokenSource.nextToken
 		if (name != token.text) {
-			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»''')
+			throw new IncorrectOperationException('''The value '«name»' is an invalid «ruleName»''')
 		}
 
 		val lexerRuleName = tokenDefMap.get(token.type).lexerRuleName
 		if (ruleName != lexerRuleName) {
-			throw new IncorrectOperationException('''The value '«»«name»' is an invalid «ruleName»''')
+			throw new IncorrectOperationException('''The value '«name»' is an invalid «ruleName»''')
 		}
 	}
 	

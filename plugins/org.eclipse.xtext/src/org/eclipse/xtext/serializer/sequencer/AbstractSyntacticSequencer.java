@@ -444,8 +444,10 @@ public abstract class AbstractSyntacticSequencer implements ISyntacticSequencer,
 		if (fromState instanceof ISynNavigable) {
 			ISynNavigable fromEmitter = (ISynNavigable) fromState;
 			//			RCStack back = stack.clone();
-			if (fromEmitter.hasEmitters())
-				accept(fromNode, fromEmitter.getShortestStackpruningPathToAbsorber(stack), stack);
+			if (fromEmitter.hasEmitters()) {
+				List<ISynState> path = fromEmitter.getShortestStackpruningPathToAbsorber(stack);
+				accept(fromNode, path, stack);
+			}
 			return fromEmitter.getTarget();
 		}
 		return null;

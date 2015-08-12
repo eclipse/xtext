@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.util.EmfFormatter;
 
@@ -33,9 +34,12 @@ public interface ISerializationDiagnostic {
 	public class ExceptionDiagnostic implements ISerializationDiagnostic {
 
 		protected Throwable exception;
+		
+		protected Grammar grammar;
 
-		public ExceptionDiagnostic(Throwable exception) {
+		public ExceptionDiagnostic(Grammar grammar, Throwable exception) {
 			this.exception = exception;
+			this.grammar = grammar;
 		}
 
 		@Override
@@ -61,6 +65,11 @@ public interface ISerializationDiagnostic {
 		@Override
 		public EObject getContext() {
 			return null;
+		}
+		
+		@Override
+		public Grammar getGrammar() {
+			return grammar;
 		}
 
 		@Override
@@ -90,7 +99,7 @@ public interface ISerializationDiagnostic {
 					result.add("URI: " + eObject.eResource().getURI());
 			}
 			if (diagnostic.getContext() != null)
-				result.add("Context: " + new Context2NameFunction().getContextName(diagnostic.getContext()));
+				result.add("Context: " + new Context2NameFunction().getContextName(diagnostic.getGrammar(), diagnostic.getContext()));
 			if (diagnostic.getEStructuralFeature() != null) {
 				EStructuralFeature feature = diagnostic.getEStructuralFeature();
 				EClass eClass = feature.getEContainingClass();
@@ -140,6 +149,8 @@ public interface ISerializationDiagnostic {
 	EObject getSemanticObject();
 
 	EObject getContext();
+	
+	Grammar getGrammar();
 
 	String getId();
 

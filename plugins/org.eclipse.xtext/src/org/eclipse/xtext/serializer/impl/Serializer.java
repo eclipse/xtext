@@ -120,7 +120,7 @@ public class Serializer implements ISerializer {
 		else
 			formatterTokenStream = formatter.createFormatterStream(null, tokenStream, !options.isFormatting());
 		EObject context = getContext(obj);
-		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, errors);
+		ISequenceAcceptor acceptor = new TokenStreamSequenceAdapter(formatterTokenStream, grammar.getGrammar(), errors);
 		serialize(obj, context, acceptor, errors);
 		formatterTokenStream.flush();
 	}

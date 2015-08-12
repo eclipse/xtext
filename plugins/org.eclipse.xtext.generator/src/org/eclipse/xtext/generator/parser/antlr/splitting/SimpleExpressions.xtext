@@ -27,10 +27,15 @@ Atom returns Expression:
 	ParenthesizedExpression
   | NumberLiteral
   | MethodCall
+  | BooleanLiteral
 ;
 
 NumberLiteral:
 	value = INT
+;
+
+BooleanLiteral:
+	{BooleanLiteral} (value?='true' | 'false')
 ;
 
 ParenthesizedExpression returns Expression:

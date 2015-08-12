@@ -32,6 +32,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="definesHiddenTokens" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="hiddenTokens" unique="false"
         upperBound="-1" eType="#//AbstractRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fragment" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wildcard" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metamodel" eType="#//AbstractMetamodelDeclaration"/>
@@ -53,6 +57,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleCall" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="rule" eType="#//AbstractRule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//NamedArgument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="explicitlyCalled" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="feature" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
@@ -84,7 +91,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Alternatives" eSuperTypes="#//CompoundElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnorderedGroup" eSuperTypes="#//CompoundElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//CompoundElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Group" eSuperTypes="#//CompoundElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="guardCondition" eType="#//Condition"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CharacterRange" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Keyword"
         containment="true"/>
@@ -96,4 +106,32 @@
         eType="#//AbstractElement" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EOF" eSuperTypes="#//AbstractElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="calledByName" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Conjunction" eSuperTypes="#//CompositeCondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Negation" eSuperTypes="#//Condition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Condition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Disjunction" eSuperTypes="#//CompositeCondition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeCondition" eSuperTypes="#//Condition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Condition"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Condition"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterReference" eSuperTypes="#//Condition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//Parameter"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralCondition" eSuperTypes="#//Condition">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="true" eType="ecore:EDataType platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"/>
+  </eClassifiers>
 </ecore:EPackage>

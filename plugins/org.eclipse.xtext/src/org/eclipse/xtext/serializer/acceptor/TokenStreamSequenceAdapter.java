@@ -12,6 +12,7 @@ import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -32,8 +33,11 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 
 	protected ITokenStream out;
 
-	public TokenStreamSequenceAdapter(ITokenStream out, ISerializationDiagnostic.Acceptor errorAcceptor) {
+	protected Grammar grammar;
+
+	public TokenStreamSequenceAdapter(ITokenStream out, Grammar grammar, ISerializationDiagnostic.Acceptor errorAcceptor) {
 		this.out = out;
+		this.grammar = grammar;
 		this.errorAcceptor = errorAcceptor;
 	}
 
@@ -134,7 +138,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 			out.flush();
 		} catch (IOException e) {
 			if (errorAcceptor != null)
-				errorAcceptor.accept(new ExceptionDiagnostic(e));
+				errorAcceptor.accept(new ExceptionDiagnostic(grammar, e));
 		}
 	}
 
@@ -165,7 +169,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 			//			System.out.println("H:" + value);
 		} catch (IOException e) {
 			if (errorAcceptor != null)
-				errorAcceptor.accept(new ExceptionDiagnostic(e));
+				errorAcceptor.accept(new ExceptionDiagnostic(grammar, e));
 		}
 	}
 
@@ -175,7 +179,7 @@ public class TokenStreamSequenceAdapter implements ISequenceAcceptor {
 			out.writeSemantic(grammarElement, value);
 		} catch (IOException e) {
 			if (errorAcceptor != null)
-				errorAcceptor.accept(new ExceptionDiagnostic(e));
+				errorAcceptor.accept(new ExceptionDiagnostic(grammar, e));
 		}
 
 	}

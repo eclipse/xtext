@@ -7,8 +7,13 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
+import org.eclipse.xtext.RuleCall
+import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.Group
 
-class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenerator {
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) {
 		switch it {
@@ -74,6 +79,13 @@ class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenera
 	protected def dispatch compileRestoreUnorderedGroups(ParserRule it, AntlrOptions options)
 			'''«IF definesUnorderedGroups(options)»myUnorderedGroupState.restore();«ENDIF»'''
 	
+	override protected _dataTypeEbnf2(Group it, boolean supportActions) {
+		if (it.guardCondition === null)
+			super._dataTypeEbnf2(it, supportActions)
+		else 
+			guardConditionToAntlr + "(" + super._dataTypeEbnf2(it, supportActions) + ")"
+	}
+	
 	override protected _dataTypeEbnf2(UnorderedGroup it, boolean supportActions) {
 		if (supportActions) {
 			val mandatoryContent = elements.filter[!optionalCardinality].size
@@ -111,6 +123,13 @@ class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenera
 		}
 	}
 	
+	override protected _ebnf2(Group it, AntlrOptions options, boolean supportActions) {
+		if (it.guardCondition === null)
+			super._ebnf2(it, options, supportActions)
+		else 
+			guardConditionToAntlr + "(" + super._ebnf2(it, options, supportActions) + ")"
+	}
+	
 	override protected _ebnf2(UnorderedGroup it, AntlrOptions options, boolean supportActions) {
 		if (supportActions) {
 			val mandatoryContent = elements.filter[!optionalCardinality].size
@@ -146,6 +165,26 @@ class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenera
 		} else {
 			super._ebnf2(it, options, supportActions)	
 		}
+	}
+	
+	override protected _ebnf2(RuleCall it, AntlrOptions options, boolean supportActions) {
+		super._ebnf2(it, options, supportActions) + getArgumentList(!isPassCurrentIntoFragment || !supportActions)
+	}
+	
+	override protected _dataTypeEbnf2(RuleCall it, boolean supportActions) {
+		super._dataTypeEbnf2(it, supportActions) + getArgumentList(!isPassCurrentIntoFragment || !supportActions)
+	}
+	
+	override protected crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {
+		super.crossrefEbnf(it, call, ref, supportActions) + call.getArgumentList(!passCurrentIntoFragment || !supportActions)
+	}
+	
+	override protected _assignmentEbnf(RuleCall it, Assignment assignment, AntlrOptions options, boolean supportActions) {
+		super._assignmentEbnf(it, assignment, options, supportActions) + it.getArgumentList(!passCurrentIntoFragment || !supportActions)
+	}
+	
+	protected def isPassCurrentIntoFragment() {
+		return false
 	}
 	
 }

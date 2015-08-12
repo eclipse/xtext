@@ -140,7 +140,7 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 «LET allTerminalRules().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
 «IF open.size == 1-»
 		// TODO Review assumption
-		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«open.first().name.toUpperCase()»;
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».«open.first().ruleName()»;
 «ELSE-»
 		// TODO Implement me
 		throw new UnsupportedOperationException("Implement me");
@@ -153,7 +153,7 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 «LET allTerminalRules().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
 «IF close.size == 1-»
 		// TODO Review assumption
-		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«close.first().name.toUpperCase()»;
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«close.first().ruleName()»;
 «ELSE-»
 		// TODO Implement me
 		throw new UnsupportedOperationException("Implement me");

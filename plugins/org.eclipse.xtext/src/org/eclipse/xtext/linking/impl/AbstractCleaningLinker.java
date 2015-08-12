@@ -17,8 +17,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -123,9 +126,17 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 		EObject grammarElement = node.getGrammarElement();
 		if (grammarElement instanceof AbstractElement) {
 			ICompositeNode parent = node.getParent();
-			if (parent != null && !parent.hasDirectSemanticElement()) {
-				Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-				return assignment == null;
+			if (parent != null) {
+				if (!parent.hasDirectSemanticElement()) {
+					Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+					return assignment == null;
+				}
+				if (grammarElement instanceof Action) {
+					ParserRule rule = (ParserRule) GrammarUtil.containingRule(grammarElement);
+					if (rule.isFragment()) {
+						return parent.getGrammarElement() instanceof RuleCall;
+					}
+				}
 			}
 		}
 		return false;
