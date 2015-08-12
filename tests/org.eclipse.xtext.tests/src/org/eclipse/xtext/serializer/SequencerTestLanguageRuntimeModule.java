@@ -32,6 +32,7 @@ import org.eclipse.xtext.serializer.sequencertest.NullCrossRef;
 import org.eclipse.xtext.serializer.sequencertest.SequencertestPackage;
 
 import com.google.common.collect.Multimap;
+import com.google.inject.Singleton;
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -99,18 +100,24 @@ public class SequencerTestLanguageRuntimeModule extends AbstractSequencerTestLan
 		}
 	}
 
+	@Singleton
 	public static class SequencerTestValueConverter extends DefaultTerminalConverters {
 		@ValueConverter(rule = "NULL_STRING")
 		public IValueConverter<String> NULL_STRING() {
 			return new IValueConverter<String>() {
 				@Override
 				public String toString(String value) throws ValueConverterException {
-					return "''";
+					if (value == null)
+						return "''";
+					return "'" + value + "'";
 				}
 
 				@Override
 				public String toValue(String string, INode node) throws ValueConverterException {
-					return null;
+					if (string.length() <= 2) {
+						return null;
+					}
+					return string.substring(1, string.length() - 1);
 				}
 			};
 		}

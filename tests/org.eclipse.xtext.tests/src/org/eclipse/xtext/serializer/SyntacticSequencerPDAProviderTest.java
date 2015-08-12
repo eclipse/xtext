@@ -77,7 +77,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 				for (EClass type : contexts.getTypesForContext(ctx))
 					seq2dot.draw(
 							new Pair<EObject, EClass>(ctx, type),
-							path + "-" + new Context2NameFunction().apply(ctx) + "_"
+							path + "-" + new Context2NameFunction().toFunction(grammar).apply(ctx) + "_"
 									+ (type == null ? "null" : type.getName()) + "-PDA.pdf", "-T pdf");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -90,7 +90,7 @@ public class SyntacticSequencerPDAProviderTest extends AbstractXtextTests {
 		List<Triple<EClass, EObject, String>> result = Lists.newArrayList();
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
 			for (EClass type : contextProvider.getTypesForContext(ctx))
-				result.add(Tuples.create(type, ctx, ctx2name.getContextName(ctx)));
+				result.add(Tuples.create(type, ctx, ctx2name.getContextName(grammar, ctx)));
 		Collections.sort(result, new Comparator<Triple<EClass, EObject, String>>() {
 			@Override
 			public int compare(Triple<EClass, EObject, String> o1, Triple<EClass, EObject, String> o2) {
