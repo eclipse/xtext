@@ -47,6 +47,7 @@ import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotat
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.RuleNames
 
 @Log
 class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
@@ -61,6 +62,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	@Inject extension GrammarAccessExtensions
 	
 	override generate(LanguageConfig2 language) {
+		RuleNames.ensureAdapterInstalled(language.grammar);
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 		if (language.grammar.name != 'org.eclipse.xtext.common.Terminals') {
 			bindingFactory.addTypeToInstance(ClassLoader.typeRef, 'getClass().getClassLoader()')

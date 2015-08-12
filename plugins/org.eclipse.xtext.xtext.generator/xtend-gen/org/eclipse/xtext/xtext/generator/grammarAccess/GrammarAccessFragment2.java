@@ -41,6 +41,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.service.AbstractElementFinder;
@@ -85,17 +86,19 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate(final LanguageConfig2 language) {
-    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     Grammar _grammar = language.getGrammar();
-    String _name = _grammar.getName();
+    RuleNames.ensureAdapterInstalled(_grammar);
+    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
+    Grammar _grammar_1 = language.getGrammar();
+    String _name = _grammar_1.getName();
     boolean _notEquals = (!Objects.equal(_name, "org.eclipse.xtext.common.Terminals"));
     if (_notEquals) {
       TypeReference _typeRef = TypeReference.typeRef(ClassLoader.class);
       bindingFactory.addTypeToInstance(_typeRef, "getClass().getClassLoader()");
     }
     TypeReference _typeRef_1 = TypeReference.typeRef(IGrammarAccess.class);
-    Grammar _grammar_1 = language.getGrammar();
-    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
+    Grammar _grammar_2 = language.getGrammar();
+    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar_2);
     GuiceModuleAccess.BindingFactory _addTypeToType = bindingFactory.addTypeToType(_typeRef_1, _grammarAccess);
     GuiceModuleAccess _runtimeGenModule = language.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
