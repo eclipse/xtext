@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.idea.config
 
+import com.google.inject.Inject
+import com.google.inject.Provider
 import com.intellij.framework.FrameworkTypeEx
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
+import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider
 
@@ -20,7 +23,12 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
 	val static XTEND_GRADLE_PLUGIN_VERSION = '0.4.7'
+	@Inject Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
 
+	new() {
+		XtendLanguage.INSTANCE.injectMembers(this)
+	}
+	
 	override getFrameworkType() {
 		FrameworkTypeEx.EP_NAME.findExtension(XtendFrameworkType)
 	}
@@ -47,6 +55,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				url 'http://oss.sonatype.org/content/repositories/snapshots'
 			}''')
 		}
+		xtendSupportConfigurableProvider.get.addSupport(module, rootModel, modifiableModelsProvider)
 	}
 
 }

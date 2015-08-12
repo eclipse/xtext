@@ -38,8 +38,6 @@ import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
 
-import static org.eclipse.xtend.core.idea.config.XtendLibraryManager.*
-
 /**
  * @author dhuebner - Initial contribution and API
  */
@@ -80,6 +78,7 @@ class XtendLibraryManager {
 			override protected run() throws Throwable {
 				var factory = GroovyPsiElementFactory.getInstance(module.project)
 				var closableBlocks = PsiTreeUtil.getChildrenOfTypeAsList(buildFile, GrMethodCall)
+				
 				var GrCall dependenciesBlock = closableBlocks.findFirst [
 					var expression = getInvokedExpression()
 					return expression !== null && "dependencies".equals(expression.getText())
