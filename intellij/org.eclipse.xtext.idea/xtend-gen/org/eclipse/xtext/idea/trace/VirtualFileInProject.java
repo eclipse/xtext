@@ -7,11 +7,12 @@
  */
 package org.eclipse.xtext.idea.trace;
 
+import com.google.common.base.Objects;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiUtil;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
@@ -22,9 +23,13 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class VirtualFileInProject {
   public static VirtualFileInProject forPsiElement(final PsiElement element) {
-    VirtualFile _virtualFile = PsiUtil.getVirtualFile(element);
+    final VirtualFile virtualFile = XtextPsiUtils.findVirtualFile(element);
+    boolean _equals = Objects.equal(virtualFile, null);
+    if (_equals) {
+      throw new NullPointerException("virtualFile");
+    }
     Project _project = element.getProject();
-    return new VirtualFileInProject(_virtualFile, _project);
+    return new VirtualFileInProject(virtualFile, _project);
   }
   
   private final VirtualFile file;

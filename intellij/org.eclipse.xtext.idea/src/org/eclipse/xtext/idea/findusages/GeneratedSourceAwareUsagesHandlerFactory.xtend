@@ -56,11 +56,12 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	protected def List<? extends PsiElement> getGeneratedElements(PsiElement element) {
-		if (element === null) {
-			return Collections.emptyList
-		}
 		if (element instanceof PsiNameIdentifierOwner) {
-			return getGeneratedElements(element.nameIdentifier)
+			val nameIdentifier = element.nameIdentifier
+			if (nameIdentifier === null) {
+				return Collections.emptyList
+			}
+			return getGeneratedElements(nameIdentifier)
 		}
 		val result = newArrayList
 		for (generatedElement : traceProvider.getGeneratedElements(element)) {

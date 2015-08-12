@@ -21,11 +21,10 @@ import com.intellij.openapi.vfs.JarFileSystem;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.util.indexing.IndexingDataKeys;
+import com.intellij.psi.util.PsiUtilCore;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -123,17 +122,12 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
-    final PsiFile containgFile = element.getContainingFile();
-    if ((containgFile == null)) {
+    VirtualFile _virtualFile = PsiUtilCore.getVirtualFile(element);
+    boolean _tripleEquals = (_virtualFile == null);
+    if (_tripleEquals) {
       return CollectionLiterals.<PsiElement>emptyList();
     }
-    PsiFile _containingFile = element.getContainingFile();
-    final VirtualFile vFile = this.tryHardToFindVirtualFile(_containingFile);
-    if ((vFile == null)) {
-      return CollectionLiterals.<PsiElement>emptyList();
-    }
-    Project _project = element.getProject();
-    final VirtualFileInProject fileInProject = new VirtualFileInProject(vFile, _project);
+    final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);
     final IIdeaTrace traceToTarget = this.getTraceToTarget(fileInProject);
     return this.getTracedElements(traceToTarget, element);
   }
@@ -208,25 +202,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     return result;
   }
   
-  private VirtualFile tryHardToFindVirtualFile(final PsiFile psiFile) {
-    final PsiFile originalFile = psiFile.getOriginalFile();
-    if (((originalFile != psiFile) && (originalFile != null))) {
-      return this.tryHardToFindVirtualFile(originalFile);
-    }
-    final VirtualFile result = psiFile.<VirtualFile>getUserData(IndexingDataKeys.VIRTUAL_FILE);
-    if ((result != null)) {
-      return result;
-    }
-    FileViewProvider _viewProvider = psiFile.getViewProvider();
-    return _viewProvider.getVirtualFile();
-  }
-  
   @Override
   public List<? extends PsiElement> getOriginalElements(final PsiElement element) {
-    PsiFile _containingFile = element.getContainingFile();
-    final VirtualFile vFile = this.tryHardToFindVirtualFile(_containingFile);
-    Project _project = element.getProject();
-    final VirtualFileInProject fileInProject = new VirtualFileInProject(vFile, _project);
+    final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);
     final VirtualFileBasedTrace traceToSource = this.getTraceToSource(fileInProject);
     return this.getTracedElements(traceToSource, element);
   }
