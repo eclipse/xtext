@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: AbstractRule.java,v 1.18 2010/04/06 14:10:16 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

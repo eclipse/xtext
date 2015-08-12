@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: AbstractNegatedTokenImpl.java,v 1.3 2010/04/06 14:09:51 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: XtextAdapterFactory.java,v 1.19 2010/04/06 14:10:25 sefftinge Exp $
  */
 package org.eclipse.xtext.util;
 
@@ -174,6 +170,42 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseEOF(EOF object) {
 				return createEOFAdapter();
+			}
+			@Override
+			public Adapter caseParameter(Parameter object) {
+				return createParameterAdapter();
+			}
+			@Override
+			public Adapter caseNamedArgument(NamedArgument object) {
+				return createNamedArgumentAdapter();
+			}
+			@Override
+			public Adapter caseCondition(Condition object) {
+				return createConditionAdapter();
+			}
+			@Override
+			public Adapter caseConjunction(Conjunction object) {
+				return createConjunctionAdapter();
+			}
+			@Override
+			public Adapter caseNegation(Negation object) {
+				return createNegationAdapter();
+			}
+			@Override
+			public Adapter caseDisjunction(Disjunction object) {
+				return createDisjunctionAdapter();
+			}
+			@Override
+			public Adapter caseCompositeCondition(CompositeCondition object) {
+				return createCompositeConditionAdapter();
+			}
+			@Override
+			public Adapter caseParameterReference(ParameterReference object) {
+				return createParameterReferenceAdapter();
+			}
+			@Override
+			public Adapter caseLiteralCondition(LiteralCondition object) {
+				return createLiteralConditionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -448,21 +480,6 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.EOF <em>EOF</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * @since 2.0
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.EOF
-	 * @generated
-	 */
-	public Adapter createEOFAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.EnumRule <em>Enum Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -557,6 +574,155 @@ public class XtextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompoundElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.EOF <em>EOF</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.EOF
+	 * @generated
+	 */
+	public Adapter createEOFAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Parameter <em>Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Parameter
+	 * @generated
+	 */
+	public Adapter createParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.NamedArgument <em>Named Argument</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.NamedArgument
+	 * @generated
+	 */
+	public Adapter createNamedArgumentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Condition <em>Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Condition
+	 * @generated
+	 */
+	public Adapter createConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Conjunction <em>Conjunction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Conjunction
+	 * @generated
+	 */
+	public Adapter createConjunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Negation <em>Negation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Negation
+	 * @generated
+	 */
+	public Adapter createNegationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.Disjunction <em>Disjunction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.Disjunction
+	 * @generated
+	 */
+	public Adapter createDisjunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.CompositeCondition <em>Composite Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.CompositeCondition
+	 * @generated
+	 */
+	public Adapter createCompositeConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ParameterReference <em>Parameter Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.ParameterReference
+	 * @generated
+	 */
+	public Adapter createParameterReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.LiteralCondition <em>Literal Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.LiteralCondition
+	 * @generated
+	 */
+	public Adapter createLiteralConditionAdapter() {
 		return null;
 	}
 

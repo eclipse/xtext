@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: EnumRuleImpl.java,v 1.1 2010/04/06 14:10:06 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

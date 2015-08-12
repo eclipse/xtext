@@ -17,10 +17,10 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -72,8 +72,7 @@ public class NumberLiteralImpl extends ExpressionImpl implements NumberLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public int getValue()
+  public int getValue()
   {
     return value;
   }
@@ -83,8 +82,7 @@ public int getValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setValue(int newValue)
+  public void setValue(int newValue)
   {
     int oldValue = value;
     value = newValue;

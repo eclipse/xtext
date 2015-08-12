@@ -11,8 +11,6 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Skip</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

@@ -20,10 +20,10 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NegatedElementImpl#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -65,8 +65,7 @@ public class NegatedElementImpl extends RuleElementImpl implements NegatedElemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement getElement()
+  public RuleElement getElement()
   {
     return element;
   }
@@ -93,8 +92,7 @@ public RuleElement getElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElement(RuleElement newElement)
+  public void setElement(RuleElement newElement)
   {
     if (newElement != element)
     {

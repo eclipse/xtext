@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: AssignmentImpl.java,v 1.16 2010/04/06 14:09:59 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

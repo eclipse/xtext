@@ -68,7 +68,10 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
       case SimpleAntlrPackage.OPTIONS: return createOptions();
       case SimpleAntlrPackage.OPTION_VALUE: return createOptionValue();
       case SimpleAntlrPackage.RULE: return createRule();
+      case SimpleAntlrPackage.PARAMETER: return createParameter();
       case SimpleAntlrPackage.RULE_ELEMENT: return createRuleElement();
+      case SimpleAntlrPackage.EXPRESSION: return createExpression();
+      case SimpleAntlrPackage.REFERENCE_OR_LITERAL: return createReferenceOrLiteral();
       case SimpleAntlrPackage.PREDICATED: return createPredicated();
       case SimpleAntlrPackage.RULE_OPTIONS: return createRuleOptions();
       case SimpleAntlrPackage.RULE_CALL: return createRuleCall();
@@ -79,6 +82,9 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
       case SimpleAntlrPackage.ELEMENT_WITH_CARDINALITY: return createElementWithCardinality();
       case SimpleAntlrPackage.NEGATED_ELEMENT: return createNegatedElement();
       case SimpleAntlrPackage.UNTIL_ELEMENT: return createUntilElement();
+      case SimpleAntlrPackage.OR_EXPRESSION: return createOrExpression();
+      case SimpleAntlrPackage.AND_EXPRESSION: return createAndExpression();
+      case SimpleAntlrPackage.NOT_EXPRESSION: return createNotExpression();
       case SimpleAntlrPackage.SKIP: return createSkip();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -90,8 +96,7 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AntlrGrammar createAntlrGrammar()
+  public AntlrGrammar createAntlrGrammar()
   {
     AntlrGrammarImpl antlrGrammar = new AntlrGrammarImpl();
     return antlrGrammar;
@@ -102,8 +107,7 @@ public AntlrGrammar createAntlrGrammar()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Options createOptions()
+  public Options createOptions()
   {
     OptionsImpl options = new OptionsImpl();
     return options;
@@ -114,8 +118,7 @@ public Options createOptions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OptionValue createOptionValue()
+  public OptionValue createOptionValue()
   {
     OptionValueImpl optionValue = new OptionValueImpl();
     return optionValue;
@@ -126,8 +129,7 @@ public OptionValue createOptionValue()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Rule createRule()
+  public Rule createRule()
   {
     RuleImpl rule = new RuleImpl();
     return rule;
@@ -138,8 +140,18 @@ public Rule createRule()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleElement createRuleElement()
+  public Parameter createParameter()
+  {
+    ParameterImpl parameter = new ParameterImpl();
+    return parameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RuleElement createRuleElement()
   {
     RuleElementImpl ruleElement = new RuleElementImpl();
     return ruleElement;
@@ -150,8 +162,29 @@ public RuleElement createRuleElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Predicated createPredicated()
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ReferenceOrLiteral createReferenceOrLiteral()
+  {
+    ReferenceOrLiteralImpl referenceOrLiteral = new ReferenceOrLiteralImpl();
+    return referenceOrLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Predicated createPredicated()
   {
     PredicatedImpl predicated = new PredicatedImpl();
     return predicated;
@@ -162,8 +195,7 @@ public Predicated createPredicated()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleOptions createRuleOptions()
+  public RuleOptions createRuleOptions()
   {
     RuleOptionsImpl ruleOptions = new RuleOptionsImpl();
     return ruleOptions;
@@ -174,8 +206,7 @@ public RuleOptions createRuleOptions()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RuleCall createRuleCall()
+  public RuleCall createRuleCall()
   {
     RuleCallImpl ruleCall = new RuleCallImpl();
     return ruleCall;
@@ -186,8 +217,7 @@ public RuleCall createRuleCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Keyword createKeyword()
+  public Keyword createKeyword()
   {
     KeywordImpl keyword = new KeywordImpl();
     return keyword;
@@ -198,8 +228,7 @@ public Keyword createKeyword()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Wildcard createWildcard()
+  public Wildcard createWildcard()
   {
     WildcardImpl wildcard = new WildcardImpl();
     return wildcard;
@@ -210,8 +239,7 @@ public Wildcard createWildcard()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Alternatives createAlternatives()
+  public Alternatives createAlternatives()
   {
     AlternativesImpl alternatives = new AlternativesImpl();
     return alternatives;
@@ -222,8 +250,7 @@ public Alternatives createAlternatives()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Group createGroup()
+  public Group createGroup()
   {
     GroupImpl group = new GroupImpl();
     return group;
@@ -234,8 +261,7 @@ public Group createGroup()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ElementWithCardinality createElementWithCardinality()
+  public ElementWithCardinality createElementWithCardinality()
   {
     ElementWithCardinalityImpl elementWithCardinality = new ElementWithCardinalityImpl();
     return elementWithCardinality;
@@ -246,8 +272,7 @@ public ElementWithCardinality createElementWithCardinality()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NegatedElement createNegatedElement()
+  public NegatedElement createNegatedElement()
   {
     NegatedElementImpl negatedElement = new NegatedElementImpl();
     return negatedElement;
@@ -258,8 +283,7 @@ public NegatedElement createNegatedElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public UntilElement createUntilElement()
+  public UntilElement createUntilElement()
   {
     UntilElementImpl untilElement = new UntilElementImpl();
     return untilElement;
@@ -270,8 +294,40 @@ public UntilElement createUntilElement()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Skip createSkip()
+  public OrExpression createOrExpression()
+  {
+    OrExpressionImpl orExpression = new OrExpressionImpl();
+    return orExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AndExpression createAndExpression()
+  {
+    AndExpressionImpl andExpression = new AndExpressionImpl();
+    return andExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotExpression createNotExpression()
+  {
+    NotExpressionImpl notExpression = new NotExpressionImpl();
+    return notExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Skip createSkip()
   {
     SkipImpl skip = new SkipImpl();
     return skip;
@@ -282,8 +338,7 @@ public Skip createSkip()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleAntlrPackage getSimpleAntlrPackage()
+  public SimpleAntlrPackage getSimpleAntlrPackage()
   {
     return (SimpleAntlrPackage)getEPackage();
   }

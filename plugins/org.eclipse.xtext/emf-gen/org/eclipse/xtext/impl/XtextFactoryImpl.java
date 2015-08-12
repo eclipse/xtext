@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: XtextFactoryImpl.java,v 1.19 2010/04/06 14:09:54 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
@@ -21,6 +17,9 @@ import org.eclipse.xtext.*;
  * An implementation of the model <b>Factory</b>.
  * <!-- end-user-doc -->
  * @generated
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * @noreference This class is not intended to be referenced by clients.
  */
 public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	/**
@@ -86,6 +85,15 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 			case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
 			case XtextPackage.COMPOUND_ELEMENT: return createCompoundElement();
 			case XtextPackage.EOF: return createEOF();
+			case XtextPackage.PARAMETER: return createParameter();
+			case XtextPackage.NAMED_ARGUMENT: return createNamedArgument();
+			case XtextPackage.CONDITION: return createCondition();
+			case XtextPackage.CONJUNCTION: return createConjunction();
+			case XtextPackage.NEGATION: return createNegation();
+			case XtextPackage.DISJUNCTION: return createDisjunction();
+			case XtextPackage.COMPOSITE_CONDITION: return createCompositeCondition();
+			case XtextPackage.PARAMETER_REFERENCE: return createParameterReference();
+			case XtextPackage.LITERAL_CONDITION: return createLiteralCondition();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -273,17 +281,6 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * @since 2.0
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EOF createEOF() {
-		EOFImpl eof = new EOFImpl();
-		return eof;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -350,6 +347,108 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory {
 	public CompoundElement createCompoundElement() {
 		CompoundElementImpl compoundElement = new CompoundElementImpl();
 		return compoundElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOF createEOF() {
+		EOFImpl eof = new EOFImpl();
+		return eof;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Parameter createParameter() {
+		ParameterImpl parameter = new ParameterImpl();
+		return parameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * @since 2.9
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NamedArgument createNamedArgument() {
+		NamedArgumentImpl namedArgument = new NamedArgumentImpl();
+		return namedArgument;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Condition createCondition() {
+		ConditionImpl condition = new ConditionImpl();
+		return condition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Conjunction createConjunction() {
+		ConjunctionImpl conjunction = new ConjunctionImpl();
+		return conjunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Negation createNegation() {
+		NegationImpl negation = new NegationImpl();
+		return negation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Disjunction createDisjunction() {
+		DisjunctionImpl disjunction = new DisjunctionImpl();
+		return disjunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeCondition createCompositeCondition() {
+		CompositeConditionImpl compositeCondition = new CompositeConditionImpl();
+		return compositeCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterReference createParameterReference() {
+		ParameterReferenceImpl parameterReference = new ParameterReferenceImpl();
+		return parameterReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LiteralCondition createLiteralCondition() {
+		LiteralConditionImpl literalCondition = new LiteralConditionImpl();
+		return literalCondition;
 	}
 
 	/**

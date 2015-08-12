@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
@@ -48,6 +49,13 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * @generated
    */
   private EClass numberLiteralEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass booleanLiteralEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -152,8 +160,7 @@ public class SimpleExpressionsPackageImpl extends EPackageImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getIfCondition()
+  public EClass getIfCondition()
   {
     return ifConditionEClass;
   }
@@ -163,8 +170,7 @@ public EClass getIfCondition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getIfCondition_Elseif()
+  public EAttribute getIfCondition_Elseif()
   {
     return (EAttribute)ifConditionEClass.getEStructuralFeatures().get(0);
   }
@@ -174,8 +180,7 @@ public EAttribute getIfCondition_Elseif()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getIfCondition_Condition()
+  public EReference getIfCondition_Condition()
   {
     return (EReference)ifConditionEClass.getEStructuralFeatures().get(1);
   }
@@ -185,8 +190,7 @@ public EReference getIfCondition_Condition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getExpression()
+  public EClass getExpression()
   {
     return expressionEClass;
   }
@@ -196,8 +200,7 @@ public EClass getExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNumberLiteral()
+  public EClass getNumberLiteral()
   {
     return numberLiteralEClass;
   }
@@ -207,8 +210,7 @@ public EClass getNumberLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getNumberLiteral_Value()
+  public EAttribute getNumberLiteral_Value()
   {
     return (EAttribute)numberLiteralEClass.getEStructuralFeatures().get(0);
   }
@@ -218,8 +220,27 @@ public EAttribute getNumberLiteral_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getMethodCall()
+  public EClass getBooleanLiteral()
+  {
+    return booleanLiteralEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBooleanLiteral_Value()
+  {
+    return (EAttribute)booleanLiteralEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMethodCall()
   {
     return methodCallEClass;
   }
@@ -229,8 +250,7 @@ public EClass getMethodCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getMethodCall_Value()
+  public EAttribute getMethodCall_Value()
   {
     return (EAttribute)methodCallEClass.getEStructuralFeatures().get(0);
   }
@@ -240,8 +260,7 @@ public EAttribute getMethodCall_Value()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getOrExpression()
+  public EClass getOrExpression()
   {
     return orExpressionEClass;
   }
@@ -251,8 +270,7 @@ public EClass getOrExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOrExpression_Left()
+  public EReference getOrExpression_Left()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -262,8 +280,7 @@ public EReference getOrExpression_Left()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getOrExpression_Right()
+  public EReference getOrExpression_Right()
   {
     return (EReference)orExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -273,8 +290,7 @@ public EReference getOrExpression_Right()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getAndExpression()
+  public EClass getAndExpression()
   {
     return andExpressionEClass;
   }
@@ -284,8 +300,7 @@ public EClass getAndExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAndExpression_Left()
+  public EReference getAndExpression_Left()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -295,8 +310,7 @@ public EReference getAndExpression_Left()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getAndExpression_Right()
+  public EReference getAndExpression_Right()
   {
     return (EReference)andExpressionEClass.getEStructuralFeatures().get(1);
   }
@@ -306,8 +320,7 @@ public EReference getAndExpression_Right()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getComparison()
+  public EClass getComparison()
   {
     return comparisonEClass;
   }
@@ -317,8 +330,7 @@ public EClass getComparison()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getComparison_Left()
+  public EReference getComparison_Left()
   {
     return (EReference)comparisonEClass.getEStructuralFeatures().get(0);
   }
@@ -328,8 +340,7 @@ public EReference getComparison_Left()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getComparison_Operator()
+  public EAttribute getComparison_Operator()
   {
     return (EAttribute)comparisonEClass.getEStructuralFeatures().get(1);
   }
@@ -339,8 +350,7 @@ public EAttribute getComparison_Operator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getComparison_Right()
+  public EReference getComparison_Right()
   {
     return (EReference)comparisonEClass.getEStructuralFeatures().get(2);
   }
@@ -350,8 +360,7 @@ public EReference getComparison_Right()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getNotExpression()
+  public EClass getNotExpression()
   {
     return notExpressionEClass;
   }
@@ -361,8 +370,7 @@ public EClass getNotExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getNotExpression_Expression()
+  public EReference getNotExpression_Expression()
   {
     return (EReference)notExpressionEClass.getEStructuralFeatures().get(0);
   }
@@ -372,8 +380,7 @@ public EReference getNotExpression_Expression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleExpressionsFactory getSimpleExpressionsFactory()
+  public SimpleExpressionsFactory getSimpleExpressionsFactory()
   {
     return (SimpleExpressionsFactory)getEFactoryInstance();
   }
@@ -406,6 +413,9 @@ public SimpleExpressionsFactory getSimpleExpressionsFactory()
 
     numberLiteralEClass = createEClass(NUMBER_LITERAL);
     createEAttribute(numberLiteralEClass, NUMBER_LITERAL__VALUE);
+
+    booleanLiteralEClass = createEClass(BOOLEAN_LITERAL);
+    createEAttribute(booleanLiteralEClass, BOOLEAN_LITERAL__VALUE);
 
     methodCallEClass = createEClass(METHOD_CALL);
     createEAttribute(methodCallEClass, METHOD_CALL__VALUE);
@@ -457,6 +467,7 @@ public SimpleExpressionsFactory getSimpleExpressionsFactory()
 
     // Add supertypes to classes
     numberLiteralEClass.getESuperTypes().add(this.getExpression());
+    booleanLiteralEClass.getESuperTypes().add(this.getExpression());
     methodCallEClass.getESuperTypes().add(this.getExpression());
     orExpressionEClass.getESuperTypes().add(this.getExpression());
     andExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -472,6 +483,9 @@ public SimpleExpressionsFactory getSimpleExpressionsFactory()
 
     initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNumberLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(booleanLiteralEClass, BooleanLiteral.class, "BooleanLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBooleanLiteral_Value(), ecorePackage.getEBoolean(), "value", null, 0, 1, BooleanLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(methodCallEClass, MethodCall.class, "MethodCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMethodCall_Value(), ecorePackage.getEString(), "value", null, 0, 1, MethodCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -8,10 +8,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Condition;
+import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
 import org.eclipse.xtext.idea.generator.parser.antlr.DefaultAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -19,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
-public class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGrammarGenerator {
+public class AbstractAntlrGrammarWithActionsGenerator extends DefaultAntlrGrammarGenerator {
   @Override
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     String _switchResult = null;
@@ -206,6 +212,23 @@ public class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGramma
   }
   
   @Override
+  protected String _dataTypeEbnf2(final Group it, final boolean supportActions) {
+    String _xifexpression = null;
+    Condition _guardCondition = it.getGuardCondition();
+    boolean _tripleEquals = (_guardCondition == null);
+    if (_tripleEquals) {
+      _xifexpression = super._dataTypeEbnf2(it, supportActions);
+    } else {
+      String _guardConditionToAntlr = AntlrGrammarGenUtil.guardConditionToAntlr(it);
+      String _plus = (_guardConditionToAntlr + "(");
+      String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
+      String _plus_1 = (_plus + __dataTypeEbnf2);
+      _xifexpression = (_plus_1 + ")");
+    }
+    return _xifexpression;
+  }
+  
+  @Override
   protected String _dataTypeEbnf2(final UnorderedGroup it, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
@@ -349,6 +372,23 @@ public class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGramma
       _xifexpression = _xblockexpression;
     } else {
       _xifexpression = super._dataTypeEbnf2(it, supportActions);
+    }
+    return _xifexpression;
+  }
+  
+  @Override
+  protected String _ebnf2(final Group it, final AntlrOptions options, final boolean supportActions) {
+    String _xifexpression = null;
+    Condition _guardCondition = it.getGuardCondition();
+    boolean _tripleEquals = (_guardCondition == null);
+    if (_tripleEquals) {
+      _xifexpression = super._ebnf2(it, options, supportActions);
+    } else {
+      String _guardConditionToAntlr = AntlrGrammarGenUtil.guardConditionToAntlr(it);
+      String _plus = (_guardConditionToAntlr + "(");
+      String __ebnf2 = super._ebnf2(it, options, supportActions);
+      String _plus_1 = (_plus + __ebnf2);
+      _xifexpression = (_plus_1 + ")");
     }
     return _xifexpression;
   }
@@ -499,6 +539,70 @@ public class AbstractActionAwareAntlrGrammarGenerator extends DefaultAntlrGramma
       _xifexpression = super._ebnf2(it, options, supportActions);
     }
     return _xifexpression;
+  }
+  
+  @Override
+  protected String _ebnf2(final RuleCall it, final AntlrOptions options, final boolean supportActions) {
+    String __ebnf2 = super._ebnf2(it, options, supportActions);
+    boolean _or = false;
+    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+    boolean _not = (!_isPassCurrentIntoFragment);
+    if (_not) {
+      _or = true;
+    } else {
+      _or = (!supportActions);
+    }
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    return (__ebnf2 + _argumentList);
+  }
+  
+  @Override
+  protected String _dataTypeEbnf2(final RuleCall it, final boolean supportActions) {
+    String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
+    boolean _or = false;
+    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+    boolean _not = (!_isPassCurrentIntoFragment);
+    if (_not) {
+      _or = true;
+    } else {
+      _or = (!supportActions);
+    }
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    return (__dataTypeEbnf2 + _argumentList);
+  }
+  
+  @Override
+  protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
+    String _crossrefEbnf = super.crossrefEbnf(it, call, ref, supportActions);
+    boolean _or = false;
+    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+    boolean _not = (!_isPassCurrentIntoFragment);
+    if (_not) {
+      _or = true;
+    } else {
+      _or = (!supportActions);
+    }
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+    return (_crossrefEbnf + _argumentList);
+  }
+  
+  @Override
+  protected String _assignmentEbnf(final RuleCall it, final Assignment assignment, final AntlrOptions options, final boolean supportActions) {
+    String __assignmentEbnf = super._assignmentEbnf(it, assignment, options, supportActions);
+    boolean _or = false;
+    boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+    boolean _not = (!_isPassCurrentIntoFragment);
+    if (_not) {
+      _or = true;
+    } else {
+      _or = (!supportActions);
+    }
+    String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+    return (__assignmentEbnf + _argumentList);
+  }
+  
+  protected boolean isPassCurrentIntoFragment() {
+    return false;
   }
   
   protected CharSequence compileInitHiddenTokens(final AbstractRule it, final AntlrOptions options) {

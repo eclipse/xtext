@@ -21,11 +21,11 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl#isElseif <em>Elseif</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl#getCondition <em>Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -87,8 +87,7 @@ public class IfConditionImpl extends MinimalEObjectImpl.Container implements IfC
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public boolean isElseif()
+  public boolean isElseif()
   {
     return elseif;
   }
@@ -98,8 +97,7 @@ public boolean isElseif()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setElseif(boolean newElseif)
+  public void setElseif(boolean newElseif)
   {
     boolean oldElseif = elseif;
     elseif = newElseif;
@@ -112,8 +110,7 @@ public void setElseif(boolean newElseif)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getCondition()
+  public Expression getCondition()
   {
     return condition;
   }
@@ -140,8 +137,7 @@ public Expression getCondition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCondition(Expression newCondition)
+  public void setCondition(Expression newCondition)
   {
     if (newCondition != condition)
     {

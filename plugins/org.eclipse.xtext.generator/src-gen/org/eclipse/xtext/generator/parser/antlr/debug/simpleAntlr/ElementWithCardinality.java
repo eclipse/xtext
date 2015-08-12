@@ -10,11 +10,11 @@ package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality#getElement <em>Element</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ElementWithCardinality#getCardinality <em>Cardinality</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage#getElementWithCardinality()
  * @model

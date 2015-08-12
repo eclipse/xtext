@@ -17,6 +17,8 @@ import com.intellij.psi.stubs.StubOutputStream;
 import java.io.IOException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.stubs.PsiEObjectStub;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -26,9 +28,19 @@ public class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, P
   @Accessors
   private final EObject grammarElement;
   
+  @Accessors
+  private final boolean inFragmentRule;
+  
   public IGrammarAwareElementType(final String debugName, final Language language, final EObject grammarElement) {
     super(debugName, language);
     this.grammarElement = grammarElement;
+    AbstractRule _containingRule = GrammarUtil.containingRule(grammarElement);
+    boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(_containingRule);
+    this.inFragmentRule = _isEObjectFragmentRule;
+  }
+  
+  public AbstractRule getRule() {
+    return GrammarUtil.containingRule(this.grammarElement);
   }
   
   @Override
@@ -72,5 +84,10 @@ public class IGrammarAwareElementType extends IStubElementType<PsiEObjectStub, P
   @Pure
   public EObject getGrammarElement() {
     return this.grammarElement;
+  }
+  
+  @Pure
+  public boolean isInFragmentRule() {
+    return this.inFragmentRule;
   }
 }

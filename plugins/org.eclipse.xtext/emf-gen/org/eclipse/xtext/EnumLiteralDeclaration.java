@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: EnumLiteralDeclaration.java,v 1.1 2010/04/06 14:10:21 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

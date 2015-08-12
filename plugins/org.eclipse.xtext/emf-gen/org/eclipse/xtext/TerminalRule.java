@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: TerminalRule.java,v 1.1 2010/04/06 14:10:12 sefftinge Exp $
  */
 package org.eclipse.xtext;
 
@@ -24,7 +20,6 @@ package org.eclipse.xtext;
  * @generated
  */
 public interface TerminalRule extends AbstractRule {
-
 	/**
 	 * Returns the value of the '<em><b>Fragment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -50,4 +45,5 @@ public interface TerminalRule extends AbstractRule {
 	 * @generated
 	 */
 	void setFragment(boolean value);
+
 } // TerminalRule

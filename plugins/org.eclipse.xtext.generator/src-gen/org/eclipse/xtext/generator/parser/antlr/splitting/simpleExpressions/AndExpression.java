@@ -10,11 +10,11 @@ package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage#getAndExpression()
  * @model
