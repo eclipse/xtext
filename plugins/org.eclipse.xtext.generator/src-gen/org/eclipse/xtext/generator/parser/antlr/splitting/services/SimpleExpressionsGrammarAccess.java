@@ -31,22 +31,22 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cLeftCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//IfCondition:
-		//	elseif?="else"? "if" "(" condition=Expression ")" "{";
+		//	elseif?='else'? 'if' '(' condition=Expression ')' '{';
 		@Override public ParserRule getRule() { return rule; }
 
-		//elseif?="else"? "if" "(" condition=Expression ")" "{"
+		//elseif?='else'? 'if' '(' condition=Expression ')' '{'
 		public Group getGroup() { return cGroup; }
 
-		//elseif?="else"?
+		//elseif?='else'?
 		public Assignment getElseifAssignment_0() { return cElseifAssignment_0; }
 
-		//"else"
+		//'else'
 		public Keyword getElseifElseKeyword_0_0() { return cElseifElseKeyword_0_0; }
 
-		//"if"
+		//'if'
 		public Keyword getIfKeyword_1() { return cIfKeyword_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//condition=Expression
@@ -55,10 +55,10 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		//Expression
 		public RuleCall getConditionExpressionParserRuleCall_3_0() { return cConditionExpressionParserRuleCall_3_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 	}
 
@@ -73,22 +73,22 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cRightAndExpressionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//Expression:
-		//	AndExpression ({OrExpression.left=current} "||" right=AndExpression)*;
+		//	AndExpression ({OrExpression.left=current} '||' right=AndExpression)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//AndExpression ({OrExpression.left=current} "||" right=AndExpression)*
+		//AndExpression ({OrExpression.left=current} '||' right=AndExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//AndExpression
 		public RuleCall getAndExpressionParserRuleCall_0() { return cAndExpressionParserRuleCall_0; }
 
-		//({OrExpression.left=current} "||" right=AndExpression)*
+		//({OrExpression.left=current} '||' right=AndExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{OrExpression.left=current}
 		public Action getOrExpressionLeftAction_1_0() { return cOrExpressionLeftAction_1_0; }
 
-		//"||"
+		//'||'
 		public Keyword getVerticalLineVerticalLineKeyword_1_1() { return cVerticalLineVerticalLineKeyword_1_1; }
 
 		//right=AndExpression
@@ -108,23 +108,23 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightComparisonParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//AndExpression returns Expression:
-		//	Comparison ({AndExpression.left=current} "&&" right=Comparison)*;
+		//AndExpression Expression:
+		//	Comparison ({AndExpression.left=current} '&&' right=Comparison)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Comparison ({AndExpression.left=current} "&&" right=Comparison)*
+		//Comparison ({AndExpression.left=current} '&&' right=Comparison)*
 		public Group getGroup() { return cGroup; }
 
 		//Comparison
 		public RuleCall getComparisonParserRuleCall_0() { return cComparisonParserRuleCall_0; }
 
-		//({AndExpression.left=current} "&&" right=Comparison)*
+		//({AndExpression.left=current} '&&' right=Comparison)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{AndExpression.left=current}
 		public Action getAndExpressionLeftAction_1_0() { return cAndExpressionLeftAction_1_0; }
 
-		//"&&"
+		//'&&'
 		public Keyword getAmpersandAmpersandKeyword_1_1() { return cAmpersandAmpersandKeyword_1_1; }
 
 		//right=Comparison
@@ -148,35 +148,35 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightPrefixExpressionParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
-		//Comparison returns Expression:
-		//	PrefixExpression ({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?;
+		//Comparison Expression:
+		//	PrefixExpression ({Comparison.left=current} operator=('==' | '<=' | '>=') right=PrefixExpression)?
 		@Override public ParserRule getRule() { return rule; }
 
-		//PrefixExpression ({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?
+		//PrefixExpression ({Comparison.left=current} operator=('==' | '<=' | '>=') right=PrefixExpression)?
 		public Group getGroup() { return cGroup; }
 
 		//PrefixExpression
 		public RuleCall getPrefixExpressionParserRuleCall_0() { return cPrefixExpressionParserRuleCall_0; }
 
-		//({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?
+		//({Comparison.left=current} operator=('==' | '<=' | '>=') right=PrefixExpression)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Comparison.left=current}
 		public Action getComparisonLeftAction_1_0() { return cComparisonLeftAction_1_0; }
 
-		//operator=("==" | "<=" | ">=")
+		//operator=('==' | '<=' | '>=')
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		//"==" | "<=" | ">="
+		//('==' | '<=' | '>=')
 		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		//"=="
+		//'=='
 		public Keyword getOperatorEqualsSignEqualsSignKeyword_1_1_0_0() { return cOperatorEqualsSignEqualsSignKeyword_1_1_0_0; }
 
-		//"<="
+		//'<='
 		public Keyword getOperatorLessThanSignEqualsSignKeyword_1_1_0_1() { return cOperatorLessThanSignEqualsSignKeyword_1_1_0_1; }
 
-		//">="
+		//'>='
 		public Keyword getOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2() { return cOperatorGreaterThanSignEqualsSignKeyword_1_1_0_2; }
 
 		//right=PrefixExpression
@@ -196,20 +196,21 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cExpressionAtomParserRuleCall_0_2_0 = (RuleCall)cExpressionAssignment_0_2.eContents().get(0);
 		private final RuleCall cAtomParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//PrefixExpression returns Expression:
-		//	{NotExpression} "!" expression=Atom | Atom;
+		//PrefixExpression Expression:
+		//	{NotExpression} '!' expression=Atom
+		//	| Atom
 		@Override public ParserRule getRule() { return rule; }
 
-		//{NotExpression} "!" expression=Atom | Atom
+		//{NotExpression} '!' expression=Atom | Atom
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{NotExpression} "!" expression=Atom
+		//{NotExpression} '!' expression=Atom
 		public Group getGroup_0() { return cGroup_0; }
 
 		//{NotExpression}
 		public Action getNotExpressionAction_0_0() { return cNotExpressionAction_0_0; }
 
-		//"!"
+		//'!'
 		public Keyword getExclamationMarkKeyword_0_1() { return cExclamationMarkKeyword_0_1; }
 
 		//expression=Atom
@@ -230,8 +231,11 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cMethodCallParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cBooleanLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//Atom returns Expression:
-		//	ParenthesizedExpression | NumberLiteral | MethodCall | BooleanLiteral;
+		//Atom Expression:
+		//	ParenthesizedExpression
+		//	| NumberLiteral
+		//	| MethodCall
+		//	| BooleanLiteral
 		@Override public ParserRule getRule() { return rule; }
 
 		//ParenthesizedExpression | NumberLiteral | MethodCall | BooleanLiteral
@@ -276,25 +280,25 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cFalseKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		
 		//BooleanLiteral:
-		//	{BooleanLiteral} (value?="true" | "false");
+		//	{BooleanLiteral} (value?='true' | 'false');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BooleanLiteral} (value?="true" | "false")
+		//{BooleanLiteral} (value?='true' | 'false')
 		public Group getGroup() { return cGroup; }
 
 		//{BooleanLiteral}
 		public Action getBooleanLiteralAction_0() { return cBooleanLiteralAction_0; }
 
-		//value?="true" | "false"
+		//(value?='true' | 'false')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//value?="true"
+		//value?='true'
 		public Assignment getValueAssignment_1_0() { return cValueAssignment_1_0; }
 
-		//"true"
+		//'true'
 		public Keyword getValueTrueKeyword_1_0_0() { return cValueTrueKeyword_1_0_0; }
 
-		//"false"
+		//'false'
 		public Keyword getFalseKeyword_1_1() { return cFalseKeyword_1_1; }
 	}
 
@@ -305,20 +309,20 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParenthesizedExpression returns Expression:
-		//	"(" Expression ")";
+		//ParenthesizedExpression Expression:
+		//	'(' Expression ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Expression ")"
+		//'(' Expression ')'
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//Expression
 		public RuleCall getExpressionParserRuleCall_1() { return cExpressionParserRuleCall_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 
@@ -355,43 +359,43 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cMethodCallLiteralParserRuleCall_1_3_1 = (RuleCall)cGroup_1_3.eContents().get(1);
 		
 		//MethodCallLiteral:
-		//	FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?;
+		//	FQN ('(' (Argument (',' Argument)*)? ')' ('.' MethodCallLiteral)?)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?
+		//FQN ('(' (Argument (',' Argument)*)? ')' ('.' MethodCallLiteral)?)?
 		public Group getGroup() { return cGroup; }
 
 		//FQN
 		public RuleCall getFQNParserRuleCall_0() { return cFQNParserRuleCall_0; }
 
-		//("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?
+		//('(' (Argument (',' Argument)*)? ')' ('.' MethodCallLiteral)?)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 
-		//(Argument ("," Argument)*)?
+		//(Argument (',' Argument)*)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//Argument
 		public RuleCall getArgumentParserRuleCall_1_1_0() { return cArgumentParserRuleCall_1_1_0; }
 
-		//("," Argument)*
+		//(',' Argument)*
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_1_0() { return cCommaKeyword_1_1_1_0; }
 
 		//Argument
 		public RuleCall getArgumentParserRuleCall_1_1_1_1() { return cArgumentParserRuleCall_1_1_1_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 
-		//("." MethodCallLiteral)?
+		//('.' MethodCallLiteral)?
 		public Group getGroup_1_3() { return cGroup_1_3; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_3_0() { return cFullStopKeyword_1_3_0; }
 
 		//MethodCallLiteral
@@ -427,19 +431,19 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -513,7 +517,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 
 	
 	//IfCondition:
-	//	elseif?="else"? "if" "(" condition=Expression ")" "{";
+	//	elseif?='else'? 'if' '(' condition=Expression ')' '{';
 	public IfConditionElements getIfConditionAccess() {
 		return pIfCondition;
 	}
@@ -523,7 +527,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Expression:
-	//	AndExpression ({OrExpression.left=current} "||" right=AndExpression)*;
+	//	AndExpression ({OrExpression.left=current} '||' right=AndExpression)*;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -532,8 +536,8 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getExpressionAccess().getRule();
 	}
 
-	//AndExpression returns Expression:
-	//	Comparison ({AndExpression.left=current} "&&" right=Comparison)*;
+	//AndExpression Expression:
+	//	Comparison ({AndExpression.left=current} '&&' right=Comparison)*
 	public AndExpressionElements getAndExpressionAccess() {
 		return pAndExpression;
 	}
@@ -542,8 +546,8 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getAndExpressionAccess().getRule();
 	}
 
-	//Comparison returns Expression:
-	//	PrefixExpression ({Comparison.left=current} operator=("==" | "<=" | ">=") right=PrefixExpression)?;
+	//Comparison Expression:
+	//	PrefixExpression ({Comparison.left=current} operator=('==' | '<=' | '>=') right=PrefixExpression)?
 	public ComparisonElements getComparisonAccess() {
 		return pComparison;
 	}
@@ -552,8 +556,9 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getComparisonAccess().getRule();
 	}
 
-	//PrefixExpression returns Expression:
-	//	{NotExpression} "!" expression=Atom | Atom;
+	//PrefixExpression Expression:
+	//	{NotExpression} '!' expression=Atom
+	//	| Atom
 	public PrefixExpressionElements getPrefixExpressionAccess() {
 		return pPrefixExpression;
 	}
@@ -562,8 +567,11 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getPrefixExpressionAccess().getRule();
 	}
 
-	//Atom returns Expression:
-	//	ParenthesizedExpression | NumberLiteral | MethodCall | BooleanLiteral;
+	//Atom Expression:
+	//	ParenthesizedExpression
+	//	| NumberLiteral
+	//	| MethodCall
+	//	| BooleanLiteral
 	public AtomElements getAtomAccess() {
 		return pAtom;
 	}
@@ -583,7 +591,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//BooleanLiteral:
-	//	{BooleanLiteral} (value?="true" | "false");
+	//	{BooleanLiteral} (value?='true' | 'false');
 	public BooleanLiteralElements getBooleanLiteralAccess() {
 		return pBooleanLiteral;
 	}
@@ -592,8 +600,8 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 		return getBooleanLiteralAccess().getRule();
 	}
 
-	//ParenthesizedExpression returns Expression:
-	//	"(" Expression ")";
+	//ParenthesizedExpression Expression:
+	//	'(' Expression ')'
 	public ParenthesizedExpressionElements getParenthesizedExpressionAccess() {
 		return pParenthesizedExpression;
 	}
@@ -613,7 +621,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//MethodCallLiteral:
-	//	FQN ("(" (Argument ("," Argument)*)? ")" ("." MethodCallLiteral)?)?;
+	//	FQN ('(' (Argument (',' Argument)*)? ')' ('.' MethodCallLiteral)?)?;
 	public MethodCallLiteralElements getMethodCallLiteralAccess() {
 		return pMethodCallLiteral;
 	}
@@ -633,7 +641,7 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//FQN:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -643,38 +651,38 @@ public class SimpleExpressionsGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

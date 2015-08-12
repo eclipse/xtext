@@ -62,11 +62,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule AntlrGrammar ****************
  *
  * AntlrGrammar:
- * 	"grammar" name=ID ";" options=Options? rules+=Rule*;
+ * 	'grammar' name=ID ';'
+ * 	options=Options?
+ * 	rules+=Rule*;
  *
  **/
 
-// "grammar" name=ID ";" options=Options? rules+=Rule*
+// 'grammar' name=ID ';' options=Options? rules+=Rule*
 protected class AntlrGrammar_Group extends GroupToken {
 	
 	public AntlrGrammar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -97,7 +99,7 @@ protected class AntlrGrammar_Group extends GroupToken {
 
 }
 
-// "grammar"
+// 'grammar'
 protected class AntlrGrammar_GrammarKeyword_0 extends KeywordToken  {
 	
 	public AntlrGrammar_GrammarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -152,7 +154,7 @@ protected class AntlrGrammar_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class AntlrGrammar_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public AntlrGrammar_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -275,11 +277,14 @@ protected class AntlrGrammar_RulesAssignment_4 extends AssignmentToken  {
 /************ begin Rule Options ****************
  *
  * Options:
- * 	{Options} "options" "{" optionValues+=OptionValue+ "}";
+ * 	{Options}
+ * 	'options' '{'
+ * 	optionValues+=OptionValue+
+ * 	'}';
  *
  **/
 
-// {Options} "options" "{" optionValues+=OptionValue+ "}"
+// {Options} 'options' '{' optionValues+=OptionValue+ '}'
 protected class Options_Group extends GroupToken {
 	
 	public Options_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -334,7 +339,7 @@ protected class Options_OptionsAction_0 extends ActionToken  {
 	}
 }
 
-// "options"
+// 'options'
 protected class Options_OptionsKeyword_1 extends KeywordToken  {
 	
 	public Options_OptionsKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -356,7 +361,7 @@ protected class Options_OptionsKeyword_1 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Options_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Options_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -425,7 +430,7 @@ protected class Options_OptionValuesAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Options_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Options_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -454,11 +459,11 @@ protected class Options_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule OptionValue ****************
  *
  * OptionValue:
- * 	key=ID "=" value=IdOrInt ";";
+ * 	key=ID '=' value=IdOrInt ';';
  *
  **/
 
-// key=ID "=" value=IdOrInt ";"
+// key=ID '=' value=IdOrInt ';'
 protected class OptionValue_Group extends GroupToken {
 	
 	public OptionValue_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -520,7 +525,7 @@ protected class OptionValue_KeyAssignment_0 extends AssignmentToken  {
 
 }
 
-// "="
+// '='
 protected class OptionValue_EqualsSignKeyword_1 extends KeywordToken  {
 	
 	public OptionValue_EqualsSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -576,7 +581,7 @@ protected class OptionValue_ValueAssignment_2 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class OptionValue_SemicolonKeyword_3 extends KeywordToken  {
 	
 	public OptionValue_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -606,12 +611,13 @@ protected class OptionValue_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule Rule ****************
  *
  * Rule:
- * 	^fragment?="fragment"? name=ID ("[" parameters+=Parameter ("," parameters+=Parameter)* "]")? ":" body=Alternatives
- * 	";";
+ * 	^fragment?='fragment'? name=ID ('[' parameters+=Parameter (',' parameters+=Parameter)* ']')? ':'
+ * 	body=Alternatives
+ * 	';';
  *
  **/
 
-// ^fragment?="fragment"? name=ID ("[" parameters+=Parameter ("," parameters+=Parameter)* "]")? ":" body=Alternatives ";"
+// ^fragment?='fragment'? name=ID ('[' parameters+=Parameter (',' parameters+=Parameter)* ']')? ':' body=Alternatives ';'
 protected class Rule_Group extends GroupToken {
 	
 	public Rule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -640,7 +646,7 @@ protected class Rule_Group extends GroupToken {
 
 }
 
-// ^fragment?="fragment"?
+// ^fragment?='fragment'?
 protected class Rule_FragmentAssignment_0 extends AssignmentToken  {
 	
 	public Rule_FragmentAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -707,7 +713,7 @@ protected class Rule_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("[" parameters+=Parameter ("," parameters+=Parameter)* "]")?
+// ('[' parameters+=Parameter (',' parameters+=Parameter)* ']')?
 protected class Rule_Group_2 extends GroupToken {
 	
 	public Rule_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -729,7 +735,7 @@ protected class Rule_Group_2 extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class Rule_LeftSquareBracketKeyword_2_0 extends KeywordToken  {
 	
 	public Rule_LeftSquareBracketKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -797,7 +803,7 @@ protected class Rule_ParametersAssignment_2_1 extends AssignmentToken  {
 	}	
 }
 
-// ("," parameters+=Parameter)*
+// (',' parameters+=Parameter)*
 protected class Rule_Group_2_2 extends GroupToken {
 	
 	public Rule_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -819,7 +825,7 @@ protected class Rule_Group_2_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Rule_CommaKeyword_2_2_0 extends KeywordToken  {
 	
 	public Rule_CommaKeyword_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -889,7 +895,7 @@ protected class Rule_ParametersAssignment_2_2_1 extends AssignmentToken  {
 }
 
 
-// "]"
+// ']'
 protected class Rule_RightSquareBracketKeyword_2_3 extends KeywordToken  {
 	
 	public Rule_RightSquareBracketKeyword_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -913,7 +919,7 @@ protected class Rule_RightSquareBracketKeyword_2_3 extends KeywordToken  {
 }
 
 
-// ":"
+// ':'
 protected class Rule_ColonKeyword_3 extends KeywordToken  {
 	
 	public Rule_ColonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -982,7 +988,7 @@ protected class Rule_BodyAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// ";"
+// ';'
 protected class Rule_SemicolonKeyword_5 extends KeywordToken  {
 	
 	public Rule_SemicolonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1117,12 +1123,12 @@ protected class Parameter_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Alternatives ****************
  *
- * Alternatives returns RuleElement:
- * 	Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+ * Alternatives RuleElement:
+ * 	Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
  *
  **/
 
-// Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?
+// Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1197,7 +1203,7 @@ protected class Alternatives_GroupParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=Group)+)?
+// ({Alternatives.groups+=current} ('|' groups+=Group)+)?
 protected class Alternatives_Group_1 extends GroupToken {
 	
 	public Alternatives_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1255,7 +1261,7 @@ protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
 	}
 }
 
-// ("|" groups+=Group)+
+// ('|' groups+=Group)+
 protected class Alternatives_Group_1_1 extends GroupToken {
 	
 	public Alternatives_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1277,7 +1283,7 @@ protected class Alternatives_Group_1_1 extends GroupToken {
 
 }
 
-// "|"
+// '|'
 protected class Alternatives_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 	
 	public Alternatives_VerticalLineKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1354,8 +1360,8 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule Group ****************
  *
- * Group returns RuleElement:
- * 	Guarded | Atom ({Group.elements+=current} elements+=Atom+)?;
+ * Group RuleElement:
+ * 	Guarded | Atom ({Group.elements+=current} elements+=Atom+)?
  *
  **/
 
@@ -1606,12 +1612,12 @@ protected class Group_ElementsAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule Atom ****************
  *
- * Atom returns RuleElement:
- * 	OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))? | RuleOptions;
+ * Atom RuleElement:
+ * 	OtherElement ({ElementWithCardinality.element=current} cardinality=('+' | '*' | '?'))? | RuleOptions
  *
  **/
 
-// OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))? | RuleOptions
+// OtherElement ({ElementWithCardinality.element=current} cardinality=('+' | '*' | '?'))? | RuleOptions
 protected class Atom_Alternatives extends AlternativesToken {
 
 	public Atom_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1652,7 +1658,7 @@ protected class Atom_Alternatives extends AlternativesToken {
 
 }
 
-// OtherElement ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))?
+// OtherElement ({ElementWithCardinality.element=current} cardinality=('+' | '*' | '?'))?
 protected class Atom_Group_0 extends GroupToken {
 	
 	public Atom_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1709,7 +1715,7 @@ protected class Atom_OtherElementParserRuleCall_0_0 extends RuleCallToken {
 	}	
 }
 
-// ({ElementWithCardinality.element=current} cardinality=("+" | "*" | "?"))?
+// ({ElementWithCardinality.element=current} cardinality=('+' | '*' | '?'))?
 protected class Atom_Group_0_1 extends GroupToken {
 	
 	public Atom_Group_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1767,7 +1773,7 @@ protected class Atom_ElementWithCardinalityElementAction_0_1_0 extends ActionTok
 	}
 }
 
-// cardinality=("+" | "*" | "?")
+// cardinality=('+' | '*' | '?')
 protected class Atom_CardinalityAssignment_0_1_1 extends AssignmentToken  {
 	
 	public Atom_CardinalityAssignment_0_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1856,14 +1862,15 @@ protected class Atom_RuleOptionsParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule OtherElement ****************
  *
- * OtherElement returns RuleElement:
- * 	{NegatedElement} "~" element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
- * 	({UntilElement.left=current} ".." right=Literal)?;
+ * OtherElement RuleElement:
+ * 	{NegatedElement} '~' element=(Parenthesized | Literal) | Predicated
+ * 	| Parenthesized
+ * 	| Literal ({UntilElement.left=current} '..' right=Literal)?
  *
  **/
 
-// {NegatedElement} "~" element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
-// ({UntilElement.left=current} ".." right=Literal)?
+// {NegatedElement} '~' element=(Parenthesized | Literal) | Predicated | Parenthesized | Literal
+// ({UntilElement.left=current} '..' right=Literal)?
 protected class OtherElement_Alternatives extends AlternativesToken {
 
 	public OtherElement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1906,7 +1913,7 @@ protected class OtherElement_Alternatives extends AlternativesToken {
 
 }
 
-// {NegatedElement} "~" element=(Parenthesized | Literal)
+// {NegatedElement} '~' element=(Parenthesized | Literal)
 protected class OtherElement_Group_0 extends GroupToken {
 	
 	public OtherElement_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1961,7 +1968,7 @@ protected class OtherElement_NegatedElementAction_0_0 extends ActionToken  {
 	}
 }
 
-// "~"
+// '~'
 protected class OtherElement_TildeKeyword_0_1 extends KeywordToken  {
 	
 	public OtherElement_TildeKeyword_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2110,7 +2117,7 @@ protected class OtherElement_ParenthesizedParserRuleCall_2 extends RuleCallToken
 	}	
 }
 
-// Literal ({UntilElement.left=current} ".." right=Literal)?
+// Literal ({UntilElement.left=current} '..' right=Literal)?
 protected class OtherElement_Group_3 extends GroupToken {
 	
 	public OtherElement_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2181,7 +2188,7 @@ protected class OtherElement_LiteralParserRuleCall_3_0 extends RuleCallToken {
 	}	
 }
 
-// ({UntilElement.left=current} ".." right=Literal)?
+// ({UntilElement.left=current} '..' right=Literal)?
 protected class OtherElement_Group_3_1 extends GroupToken {
 	
 	public OtherElement_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2239,7 +2246,7 @@ protected class OtherElement_UntilElementLeftAction_3_1_0 extends ActionToken  {
 	}
 }
 
-// ".."
+// '..'
 protected class OtherElement_FullStopFullStopKeyword_3_1_1 extends KeywordToken  {
 	
 	public OtherElement_FullStopFullStopKeyword_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2315,12 +2322,12 @@ protected class OtherElement_RightAssignment_3_1_2 extends AssignmentToken  {
 
 /************ begin Rule Guarded ****************
  *
- * Guarded returns RuleElement:
- * 	"{" guard=OrExpression "}" "?" "=>" guarded=Parenthesized;
+ * Guarded RuleElement:
+ * 	'{' guard=OrExpression '}' '?' '=>' guarded=Parenthesized
  *
  **/
 
-// "{" guard=OrExpression "}" "?" "=>" guarded=Parenthesized
+// '{' guard=OrExpression '}' '?' '=>' guarded=Parenthesized
 protected class Guarded_Group extends GroupToken {
 	
 	public Guarded_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2349,7 +2356,7 @@ protected class Guarded_Group extends GroupToken {
 
 }
 
-// "{"
+// '{'
 protected class Guarded_LeftCurlyBracketKeyword_0 extends KeywordToken  {
 	
 	public Guarded_LeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2416,7 +2423,7 @@ protected class Guarded_GuardAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Guarded_RightCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Guarded_RightCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2438,7 +2445,7 @@ protected class Guarded_RightCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// "?"
+// '?'
 protected class Guarded_QuestionMarkKeyword_3 extends KeywordToken  {
 	
 	public Guarded_QuestionMarkKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2460,7 +2467,7 @@ protected class Guarded_QuestionMarkKeyword_3 extends KeywordToken  {
 
 }
 
-// "=>"
+// '=>'
 protected class Guarded_EqualsSignGreaterThanSignKeyword_4 extends KeywordToken  {
 	
 	public Guarded_EqualsSignGreaterThanSignKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2534,12 +2541,12 @@ protected class Guarded_GuardedAssignment_5 extends AssignmentToken  {
 
 /************ begin Rule OrExpression ****************
  *
- * OrExpression returns Expression:
- * 	AndExpression ({OrExpression.left=current} "||" right=AndExpression)*;
+ * OrExpression Expression:
+ * 	AndExpression ({OrExpression.left=current} '||' right=AndExpression)*
  *
  **/
 
-// AndExpression ({OrExpression.left=current} "||" right=AndExpression)*
+// AndExpression ({OrExpression.left=current} '||' right=AndExpression)*
 protected class OrExpression_Group extends GroupToken {
 	
 	public OrExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2606,7 +2613,7 @@ protected class OrExpression_AndExpressionParserRuleCall_0 extends RuleCallToken
 	}	
 }
 
-// ({OrExpression.left=current} "||" right=AndExpression)*
+// ({OrExpression.left=current} '||' right=AndExpression)*
 protected class OrExpression_Group_1 extends GroupToken {
 	
 	public OrExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2665,7 +2672,7 @@ protected class OrExpression_OrExpressionLeftAction_1_0 extends ActionToken  {
 	}
 }
 
-// "||"
+// '||'
 protected class OrExpression_VerticalLineVerticalLineKeyword_1_1 extends KeywordToken  {
 	
 	public OrExpression_VerticalLineVerticalLineKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2740,12 +2747,12 @@ protected class OrExpression_RightAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule AndExpression ****************
  *
- * AndExpression returns Expression:
- * 	NotExpression ({AndExpression.left=current} "&&" right=NotExpression)*;
+ * AndExpression Expression:
+ * 	NotExpression ({AndExpression.left=current} '&&' right=NotExpression)*
  *
  **/
 
-// NotExpression ({AndExpression.left=current} "&&" right=NotExpression)*
+// NotExpression ({AndExpression.left=current} '&&' right=NotExpression)*
 protected class AndExpression_Group extends GroupToken {
 	
 	public AndExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2812,7 +2819,7 @@ protected class AndExpression_NotExpressionParserRuleCall_0 extends RuleCallToke
 	}	
 }
 
-// ({AndExpression.left=current} "&&" right=NotExpression)*
+// ({AndExpression.left=current} '&&' right=NotExpression)*
 protected class AndExpression_Group_1 extends GroupToken {
 	
 	public AndExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2871,7 +2878,7 @@ protected class AndExpression_AndExpressionLeftAction_1_0 extends ActionToken  {
 	}
 }
 
-// "&&"
+// '&&'
 protected class AndExpression_AmpersandAmpersandKeyword_1_1 extends KeywordToken  {
 	
 	public AndExpression_AmpersandAmpersandKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2946,12 +2953,12 @@ protected class AndExpression_RightAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule NotExpression ****************
  *
- * NotExpression returns Expression:
- * 	PrimaryExpression | {NotExpression} "!" value=NotExpression;
+ * NotExpression Expression:
+ * 	PrimaryExpression | {NotExpression} '!' value=NotExpression
  *
  **/
 
-// PrimaryExpression | {NotExpression} "!" value=NotExpression
+// PrimaryExpression | {NotExpression} '!' value=NotExpression
 protected class NotExpression_Alternatives extends AlternativesToken {
 
 	public NotExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3018,7 +3025,7 @@ protected class NotExpression_PrimaryExpressionParserRuleCall_0 extends RuleCall
 	}	
 }
 
-// {NotExpression} "!" value=NotExpression
+// {NotExpression} '!' value=NotExpression
 protected class NotExpression_Group_1 extends GroupToken {
 	
 	public NotExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3073,7 +3080,7 @@ protected class NotExpression_NotExpressionAction_1_0 extends ActionToken  {
 	}
 }
 
-// "!"
+// '!'
 protected class NotExpression_ExclamationMarkKeyword_1_1 extends KeywordToken  {
 	
 	public NotExpression_ExclamationMarkKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3148,8 +3155,8 @@ protected class NotExpression_ValueAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule PrimaryExpression ****************
  *
- * PrimaryExpression returns Expression:
- * 	ParenthesizedExpression | ReferenceOrLiteral;
+ * PrimaryExpression Expression:
+ * 	ParenthesizedExpression | ReferenceOrLiteral
  *
  **/
 
@@ -3262,12 +3269,12 @@ protected class PrimaryExpression_ReferenceOrLiteralParserRuleCall_1 extends Rul
 
 /************ begin Rule ParenthesizedExpression ****************
  *
- * ParenthesizedExpression returns Expression:
- * 	OPEN OrExpression ")";
+ * ParenthesizedExpression Expression:
+ * 	OPEN OrExpression ')'
  *
  **/
 
-// OPEN OrExpression ")"
+// OPEN OrExpression ')'
 protected class ParenthesizedExpression_Group extends GroupToken {
 	
 	public ParenthesizedExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3355,7 +3362,7 @@ protected class ParenthesizedExpression_OrExpressionParserRuleCall_1 extends Rul
 	}	
 }
 
-// ")"
+// ')'
 protected class ParenthesizedExpression_RightParenthesisKeyword_2 extends KeywordToken  {
 	
 	public ParenthesizedExpression_RightParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3428,12 +3435,12 @@ protected class ReferenceOrLiteral_NameAssignment extends AssignmentToken  {
 
 /************ begin Rule Parenthesized ****************
  *
- * Parenthesized returns RuleElement:
- * 	OPEN Alternatives ")";
+ * Parenthesized RuleElement:
+ * 	OPEN Alternatives ')'
  *
  **/
 
-// OPEN Alternatives ")"
+// OPEN Alternatives ')'
 protected class Parenthesized_Group extends GroupToken {
 	
 	public Parenthesized_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3529,7 +3536,7 @@ protected class Parenthesized_AlternativesParserRuleCall_1 extends RuleCallToken
 	}	
 }
 
-// ")"
+// ')'
 protected class Parenthesized_RightParenthesisKeyword_2 extends KeywordToken  {
 	
 	public Parenthesized_RightParenthesisKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3558,11 +3565,11 @@ protected class Parenthesized_RightParenthesisKeyword_2 extends KeywordToken  {
 /************ begin Rule Predicated ****************
  *
  * Predicated:
- * 	OPEN OPEN predicate=Alternatives ")" "=>" element=OtherElement ")";
+ * 	OPEN OPEN predicate=Alternatives ')' '=>' element=OtherElement ')';
  *
  **/
 
-// OPEN OPEN predicate=Alternatives ")" "=>" element=OtherElement ")"
+// OPEN OPEN predicate=Alternatives ')' '=>' element=OtherElement ')'
 protected class Predicated_Group extends GroupToken {
 	
 	public Predicated_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3680,7 +3687,7 @@ protected class Predicated_PredicateAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class Predicated_RightParenthesisKeyword_3 extends KeywordToken  {
 	
 	public Predicated_RightParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3702,7 +3709,7 @@ protected class Predicated_RightParenthesisKeyword_3 extends KeywordToken  {
 
 }
 
-// "=>"
+// '=>'
 protected class Predicated_EqualsSignGreaterThanSignKeyword_4 extends KeywordToken  {
 	
 	public Predicated_EqualsSignGreaterThanSignKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3770,7 +3777,7 @@ protected class Predicated_ElementAssignment_5 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class Predicated_RightParenthesisKeyword_6 extends KeywordToken  {
 	
 	public Predicated_RightParenthesisKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3799,11 +3806,12 @@ protected class Predicated_RightParenthesisKeyword_6 extends KeywordToken  {
 /************ begin Rule RuleOptions ****************
  *
  * RuleOptions:
- * 	options=Options ":" element=Atom | {Skip} "{" "skip();" "}";
+ * 	options=Options ':' element=Atom
+ * 	| {Skip} '{' 'skip();' '}';
  *
  **/
 
-// options=Options ":" element=Atom | {Skip} "{" "skip();" "}"
+// options=Options ':' element=Atom | {Skip} '{' 'skip();' '}'
 protected class RuleOptions_Alternatives extends AlternativesToken {
 
 	public RuleOptions_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3834,7 +3842,7 @@ protected class RuleOptions_Alternatives extends AlternativesToken {
 
 }
 
-// options=Options ":" element=Atom
+// options=Options ':' element=Atom
 protected class RuleOptions_Group_0 extends GroupToken {
 	
 	public RuleOptions_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3908,7 +3916,7 @@ protected class RuleOptions_OptionsAssignment_0_0 extends AssignmentToken  {
 	}	
 }
 
-// ":"
+// ':'
 protected class RuleOptions_ColonKeyword_0_1 extends KeywordToken  {
 	
 	public RuleOptions_ColonKeyword_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3977,7 +3985,7 @@ protected class RuleOptions_ElementAssignment_0_2 extends AssignmentToken  {
 }
 
 
-// {Skip} "{" "skip();" "}"
+// {Skip} '{' 'skip();' '}'
 protected class RuleOptions_Group_1 extends GroupToken {
 	
 	public RuleOptions_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4032,7 +4040,7 @@ protected class RuleOptions_SkipAction_1_0 extends ActionToken  {
 	}
 }
 
-// "{"
+// '{'
 protected class RuleOptions_LeftCurlyBracketKeyword_1_1 extends KeywordToken  {
 	
 	public RuleOptions_LeftCurlyBracketKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4054,7 +4062,7 @@ protected class RuleOptions_LeftCurlyBracketKeyword_1_1 extends KeywordToken  {
 
 }
 
-// "skip();"
+// 'skip();'
 protected class RuleOptions_SkipKeyword_1_2 extends KeywordToken  {
 	
 	public RuleOptions_SkipKeyword_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4076,7 +4084,7 @@ protected class RuleOptions_SkipKeyword_1_2 extends KeywordToken  {
 
 }
 
-// "}"
+// '}'
 protected class RuleOptions_RightCurlyBracketKeyword_1_3 extends KeywordToken  {
 	
 	public RuleOptions_RightCurlyBracketKeyword_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4105,8 +4113,10 @@ protected class RuleOptions_RightCurlyBracketKeyword_1_3 extends KeywordToken  {
 
 /************ begin Rule Literal ****************
  *
- * Literal returns RuleElement:
- * 	RuleCall | Keyword | Wildcard;
+ * Literal RuleElement:
+ * 	RuleCall
+ * 	| Keyword
+ * 	| Wildcard
  *
  **/
 
@@ -4258,11 +4268,11 @@ protected class Literal_WildcardParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule RuleCall ****************
  *
  * RuleCall:
- * 	rule=ID ("[" arguments+=OrExpression ("," arguments+=OrExpression)* "]")?;
+ * 	rule=ID ('[' arguments+=OrExpression (',' arguments+=OrExpression)* ']')?;
  *
  **/
 
-// rule=ID ("[" arguments+=OrExpression ("," arguments+=OrExpression)* "]")?
+// rule=ID ('[' arguments+=OrExpression (',' arguments+=OrExpression)* ']')?
 protected class RuleCall_Group extends GroupToken {
 	
 	public RuleCall_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4325,7 +4335,7 @@ protected class RuleCall_RuleAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("[" arguments+=OrExpression ("," arguments+=OrExpression)* "]")?
+// ('[' arguments+=OrExpression (',' arguments+=OrExpression)* ']')?
 protected class RuleCall_Group_1 extends GroupToken {
 	
 	public RuleCall_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4347,7 +4357,7 @@ protected class RuleCall_Group_1 extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class RuleCall_LeftSquareBracketKeyword_1_0 extends KeywordToken  {
 	
 	public RuleCall_LeftSquareBracketKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4415,7 +4425,7 @@ protected class RuleCall_ArgumentsAssignment_1_1 extends AssignmentToken  {
 	}	
 }
 
-// ("," arguments+=OrExpression)*
+// (',' arguments+=OrExpression)*
 protected class RuleCall_Group_1_2 extends GroupToken {
 	
 	public RuleCall_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4437,7 +4447,7 @@ protected class RuleCall_Group_1_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class RuleCall_CommaKeyword_1_2_0 extends KeywordToken  {
 	
 	public RuleCall_CommaKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4507,7 +4517,7 @@ protected class RuleCall_ArgumentsAssignment_1_2_1 extends AssignmentToken  {
 }
 
 
-// "]"
+// ']'
 protected class RuleCall_RightSquareBracketKeyword_1_3 extends KeywordToken  {
 	
 	public RuleCall_RightSquareBracketKeyword_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4584,11 +4594,11 @@ protected class Keyword_ValueAssignment extends AssignmentToken  {
 /************ begin Rule Wildcard ****************
  *
  * Wildcard:
- * 	{Wildcard} ".";
+ * 	{Wildcard} '.';
  *
  **/
 
-// {Wildcard} "."
+// {Wildcard} '.'
 protected class Wildcard_Group extends GroupToken {
 	
 	public Wildcard_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4643,7 +4653,7 @@ protected class Wildcard_WildcardAction_0 extends ActionToken  {
 	}
 }
 
-// "."
+// '.'
 protected class Wildcard_FullStopKeyword_1 extends KeywordToken  {
 	
 	public Wildcard_FullStopKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

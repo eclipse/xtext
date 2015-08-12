@@ -1,14 +1,15 @@
-module org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlr
+module org.eclipse.xtext.generator.SimpleAntlr
 
 import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/org/eclipse/xtext/generator/parser/antlr/debug/SimpleAntlr.xtext"
+var package = "org/eclipse/xtext/generator/parser/antlr/debug"
+var grammarURI = "classpath:/${package}/SimpleAntlr.xtext"
 var file.extensions = "simpleAntlr"
 var projectName = "org.eclipse.xtext.generator"
-var runtimeProject = "../${projectName}"
+var runtimeProject = "../../plugins/${projectName}"
 var backtrack = true
 var lineDelimiter = '\n'
 
@@ -16,11 +17,11 @@ Workflow {
 	
 	bean = StandaloneSetup {
 		ignoreBrokenProjectFiles = true
-		platformUri = "${runtimeProject}/../.."
+		platformUri = "${runtimeProject}"
 	}
 	
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/generator/parser/antlr/debug"
+		directory = "${runtimeProject}/src-gen/${package}"
 	}
 	
 	component = Generator auto-inject {
@@ -37,6 +38,10 @@ Workflow {
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment auto-inject {
 				emfRuntimeVersion = "2.9"
+				javaModelDirectory = "plugins/${projectName}/src-gen"
+				editDirectory = "/${projectName}.edit/src"
+				editorDirectory = "/${projectName}.editor/src"
+				xmiModelDirectory = "${runtimeProject}/src-gen/${package}"
 			}
 			
 			// the serialization component

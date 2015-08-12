@@ -67,7 +67,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpress
 entryRuleIfCondition returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getIfConditionRule()); }
-	 iv_ruleIfCondition=ruleIfCondition
+	 iv_ruleIfCondition=ruleIfCondition 
 	 { $current=$iv_ruleIfCondition.current; } 
 	 EOF 
 ;
@@ -137,7 +137,7 @@ ruleIfCondition returns [EObject current=null]
 entryRuleExpression returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getExpressionRule()); }
-	 iv_ruleExpression=ruleExpression
+	 iv_ruleExpression=ruleExpression 
 	 { $current=$iv_ruleExpression.current; } 
 	 EOF 
 ;
@@ -195,7 +195,7 @@ ruleExpression returns [EObject current=null]
 entryRuleAndExpression returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getAndExpressionRule()); }
-	 iv_ruleAndExpression=ruleAndExpression
+	 iv_ruleAndExpression=ruleAndExpression 
 	 { $current=$iv_ruleAndExpression.current; } 
 	 EOF 
 ;
@@ -253,7 +253,7 @@ ruleAndExpression returns [EObject current=null]
 entryRuleComparison returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getComparisonRule()); }
-	 iv_ruleComparison=ruleComparison
+	 iv_ruleComparison=ruleComparison 
 	 { $current=$iv_ruleComparison.current; } 
 	 EOF 
 ;
@@ -349,7 +349,7 @@ ruleComparison returns [EObject current=null]
 entryRulePrefixExpression returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getPrefixExpressionRule()); }
-	 iv_rulePrefixExpression=rulePrefixExpression
+	 iv_rulePrefixExpression=rulePrefixExpression 
 	 { $current=$iv_rulePrefixExpression.current; } 
 	 EOF 
 ;
@@ -408,7 +408,7 @@ rulePrefixExpression returns [EObject current=null]
 entryRuleAtom returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getAtomRule()); }
-	 iv_ruleAtom=ruleAtom
+	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
 	 EOF 
 ;
@@ -468,7 +468,7 @@ ruleAtom returns [EObject current=null]
 entryRuleNumberLiteral returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getNumberLiteralRule()); }
-	 iv_ruleNumberLiteral=ruleNumberLiteral
+	 iv_ruleNumberLiteral=ruleNumberLiteral 
 	 { $current=$iv_ruleNumberLiteral.current; } 
 	 EOF 
 ;
@@ -507,7 +507,7 @@ ruleNumberLiteral returns [EObject current=null]
 entryRuleBooleanLiteral returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getBooleanLiteralRule()); }
-	 iv_ruleBooleanLiteral=ruleBooleanLiteral
+	 iv_ruleBooleanLiteral=ruleBooleanLiteral 
 	 { $current=$iv_ruleBooleanLiteral.current; } 
 	 EOF 
 ;
@@ -554,7 +554,7 @@ ruleBooleanLiteral returns [EObject current=null]
 entryRuleParenthesizedExpression returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getParenthesizedExpressionRule()); }
-	 iv_ruleParenthesizedExpression=ruleParenthesizedExpression
+	 iv_ruleParenthesizedExpression=ruleParenthesizedExpression 
 	 { $current=$iv_ruleParenthesizedExpression.current; } 
 	 EOF 
 ;
@@ -592,7 +592,7 @@ ruleParenthesizedExpression returns [EObject current=null]
 entryRuleMethodCall returns [EObject current=null] 
 	:
 	{ newCompositeNode(grammarAccess.getMethodCallRule()); }
-	 iv_ruleMethodCall=ruleMethodCall
+	 iv_ruleMethodCall=ruleMethodCall 
 	 { $current=$iv_ruleMethodCall.current; } 
 	 EOF 
 ;
