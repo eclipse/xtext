@@ -107,7 +107,7 @@ import «helper.getInternalParserClassName(this)»;
 «LET allTerminalRules().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
 «IF open.size == 1-»
 		// TODO Review assumption
-		return «helper.getInternalParserClassName(this).toSimpleName()».RULE_«open.first().name.toUpperCase()»;
+		return «helper.getInternalParserClassName(this).toSimpleName()».«open.first().ruleName()»;
 «ELSE-»
 		// TODO Implement me
 		throw new UnsupportedOperationException("Implement me");
@@ -120,7 +120,7 @@ import «helper.getInternalParserClassName(this)»;
 «LET allTerminalRules().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
 «IF close.size == 1-»
 		// TODO Review assumption
-		return «helper.getInternalParserClassName(this).toSimpleName()».RULE_«close.first().name.toUpperCase()»;
+		return «helper.getInternalParserClassName(this).toSimpleName()».«close.first().ruleName()»;
 «ELSE-»
 		// TODO Implement me
 		throw new UnsupportedOperationException("Implement me");

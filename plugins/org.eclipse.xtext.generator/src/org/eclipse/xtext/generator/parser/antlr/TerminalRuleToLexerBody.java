@@ -191,7 +191,7 @@ public class TerminalRuleToLexerBody extends XtextSwitch<String>{
 
 	@Override
 	public String caseTerminalRule(TerminalRule object) {
-		result.append("RULE_").append(object.getName().toUpperCase());
+		result.append(AntlrGrammarGenUtil.getRuleName(object));
 		return "";
 	}
 

@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TypeRef
 import org.eclipse.xtext.generator.Naming
 
@@ -49,7 +50,8 @@ class GrammarAccess {
 	 * @return the identifier
 	 */
 	def String gaRuleIdentifyer(AbstractRule rule) {
-		rule.name.toJavaIdentifier(true)
+		val plainName = RuleNames.getRuleNames(rule).getUniqueRuleName(rule);
+		return toJavaIdentifier(plainName, true);
 	}
 		
 	/**

@@ -79,26 +79,10 @@ public class UnorderedGroupsSplitter {
 			IfCondition condition = (IfCondition) resource.getContents().get(0);
 			simplifier.simplify(condition);
 			String fixedLine = saveResource(resource);
-			fixedLine = addPreAndPostfix(line, braceIdx, fixedLine);
 			return fixedLine;
 		} else {
 			return line;
 		}
-	}
-
-	protected String addPreAndPostfix(String line, int braceIdx, String fixedLine) {
-		int idx = line.indexOf("else if");
-		if (idx >= 0) {
-			fixedLine = line.substring(0, idx) + fixedLine;
-		} else {
-			idx = line.indexOf("if");
-			if (idx >= 0) {
-				fixedLine = line.substring(0, idx) + fixedLine;
-			}
-		}
-		if (braceIdx != line.length() - 1)
-			fixedLine = fixedLine + line.substring(braceIdx + 1);
-		return fixedLine;
 	}
 
 	protected String saveResource(Resource resource) throws IOException {
@@ -133,7 +117,7 @@ public class UnorderedGroupsSplitter {
 	public boolean shouldSimplify(String line) {
 		String trimmedLine = line.trim();
 		return (trimmedLine.startsWith("else if") || trimmedLine.startsWith("if"))
-				&& trimmedLine.contains("getUnorderedGroupHelper()");
+				&& (trimmedLine.contains("getUnorderedGroupHelper()") || (trimmedLine.contains("p_") && !trimmedLine.contains("boolean p_")));
 	}
 
 }

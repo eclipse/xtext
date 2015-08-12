@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr.debug;
 
+import org.eclipse.xtext.parsetree.reconstr.impl.ValueSerializer;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class SimpleAntlrRuntimeModule extends org.eclipse.xtext.generator.parser.antlr.debug.AbstractSimpleAntlrRuntimeModule {
 
+	public Class<? extends ValueSerializer> bindValueSerializer() {
+		return EmptyValueSerializer.class;
+	}
+	
 }

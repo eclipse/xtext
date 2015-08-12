@@ -47,7 +47,16 @@ String toJavaIdentifier(String text, boolean uppercaseFirst):
  * @param rule the Rule
  * @return the identifier
  */
-String gaRuleIdentifyer(AbstractRule rule):
+String gaRuleIdentifyer(AbstractRule this):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getUniqueRuleName(org.eclipse.xtext.AbstractRule);
+	
+/** 
+ * Creates an identifier for a Rule which is a valid Java idetifier and unique within 
+ * the Rule's grammar.
+ * @param rule the Rule
+ * @return the identifier
+ */
+String gaBaseRuleIdentifyer(AbstractRule rule):
 	rule.name.toJavaIdentifier(true);
 	
 /**
@@ -87,7 +96,15 @@ String gaSimpleName(Grammar grammar):
  */
 String gaRuleAccessMethodName(AbstractRule rule):
 	"get" + rule.gaRuleIdentifyer() + "Rule";
-	
+
+/**
+ * Returns the method name for accessing a rule via a GrammarAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaBaseRuleAccessMethodName(AbstractRule rule):
+	"get" + rule.gaBaseRuleIdentifyer() + "Rule";
+		
 /**
  * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
  * @param rule the rule for which the accessor method is needed
@@ -95,6 +112,14 @@ String gaRuleAccessMethodName(AbstractRule rule):
  */
 String gaRuleElementsMethodName(AbstractRule rule):
 	"get" + rule.gaRuleIdentifyer() + "Access";
+
+/**
+ * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
+ * @param rule the rule for which the accessor method is needed
+ * @return the method's name.
+ */
+String gaBaseRuleElementsMethodName(AbstractRule rule):
+	"get" + rule.gaBaseRuleIdentifyer() + "Access";
 
 /**
  * Returns the method name for accessing an element via a GrammarAccess implementation.
@@ -112,6 +137,15 @@ String gaElementAccessMethodeName(AbstractElement element):
  */	
 String gaRuleAccessorClassName(AbstractRule rule):
 	rule.gaRuleIdentifyer() + "Elements";
+
+/**
+ * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
+ * a facade for each parser rule, which contains the methods for accessing the rule's elements.
+ * @param rule
+ * @return the simple class name
+ */	
+String gaBaseRuleAccessorClassName(AbstractRule rule):
+	rule.gaBaseRuleIdentifyer() + "Elements";
 	
 /**
  * Returns the invokation of the rule accessor method as Java statement.
@@ -120,6 +154,14 @@ String gaRuleAccessorClassName(AbstractRule rule):
  */	
 String gaRuleAccessor(AbstractRule rule):
 	rule.gaRuleAccessMethodName() + "()";
+
+/**
+ * Returns the invokation of the rule accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaBaseRuleAccessor(AbstractRule rule):
+	rule.gaBaseRuleAccessMethodName() + "()";
 	
 /**
  * Returns the invokation of the rule's content accessor method as Java statement.
@@ -128,6 +170,14 @@ String gaRuleAccessor(AbstractRule rule):
  */	
 String gaElementsAccessor(AbstractRule rule):
 	rule.gaRuleElementsMethodName() + "()";
+
+/**
+ * Returns the invokation of the rule's content accessor method as Java statement.
+ * @param rule the rule
+ * @return The java statement
+ */	
+String gaBaseElementsAccessor(AbstractRule rule):
+	rule.gaBaseRuleElementsMethodName() + "()";
 	
 /**
  * Returns the invokation of the element accessor method as Java statement.

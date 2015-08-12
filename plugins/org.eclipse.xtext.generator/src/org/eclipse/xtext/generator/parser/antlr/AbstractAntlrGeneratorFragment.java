@@ -19,6 +19,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.NewlineNormalizer;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
 import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
+import org.eclipse.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
 import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 import org.eclipse.xtext.util.Strings;
@@ -103,6 +105,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		checkGrammar(grammar);
+		RuleNames.ensureAdapterInstalled(grammar);
 		super.generate(grammar, ctx);
 	}
 
@@ -163,13 +166,25 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 */
 	protected void simplifyUnorderedGroupPredicatesIfRequired(Grammar grammar, String absoluteParserFileName, Charset encoding) {
 		try {
-			if (containsUnorderedGroup(grammar)) {
+			if (containsUnorderedGroup(grammar) || hasParameterizedRules(grammar)) {
 				String javaFile = absoluteParserFileName.replaceAll("\\.g$", getParserFileNameSuffix());
 				simplifyUnorderedGroupPredicates(javaFile, encoding);
 			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected boolean hasParameterizedRules(Grammar grammar) {
+		for(ParserRule rule : GrammarUtil.allParserRules(grammar)) {
+			if (!rule.getParameters().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -191,6 +206,8 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		String content = readFileIntoString(javaFile, encoding);
 		UnorderedGroupsSplitter splitter = new UnorderedGroupsSplitter(content);
 		String transformed = splitter.transform();
+		SyntacticPredicateFixup fixup = new SyntacticPredicateFixup(transformed);
+		transformed = fixup.transform();
 		BacktrackingGuardForUnorderedGroupsRemover remover = new BacktrackingGuardForUnorderedGroupsRemover(transformed);
 		String newContent = remover.transform();
 		writeStringIntoFile(javaFile, newContent, encoding);

@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.parser.antlr.splitting;
 
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression;
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.BooleanLiteral;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Meth
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression;
+import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory;
 import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch;
 
 /**
@@ -41,6 +43,31 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		Expression right = doSwitch(object.getRight());
 		if (areSemanticallyEqual(left, right))
 			return left;
+		if (left instanceof BooleanLiteral) {
+			if (((BooleanLiteral) left).isValue()) {
+				return right;
+			}
+			return left;
+		}
+		if (right instanceof BooleanLiteral) {
+			if (((BooleanLiteral) right).isValue()) {
+				return left;
+			}
+			return right;
+		}
+		if (left instanceof NotExpression) {
+			if (areSemanticallyEqual(((NotExpression) left).getExpression(), right)) {
+				BooleanLiteral result = SimpleExpressionsFactory.eINSTANCE.createBooleanLiteral();
+				result.setValue(false);
+				return result;
+			}
+		} else if (right instanceof NotExpression) {
+			if (areSemanticallyEqual(left, ((NotExpression) right).getExpression())) {
+				BooleanLiteral result = SimpleExpressionsFactory.eINSTANCE.createBooleanLiteral();
+				result.setValue(false);
+				return result;
+			}
+		}
 		object.setLeft(left);
 		object.setRight(right);
 		return object;
@@ -56,6 +83,18 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 		Expression right = doSwitch(object.getRight());
 		if (areSemanticallyEqual(left, right))
 			return left;
+		if (left instanceof BooleanLiteral) {
+			if (((BooleanLiteral) left).isValue()) {
+				return left;
+			}
+			return right;
+		}
+		if (right instanceof BooleanLiteral) {
+			if (((BooleanLiteral) right).isValue()) {
+				return right;
+			}
+			return left;
+		}
 		if (left instanceof AndExpression) {
 			AndExpression leftAsAnd = (AndExpression) left;
 			if (areSemanticallyEqual(leftAsAnd.getLeft(), right)
@@ -78,6 +117,19 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 				|| areSemanticallyEqual(rightAsOr.getRight(), left))
 				return right;
 		}
+		if (left instanceof NotExpression) {
+			if (areSemanticallyEqual(((NotExpression) left).getExpression(), right)) {
+				BooleanLiteral result = SimpleExpressionsFactory.eINSTANCE.createBooleanLiteral();
+				result.setValue(true);
+				return result;
+			}
+		} else if (right instanceof NotExpression) {
+			if (areSemanticallyEqual(left, ((NotExpression) right).getExpression())) {
+				BooleanLiteral result = SimpleExpressionsFactory.eINSTANCE.createBooleanLiteral();
+				result.setValue(true);
+				return result;
+			}
+		}
 		object.setLeft(left);
 		object.setRight(right);
 		return object;
@@ -87,8 +139,15 @@ public class ConditionSimplifier extends SimpleExpressionsSwitch<Expression>{
 	public Expression caseNotExpression(NotExpression object) {
 		if (object.getExpression() instanceof NotExpression)
 			return doSwitch(((NotExpression) object.getExpression()).getExpression());
-		object.setExpression(doSwitch(object.getExpression()));
-		return object;
+		Expression result = doSwitch(object.getExpression());
+		if (result instanceof BooleanLiteral) {
+			BooleanLiteral casted = (BooleanLiteral) result;
+			casted.setValue(!casted.isValue());
+			return casted;
+		} else {
+			object.setExpression(result);
+			return object;
+		}
 	}
 
 	@Override
