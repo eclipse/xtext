@@ -552,6 +552,19 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
   }
   
   @Override
+  public void test_return_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("return |");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("return ");
+    _builder_1.newLine();
+    _builder_1.append("|");
+    _builder_1.newLine();
+    this.assertAutoIndentOnNewLine(_builder, _builder_1);
+  }
+  
+  @Override
   protected void assertAutoIndentOnNewLine(final CharSequence model, final CharSequence expectedModel) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -559,8 +572,8 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     _builder.append("\t");
     _builder.append("def foo() {");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append(model, "\t");
+    _builder.append("\t\t");
+    _builder.append(model, "\t\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");
@@ -573,8 +586,8 @@ public class XtendAutoEditTest extends AbstractXbaseAutoEditTest {
     _builder_1.append("\t");
     _builder_1.append("def foo() {");
     _builder_1.newLine();
-    _builder_1.append("\t");
-    _builder_1.append(expectedModel, "\t");
+    _builder_1.append("\t\t");
+    _builder_1.append(expectedModel, "\t\t");
     _builder_1.newLineIfNotEmpty();
     _builder_1.append("\t");
     _builder_1.append("}");

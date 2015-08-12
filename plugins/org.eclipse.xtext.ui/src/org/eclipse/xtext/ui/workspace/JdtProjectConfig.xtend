@@ -7,18 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.workspace
 
-import org.eclipse.core.resources.IProject
 import org.eclipse.jdt.core.IClasspathEntry
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtend.lib.annotations.Data
-
-class JdtWorkspaceConfigProvider extends EclipseWorkspaceConfigProvider {
-
-	override getProjectConfig(IProject project) {
-		new JdtProjectConfig(project)
-	}
-
-}
 
 @Data
 class JdtProjectConfig extends EclipseProjectConfig {

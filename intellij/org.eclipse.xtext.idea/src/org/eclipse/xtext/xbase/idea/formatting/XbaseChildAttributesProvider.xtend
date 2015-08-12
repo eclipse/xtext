@@ -8,11 +8,11 @@
 package org.eclipse.xtext.xbase.idea.formatting
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import com.intellij.formatting.Indent
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.idea.formatting.DefaultChildAttributesProvider
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
-import com.google.inject.Singleton
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -23,15 +23,7 @@ class XbaseChildAttributesProvider extends DefaultChildAttributesProvider {
 	@Inject
 	extension XbaseGrammarAccess
 
-	protected override getAfterIndent(EObject grammarElement) {
-		grammarElement.indent ?: super.getBeforeIndent(grammarElement)
-	}
-
-	protected override getBeforeIndent(EObject grammarElement) {
-		grammarElement.indent ?: super.getBeforeIndent(grammarElement)
-	}
-
-	protected def getIndent(EObject grammarElement) {
+	protected override getIndentAfter(EObject grammarElement) {
 		if (grammarElement == null)
 			return null
 

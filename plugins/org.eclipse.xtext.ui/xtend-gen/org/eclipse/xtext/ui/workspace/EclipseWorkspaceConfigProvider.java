@@ -7,13 +7,18 @@
  */
 package org.eclipse.xtext.ui.workspace;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfig;
+import org.eclipse.xtext.ui.workspace.JdtProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -22,23 +27,53 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider {
   @Accessors
   @Inject
-  private IWorkspaceRoot workspaceRoot;
+  private IWorkspace workspace;
+  
+  @Accessors
+  @Inject
+  private IJdtHelper jdtHelper;
   
   @Override
   public IWorkspaceConfig getWorkspaceConfig(final ResourceSet context) {
-    return new EclipseWorkspaceConfig(this, this.workspaceRoot);
+    IWorkspaceRoot _root = this.workspace.getRoot();
+    return new EclipseWorkspaceConfig(this, _root);
   }
   
   public EclipseProjectConfig getProjectConfig(final IProject project) {
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(this.jdtHelper, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _isJavaCoreAvailable = this.jdtHelper.isJavaCoreAvailable();
+      _and = _isJavaCoreAvailable;
+    }
+    if (_and) {
+      return new Provider<EclipseProjectConfig>() {
+        @Override
+        public EclipseProjectConfig get() {
+          return new JdtProjectConfig(project);
+        }
+      }.get();
+    }
     return new EclipseProjectConfig(project);
   }
   
   @Pure
-  public IWorkspaceRoot getWorkspaceRoot() {
-    return this.workspaceRoot;
+  public IWorkspace getWorkspace() {
+    return this.workspace;
   }
   
-  public void setWorkspaceRoot(final IWorkspaceRoot workspaceRoot) {
-    this.workspaceRoot = workspaceRoot;
+  public void setWorkspace(final IWorkspace workspace) {
+    this.workspace = workspace;
+  }
+  
+  @Pure
+  public IJdtHelper getJdtHelper() {
+    return this.jdtHelper;
+  }
+  
+  public void setJdtHelper(final IJdtHelper jdtHelper) {
+    this.jdtHelper = jdtHelper;
   }
 }

@@ -1472,4 +1472,217 @@ class CompilerTests2 extends AbstractOutputComparingCompilerTests {
 			}
 		''')
 	}
+	
+	@Test def void testBug466974_01() {
+		'''
+			{
+				var i = 0
+				Math.max( i = i + 1, if (i == 1) { 1 } else { 2 })
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _i = i = (i + 1);
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Math.max(_i, _xifexpression);
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_02() {
+		'''
+			{
+				var i = 0
+				Math.max(if (i == 1) { 1 } else { 2 }, i = i + 1)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Math.max(_xifexpression, i = (i + 1));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_03() {
+		'''
+			{
+				var i = 0
+				Math.max({ i = i + 1 }, if (i == 1) { 1 } else { 2 })
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _i = i = (i + 1);
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Math.max(_i, _xifexpression);
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_04() {
+		'''
+			{
+				var i = 0
+				Math.max(if (i == 1) { 1 } else { 2 }, { i = i + 1 })
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Math.max(_xifexpression, i = (i + 1));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_05() {
+		'''
+			{
+				var i = 0
+				{i = i + 1}.compareTo(if (i == 1) { 1 } else { 2 })
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _i = i = (i + 1);
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Integer.valueOf(_i).compareTo(Integer.valueOf(_xifexpression));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_06() {
+		'''
+			{
+				var i = 0
+				{if (i == 1) { 1 } else { 2 }}.compareTo(i = i + 1)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Integer.valueOf(_xifexpression).compareTo(Integer.valueOf(i = (i + 1)));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_07() {
+		'''
+			{
+				var i = 0
+				{{i = i + 1}}.compareTo(if (i == 1) { 1 } else { 2 })
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _i = i = (i + 1);
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Integer.valueOf(_i).compareTo(Integer.valueOf(_xifexpression));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_08() {
+		'''
+			{
+				var i = 0
+				{if (i == 1) { 1 } else { 2 }}.compareTo({i = i + 1})
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  int _xifexpression = (int) 0;
+			  if ((i == 1)) {
+			    _xifexpression = 1;
+			  } else {
+			    _xifexpression = 2;
+			  }
+			  _xblockexpression = Integer.valueOf(_xifexpression).compareTo(Integer.valueOf(i = (i + 1)));
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_09() {
+		'''
+			{
+				var i = 0
+				Math.max(i = i + 1, 2)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  _xblockexpression = Math.max(i = (i + 1), 2);
+			}
+			return _xblockexpression;
+		''')
+	}
+	
+	@Test def void testBug466974_10() {
+		'''
+			{
+				var i = 0
+				{i = i + 1}.compareTo(2)
+			}
+		'''.compilesTo('''
+			int _xblockexpression = (int) 0;
+			{
+			  int i = 0;
+			  _xblockexpression = Integer.valueOf(i = (i + 1)).compareTo(Integer.valueOf(2));
+			}
+			return _xblockexpression;
+		''')
+	}
+
 }

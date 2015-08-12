@@ -20,14 +20,14 @@ class XtendChildAttributesProvider extends XbaseChildAttributesProvider {
 
 	@Inject
 	extension XtendGrammarAccess
-
-	override protected getIndent(EObject grammarElement) {
+	
+	override protected getIndentAfter(EObject grammarElement) {
 		switch grammarElement {
 			case XSwitchExpressionAccess.colonKeyword_5_1,
 			case XVariableDeclarationAccess.equalsSignKeyword_2_0:
 				return Indent.normalIndent
 			default:
-				return super.getIndent(grammarElement)
+				return super.getIndentAfter(grammarElement)
 		}
 	}
 

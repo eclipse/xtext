@@ -54,7 +54,8 @@ public class EclipseWorkspaceConfigurationTest {
       final Procedure1<EclipseWorkspaceConfigProvider> _function = new Procedure1<EclipseWorkspaceConfigProvider>() {
         @Override
         public void apply(final EclipseWorkspaceConfigProvider it) {
-          it.setWorkspaceRoot(wsroot);
+          IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+          it.setWorkspace(_workspace);
         }
       };
       final EclipseWorkspaceConfigProvider provider = ObjectExtensions.<EclipseWorkspaceConfigProvider>operator_doubleArrow(_eclipseWorkspaceConfigProvider, _function);

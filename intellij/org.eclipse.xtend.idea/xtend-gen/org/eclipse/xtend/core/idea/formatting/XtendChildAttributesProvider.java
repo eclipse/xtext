@@ -26,7 +26,7 @@ public class XtendChildAttributesProvider extends XbaseChildAttributesProvider {
   private XtendGrammarAccess _xtendGrammarAccess;
   
   @Override
-  protected Indent getIndent(final EObject grammarElement) {
+  protected Indent getIndentAfter(final EObject grammarElement) {
     boolean _matched = false;
     if (!_matched) {
       XtendGrammarAccess.XSwitchExpressionElements _xSwitchExpressionAccess = this._xtendGrammarAccess.getXSwitchExpressionAccess();
@@ -45,6 +45,6 @@ public class XtendChildAttributesProvider extends XbaseChildAttributesProvider {
         return Indent.getNormalIndent();
       }
     }
-    return super.getIndent(grammarElement);
+    return super.getIndentAfter(grammarElement);
   }
 }

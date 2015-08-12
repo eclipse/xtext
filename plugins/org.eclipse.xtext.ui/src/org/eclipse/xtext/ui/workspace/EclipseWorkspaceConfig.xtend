@@ -20,17 +20,28 @@ import org.eclipse.xtext.workspace.IWorkspaceConfig
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 import org.eclipse.xtend.lib.annotations.Accessors
 import static extension org.eclipse.xtext.util.UriUtil.*
+import org.eclipse.core.resources.IWorkspace
+import org.eclipse.xtext.ui.util.IJdtHelper
+import com.google.inject.Provider
 
 class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider {
 
-	@Accessors @Inject IWorkspaceRoot workspaceRoot
+	@Accessors @Inject IWorkspace workspace
+	@Accessors @Inject IJdtHelper jdtHelper
 
 	override getWorkspaceConfig(ResourceSet context) {
-		new EclipseWorkspaceConfig(this, workspaceRoot)
+		new EclipseWorkspaceConfig(this, workspace.root)
 	}
 
-	public def getProjectConfig(IProject project) {
-		new EclipseProjectConfig(project)
+	public def EclipseProjectConfig getProjectConfig(IProject project) {
+		if (jdtHelper!=null && jdtHelper.isJavaCoreAvailable) {
+			return new Provider<EclipseProjectConfig>() {
+				override get() {
+					return new JdtProjectConfig(project)
+				}
+			}.get
+		}
+		return new EclipseProjectConfig(project)
 	}
 
 }

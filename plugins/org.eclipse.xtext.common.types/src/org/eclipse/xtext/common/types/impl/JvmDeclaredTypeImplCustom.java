@@ -47,7 +47,9 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.RawTypeReferenceComputer;
 import org.eclipse.xtext.common.types.xtext.JvmMemberInitializableResource;
+import org.eclipse.xtext.resource.CompilerPhases;
 import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -224,49 +226,61 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	protected Map<String, Set<JvmDeclaredType>> allNestedTypesByName;
 
 	protected Map<String, Set<JvmDeclaredType>> internalGetAllNestedTypesMap(final Set<JvmDeclaredType> processedTypes) {
-		if (allNestedTypesByName == null) {
-			final Set<JvmDeclaredType> processedSuperTypes = processedTypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedTypes;
-			allNestedTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
-				@Override
-				public Map<String, Set<JvmDeclaredType>> get() {
-					if (allNestedTypesByName != null)
-						return allNestedTypesByName;
-					Map<String, Set<JvmDeclaredType>> result = Maps.newLinkedHashMap();
-					processTypes(result, getMembers());
-					Map<String, Set<JvmDeclaredType>> cumulated = Maps.newLinkedHashMap();
-					for (JvmTypeReference superTypeReference : getSuperTypes()) {
-						JvmType superType = getRawType(superTypeReference);
-						if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy()
-								&& !processedSuperTypes.contains(superType)) {
-							processedSuperTypes.add((JvmDeclaredType) superType);
-							Map<String, Set<JvmDeclaredType>> superTypeMap = ((JvmDeclaredTypeImplCustom) superType)
-									.internalGetAllNestedTypesMap(processedSuperTypes);
-							processedSuperTypes.remove(superType);
-							for(Map.Entry<String, Set<JvmDeclaredType>> entry: superTypeMap.entrySet()) {
-								if (!result.containsKey(entry.getKey())) {
-									processTypes(cumulated, entry.getValue());
+		try {
+			if (allNestedTypesByName == null) {
+				final Set<JvmDeclaredType> processedSuperTypes = processedTypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedTypes;
+				allNestedTypesByName = doSynchronized(new Provider<Map<String, Set<JvmDeclaredType>>>() {
+					@Override
+					public Map<String, Set<JvmDeclaredType>> get() {
+						if (allNestedTypesByName != null)
+							return allNestedTypesByName;
+						Map<String, Set<JvmDeclaredType>> result = Maps.newLinkedHashMap();
+						processTypes(result, getMembers());
+						Map<String, Set<JvmDeclaredType>> cumulated = Maps.newLinkedHashMap();
+						for (JvmTypeReference superTypeReference : getSuperTypes()) {
+							JvmType superType = getRawType(superTypeReference);
+							if (superType instanceof JvmDeclaredTypeImplCustom && !superType.eIsProxy()
+									&& !processedSuperTypes.contains(superType)) {
+								processedSuperTypes.add((JvmDeclaredType) superType);
+								Map<String, Set<JvmDeclaredType>> superTypeMap = ((JvmDeclaredTypeImplCustom) superType)
+										.internalGetAllNestedTypesMap(processedSuperTypes);
+								processedSuperTypes.remove(superType);
+								for(Map.Entry<String, Set<JvmDeclaredType>> entry: superTypeMap.entrySet()) {
+									if (!result.containsKey(entry.getKey())) {
+										processTypes(cumulated, entry.getValue());
+									}
 								}
 							}
 						}
+						result.putAll(cumulated);
+						Runnable runnable = new Runnable() {
+							@Override
+							public void run() {
+								doSynchronized(new Provider<Object>() {
+									@Override
+									public Object get() {
+										allNestedTypesByName = null;
+										return null;
+									}});
+							}
+						};
+						requestNotificationOnChange(runnable);
+						return result;
 					}
-					result.putAll(cumulated);
-					Runnable runnable = new Runnable() {
-						@Override
-						public void run() {
-							doSynchronized(new Provider<Object>() {
-								@Override
-								public Object get() {
-									allNestedTypesByName = null;
-									return null;
-								}});
-						}
-					};
-					requestNotificationOnChange(runnable);
-					return result;
+				});
+			}
+			return allNestedTypesByName;
+		} finally {
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=474238
+			// no caching for Xtext-based resources during indexing
+			if (eResource() instanceof XtextResource) {
+				XtextResource xtextResource = (XtextResource) eResource();
+				CompilerPhases compilerPhases = xtextResource.getResourceServiceProvider().get(CompilerPhases.class);
+				if (compilerPhases.isIndexing(xtextResource.getResourceSet())) {
+					allNestedTypesByName = null;
 				}
-			});
+			}
 		}
-		return allNestedTypesByName;
 	}
 	
 	protected void processTypes(Map<String, Set<JvmDeclaredType>> result, Collection<? extends JvmMember> members) {
