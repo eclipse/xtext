@@ -32,7 +32,7 @@ import static org.eclipse.xtext.xbase.XbasePackage.Literals.XMEMBER_FEATURE_CALL
 /** 
  * @author Dennis Huebner - Initial contribution and API
  */
-class LinkingDiagnosticTypeAwareMessageProducer extends LinkingDiagnosticMessageProvider {
+class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagnosticMessageProvider {
 	/** 
 	 * A user data entry that indicates a broken feature link which could also be
 	 * a type literal, e.g. 'String::CASE_INSENSITIVE'.
