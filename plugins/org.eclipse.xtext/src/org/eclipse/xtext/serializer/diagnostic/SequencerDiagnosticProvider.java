@@ -74,7 +74,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 	@Override
 	public ISerializationDiagnostic createFeatureValueMissing(EObject semanticObject, EStructuralFeature feature) {
 		String msg = "A value for feature '" + feature.getName() + "' is missing but required.";
-		return new SerializationDiagnostic(FEATURE_VALUE_MISSING, semanticObject, msg);
+		return new SerializationDiagnostic(FEATURE_VALUE_MISSING, semanticObject, grammarAccess.getGrammar(), msg);
 	}
 
 	@Override
@@ -89,18 +89,18 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 			else
 				otherValidCtxs.add(ctx);
 		}
-		String contextName = context2Name.apply(context);
+		String contextName = context2Name.getContextName(grammarAccess.getGrammar(), context);
 		String semanticType = semanticObject.eClass().getName();
-		String recommendCtxNames = Joiner.on(", ").join(Iterables.transform(recommendedCtxs, context2Name));
+		String recommendCtxNames = Joiner.on(", ").join(Iterables.transform(recommendedCtxs, context2Name.toFunction(grammarAccess.getGrammar())));
 		String validTypeNames = Joiner.on(", ").join(Iterables.transform(validTypes, new NamedElement2Name()));
 		StringBuilder msg = new StringBuilder();
 		msg.append("The context '" + contextName + "' is not valid for type '" + semanticType + "'\n");
 		msg.append("Recommended contexts for type '" + semanticType + "': " + recommendCtxNames + "\n");
 		if (!otherValidCtxs.isEmpty())
 			msg.append("Other valid contexts for type '" + semanticType + "': "
-					+ Joiner.on(", ").join(Iterables.transform(otherValidCtxs, context2Name)));
+					+ Joiner.on(", ").join(Iterables.transform(otherValidCtxs, context2Name.toFunction(grammarAccess.getGrammar()))));
 		msg.append("The context '" + contextName + "' is valid for types: " + validTypeNames + "\n");
-		return new SerializationDiagnostic(INVALID_CONTEXT_OR_TYPE, semanticObject, msg.toString());
+		return new SerializationDiagnostic(INVALID_CONTEXT_OR_TYPE, semanticObject, grammarAccess.getGrammar(), msg.toString());
 	}
 
 	protected List<EObject> getValidContexts(EClass clazz) {
@@ -135,7 +135,7 @@ public class SequencerDiagnosticProvider implements ISemanticSequencerDiagnostic
 		msg.append("Could not serialize EObject via backtracking.\n");
 		msg.append("Constraint: " + grammar + "\n");
 		msg.append(semanticObject.getValuesString());
-		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject.getEObject(), context, msg.toString());
+		return new SerializationDiagnostic(BACKTRACKING_FAILED, semanticObject.getEObject(), context, grammarAccess.getGrammar(), msg.toString());
 	}
 
 }

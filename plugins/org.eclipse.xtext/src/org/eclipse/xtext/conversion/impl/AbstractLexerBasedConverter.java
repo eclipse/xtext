@@ -19,6 +19,7 @@ import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.parser.antlr.TokenTool;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -109,7 +110,7 @@ public abstract class AbstractLexerBasedConverter<T> extends AbstractValueConver
 	// TODO: rename to getLexerRuleName() on next API change
 	protected String getRuleName(Token token) {
 		String result = getTokenDefMap().get(token.getType());
-		return result.substring("RULE_".length());
+		return TokenTool.getLexerRuleName(result);
 	}
 
 	protected Map<Integer, String> getTokenDefMap() {

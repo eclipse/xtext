@@ -18,7 +18,6 @@ import java.util.Set;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -144,8 +143,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			addOutgoing(((Assignment) element).getTerminal(), visited, isRuleCall, loopCenter);
 		else if (element instanceof CrossReference)
 			addOutgoing(((CrossReference) element).getTerminal(), visited, isRuleCall, loopCenter);
-		else if (element instanceof RuleCall
-				&& ((RuleCall) element).getRule().getType().getClassifier() instanceof EClass) {
+		else if (GrammarUtil.isEObjectRuleCall(element)) {
 			addOutgoing(((RuleCall) element).getRule().getAlternatives(), visited, true, loopCenter);
 			collectOutgoingByContainer(element, visited, isRuleCall, loopCenter);
 		} else {
@@ -213,7 +211,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	protected boolean filter(AbstractElement ele) {
 		AbstractRule rule = GrammarUtil.containingRule(ele);
-		if (rule == null || !(rule.getType().getClassifier() instanceof EClass))
+		if (rule == null || !GrammarUtil.isEObjectRule(rule))
 			return true;
 		return builder.filter(ele);
 	}
@@ -227,7 +225,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 		for (EObject root : element.eResource().getContents())
 			if (root instanceof Grammar)
 				for (AbstractRule rule : ((Grammar) root).getRules())
-					if (rule.getType().getClassifier() instanceof EClass)
+					if (GrammarUtil.isEObjectRule(rule))
 						for (AbstractElement ele : EcoreUtil2.eAllOfType(rule, AbstractElement.class))
 							if (!builder.filter(ele))
 								builder.getState(ele).getOutgoing();

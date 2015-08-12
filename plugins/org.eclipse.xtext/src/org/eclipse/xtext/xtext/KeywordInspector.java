@@ -45,7 +45,7 @@ public class KeywordInspector {
 		List<TerminalRule> rules = GrammarUtil.allTerminalRules(grammar);
 		for(TerminalRule rule: rules) {
 			if (!rule.isFragment()) {
-			AbstractElement element = rule.getAlternatives();
+				AbstractElement element = rule.getAlternatives();
 				if (element instanceof Keyword && Strings.isEmpty(element.getCardinality())) {
 					String value = ((Keyword) element).getValue();
 					if (value.equals(keyword.getValue()))
