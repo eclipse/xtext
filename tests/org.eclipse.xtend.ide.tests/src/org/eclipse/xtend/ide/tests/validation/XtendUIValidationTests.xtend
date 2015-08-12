@@ -50,6 +50,26 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void testWrongFile() {
+		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+			class Foo {
+			}
+		''')
+		helper.assertWarning(xtendFile, XTEND_TYPE_DECLARATION, WRONG_FILE)
+	}
+	
+	@Test
+	def void testNoWrongFile() {
+		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+			class Foo {
+			}
+			class Bar {
+			}
+		''')
+		helper.assertNoWarnings(xtendFile, XTEND_FILE, WRONG_FILE)
+	}
+	
+	@Test
 	def void testForbiddenImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 			import org.eclipse.xtend.core.tests.restricted.RestrictedClass
@@ -91,7 +111,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 	@Test
 	def void testValidImport() {
-		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+		val xtendFile = testHelper.xtendFile("Foo.xtend",'''
 			import java.util.List
 			class Foo {
 				def bar(List<?> l){}
@@ -310,7 +330,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 			}
 			var otherSeverity = "warning"
 			val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
-				class Foo {
+				class ValidationClazz {
 					/**
 					* {@link List}
 					*/

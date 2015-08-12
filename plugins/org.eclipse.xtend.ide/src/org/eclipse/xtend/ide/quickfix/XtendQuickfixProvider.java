@@ -497,9 +497,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length == 1) {
 			final String expectedFileName = issue.getData()[0];
 			final IFile iFile = projectUtil.findFileStorage(issue.getUriToProblem(), true);
-			final IPath pathToMoveTo = iFile.getParent().getFullPath().append(expectedFileName)
+			final IPath pathToMoveTo = iFile.getParent().getProjectRelativePath().append(expectedFileName)
 					.addFileExtension(iFile.getFileExtension());
-			if (iFile.getProject().findMember(pathToMoveTo) == null) {
+			if (!iFile.getProject().exists(pathToMoveTo)) {
 				final String label = "Rename file to '" + expectedFileName + ".xtend'";
 				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
 					@Override
