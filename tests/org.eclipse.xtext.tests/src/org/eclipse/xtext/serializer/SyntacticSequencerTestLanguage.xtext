@@ -108,4 +108,4 @@ LongAlternative:
 
   
 ActionOnly:
-	"#14" "kw1"? ID? {ActionOnly} "kw2"? ID?;
+	"#14" "kw1"? =>ID? {ActionOnly} "kw2"? ID?;
