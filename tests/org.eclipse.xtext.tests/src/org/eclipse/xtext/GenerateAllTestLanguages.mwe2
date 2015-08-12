@@ -208,6 +208,10 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest3Language.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
 			uri = "classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsQualifiedNames {}
 		}
@@ -306,6 +310,16 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/fragments/FragmentTestLanguageEx.xtext"
+			fragment = @TestLanguagesFragmentsEx auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/indentation/IndentationAwareTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx auto-inject {
 				srcGenOnly = false
@@ -315,6 +329,26 @@ Workflow {
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/TwoParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/NoParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
+			fragment = @TestLanguagesFragmentsEx auto-inject {}
+			fragment = junit.Junit4Fragment {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext"

@@ -55,13 +55,13 @@ public class FirstSetComputationTest extends AbstractXtextTests {
 		assertFirstSet("'generate', 'import'", grammarAccess.getAbstractMetamodelDeclarationRule());
 	}
 	@Test public void testAbstractRule() throws Exception {
-		assertFirstSet("'terminal', 'enum', ID", grammarAccess.getAbstractRuleRule());
+		assertFirstSet("'fragment', 'true', 'false', 'terminal', 'enum', ID", grammarAccess.getAbstractRuleRule());
 	}
 	@Test public void testAlternatives() throws Exception {
-		assertFirstSet("'=>', '->', '(', '{', ID, STRING", grammarAccess.getAlternativesRule());
+		assertFirstSet("'=>', '->', 'true', 'false', '(', '{', '<', ID, STRING", grammarAccess.getAlternativesRule());
 	}
 	@Test public void testTerminalAlternatives() throws Exception {
-		assertFirstSet("'(', '!', '->', '.', 'EOF', STRING, ID", grammarAccess.getTerminalAlternativesRule());
+		assertFirstSet("'true', 'false', '(', '!', '->', '.', 'EOF', STRING, ID", grammarAccess.getTerminalAlternativesRule());
 	}
 	
 }

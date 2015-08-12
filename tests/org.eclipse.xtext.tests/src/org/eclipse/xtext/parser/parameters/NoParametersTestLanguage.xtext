@@ -1,0 +1,69 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.parameters.NoParametersTestLanguage with org.eclipse.xtext.parser.parameters.ParametersTestLanguage
+
+import "http://www.eclipse.org/2015/tmf/xtext/parameters"
+
+ParserRuleParameters: {ParserRuleParameters} 
+  ( '#1' scenario=Scenario1_True
+  |	'#2' scenario=Scenario1_False
+  | '#3' scenario=Scenario2_True
+  | '#4' scenario=Scenario2_False
+  | =>('#5' scenario=Scenario2_True)
+  | =>('#6' scenario=Scenario2_False)
+  | '#7' scenario=Scenario3_True
+  | '#8' scenario=Scenario3_False
+  | '#9' (scenario=Scenario4_True | scenario=Scenario2_True 'keyword'?)
+  | '#10' (scenario=Scenario4_True | scenario=Scenario2_False 'keyword'?)
+  | '#11' (scenario=Scenario4_False | scenario=Scenario2_True 'keyword'?)
+  | '#12' (scenario=Scenario4_False | scenario=Scenario2_False 'keyword'?)
+  )
+;
+
+Scenario1_True returns Scenario:
+  first=ID
+;
+
+Scenario1_False returns Scenario:
+  second=ID
+;
+
+Scenario2_True returns Scenario:
+  first=IdOrKeyword_True
+;
+
+Scenario2_False returns Scenario:
+	first=IdOrKeyword_False
+;
+
+Scenario3_True returns Scenario:
+	=>first=IdOrKeyword_True
+	| second='keyword'
+;
+
+Scenario3_False returns Scenario:
+	=>first=IdOrKeyword_False
+	| second='keyword'
+;
+
+Scenario4_True returns Scenario:
+	=>second=IdOrKeyword_True 'keyword'
+;
+
+Scenario4_False returns Scenario:
+	=>second=IdOrKeyword_False 'keyword'
+;
+
+IdOrKeyword_True:
+	  'keyword'
+	| ID
+;
+
+IdOrKeyword_False:
+	ID
+;

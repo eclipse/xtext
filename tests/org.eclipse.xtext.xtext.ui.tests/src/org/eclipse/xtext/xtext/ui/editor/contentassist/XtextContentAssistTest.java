@@ -186,7 +186,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     @Test public void testCompleteAfterGrammarName_02() throws Exception {
     	newBuilder()
         .append("grammar org.foo.bar ")
-        .assertText("with", "Name", "enum", "terminal", "hidden", "generate", "import");
+        .assertText("with", "Name", "enum", "terminal", "fragment", "hidden", "generate", "import");
     }
     
     @Test public void testCompleteAfterGenerateName_01() throws Exception {
@@ -263,6 +263,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"ANY_OTHER",
         		"(",
         		"{",
+        		"[", // guarded alternative
         		"name=");
     }
     
@@ -397,6 +398,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"name=");
@@ -421,6 +423,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"*",
@@ -452,6 +455,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"name=");
@@ -662,6 +666,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"feature+=",
 	        		"name=");
     }
@@ -682,6 +687,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"feature+=",
 	        		"name=");
     }
@@ -702,6 +708,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"feature?=",
 	        		"name=");
     }
@@ -719,6 +726,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"\"Value\"",
 	        		"(",
 	        		"{",
+	        		"[", // guarded alternative
 	        		"Import",
 	        		"importedNamespace=",
 	        		"importURI=");
@@ -856,13 +864,18 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 			.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
 			.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
 			.append("EPac")
-			.assertText("EPackage: \n;\n", ":");
+			.assertText(
+					"EPackage: \n;\n",
+					"[", // parameterized rule 
+					":");
     	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
     		.appendNl("FooBar returns EPackage: 'bar';") 
     		.append("EPac")
-    		.assertText(":");
+    		.assertText(
+    				"[", // parameterized rule 
+    				":");
     }
 
     @Test public void testCompleteRuleForReferencedTypeWithAlias() throws Exception {
@@ -870,13 +883,18 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
     		.append("EPac")
-    		.assertText("EPackage returns ecore::EPackage: \n;\n", ":");
+    		.assertText(
+    				"EPackage returns ecore::EPackage: \n;\n",
+    				"[", // parameterized rule 
+    				":");
     	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
     		.appendNl("FooBar returns ecore::EPackage : 'bar';") 
     		.append("EPac")
-    		.assertText(":");
+    		.assertText(
+    				"[", // parameterized rule 
+    				":");
     }
     
     @Test public void testBug317280_01() throws Exception {
@@ -885,7 +903,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("import 'classpath:/org/eclipse/xtext/Xtext.ecore'")
 	        .append("En")
 	        .assertText("EnumRule: \n;\n", "EnumLiteralDeclaration: \n;\n", 
-	        		"enum", 
+	        		"enum",
+	        		"[", // parameterized rule
 	        		":");
     }
     
@@ -897,6 +916,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .assertText("EnumRule returns xtext::EnumRule: \n;\n", 
 	        		"EnumLiteralDeclaration returns xtext::EnumLiteralDeclaration: \n;\n", 
 	        		"enum",
+	        		"[", // parameterized rule
 	        		":");
     }
 
@@ -904,14 +924,20 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("ST")
-	        .assertText("terminal STRING:\n\t\n;", ":");
+	        .assertText(
+	        		"terminal STRING:\n\t\n;",
+	        		"[", // parameterized rule
+	        		":");
     }
     
     @Test public void testOverrideRule_02() throws Exception {
     	newBuilder()
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("IN")
-	        .assertText("terminal INT returns ecore::EInt:\n\t\n;", ":");
+	        .assertText(
+	        		"terminal INT returns ecore::EInt:\n\t\n;",
+	        		"[", // parameterized rule
+	        		":");
     }
     
     @Test public void testOverrideRule_03() throws Exception {
@@ -919,7 +945,10 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ec")
 	        .append("IN")
-	        .assertText("terminal INT returns ec::EInt:\n\t\n;", ":");
+	        .assertText(
+	        		"terminal INT returns ec::EInt:\n\t\n;",
+	        		"[", // parameterized rule
+	        		":");
     }
     
     @Test public void testOverrideRule_04() throws Exception {
@@ -927,14 +956,20 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"")
 	        .append("IN")
-	        .assertText("terminal INT returns EInt:\n\t\n;", ":");
+	        .assertText(
+	        		"terminal INT returns EInt:\n\t\n;",
+	        		"[", // parameterized rule
+	        		":");
     }
     
     @Test public void testOverrideRule_05() throws Exception {
     	newBuilder()
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
 	    	.append("ESC")
-	    	.assertText("terminal fragment ESCAPED_CHAR:\n\t\n;", ":");
+	    	.assertText(
+	    			"terminal fragment ESCAPED_CHAR:\n\t\n;",
+	    			"[", // parameterized rule
+	    			":");
     }
     
     @Test public void testCompleteHiddenTokens_01() throws Exception {

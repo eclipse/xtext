@@ -62,7 +62,7 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 		final IContextProvider contextProvider = get(IContextProvider.class);
 		List<Pair<EObject, String>> result = Lists.newArrayList();
 		for (EObject ctx : contextProvider.getAllContexts(grammar))
-			result.add(Tuples.create(ctx, ctx2name.getContextName(ctx)));
+			result.add(Tuples.create(ctx, ctx2name.getContextName(grammar, ctx)));
 		Collections.sort(result, new Comparator<Pair<EObject, String>>() {
 			@Override
 			public int compare(Pair<EObject, String> o1, Pair<EObject, String> o2) {

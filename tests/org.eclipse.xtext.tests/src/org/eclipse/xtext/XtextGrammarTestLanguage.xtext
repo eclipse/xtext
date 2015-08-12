@@ -12,9 +12,13 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Grammar:
     'grammar' name=GrammarID ('with' usedGrammars+=[Grammar|GrammarID] (',' usedGrammars+=[Grammar|GrammarID])*)?
-	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?
+	HiddenClause?
 	metamodelDeclarations+=AbstractMetamodelDeclaration* 
     (rules+=AbstractRule)+
+;
+
+fragment HiddenClause *:
+	(definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')
 ;
 
 GrammarID returns ecore::EString:
@@ -36,9 +40,25 @@ ReferencedMetamodel :
 	'import' ePackage=[ecore::EPackage|STRING] ('as' alias=ID)?;
 
 ParserRule :
-    name=ID ('returns' type=TypeRef)? (definesHiddenTokens?='hidden' '(' (hiddenTokens+=[AbstractRule] (',' hiddenTokens+=[AbstractRule])*)? ')')?':' 
+	(
+	  ^fragment?='fragment' RuleNameAndParams (wildcard?='*' | ReturnsClause?) 
+	| RuleNameAndParams ReturnsClause?
+	)
+	HiddenClause? ':'
     	alternatives=Alternatives   
     ';'
+;
+
+fragment RuleNameAndParams returns ParserRule:
+	name=ID ('[' (parameters+=Parameter (',' parameters+=Parameter)*)? ']')?
+;
+
+fragment ReturnsClause returns AbstractRule:
+	'returns' type=TypeRef
+;
+
+Parameter:
+	name=ID
 ;
 
 TypeRef :
@@ -46,11 +66,20 @@ TypeRef :
 ;
 
 Alternatives returns AbstractElement:
-    Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+      ConditionalBranch ({Alternatives.elements+=current} ('|' elements+=ConditionalBranch)+)?
+;
+
+ConditionalBranch returns AbstractElement:
+	  UnorderedGroup
+	| {ConditionalBranch} '[' filtered=InverseLiteralValue parameter=[Parameter|ID] ']' guardedElement=UnorderedGroup
+;
+
+UnorderedGroup returns AbstractElement:
+	Group ({UnorderedGroup.elements+=current} ('&' elements+=Group)+)?
 ;
 
 Group returns AbstractElement:
-    AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?
+    AbstractToken ({Group.elements+=current} (elements+=AbstractToken)+)?
 ;
 
 AbstractToken returns AbstractElement:
@@ -58,10 +87,13 @@ AbstractToken returns AbstractElement:
 	Action
 ;
 
-/* SuppressWarnings[potentialOverride] */
+/* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */
 AbstractTokenWithCardinality returns AbstractElement:
-	(Assignment | 
-	 AbstractTerminal) (cardinality=('?'|'*'|'+'))?
+	(Assignment | AbstractTerminal) Cardinalities?
+;
+
+fragment Cardinalities returns AbstractElement:
+	cardinality=('?'|'*'|'+')
 ;
 
 Action returns Action:
@@ -69,7 +101,17 @@ Action returns Action:
 ;
 
 AbstractTerminal returns AbstractElement: 
-   Keyword | RuleCall | ParenthesizedElement
+   Keyword | 
+   RuleCall | 
+   ParenthesizedElement |
+   // Keyword and RuleCall are used inside of Assignable terminal
+   // As we do not want to be able to write name==>ID
+   // the rules for Keyword and RuleCall have been copied
+   PredicatedKeyword | 
+   PredicatedRuleCall |
+   // We have to make this one explicit since the ParenthesizedElement does not
+   // create an object but we have to set the predicated flag
+   PredicatedGroup
 ;
 
 Keyword : 
@@ -77,11 +119,48 @@ Keyword :
 ;
 
 RuleCall :
-   rule=[AbstractRule]
+   {RuleCall}
+   rule=[AbstractRule|RuleID] ('[' arguments+=NamedArgument (',' arguments+=NamedArgument)* ']')?
+   
+;
+
+LiteralValue returns ecore::EBoolean:
+	'!'|'+'
+;
+
+InverseLiteralValue returns ecore::EBoolean:
+	LiteralValue
+;
+
+NamedArgument:
+	{NamedArgument} 
+	( literalValue=LiteralValue? parameter=[Parameter|ID]
+	| parameter=[Parameter|ID] '=' value=[Parameter|ID]
+	)
+;
+
+TerminalRuleCall returns RuleCall:
+   rule=[AbstractRule|RuleID]
+;
+
+RuleID returns ecore::EString:
+  ID ('::' ID)*
+;
+
+PredicatedKeyword returns Keyword:
+	Predicate value=STRING  
+;
+
+PredicatedRuleCall returns RuleCall:
+	Predicate rule=[AbstractRule]
 ;
 
 Assignment returns Assignment:
-   feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+   Predicate? feature=ID operator=('+='|'='|'?=') ^terminal=AssignableTerminal
+;
+
+fragment Predicate returns AbstractElement:
+	(predicated?='=>' | firstSetPredicated?='->')
 ;
 
 AssignableTerminal returns AbstractElement:
@@ -93,7 +172,7 @@ ParenthesizedAssignableElement returns AbstractElement:
 ;
 
 AssignableAlternatives returns AbstractElement:
-    AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
+    AssignableTerminal ({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
 ;
 
 CrossReference :
@@ -101,42 +180,38 @@ CrossReference :
 ;
 
 CrossReferenceableTerminal returns AbstractElement:
-   Keyword | RuleCall | ParenthesizedCrossReferenceableElement
-;
-
-ParenthesizedCrossReferenceableElement returns AbstractElement:
-   '(' CrossReferenceableAlternatives ')'
-;
-
-CrossReferenceableAlternatives returns AbstractElement:
-    CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
+   Keyword | RuleCall
 ;
 
 ParenthesizedElement returns AbstractElement:
    '(' Alternatives ')'
 ;
 
+PredicatedGroup returns Group:
+	Predicate '(' elements+=Alternatives ')' 
+;
+
 TerminalRule :
-	'terminal' name=ID ('returns' type=TypeRef)? ':'
+	'terminal' (^fragment?='fragment' name=ID | name=ID ReturnsClause?) ':'
 		alternatives=TerminalAlternatives
 	';'
 ;
 
 TerminalAlternatives returns AbstractElement:
-	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
+	TerminalGroup ({Alternatives.elements+=current} ('|' elements+=TerminalGroup)+)?
 ;
 
 TerminalGroup returns AbstractElement:
-	TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?
+	TerminalToken ({Group.elements+=current} (elements+=TerminalToken)+)?
 ;
 
-/* SuppressWarnings[potentialOverride] */
+/* SuppressWarnings[potentialOverride]: Handled in CardinalityAwareEcoreFactory */
 TerminalToken returns AbstractElement:
-	TerminalTokenElement (cardinality=('?'|'*'|'+'))?
+	TerminalTokenElement Cardinalities?
 ;
 
 TerminalTokenElement returns AbstractElement: 
-   CharacterRange | RuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard
+   CharacterRange | TerminalRuleCall | ParenthesizedTerminalElement | AbstractNegatedToken | Wildcard | ^EOF
 ;
 
 ParenthesizedTerminalElement returns AbstractElement:
@@ -159,18 +234,22 @@ Wildcard:
 	{Wildcard} '.'
 ;
 
+^EOF:
+	{^EOF} 'EOF'
+;
+
 CharacterRange returns AbstractElement:
 	Keyword ( {CharacterRange.left=current} '..' right=Keyword)?
 ;
 
 EnumRule:
-    'enum' name=ID ('returns' type=TypeRef)? ':' 
+    'enum' name=ID ReturnsClause? ':' 
     	alternatives=EnumLiterals   
     ';'
 ;
 
 EnumLiterals returns AbstractElement:
-	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
+	EnumLiteralDeclaration ({Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+)?
 ; 
 
 EnumLiteralDeclaration:

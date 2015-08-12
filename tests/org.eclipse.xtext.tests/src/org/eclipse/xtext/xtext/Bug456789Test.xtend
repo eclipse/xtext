@@ -20,7 +20,7 @@ class Bug456789Test extends AbstractXtextTests {
 	
 	override setUp() throws Exception {
 		super.setUp();
-		with(XtextStandaloneSetup);
+		with(XtextStandaloneSetup)
 	}
 	
 	@Test(timeout=5000 /* pessimistic, should be way faster */) def void doesNotHang_01() {
