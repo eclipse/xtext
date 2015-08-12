@@ -27,7 +27,7 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -154,7 +154,7 @@ public class QuickfixTestBuilder {
     return _xblockexpression;
   }
   
-  public QuickfixTestBuilder assertFatureCallLinkingIssue() {
+  public QuickfixTestBuilder assertFeatureCallLinkingIssue() {
     QuickfixTestBuilder _xblockexpression = null;
     {
       Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
@@ -168,7 +168,7 @@ public class QuickfixTestBuilder {
             _and = false;
           } else {
             String[] _data = it.getData();
-            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
+            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
             _and = _contains;
           }
           return Boolean.valueOf(_and);
@@ -195,7 +195,7 @@ public class QuickfixTestBuilder {
             _and = false;
           } else {
             String[] _data = it.getData();
-            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
+            boolean _contains = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
             _and = _contains;
           }
           return Boolean.valueOf(_and);

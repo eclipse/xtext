@@ -23,7 +23,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
@@ -655,7 +655,7 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
         URI _uriToProblem = it.getUriToProblem();
         EObject object = _resourceSet.getEObject(_uriToProblem, true);
         String[] _data = it.getData();
-        final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
+        final boolean featureCall = ((List<String>)Conversions.doWrapArray(_data)).contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
         boolean _and = false;
         boolean _and_1 = false;
         boolean _and_2 = false;

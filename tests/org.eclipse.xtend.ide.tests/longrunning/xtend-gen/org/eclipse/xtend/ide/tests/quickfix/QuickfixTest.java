@@ -434,8 +434,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'bar()\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create field \'bar\'", "Create local variable \'bar\'", "Create method \'bar()\'", "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -551,8 +551,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -600,8 +600,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("abstract class Foo {");
     _builder_1.newLine();
@@ -648,8 +648,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar()\' in \'Bar\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFeatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar()\' in \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -864,8 +864,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -913,8 +913,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create field \'bar\'", "Create method \'getBar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1015,8 +1015,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create method \'getFoo()\' in \'Foo\'", 
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create method \'getFoo()\' in \'Foo\'", 
       "Create extension method \'foo(Foo)\'", "Create extension method \'getFoo(Foo)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
@@ -1170,8 +1170,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'", "Create static method \'getFoo()\' in \'Foo\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'", "Create static method \'getFoo()\' in \'Foo\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1259,8 +1259,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1313,8 +1313,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create extension method \'foo(Foo)\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'foo()\' in \'Foo\'", "Create extension method \'foo(Foo)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1405,8 +1405,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create static method \'foo()\' in \'Foo\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1459,8 +1459,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create local variable \'bar\'", "Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create local variable \'bar\'", "Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1552,8 +1552,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create static method \'bar()\'", "Create static method \'getBar()\'", "Create static field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1627,8 +1627,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabels = _assertFatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create method \'getBar()\'", "Create field \'bar\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabels = _assertFeatureCallLinkingIssue.assertResolutionLabels("Create method \'bar()\'", "Create method \'getBar()\'", "Create field \'bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -4283,8 +4283,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertFatureCallLinkingIssue = _create.assertFatureCallLinkingIssue();
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar(int, Object)\'");
+    QuickfixTestBuilder _assertFeatureCallLinkingIssue = _create.assertFeatureCallLinkingIssue();
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertFeatureCallLinkingIssue.assertResolutionLabelsSubset("Create method \'bar(int, Object)\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();

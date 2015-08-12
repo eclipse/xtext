@@ -32,7 +32,7 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.workspace.RuntimeWorkspaceConfigProvider;
-import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
@@ -205,6 +205,6 @@ public class DefaultXbaseRuntimeModule extends DefaultCommonTypesRuntimeModule {
 	 * @since 2.9
 	 */
 	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
-		return LinkingDiagnosticTypeAwareMessageProducer.class;
+		return UnresolvedFeatureCallTypeAwareMessageProvider.class;
 	}
 }

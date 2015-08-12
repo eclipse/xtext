@@ -45,7 +45,7 @@ import org.eclipse.xtext.xbase.util.FeatureCallAsTypeLiteralHelper;
  * @author Dennis Huebner - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class LinkingDiagnosticTypeAwareMessageProducer extends LinkingDiagnosticMessageProvider {
+public class UnresolvedFeatureCallTypeAwareMessageProvider extends LinkingDiagnosticMessageProvider {
   /**
    * A user data entry that indicates a broken feature link which could also be
    * a type literal, e.g. 'String::CASE_INSENSITIVE'.
@@ -86,7 +86,7 @@ public class LinkingDiagnosticTypeAwareMessageProducer extends LinkingDiagnostic
       _builder.append(linkText, "");
       _builder.append(" cannot be resolved to a type.");
       return new DiagnosticMessage(_builder.toString(), Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, 
-        LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
+        UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
     }
     if ((contextObject instanceof XAbstractFeatureCall)) {
       boolean _isOperation = ((XAbstractFeatureCall)contextObject).isOperation();
@@ -201,9 +201,9 @@ public class LinkingDiagnosticTypeAwareMessageProducer extends LinkingDiagnostic
       _and = _isPotentialTypeLiteral;
     }
     if (_and) {
-      return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL);
+      return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL);
     }
-    return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL);
+    return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC, linkText, UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL);
   }
   
   protected boolean isStaticMemberCallTarget(final EObject contextObject) {
