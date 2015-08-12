@@ -134,7 +134,7 @@ ruleNamespace returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"QualifiedName");
+        		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.QualifiedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -156,7 +156,7 @@ ruleNamespace returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_3_0, 
-        		"Import");
+        		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -174,7 +174,7 @@ ruleNamespace returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_4_0, 
-        		"NamedElement");
+        		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.NamedElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -221,7 +221,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importedNamespace",
         		lv_importedNamespace_1_0, 
-        		"QualifiedName");
+        		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.QualifiedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -265,7 +265,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

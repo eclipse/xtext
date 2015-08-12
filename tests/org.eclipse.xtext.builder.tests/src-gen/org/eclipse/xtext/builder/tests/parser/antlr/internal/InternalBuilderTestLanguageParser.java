@@ -290,7 +290,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"QualifiedName");
+                    		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.QualifiedName");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -337,7 +337,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"imports",
             	            		lv_imports_3_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -386,7 +386,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"elements",
             	            		lv_elements_4_0, 
-            	            		"NamedElement");
+            	            		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.NamedElement");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -505,7 +505,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
                    			current, 
                    			"importedNamespace",
                     		lv_importedNamespace_1_0, 
-                    		"QualifiedName");
+                    		"org.eclipse.xtext.builder.tests.BuilderTestLanguage.QualifiedName");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -612,7 +612,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
