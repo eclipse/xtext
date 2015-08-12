@@ -10,7 +10,6 @@ package org.eclipse.xtext.junit4.validation;
 import static com.google.common.collect.Iterables.*;
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
@@ -20,6 +19,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
@@ -203,7 +203,7 @@ public class ValidationTestHelper {
 			@Override
 			public boolean apply(Issue input) {
 				if (issuecode.equals(input.getCode())) {
-					return userData == null || Iterables.contains(Arrays.asList(input.getData()), userData);
+					return userData == null || Arrays.contains(input.getData(), userData);
 				}
 				return false;
 			}

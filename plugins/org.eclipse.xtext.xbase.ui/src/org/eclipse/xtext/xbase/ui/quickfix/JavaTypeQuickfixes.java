@@ -51,7 +51,7 @@ import org.eclipse.xtext.util.Arrays;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer;
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner;
@@ -158,7 +158,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			return true;
 		if (isTypeReference(unresolvedReference))
 			return true;
-		if (Arrays.contains(issue.getData(), LinkingDiagnosticTypeAwareMessageProducer.TYPE_LITERAL)) {
+		if (Arrays.contains(issue.getData(), UnresolvedFeatureCallTypeAwareMessageProvider.TYPE_LITERAL)) {
 			return true;
 		}
 		return false;
