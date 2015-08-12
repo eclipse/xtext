@@ -260,7 +260,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
             	           			current, 
             	           			"types",
             	            		lv_types_2_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -496,7 +496,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -607,7 +607,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -641,7 +641,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalAntl
                    			current, 
                    			"baseType",
                     		lv_baseType_3_0, 
-                    		"CompositeTypeEntry");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeTypeEntry");
             	        afterParserOrEnumRuleCall();
             	    
 

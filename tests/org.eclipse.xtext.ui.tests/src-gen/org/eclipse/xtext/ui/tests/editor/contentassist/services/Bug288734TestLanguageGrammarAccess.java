@@ -19,7 +19,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.Model");
 		private final Assignment cConstantsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cConstantsTConstantParserRuleCall_0 = (RuleCall)cConstantsAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TConstant");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TConstant");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cTStringConstantParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cTIntegerConstantParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -59,7 +59,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TStringConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TStringConstant");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TStringConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsTAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -69,10 +69,11 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TStringConstant:
-		//	annotations+=TAnnotation* "constant" "string" name=ID;
+		//	annotations+=TAnnotation*
+		//	'constant' 'string' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//annotations+=TAnnotation* "constant" "string" name=ID
+		//annotations+=TAnnotation* 'constant' 'string' name=ID
 		public Group getGroup() { return cGroup; }
 
 		//annotations+=TAnnotation*
@@ -81,10 +82,10 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TAnnotation
 		public RuleCall getAnnotationsTAnnotationParserRuleCall_0_0() { return cAnnotationsTAnnotationParserRuleCall_0_0; }
 
-		//"constant"
+		//'constant'
 		public Keyword getConstantKeyword_1() { return cConstantKeyword_1; }
 
-		//"string"
+		//'string'
 		public Keyword getStringKeyword_2() { return cStringKeyword_2; }
 
 		//name=ID
@@ -95,7 +96,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TIntegerConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TIntegerConstant");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TIntegerConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsTAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -105,10 +106,11 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TIntegerConstant:
-		//	annotations+=TAnnotation* "constant" "integer" name=ID;
+		//	annotations+=TAnnotation*
+		//	'constant' 'integer' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//annotations+=TAnnotation* "constant" "integer" name=ID
+		//annotations+=TAnnotation* 'constant' 'integer' name=ID
 		public Group getGroup() { return cGroup; }
 
 		//annotations+=TAnnotation*
@@ -117,10 +119,10 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TAnnotation
 		public RuleCall getAnnotationsTAnnotationParserRuleCall_0_0() { return cAnnotationsTAnnotationParserRuleCall_0_0; }
 
-		//"constant"
+		//'constant'
 		public Keyword getConstantKeyword_1() { return cConstantKeyword_1; }
 
-		//"integer"
+		//'integer'
 		public Keyword getIntegerKeyword_2() { return cIntegerKeyword_2; }
 
 		//name=ID
@@ -131,7 +133,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TBooleanConstantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TBooleanConstant");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TBooleanConstant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsTAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -141,10 +143,11 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		
 		//TBooleanConstant:
-		//	annotations+=TAnnotation* "constant" "boolean" name=ID;
+		//	annotations+=TAnnotation*
+		//	'constant' 'boolean' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//annotations+=TAnnotation* "constant" "boolean" name=ID
+		//annotations+=TAnnotation* 'constant' 'boolean' name=ID
 		public Group getGroup() { return cGroup; }
 
 		//annotations+=TAnnotation*
@@ -153,10 +156,10 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TAnnotation
 		public RuleCall getAnnotationsTAnnotationParserRuleCall_0_0() { return cAnnotationsTAnnotationParserRuleCall_0_0; }
 
-		//"constant"
+		//'constant'
 		public Keyword getConstantKeyword_1() { return cConstantKeyword_1; }
 
-		//"boolean"
+		//'boolean'
 		public Keyword getBooleanKeyword_2() { return cBooleanKeyword_2; }
 
 		//name=ID
@@ -167,20 +170,20 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TAnnotationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TAnnotation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TAnnotation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDescKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDescriptionAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDescriptionSTRINGTerminalRuleCall_1_0 = (RuleCall)cDescriptionAssignment_1.eContents().get(0);
 		
 		//TAnnotation:
-		//	"@desc" description=STRING;
+		//	'@desc' description=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"@desc" description=STRING
+		//'@desc' description=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"@desc"
+		//'@desc'
 		public Keyword getDescKeyword_0() { return cDescKeyword_0; }
 
 		//description=STRING
@@ -263,7 +266,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TStringConstant:
-	//	annotations+=TAnnotation* "constant" "string" name=ID;
+	//	annotations+=TAnnotation*
+	//	'constant' 'string' name=ID;
 	public TStringConstantElements getTStringConstantAccess() {
 		return pTStringConstant;
 	}
@@ -273,7 +277,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TIntegerConstant:
-	//	annotations+=TAnnotation* "constant" "integer" name=ID;
+	//	annotations+=TAnnotation*
+	//	'constant' 'integer' name=ID;
 	public TIntegerConstantElements getTIntegerConstantAccess() {
 		return pTIntegerConstant;
 	}
@@ -283,7 +288,8 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TBooleanConstant:
-	//	annotations+=TAnnotation* "constant" "boolean" name=ID;
+	//	annotations+=TAnnotation*
+	//	'constant' 'boolean' name=ID;
 	public TBooleanConstantElements getTBooleanConstantAccess() {
 		return pTBooleanConstant;
 	}
@@ -293,7 +299,7 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//TAnnotation:
-	//	"@desc" description=STRING;
+	//	'@desc' description=STRING;
 	public TAnnotationElements getTAnnotationAccess() {
 		return pTAnnotation;
 	}
@@ -303,38 +309,38 @@ public class Bug288734TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

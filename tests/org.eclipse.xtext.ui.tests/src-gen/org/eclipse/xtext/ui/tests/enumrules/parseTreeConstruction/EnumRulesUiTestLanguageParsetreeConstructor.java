@@ -40,11 +40,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum;
+ * 	'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum;
  *
  **/
 
-// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)? | "generated" generated=GeneratedEnum
+// 'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)? | 'generated' generated=GeneratedEnum
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -74,7 +74,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "existing" existing=ExistingEnum ("generated" generated=GeneratedEnum)?
+// 'existing' existing=ExistingEnum ('generated' generated=GeneratedEnum)?
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -97,7 +97,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "existing"
+// 'existing'
 protected class Model_ExistingKeyword_0_0 extends KeywordToken  {
 	
 	public Model_ExistingKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -152,7 +152,7 @@ protected class Model_ExistingAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// ("generated" generated=GeneratedEnum)?
+// ('generated' generated=GeneratedEnum)?
 protected class Model_Group_0_2 extends GroupToken {
 	
 	public Model_Group_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -174,7 +174,7 @@ protected class Model_Group_0_2 extends GroupToken {
 
 }
 
-// "generated"
+// 'generated'
 protected class Model_GeneratedKeyword_0_2_0 extends KeywordToken  {
 	
 	public Model_GeneratedKeyword_0_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -232,7 +232,7 @@ protected class Model_GeneratedAssignment_0_2_1 extends AssignmentToken  {
 
 
 
-// "generated" generated=GeneratedEnum
+// 'generated' generated=GeneratedEnum
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -254,7 +254,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "generated"
+// 'generated'
 protected class Model_GeneratedKeyword_1_0 extends KeywordToken  {
 	
 	public Model_GeneratedKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

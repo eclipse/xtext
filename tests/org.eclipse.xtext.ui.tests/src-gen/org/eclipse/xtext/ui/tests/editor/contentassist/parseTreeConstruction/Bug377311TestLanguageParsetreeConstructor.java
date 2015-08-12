@@ -97,11 +97,11 @@ protected class Root_ChildsAssignment extends AssignmentToken  {
 /************ begin Rule Child ****************
  *
  * Child hidden(WS, ID):
- * 	"child" name=STRING;
+ * 	'child' name=STRING;
  *
  **/
 
-// "child" name=STRING
+// 'child' name=STRING
 protected class Child_Group extends GroupToken {
 	
 	public Child_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -130,7 +130,7 @@ protected class Child_Group extends GroupToken {
 
 }
 
-// "child"
+// 'child'
 protected class Child_ChildKeyword_0 extends KeywordToken  {
 	
 	public Child_ChildKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

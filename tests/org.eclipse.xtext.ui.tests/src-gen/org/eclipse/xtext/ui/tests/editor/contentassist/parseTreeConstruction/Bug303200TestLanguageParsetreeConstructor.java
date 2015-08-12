@@ -50,7 +50,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Program ****************
  *
  * Program:
- * 	{Program} (LT* directives+=ProgramDirective)* LT*;
+ * 	{Program} (LT* directives+=ProgramDirective)*
+ * 	LT*;
  *
  **/
 
@@ -187,7 +188,8 @@ protected class Program_DirectivesAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule ProgramDirective ****************
  *
  * ProgramDirective:
- * 	FunctionDefinition | Statement;
+ * 	FunctionDefinition
+ * 	| Statement;
  *
  **/
 
@@ -303,11 +305,12 @@ protected class ProgramDirective_StatementParserRuleCall_1 extends RuleCallToken
 /************ begin Rule FunctionDefinition ****************
  *
  * FunctionDefinition:
- * 	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+ * 	attributes+=Attribute* 'function' LT* name=ID LT*
+ * 	params=Parameters LT* body=Block;
  *
  **/
 
-// attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
+// attributes+=Attribute* 'function' LT* name=ID LT* params=Parameters LT* body=Block
 protected class FunctionDefinition_Group extends GroupToken {
 	
 	public FunctionDefinition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -382,7 +385,7 @@ protected class FunctionDefinition_AttributesAssignment_0 extends AssignmentToke
 	}	
 }
 
-// "function"
+// 'function'
 protected class FunctionDefinition_FunctionKeyword_1 extends KeywordToken  {
 	
 	public FunctionDefinition_FunctionKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -537,11 +540,12 @@ protected class FunctionDefinition_BodyAssignment_7 extends AssignmentToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+ * 	ident=ID
+ * 	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
  *
  **/
 
-// ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+// ident=ID | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 protected class Attribute_Alternatives extends AlternativesToken {
 
 	public Attribute_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -607,7 +611,7 @@ protected class Attribute_IdentAssignment_0 extends AssignmentToken  {
 
 }
 
-// {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+// {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 protected class Attribute_Group_1 extends GroupToken {
 	
 	public Attribute_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -662,7 +666,7 @@ protected class Attribute_BracketAttributeAction_1_0 extends ActionToken  {
 	}
 }
 
-// "["
+// '['
 protected class Attribute_LeftSquareBracketKeyword_1_1 extends KeywordToken  {
 	
 	public Attribute_LeftSquareBracketKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -730,7 +734,7 @@ protected class Attribute_ExpressionAssignment_1_3 extends AssignmentToken  {
 	}	
 }
 
-// "]"
+// ']'
 protected class Attribute_RightSquareBracketKeyword_1_5 extends KeywordToken  {
 	
 	public Attribute_RightSquareBracketKeyword_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -760,11 +764,12 @@ protected class Attribute_RightSquareBracketKeyword_1_5 extends KeywordToken  {
 /************ begin Rule Parameters ****************
  *
  * Parameters:
- * 	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+ * 	{Parameters}
+ * 	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
  *
  **/
 
-// {Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")"
+// {Parameters} '(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')'
 protected class Parameters_Group extends GroupToken {
 	
 	public Parameters_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -819,7 +824,7 @@ protected class Parameters_ParametersAction_0 extends ActionToken  {
 	}
 }
 
-// "("
+// '('
 protected class Parameters_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
 	public Parameters_LeftParenthesisKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -841,7 +846,7 @@ protected class Parameters_LeftParenthesisKeyword_1 extends KeywordToken  {
 
 }
 
-// (params+=ID LT* ("," LT* params+=ID LT*)*)?
+// (params+=ID LT* (',' LT* params+=ID LT*)*)?
 protected class Parameters_Group_3 extends GroupToken {
 	
 	public Parameters_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -898,7 +903,7 @@ protected class Parameters_ParamsAssignment_3_0 extends AssignmentToken  {
 
 }
 
-// ("," LT* params+=ID LT*)*
+// (',' LT* params+=ID LT*)*
 protected class Parameters_Group_3_2 extends GroupToken {
 	
 	public Parameters_Group_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -920,7 +925,7 @@ protected class Parameters_Group_3_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Parameters_CommaKeyword_3_2_0 extends KeywordToken  {
 	
 	public Parameters_CommaKeyword_3_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -979,7 +984,7 @@ protected class Parameters_ParamsAssignment_3_2_2 extends AssignmentToken  {
 
 
 
-// ")"
+// ')'
 protected class Parameters_RightParenthesisKeyword_4 extends KeywordToken  {
 	
 	public Parameters_RightParenthesisKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1009,11 +1014,12 @@ protected class Parameters_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Block ****************
  *
  * Block:
- * 	{Block} "{" (LT* directives+=Statement)* LT* "}";
+ * 	{Block}
+ * 	'{' (LT* directives+=Statement)* LT* '}';
  *
  **/
 
-// {Block} "{" (LT* directives+=Statement)* LT* "}"
+// {Block} '{' (LT* directives+=Statement)* LT* '}'
 protected class Block_Group extends GroupToken {
 	
 	public Block_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1068,7 +1074,7 @@ protected class Block_BlockAction_0 extends ActionToken  {
 	}
 }
 
-// "{"
+// '{'
 protected class Block_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 	
 	public Block_LeftCurlyBracketKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1160,7 +1166,7 @@ protected class Block_DirectivesAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class Block_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Block_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1190,11 +1196,12 @@ protected class Block_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Statement ****************
  *
  * Statement:
- * 	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
+ * 	Block
+ * 	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
  *
  **/
 
-// Block | {ExpressionStatement} expression=PostfixExpression (";" | LT)
+// Block | {ExpressionStatement} expression=PostfixExpression (';' | LT)
 protected class Statement_Alternatives extends AlternativesToken {
 
 	public Statement_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1261,7 +1268,7 @@ protected class Statement_BlockParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// {ExpressionStatement} expression=PostfixExpression (";" | LT)
+// {ExpressionStatement} expression=PostfixExpression (';' | LT)
 protected class Statement_Group_1 extends GroupToken {
 	
 	public Statement_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1362,7 +1369,7 @@ protected class Statement_ExpressionAssignment_1_1 extends AssignmentToken  {
 	}	
 }
 
-// ";" | LT
+// (';' | LT)
 protected class Statement_Alternatives_1_2 extends AlternativesToken {
 
 	public Statement_Alternatives_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1384,7 +1391,7 @@ protected class Statement_Alternatives_1_2 extends AlternativesToken {
 
 }
 
-// ";"
+// ';'
 protected class Statement_SemicolonKeyword_1_2_0 extends KeywordToken  {
 	
 	public Statement_SemicolonKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1415,13 +1422,13 @@ protected class Statement_SemicolonKeyword_1_2_0 extends KeywordToken  {
 /************ begin Rule PostfixExpression ****************
  *
  * PostfixExpression:
- * 	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
- * 	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
+ * 	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
+ * 	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
  *
  **/
 
 // PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
-// {Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
+// {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
 protected class PostfixExpression_Group extends GroupToken {
 	
 	public PostfixExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1491,8 +1498,8 @@ protected class PostfixExpression_PrimaryExpressionParserRuleCall_0 extends Rule
 	}	
 }
 
-// ({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* "(" LT*
-// (arguments=ListExpression LT*)? ")")*
+// ({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* '(' LT*
+// (arguments=ListExpression LT*)? ')')*
 protected class PostfixExpression_Alternatives_1 extends AlternativesToken {
 
 	public PostfixExpression_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1629,7 +1636,7 @@ protected class PostfixExpression_PropertyAssignment_1_0_2 extends AssignmentTok
 }
 
 
-// {Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")"
+// {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
 protected class PostfixExpression_Group_1_1 extends GroupToken {
 	
 	public PostfixExpression_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1688,7 +1695,7 @@ protected class PostfixExpression_InvocationExpressionAction_1_1_0 extends Actio
 	}
 }
 
-// "("
+// '('
 protected class PostfixExpression_LeftParenthesisKeyword_1_1_2 extends KeywordToken  {
 	
 	public PostfixExpression_LeftParenthesisKeyword_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1779,7 +1786,7 @@ protected class PostfixExpression_ArgumentsAssignment_1_1_4_0 extends Assignment
 }
 
 
-// ")"
+// ')'
 protected class PostfixExpression_RightParenthesisKeyword_1_1_5 extends KeywordToken  {
 	
 	public PostfixExpression_RightParenthesisKeyword_1_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1811,11 +1818,11 @@ protected class PostfixExpression_RightParenthesisKeyword_1_1_5 extends KeywordT
 /************ begin Rule ListExpression ****************
  *
  * ListExpression:
- * 	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+ * 	expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
  *
  **/
 
-// expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*
+// expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*
 protected class ListExpression_Group extends GroupToken {
 	
 	public ListExpression_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1890,7 +1897,7 @@ protected class ListExpression_ExpressionsAssignment_0 extends AssignmentToken  
 	}	
 }
 
-// (LT* "," LT* expressions+=PostfixExpression)*
+// (LT* ',' LT* expressions+=PostfixExpression)*
 protected class ListExpression_Group_1 extends GroupToken {
 	
 	public ListExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1912,7 +1919,7 @@ protected class ListExpression_Group_1 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class ListExpression_CommaKeyword_1_1 extends KeywordToken  {
 	
 	public ListExpression_CommaKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1989,11 +1996,12 @@ protected class ListExpression_ExpressionsAssignment_1_3 extends AssignmentToken
 /************ begin Rule PropertyOperator ****************
  *
  * PropertyOperator:
- * 	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
+ * 	'.' LT* name=ID
+ * 	| '[' LT* expressions=ListExpression LT* ']';
  *
  **/
 
-// "." LT* name=ID | "[" LT* expressions=ListExpression LT* "]"
+// '.' LT* name=ID | '[' LT* expressions=ListExpression LT* ']'
 protected class PropertyOperator_Alternatives extends AlternativesToken {
 
 	public PropertyOperator_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2023,7 +2031,7 @@ protected class PropertyOperator_Alternatives extends AlternativesToken {
 
 }
 
-// "." LT* name=ID
+// '.' LT* name=ID
 protected class PropertyOperator_Group_0 extends GroupToken {
 	
 	public PropertyOperator_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2045,7 +2053,7 @@ protected class PropertyOperator_Group_0 extends GroupToken {
 
 }
 
-// "."
+// '.'
 protected class PropertyOperator_FullStopKeyword_0_0 extends KeywordToken  {
 	
 	public PropertyOperator_FullStopKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2101,7 +2109,7 @@ protected class PropertyOperator_NameAssignment_0_2 extends AssignmentToken  {
 }
 
 
-// "[" LT* expressions=ListExpression LT* "]"
+// '[' LT* expressions=ListExpression LT* ']'
 protected class PropertyOperator_Group_1 extends GroupToken {
 	
 	public PropertyOperator_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2123,7 +2131,7 @@ protected class PropertyOperator_Group_1 extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class PropertyOperator_LeftSquareBracketKeyword_1_0 extends KeywordToken  {
 	
 	public PropertyOperator_LeftSquareBracketKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2190,7 +2198,7 @@ protected class PropertyOperator_ExpressionsAssignment_1_2 extends AssignmentTok
 	}	
 }
 
-// "]"
+// ']'
 protected class PropertyOperator_RightSquareBracketKeyword_1_4 extends KeywordToken  {
 	
 	public PropertyOperator_RightSquareBracketKeyword_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2220,11 +2228,12 @@ protected class PropertyOperator_RightSquareBracketKeyword_1_4 extends KeywordTo
 /************ begin Rule PrimaryExpression ****************
  *
  * PrimaryExpression:
- * 	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
+ * 	{Identifier} name=ID
+ * 	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
  *
  **/
 
-// {Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block
+// {Identifier} name=ID | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
 	public PrimaryExpression_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2345,7 +2354,7 @@ protected class PrimaryExpression_NameAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// {FunctionExpression} "function" LT* params=Parameters LT* body=Block
+// {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 protected class PrimaryExpression_Group_1 extends GroupToken {
 	
 	public PrimaryExpression_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2400,7 +2409,7 @@ protected class PrimaryExpression_FunctionExpressionAction_1_0 extends ActionTok
 	}
 }
 
-// "function"
+// 'function'
 protected class PrimaryExpression_FunctionKeyword_1_1 extends KeywordToken  {
 	
 	public PrimaryExpression_FunctionKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

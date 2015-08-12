@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"constants",
         		lv_constants_0_0, 
-        		"TConstant");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TConstant");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -179,7 +179,7 @@ ruleTStringConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -206,7 +206,7 @@ ruleTStringConstant returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -244,7 +244,7 @@ ruleTIntegerConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -271,7 +271,7 @@ ruleTIntegerConstant returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -309,7 +309,7 @@ ruleTBooleanConstant returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"TAnnotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage.TAnnotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -336,7 +336,7 @@ ruleTBooleanConstant returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -379,7 +379,7 @@ ruleTAnnotation returns [EObject current=null]
        			$current, 
        			"description",
         		lv_description_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

@@ -129,7 +129,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_3_0, 
-        		"StateType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -163,7 +163,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_5_0, 
-        		"StateType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -197,7 +197,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateKind",
         		lv_stateKind_7_0, 
-        		"StateType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -235,7 +235,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"stateName",
         		lv_stateName_10_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -253,7 +253,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"label",
         		lv_label_11_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

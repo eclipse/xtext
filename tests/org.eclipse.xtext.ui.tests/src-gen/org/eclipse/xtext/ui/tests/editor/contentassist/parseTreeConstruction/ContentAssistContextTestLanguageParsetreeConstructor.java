@@ -46,7 +46,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule FirstLevel ****************
  *
  * FirstLevel:
- * 	secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
+ * 	secondLevelA+=SecondLevelA*
+ * 	secondLevelB+=SecondLevelB*;
  *
  **/
 
@@ -180,7 +181,8 @@ protected class FirstLevel_SecondLevelBAssignment_1 extends AssignmentToken  {
 /************ begin Rule SecondLevelA ****************
  *
  * SecondLevelA:
- * 	thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
+ * 	thirdLevelA1+=ThirdLevelA1+
+ * 	thirdLevelA2+=ThirdLevelA2+;
  *
  **/
 
@@ -313,7 +315,8 @@ protected class SecondLevelA_ThirdLevelA2Assignment_1 extends AssignmentToken  {
 /************ begin Rule SecondLevelB ****************
  *
  * SecondLevelB:
- * 	thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
+ * 	thirdLevelB1+=ThirdLevelB1+
+ * 	thirdLevelB2+=ThirdLevelB2+;
  *
  **/
 
@@ -446,11 +449,11 @@ protected class SecondLevelB_ThirdLevelB2Assignment_1 extends AssignmentToken  {
 /************ begin Rule ThirdLevelA1 ****************
  *
  * ThirdLevelA1:
- * 	"A1" {ThirdLevelA1} name=ID?;
+ * 	'A1' {ThirdLevelA1} name=ID?;
  *
  **/
 
-// "A1" {ThirdLevelA1} name=ID?
+// 'A1' {ThirdLevelA1} name=ID?
 protected class ThirdLevelA1_Group extends GroupToken {
 	
 	public ThirdLevelA1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -480,7 +483,7 @@ protected class ThirdLevelA1_Group extends GroupToken {
 
 }
 
-// "A1"
+// 'A1'
 protected class ThirdLevelA1_A1Keyword_0 extends KeywordToken  {
 	
 	public ThirdLevelA1_A1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -569,11 +572,11 @@ protected class ThirdLevelA1_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelA2 ****************
  *
  * ThirdLevelA2:
- * 	"A2" {ThirdLevelA2} name=ID?;
+ * 	'A2' {ThirdLevelA2} name=ID?;
  *
  **/
 
-// "A2" {ThirdLevelA2} name=ID?
+// 'A2' {ThirdLevelA2} name=ID?
 protected class ThirdLevelA2_Group extends GroupToken {
 	
 	public ThirdLevelA2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -603,7 +606,7 @@ protected class ThirdLevelA2_Group extends GroupToken {
 
 }
 
-// "A2"
+// 'A2'
 protected class ThirdLevelA2_A2Keyword_0 extends KeywordToken  {
 	
 	public ThirdLevelA2_A2Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -692,11 +695,11 @@ protected class ThirdLevelA2_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelB1 ****************
  *
  * ThirdLevelB1:
- * 	"B1" {ThirdLevelB1} name=ID?;
+ * 	'B1' {ThirdLevelB1} name=ID?;
  *
  **/
 
-// "B1" {ThirdLevelB1} name=ID?
+// 'B1' {ThirdLevelB1} name=ID?
 protected class ThirdLevelB1_Group extends GroupToken {
 	
 	public ThirdLevelB1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -726,7 +729,7 @@ protected class ThirdLevelB1_Group extends GroupToken {
 
 }
 
-// "B1"
+// 'B1'
 protected class ThirdLevelB1_B1Keyword_0 extends KeywordToken  {
 	
 	public ThirdLevelB1_B1Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -815,11 +818,11 @@ protected class ThirdLevelB1_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule ThirdLevelB2 ****************
  *
  * ThirdLevelB2:
- * 	"B2" {ThirdLevelB2} name=ID?;
+ * 	'B2' {ThirdLevelB2} name=ID?;
  *
  **/
 
-// "B2" {ThirdLevelB2} name=ID?
+// 'B2' {ThirdLevelB2} name=ID?
 protected class ThirdLevelB2_Group extends GroupToken {
 	
 	public ThirdLevelB2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -849,7 +852,7 @@ protected class ThirdLevelB2_Group extends GroupToken {
 
 }
 
-// "B2"
+// 'B2'
 protected class ThirdLevelB2_B2Keyword_0 extends KeywordToken  {
 	
 	public ThirdLevelB2_B2Keyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

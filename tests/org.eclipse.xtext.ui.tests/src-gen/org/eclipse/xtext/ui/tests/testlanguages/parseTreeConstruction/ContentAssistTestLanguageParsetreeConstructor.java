@@ -44,7 +44,9 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Start ****************
  *
  * Start:
- * 	"abstract rules" rules+=AbstractRule+ "end";
+ * 	"abstract rules"
+ * 	rules+=AbstractRule+
+ * 	"end";
  *
  **/
 
@@ -288,11 +290,11 @@ protected class AbstractRule_SecondAbstractRuleChildParserRuleCall_1 extends Rul
 /************ begin Rule FirstAbstractRuleChild ****************
  *
  * FirstAbstractRuleChild:
- * 	name=ID "(" elements+=AbstractRule+ ")" ";";
+ * 	name=ID '(' elements+=AbstractRule+ ')' ';';
  *
  **/
 
-// name=ID "(" elements+=AbstractRule+ ")" ";"
+// name=ID '(' elements+=AbstractRule+ ')' ';'
 protected class FirstAbstractRuleChild_Group extends GroupToken {
 	
 	public FirstAbstractRuleChild_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -354,7 +356,7 @@ protected class FirstAbstractRuleChild_NameAssignment_0 extends AssignmentToken 
 
 }
 
-// "("
+// '('
 protected class FirstAbstractRuleChild_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
 	public FirstAbstractRuleChild_LeftParenthesisKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -423,7 +425,7 @@ protected class FirstAbstractRuleChild_ElementsAssignment_2 extends AssignmentTo
 	}	
 }
 
-// ")"
+// ')'
 protected class FirstAbstractRuleChild_RightParenthesisKeyword_3 extends KeywordToken  {
 	
 	public FirstAbstractRuleChild_RightParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -445,7 +447,7 @@ protected class FirstAbstractRuleChild_RightParenthesisKeyword_3 extends Keyword
 
 }
 
-// ";"
+// ';'
 protected class FirstAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken  {
 	
 	public FirstAbstractRuleChild_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -474,11 +476,11 @@ protected class FirstAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken  
 /************ begin Rule SecondAbstractRuleChild ****************
  *
  * SecondAbstractRuleChild:
- * 	name=ID "rule" ":" rule=AbstractRuleCall ";";
+ * 	name=ID 'rule' ':' rule=AbstractRuleCall ';';
  *
  **/
 
-// name=ID "rule" ":" rule=AbstractRuleCall ";"
+// name=ID 'rule' ':' rule=AbstractRuleCall ';'
 protected class SecondAbstractRuleChild_Group extends GroupToken {
 	
 	public SecondAbstractRuleChild_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -540,7 +542,7 @@ protected class SecondAbstractRuleChild_NameAssignment_0 extends AssignmentToken
 
 }
 
-// "rule"
+// 'rule'
 protected class SecondAbstractRuleChild_RuleKeyword_1 extends KeywordToken  {
 	
 	public SecondAbstractRuleChild_RuleKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -562,7 +564,7 @@ protected class SecondAbstractRuleChild_RuleKeyword_1 extends KeywordToken  {
 
 }
 
-// ":"
+// ':'
 protected class SecondAbstractRuleChild_ColonKeyword_2 extends KeywordToken  {
 	
 	public SecondAbstractRuleChild_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -630,7 +632,7 @@ protected class SecondAbstractRuleChild_RuleAssignment_3 extends AssignmentToken
 	}	
 }
 
-// ";"
+// ';'
 protected class SecondAbstractRuleChild_SemicolonKeyword_4 extends KeywordToken  {
 	
 	public SecondAbstractRuleChild_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

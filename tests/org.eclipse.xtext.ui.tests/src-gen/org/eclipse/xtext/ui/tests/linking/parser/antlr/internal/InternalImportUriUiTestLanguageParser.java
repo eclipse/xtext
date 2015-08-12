@@ -162,7 +162,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"imports",
             	            		lv_imports_0_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -211,7 +211,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"types",
             	            		lv_types_1_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -321,7 +321,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"importURI",
                     		lv_importURI_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -426,7 +426,7 @@ public class InternalImportUriUiTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

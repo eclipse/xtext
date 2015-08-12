@@ -151,7 +151,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"stmt",
                     		lv_stmt_0_0, 
-                    		"CopyFieldNameToVariableStmt");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.CopyFieldNameToVariableStmt");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -268,16 +268,16 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
                 int alt1=4;
                 int LA1_0 = input.LA(1);
 
-                if ( LA1_0 ==12 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2) ) ) {
+                if ( LA1_0 == 12 && ( getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1) || getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2) ) ) {
                     int LA1_2 = input.LA(2);
 
-                    if ( LA1_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2) ) {
+                    if ( LA1_2 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2) ) {
                         alt1=3;
                     }
-                    else if ( LA1_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1) ) {
+                    else if ( LA1_2 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1) ) {
                         alt1=2;
                     }
-                    else if ( LA1_2 ==13 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0) ) {
+                    else if ( LA1_2 == 13 && getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0) ) {
                         alt1=1;
                     }
 
@@ -344,7 +344,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"line",
             	            		lv_line_6_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -374,7 +374,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"column",
             	            		lv_column_8_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -458,7 +458,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"name",
             	            		lv_name_13_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }

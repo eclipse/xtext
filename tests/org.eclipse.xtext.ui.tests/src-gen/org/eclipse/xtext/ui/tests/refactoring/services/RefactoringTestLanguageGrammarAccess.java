@@ -19,7 +19,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	
 	public class MainElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Main");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.Main");
 		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementsAbstractElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class AbstractElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractElement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.AbstractElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cElementParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cImportParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -55,20 +55,20 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportedNamespaceFQNWithWCParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importedNamespace=FQNWithWC;
+		//	'import' importedNamespace=FQNWithWC;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=FQNWithWC
+		//'import' importedNamespace=FQNWithWC
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//importedNamespace=FQNWithWC
@@ -79,7 +79,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -96,10 +96,10 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//Element:
-		//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
+		//	name=ID ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
+		//name=ID ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -108,13 +108,13 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
+		//('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 
-		//(contained+=Element | "ref" referenced+=[Element|FQN])*
+		//(contained+=Element | 'ref' referenced+=[Element|FQN])*
 		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
 
 		//contained+=Element
@@ -123,10 +123,10 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//Element
 		public RuleCall getContainedElementParserRuleCall_1_1_0_0() { return cContainedElementParserRuleCall_1_1_0_0; }
 
-		//"ref" referenced+=[Element|FQN]
+		//'ref' referenced+=[Element|FQN]
 		public Group getGroup_1_1_1() { return cGroup_1_1_1; }
 
-		//"ref"
+		//'ref'
 		public Keyword getRefKeyword_1_1_1_0() { return cRefKeyword_1_1_1_0; }
 
 		//referenced+=[Element|FQN]
@@ -138,12 +138,12 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		//FQN
 		public RuleCall getReferencedElementFQNParserRuleCall_1_1_1_1_0_1() { return cReferencedElementFQNParserRuleCall_1_1_1_1_0_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -151,19 +151,19 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -171,22 +171,22 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class FQNWithWCElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQNWithWC");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.FQNWithWC");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cFQNParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cFullStopAsteriskKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//FQNWithWC:
-		//	FQN ".*"?;
+		//	FQN '.*'?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//FQN ".*"?
+		//FQN '.*'?
 		public Group getGroup() { return cGroup; }
 
 		//FQN
 		public RuleCall getFQNParserRuleCall_0() { return cFQNParserRuleCall_0; }
 
-		//".*"?
+		//'.*'?
 		public Keyword getFullStopAsteriskKeyword_1() { return cFullStopAsteriskKeyword_1; }
 	}
 	
@@ -263,7 +263,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Import:
-	//	"import" importedNamespace=FQNWithWC;
+	//	'import' importedNamespace=FQNWithWC;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -273,7 +273,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Element:
-	//	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
+	//	name=ID ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -283,7 +283,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//FQN:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -293,7 +293,7 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//FQNWithWC:
-	//	FQN ".*"?;
+	//	FQN '.*'?;
 	public FQNWithWCElements getFQNWithWCAccess() {
 		return pFQNWithWC;
 	}
@@ -303,38 +303,38 @@ public class RefactoringTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

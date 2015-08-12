@@ -156,7 +156,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"childs",
             	            		lv_childs_0_0, 
-            	            		"Child");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Child");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -270,7 +270,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }

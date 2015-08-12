@@ -160,7 +160,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"AbstractElement");
+            	            		"org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.AbstractElement");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -397,7 +397,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"importedNamespace",
                     		lv_importedNamespace_1_0, 
-                    		"FQNWithWC");
+                    		"org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.FQNWithWC");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -501,7 +501,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -564,7 +564,7 @@ public class InternalRefactoringTestLanguageParser extends AbstractInternalAntlr
                     	           			current, 
                     	           			"contained",
                     	            		lv_contained_2_0, 
-                    	            		"Element");
+                    	            		"org.eclipse.xtext.ui.tests.refactoring.RefactoringTestLanguage.Element");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 

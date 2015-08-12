@@ -90,7 +90,7 @@ ruleFile returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_0_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -197,7 +197,7 @@ ruleSExpression returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -224,7 +224,7 @@ ruleSExpression returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_5_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -267,7 +267,7 @@ ruleAtom returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"VALUE");
+        		"org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage.VALUE");
 	        afterParserOrEnumRuleCall();
 	    }
 

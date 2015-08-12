@@ -19,7 +19,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	
 	
 	public class FirstLevelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstLevel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.FirstLevel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSecondLevelAAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cSecondLevelASecondLevelAParserRuleCall_0_0 = (RuleCall)cSecondLevelAAssignment_0.eContents().get(0);
@@ -27,7 +27,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cSecondLevelBSecondLevelBParserRuleCall_1_0 = (RuleCall)cSecondLevelBAssignment_1.eContents().get(0);
 		
 		//FirstLevel:
-		//	secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
+		//	secondLevelA+=SecondLevelA*
+		//	secondLevelB+=SecondLevelB*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*
@@ -47,7 +48,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class SecondLevelAElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondLevelA");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.SecondLevelA");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cThirdLevelA1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cThirdLevelA1ThirdLevelA1ParserRuleCall_0_0 = (RuleCall)cThirdLevelA1Assignment_0.eContents().get(0);
@@ -55,7 +56,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cThirdLevelA2ThirdLevelA2ParserRuleCall_1_0 = (RuleCall)cThirdLevelA2Assignment_1.eContents().get(0);
 		
 		//SecondLevelA:
-		//	thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
+		//	thirdLevelA1+=ThirdLevelA1+
+		//	thirdLevelA2+=ThirdLevelA2+;
 		@Override public ParserRule getRule() { return rule; }
 
 		//thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+
@@ -75,7 +77,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class SecondLevelBElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondLevelB");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.SecondLevelB");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cThirdLevelB1Assignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cThirdLevelB1ThirdLevelB1ParserRuleCall_0_0 = (RuleCall)cThirdLevelB1Assignment_0.eContents().get(0);
@@ -83,7 +85,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cThirdLevelB2ThirdLevelB2ParserRuleCall_1_0 = (RuleCall)cThirdLevelB2Assignment_1.eContents().get(0);
 		
 		//SecondLevelB:
-		//	thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
+		//	thirdLevelB1+=ThirdLevelB1+
+		//	thirdLevelB2+=ThirdLevelB2+;
 		@Override public ParserRule getRule() { return rule; }
 
 		//thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+
@@ -103,7 +106,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class ThirdLevelA1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelA1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelA1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cA1Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cThirdLevelA1Action_1 = (Action)cGroup.eContents().get(1);
@@ -111,13 +114,13 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ThirdLevelA1:
-		//	"A1" {ThirdLevelA1} name=ID?;
+		//	'A1' {ThirdLevelA1} name=ID?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"A1" {ThirdLevelA1} name=ID?
+		//'A1' {ThirdLevelA1} name=ID?
 		public Group getGroup() { return cGroup; }
 
-		//"A1"
+		//'A1'
 		public Keyword getA1Keyword_0() { return cA1Keyword_0; }
 
 		//{ThirdLevelA1}
@@ -131,7 +134,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class ThirdLevelA2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelA2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelA2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cA2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cThirdLevelA2Action_1 = (Action)cGroup.eContents().get(1);
@@ -139,13 +142,13 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ThirdLevelA2:
-		//	"A2" {ThirdLevelA2} name=ID?;
+		//	'A2' {ThirdLevelA2} name=ID?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"A2" {ThirdLevelA2} name=ID?
+		//'A2' {ThirdLevelA2} name=ID?
 		public Group getGroup() { return cGroup; }
 
-		//"A2"
+		//'A2'
 		public Keyword getA2Keyword_0() { return cA2Keyword_0; }
 
 		//{ThirdLevelA2}
@@ -159,7 +162,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class ThirdLevelB1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelB1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelB1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cB1Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cThirdLevelB1Action_1 = (Action)cGroup.eContents().get(1);
@@ -167,13 +170,13 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ThirdLevelB1:
-		//	"B1" {ThirdLevelB1} name=ID?;
+		//	'B1' {ThirdLevelB1} name=ID?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"B1" {ThirdLevelB1} name=ID?
+		//'B1' {ThirdLevelB1} name=ID?
 		public Group getGroup() { return cGroup; }
 
-		//"B1"
+		//'B1'
 		public Keyword getB1Keyword_0() { return cB1Keyword_0; }
 
 		//{ThirdLevelB1}
@@ -187,7 +190,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	public class ThirdLevelB2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ThirdLevelB2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelB2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cB2Keyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cThirdLevelB2Action_1 = (Action)cGroup.eContents().get(1);
@@ -195,13 +198,13 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//ThirdLevelB2:
-		//	"B2" {ThirdLevelB2} name=ID?;
+		//	'B2' {ThirdLevelB2} name=ID?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"B2" {ThirdLevelB2} name=ID?
+		//'B2' {ThirdLevelB2} name=ID?
 		public Group getGroup() { return cGroup; }
 
-		//"B2"
+		//'B2'
 		public Keyword getB2Keyword_0() { return cB2Keyword_0; }
 
 		//{ThirdLevelB2}
@@ -269,7 +272,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 
 	
 	//FirstLevel:
-	//	secondLevelA+=SecondLevelA* secondLevelB+=SecondLevelB*;
+	//	secondLevelA+=SecondLevelA*
+	//	secondLevelB+=SecondLevelB*;
 	public FirstLevelElements getFirstLevelAccess() {
 		return pFirstLevel;
 	}
@@ -279,7 +283,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//SecondLevelA:
-	//	thirdLevelA1+=ThirdLevelA1+ thirdLevelA2+=ThirdLevelA2+;
+	//	thirdLevelA1+=ThirdLevelA1+
+	//	thirdLevelA2+=ThirdLevelA2+;
 	public SecondLevelAElements getSecondLevelAAccess() {
 		return pSecondLevelA;
 	}
@@ -289,7 +294,8 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//SecondLevelB:
-	//	thirdLevelB1+=ThirdLevelB1+ thirdLevelB2+=ThirdLevelB2+;
+	//	thirdLevelB1+=ThirdLevelB1+
+	//	thirdLevelB2+=ThirdLevelB2+;
 	public SecondLevelBElements getSecondLevelBAccess() {
 		return pSecondLevelB;
 	}
@@ -299,7 +305,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//ThirdLevelA1:
-	//	"A1" {ThirdLevelA1} name=ID?;
+	//	'A1' {ThirdLevelA1} name=ID?;
 	public ThirdLevelA1Elements getThirdLevelA1Access() {
 		return pThirdLevelA1;
 	}
@@ -309,7 +315,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//ThirdLevelA2:
-	//	"A2" {ThirdLevelA2} name=ID?;
+	//	'A2' {ThirdLevelA2} name=ID?;
 	public ThirdLevelA2Elements getThirdLevelA2Access() {
 		return pThirdLevelA2;
 	}
@@ -319,7 +325,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//ThirdLevelB1:
-	//	"B1" {ThirdLevelB1} name=ID?;
+	//	'B1' {ThirdLevelB1} name=ID?;
 	public ThirdLevelB1Elements getThirdLevelB1Access() {
 		return pThirdLevelB1;
 	}
@@ -329,7 +335,7 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//ThirdLevelB2:
-	//	"B2" {ThirdLevelB2} name=ID?;
+	//	'B2' {ThirdLevelB2} name=ID?;
 	public ThirdLevelB2Elements getThirdLevelB2Access() {
 		return pThirdLevelB2;
 	}
@@ -339,38 +345,38 @@ public class ContentAssistContextTestLanguageGrammarAccess extends AbstractGramm
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

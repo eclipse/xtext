@@ -100,7 +100,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"INT0");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.INT0");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"classes",
         		lv_classes_6_0, 
-        		"Abstract");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Abstract");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -152,7 +152,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"classes",
         		lv_classes_8_0, 
-        		"Abstract");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Abstract");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -178,7 +178,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"concrete0",
         		lv_concrete0_11_0, 
-        		"Concrete0");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Concrete0");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -348,7 +348,7 @@ ruleConcrete0_Impl returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"EString");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -433,7 +433,7 @@ ruleConcrete1_Impl returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"EString");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -482,7 +482,7 @@ ruleDiamondInheritance returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"EString");
+        		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
 	        afterParserOrEnumRuleCall();
 	    }
 

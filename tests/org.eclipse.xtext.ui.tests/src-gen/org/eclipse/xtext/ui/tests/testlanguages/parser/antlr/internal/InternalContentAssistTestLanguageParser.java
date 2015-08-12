@@ -171,7 +171,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"rules",
             	            		lv_rules_1_0, 
-            	            		"AbstractRule");
+            	            		"org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.AbstractRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -424,7 +424,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -471,7 +471,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
             	           			current, 
             	           			"elements",
             	            		lv_elements_2_0, 
-            	            		"AbstractRule");
+            	            		"org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.AbstractRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -593,7 +593,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -631,7 +631,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalAnt
                    			current, 
                    			"rule",
                     		lv_rule_3_0, 
-                    		"AbstractRuleCall");
+                    		"org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.AbstractRuleCall");
             	        afterParserOrEnumRuleCall();
             	    
 

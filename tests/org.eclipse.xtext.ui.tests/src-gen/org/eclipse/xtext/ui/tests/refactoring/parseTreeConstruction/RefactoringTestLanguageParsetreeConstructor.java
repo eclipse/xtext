@@ -213,11 +213,11 @@ protected class AbstractElement_ImportParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" importedNamespace=FQNWithWC;
+ * 	'import' importedNamespace=FQNWithWC;
  *
  **/
 
-// "import" importedNamespace=FQNWithWC
+// 'import' importedNamespace=FQNWithWC
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -246,7 +246,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -308,11 +308,11 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?;
+ * 	name=ID ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?;
  *
  **/
 
-// name=ID ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
+// name=ID ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -375,7 +375,7 @@ protected class Element_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("{" (contained+=Element | "ref" referenced+=[Element|FQN])* "}")?
+// ('{' (contained+=Element | 'ref' referenced+=[Element|FQN])* '}')?
 protected class Element_Group_1 extends GroupToken {
 	
 	public Element_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -397,7 +397,7 @@ protected class Element_Group_1 extends GroupToken {
 
 }
 
-// "{"
+// '{'
 protected class Element_LeftCurlyBracketKeyword_1_0 extends KeywordToken  {
 	
 	public Element_LeftCurlyBracketKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -419,7 +419,7 @@ protected class Element_LeftCurlyBracketKeyword_1_0 extends KeywordToken  {
 
 }
 
-// (contained+=Element | "ref" referenced+=[Element|FQN])*
+// (contained+=Element | 'ref' referenced+=[Element|FQN])*
 protected class Element_Alternatives_1_1 extends AlternativesToken {
 
 	public Element_Alternatives_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -489,7 +489,7 @@ protected class Element_ContainedAssignment_1_1_0 extends AssignmentToken  {
 	}	
 }
 
-// "ref" referenced+=[Element|FQN]
+// 'ref' referenced+=[Element|FQN]
 protected class Element_Group_1_1_1 extends GroupToken {
 	
 	public Element_Group_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -511,7 +511,7 @@ protected class Element_Group_1_1_1 extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Element_RefKeyword_1_1_1_0 extends KeywordToken  {
 	
 	public Element_RefKeyword_1_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -573,7 +573,7 @@ protected class Element_ReferencedAssignment_1_1_1_1 extends AssignmentToken  {
 
 
 
-// "}"
+// '}'
 protected class Element_RightCurlyBracketKeyword_1_2 extends KeywordToken  {
 	
 	public Element_RightCurlyBracketKeyword_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

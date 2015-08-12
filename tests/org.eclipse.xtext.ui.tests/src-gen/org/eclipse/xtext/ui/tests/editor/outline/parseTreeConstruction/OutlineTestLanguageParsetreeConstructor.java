@@ -97,11 +97,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	name=ID ("(" xrefs+=[Element]* ")")? "{" children+=Element* "}";
+ * 	name=ID ('(' xrefs+=[Element]* ')')? '{' children+=Element* '}';
  *
  **/
 
-// name=ID ("(" xrefs+=[Element]* ")")? "{" children+=Element* "}"
+// name=ID ('(' xrefs+=[Element]* ')')? '{' children+=Element* '}'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -163,7 +163,7 @@ protected class Element_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("(" xrefs+=[Element]* ")")?
+// ('(' xrefs+=[Element]* ')')?
 protected class Element_Group_1 extends GroupToken {
 	
 	public Element_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -185,7 +185,7 @@ protected class Element_Group_1 extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class Element_LeftParenthesisKeyword_1_0 extends KeywordToken  {
 	
 	public Element_LeftParenthesisKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -245,7 +245,7 @@ protected class Element_XrefsAssignment_1_1 extends AssignmentToken  {
 
 }
 
-// ")"
+// ')'
 protected class Element_RightParenthesisKeyword_1_2 extends KeywordToken  {
 	
 	public Element_RightParenthesisKeyword_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -268,7 +268,7 @@ protected class Element_RightParenthesisKeyword_1_2 extends KeywordToken  {
 }
 
 
-// "{"
+// '{'
 protected class Element_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Element_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -338,7 +338,7 @@ protected class Element_ChildrenAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Element_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Element_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

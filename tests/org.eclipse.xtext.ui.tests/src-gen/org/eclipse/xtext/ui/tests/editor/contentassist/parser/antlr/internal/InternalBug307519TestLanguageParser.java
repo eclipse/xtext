@@ -187,7 +187,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"e1",
             	            		lv_e1_0_0, 
-            	            		"Elem1");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -224,7 +224,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"e2",
             	            		lv_e2_1_0, 
-            	            		"Elem2");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem2");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -335,7 +335,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"EnumT");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.EnumT");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -439,7 +439,7 @@ public class InternalBug307519TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"EnumT");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.EnumT");
             	        afterParserOrEnumRuleCall();
             	    
 

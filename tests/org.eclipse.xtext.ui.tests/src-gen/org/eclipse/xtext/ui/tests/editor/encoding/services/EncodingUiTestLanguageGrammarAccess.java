@@ -18,7 +18,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Model");
 		private final Assignment cWordsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cWordsWordParserRuleCall_0 = (RuleCall)cWordsAssignment.eContents().get(0);
 		
@@ -34,7 +34,7 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 
 	public class WordElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Word");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Word");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueLEXEMETerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
@@ -63,9 +63,9 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pModel = new ModelElements();
 		this.pWord = new WordElements();
-		this.tLEXEME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LEXEME");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
+		this.tLEXEME = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.LEXEME");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -112,13 +112,13 @@ public class EncodingUiTestLanguageGrammarAccess extends AbstractGrammarElementF
 	}
 
 	//terminal LEXEME:
-	//	("a".."z" | "A".."Z" | "0".."9" | "ä" | "ö" | "ü" | "ß" | "Ä" | "Ö" | "Ü")*;
+	//	'a'..'z' | 'A'..'Z' | '0'..'9' | 'ä' | 'ö' | 'ü' | 'ß' | 'Ä' | 'Ö' | 'Ü'*;
 	public TerminalRule getLEXEMERule() {
 		return tLEXEME;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

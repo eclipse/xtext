@@ -19,7 +19,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.Model");
 		private final Assignment cTypesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cTypesTypeParserRuleCall_0 = (RuleCall)cTypesAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
@@ -49,13 +49,13 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Type:
-		//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
+		//	(name=FQN | name='FQN') ('extends' superType=TypeRef)? ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";"
+		//(name=FQN | name='FQN') ('extends' superType=TypeRef)? ';'
 		public Group getGroup() { return cGroup; }
 
-		//name=FQN | name="FQN"
+		//(name=FQN | name='FQN')
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//name=FQN
@@ -64,16 +64,16 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_0_0_0() { return cNameFQNParserRuleCall_0_0_0; }
 
-		//name="FQN"
+		//name='FQN'
 		public Assignment getNameAssignment_0_1() { return cNameAssignment_0_1; }
 
-		//"FQN"
+		//'FQN'
 		public Keyword getNameFQNKeyword_0_1_0() { return cNameFQNKeyword_0_1_0; }
 
-		//("extends" superType=TypeRef)?
+		//('extends' superType=TypeRef)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_1_0() { return cExtendsKeyword_1_0; }
 
 		//superType=TypeRef
@@ -82,12 +82,12 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		//TypeRef
 		public RuleCall getSuperTypeTypeRefParserRuleCall_1_1_0() { return cSuperTypeTypeRefParserRuleCall_1_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class TypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.TypeRef");
 		private final Assignment cTypeAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cTypeTypeCrossReference_0 = (CrossReference)cTypeAssignment.eContents().get(0);
 		private final RuleCall cTypeTypeFQNParserRuleCall_0_1 = (RuleCall)cTypeTypeCrossReference_0.eContents().get(1);
@@ -107,7 +107,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -115,19 +115,19 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -193,7 +193,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//Type:
-	//	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
+	//	(name=FQN | name='FQN') ('extends' superType=TypeRef)? ';';
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -213,7 +213,7 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//FQN:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -223,38 +223,38 @@ public class ContentAssistCustomizingTestLanguageGrammarAccess extends AbstractG
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

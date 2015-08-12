@@ -98,13 +98,13 @@ protected class Model_StmtAssignment extends AssignmentToken  {
 /************ begin Rule CopyFieldNameToVariableStmt ****************
  *
  * CopyFieldNameToVariableStmt:
- * 	"FIELD-NAME-TO-VARIABLE" ("," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "="
- * 	"REPLACE")?);
+ * 	'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & ',' 'TYPE' '='
+ * 	'REPLACE'?);
  *
  **/
 
-// "FIELD-NAME-TO-VARIABLE" ("," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "="
-// "REPLACE")?)
+// 'FIELD-NAME-TO-VARIABLE' (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & ',' 'TYPE' '='
+// 'REPLACE'?)
 protected class CopyFieldNameToVariableStmt_Group extends GroupToken {
 	
 	public CopyFieldNameToVariableStmt_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -133,7 +133,7 @@ protected class CopyFieldNameToVariableStmt_Group extends GroupToken {
 
 }
 
-// "FIELD-NAME-TO-VARIABLE"
+// 'FIELD-NAME-TO-VARIABLE'
 protected class CopyFieldNameToVariableStmt_FIELDNAMETOVARIABLEKeyword_0 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_FIELDNAMETOVARIABLEKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -154,7 +154,7 @@ protected class CopyFieldNameToVariableStmt_FIELDNAMETOVARIABLEKeyword_0 extends
 
 }
 
-// "," "SCREEN" "=" "(" line=INT "," column=INT ")" & "," "VAR" "=" name=ID & ("," "TYPE" "=" "REPLACE")?
+// (',' 'SCREEN' '=' '(' line=INT ',' column=INT ')' & ',' 'VAR' '=' name=ID & ',' 'TYPE' '=' 'REPLACE'?)
 protected class CopyFieldNameToVariableStmt_UnorderedGroup_1 extends UnorderedGroupToken {
 	
 	public CopyFieldNameToVariableStmt_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -176,7 +176,7 @@ protected class CopyFieldNameToVariableStmt_UnorderedGroup_1 extends UnorderedGr
 
 }
 
-// "," "SCREEN" "=" "(" line=INT "," column=INT ")"
+// ',' 'SCREEN' '=' '(' line=INT ',' column=INT ')'
 protected class CopyFieldNameToVariableStmt_Group_1_0 extends GroupToken {
 	
 	public CopyFieldNameToVariableStmt_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -198,7 +198,7 @@ protected class CopyFieldNameToVariableStmt_Group_1_0 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class CopyFieldNameToVariableStmt_CommaKeyword_1_0_0 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_CommaKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -220,7 +220,7 @@ protected class CopyFieldNameToVariableStmt_CommaKeyword_1_0_0 extends KeywordTo
 
 }
 
-// "SCREEN"
+// 'SCREEN'
 protected class CopyFieldNameToVariableStmt_SCREENKeyword_1_0_1 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_SCREENKeyword_1_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -242,7 +242,7 @@ protected class CopyFieldNameToVariableStmt_SCREENKeyword_1_0_1 extends KeywordT
 
 }
 
-// "="
+// '='
 protected class CopyFieldNameToVariableStmt_EqualsSignKeyword_1_0_2 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_EqualsSignKeyword_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -264,7 +264,7 @@ protected class CopyFieldNameToVariableStmt_EqualsSignKeyword_1_0_2 extends Keyw
 
 }
 
-// "("
+// '('
 protected class CopyFieldNameToVariableStmt_LeftParenthesisKeyword_1_0_3 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_LeftParenthesisKeyword_1_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -320,7 +320,7 @@ protected class CopyFieldNameToVariableStmt_LineAssignment_1_0_4 extends Assignm
 
 }
 
-// ","
+// ','
 protected class CopyFieldNameToVariableStmt_CommaKeyword_1_0_5 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_CommaKeyword_1_0_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -376,7 +376,7 @@ protected class CopyFieldNameToVariableStmt_ColumnAssignment_1_0_6 extends Assig
 
 }
 
-// ")"
+// ')'
 protected class CopyFieldNameToVariableStmt_RightParenthesisKeyword_1_0_7 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_RightParenthesisKeyword_1_0_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -399,7 +399,7 @@ protected class CopyFieldNameToVariableStmt_RightParenthesisKeyword_1_0_7 extend
 }
 
 
-// "," "VAR" "=" name=ID
+// ',' 'VAR' '=' name=ID
 protected class CopyFieldNameToVariableStmt_Group_1_1 extends GroupToken {
 	
 	public CopyFieldNameToVariableStmt_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -421,7 +421,7 @@ protected class CopyFieldNameToVariableStmt_Group_1_1 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class CopyFieldNameToVariableStmt_CommaKeyword_1_1_0 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_CommaKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -443,7 +443,7 @@ protected class CopyFieldNameToVariableStmt_CommaKeyword_1_1_0 extends KeywordTo
 
 }
 
-// "VAR"
+// 'VAR'
 protected class CopyFieldNameToVariableStmt_VARKeyword_1_1_1 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_VARKeyword_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -465,7 +465,7 @@ protected class CopyFieldNameToVariableStmt_VARKeyword_1_1_1 extends KeywordToke
 
 }
 
-// "="
+// '='
 protected class CopyFieldNameToVariableStmt_EqualsSignKeyword_1_1_2 extends KeywordToken  {
 	
 	public CopyFieldNameToVariableStmt_EqualsSignKeyword_1_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

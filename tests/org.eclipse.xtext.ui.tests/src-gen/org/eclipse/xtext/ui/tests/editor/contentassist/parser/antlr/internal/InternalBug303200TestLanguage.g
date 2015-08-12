@@ -109,7 +109,7 @@ ruleProgram returns [EObject current=null]
        			$current, 
        			"directives",
         		lv_directives_2_0, 
-        		"ProgramDirective");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ProgramDirective");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -198,7 +198,7 @@ ruleFunctionDefinition returns [EObject current=null]
        			$current, 
        			"attributes",
         		lv_attributes_0_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -225,7 +225,7 @@ ruleFunctionDefinition returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -246,7 +246,7 @@ ruleFunctionDefinition returns [EObject current=null]
        			$current, 
        			"params",
         		lv_params_5_0, 
-        		"Parameters");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Parameters");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -268,7 +268,7 @@ ruleFunctionDefinition returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_7_0, 
-        		"Block");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Block");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -308,7 +308,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"ident",
         		lv_ident_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -343,7 +343,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_4_0, 
-        		"PostfixExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -408,7 +408,7 @@ ruleParameters returns [EObject current=null]
        			$current, 
        			"params",
         		lv_params_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -438,7 +438,7 @@ ruleParameters returns [EObject current=null]
        			$current, 
        			"params",
         		lv_params_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -501,7 +501,7 @@ ruleBlock returns [EObject current=null]
        			$current, 
        			"directives",
         		lv_directives_3_0, 
-        		"Statement");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Statement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -570,7 +570,7 @@ ruleStatement returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_2_0, 
-        		"PostfixExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -643,7 +643,7 @@ rulePostfixExpression returns [EObject current=null]
        			$current, 
        			"property",
         		lv_property_3_0, 
-        		"PropertyOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PropertyOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -683,7 +683,7 @@ rulePostfixExpression returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_8_0, 
-        		"ListExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ListExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -730,7 +730,7 @@ ruleListExpression returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_0_0, 
-        		"PostfixExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -760,7 +760,7 @@ ruleListExpression returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_4_0, 
-        		"PostfixExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -808,7 +808,7 @@ rulePropertyOperator returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -834,7 +834,7 @@ rulePropertyOperator returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_5_0, 
-        		"ListExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ListExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -891,7 +891,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
 	    }
 
 )
@@ -926,7 +926,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"params",
         		lv_params_5_0, 
-        		"Parameters");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Parameters");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -948,7 +948,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_7_0, 
-        		"Block");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Block");
 	        afterParserOrEnumRuleCall();
 	    }
 

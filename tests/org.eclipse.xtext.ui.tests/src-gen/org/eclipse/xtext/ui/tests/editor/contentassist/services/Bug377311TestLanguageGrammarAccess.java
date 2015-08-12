@@ -19,7 +19,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Root");
 		private final Assignment cChildsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cChildsChildParserRuleCall_0 = (RuleCall)cChildsAssignment.eContents().get(0);
 		
@@ -35,20 +35,20 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ChildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Child");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChildKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
 		//Child hidden(WS, ID):
-		//	"child" name=STRING;
+		//	'child' name=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"child" name=STRING
+		//'child' name=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"child"
+		//'child'
 		public Keyword getChildKeyword_0() { return cChildKeyword_0; }
 
 		//name=STRING
@@ -75,8 +75,8 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.gaTerminals = gaTerminals;
 		this.pRoot = new RootElements();
 		this.pChild = new ChildElements();
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tNewLine = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NewLine");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.WS");
+		this.tNewLine = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.NewLine");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -117,7 +117,7 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Child hidden(WS, ID):
-	//	"child" name=STRING;
+	//	'child' name=STRING;
 	public ChildElements getChildAccess() {
 		return pChild;
 	}
@@ -127,44 +127,44 @@ public class Bug377311TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal WS:
-	//	(" " | "\t")+;
+	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 
 
-	/// * SuppressWarnings[InvalidTerminalRuleName] * / terminal NewLine:
-	//	"\r"? "\n";
+	//terminal NewLine:
+	//	'\r'? '\n';
 	public TerminalRule getNewLineRule() {
 		return tNewLine;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 

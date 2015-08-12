@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"types",
         		lv_types_0_0, 
-        		"Type");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -129,7 +129,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"FQN");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -167,7 +167,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"superType",
         		lv_superType_3_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 

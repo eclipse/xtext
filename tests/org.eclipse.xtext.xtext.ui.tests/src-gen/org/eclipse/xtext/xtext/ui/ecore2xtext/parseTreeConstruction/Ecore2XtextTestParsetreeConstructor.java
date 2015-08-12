@@ -45,13 +45,16 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- * 	{Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
- * 	concrete0=Concrete0)? "}";
+ * 	{Root}
+ * 	'Root'
+ * 	name=INT0
+ * 	'{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0' concrete0=Concrete0)?
+ * 	'}';
  *
  **/
 
-// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")? ("concrete0"
-// concrete0=Concrete0)? "}"
+// {Root} 'Root' name=INT0 '{' ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')? ('concrete0'
+// concrete0=Concrete0)? '}'
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -106,7 +109,7 @@ protected class Root_RootAction_0 extends ActionToken  {
 	}
 }
 
-// "Root"
+// 'Root'
 protected class Root_RootKeyword_1 extends KeywordToken  {
 	
 	public Root_RootKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -162,7 +165,7 @@ protected class Root_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Root_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Root_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -184,7 +187,7 @@ protected class Root_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")?
+// ('classes' '{' classes+=Abstract ("," classes+=Abstract)* '}')?
 protected class Root_Group_4 extends GroupToken {
 	
 	public Root_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -206,7 +209,7 @@ protected class Root_Group_4 extends GroupToken {
 
 }
 
-// "classes"
+// 'classes'
 protected class Root_ClassesKeyword_4_0 extends KeywordToken  {
 	
 	public Root_ClassesKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -228,7 +231,7 @@ protected class Root_ClassesKeyword_4_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Root_LeftCurlyBracketKeyword_4_1 extends KeywordToken  {
 	
 	public Root_LeftCurlyBracketKeyword_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -388,7 +391,7 @@ protected class Root_ClassesAssignment_4_3_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class Root_RightCurlyBracketKeyword_4_4 extends KeywordToken  {
 	
 	public Root_RightCurlyBracketKeyword_4_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -412,7 +415,7 @@ protected class Root_RightCurlyBracketKeyword_4_4 extends KeywordToken  {
 }
 
 
-// ("concrete0" concrete0=Concrete0)?
+// ('concrete0' concrete0=Concrete0)?
 protected class Root_Group_5 extends GroupToken {
 	
 	public Root_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -434,7 +437,7 @@ protected class Root_Group_5 extends GroupToken {
 
 }
 
-// "concrete0"
+// 'concrete0'
 protected class Root_Concrete0Keyword_5_0 extends KeywordToken  {
 	
 	public Root_Concrete0Keyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -504,7 +507,7 @@ protected class Root_Concrete0Assignment_5_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class Root_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	
 	public Root_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -801,12 +804,14 @@ protected class Concrete0_DiamondInheritanceParserRuleCall_1 extends RuleCallTok
 
 /************ begin Rule Concrete0_Impl ****************
  *
- * Concrete0_Impl returns Concrete0:
- * 	{Concrete0} "Concrete0" name=EString;
+ * Concrete0_Impl Concrete0:
+ * 	{Concrete0}
+ * 	'Concrete0'
+ * 	name=EString
  *
  **/
 
-// {Concrete0} "Concrete0" name=EString
+// {Concrete0} 'Concrete0' name=EString
 protected class Concrete0_Impl_Group extends GroupToken {
 	
 	public Concrete0_Impl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -861,7 +866,7 @@ protected class Concrete0_Impl_Concrete0Action_0 extends ActionToken  {
 	}
 }
 
-// "Concrete0"
+// 'Concrete0'
 protected class Concrete0_Impl_Concrete0Keyword_1 extends KeywordToken  {
 	
 	public Concrete0_Impl_Concrete0Keyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -924,12 +929,14 @@ protected class Concrete0_Impl_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Concrete1_Impl ****************
  *
- * Concrete1_Impl returns Concrete1:
- * 	{Concrete1} "Concrete1" name=EString;
+ * Concrete1_Impl Concrete1:
+ * 	{Concrete1}
+ * 	'Concrete1'
+ * 	name=EString
  *
  **/
 
-// {Concrete1} "Concrete1" name=EString
+// {Concrete1} 'Concrete1' name=EString
 protected class Concrete1_Impl_Group extends GroupToken {
 	
 	public Concrete1_Impl_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -984,7 +991,7 @@ protected class Concrete1_Impl_Concrete1Action_0 extends ActionToken  {
 	}
 }
 
-// "Concrete1"
+// 'Concrete1'
 protected class Concrete1_Impl_Concrete1Keyword_1 extends KeywordToken  {
 	
 	public Concrete1_Impl_Concrete1Keyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1047,11 +1054,13 @@ protected class Concrete1_Impl_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule DiamondInheritance ****************
  *
  * DiamondInheritance:
- * 	{DiamondInheritance} "DiamondInheritance" name=EString;
+ * 	{DiamondInheritance}
+ * 	'DiamondInheritance'
+ * 	name=EString;
  *
  **/
 
-// {DiamondInheritance} "DiamondInheritance" name=EString
+// {DiamondInheritance} 'DiamondInheritance' name=EString
 protected class DiamondInheritance_Group extends GroupToken {
 	
 	public DiamondInheritance_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1106,7 +1115,7 @@ protected class DiamondInheritance_DiamondInheritanceAction_0 extends ActionToke
 	}
 }
 
-// "DiamondInheritance"
+// 'DiamondInheritance'
 protected class DiamondInheritance_DiamondInheritanceKeyword_1 extends KeywordToken  {
 	
 	public DiamondInheritance_DiamondInheritanceKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

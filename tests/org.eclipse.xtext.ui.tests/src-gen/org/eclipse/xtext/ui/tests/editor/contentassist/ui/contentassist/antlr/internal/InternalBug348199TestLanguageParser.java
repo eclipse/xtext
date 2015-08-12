@@ -17381,10 +17381,10 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
             int alt88=2;
             int LA88_0 = input.LA(1);
 
-            if ( LA88_0 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0) ) {
+            if ( LA88_0 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0) ) {
                 alt88=1;
             }
-            else if ( LA88_0 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1) ) {
+            else if ( LA88_0 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1) ) {
                 alt88=2;
             }
             else {
@@ -17528,10 +17528,10 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
             int alt89=2;
             int LA89_0 = input.LA(1);
 
-            if ( LA89_0 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0) ) {
+            if ( LA89_0 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0) ) {
                 alt89=1;
             }
-            else if ( LA89_0 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1) ) {
+            else if ( LA89_0 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1) ) {
                 alt89=1;
             }
             switch (alt89) {
@@ -20326,11 +20326,11 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         int index86_2 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA86_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+                        if ( LA86_2 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
 
-                        else if ( LA86_2 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
+                        else if ( LA86_2 == RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
 
-                        else if ( LA86_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
+                        else if ( LA86_2 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
 
                          
                         input.seek(index86_2);
@@ -20343,11 +20343,11 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         int index86_1 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA86_1 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
+                        if ( LA86_1 == RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 2;}
 
-                        else if ( LA86_1 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
+                        else if ( LA86_1 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 3;}
 
-                        else if ( LA86_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
+                        else if ( LA86_1 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 4;}
 
                          
                         input.seek(index86_1);
@@ -20360,7 +20360,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         int index86_0 = input.index();
                         input.rewind();
                         s = -1;
-                        if ( LA86_0 ==RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 1;}
+                        if ( LA86_0 == RULE_NL && ( getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) || getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) ) {s = 1;}
 
                          
                         input.seek(index86_0);
@@ -20441,9 +20441,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
 
                         else if ( (LA87_2==RULE_NL) ) {s = 2;}
 
-                        else if ( LA87_2 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
+                        else if ( LA87_2 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
 
-                        else if ( LA87_2 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
+                        else if ( LA87_2 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
 
                          
                         input.seek(index87_2);
@@ -20458,11 +20458,11 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalContent
                         s = -1;
                         if ( (LA87_1==RULE_NL) ) {s = 2;}
 
-                        else if ( LA87_1 ==17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
+                        else if ( LA87_1 == 17 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {s = 3;}
 
                         else if ( (LA87_1==16) ) {s = 4;}
 
-                        else if ( LA87_1 ==18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
+                        else if ( LA87_1 == 18 && getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {s = 5;}
 
                          
                         input.seek(index87_1);

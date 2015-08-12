@@ -41,8 +41,10 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule WorkflowElement ****************
  *
  * WorkflowElement:
- * 	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
- * 	children+=WorkflowElement* end=END_TAG;
+ * 	name=START_TAG attributes+=Attribute* END_TAG_SHORT
+ * 	| name=START_TAG attributes+=Attribute* GT
+ * 	children+=WorkflowElement*
+ * 	end=END_TAG;
  *
  **/
 

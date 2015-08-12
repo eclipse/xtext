@@ -97,11 +97,13 @@ protected class FoldingModel_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	"element" name=ID subelements+=Element* "end";
+ * 	'element' name=ID
+ * 	subelements+=Element*
+ * 	'end';
  *
  **/
 
-// "element" name=ID subelements+=Element* "end"
+// 'element' name=ID subelements+=Element* 'end'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -130,7 +132,7 @@ protected class Element_Group extends GroupToken {
 
 }
 
-// "element"
+// 'element'
 protected class Element_ElementKeyword_0 extends KeywordToken  {
 	
 	public Element_ElementKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -232,7 +234,7 @@ protected class Element_SubelementsAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// "end"
+// 'end'
 protected class Element_EndKeyword_3 extends KeywordToken  {
 	
 	public Element_EndKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

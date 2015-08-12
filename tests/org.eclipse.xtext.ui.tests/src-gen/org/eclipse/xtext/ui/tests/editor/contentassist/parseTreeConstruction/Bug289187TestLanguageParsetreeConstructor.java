@@ -99,17 +99,21 @@ protected class Model_ClassesAssignment extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- * 	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
- * 	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
- * 	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
- * 	operations+=Operation* "}";
+ * 	abstract?='abstract'?
+ * 	transient?='transient'?
+ * 	'class' name=ID ('extends' superClass=[Class])? ('implements' implementedInterfaces+=[Class] (',' 'implements'
+ * 	implementedInterfaces+=[Class])*)?
+ * 	'{' ('classNumber' '=' classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)?
+ * 	attributes+=Attribute*
+ * 	operations+=Operation*
+ * 	'}';
  *
  **/
 
-// abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
-// implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-// classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-// operations+=Operation* "}"
+// abstract?='abstract'? transient?='transient'? 'class' name=ID ('extends' superClass=[Class])? ('implements'
+// implementedInterfaces+=[Class] (',' 'implements' implementedInterfaces+=[Class])*)? '{' ('classNumber' '='
+// classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)? attributes+=Attribute*
+// operations+=Operation* '}'
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -138,7 +142,7 @@ protected class Class_Group extends GroupToken {
 
 }
 
-// abstract?="abstract"?
+// abstract?='abstract'?
 protected class Class_AbstractAssignment_0 extends AssignmentToken  {
 	
 	public Class_AbstractAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -171,7 +175,7 @@ protected class Class_AbstractAssignment_0 extends AssignmentToken  {
 
 }
 
-// transient?="transient"?
+// transient?='transient'?
 protected class Class_TransientAssignment_1 extends AssignmentToken  {
 	
 	public Class_TransientAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -205,7 +209,7 @@ protected class Class_TransientAssignment_1 extends AssignmentToken  {
 
 }
 
-// "class"
+// 'class'
 protected class Class_ClassKeyword_2 extends KeywordToken  {
 	
 	public Class_ClassKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -262,7 +266,7 @@ protected class Class_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// ("extends" superClass=[Class])?
+// ('extends' superClass=[Class])?
 protected class Class_Group_4 extends GroupToken {
 	
 	public Class_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -284,7 +288,7 @@ protected class Class_Group_4 extends GroupToken {
 
 }
 
-// "extends"
+// 'extends'
 protected class Class_ExtendsKeyword_4_0 extends KeywordToken  {
 	
 	public Class_ExtendsKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -344,7 +348,7 @@ protected class Class_SuperClassAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// ("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)?
+// ('implements' implementedInterfaces+=[Class] (',' 'implements' implementedInterfaces+=[Class])*)?
 protected class Class_Group_5 extends GroupToken {
 	
 	public Class_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -367,7 +371,7 @@ protected class Class_Group_5 extends GroupToken {
 
 }
 
-// "implements"
+// 'implements'
 protected class Class_ImplementsKeyword_5_0 extends KeywordToken  {
 	
 	public Class_ImplementsKeyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -427,7 +431,7 @@ protected class Class_ImplementedInterfacesAssignment_5_1 extends AssignmentToke
 
 }
 
-// ("," "implements" implementedInterfaces+=[Class])*
+// (',' 'implements' implementedInterfaces+=[Class])*
 protected class Class_Group_5_2 extends GroupToken {
 	
 	public Class_Group_5_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -449,7 +453,7 @@ protected class Class_Group_5_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Class_CommaKeyword_5_2_0 extends KeywordToken  {
 	
 	public Class_CommaKeyword_5_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -472,7 +476,7 @@ protected class Class_CommaKeyword_5_2_0 extends KeywordToken  {
 
 }
 
-// "implements"
+// 'implements'
 protected class Class_ImplementsKeyword_5_2_1 extends KeywordToken  {
 	
 	public Class_ImplementsKeyword_5_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -533,7 +537,7 @@ protected class Class_ImplementedInterfacesAssignment_5_2_2 extends AssignmentTo
 
 
 
-// "{"
+// '{'
 protected class Class_LeftCurlyBracketKeyword_6 extends KeywordToken  {
 	
 	public Class_LeftCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -557,7 +561,7 @@ protected class Class_LeftCurlyBracketKeyword_6 extends KeywordToken  {
 
 }
 
-// ("classNumber" "=" classNumber=INT)?
+// ('classNumber' '=' classNumber=INT)?
 protected class Class_Group_7 extends GroupToken {
 	
 	public Class_Group_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -579,7 +583,7 @@ protected class Class_Group_7 extends GroupToken {
 
 }
 
-// "classNumber"
+// 'classNumber'
 protected class Class_ClassNumberKeyword_7_0 extends KeywordToken  {
 	
 	public Class_ClassNumberKeyword_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -601,7 +605,7 @@ protected class Class_ClassNumberKeyword_7_0 extends KeywordToken  {
 
 }
 
-// "="
+// '='
 protected class Class_EqualsSignKeyword_7_1 extends KeywordToken  {
 	
 	public Class_EqualsSignKeyword_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -658,7 +662,7 @@ protected class Class_ClassNumberAssignment_7_2 extends AssignmentToken  {
 }
 
 
-// ("quid" "=" quid=INT)?
+// ('quid' '=' quid=INT)?
 protected class Class_Group_8 extends GroupToken {
 	
 	public Class_Group_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -680,7 +684,7 @@ protected class Class_Group_8 extends GroupToken {
 
 }
 
-// "quid"
+// 'quid'
 protected class Class_QuidKeyword_8_0 extends KeywordToken  {
 	
 	public Class_QuidKeyword_8_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -703,7 +707,7 @@ protected class Class_QuidKeyword_8_0 extends KeywordToken  {
 
 }
 
-// "="
+// '='
 protected class Class_EqualsSignKeyword_8_1 extends KeywordToken  {
 	
 	public Class_EqualsSignKeyword_8_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -760,7 +764,7 @@ protected class Class_QuidAssignment_8_2 extends AssignmentToken  {
 }
 
 
-// ("documentation" "=" documentation=STRING)?
+// ('documentation' '=' documentation=STRING)?
 protected class Class_Group_9 extends GroupToken {
 	
 	public Class_Group_9(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -782,7 +786,7 @@ protected class Class_Group_9 extends GroupToken {
 
 }
 
-// "documentation"
+// 'documentation'
 protected class Class_DocumentationKeyword_9_0 extends KeywordToken  {
 	
 	public Class_DocumentationKeyword_9_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -806,7 +810,7 @@ protected class Class_DocumentationKeyword_9_0 extends KeywordToken  {
 
 }
 
-// "="
+// '='
 protected class Class_EqualsSignKeyword_9_1 extends KeywordToken  {
 	
 	public Class_EqualsSignKeyword_9_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -964,7 +968,7 @@ protected class Class_OperationsAssignment_11 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Class_RightCurlyBracketKeyword_12 extends KeywordToken  {
 	
 	public Class_RightCurlyBracketKeyword_12(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -998,11 +1002,11 @@ protected class Class_RightCurlyBracketKeyword_12 extends KeywordToken  {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	visibility=Visibility? "attribute" name=ID;
+ * 	visibility=Visibility? 'attribute' name=ID;
  *
  **/
 
-// visibility=Visibility? "attribute" name=ID
+// visibility=Visibility? 'attribute' name=ID
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1064,7 +1068,7 @@ protected class Attribute_VisibilityAssignment_0 extends AssignmentToken  {
 
 }
 
-// "attribute"
+// 'attribute'
 protected class Attribute_AttributeKeyword_1 extends KeywordToken  {
 	
 	public Attribute_AttributeKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1127,11 +1131,11 @@ protected class Attribute_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule Operation ****************
  *
  * Operation:
- * 	visibility=Visibility? "operation" name=ID;
+ * 	visibility=Visibility? 'operation' name=ID;
  *
  **/
 
-// visibility=Visibility? "operation" name=ID
+// visibility=Visibility? 'operation' name=ID
 protected class Operation_Group extends GroupToken {
 	
 	public Operation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1193,7 +1197,7 @@ protected class Operation_VisibilityAssignment_0 extends AssignmentToken  {
 
 }
 
-// "operation"
+// 'operation'
 protected class Operation_OperationKeyword_1 extends KeywordToken  {
 	
 	public Operation_OperationKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

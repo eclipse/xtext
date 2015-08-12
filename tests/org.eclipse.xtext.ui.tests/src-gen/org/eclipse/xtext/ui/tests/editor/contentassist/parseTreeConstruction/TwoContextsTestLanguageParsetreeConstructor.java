@@ -97,11 +97,11 @@ protected class MainModel_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule AnElement ****************
  *
  * AnElement:
- * 	name=ID ("refersTo" referred=[AnElement])? ";";
+ * 	name=ID ('refersTo' referred=[AnElement])? ';';
  *
  **/
 
-// name=ID ("refersTo" referred=[AnElement])? ";"
+// name=ID ('refersTo' referred=[AnElement])? ';'
 protected class AnElement_Group extends GroupToken {
 	
 	public AnElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -163,7 +163,7 @@ protected class AnElement_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ("refersTo" referred=[AnElement])?
+// ('refersTo' referred=[AnElement])?
 protected class AnElement_Group_1 extends GroupToken {
 	
 	public AnElement_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -185,7 +185,7 @@ protected class AnElement_Group_1 extends GroupToken {
 
 }
 
-// "refersTo"
+// 'refersTo'
 protected class AnElement_RefersToKeyword_1_0 extends KeywordToken  {
 	
 	public AnElement_RefersToKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -245,7 +245,7 @@ protected class AnElement_ReferredAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// ";"
+// ';'
 protected class AnElement_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public AnElement_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

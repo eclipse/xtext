@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"classes",
         		lv_classes_0_0, 
-        		"Class");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Class");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -165,7 +165,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -250,7 +250,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"classNumber",
         		lv_classNumber_14_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -276,7 +276,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"quid",
         		lv_quid_17_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -302,7 +302,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"documentation",
         		lv_documentation_20_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -319,7 +319,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"attributes",
         		lv_attributes_21_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -337,7 +337,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_22_0, 
-        		"Operation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Operation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -380,7 +380,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"visibility",
         		lv_visibility_0_0, 
-        		"Visibility");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Visibility");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -403,7 +403,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -441,7 +441,7 @@ ruleOperation returns [EObject current=null]
        			$current, 
        			"visibility",
         		lv_visibility_0_0, 
-        		"Visibility");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Visibility");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -464,7 +464,7 @@ ruleOperation returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

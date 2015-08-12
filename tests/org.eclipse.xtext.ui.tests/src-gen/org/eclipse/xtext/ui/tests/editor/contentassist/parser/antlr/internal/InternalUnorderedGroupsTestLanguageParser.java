@@ -234,7 +234,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"first",
                             		lv_first_1_0, 
-                            		"SimpleModel");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.SimpleModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -281,7 +281,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"second",
                             		lv_second_3_0, 
-                            		"MandatoryModel");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.MandatoryModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -328,7 +328,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"thrird",
                             		lv_thrird_5_0, 
-                            		"LoopedModel");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -375,7 +375,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"forth",
                             		lv_forth_7_0, 
-                            		"GroupLoopedModel");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.GroupLoopedModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -422,7 +422,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"fifth",
                             		lv_fifth_9_0, 
-                            		"LoopedAlternativeModel");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedAlternativeModel");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -469,7 +469,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                            			current, 
                            			"model",
                             		lv_model_11_0, 
-                            		"Bug304681Model");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Model");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -584,16 +584,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                 int alt4=5;
                 int LA4_0 = input.LA(1);
 
-                if ( LA4_0 >=17 && LA4_0<=19 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0) ) {
+                if ( LA4_0 >= 17 && LA4_0 <= 19 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0) ) {
                     alt4=1;
                 }
-                else if ( LA4_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1) ) {
+                else if ( LA4_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1) ) {
                     alt4=2;
                 }
-                else if ( LA4_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2) ) {
+                else if ( LA4_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2) ) {
                     alt4=3;
                 }
-                else if ( LA4_0 >=22 && LA4_0<=23 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3) ) {
+                else if ( LA4_0 >= 22 && LA4_0 <= 23 && getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3) ) {
                     alt4=4;
                 }
 
@@ -992,7 +992,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_7_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1109,16 +1109,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                 int alt7=5;
                 int LA7_0 = input.LA(1);
 
-                if ( LA7_0 >=17 && LA7_0<=19 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0) ) {
+                if ( LA7_0 >= 17 && LA7_0 <= 19 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0) ) {
                     alt7=1;
                 }
-                else if ( LA7_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1) ) {
+                else if ( LA7_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1) ) {
                     alt7=2;
                 }
-                else if ( LA7_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2) ) {
+                else if ( LA7_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2) ) {
                     alt7=3;
                 }
-                else if ( LA7_0 >=22 && LA7_0<=23 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3) ) {
+                else if ( LA7_0 >= 22 && LA7_0 <= 23 && getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3) ) {
                     alt7=4;
                 }
 
@@ -1524,7 +1524,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_7_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1640,16 +1640,16 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                 int alt14=5;
                 int LA14_0 = input.LA(1);
 
-                if ( LA14_0 >=17 && LA14_0<=19 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0) ) {
+                if ( LA14_0 >= 17 && LA14_0 <= 19 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0) ) {
                     alt14=1;
                 }
-                else if ( LA14_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1) ) {
+                else if ( LA14_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1) ) {
                     alt14=2;
                 }
-                else if ( LA14_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2) ) {
+                else if ( LA14_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2) ) {
                     alt14=3;
                 }
-                else if ( LA14_0 >=22 && LA14_0<=23 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3) ) {
+                else if ( LA14_0 >= 22 && LA14_0 <= 23 && getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3) ) {
                     alt14=4;
                 }
 
@@ -2197,7 +2197,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_7_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2732,7 +2732,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_7_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3174,7 +3174,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_8_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3309,19 +3309,19 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                 int alt24=6;
                 int LA24_0 = input.LA(1);
 
-                if ( LA24_0 ==29 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
+                if ( LA24_0 == 29 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 0) ) {
                     alt24=1;
                 }
-                else if ( LA24_0 ==31 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
+                else if ( LA24_0 == 31 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 1) ) {
                     alt24=2;
                 }
-                else if ( LA24_0 ==32 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
+                else if ( LA24_0 == 32 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 2) ) {
                     alt24=3;
                 }
-                else if ( LA24_0 ==33 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
+                else if ( LA24_0 == 33 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 3) ) {
                     alt24=4;
                 }
-                else if ( LA24_0 >=34 && LA24_0<=35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
+                else if ( LA24_0 >= 34 && LA24_0 <= 35 && getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_2(), 4) ) {
                     alt24=5;
                 }
 
@@ -3373,7 +3373,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"shortDescription",
             	            		lv_shortDescription_4_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -3449,7 +3449,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"longDescription",
             	            		lv_longDescription_7_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -3525,7 +3525,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
             	           			current, 
             	           			"uid",
             	            		lv_uid_10_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -3694,7 +3694,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
             	    	           			current, 
             	    	           			"features",
             	    	            		lv_features_14_0, 
-            	    	            		"Bug304681Feature");
+            	    	            		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Feature");
             	    	    	        afterParserOrEnumRuleCall();
             	    	    	    
 
@@ -3971,7 +3971,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4079,7 +4079,7 @@ public class InternalUnorderedGroupsTestLanguageParser extends AbstractInternalA
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

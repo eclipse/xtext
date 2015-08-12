@@ -19,7 +19,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	
 	public class StartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Start");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.Start");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAbstractRulesKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRulesAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -27,7 +27,9 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cEndKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Start:
-		//	"abstract rules" rules+=AbstractRule+ "end";
+		//	"abstract rules"
+		//	rules+=AbstractRule+
+		//	"end";
 		@Override public ParserRule getRule() { return rule; }
 
 		//"abstract rules" rules+=AbstractRule+ "end"
@@ -47,7 +49,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	public class AbstractRuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRule");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.AbstractRule");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFirstAbstractRuleChildParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSecondAbstractRuleChildParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -67,7 +69,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	public class FirstAbstractRuleChildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstAbstractRuleChild");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.FirstAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -78,10 +80,10 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//FirstAbstractRuleChild:
-		//	name=ID "(" elements+=AbstractRule+ ")" ";";
+		//	name=ID '(' elements+=AbstractRule+ ')' ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID "(" elements+=AbstractRule+ ")" ";"
+		//name=ID '(' elements+=AbstractRule+ ')' ';'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -90,7 +92,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//elements+=AbstractRule+
@@ -99,15 +101,15 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//AbstractRule
 		public RuleCall getElementsAbstractRuleParserRuleCall_2_0() { return cElementsAbstractRuleParserRuleCall_2_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class SecondAbstractRuleChildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SecondAbstractRuleChild");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.SecondAbstractRuleChild");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -118,10 +120,10 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//SecondAbstractRuleChild:
-		//	name=ID "rule" ":" rule=AbstractRuleCall ";";
+		//	name=ID 'rule' ':' rule=AbstractRuleCall ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID "rule" ":" rule=AbstractRuleCall ";"
+		//name=ID 'rule' ':' rule=AbstractRuleCall ';'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -130,10 +132,10 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//"rule"
+		//'rule'
 		public Keyword getRuleKeyword_1() { return cRuleKeyword_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//rule=AbstractRuleCall
@@ -142,12 +144,12 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//AbstractRuleCall
 		public RuleCall getRuleAbstractRuleCallParserRuleCall_3_0() { return cRuleAbstractRuleCallParserRuleCall_3_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class AbstractRuleCallElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractRuleCall");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage.AbstractRuleCall");
 		private final Assignment cRuleAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cRuleAbstractRuleCrossReference_0 = (CrossReference)cRuleAssignment.eContents().get(0);
 		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_0.eContents().get(1);
@@ -217,7 +219,9 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 
 	
 	//Start:
-	//	"abstract rules" rules+=AbstractRule+ "end";
+	//	"abstract rules"
+	//	rules+=AbstractRule+
+	//	"end";
 	public StartElements getStartAccess() {
 		return pStart;
 	}
@@ -237,7 +241,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//FirstAbstractRuleChild:
-	//	name=ID "(" elements+=AbstractRule+ ")" ";";
+	//	name=ID '(' elements+=AbstractRule+ ')' ';';
 	public FirstAbstractRuleChildElements getFirstAbstractRuleChildAccess() {
 		return pFirstAbstractRuleChild;
 	}
@@ -247,7 +251,7 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//SecondAbstractRuleChild:
-	//	name=ID "rule" ":" rule=AbstractRuleCall ";";
+	//	name=ID 'rule' ':' rule=AbstractRuleCall ';';
 	public SecondAbstractRuleChildElements getSecondAbstractRuleChildAccess() {
 		return pSecondAbstractRuleChild;
 	}
@@ -267,38 +271,38 @@ public class ContentAssistTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

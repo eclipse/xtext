@@ -18,7 +18,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
@@ -26,7 +26,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cQueryMQLqueryParserRuleCall_1_0 = (RuleCall)cQueryAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	imports+=Import* query=MQLquery;
+		//	imports+=Import*
+		//	query=MQLquery;
 		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* query=MQLquery
@@ -46,20 +47,20 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importURI=STRING;
+		//	'import' importURI=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" importURI=STRING
+		//'import' importURI=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//importURI=STRING
@@ -70,7 +71,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class MQLqueryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MQLquery");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.MQLquery");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSelectKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cSelectEntriesAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -156,7 +157,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SelectEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SelectEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SelectEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cSelectAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cSelectFromEntryCrossReference_0_0 = (CrossReference)cSelectAssignment_0.eContents().get(0);
@@ -200,7 +201,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FromEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FromEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.FromEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cTypeEClassCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
@@ -252,7 +253,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ScopeClauseElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ScopeClause");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ScopeClause");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNotInAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cNotInNotKeyword_0_0 = (Keyword)cNotInAssignment_0.eContents().get(0);
@@ -284,7 +285,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ScopeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Scope");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Scope");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cResourceScopeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cElementScopeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -304,7 +305,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ResourceScopeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ResourceScope");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ResourceScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cResourcesKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -352,7 +353,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ElementScopeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ElementScope");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ElementScope");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cElementsKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -400,7 +401,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class WhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.WhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAndWhereEntryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -440,7 +441,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AndWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AndWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.AndWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cConcreteWhereEntryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -450,8 +451,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cEntriesAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cEntriesConcreteWhereEntryParserRuleCall_1_1_1_0 = (RuleCall)cEntriesAssignment_1_1_1.eContents().get(0);
 		
-		//AndWhereEntry returns WhereEntry:
-		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
+		//AndWhereEntry WhereEntry:
+		//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
 		@Override public ParserRule getRule() { return rule; }
 
 		//ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
@@ -480,7 +481,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ConcreteWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConcreteWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ConcreteWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cParWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAttributeWhereEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -489,9 +490,9 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cAliasWhereEntryParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cSubselectWhereEntryParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
-		//ConcreteWhereEntry returns WhereEntry:
+		//ConcreteWhereEntry WhereEntry:
 		//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
-		//	SubselectWhereEntry;
+		//	SubselectWhereEntry
 		@Override public ParserRule getRule() { return rule; }
 
 		//ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry | SubselectWhereEntry
@@ -517,14 +518,14 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ParWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ParWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cWhereEntryParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParWhereEntry returns WhereEntry:
-		//	"(" WhereEntry ")";
+		//ParWhereEntry WhereEntry:
+		//	"(" WhereEntry ")"
 		@Override public ParserRule getRule() { return rule; }
 
 		//"(" WhereEntry ")"
@@ -541,7 +542,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AttributeWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AttributeWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.AttributeWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNumericAttributeWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStringAttributeWhereEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -569,7 +570,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NumericAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumericAttributeWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericAttributeWhereEntry");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDoubleWhereEntryParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLongWhereEntryParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -589,7 +590,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DoubleWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DoubleWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.DoubleWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -645,7 +646,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class LongWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LongWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.LongWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -701,7 +702,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class VariableWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.VariableWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -779,7 +780,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class StringAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringAttributeWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.StringAttributeWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -835,7 +836,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class BooleanAttributeWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanAttributeWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanAttributeWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -885,7 +886,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//BooleanOperator
 		public RuleCall getOperatorBooleanOperatorEnumRuleCall_3_0() { return cOperatorBooleanOperatorEnumRuleCall_3_0; }
 
-		//isTrue?="true" | "false"
+		//(isTrue?="true" | "false")
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
 		//isTrue?="true"
@@ -899,7 +900,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class NullWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NullWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -951,7 +952,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ReferenceAliasWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReferenceAliasWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ReferenceAliasWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -1007,7 +1008,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SubselectWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubselectWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SubselectWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -1075,7 +1076,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AliasWhereEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AliasWhereEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.AliasWhereEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAliasAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cAliasFromEntryCrossReference_0_0 = (CrossReference)cAliasAssignment_0.eContents().get(0);
@@ -1116,7 +1117,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class NumericOperatorElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "NumericOperator");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLessThenEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cLessThenLessThanSignKeyword_0_0 = (Keyword)cLessThenEnumLiteralDeclaration_0.eContents().get(0);
@@ -1176,7 +1177,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class StringOperatorElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "StringOperator");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.StringOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cEqualEqualsSignKeyword_0_0 = (Keyword)cEqualEnumLiteralDeclaration_0.eContents().get(0);
@@ -1220,7 +1221,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class BooleanOperatorElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanOperator");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cEqualEqualsSignKeyword_0_0 = (Keyword)cEqualEnumLiteralDeclaration_0.eContents().get(0);
@@ -1314,13 +1315,13 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pReferenceAliasWhereEntry = new ReferenceAliasWhereEntryElements();
 		this.pSubselectWhereEntry = new SubselectWhereEntryElements();
 		this.pAliasWhereEntry = new AliasWhereEntryElements();
-		this.tSINGED_LONG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SINGED_LONG");
-		this.tSIGNED_DOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SIGNED_DOUBLE");
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
-		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
-		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tSINGED_LONG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SINGED_LONG");
+		this.tSIGNED_DOUBLE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SIGNED_DOUBLE");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ID");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ML_COMMENT");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1347,7 +1348,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	imports+=Import* query=MQLquery;
+	//	imports+=Import*
+	//	query=MQLquery;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -1357,7 +1359,7 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Import:
-	//	"import" importURI=STRING;
+	//	'import' importURI=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -1447,8 +1449,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getWhereEntryAccess().getRule();
 	}
 
-	//AndWhereEntry returns WhereEntry:
-	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
+	//AndWhereEntry WhereEntry:
+	//	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
 	public AndWhereEntryElements getAndWhereEntryAccess() {
 		return pAndWhereEntry;
 	}
@@ -1457,9 +1459,9 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getAndWhereEntryAccess().getRule();
 	}
 
-	//ConcreteWhereEntry returns WhereEntry:
+	//ConcreteWhereEntry WhereEntry:
 	//	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
-	//	SubselectWhereEntry;
+	//	SubselectWhereEntry
 	public ConcreteWhereEntryElements getConcreteWhereEntryAccess() {
 		return pConcreteWhereEntry;
 	}
@@ -1468,8 +1470,8 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getConcreteWhereEntryAccess().getRule();
 	}
 
-	//ParWhereEntry returns WhereEntry:
-	//	"(" WhereEntry ")";
+	//ParWhereEntry WhereEntry:
+	//	"(" WhereEntry ")"
 	public ParWhereEntryElements getParWhereEntryAccess() {
 		return pParWhereEntry;
 	}
@@ -1620,44 +1622,44 @@ public class Bug287941TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal SINGED_LONG returns ecore::ELong:
-	//	"-"? "0".."9"+;
+	//	'-'? '0'..'9'+;
 	public TerminalRule getSINGED_LONGRule() {
 		return tSINGED_LONG;
 	} 
 
 	//terminal SIGNED_DOUBLE returns ecore::EDouble:
-	//	"-"? "0".."9"+ ("." "0".."9"+)?;
+	//	'-'? '0'..'9'+ ('.' '0'..'9'+)?;
 	public TerminalRule getSIGNED_DOUBLERule() {
 		return tSIGNED_DOUBLE;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
+	//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

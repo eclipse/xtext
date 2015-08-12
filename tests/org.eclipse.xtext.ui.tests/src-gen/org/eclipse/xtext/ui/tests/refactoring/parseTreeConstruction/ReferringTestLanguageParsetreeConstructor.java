@@ -97,11 +97,11 @@ protected class Main_ReferencedAssignment extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- * 	"ref" referenced=[ecore::EObject|FQN];
+ * 	'ref' referenced=[ecore::EObject|FQN];
  *
  **/
 
-// "ref" referenced=[ecore::EObject|FQN]
+// 'ref' referenced=[ecore::EObject|FQN]
 protected class Reference_Group extends GroupToken {
 	
 	public Reference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -130,7 +130,7 @@ protected class Reference_Group extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Reference_RefKeyword_0 extends KeywordToken  {
 	
 	public Reference_RefKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -42,11 +42,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	(e1+=Elem1 | e2+=Elem2)+;
+ * 	e1+=Elem1 | e2+=Elem2+;
  *
  **/
 
-// (e1+=Elem1 | e2+=Elem2)+
+// e1+=Elem1 | e2+=Elem2+
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -19,7 +19,7 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class TimeperiodElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Timeperiod");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.Timeperiod");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTimeperiodAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cDefineKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -251,62 +251,97 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_7_5 = (Keyword)cGroup_3_7.eContents().get(5);
 		
 		//Timeperiod:
-		//	{Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+
-		//	time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+
-		//	"timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" |
-		//	"3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID
-		//	(NL+ time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
-		//	| NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-		//	name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+
-		//	(time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-		//	(time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
-		//	| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-		//	name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}");
+		//	{Timeperiod}
+		//	'define' 'timeperiod' ('1'
+		//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+		//	time+=TimeDef3)*?) NL+
+		//	'}'
+		//	|
+		//	'2'
+		//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//	time+=TimeDef3)*?) NL+
+		//	'}'
+		//	|
+		//	'3'
+		//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//	time+=TimeDef3)*)+
+		//	NL+
+		//	'}'
+		//	|
+		//	'4'
+		//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//	time+=TimeDef3)*)*
+		//	NL+
+		//	'}'
+		//	|
+		//	'5'
+		//	'{'
+		//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+
+		//	(time+=TimeDef3 NL+)*?)
+		//	'}'
+		//	|
+		//	'6'
+		//	'{'
+		//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//	(time+=TimeDef3 NL+)*?)
+		//	'}'
+		//	|
+		//	'7'
+		//	'{'
+		//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//	(time+=TimeDef3 NL+)*)+
+		//	'}'
+		//	|
+		//	'8'
+		//	'{'
+		//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//	(time+=TimeDef3 NL+)*)*
+		//	'}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
-		//& (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name"
-		//name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "3" "{" (NL+
-		//time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+
-		//"otherelement" alias+=ID (NL+ time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-		//name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+
-		//(time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
-		//| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-		//name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}")
+		//{Timeperiod} 'define' 'timeperiod' ('1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
+		//& NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
+		//name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '3' '{' (NL+
+		//time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*)+ NL+ '}' | '4' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+
+		//'otherelement' alias+=ID (NL+ time+=TimeDef3)*)* NL+ '}' | '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+		//name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '6' '{' NL+
+		//(time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*?) '}' | '7' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* |
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)+ '}' | '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+		//name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}')
 		public Group getGroup() { return cGroup; }
 
 		//{Timeperiod}
 		public Action getTimeperiodAction_0() { return cTimeperiodAction_0; }
 
-		//"define"
+		//'define'
 		public Keyword getDefineKeyword_1() { return cDefineKeyword_1; }
 
-		//"timeperiod"
+		//'timeperiod'
 		public Keyword getTimeperiodKeyword_2() { return cTimeperiodKeyword_2; }
 
-		//"1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* |
-		//(NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name"
-		//name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+
-		//time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* &
-		//("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-		//name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+
-		//(time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* |
-		//"otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}"
+		//('1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+
+		//'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
+		//name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)+ NL+ '}' | '4' '{' (NL+
+		//time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*)* NL+ '}' | '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* &
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '6' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+		//name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '7' '{' NL+
+		//(time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*)+ '}' | '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* |
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		//"1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)?) NL+ "}"
+		//'1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*?) NL+ '}'
 		public Group getGroup_3_0() { return cGroup_3_0; }
 
-		//"1"
+		//'1'
 		public Keyword getDigitOneKeyword_3_0_0() { return cDigitOneKeyword_3_0_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0_1() { return cLeftCurlyBracketKeyword_3_0_1; }
 
 		//(NL+ time+=TimeDef1)*
@@ -321,16 +356,16 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_0_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_0_2_1_0; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?)
 		public UnorderedGroup getUnorderedGroup_3_0_3() { return cUnorderedGroup_3_0_3; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 		public Group getGroup_3_0_3_0() { return cGroup_3_0_3_0; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_0_3_0_0() { return cNLTerminalRuleCall_3_0_3_0_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_0_3_0_1() { return cTimeperiod_nameKeyword_3_0_3_0_1; }
 
 		//name+=ID
@@ -351,13 +386,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef2
 		public RuleCall getTimeTimeDef2ParserRuleCall_3_0_3_0_3_1_0() { return cTimeTimeDef2ParserRuleCall_3_0_3_0_3_1_0; }
 
-		//(NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+		//NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?
 		public Group getGroup_3_0_3_1() { return cGroup_3_0_3_1; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_0_3_1_0() { return cNLTerminalRuleCall_3_0_3_1_0; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_0_3_1_1() { return cOtherelementKeyword_3_0_3_1_1; }
 
 		//alias+=ID
@@ -381,17 +416,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_0_4() { return cNLTerminalRuleCall_3_0_4; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_0_5() { return cRightCurlyBracketKeyword_3_0_5; }
 
-		//"2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)?) NL+ "}"
+		//'2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*?) NL+ '}'
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_3_1_0() { return cDigitTwoKeyword_3_1_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_1_1() { return cLeftCurlyBracketKeyword_3_1_1; }
 
 		//(NL+ time+=TimeDef1)*
@@ -406,16 +441,16 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_1_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_1_2_1_0; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?)
 		public Alternatives getAlternatives_3_1_3() { return cAlternatives_3_1_3; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 		public Group getGroup_3_1_3_0() { return cGroup_3_1_3_0; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_1_3_0_0() { return cNLTerminalRuleCall_3_1_3_0_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_1_3_0_1() { return cTimeperiod_nameKeyword_3_1_3_0_1; }
 
 		//name+=ID
@@ -436,13 +471,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef2
 		public RuleCall getTimeTimeDef2ParserRuleCall_3_1_3_0_3_1_0() { return cTimeTimeDef2ParserRuleCall_3_1_3_0_3_1_0; }
 
-		//(NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+		//NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?
 		public Group getGroup_3_1_3_1() { return cGroup_3_1_3_1; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_1_3_1_0() { return cNLTerminalRuleCall_3_1_3_1_0; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_1_3_1_1() { return cOtherelementKeyword_3_1_3_1_1; }
 
 		//alias+=ID
@@ -466,17 +501,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_1_4() { return cNLTerminalRuleCall_3_1_4; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_1_5() { return cRightCurlyBracketKeyword_3_1_5; }
 
-		//"3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)+ NL+ "}"
+		//'3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*)+ NL+ '}'
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//"3"
+		//'3'
 		public Keyword getDigitThreeKeyword_3_2_0() { return cDigitThreeKeyword_3_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_2_1() { return cLeftCurlyBracketKeyword_3_2_1; }
 
 		//(NL+ time+=TimeDef1)*
@@ -491,16 +526,16 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_2_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_2_2_1_0; }
 
-		//(NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)+
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)+
 		public Alternatives getAlternatives_3_2_3() { return cAlternatives_3_2_3; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 		public Group getGroup_3_2_3_0() { return cGroup_3_2_3_0; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_2_3_0_0() { return cNLTerminalRuleCall_3_2_3_0_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_2_3_0_1() { return cTimeperiod_nameKeyword_3_2_3_0_1; }
 
 		//name+=ID
@@ -521,13 +556,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef2
 		public RuleCall getTimeTimeDef2ParserRuleCall_3_2_3_0_3_1_0() { return cTimeTimeDef2ParserRuleCall_3_2_3_0_3_1_0; }
 
-		//NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*
+		//NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*
 		public Group getGroup_3_2_3_1() { return cGroup_3_2_3_1; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_2_3_1_0() { return cNLTerminalRuleCall_3_2_3_1_0; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_2_3_1_1() { return cOtherelementKeyword_3_2_3_1_1; }
 
 		//alias+=ID
@@ -551,17 +586,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_2_4() { return cNLTerminalRuleCall_3_2_4; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2_5() { return cRightCurlyBracketKeyword_3_2_5; }
 
-		//"4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-		//time+=TimeDef3)*)* NL+ "}"
+		//'4' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+		//time+=TimeDef3)*)* NL+ '}'
 		public Group getGroup_3_3() { return cGroup_3_3; }
 
-		//"4"
+		//'4'
 		public Keyword getDigitFourKeyword_3_3_0() { return cDigitFourKeyword_3_3_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_3_1() { return cLeftCurlyBracketKeyword_3_3_1; }
 
 		//(NL+ time+=TimeDef1)*
@@ -576,16 +611,16 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef1
 		public RuleCall getTimeTimeDef1ParserRuleCall_3_3_2_1_0() { return cTimeTimeDef1ParserRuleCall_3_3_2_1_0; }
 
-		//(NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)*
+		//(NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)*
 		public Alternatives getAlternatives_3_3_3() { return cAlternatives_3_3_3; }
 
-		//NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+		//NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 		public Group getGroup_3_3_3_0() { return cGroup_3_3_3_0; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_3_3_0_0() { return cNLTerminalRuleCall_3_3_3_0_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_3_3_0_1() { return cTimeperiod_nameKeyword_3_3_3_0_1; }
 
 		//name+=ID
@@ -606,13 +641,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//TimeDef2
 		public RuleCall getTimeTimeDef2ParserRuleCall_3_3_3_0_3_1_0() { return cTimeTimeDef2ParserRuleCall_3_3_3_0_3_1_0; }
 
-		//NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*
+		//NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*
 		public Group getGroup_3_3_3_1() { return cGroup_3_3_3_1; }
 
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_3_3_1_0() { return cNLTerminalRuleCall_3_3_3_1_0; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_3_3_1_1() { return cOtherelementKeyword_3_3_3_1_1; }
 
 		//alias+=ID
@@ -636,17 +671,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_3_4() { return cNLTerminalRuleCall_3_3_4; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_3_5() { return cRightCurlyBracketKeyword_3_3_5; }
 
-		//"5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)?) "}"
+		//'5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*?) '}'
 		public Group getGroup_3_4() { return cGroup_3_4; }
 
-		//"5"
+		//'5'
 		public Keyword getDigitFiveKeyword_3_4_0() { return cDigitFiveKeyword_3_4_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_4_1() { return cLeftCurlyBracketKeyword_3_4_1; }
 
 		//NL+
@@ -664,13 +699,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_4_3_1() { return cNLTerminalRuleCall_3_4_3_1; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?)
 		public UnorderedGroup getUnorderedGroup_3_4_4() { return cUnorderedGroup_3_4_4; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 		public Group getGroup_3_4_4_0() { return cGroup_3_4_4_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_4_4_0_0() { return cTimeperiod_nameKeyword_3_4_4_0_0; }
 
 		//name+=ID
@@ -694,10 +729,10 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_4_4_0_3_1() { return cNLTerminalRuleCall_3_4_4_0_3_1; }
 
-		//("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?
 		public Group getGroup_3_4_4_1() { return cGroup_3_4_4_1; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_4_4_1_0() { return cOtherelementKeyword_3_4_4_1_0; }
 
 		//alias+=ID
@@ -721,17 +756,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_4_4_1_3_1() { return cNLTerminalRuleCall_3_4_4_1_3_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_4_5() { return cRightCurlyBracketKeyword_3_4_5; }
 
-		//"6" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)?) "}"
+		//'6' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*?) '}'
 		public Group getGroup_3_5() { return cGroup_3_5; }
 
-		//"6"
+		//'6'
 		public Keyword getDigitSixKeyword_3_5_0() { return cDigitSixKeyword_3_5_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_5_1() { return cLeftCurlyBracketKeyword_3_5_1; }
 
 		//NL+
@@ -749,13 +784,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_5_3_1() { return cNLTerminalRuleCall_3_5_3_1; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?)
 		public Alternatives getAlternatives_3_5_4() { return cAlternatives_3_5_4; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 		public Group getGroup_3_5_4_0() { return cGroup_3_5_4_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_5_4_0_0() { return cTimeperiod_nameKeyword_3_5_4_0_0; }
 
 		//name+=ID
@@ -779,10 +814,10 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_5_4_0_3_1() { return cNLTerminalRuleCall_3_5_4_0_3_1; }
 
-		//("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?
 		public Group getGroup_3_5_4_1() { return cGroup_3_5_4_1; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_5_4_1_0() { return cOtherelementKeyword_3_5_4_1_0; }
 
 		//alias+=ID
@@ -806,17 +841,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_5_4_1_3_1() { return cNLTerminalRuleCall_3_5_4_1_3_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_5_5() { return cRightCurlyBracketKeyword_3_5_5; }
 
-		//"7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)+ "}"
+		//'7' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*)+ '}'
 		public Group getGroup_3_6() { return cGroup_3_6; }
 
-		//"7"
+		//'7'
 		public Keyword getDigitSevenKeyword_3_6_0() { return cDigitSevenKeyword_3_6_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_6_1() { return cLeftCurlyBracketKeyword_3_6_1; }
 
 		//NL+
@@ -834,13 +869,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_6_3_1() { return cNLTerminalRuleCall_3_6_3_1; }
 
-		//("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)+
 		public Alternatives getAlternatives_3_6_4() { return cAlternatives_3_6_4; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 		public Group getGroup_3_6_4_0() { return cGroup_3_6_4_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_6_4_0_0() { return cTimeperiod_nameKeyword_3_6_4_0_0; }
 
 		//name+=ID
@@ -864,10 +899,10 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_6_4_0_3_1() { return cNLTerminalRuleCall_3_6_4_0_3_1; }
 
-		//"otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*
 		public Group getGroup_3_6_4_1() { return cGroup_3_6_4_1; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_6_4_1_0() { return cOtherelementKeyword_3_6_4_1_0; }
 
 		//alias+=ID
@@ -891,17 +926,17 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_6_4_1_3_1() { return cNLTerminalRuleCall_3_6_4_1_3_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_6_5() { return cRightCurlyBracketKeyword_3_6_5; }
 
-		//"8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-		//(time+=TimeDef3 NL+)*)* "}"
+		//'8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+		//(time+=TimeDef3 NL+)*)* '}'
 		public Group getGroup_3_7() { return cGroup_3_7; }
 
-		//"8"
+		//'8'
 		public Keyword getDigitEightKeyword_3_7_0() { return cDigitEightKeyword_3_7_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_7_1() { return cLeftCurlyBracketKeyword_3_7_1; }
 
 		//NL+
@@ -919,13 +954,13 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_7_3_1() { return cNLTerminalRuleCall_3_7_3_1; }
 
-		//("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)*
+		//('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)*
 		public Alternatives getAlternatives_3_7_4() { return cAlternatives_3_7_4; }
 
-		//"timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+		//'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 		public Group getGroup_3_7_4_0() { return cGroup_3_7_4_0; }
 
-		//"timeperiod_name"
+		//'timeperiod_name'
 		public Keyword getTimeperiod_nameKeyword_3_7_4_0_0() { return cTimeperiod_nameKeyword_3_7_4_0_0; }
 
 		//name+=ID
@@ -949,10 +984,10 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_7_4_0_3_1() { return cNLTerminalRuleCall_3_7_4_0_3_1; }
 
-		//"otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*
+		//'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*
 		public Group getGroup_3_7_4_1() { return cGroup_3_7_4_1; }
 
-		//"otherelement"
+		//'otherelement'
 		public Keyword getOtherelementKeyword_3_7_4_1_0() { return cOtherelementKeyword_3_7_4_1_0; }
 
 		//alias+=ID
@@ -976,25 +1011,25 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//NL+
 		public RuleCall getNLTerminalRuleCall_3_7_4_1_3_1() { return cNLTerminalRuleCall_3_7_4_1_3_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_7_5() { return cRightCurlyBracketKeyword_3_7_5; }
 	}
 
 	public class TimeDef1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeDef1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.TimeDef1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cJulyKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDayAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDayINTTerminalRuleCall_1_0 = (RuleCall)cDayAssignment_1.eContents().get(0);
 		
-		//TimeDef1 returns TimeDef:
-		//	"july" day=INT;
+		//TimeDef1 TimeDef:
+		//	'july' day=INT
 		@Override public ParserRule getRule() { return rule; }
 
-		//"july" day=INT
+		//'july' day=INT
 		public Group getGroup() { return cGroup; }
 
-		//"july"
+		//'july'
 		public Keyword getJulyKeyword_0() { return cJulyKeyword_0; }
 
 		//day=INT
@@ -1005,20 +1040,20 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TimeDef2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeDef2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.TimeDef2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAugustKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDayAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDayINTTerminalRuleCall_1_0 = (RuleCall)cDayAssignment_1.eContents().get(0);
 		
-		//TimeDef2 returns TimeDef:
-		//	"august" day=INT;
+		//TimeDef2 TimeDef:
+		//	'august' day=INT
 		@Override public ParserRule getRule() { return rule; }
 
-		//"august" day=INT
+		//'august' day=INT
 		public Group getGroup() { return cGroup; }
 
-		//"august"
+		//'august'
 		public Keyword getAugustKeyword_0() { return cAugustKeyword_0; }
 
 		//day=INT
@@ -1029,20 +1064,20 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TimeDef3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TimeDef3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.TimeDef3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSeptemberKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDayAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cDayINTTerminalRuleCall_1_0 = (RuleCall)cDayAssignment_1.eContents().get(0);
 		
-		//TimeDef3 returns TimeDef:
-		//	"september" day=INT;
+		//TimeDef3 TimeDef:
+		//	'september' day=INT
 		@Override public ParserRule getRule() { return rule; }
 
-		//"september" day=INT
+		//'september' day=INT
 		public Group getGroup() { return cGroup; }
 
-		//"september"
+		//'september'
 		public Keyword getSeptemberKeyword_0() { return cSeptemberKeyword_0; }
 
 		//day=INT
@@ -1073,8 +1108,8 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pTimeDef1 = new TimeDef1Elements();
 		this.pTimeDef2 = new TimeDef2Elements();
 		this.pTimeDef3 = new TimeDef3Elements();
-		this.tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NL");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
+		this.tNL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.NL");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug348199TestLanguage.WS");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -1105,17 +1140,52 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Timeperiod:
-	//	{Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+
-	//	time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+
-	//	"timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" |
-	//	"3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID
-	//	(NL+ time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
-	//	| NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-	//	name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+
-	//	(time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-	//	(time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
-	//	| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-	//	name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}");
+	//	{Timeperiod}
+	//	'define' 'timeperiod' ('1'
+	//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+	//	time+=TimeDef3)*?) NL+
+	//	'}'
+	//	|
+	//	'2'
+	//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+	//	time+=TimeDef3)*?) NL+
+	//	'}'
+	//	|
+	//	'3'
+	//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+	//	time+=TimeDef3)*)+
+	//	NL+
+	//	'}'
+	//	|
+	//	'4'
+	//	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+	//	time+=TimeDef3)*)*
+	//	NL+
+	//	'}'
+	//	|
+	//	'5'
+	//	'{'
+	//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+
+	//	(time+=TimeDef3 NL+)*?)
+	//	'}'
+	//	|
+	//	'6'
+	//	'{'
+	//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+	//	(time+=TimeDef3 NL+)*?)
+	//	'}'
+	//	|
+	//	'7'
+	//	'{'
+	//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+	//	(time+=TimeDef3 NL+)*)+
+	//	'}'
+	//	|
+	//	'8'
+	//	'{'
+	//	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+	//	(time+=TimeDef3 NL+)*)*
+	//	'}');
 	public TimeperiodElements getTimeperiodAccess() {
 		return pTimeperiod;
 	}
@@ -1124,8 +1194,8 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getTimeperiodAccess().getRule();
 	}
 
-	//TimeDef1 returns TimeDef:
-	//	"july" day=INT;
+	//TimeDef1 TimeDef:
+	//	'july' day=INT
 	public TimeDef1Elements getTimeDef1Access() {
 		return pTimeDef1;
 	}
@@ -1134,8 +1204,8 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getTimeDef1Access().getRule();
 	}
 
-	//TimeDef2 returns TimeDef:
-	//	"august" day=INT;
+	//TimeDef2 TimeDef:
+	//	'august' day=INT
 	public TimeDef2Elements getTimeDef2Access() {
 		return pTimeDef2;
 	}
@@ -1144,8 +1214,8 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getTimeDef2Access().getRule();
 	}
 
-	//TimeDef3 returns TimeDef:
-	//	"september" day=INT;
+	//TimeDef3 TimeDef:
+	//	'september' day=INT
 	public TimeDef3Elements getTimeDef3Access() {
 		return pTimeDef3;
 	}
@@ -1155,44 +1225,44 @@ public class Bug348199TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal NL:
-	//	"\r"? "\n";
+	//	'\r'? '\n';
 	public TerminalRule getNLRule() {
 		return tNL;
 	} 
 
 	//terminal WS:
-	//	" " | "\t";
+	//	' ' | '\t';
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 

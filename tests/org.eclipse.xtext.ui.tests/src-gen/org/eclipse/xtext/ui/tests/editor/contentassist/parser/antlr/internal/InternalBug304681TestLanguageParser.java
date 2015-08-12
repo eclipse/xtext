@@ -216,7 +216,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"definition",
                               		lv_definition_1_0, 
-                              		"PackageDefinition");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.PackageDefinition");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -269,7 +269,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"definition",
                               		lv_definition_3_0, 
-                              		"PackageDefinition2");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.PackageDefinition2");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -412,7 +412,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"namespace",
                       		lv_namespace_2_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -464,7 +464,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"contents",
             	              		lv_contents_4_0, 
-            	              		"Object");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Object");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -704,7 +704,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -839,7 +839,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"shortDescription",
             	              		lv_shortDescription_9_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -921,7 +921,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"longDescription",
             	              		lv_longDescription_12_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -1003,7 +1003,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"serialVersionUID",
             	              		lv_serialVersionUID_15_0, 
-            	              		"INT");
+            	              		"org.eclipse.xtext.common.Terminals.INT");
             	      	    
             	    }
 
@@ -1180,7 +1180,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"features",
             	    	              		lv_features_19_0, 
-            	    	              		"Feature");
+            	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Feature");
             	    	      	        afterParserOrEnumRuleCall();
             	    	      	    
             	    	    }
@@ -1281,7 +1281,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"features",
             	    	              		lv_features_21_0, 
-            	    	              		"Feature");
+            	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Feature");
             	    	      	        afterParserOrEnumRuleCall();
             	    	      	    
             	    	    }
@@ -1380,7 +1380,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"features",
             	    	              		lv_features_24_0, 
-            	    	              		"Feature");
+            	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Feature");
             	    	      	        afterParserOrEnumRuleCall();
             	    	      	    
             	    	    }
@@ -1474,7 +1474,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"features",
             	    	              		lv_features_26_0, 
-            	    	              		"Feature");
+            	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Feature");
             	    	      	        afterParserOrEnumRuleCall();
             	    	      	    
             	    	    }
@@ -1794,7 +1794,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"type",
                       		lv_type_1_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -1824,7 +1824,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_2_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -2034,7 +2034,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -2089,10 +2089,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt12=3;
                         int LA12_0 = input.LA(1);
 
-                        if ( LA12_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
+                        if ( LA12_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0) ) {
                             alt12=1;
                         }
-                        else if ( LA12_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
+                        else if ( LA12_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1) ) {
                             alt12=2;
                         }
 
@@ -2149,7 +2149,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"shortDescription",
                     	              		lv_shortDescription_7_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -2231,7 +2231,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"longDescription",
                     	              		lv_longDescription_10_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -2435,7 +2435,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"namespace",
                       		lv_namespace_2_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -2487,7 +2487,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"contents",
             	              		lv_contents_4_0, 
-            	              		"Object2");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Object2");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2717,7 +2717,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -2801,22 +2801,22 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 int alt18=6;
                 int LA18_0 = input.LA(1);
 
-                if ( LA18_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
+                if ( LA18_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 0) ) {
                     alt18=1;
                 }
-                else if ( LA18_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
+                else if ( LA18_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 1) ) {
                     alt18=2;
                 }
-                else if ( LA18_0 ==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
+                else if ( LA18_0 == 22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 2) ) {
                     alt18=3;
                 }
-                else if ( LA18_0 ==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
+                else if ( LA18_0 == 23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 3) ) {
                     alt18=4;
                 }
-                else if ( LA18_0 ==29 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
+                else if ( LA18_0 == 29 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                     alt18=5;
                 }
-                else if ( LA18_0 ==30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
+                else if ( LA18_0 == 30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObject2Access().getUnorderedGroup_5(), 4) ) {
                     alt18=5;
                 }
 
@@ -2873,7 +2873,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"shortDescription",
             	              		lv_shortDescription_9_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -2955,7 +2955,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"longDescription",
             	              		lv_longDescription_12_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -3037,7 +3037,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"serialVersionUID",
             	              		lv_serialVersionUID_15_0, 
-            	              		"INT");
+            	              		"org.eclipse.xtext.common.Terminals.INT");
             	      	    
             	    }
 
@@ -3214,7 +3214,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"features",
             	    	              		lv_features_19_0, 
-            	    	              		"Feature2");
+            	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.Feature2");
             	    	      	        afterParserOrEnumRuleCall();
             	    	      	    
             	    	    }
@@ -3556,7 +3556,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"type",
                       		lv_type_1_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -3586,7 +3586,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_2_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -3641,19 +3641,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt21=6;
                         int LA21_0 = input.LA(1);
 
-                        if ( LA21_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
+                        if ( LA21_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 0) ) {
                             alt21=1;
                         }
-                        else if ( LA21_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
+                        else if ( LA21_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 1) ) {
                             alt21=2;
                         }
-                        else if ( LA21_0 ==34 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
+                        else if ( LA21_0 == 34 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 2) ) {
                             alt21=3;
                         }
-                        else if ( LA21_0 ==32 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
+                        else if ( LA21_0 == 32 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 3) ) {
                             alt21=4;
                         }
-                        else if ( LA21_0 ==33 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
+                        else if ( LA21_0 == 33 && getUnorderedGroupHelper().canSelect(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), 4) ) {
                             alt21=5;
                         }
 
@@ -3710,7 +3710,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"shortDescription",
                     	              		lv_shortDescription_6_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -3792,7 +3792,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"longDescription",
                     	              		lv_longDescription_9_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -3888,7 +3888,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    	             			current, 
                     	    	             			"constraintDefinitions",
                     	    	              		lv_constraintDefinitions_11_0, 
-                    	    	              		"ConstraintDefinition");
+                    	    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage.ConstraintDefinition");
                     	    	      	        afterParserOrEnumRuleCall();
                     	    	      	    
                     	    	    }
@@ -4307,7 +4307,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -4362,10 +4362,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         int alt24=3;
                         int LA24_0 = input.LA(1);
 
-                        if ( LA24_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
+                        if ( LA24_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 0) ) {
                             alt24=1;
                         }
-                        else if ( LA24_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
+                        else if ( LA24_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), 1) ) {
                             alt24=2;
                         }
 
@@ -4422,7 +4422,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"shortDescription",
                     	              		lv_shortDescription_7_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -4504,7 +4504,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"longDescription",
                     	              		lv_longDescription_10_0, 
-                    	              		"STRING");
+                    	              		"org.eclipse.xtext.common.Terminals.STRING");
                     	      	    
                     	    }
 
@@ -4706,7 +4706,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"type",
                       		lv_type_1_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.common.Terminals.ID");
               	    
             }
 
@@ -4738,10 +4738,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                 int alt27=3;
                 int LA27_0 = input.LA(1);
 
-                if ( LA27_0 ==35 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
+                if ( LA27_0 == 35 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 0) ) {
                     alt27=1;
                 }
-                else if ( LA27_0 ==36 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
+                else if ( LA27_0 == 36 && getUnorderedGroupHelper().canSelect(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), 1) ) {
                     alt27=2;
                 }
 
@@ -4810,7 +4810,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    	             			current, 
             	    	             			"parameters",
             	    	              		lv_parameters_5_0, 
-            	    	              		"STRING");
+            	    	              		"org.eclipse.xtext.common.Terminals.STRING");
             	    	      	    
             	    	    }
 
@@ -4898,7 +4898,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"message",
             	              		lv_message_8_0, 
-            	              		"STRING");
+            	              		"org.eclipse.xtext.common.Terminals.STRING");
             	      	    
             	    }
 
@@ -7305,23 +7305,23 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                         s = -1;
                         if ( (LA9_0==28) ) {s = 1;}
 
-                        else if ( LA9_0 ==20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {s = 2;}
+                        else if ( LA9_0 == 20 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0) ) {s = 2;}
 
-                        else if ( LA9_0 ==21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {s = 3;}
+                        else if ( LA9_0 == 21 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1) ) {s = 3;}
 
-                        else if ( LA9_0 ==22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {s = 4;}
+                        else if ( LA9_0 == 22 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2) ) {s = 4;}
 
-                        else if ( LA9_0 ==23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {s = 5;}
+                        else if ( LA9_0 == 23 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3) ) {s = 5;}
 
-                        else if ( LA9_0 ==29 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 6;}
+                        else if ( LA9_0 == 29 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 6;}
 
-                        else if ( LA9_0 ==30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 7;}
+                        else if ( LA9_0 == 30 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4) ) {s = 7;}
 
-                        else if ( LA9_0 ==24 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {s = 8;}
+                        else if ( LA9_0 == 24 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5) ) {s = 8;}
 
-                        else if ( LA9_0 ==26 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {s = 9;}
+                        else if ( LA9_0 == 26 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6) ) {s = 9;}
 
-                        else if ( LA9_0 ==27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {s = 10;}
+                        else if ( LA9_0 == 27 && getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7) ) {s = 10;}
 
                          
                         input.seek(index9_0);

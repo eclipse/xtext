@@ -19,7 +19,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	
 	
 	public class DocumentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Document");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Document");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cPackagesAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cPackagesPackageDeclarationParserRuleCall_0_0 = (RuleCall)cPackagesAssignment_0.eContents().get(0);
@@ -27,10 +27,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cContextsContextDeclParserRuleCall_1_0 = (RuleCall)cContextsAssignment_1.eContents().get(0);
 		
 		//Document:
-		//	(packages+=PackageDeclaration | contexts+=ContextDecl)*;
+		//	packages+=PackageDeclaration | contexts+=ContextDecl*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(packages+=PackageDeclaration | contexts+=ContextDecl)*
+		//packages+=PackageDeclaration | contexts+=ContextDecl*
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//packages+=PackageDeclaration
@@ -47,7 +47,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class BodyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Body");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Body");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cBodyKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConstraintNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -57,13 +57,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Body:
-		//	"body" constraintName=Identifier? ":" expression=Expression;
+		//	'body' constraintName=Identifier? ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"body" constraintName=Identifier? ":" expression=Expression
+		//'body' constraintName=Identifier? ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"body"
+		//'body'
 		public Keyword getBodyKeyword_0() { return cBodyKeyword_0; }
 
 		//constraintName=Identifier?
@@ -72,7 +72,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstraintNameIdentifierParserRuleCall_1_0() { return cConstraintNameIdentifierParserRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//expression=Expression
@@ -83,7 +83,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ClassifierContextDeclElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClassifierContextDecl");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierContextDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContextKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -99,16 +99,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cDefinitionsDefinitionParserRuleCall_3_1_0 = (RuleCall)cDefinitionsAssignment_3_1.eContents().get(0);
 		
 		//ClassifierContextDecl:
-		//	"context" (selfName=Identifier ":")? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*;
+		//	'context' (selfName=Identifier ':')? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"context" (selfName=Identifier ":")? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*
+		//'context' (selfName=Identifier ':')? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*
 		public Group getGroup() { return cGroup; }
 
-		//"context"
+		//'context'
 		public Keyword getContextKeyword_0() { return cContextKeyword_0; }
 
-		//(selfName=Identifier ":")?
+		//(selfName=Identifier ':')?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//selfName=Identifier
@@ -117,7 +117,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getSelfNameIdentifierParserRuleCall_1_0_0() { return cSelfNameIdentifierParserRuleCall_1_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_1() { return cColonKeyword_1_1; }
 
 		//classifier=ClassifierRef
@@ -143,7 +143,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ClassifierRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClassifierRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cQualifiedClassifierRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimpleClassifierRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -163,14 +163,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ContextDeclElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ContextDecl");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ContextDecl");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPropertyContextDeclParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cClassifierContextDeclParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOperationContextDeclParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//ContextDecl:
-		//	PropertyContextDecl | ClassifierContextDecl | OperationContextDecl;
+		//	PropertyContextDecl
+		//	| ClassifierContextDecl
+		//	| OperationContextDecl;
 		@Override public ParserRule getRule() { return rule; }
 
 		//PropertyContextDecl | ClassifierContextDecl | OperationContextDecl
@@ -187,7 +189,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class DefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Definition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Definition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cStaticAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cStaticStaticKeyword_0_0 = (Keyword)cStaticAssignment_0.eContents().get(0);
@@ -215,21 +217,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_9_0 = (RuleCall)cExpressionAssignment_9.eContents().get(0);
 		
 		//Definition:
-		//	static?="static"? "def" constraintName=Identifier? ":" constrainedName=Identifier ("(" (parameters+=Parameter (","
-		//	parameters+=Parameter)*)? ")")? ":" type=TypeExp? "=" expression=Expression;
+		//	static?='static'? 'def' constraintName=Identifier? ':' constrainedName=Identifier ('(' (parameters+=Parameter (','
+		//	parameters+=Parameter)*)? ')')?
+		//	':' type=TypeExp? '=' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//static?="static"? "def" constraintName=Identifier? ":" constrainedName=Identifier ("(" (parameters+=Parameter (","
-		//parameters+=Parameter)*)? ")")? ":" type=TypeExp? "=" expression=Expression
+		//static?='static'? 'def' constraintName=Identifier? ':' constrainedName=Identifier ('(' (parameters+=Parameter (','
+		//parameters+=Parameter)*)? ')')? ':' type=TypeExp? '=' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//static?="static"?
+		//static?='static'?
 		public Assignment getStaticAssignment_0() { return cStaticAssignment_0; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_0() { return cStaticStaticKeyword_0_0; }
 
-		//"def"
+		//'def'
 		public Keyword getDefKeyword_1() { return cDefKeyword_1; }
 
 		//constraintName=Identifier?
@@ -238,7 +241,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstraintNameIdentifierParserRuleCall_2_0() { return cConstraintNameIdentifierParserRuleCall_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
 		//constrainedName=Identifier
@@ -247,13 +250,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstrainedNameIdentifierParserRuleCall_4_0() { return cConstrainedNameIdentifierParserRuleCall_4_0; }
 
-		//("(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")")?
+		//('(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')')?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_5_0() { return cLeftParenthesisKeyword_5_0; }
 
-		//(parameters+=Parameter ("," parameters+=Parameter)*)?
+		//(parameters+=Parameter (',' parameters+=Parameter)*)?
 		public Group getGroup_5_1() { return cGroup_5_1; }
 
 		//parameters+=Parameter
@@ -262,10 +265,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Parameter
 		public RuleCall getParametersParameterParserRuleCall_5_1_0_0() { return cParametersParameterParserRuleCall_5_1_0_0; }
 
-		//("," parameters+=Parameter)*
+		//(',' parameters+=Parameter)*
 		public Group getGroup_5_1_1() { return cGroup_5_1_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_5_1_1_0() { return cCommaKeyword_5_1_1_0; }
 
 		//parameters+=Parameter
@@ -274,10 +277,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Parameter
 		public RuleCall getParametersParameterParserRuleCall_5_1_1_1_0() { return cParametersParameterParserRuleCall_5_1_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5_2() { return cRightParenthesisKeyword_5_2; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_6() { return cColonKeyword_6; }
 
 		//type=TypeExp?
@@ -286,7 +289,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_7_0() { return cTypeTypeExpParserRuleCall_7_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_8() { return cEqualsSignKeyword_8; }
 
 		//expression=Expression
@@ -297,7 +300,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class DerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Der");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Der");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDeriveKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -305,16 +308,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		
 		//Der:
-		//	"derive" ":" expression=Expression;
+		//	'derive' ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"derive" ":" expression=Expression
+		//'derive' ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"derive"
+		//'derive'
 		public Keyword getDeriveKeyword_0() { return cDeriveKeyword_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//expression=Expression
@@ -325,7 +328,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class InitElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Init");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Init");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInitKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -333,16 +336,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
 		
 		//Init:
-		//	"init" ":" expression=Expression;
+		//	'init' ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"init" ":" expression=Expression
+		//'init' ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"init"
+		//'init'
 		public Keyword getInitKeyword_0() { return cInitKeyword_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//expression=Expression
@@ -353,7 +356,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class InvariantElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Invariant");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Invariant");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cInvKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConstraintNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -363,13 +366,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Invariant:
-		//	"inv" constraintName=Identifier? ":" expression=Expression;
+		//	'inv' constraintName=Identifier? ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"inv" constraintName=Identifier? ":" expression=Expression
+		//'inv' constraintName=Identifier? ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"inv"
+		//'inv'
 		public Keyword getInvKeyword_0() { return cInvKeyword_0; }
 
 		//constraintName=Identifier?
@@ -378,7 +381,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstraintNameIdentifierParserRuleCall_1_0() { return cConstraintNameIdentifierParserRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//expression=Expression
@@ -389,7 +392,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class OperationContextDeclElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationContextDecl");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationContextDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContextKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOperationAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -415,15 +418,15 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cBodiesBodyParserRuleCall_7_2_0 = (RuleCall)cBodiesAssignment_7_2.eContents().get(0);
 		
 		//OperationContextDecl:
-		//	"context" operation=OperationRef "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ":" type=TypeExp?
-		//	(pres+=Pre | posts+=Post | bodies+=Body)*;
+		//	'context' operation=OperationRef '(' (parameters+=Parameter (',' parameters+=Parameter)*)?
+		//	')' ':' type=TypeExp? (pres+=Pre | posts+=Post | bodies+=Body)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"context" operation=OperationRef "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ":" type=TypeExp?
+		//'context' operation=OperationRef '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' ':' type=TypeExp?
 		//(pres+=Pre | posts+=Post | bodies+=Body)*
 		public Group getGroup() { return cGroup; }
 
-		//"context"
+		//'context'
 		public Keyword getContextKeyword_0() { return cContextKeyword_0; }
 
 		//operation=OperationRef
@@ -432,10 +435,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//OperationRef
 		public RuleCall getOperationOperationRefParserRuleCall_1_0() { return cOperationOperationRefParserRuleCall_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//(parameters+=Parameter ("," parameters+=Parameter)*)?
+		//(parameters+=Parameter (',' parameters+=Parameter)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//parameters+=Parameter
@@ -444,10 +447,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Parameter
 		public RuleCall getParametersParameterParserRuleCall_3_0_0() { return cParametersParameterParserRuleCall_3_0_0; }
 
-		//("," parameters+=Parameter)*
+		//(',' parameters+=Parameter)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
 		//parameters+=Parameter
@@ -456,10 +459,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Parameter
 		public RuleCall getParametersParameterParserRuleCall_3_1_1_0() { return cParametersParameterParserRuleCall_3_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
 
 		//type=TypeExp?
@@ -491,7 +494,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class OperationRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cQualifiedOperationRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimpleOperationRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -511,7 +514,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PackageDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPackageAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -521,13 +524,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cEndpackageKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//PackageDeclaration:
-		//	"package" package=PackageRef contexts+=ContextDecl* "endpackage";
+		//	'package' package=PackageRef contexts+=ContextDecl* 'endpackage';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"package" package=PackageRef contexts+=ContextDecl* "endpackage"
+		//'package' package=PackageRef contexts+=ContextDecl* 'endpackage'
 		public Group getGroup() { return cGroup; }
 
-		//"package"
+		//'package'
 		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
 
 		//package=PackageRef
@@ -542,12 +545,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//ContextDecl
 		public RuleCall getContextsContextDeclParserRuleCall_2_0() { return cContextsContextDeclParserRuleCall_2_0; }
 
-		//"endpackage"
+		//'endpackage'
 		public Keyword getEndpackageKeyword_3() { return cEndpackageKeyword_3; }
 	}
 
 	public class PackageRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PackageRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cQualifiedPackageRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimplePackageRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -567,7 +570,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -577,13 +580,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cTypeTypeExpParserRuleCall_1_0 = (RuleCall)cTypeAssignment_1.eContents().get(0);
 		
 		//Parameter:
-		//	(name=Identifier ":")? type=TypeExp;
+		//	(name=Identifier ':')? type=TypeExp;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(name=Identifier ":")? type=TypeExp
+		//(name=Identifier ':')? type=TypeExp
 		public Group getGroup() { return cGroup; }
 
-		//(name=Identifier ":")?
+		//(name=Identifier ':')?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//name=Identifier
@@ -592,7 +595,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0_0() { return cNameIdentifierParserRuleCall_0_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_0_1() { return cColonKeyword_0_1; }
 
 		//type=TypeExp
@@ -603,7 +606,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PostElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Post");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Post");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPostKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConstraintNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -613,13 +616,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Post:
-		//	"post" constraintName=Identifier? ":" expression=Expression;
+		//	'post' constraintName=Identifier? ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"post" constraintName=Identifier? ":" expression=Expression
+		//'post' constraintName=Identifier? ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"post"
+		//'post'
 		public Keyword getPostKeyword_0() { return cPostKeyword_0; }
 
 		//constraintName=Identifier?
@@ -628,7 +631,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstraintNameIdentifierParserRuleCall_1_0() { return cConstraintNameIdentifierParserRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//expression=Expression
@@ -639,7 +642,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PreElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Pre");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Pre");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPreKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConstraintNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -649,13 +652,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cExpressionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Pre:
-		//	"pre" constraintName=Identifier? ":" expression=Expression;
+		//	'pre' constraintName=Identifier? ':' expression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"pre" constraintName=Identifier? ":" expression=Expression
+		//'pre' constraintName=Identifier? ':' expression=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"pre"
+		//'pre'
 		public Keyword getPreKeyword_0() { return cPreKeyword_0; }
 
 		//constraintName=Identifier?
@@ -664,7 +667,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getConstraintNameIdentifierParserRuleCall_1_0() { return cConstraintNameIdentifierParserRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//expression=Expression
@@ -675,7 +678,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PropertyContextDeclElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PropertyContextDecl");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyContextDecl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cContextKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cPropertyAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -696,13 +699,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInitInitParserRuleCall_4_1_1_0 = (RuleCall)cInitAssignment_4_1_1.eContents().get(0);
 		
 		//PropertyContextDecl:
-		//	"context" property=PropertyRef ":" type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?);
+		//	'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//"context" property=PropertyRef ":" type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?)
+		//'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?)
 		public Group getGroup() { return cGroup; }
 
-		//"context"
+		//'context'
 		public Keyword getContextKeyword_0() { return cContextKeyword_0; }
 
 		//property=PropertyRef
@@ -711,7 +714,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//PropertyRef
 		public RuleCall getPropertyPropertyRefParserRuleCall_1_0() { return cPropertyPropertyRefParserRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//type=TypeExp
@@ -720,10 +723,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_3_0() { return cTypeTypeExpParserRuleCall_3_0; }
 
-		//(init=Init der=Der?)? | der=Der init=Init?
+		//(init=Init der=Der?? | der=Der init=Init?)
 		public Alternatives getAlternatives_4() { return cAlternatives_4; }
 
-		//(init=Init der=Der?)?
+		//init=Init der=Der??
 		public Group getGroup_4_0() { return cGroup_4_0; }
 
 		//init=Init
@@ -755,7 +758,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PropertyRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PropertyRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cQualifiedPropertyRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimplePropertyRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -775,7 +778,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class QualifiedClassifierRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedClassifierRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.QualifiedClassifierRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNamespaceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNamespaceIdentifierParserRuleCall_0_0 = (RuleCall)cNamespaceAssignment_0.eContents().get(0);
@@ -784,10 +787,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cElementClassifierRefParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
 		
 		//QualifiedClassifierRef:
-		//	namespace=Identifier "::" element=ClassifierRef;
+		//	namespace=Identifier
+		//	'::' element=ClassifierRef;
 		@Override public ParserRule getRule() { return rule; }
 
-		//namespace=Identifier "::" element=ClassifierRef
+		//namespace=Identifier '::' element=ClassifierRef
 		public Group getGroup() { return cGroup; }
 
 		//namespace=Identifier
@@ -796,7 +800,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNamespaceIdentifierParserRuleCall_0_0() { return cNamespaceIdentifierParserRuleCall_0_0; }
 
-		//"::"
+		//'::'
 		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 
 		//element=ClassifierRef
@@ -807,7 +811,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class QualifiedOperationRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedOperationRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.QualifiedOperationRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNamespaceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNamespaceIdentifierParserRuleCall_0_0 = (RuleCall)cNamespaceAssignment_0.eContents().get(0);
@@ -816,10 +820,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cElementOperationRefParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
 		
 		//QualifiedOperationRef:
-		//	namespace=Identifier "::" element=OperationRef;
+		//	namespace=Identifier
+		//	'::' element=OperationRef;
 		@Override public ParserRule getRule() { return rule; }
 
-		//namespace=Identifier "::" element=OperationRef
+		//namespace=Identifier '::' element=OperationRef
 		public Group getGroup() { return cGroup; }
 
 		//namespace=Identifier
@@ -828,7 +833,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNamespaceIdentifierParserRuleCall_0_0() { return cNamespaceIdentifierParserRuleCall_0_0; }
 
-		//"::"
+		//'::'
 		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 
 		//element=OperationRef
@@ -839,7 +844,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class QualifiedPropertyRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedPropertyRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.QualifiedPropertyRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNamespaceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNamespaceIdentifierParserRuleCall_0_0 = (RuleCall)cNamespaceAssignment_0.eContents().get(0);
@@ -848,10 +853,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cElementPropertyRefParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
 		
 		//QualifiedPropertyRef:
-		//	namespace=Identifier "::" element=PropertyRef;
+		//	namespace=Identifier
+		//	'::' element=PropertyRef;
 		@Override public ParserRule getRule() { return rule; }
 
-		//namespace=Identifier "::" element=PropertyRef
+		//namespace=Identifier '::' element=PropertyRef
 		public Group getGroup() { return cGroup; }
 
 		//namespace=Identifier
@@ -860,7 +866,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNamespaceIdentifierParserRuleCall_0_0() { return cNamespaceIdentifierParserRuleCall_0_0; }
 
-		//"::"
+		//'::'
 		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 
 		//element=PropertyRef
@@ -871,7 +877,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class QualifiedPackageRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedPackageRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.QualifiedPackageRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNamespaceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNamespaceIdentifierParserRuleCall_0_0 = (RuleCall)cNamespaceAssignment_0.eContents().get(0);
@@ -880,10 +886,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cElementPackageRefParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
 		
 		//QualifiedPackageRef:
-		//	namespace=Identifier "::" element=PackageRef;
+		//	namespace=Identifier
+		//	'::' element=PackageRef;
 		@Override public ParserRule getRule() { return rule; }
 
-		//namespace=Identifier "::" element=PackageRef
+		//namespace=Identifier '::' element=PackageRef
 		public Group getGroup() { return cGroup; }
 
 		//namespace=Identifier
@@ -892,7 +899,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNamespaceIdentifierParserRuleCall_0_0() { return cNamespaceIdentifierParserRuleCall_0_0; }
 
-		//"::"
+		//'::'
 		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 
 		//element=PackageRef
@@ -903,7 +910,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimpleClassifierRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleClassifierRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimpleClassifierRef");
 		private final Assignment cClassifierAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cClassifierIdentifierParserRuleCall_0 = (RuleCall)cClassifierAssignment.eContents().get(0);
 		
@@ -919,7 +926,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimpleOperationRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleOperationRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimpleOperationRef");
 		private final Assignment cOperationAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cOperationIdentifierParserRuleCall_0 = (RuleCall)cOperationAssignment.eContents().get(0);
 		
@@ -935,7 +942,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimplePackageRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimplePackageRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimplePackageRef");
 		private final Assignment cPackageAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cPackageIdentifierParserRuleCall_0 = (RuleCall)cPackageAssignment.eContents().get(0);
 		
@@ -951,7 +958,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimplePropertyRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimplePropertyRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimplePropertyRef");
 		private final Assignment cFeatureAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cFeatureIdentifierParserRuleCall_0 = (RuleCall)cFeatureAssignment.eContents().get(0);
 		
@@ -967,7 +974,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class NavigationExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NavigationExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigationExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cSubNavigationExpParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1000,38 +1007,39 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		////---------------------------------------------------------------------------------
 		////	EssentialOCL overrides
 		////---------------------------------------------------------------------------------
-		//NavigationExp returns Expression:
-		//	SubNavigationExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-		//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
+		//NavigationExp Expression:
+		//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+		//	op=('^^' | '^') messageName=Identifier
+		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		@Override public ParserRule getRule() { return rule; }
 
-		//SubNavigationExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-		//op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?
+		//SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+		//op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 
 		//SubNavigationExp
 		public RuleCall getSubNavigationExpParserRuleCall_0() { return cSubNavigationExpParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current} op=("^^" | "^")
-		//messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?
+		//({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=('^^' | '^')
+		//messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//{InfixExp.source=current} op=("." | "->") argument=NavigatingExp
+		//{InfixExp.source=current} op=('.' | '->') argument=NavigatingExp
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0_0() { return cInfixExpSourceAction_1_0_0; }
 
-		//op=("." | "->")
+		//op=('.' | '->')
 		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 
-		//"." | "->"
+		//('.' | '->')
 		public Alternatives getOpAlternatives_1_0_1_0() { return cOpAlternatives_1_0_1_0; }
 
-		//"."
+		//'.'
 		public Keyword getOpFullStopKeyword_1_0_1_0_0() { return cOpFullStopKeyword_1_0_1_0_0; }
 
-		//"->"
+		//'->'
 		public Keyword getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1() { return cOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1; }
 
 		//argument=NavigatingExp
@@ -1040,23 +1048,23 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NavigatingExp
 		public RuleCall getArgumentNavigatingExpParserRuleCall_1_0_2_0() { return cArgumentNavigatingExpParserRuleCall_1_0_2_0; }
 
-		//{OclMessage.source=current} op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg (","
-		//arguments+=OclMessageArg)*)? ")"
+		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (','
+		//arguments+=OclMessageArg)*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{OclMessage.source=current}
 		public Action getOclMessageSourceAction_1_1_0() { return cOclMessageSourceAction_1_1_0; }
 
-		//op=("^^" | "^")
+		//op=('^^' | '^')
 		public Assignment getOpAssignment_1_1_1() { return cOpAssignment_1_1_1; }
 
-		//"^^" | "^"
+		//('^^' | '^')
 		public Alternatives getOpAlternatives_1_1_1_0() { return cOpAlternatives_1_1_1_0; }
 
-		//"^^"
+		//'^^'
 		public Keyword getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0() { return cOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0; }
 
-		//"^"
+		//'^'
 		public Keyword getOpCircumflexAccentKeyword_1_1_1_0_1() { return cOpCircumflexAccentKeyword_1_1_1_0_1; }
 
 		//messageName=Identifier
@@ -1065,10 +1073,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getMessageNameIdentifierParserRuleCall_1_1_2_0() { return cMessageNameIdentifierParserRuleCall_1_1_2_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_1_3() { return cLeftParenthesisKeyword_1_1_3; }
 
-		//(arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)?
+		//(arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)?
 		public Group getGroup_1_1_4() { return cGroup_1_1_4; }
 
 		//arguments+=OclMessageArg
@@ -1077,10 +1085,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//OclMessageArg
 		public RuleCall getArgumentsOclMessageArgParserRuleCall_1_1_4_0_0() { return cArgumentsOclMessageArgParserRuleCall_1_1_4_0_0; }
 
-		//("," arguments+=OclMessageArg)*
+		//(',' arguments+=OclMessageArg)*
 		public Group getGroup_1_1_4_1() { return cGroup_1_1_4_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_4_1_0() { return cCommaKeyword_1_1_4_1_0; }
 
 		//arguments+=OclMessageArg
@@ -1089,12 +1097,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//OclMessageArg
 		public RuleCall getArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0() { return cArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_1_5() { return cRightParenthesisKeyword_1_1_5; }
 	}
 
 	public class NavigatingExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NavigatingExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigatingExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cSubNavigatingExpParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1126,37 +1134,38 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		
 		//// Follows ., ->, ^
 		//NavigatingExp:
-		//	SubNavigatingExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-		//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
+		//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+		//	op=('^^' | '^') messageName=Identifier
+		//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//SubNavigatingExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-		//op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?
+		//SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+		//op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Group getGroup() { return cGroup; }
 
 		//SubNavigatingExp
 		public RuleCall getSubNavigatingExpParserRuleCall_0() { return cSubNavigatingExpParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current} op=("^^" | "^")
-		//messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?
+		//({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current} op=('^^' | '^')
+		//messageName=Identifier '(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//{InfixExp.source=current} op=("." | "->") argument=NavigatingExp
+		//{InfixExp.source=current} op=('.' | '->') argument=NavigatingExp
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0_0() { return cInfixExpSourceAction_1_0_0; }
 
-		//op=("." | "->")
+		//op=('.' | '->')
 		public Assignment getOpAssignment_1_0_1() { return cOpAssignment_1_0_1; }
 
-		//"." | "->"
+		//('.' | '->')
 		public Alternatives getOpAlternatives_1_0_1_0() { return cOpAlternatives_1_0_1_0; }
 
-		//"."
+		//'.'
 		public Keyword getOpFullStopKeyword_1_0_1_0_0() { return cOpFullStopKeyword_1_0_1_0_0; }
 
-		//"->"
+		//'->'
 		public Keyword getOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1() { return cOpHyphenMinusGreaterThanSignKeyword_1_0_1_0_1; }
 
 		//argument=NavigatingExp
@@ -1165,23 +1174,23 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NavigatingExp
 		public RuleCall getArgumentNavigatingExpParserRuleCall_1_0_2_0() { return cArgumentNavigatingExpParserRuleCall_1_0_2_0; }
 
-		//{OclMessage.source=current} op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg (","
-		//arguments+=OclMessageArg)*)? ")"
+		//{OclMessage.source=current} op=('^^' | '^') messageName=Identifier '(' (arguments+=OclMessageArg (','
+		//arguments+=OclMessageArg)*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{OclMessage.source=current}
 		public Action getOclMessageSourceAction_1_1_0() { return cOclMessageSourceAction_1_1_0; }
 
-		//op=("^^" | "^")
+		//op=('^^' | '^')
 		public Assignment getOpAssignment_1_1_1() { return cOpAssignment_1_1_1; }
 
-		//"^^" | "^"
+		//('^^' | '^')
 		public Alternatives getOpAlternatives_1_1_1_0() { return cOpAlternatives_1_1_1_0; }
 
-		//"^^"
+		//'^^'
 		public Keyword getOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0() { return cOpCircumflexAccentCircumflexAccentKeyword_1_1_1_0_0; }
 
-		//"^"
+		//'^'
 		public Keyword getOpCircumflexAccentKeyword_1_1_1_0_1() { return cOpCircumflexAccentKeyword_1_1_1_0_1; }
 
 		//messageName=Identifier
@@ -1190,10 +1199,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getMessageNameIdentifierParserRuleCall_1_1_2_0() { return cMessageNameIdentifierParserRuleCall_1_1_2_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_1_3() { return cLeftParenthesisKeyword_1_1_3; }
 
-		//(arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)?
+		//(arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)?
 		public Group getGroup_1_1_4() { return cGroup_1_1_4; }
 
 		//arguments+=OclMessageArg
@@ -1202,10 +1211,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//OclMessageArg
 		public RuleCall getArgumentsOclMessageArgParserRuleCall_1_1_4_0_0() { return cArgumentsOclMessageArgParserRuleCall_1_1_4_0_0; }
 
-		//("," arguments+=OclMessageArg)*
+		//(',' arguments+=OclMessageArg)*
 		public Group getGroup_1_1_4_1() { return cGroup_1_1_4_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_4_1_0() { return cCommaKeyword_1_1_4_1_0; }
 
 		//arguments+=OclMessageArg
@@ -1214,12 +1223,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//OclMessageArg
 		public RuleCall getArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0() { return cArgumentsOclMessageArgParserRuleCall_1_1_4_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_1_5() { return cRightParenthesisKeyword_1_1_5; }
 	}
 
 	public class OclMessageArgElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OclMessageArg");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cOclMessageArgAction_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -1232,25 +1241,25 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		
 		//// FIXME @pre
 		//OclMessageArg:
-		//	{OclMessageArg} "?" (":" type=TypeExp)? | Expression;
+		//	{OclMessageArg} '?' (':' type=TypeExp)? | Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{OclMessageArg} "?" (":" type=TypeExp)? | Expression
+		//{OclMessageArg} '?' (':' type=TypeExp)? | Expression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//{OclMessageArg} "?" (":" type=TypeExp)?
+		//{OclMessageArg} '?' (':' type=TypeExp)?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//{OclMessageArg}
 		public Action getOclMessageArgAction_0_0() { return cOclMessageArgAction_0_0; }
 
-		//"?"
+		//'?'
 		public Keyword getQuestionMarkKeyword_0_1() { return cQuestionMarkKeyword_0_1; }
 
-		//(":" type=TypeExp)?
+		//(':' type=TypeExp)?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_0_2_0() { return cColonKeyword_0_2_0; }
 
 		//type=TypeExp
@@ -1264,7 +1273,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class NUMBER_LITERALElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER_LITERAL");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NUMBER_LITERAL");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1280,43 +1289,43 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cINTTerminalRuleCall_2_2 = (RuleCall)cGroup_2.eContents().get(2);
 		
 		//NUMBER_LITERAL:
-		//	INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?;
+		//	INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?
+		//INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?
 		public Group getGroup() { return cGroup; }
 
 		//INT
 		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
 
-		//("." INT)?
+		//('.' INT)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//INT
 		public RuleCall getINTTerminalRuleCall_1_1() { return cINTTerminalRuleCall_1_1; }
 
-		//(("e" | "E") ("+" | "-")? INT)?
+		//(('e' | 'E') ('+' | '-')? INT)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"e" | "E"
+		//('e' | 'E')
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 
-		//"e"
+		//'e'
 		public Keyword getEKeyword_2_0_0() { return cEKeyword_2_0_0; }
 
-		//"E"
+		//'E'
 		public Keyword getEKeyword_2_0_1() { return cEKeyword_2_0_1; }
 
-		//("+" | "-")?
+		//('+' | '-')?
 		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_2_1_0() { return cPlusSignKeyword_2_1_0; }
 
-		//"-"
+		//'-'
 		public Keyword getHyphenMinusKeyword_2_1_1() { return cHyphenMinusKeyword_2_1_1; }
 
 		//INT
@@ -1324,46 +1333,48 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class EssentialOCLRestrictedKeywordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EssentialOCLRestrictedKeywords");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.EssentialOCLRestrictedKeywords");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cEKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cEKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		
 		//EssentialOCLRestrictedKeywords:
-		//	"e" | "E";
+		//	'e'
+		//	| 'E';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"e" | "E"
+		//'e' | 'E'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"e"
+		//'e'
 		public Keyword getEKeyword_0() { return cEKeyword_0; }
 
-		//"E"
+		//'E'
 		public Keyword getEKeyword_1() { return cEKeyword_1; }
 	}
 
 	public class RestrictedKeywordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RestrictedKeywords");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.RestrictedKeywords");
 		private final RuleCall cEssentialOCLRestrictedKeywordsParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//// Intended to be overridden
 		//RestrictedKeywords:
 		//	EssentialOCLRestrictedKeywords;
 		@Override public ParserRule getRule() { return rule; }
 
+		//// Intended to be overridden
 		//EssentialOCLRestrictedKeywords
 		public RuleCall getEssentialOCLRestrictedKeywordsParserRuleCall() { return cEssentialOCLRestrictedKeywordsParserRuleCall; }
 	}
 
 	public class IdentifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Identifier");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRestrictedKeywordsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Identifier:
-		//	ID | RestrictedKeywords;
+		//	ID
+		//	| RestrictedKeywords;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ID | RestrictedKeywords
@@ -1377,7 +1388,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class StringLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.StringLiteral");
 		private final RuleCall cSTRINGTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//StringLiteral:
@@ -1389,7 +1400,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimpleNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimpleName");
 		private final RuleCall cIdentifierParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//SimpleName:
@@ -1401,7 +1412,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PrimitiveTypeIdentifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveTypeIdentifier");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PrimitiveTypeIdentifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cBooleanKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cIntegerKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -1413,39 +1424,46 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cOclVoidKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
 		
 		//PrimitiveTypeIdentifier:
-		//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
+		//	'Boolean'
+		//	| 'Integer'
+		//	| 'Real'
+		//	| 'String'
+		//	| 'UnlimitedNatural'
+		//	| 'OclAny'
+		//	| 'OclInvalid'
+		//	| 'OclVoid';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid"
+		//'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' | 'OclAny' | 'OclInvalid' | 'OclVoid'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"Boolean"
+		//'Boolean'
 		public Keyword getBooleanKeyword_0() { return cBooleanKeyword_0; }
 
-		//"Integer"
+		//'Integer'
 		public Keyword getIntegerKeyword_1() { return cIntegerKeyword_1; }
 
-		//"Real"
+		//'Real'
 		public Keyword getRealKeyword_2() { return cRealKeyword_2; }
 
-		//"String"
+		//'String'
 		public Keyword getStringKeyword_3() { return cStringKeyword_3; }
 
-		//"UnlimitedNatural"
+		//'UnlimitedNatural'
 		public Keyword getUnlimitedNaturalKeyword_4() { return cUnlimitedNaturalKeyword_4; }
 
-		//"OclAny"
+		//'OclAny'
 		public Keyword getOclAnyKeyword_5() { return cOclAnyKeyword_5; }
 
-		//"OclInvalid"
+		//'OclInvalid'
 		public Keyword getOclInvalidKeyword_6() { return cOclInvalidKeyword_6; }
 
-		//"OclVoid"
+		//'OclVoid'
 		public Keyword getOclVoidKeyword_7() { return cOclVoidKeyword_7; }
 	}
 
 	public class PrimitiveTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PrimitiveType");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNamePrimitiveTypeIdentifierParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -1461,7 +1479,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class CollectionTypeIdentifierElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CollectionTypeIdentifier");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionTypeIdentifier");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cSetKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cBagKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -1470,30 +1488,34 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cOrderedSetKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//CollectionTypeIdentifier:
-		//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
+		//	'Set'
+		//	| 'Bag'
+		//	| 'Sequence'
+		//	| 'Collection'
+		//	| 'OrderedSet';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet"
+		//'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"Set"
+		//'Set'
 		public Keyword getSetKeyword_0() { return cSetKeyword_0; }
 
-		//"Bag"
+		//'Bag'
 		public Keyword getBagKeyword_1() { return cBagKeyword_1; }
 
-		//"Sequence"
+		//'Sequence'
 		public Keyword getSequenceKeyword_2() { return cSequenceKeyword_2; }
 
-		//"Collection"
+		//'Collection'
 		public Keyword getCollectionKeyword_3() { return cCollectionKeyword_3; }
 
-		//"OrderedSet"
+		//'OrderedSet'
 		public Keyword getOrderedSetKeyword_4() { return cOrderedSetKeyword_4; }
 	}
 
 	public class TypeExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPrimitiveTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cNameExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -1501,7 +1523,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cTupleTypeParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//TypeExp:
-		//	PrimitiveType | NameExp | CollectionType | TupleType;
+		//	PrimitiveType
+		//	| NameExp
+		//	| CollectionType
+		//	| TupleType;
 		@Override public ParserRule getRule() { return rule; }
 
 		//PrimitiveType | NameExp | CollectionType | TupleType
@@ -1521,7 +1546,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class CollectionTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CollectionType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeIdentifierAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeIdentifierCollectionTypeIdentifierParserRuleCall_0_0 = (RuleCall)cTypeIdentifierAssignment_0.eContents().get(0);
@@ -1532,10 +1557,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightParenthesisKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		
 		//CollectionType:
-		//	typeIdentifier=CollectionTypeIdentifier ("(" type=TypeExp ")")?;
+		//	typeIdentifier=CollectionTypeIdentifier ('(' type=TypeExp ')')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//typeIdentifier=CollectionTypeIdentifier ("(" type=TypeExp ")")?
+		//typeIdentifier=CollectionTypeIdentifier ('(' type=TypeExp ')')?
 		public Group getGroup() { return cGroup; }
 
 		//typeIdentifier=CollectionTypeIdentifier
@@ -1544,10 +1569,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//CollectionTypeIdentifier
 		public RuleCall getTypeIdentifierCollectionTypeIdentifierParserRuleCall_0_0() { return cTypeIdentifierCollectionTypeIdentifierParserRuleCall_0_0; }
 
-		//("(" type=TypeExp ")")?
+		//('(' type=TypeExp ')')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_0() { return cLeftParenthesisKeyword_1_0; }
 
 		//type=TypeExp
@@ -1556,12 +1581,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_1_1_0() { return cTypeTypeExpParserRuleCall_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 	}
 
 	public class TupleTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TupleType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cNameTupleKeyword_0_0 = (Keyword)cNameAssignment_0.eContents().get(0);
@@ -1576,22 +1601,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//TupleType:
-		//	name="Tuple" "(" (part+=tuplePart ("," part+=tuplePart)*)? ")";
+		//	name='Tuple' '(' (part+=tuplePart (',' part+=tuplePart)*)? ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name="Tuple" "(" (part+=tuplePart ("," part+=tuplePart)*)? ")"
+		//name='Tuple' '(' (part+=tuplePart (',' part+=tuplePart)*)? ')'
 		public Group getGroup() { return cGroup; }
 
-		//name="Tuple"
+		//name='Tuple'
 		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
 
-		//"Tuple"
+		//'Tuple'
 		public Keyword getNameTupleKeyword_0_0() { return cNameTupleKeyword_0_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(part+=tuplePart ("," part+=tuplePart)*)?
+		//(part+=tuplePart (',' part+=tuplePart)*)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//part+=tuplePart
@@ -1600,10 +1625,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//tuplePart
 		public RuleCall getPartTuplePartParserRuleCall_2_0_0() { return cPartTuplePartParserRuleCall_2_0_0; }
 
-		//("," part+=tuplePart)*
+		//(',' part+=tuplePart)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 
 		//part+=tuplePart
@@ -1612,12 +1637,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//tuplePart
 		public RuleCall getPartTuplePartParserRuleCall_2_1_1_0() { return cPartTuplePartParserRuleCall_2_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class TuplePartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "tuplePart");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.tuplePart");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIdentifierParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -1626,10 +1651,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cTypeTypeExpParserRuleCall_2_0 = (RuleCall)cTypeAssignment_2.eContents().get(0);
 		
 		//tuplePart:
-		//	name=Identifier ":" type=TypeExp;
+		//	name=Identifier ':' type=TypeExp;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=Identifier ":" type=TypeExp
+		//name=Identifier ':' type=TypeExp
 		public Group getGroup() { return cGroup; }
 
 		//name=Identifier
@@ -1638,7 +1663,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0() { return cNameIdentifierParserRuleCall_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//type=TypeExp
@@ -1649,7 +1674,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class CollectionLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CollectionLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCollectionTypeParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1665,28 +1690,29 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightCurlyBracketKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//CollectionLiteralExp:
-		//	CollectionType ({CollectionLiteralExp.type=current} "{" (collectionLiteralParts+=CollectionLiteralPart (","
-		//	collectionLiteralParts+=CollectionLiteralPart)*)? "}")?;
+		//	CollectionType ({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
+		//	collectionLiteralParts+=CollectionLiteralPart)*)?
+		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//CollectionType ({CollectionLiteralExp.type=current} "{" (collectionLiteralParts+=CollectionLiteralPart (","
-		//collectionLiteralParts+=CollectionLiteralPart)*)? "}")?
+		//CollectionType ({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
+		//collectionLiteralParts+=CollectionLiteralPart)*)? '}')?
 		public Group getGroup() { return cGroup; }
 
 		//CollectionType
 		public RuleCall getCollectionTypeParserRuleCall_0() { return cCollectionTypeParserRuleCall_0; }
 
-		//({CollectionLiteralExp.type=current} "{" (collectionLiteralParts+=CollectionLiteralPart (","
-		//collectionLiteralParts+=CollectionLiteralPart)*)? "}")?
+		//({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
+		//collectionLiteralParts+=CollectionLiteralPart)*)? '}')?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{CollectionLiteralExp.type=current}
 		public Action getCollectionLiteralExpTypeAction_1_0() { return cCollectionLiteralExpTypeAction_1_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_1() { return cLeftCurlyBracketKeyword_1_1; }
 
-		//(collectionLiteralParts+=CollectionLiteralPart ("," collectionLiteralParts+=CollectionLiteralPart)*)?
+		//(collectionLiteralParts+=CollectionLiteralPart (',' collectionLiteralParts+=CollectionLiteralPart)*)?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//collectionLiteralParts+=CollectionLiteralPart
@@ -1695,10 +1721,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//CollectionLiteralPart
 		public RuleCall getCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_0_0() { return cCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_0_0; }
 
-		//("," collectionLiteralParts+=CollectionLiteralPart)*
+		//(',' collectionLiteralParts+=CollectionLiteralPart)*
 		public Group getGroup_1_2_1() { return cGroup_1_2_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_2_1_0() { return cCommaKeyword_1_2_1_0; }
 
 		//collectionLiteralParts+=CollectionLiteralPart
@@ -1707,12 +1733,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//CollectionLiteralPart
 		public RuleCall getCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_1_1_0() { return cCollectionLiteralPartsCollectionLiteralPartParserRuleCall_1_2_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_3() { return cRightCurlyBracketKeyword_1_3; }
 	}
 
 	public class CollectionLiteralPartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CollectionLiteralPart");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralPart");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cExpressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cExpressionExpressionParserRuleCall_0_0 = (RuleCall)cExpressionAssignment_0.eContents().get(0);
@@ -1722,10 +1748,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cLastExpressionExpressionParserRuleCall_1_1_0 = (RuleCall)cLastExpressionAssignment_1_1.eContents().get(0);
 		
 		//CollectionLiteralPart:
-		//	expression=Expression (".." lastExpression=Expression)?;
+		//	expression=Expression ('..' lastExpression=Expression)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//expression=Expression (".." lastExpression=Expression)?
+		//expression=Expression ('..' lastExpression=Expression)?
 		public Group getGroup() { return cGroup; }
 
 		//expression=Expression
@@ -1734,10 +1760,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getExpressionExpressionParserRuleCall_0_0() { return cExpressionExpressionParserRuleCall_0_0; }
 
-		//(".." lastExpression=Expression)?
+		//('..' lastExpression=Expression)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//".."
+		//'..'
 		public Keyword getFullStopFullStopKeyword_1_0() { return cFullStopFullStopKeyword_1_0; }
 
 		//lastExpression=Expression
@@ -1748,7 +1774,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PrimitiveLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimitiveLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PrimitiveLiteralExp");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNumberLiteralExpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStringLiteralExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -1757,7 +1783,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cNullLiteralExpParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//PrimitiveLiteralExp:
-		//	NumberLiteralExp | StringLiteralExp | BooleanLiteralExp | InvalidLiteralExp | NullLiteralExp;
+		//	NumberLiteralExp
+		//	| StringLiteralExp
+		//	| BooleanLiteralExp
+		//	| InvalidLiteralExp
+		//	| NullLiteralExp;
 		@Override public ParserRule getRule() { return rule; }
 
 		//NumberLiteralExp | StringLiteralExp | BooleanLiteralExp | InvalidLiteralExp | NullLiteralExp
@@ -1780,7 +1810,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class TupleLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TupleLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTupleLiteralExpAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTupleKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1795,22 +1825,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightCurlyBracketKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//TupleLiteralExp:
-		//	{TupleLiteralExp} "Tuple" ("{" part+=TupleLiteralPart ("," part+=TupleLiteralPart)* "}")?;
+		//	{TupleLiteralExp} 'Tuple' ('{' part+=TupleLiteralPart (',' part+=TupleLiteralPart)* '}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{TupleLiteralExp} "Tuple" ("{" part+=TupleLiteralPart ("," part+=TupleLiteralPart)* "}")?
+		//{TupleLiteralExp} 'Tuple' ('{' part+=TupleLiteralPart (',' part+=TupleLiteralPart)* '}')?
 		public Group getGroup() { return cGroup; }
 
 		//{TupleLiteralExp}
 		public Action getTupleLiteralExpAction_0() { return cTupleLiteralExpAction_0; }
 
-		//"Tuple"
+		//'Tuple'
 		public Keyword getTupleKeyword_1() { return cTupleKeyword_1; }
 
-		//("{" part+=TupleLiteralPart ("," part+=TupleLiteralPart)* "}")?
+		//('{' part+=TupleLiteralPart (',' part+=TupleLiteralPart)* '}')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 
 		//part+=TupleLiteralPart
@@ -1819,10 +1849,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TupleLiteralPart
 		public RuleCall getPartTupleLiteralPartParserRuleCall_2_1_0() { return cPartTupleLiteralPartParserRuleCall_2_1_0; }
 
-		//("," part+=TupleLiteralPart)*
+		//(',' part+=TupleLiteralPart)*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
 		//part+=TupleLiteralPart
@@ -1831,12 +1861,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TupleLiteralPart
 		public RuleCall getPartTupleLiteralPartParserRuleCall_2_2_1_0() { return cPartTupleLiteralPartParserRuleCall_2_2_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
 	}
 
 	public class TupleLiteralPartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TupleLiteralPart");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralPart");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIdentifierParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -1849,10 +1879,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInitExpressionExpressionParserRuleCall_3_0 = (RuleCall)cInitExpressionAssignment_3.eContents().get(0);
 		
 		//TupleLiteralPart:
-		//	name=Identifier (":" type=TypeExp)? "=" initExpression=Expression;
+		//	name=Identifier (':' type=TypeExp)? '=' initExpression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=Identifier (":" type=TypeExp)? "=" initExpression=Expression
+		//name=Identifier (':' type=TypeExp)? '=' initExpression=Expression
 		public Group getGroup() { return cGroup; }
 
 		//name=Identifier
@@ -1861,10 +1891,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0() { return cNameIdentifierParserRuleCall_0_0; }
 
-		//(":" type=TypeExp)?
+		//(':' type=TypeExp)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
 		//type=TypeExp
@@ -1873,7 +1903,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_1_1_0() { return cTypeTypeExpParserRuleCall_1_1_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_2() { return cEqualsSignKeyword_2; }
 
 		//initExpression=Expression
@@ -1884,7 +1914,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class NumberLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NumberLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NumberLiteralExp");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameNUMBER_LITERALParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -1900,7 +1930,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class StringLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.StringLiteralExp");
 		private final Assignment cValuesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValuesStringLiteralParserRuleCall_0 = (RuleCall)cValuesAssignment.eContents().get(0);
 		
@@ -1916,7 +1946,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class BooleanLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BooleanLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.BooleanLiteralExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBooleanLiteralExpAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1925,76 +1955,78 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cFalseKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		
 		//BooleanLiteralExp:
-		//	{BooleanLiteralExp} (isTrue?="true" | "false");
+		//	{BooleanLiteralExp} (isTrue?='true'
+		//	| 'false');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BooleanLiteralExp} (isTrue?="true" | "false")
+		//{BooleanLiteralExp} (isTrue?='true' | 'false')
 		public Group getGroup() { return cGroup; }
 
 		//{BooleanLiteralExp}
 		public Action getBooleanLiteralExpAction_0() { return cBooleanLiteralExpAction_0; }
 
-		//isTrue?="true" | "false"
+		//(isTrue?='true' | 'false')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//isTrue?="true"
+		//isTrue?='true'
 		public Assignment getIsTrueAssignment_1_0() { return cIsTrueAssignment_1_0; }
 
-		//"true"
+		//'true'
 		public Keyword getIsTrueTrueKeyword_1_0_0() { return cIsTrueTrueKeyword_1_0_0; }
 
-		//"false"
+		//'false'
 		public Keyword getFalseKeyword_1_1() { return cFalseKeyword_1_1; }
 	}
 
 	public class InvalidLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InvalidLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.InvalidLiteralExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cInvalidLiteralExpAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cInvalidKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//InvalidLiteralExp:
-		//	{InvalidLiteralExp} "invalid";
+		//	{InvalidLiteralExp} 'invalid';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{InvalidLiteralExp} "invalid"
+		//{InvalidLiteralExp} 'invalid'
 		public Group getGroup() { return cGroup; }
 
 		//{InvalidLiteralExp}
 		public Action getInvalidLiteralExpAction_0() { return cInvalidLiteralExpAction_0; }
 
-		//"invalid"
+		//'invalid'
 		public Keyword getInvalidKeyword_1() { return cInvalidKeyword_1; }
 	}
 
 	public class NullLiteralExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NullLiteralExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NullLiteralExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cNullLiteralExpAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cNullKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//NullLiteralExp:
-		//	{NullLiteralExp} "null";
+		//	{NullLiteralExp} 'null';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{NullLiteralExp} "null"
+		//{NullLiteralExp} 'null'
 		public Group getGroup() { return cGroup; }
 
 		//{NullLiteralExp}
 		public Action getNullLiteralExpAction_0() { return cNullLiteralExpAction_0; }
 
-		//"null"
+		//'null'
 		public Keyword getNullKeyword_1() { return cNullKeyword_1; }
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cImpliesParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLetExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//Expression:
-		//	implies | LetExp;
+		//	implies
+		//	| LetExp;
 		@Override public ParserRule getRule() { return rule; }
 
 		//implies | LetExp
@@ -2008,7 +2040,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class ImpliesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "implies");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.implies");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cXorParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2020,32 +2052,32 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentXorParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//implies returns Expression:
-		//	xor ({InfixExp.source=current} op="implies" argument=(xor | LetExp))*;
+		//implies Expression:
+		//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//xor ({InfixExp.source=current} op="implies" argument=(xor | LetExp))*
+		//xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//xor
 		public RuleCall getXorParserRuleCall_0() { return cXorParserRuleCall_0; }
 
-		//({InfixExp.source=current} op="implies" argument=(xor | LetExp))*
+		//({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op="implies"
+		//op='implies'
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"implies"
+		//'implies'
 		public Keyword getOpImpliesKeyword_1_1_0() { return cOpImpliesKeyword_1_1_0; }
 
 		//argument=(xor | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//xor | LetExp
+		//(xor | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//xor
@@ -2056,7 +2088,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class XorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "xor");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.xor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cOrParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2068,32 +2100,32 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentOrParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//xor returns Expression:
-		//	or ({InfixExp.source=current} op="xor" argument=(or | LetExp))*;
+		//xor Expression:
+		//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//or ({InfixExp.source=current} op="xor" argument=(or | LetExp))*
+		//or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//or
 		public RuleCall getOrParserRuleCall_0() { return cOrParserRuleCall_0; }
 
-		//({InfixExp.source=current} op="xor" argument=(or | LetExp))*
+		//({InfixExp.source=current} op='xor' argument=(or | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op="xor"
+		//op='xor'
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"xor"
+		//'xor'
 		public Keyword getOpXorKeyword_1_1_0() { return cOpXorKeyword_1_1_0; }
 
 		//argument=(or | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//or | LetExp
+		//(or | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//or
@@ -2104,7 +2136,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class OrElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "or");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.or");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAndParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2116,32 +2148,32 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentAndParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//or returns Expression:
-		//	and ({InfixExp.source=current} op="or" argument=(and | LetExp))*;
+		//or Expression:
+		//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//and ({InfixExp.source=current} op="or" argument=(and | LetExp))*
+		//and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//and
 		public RuleCall getAndParserRuleCall_0() { return cAndParserRuleCall_0; }
 
-		//({InfixExp.source=current} op="or" argument=(and | LetExp))*
+		//({InfixExp.source=current} op='or' argument=(and | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op="or"
+		//op='or'
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"or"
+		//'or'
 		public Keyword getOpOrKeyword_1_1_0() { return cOpOrKeyword_1_1_0; }
 
 		//argument=(and | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//and | LetExp
+		//(and | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//and
@@ -2152,7 +2184,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class AndElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "and");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.and");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cEqualityParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2164,32 +2196,32 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentEqualityParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//and returns Expression:
-		//	equality ({InfixExp.source=current} op="and" argument=(equality | LetExp))*;
+		//and Expression:
+		//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//equality ({InfixExp.source=current} op="and" argument=(equality | LetExp))*
+		//equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//equality
 		public RuleCall getEqualityParserRuleCall_0() { return cEqualityParserRuleCall_0; }
 
-		//({InfixExp.source=current} op="and" argument=(equality | LetExp))*
+		//({InfixExp.source=current} op='and' argument=(equality | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op="and"
+		//op='and'
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"and"
+		//'and'
 		public Keyword getOpAndKeyword_1_1_0() { return cOpAndKeyword_1_1_0; }
 
 		//argument=(equality | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//equality | LetExp
+		//(equality | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//equality
@@ -2200,7 +2232,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class EqualityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "equality");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.equality");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cRelationalParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2214,38 +2246,38 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentRelationalParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//equality returns Expression:
-		//	relational ({InfixExp.source=current} op=("=" | "<>") argument=(relational | LetExp))*;
+		//equality Expression:
+		//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//relational ({InfixExp.source=current} op=("=" | "<>") argument=(relational | LetExp))*
+		//relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//relational
 		public RuleCall getRelationalParserRuleCall_0() { return cRelationalParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=("=" | "<>") argument=(relational | LetExp))*
+		//({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op=("=" | "<>")
+		//op=('=' | '<>')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"=" | "<>"
+		//('=' | '<>')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 
-		//"="
+		//'='
 		public Keyword getOpEqualsSignKeyword_1_1_0_0() { return cOpEqualsSignKeyword_1_1_0_0; }
 
-		//"<>"
+		//'<>'
 		public Keyword getOpLessThanSignGreaterThanSignKeyword_1_1_0_1() { return cOpLessThanSignGreaterThanSignKeyword_1_1_0_1; }
 
 		//argument=(relational | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//relational | LetExp
+		//(relational | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//relational
@@ -2256,7 +2288,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class RelationalElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "relational");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.relational");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditiveParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2272,44 +2304,44 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentAdditiveParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//relational returns Expression:
-		//	additive ({InfixExp.source=current} op=(">" | "<" | ">=" | "<=") argument=(additive | LetExp))*;
+		//relational Expression:
+		//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//additive ({InfixExp.source=current} op=(">" | "<" | ">=" | "<=") argument=(additive | LetExp))*
+		//additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//additive
 		public RuleCall getAdditiveParserRuleCall_0() { return cAdditiveParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=(">" | "<" | ">=" | "<=") argument=(additive | LetExp))*
+		//({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op=(">" | "<" | ">=" | "<=")
+		//op=('>' | '<' | '>=' | '<=')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//">" | "<" | ">=" | "<="
+		//('>' | '<' | '>=' | '<=')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 
-		//">"
+		//'>'
 		public Keyword getOpGreaterThanSignKeyword_1_1_0_0() { return cOpGreaterThanSignKeyword_1_1_0_0; }
 
-		//"<"
+		//'<'
 		public Keyword getOpLessThanSignKeyword_1_1_0_1() { return cOpLessThanSignKeyword_1_1_0_1; }
 
-		//">="
+		//'>='
 		public Keyword getOpGreaterThanSignEqualsSignKeyword_1_1_0_2() { return cOpGreaterThanSignEqualsSignKeyword_1_1_0_2; }
 
-		//"<="
+		//'<='
 		public Keyword getOpLessThanSignEqualsSignKeyword_1_1_0_3() { return cOpLessThanSignEqualsSignKeyword_1_1_0_3; }
 
 		//argument=(additive | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//additive | LetExp
+		//(additive | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//additive
@@ -2320,7 +2352,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class AdditiveElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "additive");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.additive");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicativeParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2334,38 +2366,38 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentMultiplicativeParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//additive returns Expression:
-		//	multiplicative ({InfixExp.source=current} op=("+" | "-") argument=(multiplicative | LetExp))*;
+		//additive Expression:
+		//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//multiplicative ({InfixExp.source=current} op=("+" | "-") argument=(multiplicative | LetExp))*
+		//multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//multiplicative
 		public RuleCall getMultiplicativeParserRuleCall_0() { return cMultiplicativeParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=("+" | "-") argument=(multiplicative | LetExp))*
+		//({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op=("+" | "-")
+		//op=('+' | '-')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"+" | "-"
+		//('+' | '-')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 
-		//"+"
+		//'+'
 		public Keyword getOpPlusSignKeyword_1_1_0_0() { return cOpPlusSignKeyword_1_1_0_0; }
 
-		//"-"
+		//'-'
 		public Keyword getOpHyphenMinusKeyword_1_1_0_1() { return cOpHyphenMinusKeyword_1_1_0_1; }
 
 		//argument=(multiplicative | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//multiplicative | LetExp
+		//(multiplicative | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//multiplicative
@@ -2376,7 +2408,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class MultiplicativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "multiplicative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.multiplicative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cUnaryParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2390,38 +2422,38 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cArgumentUnaryParserRuleCall_1_2_0_0 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(0);
 		private final RuleCall cArgumentLetExpParserRuleCall_1_2_0_1 = (RuleCall)cArgumentAlternatives_1_2_0.eContents().get(1);
 		
-		//multiplicative returns Expression:
-		//	unary ({InfixExp.source=current} op=("*" | "/") argument=(unary | LetExp))*;
+		//multiplicative Expression:
+		//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
 		@Override public ParserRule getRule() { return rule; }
 
-		//unary ({InfixExp.source=current} op=("*" | "/") argument=(unary | LetExp))*
+		//unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
 		public Group getGroup() { return cGroup; }
 
 		//unary
 		public RuleCall getUnaryParserRuleCall_0() { return cUnaryParserRuleCall_0; }
 
-		//({InfixExp.source=current} op=("*" | "/") argument=(unary | LetExp))*
+		//({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{InfixExp.source=current}
 		public Action getInfixExpSourceAction_1_0() { return cInfixExpSourceAction_1_0; }
 
-		//op=("*" | "/")
+		//op=('*' | '/')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"*" | "/"
+		//('*' | '/')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getOpAsteriskKeyword_1_1_0_0() { return cOpAsteriskKeyword_1_1_0_0; }
 
-		//"/"
+		//'/'
 		public Keyword getOpSolidusKeyword_1_1_0_1() { return cOpSolidusKeyword_1_1_0_1; }
 
 		//argument=(unary | LetExp)
 		public Assignment getArgumentAssignment_1_2() { return cArgumentAssignment_1_2; }
 
-		//unary | LetExp
+		//(unary | LetExp)
 		public Alternatives getArgumentAlternatives_1_2_0() { return cArgumentAlternatives_1_2_0; }
 
 		//unary
@@ -2432,7 +2464,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class UnaryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "unary");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.unary");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNavigationExpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
@@ -2444,32 +2476,33 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Assignment cSourceAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cSourceUnaryParserRuleCall_1_2_0 = (RuleCall)cSourceAssignment_1_2.eContents().get(0);
 		
-		//unary returns Expression:
-		//	NavigationExp | {PrefixExp} op=("-" | "not") source=unary;
+		//unary Expression:
+		//	NavigationExp
+		//	| {PrefixExp} op=('-' | 'not') source=unary
 		@Override public ParserRule getRule() { return rule; }
 
-		//NavigationExp | {PrefixExp} op=("-" | "not") source=unary
+		//NavigationExp | {PrefixExp} op=('-' | 'not') source=unary
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//NavigationExp
 		public RuleCall getNavigationExpParserRuleCall_0() { return cNavigationExpParserRuleCall_0; }
 
-		//{PrefixExp} op=("-" | "not") source=unary
+		//{PrefixExp} op=('-' | 'not') source=unary
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{PrefixExp}
 		public Action getPrefixExpAction_1_0() { return cPrefixExpAction_1_0; }
 
-		//op=("-" | "not")
+		//op=('-' | 'not')
 		public Assignment getOpAssignment_1_1() { return cOpAssignment_1_1; }
 
-		//"-" | "not"
+		//('-' | 'not')
 		public Alternatives getOpAlternatives_1_1_0() { return cOpAlternatives_1_1_0; }
 
-		//"-"
+		//'-'
 		public Keyword getOpHyphenMinusKeyword_1_1_0_0() { return cOpHyphenMinusKeyword_1_1_0_0; }
 
-		//"not"
+		//'not'
 		public Keyword getOpNotKeyword_1_1_0_1() { return cOpNotKeyword_1_1_0_1; }
 
 		//source=unary
@@ -2480,7 +2513,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SubNavigationExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubNavigationExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SubNavigationExp");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRoundBracketExpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSquareBracketExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -2498,13 +2531,21 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cSourceExpressionParserRuleCall_9_2_0 = (RuleCall)cSourceAssignment_9_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_9_3 = (Keyword)cGroup_9.eContents().get(3);
 		
-		//SubNavigationExp returns Expression:
-		//	RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
-		//	TypeExp | IfExp | "(" {NestedExp} source=Expression ")";
+		//SubNavigationExp Expression:
+		//	RoundBracketExp
+		//	| SquareBracketExp
+		//	| SelfExp
+		//	| PrimitiveLiteralExp
+		//	| TupleLiteralExp
+		//	| CollectionLiteralExp
+		//	| PreExp
+		//	| TypeExp
+		//	| IfExp
+		//	| '(' {NestedExp} source=Expression ')'
 		@Override public ParserRule getRule() { return rule; }
 
 		//RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
-		//TypeExp | IfExp | "(" {NestedExp} source=Expression ")"
+		//TypeExp | IfExp | '(' {NestedExp} source=Expression ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//RoundBracketExp
@@ -2534,10 +2575,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//IfExp
 		public RuleCall getIfExpParserRuleCall_8() { return cIfExpParserRuleCall_8; }
 
-		//"(" {NestedExp} source=Expression ")"
+		//'(' {NestedExp} source=Expression ')'
 		public Group getGroup_9() { return cGroup_9; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_9_0() { return cLeftParenthesisKeyword_9_0; }
 
 		//{NestedExp}
@@ -2549,20 +2590,23 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getSourceExpressionParserRuleCall_9_2_0() { return cSourceExpressionParserRuleCall_9_2_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_9_3() { return cRightParenthesisKeyword_9_3; }
 	}
 
 	public class SubNavigatingExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubNavigatingExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SubNavigatingExp");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cRoundBracketExpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSquareBracketExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPreExpParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cNameExpParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
-		//SubNavigatingExp returns Expression:
-		//	RoundBracketExp | SquareBracketExp | PreExp | NameExp;
+		//SubNavigatingExp Expression:
+		//	RoundBracketExp
+		//	| SquareBracketExp
+		//	| PreExp
+		//	| NameExp
 		@Override public ParserRule getRule() { return rule; }
 
 		//RoundBracketExp | SquareBracketExp | PreExp | NameExp
@@ -2582,7 +2626,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class IteratorVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "iteratorVariable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorVariable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIdentifierParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -2592,10 +2636,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cTypeTypeExpParserRuleCall_1_1_0 = (RuleCall)cTypeAssignment_1_1.eContents().get(0);
 		
 		//iteratorVariable:
-		//	name=Identifier (":" type=TypeExp)?;
+		//	name=Identifier (':' type=TypeExp)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=Identifier (":" type=TypeExp)?
+		//name=Identifier (':' type=TypeExp)?
 		public Group getGroup() { return cGroup; }
 
 		//name=Identifier
@@ -2604,10 +2648,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0() { return cNameIdentifierParserRuleCall_0_0; }
 
-		//(":" type=TypeExp)?
+		//(':' type=TypeExp)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
 		//type=TypeExp
@@ -2618,7 +2662,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class IteratorAccumulatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "iteratorAccumulator");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorAccumulator");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIdentifierParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -2630,10 +2674,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInitExpressionExpressionParserRuleCall_4_0 = (RuleCall)cInitExpressionAssignment_4.eContents().get(0);
 		
 		//iteratorAccumulator:
-		//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
+		//	name=Identifier ':' type=TypeExp '=' initExpression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=Identifier ":" type=TypeExp "=" initExpression=Expression
+		//name=Identifier ':' type=TypeExp '=' initExpression=Expression
 		public Group getGroup() { return cGroup; }
 
 		//name=Identifier
@@ -2642,7 +2686,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0() { return cNameIdentifierParserRuleCall_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//type=TypeExp
@@ -2651,7 +2695,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_2_0() { return cTypeTypeExpParserRuleCall_2_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
 
 		//initExpression=Expression
@@ -2662,7 +2706,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class RoundBracketExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RoundBracketExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.RoundBracketExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameNameExpParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -2694,12 +2738,14 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//RoundBracketExp:
-		//	name=NameExp ("@" pre?="pre")? "(" (variable1=iteratorVariable ("," variable2=iteratorVariable | ";"
-		//	variable2=iteratorAccumulator)? "|")? (arguments+=Expression ("," arguments+=Expression)*)? ")";
+		//	name=NameExp ('@' pre?='pre')? '(' (variable1=iteratorVariable (',' variable2=iteratorVariable | ';'
+		//	variable2=iteratorAccumulator)?
+		//	'|')? (arguments+=Expression (',' arguments+=Expression)*)?
+		//	')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=NameExp ("@" pre?="pre")? "(" (variable1=iteratorVariable ("," variable2=iteratorVariable | ";"
-		//variable2=iteratorAccumulator)? "|")? (arguments+=Expression ("," arguments+=Expression)*)? ")"
+		//name=NameExp ('@' pre?='pre')? '(' (variable1=iteratorVariable (',' variable2=iteratorVariable | ';'
+		//variable2=iteratorAccumulator)? '|')? (arguments+=Expression (',' arguments+=Expression)*)? ')'
 		public Group getGroup() { return cGroup; }
 
 		//name=NameExp
@@ -2708,22 +2754,22 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NameExp
 		public RuleCall getNameNameExpParserRuleCall_0_0() { return cNameNameExpParserRuleCall_0_0; }
 
-		//("@" pre?="pre")?
+		//('@' pre?='pre')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"@"
+		//'@'
 		public Keyword getCommercialAtKeyword_1_0() { return cCommercialAtKeyword_1_0; }
 
-		//pre?="pre"
+		//pre?='pre'
 		public Assignment getPreAssignment_1_1() { return cPreAssignment_1_1; }
 
-		//"pre"
+		//'pre'
 		public Keyword getPrePreKeyword_1_1_0() { return cPrePreKeyword_1_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
-		//(variable1=iteratorVariable ("," variable2=iteratorVariable | ";" variable2=iteratorAccumulator)? "|")?
+		//(variable1=iteratorVariable (',' variable2=iteratorVariable | ';' variable2=iteratorAccumulator)? '|')?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//variable1=iteratorVariable
@@ -2732,13 +2778,13 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//iteratorVariable
 		public RuleCall getVariable1IteratorVariableParserRuleCall_3_0_0() { return cVariable1IteratorVariableParserRuleCall_3_0_0; }
 
-		//("," variable2=iteratorVariable | ";" variable2=iteratorAccumulator)?
+		//(',' variable2=iteratorVariable | ';' variable2=iteratorAccumulator)?
 		public Alternatives getAlternatives_3_1() { return cAlternatives_3_1; }
 
-		//"," variable2=iteratorVariable
+		//',' variable2=iteratorVariable
 		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_1_0_0() { return cCommaKeyword_3_1_0_0; }
 
 		//variable2=iteratorVariable
@@ -2747,10 +2793,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//iteratorVariable
 		public RuleCall getVariable2IteratorVariableParserRuleCall_3_1_0_1_0() { return cVariable2IteratorVariableParserRuleCall_3_1_0_1_0; }
 
-		//";" variable2=iteratorAccumulator
+		//';' variable2=iteratorAccumulator
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_1_0() { return cSemicolonKeyword_3_1_1_0; }
 
 		//variable2=iteratorAccumulator
@@ -2759,10 +2805,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//iteratorAccumulator
 		public RuleCall getVariable2IteratorAccumulatorParserRuleCall_3_1_1_1_0() { return cVariable2IteratorAccumulatorParserRuleCall_3_1_1_1_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_3_2() { return cVerticalLineKeyword_3_2; }
 
-		//(arguments+=Expression ("," arguments+=Expression)*)?
+		//(arguments+=Expression (',' arguments+=Expression)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//arguments+=Expression
@@ -2771,10 +2817,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getArgumentsExpressionParserRuleCall_4_0_0() { return cArgumentsExpressionParserRuleCall_4_0_0; }
 
-		//("," arguments+=Expression)*
+		//(',' arguments+=Expression)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
 		//arguments+=Expression
@@ -2783,12 +2829,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getArgumentsExpressionParserRuleCall_4_1_1_0() { return cArgumentsExpressionParserRuleCall_4_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class SquareBracketExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SquareBracketExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SquareBracketExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameNameExpParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -2806,10 +2852,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cPrePreKeyword_5_1_0 = (Keyword)cPreAssignment_5_1.eContents().get(0);
 		
 		//SquareBracketExp:
-		//	name=NameExp "[" arguments+=Expression ("," arguments+=Expression)* "]" ("@" pre?="pre")?;
+		//	name=NameExp '[' arguments+=Expression (',' arguments+=Expression)* ']' ('@' pre?='pre')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=NameExp "[" arguments+=Expression ("," arguments+=Expression)* "]" ("@" pre?="pre")?
+		//name=NameExp '[' arguments+=Expression (',' arguments+=Expression)* ']' ('@' pre?='pre')?
 		public Group getGroup() { return cGroup; }
 
 		//name=NameExp
@@ -2818,7 +2864,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NameExp
 		public RuleCall getNameNameExpParserRuleCall_0_0() { return cNameNameExpParserRuleCall_0_0; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_1() { return cLeftSquareBracketKeyword_1; }
 
 		//arguments+=Expression
@@ -2827,10 +2873,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getArgumentsExpressionParserRuleCall_2_0() { return cArgumentsExpressionParserRuleCall_2_0; }
 
-		//("," arguments+=Expression)*
+		//(',' arguments+=Expression)*
 		public Group getGroup_3() { return cGroup_3; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
 		//arguments+=Expression
@@ -2839,24 +2885,24 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getArgumentsExpressionParserRuleCall_3_1_0() { return cArgumentsExpressionParserRuleCall_3_1_0; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_4() { return cRightSquareBracketKeyword_4; }
 
-		//("@" pre?="pre")?
+		//('@' pre?='pre')?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"@"
+		//'@'
 		public Keyword getCommercialAtKeyword_5_0() { return cCommercialAtKeyword_5_0; }
 
-		//pre?="pre"
+		//pre?='pre'
 		public Assignment getPreAssignment_5_1() { return cPreAssignment_5_1; }
 
-		//"pre"
+		//'pre'
 		public Keyword getPrePreKeyword_5_1_0() { return cPrePreKeyword_5_1_0; }
 	}
 
 	public class PreExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PreExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PreExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameNameExpParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -2864,10 +2910,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cPreKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//PreExp:
-		//	name=NameExp "@" "pre";
+		//	name=NameExp '@' 'pre';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=NameExp "@" "pre"
+		//name=NameExp '@' 'pre'
 		public Group getGroup() { return cGroup; }
 
 		//name=NameExp
@@ -2876,35 +2922,35 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//NameExp
 		public RuleCall getNameNameExpParserRuleCall_0_0() { return cNameNameExpParserRuleCall_0_0; }
 
-		//"@"
+		//'@'
 		public Keyword getCommercialAtKeyword_1() { return cCommercialAtKeyword_1; }
 
-		//"pre"
+		//'pre'
 		public Keyword getPreKeyword_2() { return cPreKeyword_2; }
 	}
 
 	public class SelfExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SelfExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SelfExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSelfExpAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cSelfKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//SelfExp:
-		//	{SelfExp} "self";
+		//	{SelfExp} 'self';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{SelfExp} "self"
+		//{SelfExp} 'self'
 		public Group getGroup() { return cGroup; }
 
 		//{SelfExp}
 		public Action getSelfExpAction_0() { return cSelfExpAction_0; }
 
-		//"self"
+		//'self'
 		public Keyword getSelfKeyword_1() { return cSelfKeyword_1; }
 	}
 
 	public class NameExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPathNameExpParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimpleNameExpParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -2924,7 +2970,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class PathNameExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PathNameExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PathNameExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNamespaceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNamespaceIdentifierParserRuleCall_0_0 = (RuleCall)cNamespaceAssignment_0.eContents().get(0);
@@ -2933,10 +2979,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cElementNameExpParserRuleCall_2_0 = (RuleCall)cElementAssignment_2.eContents().get(0);
 		
 		//PathNameExp:
-		//	namespace=Identifier "::" element=NameExp;
+		//	namespace=Identifier '::' element=NameExp;
 		@Override public ParserRule getRule() { return rule; }
 
-		//namespace=Identifier "::" element=NameExp
+		//namespace=Identifier '::' element=NameExp
 		public Group getGroup() { return cGroup; }
 
 		//namespace=Identifier
@@ -2945,7 +2991,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNamespaceIdentifierParserRuleCall_0_0() { return cNamespaceIdentifierParserRuleCall_0_0; }
 
-		//"::"
+		//'::'
 		public Keyword getColonColonKeyword_1() { return cColonColonKeyword_1; }
 
 		//element=NameExp
@@ -2956,7 +3002,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class SimpleNameExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleNameExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.SimpleNameExp");
 		private final Assignment cElementAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cElementIdentifierParserRuleCall_0 = (RuleCall)cElementAssignment.eContents().get(0);
 		
@@ -2972,7 +3018,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class IfExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IfExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.IfExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2986,13 +3032,16 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final Keyword cEndifKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//IfExp:
-		//	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression "endif";
+		//	'if' condition=Expression
+		//	'then' thenExpression=Expression
+		//	'else' elseExpression=Expression
+		//	'endif';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression "endif"
+		//'if' condition=Expression 'then' thenExpression=Expression 'else' elseExpression=Expression 'endif'
 		public Group getGroup() { return cGroup; }
 
-		//"if"
+		//'if'
 		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
 
 		//condition=Expression
@@ -3001,7 +3050,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getConditionExpressionParserRuleCall_1_0() { return cConditionExpressionParserRuleCall_1_0; }
 
-		//"then"
+		//'then'
 		public Keyword getThenKeyword_2() { return cThenKeyword_2; }
 
 		//thenExpression=Expression
@@ -3010,7 +3059,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getThenExpressionExpressionParserRuleCall_3_0() { return cThenExpressionExpressionParserRuleCall_3_0; }
 
-		//"else"
+		//'else'
 		public Keyword getElseKeyword_4() { return cElseKeyword_4; }
 
 		//elseExpression=Expression
@@ -3019,12 +3068,12 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Expression
 		public RuleCall getElseExpressionExpressionParserRuleCall_5_0() { return cElseExpressionExpressionParserRuleCall_5_0; }
 
-		//"endif"
+		//'endif'
 		public Keyword getEndifKeyword_6() { return cEndifKeyword_6; }
 	}
 
 	public class LetExpElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetExp");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLetKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVariableAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -3038,13 +3087,15 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInExpressionParserRuleCall_4_0 = (RuleCall)cInAssignment_4.eContents().get(0);
 		
 		//LetExp:
-		//	"let" variable+=LetVariable ("," variable+=LetVariable)* "in" in=Expression;
+		//	'let'
+		//	variable+=LetVariable (',' variable+=LetVariable)*
+		//	'in' in=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"let" variable+=LetVariable ("," variable+=LetVariable)* "in" in=Expression
+		//'let' variable+=LetVariable (',' variable+=LetVariable)* 'in' in=Expression
 		public Group getGroup() { return cGroup; }
 
-		//"let"
+		//'let'
 		public Keyword getLetKeyword_0() { return cLetKeyword_0; }
 
 		//variable+=LetVariable
@@ -3053,10 +3104,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//LetVariable
 		public RuleCall getVariableLetVariableParserRuleCall_1_0() { return cVariableLetVariableParserRuleCall_1_0; }
 
-		//("," variable+=LetVariable)*
+		//(',' variable+=LetVariable)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
 		//variable+=LetVariable
@@ -3065,7 +3116,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//LetVariable
 		public RuleCall getVariableLetVariableParserRuleCall_2_1_0() { return cVariableLetVariableParserRuleCall_2_1_0; }
 
-		//"in"
+		//'in'
 		public Keyword getInKeyword_3() { return cInKeyword_3; }
 
 		//in=Expression
@@ -3076,7 +3127,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	public class LetVariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LetVariable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetVariable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIdentifierParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -3088,10 +3139,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		private final RuleCall cInitExpressionExpressionParserRuleCall_4_0 = (RuleCall)cInitExpressionAssignment_4.eContents().get(0);
 		
 		//LetVariable:
-		//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
+		//	name=Identifier ':' type=TypeExp '=' initExpression=Expression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=Identifier ":" type=TypeExp "=" initExpression=Expression
+		//name=Identifier ':' type=TypeExp '=' initExpression=Expression
 		public Group getGroup() { return cGroup; }
 
 		//name=Identifier
@@ -3100,7 +3151,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//Identifier
 		public RuleCall getNameIdentifierParserRuleCall_0_0() { return cNameIdentifierParserRuleCall_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//type=TypeExp
@@ -3109,7 +3160,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		//TypeExp
 		public RuleCall getTypeTypeExpParserRuleCall_2_0() { return cTypeTypeExpParserRuleCall_2_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_3() { return cEqualsSignKeyword_3; }
 
 		//initExpression=Expression
@@ -3312,7 +3363,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 
 	
 	//Document:
-	//	(packages+=PackageDeclaration | contexts+=ContextDecl)*;
+	//	packages+=PackageDeclaration | contexts+=ContextDecl*;
 	public DocumentElements getDocumentAccess() {
 		return pDocument;
 	}
@@ -3322,7 +3373,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Body:
-	//	"body" constraintName=Identifier? ":" expression=Expression;
+	//	'body' constraintName=Identifier? ':' expression=Expression;
 	public BodyElements getBodyAccess() {
 		return pBody;
 	}
@@ -3332,7 +3383,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//ClassifierContextDecl:
-	//	"context" (selfName=Identifier ":")? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*;
+	//	'context' (selfName=Identifier ':')? classifier=ClassifierRef (invariants+=Invariant | definitions+=Definition)*;
 	public ClassifierContextDeclElements getClassifierContextDeclAccess() {
 		return pClassifierContextDecl;
 	}
@@ -3352,7 +3403,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//ContextDecl:
-	//	PropertyContextDecl | ClassifierContextDecl | OperationContextDecl;
+	//	PropertyContextDecl
+	//	| ClassifierContextDecl
+	//	| OperationContextDecl;
 	public ContextDeclElements getContextDeclAccess() {
 		return pContextDecl;
 	}
@@ -3362,8 +3415,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Definition:
-	//	static?="static"? "def" constraintName=Identifier? ":" constrainedName=Identifier ("(" (parameters+=Parameter (","
-	//	parameters+=Parameter)*)? ")")? ":" type=TypeExp? "=" expression=Expression;
+	//	static?='static'? 'def' constraintName=Identifier? ':' constrainedName=Identifier ('(' (parameters+=Parameter (','
+	//	parameters+=Parameter)*)? ')')?
+	//	':' type=TypeExp? '=' expression=Expression;
 	public DefinitionElements getDefinitionAccess() {
 		return pDefinition;
 	}
@@ -3373,7 +3427,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Der:
-	//	"derive" ":" expression=Expression;
+	//	'derive' ':' expression=Expression;
 	public DerElements getDerAccess() {
 		return pDer;
 	}
@@ -3383,7 +3437,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Init:
-	//	"init" ":" expression=Expression;
+	//	'init' ':' expression=Expression;
 	public InitElements getInitAccess() {
 		return pInit;
 	}
@@ -3393,7 +3447,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Invariant:
-	//	"inv" constraintName=Identifier? ":" expression=Expression;
+	//	'inv' constraintName=Identifier? ':' expression=Expression;
 	public InvariantElements getInvariantAccess() {
 		return pInvariant;
 	}
@@ -3403,8 +3457,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//OperationContextDecl:
-	//	"context" operation=OperationRef "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" ":" type=TypeExp?
-	//	(pres+=Pre | posts+=Post | bodies+=Body)*;
+	//	'context' operation=OperationRef '(' (parameters+=Parameter (',' parameters+=Parameter)*)?
+	//	')' ':' type=TypeExp? (pres+=Pre | posts+=Post | bodies+=Body)*;
 	public OperationContextDeclElements getOperationContextDeclAccess() {
 		return pOperationContextDecl;
 	}
@@ -3424,7 +3478,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PackageDeclaration:
-	//	"package" package=PackageRef contexts+=ContextDecl* "endpackage";
+	//	'package' package=PackageRef contexts+=ContextDecl* 'endpackage';
 	public PackageDeclarationElements getPackageDeclarationAccess() {
 		return pPackageDeclaration;
 	}
@@ -3444,7 +3498,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Parameter:
-	//	(name=Identifier ":")? type=TypeExp;
+	//	(name=Identifier ':')? type=TypeExp;
 	public ParameterElements getParameterAccess() {
 		return pParameter;
 	}
@@ -3454,7 +3508,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Post:
-	//	"post" constraintName=Identifier? ":" expression=Expression;
+	//	'post' constraintName=Identifier? ':' expression=Expression;
 	public PostElements getPostAccess() {
 		return pPost;
 	}
@@ -3464,7 +3518,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Pre:
-	//	"pre" constraintName=Identifier? ":" expression=Expression;
+	//	'pre' constraintName=Identifier? ':' expression=Expression;
 	public PreElements getPreAccess() {
 		return pPre;
 	}
@@ -3474,7 +3528,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PropertyContextDecl:
-	//	"context" property=PropertyRef ":" type=TypeExp ((init=Init der=Der?)? | der=Der init=Init?);
+	//	'context' property=PropertyRef ':' type=TypeExp (init=Init der=Der?? | der=Der init=Init?);
 	public PropertyContextDeclElements getPropertyContextDeclAccess() {
 		return pPropertyContextDecl;
 	}
@@ -3494,7 +3548,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//QualifiedClassifierRef:
-	//	namespace=Identifier "::" element=ClassifierRef;
+	//	namespace=Identifier
+	//	'::' element=ClassifierRef;
 	public QualifiedClassifierRefElements getQualifiedClassifierRefAccess() {
 		return pQualifiedClassifierRef;
 	}
@@ -3504,7 +3559,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//QualifiedOperationRef:
-	//	namespace=Identifier "::" element=OperationRef;
+	//	namespace=Identifier
+	//	'::' element=OperationRef;
 	public QualifiedOperationRefElements getQualifiedOperationRefAccess() {
 		return pQualifiedOperationRef;
 	}
@@ -3514,7 +3570,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//QualifiedPropertyRef:
-	//	namespace=Identifier "::" element=PropertyRef;
+	//	namespace=Identifier
+	//	'::' element=PropertyRef;
 	public QualifiedPropertyRefElements getQualifiedPropertyRefAccess() {
 		return pQualifiedPropertyRef;
 	}
@@ -3524,7 +3581,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//QualifiedPackageRef:
-	//	namespace=Identifier "::" element=PackageRef;
+	//	namespace=Identifier
+	//	'::' element=PackageRef;
 	public QualifiedPackageRefElements getQualifiedPackageRefAccess() {
 		return pQualifiedPackageRef;
 	}
@@ -3576,9 +3634,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	////---------------------------------------------------------------------------------
 	////	EssentialOCL overrides
 	////---------------------------------------------------------------------------------
-	//NavigationExp returns Expression:
-	//	SubNavigationExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-	//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
+	//NavigationExp Expression:
+	//	SubNavigationExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+	//	op=('^^' | '^') messageName=Identifier
+	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?
 	public NavigationExpElements getNavigationExpAccess() {
 		return pNavigationExp;
 	}
@@ -3589,8 +3648,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 
 	//// Follows ., ->, ^
 	//NavigatingExp:
-	//	SubNavigatingExp ({InfixExp.source=current} op=("." | "->") argument=NavigatingExp | {OclMessage.source=current}
-	//	op=("^^" | "^") messageName=Identifier "(" (arguments+=OclMessageArg ("," arguments+=OclMessageArg)*)? ")")?;
+	//	SubNavigatingExp ({InfixExp.source=current} op=('.' | '->') argument=NavigatingExp | {OclMessage.source=current}
+	//	op=('^^' | '^') messageName=Identifier
+	//	'(' (arguments+=OclMessageArg (',' arguments+=OclMessageArg)*)? ')')?;
 	public NavigatingExpElements getNavigatingExpAccess() {
 		return pNavigatingExp;
 	}
@@ -3601,7 +3661,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 
 	//// FIXME @pre
 	//OclMessageArg:
-	//	{OclMessageArg} "?" (":" type=TypeExp)? | Expression;
+	//	{OclMessageArg} '?' (':' type=TypeExp)? | Expression;
 	public OclMessageArgElements getOclMessageArgAccess() {
 		return pOclMessageArg;
 	}
@@ -3611,7 +3671,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//NUMBER_LITERAL:
-	//	INT ("." INT)? (("e" | "E") ("+" | "-")? INT)?;
+	//	INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?;
 	public NUMBER_LITERALElements getNUMBER_LITERALAccess() {
 		return pNUMBER_LITERAL;
 	}
@@ -3621,7 +3681,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//EssentialOCLRestrictedKeywords:
-	//	"e" | "E";
+	//	'e'
+	//	| 'E';
 	public EssentialOCLRestrictedKeywordsElements getEssentialOCLRestrictedKeywordsAccess() {
 		return pEssentialOCLRestrictedKeywords;
 	}
@@ -3630,7 +3691,6 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getEssentialOCLRestrictedKeywordsAccess().getRule();
 	}
 
-	//// Intended to be overridden
 	//RestrictedKeywords:
 	//	EssentialOCLRestrictedKeywords;
 	public RestrictedKeywordsElements getRestrictedKeywordsAccess() {
@@ -3642,7 +3702,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Identifier:
-	//	ID | RestrictedKeywords;
+	//	ID
+	//	| RestrictedKeywords;
 	public IdentifierElements getIdentifierAccess() {
 		return pIdentifier;
 	}
@@ -3672,7 +3733,14 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PrimitiveTypeIdentifier:
-	//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
+	//	'Boolean'
+	//	| 'Integer'
+	//	| 'Real'
+	//	| 'String'
+	//	| 'UnlimitedNatural'
+	//	| 'OclAny'
+	//	| 'OclInvalid'
+	//	| 'OclVoid';
 	public PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
 		return pPrimitiveTypeIdentifier;
 	}
@@ -3692,7 +3760,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//CollectionTypeIdentifier:
-	//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
+	//	'Set'
+	//	| 'Bag'
+	//	| 'Sequence'
+	//	| 'Collection'
+	//	| 'OrderedSet';
 	public CollectionTypeIdentifierElements getCollectionTypeIdentifierAccess() {
 		return pCollectionTypeIdentifier;
 	}
@@ -3702,7 +3774,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//TypeExp:
-	//	PrimitiveType | NameExp | CollectionType | TupleType;
+	//	PrimitiveType
+	//	| NameExp
+	//	| CollectionType
+	//	| TupleType;
 	public TypeExpElements getTypeExpAccess() {
 		return pTypeExp;
 	}
@@ -3712,7 +3787,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//CollectionType:
-	//	typeIdentifier=CollectionTypeIdentifier ("(" type=TypeExp ")")?;
+	//	typeIdentifier=CollectionTypeIdentifier ('(' type=TypeExp ')')?;
 	public CollectionTypeElements getCollectionTypeAccess() {
 		return pCollectionType;
 	}
@@ -3722,7 +3797,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//TupleType:
-	//	name="Tuple" "(" (part+=tuplePart ("," part+=tuplePart)*)? ")";
+	//	name='Tuple' '(' (part+=tuplePart (',' part+=tuplePart)*)? ')';
 	public TupleTypeElements getTupleTypeAccess() {
 		return pTupleType;
 	}
@@ -3732,7 +3807,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//tuplePart:
-	//	name=Identifier ":" type=TypeExp;
+	//	name=Identifier ':' type=TypeExp;
 	public TuplePartElements getTuplePartAccess() {
 		return pTuplePart;
 	}
@@ -3742,8 +3817,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//CollectionLiteralExp:
-	//	CollectionType ({CollectionLiteralExp.type=current} "{" (collectionLiteralParts+=CollectionLiteralPart (","
-	//	collectionLiteralParts+=CollectionLiteralPart)*)? "}")?;
+	//	CollectionType ({CollectionLiteralExp.type=current} '{' (collectionLiteralParts+=CollectionLiteralPart (','
+	//	collectionLiteralParts+=CollectionLiteralPart)*)?
+	//	'}')?;
 	public CollectionLiteralExpElements getCollectionLiteralExpAccess() {
 		return pCollectionLiteralExp;
 	}
@@ -3753,7 +3829,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//CollectionLiteralPart:
-	//	expression=Expression (".." lastExpression=Expression)?;
+	//	expression=Expression ('..' lastExpression=Expression)?;
 	public CollectionLiteralPartElements getCollectionLiteralPartAccess() {
 		return pCollectionLiteralPart;
 	}
@@ -3763,7 +3839,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PrimitiveLiteralExp:
-	//	NumberLiteralExp | StringLiteralExp | BooleanLiteralExp | InvalidLiteralExp | NullLiteralExp;
+	//	NumberLiteralExp
+	//	| StringLiteralExp
+	//	| BooleanLiteralExp
+	//	| InvalidLiteralExp
+	//	| NullLiteralExp;
 	public PrimitiveLiteralExpElements getPrimitiveLiteralExpAccess() {
 		return pPrimitiveLiteralExp;
 	}
@@ -3773,7 +3853,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//TupleLiteralExp:
-	//	{TupleLiteralExp} "Tuple" ("{" part+=TupleLiteralPart ("," part+=TupleLiteralPart)* "}")?;
+	//	{TupleLiteralExp} 'Tuple' ('{' part+=TupleLiteralPart (',' part+=TupleLiteralPart)* '}')?;
 	public TupleLiteralExpElements getTupleLiteralExpAccess() {
 		return pTupleLiteralExp;
 	}
@@ -3783,7 +3863,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//TupleLiteralPart:
-	//	name=Identifier (":" type=TypeExp)? "=" initExpression=Expression;
+	//	name=Identifier (':' type=TypeExp)? '=' initExpression=Expression;
 	public TupleLiteralPartElements getTupleLiteralPartAccess() {
 		return pTupleLiteralPart;
 	}
@@ -3813,7 +3893,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//BooleanLiteralExp:
-	//	{BooleanLiteralExp} (isTrue?="true" | "false");
+	//	{BooleanLiteralExp} (isTrue?='true'
+	//	| 'false');
 	public BooleanLiteralExpElements getBooleanLiteralExpAccess() {
 		return pBooleanLiteralExp;
 	}
@@ -3823,7 +3904,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//InvalidLiteralExp:
-	//	{InvalidLiteralExp} "invalid";
+	//	{InvalidLiteralExp} 'invalid';
 	public InvalidLiteralExpElements getInvalidLiteralExpAccess() {
 		return pInvalidLiteralExp;
 	}
@@ -3833,7 +3914,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//NullLiteralExp:
-	//	{NullLiteralExp} "null";
+	//	{NullLiteralExp} 'null';
 	public NullLiteralExpElements getNullLiteralExpAccess() {
 		return pNullLiteralExp;
 	}
@@ -3843,7 +3924,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//Expression:
-	//	implies | LetExp;
+	//	implies
+	//	| LetExp;
 	public ExpressionElements getExpressionAccess() {
 		return pExpression;
 	}
@@ -3852,8 +3934,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getExpressionAccess().getRule();
 	}
 
-	//implies returns Expression:
-	//	xor ({InfixExp.source=current} op="implies" argument=(xor | LetExp))*;
+	//implies Expression:
+	//	xor ({InfixExp.source=current} op='implies' argument=(xor | LetExp))*
 	public ImpliesElements getImpliesAccess() {
 		return pImplies;
 	}
@@ -3862,8 +3944,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getImpliesAccess().getRule();
 	}
 
-	//xor returns Expression:
-	//	or ({InfixExp.source=current} op="xor" argument=(or | LetExp))*;
+	//xor Expression:
+	//	or ({InfixExp.source=current} op='xor' argument=(or | LetExp))*
 	public XorElements getXorAccess() {
 		return pXor;
 	}
@@ -3872,8 +3954,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getXorAccess().getRule();
 	}
 
-	//or returns Expression:
-	//	and ({InfixExp.source=current} op="or" argument=(and | LetExp))*;
+	//or Expression:
+	//	and ({InfixExp.source=current} op='or' argument=(and | LetExp))*
 	public OrElements getOrAccess() {
 		return pOr;
 	}
@@ -3882,8 +3964,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getOrAccess().getRule();
 	}
 
-	//and returns Expression:
-	//	equality ({InfixExp.source=current} op="and" argument=(equality | LetExp))*;
+	//and Expression:
+	//	equality ({InfixExp.source=current} op='and' argument=(equality | LetExp))*
 	public AndElements getAndAccess() {
 		return pAnd;
 	}
@@ -3892,8 +3974,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getAndAccess().getRule();
 	}
 
-	//equality returns Expression:
-	//	relational ({InfixExp.source=current} op=("=" | "<>") argument=(relational | LetExp))*;
+	//equality Expression:
+	//	relational ({InfixExp.source=current} op=('=' | '<>') argument=(relational | LetExp))*
 	public EqualityElements getEqualityAccess() {
 		return pEquality;
 	}
@@ -3902,8 +3984,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getEqualityAccess().getRule();
 	}
 
-	//relational returns Expression:
-	//	additive ({InfixExp.source=current} op=(">" | "<" | ">=" | "<=") argument=(additive | LetExp))*;
+	//relational Expression:
+	//	additive ({InfixExp.source=current} op=('>' | '<' | '>=' | '<=') argument=(additive | LetExp))*
 	public RelationalElements getRelationalAccess() {
 		return pRelational;
 	}
@@ -3912,8 +3994,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getRelationalAccess().getRule();
 	}
 
-	//additive returns Expression:
-	//	multiplicative ({InfixExp.source=current} op=("+" | "-") argument=(multiplicative | LetExp))*;
+	//additive Expression:
+	//	multiplicative ({InfixExp.source=current} op=('+' | '-') argument=(multiplicative | LetExp))*
 	public AdditiveElements getAdditiveAccess() {
 		return pAdditive;
 	}
@@ -3922,8 +4004,8 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getAdditiveAccess().getRule();
 	}
 
-	//multiplicative returns Expression:
-	//	unary ({InfixExp.source=current} op=("*" | "/") argument=(unary | LetExp))*;
+	//multiplicative Expression:
+	//	unary ({InfixExp.source=current} op=('*' | '/') argument=(unary | LetExp))*
 	public MultiplicativeElements getMultiplicativeAccess() {
 		return pMultiplicative;
 	}
@@ -3932,8 +4014,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getMultiplicativeAccess().getRule();
 	}
 
-	//unary returns Expression:
-	//	NavigationExp | {PrefixExp} op=("-" | "not") source=unary;
+	//unary Expression:
+	//	NavigationExp
+	//	| {PrefixExp} op=('-' | 'not') source=unary
 	public UnaryElements getUnaryAccess() {
 		return pUnary;
 	}
@@ -3942,9 +4025,17 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getUnaryAccess().getRule();
 	}
 
-	//SubNavigationExp returns Expression:
-	//	RoundBracketExp | SquareBracketExp | SelfExp | PrimitiveLiteralExp | TupleLiteralExp | CollectionLiteralExp | PreExp |
-	//	TypeExp | IfExp | "(" {NestedExp} source=Expression ")";
+	//SubNavigationExp Expression:
+	//	RoundBracketExp
+	//	| SquareBracketExp
+	//	| SelfExp
+	//	| PrimitiveLiteralExp
+	//	| TupleLiteralExp
+	//	| CollectionLiteralExp
+	//	| PreExp
+	//	| TypeExp
+	//	| IfExp
+	//	| '(' {NestedExp} source=Expression ')'
 	public SubNavigationExpElements getSubNavigationExpAccess() {
 		return pSubNavigationExp;
 	}
@@ -3953,8 +4044,11 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 		return getSubNavigationExpAccess().getRule();
 	}
 
-	//SubNavigatingExp returns Expression:
-	//	RoundBracketExp | SquareBracketExp | PreExp | NameExp;
+	//SubNavigatingExp Expression:
+	//	RoundBracketExp
+	//	| SquareBracketExp
+	//	| PreExp
+	//	| NameExp
 	public SubNavigatingExpElements getSubNavigatingExpAccess() {
 		return pSubNavigatingExp;
 	}
@@ -3964,7 +4058,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//iteratorVariable:
-	//	name=Identifier (":" type=TypeExp)?;
+	//	name=Identifier (':' type=TypeExp)?;
 	public IteratorVariableElements getIteratorVariableAccess() {
 		return pIteratorVariable;
 	}
@@ -3974,7 +4068,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//iteratorAccumulator:
-	//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
+	//	name=Identifier ':' type=TypeExp '=' initExpression=Expression;
 	public IteratorAccumulatorElements getIteratorAccumulatorAccess() {
 		return pIteratorAccumulator;
 	}
@@ -3984,8 +4078,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//RoundBracketExp:
-	//	name=NameExp ("@" pre?="pre")? "(" (variable1=iteratorVariable ("," variable2=iteratorVariable | ";"
-	//	variable2=iteratorAccumulator)? "|")? (arguments+=Expression ("," arguments+=Expression)*)? ")";
+	//	name=NameExp ('@' pre?='pre')? '(' (variable1=iteratorVariable (',' variable2=iteratorVariable | ';'
+	//	variable2=iteratorAccumulator)?
+	//	'|')? (arguments+=Expression (',' arguments+=Expression)*)?
+	//	')';
 	public RoundBracketExpElements getRoundBracketExpAccess() {
 		return pRoundBracketExp;
 	}
@@ -3995,7 +4091,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//SquareBracketExp:
-	//	name=NameExp "[" arguments+=Expression ("," arguments+=Expression)* "]" ("@" pre?="pre")?;
+	//	name=NameExp '[' arguments+=Expression (',' arguments+=Expression)* ']' ('@' pre?='pre')?;
 	public SquareBracketExpElements getSquareBracketExpAccess() {
 		return pSquareBracketExp;
 	}
@@ -4005,7 +4101,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PreExp:
-	//	name=NameExp "@" "pre";
+	//	name=NameExp '@' 'pre';
 	public PreExpElements getPreExpAccess() {
 		return pPreExp;
 	}
@@ -4015,7 +4111,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//SelfExp:
-	//	{SelfExp} "self";
+	//	{SelfExp} 'self';
 	public SelfExpElements getSelfExpAccess() {
 		return pSelfExp;
 	}
@@ -4035,7 +4131,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//PathNameExp:
-	//	namespace=Identifier "::" element=NameExp;
+	//	namespace=Identifier '::' element=NameExp;
 	public PathNameExpElements getPathNameExpAccess() {
 		return pPathNameExp;
 	}
@@ -4055,7 +4151,10 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//IfExp:
-	//	"if" condition=Expression "then" thenExpression=Expression "else" elseExpression=Expression "endif";
+	//	'if' condition=Expression
+	//	'then' thenExpression=Expression
+	//	'else' elseExpression=Expression
+	//	'endif';
 	public IfExpElements getIfExpAccess() {
 		return pIfExp;
 	}
@@ -4065,7 +4164,9 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//LetExp:
-	//	"let" variable+=LetVariable ("," variable+=LetVariable)* "in" in=Expression;
+	//	'let'
+	//	variable+=LetVariable (',' variable+=LetVariable)*
+	//	'in' in=Expression;
 	public LetExpElements getLetExpAccess() {
 		return pLetExp;
 	}
@@ -4075,7 +4176,7 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//LetVariable:
-	//	name=Identifier ":" type=TypeExp "=" initExpression=Expression;
+	//	name=Identifier ':' type=TypeExp '=' initExpression=Expression;
 	public LetVariableElements getLetVariableAccess() {
 		return pLetVariable;
 	}
@@ -4085,38 +4186,38 @@ public class BacktrackingContentAssistTestLanguageGrammarAccess extends Abstract
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

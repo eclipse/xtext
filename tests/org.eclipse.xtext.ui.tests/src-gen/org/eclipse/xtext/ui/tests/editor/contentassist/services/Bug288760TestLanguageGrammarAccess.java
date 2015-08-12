@@ -18,7 +18,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class WorkflowElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WorkflowElement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.WorkflowElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -38,8 +38,10 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cEndEND_TAGTerminalRuleCall_1_4_0 = (RuleCall)cEndAssignment_1_4.eContents().get(0);
 		
 		//WorkflowElement:
-		//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
-		//	children+=WorkflowElement* end=END_TAG;
+		//	name=START_TAG attributes+=Attribute* END_TAG_SHORT
+		//	| name=START_TAG attributes+=Attribute* GT
+		//	children+=WorkflowElement*
+		//	end=END_TAG;
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
@@ -96,7 +98,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -151,19 +153,19 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pWorkflowElement = new WorkflowElementElements();
 		this.pAttribute = new AttributeElements();
-		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ML_COMMENT");
-		this.tSTART_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "START_TAG");
-		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT");
-		this.tGT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "GT");
-		this.tEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EQ");
-		this.tEND_TAG_SHORT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_SHORT");
-		this.tEND_TAG_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG_START");
-		this.tEND_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "END_TAG");
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
-		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
+		this.tML_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.ML_COMMENT");
+		this.tSTART_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.START_TAG");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.LT");
+		this.tGT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.GT");
+		this.tEQ = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.EQ");
+		this.tEND_TAG_SHORT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.END_TAG_SHORT");
+		this.tEND_TAG_START = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.END_TAG_START");
+		this.tEND_TAG = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.END_TAG");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.ID");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.INT");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.STRING");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage.ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -190,8 +192,10 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//WorkflowElement:
-	//	name=START_TAG attributes+=Attribute* END_TAG_SHORT | name=START_TAG attributes+=Attribute* GT
-	//	children+=WorkflowElement* end=END_TAG;
+	//	name=START_TAG attributes+=Attribute* END_TAG_SHORT
+	//	| name=START_TAG attributes+=Attribute* GT
+	//	children+=WorkflowElement*
+	//	end=END_TAG;
 	public WorkflowElementElements getWorkflowElementAccess() {
 		return pWorkflowElement;
 	}
@@ -211,7 +215,7 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ML_COMMENT:
-	//	"<!--"->"-->";
+	//	'<!--'->'-->';
 	public TerminalRule getML_COMMENTRule() {
 		return tML_COMMENT;
 	} 
@@ -223,31 +227,31 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal LT:
-	//	"<";
+	//	'<';
 	public TerminalRule getLTRule() {
 		return tLT;
 	} 
 
 	//terminal GT:
-	//	">";
+	//	'>';
 	public TerminalRule getGTRule() {
 		return tGT;
 	} 
 
 	//terminal EQ:
-	//	"=";
+	//	'=';
 	public TerminalRule getEQRule() {
 		return tEQ;
 	} 
 
 	//terminal END_TAG_SHORT:
-	//	"/>";
+	//	'/>';
 	public TerminalRule getEND_TAG_SHORTRule() {
 		return tEND_TAG_SHORT;
 	} 
 
 	//terminal END_TAG_START:
-	//	"</";
+	//	'</';
 	public TerminalRule getEND_TAG_STARTRule() {
 		return tEND_TAG_START;
 	} 
@@ -259,26 +263,26 @@ public class Bug288760TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return tINT;
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" | "n" |
-	//	"f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | '"'))* '"' |
+	//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

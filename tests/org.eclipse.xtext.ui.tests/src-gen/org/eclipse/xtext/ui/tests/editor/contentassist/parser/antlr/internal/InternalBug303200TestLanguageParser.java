@@ -223,7 +223,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"directives",
             	              		lv_directives_2_0, 
-            	              		"ProgramDirective");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ProgramDirective");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -589,7 +589,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"attributes",
             	              		lv_attributes_0_0, 
-            	              		"Attribute");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Attribute");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -662,7 +662,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"name",
                       		lv_name_3_0, 
-                      		"ID");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
               	    
             }
 
@@ -726,7 +726,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"params",
                       		lv_params_5_0, 
-                      		"Parameters");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Parameters");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -791,7 +791,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"body",
                       		lv_body_7_0, 
-                      		"Block");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Block");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -924,7 +924,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"ident",
                               		lv_ident_0_0, 
-                              		"ID");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
                       	    
                     }
 
@@ -1021,7 +1021,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"expression",
                               		lv_expression_4_0, 
-                              		"PostfixExpression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -1245,7 +1245,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"params",
                               		lv_params_3_0, 
-                              		"ID");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
                       	    
                     }
 
@@ -1356,7 +1356,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                     	             			current, 
                     	             			"params",
                     	              		lv_params_7_0, 
-                    	              		"ID");
+                    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
                     	      	    
                     	    }
 
@@ -1587,7 +1587,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"directives",
             	              		lv_directives_3_0, 
-            	              		"Statement");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Statement");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1816,7 +1816,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"expression",
                               		lv_expression_2_0, 
-                              		"PostfixExpression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2072,7 +2072,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"property",
             	              		lv_property_3_0, 
-            	              		"PropertyOperator");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PropertyOperator");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2214,7 +2214,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	                     			current, 
             	                     			"arguments",
             	                      		lv_arguments_8_0, 
-            	                      		"ListExpression");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ListExpression");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -2387,7 +2387,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                      			current, 
                      			"expressions",
                       		lv_expressions_0_0, 
-                      		"PostfixExpression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2497,7 +2497,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
             	             			current, 
             	             			"expressions",
             	              		lv_expressions_4_0, 
-            	              		"PostfixExpression");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2680,7 +2680,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"name",
                               		lv_name_2_0, 
-                              		"ID");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
                       	    
                     }
 
@@ -2762,7 +2762,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"expressions",
                               		lv_expressions_5_0, 
-                              		"ListExpression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ListExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2959,7 +2959,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"name",
                               		lv_name_1_0, 
-                              		"ID");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
                       	    
                     }
 
@@ -3059,7 +3059,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"params",
                               		lv_params_5_0, 
-                              		"Parameters");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Parameters");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3124,7 +3124,7 @@ public class InternalBug303200TestLanguageParser extends AbstractInternalAntlrPa
                              			current, 
                              			"body",
                               		lv_body_7_0, 
-                              		"Block");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Block");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }

@@ -156,7 +156,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -266,7 +266,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -308,7 +308,7 @@ public class InternalFoldingTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"subelements",
             	            		lv_subelements_2_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.FoldingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

@@ -104,7 +104,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_3_0, 
-        		"Error_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -122,7 +122,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_4_0, 
-        		"Operation_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -153,7 +153,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_8_0, 
-        		"Error_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -171,7 +171,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_9_0, 
-        		"Operation_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -202,7 +202,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_13_0, 
-        		"Error_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -220,7 +220,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_14_0, 
-        		"Operation_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -248,7 +248,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_17_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -269,7 +269,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_19_0, 
-        		"Error_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -287,7 +287,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_20_0, 
-        		"Operation_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -315,7 +315,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_23_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -336,7 +336,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_25_0, 
-        		"Error_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -354,7 +354,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_26_0, 
-        		"Operation_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -382,7 +382,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_29_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -403,7 +403,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_31_0, 
-        		"Error_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -421,7 +421,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_32_0, 
-        		"Operation_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -449,7 +449,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_35_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -470,7 +470,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_37_0, 
-        		"Error_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -488,7 +488,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_38_0, 
-        		"Operation_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -516,7 +516,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_41_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -537,7 +537,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_43_0, 
-        		"Error_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -555,7 +555,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_44_0, 
-        		"Operation_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -583,7 +583,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_47_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -604,7 +604,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_49_0, 
-        		"Error_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -622,7 +622,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_50_0, 
-        		"Operation_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -650,7 +650,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_53_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -671,7 +671,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"errors",
         		lv_errors_55_0, 
-        		"Error_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -689,7 +689,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"operations",
         		lv_operations_56_0, 
-        		"Operation_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -732,7 +732,7 @@ ruleError_1 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -755,7 +755,7 @@ ruleError_1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -793,7 +793,7 @@ ruleOperation_1 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -816,7 +816,7 @@ ruleOperation_1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -854,7 +854,7 @@ ruleError_2 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -877,7 +877,7 @@ ruleError_2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -915,7 +915,7 @@ ruleOperation_2 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -938,7 +938,7 @@ ruleOperation_2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -976,7 +976,7 @@ ruleError_3 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -999,7 +999,7 @@ ruleError_3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1037,7 +1037,7 @@ ruleOperation_3 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1060,7 +1060,7 @@ ruleOperation_3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1098,7 +1098,7 @@ ruleError_4 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1121,7 +1121,7 @@ ruleError_4 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1159,7 +1159,7 @@ ruleOperation_4 returns [EObject current=null]
        			$current, 
        			"annotations",
         		lv_annotations_0_0, 
-        		"Annotation");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1182,7 +1182,7 @@ ruleOperation_4 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1225,7 +1225,7 @@ ruleError_5 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1268,7 +1268,7 @@ ruleOperation_5 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1311,7 +1311,7 @@ ruleAnnotation returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

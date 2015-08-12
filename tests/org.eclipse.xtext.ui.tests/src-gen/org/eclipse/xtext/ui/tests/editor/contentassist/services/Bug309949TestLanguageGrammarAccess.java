@@ -19,7 +19,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -119,12 +119,46 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_1_9_5 = (Keyword)cGroup_1_9.eContents().get(5);
 		
 		//Model:
-		//	{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
-		//	"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
-		//	operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
-		//	errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" |
-		//	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
-		//	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
+		//	{Model} ("#1*" "{"
+		//	errors+=Error_1*
+		//	operations+=Operation_1*
+		//	"}"
+		//	| "#1+" "{"
+		//	errors+=Error_1+
+		//	operations+=Operation_1+
+		//	"}"
+		//	| "#2*" "{"
+		//	errors+=Error_2*
+		//	operations+=Operation_2*
+		//	"}"
+		//	| "#2+" name=ID "{"
+		//	errors+=Error_2+
+		//	operations+=Operation_2+
+		//	"}"
+		//	| "#3*" name=ID "{"
+		//	errors+=Error_3*
+		//	operations+=Operation_3*
+		//	"}"
+		//	| "#3+" name=ID "{"
+		//	errors+=Error_3+
+		//	operations+=Operation_3+
+		//	"}"
+		//	| "#4*" name=ID "{"
+		//	errors+=Error_4*
+		//	operations+=Operation_4*
+		//	"}"
+		//	| "#4+" name=ID "{"
+		//	errors+=Error_4+
+		//	operations+=Operation_4+
+		//	"}"
+		//	| "#5*" name=ID "{"
+		//	errors+=Error_5*
+		//	operations+=Operation_5*
+		//	"}"
+		//	| "#5+" name=ID "{"
+		//	errors+=Error_5+
+		//	operations+=Operation_5+
+		//	"}");
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
@@ -138,12 +172,12 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
+		//("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
 		//"#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
 		//"}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{" errors+=Error_3+
 		//operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+" name=ID "{"
 		//errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}" | "#5+"
-		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}"
+		//name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"#1*" "{" errors+=Error_1* operations+=Operation_1* "}"
@@ -430,7 +464,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Error_1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Error_1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -438,8 +472,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Error_1 returns Error:
-		//	annotations+=Annotation* "error" name=ID;
+		//Error_1 Error:
+		//	annotations+=Annotation*
+		//	"error" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation* "error" name=ID
@@ -462,7 +497,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Operation_1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation_1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_1");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -470,8 +505,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Operation_1 returns Operation:
-		//	annotations+=Annotation* "operation" name=ID;
+		//Operation_1 Operation:
+		//	annotations+=Annotation*
+		//	"operation" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation* "operation" name=ID
@@ -494,7 +530,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Error_2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Error_2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -502,8 +538,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Error_2 returns Error:
-		//	annotations+=Annotation+ "error" name=ID;
+		//Error_2 Error:
+		//	annotations+=Annotation+
+		//	"error" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation+ "error" name=ID
@@ -526,7 +563,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Operation_2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation_2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -534,8 +571,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Operation_2 returns Operation:
-		//	annotations+=Annotation+ "operation" name=ID;
+		//Operation_2 Operation:
+		//	annotations+=Annotation+
+		//	"operation" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation+ "operation" name=ID
@@ -558,7 +596,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Error_3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Error_3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -566,8 +604,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Error_3 returns Error:
-		//	annotations+=Annotation? "error" name=ID;
+		//Error_3 Error:
+		//	annotations+=Annotation?
+		//	"error" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation? "error" name=ID
@@ -590,7 +629,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Operation_3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation_3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_3");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -598,8 +637,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Operation_3 returns Operation:
-		//	annotations+=Annotation? "operation" name=ID;
+		//Operation_3 Operation:
+		//	annotations+=Annotation?
+		//	"operation" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation? "operation" name=ID
@@ -622,7 +662,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Error_4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Error_4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -630,8 +670,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Error_4 returns Error:
-		//	annotations+=Annotation "error" name=ID;
+		//Error_4 Error:
+		//	annotations+=Annotation "error" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation "error" name=ID
@@ -654,7 +694,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Operation_4Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation_4");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_4");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAnnotationsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAnnotationsAnnotationParserRuleCall_0_0 = (RuleCall)cAnnotationsAssignment_0.eContents().get(0);
@@ -662,8 +702,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
-		//Operation_4 returns Operation:
-		//	annotations+=Annotation "operation" name=ID;
+		//Operation_4 Operation:
+		//	annotations+=Annotation "operation" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//annotations+=Annotation "operation" name=ID
@@ -686,14 +726,14 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Error_5Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Error_5");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Error_5");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cErrorKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Error_5 returns Error:
-		//	"error" name=ID;
+		//Error_5 Error:
+		//	"error" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//"error" name=ID
@@ -710,14 +750,14 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Operation_5Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation_5");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Operation_5");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cOperationKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Operation_5 returns Operation:
-		//	"operation" name=ID;
+		//Operation_5 Operation:
+		//	"operation" name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//"operation" name=ID
@@ -734,7 +774,7 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AnnotationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Annotation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug309949TestLanguage.Annotation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cUuidKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -822,12 +862,46 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
-	//	"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
-	//	operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
-	//	errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" |
-	//	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
-	//	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
+	//	{Model} ("#1*" "{"
+	//	errors+=Error_1*
+	//	operations+=Operation_1*
+	//	"}"
+	//	| "#1+" "{"
+	//	errors+=Error_1+
+	//	operations+=Operation_1+
+	//	"}"
+	//	| "#2*" "{"
+	//	errors+=Error_2*
+	//	operations+=Operation_2*
+	//	"}"
+	//	| "#2+" name=ID "{"
+	//	errors+=Error_2+
+	//	operations+=Operation_2+
+	//	"}"
+	//	| "#3*" name=ID "{"
+	//	errors+=Error_3*
+	//	operations+=Operation_3*
+	//	"}"
+	//	| "#3+" name=ID "{"
+	//	errors+=Error_3+
+	//	operations+=Operation_3+
+	//	"}"
+	//	| "#4*" name=ID "{"
+	//	errors+=Error_4*
+	//	operations+=Operation_4*
+	//	"}"
+	//	| "#4+" name=ID "{"
+	//	errors+=Error_4+
+	//	operations+=Operation_4+
+	//	"}"
+	//	| "#5*" name=ID "{"
+	//	errors+=Error_5*
+	//	operations+=Operation_5*
+	//	"}"
+	//	| "#5+" name=ID "{"
+	//	errors+=Error_5+
+	//	operations+=Operation_5+
+	//	"}");
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -836,8 +910,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getModelAccess().getRule();
 	}
 
-	//Error_1 returns Error:
-	//	annotations+=Annotation* "error" name=ID;
+	//Error_1 Error:
+	//	annotations+=Annotation*
+	//	"error" name=ID
 	public Error_1Elements getError_1Access() {
 		return pError_1;
 	}
@@ -846,8 +921,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getError_1Access().getRule();
 	}
 
-	//Operation_1 returns Operation:
-	//	annotations+=Annotation* "operation" name=ID;
+	//Operation_1 Operation:
+	//	annotations+=Annotation*
+	//	"operation" name=ID
 	public Operation_1Elements getOperation_1Access() {
 		return pOperation_1;
 	}
@@ -856,8 +932,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getOperation_1Access().getRule();
 	}
 
-	//Error_2 returns Error:
-	//	annotations+=Annotation+ "error" name=ID;
+	//Error_2 Error:
+	//	annotations+=Annotation+
+	//	"error" name=ID
 	public Error_2Elements getError_2Access() {
 		return pError_2;
 	}
@@ -866,8 +943,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getError_2Access().getRule();
 	}
 
-	//Operation_2 returns Operation:
-	//	annotations+=Annotation+ "operation" name=ID;
+	//Operation_2 Operation:
+	//	annotations+=Annotation+
+	//	"operation" name=ID
 	public Operation_2Elements getOperation_2Access() {
 		return pOperation_2;
 	}
@@ -876,8 +954,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getOperation_2Access().getRule();
 	}
 
-	//Error_3 returns Error:
-	//	annotations+=Annotation? "error" name=ID;
+	//Error_3 Error:
+	//	annotations+=Annotation?
+	//	"error" name=ID
 	public Error_3Elements getError_3Access() {
 		return pError_3;
 	}
@@ -886,8 +965,9 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getError_3Access().getRule();
 	}
 
-	//Operation_3 returns Operation:
-	//	annotations+=Annotation? "operation" name=ID;
+	//Operation_3 Operation:
+	//	annotations+=Annotation?
+	//	"operation" name=ID
 	public Operation_3Elements getOperation_3Access() {
 		return pOperation_3;
 	}
@@ -896,8 +976,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getOperation_3Access().getRule();
 	}
 
-	//Error_4 returns Error:
-	//	annotations+=Annotation "error" name=ID;
+	//Error_4 Error:
+	//	annotations+=Annotation "error" name=ID
 	public Error_4Elements getError_4Access() {
 		return pError_4;
 	}
@@ -906,8 +986,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getError_4Access().getRule();
 	}
 
-	//Operation_4 returns Operation:
-	//	annotations+=Annotation "operation" name=ID;
+	//Operation_4 Operation:
+	//	annotations+=Annotation "operation" name=ID
 	public Operation_4Elements getOperation_4Access() {
 		return pOperation_4;
 	}
@@ -916,8 +996,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getOperation_4Access().getRule();
 	}
 
-	//Error_5 returns Error:
-	//	"error" name=ID;
+	//Error_5 Error:
+	//	"error" name=ID
 	public Error_5Elements getError_5Access() {
 		return pError_5;
 	}
@@ -926,8 +1006,8 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getError_5Access().getRule();
 	}
 
-	//Operation_5 returns Operation:
-	//	"operation" name=ID;
+	//Operation_5 Operation:
+	//	"operation" name=ID
 	public Operation_5Elements getOperation_5Access() {
 		return pOperation_5;
 	}
@@ -947,38 +1027,38 @@ public class Bug309949TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

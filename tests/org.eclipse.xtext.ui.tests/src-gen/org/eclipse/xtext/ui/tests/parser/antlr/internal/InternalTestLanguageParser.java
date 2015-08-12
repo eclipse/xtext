@@ -156,7 +156,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
             	           			current, 
             	           			"stuff",
             	            		lv_stuff_0_0, 
-            	            		"Stuff");
+            	            		"org.eclipse.xtext.ui.tests.TestLanguage.Stuff");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -265,7 +265,7 @@ public class InternalTestLanguageParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

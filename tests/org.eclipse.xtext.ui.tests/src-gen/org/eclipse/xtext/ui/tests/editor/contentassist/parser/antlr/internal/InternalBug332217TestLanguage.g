@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"TableView");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TableView");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,7 +133,7 @@ ruleTypeDescription returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -186,7 +186,7 @@ ruleParameter returns [EObject current=null]
        			$current, 
        			"description",
         		lv_description_0_0, 
-        		"TypeDescription");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TypeDescription");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -205,7 +205,7 @@ ruleParameter returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -256,7 +256,7 @@ ruleObjectReference returns [EObject current=null]
        			$current, 
        			"tail",
         		lv_tail_1_0, 
-        		"NestedObjectReference");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.NestedObjectReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -312,7 +312,7 @@ ruleNestedObjectReference returns [EObject current=null]
        			$current, 
        			"tail",
         		lv_tail_2_0, 
-        		"NestedObjectReference");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.NestedObjectReference");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -484,7 +484,7 @@ ruleStringLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -532,7 +532,7 @@ ruleStringFunction returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_2_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -565,7 +565,7 @@ ruleStringFunction returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_6_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -587,7 +587,7 @@ ruleStringFunction returns [EObject current=null]
        			$current, 
        			"match",
         		lv_match_8_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -609,7 +609,7 @@ ruleStringFunction returns [EObject current=null]
        			$current, 
        			"replacement",
         		lv_replacement_10_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -642,7 +642,7 @@ ruleStringFunction returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_14_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -689,7 +689,7 @@ ruleCollectionLiteral returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_1_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -711,7 +711,7 @@ ruleCollectionLiteral returns [EObject current=null]
        			$current, 
        			"items",
         		lv_items_3_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -764,7 +764,7 @@ ruleCollectionFunction returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -786,7 +786,7 @@ ruleCollectionFunction returns [EObject current=null]
        			$current, 
        			"delimiter",
         		lv_delimiter_4_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -834,7 +834,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -855,7 +855,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"content",
         		lv_content_3_0, 
-        		"Parameter");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -899,7 +899,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"title",
         		lv_title_8_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -933,7 +933,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"titleImage",
         		lv_titleImage_10_0, 
-        		"ImageExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ImageExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -967,7 +967,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"style",
         		lv_style_12_0, 
-        		"TableViewStyle");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.TableViewStyle");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -999,7 +999,7 @@ ruleTableView returns [EObject current=null]
        			$current, 
        			"sections",
         		lv_sections_13_0, 
-        		"Section");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Section");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1048,7 +1048,7 @@ ruleSection returns [EObject current=null]
        			$current, 
        			"iterator",
         		lv_iterator_1_0, 
-        		"CollectionIterator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionIterator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1074,7 +1074,7 @@ ruleSection returns [EObject current=null]
        			$current, 
        			"title",
         		lv_title_4_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1092,7 +1092,7 @@ ruleSection returns [EObject current=null]
        			$current, 
        			"cells",
         		lv_cells_5_0, 
-        		"Cell");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.Cell");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1139,7 +1139,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_1_0, 
-        		"CellType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1157,7 +1157,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"iterator",
         		lv_iterator_2_0, 
-        		"CollectionIterator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionIterator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1197,7 +1197,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"text",
         		lv_text_6_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1231,7 +1231,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"details",
         		lv_details_8_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1265,7 +1265,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"image",
         		lv_image_10_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1299,7 +1299,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"action",
         		lv_action_12_0, 
-        		"ViewAction");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ViewAction");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1333,7 +1333,7 @@ ruleCell returns [EObject current=null]
        			$current, 
        			"accessory",
         		lv_accessory_14_0, 
-        		"CellAccessory");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CellAccessory");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1395,7 +1395,7 @@ ruleCollectionIterator returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1416,7 +1416,7 @@ ruleCollectionIterator returns [EObject current=null]
        			$current, 
        			"collection",
         		lv_collection_3_0, 
-        		"CollectionExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.CollectionExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1550,7 +1550,7 @@ ruleSelector returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"SelectorName");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.SelectorName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1593,7 +1593,7 @@ ruleExternalOpen returns [EObject current=null]
        			$current, 
        			"url",
         		lv_url_0_0, 
-        		"ScalarExpression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug332217TestLanguage.ScalarExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 

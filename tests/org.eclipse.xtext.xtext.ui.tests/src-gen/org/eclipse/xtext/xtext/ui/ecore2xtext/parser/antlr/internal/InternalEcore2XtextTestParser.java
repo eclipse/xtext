@@ -184,7 +184,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"INT0");
+                    		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.INT0");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -238,7 +238,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"classes",
                             		lv_classes_6_0, 
-                            		"Abstract");
+                            		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Abstract");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -288,7 +288,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     	           			current, 
                     	           			"classes",
                     	            		lv_classes_8_0, 
-                    	            		"Abstract");
+                    	            		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Abstract");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -353,7 +353,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                            			current, 
                            			"concrete0",
                             		lv_concrete0_11_0, 
-                            		"Concrete0");
+                            		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Concrete0");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -833,7 +833,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"EString");
+                    		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1066,7 +1066,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"EString");
+                    		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1186,7 +1186,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"EString");
+                    		"org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.EString");
             	        afterParserOrEnumRuleCall();
             	    
 

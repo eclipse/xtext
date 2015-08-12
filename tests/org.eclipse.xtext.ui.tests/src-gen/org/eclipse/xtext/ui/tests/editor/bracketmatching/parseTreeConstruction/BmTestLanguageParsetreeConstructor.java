@@ -99,7 +99,8 @@ protected class File_ExpressionAssignment extends AssignmentToken  {
 /************ begin Rule Expression ****************
  *
  * Expression:
- * 	SExpression | Atom | "[" Expression "]";
+ * 	SExpression | Atom |
+ * 	"[" Expression "]";
  *
  **/
 
@@ -315,7 +316,12 @@ protected class Expression_RightSquareBracketKeyword_2_2 extends KeywordToken  {
 /************ begin Rule SExpression ****************
  *
  * SExpression:
- * 	{SExpression} ("(" element+=Expression* ")" | "begin" element+=Expression* "end");
+ * 	{SExpression} ("("
+ * 	element+=Expression*
+ * 	")" |
+ * 	"begin"
+ * 	element+=Expression*
+ * 	"end");
  *
  **/
 
@@ -374,7 +380,7 @@ protected class SExpression_SExpressionAction_0 extends ActionToken  {
 	}
 }
 
-// "(" element+=Expression* ")" | "begin" element+=Expression* "end"
+// ("(" element+=Expression* ")" | "begin" element+=Expression* "end")
 protected class SExpression_Alternatives_1 extends AlternativesToken {
 
 	public SExpression_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

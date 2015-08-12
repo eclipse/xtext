@@ -97,7 +97,7 @@ ruleRootModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -131,7 +131,7 @@ ruleRootModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_4_0, 
-        		"ModelAttribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelAttribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -192,7 +192,7 @@ ruleModelElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -231,7 +231,7 @@ ruleModelElement returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_6_0, 
-        		"ModelAttribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelAttribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -332,7 +332,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"e1",
         		lv_e1_0_0, 
-        		"Elem1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"e2",
         		lv_e2_1_0, 
-        		"Elem2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -149,7 +149,7 @@ ruleElem1 returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"EnumT");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.EnumT");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -188,7 +188,7 @@ ruleElem2 returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"EnumT");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.EnumT");
 	        afterParserOrEnumRuleCall();
 	    }
 

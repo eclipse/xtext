@@ -91,11 +91,13 @@ protected class Model_TypesParserRuleCall extends RuleCallToken {
 /************ begin Rule Types ****************
  *
  * Types:
- * 	{Types} "Types" types+=Type*;
+ * 	{Types}
+ * 	'Types'
+ * 	types+=Type*;
  *
  **/
 
-// {Types} "Types" types+=Type*
+// {Types} 'Types' types+=Type*
 protected class Types_Group extends GroupToken {
 	
 	public Types_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -151,7 +153,7 @@ protected class Types_TypesAction_0 extends ActionToken  {
 	}
 }
 
-// "Types"
+// 'Types'
 protected class Types_TypesKeyword_1 extends KeywordToken  {
 	
 	public Types_TypesKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -341,11 +343,11 @@ protected class Type_CompositeTypeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule SimpleType ****************
  *
  * SimpleType:
- * 	"Type" name=ID ";";
+ * 	'Type' name=ID ';';
  *
  **/
 
-// "Type" name=ID ";"
+// 'Type' name=ID ';'
 protected class SimpleType_Group extends GroupToken {
 	
 	public SimpleType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -374,7 +376,7 @@ protected class SimpleType_Group extends GroupToken {
 
 }
 
-// "Type"
+// 'Type'
 protected class SimpleType_TypeKeyword_0 extends KeywordToken  {
 	
 	public SimpleType_TypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -429,7 +431,7 @@ protected class SimpleType_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class SimpleType_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public SimpleType_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -458,11 +460,12 @@ protected class SimpleType_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule CompositeType ****************
  *
  * CompositeType:
- * 	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+ * 	'Composite' name=ID
+ * 	'base' baseType=CompositeTypeEntry ';';
  *
  **/
 
-// "Composite" name=ID "base" baseType=CompositeTypeEntry ";"
+// 'Composite' name=ID 'base' baseType=CompositeTypeEntry ';'
 protected class CompositeType_Group extends GroupToken {
 	
 	public CompositeType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -491,7 +494,7 @@ protected class CompositeType_Group extends GroupToken {
 
 }
 
-// "Composite"
+// 'Composite'
 protected class CompositeType_CompositeKeyword_0 extends KeywordToken  {
 	
 	public CompositeType_CompositeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -546,7 +549,7 @@ protected class CompositeType_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "base"
+// 'base'
 protected class CompositeType_BaseKeyword_2 extends KeywordToken  {
 	
 	public CompositeType_BaseKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -614,7 +617,7 @@ protected class CompositeType_BaseTypeAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// ";"
+// ';'
 protected class CompositeType_SemicolonKeyword_4 extends KeywordToken  {
 	
 	public CompositeType_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

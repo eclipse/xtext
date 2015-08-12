@@ -43,31 +43,66 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Timeperiod ****************
  *
  * Timeperiod:
- * 	{Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+
- * 	time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+
- * 	"timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" |
- * 	"3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID
- * 	(NL+ time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
- * 	| NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
- * 	name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+
- * 	(time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
- * 	(time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
- * 	| "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
- * 	name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}");
+ * 	{Timeperiod}
+ * 	'define' 'timeperiod' ('1'
+ * 	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+ * 	time+=TimeDef3)*?) NL+
+ * 	'}'
+ * 	|
+ * 	'2'
+ * 	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+ * 	time+=TimeDef3)*?) NL+
+ * 	'}'
+ * 	|
+ * 	'3'
+ * 	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+ * 	time+=TimeDef3)*)+
+ * 	NL+
+ * 	'}'
+ * 	|
+ * 	'4'
+ * 	'{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+ * 	time+=TimeDef3)*)*
+ * 	NL+
+ * 	'}'
+ * 	|
+ * 	'5'
+ * 	'{'
+ * 	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+
+ * 	(time+=TimeDef3 NL+)*?)
+ * 	'}'
+ * 	|
+ * 	'6'
+ * 	'{'
+ * 	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+ * 	(time+=TimeDef3 NL+)*?)
+ * 	'}'
+ * 	|
+ * 	'7'
+ * 	'{'
+ * 	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+ * 	(time+=TimeDef3 NL+)*)+
+ * 	'}'
+ * 	|
+ * 	'8'
+ * 	'{'
+ * 	NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+ * 	(time+=TimeDef3 NL+)*)*
+ * 	'}');
  *
  **/
 
-// {Timeperiod} "define" "timeperiod" ("1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
-// & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name"
-// name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "3" "{" (NL+
-// time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+
-// "otherelement" alias+=ID (NL+ time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-// name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+
-// (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
-// | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-// name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}")
+// {Timeperiod} 'define' 'timeperiod' ('1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
+// & NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
+// name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '3' '{' (NL+
+// time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*)+ NL+ '}' | '4' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+
+// 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)* NL+ '}' | '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+// name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '6' '{' NL+
+// (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*?) '}' | '7' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* |
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)+ '}' | '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+// name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}')
 protected class Timeperiod_Group extends GroupToken {
 	
 	public Timeperiod_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -122,7 +157,7 @@ protected class Timeperiod_TimeperiodAction_0 extends ActionToken  {
 	}
 }
 
-// "define"
+// 'define'
 protected class Timeperiod_DefineKeyword_1 extends KeywordToken  {
 	
 	public Timeperiod_DefineKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -144,7 +179,7 @@ protected class Timeperiod_DefineKeyword_1 extends KeywordToken  {
 
 }
 
-// "timeperiod"
+// 'timeperiod'
 protected class Timeperiod_TimeperiodKeyword_2 extends KeywordToken  {
 	
 	public Timeperiod_TimeperiodKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -166,17 +201,17 @@ protected class Timeperiod_TimeperiodKeyword_2 extends KeywordToken  {
 
 }
 
-// "1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)?) NL+ "}" | "2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* |
-// (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?) NL+ "}" | "3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name"
-// name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)+ NL+ "}" | "4" "{" (NL+
-// time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)* NL+ "}" | "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* &
-// ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "6" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name"
-// name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?) "}" | "7" "{" NL+
-// (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)+ "}" | "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* |
-// "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)* "}"
+// ('1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*?) NL+ '}' | '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+
+// 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?) NL+ '}' | '3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name'
+// name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)+ NL+ '}' | '4' '{' (NL+
+// time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*)* NL+ '}' | '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* &
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '6' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name'
+// name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?) '}' | '7' '{' NL+
+// (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*)+ '}' | '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* |
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)* '}')
 protected class Timeperiod_Alternatives_3 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -205,8 +240,8 @@ protected class Timeperiod_Alternatives_3 extends AlternativesToken {
 
 }
 
-// "1" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)?) NL+ "}"
+// '1' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*?) NL+ '}'
 protected class Timeperiod_Group_3_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -228,7 +263,7 @@ protected class Timeperiod_Group_3_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class Timeperiod_DigitOneKeyword_3_0_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitOneKeyword_3_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -250,7 +285,7 @@ protected class Timeperiod_DigitOneKeyword_3_0_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_0_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -364,7 +399,7 @@ protected class Timeperiod_TimeAssignment_3_0_2_1 extends AssignmentToken  {
 }
 
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* & (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+// (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* & NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?)
 protected class Timeperiod_UnorderedGroup_3_0_3 extends UnorderedGroupToken {
 	
 	public Timeperiod_UnorderedGroup_3_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -387,7 +422,7 @@ protected class Timeperiod_UnorderedGroup_3_0_3 extends UnorderedGroupToken {
 
 }
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+// NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 protected class Timeperiod_Group_3_0_3_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -433,7 +468,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_0_3_0_0 extends UnassignedTextTo
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_0_3_0_1 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_0_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -582,7 +617,7 @@ protected class Timeperiod_TimeAssignment_3_0_3_0_3_1 extends AssignmentToken  {
 
 
 
-// (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+// NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?
 protected class Timeperiod_Group_3_0_3_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -627,7 +662,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_0_3_1_0 extends UnassignedTextTo
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_0_3_1_1 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_0_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -799,7 +834,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_0_4 extends UnassignedTextToken 
 
 }
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_0_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_0_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -822,8 +857,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_0_5 extends KeywordToken  
 }
 
 
-// "2" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)?) NL+ "}"
+// '2' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*?) NL+ '}'
 protected class Timeperiod_Group_3_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -845,7 +880,7 @@ protected class Timeperiod_Group_3_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Timeperiod_DigitTwoKeyword_3_1_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitTwoKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -867,7 +902,7 @@ protected class Timeperiod_DigitTwoKeyword_3_1_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_1_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -981,7 +1016,7 @@ protected class Timeperiod_TimeAssignment_3_1_2_1 extends AssignmentToken  {
 }
 
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+// (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?)
 protected class Timeperiod_Alternatives_3_1_3 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1006,7 +1041,7 @@ protected class Timeperiod_Alternatives_3_1_3 extends AlternativesToken {
 
 }
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+// NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 protected class Timeperiod_Group_3_1_3_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1052,7 +1087,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_1_3_0_0 extends UnassignedTextTo
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_1_3_0_1 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_1_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1201,7 +1236,7 @@ protected class Timeperiod_TimeAssignment_3_1_3_0_3_1 extends AssignmentToken  {
 
 
 
-// (NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)?
+// NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*?
 protected class Timeperiod_Group_3_1_3_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_1_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1247,7 +1282,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_1_3_1_0 extends UnassignedTextTo
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_1_3_1_1 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_1_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1419,7 +1454,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_1_4 extends UnassignedTextToken 
 
 }
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_1_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1442,8 +1477,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_1_5 extends KeywordToken  
 }
 
 
-// "3" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)+ NL+ "}"
+// '3' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*)+ NL+ '}'
 protected class Timeperiod_Group_3_2 extends GroupToken {
 	
 	public Timeperiod_Group_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1465,7 +1500,7 @@ protected class Timeperiod_Group_3_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Timeperiod_DigitThreeKeyword_3_2_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitThreeKeyword_3_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1487,7 +1522,7 @@ protected class Timeperiod_DigitThreeKeyword_3_2_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_2_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1601,7 +1636,7 @@ protected class Timeperiod_TimeAssignment_3_2_2_1 extends AssignmentToken  {
 }
 
 
-// (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)+
+// (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)+
 protected class Timeperiod_Alternatives_3_2_3 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1624,7 +1659,7 @@ protected class Timeperiod_Alternatives_3_2_3 extends AlternativesToken {
 
 }
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+// NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 protected class Timeperiod_Group_3_2_3_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_2_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1671,7 +1706,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_2_3_0_0 extends UnassignedTextTo
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_2_3_0_1 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_2_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1820,7 +1855,7 @@ protected class Timeperiod_TimeAssignment_3_2_3_0_3_1 extends AssignmentToken  {
 
 
 
-// NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*
+// NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*
 protected class Timeperiod_Group_3_2_3_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_2_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1867,7 +1902,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_2_3_1_0 extends UnassignedTextTo
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_2_3_1_1 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_2_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2039,7 +2074,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_2_4 extends UnassignedTextToken 
 
 }
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_2_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_2_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2062,8 +2097,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_2_5 extends KeywordToken  
 }
 
 
-// "4" "{" (NL+ time+=TimeDef1)* (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+
-// time+=TimeDef3)*)* NL+ "}"
+// '4' '{' (NL+ time+=TimeDef1)* (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+
+// time+=TimeDef3)*)* NL+ '}'
 protected class Timeperiod_Group_3_3 extends GroupToken {
 	
 	public Timeperiod_Group_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2085,7 +2120,7 @@ protected class Timeperiod_Group_3_3 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Timeperiod_DigitFourKeyword_3_3_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitFourKeyword_3_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2107,7 +2142,7 @@ protected class Timeperiod_DigitFourKeyword_3_3_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_3_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2221,7 +2256,7 @@ protected class Timeperiod_TimeAssignment_3_3_2_1 extends AssignmentToken  {
 }
 
 
-// (NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)* | NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*)*
+// (NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)* | NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*)*
 protected class Timeperiod_Alternatives_3_3_3 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2244,7 +2279,7 @@ protected class Timeperiod_Alternatives_3_3_3 extends AlternativesToken {
 
 }
 
-// NL+ "timeperiod_name" name+=ID (NL+ time+=TimeDef2)*
+// NL+ 'timeperiod_name' name+=ID (NL+ time+=TimeDef2)*
 protected class Timeperiod_Group_3_3_3_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_3_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2291,7 +2326,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_3_3_0_0 extends UnassignedTextTo
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_3_3_0_1 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_3_3_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2440,7 +2475,7 @@ protected class Timeperiod_TimeAssignment_3_3_3_0_3_1 extends AssignmentToken  {
 
 
 
-// NL+ "otherelement" alias+=ID (NL+ time+=TimeDef3)*
+// NL+ 'otherelement' alias+=ID (NL+ time+=TimeDef3)*
 protected class Timeperiod_Group_3_3_3_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_3_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2487,7 +2522,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_3_3_1_0 extends UnassignedTextTo
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_3_3_1_1 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_3_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2661,7 +2696,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_3_4 extends UnassignedTextToken 
 
 }
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_3_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_3_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2684,8 +2719,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_3_5 extends KeywordToken  
 }
 
 
-// "5" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)?) "}"
+// '5' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*?) '}'
 protected class Timeperiod_Group_3_4 extends GroupToken {
 	
 	public Timeperiod_Group_3_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2707,7 +2742,7 @@ protected class Timeperiod_Group_3_4 extends GroupToken {
 
 }
 
-// "5"
+// '5'
 protected class Timeperiod_DigitFiveKeyword_3_4_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitFiveKeyword_3_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2729,7 +2764,7 @@ protected class Timeperiod_DigitFiveKeyword_3_4_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_4_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2865,7 +2900,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_4_3_1 extends UnassignedTextToke
 }
 
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* & ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+// ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* & 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?)
 protected class Timeperiod_UnorderedGroup_3_4_4 extends UnorderedGroupToken {
 	
 	public Timeperiod_UnorderedGroup_3_4_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2888,7 +2923,7 @@ protected class Timeperiod_UnorderedGroup_3_4_4 extends UnorderedGroupToken {
 
 }
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+// 'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 protected class Timeperiod_Group_3_4_4_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_4_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2911,7 +2946,7 @@ protected class Timeperiod_Group_3_4_4_0 extends GroupToken {
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_4_4_0_0 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_4_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3083,7 +3118,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_4_4_0_3_1 extends UnassignedText
 
 
 
-// ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?
 protected class Timeperiod_Group_3_4_4_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_4_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3106,7 +3141,7 @@ protected class Timeperiod_Group_3_4_4_1 extends GroupToken {
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_4_4_1_0 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_4_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3278,7 +3313,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_4_4_1_3_1 extends UnassignedText
 
 
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_4_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_4_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3301,8 +3336,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_4_5 extends KeywordToken  
 }
 
 
-// "6" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)?) "}"
+// '6' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*?) '}'
 protected class Timeperiod_Group_3_5 extends GroupToken {
 	
 	public Timeperiod_Group_3_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3324,7 +3359,7 @@ protected class Timeperiod_Group_3_5 extends GroupToken {
 
 }
 
-// "6"
+// '6'
 protected class Timeperiod_DigitSixKeyword_3_5_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitSixKeyword_3_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3346,7 +3381,7 @@ protected class Timeperiod_DigitSixKeyword_3_5_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_5_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_5_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3482,7 +3517,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_5_3_1 extends UnassignedTextToke
 }
 
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+// ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?)
 protected class Timeperiod_Alternatives_3_5_4 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_5_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3507,7 +3542,7 @@ protected class Timeperiod_Alternatives_3_5_4 extends AlternativesToken {
 
 }
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+// 'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 protected class Timeperiod_Group_3_5_4_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_5_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3530,7 +3565,7 @@ protected class Timeperiod_Group_3_5_4_0 extends GroupToken {
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_5_4_0_0 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_5_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3702,7 +3737,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_5_4_0_3_1 extends UnassignedText
 
 
 
-// ("otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)?
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*?
 protected class Timeperiod_Group_3_5_4_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_5_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3725,7 +3760,7 @@ protected class Timeperiod_Group_3_5_4_1 extends GroupToken {
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_5_4_1_0 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_5_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3898,7 +3933,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_5_4_1_3_1 extends UnassignedText
 
 
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_5_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_5_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3921,8 +3956,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_5_5 extends KeywordToken  
 }
 
 
-// "7" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)+ "}"
+// '7' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*)+ '}'
 protected class Timeperiod_Group_3_6 extends GroupToken {
 	
 	public Timeperiod_Group_3_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3944,7 +3979,7 @@ protected class Timeperiod_Group_3_6 extends GroupToken {
 
 }
 
-// "7"
+// '7'
 protected class Timeperiod_DigitSevenKeyword_3_6_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitSevenKeyword_3_6_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3966,7 +4001,7 @@ protected class Timeperiod_DigitSevenKeyword_3_6_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_6_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_6_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4102,7 +4137,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_6_3_1 extends UnassignedTextToke
 }
 
 
-// ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)+
+// ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)+
 protected class Timeperiod_Alternatives_3_6_4 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_6_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4125,7 +4160,7 @@ protected class Timeperiod_Alternatives_3_6_4 extends AlternativesToken {
 
 }
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+// 'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 protected class Timeperiod_Group_3_6_4_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_6_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4148,7 +4183,7 @@ protected class Timeperiod_Group_3_6_4_0 extends GroupToken {
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_6_4_0_0 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_6_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4321,7 +4356,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_6_4_0_3_1 extends UnassignedText
 
 
 
-// "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*
 protected class Timeperiod_Group_3_6_4_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_6_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4344,7 +4379,7 @@ protected class Timeperiod_Group_3_6_4_1 extends GroupToken {
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_6_4_1_0 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_6_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4518,7 +4553,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_6_4_1_3_1 extends UnassignedText
 
 
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_6_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_6_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4541,8 +4576,8 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_6_5 extends KeywordToken  
 }
 
 
-// "8" "{" NL+ (time+=TimeDef1 NL+)* ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+
-// (time+=TimeDef3 NL+)*)* "}"
+// '8' '{' NL+ (time+=TimeDef1 NL+)* ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+
+// (time+=TimeDef3 NL+)*)* '}'
 protected class Timeperiod_Group_3_7 extends GroupToken {
 	
 	public Timeperiod_Group_3_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4564,7 +4599,7 @@ protected class Timeperiod_Group_3_7 extends GroupToken {
 
 }
 
-// "8"
+// '8'
 protected class Timeperiod_DigitEightKeyword_3_7_0 extends KeywordToken  {
 	
 	public Timeperiod_DigitEightKeyword_3_7_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4586,7 +4621,7 @@ protected class Timeperiod_DigitEightKeyword_3_7_0 extends KeywordToken  {
 
 }
 
-// "{"
+// '{'
 protected class Timeperiod_LeftCurlyBracketKeyword_3_7_1 extends KeywordToken  {
 	
 	public Timeperiod_LeftCurlyBracketKeyword_3_7_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4722,7 +4757,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_7_3_1 extends UnassignedTextToke
 }
 
 
-// ("timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)* | "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*)*
+// ('timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)* | 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*)*
 protected class Timeperiod_Alternatives_3_7_4 extends AlternativesToken {
 
 	public Timeperiod_Alternatives_3_7_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4745,7 +4780,7 @@ protected class Timeperiod_Alternatives_3_7_4 extends AlternativesToken {
 
 }
 
-// "timeperiod_name" name+=ID NL+ (time+=TimeDef2 NL+)*
+// 'timeperiod_name' name+=ID NL+ (time+=TimeDef2 NL+)*
 protected class Timeperiod_Group_3_7_4_0 extends GroupToken {
 	
 	public Timeperiod_Group_3_7_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4768,7 +4803,7 @@ protected class Timeperiod_Group_3_7_4_0 extends GroupToken {
 
 }
 
-// "timeperiod_name"
+// 'timeperiod_name'
 protected class Timeperiod_Timeperiod_nameKeyword_3_7_4_0_0 extends KeywordToken  {
 	
 	public Timeperiod_Timeperiod_nameKeyword_3_7_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4941,7 +4976,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_7_4_0_3_1 extends UnassignedText
 
 
 
-// "otherelement" alias+=ID NL+ (time+=TimeDef3 NL+)*
+// 'otherelement' alias+=ID NL+ (time+=TimeDef3 NL+)*
 protected class Timeperiod_Group_3_7_4_1 extends GroupToken {
 	
 	public Timeperiod_Group_3_7_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4964,7 +4999,7 @@ protected class Timeperiod_Group_3_7_4_1 extends GroupToken {
 
 }
 
-// "otherelement"
+// 'otherelement'
 protected class Timeperiod_OtherelementKeyword_3_7_4_1_0 extends KeywordToken  {
 	
 	public Timeperiod_OtherelementKeyword_3_7_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5138,7 +5173,7 @@ protected class Timeperiod_NLTerminalRuleCall_3_7_4_1_3_1 extends UnassignedText
 
 
 
-// "}"
+// '}'
 protected class Timeperiod_RightCurlyBracketKeyword_3_7_5 extends KeywordToken  {
 	
 	public Timeperiod_RightCurlyBracketKeyword_3_7_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5170,12 +5205,12 @@ protected class Timeperiod_RightCurlyBracketKeyword_3_7_5 extends KeywordToken  
 
 /************ begin Rule TimeDef1 ****************
  *
- * TimeDef1 returns TimeDef:
- * 	"july" day=INT;
+ * TimeDef1 TimeDef:
+ * 	'july' day=INT
  *
  **/
 
-// "july" day=INT
+// 'july' day=INT
 protected class TimeDef1_Group extends GroupToken {
 	
 	public TimeDef1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5204,7 +5239,7 @@ protected class TimeDef1_Group extends GroupToken {
 
 }
 
-// "july"
+// 'july'
 protected class TimeDef1_JulyKeyword_0 extends KeywordToken  {
 	
 	public TimeDef1_JulyKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5265,12 +5300,12 @@ protected class TimeDef1_DayAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule TimeDef2 ****************
  *
- * TimeDef2 returns TimeDef:
- * 	"august" day=INT;
+ * TimeDef2 TimeDef:
+ * 	'august' day=INT
  *
  **/
 
-// "august" day=INT
+// 'august' day=INT
 protected class TimeDef2_Group extends GroupToken {
 	
 	public TimeDef2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5299,7 +5334,7 @@ protected class TimeDef2_Group extends GroupToken {
 
 }
 
-// "august"
+// 'august'
 protected class TimeDef2_AugustKeyword_0 extends KeywordToken  {
 	
 	public TimeDef2_AugustKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5360,12 +5395,12 @@ protected class TimeDef2_DayAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule TimeDef3 ****************
  *
- * TimeDef3 returns TimeDef:
- * 	"september" day=INT;
+ * TimeDef3 TimeDef:
+ * 	'september' day=INT
  *
  **/
 
-// "september" day=INT
+// 'september' day=INT
 protected class TimeDef3_Group extends GroupToken {
 	
 	public TimeDef3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5394,7 +5429,7 @@ protected class TimeDef3_Group extends GroupToken {
 
 }
 
-// "september"
+// 'september'
 protected class TimeDef3_SeptemberKeyword_0 extends KeywordToken  {
 	
 	public TimeDef3_SeptemberKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

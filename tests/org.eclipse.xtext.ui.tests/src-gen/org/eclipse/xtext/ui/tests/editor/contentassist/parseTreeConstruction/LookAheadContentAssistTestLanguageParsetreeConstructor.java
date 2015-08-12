@@ -42,13 +42,15 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
- * 	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
+ * 	{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
+ * 	| '[' attribute+=Attribute+ attribute+=Pair* ']'
+ * 	| '<' attribute+=Attribute* attribute+=Pair+ '>'
+ * 	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
  *
  **/
 
-// {Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-// attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}")
+// {Model} ('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
+// attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -103,8 +105,8 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-// attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}"
+// ('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
+// attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -129,7 +131,7 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 
 }
 
-// "(" attribute+=Attribute* attribute+=Pair* ")"
+// '(' attribute+=Attribute* attribute+=Pair* ')'
 protected class Model_Group_1_0 extends GroupToken {
 	
 	public Model_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -151,7 +153,7 @@ protected class Model_Group_1_0 extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class Model_LeftParenthesisKeyword_1_0_0 extends KeywordToken  {
 	
 	public Model_LeftParenthesisKeyword_1_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -268,7 +270,7 @@ protected class Model_AttributeAssignment_1_0_2 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class Model_RightParenthesisKeyword_1_0_3 extends KeywordToken  {
 	
 	public Model_RightParenthesisKeyword_1_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -293,7 +295,7 @@ protected class Model_RightParenthesisKeyword_1_0_3 extends KeywordToken  {
 }
 
 
-// "[" attribute+=Attribute+ attribute+=Pair* "]"
+// '[' attribute+=Attribute+ attribute+=Pair* ']'
 protected class Model_Group_1_1 extends GroupToken {
 	
 	public Model_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -315,7 +317,7 @@ protected class Model_Group_1_1 extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class Model_LeftSquareBracketKeyword_1_1_0 extends KeywordToken  {
 	
 	public Model_LeftSquareBracketKeyword_1_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -431,7 +433,7 @@ protected class Model_AttributeAssignment_1_1_2 extends AssignmentToken  {
 	}	
 }
 
-// "]"
+// ']'
 protected class Model_RightSquareBracketKeyword_1_1_3 extends KeywordToken  {
 	
 	public Model_RightSquareBracketKeyword_1_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -455,7 +457,7 @@ protected class Model_RightSquareBracketKeyword_1_1_3 extends KeywordToken  {
 }
 
 
-// "<" attribute+=Attribute* attribute+=Pair+ ">"
+// '<' attribute+=Attribute* attribute+=Pair+ '>'
 protected class Model_Group_1_2 extends GroupToken {
 	
 	public Model_Group_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -477,7 +479,7 @@ protected class Model_Group_1_2 extends GroupToken {
 
 }
 
-// "<"
+// '<'
 protected class Model_LessThanSignKeyword_1_2_0 extends KeywordToken  {
 	
 	public Model_LessThanSignKeyword_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -594,7 +596,7 @@ protected class Model_AttributeAssignment_1_2_2 extends AssignmentToken  {
 	}	
 }
 
-// ">"
+// '>'
 protected class Model_GreaterThanSignKeyword_1_2_3 extends KeywordToken  {
 	
 	public Model_GreaterThanSignKeyword_1_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -617,7 +619,7 @@ protected class Model_GreaterThanSignKeyword_1_2_3 extends KeywordToken  {
 }
 
 
-// "{" attribute+=Attribute+ attribute+=Pair+ "}"
+// '{' attribute+=Attribute+ attribute+=Pair+ '}'
 protected class Model_Group_1_3 extends GroupToken {
 	
 	public Model_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -639,7 +641,7 @@ protected class Model_Group_1_3 extends GroupToken {
 
 }
 
-// "{"
+// '{'
 protected class Model_LeftCurlyBracketKeyword_1_3_0 extends KeywordToken  {
 	
 	public Model_LeftCurlyBracketKeyword_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -755,7 +757,7 @@ protected class Model_AttributeAssignment_1_3_2 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Model_RightCurlyBracketKeyword_1_3_3 extends KeywordToken  {
 	
 	public Model_RightCurlyBracketKeyword_1_3_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -830,37 +832,12 @@ protected class Attribute_ValueAssignment extends AssignmentToken  {
 
 /************ begin Rule Pair ****************
  *
- * //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
- * //
- * //Attribute:
- * //		IdAttribute | StringAttribute;
- * //	
- * //IdAttribute:
- * //        value=ID;
- * //
- * //StringAttribute:
- * //        value=STRING;
- * //        
- * //Pair:
- * //        name=ID "=" value=ID;
  * Pair:
  * 	name=ID "=" value=ID;
  *
  **/
 
-// name=ID "=" value=ID //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-// //
-// //Attribute:
-// //		IdAttribute | StringAttribute;
-// //	
-// //IdAttribute:
-// //        value=ID;
-// //
-// //StringAttribute:
-// //        value=STRING;
-// //        
-// //Pair:
-// //        name=ID "=" value=ID;
+// name=ID "=" value=ID
 protected class Pair_Group extends GroupToken {
 	
 	public Pair_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -944,19 +921,6 @@ protected class Pair_EqualsSignKeyword_1 extends KeywordToken  {
 
 }
 
-// //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-// //
-// //Attribute:
-// //		IdAttribute | StringAttribute;
-// //	
-// //IdAttribute:
-// //        value=ID;
-// //
-// //StringAttribute:
-// //        value=STRING;
-// //        
-// //Pair:
-// //        name=ID "=" value=ID;
 // value=ID
 protected class Pair_ValueAssignment_2 extends AssignmentToken  {
 	

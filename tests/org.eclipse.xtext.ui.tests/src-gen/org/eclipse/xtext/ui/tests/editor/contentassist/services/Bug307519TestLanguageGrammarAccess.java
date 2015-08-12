@@ -19,7 +19,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cE1Assignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cE1Elem1ParserRuleCall_0_0 = (RuleCall)cE1Assignment_0.eContents().get(0);
@@ -27,10 +27,10 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cE2Elem2ParserRuleCall_1_0 = (RuleCall)cE2Assignment_1.eContents().get(0);
 		
 		//Model:
-		//	(e1+=Elem1 | e2+=Elem2)+;
+		//	e1+=Elem1 | e2+=Elem2+;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(e1+=Elem1 | e2+=Elem2)+
+		//e1+=Elem1 | e2+=Elem2+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//e1+=Elem1
@@ -47,7 +47,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Elem1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Elem1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem1");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueEnumTEnumRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
@@ -63,7 +63,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Elem2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Elem2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.Elem2");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cValueEnumTEnumRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
@@ -96,7 +96,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class EnumTElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumT");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage.EnumT");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cT1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cT1T1Keyword_0_0 = (Keyword)cT1EnumLiteralDeclaration_0.eContents().get(0);
@@ -171,7 +171,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	(e1+=Elem1 | e2+=Elem2)+;
+	//	e1+=Elem1 | e2+=Elem2+;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -211,38 +211,38 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

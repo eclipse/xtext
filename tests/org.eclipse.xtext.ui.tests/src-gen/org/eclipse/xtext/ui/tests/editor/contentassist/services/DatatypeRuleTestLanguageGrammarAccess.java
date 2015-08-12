@@ -19,7 +19,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Model");
 		private final RuleCall cTypesParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Model:
@@ -31,7 +31,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class TypesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Types");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Types");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTypesAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTypesKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -39,16 +39,18 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final RuleCall cTypesTypeParserRuleCall_2_0 = (RuleCall)cTypesAssignment_2.eContents().get(0);
 		
 		//Types:
-		//	{Types} "Types" types+=Type*;
+		//	{Types}
+		//	'Types'
+		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Types} "Types" types+=Type*
+		//{Types} 'Types' types+=Type*
 		public Group getGroup() { return cGroup; }
 
 		//{Types}
 		public Action getTypesAction_0() { return cTypesAction_0; }
 
-		//"Types"
+		//'Types'
 		public Keyword getTypesKeyword_1() { return cTypesKeyword_1; }
 
 		//types+=Type*
@@ -59,7 +61,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Type");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSimpleTypeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cCompositeTypeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -79,7 +81,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class SimpleTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.SimpleType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -87,13 +89,13 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SimpleType:
-		//	"Type" name=ID ";";
+		//	'Type' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Type" name=ID ";"
+		//'Type' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"Type"
+		//'Type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
 
 		//name=ID
@@ -102,12 +104,12 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class CompositeTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeType");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cCompositeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -118,13 +120,14 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//CompositeType:
-		//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+		//	'Composite' name=ID
+		//	'base' baseType=CompositeTypeEntry ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Composite" name=ID "base" baseType=CompositeTypeEntry ";"
+		//'Composite' name=ID 'base' baseType=CompositeTypeEntry ';'
 		public Group getGroup() { return cGroup; }
 
-		//"Composite"
+		//'Composite'
 		public Keyword getCompositeKeyword_0() { return cCompositeKeyword_0; }
 
 		//name=ID
@@ -133,7 +136,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"base"
+		//'base'
 		public Keyword getBaseKeyword_2() { return cBaseKeyword_2; }
 
 		//baseType=CompositeTypeEntry
@@ -142,12 +145,12 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		//CompositeTypeEntry
 		public RuleCall getBaseTypeCompositeTypeEntryParserRuleCall_3_0() { return cBaseTypeCompositeTypeEntryParserRuleCall_3_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
 	}
 
 	public class CompositeTypeEntryElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CompositeTypeEntry");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeTypeEntry");
 		private final Assignment cDataTypeAssignment = (Assignment)rule.eContents().get(1);
 		private final CrossReference cDataTypeTypeCrossReference_0 = (CrossReference)cDataTypeAssignment.eContents().get(0);
 		private final RuleCall cDataTypeTypeTypeIdParserRuleCall_0_1 = (RuleCall)cDataTypeTypeCrossReference_0.eContents().get(1);
@@ -167,7 +170,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	public class TypeIdElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeId");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.TypeId");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -179,34 +182,34 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//TypeId:
-		//	ID ("<" TypeId ("," TypeId)* ">")?;
+		//	ID ('<' TypeId (',' TypeId)* '>')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("<" TypeId ("," TypeId)* ">")?
+		//ID ('<' TypeId (',' TypeId)* '>')?
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("<" TypeId ("," TypeId)* ">")?
+		//('<' TypeId (',' TypeId)* '>')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"<"
+		//'<'
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
 		//TypeId
 		public RuleCall getTypeIdParserRuleCall_1_1() { return cTypeIdParserRuleCall_1_1; }
 
-		//("," TypeId)*
+		//(',' TypeId)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
 		//TypeId
 		public RuleCall getTypeIdParserRuleCall_1_2_1() { return cTypeIdParserRuleCall_1_2_1; }
 
-		//">"
+		//'>'
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
 	
@@ -275,7 +278,9 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//Types:
-	//	{Types} "Types" types+=Type*;
+	//	{Types}
+	//	'Types'
+	//	types+=Type*;
 	public TypesElements getTypesAccess() {
 		return pTypes;
 	}
@@ -295,7 +300,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//SimpleType:
-	//	"Type" name=ID ";";
+	//	'Type' name=ID ';';
 	public SimpleTypeElements getSimpleTypeAccess() {
 		return pSimpleType;
 	}
@@ -305,7 +310,8 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//CompositeType:
-	//	"Composite" name=ID "base" baseType=CompositeTypeEntry ";";
+	//	'Composite' name=ID
+	//	'base' baseType=CompositeTypeEntry ';';
 	public CompositeTypeElements getCompositeTypeAccess() {
 		return pCompositeType;
 	}
@@ -325,7 +331,7 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//TypeId:
-	//	ID ("<" TypeId ("," TypeId)* ">")?;
+	//	ID ('<' TypeId (',' TypeId)* '>')?;
 	public TypeIdElements getTypeIdAccess() {
 		return pTypeId;
 	}
@@ -335,38 +341,38 @@ public class DatatypeRuleTestLanguageGrammarAccess extends AbstractGrammarElemen
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

@@ -189,7 +189,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"imports",
             	            		lv_imports_0_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -226,7 +226,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"query",
                     		lv_query_1_0, 
-                    		"MQLquery");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.MQLquery");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -330,7 +330,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"importURI",
                     		lv_importURI_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    
 
             }
@@ -450,7 +450,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"selectEntries",
                     		lv_selectEntries_1_0, 
-                    		"SelectEntry");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SelectEntry");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -500,7 +500,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"selectEntries",
             	            		lv_selectEntries_3_0, 
-            	            		"SelectEntry");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SelectEntry");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -544,7 +544,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"fromEntries",
                     		lv_fromEntries_5_0, 
-                    		"FromEntry");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.FromEntry");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -594,7 +594,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"fromEntries",
             	            		lv_fromEntries_7_0, 
-            	            		"FromEntry");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.FromEntry");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -662,7 +662,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"whereEntries",
                     	            		lv_whereEntries_9_0, 
-                    	            		"WhereEntry");
+                    	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.WhereEntry");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -977,7 +977,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"alias",
                     		lv_alias_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ID");
             	    
 
             }
@@ -1015,7 +1015,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"scopeClause",
                             		lv_scopeClause_4_0, 
-                            		"ScopeClause");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ScopeClause");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1161,7 +1161,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"scope",
                     		lv_scope_2_0, 
-                    		"Scope");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Scope");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1398,7 +1398,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"uris",
                     		lv_uris_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    
 
             }
@@ -1443,7 +1443,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"uris",
             	            		lv_uris_4_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    	    
 
             	    }
@@ -1567,7 +1567,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"uris",
                     		lv_uris_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    
 
             }
@@ -1612,7 +1612,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"uris",
             	            		lv_uris_4_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    	    
 
             	    }
@@ -1785,7 +1785,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"entries",
                     	            		lv_entries_3_0, 
-                    	            		"AndWhereEntry");
+                    	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.AndWhereEntry");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -1965,7 +1965,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"entries",
                     	            		lv_entries_3_0, 
-                    	            		"ConcreteWhereEntry");
+                    	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ConcreteWhereEntry");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -2689,7 +2689,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"NumericOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2716,7 +2716,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_4_0, 
-                    		"SIGNED_DOUBLE");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SIGNED_DOUBLE");
             	    
 
             }
@@ -2869,7 +2869,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"NumericOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2896,7 +2896,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_4_0, 
-                    		"SINGED_LONG");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SINGED_LONG");
             	    
 
             }
@@ -3051,7 +3051,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"NumericOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3251,7 +3251,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"StringOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.StringOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3278,7 +3278,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"pattern",
                     		lv_pattern_4_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
             	    
 
             }
@@ -3432,7 +3432,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"BooleanOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3644,7 +3644,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"operator",
                     		lv_operator_3_0, 
-                    		"BooleanOperator");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3993,7 +3993,7 @@ public class InternalBug287941TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"subQuery",
                     		lv_subQuery_6_0, 
-                    		"MQLquery");
+                    		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.MQLquery");
             	        afterParserOrEnumRuleCall();
             	    
 

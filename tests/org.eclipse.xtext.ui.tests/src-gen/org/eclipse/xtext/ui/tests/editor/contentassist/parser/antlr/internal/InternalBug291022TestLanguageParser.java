@@ -169,7 +169,7 @@ public class InternalBug291022TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"name",
                             		lv_name_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -258,7 +258,7 @@ public class InternalBug291022TestLanguageParser extends AbstractInternalAntlrPa
                             	           			current, 
                             	           			"elements",
                             	            		lv_elements_4_0, 
-                            	            		"ModelAttribute");
+                            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelAttribute");
                             	    	        afterParserOrEnumRuleCall();
                             	    	    
 
@@ -420,7 +420,7 @@ public class InternalBug291022TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"name",
                             		lv_name_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -537,7 +537,7 @@ public class InternalBug291022TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"elements",
                     	            		lv_elements_6_0, 
-                    	            		"ModelAttribute");
+                    	            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelAttribute");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -817,7 +817,7 @@ public class InternalBug291022TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"value",
                     		lv_value_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
