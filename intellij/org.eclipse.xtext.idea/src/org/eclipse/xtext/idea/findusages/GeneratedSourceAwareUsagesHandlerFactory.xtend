@@ -21,6 +21,7 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import com.intellij.psi.PsiNameIdentifierOwner
 import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.psi.PsiNamedElement
+import java.util.Collections
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,10 +56,19 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	protected def List<? extends PsiElement> getGeneratedElements(PsiElement element) {
+		if (element === null) {
+			return Collections.emptyList
+		}
 		if (element instanceof PsiNameIdentifierOwner) {
 			return getGeneratedElements(element.nameIdentifier)
 		}
-		val result = traceProvider.getGeneratedElements(element).map[PsiTreeUtil.getParentOfType(it, PsiNamedElement, false)].filterNull.toSet.toList
+		val result = newArrayList
+		for (generatedElement : traceProvider.getGeneratedElements(element)) {
+			val parent = PsiTreeUtil.getParentOfType(generatedElement, PsiNamedElement, false)
+			if (parent != null && !result.contains(parent)) {
+				result.add(parent)
+			}	
+		}
 		return result
 	}
 	

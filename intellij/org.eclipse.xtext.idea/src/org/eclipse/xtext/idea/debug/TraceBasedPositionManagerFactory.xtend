@@ -14,10 +14,19 @@ import com.intellij.debugger.PositionManagerFactory
 import com.intellij.debugger.SourcePosition
 import com.intellij.debugger.engine.DebugProcess
 import com.intellij.debugger.requests.ClassPrepareRequestor
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.psi.PsiDocumentManager
+import com.intellij.psi.util.PsiUtil
+import com.intellij.util.DocumentUtil
 import com.sun.jdi.AbsentInformationException
 import com.sun.jdi.Location
 import com.sun.jdi.ReferenceType
+import java.util.List
+import java.util.Set
 import org.eclipse.xtext.idea.lang.IXtextLanguage
+import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider
+import org.eclipse.xtext.idea.trace.VirtualFileInProject
+import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -41,6 +50,7 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 		val IXtextLanguage language
 		
 		@Inject extension DebugProcessExtensions
+		@Inject TraceForVirtualFileProvider traceForVirtualFileProvider
 	
 		new (DebugProcess process, IXtextLanguage language) {
 			this.process = process
@@ -54,18 +64,15 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 			if (source.file.language != language) {
 				throw NoDataException.INSTANCE
 			}
-			val traces = process.getTracesForSource(source)
-			val line = source.line
-			val names = newHashSet
-			for (uri2trace : traces.entrySet) {
-				val region = uri2trace.value.treeIterator.findFirst[mergedAssociatedLocation.lineNumber == line]
-				if (region != null) {
-					names.add(uri2trace.key.lastSegment)
-				}
-			}
-			if (names.empty)
-				throw NoDataException.INSTANCE;
 			
+			val names = ApplicationManager.application.<Set<String>>runReadAction[ 
+				val trace = traceForVirtualFileProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(source.elementAt))
+				if (trace == null)
+					throw NoDataException.INSTANCE;
+				return trace.allAssociatedLocations.map[it.srcRelativeResourceURI.URI.lastSegment].toSet
+			]
+			if (names.isEmpty)
+				throw NoDataException.INSTANCE;
 			return process.requestsManager.createClassPrepareRequest([ process, refType|
 				try {
 					if (names.contains(refType.sourceName)) {
@@ -133,15 +140,27 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 			if (position.file.language != language) {
 				throw NoDataException.INSTANCE
 			}
-			val traces = process.getTracesForSource(position)
-			for (entry :  traces.entrySet) {
-				if (entry.key.lastSegment == type.sourceName) {
-					val allLocations = entry.value.leafIterator.filter[associatedLocations.exists[lineNumber == position.line]].toList
-					val locations = allLocations.map[type.locationsOfLine(it.myLineNumber+1)].flatten.toSet.toList
-					return locations
+			return ApplicationManager.application.<List<Location>>runReadAction[
+				val psi = position.elementAt
+				val document = PsiDocumentManager.getInstance(psi.project).getDocument(psi.containingFile)
+				val range = DocumentUtil.getLineTextRange(document, position.line)
+				val traceToTarget = traceForVirtualFileProvider.getTraceToTarget(new VirtualFileInProject(PsiUtil.getVirtualFile(psi), psi.project))
+				if (traceToTarget == null) {
+					throw NoDataException.INSTANCE
 				}
-			}
-			throw NoDataException.INSTANCE
+				val result = newArrayList
+				for (location : traceToTarget.getAllAssociatedLocations(new TextRegion(range.startOffset, range.length)).sortBy[textRegion.lineNumber]) {
+					if (type.sourceName == location.srcRelativeResourceURI.URI.lastSegment.toString 
+						&& location.textRegion.lineNumber == location.textRegion.endLineNumber) {
+						val locationsOfLine = type.locationsOfLine(location.textRegion.lineNumber+1)
+						if (!locationsOfLine.isEmpty) {
+							result.addAll(locationsOfLine)
+							return result
+						}
+					}
+				}
+				throw NoDataException.INSTANCE
+			]
 		}
 		
 	}

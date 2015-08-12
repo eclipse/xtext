@@ -47,6 +47,7 @@ import org.eclipse.xtext.idea.tests.AbstractIdeaTestCase
 import org.jetbrains.annotations.NotNull
 
 import static junit.framework.TestCase.*
+import junit.framework.AssertionFailedError
 
 abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 
@@ -86,7 +87,11 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 
 	protected def stepOver(int times) {
 		for (i : 0 ..< times) {
-			stepOver
+			try {
+				stepOver
+			} catch (AssertionFailedError e) {
+				fail("Failed on step "+i+" : "+e.message)
+			}
 		}
 	}
 
@@ -105,6 +110,12 @@ abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 	protected def stepOut() {
 		waitForContextChange [
 			myDebuggerSession.stepOut
+		]
+	}
+	
+	protected def resume() {
+		waitForContextChange [
+			myDebuggerSession.resume
 		]
 	}
 
