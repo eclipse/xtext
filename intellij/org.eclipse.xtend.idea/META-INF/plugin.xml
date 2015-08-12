@@ -67,4 +67,9 @@
 		<liveTemplateContext implementation="org.eclipse.xtend.core.idea.completion.XtendCodeContextType$Statement"/>
 		<liveTemplateContext implementation="org.eclipse.xtend.core.idea.completion.XtendCodeContextType$Expression"/>
 	</extensions>
+	
+	<extensions defaultExtensionNs="org.jetbrains.plugins.gradle">
+	  <frameworkSupport implementation="org.eclipse.xtend.core.idea.config.XtendGradleFrameworkSupportProvider"/>
+    </extensions>
+	
 </idea-plugin>

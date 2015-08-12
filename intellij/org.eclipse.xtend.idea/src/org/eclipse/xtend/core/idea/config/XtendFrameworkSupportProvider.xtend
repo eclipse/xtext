@@ -22,7 +22,7 @@ class XtendFrameworkSupportProvider extends FrameworkSupportInModuleProvider {
 
 	@Inject
 	Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
-
+	
 	override getFrameworkType() {
 		FrameworkTypeEx.EP_NAME.findExtension(XtendFrameworkType)
 	}
