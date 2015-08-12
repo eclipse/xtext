@@ -263,7 +263,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
         		"ANY_OTHER",
         		"(",
         		"{",
-        		"[", // guarded alternative
+        		"<", // guarded alternative
         		"name=");
     }
     
@@ -398,7 +398,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"name=");
@@ -423,7 +423,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"*",
@@ -455,7 +455,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"ANY_OTHER",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"=>",
 	        		"->",
 	        		"name=");
@@ -666,7 +666,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"feature+=",
 	        		"name=");
     }
@@ -687,7 +687,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"feature+=",
 	        		"name=");
     }
@@ -708,7 +708,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"RuleB",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"feature?=",
 	        		"name=");
     }
@@ -726,7 +726,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"\"Value\"",
 	        		"(",
 	        		"{",
-	        		"[", // guarded alternative
+	        		"<", // guarded alternative
 	        		"Import",
 	        		"importedNamespace=",
 	        		"importURI=");
@@ -866,7 +866,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 			.append("EPac")
 			.assertText(
 					"EPackage: \n;\n",
-					"[", // parameterized rule 
+					"<", // parameterized rule 
 					":");
     	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
@@ -874,7 +874,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("FooBar returns EPackage: 'bar';") 
     		.append("EPac")
     		.assertText(
-    				"[", // parameterized rule 
+    				"<", // parameterized rule 
     				":");
     }
 
@@ -885,7 +885,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.append("EPac")
     		.assertText(
     				"EPackage returns ecore::EPackage: \n;\n",
-    				"[", // parameterized rule 
+    				"<", // parameterized rule 
     				":");
     	newBuilder()
     		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
@@ -893,7 +893,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("FooBar returns ecore::EPackage : 'bar';") 
     		.append("EPac")
     		.assertText(
-    				"[", // parameterized rule 
+    				"<", // parameterized rule 
     				":");
     }
     
@@ -904,7 +904,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("En")
 	        .assertText("EnumRule: \n;\n", "EnumLiteralDeclaration: \n;\n", 
 	        		"enum",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
     
@@ -916,7 +916,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .assertText("EnumRule returns xtext::EnumRule: \n;\n", 
 	        		"EnumLiteralDeclaration returns xtext::EnumLiteralDeclaration: \n;\n", 
 	        		"enum",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
 
@@ -926,7 +926,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("ST")
 	        .assertText(
 	        		"terminal STRING:\n\t\n;",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
     
@@ -936,7 +936,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("IN")
 	        .assertText(
 	        		"terminal INT returns ecore::EInt:\n\t\n;",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
     
@@ -947,7 +947,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("IN")
 	        .assertText(
 	        		"terminal INT returns ec::EInt:\n\t\n;",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
     
@@ -958,7 +958,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .append("IN")
 	        .assertText(
 	        		"terminal INT returns EInt:\n\t\n;",
-	        		"[", // parameterized rule
+	        		"<", // parameterized rule
 	        		":");
     }
     
@@ -968,7 +968,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	    	.append("ESC")
 	    	.assertText(
 	    			"terminal fragment ESCAPED_CHAR:\n\t\n;",
-	    			"[", // parameterized rule
+	    			"<", // parameterized rule
 	    			":");
     }
     
