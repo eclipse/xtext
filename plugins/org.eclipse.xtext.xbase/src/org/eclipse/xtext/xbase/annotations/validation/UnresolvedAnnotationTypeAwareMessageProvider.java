@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class UnresolvedAnnotationTypeAwareMessageProducer extends LinkingDiagnosticTypeAwareMessageProducer {
+public class UnresolvedAnnotationTypeAwareMessageProvider extends UnresolvedFeatureCallTypeAwareMessageProvider {
 
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {

@@ -17,12 +17,12 @@ import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.xbase.annotations.validation.LinkingDiagnosticTypeAwareMessageProducer
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
@@ -346,7 +346,7 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		val List<Issue> allIssues = validate(resource)
 		val match = allIssues.filter [
 			var EObject object = resource.getResourceSet().getEObject(getUriToProblem(), true)
-			val featureCall = data.contains(LinkingDiagnosticTypeAwareMessageProducer.FEATURE_CALL)
+			val featureCall = data.contains(UnresolvedFeatureCallTypeAwareMessageProvider.FEATURE_CALL)
 			return code == Diagnostic.LINKING_DIAGNOSTIC && getSeverity() === Severity.ERROR &&
 				objectType.isInstance(object) && featureCall
 		]
