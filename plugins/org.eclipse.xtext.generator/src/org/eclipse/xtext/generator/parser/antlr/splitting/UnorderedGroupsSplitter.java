@@ -79,10 +79,17 @@ public class UnorderedGroupsSplitter {
 			IfCondition condition = (IfCondition) resource.getContents().get(0);
 			simplifier.simplify(condition);
 			String fixedLine = saveResource(resource);
+			fixedLine = addPostfix(line, braceIdx, fixedLine);
 			return fixedLine;
 		} else {
 			return line;
 		}
+	}
+	
+	private String addPostfix(String line, int braceIdx, String fixedLine) {
+		if (braceIdx != line.length() - 1)
+			fixedLine = fixedLine + line.substring(braceIdx + 1);
+		return fixedLine;
 	}
 
 	protected String saveResource(Resource resource) throws IOException {
