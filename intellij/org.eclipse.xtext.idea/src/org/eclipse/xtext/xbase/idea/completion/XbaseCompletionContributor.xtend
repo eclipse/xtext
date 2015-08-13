@@ -17,6 +17,7 @@ import com.intellij.codeInsight.completion.InsertionContext
 import com.intellij.codeInsight.completion.JavaClassNameCompletionContributor
 import com.intellij.codeInsight.completion.JavaCompletionSorting
 import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement
+import com.intellij.patterns.PlatformPatterns
 import com.intellij.psi.PsiModifier
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.common.types.JvmDeclaredType
@@ -38,6 +39,15 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		completeXImportDeclaration_ImportedType
 		completeXConstructorCall_Constructor
 		completeXTypeLiteral_Type
+		completeJavaTypeWithinMultiLineComment
+	}
+	
+	protected def void completeJavaTypeWithinMultiLineComment() {
+		for (mlCommentTokenType : multiLineCommentTokens.types) {
+			extend(CompletionType.BASIC, PlatformPatterns.psiElement(mlCommentTokenType)) [
+				completeJavaTypes($0, $2, false) [true]
+			]
+		}
 	}
 
 	protected def completeJvmParameterizedTypeReference_Type() {
@@ -63,7 +73,7 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		completeJavaTypes(reference, true)
 	}
 	
-	protected def void completeJavaTypes(EReference reference, boolean addImport ) {
+	protected def void completeJavaTypes(EReference reference, boolean addImport) {
 		completeJavaTypes(reference, addImport)[true]
 	}
 

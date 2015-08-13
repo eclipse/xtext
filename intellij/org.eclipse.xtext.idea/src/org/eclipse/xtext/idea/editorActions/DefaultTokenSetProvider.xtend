@@ -26,14 +26,13 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 	TokenTypeProvider tokenTypeProvider
 
 	TokenSet slCommentTokens
+	
+	TokenSet mlCommentTokens
 
 	@Inject
 	def void setCommenter(CodeDocumentationAwareCommenter commenter) {
-		val lineCommentTokenType = commenter.lineCommentTokenType
-		slCommentTokens = if (lineCommentTokenType == null)
-			TokenSet.EMPTY
-		else
-			TokenSet.create(lineCommentTokenType)
+		slCommentTokens = TokenSet.create(commenter.lineCommentTokenType)
+		mlCommentTokens = TokenSet.create(commenter.blockCommentTokenType)
 	}
 
 	override getTokenSet(EditorEx editor, int offset) {
@@ -45,6 +44,8 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 			return stringLiteralTokens
 		if (singleLineCommentTokens.contains(tokenType))
 			return singleLineCommentTokens
+		if (multiLineCommentTokens.contains(tokenType))
+			return multiLineCommentTokens
 		if (commentTokens.contains(tokenType))
 			return commentTokens
 		return null
@@ -65,6 +66,10 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 
 	override def getSingleLineCommentTokens() {
 		slCommentTokens
+	}
+	
+	override getMultiLineCommentTokens() {
+		mlCommentTokens
 	}
 
 	override def getStringLiteralTokens() {

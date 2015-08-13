@@ -26,6 +26,7 @@ import com.intellij.codeInsight.lookup.LookupElement
 import com.intellij.codeInsight.lookup.LookupElementWeigher
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.util.Computable
+import com.intellij.openapi.util.TextRange
 import com.intellij.util.ProcessingContext
 import java.util.Map
 import java.util.Set
@@ -40,38 +41,57 @@ import org.eclipse.xtext.ide.editor.contentassist.ContentAssistContext
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ContentAssistContextFactory
 import org.eclipse.xtext.ide.editor.contentassist.antlr.FollowElementComputer
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
+import org.eclipse.xtext.idea.editorActions.TokenSetProvider
 import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.util.TextRegion
+import com.intellij.psi.tree.TokenSet
+import com.intellij.openapi.editor.ex.EditorEx
 
 abstract class AbstractCompletionContributor extends CompletionContributor {
 
 	@Inject(optional=true) Provider<ContentAssistContextFactory> delegates
 	@Inject protected extension CompletionExtensions
 	@Inject protected IGrammarAccess grammarAccess
+	@Inject protected extension TokenSetProvider
 	
 	@Inject IContentAssistParser contentAssistParser
 	@Inject FollowElementComputer followElementComputer
 	
 	ExecutorService pool = Executors.newFixedThreadPool(3)
-	Map<CompletionType, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> myContributors = newHashMap
+	
+	Map<CompletionType, Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>> myContributors = newHashMap
 
 	new(AbstractXtextLanguage lang) {
 		lang.injectMembers(this)
 	}
 	
 	protected def extend(CompletionType type, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
+		extend(type, #[null], feature, contrib)
+	}
+	
+	protected def extend(CompletionType type, TokenSet[] tokenSets, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
 		followElementComputer.collectAbstractElements(grammarAccess.grammar, feature) [
-			extend(type, it, contrib)
+			extend(type, tokenSets, it, contrib)
 		]
 	}
 	
 	protected def extend(CompletionType type, AbstractElement followElement, CompletionProvider<CompletionParameters> contrib) {
+		extend(type, #[null], followElement, contrib)
+	}
+	
+	protected def extend(CompletionType type, TokenSet[] tokenSets, AbstractElement followElement, CompletionProvider<CompletionParameters> contrib) {
 		if (!myContributors.containsKey(type)) {
-			myContributors.put(type, ArrayListMultimap.create)
+			myContributors.put(type, newHashMap)
 		}
 		val map = myContributors.get(type)
-		map.put(followElement, contrib)
+		for (tokenSet : tokenSets) {
+			if (!map.containsKey(tokenSet)) {
+				map.put(tokenSet, ArrayListMultimap.create)
+			}
+			val providers = map.get(tokenSet)
+			providers.put(followElement, contrib)
+		}
 	}
 
 	override void fillCompletionVariants(CompletionParameters parameters, CompletionResultSet result) {
@@ -91,8 +111,13 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	protected def void createFollowElementBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
 		if (myContributors.isEmpty || !myContributors.containsKey(parameters.completionType))
 			return;
+			
+		val tokenSet = (parameters.editor as EditorEx).getTokenSet(parameters.offset)
+		val element2provider = myContributors.get(parameters.getCompletionType()).get(tokenSet)
+		if (element2provider == null)
+			return;
+		
 		val followElements = computeFollowElements(parameters)
-		val element2provider = myContributors.get(parameters.getCompletionType())
 		val calledProviders = newHashSet
 		for (followElement : element2provider.keySet) {
 			val context = new ProcessingContext
@@ -111,7 +136,8 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def Set<AbstractElement> computeFollowElements(CompletionParameters parameters) {
-		val followElements = contentAssistParser.getFollowElements(parameters.editor.document.text.substring(0, parameters.position.node.startOffset), false)
+		val text = parameters.editor.document.getText(new TextRange(0, parameters.position.node.startOffset))
+		val followElements = contentAssistParser.getFollowElements(text, false)
 		val allElements = newHashSet
 		followElementComputer.computeFollowElements(followElements, allElements)
 		return allElements
@@ -134,11 +160,19 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 
 	protected def createParserBasedProposals(CompletionParameters parameters, CompletionResultSet result) {
+		val tokenSet = (parameters.editor as EditorEx).getTokenSet(parameters.offset)
+		if (!tokenSet.supportParserBasedProposals)
+			return;
+
 		val delegate = parserBasedDelegate
 		if (delegate == null)
 			return;
 		val contexts = delegate.create(parameters.text, parameters.selection, parameters.offset, parameters.resource)
 		contexts.forEach[c|c.firstSetGrammarElements.forEach[e|createProposal(e, c, parameters, result)]]
+	}
+	
+	protected def supportParserBasedProposals(TokenSet tokenSet) {
+		tokenSet == null
 	}
 
 	protected def getParserBasedDelegate() {

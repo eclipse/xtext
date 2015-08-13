@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.idea.editorActions;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.lang.CodeDocumentationAwareCommenter;
 import com.intellij.openapi.editor.ex.DocumentEx;
@@ -32,17 +31,16 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   
   private TokenSet slCommentTokens;
   
+  private TokenSet mlCommentTokens;
+  
   @Inject
   public void setCommenter(final CodeDocumentationAwareCommenter commenter) {
-    final IElementType lineCommentTokenType = commenter.getLineCommentTokenType();
-    TokenSet _xifexpression = null;
-    boolean _equals = Objects.equal(lineCommentTokenType, null);
-    if (_equals) {
-      _xifexpression = TokenSet.EMPTY;
-    } else {
-      _xifexpression = TokenSet.create(lineCommentTokenType);
-    }
-    this.slCommentTokens = _xifexpression;
+    IElementType _lineCommentTokenType = commenter.getLineCommentTokenType();
+    TokenSet _create = TokenSet.create(_lineCommentTokenType);
+    this.slCommentTokens = _create;
+    IElementType _blockCommentTokenType = commenter.getBlockCommentTokenType();
+    TokenSet _create_1 = TokenSet.create(_blockCommentTokenType);
+    this.mlCommentTokens = _create_1;
   }
   
   @Override
@@ -63,9 +61,14 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
     if (_contains_1) {
       return this.getSingleLineCommentTokens();
     }
-    TokenSet _commentTokens = this.getCommentTokens();
-    boolean _contains_2 = _commentTokens.contains(tokenType);
+    TokenSet _multiLineCommentTokens = this.getMultiLineCommentTokens();
+    boolean _contains_2 = _multiLineCommentTokens.contains(tokenType);
     if (_contains_2) {
+      return this.getMultiLineCommentTokens();
+    }
+    TokenSet _commentTokens = this.getCommentTokens();
+    boolean _contains_3 = _commentTokens.contains(tokenType);
+    if (_contains_3) {
       return this.getCommentTokens();
     }
     return null;
@@ -105,6 +108,11 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
   @Override
   public TokenSet getSingleLineCommentTokens() {
     return this.slCommentTokens;
+  }
+  
+  @Override
+  public TokenSet getMultiLineCommentTokens() {
+    return this.mlCommentTokens;
   }
   
   @Override
