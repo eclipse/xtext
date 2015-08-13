@@ -22,6 +22,8 @@ import org.eclipse.xtext.Alternatives
 import org.eclipse.xtext.Negation
 import org.eclipse.xtext.ParameterReference
 import org.eclipse.xtext.LiteralCondition
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.util.LazyStringInputStream
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -92,6 +94,31 @@ class XtextLinkerTest extends AbstractXtextTests {
 		val rootRule = grammar.rules.head as ParserRule
 		val lastRule = grammar.rules.last as ParserRule
 		val lastAssignment = (lastRule.alternatives as Group).elements.last as Assignment
+		val ruleCall = lastAssignment.terminal as RuleCall
+		val argument = ruleCall.arguments.head
+		assertEquals(rootRule.parameters.head, argument.parameter)
+		assertFalse((argument.value as LiteralCondition).isTrue)
+	}
+	
+	@Test def void testNamedParameterAdjustment() throws Exception {
+		val grammarAsString = '''
+			grammar test.Lang with org.eclipse.xtext.common.Terminals
+			generate test 'http://test'
+			Root<MyParam>: rule=Rule<true>;
+			Rule<MyParam>: name=ID child=Root<false>?;
+		'''
+		val grammar = grammarAsString.model as Grammar
+		val resourceSet = grammar.eResource.resourceSet
+		val otherResource = resourceSet.createResource(URI.createURI('other.xtext'))
+		otherResource.load(new LazyStringInputStream('''
+			grammar test.SubLang with test.Lang
+			import 'http://test'
+			Root<MyParam>: rule=super::Rule<true>;
+		'''), null)
+		val subGrammar = otherResource.contents.head as Grammar
+		val rootRule = subGrammar.rules.head as ParserRule
+		val parentRule = grammar.rules.last as ParserRule
+		val lastAssignment = (parentRule.alternatives as Group).elements.last as Assignment
 		val ruleCall = lastAssignment.terminal as RuleCall
 		val argument = ruleCall.arguments.head
 		assertEquals(rootRule.parameters.head, argument.parameter)
