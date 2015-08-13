@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="Xtext" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.edit" editorPluginID="org.eclipse.xtext.editor"
-    usedGenPackages="../../../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
+    usedGenPackages="platform:/resource/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <foreignModel>Xtext.ecore</foreignModel>
   <genPackages prefix="Xtext" basePackage="org.eclipse" disposableProviderFactory="true"
       ecorePackage="Xtext.ecore#/">
