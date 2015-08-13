@@ -168,8 +168,10 @@ class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 				'returns [Enumerator current=null]'
 			ParserRule case datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
+			ParserRule case isEObjectFragmentRule:
+				'[EObject current=in_current]'
 			ParserRule:
-				'''[EObject current=«IF it.isEObjectFragmentRule»in_current«ELSE»null«ENDIF»]'''
+				'[EObject current=null]'
 			default:
 				throw new IllegalStateException("Unexpected rule: " + it)
 		}
