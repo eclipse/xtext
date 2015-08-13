@@ -31,7 +31,7 @@ import com.google.common.collect.Maps;
  */
 public class SuperCallScope implements IScope {
 
-	private static final String SUPER = "super";
+	static final String SUPER = "super";
 
 	/**
 	 * Used during linking to set the {@link RuleCall#isExplicitlyCalled() flag}
