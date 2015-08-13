@@ -36,6 +36,7 @@ public class XtextValidatorConfigurationBlock extends AbstractValidatorConfigura
 
 	protected void fillGrammarSection(Composite section, int defaultIndent) {
 		addComboBox(INVALID_TERMINALRULE_NAME, Messages.XtextValidatorConfigurationBlock_2, section, defaultIndent);
+		addComboBox(DISCOURAGED_RULE_NAME, Messages.XtextValidatorConfigurationBlock_15, section, defaultIndent);
 		addComboBox(DUPLICATE_ENUM_LITERAL, Messages.XtextValidatorConfigurationBlock_3, section, defaultIndent);
 	}
 
