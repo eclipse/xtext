@@ -165,11 +165,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendOutputConfigurationProvider.class;
 	}
 
-//	@Override
-//	public Class<? extends IScopeProvider> bindIScopeProvider() {
-//		return XtendScopeProvider.class;
-//	}
-	
 	public Class<? extends TargetURICollector> bindTargetURICollector() {
 		return JvmModelTargetURICollector.class;
 	}
