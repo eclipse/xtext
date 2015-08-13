@@ -64,6 +64,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.ForwardingEObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.services.XtextGrammarAccess;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
@@ -265,12 +266,20 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	@Override
 	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
-		StyledString styledDisplayString = super.getStyledDisplayString(element, qualifiedName, shortName);
-		if (element instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) element)) {
-			styledDisplayString = stylerFactory.createFromXtextStyle(styledDisplayString.getString(),
-					semanticHighlightingConfiguration.dataTypeRule());
+		if (element instanceof AbstractRule) {
+			StyledString result;
+			if (element instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) element)) {
+				result = stylerFactory.createFromXtextStyle(shortName, semanticHighlightingConfiguration.dataTypeRule());
+			} else {
+				result = new StyledString(shortName);
+			}
+			if (qualifiedName != null) {
+				result.append(" - ", StyledString.QUALIFIER_STYLER);
+				result.append(qualifiedName, StyledString.QUALIFIER_STYLER);
+			}
+			return result;
 		}
-		return styledDisplayString;
+		return super.getStyledDisplayString(element, qualifiedName, shortName);
 	}
 
 	@Override
@@ -290,6 +299,21 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				return new StyledString(qualifiedName.getLastSegment() + " - " + qualifiedName.toString());
 			}
 			return new StyledString(qualifiedName.toString());
+		} else if (XtextPackage.Literals.ABSTRACT_RULE.isSuperTypeOf(description.getEClass())) {
+			EObject object = description.getEObjectOrProxy();
+			if (!object.eIsProxy()) {
+				AbstractRule rule = (AbstractRule) object;
+				Grammar grammar = GrammarUtil.getGrammar(rule);
+				if (description instanceof EnclosingGrammarAwareDescription) {
+					if (grammar == ((EnclosingGrammarAwareDescription) description).getGrammar()) {
+						return getStyledDisplayString(rule, null, rule.getName());
+					}
+				}
+				return getStyledDisplayString(rule,
+						grammar.getName() + "." + rule.getName(),
+						description.getName().toString().replace(".", "::"));	
+			}
+			
 		}
 		return super.getStyledDisplayString(description);
 	}
@@ -764,9 +788,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			@Override
 			public boolean apply(IEObjectDescription input) {
 				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
-					EObject object = input.getEObjectOrProxy();
-					if (object.eIsProxy())
-						object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+					EObject object = resolve(input, context);
 					if (object instanceof TerminalRule)
 						return !((TerminalRule) object).isFragment();
 				}
@@ -801,6 +823,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	@Override
 	public void completeRuleCall_Rule(EObject model, Assignment assignment, final ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		final Assignment containingAssignment = GrammarUtil.containingAssignment(model);
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
 			final Set<URI> seenProposals = Sets.newHashSet();
@@ -810,20 +833,53 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					return false;
 				}
 				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
-					EObject object = input.getEObjectOrProxy();
-					if (object.eIsProxy())
-						object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
-					if (object instanceof TerminalRule)
+					EObject object = resolve(input, context);
+					if (object instanceof TerminalRule) {
 						return !((TerminalRule) object).isFragment();
+					}
+				}
+				if (containingAssignment != null && input.getEClass() == XtextPackage.Literals.PARSER_RULE) {
+					EObject object = resolve(input, context);
+					if (object instanceof ParserRule) {
+						return !((ParserRule) object).isFragment();
+					}
 				}
 				return true;
 			}
 		});
 	}
 	
+	private static class EnclosingGrammarAwareDescription extends ForwardingEObjectDescription {
+
+		private Grammar grammar;
+
+		public EnclosingGrammarAwareDescription(IEObjectDescription delegate, Grammar grammar) {
+			super(delegate);
+			this.grammar = grammar;
+		}
+		
+		public Grammar getGrammar() {
+			return grammar;
+		}
+		
+	}
+	
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
-		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter());
+		final Grammar grammar = GrammarUtil.getGrammar(contentAssistContext.getCurrentModel());
+		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+			@Override
+			public ICompletionProposal apply(IEObjectDescription candidate) {
+				return super.apply(new EnclosingGrammarAwareDescription(candidate, grammar));
+			}
+		};
+	}
+
+	private EObject resolve(IEObjectDescription input, final ContentAssistContext context) {
+		EObject object = input.getEObjectOrProxy();
+		if (object.eIsProxy())
+			object = context.getResource().getResourceSet().getEObject(input.getEObjectURI(), true);
+		return object;
 	}
 
 }
