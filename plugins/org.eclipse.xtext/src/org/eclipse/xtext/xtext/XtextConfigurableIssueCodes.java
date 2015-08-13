@@ -39,6 +39,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final String INVALID_PACKAGE_REFERENCE_EXTERNAL = ISSUE_CODE_PREFIX + "InvalidPackageReference.external";
 	public static final String INVALID_PACKAGE_REFERENCE_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "InvalidPackageReference.notOnClasspath";
 	public static final String INVALID_TERMINALRULE_NAME = ISSUE_CODE_PREFIX + "InvalidTerminalRuleName";
+	public static final String DISCOURAGED_RULE_NAME = ISSUE_CODE_PREFIX + "DiscouragedName";
 	public static final String DUPLICATE_ENUM_LITERAL = ISSUE_CODE_PREFIX + "DuplicateEnumLiteral";
 	public static final String BIDIRECTIONAL_REFERENCE = ISSUE_CODE_PREFIX + "BidirectionalReference";
 	
@@ -69,6 +70,7 @@ public class XtextConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		acceptor.accept(create(INVALID_TERMINALRULE_NAME, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(DUPLICATE_ENUM_LITERAL, SeverityConverter.SEVERITY_WARNING));
 		acceptor.accept(create(BIDIRECTIONAL_REFERENCE, SeverityConverter.SEVERITY_WARNING));
+		acceptor.accept(create(DISCOURAGED_RULE_NAME, SeverityConverter.SEVERITY_WARNING));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {

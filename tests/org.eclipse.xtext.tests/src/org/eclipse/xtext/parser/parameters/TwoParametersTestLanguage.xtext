@@ -1,0 +1,49 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.parameters.TwoParametersTestLanguage with org.eclipse.xtext.parser.parameters.ParametersTestLanguage
+
+import "http://www.eclipse.org/2015/tmf/xtext/parameters"
+
+ParserRuleParameters: {ParserRuleParameters} 
+  ( '#1' scenario=Scenario5<true, true>
+  |	'#2' scenario=Scenario5<false, false>
+  | '#3' scenario=Scenario6<true, true>
+  | '#4' scenario=Scenario6<false, true>
+  | =>('#5' scenario=Scenario6<true, true>)
+  | =>('#6' scenario=Scenario6<false, false>)
+  | '#7' scenario=Scenario7<true, true>
+  | '#8' scenario=Scenario7<false, true>
+  | '#9' (scenario=Scenario8<true, true> | scenario=Scenario6<true, true> 'keyword'?)
+  | '#10' (scenario=Scenario8<true, true> | scenario=Scenario6<false, false> 'keyword'?)
+  | '#11' (scenario=Scenario8<false, false> | scenario=Scenario6<true, true> 'keyword'?)
+  | '#12' (scenario=Scenario8<false, false> | scenario=Scenario6<false, false> 'keyword'?)
+  )
+;
+
+Scenario5<A, B> returns Scenario:
+	<A & B> first=ID
+  | <!A | !B> second=ID
+;
+
+Scenario6<A, B> returns Scenario:
+	first=IdOrKeyword2<A, B, A&B>
+;
+
+Scenario7<A, B> returns Scenario:
+	=>first=IdOrKeyword2<A, B, A&B>
+	| second='keyword'
+;
+
+Scenario8<A, B> returns Scenario:
+	=>second=IdOrKeyword2<A, B, A|B> 'keyword'
+;
+
+IdOrKeyword2<A, B, C>:
+	<A & B | C> 'keyword'
+	| ID
+;

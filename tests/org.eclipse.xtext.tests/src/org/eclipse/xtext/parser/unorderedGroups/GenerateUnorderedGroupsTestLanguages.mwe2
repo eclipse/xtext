@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.*
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
+var srcGenOnly = true
 
 Workflow {
 	bean = StandaloneSetup {
@@ -26,37 +27,42 @@ Workflow {
 		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/unorderedGroups"
 	}
 	
+	component = DirectoryCleaner {
+		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea"
+	}
+	
 	component = Generator auto-inject {
 		pathRtProject = runtimeProject
 		projectNameRt = projectName
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor auto-inject {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {}
+			fragment = @TestLanguagesFragmentsExParseTreeConstructor auto-inject {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/BacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
+			fragment = @TestLanguagesFragments auto-inject {
 				backtrack = true
+				srcGenOnly = false
 			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragments {
+			fragment = @TestLanguagesFragments auto-inject {
 				backtrack = true
 			}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExBacktrackingBug325745TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragmentsEx auto-inject {
 				backtrack = true
 			}
 		}

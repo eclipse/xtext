@@ -8,10 +8,10 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -47,8 +47,8 @@ public class DefaultHiddenTokenHelper extends AbstractHiddenTokenHelper {
 	}
 
 	@Inject
-	private void setGrammar(IGrammarAccess grammar) {
-		wsRule = GrammarUtil.findRuleForName(grammar.getGrammar(), "WS");
+	private void setGrammar(RuleNames names) {
+		wsRule = Iterables.getFirst(names.getRulesBySimpleName("WS"), null);
 	}
 
 }

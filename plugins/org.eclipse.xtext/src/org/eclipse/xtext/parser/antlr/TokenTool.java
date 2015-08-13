@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 
@@ -53,12 +56,20 @@ public class TokenTool {
 	
 	public static final String LEXER_RULE_PREFIX = "RULE_";
 	
+	private static final Pattern superRulePattern = Pattern.compile("^(SUPER_(\\d+_)?).*$");
+	
 	public static boolean isLexerRule(String antlrTokenDef) {
 		return antlrTokenDef.startsWith(LEXER_RULE_PREFIX);
 	}
 	
 	public static String getLexerRuleName(String antlrTokenDef) {
-		return antlrTokenDef.substring(LEXER_RULE_PREFIX.length());
+		if (antlrTokenDef.startsWith(LEXER_RULE_PREFIX))
+			return antlrTokenDef.substring(LEXER_RULE_PREFIX.length());
+		Matcher matcher = superRulePattern.matcher(antlrTokenDef);
+		if (matcher.matches()) {
+			return antlrTokenDef.substring(matcher.group(1).length());
+		}
+		return antlrTokenDef;
 	}
 
 }

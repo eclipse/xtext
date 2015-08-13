@@ -242,7 +242,7 @@ public class NodeModelUtils {
 			if (parent.hasDirectSemanticElement())
 				return findActualSemanticObjectFor(parent);
 			INode sibling = parent.getFirstChild();
-			while(sibling != node) {
+			while(!sibling.equals(node)) {
 				EObject siblingGrammarElement = sibling.getGrammarElement();
 				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
 					if (GrammarUtil.isEObjectRuleCall(siblingGrammarElement)) {

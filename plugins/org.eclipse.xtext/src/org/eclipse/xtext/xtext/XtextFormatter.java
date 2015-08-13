@@ -18,8 +18,11 @@ import org.eclipse.xtext.services.XtextGrammarAccess.CharacterRangeElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.CrossReferenceElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.EnumLiteralDeclarationElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.GrammarElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.NamedArgumentElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.NegatedTokenElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.NegationElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.ParserRuleElements;
+import org.eclipse.xtext.services.XtextGrammarAccess.RuleCallElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TerminalTokenElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.TypeRefElements;
 import org.eclipse.xtext.services.XtextGrammarAccess.UnorderedGroupElements;
@@ -44,6 +47,14 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 
 		// general keywords
 		for (Pair<Keyword, Keyword> pair : g.findKeywordPairs("(", ")")) {
+			cfg.setNoSpace().after(pair.getFirst());
+			cfg.setNoSpace().before(pair.getSecond());
+		}
+		for (Pair<Keyword, Keyword> pair : g.findKeywordPairs("[", "]")) {
+			cfg.setNoSpace().after(pair.getFirst());
+			cfg.setNoSpace().before(pair.getSecond());
+		}
+		for (Pair<Keyword, Keyword> pair : g.findKeywordPairs("<", ">")) {
 			cfg.setNoSpace().after(pair.getFirst());
 			cfg.setNoSpace().before(pair.getSecond());
 		}
@@ -72,7 +83,7 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 
 		// ParserRule
 		ParserRuleElements pr = g.getParserRuleAccess();
-		cfg.setNoSpace().before(pr.getLeftParenthesisKeyword_2_1());
+		cfg.setNoSpace().before(pr.getLeftParenthesisKeyword_1_1());
 
 		// TypeRef
 		TypeRefElements typeRef = g.getTypeRefAccess();
@@ -101,8 +112,6 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 
 		// CrossReference
 		CrossReferenceElements cr = g.getCrossReferenceAccess();
-		cfg.setNoSpace().after(cr.getLeftSquareBracketKeyword_0());
-		cfg.setNoSpace().before(cr.getRightSquareBracketKeyword_3());
 		cfg.setNoSpace().around(cr.getVerticalLineKeyword_2_0());
 
 		// TerminalToken
@@ -124,6 +133,20 @@ public class XtextFormatter extends AbstractDeclarativeFormatter {
 		// EnumLiteralDeclaration
 		EnumLiteralDeclarationElements eld = g.getEnumLiteralDeclarationAccess();
 		cfg.setNoSpace().around(eld.getEqualsSignKeyword_1_0());
+		
+		// GuardCondition
+		NegationElements na = g.getNegationAccess();
+		cfg.setNoSpace().after(na.getExclamationMarkKeyword_1_1());
+		
+		// RuleCall
+		RuleCallElements rca = g.getRuleCallAccess();
+		cfg.setNoSpace().before(rca.getLessThanSignKeyword_1_0());
+		
+		// NamedArgument
+		NamedArgumentElements naa = g.getNamedArgumentAccess();
+		cfg.setNoSpace().around(naa.getCalledByNameAssignment_0_1());
+		cfg.setNoSpace().around(naa.getValueAssignment_1());
+		cfg.setNoSpace().around(naa.getParameterAssignment_0_0());
 
 		//saveDebugGraphvizDiagram("XtextFormatting.dot");
 	}

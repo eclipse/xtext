@@ -7,14 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 /**
@@ -44,13 +46,24 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 	@Override
 	public void setTarget(EObject object, EStructuralFeature feature) {
 		EObject myObject = object;
-		ICompositeNode result = NodeModelUtils.getNode(myObject);
+		INode result = NodeModelUtils.getNode(myObject);
 		while(result == null && myObject.eContainer() != null) {
 			myObject = myObject.eContainer();
 			result = NodeModelUtils.getNode(myObject);
 		}
 		if (result == null)
 			throw new IllegalStateException("Cannot find NodeAdapter for object: " + object);
+		else {
+			if (feature == null) {
+				feature = myObject.eClass().getEStructuralFeature("name");
+			}
+			if (feature != null) {
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(myObject, feature);
+				if (nodes.size() == 1) {
+					result = nodes.get(0);
+				}
+			}
+		}
 		setNode(result);
 	}
 

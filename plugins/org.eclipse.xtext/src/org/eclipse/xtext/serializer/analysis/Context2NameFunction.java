@@ -14,8 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.base.Function;
@@ -25,28 +27,35 @@ import com.google.common.collect.Lists;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class Context2NameFunction implements Function<EObject, String> {
+public class Context2NameFunction {
 
-	@Override
-	public String apply(EObject from) {
-		return getContextName(from);
+	public Function<EObject, String> toFunction(final Grammar grammar) {
+		return new Function<EObject, String>() {
+			@Override
+			public String apply(EObject from) {
+				return getContextName(grammar, from);
+			}
+		};
 	}
-
-	public String getContextName(Action ctx) {
+	
+	public String getContextName(Grammar grammar, Action ctx) {
 		ParserRule rule = EcoreUtil2.getContainerOfType(ctx, ParserRule.class);
-		return rule.getName() + "_" + getUniqueActionName(ctx);
+		return getContextName(grammar, rule) + "_" + getUniqueActionName(ctx);
 	}
 
-	public String getContextName(EObject ctx) {
+	public String getContextName(Grammar grammar, EObject ctx) {
 		if (GrammarUtil.isEObjectRule(ctx))
-			return getContextName((ParserRule) ctx);
+			return getContextName(grammar, (ParserRule) ctx);
 		if (GrammarUtil.isAssignedAction(ctx))
-			return getContextName((Action) ctx);
+			return getContextName(grammar, (Action) ctx);
 		throw new RuntimeException("Invalid Context: " + EmfFormatter.objPath(ctx));
 	}
 
-	public String getContextName(ParserRule ctx) {
-		return ctx.getName();
+	public String getContextName(Grammar grammar, ParserRule ctx) {
+		if (grammar == null) {
+			return ctx.getName();	
+		}
+		return RuleNames.getRuleNames(grammar, false).getUniqueRuleName(ctx);
 	}
 
 	public String getUniqueActionName(Action action) {

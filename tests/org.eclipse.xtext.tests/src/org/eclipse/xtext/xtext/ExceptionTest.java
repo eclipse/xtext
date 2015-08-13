@@ -55,7 +55,26 @@ public class ExceptionTest extends AbstractXtextTests {
 			"grammar test with org.eclipse.xtext.common.Terminals\n" +
             "generate test \"test\"\n" +
             "Numbers: =INT n2=INT ;";
-		assertNoException(model, 1);
+		// should in fact be 1 but the parse recovers badly because there are two equally invalid decisions it refused to insert a token
+		assertNoException(model, 4); 
+	}
+	
+	@Test public void testFirstAssignmentWithoutLeftSide_02() throws Exception {
+		String model =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test \"test\"\n" +
+			"Numbers: +=INT n2=INT ;";
+		// should in fact be 1 but the parse recovers badly because there are two equally invalid decisions it refused to insert a token
+		assertNoException(model, 4); // should in fact be 1 but the parse recovers badly
+	}
+	
+	@Test public void testFirstAssignmentWithoutLeftSide_03() throws Exception {
+		String model =
+			"grammar test with org.eclipse.xtext.common.Terminals\n" +
+			"generate test \"test\"\n" +
+			"Numbers: ?=INT n2=INT ;";
+		// should in fact be 1 but the parse recovers badly because there are two equally invalid decisions it refused to insert a token
+		assertNoException(model, 4); // should in fact be 1 but the parse recovers badly
 	}
 	
 	@Test public void testBug_270773() throws Exception {

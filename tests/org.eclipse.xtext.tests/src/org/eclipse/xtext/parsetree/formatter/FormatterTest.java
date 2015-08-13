@@ -107,7 +107,7 @@ public class FormatterTest extends AbstractXtextTests {
 		ISemanticSequencer semantic = get(ISemanticSequencer.class);
 		ISyntacticSequencer syntactic = get(ISyntacticSequencer.class);
 		IHiddenTokenSequencer hidden = get(IHiddenTokenSequencer.class);
-		TokenStreamSequenceAdapter tokenstream = new TokenStreamSequenceAdapter(out, errors);
+		TokenStreamSequenceAdapter tokenstream = new TokenStreamSequenceAdapter(out, getGrammarAccess().getGrammar(), errors);
 		semantic.init((ISemanticSequenceAcceptor) syntactic, errors);
 		EObject context = get(IGrammarAccess.class).getGrammar().getRules().get(0);
 		syntactic.init(context, semanticObject, (ISyntacticSequenceAcceptor) hidden, errors);

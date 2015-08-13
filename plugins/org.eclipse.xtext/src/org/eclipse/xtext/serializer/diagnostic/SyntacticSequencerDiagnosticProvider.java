@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.AbstractElement;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.grammaranalysis.impl.GrammarElementTitleSwitch;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynAbsorberState;
@@ -21,12 +22,16 @@ import org.eclipse.xtext.serializer.sequencer.RuleCallStack;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencerDiagnosticProvider {
 
+	@Inject
+	private IGrammarAccess grammarAccess;
+	
 	@Override
 	public ISerializationDiagnostic createInvalidFollowingAbsorberDiagnostic(EObject context, EObject semanticObject,
 			ISynAbsorberState from, AbstractElement to) {
@@ -42,7 +47,7 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		msg.append("State '" + toName + "' may not follow '" + fromName + "'.\n");
 		msg.append("Valid followers are: " + Joiner.on(", ").join(targets));
 
-		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, msg.toString());
+		return new SerializationDiagnostic(INVALID_FOLLOWING_ABSORBER, semanticObject, context, grammarAccess.getGrammar(), msg.toString());
 	}
 
 	@Override
@@ -60,6 +65,6 @@ public class SyntacticSequencerDiagnosticProvider implements ISyntacticSequencer
 		buf.append("Found on top of the stack: " + poppedStr + "\n");
 		buf.append("Expected: " + toConsume + "\n");
 		buf.append("Rest of the stack: " + stack + "\n");
-		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, toConsume.getContext(), buf.toString());
+		return new SerializationDiagnostic(UNEXPECTED_STACK_TRACE, semanticObject, toConsume.getContext(), grammarAccess.getGrammar(), buf.toString());
 	}
 }
