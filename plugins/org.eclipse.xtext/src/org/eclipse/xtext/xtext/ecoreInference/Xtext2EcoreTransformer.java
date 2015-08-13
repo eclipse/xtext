@@ -774,14 +774,14 @@ public class Xtext2EcoreTransformer {
 					"Overridden rule " + rule.getName() + " does not declare any parameters", rule);
 		}
 		StringBuilder message = new StringBuilder("Parameter list is incompatible with inherited ");
-		message.append(rule.getName()).append("[");
+		message.append(rule.getName()).append("<");
 		for(int i = 0; i < overridden.getParameters().size(); i++) {
 			if (i != 0) {
 				message.append(", ");
 			}
 			message.append(overridden.getParameters().get(i).getName());
 		}
-		message.append("]");
+		message.append(">");
 		throw new TransformationException(TransformationErrorCode.InvalidRuleOverride,
 				message.toString(), rule);
 	}

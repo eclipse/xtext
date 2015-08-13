@@ -1817,12 +1817,10 @@ class Xtext2EcoreTransformerTest extends AbstractXtextTests {
 		var typeD = ePackage.type("TypeD") as EClass
 		assertNotNull(typeD)
 		assertNotNull(typeD.feature("x"))
-		assertEquals(1,
-			typeD.features.
-				size)
-			}
+		assertEquals(1, typeD.features.size)
+	}
 
-																																					@Test def void testBug346685_a05() throws Exception {
+	@Test def void testBug346685_a05() throws Exception {
 		var String grammar = '''grammar test with org.eclipse.xtext.common.Terminals generate test 'http://test'«»'''
 		grammar += " RuleA returns TypeA: RuleB? ({TypeC.x=current} 'x' | {TypeD.x=current} 'y')? name+=STRING;"
 		grammar += " RuleB returns TypeB: {TypeB} 'ignore';"
