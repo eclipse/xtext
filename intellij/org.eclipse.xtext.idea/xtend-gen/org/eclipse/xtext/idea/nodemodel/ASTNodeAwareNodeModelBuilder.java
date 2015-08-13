@@ -34,8 +34,6 @@ import org.eclipse.xtext.nodemodel.impl.RootNode;
 import org.eclipse.xtext.parser.antlr.TokenTool;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @SuppressWarnings("all")
@@ -134,15 +132,7 @@ public class ASTNodeAwareNodeModelBuilder extends NodeModelBuilder implements IA
                 {
                   final String ruleName = TokenTool.getLexerRuleName(tokenName);
                   Grammar _grammar = this.grammarAccess.getGrammar();
-                  List<AbstractRule> _allRules = GrammarUtil.allRules(_grammar);
-                  final Function1<AbstractRule, Boolean> _function = new Function1<AbstractRule, Boolean>() {
-                    @Override
-                    public Boolean apply(final AbstractRule it) {
-                      String _name = it.getName();
-                      return Boolean.valueOf(Objects.equal(_name, ruleName));
-                    }
-                  };
-                  _xblockexpression_3 = IterableExtensions.<AbstractRule>findFirst(_allRules, _function);
+                  _xblockexpression_3 = GrammarUtil.findRuleForName(_grammar, ruleName);
                 }
                 _xifexpression_2 = _xblockexpression_3;
               }

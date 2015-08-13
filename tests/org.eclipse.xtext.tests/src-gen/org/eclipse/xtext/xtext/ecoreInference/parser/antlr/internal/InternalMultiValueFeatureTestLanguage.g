@@ -91,7 +91,7 @@ ruleStart returns [EObject current=null]
        			$current, 
        			"featureA",
         		lv_featureA_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

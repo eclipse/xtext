@@ -19,7 +19,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	
 	
 	public class NamedElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NamedElement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.builder.tests.BuilderTestLanguage.NamedElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNamespaceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cElementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -39,7 +39,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class NamespaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Namespace");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.builder.tests.BuilderTestLanguage.Namespace");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNamespaceKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -52,13 +52,16 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Namespace:
-		//	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+		//	'namespace' name=QualifiedName '{'
+		//	imports+=Import*
+		//	elements+=NamedElement*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}"
+		//'namespace' name=QualifiedName '{' imports+=Import* elements+=NamedElement* '}'
 		public Group getGroup() { return cGroup; }
 
-		//"namespace"
+		//'namespace'
 		public Keyword getNamespaceKeyword_0() { return cNamespaceKeyword_0; }
 
 		//name=QualifiedName
@@ -67,7 +70,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//QualifiedName
 		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
 		//imports+=Import*
@@ -82,25 +85,25 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//NamedElement
 		public RuleCall getElementsNamedElementParserRuleCall_4_0() { return cElementsNamedElementParserRuleCall_4_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.builder.tests.BuilderTestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importedNamespace=QualifiedName;
+		//	'import' importedNamespace=QualifiedName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=QualifiedName
+		//'import' importedNamespace=QualifiedName
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//importedNamespace=QualifiedName
@@ -111,7 +114,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.builder.tests.BuilderTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cObjectKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -133,15 +136,15 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cOtherRefsElementQualifiedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cOtherRefsElementCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Element:
-		//	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
-		//	("," otherRefs+=[Element|QualifiedName])*)?;
+		//	'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName]
+		//	(',' otherRefs+=[Element|QualifiedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName] (","
+		//'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName] (','
 		//otherRefs+=[Element|QualifiedName])*)?
 		public Group getGroup() { return cGroup; }
 
-		//"object"
+		//'object'
 		public Keyword getObjectKeyword_0() { return cObjectKeyword_0; }
 
 		//name=ID
@@ -150,10 +153,10 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("references" references=[Element|QualifiedName])?
+		//('references' references=[Element|QualifiedName])?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"references"
+		//'references'
 		public Keyword getReferencesKeyword_2_0() { return cReferencesKeyword_2_0; }
 
 		//references=[Element|QualifiedName]
@@ -165,10 +168,10 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//QualifiedName
 		public RuleCall getReferencesElementQualifiedNameParserRuleCall_2_1_0_1() { return cReferencesElementQualifiedNameParserRuleCall_2_1_0_1; }
 
-		//("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
+		//('otherRefs' otherRefs+=[Element|QualifiedName] (',' otherRefs+=[Element|QualifiedName])*)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"otherRefs"
+		//'otherRefs'
 		public Keyword getOtherRefsKeyword_3_0() { return cOtherRefsKeyword_3_0; }
 
 		//otherRefs+=[Element|QualifiedName]
@@ -180,10 +183,10 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//QualifiedName
 		public RuleCall getOtherRefsElementQualifiedNameParserRuleCall_3_1_0_1() { return cOtherRefsElementQualifiedNameParserRuleCall_3_1_0_1; }
 
-		//("," otherRefs+=[Element|QualifiedName])*
+		//(',' otherRefs+=[Element|QualifiedName])*
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
 
 		//otherRefs+=[Element|QualifiedName]
@@ -197,7 +200,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.builder.tests.BuilderTestLanguage.QualifiedName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -205,19 +208,19 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QualifiedName:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -285,7 +288,10 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Namespace:
-	//	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+	//	'namespace' name=QualifiedName '{'
+	//	imports+=Import*
+	//	elements+=NamedElement*
+	//	'}';
 	public NamespaceElements getNamespaceAccess() {
 		return pNamespace;
 	}
@@ -295,7 +301,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Import:
-	//	"import" importedNamespace=QualifiedName;
+	//	'import' importedNamespace=QualifiedName;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -305,8 +311,8 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Element:
-	//	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
-	//	("," otherRefs+=[Element|QualifiedName])*)?;
+	//	'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName]
+	//	(',' otherRefs+=[Element|QualifiedName])*)?;
 	public ElementElements getElementAccess() {
 		return pElement;
 	}
@@ -316,7 +322,7 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//QualifiedName:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public QualifiedNameElements getQualifiedNameAccess() {
 		return pQualifiedName;
 	}
@@ -326,38 +332,38 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

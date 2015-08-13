@@ -97,11 +97,11 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	optional?="optional"? "element" name=ID descriptions+=STRING* ";";
+ * 	optional?='optional'? "element" name=ID descriptions+=STRING* ';';
  *
  **/
 
-// optional?="optional"? "element" name=ID descriptions+=STRING* ";"
+// optional?='optional'? "element" name=ID descriptions+=STRING* ';'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -130,7 +130,7 @@ protected class Element_Group extends GroupToken {
 
 }
 
-// optional?="optional"?
+// optional?='optional'?
 protected class Element_OptionalAssignment_0 extends AssignmentToken  {
 	
 	public Element_OptionalAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -254,7 +254,7 @@ protected class Element_DescriptionsAssignment_3 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Element_SemicolonKeyword_4 extends KeywordToken  {
 	
 	public Element_SemicolonKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

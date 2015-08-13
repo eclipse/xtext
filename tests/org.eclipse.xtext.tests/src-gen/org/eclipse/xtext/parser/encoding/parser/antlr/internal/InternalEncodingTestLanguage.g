@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"words",
         		lv_words_0_0, 
-        		"Word");
+        		"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.Word");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleWord returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"LEXEME");
+        		"org.eclipse.xtext.parser.encoding.EncodingTestLanguage.LEXEME");
 	    }
 
 )

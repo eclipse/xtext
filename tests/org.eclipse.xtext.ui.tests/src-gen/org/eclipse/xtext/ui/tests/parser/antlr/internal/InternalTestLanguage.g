@@ -90,7 +90,7 @@ ruleFile returns [EObject current=null]
        			$current, 
        			"stuff",
         		lv_stuff_0_0, 
-        		"Stuff");
+        		"org.eclipse.xtext.ui.tests.TestLanguage.Stuff");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleStuff returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

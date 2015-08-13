@@ -105,7 +105,7 @@ ruleSequence returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_2_0, 
-        		"Addition");
+        		"org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Addition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -189,7 +189,7 @@ ruleAddition returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_3_0, 
-        		"Multiplication");
+        		"org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Multiplication");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -273,7 +273,7 @@ ruleMultiplication returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_3_0, 
-        		"Term");
+        		"org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage.Term");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -353,7 +353,7 @@ ruleAtom returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

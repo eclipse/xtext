@@ -42,8 +42,8 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule Root ****************
  *
- * Root returns root::AModel:
- * 	elements+=Type*;
+ * Root root::AModel:
+ * 	elements+=Type*
  *
  **/
 
@@ -98,8 +98,8 @@ protected class Root_ElementsAssignment extends AssignmentToken  {
 
 /************ begin Rule Type ****************
  *
- * Type returns root::AType:
- * 	AType | AnotherType;
+ * Type root::AType:
+ * 	AType | AnotherType
  *
  **/
 
@@ -212,12 +212,12 @@ protected class Type_AnotherTypeParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule AType ****************
  *
- * AType returns root::AType:
- * 	"foo" {root::AType};
+ * AType root::AType:
+ * 	'foo' {root::AType}
  *
  **/
 
-// "foo" {root::AType}
+// 'foo' {root::AType}
 protected class AType_Group extends GroupToken {
 	
 	public AType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -246,7 +246,7 @@ protected class AType_Group extends GroupToken {
 
 }
 
-// "foo"
+// 'foo'
 protected class AType_FooKeyword_0 extends KeywordToken  {
 	
 	public AType_FooKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -300,12 +300,12 @@ protected class AType_ATypeAction_1 extends ActionToken  {
 
 /************ begin Rule AnotherType ****************
  *
- * AnotherType returns sub::AnotherType:
- * 	"bar" {sub::AnotherType};
+ * AnotherType sub::AnotherType:
+ * 	'bar' {sub::AnotherType}
  *
  **/
 
-// "bar" {sub::AnotherType}
+// 'bar' {sub::AnotherType}
 protected class AnotherType_Group extends GroupToken {
 	
 	public AnotherType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -334,7 +334,7 @@ protected class AnotherType_Group extends GroupToken {
 
 }
 
-// "bar"
+// 'bar'
 protected class AnotherType_BarKeyword_0 extends KeywordToken  {
 	
 	public AnotherType_BarKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

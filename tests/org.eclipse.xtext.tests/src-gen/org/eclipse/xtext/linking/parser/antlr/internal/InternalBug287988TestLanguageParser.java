@@ -233,7 +233,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_1_0, 
-                    	            		"BaseAttribute");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.BaseAttribute");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -298,7 +298,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_3_0, 
-                    	            		"SimpleAttribute");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.SimpleAttribute");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -363,7 +363,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_5_0, 
-                    	            		"RuleCallAttribute");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.RuleCallAttribute");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -428,7 +428,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_7_0, 
-                    	            		"RuleCallAttribute2");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.RuleCallAttribute2");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -493,7 +493,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_9_0, 
-                    	            		"RuleCallAttribute3");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.RuleCallAttribute3");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -558,7 +558,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"attributes",
                     	            		lv_attributes_11_0, 
-                    	            		"ActionAttribute");
+                    	            		"org.eclipse.xtext.linking.Bug287988TestLanguage.ActionAttribute");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -790,7 +790,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -822,7 +822,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_5_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1235,7 +1235,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1267,7 +1267,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_7_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1430,7 +1430,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1462,7 +1462,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1579,7 +1579,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1737,7 +1737,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1912,7 +1912,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2017,7 +2017,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2186,7 +2186,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"type",
                             		lv_type_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2386,7 +2386,7 @@ public class InternalBug287988TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

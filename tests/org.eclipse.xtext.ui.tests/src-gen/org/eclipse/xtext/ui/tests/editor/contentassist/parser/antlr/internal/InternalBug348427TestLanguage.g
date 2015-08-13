@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element1",
         		lv_element1_0_0, 
-        		"Scenario1_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario1_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element1",
         		lv_element1_1_0, 
-        		"Scenario1_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario1_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element1",
         		lv_element1_2_0, 
-        		"Scenario1_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario1_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,7 +148,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element1",
         		lv_element1_3_0, 
-        		"Scenario1_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario1_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -167,7 +167,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_4_0, 
-        		"Scenario2_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -186,7 +186,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_5_0, 
-        		"Scenario2_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_6_0, 
-        		"Scenario2_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -224,7 +224,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_7_0, 
-        		"Scenario2_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -243,7 +243,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_8_0, 
-        		"Scenario2_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -262,7 +262,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_9_0, 
-        		"Scenario2_6");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_6");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -281,7 +281,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_10_0, 
-        		"Scenario2_7");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_7");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -300,7 +300,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element2",
         		lv_element2_11_0, 
-        		"Scenario2_8");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Scenario2_8");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -343,7 +343,7 @@ ruleScenario1_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child1_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -362,7 +362,7 @@ ruleScenario1_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child1_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -381,7 +381,7 @@ ruleScenario1_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child1_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -428,7 +428,7 @@ ruleScenario1_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child1_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -447,7 +447,7 @@ ruleScenario1_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child1_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -466,7 +466,7 @@ ruleScenario1_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child1_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -519,7 +519,7 @@ ruleScenario1_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child1_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -538,7 +538,7 @@ ruleScenario1_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child1_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -557,7 +557,7 @@ ruleScenario1_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child1_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -610,7 +610,7 @@ ruleScenario1_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child1_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -629,7 +629,7 @@ ruleScenario1_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child1_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -648,7 +648,7 @@ ruleScenario1_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child1_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child1_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -692,7 +692,7 @@ ruleChild1_1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -732,7 +732,7 @@ ruleChild1_1 returns [EObject current=null]
        			$current, 
        			"enumType",
         		lv_enumType_4_0, 
-        		"EnumType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.EnumType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -780,7 +780,7 @@ ruleChild1_2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -820,7 +820,7 @@ ruleChild1_2 returns [EObject current=null]
        			$current, 
        			"enumType",
         		lv_enumType_4_0, 
-        		"EnumType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.EnumType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -868,7 +868,7 @@ ruleChild1_3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -908,7 +908,7 @@ ruleChild1_3 returns [EObject current=null]
        			$current, 
        			"enumType",
         		lv_enumType_4_0, 
-        		"EnumType");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.EnumType");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -959,7 +959,7 @@ ruleScenario2_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child2_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -978,7 +978,7 @@ ruleScenario2_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -997,7 +997,7 @@ ruleScenario2_1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1044,7 +1044,7 @@ ruleScenario2_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child2_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1063,7 +1063,7 @@ ruleScenario2_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1082,7 +1082,7 @@ ruleScenario2_2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1129,7 +1129,7 @@ ruleScenario2_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child2_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1148,7 +1148,7 @@ ruleScenario2_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1167,7 +1167,7 @@ ruleScenario2_3 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_6");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_6");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1214,7 +1214,7 @@ ruleScenario2_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_1_0, 
-        		"Child2_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1233,7 +1233,7 @@ ruleScenario2_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1252,7 +1252,7 @@ ruleScenario2_4 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_6");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_6");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1305,7 +1305,7 @@ ruleScenario2_5 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1324,7 +1324,7 @@ ruleScenario2_5 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1343,7 +1343,7 @@ ruleScenario2_5 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child2_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1396,7 +1396,7 @@ ruleScenario2_6 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_1");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1415,7 +1415,7 @@ ruleScenario2_6 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_2");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1434,7 +1434,7 @@ ruleScenario2_6 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child2_3");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1487,7 +1487,7 @@ ruleScenario2_7 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1506,7 +1506,7 @@ ruleScenario2_7 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1525,7 +1525,7 @@ ruleScenario2_7 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child2_6");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_6");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1578,7 +1578,7 @@ ruleScenario2_8 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"Child2_4");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1597,7 +1597,7 @@ ruleScenario2_8 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_3_0, 
-        		"Child2_5");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1616,7 +1616,7 @@ ruleScenario2_8 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_4_0, 
-        		"Child2_6");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug348427TestLanguage.Child2_6");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1660,7 +1660,7 @@ ruleChild2_1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1760,7 +1760,7 @@ ruleChild2_2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1860,7 +1860,7 @@ ruleChild2_3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1960,7 +1960,7 @@ ruleChild2_4 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2061,7 +2061,7 @@ ruleChild2_5 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2162,7 +2162,7 @@ ruleChild2_6 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

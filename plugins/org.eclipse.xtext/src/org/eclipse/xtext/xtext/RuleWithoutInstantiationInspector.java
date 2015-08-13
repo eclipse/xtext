@@ -43,7 +43,7 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 		// special treatment of first rule
 		if (GrammarUtil.getGrammar(rule).getRules().get(0) == rule)
 			return false;
-		if (GrammarUtil.isDatatypeRule(rule) || rule.getAlternatives() == null)
+		if (GrammarUtil.isDatatypeRule(rule) || rule.getAlternatives() == null || rule.isFragment())
 			return false;
 		return super.canInspect(rule);
 	}

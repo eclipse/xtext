@@ -90,7 +90,7 @@ ruleMainModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"AnElement");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage.AnElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleAnElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

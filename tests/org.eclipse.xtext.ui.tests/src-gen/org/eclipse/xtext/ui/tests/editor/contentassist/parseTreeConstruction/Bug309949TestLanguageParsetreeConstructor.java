@@ -51,12 +51,46 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	{Model} ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+
- * 	"}" | "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+
- * 	operations+=Operation_2+ "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{"
- * 	errors+=Error_3+ operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" |
- * 	"#4+" name=ID "{" errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5*
- * 	operations+=Operation_5* "}" | "#5+" name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}");
+ * 	{Model} ("#1*" "{"
+ * 	errors+=Error_1*
+ * 	operations+=Operation_1*
+ * 	"}"
+ * 	| "#1+" "{"
+ * 	errors+=Error_1+
+ * 	operations+=Operation_1+
+ * 	"}"
+ * 	| "#2*" "{"
+ * 	errors+=Error_2*
+ * 	operations+=Operation_2*
+ * 	"}"
+ * 	| "#2+" name=ID "{"
+ * 	errors+=Error_2+
+ * 	operations+=Operation_2+
+ * 	"}"
+ * 	| "#3*" name=ID "{"
+ * 	errors+=Error_3*
+ * 	operations+=Operation_3*
+ * 	"}"
+ * 	| "#3+" name=ID "{"
+ * 	errors+=Error_3+
+ * 	operations+=Operation_3+
+ * 	"}"
+ * 	| "#4*" name=ID "{"
+ * 	errors+=Error_4*
+ * 	operations+=Operation_4*
+ * 	"}"
+ * 	| "#4+" name=ID "{"
+ * 	errors+=Error_4+
+ * 	operations+=Operation_4+
+ * 	"}"
+ * 	| "#5*" name=ID "{"
+ * 	errors+=Error_5*
+ * 	operations+=Operation_5*
+ * 	"}"
+ * 	| "#5+" name=ID "{"
+ * 	errors+=Error_5+
+ * 	operations+=Operation_5+
+ * 	"}");
  *
  **/
 
@@ -120,12 +154,12 @@ protected class Model_ModelAction_0 extends ActionToken  {
 	}
 }
 
-// "#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
+// ("#1*" "{" errors+=Error_1* operations+=Operation_1* "}" | "#1+" "{" errors+=Error_1+ operations+=Operation_1+ "}" |
 // "#2*" "{" errors+=Error_2* operations+=Operation_2* "}" | "#2+" name=ID "{" errors+=Error_2+ operations+=Operation_2+
 // "}" | "#3*" name=ID "{" errors+=Error_3* operations+=Operation_3* "}" | "#3+" name=ID "{" errors+=Error_3+
 // operations+=Operation_3+ "}" | "#4*" name=ID "{" errors+=Error_4* operations+=Operation_4* "}" | "#4+" name=ID "{"
 // errors+=Error_4+ operations+=Operation_4+ "}" | "#5*" name=ID "{" errors+=Error_5* operations+=Operation_5* "}" | "#5+"
-// name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}"
+// name=ID "{" errors+=Error_5+ operations+=Operation_5+ "}")
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2246,8 +2280,9 @@ protected class Model_RightCurlyBracketKeyword_1_9_5 extends KeywordToken  {
 
 /************ begin Rule Error_1 ****************
  *
- * Error_1 returns Error:
- * 	annotations+=Annotation* "error" name=ID;
+ * Error_1 Error:
+ * 	annotations+=Annotation*
+ * 	"error" name=ID
  *
  **/
 
@@ -2388,8 +2423,9 @@ protected class Error_1_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Operation_1 ****************
  *
- * Operation_1 returns Operation:
- * 	annotations+=Annotation* "operation" name=ID;
+ * Operation_1 Operation:
+ * 	annotations+=Annotation*
+ * 	"operation" name=ID
  *
  **/
 
@@ -2530,8 +2566,9 @@ protected class Operation_1_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Error_2 ****************
  *
- * Error_2 returns Error:
- * 	annotations+=Annotation+ "error" name=ID;
+ * Error_2 Error:
+ * 	annotations+=Annotation+
+ * 	"error" name=ID
  *
  **/
 
@@ -2672,8 +2709,9 @@ protected class Error_2_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Operation_2 ****************
  *
- * Operation_2 returns Operation:
- * 	annotations+=Annotation+ "operation" name=ID;
+ * Operation_2 Operation:
+ * 	annotations+=Annotation+
+ * 	"operation" name=ID
  *
  **/
 
@@ -2814,8 +2852,9 @@ protected class Operation_2_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Error_3 ****************
  *
- * Error_3 returns Error:
- * 	annotations+=Annotation? "error" name=ID;
+ * Error_3 Error:
+ * 	annotations+=Annotation?
+ * 	"error" name=ID
  *
  **/
 
@@ -2955,8 +2994,9 @@ protected class Error_3_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Operation_3 ****************
  *
- * Operation_3 returns Operation:
- * 	annotations+=Annotation? "operation" name=ID;
+ * Operation_3 Operation:
+ * 	annotations+=Annotation?
+ * 	"operation" name=ID
  *
  **/
 
@@ -3096,8 +3136,8 @@ protected class Operation_3_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Error_4 ****************
  *
- * Error_4 returns Error:
- * 	annotations+=Annotation "error" name=ID;
+ * Error_4 Error:
+ * 	annotations+=Annotation "error" name=ID
  *
  **/
 
@@ -3237,8 +3277,8 @@ protected class Error_4_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Operation_4 ****************
  *
- * Operation_4 returns Operation:
- * 	annotations+=Annotation "operation" name=ID;
+ * Operation_4 Operation:
+ * 	annotations+=Annotation "operation" name=ID
  *
  **/
 
@@ -3378,8 +3418,8 @@ protected class Operation_4_NameAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Error_5 ****************
  *
- * Error_5 returns Error:
- * 	"error" name=ID;
+ * Error_5 Error:
+ * 	"error" name=ID
  *
  **/
 
@@ -3473,8 +3513,8 @@ protected class Error_5_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Operation_5 ****************
  *
- * Operation_5 returns Operation:
- * 	"operation" name=ID;
+ * Operation_5 Operation:
+ * 	"operation" name=ID
  *
  **/
 

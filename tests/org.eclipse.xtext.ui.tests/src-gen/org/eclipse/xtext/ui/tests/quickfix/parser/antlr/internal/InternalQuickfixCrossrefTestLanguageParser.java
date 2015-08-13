@@ -157,7 +157,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -274,7 +274,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
                            			current, 
                            			"doc",
                             		lv_doc_0_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -303,7 +303,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -349,7 +349,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"contained",
             	            		lv_contained_3_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

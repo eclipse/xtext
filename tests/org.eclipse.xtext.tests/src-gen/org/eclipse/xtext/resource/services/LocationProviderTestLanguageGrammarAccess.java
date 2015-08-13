@@ -19,7 +19,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cElementsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cElementsElementParserRuleCall_0_0 = (RuleCall)cElementsAssignment_0.eContents().get(0);
@@ -27,7 +27,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cComponentsComponentParserRuleCall_1_0 = (RuleCall)cComponentsAssignment_1.eContents().get(0);
 		
 		//Model:
-		//	elements+=Element* components+=Component*;
+		//	elements+=Element*
+		//	components+=Component*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//elements+=Element* components+=Component*
@@ -47,7 +48,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Element");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Element");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cElementKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -111,7 +112,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	public class ComponentElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Component");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Component");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final RuleCall cBusParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
@@ -127,13 +128,14 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Component:
-		//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
+		//	(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
+		//	'end' ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";"
+		//(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)? 'end' ';'
 		public Group getGroup() { return cGroup; }
 
-		//Bus | Processor
+		//(Bus | Processor)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Bus
@@ -142,10 +144,10 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Processor
 		public RuleCall getProcessorParserRuleCall_0_1() { return cProcessorParserRuleCall_0_1; }
 
-		//("modes" (mode+=Mode | transition+=Transition)+)?
+		//('modes' (mode+=Mode | transition+=Transition)+)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"modes"
+		//'modes'
 		public Keyword getModesKeyword_1_0() { return cModesKeyword_1_0; }
 
 		//(mode+=Mode | transition+=Transition)+
@@ -163,15 +165,15 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//Transition
 		public RuleCall getTransitionTransitionParserRuleCall_1_1_1_0() { return cTransitionTransitionParserRuleCall_1_1_1_0; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_2() { return cEndKeyword_2; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class BusElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bus");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Bus");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cBusKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -180,13 +182,14 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cPortPortParserRuleCall_2_0 = (RuleCall)cPortAssignment_2.eContents().get(0);
 		
 		//Bus:
-		//	"bus" name=ID port+=Port*;
+		//	'bus' name=ID
+		//	port+=Port*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"bus" name=ID port+=Port*
+		//'bus' name=ID port+=Port*
 		public Group getGroup() { return cGroup; }
 
-		//"bus"
+		//'bus'
 		public Keyword getBusKeyword_0() { return cBusKeyword_0; }
 
 		//name=ID
@@ -203,7 +206,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	public class ProcessorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Processor");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Processor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cProcessorKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -212,13 +215,14 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final RuleCall cDataDataParserRuleCall_2_0 = (RuleCall)cDataAssignment_2.eContents().get(0);
 		
 		//Processor:
-		//	"processor" name=ID data+=Data*;
+		//	'processor' name=ID
+		//	data+=Data*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"processor" name=ID data+=Data*
+		//'processor' name=ID data+=Data*
 		public Group getGroup() { return cGroup; }
 
-		//"processor"
+		//'processor'
 		public Keyword getProcessorKeyword_0() { return cProcessorKeyword_0; }
 
 		//name=ID
@@ -235,7 +239,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	public class ModeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Mode");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Mode");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -243,13 +247,13 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Mode:
-		//	"mode" name=ID ";";
+		//	'mode' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"mode" name=ID ";"
+		//'mode' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"mode"
+		//'mode'
 		public Keyword getModeKeyword_0() { return cModeKeyword_0; }
 
 		//name=ID
@@ -258,12 +262,12 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class TransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -278,10 +282,10 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Transition:
-		//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
+		//	name=ID ':' source=[Mode] '->' destination=[Mode] ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID ":" source=[Mode] "->" destination=[Mode] ";"
+		//name=ID ':' source=[Mode] '->' destination=[Mode] ';'
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -290,7 +294,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
 		//source=[Mode]
@@ -302,7 +306,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getSourceModeIDTerminalRuleCall_2_0_1() { return cSourceModeIDTerminalRuleCall_2_0_1; }
 
-		//"->"
+		//'->'
 		public Keyword getHyphenMinusGreaterThanSignKeyword_3() { return cHyphenMinusGreaterThanSignKeyword_3; }
 
 		//destination=[Mode]
@@ -314,12 +318,12 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getDestinationModeIDTerminalRuleCall_4_0_1() { return cDestinationModeIDTerminalRuleCall_4_0_1; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
 	public class PortElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Port");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Port");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPortKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -327,13 +331,13 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Port:
-		//	"port" name=ID ";";
+		//	'port' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"port" name=ID ";"
+		//'port' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"port"
+		//'port'
 		public Keyword getPortKeyword_0() { return cPortKeyword_0; }
 
 		//name=ID
@@ -342,12 +346,12 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class DataElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Data");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.resource.LocationProviderTestLanguage.Data");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDataKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -355,13 +359,13 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Data:
-		//	"data" name=ID ";";
+		//	'data' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"data" name=ID ";"
+		//'data' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"data"
+		//'data'
 		public Keyword getDataKeyword_0() { return cDataKeyword_0; }
 
 		//name=ID
@@ -370,7 +374,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	
@@ -433,7 +437,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//Model:
-	//	elements+=Element* components+=Component*;
+	//	elements+=Element*
+	//	components+=Component*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -453,7 +458,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Component:
-	//	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
+	//	(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
+	//	'end' ';';
 	public ComponentElements getComponentAccess() {
 		return pComponent;
 	}
@@ -463,7 +469,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Bus:
-	//	"bus" name=ID port+=Port*;
+	//	'bus' name=ID
+	//	port+=Port*;
 	public BusElements getBusAccess() {
 		return pBus;
 	}
@@ -473,7 +480,8 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Processor:
-	//	"processor" name=ID data+=Data*;
+	//	'processor' name=ID
+	//	data+=Data*;
 	public ProcessorElements getProcessorAccess() {
 		return pProcessor;
 	}
@@ -483,7 +491,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Mode:
-	//	"mode" name=ID ";";
+	//	'mode' name=ID ';';
 	public ModeElements getModeAccess() {
 		return pMode;
 	}
@@ -493,7 +501,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Transition:
-	//	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
+	//	name=ID ':' source=[Mode] '->' destination=[Mode] ';';
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
 	}
@@ -503,7 +511,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Port:
-	//	"port" name=ID ";";
+	//	'port' name=ID ';';
 	public PortElements getPortAccess() {
 		return pPort;
 	}
@@ -513,7 +521,7 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//Data:
-	//	"data" name=ID ";";
+	//	'data' name=ID ';';
 	public DataElements getDataAccess() {
 		return pData;
 	}
@@ -523,38 +531,38 @@ public class LocationProviderTestLanguageGrammarAccess extends AbstractGrammarEl
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

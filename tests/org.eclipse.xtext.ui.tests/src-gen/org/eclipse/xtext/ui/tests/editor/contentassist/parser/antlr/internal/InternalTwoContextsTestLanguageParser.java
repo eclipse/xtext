@@ -156,7 +156,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"AnElement");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage.AnElement");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -261,7 +261,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

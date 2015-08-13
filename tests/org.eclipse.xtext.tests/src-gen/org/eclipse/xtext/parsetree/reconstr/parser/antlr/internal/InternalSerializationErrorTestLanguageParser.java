@@ -172,7 +172,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"test",
                             		lv_test_0_0, 
-                            		"Test");
+                            		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Test");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -209,7 +209,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"test",
                             		lv_test_1_0, 
-                            		"Parenthesis");
+                            		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Parenthesis");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -566,7 +566,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                    			current, 
                    			"one",
                     		lv_one_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -592,7 +592,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                    			current, 
                    			"two",
                     		lv_two_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -725,7 +725,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"one",
                             		lv_one_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -767,7 +767,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"two",
                             		lv_two_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -897,7 +897,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"req",
                             		lv_req_1_0, 
-                            		"TwoRequired");
+                            		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoRequired");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -939,7 +939,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
                            			current, 
                            			"opt",
                             		lv_opt_2_0, 
-                            		"TwoOptions");
+                            		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.TwoOptions");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -985,7 +985,7 @@ public class InternalSerializationErrorTestLanguageParser extends AbstractIntern
             	           			current, 
             	           			"indent",
             	            		lv_indent_3_0, 
-            	            		"Indent");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SerializationErrorTestLanguage.Indent");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

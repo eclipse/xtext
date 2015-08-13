@@ -234,11 +234,11 @@ protected class PropertyPathPart_CollectionIteratorParserRuleCall_1 extends Rule
 /************ begin Rule TypeDescription ****************
  *
  * TypeDescription:
- * 	type=ID many?="[]"?;
+ * 	type=ID many?='[]'?;
  *
  **/
 
-// type=ID many?="[]"?
+// type=ID many?='[]'?
 protected class TypeDescription_Group extends GroupToken {
 	
 	public TypeDescription_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,7 +301,7 @@ protected class TypeDescription_TypeAssignment_0 extends AssignmentToken  {
 
 }
 
-// many?="[]"?
+// many?='[]'?
 protected class TypeDescription_ManyAssignment_1 extends AssignmentToken  {
 	
 	public TypeDescription_ManyAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -587,12 +587,12 @@ protected class ObjectReference_TailAssignment_1 extends AssignmentToken  {
  * //   assist parser technically could have been include in ObjectReference like
  * //   ObjectReference:
  * //     object=[PropertyPathPart] ('.' tail=ObjectReference)?;
- * NestedObjectReference returns ObjectReference:
- * 	"." object=[PropertyPathPart] tail=NestedObjectReference?;
+ * NestedObjectReference ObjectReference:
+ * 	'.' object=[PropertyPathPart] tail=NestedObjectReference?
  *
  **/
 
-// "." object=[PropertyPathPart] tail=NestedObjectReference?
+// '.' object=[PropertyPathPart] tail=NestedObjectReference?
 protected class NestedObjectReference_Group extends GroupToken {
 	
 	public NestedObjectReference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -622,7 +622,7 @@ protected class NestedObjectReference_Group extends GroupToken {
 
 }
 
-// "."
+// '.'
 protected class NestedObjectReference_FullStopKeyword_0 extends KeywordToken  {
 	
 	public NestedObjectReference_FullStopKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -965,8 +965,8 @@ protected class Expression_ObjectReferenceParserRuleCall_4 extends RuleCallToken
 
 /************ begin Rule ImageExpression ****************
  *
- * ImageExpression returns ScalarExpression:
- * 	ScalarExpression;
+ * ImageExpression ScalarExpression:
+ * 	ScalarExpression
  *
  **/
 
@@ -1369,15 +1369,15 @@ protected class StringLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule StringFunction ****************
  *
  * StringFunction:
- * 	{StringConcat} "(" values+=ScalarExpression+ ")" | {StringReplace} "replace(" value=ScalarExpression ","
- * 	match=ScalarExpression "," replacement=ScalarExpression ")" | {StringUrlConform} "urlconform(" value=ScalarExpression
- * 	")";
+ * 	{StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
+ * 	match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
+ * 	')';
  *
  **/
 
-// {StringConcat} "(" values+=ScalarExpression+ ")" | {StringReplace} "replace(" value=ScalarExpression ","
-// match=ScalarExpression "," replacement=ScalarExpression ")" | {StringUrlConform} "urlconform(" value=ScalarExpression
-// ")"
+// {StringConcat} '(' values+=ScalarExpression+ ')' | {StringReplace} 'replace(' value=ScalarExpression ','
+// match=ScalarExpression ',' replacement=ScalarExpression ')' | {StringUrlConform} 'urlconform(' value=ScalarExpression
+// ')'
 protected class StringFunction_Alternatives extends AlternativesToken {
 
 	public StringFunction_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1410,7 +1410,7 @@ protected class StringFunction_Alternatives extends AlternativesToken {
 
 }
 
-// {StringConcat} "(" values+=ScalarExpression+ ")"
+// {StringConcat} '(' values+=ScalarExpression+ ')'
 protected class StringFunction_Group_0 extends GroupToken {
 	
 	public StringFunction_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1465,7 +1465,7 @@ protected class StringFunction_StringConcatAction_0_0 extends ActionToken  {
 	}
 }
 
-// "("
+// '('
 protected class StringFunction_LeftParenthesisKeyword_0_1 extends KeywordToken  {
 	
 	public StringFunction_LeftParenthesisKeyword_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1534,7 +1534,7 @@ protected class StringFunction_ValuesAssignment_0_2 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class StringFunction_RightParenthesisKeyword_0_3 extends KeywordToken  {
 	
 	public StringFunction_RightParenthesisKeyword_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1557,7 +1557,7 @@ protected class StringFunction_RightParenthesisKeyword_0_3 extends KeywordToken 
 }
 
 
-// {StringReplace} "replace(" value=ScalarExpression "," match=ScalarExpression "," replacement=ScalarExpression ")"
+// {StringReplace} 'replace(' value=ScalarExpression ',' match=ScalarExpression ',' replacement=ScalarExpression ')'
 protected class StringFunction_Group_1 extends GroupToken {
 	
 	public StringFunction_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1612,7 +1612,7 @@ protected class StringFunction_StringReplaceAction_1_0 extends ActionToken  {
 	}
 }
 
-// "replace("
+// 'replace('
 protected class StringFunction_ReplaceKeyword_1_1 extends KeywordToken  {
 	
 	public StringFunction_ReplaceKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1680,7 +1680,7 @@ protected class StringFunction_ValueAssignment_1_2 extends AssignmentToken  {
 	}	
 }
 
-// ","
+// ','
 protected class StringFunction_CommaKeyword_1_3 extends KeywordToken  {
 	
 	public StringFunction_CommaKeyword_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1748,7 +1748,7 @@ protected class StringFunction_MatchAssignment_1_4 extends AssignmentToken  {
 	}	
 }
 
-// ","
+// ','
 protected class StringFunction_CommaKeyword_1_5 extends KeywordToken  {
 	
 	public StringFunction_CommaKeyword_1_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1816,7 +1816,7 @@ protected class StringFunction_ReplacementAssignment_1_6 extends AssignmentToken
 	}	
 }
 
-// ")"
+// ')'
 protected class StringFunction_RightParenthesisKeyword_1_7 extends KeywordToken  {
 	
 	public StringFunction_RightParenthesisKeyword_1_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1839,7 +1839,7 @@ protected class StringFunction_RightParenthesisKeyword_1_7 extends KeywordToken 
 }
 
 
-// {StringUrlConform} "urlconform(" value=ScalarExpression ")"
+// {StringUrlConform} 'urlconform(' value=ScalarExpression ')'
 protected class StringFunction_Group_2 extends GroupToken {
 	
 	public StringFunction_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1894,7 +1894,7 @@ protected class StringFunction_StringUrlConformAction_2_0 extends ActionToken  {
 	}
 }
 
-// "urlconform("
+// 'urlconform('
 protected class StringFunction_UrlconformKeyword_2_1 extends KeywordToken  {
 	
 	public StringFunction_UrlconformKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1962,7 +1962,7 @@ protected class StringFunction_ValueAssignment_2_2 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class StringFunction_RightParenthesisKeyword_2_3 extends KeywordToken  {
 	
 	public StringFunction_RightParenthesisKeyword_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1992,11 +1992,11 @@ protected class StringFunction_RightParenthesisKeyword_2_3 extends KeywordToken 
 /************ begin Rule CollectionLiteral ****************
  *
  * CollectionLiteral:
- * 	"[" items+=ScalarExpression ("," items+=ScalarExpression)* "]";
+ * 	'[' items+=ScalarExpression (',' items+=ScalarExpression)* ']';
  *
  **/
 
-// "[" items+=ScalarExpression ("," items+=ScalarExpression)* "]"
+// '[' items+=ScalarExpression (',' items+=ScalarExpression)* ']'
 protected class CollectionLiteral_Group extends GroupToken {
 	
 	public CollectionLiteral_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2025,7 +2025,7 @@ protected class CollectionLiteral_Group extends GroupToken {
 
 }
 
-// "["
+// '['
 protected class CollectionLiteral_LeftSquareBracketKeyword_0 extends KeywordToken  {
 	
 	public CollectionLiteral_LeftSquareBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2092,7 +2092,7 @@ protected class CollectionLiteral_ItemsAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// ("," items+=ScalarExpression)*
+// (',' items+=ScalarExpression)*
 protected class CollectionLiteral_Group_2 extends GroupToken {
 	
 	public CollectionLiteral_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2114,7 +2114,7 @@ protected class CollectionLiteral_Group_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class CollectionLiteral_CommaKeyword_2_0 extends KeywordToken  {
 	
 	public CollectionLiteral_CommaKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2184,7 +2184,7 @@ protected class CollectionLiteral_ItemsAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "]"
+// ']'
 protected class CollectionLiteral_RightSquareBracketKeyword_3 extends KeywordToken  {
 	
 	public CollectionLiteral_RightSquareBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2214,11 +2214,11 @@ protected class CollectionLiteral_RightSquareBracketKeyword_3 extends KeywordTok
 /************ begin Rule CollectionFunction ****************
  *
  * CollectionFunction:
- * 	{StringSplit} "split(" value=ScalarExpression "," delimiter=ScalarExpression ")";
+ * 	{StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')';
  *
  **/
 
-// {StringSplit} "split(" value=ScalarExpression "," delimiter=ScalarExpression ")"
+// {StringSplit} 'split(' value=ScalarExpression ',' delimiter=ScalarExpression ')'
 protected class CollectionFunction_Group extends GroupToken {
 	
 	public CollectionFunction_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2273,7 +2273,7 @@ protected class CollectionFunction_StringSplitAction_0 extends ActionToken  {
 	}
 }
 
-// "split("
+// 'split('
 protected class CollectionFunction_SplitKeyword_1 extends KeywordToken  {
 	
 	public CollectionFunction_SplitKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2341,7 +2341,7 @@ protected class CollectionFunction_ValueAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// ","
+// ','
 protected class CollectionFunction_CommaKeyword_3 extends KeywordToken  {
 	
 	public CollectionFunction_CommaKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2409,7 +2409,7 @@ protected class CollectionFunction_DelimiterAssignment_4 extends AssignmentToken
 	}	
 }
 
-// ")"
+// ')'
 protected class CollectionFunction_RightParenthesisKeyword_5 extends KeywordToken  {
 	
 	public CollectionFunction_RightParenthesisKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2438,13 +2438,15 @@ protected class CollectionFunction_RightParenthesisKeyword_5 extends KeywordToke
 /************ begin Rule TableView ****************
  *
  * TableView:
- * 	"tableview" name=ID ("(" content=Parameter ")")? "{" (("title:" title=ScalarExpression)? & ("titleImage:"
- * 	titleImage=ImageExpression)? & ("style:" style=TableViewStyle)?) sections+=Section* "}";
+ * 	'tableview' name=ID ('(' content=Parameter ')')? '{' ('title:' title=ScalarExpression?
+ * 	& 'titleImage:' titleImage=ImageExpression?
+ * 	& 'style:' style=TableViewStyle?) sections+=Section*
+ * 	'}';
  *
  **/
 
-// "tableview" name=ID ("(" content=Parameter ")")? "{" (("title:" title=ScalarExpression)? & ("titleImage:"
-// titleImage=ImageExpression)? & ("style:" style=TableViewStyle)?) sections+=Section* "}"
+// 'tableview' name=ID ('(' content=Parameter ')')? '{' ('title:' title=ScalarExpression? & 'titleImage:'
+// titleImage=ImageExpression? & 'style:' style=TableViewStyle?) sections+=Section* '}'
 protected class TableView_Group extends GroupToken {
 	
 	public TableView_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2473,7 +2475,7 @@ protected class TableView_Group extends GroupToken {
 
 }
 
-// "tableview"
+// 'tableview'
 protected class TableView_TableviewKeyword_0 extends KeywordToken  {
 	
 	public TableView_TableviewKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2528,7 +2530,7 @@ protected class TableView_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("(" content=Parameter ")")?
+// ('(' content=Parameter ')')?
 protected class TableView_Group_2 extends GroupToken {
 	
 	public TableView_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2550,7 +2552,7 @@ protected class TableView_Group_2 extends GroupToken {
 
 }
 
-// "("
+// '('
 protected class TableView_LeftParenthesisKeyword_2_0 extends KeywordToken  {
 	
 	public TableView_LeftParenthesisKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2618,7 +2620,7 @@ protected class TableView_ContentAssignment_2_1 extends AssignmentToken  {
 	}	
 }
 
-// ")"
+// ')'
 protected class TableView_RightParenthesisKeyword_2_2 extends KeywordToken  {
 	
 	public TableView_RightParenthesisKeyword_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2641,7 +2643,7 @@ protected class TableView_RightParenthesisKeyword_2_2 extends KeywordToken  {
 }
 
 
-// "{"
+// '{'
 protected class TableView_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public TableView_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2664,7 +2666,7 @@ protected class TableView_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// ("title:" title=ScalarExpression)? & ("titleImage:" titleImage=ImageExpression)? & ("style:" style=TableViewStyle)?
+// ('title:' title=ScalarExpression? & 'titleImage:' titleImage=ImageExpression? & 'style:' style=TableViewStyle?)
 protected class TableView_UnorderedGroup_4 extends UnorderedGroupToken {
 	
 	public TableView_UnorderedGroup_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2689,7 +2691,7 @@ protected class TableView_UnorderedGroup_4 extends UnorderedGroupToken {
 
 }
 
-// ("title:" title=ScalarExpression)?
+// 'title:' title=ScalarExpression?
 protected class TableView_Group_4_0 extends GroupToken {
 	
 	public TableView_Group_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2711,7 +2713,7 @@ protected class TableView_Group_4_0 extends GroupToken {
 
 }
 
-// "title:"
+// 'title:'
 protected class TableView_TitleKeyword_4_0_0 extends KeywordToken  {
 	
 	public TableView_TitleKeyword_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2780,7 +2782,7 @@ protected class TableView_TitleAssignment_4_0_1 extends AssignmentToken  {
 }
 
 
-// ("titleImage:" titleImage=ImageExpression)?
+// 'titleImage:' titleImage=ImageExpression?
 protected class TableView_Group_4_1 extends GroupToken {
 	
 	public TableView_Group_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2802,7 +2804,7 @@ protected class TableView_Group_4_1 extends GroupToken {
 
 }
 
-// "titleImage:"
+// 'titleImage:'
 protected class TableView_TitleImageKeyword_4_1_0 extends KeywordToken  {
 	
 	public TableView_TitleImageKeyword_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2872,7 +2874,7 @@ protected class TableView_TitleImageAssignment_4_1_1 extends AssignmentToken  {
 }
 
 
-// ("style:" style=TableViewStyle)?
+// 'style:' style=TableViewStyle?
 protected class TableView_Group_4_2 extends GroupToken {
 	
 	public TableView_Group_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2894,7 +2896,7 @@ protected class TableView_Group_4_2 extends GroupToken {
 
 }
 
-// "style:"
+// 'style:'
 protected class TableView_StyleKeyword_4_2_0 extends KeywordToken  {
 	
 	public TableView_StyleKeyword_4_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3001,7 +3003,7 @@ protected class TableView_SectionsAssignment_5 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class TableView_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	
 	public TableView_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3145,11 +3147,13 @@ protected class ViewContentElement_CellParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Section ****************
  *
  * Section:
- * 	"section" iterator=CollectionIterator? "{" ("title:" title=ScalarExpression)? cells+=Cell+ "}";
+ * 	'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)?
+ * 	cells+=Cell+
+ * 	'}';
  *
  **/
 
-// "section" iterator=CollectionIterator? "{" ("title:" title=ScalarExpression)? cells+=Cell+ "}"
+// 'section' iterator=CollectionIterator? '{' ('title:' title=ScalarExpression)? cells+=Cell+ '}'
 protected class Section_Group extends GroupToken {
 	
 	public Section_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3178,7 +3182,7 @@ protected class Section_Group extends GroupToken {
 
 }
 
-// "section"
+// 'section'
 protected class Section_SectionKeyword_0 extends KeywordToken  {
 	
 	public Section_SectionKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3245,7 +3249,7 @@ protected class Section_IteratorAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "{"
+// '{'
 protected class Section_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Section_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3268,7 +3272,7 @@ protected class Section_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// ("title:" title=ScalarExpression)?
+// ('title:' title=ScalarExpression)?
 protected class Section_Group_3 extends GroupToken {
 	
 	public Section_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3290,7 +3294,7 @@ protected class Section_Group_3 extends GroupToken {
 
 }
 
-// "title:"
+// 'title:'
 protected class Section_TitleKeyword_3_0 extends KeywordToken  {
 	
 	public Section_TitleKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3407,7 +3411,7 @@ protected class Section_CellsAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Section_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public Section_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3436,15 +3440,18 @@ protected class Section_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Cell ****************
  *
  * Cell:
- * 	"cell" type=CellType iterator=CollectionIterator? "{" (("text:" text=ScalarExpression)? & ("details:"
- * 	details=ScalarExpression)? & ("image:" image=ScalarExpression)? & ("action:" action=ViewAction)? & ("accessory:"
- * 	accessory=CellAccessory)?) "}";
+ * 	'cell' type=CellType iterator=CollectionIterator? '{' ('text:' text=ScalarExpression?
+ * 	& 'details:' details=ScalarExpression?
+ * 	& 'image:' image=ScalarExpression?
+ * 	& 'action:' action=ViewAction?
+ * 	& 'accessory:' accessory=CellAccessory?)
+ * 	'}';
  *
  **/
 
-// "cell" type=CellType iterator=CollectionIterator? "{" (("text:" text=ScalarExpression)? & ("details:"
-// details=ScalarExpression)? & ("image:" image=ScalarExpression)? & ("action:" action=ViewAction)? & ("accessory:"
-// accessory=CellAccessory)?) "}"
+// 'cell' type=CellType iterator=CollectionIterator? '{' ('text:' text=ScalarExpression? & 'details:'
+// details=ScalarExpression? & 'image:' image=ScalarExpression? & 'action:' action=ViewAction? & 'accessory:'
+// accessory=CellAccessory?) '}'
 protected class Cell_Group extends GroupToken {
 	
 	public Cell_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3473,7 +3480,7 @@ protected class Cell_Group extends GroupToken {
 
 }
 
-// "cell"
+// 'cell'
 protected class Cell_CellKeyword_0 extends KeywordToken  {
 	
 	public Cell_CellKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3574,7 +3581,7 @@ protected class Cell_IteratorAssignment_2 extends AssignmentToken  {
 	}	
 }
 
-// "{"
+// '{'
 protected class Cell_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Cell_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3597,8 +3604,8 @@ protected class Cell_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// ("text:" text=ScalarExpression)? & ("details:" details=ScalarExpression)? & ("image:" image=ScalarExpression)? &
-// ("action:" action=ViewAction)? & ("accessory:" accessory=CellAccessory)?
+// ('text:' text=ScalarExpression? & 'details:' details=ScalarExpression? & 'image:' image=ScalarExpression? & 'action:'
+// action=ViewAction? & 'accessory:' accessory=CellAccessory?)
 protected class Cell_UnorderedGroup_4 extends UnorderedGroupToken {
 	
 	public Cell_UnorderedGroup_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3625,7 +3632,7 @@ protected class Cell_UnorderedGroup_4 extends UnorderedGroupToken {
 
 }
 
-// ("text:" text=ScalarExpression)?
+// 'text:' text=ScalarExpression?
 protected class Cell_Group_4_0 extends GroupToken {
 	
 	public Cell_Group_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3647,7 +3654,7 @@ protected class Cell_Group_4_0 extends GroupToken {
 
 }
 
-// "text:"
+// 'text:'
 protected class Cell_TextKeyword_4_0_0 extends KeywordToken  {
 	
 	public Cell_TextKeyword_4_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3716,7 +3723,7 @@ protected class Cell_TextAssignment_4_0_1 extends AssignmentToken  {
 }
 
 
-// ("details:" details=ScalarExpression)?
+// 'details:' details=ScalarExpression?
 protected class Cell_Group_4_1 extends GroupToken {
 	
 	public Cell_Group_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3738,7 +3745,7 @@ protected class Cell_Group_4_1 extends GroupToken {
 
 }
 
-// "details:"
+// 'details:'
 protected class Cell_DetailsKeyword_4_1_0 extends KeywordToken  {
 	
 	public Cell_DetailsKeyword_4_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3808,7 +3815,7 @@ protected class Cell_DetailsAssignment_4_1_1 extends AssignmentToken  {
 }
 
 
-// ("image:" image=ScalarExpression)?
+// 'image:' image=ScalarExpression?
 protected class Cell_Group_4_2 extends GroupToken {
 	
 	public Cell_Group_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3830,7 +3837,7 @@ protected class Cell_Group_4_2 extends GroupToken {
 
 }
 
-// "image:"
+// 'image:'
 protected class Cell_ImageKeyword_4_2_0 extends KeywordToken  {
 	
 	public Cell_ImageKeyword_4_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3901,7 +3908,7 @@ protected class Cell_ImageAssignment_4_2_1 extends AssignmentToken  {
 }
 
 
-// ("action:" action=ViewAction)?
+// 'action:' action=ViewAction?
 protected class Cell_Group_4_3 extends GroupToken {
 	
 	public Cell_Group_4_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3923,7 +3930,7 @@ protected class Cell_Group_4_3 extends GroupToken {
 
 }
 
-// "action:"
+// 'action:'
 protected class Cell_ActionKeyword_4_3_0 extends KeywordToken  {
 	
 	public Cell_ActionKeyword_4_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3995,7 +4002,7 @@ protected class Cell_ActionAssignment_4_3_1 extends AssignmentToken  {
 }
 
 
-// ("accessory:" accessory=CellAccessory)?
+// 'accessory:' accessory=CellAccessory?
 protected class Cell_Group_4_4 extends GroupToken {
 	
 	public Cell_Group_4_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4017,7 +4024,7 @@ protected class Cell_Group_4_4 extends GroupToken {
 
 }
 
-// "accessory:"
+// 'accessory:'
 protected class Cell_AccessoryKeyword_4_4_0 extends KeywordToken  {
 	
 	public Cell_AccessoryKeyword_4_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4079,7 +4086,7 @@ protected class Cell_AccessoryAssignment_4_4_1 extends AssignmentToken  {
 
 
 
-// "}"
+// '}'
 protected class Cell_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public Cell_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4108,11 +4115,11 @@ protected class Cell_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule CollectionIterator ****************
  *
  * CollectionIterator:
- * 	"for" name=ID "in" collection=CollectionExpression;
+ * 	'for' name=ID 'in' collection=CollectionExpression;
  *
  **/
 
-// "for" name=ID "in" collection=CollectionExpression
+// 'for' name=ID 'in' collection=CollectionExpression
 protected class CollectionIterator_Group extends GroupToken {
 	
 	public CollectionIterator_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4141,7 +4148,7 @@ protected class CollectionIterator_Group extends GroupToken {
 
 }
 
-// "for"
+// 'for'
 protected class CollectionIterator_ForKeyword_0 extends KeywordToken  {
 	
 	public CollectionIterator_ForKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4196,7 +4203,7 @@ protected class CollectionIterator_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "in"
+// 'in'
 protected class CollectionIterator_InKeyword_2 extends KeywordToken  {
 	
 	public CollectionIterator_InKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4386,11 +4393,11 @@ protected class ViewAction_SelectorParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Selector ****************
  *
  * Selector:
- * 	"@selector" "(" name=SelectorName ")";
+ * 	'@selector' '(' name=SelectorName ')';
  *
  **/
 
-// "@selector" "(" name=SelectorName ")"
+// '@selector' '(' name=SelectorName ')'
 protected class Selector_Group extends GroupToken {
 	
 	public Selector_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4419,7 +4426,7 @@ protected class Selector_Group extends GroupToken {
 
 }
 
-// "@selector"
+// '@selector'
 protected class Selector_SelectorKeyword_0 extends KeywordToken  {
 	
 	public Selector_SelectorKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4440,7 +4447,7 @@ protected class Selector_SelectorKeyword_0 extends KeywordToken  {
 
 }
 
-// "("
+// '('
 protected class Selector_LeftParenthesisKeyword_1 extends KeywordToken  {
 	
 	public Selector_LeftParenthesisKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4496,7 +4503,7 @@ protected class Selector_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// ")"
+// ')'
 protected class Selector_RightParenthesisKeyword_3 extends KeywordToken  {
 	
 	public Selector_RightParenthesisKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -18,7 +18,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ProgramElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Program");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Program");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cProgramAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -28,7 +28,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLTTerminalRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		
 		//Program:
-		//	{Program} (LT* directives+=ProgramDirective)* LT*;
+		//	{Program} (LT* directives+=ProgramDirective)*
+		//	LT*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//{Program} (LT* directives+=ProgramDirective)* LT*
@@ -54,13 +55,14 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ProgramDirectiveElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ProgramDirective");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ProgramDirective");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFunctionDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//ProgramDirective:
-		//	FunctionDefinition | Statement;
+		//	FunctionDefinition
+		//	| Statement;
 		@Override public ParserRule getRule() { return rule; }
 
 		//FunctionDefinition | Statement
@@ -74,7 +76,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FunctionDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FunctionDefinition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.FunctionDefinition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAttributesAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cAttributesAttributeParserRuleCall_0_0 = (RuleCall)cAttributesAssignment_0.eContents().get(0);
@@ -90,10 +92,11 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_7_0 = (RuleCall)cBodyAssignment_7.eContents().get(0);
 		
 		//FunctionDefinition:
-		//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+		//	attributes+=Attribute* 'function' LT* name=ID LT*
+		//	params=Parameters LT* body=Block;
 		@Override public ParserRule getRule() { return rule; }
 
-		//attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block
+		//attributes+=Attribute* 'function' LT* name=ID LT* params=Parameters LT* body=Block
 		public Group getGroup() { return cGroup; }
 
 		//attributes+=Attribute*
@@ -102,7 +105,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Attribute
 		public RuleCall getAttributesAttributeParserRuleCall_0_0() { return cAttributesAttributeParserRuleCall_0_0; }
 
-		//"function"
+		//'function'
 		public Keyword getFunctionKeyword_1() { return cFunctionKeyword_1; }
 
 		//LT*
@@ -134,7 +137,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Attribute");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cIdentAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cIdentIDTerminalRuleCall_0_0 = (RuleCall)cIdentAssignment_0.eContents().get(0);
@@ -148,10 +151,11 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		
 		//Attribute:
-		//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+		//	ident=ID
+		//	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
 		@Override public ParserRule getRule() { return rule; }
 
-		//ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+		//ident=ID | {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ident=ID
@@ -160,13 +164,13 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getIdentIDTerminalRuleCall_0_0() { return cIdentIDTerminalRuleCall_0_0; }
 
-		//{BracketAttribute} "[" LT* expression=PostfixExpression LT* "]"
+		//{BracketAttribute} '[' LT* expression=PostfixExpression LT* ']'
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{BracketAttribute}
 		public Action getBracketAttributeAction_1_0() { return cBracketAttributeAction_1_0; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_1_1() { return cLeftSquareBracketKeyword_1_1; }
 
 		//LT*
@@ -181,12 +185,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_1_4() { return cLTTerminalRuleCall_1_4; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_1_5() { return cRightSquareBracketKeyword_1_5; }
 	}
 
 	public class ParametersElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameters");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Parameters");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cParametersAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -204,22 +208,23 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Parameters:
-		//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+		//	{Parameters}
+		//	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")"
+		//{Parameters} '(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')'
 		public Group getGroup() { return cGroup; }
 
 		//{Parameters}
 		public Action getParametersAction_0() { return cParametersAction_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//LT*
 		public RuleCall getLTTerminalRuleCall_2() { return cLTTerminalRuleCall_2; }
 
-		//(params+=ID LT* ("," LT* params+=ID LT*)*)?
+		//(params+=ID LT* (',' LT* params+=ID LT*)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//params+=ID
@@ -231,10 +236,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_3_1() { return cLTTerminalRuleCall_3_1; }
 
-		//("," LT* params+=ID LT*)*
+		//(',' LT* params+=ID LT*)*
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
 
 		//LT*
@@ -249,12 +254,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_3_2_3() { return cLTTerminalRuleCall_3_2_3; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
 	public class BlockElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Block");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Block");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -266,16 +271,17 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Block:
-		//	{Block} "{" (LT* directives+=Statement)* LT* "}";
+		//	{Block}
+		//	'{' (LT* directives+=Statement)* LT* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Block} "{" (LT* directives+=Statement)* LT* "}"
+		//{Block} '{' (LT* directives+=Statement)* LT* '}'
 		public Group getGroup() { return cGroup; }
 
 		//{Block}
 		public Action getBlockAction_0() { return cBlockAction_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//(LT* directives+=Statement)*
@@ -293,12 +299,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_3() { return cLTTerminalRuleCall_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.Statement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBlockParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
@@ -310,16 +316,17 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLTTerminalRuleCall_1_2_1 = (RuleCall)cAlternatives_1_2.eContents().get(1);
 		
 		//Statement:
-		//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
+		//	Block
+		//	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
 		@Override public ParserRule getRule() { return rule; }
 
-		//Block | {ExpressionStatement} expression=PostfixExpression (";" | LT)
+		//Block | {ExpressionStatement} expression=PostfixExpression (';' | LT)
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Block
 		public RuleCall getBlockParserRuleCall_0() { return cBlockParserRuleCall_0; }
 
-		//{ExpressionStatement} expression=PostfixExpression (";" | LT)
+		//{ExpressionStatement} expression=PostfixExpression (';' | LT)
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{ExpressionStatement}
@@ -331,10 +338,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PostfixExpression
 		public RuleCall getExpressionPostfixExpressionParserRuleCall_1_1_0() { return cExpressionPostfixExpressionParserRuleCall_1_1_0; }
 
-		//";" | LT
+		//(';' | LT)
 		public Alternatives getAlternatives_1_2() { return cAlternatives_1_2; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_1_2_0() { return cSemicolonKeyword_1_2_0; }
 
 		//LT
@@ -342,7 +349,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class PostfixExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PostfixExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PostfixExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimaryExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -363,19 +370,19 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightParenthesisKeyword_1_1_5 = (Keyword)cGroup_1_1.eContents().get(5);
 		
 		//PostfixExpression:
-		//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
-		//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
+		//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
+		//	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
-		//{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*
+		//{Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 
-		//({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* "(" LT*
-		//(arguments=ListExpression LT*)? ")")*
+		//({PostfixExpression.expression=current} LT* property=PropertyOperator | {Invocation.expression=current} LT* '(' LT*
+		//(arguments=ListExpression LT*)? ')')*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{PostfixExpression.expression=current} LT* property=PropertyOperator
@@ -393,7 +400,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PropertyOperator
 		public RuleCall getPropertyPropertyOperatorParserRuleCall_1_0_2_0() { return cPropertyPropertyOperatorParserRuleCall_1_0_2_0; }
 
-		//{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")"
+		//{Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{Invocation.expression=current}
@@ -402,7 +409,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_1_1_1() { return cLTTerminalRuleCall_1_1_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_1_2() { return cLeftParenthesisKeyword_1_1_2; }
 
 		//LT*
@@ -420,12 +427,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_1_1_4_1() { return cLTTerminalRuleCall_1_1_4_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_1_5() { return cRightParenthesisKeyword_1_1_5; }
 	}
 
 	public class ListExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ListExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ListExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cExpressionsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cExpressionsPostfixExpressionParserRuleCall_0_0 = (RuleCall)cExpressionsAssignment_0.eContents().get(0);
@@ -437,10 +444,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cExpressionsPostfixExpressionParserRuleCall_1_3_0 = (RuleCall)cExpressionsAssignment_1_3.eContents().get(0);
 		
 		//ListExpression:
-		//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+		//	expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*
+		//expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//expressions+=PostfixExpression
@@ -449,13 +456,13 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//PostfixExpression
 		public RuleCall getExpressionsPostfixExpressionParserRuleCall_0_0() { return cExpressionsPostfixExpressionParserRuleCall_0_0; }
 
-		//(LT* "," LT* expressions+=PostfixExpression)*
+		//(LT* ',' LT* expressions+=PostfixExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//LT*
 		public RuleCall getLTTerminalRuleCall_1_0() { return cLTTerminalRuleCall_1_0; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1() { return cCommaKeyword_1_1; }
 
 		//LT*
@@ -469,7 +476,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class PropertyOperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PropertyOperator");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PropertyOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cFullStopKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -485,16 +492,17 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightSquareBracketKeyword_1_4 = (Keyword)cGroup_1.eContents().get(4);
 		
 		//PropertyOperator:
-		//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
+		//	'.' LT* name=ID
+		//	| '[' LT* expressions=ListExpression LT* ']';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]"
+		//'.' LT* name=ID | '[' LT* expressions=ListExpression LT* ']'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"." LT* name=ID
+		//'.' LT* name=ID
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_0_0() { return cFullStopKeyword_0_0; }
 
 		//LT*
@@ -506,10 +514,10 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_2_0() { return cNameIDTerminalRuleCall_0_2_0; }
 
-		//"[" LT* expressions=ListExpression LT* "]"
+		//'[' LT* expressions=ListExpression LT* ']'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_1_0() { return cLeftSquareBracketKeyword_1_0; }
 
 		//LT*
@@ -524,12 +532,12 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//LT*
 		public RuleCall getLTTerminalRuleCall_1_3() { return cLTTerminalRuleCall_1_3; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_1_4() { return cRightSquareBracketKeyword_1_4; }
 	}
 
 	public class PrimaryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimaryExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.PrimaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cIdentifierAction_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -546,10 +554,11 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cBodyBlockParserRuleCall_1_5_0 = (RuleCall)cBodyAssignment_1_5.eContents().get(0);
 		
 		//PrimaryExpression:
-		//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
+		//	{Identifier} name=ID
+		//	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block
+		//{Identifier} name=ID | {FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//{Identifier} name=ID
@@ -564,13 +573,13 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_1_0() { return cNameIDTerminalRuleCall_0_1_0; }
 
-		//{FunctionExpression} "function" LT* params=Parameters LT* body=Block
+		//{FunctionExpression} 'function' LT* params=Parameters LT* body=Block
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{FunctionExpression}
 		public Action getFunctionExpressionAction_1_0() { return cFunctionExpressionAction_1_0; }
 
-		//"function"
+		//'function'
 		public Keyword getFunctionKeyword_1_1() { return cFunctionKeyword_1_1; }
 
 		//LT*
@@ -624,9 +633,9 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		this.pListExpression = new ListExpressionElements();
 		this.pPropertyOperator = new PropertyOperatorElements();
 		this.pPrimaryExpression = new PrimaryExpressionElements();
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "LT");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.ID");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.WS");
+		this.tLT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug303200TestLanguage.LT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -653,7 +662,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Program:
-	//	{Program} (LT* directives+=ProgramDirective)* LT*;
+	//	{Program} (LT* directives+=ProgramDirective)*
+	//	LT*;
 	public ProgramElements getProgramAccess() {
 		return pProgram;
 	}
@@ -663,7 +673,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ProgramDirective:
-	//	FunctionDefinition | Statement;
+	//	FunctionDefinition
+	//	| Statement;
 	public ProgramDirectiveElements getProgramDirectiveAccess() {
 		return pProgramDirective;
 	}
@@ -673,7 +684,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FunctionDefinition:
-	//	attributes+=Attribute* "function" LT* name=ID LT* params=Parameters LT* body=Block;
+	//	attributes+=Attribute* 'function' LT* name=ID LT*
+	//	params=Parameters LT* body=Block;
 	public FunctionDefinitionElements getFunctionDefinitionAccess() {
 		return pFunctionDefinition;
 	}
@@ -683,7 +695,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//	ident=ID | {BracketAttribute} "[" LT* expression=PostfixExpression LT* "]";
+	//	ident=ID
+	//	| {BracketAttribute} '[' LT* expression=PostfixExpression LT* ']';
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -693,7 +706,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Parameters:
-	//	{Parameters} "(" LT* (params+=ID LT* ("," LT* params+=ID LT*)*)? ")";
+	//	{Parameters}
+	//	'(' LT* (params+=ID LT* (',' LT* params+=ID LT*)*)? ')';
 	public ParametersElements getParametersAccess() {
 		return pParameters;
 	}
@@ -703,7 +717,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Block:
-	//	{Block} "{" (LT* directives+=Statement)* LT* "}";
+	//	{Block}
+	//	'{' (LT* directives+=Statement)* LT* '}';
 	public BlockElements getBlockAccess() {
 		return pBlock;
 	}
@@ -713,7 +728,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Statement:
-	//	Block | {ExpressionStatement} expression=PostfixExpression (";" | LT);
+	//	Block
+	//	| {ExpressionStatement} expression=PostfixExpression (';' | LT);
 	public StatementElements getStatementAccess() {
 		return pStatement;
 	}
@@ -723,8 +739,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PostfixExpression:
-	//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator |
-	//	{Invocation.expression=current} LT* "(" LT* (arguments=ListExpression LT*)? ")")*;
+	//	PrimaryExpression ({PostfixExpression.expression=current} LT* property=PropertyOperator
+	//	| {Invocation.expression=current} LT* '(' LT* (arguments=ListExpression LT*)? ')')*;
 	public PostfixExpressionElements getPostfixExpressionAccess() {
 		return pPostfixExpression;
 	}
@@ -734,7 +750,7 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ListExpression:
-	//	expressions+=PostfixExpression (LT* "," LT* expressions+=PostfixExpression)*;
+	//	expressions+=PostfixExpression (LT* ',' LT* expressions+=PostfixExpression)*;
 	public ListExpressionElements getListExpressionAccess() {
 		return pListExpression;
 	}
@@ -744,7 +760,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PropertyOperator:
-	//	"." LT* name=ID | "[" LT* expressions=ListExpression LT* "]";
+	//	'.' LT* name=ID
+	//	| '[' LT* expressions=ListExpression LT* ']';
 	public PropertyOperatorElements getPropertyOperatorAccess() {
 		return pPropertyOperator;
 	}
@@ -754,7 +771,8 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//PrimaryExpression:
-	//	{Identifier} name=ID | {FunctionExpression} "function" LT* params=Parameters LT* body=Block;
+	//	{Identifier} name=ID
+	//	| {FunctionExpression} 'function' LT* params=Parameters LT* body=Block;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -764,19 +782,19 @@ public class Bug303200TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	("a".."z" | "A".."Z")+;
+	//	'a'..'z' | 'A'..'Z'+;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t")+;
+	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 
 
 	//terminal LT:
-	//	"\r" | "\n";
+	//	'\r' | '\n';
 	public TerminalRule getLTRule() {
 		return tLT;
 	} 

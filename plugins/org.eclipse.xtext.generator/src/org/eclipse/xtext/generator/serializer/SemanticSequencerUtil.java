@@ -110,7 +110,8 @@ public class SemanticSequencerUtil {
 		if (grammar == null)
 			return Collections.emptySet();
 		Set<IConstraint> result = Sets.newLinkedHashSet();
-		for (IConstraintContext ctx : gcp.getConstraints(grammar))
+		List<IConstraintContext> constraints = gcp.getConstraints(grammar);
+		for (IConstraintContext ctx : constraints)
 			result.addAll(ctx.getConstraints());
 		return result;
 	}

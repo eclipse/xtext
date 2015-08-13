@@ -90,7 +90,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"referenced",
         		lv_referenced_0_0, 
-        		"Reference");
+        		"org.eclipse.xtext.ui.tests.refactoring.ReferringTestLanguage.Reference");
 	        afterParserOrEnumRuleCall();
 	    }
 

@@ -96,7 +96,7 @@ ruleDocument returns [EObject current=null]
        			$current, 
        			"packages",
         		lv_packages_0_0, 
-        		"PackageDeclaration");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -115,7 +115,7 @@ ruleDocument returns [EObject current=null]
        			$current, 
        			"contexts",
         		lv_contexts_1_0, 
-        		"ContextDecl");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ContextDecl");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -158,7 +158,7 @@ ruleBody returns [EObject current=null]
        			$current, 
        			"constraintName",
         		lv_constraintName_1_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -180,7 +180,7 @@ ruleBody returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -223,7 +223,7 @@ ruleClassifierContextDecl returns [EObject current=null]
        			$current, 
        			"selfName",
         		lv_selfName_1_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -245,7 +245,7 @@ ruleClassifierContextDecl returns [EObject current=null]
        			$current, 
        			"classifier",
         		lv_classifier_3_0, 
-        		"ClassifierRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -263,7 +263,7 @@ ruleClassifierContextDecl returns [EObject current=null]
        			$current, 
        			"invariants",
         		lv_invariants_4_0, 
-        		"Invariant");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Invariant");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -282,7 +282,7 @@ ruleClassifierContextDecl returns [EObject current=null]
        			$current, 
        			"definitions",
         		lv_definitions_5_0, 
-        		"Definition");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Definition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -445,7 +445,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"constraintName",
         		lv_constraintName_2_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -467,7 +467,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"constrainedName",
         		lv_constrainedName_4_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -489,7 +489,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_6_0, 
-        		"Parameter");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -511,7 +511,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_8_0, 
-        		"Parameter");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -537,7 +537,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_11_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -559,7 +559,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_13_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -606,7 +606,7 @@ ruleDer returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -653,7 +653,7 @@ ruleInit returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -696,7 +696,7 @@ ruleInvariant returns [EObject current=null]
        			$current, 
        			"constraintName",
         		lv_constraintName_1_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -718,7 +718,7 @@ ruleInvariant returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -761,7 +761,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"operation",
         		lv_operation_1_0, 
-        		"OperationRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -783,7 +783,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_3_0, 
-        		"Parameter");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -805,7 +805,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_5_0, 
-        		"Parameter");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -831,7 +831,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_8_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -849,7 +849,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"pres",
         		lv_pres_9_0, 
-        		"Pre");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Pre");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -868,7 +868,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"posts",
         		lv_posts_10_0, 
-        		"Post");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Post");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -887,7 +887,7 @@ ruleOperationContextDecl returns [EObject current=null]
        			$current, 
        			"bodies",
         		lv_bodies_11_0, 
-        		"Body");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Body");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -976,7 +976,7 @@ rulePackageDeclaration returns [EObject current=null]
        			$current, 
        			"package",
         		lv_package_1_0, 
-        		"PackageRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -994,7 +994,7 @@ rulePackageDeclaration returns [EObject current=null]
        			$current, 
        			"contexts",
         		lv_contexts_2_0, 
-        		"ContextDecl");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ContextDecl");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1083,7 +1083,7 @@ ruleParameter returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1105,7 +1105,7 @@ ruleParameter returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1148,7 +1148,7 @@ rulePost returns [EObject current=null]
        			$current, 
        			"constraintName",
         		lv_constraintName_1_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1170,7 +1170,7 @@ rulePost returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1213,7 +1213,7 @@ rulePre returns [EObject current=null]
        			$current, 
        			"constraintName",
         		lv_constraintName_1_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1235,7 +1235,7 @@ rulePre returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1278,7 +1278,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"property",
         		lv_property_1_0, 
-        		"PropertyRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1300,7 +1300,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1318,7 +1318,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"init",
         		lv_init_4_0, 
-        		"Init");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Init");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1336,7 +1336,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"der",
         		lv_der_5_0, 
-        		"Der");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Der");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1355,7 +1355,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"der",
         		lv_der_6_0, 
-        		"Der");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Der");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1373,7 +1373,7 @@ rulePropertyContextDecl returns [EObject current=null]
        			$current, 
        			"init",
         		lv_init_7_0, 
-        		"Init");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Init");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1458,7 +1458,7 @@ ruleQualifiedClassifierRef returns [EObject current=null]
        			$current, 
        			"namespace",
         		lv_namespace_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1480,7 +1480,7 @@ ruleQualifiedClassifierRef returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"ClassifierRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1519,7 +1519,7 @@ ruleQualifiedOperationRef returns [EObject current=null]
        			$current, 
        			"namespace",
         		lv_namespace_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1541,7 +1541,7 @@ ruleQualifiedOperationRef returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"OperationRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1580,7 +1580,7 @@ ruleQualifiedPropertyRef returns [EObject current=null]
        			$current, 
        			"namespace",
         		lv_namespace_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1602,7 +1602,7 @@ ruleQualifiedPropertyRef returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"PropertyRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1641,7 +1641,7 @@ ruleQualifiedPackageRef returns [EObject current=null]
        			$current, 
        			"namespace",
         		lv_namespace_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1663,7 +1663,7 @@ ruleQualifiedPackageRef returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"PackageRef");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1702,7 +1702,7 @@ ruleSimpleClassifierRef returns [EObject current=null]
        			$current, 
        			"classifier",
         		lv_classifier_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1741,7 +1741,7 @@ ruleSimpleOperationRef returns [EObject current=null]
        			$current, 
        			"operation",
         		lv_operation_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1780,7 +1780,7 @@ ruleSimplePackageRef returns [EObject current=null]
        			$current, 
        			"package",
         		lv_package_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1819,7 +1819,7 @@ ruleSimplePropertyRef returns [EObject current=null]
        			$current, 
        			"feature",
         		lv_feature_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1909,7 +1909,7 @@ ruleNavigationExp returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_0, 
-        		"NavigatingExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigatingExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1967,7 +1967,7 @@ ruleNavigationExp returns [EObject current=null]
        			$current, 
        			"messageName",
         		lv_messageName_6_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1989,7 +1989,7 @@ ruleNavigationExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_8_0, 
-        		"OclMessageArg");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2011,7 +2011,7 @@ ruleNavigationExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_10_0, 
-        		"OclMessageArg");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2105,7 +2105,7 @@ ruleNavigatingExp returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_0, 
-        		"NavigatingExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigatingExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2163,7 +2163,7 @@ ruleNavigatingExp returns [EObject current=null]
        			$current, 
        			"messageName",
         		lv_messageName_6_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2185,7 +2185,7 @@ ruleNavigatingExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_8_0, 
-        		"OclMessageArg");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2207,7 +2207,7 @@ ruleNavigatingExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_10_0, 
-        		"OclMessageArg");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2267,7 +2267,7 @@ ruleOclMessageArg returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2605,7 +2605,7 @@ rulePrimitiveType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"PrimitiveTypeIdentifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PrimitiveTypeIdentifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2771,7 +2771,7 @@ ruleCollectionType returns [EObject current=null]
        			$current, 
        			"typeIdentifier",
         		lv_typeIdentifier_0_0, 
-        		"CollectionTypeIdentifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionTypeIdentifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2793,7 +2793,7 @@ ruleCollectionType returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2855,7 +2855,7 @@ ruleTupleType returns [EObject current=null]
        			$current, 
        			"part",
         		lv_part_2_0, 
-        		"tuplePart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.tuplePart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2877,7 +2877,7 @@ ruleTupleType returns [EObject current=null]
        			$current, 
        			"part",
         		lv_part_4_0, 
-        		"tuplePart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.tuplePart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2920,7 +2920,7 @@ ruletuplePart returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2942,7 +2942,7 @@ ruletuplePart returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3006,7 +3006,7 @@ ruleCollectionLiteralExp returns [EObject current=null]
        			$current, 
        			"collectionLiteralParts",
         		lv_collectionLiteralParts_3_0, 
-        		"CollectionLiteralPart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralPart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3028,7 +3028,7 @@ ruleCollectionLiteralExp returns [EObject current=null]
        			$current, 
        			"collectionLiteralParts",
         		lv_collectionLiteralParts_5_0, 
-        		"CollectionLiteralPart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralPart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3071,7 +3071,7 @@ ruleCollectionLiteralPart returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_0_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3093,7 +3093,7 @@ ruleCollectionLiteralPart returns [EObject current=null]
        			$current, 
        			"lastExpression",
         		lv_lastExpression_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3234,7 +3234,7 @@ ruleTupleLiteralExp returns [EObject current=null]
        			$current, 
        			"part",
         		lv_part_3_0, 
-        		"TupleLiteralPart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralPart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3256,7 +3256,7 @@ ruleTupleLiteralExp returns [EObject current=null]
        			$current, 
        			"part",
         		lv_part_5_0, 
-        		"TupleLiteralPart");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralPart");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3299,7 +3299,7 @@ ruleTupleLiteralPart returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3321,7 +3321,7 @@ ruleTupleLiteralPart returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3343,7 +3343,7 @@ ruleTupleLiteralPart returns [EObject current=null]
        			$current, 
        			"initExpression",
         		lv_initExpression_4_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3382,7 +3382,7 @@ ruleNumberLiteralExp returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"NUMBER_LITERAL");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NUMBER_LITERAL");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3421,7 +3421,7 @@ ruleStringLiteralExp returns [EObject current=null]
        			$current, 
        			"values",
         		lv_values_0_0, 
-        		"StringLiteral");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.StringLiteral");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3661,7 +3661,7 @@ ruleimplies returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"xor");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.xor");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3676,7 +3676,7 @@ ruleimplies returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3754,7 +3754,7 @@ rulexor returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"or");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.or");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3769,7 +3769,7 @@ rulexor returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3847,7 +3847,7 @@ ruleor returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"and");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.and");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3862,7 +3862,7 @@ ruleor returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3940,7 +3940,7 @@ ruleand returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"equality");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.equality");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3955,7 +3955,7 @@ ruleand returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4048,7 +4048,7 @@ ruleequality returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"relational");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.relational");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4063,7 +4063,7 @@ ruleequality returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4180,7 +4180,7 @@ rulerelational returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"additive");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.additive");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4195,7 +4195,7 @@ rulerelational returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4288,7 +4288,7 @@ ruleadditive returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"multiplicative");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.multiplicative");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4303,7 +4303,7 @@ ruleadditive returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4396,7 +4396,7 @@ rulemultiplicative returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_1, 
-        		"unary");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.unary");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4411,7 +4411,7 @@ rulemultiplicative returns [EObject current=null]
        			$current, 
        			"argument",
         		lv_argument_3_2, 
-        		"LetExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4504,7 +4504,7 @@ ruleunary returns [EObject current=null]
        			$current, 
        			"source",
         		lv_source_3_0, 
-        		"unary");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.unary");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4673,7 +4673,7 @@ ruleSubNavigationExp returns [EObject current=null]
        			$current, 
        			"source",
         		lv_source_11_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4788,7 +4788,7 @@ ruleiteratorVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4810,7 +4810,7 @@ ruleiteratorVariable returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4849,7 +4849,7 @@ ruleiteratorAccumulator returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4871,7 +4871,7 @@ ruleiteratorAccumulator returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4893,7 +4893,7 @@ ruleiteratorAccumulator returns [EObject current=null]
        			$current, 
        			"initExpression",
         		lv_initExpression_4_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4932,7 +4932,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"NameExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4973,7 +4973,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"variable1",
         		lv_variable1_4_0, 
-        		"iteratorVariable");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorVariable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4995,7 +4995,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"variable2",
         		lv_variable2_6_0, 
-        		"iteratorVariable");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorVariable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5018,7 +5018,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"variable2",
         		lv_variable2_8_0, 
-        		"iteratorAccumulator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorAccumulator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5040,7 +5040,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_10_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5062,7 +5062,7 @@ ruleRoundBracketExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_12_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5105,7 +5105,7 @@ ruleSquareBracketExp returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"NameExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5127,7 +5127,7 @@ ruleSquareBracketExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5149,7 +5149,7 @@ ruleSquareBracketExp returns [EObject current=null]
        			$current, 
        			"arguments",
         		lv_arguments_4_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5211,7 +5211,7 @@ rulePreExp returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"NameExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5338,7 +5338,7 @@ rulePathNameExp returns [EObject current=null]
        			$current, 
        			"namespace",
         		lv_namespace_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5360,7 +5360,7 @@ rulePathNameExp returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_2_0, 
-        		"NameExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5399,7 +5399,7 @@ ruleSimpleNameExp returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5442,7 +5442,7 @@ ruleIfExp returns [EObject current=null]
        			$current, 
        			"condition",
         		lv_condition_1_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5464,7 +5464,7 @@ ruleIfExp returns [EObject current=null]
        			$current, 
        			"thenExpression",
         		lv_thenExpression_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5486,7 +5486,7 @@ ruleIfExp returns [EObject current=null]
        			$current, 
        			"elseExpression",
         		lv_elseExpression_5_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5533,7 +5533,7 @@ ruleLetExp returns [EObject current=null]
        			$current, 
        			"variable",
         		lv_variable_1_0, 
-        		"LetVariable");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetVariable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5555,7 +5555,7 @@ ruleLetExp returns [EObject current=null]
        			$current, 
        			"variable",
         		lv_variable_3_0, 
-        		"LetVariable");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetVariable");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5577,7 +5577,7 @@ ruleLetExp returns [EObject current=null]
        			$current, 
        			"in",
         		lv_in_5_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5616,7 +5616,7 @@ ruleLetVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"Identifier");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5638,7 +5638,7 @@ ruleLetVariable returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeExp");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5660,7 +5660,7 @@ ruleLetVariable returns [EObject current=null]
        			$current, 
        			"initExpression",
         		lv_initExpression_4_0, 
-        		"Expression");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 

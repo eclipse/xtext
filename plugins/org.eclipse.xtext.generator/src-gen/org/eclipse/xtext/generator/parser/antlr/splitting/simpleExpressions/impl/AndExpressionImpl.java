@@ -20,11 +20,11 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -76,8 +76,7 @@ public class AndExpressionImpl extends ExpressionImpl implements AndExpression
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getLeft()
+  public Expression getLeft()
   {
     return left;
   }
@@ -104,8 +103,7 @@ public Expression getLeft()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLeft(Expression newLeft)
+  public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
     {
@@ -126,8 +124,7 @@ public void setLeft(Expression newLeft)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getRight()
+  public Expression getRight()
   {
     return right;
   }
@@ -154,8 +151,7 @@ public Expression getRight()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRight(Expression newRight)
+  public void setRight(Expression newRight)
   {
     if (newRight != right)
     {

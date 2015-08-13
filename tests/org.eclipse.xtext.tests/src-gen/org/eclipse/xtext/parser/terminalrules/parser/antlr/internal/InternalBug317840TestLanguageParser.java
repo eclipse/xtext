@@ -156,7 +156,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -274,7 +274,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"first",
                     		lv_first_1_0, 
-                    		"Named");
+                    		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -309,7 +309,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"second",
                             		lv_second_2_0, 
-                            		"Named");
+                            		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -358,7 +358,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"third",
             	            		lv_third_3_0, 
-            	            		"Named");
+            	            		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -389,7 +389,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"forth",
             	            		lv_forth_4_0, 
-            	            		"Named");
+            	            		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.Named");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -499,7 +499,7 @@ public class InternalBug317840TestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"NAME");
+                    		"org.eclipse.xtext.parser.terminalrules.Bug317840TestLanguage.NAME");
             	        afterParserOrEnumRuleCall();
             	    
 

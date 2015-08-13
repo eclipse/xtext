@@ -10,11 +10,11 @@ package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage#getPredicated()
  * @model

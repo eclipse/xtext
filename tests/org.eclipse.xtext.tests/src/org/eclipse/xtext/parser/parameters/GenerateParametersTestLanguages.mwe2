@@ -1,0 +1,59 @@
+/*******************************************************************************
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+module org.eclipse.xtext.parser.parameters.GenerateParametersTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var lineDelimiter = '\n'
+var srcGenOnly = true
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/parameters"
+	}
+	
+	component = DirectoryCleaner {
+		directory = "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/parameters/idea"
+	}
+	
+	component = Generator auto-inject {
+		pathRtProject = runtimeProject
+		pathTestProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/TwoParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/NoParametersTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/parameters/ParametersTestLanguageEx.xtext"
+			fragment = @TestLanguagesFragmentsEx auto-inject {}
+			fragment = junit.Junit4Fragment {}
+		}
+	}
+}

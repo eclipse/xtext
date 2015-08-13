@@ -161,7 +161,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"imports",
             	            		lv_imports_0_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -211,7 +211,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"elements",
             	            		lv_elements_1_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -317,7 +317,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
                    			current, 
                    			"importedNamespace",
                     		lv_importedNamespace_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -417,7 +417,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -495,7 +495,7 @@ public class InternalIgnoreCaseNamespacesTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"elements",
             	            		lv_elements_3_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

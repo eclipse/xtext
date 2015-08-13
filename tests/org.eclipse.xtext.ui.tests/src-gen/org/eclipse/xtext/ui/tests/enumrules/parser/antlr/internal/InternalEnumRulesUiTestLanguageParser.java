@@ -182,7 +182,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"existing",
                             		lv_existing_1_0, 
-                            		"ExistingEnum");
+                            		"org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage.ExistingEnum");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -228,7 +228,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalAntlr
                                    			current, 
                                    			"generated",
                                     		lv_generated_3_0, 
-                                    		"GeneratedEnum");
+                                    		"org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage.GeneratedEnum");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -281,7 +281,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalAntlr
                            			current, 
                            			"generated",
                             		lv_generated_5_0, 
-                            		"GeneratedEnum");
+                            		"org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage.GeneratedEnum");
                     	        afterParserOrEnumRuleCall();
                     	    
 

@@ -26,9 +26,10 @@ import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 @Singleton
-class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
+class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	
 	protected override getGrammarFileName(Grammar it) {
 		getGrammarFileName('')
@@ -119,8 +120,10 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 		false
 	}
 	
-	protected override _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		«compileEntryRule(grammar, options)»
+	protected override compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+		«IF !it.isFragment»
+			«compileEntryRule(grammar, options)»
+		«ENDIF»
 		
 		«compileEBNF(options)»
 	'''
@@ -129,7 +132,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 		// Entry rule «entryRuleName»
 		«entryRuleName» returns «compileEntryReturns(options)»«compileEntryInit(options)»:
 			{ «newCompositeNode» }
-			iv_«ruleName»=«ruleName»
+			iv_«ruleName»=«ruleName»«defaultArgumentList»
 			{ $current=$iv_«ruleName».current«IF datatypeRule».getText()«ENDIF»; }
 			EOF;
 		«compileEntryFinally(options)»
@@ -147,7 +150,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 	}
 	
 	override protected compileInit(AbstractRule it, AntlrOptions options) '''
-		 returns «compileReturns(options)»
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF» returns «compileReturns(options)»
 		@init {
 			enterRule();
 			«compileInitHiddenTokens(options)»
@@ -156,6 +159,8 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 		@after {
 			leaveRule();
 		}'''
+	
+	
 		
 	protected def compileReturns(AbstractRule it, AntlrOptions options) {
 		switch it {
@@ -163,6 +168,8 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 				'returns [Enumerator current=null]'
 			ParserRule case datatypeRule:
 				'[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]'
+			ParserRule case isEObjectFragmentRule:
+				'[EObject current=in_current]'
 			ParserRule:
 				'[EObject current=null]'
 			default:
@@ -193,7 +200,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 					{
 						«newCompositeNode»
 					}
-					«localVar»=«super._dataTypeEbnf2(it, supportActions)»
+					«localVar»=«super._dataTypeEbnf2(it, supportActions)»«getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
 					{
 						$current.merge(«localVar»);
 					}
@@ -278,6 +285,11 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 					}
 					«ENDIF»
 					{
+						«IF isEObjectFragmentRuleCall»
+							if ($current==null) {
+								$current = «it.createModelElement»;
+							}
+						«ENDIF»
 						«newCompositeNode»
 					}
 					«super._ebnf2(it, options, supportActions)»
@@ -311,7 +323,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 			}
 	}
 	
-	protected override String _crossrefEbnf(AbstractRule it, CrossReference ref, boolean supportActions) {
+	protected override String crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {
 		if (supportActions)
 			switch it {
 				EnumRule,
@@ -319,7 +331,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 					{
 						«ref.newCompositeNode»
 					}
-					«ruleName»
+					«ruleName»«call.getArgumentList(!isPassCurrentIntoFragment || !supportActions)»
 					{
 						afterParserOrEnumRuleCall();
 					}
@@ -334,7 +346,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 					throw new IllegalStateException("crossrefEbnf is not supported for " + it)
 			}
 		else
-			super._crossrefEbnf(it, ref, supportActions)
+			super.crossrefEbnf(it, call, ref, supportActions)
 	}
 	
 	override protected _assignmentEbnf(CrossReference it, Assignment assignment, AntlrOptions options, boolean supportActions) {
@@ -362,7 +374,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 					$current = «assignment.createModelElement»;
 				}
 				«assignment.setOrAdd»WithLastConsumed($current, "«assignment.feature»", «
-	        		IF assignment.boolean»true«
+	        		IF assignment.isBooleanAssignment»true«
 	        		ELSE»«assignment.localVar(it)»«
 	        		ENDIF», «assignment.terminal.toStringLiteral»);
 			}
@@ -387,7 +399,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 						«assignment.setOrAdd»(
 							$current,
 							"«assignment.feature»",
-							«IF assignment.boolean»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«IF assignment.isBooleanAssignment»true«ELSE»«assignment.localVar(it)»«ENDIF»,
 							«toStringLiteral»);
 						afterParserOrEnumRuleCall();
 					}
@@ -404,7 +416,7 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 						«assignment.setOrAdd»WithLastConsumed(
 							$current,
 							"«assignment.feature»",
-							«IF assignment.isBoolean»true«ELSE»«assignment.localVar(it)»«ENDIF»,
+							«IF assignment.isBooleanAssignment»true«ELSE»«assignment.localVar(it)»«ENDIF»,
 							«toStringLiteral»);
 					}
 				'''
@@ -413,6 +425,10 @@ class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
 			}
 		else
 			super._assignmentEbnf(it, assignment, options, supportActions)
+	}
+	
+	override protected isPassCurrentIntoFragment() {
+		return true
 	}
 	
 	protected def createModelElement(EObject grammarElement) '''

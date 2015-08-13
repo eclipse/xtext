@@ -689,495 +689,495 @@ public class ComplexReconstrTestLanguageElementTypeProvider implements IElementT
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_AlternativesElementType() {
 		return Root_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_OpParserRuleCall_0ElementType() {
 		return Root_OpParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_TrickyGParserRuleCall_1ElementType() {
 		return Root_TrickyGParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOpElementType() {
 		return Op_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_GroupElementType() {
 		return Op_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_TermParserRuleCall_0ElementType() {
 		return Op_TermParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_Alternatives_1ElementType() {
 		return Op_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_Group_1_0ElementType() {
 		return Op_Group_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_AddAddOperandsAction_1_0_0ElementType() {
 		return Op_AddAddOperandsAction_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_PlusSignKeyword_1_0_1ElementType() {
 		return Op_PlusSignKeyword_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_AddOperandsAssignment_1_0_2ElementType() {
 		return Op_AddOperandsAssignment_1_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_AddOperandsTermParserRuleCall_1_0_2_0ElementType() {
 		return Op_AddOperandsTermParserRuleCall_1_0_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_Group_1_1ElementType() {
 		return Op_Group_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_MinusMinusOperandsAction_1_1_0ElementType() {
 		return Op_MinusMinusOperandsAction_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_HyphenMinusKeyword_1_1_1ElementType() {
 		return Op_HyphenMinusKeyword_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_MinusOperandsAssignment_1_1_2ElementType() {
 		return Op_MinusOperandsAssignment_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getOp_MinusOperandsTermParserRuleCall_1_1_2_0ElementType() {
 		return Op_MinusOperandsTermParserRuleCall_1_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTermElementType() {
 		return Term_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_AlternativesElementType() {
 		return Term_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_AtomParserRuleCall_0ElementType() {
 		return Term_AtomParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTerm_ParensParserRuleCall_1ElementType() {
 		return Term_ParensParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtomElementType() {
 		return Atom_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtom_NameAssignmentElementType() {
 		return Atom_NameAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAtom_NameIDTerminalRuleCall_0ElementType() {
 		return Atom_NameIDTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParensElementType() {
 		return Parens_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_GroupElementType() {
 		return Parens_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_LeftParenthesisKeyword_0ElementType() {
 		return Parens_LeftParenthesisKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_OpParserRuleCall_1ElementType() {
 		return Parens_OpParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_RightParenthesisKeyword_2ElementType() {
 		return Parens_RightParenthesisKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_EmAssignment_3ElementType() {
 		return Parens_EmAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getParens_EmExclamationMarkKeyword_3_0ElementType() {
 		return Parens_EmExclamationMarkKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyBElementType() {
 		return TrickyB_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_GroupElementType() {
 		return TrickyB_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_TBKeyword_0ElementType() {
 		return TrickyB_TBKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_Group_1ElementType() {
 		return TrickyB_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_NameAssignment_1_0ElementType() {
 		return TrickyB_NameAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_NameIDTerminalRuleCall_1_0_0ElementType() {
 		return TrickyB_NameIDTerminalRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_TypeAssignment_1_1ElementType() {
 		return TrickyB_TypeAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_TypeINTTerminalRuleCall_1_1_0ElementType() {
 		return TrickyB_TypeINTTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_TypeAssignment_2ElementType() {
 		return TrickyB_TypeAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyB_TypeINTTerminalRuleCall_2_0ElementType() {
 		return TrickyB_TypeINTTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyCElementType() {
 		return TrickyC_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_GroupElementType() {
 		return TrickyC_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_TCKeyword_0ElementType() {
 		return TrickyC_TCKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_NameAssignment_1ElementType() {
 		return TrickyC_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_NameIDTerminalRuleCall_1_0ElementType() {
 		return TrickyC_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_Group_2ElementType() {
 		return TrickyC_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_C1XAction_2_0ElementType() {
 		return TrickyC_C1XAction_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_XKeyword_2_1ElementType() {
 		return TrickyC_XKeyword_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_Group_3ElementType() {
 		return TrickyC_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_C2YAction_3_0ElementType() {
 		return TrickyC_C2YAction_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_YKeyword_3_1ElementType() {
 		return TrickyC_YKeyword_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_Group_4ElementType() {
 		return TrickyC_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_C3ZAction_4_0ElementType() {
 		return TrickyC_C3ZAction_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyC_ZKeyword_4_1ElementType() {
 		return TrickyC_ZKeyword_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyDElementType() {
 		return TrickyD_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_GroupElementType() {
 		return TrickyD_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TDKeyword_0ElementType() {
 		return TrickyD_TDKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_Group_1ElementType() {
 		return TrickyD_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_NameAssignment_1_0ElementType() {
 		return TrickyD_NameAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_NameINTTerminalRuleCall_1_0_0ElementType() {
 		return TrickyD_NameINTTerminalRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_FooAssignment_1_1ElementType() {
 		return TrickyD_FooAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_FooSTRINGTerminalRuleCall_1_1_0ElementType() {
 		return TrickyD_FooSTRINGTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeAssignment_1_2ElementType() {
 		return TrickyD_TypeAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeIDTerminalRuleCall_1_2_0ElementType() {
 		return TrickyD_TypeIDTerminalRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_Group_2ElementType() {
 		return TrickyD_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_NameAssignment_2_0ElementType() {
 		return TrickyD_NameAssignment_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_NameINTTerminalRuleCall_2_0_0ElementType() {
 		return TrickyD_NameINTTerminalRuleCall_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeAssignment_2_1ElementType() {
 		return TrickyD_TypeAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeIDTerminalRuleCall_2_1_0ElementType() {
 		return TrickyD_TypeIDTerminalRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeAssignment_3ElementType() {
 		return TrickyD_TypeAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyD_TypeIDTerminalRuleCall_3_0ElementType() {
 		return TrickyD_TypeIDTerminalRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyEElementType() {
 		return TrickyE_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_GroupElementType() {
 		return TrickyE_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_TEKeyword_0ElementType() {
 		return TrickyE_TEKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_Group_1ElementType() {
 		return TrickyE_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_NameAssignment_1_0ElementType() {
 		return TrickyE_NameAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_NameINTTerminalRuleCall_1_0_0ElementType() {
 		return TrickyE_NameINTTerminalRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_FooAssignment_1_1ElementType() {
 		return TrickyE_FooAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_FooSTRINGTerminalRuleCall_1_1_0ElementType() {
 		return TrickyE_FooSTRINGTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_TypeAssignment_1_2ElementType() {
 		return TrickyE_TypeAssignment_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_TypeIDTerminalRuleCall_1_2_0ElementType() {
 		return TrickyE_TypeIDTerminalRuleCall_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_XKeyword_2ElementType() {
 		return TrickyE_XKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_Group_3ElementType() {
 		return TrickyE_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_NameAssignment_3_0ElementType() {
 		return TrickyE_NameAssignment_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_NameINTTerminalRuleCall_3_0_0ElementType() {
 		return TrickyE_NameINTTerminalRuleCall_3_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_TypeAssignment_3_1ElementType() {
 		return TrickyE_TypeAssignment_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyE_TypeIDTerminalRuleCall_3_1_0ElementType() {
 		return TrickyE_TypeIDTerminalRuleCall_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyFElementType() {
 		return TrickyF_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_GroupElementType() {
 		return TrickyF_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_TFKeyword_0ElementType() {
 		return TrickyF_TFKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_Group_1ElementType() {
 		return TrickyF_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_NameAssignment_1_0ElementType() {
 		return TrickyF_NameAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_NameIDTerminalRuleCall_1_0_0ElementType() {
 		return TrickyF_NameIDTerminalRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_TypeAssignment_1_1ElementType() {
 		return TrickyF_TypeAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_TypeINTTerminalRuleCall_1_1_0ElementType() {
 		return TrickyF_TypeINTTerminalRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_Alternatives_2ElementType() {
 		return TrickyF_Alternatives_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_NameAssignment_2_0ElementType() {
 		return TrickyF_NameAssignment_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_NameIDTerminalRuleCall_2_0_0ElementType() {
 		return TrickyF_NameIDTerminalRuleCall_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_TypeAssignment_2_1ElementType() {
 		return TrickyF_TypeAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyF_TypeINTTerminalRuleCall_2_1_0ElementType() {
 		return TrickyF_TypeINTTerminalRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyGElementType() {
 		return TrickyG_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG_GroupElementType() {
 		return TrickyG_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG_TGKeyword_0ElementType() {
 		return TrickyG_TGKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG_TreeAssignment_1ElementType() {
 		return TrickyG_TreeAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG_TreeTrickyG1ParserRuleCall_1_0ElementType() {
 		return TrickyG_TreeTrickyG1ParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1ElementType() {
 		return TrickyG1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_GroupElementType() {
 		return TrickyG1_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_LeftSquareBracketKeyword_0ElementType() {
 		return TrickyG1_LeftSquareBracketKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_Group_1ElementType() {
 		return TrickyG1_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_ValsAssignment_1_0ElementType() {
 		return TrickyG1_ValsAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_ValsTrickyG2ParserRuleCall_1_0_0ElementType() {
 		return TrickyG1_ValsTrickyG2ParserRuleCall_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_Group_1_1ElementType() {
 		return TrickyG1_Group_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_CommaKeyword_1_1_0ElementType() {
 		return TrickyG1_CommaKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_ValsAssignment_1_1_1ElementType() {
 		return TrickyG1_ValsAssignment_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_ValsTrickyG2ParserRuleCall_1_1_1_0ElementType() {
 		return TrickyG1_ValsTrickyG2ParserRuleCall_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG1_RightSquareBracketKeyword_2ElementType() {
 		return TrickyG1_RightSquareBracketKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG2ElementType() {
 		return TrickyG2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG2_AlternativesElementType() {
 		return TrickyG2_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG2_TrickyG1ParserRuleCall_0ElementType() {
 		return TrickyG2_TrickyG1ParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG2_ValAssignment_1ElementType() {
 		return TrickyG2_ValAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTrickyG2_ValINTTerminalRuleCall_1_0ElementType() {
 		return TrickyG2_ValINTTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

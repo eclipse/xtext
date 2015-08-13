@@ -19,7 +19,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -53,25 +53,27 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		private final Keyword cRightCurlyBracketKeyword_1_3_3 = (Keyword)cGroup_1_3.eContents().get(3);
 		
 		//Model:
-		//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-		//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
+		//	{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
+		//	| '[' attribute+=Attribute+ attribute+=Pair* ']'
+		//	| '<' attribute+=Attribute* attribute+=Pair+ '>'
+		//	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-		//attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}")
+		//{Model} ('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
+		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//"(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-		//attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}"
+		//('(' attribute+=Attribute* attribute+=Pair* ')' | '[' attribute+=Attribute+ attribute+=Pair* ']' | '<'
+		//attribute+=Attribute* attribute+=Pair+ '>' | '{' attribute+=Attribute+ attribute+=Pair+ '}')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"(" attribute+=Attribute* attribute+=Pair* ")"
+		//'(' attribute+=Attribute* attribute+=Pair* ')'
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_0_0() { return cLeftParenthesisKeyword_1_0_0; }
 
 		//attribute+=Attribute*
@@ -86,13 +88,13 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//Pair
 		public RuleCall getAttributePairParserRuleCall_1_0_2_0() { return cAttributePairParserRuleCall_1_0_2_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_0_3() { return cRightParenthesisKeyword_1_0_3; }
 
-		//"[" attribute+=Attribute+ attribute+=Pair* "]"
+		//'[' attribute+=Attribute+ attribute+=Pair* ']'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_1_1_0() { return cLeftSquareBracketKeyword_1_1_0; }
 
 		//attribute+=Attribute+
@@ -107,13 +109,13 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//Pair
 		public RuleCall getAttributePairParserRuleCall_1_1_2_0() { return cAttributePairParserRuleCall_1_1_2_0; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_1_1_3() { return cRightSquareBracketKeyword_1_1_3; }
 
-		//"<" attribute+=Attribute* attribute+=Pair+ ">"
+		//'<' attribute+=Attribute* attribute+=Pair+ '>'
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//"<"
+		//'<'
 		public Keyword getLessThanSignKeyword_1_2_0() { return cLessThanSignKeyword_1_2_0; }
 
 		//attribute+=Attribute*
@@ -128,13 +130,13 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//Pair
 		public RuleCall getAttributePairParserRuleCall_1_2_2_0() { return cAttributePairParserRuleCall_1_2_2_0; }
 
-		//">"
+		//'>'
 		public Keyword getGreaterThanSignKeyword_1_2_3() { return cGreaterThanSignKeyword_1_2_3; }
 
-		//"{" attribute+=Attribute+ attribute+=Pair+ "}"
+		//'{' attribute+=Attribute+ attribute+=Pair+ '}'
 		public Group getGroup_1_3() { return cGroup_1_3; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_3_0() { return cLeftCurlyBracketKeyword_1_3_0; }
 
 		//attribute+=Attribute+
@@ -149,12 +151,12 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//Pair
 		public RuleCall getAttributePairParserRuleCall_1_3_2_0() { return cAttributePairParserRuleCall_1_3_2_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_3_3() { return cRightCurlyBracketKeyword_1_3_3; }
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Attribute");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueIDTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
@@ -170,7 +172,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	}
 
 	public class PairElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Pair");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Pair");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -178,36 +180,11 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cValueIDTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
-		////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-		////
-		////Attribute:
-		////		IdAttribute | StringAttribute;
-		////	
-		////IdAttribute:
-		////        value=ID;
-		////
-		////StringAttribute:
-		////        value=STRING;
-		////        
-		////Pair:
-		////        name=ID "=" value=ID;
 		//Pair:
 		//	name=ID "=" value=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ID "=" value=ID //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-		////
-		////Attribute:
-		////		IdAttribute | StringAttribute;
-		////	
-		////IdAttribute:
-		////        value=ID;
-		////
-		////StringAttribute:
-		////        value=STRING;
-		////        
-		////Pair:
-		////        name=ID "=" value=ID;
+		//name=ID "=" value=ID
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -219,35 +196,9 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		//"="
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
-		////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-		////
-		////Attribute:
-		////		IdAttribute | StringAttribute;
-		////	
-		////IdAttribute:
-		////        value=ID;
-		////
-		////StringAttribute:
-		////        value=STRING;
-		////        
-		////Pair:
-		////        name=ID "=" value=ID;
 		//value=ID
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 
-		////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-		////
-		////Attribute:
-		////		IdAttribute | StringAttribute;
-		////	
-		////IdAttribute:
-		////        value=ID;
-		////
-		////StringAttribute:
-		////        value=STRING;
-		////        
-		////Pair:
-		////        name=ID "=" value=ID;
 		//ID
 		public RuleCall getValueIDTerminalRuleCall_2_0() { return cValueIDTerminalRuleCall_2_0; }
 	}
@@ -299,8 +250,10 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 
 	
 	//Model:
-	//	{Model} ("(" attribute+=Attribute* attribute+=Pair* ")" | "[" attribute+=Attribute+ attribute+=Pair* "]" | "<"
-	//	attribute+=Attribute* attribute+=Pair+ ">" | "{" attribute+=Attribute+ attribute+=Pair+ "}");
+	//	{Model} ('(' attribute+=Attribute* attribute+=Pair* ')'
+	//	| '[' attribute+=Attribute+ attribute+=Pair* ']'
+	//	| '<' attribute+=Attribute* attribute+=Pair+ '>'
+	//	| '{' attribute+=Attribute+ attribute+=Pair+ '}');
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -319,19 +272,6 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		return getAttributeAccess().getRule();
 	}
 
-	////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-	////
-	////Attribute:
-	////		IdAttribute | StringAttribute;
-	////	
-	////IdAttribute:
-	////        value=ID;
-	////
-	////StringAttribute:
-	////        value=STRING;
-	////        
-	////Pair:
-	////        name=ID "=" value=ID;
 	//Pair:
 	//	name=ID "=" value=ID;
 	public PairElements getPairAccess() {
@@ -343,38 +283,38 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

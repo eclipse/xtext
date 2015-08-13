@@ -395,7 +395,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x1",
                             		lv_x1_0_0, 
-                            		"SimpleGroup");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleGroup");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -432,7 +432,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x2",
                             		lv_x2_1_0, 
-                            		"SimpleAlternative");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleAlternative");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -469,7 +469,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x3",
                             		lv_x3_2_0, 
-                            		"SimpleMultiplicities");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -506,7 +506,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x4",
                             		lv_x4_3_0, 
-                            		"GroupMultiplicities");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.GroupMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -543,7 +543,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x5",
                             		lv_x5_4_0, 
-                            		"AlternativeMultiplicities");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AlternativeMultiplicities");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -580,7 +580,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x6",
                             		lv_x6_5_0, 
-                            		"AssignedAction");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedAction");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -617,7 +617,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x7",
                             		lv_x7_6_0, 
-                            		"AssignedActionSecond");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedActionSecond");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -654,7 +654,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x8",
                             		lv_x8_7_0, 
-                            		"UnassignedAction1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -691,7 +691,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x9",
                             		lv_x9_8_0, 
-                            		"UnassignedAction2");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -728,7 +728,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x10",
                             		lv_x10_9_0, 
-                            		"UnassignedAction3");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -765,7 +765,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x11",
                             		lv_x11_10_0, 
-                            		"UnassignedRuleCall1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -802,7 +802,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x12",
                             		lv_x12_11_0, 
-                            		"UnassignedRuleCall2");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -839,7 +839,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x13",
                             		lv_x13_12_0, 
-                            		"Combination1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -876,7 +876,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x14",
                             		lv_x14_13_0, 
-                            		"Combination2");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -913,7 +913,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x15",
                             		lv_x15_14_0, 
-                            		"Combination3");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -950,7 +950,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x16",
                             		lv_x16_15_0, 
-                            		"Combination4");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination4");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -987,7 +987,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x17",
                             		lv_x17_16_0, 
-                            		"List1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1024,7 +1024,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x18",
                             		lv_x18_17_0, 
-                            		"List2");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1061,7 +1061,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x19",
                             		lv_x19_18_0, 
-                            		"List3");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List3");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1098,7 +1098,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x20",
                             		lv_x20_19_0, 
-                            		"List4");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List4");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1135,7 +1135,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x21",
                             		lv_x21_20_0, 
-                            		"List5");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List5");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1172,7 +1172,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x22",
                             		lv_x22_21_0, 
-                            		"AltList1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1209,7 +1209,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x23",
                             		lv_x23_22_0, 
-                            		"AltList2");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList2");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1246,7 +1246,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x24",
                             		lv_x24_23_0, 
-                            		"TransientObject");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObject");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1283,7 +1283,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x25",
                             		lv_x25_24_0, 
-                            		"TransientSerializeables1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1320,7 +1320,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x26",
                             		lv_x26_25_0, 
-                            		"StaticSimplification");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.StaticSimplification");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1357,7 +1357,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x27",
                             		lv_x27_26_0, 
-                            		"TwoVersion");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TwoVersion");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1394,7 +1394,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"x28",
                             		lv_x28_27_0, 
-                            		"Heuristic1");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Heuristic1");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1502,7 +1502,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1528,7 +1528,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1661,7 +1661,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1703,7 +1703,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1821,7 +1821,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1859,7 +1859,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1905,7 +1905,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val3",
             	            		lv_val3_5_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -1957,7 +1957,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val4",
             	            		lv_val4_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2075,7 +2075,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2116,7 +2116,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2142,7 +2142,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val3",
                             		lv_val3_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2194,7 +2194,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val4",
             	            		lv_val4_6_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2220,7 +2220,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val5",
             	            		lv_val5_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2278,7 +2278,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val6",
             	            		lv_val6_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2304,7 +2304,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val7",
             	            		lv_val7_10_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2440,7 +2440,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2479,7 +2479,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val3",
                             		lv_val3_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2537,7 +2537,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val4",
             	            		lv_val4_5_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2576,7 +2576,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val5",
             	            		lv_val5_7_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2640,7 +2640,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val6",
             	            		lv_val6_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2679,7 +2679,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val7",
             	            		lv_val7_11_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2795,7 +2795,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2848,7 +2848,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val1",
             	            		lv_val1_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2966,7 +2966,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2996,7 +2996,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3111,7 +3111,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3145,7 +3145,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3263,7 +3263,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3297,7 +3297,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3480,7 +3480,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_5_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3514,7 +3514,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3634,7 +3634,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3729,7 +3729,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3843,7 +3843,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4021,7 +4021,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4062,7 +4062,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -4115,7 +4115,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                                    			current, 
                                    			"val3",
                                     		lv_val3_5_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -4150,7 +4150,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                                    			current, 
                                    			"val4",
                                     		lv_val4_6_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -4269,7 +4269,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4322,7 +4322,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -4372,7 +4372,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val3",
                     	            		lv_val3_4_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -4398,7 +4398,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val4",
                     	            		lv_val4_5_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -4545,7 +4545,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val1",
             	            		lv_val1_1_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -4577,7 +4577,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val2",
             	            		lv_val2_2_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -4609,7 +4609,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val3",
             	            		lv_val3_3_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -4744,7 +4744,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val1",
             	            		lv_val1_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -4770,7 +4770,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val2",
             	            		lv_val2_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -4796,7 +4796,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val3",
             	            		lv_val3_4_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -4914,7 +4914,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4959,7 +4959,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val1",
             	            		lv_val1_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -5084,7 +5084,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5129,7 +5129,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_3_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -5274,7 +5274,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5319,7 +5319,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_3_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -5373,7 +5373,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5486,7 +5486,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5531,7 +5531,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"val1",
             	            		lv_val1_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -5570,7 +5570,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_5_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5711,7 +5711,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5756,7 +5756,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_3_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -5795,7 +5795,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5830,7 +5830,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val3",
                             		lv_val3_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5978,7 +5978,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6004,7 +6004,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6046,7 +6046,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6072,7 +6072,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val3",
                             		lv_val3_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6114,7 +6114,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_7_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6148,7 +6148,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                                    			current, 
                                    			"val4",
                                     		lv_val4_8_0, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -6292,7 +6292,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6318,7 +6318,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6360,7 +6360,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6405,7 +6405,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val1",
                     	            		lv_val1_6_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -6440,7 +6440,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val3",
                             		lv_val3_7_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6565,7 +6565,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6595,7 +6595,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"nested",
                             		lv_nested_2_0, 
-                            		"TransientObjectSub");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObjectSub");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -6701,7 +6701,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val2",
                     		lv_val2_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -6727,7 +6727,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"val3",
                     		lv_val3_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -6849,7 +6849,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_1_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6879,7 +6879,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"enum1",
                             		lv_enum1_2_0, 
-                            		"TransientSerializeables1Enum");
+                            		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1Enum");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -6923,7 +6923,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6949,7 +6949,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"int1",
                             		lv_int1_4_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -7133,7 +7133,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val1",
                             		lv_val1_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7195,7 +7195,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"val2",
                             		lv_val2_5_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7262,7 +7262,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"val3",
                     	            		lv_val3_8_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -7565,7 +7565,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"shared1",
                             		lv_shared1_0_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7594,7 +7594,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"shared2",
                     		lv_shared2_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7635,7 +7635,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"shared3",
                             		lv_shared3_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7673,7 +7673,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"shared3",
                     	            		lv_shared3_4_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -7723,7 +7723,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"version1",
                             		lv_version1_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7846,7 +7846,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"shared1",
                             		lv_shared1_0_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7875,7 +7875,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                    			current, 
                    			"shared2",
                     		lv_shared2_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -7916,7 +7916,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"shared3",
                             		lv_shared3_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -7954,7 +7954,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                     	           			current, 
                     	           			"shared3",
                     	            		lv_shared3_4_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -8015,7 +8015,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"extra1",
                             		lv_extra1_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8061,7 +8061,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"extra2",
                             		lv_extra2_7_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8087,7 +8087,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"extra3",
                             		lv_extra3_8_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8129,7 +8129,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
                            			current, 
                            			"extra4",
                             		lv_extra4_10_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -8268,7 +8268,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"a",
             	            		lv_a_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8294,7 +8294,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"b",
             	            		lv_b_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8348,7 +8348,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"a",
             	            		lv_a_5_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8374,7 +8374,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"c",
             	            		lv_c_6_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8428,7 +8428,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"b",
             	            		lv_b_8_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -8454,7 +8454,7 @@ public class InternalConcreteSyntaxValidationTestLanguageParser extends Abstract
             	           			current, 
             	           			"c",
             	            		lv_c_9_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }

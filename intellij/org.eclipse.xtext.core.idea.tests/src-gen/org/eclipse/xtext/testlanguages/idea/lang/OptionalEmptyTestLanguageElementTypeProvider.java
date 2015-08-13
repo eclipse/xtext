@@ -81,35 +81,35 @@ public class OptionalEmptyTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ChildAssignmentElementType() {
 		return Model_ChildAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ChildGreetingParserRuleCall_0ElementType() {
 		return Model_ChildGreetingParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreetingElementType() {
 		return Greeting_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_GroupElementType() {
 		return Greeting_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_HalloKeyword_0ElementType() {
 		return Greeting_HalloKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_NameAssignment_1ElementType() {
 		return Greeting_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGreeting_NameIDTerminalRuleCall_1_0ElementType() {
 		return Greeting_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}

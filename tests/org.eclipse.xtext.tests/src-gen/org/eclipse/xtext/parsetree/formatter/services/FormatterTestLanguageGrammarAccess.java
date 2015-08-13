@@ -19,7 +19,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class RootElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Root");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Root");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTestKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -38,7 +38,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"test"
 		public Keyword getTestKeyword_0() { return cTestKeyword_0; }
 
-		//TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest
+		//(TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//TestLinewrap
@@ -55,7 +55,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class LineElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Line");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final RuleCall cDeclParserRuleCall_0_0 = (RuleCall)cAlternatives_0.eContents().get(0);
@@ -78,7 +78,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes) ";"
 		public Group getGroup() { return cGroup; }
 
-		//Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes
+		//(Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes)
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//Decl
@@ -119,7 +119,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DeclElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Decl");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Decl");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeIDTerminalRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
@@ -147,7 +147,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AssignElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assign");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Assign");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVarAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cVarIDTerminalRuleCall_0_0 = (RuleCall)cVarAssignment_0.eContents().get(0);
@@ -181,7 +181,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//op=("=" | "+=")
 		public Assignment getOpAssignment_1() { return cOpAssignment_1; }
 
-		//"=" | "+="
+		//("=" | "+=")
 		public Alternatives getOpAlternatives_1_0() { return cOpAlternatives_1_0; }
 
 		//"="
@@ -219,7 +219,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class MethElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Meth");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Meth");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVoidKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -279,7 +279,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ParamElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Param");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -311,7 +311,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SpaceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Space");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Space");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cSpaceKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -335,7 +335,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TestLinewrapElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrap");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestLinewrap");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestLinewrapAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLinewrapKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -363,7 +363,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TestLinewrapMinMaxElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestLinewrapMinMax");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestLinewrapMinMax");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestLinewrapMinMaxAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cWrapminmaxKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -391,7 +391,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class TestIndentationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TestIndentation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestIndentation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTestIndentationAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cIndentationKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -423,7 +423,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//items+=(Line | TestIndentation)*
 		public Assignment getItemsAssignment_3() { return cItemsAssignment_3; }
 
-		//Line | TestIndentation
+		//(Line | TestIndentation)
 		public Alternatives getItemsAlternatives_3_0() { return cItemsAlternatives_3_0; }
 
 		//Line
@@ -443,7 +443,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FqnObjElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnObj");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FqnObj");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFqnKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -467,7 +467,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -495,7 +495,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FqnRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FqnRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FqnRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cFqnrefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -523,7 +523,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class EnumerationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Enumeration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enumeration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cEnumKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -534,10 +534,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValEnum1EnumRuleCall_2_1_0 = (RuleCall)cValAssignment_2_1.eContents().get(0);
 		
 		//Enumeration:
-		//	"enum" val+=Enum1+ ("," val+=Enum1)*;
+		//	"enum" val+=Enum1+ (',' val+=Enum1)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"enum" val+=Enum1+ ("," val+=Enum1)*
+		//"enum" val+=Enum1+ (',' val+=Enum1)*
 		public Group getGroup() { return cGroup; }
 
 		//"enum"
@@ -549,10 +549,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Enum1
 		public RuleCall getValEnum1EnumRuleCall_1_0() { return cValEnum1EnumRuleCall_1_0; }
 
-		//("," val+=Enum1)*
+		//(',' val+=Enum1)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
 		//val+=Enum1
@@ -563,7 +563,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SuppressedHiddenElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHidden");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHidden");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSuppressedHiddenAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cGraveAccentKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -577,10 +577,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cGraveAccentKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//SuppressedHidden hidden():
-		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
+		//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
+		//{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`"
 		public Group getGroup() { return cGroup; }
 
 		//{SuppressedHidden}
@@ -589,7 +589,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//"`"
 		public Keyword getGraveAccentKeyword_1() { return cGraveAccentKeyword_1; }
 
-		//(vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)?
+		//(vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//vals+=SuppressedHiddenSub
@@ -598,10 +598,10 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//SuppressedHiddenSub
 		public RuleCall getValsSuppressedHiddenSubParserRuleCall_2_0_0() { return cValsSuppressedHiddenSubParserRuleCall_2_0_0; }
 
-		//("%" vals+=SuppressedHiddenSub)*
+		//('%' vals+=SuppressedHiddenSub)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"%"
+		//'%'
 		public Keyword getPercentSignKeyword_2_1_0() { return cPercentSignKeyword_2_1_0; }
 
 		//vals+=SuppressedHiddenSub
@@ -615,7 +615,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SuppressedHiddenSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSuppressedHiddenSubSubParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSuppressedHiddenSubIDParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -635,7 +635,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SuppressedHiddenSubSubElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSubSub");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSubSub");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cIdvalAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -643,13 +643,13 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cGreaterThanSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//SuppressedHiddenSubSub hidden(WS):
-		//	"<" idval=ID ">";
+		//	'<' idval=ID '>';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"<" idval=ID ">"
+		//'<' idval=ID '>'
 		public Group getGroup() { return cGroup; }
 
-		//"<"
+		//'<'
 		public Keyword getLessThanSignKeyword_0() { return cLessThanSignKeyword_0; }
 
 		//idval=ID
@@ -658,12 +658,12 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getIdvalIDTerminalRuleCall_1_0() { return cIdvalIDTerminalRuleCall_1_0; }
 
-		//">"
+		//'>'
 		public Keyword getGreaterThanSignKeyword_2() { return cGreaterThanSignKeyword_2; }
 	}
 
 	public class SuppressedHiddenSubIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuppressedHiddenSubID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSubID");
 		private final Assignment cIdvalAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cIdvalIDTerminalRuleCall_0 = (RuleCall)cIdvalAssignment.eContents().get(0);
 		
@@ -679,7 +679,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Datatype1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype1");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Datatype1:
@@ -691,7 +691,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Datatype2Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype2");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Datatype2:
@@ -703,7 +703,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class Datatype3Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatype3");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
 		private final RuleCall cFQNParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Datatype3:
@@ -715,7 +715,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DatatypesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Datatypes");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatypes");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDatatypesKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cVal1Assignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -763,7 +763,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class WrappingDataTypeTestElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WrappingDataTypeTest");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataTypeTest");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWrappingdtKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDatatypeAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -791,7 +791,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class WrappingDataTypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WrappingDataType");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataType");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//WrappingDataType:
@@ -804,7 +804,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class Enum1Elements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Enum1");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
@@ -1059,7 +1059,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Enumeration:
-	//	"enum" val+=Enum1+ ("," val+=Enum1)*;
+	//	"enum" val+=Enum1+ (',' val+=Enum1)*;
 	public EnumerationElements getEnumerationAccess() {
 		return pEnumeration;
 	}
@@ -1079,7 +1079,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHidden hidden():
-	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
+	//	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
 	public SuppressedHiddenElements getSuppressedHiddenAccess() {
 		return pSuppressedHidden;
 	}
@@ -1099,7 +1099,7 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SuppressedHiddenSubSub hidden(WS):
-	//	"<" idval=ID ">";
+	//	'<' idval=ID '>';
 	public SuppressedHiddenSubSubElements getSuppressedHiddenSubSubAccess() {
 		return pSuppressedHiddenSubSub;
 	}
@@ -1179,38 +1179,38 @@ public class FormatterTestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

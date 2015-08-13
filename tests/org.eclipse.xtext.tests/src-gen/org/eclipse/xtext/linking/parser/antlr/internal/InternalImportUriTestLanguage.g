@@ -90,7 +90,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_0_0, 
-        		"Import");
+        		"org.eclipse.xtext.linking.ImportUriTestLanguage.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +108,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"types",
         		lv_types_1_0, 
-        		"Type");
+        		"org.eclipse.xtext.linking.ImportUriTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -152,7 +152,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importURI",
         		lv_importURI_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -195,7 +195,7 @@ ruleType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

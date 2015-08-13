@@ -47,7 +47,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	imports+=Import* elements+=Type*;
+ * 	imports+=Import*
+ * 	elements+=Type*;
  *
  **/
 
@@ -181,11 +182,11 @@ protected class Model_ElementsAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" importURI=STRING;
+ * 	'import' importURI=STRING;
  *
  **/
 
-// "import" importURI=STRING
+// 'import' importURI=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -214,7 +215,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -390,11 +391,11 @@ protected class Type_ClassParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule DataType ****************
  *
  * DataType:
- * 	"datatype" name=ID ";"?;
+ * 	'datatype' name=ID ';'?;
  *
  **/
 
-// "datatype" name=ID ";"?
+// 'datatype' name=ID ';'?
 protected class DataType_Group extends GroupToken {
 	
 	public DataType_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -423,7 +424,7 @@ protected class DataType_Group extends GroupToken {
 
 }
 
-// "datatype"
+// 'datatype'
 protected class DataType_DatatypeKeyword_0 extends KeywordToken  {
 	
 	public DataType_DatatypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -485,11 +486,14 @@ protected class DataType_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- * 	"class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}";
+ * 	'class' name=ID ('extends' superClass=[Class])? '{'
+ * 	properties+=Property*
+ * 	subClasses+=Class*
+ * 	'}';
  *
  **/
 
-// "class" name=ID ("extends" superClass=[Class])? "{" properties+=Property* subClasses+=Class* "}"
+// 'class' name=ID ('extends' superClass=[Class])? '{' properties+=Property* subClasses+=Class* '}'
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -518,7 +522,7 @@ protected class Class_Group extends GroupToken {
 
 }
 
-// "class"
+// 'class'
 protected class Class_ClassKeyword_0 extends KeywordToken  {
 	
 	public Class_ClassKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -573,7 +577,7 @@ protected class Class_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("extends" superClass=[Class])?
+// ('extends' superClass=[Class])?
 protected class Class_Group_2 extends GroupToken {
 	
 	public Class_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -595,7 +599,7 @@ protected class Class_Group_2 extends GroupToken {
 
 }
 
-// "extends"
+// 'extends'
 protected class Class_ExtendsKeyword_2_0 extends KeywordToken  {
 	
 	public Class_ExtendsKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -655,7 +659,7 @@ protected class Class_SuperClassAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "{"
+// '{'
 protected class Class_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Class_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -773,7 +777,7 @@ protected class Class_SubClassesAssignment_5 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Class_RightCurlyBracketKeyword_6 extends KeywordToken  {
 	
 	public Class_RightCurlyBracketKeyword_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -918,11 +922,11 @@ protected class Property_ReferenceParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	"attr" name=ID ":" type=[DataType] ";"?;
+ * 	'attr' name=ID ':' type=[DataType] ';'?;
  *
  **/
 
-// "attr" name=ID ":" type=[DataType] ";"?
+// 'attr' name=ID ':' type=[DataType] ';'?
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -951,7 +955,7 @@ protected class Attribute_Group extends GroupToken {
 
 }
 
-// "attr"
+// 'attr'
 protected class Attribute_AttrKeyword_0 extends KeywordToken  {
 	
 	public Attribute_AttrKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1006,7 +1010,7 @@ protected class Attribute_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Attribute_ColonKeyword_2 extends KeywordToken  {
 	
 	public Attribute_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1072,11 +1076,11 @@ protected class Attribute_TypeAssignment_3 extends AssignmentToken  {
 /************ begin Rule Reference ****************
  *
  * Reference:
- * 	"ref" name=ID ":" type=[Class] ";"?;
+ * 	'ref' name=ID ':' type=[Class] ';'?;
  *
  **/
 
-// "ref" name=ID ":" type=[Class] ";"?
+// 'ref' name=ID ':' type=[Class] ';'?
 protected class Reference_Group extends GroupToken {
 	
 	public Reference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1105,7 +1109,7 @@ protected class Reference_Group extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Reference_RefKeyword_0 extends KeywordToken  {
 	
 	public Reference_RefKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1160,7 +1164,7 @@ protected class Reference_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Reference_ColonKeyword_2 extends KeywordToken  {
 	
 	public Reference_ColonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

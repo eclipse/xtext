@@ -327,7 +327,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                    			current, 
                    			"required1",
                     		lv_required1_2_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -353,7 +353,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                    			current, 
                    			"required2",
                     		lv_required2_3_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -477,7 +477,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                            			current, 
                            			"opt1",
                             		lv_opt1_2_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -521,7 +521,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
                            			current, 
                            			"opt2",
                             		lv_opt2_4_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -653,7 +653,7 @@ public class InternalTransientValuesTestParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"item",
             	            		lv_item_2_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }

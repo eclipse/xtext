@@ -63,7 +63,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	imports+=Import* query=MQLquery;
+ * 	imports+=Import*
+ * 	query=MQLquery;
  *
  **/
 
@@ -195,11 +196,11 @@ protected class Model_QueryAssignment_1 extends AssignmentToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" importURI=STRING;
+ * 	'import' importURI=STRING;
  *
  **/
 
-// "import" importURI=STRING
+// 'import' importURI=STRING
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -228,7 +229,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2050,8 +2051,8 @@ protected class WhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule AndWhereEntry ****************
  *
- * AndWhereEntry returns WhereEntry:
- * 	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?;
+ * AndWhereEntry WhereEntry:
+ * 	ConcreteWhereEntry ({AndWhereEntry.entries+=current} ("and" entries+=ConcreteWhereEntry)+)?
  *
  **/
 
@@ -2286,9 +2287,9 @@ protected class AndWhereEntry_EntriesAssignment_1_1_1 extends AssignmentToken  {
 
 /************ begin Rule ConcreteWhereEntry ****************
  *
- * ConcreteWhereEntry returns WhereEntry:
+ * ConcreteWhereEntry WhereEntry:
  * 	ParWhereEntry | AttributeWhereEntry | NullWhereEntry | ReferenceAliasWhereEntry | AliasWhereEntry |
- * 	SubselectWhereEntry;
+ * 	SubselectWhereEntry
  *
  **/
 
@@ -2560,8 +2561,8 @@ protected class ConcreteWhereEntry_SubselectWhereEntryParserRuleCall_5 extends R
 
 /************ begin Rule ParWhereEntry ****************
  *
- * ParWhereEntry returns WhereEntry:
- * 	"(" WhereEntry ")";
+ * ParWhereEntry WhereEntry:
+ * 	"(" WhereEntry ")"
  *
  **/
 
@@ -4033,7 +4034,7 @@ protected class BooleanAttributeWhereEntry_OperatorAssignment_3 extends Assignme
 
 }
 
-// isTrue?="true" | "false"
+// (isTrue?="true" | "false")
 protected class BooleanAttributeWhereEntry_Alternatives_4 extends AlternativesToken {
 
 	public BooleanAttributeWhereEntry_Alternatives_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

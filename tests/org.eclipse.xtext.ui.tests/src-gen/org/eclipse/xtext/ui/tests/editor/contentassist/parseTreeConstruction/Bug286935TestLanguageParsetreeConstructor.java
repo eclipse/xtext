@@ -40,13 +40,16 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule State ****************
  *
  * State:
- * 	{State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
- * 	isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?;
+ * 	{State} (isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType |
+ * 	isInitial?='init' stateKind=StateType isFinal?='final')?
+ * 	'state'?
+ * 	stateName=ID?
+ * 	label=STRING?;
  *
  **/
 
-// {State} (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType |
-// isInitial?="init" stateKind=StateType isFinal?="final")? "state"? stateName=ID? label=STRING?
+// {State} (isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType |
+// isInitial?='init' stateKind=StateType isFinal?='final')? 'state'? stateName=ID? label=STRING?
 protected class State_Group extends GroupToken {
 	
 	public State_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -104,8 +107,8 @@ protected class State_StateAction_0 extends ActionToken  {
 	}
 }
 
-// (isInitial?="init" | isFinal?="final" | stateKind=StateType | isInitial?="init" stateKind=StateType | isInitial?="init"
-// stateKind=StateType isFinal?="final")?
+// (isInitial?='init' | isFinal?='final' | stateKind=StateType | isInitial?='init' stateKind=StateType | isInitial?='init'
+// stateKind=StateType isFinal?='final')?
 protected class State_Alternatives_1 extends AlternativesToken {
 
 	public State_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -131,7 +134,7 @@ protected class State_Alternatives_1 extends AlternativesToken {
 
 }
 
-// isInitial?="init"
+// isInitial?='init'
 protected class State_IsInitialAssignment_1_0 extends AssignmentToken  {
 	
 	public State_IsInitialAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -165,7 +168,7 @@ protected class State_IsInitialAssignment_1_0 extends AssignmentToken  {
 
 }
 
-// isFinal?="final"
+// isFinal?='final'
 protected class State_IsFinalAssignment_1_1 extends AssignmentToken  {
 	
 	public State_IsFinalAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -233,7 +236,7 @@ protected class State_StateKindAssignment_1_2 extends AssignmentToken  {
 
 }
 
-// isInitial?="init" stateKind=StateType
+// isInitial?='init' stateKind=StateType
 protected class State_Group_1_3 extends GroupToken {
 	
 	public State_Group_1_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -255,7 +258,7 @@ protected class State_Group_1_3 extends GroupToken {
 
 }
 
-// isInitial?="init"
+// isInitial?='init'
 protected class State_IsInitialAssignment_1_3_0 extends AssignmentToken  {
 	
 	public State_IsInitialAssignment_1_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -324,7 +327,7 @@ protected class State_StateKindAssignment_1_3_1 extends AssignmentToken  {
 }
 
 
-// isInitial?="init" stateKind=StateType isFinal?="final"
+// isInitial?='init' stateKind=StateType isFinal?='final'
 protected class State_Group_1_4 extends GroupToken {
 	
 	public State_Group_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -346,7 +349,7 @@ protected class State_Group_1_4 extends GroupToken {
 
 }
 
-// isInitial?="init"
+// isInitial?='init'
 protected class State_IsInitialAssignment_1_4_0 extends AssignmentToken  {
 	
 	public State_IsInitialAssignment_1_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -414,7 +417,7 @@ protected class State_StateKindAssignment_1_4_1 extends AssignmentToken  {
 
 }
 
-// isFinal?="final"
+// isFinal?='final'
 protected class State_IsFinalAssignment_1_4_2 extends AssignmentToken  {
 	
 	public State_IsFinalAssignment_1_4_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

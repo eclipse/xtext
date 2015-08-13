@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_0_0, 
-        		"Import");
+        		"org.eclipse.xtext.linking.IgnoreCaseNamespacesTestLanguage.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_1_0, 
-        		"Element");
+        		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,7 +148,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importedNamespace",
         		lv_importedNamespace_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -187,7 +187,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -221,7 +221,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_3_0, 
-        		"Element");
+        		"org.eclipse.xtext.linking.AbstractIgnoreCaseLinkingTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 

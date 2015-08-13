@@ -144,83 +144,83 @@ public class ImportUriTestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getMainElementType() {
 		return Main_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_GroupElementType() {
 		return Main_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_ImportsAssignment_0ElementType() {
 		return Main_ImportsAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_ImportsImportParserRuleCall_0_0ElementType() {
 		return Main_ImportsImportParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_TypesAssignment_1ElementType() {
 		return Main_TypesAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getMain_TypesTypeParserRuleCall_1_0ElementType() {
 		return Main_TypesTypeParserRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImportElementType() {
 		return Import_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_GroupElementType() {
 		return Import_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_ImportKeyword_0ElementType() {
 		return Import_ImportKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_ImportURIAssignment_1ElementType() {
 		return Import_ImportURIAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getImport_ImportURISTRINGTerminalRuleCall_1_0ElementType() {
 		return Import_ImportURISTRINGTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTypeElementType() {
 		return Type_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_GroupElementType() {
 		return Type_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_TypeKeyword_0ElementType() {
 		return Type_TypeKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_NameAssignment_1ElementType() {
 		return Type_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_NameIDTerminalRuleCall_1_0ElementType() {
 		return Type_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsKeyword_2ElementType() {
 		return Type_ExtendsKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsAssignment_3ElementType() {
 		return Type_ExtendsAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsTypeCrossReference_3_0ElementType() {
 		return Type_ExtendsTypeCrossReference_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ExtendsTypeIDTerminalRuleCall_3_0_1ElementType() {
 		return Type_ExtendsTypeIDTerminalRuleCall_3_0_1_ELEMENT_TYPE;
 	}

@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x1",
         		lv_x1_0_0, 
-        		"SimpleGroup");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleGroup");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -110,7 +110,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x2",
         		lv_x2_1_0, 
-        		"SimpleAlternative");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleAlternative");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -129,7 +129,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x3",
         		lv_x3_2_0, 
-        		"SimpleMultiplicities");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.SimpleMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -148,7 +148,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x4",
         		lv_x4_3_0, 
-        		"GroupMultiplicities");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.GroupMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -167,7 +167,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x5",
         		lv_x5_4_0, 
-        		"AlternativeMultiplicities");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AlternativeMultiplicities");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -186,7 +186,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x6",
         		lv_x6_5_0, 
-        		"AssignedAction");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedAction");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -205,7 +205,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x7",
         		lv_x7_6_0, 
-        		"AssignedActionSecond");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AssignedActionSecond");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -224,7 +224,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x8",
         		lv_x8_7_0, 
-        		"UnassignedAction1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -243,7 +243,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x9",
         		lv_x9_8_0, 
-        		"UnassignedAction2");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -262,7 +262,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x10",
         		lv_x10_9_0, 
-        		"UnassignedAction3");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedAction3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -281,7 +281,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x11",
         		lv_x11_10_0, 
-        		"UnassignedRuleCall1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -300,7 +300,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x12",
         		lv_x12_11_0, 
-        		"UnassignedRuleCall2");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.UnassignedRuleCall2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -319,7 +319,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x13",
         		lv_x13_12_0, 
-        		"Combination1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -338,7 +338,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x14",
         		lv_x14_13_0, 
-        		"Combination2");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -357,7 +357,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x15",
         		lv_x15_14_0, 
-        		"Combination3");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -376,7 +376,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x16",
         		lv_x16_15_0, 
-        		"Combination4");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Combination4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -395,7 +395,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x17",
         		lv_x17_16_0, 
-        		"List1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -414,7 +414,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x18",
         		lv_x18_17_0, 
-        		"List2");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -433,7 +433,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x19",
         		lv_x19_18_0, 
-        		"List3");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List3");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -452,7 +452,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x20",
         		lv_x20_19_0, 
-        		"List4");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List4");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -471,7 +471,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x21",
         		lv_x21_20_0, 
-        		"List5");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.List5");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -490,7 +490,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x22",
         		lv_x22_21_0, 
-        		"AltList1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -509,7 +509,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x23",
         		lv_x23_22_0, 
-        		"AltList2");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.AltList2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -528,7 +528,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x24",
         		lv_x24_23_0, 
-        		"TransientObject");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObject");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -547,7 +547,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x25",
         		lv_x25_24_0, 
-        		"TransientSerializeables1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -566,7 +566,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x26",
         		lv_x26_25_0, 
-        		"StaticSimplification");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.StaticSimplification");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -585,7 +585,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x27",
         		lv_x27_26_0, 
-        		"TwoVersion");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TwoVersion");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -604,7 +604,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"x28",
         		lv_x28_27_0, 
-        		"Heuristic1");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.Heuristic1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -648,7 +648,7 @@ ruleSimpleGroup returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -666,7 +666,7 @@ ruleSimpleGroup returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -713,7 +713,7 @@ ruleSimpleAlternative returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -736,7 +736,7 @@ ruleSimpleAlternative returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -779,7 +779,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -801,7 +801,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -823,7 +823,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -845,7 +845,7 @@ ruleSimpleMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -888,7 +888,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -910,7 +910,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -928,7 +928,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -950,7 +950,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -968,7 +968,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val5",
         		lv_val5_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -990,7 +990,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val6",
         		lv_val6_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1008,7 +1008,7 @@ ruleGroupMultiplicities returns [EObject current=null]
        			$current, 
        			"val7",
         		lv_val7_10_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1051,7 +1051,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1074,7 +1074,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1096,7 +1096,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1119,7 +1119,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val5",
         		lv_val5_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1141,7 +1141,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val6",
         		lv_val6_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1164,7 +1164,7 @@ ruleAlternativeMultiplicities returns [EObject current=null]
        			$current, 
        			"val7",
         		lv_val7_11_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1207,7 +1207,7 @@ ruleAssignedAction returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1231,7 +1231,7 @@ ruleAssignedAction returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1274,7 +1274,7 @@ ruleAssignedActionSecond returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1296,7 +1296,7 @@ ruleAssignedActionSecond returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1345,7 +1345,7 @@ ruleUnassignedAction1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1363,7 +1363,7 @@ ruleUnassignedAction1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1412,7 +1412,7 @@ ruleUnassignedAction2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1430,7 +1430,7 @@ ruleUnassignedAction2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1494,7 +1494,7 @@ ruleUnassignedAction3 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1512,7 +1512,7 @@ ruleUnassignedAction3 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1564,7 +1564,7 @@ ruleUnassignedRuleCall1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1603,7 +1603,7 @@ ruleUnassignedRuleCall1Sub returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1655,7 +1655,7 @@ ruleUnassignedRuleCall2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1725,7 +1725,7 @@ ruleCombination1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1747,7 +1747,7 @@ ruleCombination1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1769,7 +1769,7 @@ ruleCombination1 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1788,7 +1788,7 @@ ruleCombination1 returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1831,7 +1831,7 @@ ruleCombination2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1853,7 +1853,7 @@ ruleCombination2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1872,7 +1872,7 @@ ruleCombination2 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1890,7 +1890,7 @@ ruleCombination2 returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1933,7 +1933,7 @@ ruleCombination3 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1952,7 +1952,7 @@ ruleCombination3 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -1971,7 +1971,7 @@ ruleCombination3 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_3_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -2018,7 +2018,7 @@ ruleCombination4 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2036,7 +2036,7 @@ ruleCombination4 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2054,7 +2054,7 @@ ruleCombination4 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2097,7 +2097,7 @@ ruleList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2119,7 +2119,7 @@ ruleList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2162,7 +2162,7 @@ ruleList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2184,7 +2184,7 @@ ruleList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2227,7 +2227,7 @@ ruleList3 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2249,7 +2249,7 @@ ruleList3 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2272,7 +2272,7 @@ ruleList3 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2315,7 +2315,7 @@ ruleList4 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2337,7 +2337,7 @@ ruleList4 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2359,7 +2359,7 @@ ruleList4 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2402,7 +2402,7 @@ ruleList5 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2424,7 +2424,7 @@ ruleList5 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2446,7 +2446,7 @@ ruleList5 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2465,7 +2465,7 @@ ruleList5 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2508,7 +2508,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2526,7 +2526,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2549,7 +2549,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2567,7 +2567,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2590,7 +2590,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2608,7 +2608,7 @@ ruleAltList1 returns [EObject current=null]
        			$current, 
        			"val4",
         		lv_val4_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2651,7 +2651,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2669,7 +2669,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2692,7 +2692,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2714,7 +2714,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2732,7 +2732,7 @@ ruleAltList2 returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2775,7 +2775,7 @@ ruleTransientObject returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2792,7 +2792,7 @@ ruleTransientObject returns [EObject current=null]
        			$current, 
        			"nested",
         		lv_nested_2_0, 
-        		"TransientObjectSub");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientObjectSub");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2832,7 +2832,7 @@ ruleTransientObjectSub returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2850,7 +2850,7 @@ ruleTransientObjectSub returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2893,7 +2893,7 @@ ruleTransientSerializeables1 returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2910,7 +2910,7 @@ ruleTransientSerializeables1 returns [EObject current=null]
        			$current, 
        			"enum1",
         		lv_enum1_2_0, 
-        		"TransientSerializeables1Enum");
+        		"org.eclipse.xtext.validation.ConcreteSyntaxValidationTestLanguage.TransientSerializeables1Enum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2929,7 +2929,7 @@ ruleTransientSerializeables1 returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2947,7 +2947,7 @@ ruleTransientSerializeables1 returns [EObject current=null]
        			$current, 
        			"int1",
         		lv_int1_4_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -3002,7 +3002,7 @@ ruleStaticSimplification returns [EObject current=null]
        			$current, 
        			"val1",
         		lv_val1_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3025,7 +3025,7 @@ ruleStaticSimplification returns [EObject current=null]
        			$current, 
        			"val2",
         		lv_val2_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3051,7 +3051,7 @@ ruleStaticSimplification returns [EObject current=null]
        			$current, 
        			"val3",
         		lv_val3_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3134,7 +3134,7 @@ ruleTwoVersionNo1 returns [EObject current=null]
        			$current, 
        			"shared1",
         		lv_shared1_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3152,7 +3152,7 @@ ruleTwoVersionNo1 returns [EObject current=null]
        			$current, 
        			"shared2",
         		lv_shared2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3174,7 +3174,7 @@ ruleTwoVersionNo1 returns [EObject current=null]
        			$current, 
        			"shared3",
         		lv_shared3_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3192,7 +3192,7 @@ ruleTwoVersionNo1 returns [EObject current=null]
        			$current, 
        			"shared3",
         		lv_shared3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3214,7 +3214,7 @@ ruleTwoVersionNo1 returns [EObject current=null]
        			$current, 
        			"version1",
         		lv_version1_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3253,7 +3253,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"shared1",
         		lv_shared1_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3271,7 +3271,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"shared2",
         		lv_shared2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3293,7 +3293,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"shared3",
         		lv_shared3_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3311,7 +3311,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"shared3",
         		lv_shared3_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3333,7 +3333,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"extra1",
         		lv_extra1_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3351,7 +3351,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"extra2",
         		lv_extra2_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3369,7 +3369,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"extra3",
         		lv_extra3_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3392,7 +3392,7 @@ ruleTwoVersionNo2 returns [EObject current=null]
        			$current, 
        			"extra4",
         		lv_extra4_10_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3439,7 +3439,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"a",
         		lv_a_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3457,7 +3457,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"b",
         		lv_b_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3479,7 +3479,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"a",
         		lv_a_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3497,7 +3497,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"c",
         		lv_c_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3519,7 +3519,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"b",
         		lv_b_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3537,7 +3537,7 @@ ruleHeuristic1 returns [EObject current=null]
        			$current, 
        			"c",
         		lv_c_9_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

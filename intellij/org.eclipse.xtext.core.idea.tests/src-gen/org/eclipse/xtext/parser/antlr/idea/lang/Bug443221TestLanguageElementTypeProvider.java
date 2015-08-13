@@ -98,51 +98,51 @@ public class Bug443221TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelAction_0ElementType() {
 		return Model_ModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DummyKeyword_1ElementType() {
 		return Model_DummyKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameAssignment_2ElementType() {
 		return Model_NameAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameIDTerminalRuleCall_2_0ElementType() {
 		return Model_NameIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel__Keyword_3ElementType() {
 		return Model__Keyword_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel__dummy_Keyword_4ElementType() {
 		return Model__dummy_Keyword_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel___dummy__Keyword_5ElementType() {
 		return Model___dummy__Keyword_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel___dummy__Keyword_6ElementType() {
 		return Model___dummy__Keyword_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DollarSignKeyword_7ElementType() {
 		return Model_DollarSignKeyword_7_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DollarSignKeyword_8ElementType() {
 		return Model_DollarSignKeyword_8_ELEMENT_TYPE;
 	}

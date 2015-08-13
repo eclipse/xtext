@@ -115,7 +115,7 @@ protected class Root_TestKeyword_0 extends KeywordToken  {
 
 }
 
-// TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest
+// (TestLinewrap | TestIndentation | TestLinewrapMinMax | WrappingDataTypeTest)
 protected class Root_Alternatives_1 extends AlternativesToken {
 
 	public Root_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -337,7 +337,7 @@ protected class Line_Group extends GroupToken {
 
 }
 
-// Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes
+// (Decl | Assign | Meth | FqnObj | FqnRef | Enumeration | SuppressedHidden "post" | Space | Datatypes)
 protected class Line_Alternatives_0 extends AlternativesToken {
 
 	public Line_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2390,11 +2390,11 @@ protected class FqnRef_RefAssignment_1 extends AssignmentToken  {
 /************ begin Rule Enumeration ****************
  *
  * Enumeration:
- * 	"enum" val+=Enum1+ ("," val+=Enum1)*;
+ * 	"enum" val+=Enum1+ (',' val+=Enum1)*;
  *
  **/
 
-// "enum" val+=Enum1+ ("," val+=Enum1)*
+// "enum" val+=Enum1+ (',' val+=Enum1)*
 protected class Enumeration_Group extends GroupToken {
 	
 	public Enumeration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2480,7 +2480,7 @@ protected class Enumeration_ValAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("," val+=Enum1)*
+// (',' val+=Enum1)*
 protected class Enumeration_Group_2 extends GroupToken {
 	
 	public Enumeration_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2502,7 +2502,7 @@ protected class Enumeration_Group_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Enumeration_CommaKeyword_2_0 extends KeywordToken  {
 	
 	public Enumeration_CommaKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2567,11 +2567,11 @@ protected class Enumeration_ValAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule SuppressedHidden ****************
  *
  * SuppressedHidden hidden():
- * 	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`";
+ * 	{SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`";
  *
  **/
 
-// {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)? "`"
+// {SuppressedHidden} "`" (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)? "`"
 protected class SuppressedHidden_Group extends GroupToken {
 	
 	public SuppressedHidden_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2648,7 +2648,7 @@ protected class SuppressedHidden_GraveAccentKeyword_1 extends KeywordToken  {
 
 }
 
-// (vals+=SuppressedHiddenSub ("%" vals+=SuppressedHiddenSub)*)?
+// (vals+=SuppressedHiddenSub ('%' vals+=SuppressedHiddenSub)*)?
 protected class SuppressedHidden_Group_2 extends GroupToken {
 	
 	public SuppressedHidden_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2717,7 +2717,7 @@ protected class SuppressedHidden_ValsAssignment_2_0 extends AssignmentToken  {
 	}	
 }
 
-// ("%" vals+=SuppressedHiddenSub)*
+// ('%' vals+=SuppressedHiddenSub)*
 protected class SuppressedHidden_Group_2_1 extends GroupToken {
 	
 	public SuppressedHidden_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2739,7 +2739,7 @@ protected class SuppressedHidden_Group_2_1 extends GroupToken {
 
 }
 
-// "%"
+// '%'
 protected class SuppressedHidden_PercentSignKeyword_2_1_0 extends KeywordToken  {
 	
 	public SuppressedHidden_PercentSignKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2954,11 +2954,11 @@ protected class SuppressedHiddenSub_SuppressedHiddenSubIDParserRuleCall_1 extend
 /************ begin Rule SuppressedHiddenSubSub ****************
  *
  * SuppressedHiddenSubSub hidden(WS):
- * 	"<" idval=ID ">";
+ * 	'<' idval=ID '>';
  *
  **/
 
-// "<" idval=ID ">"
+// '<' idval=ID '>'
 protected class SuppressedHiddenSubSub_Group extends GroupToken {
 	
 	public SuppressedHiddenSubSub_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2987,7 +2987,7 @@ protected class SuppressedHiddenSubSub_Group extends GroupToken {
 
 }
 
-// "<"
+// '<'
 protected class SuppressedHiddenSubSub_LessThanSignKeyword_0 extends KeywordToken  {
 	
 	public SuppressedHiddenSubSub_LessThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3042,7 +3042,7 @@ protected class SuppressedHiddenSubSub_IdvalAssignment_1 extends AssignmentToken
 
 }
 
-// ">"
+// '>'
 protected class SuppressedHiddenSubSub_GreaterThanSignKeyword_2 extends KeywordToken  {
 	
 	public SuppressedHiddenSubSub_GreaterThanSignKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

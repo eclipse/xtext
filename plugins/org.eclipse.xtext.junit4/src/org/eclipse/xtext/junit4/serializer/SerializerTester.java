@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -66,6 +67,9 @@ public class SerializerTester {
 
 	@Inject
 	protected ValidationTestHelper validationHelper;
+	
+	@Inject
+	private IGrammarAccess grammarAccess;
 
 	/**
 	 * @since 2.3
@@ -174,7 +178,7 @@ public class SerializerTester {
 		if (Iterables.size(contexts) != 1) {
 			StringBuilder msg = new StringBuilder();
 			msg.append("One context is expected, but " + Iterables.size(contexts) + " have been found\n");
-			msg.append("Contexts: " + Joiner.on(", ").join(Iterables.transform(contexts, new Context2NameFunction())));
+			msg.append("Contexts: " + Joiner.on(", ").join(Iterables.transform(contexts, new Context2NameFunction().toFunction(grammarAccess.getGrammar()))));
 			msg.append("Semantic Object: " + EmfFormatter.objPath(semanticObject));
 			Assert.fail(msg.toString());
 		}

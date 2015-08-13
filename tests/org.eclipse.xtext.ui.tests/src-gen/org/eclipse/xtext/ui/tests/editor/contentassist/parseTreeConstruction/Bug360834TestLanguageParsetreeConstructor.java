@@ -47,11 +47,12 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"alternative" element=Alternative | "unordered" element=Unordered;
+ * 	'alternative' element=Alternative
+ * 	| 'unordered' element=Unordered;
  *
  **/
 
-// "alternative" element=Alternative | "unordered" element=Unordered
+// 'alternative' element=Alternative | 'unordered' element=Unordered
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -81,7 +82,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "alternative" element=Alternative
+// 'alternative' element=Alternative
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -103,7 +104,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "alternative"
+// 'alternative'
 protected class Model_AlternativeKeyword_0_0 extends KeywordToken  {
 	
 	public Model_AlternativeKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -171,7 +172,7 @@ protected class Model_ElementAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "unordered" element=Unordered
+// 'unordered' element=Unordered
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -193,7 +194,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "unordered"
+// 'unordered'
 protected class Model_UnorderedKeyword_1_0 extends KeywordToken  {
 	
 	public Model_UnorderedKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -268,11 +269,12 @@ protected class Model_ElementAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule Alternative ****************
  *
  * Alternative:
- * 	"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration;
+ * 	'package' name=FQN ';'
+ * 	rootDeclaration=RecursiveClassDeclaration;
  *
  **/
 
-// "package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration
+// 'package' name=FQN ';' rootDeclaration=RecursiveClassDeclaration
 protected class Alternative_Group extends GroupToken {
 	
 	public Alternative_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -301,7 +303,7 @@ protected class Alternative_Group extends GroupToken {
 
 }
 
-// "package"
+// 'package'
 protected class Alternative_PackageKeyword_0 extends KeywordToken  {
 	
 	public Alternative_PackageKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -356,7 +358,7 @@ protected class Alternative_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Alternative_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Alternative_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -432,11 +434,13 @@ protected class Alternative_RootDeclarationAssignment_3 extends AssignmentToken 
 /************ begin Rule RecursiveClassDeclaration ****************
  *
  * RecursiveClassDeclaration:
- * 	modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}";
+ * 	modifiers=AlternativeClassModifiers 'class' name=ID '{'
+ * 	members+=RecursiveClassDeclaration*
+ * 	'}';
  *
  **/
 
-// modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}"
+// modifiers=AlternativeClassModifiers 'class' name=ID '{' members+=RecursiveClassDeclaration* '}'
 protected class RecursiveClassDeclaration_Group extends GroupToken {
 	
 	public RecursiveClassDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -510,7 +514,7 @@ protected class RecursiveClassDeclaration_ModifiersAssignment_0 extends Assignme
 	}	
 }
 
-// "class"
+// 'class'
 protected class RecursiveClassDeclaration_ClassKeyword_1 extends KeywordToken  {
 	
 	public RecursiveClassDeclaration_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -566,7 +570,7 @@ protected class RecursiveClassDeclaration_NameAssignment_2 extends AssignmentTok
 
 }
 
-// "{"
+// '{'
 protected class RecursiveClassDeclaration_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public RecursiveClassDeclaration_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -635,7 +639,7 @@ protected class RecursiveClassDeclaration_MembersAssignment_4 extends Assignment
 	}	
 }
 
-// "}"
+// '}'
 protected class RecursiveClassDeclaration_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public RecursiveClassDeclaration_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -664,12 +668,15 @@ protected class RecursiveClassDeclaration_RightCurlyBracketKeyword_5 extends Key
 
 /************ begin Rule AlternativeClassModifiers ****************
  *
- * AlternativeClassModifiers returns Modifiers:
- * 	{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?);
+ * AlternativeClassModifiers Modifiers:
+ * 	{Modifiers} (final?='final'
+ * 	| abstract?='abstract'
+ * 	| extern?='extern'
+ * 	| visibility=Visibility?)
  *
  **/
 
-// {Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?)
+// {Modifiers} (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
 protected class AlternativeClassModifiers_Group extends GroupToken {
 	
 	public AlternativeClassModifiers_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -724,7 +731,7 @@ protected class AlternativeClassModifiers_ModifiersAction_0 extends ActionToken 
 	}
 }
 
-// final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?
+// (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
 protected class AlternativeClassModifiers_Alternatives_1 extends AlternativesToken {
 
 	public AlternativeClassModifiers_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -750,7 +757,7 @@ protected class AlternativeClassModifiers_Alternatives_1 extends AlternativesTok
 
 }
 
-// final?="final"
+// final?='final'
 protected class AlternativeClassModifiers_FinalAssignment_1_0 extends AssignmentToken  {
 	
 	public AlternativeClassModifiers_FinalAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -784,7 +791,7 @@ protected class AlternativeClassModifiers_FinalAssignment_1_0 extends Assignment
 
 }
 
-// abstract?="abstract"
+// abstract?='abstract'
 protected class AlternativeClassModifiers_AbstractAssignment_1_1 extends AssignmentToken  {
 	
 	public AlternativeClassModifiers_AbstractAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -818,7 +825,7 @@ protected class AlternativeClassModifiers_AbstractAssignment_1_1 extends Assignm
 
 }
 
-// extern?="extern"
+// extern?='extern'
 protected class AlternativeClassModifiers_ExternAssignment_1_2 extends AssignmentToken  {
 	
 	public AlternativeClassModifiers_ExternAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -894,11 +901,12 @@ protected class AlternativeClassModifiers_VisibilityAssignment_1_3 extends Assig
 /************ begin Rule Unordered ****************
  *
  * Unordered:
- * 	"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration;
+ * 	'package' name=FQN ';'
+ * 	rootDeclaration=SimpleClassDeclaration;
  *
  **/
 
-// "package" name=FQN ";" rootDeclaration=SimpleClassDeclaration
+// 'package' name=FQN ';' rootDeclaration=SimpleClassDeclaration
 protected class Unordered_Group extends GroupToken {
 	
 	public Unordered_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -927,7 +935,7 @@ protected class Unordered_Group extends GroupToken {
 
 }
 
-// "package"
+// 'package'
 protected class Unordered_PackageKeyword_0 extends KeywordToken  {
 	
 	public Unordered_PackageKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -982,7 +990,7 @@ protected class Unordered_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Unordered_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Unordered_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1057,11 +1065,13 @@ protected class Unordered_RootDeclarationAssignment_3 extends AssignmentToken  {
 /************ begin Rule SimpleClassDeclaration ****************
  *
  * SimpleClassDeclaration:
- * 	modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}";
+ * 	modifiers=UnorderedModifiers 'class' name=ID '{'
+ * 	members+=ClassMember*
+ * 	'}';
  *
  **/
 
-// modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}"
+// modifiers=UnorderedModifiers 'class' name=ID '{' members+=ClassMember* '}'
 protected class SimpleClassDeclaration_Group extends GroupToken {
 	
 	public SimpleClassDeclaration_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1135,7 +1145,7 @@ protected class SimpleClassDeclaration_ModifiersAssignment_0 extends AssignmentT
 	}	
 }
 
-// "class"
+// 'class'
 protected class SimpleClassDeclaration_ClassKeyword_1 extends KeywordToken  {
 	
 	public SimpleClassDeclaration_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1191,7 +1201,7 @@ protected class SimpleClassDeclaration_NameAssignment_2 extends AssignmentToken 
 
 }
 
-// "{"
+// '{'
 protected class SimpleClassDeclaration_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public SimpleClassDeclaration_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1260,7 +1270,7 @@ protected class SimpleClassDeclaration_MembersAssignment_4 extends AssignmentTok
 	}	
 }
 
-// "}"
+// '}'
 protected class SimpleClassDeclaration_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public SimpleClassDeclaration_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1290,11 +1300,11 @@ protected class SimpleClassDeclaration_RightCurlyBracketKeyword_5 extends Keywor
 /************ begin Rule ClassMember ****************
  *
  * ClassMember:
- * 	modifiers=UnorderedModifiers "var" name=ID ";";
+ * 	modifiers=UnorderedModifiers 'var' name=ID ';';
  *
  **/
 
-// modifiers=UnorderedModifiers "var" name=ID ";"
+// modifiers=UnorderedModifiers 'var' name=ID ';'
 protected class ClassMember_Group extends GroupToken {
 	
 	public ClassMember_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1368,7 +1378,7 @@ protected class ClassMember_ModifiersAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// "var"
+// 'var'
 protected class ClassMember_VarKeyword_1 extends KeywordToken  {
 	
 	public ClassMember_VarKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1424,7 +1434,7 @@ protected class ClassMember_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class ClassMember_SemicolonKeyword_3 extends KeywordToken  {
 	
 	public ClassMember_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1453,11 +1463,14 @@ protected class ClassMember_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule UnorderedModifiers ****************
  *
  * UnorderedModifiers:
- * 	{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?);
+ * 	{Modifiers} (final?='final'?
+ * 	& abstract?='abstract'?
+ * 	& extern?='extern'?
+ * 	& visibility=Visibility?);
  *
  **/
 
-// {Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?)
+// {Modifiers} (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 protected class UnorderedModifiers_Group extends GroupToken {
 	
 	public UnorderedModifiers_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1512,7 +1525,7 @@ protected class UnorderedModifiers_ModifiersAction_0 extends ActionToken  {
 	}
 }
 
-// final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?
+// (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 protected class UnorderedModifiers_UnorderedGroup_1 extends UnorderedGroupToken {
 	
 	public UnorderedModifiers_UnorderedGroup_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1538,7 +1551,7 @@ protected class UnorderedModifiers_UnorderedGroup_1 extends UnorderedGroupToken 
 
 }
 
-// final?="final"?
+// final?='final'?
 protected class UnorderedModifiers_FinalAssignment_1_0 extends AssignmentToken  {
 	
 	public UnorderedModifiers_FinalAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1572,7 +1585,7 @@ protected class UnorderedModifiers_FinalAssignment_1_0 extends AssignmentToken  
 
 }
 
-// abstract?="abstract"?
+// abstract?='abstract'?
 protected class UnorderedModifiers_AbstractAssignment_1_1 extends AssignmentToken  {
 	
 	public UnorderedModifiers_AbstractAssignment_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1607,7 +1620,7 @@ protected class UnorderedModifiers_AbstractAssignment_1_1 extends AssignmentToke
 
 }
 
-// extern?="extern"?
+// extern?='extern'?
 protected class UnorderedModifiers_ExternAssignment_1_2 extends AssignmentToken  {
 	
 	public UnorderedModifiers_ExternAssignment_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

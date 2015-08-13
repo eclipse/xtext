@@ -19,7 +19,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cAlternativeKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -31,16 +31,17 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cElementUnorderedParserRuleCall_1_1_0 = (RuleCall)cElementAssignment_1_1.eContents().get(0);
 		
 		//Model:
-		//	"alternative" element=Alternative | "unordered" element=Unordered;
+		//	'alternative' element=Alternative
+		//	| 'unordered' element=Unordered;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"alternative" element=Alternative | "unordered" element=Unordered
+		//'alternative' element=Alternative | 'unordered' element=Unordered
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"alternative" element=Alternative
+		//'alternative' element=Alternative
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"alternative"
+		//'alternative'
 		public Keyword getAlternativeKeyword_0_0() { return cAlternativeKeyword_0_0; }
 
 		//element=Alternative
@@ -49,10 +50,10 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Alternative
 		public RuleCall getElementAlternativeParserRuleCall_0_1_0() { return cElementAlternativeParserRuleCall_0_1_0; }
 
-		//"unordered" element=Unordered
+		//'unordered' element=Unordered
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"unordered"
+		//'unordered'
 		public Keyword getUnorderedKeyword_1_0() { return cUnorderedKeyword_1_0; }
 
 		//element=Unordered
@@ -63,7 +64,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AlternativeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Alternative");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Alternative");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -73,13 +74,14 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRootDeclarationRecursiveClassDeclarationParserRuleCall_3_0 = (RuleCall)cRootDeclarationAssignment_3.eContents().get(0);
 		
 		//Alternative:
-		//	"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration;
+		//	'package' name=FQN ';'
+		//	rootDeclaration=RecursiveClassDeclaration;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration
+		//'package' name=FQN ';' rootDeclaration=RecursiveClassDeclaration
 		public Group getGroup() { return cGroup; }
 
-		//"package"
+		//'package'
 		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
 
 		//name=FQN
@@ -88,7 +90,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 
 		//rootDeclaration=RecursiveClassDeclaration
@@ -99,7 +101,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -107,19 +109,19 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN:
-		//	ID ("." ID)*;
+		//	ID ('.' ID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)*
+		//ID ('.' ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)*
+		//('.' ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ID
@@ -127,7 +129,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class RecursiveClassDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RecursiveClassDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.RecursiveClassDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cModifiersAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cModifiersAlternativeClassModifiersParserRuleCall_0_0 = (RuleCall)cModifiersAssignment_0.eContents().get(0);
@@ -140,10 +142,12 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//RecursiveClassDeclaration:
-		//	modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}";
+		//	modifiers=AlternativeClassModifiers 'class' name=ID '{'
+		//	members+=RecursiveClassDeclaration*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}"
+		//modifiers=AlternativeClassModifiers 'class' name=ID '{' members+=RecursiveClassDeclaration* '}'
 		public Group getGroup() { return cGroup; }
 
 		//modifiers=AlternativeClassModifiers
@@ -152,7 +156,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//AlternativeClassModifiers
 		public RuleCall getModifiersAlternativeClassModifiersParserRuleCall_0_0() { return cModifiersAlternativeClassModifiersParserRuleCall_0_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -161,7 +165,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
 		//members+=RecursiveClassDeclaration*
@@ -170,12 +174,12 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//RecursiveClassDeclaration
 		public RuleCall getMembersRecursiveClassDeclarationParserRuleCall_4_0() { return cMembersRecursiveClassDeclarationParserRuleCall_4_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class AlternativeClassModifiersElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AlternativeClassModifiers");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.AlternativeClassModifiers");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModifiersAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -188,35 +192,38 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cVisibilityAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_1_3_0 = (RuleCall)cVisibilityAssignment_1_3.eContents().get(0);
 		
-		//AlternativeClassModifiers returns Modifiers:
-		//	{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?);
+		//AlternativeClassModifiers Modifiers:
+		//	{Modifiers} (final?='final'
+		//	| abstract?='abstract'
+		//	| extern?='extern'
+		//	| visibility=Visibility?)
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?)
+		//{Modifiers} (final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
 		public Group getGroup() { return cGroup; }
 
 		//{Modifiers}
 		public Action getModifiersAction_0() { return cModifiersAction_0; }
 
-		//final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?
+		//(final?='final' | abstract?='abstract' | extern?='extern' | visibility=Visibility?)
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//final?="final"
+		//final?='final'
 		public Assignment getFinalAssignment_1_0() { return cFinalAssignment_1_0; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_1_0_0() { return cFinalFinalKeyword_1_0_0; }
 
-		//abstract?="abstract"
+		//abstract?='abstract'
 		public Assignment getAbstractAssignment_1_1() { return cAbstractAssignment_1_1; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_1_1_0() { return cAbstractAbstractKeyword_1_1_0; }
 
-		//extern?="extern"
+		//extern?='extern'
 		public Assignment getExternAssignment_1_2() { return cExternAssignment_1_2; }
 
-		//"extern"
+		//'extern'
 		public Keyword getExternExternKeyword_1_2_0() { return cExternExternKeyword_1_2_0; }
 
 		//visibility=Visibility?
@@ -227,7 +234,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class UnorderedElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Unordered");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Unordered");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -237,13 +244,14 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRootDeclarationSimpleClassDeclarationParserRuleCall_3_0 = (RuleCall)cRootDeclarationAssignment_3.eContents().get(0);
 		
 		//Unordered:
-		//	"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration;
+		//	'package' name=FQN ';'
+		//	rootDeclaration=SimpleClassDeclaration;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration
+		//'package' name=FQN ';' rootDeclaration=SimpleClassDeclaration
 		public Group getGroup() { return cGroup; }
 
-		//"package"
+		//'package'
 		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
 
 		//name=FQN
@@ -252,7 +260,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 
 		//rootDeclaration=SimpleClassDeclaration
@@ -263,7 +271,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SimpleClassDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleClassDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.SimpleClassDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cModifiersAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cModifiersUnorderedModifiersParserRuleCall_0_0 = (RuleCall)cModifiersAssignment_0.eContents().get(0);
@@ -276,10 +284,12 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//SimpleClassDeclaration:
-		//	modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}";
+		//	modifiers=UnorderedModifiers 'class' name=ID '{'
+		//	members+=ClassMember*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}"
+		//modifiers=UnorderedModifiers 'class' name=ID '{' members+=ClassMember* '}'
 		public Group getGroup() { return cGroup; }
 
 		//modifiers=UnorderedModifiers
@@ -288,7 +298,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//UnorderedModifiers
 		public RuleCall getModifiersUnorderedModifiersParserRuleCall_0_0() { return cModifiersUnorderedModifiersParserRuleCall_0_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -297,7 +307,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
 		//members+=ClassMember*
@@ -306,12 +316,12 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ClassMember
 		public RuleCall getMembersClassMemberParserRuleCall_4_0() { return cMembersClassMemberParserRuleCall_4_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 
 	public class ClassMemberElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClassMember");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.ClassMember");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cModifiersAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cModifiersUnorderedModifiersParserRuleCall_0_0 = (RuleCall)cModifiersAssignment_0.eContents().get(0);
@@ -321,10 +331,10 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ClassMember:
-		//	modifiers=UnorderedModifiers "var" name=ID ";";
+		//	modifiers=UnorderedModifiers 'var' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//modifiers=UnorderedModifiers "var" name=ID ";"
+		//modifiers=UnorderedModifiers 'var' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
 		//modifiers=UnorderedModifiers
@@ -333,7 +343,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//UnorderedModifiers
 		public RuleCall getModifiersUnorderedModifiersParserRuleCall_0_0() { return cModifiersUnorderedModifiersParserRuleCall_0_0; }
 
-		//"var"
+		//'var'
 		public Keyword getVarKeyword_1() { return cVarKeyword_1; }
 
 		//name=ID
@@ -342,12 +352,12 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class UnorderedModifiersElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedModifiers");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.UnorderedModifiers");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModifiersAction_0 = (Action)cGroup.eContents().get(0);
 		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
@@ -361,34 +371,37 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_1_3_0 = (RuleCall)cVisibilityAssignment_1_3.eContents().get(0);
 		
 		//UnorderedModifiers:
-		//	{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?);
+		//	{Modifiers} (final?='final'?
+		//	& abstract?='abstract'?
+		//	& extern?='extern'?
+		//	& visibility=Visibility?);
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?)
+		//{Modifiers} (final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 		public Group getGroup() { return cGroup; }
 
 		//{Modifiers}
 		public Action getModifiersAction_0() { return cModifiersAction_0; }
 
-		//final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?
+		//(final?='final'? & abstract?='abstract'? & extern?='extern'? & visibility=Visibility?)
 		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
 
-		//final?="final"?
+		//final?='final'?
 		public Assignment getFinalAssignment_1_0() { return cFinalAssignment_1_0; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_1_0_0() { return cFinalFinalKeyword_1_0_0; }
 
-		//abstract?="abstract"?
+		//abstract?='abstract'?
 		public Assignment getAbstractAssignment_1_1() { return cAbstractAssignment_1_1; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_1_1_0() { return cAbstractAbstractKeyword_1_1_0; }
 
-		//extern?="extern"?
+		//extern?='extern'?
 		public Assignment getExternAssignment_1_2() { return cExternAssignment_1_2; }
 
-		//"extern"
+		//'extern'
 		public Keyword getExternExternKeyword_1_2_0() { return cExternExternKeyword_1_2_0; }
 
 		//visibility=Visibility?
@@ -400,7 +413,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class VisibilityElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Visibility");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Visibility");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cPUBLICEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cPUBLICPublicKeyword_0_0 = (Keyword)cPUBLICEnumLiteralDeclaration_0.eContents().get(0);
@@ -410,28 +423,28 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cPRIVATEPrivateKeyword_2_0 = (Keyword)cPRIVATEEnumLiteralDeclaration_2.eContents().get(0);
 		
 		//enum Visibility:
-		//	PUBLIC="public" | PROTECTED="protected" | PRIVATE="private";
+		//	PUBLIC='public' | PROTECTED='protected' | PRIVATE='private';
 		public EnumRule getRule() { return rule; }
 
-		//PUBLIC="public" | PROTECTED="protected" | PRIVATE="private"
+		//PUBLIC='public' | PROTECTED='protected' | PRIVATE='private'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//PUBLIC="public"
+		//PUBLIC='public'
 		public EnumLiteralDeclaration getPUBLICEnumLiteralDeclaration_0() { return cPUBLICEnumLiteralDeclaration_0; }
 
-		//"public"
+		//'public'
 		public Keyword getPUBLICPublicKeyword_0_0() { return cPUBLICPublicKeyword_0_0; }
 
-		//PROTECTED="protected"
+		//PROTECTED='protected'
 		public EnumLiteralDeclaration getPROTECTEDEnumLiteralDeclaration_1() { return cPROTECTEDEnumLiteralDeclaration_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getPROTECTEDProtectedKeyword_1_0() { return cPROTECTEDProtectedKeyword_1_0; }
 
-		//PRIVATE="private"
+		//PRIVATE='private'
 		public EnumLiteralDeclaration getPRIVATEEnumLiteralDeclaration_2() { return cPRIVATEEnumLiteralDeclaration_2; }
 
-		//"private"
+		//'private'
 		public Keyword getPRIVATEPrivateKeyword_2_0() { return cPRIVATEPrivateKeyword_2_0; }
 	}
 	
@@ -495,7 +508,8 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	"alternative" element=Alternative | "unordered" element=Unordered;
+	//	'alternative' element=Alternative
+	//	| 'unordered' element=Unordered;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -505,7 +519,8 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Alternative:
-	//	"package" name=FQN ";" rootDeclaration=RecursiveClassDeclaration;
+	//	'package' name=FQN ';'
+	//	rootDeclaration=RecursiveClassDeclaration;
 	public AlternativeElements getAlternativeAccess() {
 		return pAlternative;
 	}
@@ -515,7 +530,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FQN:
-	//	ID ("." ID)*;
+	//	ID ('.' ID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -525,7 +540,9 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//RecursiveClassDeclaration:
-	//	modifiers=AlternativeClassModifiers "class" name=ID "{" members+=RecursiveClassDeclaration* "}";
+	//	modifiers=AlternativeClassModifiers 'class' name=ID '{'
+	//	members+=RecursiveClassDeclaration*
+	//	'}';
 	public RecursiveClassDeclarationElements getRecursiveClassDeclarationAccess() {
 		return pRecursiveClassDeclaration;
 	}
@@ -535,7 +552,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//enum Visibility:
-	//	PUBLIC="public" | PROTECTED="protected" | PRIVATE="private";
+	//	PUBLIC='public' | PROTECTED='protected' | PRIVATE='private';
 	public VisibilityElements getVisibilityAccess() {
 		return unknownRuleVisibility;
 	}
@@ -544,8 +561,11 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		return getVisibilityAccess().getRule();
 	}
 
-	//AlternativeClassModifiers returns Modifiers:
-	//	{Modifiers} (final?="final" | abstract?="abstract" | extern?="extern" | visibility=Visibility?);
+	//AlternativeClassModifiers Modifiers:
+	//	{Modifiers} (final?='final'
+	//	| abstract?='abstract'
+	//	| extern?='extern'
+	//	| visibility=Visibility?)
 	public AlternativeClassModifiersElements getAlternativeClassModifiersAccess() {
 		return pAlternativeClassModifiers;
 	}
@@ -555,7 +575,8 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Unordered:
-	//	"package" name=FQN ";" rootDeclaration=SimpleClassDeclaration;
+	//	'package' name=FQN ';'
+	//	rootDeclaration=SimpleClassDeclaration;
 	public UnorderedElements getUnorderedAccess() {
 		return pUnordered;
 	}
@@ -565,7 +586,9 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SimpleClassDeclaration:
-	//	modifiers=UnorderedModifiers "class" name=ID "{" members+=ClassMember* "}";
+	//	modifiers=UnorderedModifiers 'class' name=ID '{'
+	//	members+=ClassMember*
+	//	'}';
 	public SimpleClassDeclarationElements getSimpleClassDeclarationAccess() {
 		return pSimpleClassDeclaration;
 	}
@@ -575,7 +598,7 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ClassMember:
-	//	modifiers=UnorderedModifiers "var" name=ID ";";
+	//	modifiers=UnorderedModifiers 'var' name=ID ';';
 	public ClassMemberElements getClassMemberAccess() {
 		return pClassMember;
 	}
@@ -585,7 +608,10 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//UnorderedModifiers:
-	//	{Modifiers} (final?="final"? & abstract?="abstract"? & extern?="extern"? & visibility=Visibility?);
+	//	{Modifiers} (final?='final'?
+	//	& abstract?='abstract'?
+	//	& extern?='extern'?
+	//	& visibility=Visibility?);
 	public UnorderedModifiersElements getUnorderedModifiersAccess() {
 		return pUnorderedModifiers;
 	}
@@ -595,38 +621,38 @@ public class Bug360834TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

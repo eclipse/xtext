@@ -44,12 +44,14 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
- * 	object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
+ * 	'simple' (single=SingleValue
+ * 	| multi=MultiValue
+ * 	| single=SingleDatatype
+ * 	| multi=MultiDatatype) | 'complex' object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype);
  *
  **/
 
-// "simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | "complex"
+// 'simple' (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype) | 'complex'
 // object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 protected class Model_Alternatives extends AlternativesToken {
 
@@ -80,7 +82,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "simple" (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
+// 'simple' (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -102,7 +104,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "simple"
+// 'simple'
 protected class Model_SimpleKeyword_0_0 extends KeywordToken  {
 	
 	public Model_SimpleKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -123,7 +125,7 @@ protected class Model_SimpleKeyword_0_0 extends KeywordToken  {
 
 }
 
-// single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype
+// (single=SingleValue | multi=MultiValue | single=SingleDatatype | multi=MultiDatatype)
 protected class Model_Alternatives_0_1 extends AlternativesToken {
 
 	public Model_Alternatives_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -334,7 +336,7 @@ protected class Model_MultiAssignment_0_1_3 extends AssignmentToken  {
 
 
 
-// "complex" object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
+// 'complex' object=(SingleValue | MultiValue | SingleDatatype | MultiDatatype)
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -356,7 +358,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "complex"
+// 'complex'
 protected class Model_ComplexKeyword_1_0 extends KeywordToken  {
 	
 	public Model_ComplexKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -461,7 +463,8 @@ protected class Model_ObjectAssignment_1_1 extends AssignmentToken  {
 /************ begin Rule SingleValue ****************
  *
  * SingleValue:
- * 	"id" value=ID | "alternative" value=(ID | STRING) | "string" value=STRING;
+ * 	"id" value=ID
+ * 	| "alternative" value=(ID | STRING) | "string" value=STRING;
  *
  **/
 
@@ -742,7 +745,8 @@ protected class SingleValue_ValueAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule MultiValue ****************
  *
  * MultiValue:
- * 	"ids" value+=ID | "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
+ * 	"ids" value+=ID
+ * 	| "alternatives" value+=(ID | STRING) | "strings" value+=STRING;
  *
  **/
 
@@ -1022,9 +1026,9 @@ protected class MultiValue_ValueAssignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule SingleDatatype ****************
  *
- * SingleDatatype returns SingleValue:
- * 	"datatypeid" value=IdDatatype | "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring"
- * 	value=StringDatatype;
+ * SingleDatatype SingleValue:
+ * 	"datatypeid" value=IdDatatype
+ * 	| "datatypealternative" value=(IdDatatype | StringDatatype) | "datatypestring" value=StringDatatype
  *
  **/
 
@@ -1305,9 +1309,9 @@ protected class SingleDatatype_ValueAssignment_2_1 extends AssignmentToken  {
 
 /************ begin Rule MultiDatatype ****************
  *
- * MultiDatatype returns MultiValue:
- * 	"datatypeids" value+=IdDatatype | "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings"
- * 	value+=StringDatatype;
+ * MultiDatatype MultiValue:
+ * 	"datatypeids" value+=IdDatatype
+ * 	| "datatypealternatives" value+=(IdDatatype | StringDatatype) | "datatypestrings" value+=StringDatatype
  *
  **/
 

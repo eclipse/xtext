@@ -239,7 +239,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"stateKind",
                             		lv_stateKind_3_0, 
-                            		"StateType");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -301,7 +301,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"stateKind",
                             		lv_stateKind_5_0, 
-                            		"StateType");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -366,7 +366,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"stateKind",
                             		lv_stateKind_7_0, 
-                            		"StateType");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage.StateType");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -453,7 +453,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"stateName",
                             		lv_stateName_10_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -490,7 +490,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"label",
                             		lv_label_11_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }

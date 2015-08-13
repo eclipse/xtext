@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"stmt",
         		lv_stmt_0_0, 
-        		"CopyFieldNameToVariableStmt");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug381381TestLanguage.CopyFieldNameToVariableStmt");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -164,7 +164,7 @@ ruleCopyFieldNameToVariableStmt returns [EObject current=null]
        			$current, 
        			"line",
         		lv_line_6_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -186,7 +186,7 @@ ruleCopyFieldNameToVariableStmt returns [EObject current=null]
        			$current, 
        			"column",
         		lv_column_8_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -232,7 +232,7 @@ ruleCopyFieldNameToVariableStmt returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_13_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

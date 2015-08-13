@@ -34,7 +34,7 @@ RULE_WS :
 		'\t' |
 		'\r' |
 		'\n'
-	)+ {skip();}
+	)+ { skip(); }
 ;
 
 RULE_ANY_OTHER :

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: GeneratedMetamodel.java,v 1.17 2010/04/06 14:10:20 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

@@ -19,7 +19,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	
 	
 	public class MainElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Main");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.LangATestLanguage.Main");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
@@ -27,7 +27,8 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
 		//Main:
-		//	imports+=Import* types+=Type*;
+		//	imports+=Import*
+		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
@@ -47,20 +48,20 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.LangATestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cUriAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cUriSTRINGTerminalRuleCall_1_0 = (RuleCall)cUriAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" uri=STRING;
+		//	'import' uri=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" uri=STRING
+		//'import' uri=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//uri=STRING
@@ -71,7 +72,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.LangATestLanguage.Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -93,13 +94,13 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final RuleCall cImplementsTypeIDTerminalRuleCall_3_2_1_0_1 = (RuleCall)cImplementsTypeCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Type:
-		//	"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?;
+		//	'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?
+		//'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?
 		public Group getGroup() { return cGroup; }
 
-		//"type"
+		//'type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
 
 		//name=ID
@@ -108,13 +109,13 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("extends" extends=[Type])?
+		//('extends' ^extends=[Type])?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_2_0() { return cExtendsKeyword_2_0; }
 
-		//extends=[Type]
+		//^extends=[Type]
 		public Assignment getExtendsAssignment_2_1() { return cExtendsAssignment_2_1; }
 
 		//[Type]
@@ -123,10 +124,10 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getExtendsTypeIDTerminalRuleCall_2_1_0_1() { return cExtendsTypeIDTerminalRuleCall_2_1_0_1; }
 
-		//("implements" implements+=[Type] ("," implements+=[Type])*)?
+		//('implements' implements+=[Type] (',' implements+=[Type])*)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"implements"
+		//'implements'
 		public Keyword getImplementsKeyword_3_0() { return cImplementsKeyword_3_0; }
 
 		//implements+=[Type]
@@ -138,10 +139,10 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getImplementsTypeIDTerminalRuleCall_3_1_0_1() { return cImplementsTypeIDTerminalRuleCall_3_1_0_1; }
 
-		//("," implements+=[Type])*
+		//(',' implements+=[Type])*
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
 
 		//implements+=[Type]
@@ -201,7 +202,8 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 
 	
 	//Main:
-	//	imports+=Import* types+=Type*;
+	//	imports+=Import*
+	//	types+=Type*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -211,7 +213,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Import:
-	//	"import" uri=STRING;
+	//	'import' uri=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -221,7 +223,7 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Type:
-	//	"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] ("," implements+=[Type])*)?;
+	//	'type' name=ID ('extends' ^extends=[Type])? ('implements' implements+=[Type] (',' implements+=[Type])*)?;
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -231,38 +233,38 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

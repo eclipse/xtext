@@ -98,7 +98,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"modelFeatures",
         		lv_modelFeatures_2_0, 
-        		"ModelFeatures");
+        		"org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTestLanguage.ModelFeatures");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -142,7 +142,7 @@ ruleModelFeatures returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

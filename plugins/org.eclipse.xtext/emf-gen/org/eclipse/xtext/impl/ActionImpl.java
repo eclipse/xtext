@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: ActionImpl.java,v 1.16 2010/04/06 14:10:05 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

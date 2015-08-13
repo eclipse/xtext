@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_1_0, 
-        		"Alternative");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Alternative");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -118,7 +118,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"element",
         		lv_element_3_0, 
-        		"Unordered");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Unordered");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -161,7 +161,7 @@ ruleAlternative returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"FQN");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -183,7 +183,7 @@ ruleAlternative returns [EObject current=null]
        			$current, 
        			"rootDeclaration",
         		lv_rootDeclaration_3_0, 
-        		"RecursiveClassDeclaration");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.RecursiveClassDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -263,7 +263,7 @@ ruleRecursiveClassDeclaration returns [EObject current=null]
        			$current, 
        			"modifiers",
         		lv_modifiers_0_0, 
-        		"AlternativeClassModifiers");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.AlternativeClassModifiers");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -286,7 +286,7 @@ ruleRecursiveClassDeclaration returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -307,7 +307,7 @@ ruleRecursiveClassDeclaration returns [EObject current=null]
        			$current, 
        			"members",
         		lv_members_4_0, 
-        		"RecursiveClassDeclaration");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.RecursiveClassDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -404,7 +404,7 @@ ruleAlternativeClassModifiers returns [EObject current=null]
        			$current, 
        			"visibility",
         		lv_visibility_4_0, 
-        		"Visibility");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Visibility");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -447,7 +447,7 @@ ruleUnordered returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"FQN");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -469,7 +469,7 @@ ruleUnordered returns [EObject current=null]
        			$current, 
        			"rootDeclaration",
         		lv_rootDeclaration_3_0, 
-        		"SimpleClassDeclaration");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.SimpleClassDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -508,7 +508,7 @@ ruleSimpleClassDeclaration returns [EObject current=null]
        			$current, 
        			"modifiers",
         		lv_modifiers_0_0, 
-        		"UnorderedModifiers");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.UnorderedModifiers");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -531,7 +531,7 @@ ruleSimpleClassDeclaration returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -552,7 +552,7 @@ ruleSimpleClassDeclaration returns [EObject current=null]
        			$current, 
        			"members",
         		lv_members_4_0, 
-        		"ClassMember");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.ClassMember");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -595,7 +595,7 @@ ruleClassMember returns [EObject current=null]
        			$current, 
        			"modifiers",
         		lv_modifiers_0_0, 
-        		"UnorderedModifiers");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.UnorderedModifiers");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -618,7 +618,7 @@ ruleClassMember returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -761,7 +761,7 @@ ruleUnorderedModifiers returns [EObject current=null]
        			$current, 
        			"visibility",
         		lv_visibility_5_0, 
-        		"Visibility");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug360834TestLanguage.Visibility");
 	        afterParserOrEnumRuleCall();
 	    }
 

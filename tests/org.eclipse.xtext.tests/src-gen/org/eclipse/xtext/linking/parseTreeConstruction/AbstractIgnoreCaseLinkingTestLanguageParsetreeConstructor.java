@@ -97,11 +97,13 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	name=ID reference=[Element]? "{" elements+=Element* "}";
+ * 	name=ID reference=[Element]? '{'
+ * 	elements+=Element*
+ * 	'}';
  *
  **/
 
-// name=ID reference=[Element]? "{" elements+=Element* "}"
+// name=ID reference=[Element]? '{' elements+=Element* '}'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -200,7 +202,7 @@ protected class Element_ReferenceAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Element_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Element_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -270,7 +272,7 @@ protected class Element_ElementsAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Element_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Element_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

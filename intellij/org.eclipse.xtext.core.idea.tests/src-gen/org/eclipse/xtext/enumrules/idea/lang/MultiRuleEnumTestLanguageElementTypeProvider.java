@@ -212,135 +212,135 @@ public class MultiRuleEnumTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SomeEnumKeyword_0ElementType() {
 		return Model_SomeEnumKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AAssignment_1ElementType() {
 		return Model_AAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AEnumRuleAEnumRuleCall_1_0ElementType() {
 		return Model_AEnumRuleAEnumRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BAssignment_2ElementType() {
 		return Model_BAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BEnumRuleBEnumRuleCall_2_0ElementType() {
 		return Model_BEnumRuleBEnumRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_CAssignment_3ElementType() {
 		return Model_CAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_CEnumRuleCEnumRuleCall_3_0ElementType() {
 		return Model_CEnumRuleCEnumRuleCall_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleAElementType() {
 		return EnumRuleA_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_AlternativesElementType() {
 		return EnumRuleA_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_AEnumLiteralDeclaration_0ElementType() {
 		return EnumRuleA_AEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_AAKeyword_0_0ElementType() {
 		return EnumRuleA_AAKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_BEnumLiteralDeclaration_1ElementType() {
 		return EnumRuleA_BEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_BBKeyword_1_0ElementType() {
 		return EnumRuleA_BBKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_CEnumLiteralDeclaration_2ElementType() {
 		return EnumRuleA_CEnumLiteralDeclaration_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleA_CCKeyword_2_0ElementType() {
 		return EnumRuleA_CCKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleBElementType() {
 		return EnumRuleB_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_AlternativesElementType() {
 		return EnumRuleB_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_CEnumLiteralDeclaration_0ElementType() {
 		return EnumRuleB_CEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_CCKeyword_0_0ElementType() {
 		return EnumRuleB_CCKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_DEnumLiteralDeclaration_1ElementType() {
 		return EnumRuleB_DEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_DDKeyword_1_0ElementType() {
 		return EnumRuleB_DDKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_EEnumLiteralDeclaration_2ElementType() {
 		return EnumRuleB_EEnumLiteralDeclaration_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleB_EEKeyword_2_0ElementType() {
 		return EnumRuleB_EEKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleCElementType() {
 		return EnumRuleC_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_AlternativesElementType() {
 		return EnumRuleC_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_AEnumLiteralDeclaration_0ElementType() {
 		return EnumRuleC_AEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_AAKeyword_0_0ElementType() {
 		return EnumRuleC_AAKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_DEnumLiteralDeclaration_1ElementType() {
 		return EnumRuleC_DEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_DDKeyword_1_0ElementType() {
 		return EnumRuleC_DDKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_BEnumLiteralDeclaration_2ElementType() {
 		return EnumRuleC_BEnumLiteralDeclaration_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEnumRuleC_BBKeyword_2_0ElementType() {
 		return EnumRuleC_BBKeyword_2_0_ELEMENT_TYPE;
 	}

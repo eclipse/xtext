@@ -15,6 +15,8 @@ import static org.eclipse.xtext.EcoreUtil2.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,6 +41,8 @@ import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Jan Koehnlein
@@ -179,8 +183,7 @@ public class GrammarUtil {
 	public static boolean isEObjectRuleCall(EObject grammarElement) {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
-			return calledRule != null && calledRule instanceof ParserRule
-					&& calledRule.getType().getClassifier() instanceof EClass;
+			return isEObjectRule(calledRule);
 		}
 		return false;
 	}
@@ -189,8 +192,15 @@ public class GrammarUtil {
 	 * @since 2.0
 	 */
 	public static boolean isEObjectRule(EObject grammarElement) {
-		return grammarElement instanceof ParserRule
-				&& ((ParserRule) grammarElement).getType().getClassifier() instanceof EClass;
+		if (grammarElement instanceof ParserRule) {
+			ParserRule rule = (ParserRule) grammarElement;
+			if (rule.isWildcard()) {
+				return true;
+			}
+			TypeRef type = rule.getType();
+			return type != null && type.getClassifier() instanceof EClass;
+		}
+		return false;
 	}
 	
 	/**
@@ -212,6 +222,24 @@ public class GrammarUtil {
 	}
 	
 	/**
+	 * @since 2.9
+	 */
+	public static boolean isEObjectFragmentRuleCall(EObject ele) {
+		if (ele instanceof RuleCall) {
+			AbstractRule rule = ((RuleCall) ele).getRule();
+			return isEObjectFragmentRule(rule);
+		}
+		return false;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public static boolean isEObjectFragmentRule(AbstractRule rule) {
+		return rule instanceof ParserRule && ((ParserRule) rule).isFragment();
+	}
+	
+	/**
 	 * @since 2.0
 	 */
 	public static boolean isAssignedEObjectRuleCall(EObject ele) {
@@ -224,7 +252,7 @@ public class GrammarUtil {
 		if (grammarElement instanceof RuleCall) {
 			AbstractRule calledRule = ((RuleCall) grammarElement).getRule();
 			return calledRule != null && calledRule instanceof ParserRule
-					&& calledRule.getType().getClassifier() instanceof EDataType;
+					&& calledRule.getType() != null && calledRule.getType().getClassifier() instanceof EDataType;
 		}
 		return false;
 	}
@@ -248,56 +276,102 @@ public class GrammarUtil {
 		return false;
 	}
 
+	/**
+	 * @param ruleName
+	 *            the name of the rule that should be found. May be a qualified name with a dot as a delimiter.
+	 */
 	public static AbstractRule findRuleForName(Grammar grammar, String ruleName) {
 		if (ruleName == null)
 			return null;
-		for (AbstractRule rule : grammar.getRules()) {
-			if (ruleName.equals(rule.getName())) {
-				return rule;
-			}
+		int lastIndex = ruleName.lastIndexOf('.');
+		if (lastIndex == -1) {
+			return findRuleForNameRecursively(grammar, null, ruleName, Sets.<Grammar>newHashSet());
+		} else {
+			return findRuleForNameRecursively(grammar, ruleName.substring(0, lastIndex), ruleName.substring(lastIndex + 1), Sets.<Grammar>newHashSet());
 		}
-		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
-			AbstractRule rule = findRuleForName(usedGrammar, ruleName);
-			if (rule != null) {
-				return rule;
+	}
+
+	private static AbstractRule findRuleForNameRecursively(Grammar grammar, String langName, String ruleName, Set<Grammar> visited) {
+		if (visited.add(grammar)) {
+			if (langName == null || langName.equals(grammar.getName())) {
+				for (AbstractRule rule : grammar.getRules()) {
+					if (ruleName.equals(rule.getName())) {
+						return rule;
+					}
+				}
+				if (langName != null) {
+					return null;
+				}
+			}
+			for (Grammar usedGrammar : grammar.getUsedGrammars()) {
+				AbstractRule rule = findRuleForNameRecursively(usedGrammar, langName, ruleName, visited);
+				if (rule != null) {
+					return rule;
+				}
 			}
 		}
 		return null;
 	}
 
 	public static List<Grammar> allUsedGrammars(Grammar grammar) {
-		List<Grammar> grammars = new ArrayList<Grammar>();
-		collectAllUsedGrammars(grammars, grammar);
-		return grammars;
+		Collection<Grammar> visitedGrammars = new LinkedHashSet<Grammar>();
+		for(Grammar used: grammar.getUsedGrammars())
+			collectAllUsedGrammars(used, grammar, visitedGrammars);
+		return new ArrayList<Grammar>(visitedGrammars);
 	}
-
-	private static void collectAllUsedGrammars(List<Grammar> grammars, Grammar grammar) {
-		grammars.addAll(grammar.getUsedGrammars());
-		for (Grammar g : grammar.getUsedGrammars())
-			collectAllUsedGrammars(grammars, g);
+	
+	private static void collectAllUsedGrammars(Grammar grammar, Grammar start, Collection<Grammar> result) {
+		if (grammar == start || !result.add(grammar))
+			return;
+		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+			collectAllUsedGrammars(usedGrammar, start, result);
+		}
 	}
 
 	public static List<AbstractRule> allRules(Grammar grammar) {
-		final List<AbstractRule> result = new ArrayList<AbstractRule>();
-		final Set<String> names = new HashSet<String>();
-		final Set<Grammar> grammars = new HashSet<Grammar>();
-		collectAllRules(grammar, result, grammars, names);
-		return result;
+		final Set<AbstractRule> result = Sets.newLinkedHashSet();
+		final Set<AbstractRule> explicitlyCalled = Sets.newHashSet();
+		final Set<String> seenNames = Sets.newHashSet();
+		final Set<Grammar> seenGrammars = Sets.newHashSet();
+		collectAllRules(grammar, result, explicitlyCalled, seenNames, seenGrammars);
+		return Lists.newArrayList(result);
 	}
 
-	private static void collectAllRules(Grammar grammar, List<AbstractRule> result, Set<Grammar> visitedGrammars,
-			Set<String> knownRulenames) {
-		if (!visitedGrammars.add(grammar))
+	private static void collectAllRules(
+			Grammar grammar,
+			Set<AbstractRule> result,
+			Set<AbstractRule> explicitlyCalled,
+			Set<String> seenNames,
+			Set<Grammar> seenGrammars) {
+		if (!seenGrammars.add(grammar))
 			return;
-
 		for (AbstractRule rule : grammar.getRules()) {
-			if (knownRulenames.add(rule.getName())) {
+			// we need to iterate the rules twice in case an explicit call to a
+			// rule is made from a rule defined later
+			// this explicitly called rule needs to be added
+			// to the set of all rules even though it may 
+			// have been specialized in the sub grammar
+			if (!seenNames.contains(rule.getName()) || explicitlyCalled.contains(rule)) {
+				AbstractElement body = rule.getAlternatives();
+				if (body != null) {
+					Iterator<EObject> contents = eAll(body);
+					while(contents.hasNext()) {
+						EObject content = contents.next();
+						if (content instanceof RuleCall) {
+							AbstractRule calledRule = ((RuleCall) content).getRule();
+							explicitlyCalled.add(calledRule);
+						}
+					}
+				}
+			}
+		}
+		for (AbstractRule rule : grammar.getRules()) {
+			if (seenNames.add(rule.getName()) || explicitlyCalled.contains(rule)) {
 				result.add(rule);
 			}
 		}
-
 		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
-			collectAllRules(usedGrammar, result, visitedGrammars, knownRulenames);
+			collectAllRules(usedGrammar, result, explicitlyCalled, seenNames, seenGrammars);
 		}
 	}
 
@@ -349,8 +423,13 @@ public class GrammarUtil {
 			final BidiIterator<INode> leafNodes = node.getAsTreeIterable().iterator();
 			while (leafNodes.hasPrevious()) {
 				INode previous = leafNodes.previous();
-				if (previous instanceof ILeafNode && !((ILeafNode) previous).isHidden())
-					return previous.getText();
+				if (previous instanceof ILeafNode && !((ILeafNode) previous).isHidden()) {
+					String result = previous.getText();
+					if (result != null && result.startsWith("^")) {
+						result = result.substring(1);
+					}
+					return result;
+				}
 			}
 		}
 		return null;

@@ -192,7 +192,7 @@ public class InternalActionTestLanguage2Parser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"disjuncts",
             	            		lv_disjuncts_3_0, 
-            	            		"Value");
+            	            		"org.eclipse.xtext.testlanguages.ActionTestLanguage2.Value");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

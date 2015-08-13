@@ -18,6 +18,7 @@ import org.eclipse.xtext.xtextTest.Action;
 import org.eclipse.xtext.xtextTest.Alternatives;
 import org.eclipse.xtext.xtextTest.Assignment;
 import org.eclipse.xtext.xtextTest.CharacterRange;
+import org.eclipse.xtext.xtextTest.ConditionalBranch;
 import org.eclipse.xtext.xtextTest.CrossReference;
 import org.eclipse.xtext.xtextTest.EnumLiteralDeclaration;
 import org.eclipse.xtext.xtextTest.EnumRule;
@@ -25,12 +26,15 @@ import org.eclipse.xtext.xtextTest.GeneratedMetamodel;
 import org.eclipse.xtext.xtextTest.Grammar;
 import org.eclipse.xtext.xtextTest.Group;
 import org.eclipse.xtext.xtextTest.Keyword;
+import org.eclipse.xtext.xtextTest.NamedArgument;
 import org.eclipse.xtext.xtextTest.NegatedToken;
+import org.eclipse.xtext.xtextTest.Parameter;
 import org.eclipse.xtext.xtextTest.ParserRule;
 import org.eclipse.xtext.xtextTest.ReferencedMetamodel;
 import org.eclipse.xtext.xtextTest.RuleCall;
 import org.eclipse.xtext.xtextTest.TerminalRule;
 import org.eclipse.xtext.xtextTest.TypeRef;
+import org.eclipse.xtext.xtextTest.UnorderedGroup;
 import org.eclipse.xtext.xtextTest.UntilToken;
 import org.eclipse.xtext.xtextTest.Wildcard;
 import org.eclipse.xtext.xtextTest.XtextTestFactory;
@@ -91,6 +95,13 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass parameterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass typeRefEClass = null;
 
   /**
@@ -126,6 +137,13 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass namedArgumentEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass assignmentEClass = null;
 
   /**
@@ -134,6 +152,13 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * @generated
    */
   private EClass crossReferenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass groupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -175,6 +200,13 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass eofEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass enumRuleEClass = null;
 
   /**
@@ -196,7 +228,14 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass groupEClass = null;
+  private EClass conditionalBranchEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -356,19 +395,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getAbstractRule_Name()
-  {
-    return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EReference getAbstractRule_Type()
   {
-    return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
+    return (EReference)abstractRuleEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -378,7 +407,17 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    */
   public EReference getAbstractRule_Alternatives()
   {
-    return (EReference)abstractRuleEClass.getEStructuralFeatures().get(2);
+    return (EReference)abstractRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractRule_Name()
+  {
+    return (EAttribute)abstractRuleEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -456,7 +495,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getParserRule_DefinesHiddenTokens()
+  public EAttribute getParserRule_Fragment()
   {
     return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(0);
   }
@@ -466,9 +505,59 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getParserRule_Wildcard()
+  {
+    return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParserRule_DefinesHiddenTokens()
+  {
+    return (EAttribute)parserRuleEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EReference getParserRule_HiddenTokens()
   {
-    return (EReference)parserRuleEClass.getEStructuralFeatures().get(1);
+    return (EReference)parserRuleEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParserRule_Parameters()
+  {
+    return (EReference)parserRuleEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getParameter()
+  {
+    return parameterEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getParameter_Name()
+  {
+    return (EAttribute)parameterEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -519,6 +608,26 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
   public EAttribute getAbstractElement_Cardinality()
   {
     return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractElement_Predicated()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAbstractElement_FirstSetPredicated()
+  {
+    return (EAttribute)abstractElementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -606,6 +715,56 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getRuleCall_Arguments()
+  {
+    return (EReference)ruleCallEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNamedArgument()
+  {
+    return namedArgumentEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNamedArgument_LiteralValue()
+  {
+    return (EAttribute)namedArgumentEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNamedArgument_Parameter()
+  {
+    return (EReference)namedArgumentEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getNamedArgument_Value()
+  {
+    return (EReference)namedArgumentEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAssignment()
   {
     return assignmentEClass;
@@ -676,9 +835,39 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getGroup()
+  {
+    return groupEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getGroup_Elements()
+  {
+    return (EReference)groupEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getTerminalRule()
   {
     return terminalRuleEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTerminalRule_Fragment()
+  {
+    return (EAttribute)terminalRuleEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -736,6 +925,16 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEOF()
+  {
+    return eofEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getEnumRule()
   {
     return enumRuleEClass;
@@ -786,7 +985,7 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAlternatives_Groups()
+  public EReference getAlternatives_Elements()
   {
     return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
   }
@@ -796,9 +995,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getGroup()
+  public EClass getConditionalBranch()
   {
-    return groupEClass;
+    return conditionalBranchEClass;
   }
 
   /**
@@ -806,9 +1005,49 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getGroup_Tokens()
+  public EAttribute getConditionalBranch_Filtered()
   {
-    return (EReference)groupEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)conditionalBranchEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConditionalBranch_Parameter()
+  {
+    return (EReference)conditionalBranchEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConditionalBranch_GuardedElement()
+  {
+    return (EReference)conditionalBranchEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getUnorderedGroup()
+  {
+    return unorderedGroupEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedGroup_Elements()
+  {
+    return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -880,9 +1119,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     createEReference(grammarEClass, GRAMMAR__RULES);
 
     abstractRuleEClass = createEClass(ABSTRACT_RULE);
-    createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
     createEReference(abstractRuleEClass, ABSTRACT_RULE__TYPE);
     createEReference(abstractRuleEClass, ABSTRACT_RULE__ALTERNATIVES);
+    createEAttribute(abstractRuleEClass, ABSTRACT_RULE__NAME);
 
     abstractMetamodelDeclarationEClass = createEClass(ABSTRACT_METAMODEL_DECLARATION);
     createEReference(abstractMetamodelDeclarationEClass, ABSTRACT_METAMODEL_DECLARATION__EPACKAGE);
@@ -894,8 +1133,14 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     referencedMetamodelEClass = createEClass(REFERENCED_METAMODEL);
 
     parserRuleEClass = createEClass(PARSER_RULE);
+    createEAttribute(parserRuleEClass, PARSER_RULE__FRAGMENT);
+    createEAttribute(parserRuleEClass, PARSER_RULE__WILDCARD);
     createEAttribute(parserRuleEClass, PARSER_RULE__DEFINES_HIDDEN_TOKENS);
     createEReference(parserRuleEClass, PARSER_RULE__HIDDEN_TOKENS);
+    createEReference(parserRuleEClass, PARSER_RULE__PARAMETERS);
+
+    parameterEClass = createEClass(PARAMETER);
+    createEAttribute(parameterEClass, PARAMETER__NAME);
 
     typeRefEClass = createEClass(TYPE_REF);
     createEReference(typeRefEClass, TYPE_REF__METAMODEL);
@@ -903,6 +1148,8 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     abstractElementEClass = createEClass(ABSTRACT_ELEMENT);
     createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__CARDINALITY);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__PREDICATED);
+    createEAttribute(abstractElementEClass, ABSTRACT_ELEMENT__FIRST_SET_PREDICATED);
 
     actionEClass = createEClass(ACTION);
     createEReference(actionEClass, ACTION__TYPE);
@@ -914,6 +1161,12 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     ruleCallEClass = createEClass(RULE_CALL);
     createEReference(ruleCallEClass, RULE_CALL__RULE);
+    createEReference(ruleCallEClass, RULE_CALL__ARGUMENTS);
+
+    namedArgumentEClass = createEClass(NAMED_ARGUMENT);
+    createEAttribute(namedArgumentEClass, NAMED_ARGUMENT__LITERAL_VALUE);
+    createEReference(namedArgumentEClass, NAMED_ARGUMENT__PARAMETER);
+    createEReference(namedArgumentEClass, NAMED_ARGUMENT__VALUE);
 
     assignmentEClass = createEClass(ASSIGNMENT);
     createEAttribute(assignmentEClass, ASSIGNMENT__FEATURE);
@@ -924,7 +1177,11 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     createEReference(crossReferenceEClass, CROSS_REFERENCE__TYPE);
     createEReference(crossReferenceEClass, CROSS_REFERENCE__TERMINAL);
 
+    groupEClass = createEClass(GROUP);
+    createEReference(groupEClass, GROUP__ELEMENTS);
+
     terminalRuleEClass = createEClass(TERMINAL_RULE);
+    createEAttribute(terminalRuleEClass, TERMINAL_RULE__FRAGMENT);
 
     abstractNegatedTokenEClass = createEClass(ABSTRACT_NEGATED_TOKEN);
     createEReference(abstractNegatedTokenEClass, ABSTRACT_NEGATED_TOKEN__TERMINAL);
@@ -935,6 +1192,8 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     wildcardEClass = createEClass(WILDCARD);
 
+    eofEClass = createEClass(EOF);
+
     enumRuleEClass = createEClass(ENUM_RULE);
 
     enumLiteralDeclarationEClass = createEClass(ENUM_LITERAL_DECLARATION);
@@ -942,10 +1201,15 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     createEReference(enumLiteralDeclarationEClass, ENUM_LITERAL_DECLARATION__LITERAL);
 
     alternativesEClass = createEClass(ALTERNATIVES);
-    createEReference(alternativesEClass, ALTERNATIVES__GROUPS);
+    createEReference(alternativesEClass, ALTERNATIVES__ELEMENTS);
 
-    groupEClass = createEClass(GROUP);
-    createEReference(groupEClass, GROUP__TOKENS);
+    conditionalBranchEClass = createEClass(CONDITIONAL_BRANCH);
+    createEAttribute(conditionalBranchEClass, CONDITIONAL_BRANCH__FILTERED);
+    createEReference(conditionalBranchEClass, CONDITIONAL_BRANCH__PARAMETER);
+    createEReference(conditionalBranchEClass, CONDITIONAL_BRANCH__GUARDED_ELEMENT);
+
+    unorderedGroupEClass = createEClass(UNORDERED_GROUP);
+    createEReference(unorderedGroupEClass, UNORDERED_GROUP__ELEMENTS);
 
     characterRangeEClass = createEClass(CHARACTER_RANGE);
     createEReference(characterRangeEClass, CHARACTER_RANGE__LEFT);
@@ -992,15 +1256,18 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     ruleCallEClass.getESuperTypes().add(this.getAbstractElement());
     assignmentEClass.getESuperTypes().add(this.getAbstractElement());
     crossReferenceEClass.getESuperTypes().add(this.getAbstractElement());
+    groupEClass.getESuperTypes().add(this.getAbstractElement());
     terminalRuleEClass.getESuperTypes().add(this.getAbstractRule());
     abstractNegatedTokenEClass.getESuperTypes().add(this.getAbstractElement());
     negatedTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
     untilTokenEClass.getESuperTypes().add(this.getAbstractNegatedToken());
     wildcardEClass.getESuperTypes().add(this.getAbstractElement());
+    eofEClass.getESuperTypes().add(this.getAbstractElement());
     enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
     enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
     alternativesEClass.getESuperTypes().add(this.getAbstractElement());
-    groupEClass.getESuperTypes().add(this.getAbstractElement());
+    conditionalBranchEClass.getESuperTypes().add(this.getAbstractElement());
+    unorderedGroupEClass.getESuperTypes().add(this.getAbstractElement());
     characterRangeEClass.getESuperTypes().add(this.getAbstractElement());
 
     // Initialize classes and features; add operations and parameters
@@ -1013,9 +1280,9 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     initEReference(getGrammar_Rules(), this.getAbstractRule(), null, "rules", null, 0, -1, Grammar.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractRuleEClass, AbstractRule.class, "AbstractRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAbstractRule_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractRule_Type(), this.getTypeRef(), null, "type", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getAbstractRule_Alternatives(), this.getAbstractElement(), null, "alternatives", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractRule_Name(), theEcorePackage.getEString(), "name", null, 0, 1, AbstractRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractMetamodelDeclarationEClass, AbstractMetamodelDeclaration.class, "AbstractMetamodelDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAbstractMetamodelDeclaration_EPackage(), theEcorePackage.getEPackage(), null, "ePackage", null, 0, 1, AbstractMetamodelDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1027,8 +1294,14 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     initEClass(referencedMetamodelEClass, ReferencedMetamodel.class, "ReferencedMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(parserRuleEClass, ParserRule.class, "ParserRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParserRule_Fragment(), theEcorePackage.getEBoolean(), "fragment", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getParserRule_Wildcard(), theEcorePackage.getEBoolean(), "wildcard", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getParserRule_DefinesHiddenTokens(), theEcorePackage.getEBoolean(), "definesHiddenTokens", null, 0, 1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getParserRule_HiddenTokens(), this.getAbstractRule(), null, "hiddenTokens", null, 0, -1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getParserRule_Parameters(), this.getParameter(), null, "parameters", null, 0, -1, ParserRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getParameter_Name(), theEcorePackage.getEString(), "name", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypeRef_Metamodel(), this.getAbstractMetamodelDeclaration(), null, "metamodel", null, 0, 1, TypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1036,6 +1309,8 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     initEClass(abstractElementEClass, AbstractElement.class, "AbstractElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAbstractElement_Cardinality(), theEcorePackage.getEString(), "cardinality", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractElement_Predicated(), theEcorePackage.getEBoolean(), "predicated", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAbstractElement_FirstSetPredicated(), theEcorePackage.getEBoolean(), "firstSetPredicated", null, 0, 1, AbstractElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(actionEClass, Action.class, "Action", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAction_Type(), this.getTypeRef(), null, "type", null, 0, 1, Action.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1047,6 +1322,12 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     initEClass(ruleCallEClass, RuleCall.class, "RuleCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getRuleCall_Rule(), this.getAbstractRule(), null, "rule", null, 0, 1, RuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRuleCall_Arguments(), this.getNamedArgument(), null, "arguments", null, 0, -1, RuleCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(namedArgumentEClass, NamedArgument.class, "NamedArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNamedArgument_LiteralValue(), theEcorePackage.getEBoolean(), "literalValue", null, 0, 1, NamedArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNamedArgument_Parameter(), this.getParameter(), null, "parameter", null, 0, 1, NamedArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getNamedArgument_Value(), this.getParameter(), null, "value", null, 0, 1, NamedArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getAssignment_Feature(), theEcorePackage.getEString(), "feature", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1057,7 +1338,11 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     initEReference(getCrossReference_Type(), this.getTypeRef(), null, "type", null, 0, 1, CrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCrossReference_Terminal(), this.getAbstractElement(), null, "terminal", null, 0, 1, CrossReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGroup_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(terminalRuleEClass, TerminalRule.class, "TerminalRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTerminalRule_Fragment(), theEcorePackage.getEBoolean(), "fragment", null, 0, 1, TerminalRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(abstractNegatedTokenEClass, AbstractNegatedToken.class, "AbstractNegatedToken", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAbstractNegatedToken_Terminal(), this.getAbstractElement(), null, "terminal", null, 0, 1, AbstractNegatedToken.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1068,6 +1353,8 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
 
     initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(eofEClass, org.eclipse.xtext.xtextTest.EOF.class, "EOF", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
     initEClass(enumRuleEClass, EnumRule.class, "EnumRule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(enumLiteralDeclarationEClass, EnumLiteralDeclaration.class, "EnumLiteralDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1075,10 +1362,15 @@ public class XtextTestPackageImpl extends EPackageImpl implements XtextTestPacka
     initEReference(getEnumLiteralDeclaration_Literal(), this.getKeyword(), null, "literal", null, 0, 1, EnumLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(alternativesEClass, Alternatives.class, "Alternatives", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAlternatives_Groups(), this.getAbstractElement(), null, "groups", null, 0, -1, Alternatives.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAlternatives_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, Alternatives.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGroup_Tokens(), this.getAbstractElement(), null, "tokens", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(conditionalBranchEClass, ConditionalBranch.class, "ConditionalBranch", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConditionalBranch_Filtered(), theEcorePackage.getEBoolean(), "filtered", null, 0, 1, ConditionalBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConditionalBranch_Parameter(), this.getParameter(), null, "parameter", null, 0, 1, ConditionalBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getConditionalBranch_GuardedElement(), this.getAbstractElement(), null, "guardedElement", null, 0, 1, ConditionalBranch.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupEClass, UnorderedGroup.class, "UnorderedGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getUnorderedGroup_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(characterRangeEClass, CharacterRange.class, "CharacterRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCharacterRange_Left(), this.getKeyword(), null, "left", null, 0, 1, CharacterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

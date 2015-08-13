@@ -24,11 +24,11 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "Control000a", "Control000d", "RULE_ID", "RULE_WS", "RULE_ANY_OTHER"
     };
     public static final int RULE_ID=6;
+    public static final int Control000d=5;
+    public static final int RULE_ANY_OTHER=8;
     public static final int Control000a=4;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
-    public static final int Control000d=5;
-    public static final int RULE_ANY_OTHER=8;
 
     // delegates
     // delegators
@@ -222,7 +222,7 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }
@@ -252,7 +252,7 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"value",
                     		lv_value_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }
@@ -289,7 +289,7 @@ public class InternalBug301935ExTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"value2",
                     		lv_value2_4_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.parser.antlr.Bug301935TestLanguage.ID");
             	    
 
             }

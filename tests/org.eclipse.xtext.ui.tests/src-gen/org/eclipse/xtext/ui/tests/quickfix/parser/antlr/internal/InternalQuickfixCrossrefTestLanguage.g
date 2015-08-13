@@ -90,7 +90,7 @@ ruleMain returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"doc",
         		lv_doc_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -148,7 +148,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -169,7 +169,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"contained",
         		lv_contained_3_0, 
-        		"Element");
+        		"org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 

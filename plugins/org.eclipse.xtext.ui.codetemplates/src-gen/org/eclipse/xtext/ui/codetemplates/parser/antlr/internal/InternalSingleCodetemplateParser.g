@@ -91,7 +91,8 @@ ruleCodetemplates returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getCodetemplatesAccess().getLanguageGrammarCrossReference_2_0()); 
 	    }
-		ruleFQN		{ 
+		ruleFQN
+		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -109,7 +110,7 @@ ruleCodetemplates returns [EObject current=null]
        			$current, 
        			"templates",
         		lv_templates_3_0, 
-        		"Codetemplate");
+        		"org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.Codetemplate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -149,7 +150,7 @@ ruleCodetemplate returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.STRING");
 	    }
 
 )
@@ -168,7 +169,8 @@ ruleCodetemplate returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getCodetemplateAccess().getContextAbstractRuleCrossReference_2_0_0()); 
 	    }
-		ruleValidID		{ 
+		ruleValidID
+		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -188,7 +190,7 @@ ruleCodetemplate returns [EObject current=null]
        			$current, 
        			"keywordContext",
         		lv_keywordContext_3_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.STRING");
 	    }
 
 )
@@ -205,7 +207,7 @@ ruleCodetemplate returns [EObject current=null]
        			$current, 
        			"body",
         		lv_body_4_0, 
-        		"TemplateBodyWithQuotes");
+        		"org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.TemplateBodyWithQuotes");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -357,7 +359,7 @@ ruleTemplateBody returns [EObject current=null]
        			$current, 
        			"parts",
         		lv_parts_1_0, 
-        		"Literal");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -375,7 +377,7 @@ ruleTemplateBody returns [EObject current=null]
        			$current, 
        			"parts",
         		lv_parts_2_0, 
-        		"VariableOrDollar");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.VariableOrDollar");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -393,7 +395,7 @@ ruleTemplateBody returns [EObject current=null]
        			$current, 
        			"parts",
         		lv_parts_3_0, 
-        		"Literal");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.Literal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -503,7 +505,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ValidID");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -522,7 +524,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ValidID");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -553,7 +555,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_7_0, 
-        		"ValidID");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.ValidID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -597,7 +599,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_11_1, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.STRING");
 	    }
 
     |		{ 
@@ -611,7 +613,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_11_2, 
-        		"FQN");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -646,7 +648,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_15_1, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.STRING");
 	    }
 
     |		{ 
@@ -660,7 +662,7 @@ ruleVariable returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_15_2, 
-        		"FQN");
+        		"org.eclipse.xtext.ui.codetemplates.Codetemplates.FQN");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -842,7 +844,7 @@ ruleLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"LiteralValue");
+        		"org.eclipse.xtext.ui.codetemplates.SingleCodetemplate.LiteralValue");
 	        afterParserOrEnumRuleCall();
 	    }
 

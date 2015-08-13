@@ -68,27 +68,27 @@ public class Bug299237TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelKeyword_0ElementType() {
 		return Model_ModelKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameAssignment_1ElementType() {
 		return Model_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NameIDTerminalRuleCall_1_0ElementType() {
 		return Model_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SemicolonKeyword_2ElementType() {
 		return Model_SemicolonKeyword_2_ELEMENT_TYPE;
 	}

@@ -61,7 +61,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
@@ -1332,71 +1331,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     return _builder;
   }
   
-  public CharSequence compilePsiElement(final Grammar grammar, final AbstractRule rule) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package ");
-    String _psiPackageName = this._ideaPluginClassNames.getPsiPackageName(grammar);
-    _builder.append(_psiPackageName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    {
-      boolean _hasMultipleAssigment = this._ideaPluginExtension.hasMultipleAssigment(rule);
-      if (_hasMultipleAssigment) {
-        _builder.newLine();
-        _builder.append("import java.util.List;");
-        _builder.newLine();
-      }
-    }
-    _builder.newLine();
-    _builder.append("import com.intellij.psi.");
-    String _psiElementSuperClassName = this._ideaPluginExtension.getPsiElementSuperClassName(rule);
-    _builder.append(_psiElementSuperClassName, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("public interface ");
-    String _psiElementClassName = this._ideaPluginExtension.getPsiElementClassName(rule);
-    _builder.append(_psiElementClassName, "");
-    _builder.append(" extends ");
-    String _psiElementSuperClassName_1 = this._ideaPluginExtension.getPsiElementSuperClassName(rule);
-    _builder.append(_psiElementSuperClassName_1, "");
-    _builder.append(" {");
-    _builder.newLineIfNotEmpty();
-    {
-      List<Assignment> _assignmentsWithoutName = this._ideaPluginExtension.getAssignmentsWithoutName(rule);
-      for(final Assignment assignment : _assignmentsWithoutName) {
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        String _typeName = this._ideaPluginExtension.getTypeName(assignment);
-        _builder.append(_typeName, "\t");
-        _builder.append(" ");
-        String _getter = this._ideaPluginExtension.getGetter(assignment);
-        _builder.append(_getter, "\t");
-        _builder.append("();");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("void ");
-        String _setter = this._ideaPluginExtension.getSetter(assignment);
-        _builder.append(_setter, "\t");
-        _builder.append("(");
-        String _typeName_1 = this._ideaPluginExtension.getTypeName(assignment);
-        _builder.append(_typeName_1, "\t");
-        _builder.append(" ");
-        String _feature = assignment.getFeature();
-        _builder.append(_feature, "\t");
-        _builder.append(");");
-        _builder.newLineIfNotEmpty();
-      }
-    }
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence compileFileImpl(final Grammar grammar) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
@@ -1966,8 +1900,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(".class);");
     _builder.newLineIfNotEmpty();
     {
-      List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
-      for(final AbstractRule rule : _allRules) {
+      Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
+      for(final AbstractRule rule : _allNonTerminalRules) {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("private static class ");
@@ -2101,9 +2035,8 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     {
-      List<AbstractRule> _allRules_1 = this._ideaPluginExtension.getAllRules(grammar);
-      for(final AbstractRule rule_1 : _allRules_1) {
-        _builder.append("\t");
+      Iterable<AbstractRule> _allNonTerminalRules_1 = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
+      for(final AbstractRule rule_1 : _allNonTerminalRules_1) {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public IGrammarAwareElementType get");
@@ -2126,7 +2059,6 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
           Iterator<AbstractElement> _filter_2 = Iterators.<AbstractElement>filter(_eAllContents_2, AbstractElement.class);
           Iterable<AbstractElement> _iterable_2 = IteratorExtensions.<AbstractElement>toIterable(_filter_2);
           for(final AbstractElement element_2 : _iterable_2) {
-            _builder.append("\t");
             _builder.newLine();
             _builder.append("\t");
             _builder.append("public IGrammarAwareElementType get");
@@ -2690,7 +2622,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   protected Iterable<CrossReference> getCrossReferences(final Grammar grammar) {
-    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
     final Function1<AbstractRule, Iterable<CrossReference>> _function = new Function1<AbstractRule, Iterable<CrossReference>>() {
       @Override
       public Iterable<CrossReference> apply(final AbstractRule it) {
@@ -2706,7 +2638,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
         return IteratorExtensions.<CrossReference>toIterable(_filter_1);
       }
     };
-    List<Iterable<CrossReference>> _map = ListExtensions.<AbstractRule, Iterable<CrossReference>>map(_allRules, _function);
+    Iterable<Iterable<CrossReference>> _map = IterableExtensions.<AbstractRule, Iterable<CrossReference>>map(_allNonTerminalRules, _function);
     return Iterables.<CrossReference>concat(_map);
   }
   
@@ -2741,14 +2673,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   protected Iterable<RuleCall> getRuleCallsWithName(final Grammar grammar, final RuleCall nameRuleCall) {
-    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
     final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
       @Override
       public Iterable<RuleCall> apply(final AbstractRule it) {
         return IdeaPluginGenerator.this.getRuleCallsWithName(it, nameRuleCall);
       }
     };
-    List<Iterable<RuleCall>> _map = ListExtensions.<AbstractRule, Iterable<RuleCall>>map(_allRules, _function);
+    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
     return Iterables.<RuleCall>concat(_map);
   }
   
@@ -2774,14 +2706,14 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   }
   
   protected Iterable<RuleCall> getNameRuleCalls(final Grammar grammar) {
-    List<AbstractRule> _allRules = this._ideaPluginExtension.getAllRules(grammar);
+    Iterable<AbstractRule> _allNonTerminalRules = this._ideaPluginExtension.getAllNonTerminalRules(grammar);
     final Function1<AbstractRule, Iterable<RuleCall>> _function = new Function1<AbstractRule, Iterable<RuleCall>>() {
       @Override
       public Iterable<RuleCall> apply(final AbstractRule it) {
         return IdeaPluginGenerator.this.getNameRuleCalls(it);
       }
     };
-    List<Iterable<RuleCall>> _map = ListExtensions.<AbstractRule, Iterable<RuleCall>>map(_allRules, _function);
+    Iterable<Iterable<RuleCall>> _map = IterableExtensions.<AbstractRule, Iterable<RuleCall>>map(_allNonTerminalRules, _function);
     return Iterables.<RuleCall>concat(_map);
   }
   
@@ -3125,6 +3057,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append("}");
     _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
   
@@ -3147,6 +3080,7 @@ public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
     _builder.append(" {");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
+    _builder.newLine();
     return _builder;
   }
   

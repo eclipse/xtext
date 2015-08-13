@@ -105,6 +105,11 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
         return createParserRuleAdapter();
       }
       @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
+      }
+      @Override
       public Adapter caseTypeRef(TypeRef object)
       {
         return createTypeRefAdapter();
@@ -130,6 +135,11 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
         return createRuleCallAdapter();
       }
       @Override
+      public Adapter caseNamedArgument(NamedArgument object)
+      {
+        return createNamedArgumentAdapter();
+      }
+      @Override
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
@@ -138,6 +148,11 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseCrossReference(CrossReference object)
       {
         return createCrossReferenceAdapter();
+      }
+      @Override
+      public Adapter caseGroup(Group object)
+      {
+        return createGroupAdapter();
       }
       @Override
       public Adapter caseTerminalRule(TerminalRule object)
@@ -165,6 +180,11 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
         return createWildcardAdapter();
       }
       @Override
+      public Adapter caseEOF(EOF object)
+      {
+        return createEOFAdapter();
+      }
+      @Override
       public Adapter caseEnumRule(EnumRule object)
       {
         return createEnumRuleAdapter();
@@ -180,9 +200,14 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
         return createAlternativesAdapter();
       }
       @Override
-      public Adapter caseGroup(Group object)
+      public Adapter caseConditionalBranch(ConditionalBranch object)
       {
-        return createGroupAdapter();
+        return createConditionalBranchAdapter();
+      }
+      @Override
+      public Adapter caseUnorderedGroup(UnorderedGroup object)
+      {
+        return createUnorderedGroupAdapter();
       }
       @Override
       public Adapter caseCharacterRange(CharacterRange object)
@@ -302,6 +327,21 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xtextTest.Parameter
+   * @generated
+   */
+  public Adapter createParameterAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.TypeRef <em>Type Ref</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -377,6 +417,21 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.NamedArgument <em>Named Argument</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xtextTest.NamedArgument
+   * @generated
+   */
+  public Adapter createNamedArgumentAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.Assignment <em>Assignment</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -402,6 +457,21 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCrossReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.Group <em>Group</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xtextTest.Group
+   * @generated
+   */
+  public Adapter createGroupAdapter()
   {
     return null;
   }
@@ -482,6 +552,21 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.EOF <em>EOF</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xtextTest.EOF
+   * @generated
+   */
+  public Adapter createEOFAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.EnumRule <em>Enum Rule</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -527,16 +612,31 @@ public class XtextTestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.Group <em>Group</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.ConditionalBranch <em>Conditional Branch</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.xtextTest.Group
+   * @see org.eclipse.xtext.xtextTest.ConditionalBranch
    * @generated
    */
-  public Adapter createGroupAdapter()
+  public Adapter createConditionalBranchAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtextTest.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.xtextTest.UnorderedGroup
+   * @generated
+   */
+  public Adapter createUnorderedGroupAdapter()
   {
     return null;
   }

@@ -67,6 +67,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
       case SimpleExpressionsPackage.IF_CONDITION: return createIfCondition();
       case SimpleExpressionsPackage.EXPRESSION: return createExpression();
       case SimpleExpressionsPackage.NUMBER_LITERAL: return createNumberLiteral();
+      case SimpleExpressionsPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case SimpleExpressionsPackage.METHOD_CALL: return createMethodCall();
       case SimpleExpressionsPackage.OR_EXPRESSION: return createOrExpression();
       case SimpleExpressionsPackage.AND_EXPRESSION: return createAndExpression();
@@ -82,8 +83,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public IfCondition createIfCondition()
+  public IfCondition createIfCondition()
   {
     IfConditionImpl ifCondition = new IfConditionImpl();
     return ifCondition;
@@ -94,8 +94,7 @@ public IfCondition createIfCondition()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression createExpression()
+  public Expression createExpression()
   {
     ExpressionImpl expression = new ExpressionImpl();
     return expression;
@@ -106,8 +105,7 @@ public Expression createExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NumberLiteral createNumberLiteral()
+  public NumberLiteral createNumberLiteral()
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
     return numberLiteral;
@@ -118,8 +116,18 @@ public NumberLiteral createNumberLiteral()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public MethodCall createMethodCall()
+  public BooleanLiteral createBooleanLiteral()
+  {
+    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
+    return booleanLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MethodCall createMethodCall()
   {
     MethodCallImpl methodCall = new MethodCallImpl();
     return methodCall;
@@ -130,8 +138,7 @@ public MethodCall createMethodCall()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public OrExpression createOrExpression()
+  public OrExpression createOrExpression()
   {
     OrExpressionImpl orExpression = new OrExpressionImpl();
     return orExpression;
@@ -142,8 +149,7 @@ public OrExpression createOrExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public AndExpression createAndExpression()
+  public AndExpression createAndExpression()
   {
     AndExpressionImpl andExpression = new AndExpressionImpl();
     return andExpression;
@@ -154,8 +160,7 @@ public AndExpression createAndExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Comparison createComparison()
+  public Comparison createComparison()
   {
     ComparisonImpl comparison = new ComparisonImpl();
     return comparison;
@@ -166,8 +171,7 @@ public Comparison createComparison()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public NotExpression createNotExpression()
+  public NotExpression createNotExpression()
   {
     NotExpressionImpl notExpression = new NotExpressionImpl();
     return notExpression;
@@ -178,8 +182,7 @@ public NotExpression createNotExpression()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public SimpleExpressionsPackage getSimpleExpressionsPackage()
+  public SimpleExpressionsPackage getSimpleExpressionsPackage()
   {
     return (SimpleExpressionsPackage)getEPackage();
   }

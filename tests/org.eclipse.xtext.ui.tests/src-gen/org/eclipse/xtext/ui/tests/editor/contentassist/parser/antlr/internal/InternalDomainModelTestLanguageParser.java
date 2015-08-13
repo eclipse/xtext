@@ -169,7 +169,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"imports",
             	            		lv_imports_0_0, 
-            	            		"Import");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Import");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -218,7 +218,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"elements",
             	            		lv_elements_1_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -328,7 +328,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"importURI",
                     		lv_importURI_1_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -557,7 +557,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -689,7 +689,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -777,7 +777,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"properties",
             	            		lv_properties_5_0, 
-            	            		"Property");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Property");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -826,7 +826,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
             	           			current, 
             	           			"subClasses",
             	            		lv_subClasses_6_0, 
-            	            		"Class");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Class");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1068,7 +1068,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1220,7 +1220,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalAntlr
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }

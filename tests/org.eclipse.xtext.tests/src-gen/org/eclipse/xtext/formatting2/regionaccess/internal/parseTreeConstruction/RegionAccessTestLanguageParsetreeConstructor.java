@@ -1270,8 +1270,8 @@ protected class Expression_RightAssignment_1_2 extends AssignmentToken  {
 
 /************ begin Rule Primary ****************
  *
- * Primary returns Expression:
- * 	{Named} name=ID | Parenthesized;
+ * Primary Expression:
+ * 	{Named} name=ID | Parenthesized
  *
  **/
 
@@ -1436,8 +1436,8 @@ protected class Primary_ParenthesizedParserRuleCall_1 extends RuleCallToken {
 
 /************ begin Rule Parenthesized ****************
  *
- * Parenthesized returns Expression:
- * 	"(" Expression ")";
+ * Parenthesized Expression:
+ * 	"(" Expression ")"
  *
  **/
 
@@ -1557,7 +1557,8 @@ protected class Parenthesized_RightParenthesisKeyword_2 extends KeywordToken  {
  *
  * Mixed:
  * 	"(" ("unassigned" (ID | Datatype))? ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref"
- * 	ref=[Mixed] | lit=Enum)) ")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
+ * 	ref=[Mixed] | lit=Enum))
+ * 	")" ({AssignedAction.child=current} "action" (body=Mixed "end")?)*;
  *
  **/
 
@@ -1615,7 +1616,7 @@ protected class Mixed_LeftParenthesisKeyword_0 extends KeywordToken  {
 
 }
 
-// {Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
+// ({Action} | Mixed | (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum))
 protected class Mixed_Alternatives_2 extends AlternativesToken {
 
 	public Mixed_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1703,7 +1704,7 @@ protected class Mixed_MixedParserRuleCall_2_1 extends RuleCallToken {
 	}	
 }
 
-// name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum
+// (name=ID | "child" eobj=Mixed | datatype=Datatype | "ref" ref=[Mixed] | lit=Enum)
 protected class Mixed_Alternatives_2_2 extends AlternativesToken {
 
 	public Mixed_Alternatives_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

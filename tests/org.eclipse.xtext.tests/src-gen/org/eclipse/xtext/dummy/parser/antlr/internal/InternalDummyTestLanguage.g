@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.dummy.DummyTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -149,7 +149,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -167,7 +167,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"descriptions",
         		lv_descriptions_3_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

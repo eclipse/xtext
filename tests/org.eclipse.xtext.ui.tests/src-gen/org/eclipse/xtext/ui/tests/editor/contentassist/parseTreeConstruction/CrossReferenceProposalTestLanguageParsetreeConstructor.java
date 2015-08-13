@@ -97,11 +97,12 @@ protected class Model_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Class ****************
  *
  * Class:
- * 	(superClass=[Class] "<-")? name=ID "{" "}";
+ * 	(superClass=[Class] '<-')? name=ID '{'
+ * 	'}';
  *
  **/
 
-// (superClass=[Class] "<-")? name=ID "{" "}"
+// (superClass=[Class] '<-')? name=ID '{' '}'
 protected class Class_Group extends GroupToken {
 	
 	public Class_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -130,7 +131,7 @@ protected class Class_Group extends GroupToken {
 
 }
 
-// (superClass=[Class] "<-")?
+// (superClass=[Class] '<-')?
 protected class Class_Group_0 extends GroupToken {
 	
 	public Class_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -188,7 +189,7 @@ protected class Class_SuperClassAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// "<-"
+// '<-'
 protected class Class_LessThanSignHyphenMinusKeyword_0_1 extends KeywordToken  {
 	
 	public Class_LessThanSignHyphenMinusKeyword_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -245,7 +246,7 @@ protected class Class_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Class_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Class_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -267,7 +268,7 @@ protected class Class_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 
 }
 
-// "}"
+// '}'
 protected class Class_RightCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public Class_RightCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

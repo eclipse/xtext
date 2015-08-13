@@ -158,7 +158,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
             	           			current, 
             	           			"types",
             	            		lv_types_0_0, 
-            	            		"Type");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.Type");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -290,7 +290,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
                            			current, 
                            			"name",
                             		lv_name_0_0, 
-                            		"FQN");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.FQN");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -370,7 +370,7 @@ public class InternalContentAssistCustomizingTestLanguageParser extends Abstract
                            			current, 
                            			"superType",
                             		lv_superType_3_0, 
-                            		"TypeRef");
+                            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage.TypeRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 

@@ -164,99 +164,99 @@ public class FormatterTestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_AlternativesElementType() {
 		return Root_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_IDListParserRuleCall_0ElementType() {
 		return Root_IDListParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_KWListParserRuleCall_1ElementType() {
 		return Root_KWListParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDListElementType() {
 		return IDList_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDList_GroupElementType() {
 		return IDList_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDList_IDListAction_0ElementType() {
 		return IDList_IDListAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDList_IdlistKeyword_1ElementType() {
 		return IDList_IdlistKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDList_IdsAssignment_2ElementType() {
 		return IDList_IdsAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIDList_IdsIDTerminalRuleCall_2_0ElementType() {
 		return IDList_IdsIDTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWListElementType() {
 		return KWList_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_GroupElementType() {
 		return KWList_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_KWListAction_0ElementType() {
 		return KWList_KWListAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_KwlistKeyword_1ElementType() {
 		return KWList_KwlistKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw1Assignment_2ElementType() {
 		return KWList_Kw1Assignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw1Kw1Keyword_2_0ElementType() {
 		return KWList_Kw1Kw1Keyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw2Assignment_3ElementType() {
 		return KWList_Kw2Assignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw2Kw2Keyword_3_0ElementType() {
 		return KWList_Kw2Kw2Keyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw3Assignment_4ElementType() {
 		return KWList_Kw3Assignment_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw3Kw3Keyword_4_0ElementType() {
 		return KWList_Kw3Kw3Keyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw4Assignment_5ElementType() {
 		return KWList_Kw4Assignment_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw4Kw4Keyword_5_0ElementType() {
 		return KWList_Kw4Kw4Keyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw5Assignment_6ElementType() {
 		return KWList_Kw5Assignment_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKWList_Kw5Kw5Keyword_6_0ElementType() {
 		return KWList_Kw5Kw5Keyword_6_0_ELEMENT_TYPE;
 	}

@@ -48,11 +48,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Codetemplates ****************
  *
  * Codetemplates:
- * 	"templates" "for" language=[xtext::Grammar|FQN] templates+=Codetemplate;
+ * 	'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate;
  *
  **/
 
-// "templates" "for" language=[xtext::Grammar|FQN] templates+=Codetemplate
+// 'templates' 'for' language=[xtext::Grammar|FQN] templates+=Codetemplate
 protected class Codetemplates_Group extends GroupToken {
 	
 	public Codetemplates_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -81,7 +81,7 @@ protected class Codetemplates_Group extends GroupToken {
 
 }
 
-// "templates"
+// 'templates'
 protected class Codetemplates_TemplatesKeyword_0 extends KeywordToken  {
 	
 	public Codetemplates_TemplatesKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -102,7 +102,7 @@ protected class Codetemplates_TemplatesKeyword_0 extends KeywordToken  {
 
 }
 
-// "for"
+// 'for'
 protected class Codetemplates_ForKeyword_1 extends KeywordToken  {
 	
 	public Codetemplates_ForKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -214,11 +214,11 @@ protected class Codetemplates_TemplatesAssignment_3 extends AssignmentToken  {
 /************ begin Rule Codetemplate ****************
  *
  * Codetemplate:
- * 	name=STRING "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
+ * 	name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes;
  *
  **/
 
-// name=STRING "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes
+// name=STRING 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING) body=TemplateBodyWithQuotes
 protected class Codetemplate_Group extends GroupToken {
 	
 	public Codetemplate_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -280,7 +280,7 @@ protected class Codetemplate_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// "for"
+// 'for'
 protected class Codetemplate_ForKeyword_1 extends KeywordToken  {
 	
 	public Codetemplate_ForKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -302,7 +302,7 @@ protected class Codetemplate_ForKeyword_1 extends KeywordToken  {
 
 }
 
-// context=[xtext::AbstractRule|ValidID] | keywordContext=STRING
+// (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
 protected class Codetemplate_Alternatives_2 extends AlternativesToken {
 
 	public Codetemplate_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -449,13 +449,14 @@ protected class Codetemplate_BodyAssignment_3 extends AssignmentToken  {
 
 /************ begin Rule TemplateBodyWithQuotes ****************
  *
- * TemplateBodyWithQuotes returns TemplateBody hidden(): // EOL
- * 	">>" TemplateBody;
+ * TemplateBodyWithQuotes TemplateBody hidden():
+ * 	'>>' // EOL
+ * 	TemplateBody
  *
  **/
 
-// // EOL
-// ">>" TemplateBody
+// '>>' // EOL
+// TemplateBody
 protected class TemplateBodyWithQuotes_Group extends GroupToken {
 	
 	public TemplateBodyWithQuotes_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -484,8 +485,7 @@ protected class TemplateBodyWithQuotes_Group extends GroupToken {
 
 }
 
-// // EOL
-// ">>"
+// '>>'
 protected class TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0 extends KeywordToken  {
 	
 	public TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -506,6 +506,7 @@ protected class TemplateBodyWithQuotes_GreaterThanSignGreaterThanSignKeyword_0 e
 
 }
 
+// // EOL
 // TemplateBody
 protected class TemplateBodyWithQuotes_TemplateBodyParserRuleCall_1 extends RuleCallToken {
 	
@@ -896,8 +897,8 @@ protected class TemplatePart_VariableOrDollarParserRuleCall_1 extends RuleCallTo
 
 /************ begin Rule VariableOrDollar ****************
  *
- * VariableOrDollar returns TemplatePart hidden():
- * 	Variable | Dollar;
+ * VariableOrDollar TemplatePart hidden():
+ * 	Variable | Dollar
  *
  **/
 
@@ -1011,13 +1012,14 @@ protected class VariableOrDollar_DollarParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Variable ****************
  *
  * Variable hidden():
- * 	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
- * 	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
+ * 	'${' WS* (name=ValidID
+ * 	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+ * 	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
  *
  **/
 
-// "${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING
-// | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}"
+// '${' WS* (name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING
+// | FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}'
 protected class Variable_Group extends GroupToken {
 	
 	public Variable_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1046,7 +1048,7 @@ protected class Variable_Group extends GroupToken {
 
 }
 
-// "${"
+// '${'
 protected class Variable_DollarSignLeftCurlyBracketKeyword_0 extends KeywordToken  {
 	
 	public Variable_DollarSignLeftCurlyBracketKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1067,8 +1069,8 @@ protected class Variable_DollarSignLeftCurlyBracketKeyword_0 extends KeywordToke
 
 }
 
-// name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN)
-// (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
+// (name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN)
+// (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?)
 protected class Variable_Alternatives_2 extends AlternativesToken {
 
 	public Variable_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1125,8 +1127,8 @@ protected class Variable_NameAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS*
-// parameters+=(STRING | FQN))* WS*)? ")")?
+// (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+// parameters+=(STRING | FQN))* WS*)? ')')?
 protected class Variable_Group_2_1 extends GroupToken {
 	
 	public Variable_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1206,7 +1208,7 @@ protected class Variable_NameAssignment_2_1_0_0 extends AssignmentToken  {
 }
 
 
-// ":"
+// ':'
 protected class Variable_ColonKeyword_2_1_1 extends KeywordToken  {
 	
 	public Variable_ColonKeyword_2_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1263,7 +1265,7 @@ protected class Variable_TypeAssignment_2_1_3 extends AssignmentToken  {
 
 }
 
-// (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
+// (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?
 protected class Variable_Group_2_1_4 extends GroupToken {
 	
 	public Variable_Group_2_1_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1285,7 +1287,7 @@ protected class Variable_Group_2_1_4 extends GroupToken {
 
 }
 
-// expectingParameters?="("
+// expectingParameters?='('
 protected class Variable_ExpectingParametersAssignment_2_1_4_1 extends AssignmentToken  {
 	
 	public Variable_ExpectingParametersAssignment_2_1_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1319,7 +1321,7 @@ protected class Variable_ExpectingParametersAssignment_2_1_4_1 extends Assignmen
 
 }
 
-// (parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)?
+// (parameters+=(STRING | FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)?
 protected class Variable_Group_2_1_4_3 extends GroupToken {
 	
 	public Variable_Group_2_1_4_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1381,7 +1383,7 @@ protected class Variable_ParametersAssignment_2_1_4_3_0 extends AssignmentToken 
 
 }
 
-// (WS* "," WS* parameters+=(STRING | FQN))*
+// (WS* ',' WS* parameters+=(STRING | FQN))*
 protected class Variable_Group_2_1_4_3_1 extends GroupToken {
 	
 	public Variable_Group_2_1_4_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1403,7 +1405,7 @@ protected class Variable_Group_2_1_4_3_1 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Variable_CommaKeyword_2_1_4_3_1_1 extends KeywordToken  {
 	
 	public Variable_CommaKeyword_2_1_4_3_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1467,7 +1469,7 @@ protected class Variable_ParametersAssignment_2_1_4_3_1_3 extends AssignmentToke
 
 
 
-// ")"
+// ')'
 protected class Variable_RightParenthesisKeyword_2_1_4_4 extends KeywordToken  {
 	
 	public Variable_RightParenthesisKeyword_2_1_4_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1493,7 +1495,7 @@ protected class Variable_RightParenthesisKeyword_2_1_4_4 extends KeywordToken  {
 
 
 
-// "}"
+// '}'
 protected class Variable_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public Variable_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1524,11 +1526,11 @@ protected class Variable_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule Literal ****************
  *
  * Literal hidden():
- * 	value=LiteralValue;
+ * 	value=super::LiteralValue;
  *
  **/
 
-// value=LiteralValue
+// value=super::LiteralValue
 protected class Literal_ValueAssignment extends AssignmentToken  {
 	
 	public Literal_ValueAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1569,11 +1571,11 @@ protected class Literal_ValueAssignment extends AssignmentToken  {
 /************ begin Rule Dollar ****************
  *
  * Dollar hidden():
- * 	{Dollar} (escaped?="$$" | "$");
+ * 	{Dollar} (escaped?='$$' | '$');
  *
  **/
 
-// {Dollar} (escaped?="$$" | "$")
+// {Dollar} (escaped?='$$' | '$')
 protected class Dollar_Group extends GroupToken {
 	
 	public Dollar_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1628,7 +1630,7 @@ protected class Dollar_DollarAction_0 extends ActionToken  {
 	}
 }
 
-// escaped?="$$" | "$"
+// (escaped?='$$' | '$')
 protected class Dollar_Alternatives_1 extends AlternativesToken {
 
 	public Dollar_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1651,7 +1653,7 @@ protected class Dollar_Alternatives_1 extends AlternativesToken {
 
 }
 
-// escaped?="$$"
+// escaped?='$$'
 protected class Dollar_EscapedAssignment_1_0 extends AssignmentToken  {
 	
 	public Dollar_EscapedAssignment_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1685,7 +1687,7 @@ protected class Dollar_EscapedAssignment_1_0 extends AssignmentToken  {
 
 }
 
-// "$"
+// '$'
 protected class Dollar_DollarSignKeyword_1_1 extends KeywordToken  {
 	
 	public Dollar_DollarSignKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

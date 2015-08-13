@@ -339,7 +339,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"value",
                                     		lv_value_1_2, 
-                                    		"STRING");
+                                    		"org.eclipse.xtext.common.Terminals.STRING");
                             	    
 
                             }
@@ -363,7 +363,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"value",
                                     		lv_value_1_3, 
-                                    		"NestedDatatype");
+                                    		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -388,7 +388,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"value",
                                     		lv_value_1_4, 
-                                    		"Datatype");
+                                    		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -409,7 +409,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"value",
                                     		lv_value_1_5, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -524,7 +524,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"multiValue",
                                     		lv_multiValue_3_2, 
-                                    		"STRING");
+                                    		"org.eclipse.xtext.common.Terminals.STRING");
                             	    
 
                             }
@@ -548,7 +548,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"multiValue",
                                     		lv_multiValue_3_3, 
-                                    		"NestedDatatype");
+                                    		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -573,7 +573,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"multiValue",
                                     		lv_multiValue_3_4, 
-                                    		"Datatype");
+                                    		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
                             	        afterParserOrEnumRuleCall();
                             	    
 
@@ -594,7 +594,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                                    			current, 
                                    			"multiValue",
                                     		lv_multiValue_3_5, 
-                                    		"ID");
+                                    		"org.eclipse.xtext.common.Terminals.ID");
                             	    
 
                             }
@@ -642,7 +642,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"value",
                             		lv_value_5_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -684,7 +684,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"multiValue",
                             		lv_multiValue_7_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -730,7 +730,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"value",
                             		lv_value_9_0, 
-                            		"Datatype");
+                            		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -777,7 +777,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"multiValue",
                             		lv_multiValue_11_0, 
-                            		"Datatype");
+                            		"org.eclipse.xtext.valueconverter.Bug250313.Datatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -824,7 +824,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"value",
                             		lv_value_13_0, 
-                            		"NestedDatatype");
+                            		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -871,7 +871,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"multiValue",
                             		lv_multiValue_15_0, 
-                            		"NestedDatatype");
+                            		"org.eclipse.xtext.valueconverter.Bug250313.NestedDatatype");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -921,7 +921,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                            			current, 
                            			"children",
                             		lv_children_17_0, 
-                            		"Child");
+                            		"org.eclipse.xtext.valueconverter.Bug250313.Child");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1445,7 +1445,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1537,7 +1537,7 @@ public class InternalBug250313Parser extends AbstractInternalAntlrParser {
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }

@@ -19,7 +19,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class RootModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RootModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.RootModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRootModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -33,11 +33,13 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cElementsModelAttributeParserRuleCall_3_1_0 = (RuleCall)cElementsAssignment_3_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
-		//RootModel returns ModelElement:
-		//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+		//RootModel ModelElement:
+		//	{RootModel} name=ID type=[ModelElement]? ('{'
+		//	elements+=ModelAttribute*
+		//	'}')??
 		@Override public ParserRule getRule() { return rule; }
 
-		//({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?
+		//{RootModel} name=ID type=[ModelElement]? ('{' elements+=ModelAttribute* '}')??
 		public Group getGroup() { return cGroup; }
 
 		//{RootModel}
@@ -58,10 +60,10 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getTypeModelElementIDTerminalRuleCall_2_0_1() { return cTypeModelElementIDTerminalRuleCall_2_0_1; }
 
-		//("{" elements+=ModelAttribute* "}")?
+		//('{' elements+=ModelAttribute* '}')?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
 		//elements+=ModelAttribute*
@@ -70,12 +72,12 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ModelAttribute
 		public RuleCall getElementsModelAttributeParserRuleCall_3_1_0() { return cElementsModelAttributeParserRuleCall_3_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class ModelElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelElement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelElement");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFirstReferenceAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cFirstReferenceModelElementCrossReference_0_0 = (CrossReference)cFirstReferenceAssignment_0.eContents().get(0);
@@ -96,11 +98,11 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_3_1_2 = (Keyword)cGroup_3_1.eContents().get(2);
 		
 		//ModelElement:
-		//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
-		//	"}");
+		//	firstReference=[ModelElement] (':' name=ID)? secondReference=[ModelElement]? (';'
+		//	| '{' elements+=ModelAttribute* '}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute* "}")
+		//firstReference=[ModelElement] (':' name=ID)? secondReference=[ModelElement]? (';' | '{' elements+=ModelAttribute* '}')
 		public Group getGroup() { return cGroup; }
 
 		//firstReference=[ModelElement]
@@ -112,10 +114,10 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getFirstReferenceModelElementIDTerminalRuleCall_0_0_1() { return cFirstReferenceModelElementIDTerminalRuleCall_0_0_1; }
 
-		//(":" name=ID)?
+		//(':' name=ID)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
 		//name=ID
@@ -133,16 +135,16 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSecondReferenceModelElementIDTerminalRuleCall_2_0_1() { return cSecondReferenceModelElementIDTerminalRuleCall_2_0_1; }
 
-		//";" | "{" elements+=ModelAttribute* "}"
+		//(';' | '{' elements+=ModelAttribute* '}')
 		public Alternatives getAlternatives_3() { return cAlternatives_3; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_0() { return cSemicolonKeyword_3_0; }
 
-		//"{" elements+=ModelAttribute* "}"
+		//'{' elements+=ModelAttribute* '}'
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_1_0() { return cLeftCurlyBracketKeyword_3_1_0; }
 
 		//elements+=ModelAttribute*
@@ -151,12 +153,12 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ModelAttribute
 		public RuleCall getElementsModelAttributeParserRuleCall_3_1_1_0() { return cElementsModelAttributeParserRuleCall_3_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_1_2() { return cRightCurlyBracketKeyword_3_1_2; }
 	}
 
 	public class ModelAttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelAttribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.ModelAttribute");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cModelElementParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAttributeParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -176,7 +178,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage.Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cFeatureAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cFeatureModelElementCrossReference_0_0 = (CrossReference)cFeatureAssignment_0.eContents().get(0);
@@ -186,10 +188,10 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cValueSTRINGTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//	feature=[ModelElement] "=" value=STRING;
+		//	feature=[ModelElement] '=' value=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//feature=[ModelElement] "=" value=STRING
+		//feature=[ModelElement] '=' value=STRING
 		public Group getGroup() { return cGroup; }
 
 		//feature=[ModelElement]
@@ -201,7 +203,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getFeatureModelElementIDTerminalRuleCall_0_0_1() { return cFeatureModelElementIDTerminalRuleCall_0_0_1; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
 		//value=STRING
@@ -259,8 +261,10 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	
-	//RootModel returns ModelElement:
-	//	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+	//RootModel ModelElement:
+	//	{RootModel} name=ID type=[ModelElement]? ('{'
+	//	elements+=ModelAttribute*
+	//	'}')??
 	public RootModelElements getRootModelAccess() {
 		return pRootModel;
 	}
@@ -270,8 +274,8 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//ModelElement:
-	//	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
-	//	"}");
+	//	firstReference=[ModelElement] (':' name=ID)? secondReference=[ModelElement]? (';'
+	//	| '{' elements+=ModelAttribute* '}');
 	public ModelElementElements getModelElementAccess() {
 		return pModelElement;
 	}
@@ -291,7 +295,7 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//	feature=[ModelElement] "=" value=STRING;
+	//	feature=[ModelElement] '=' value=STRING;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -301,38 +305,38 @@ public class Bug291022TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

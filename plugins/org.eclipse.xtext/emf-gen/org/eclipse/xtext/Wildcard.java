@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: Wildcard.java,v 1.3 2010/04/06 14:10:16 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

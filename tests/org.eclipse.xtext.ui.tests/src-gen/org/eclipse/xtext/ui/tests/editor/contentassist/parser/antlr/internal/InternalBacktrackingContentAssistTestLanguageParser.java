@@ -246,7 +246,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"packages",
             	              		lv_packages_0_0, 
-            	              		"PackageDeclaration");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageDeclaration");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -287,7 +287,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"contexts",
             	              		lv_contexts_1_0, 
-            	              		"ContextDecl");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ContextDecl");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -425,7 +425,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"constraintName",
                               		lv_constraintName_1_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -469,7 +469,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_3_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -633,7 +633,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"selfName",
                               		lv_selfName_1_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -680,7 +680,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"classifier",
                       		lv_classifier_3_0, 
-                      		"ClassifierRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -733,7 +733,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"invariants",
             	              		lv_invariants_4_0, 
-            	              		"Invariant");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Invariant");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -774,7 +774,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"definitions",
             	              		lv_definitions_5_0, 
-            	              		"Definition");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Definition");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1360,7 +1360,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"constraintName",
                               		lv_constraintName_2_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -1404,7 +1404,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"constrainedName",
                       		lv_constrainedName_4_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -1467,7 +1467,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"parameters",
                                       		lv_parameters_6_0, 
-                                      		"Parameter");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1523,7 +1523,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	             			current, 
                             	             			"parameters",
                             	              		lv_parameters_8_0, 
-                            	              		"Parameter");
+                            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -1599,7 +1599,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"type",
                               		lv_type_11_0, 
-                              		"TypeExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -1643,7 +1643,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_13_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -1771,7 +1771,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_2_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -1899,7 +1899,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_2_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2031,7 +2031,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"constraintName",
                               		lv_constraintName_1_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2075,7 +2075,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_3_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2212,7 +2212,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"operation",
                       		lv_operation_1_0, 
-                      		"OperationRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2264,7 +2264,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"parameters",
                               		lv_parameters_3_0, 
-                              		"Parameter");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2320,7 +2320,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	             			current, 
                     	             			"parameters",
                     	              		lv_parameters_5_0, 
-                    	              		"Parameter");
+                    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Parameter");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -2390,7 +2390,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"type",
                               		lv_type_8_0, 
-                              		"TypeExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -2455,7 +2455,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"pres",
             	              		lv_pres_9_0, 
-            	              		"Pre");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Pre");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2496,7 +2496,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"posts",
             	              		lv_posts_10_0, 
-            	              		"Post");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Post");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2537,7 +2537,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"bodies",
             	              		lv_bodies_11_0, 
-            	              		"Body");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Body");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2871,7 +2871,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"package",
                       		lv_package_1_0, 
-                      		"PackageRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -2918,7 +2918,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"contexts",
             	              		lv_contexts_2_0, 
-            	              		"ContextDecl");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ContextDecl");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -3284,7 +3284,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"name",
                               		lv_name_0_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3331,7 +3331,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"type",
                       		lv_type_2_0, 
-                      		"TypeExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3463,7 +3463,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"constraintName",
                               		lv_constraintName_1_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3507,7 +3507,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_3_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3639,7 +3639,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"constraintName",
                               		lv_constraintName_1_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -3683,7 +3683,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_3_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3815,7 +3815,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"property",
                       		lv_property_1_0, 
-                      		"PropertyRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3856,7 +3856,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"type",
                       		lv_type_3_0, 
-                      		"TypeExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -3923,7 +3923,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"init",
                                       		lv_init_4_0, 
-                                      		"Init");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Init");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -3966,7 +3966,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                              			current, 
                                              			"der",
                                               		lv_der_5_0, 
-                                              		"Der");
+                                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Der");
                                       	        afterParserOrEnumRuleCall();
                                       	    
                                     }
@@ -4019,7 +4019,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"der",
                               		lv_der_6_0, 
-                              		"Der");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Der");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -4062,7 +4062,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"init",
                                       		lv_init_7_0, 
-                                      		"Init");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Init");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -4392,7 +4392,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"namespace",
                       		lv_namespace_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4433,7 +4433,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_2_0, 
-                      		"ClassifierRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.ClassifierRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4550,7 +4550,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"namespace",
                       		lv_namespace_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4591,7 +4591,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_2_0, 
-                      		"OperationRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OperationRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4708,7 +4708,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"namespace",
                       		lv_namespace_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4749,7 +4749,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_2_0, 
-                      		"PropertyRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PropertyRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4866,7 +4866,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"namespace",
                       		lv_namespace_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -4907,7 +4907,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_2_0, 
-                      		"PackageRef");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PackageRef");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5018,7 +5018,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"classifier",
                       		lv_classifier_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5126,7 +5126,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"operation",
                       		lv_operation_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5234,7 +5234,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"package",
                       		lv_package_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5342,7 +5342,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"feature",
                       		lv_feature_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -5597,7 +5597,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"argument",
                               		lv_argument_3_0, 
-                              		"NavigatingExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigatingExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -5735,7 +5735,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"messageName",
                               		lv_messageName_6_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -5787,7 +5787,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"arguments",
                                       		lv_arguments_8_0, 
-                                      		"OclMessageArg");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -5843,7 +5843,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	             			current, 
                             	             			"arguments",
                             	              		lv_arguments_10_0, 
-                            	              		"OclMessageArg");
+                            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -6131,7 +6131,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"argument",
                               		lv_argument_3_0, 
-                              		"NavigatingExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NavigatingExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -6269,7 +6269,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"messageName",
                               		lv_messageName_6_0, 
-                              		"Identifier");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -6321,7 +6321,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"arguments",
                                       		lv_arguments_8_0, 
-                                      		"OclMessageArg");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -6377,7 +6377,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	             			current, 
                             	             			"arguments",
                             	              		lv_arguments_10_0, 
-                            	              		"OclMessageArg");
+                            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.OclMessageArg");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -6587,7 +6587,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"type",
                                       		lv_type_3_0, 
-                                      		"TypeExp");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -7647,7 +7647,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"PrimitiveTypeIdentifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.PrimitiveTypeIdentifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8174,7 +8174,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"typeIdentifier",
                       		lv_typeIdentifier_0_0, 
-                      		"CollectionTypeIdentifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionTypeIdentifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8226,7 +8226,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"type",
                               		lv_type_2_0, 
-                              		"TypeExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8401,7 +8401,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"part",
                               		lv_part_2_0, 
-                              		"tuplePart");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.tuplePart");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8457,7 +8457,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	             			current, 
                     	             			"part",
                     	              		lv_part_4_0, 
-                    	              		"tuplePart");
+                    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.tuplePart");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -8595,7 +8595,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8636,7 +8636,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"type",
                       		lv_type_2_0, 
-                      		"TypeExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8824,7 +8824,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"collectionLiteralParts",
                                       		lv_collectionLiteralParts_3_0, 
-                                      		"CollectionLiteralPart");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralPart");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -8880,7 +8880,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                             	             			current, 
                             	             			"collectionLiteralParts",
                             	              		lv_collectionLiteralParts_5_0, 
-                            	              		"CollectionLiteralPart");
+                            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.CollectionLiteralPart");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -9024,7 +9024,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"expression",
                       		lv_expression_0_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9076,7 +9076,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"lastExpression",
                               		lv_lastExpression_2_0, 
-                              		"Expression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9500,7 +9500,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"part",
                               		lv_part_3_0, 
-                              		"TupleLiteralPart");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralPart");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9556,7 +9556,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	             			current, 
                     	             			"part",
                     	              		lv_part_5_0, 
-                    	              		"TupleLiteralPart");
+                    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TupleLiteralPart");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -9697,7 +9697,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9749,7 +9749,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"type",
                               		lv_type_2_0, 
-                              		"TypeExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9796,7 +9796,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"initExpression",
                       		lv_initExpression_4_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9907,7 +9907,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"NUMBER_LITERAL");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NUMBER_LITERAL");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -10028,7 +10028,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"values",
             	              		lv_values_0_0, 
-            	              		"StringLiteral");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.StringLiteral");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -10778,7 +10778,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"xor");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.xor");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -10807,7 +10807,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11048,7 +11048,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"or");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.or");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11077,7 +11077,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11318,7 +11318,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"and");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.and");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11347,7 +11347,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11588,7 +11588,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"equality");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.equality");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11617,7 +11617,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11915,7 +11915,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"relational");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.relational");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -11944,7 +11944,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -12324,7 +12324,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"additive");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.additive");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -12353,7 +12353,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -12651,7 +12651,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"multiplicative");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.multiplicative");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -12680,7 +12680,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -12978,7 +12978,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_1, 
-            	                      		"unary");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.unary");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -13007,7 +13007,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	                     			current, 
             	                     			"argument",
             	                      		lv_argument_3_2, 
-            	                      		"LetExp");
+            	                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetExp");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -13279,7 +13279,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"source",
                               		lv_source_3_0, 
-                              		"unary");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.unary");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -13693,7 +13693,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"source",
                               		lv_source_11_0, 
-                              		"Expression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -14099,7 +14099,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14151,7 +14151,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"type",
                               		lv_type_2_0, 
-                              		"TypeExp");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -14277,7 +14277,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14318,7 +14318,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"type",
                       		lv_type_2_0, 
-                      		"TypeExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14359,7 +14359,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"initExpression",
                       		lv_initExpression_4_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14491,7 +14491,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"NameExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14588,7 +14588,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"variable1",
                               		lv_variable1_4_0, 
-                              		"iteratorVariable");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorVariable");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -14646,7 +14646,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"variable2",
                                       		lv_variable2_6_0, 
-                                      		"iteratorVariable");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorVariable");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -14699,7 +14699,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                                      			current, 
                                      			"variable2",
                                       		lv_variable2_8_0, 
-                                      		"iteratorAccumulator");
+                                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.iteratorAccumulator");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -14766,7 +14766,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                              			current, 
                              			"arguments",
                               		lv_arguments_10_0, 
-                              		"Expression");
+                              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -14822,7 +14822,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                     	             			current, 
                     	             			"arguments",
                     	              		lv_arguments_12_0, 
-                    	              		"Expression");
+                    	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -14966,7 +14966,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"NameExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15007,7 +15007,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"arguments",
                       		lv_arguments_2_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15063,7 +15063,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"arguments",
             	              		lv_arguments_4_0, 
-            	              		"Expression");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -15243,7 +15243,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"NameExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15675,7 +15675,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"namespace",
                       		lv_namespace_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15716,7 +15716,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_2_0, 
-                      		"NameExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.NameExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15827,7 +15827,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"element",
                       		lv_element_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15952,7 +15952,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"condition",
                       		lv_condition_1_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15993,7 +15993,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"thenExpression",
                       		lv_thenExpression_3_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16034,7 +16034,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"elseExpression",
                       		lv_elseExpression_5_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16167,7 +16167,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"variable",
                       		lv_variable_1_0, 
-                      		"LetVariable");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetVariable");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16223,7 +16223,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
             	             			current, 
             	             			"variable",
             	              		lv_variable_3_0, 
-            	              		"LetVariable");
+            	              		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.LetVariable");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -16273,7 +16273,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"in",
                       		lv_in_5_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16393,7 +16393,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"name",
                       		lv_name_0_0, 
-                      		"Identifier");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Identifier");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16434,7 +16434,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"type",
                       		lv_type_2_0, 
-                      		"TypeExp");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.TypeExp");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16475,7 +16475,7 @@ public class InternalBacktrackingContentAssistTestLanguageParser extends Abstrac
                      			current, 
                      			"initExpression",
                       		lv_initExpression_4_0, 
-                      		"Expression");
+                      		"org.eclipse.xtext.ui.tests.editor.contentassist.BacktrackingContentAssistTestLanguage.Expression");
               	        afterParserOrEnumRuleCall();
               	    
             }

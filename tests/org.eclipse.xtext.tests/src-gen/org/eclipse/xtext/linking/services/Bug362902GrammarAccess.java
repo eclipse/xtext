@@ -19,7 +19,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cGreetingsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cGreetingsGreetingParserRuleCall_0_0 = (RuleCall)cGreetingsAssignment_0.eContents().get(0);
@@ -29,10 +29,11 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFavouriteGreetingMyIdParserRuleCall_2_0_1 = (RuleCall)cFavouriteGreetingCrossReference_2_0.eContents().get(1);
 		
 		//Model:
-		//	greetings+=Greeting* "favourite" favourite=[Greeting|MyId];
+		//	greetings+=Greeting*
+		//	'favourite' favourite=[Greeting|MyId];
 		@Override public ParserRule getRule() { return rule; }
 
-		//greetings+=Greeting* "favourite" favourite=[Greeting|MyId]
+		//greetings+=Greeting* 'favourite' favourite=[Greeting|MyId]
 		public Group getGroup() { return cGroup; }
 
 		//greetings+=Greeting*
@@ -41,7 +42,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		//Greeting
 		public RuleCall getGreetingsGreetingParserRuleCall_0_0() { return cGreetingsGreetingParserRuleCall_0_0; }
 
-		//"favourite"
+		//'favourite'
 		public Keyword getFavouriteKeyword_1() { return cFavouriteKeyword_1; }
 
 		//favourite=[Greeting|MyId]
@@ -55,7 +56,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class GreetingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Greeting");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.Greeting");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHelloKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -63,13 +64,13 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cExclamationMarkKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Greeting:
-		//	"Hello" name=MyId "!";
+		//	'Hello' name=MyId '!';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Hello" name=MyId "!"
+		//'Hello' name=MyId '!'
 		public Group getGroup() { return cGroup; }
 
-		//"Hello"
+		//'Hello'
 		public Keyword getHelloKeyword_0() { return cHelloKeyword_0; }
 
 		//name=MyId
@@ -78,15 +79,15 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		//MyId
 		public RuleCall getNameMyIdParserRuleCall_1_0() { return cNameMyIdParserRuleCall_1_0; }
 
-		//"!"
+		//'!'
 		public Keyword getExclamationMarkKeyword_2() { return cExclamationMarkKeyword_2; }
 	}
 
 	public class MyIdElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MyId");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.Bug362902.MyId");
 		private final RuleCall cIDTerminalRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//MyId returns ecore::EString:
+		//MyId:
 		//	ID;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -141,7 +142,8 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Model:
-	//	greetings+=Greeting* "favourite" favourite=[Greeting|MyId];
+	//	greetings+=Greeting*
+	//	'favourite' favourite=[Greeting|MyId];
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -151,7 +153,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Greeting:
-	//	"Hello" name=MyId "!";
+	//	'Hello' name=MyId '!';
 	public GreetingElements getGreetingAccess() {
 		return pGreeting;
 	}
@@ -160,7 +162,7 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 		return getGreetingAccess().getRule();
 	}
 
-	//MyId returns ecore::EString:
+	//MyId:
 	//	ID;
 	public MyIdElements getMyIdAccess() {
 		return pMyId;
@@ -171,38 +173,38 @@ public class Bug362902GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

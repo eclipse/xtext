@@ -18,7 +18,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class CodetemplatesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Codetemplates");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.Codetemplates");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTemplatesKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cForKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -30,16 +30,17 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTemplatesCodetemplateParserRuleCall_4_0 = (RuleCall)cTemplatesAssignment_4.eContents().get(0);
 		
 		//Codetemplates:
-		//	"templates" "for" language=[xtext::Grammar|FQN] ":" templates+=Codetemplate*;
+		//	'templates' 'for' language=[xtext::Grammar|FQN] ':'
+		//	templates+=Codetemplate*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"templates" "for" language=[xtext::Grammar|FQN] ":" templates+=Codetemplate*
+		//'templates' 'for' language=[xtext::Grammar|FQN] ':' templates+=Codetemplate*
 		public Group getGroup() { return cGroup; }
 
-		//"templates"
+		//'templates'
 		public Keyword getTemplatesKeyword_0() { return cTemplatesKeyword_0; }
 
-		//"for"
+		//'for'
 		public Keyword getForKeyword_1() { return cForKeyword_1; }
 
 		//language=[xtext::Grammar|FQN]
@@ -51,7 +52,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getLanguageGrammarFQNParserRuleCall_2_0_1() { return cLanguageGrammarFQNParserRuleCall_2_0_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
 		//templates+=Codetemplate*
@@ -62,7 +63,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class CodetemplateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Codetemplate");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.Codetemplate");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameValidIDParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -84,11 +85,11 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cBodyTemplateBodyWithQuotesParserRuleCall_8_0 = (RuleCall)cBodyAssignment_8.eContents().get(0);
 		
 		//Codetemplate:
-		//	name=ValidID "(" id=ID "," description=STRING ")" "for" (context=[xtext::AbstractRule|ValidID] |
+		//	name=ValidID '(' id=ID ',' description=STRING ')' 'for' (context=[xtext::AbstractRule|ValidID] |
 		//	keywordContext=STRING) body=TemplateBodyWithQuotes;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=ValidID "(" id=ID "," description=STRING ")" "for" (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
+		//name=ValidID '(' id=ID ',' description=STRING ')' 'for' (context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
 		//body=TemplateBodyWithQuotes
 		public Group getGroup() { return cGroup; }
 
@@ -98,7 +99,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_0_0() { return cNameValidIDParserRuleCall_0_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//id=ID
@@ -107,7 +108,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIdIDTerminalRuleCall_2_0() { return cIdIDTerminalRuleCall_2_0; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
 
 		//description=STRING
@@ -116,13 +117,13 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//STRING
 		public RuleCall getDescriptionSTRINGTerminalRuleCall_4_0() { return cDescriptionSTRINGTerminalRuleCall_4_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
-		//"for"
+		//'for'
 		public Keyword getForKeyword_6() { return cForKeyword_6; }
 
-		//context=[xtext::AbstractRule|ValidID] | keywordContext=STRING
+		//(context=[xtext::AbstractRule|ValidID] | keywordContext=STRING)
 		public Alternatives getAlternatives_7() { return cAlternatives_7; }
 
 		//context=[xtext::AbstractRule|ValidID]
@@ -148,41 +149,39 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class TemplateBodyWithQuotesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TemplateBodyWithQuotes");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.TemplateBodyWithQuotes");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cGreaterThanSignGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final RuleCall cTemplateBodyParserRuleCall_2 = (RuleCall)cGroup.eContents().get(2);
 		private final Keyword cLessThanSignLessThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//TemplateBodyWithQuotes returns TemplateBody hidden():
-		//	WS? // EOL
-		//	">>" TemplateBody // BOL
-		//	"<<";
+		//TemplateBodyWithQuotes TemplateBody hidden():
+		//	WS? '>>' // EOL
+		//	TemplateBody
+		//	'<<'
 		@Override public ParserRule getRule() { return rule; }
 
-		//WS? // EOL
-		//">>" TemplateBody // BOL
-		//"<<"
+		//WS? '>>' // EOL
+		//TemplateBody '<<'
 		public Group getGroup() { return cGroup; }
 
 		//WS?
 		public RuleCall getWSTerminalRuleCall_0() { return cWSTerminalRuleCall_0; }
 
-		//// EOL
-		//">>"
+		//'>>'
 		public Keyword getGreaterThanSignGreaterThanSignKeyword_1() { return cGreaterThanSignGreaterThanSignKeyword_1; }
 
+		//// EOL
 		//TemplateBody
 		public RuleCall getTemplateBodyParserRuleCall_2() { return cTemplateBodyParserRuleCall_2; }
 
-		//// BOL
-		//"<<"
+		//'<<'
 		public Keyword getLessThanSignLessThanSignKeyword_3() { return cLessThanSignLessThanSignKeyword_3; }
 	}
 
 	public class TemplateBodyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TemplateBody");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.TemplateBody");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTemplateBodyAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cPartsAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -226,7 +225,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class TemplatePartElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TemplatePart");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.TemplatePart");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVariableOrDollarParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -246,13 +245,13 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class VariableOrDollarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VariableOrDollar");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.VariableOrDollar");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVariableParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDollarParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//VariableOrDollar returns TemplatePart hidden():
-		//	Variable | Dollar;
+		//VariableOrDollar TemplatePart hidden():
+		//	Variable | Dollar
 		@Override public ParserRule getRule() { return rule; }
 
 		//Variable | Dollar
@@ -266,7 +265,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class VariableElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Variable");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.Variable");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDollarSignLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cWSTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
@@ -306,22 +305,23 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Variable hidden():
-		//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
-		//	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
+		//	'${' WS* (name=ValidID
+		//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+		//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING
-		//| FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}"
+		//'${' WS* (name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING
+		//| FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}'
 		public Group getGroup() { return cGroup; }
 
-		//"${"
+		//'${'
 		public Keyword getDollarSignLeftCurlyBracketKeyword_0() { return cDollarSignLeftCurlyBracketKeyword_0; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_1() { return cWSTerminalRuleCall_1; }
 
-		//name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN)
-		//(WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
+		//(name=ValidID | (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN)
+		//(WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?)
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
 		//name=ValidID
@@ -330,8 +330,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_2_0_0() { return cNameValidIDParserRuleCall_2_0_0; }
 
-		//(name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS*
-		//parameters+=(STRING | FQN))* WS*)? ")")?
+		//(name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+		//parameters+=(STRING | FQN))* WS*)? ')')?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//(name=ValidID WS*)?
@@ -346,7 +346,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_0_1() { return cWSTerminalRuleCall_2_1_0_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_1_1() { return cColonKeyword_2_1_1; }
 
 		//WS*
@@ -358,28 +358,28 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getTypeValidIDParserRuleCall_2_1_3_0() { return cTypeValidIDParserRuleCall_2_1_3_0; }
 
-		//(WS* expectingParameters?="(" WS* (parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?
+		//(WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)? ')')?
 		public Group getGroup_2_1_4() { return cGroup_2_1_4; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_0() { return cWSTerminalRuleCall_2_1_4_0; }
 
-		//expectingParameters?="("
+		//expectingParameters?='('
 		public Assignment getExpectingParametersAssignment_2_1_4_1() { return cExpectingParametersAssignment_2_1_4_1; }
 
-		//"("
+		//'('
 		public Keyword getExpectingParametersLeftParenthesisKeyword_2_1_4_1_0() { return cExpectingParametersLeftParenthesisKeyword_2_1_4_1_0; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_2() { return cWSTerminalRuleCall_2_1_4_2; }
 
-		//(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)?
+		//(parameters+=(STRING | FQN) (WS* ',' WS* parameters+=(STRING | FQN))* WS*)?
 		public Group getGroup_2_1_4_3() { return cGroup_2_1_4_3; }
 
 		//parameters+=(STRING | FQN)
 		public Assignment getParametersAssignment_2_1_4_3_0() { return cParametersAssignment_2_1_4_3_0; }
 
-		//STRING | FQN
+		//(STRING | FQN)
 		public Alternatives getParametersAlternatives_2_1_4_3_0_0() { return cParametersAlternatives_2_1_4_3_0_0; }
 
 		//STRING
@@ -388,13 +388,13 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getParametersFQNParserRuleCall_2_1_4_3_0_0_1() { return cParametersFQNParserRuleCall_2_1_4_3_0_0_1; }
 
-		//(WS* "," WS* parameters+=(STRING | FQN))*
+		//(WS* ',' WS* parameters+=(STRING | FQN))*
 		public Group getGroup_2_1_4_3_1() { return cGroup_2_1_4_3_1; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_3_1_0() { return cWSTerminalRuleCall_2_1_4_3_1_0; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_1_4_3_1_1() { return cCommaKeyword_2_1_4_3_1_1; }
 
 		//WS*
@@ -403,7 +403,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//parameters+=(STRING | FQN)
 		public Assignment getParametersAssignment_2_1_4_3_1_3() { return cParametersAssignment_2_1_4_3_1_3; }
 
-		//STRING | FQN
+		//(STRING | FQN)
 		public Alternatives getParametersAlternatives_2_1_4_3_1_3_0() { return cParametersAlternatives_2_1_4_3_1_3_0; }
 
 		//STRING
@@ -415,42 +415,42 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//WS*
 		public RuleCall getWSTerminalRuleCall_2_1_4_3_2() { return cWSTerminalRuleCall_2_1_4_3_2; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2_1_4_4() { return cRightParenthesisKeyword_2_1_4_4; }
 
 		//WS*
 		public RuleCall getWSTerminalRuleCall_3() { return cWSTerminalRuleCall_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class ValidIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValidID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.ValidID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Keyword cForKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cTemplatesKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
 		//ValidID hidden():
-		//	ID | "for" | "templates";
+		//	ID | 'for' | 'templates';
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID | "for" | "templates"
+		//ID | 'for' | 'templates'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"for"
+		//'for'
 		public Keyword getForKeyword_1() { return cForKeyword_1; }
 
-		//"templates"
+		//'templates'
 		public Keyword getTemplatesKeyword_2() { return cTemplatesKeyword_2; }
 	}
 
 	public class FQNElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -458,19 +458,19 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValidIDParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN hidden():
-		//	ValidID ("." ValidID)*;
+		//	ValidID ('.' ValidID)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ValidID ("." ValidID)*
+		//ValidID ('.' ValidID)*
 		public Group getGroup() { return cGroup; }
 
 		//ValidID
 		public RuleCall getValidIDParserRuleCall_0() { return cValidIDParserRuleCall_0; }
 
-		//("." ValidID)*
+		//('.' ValidID)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//ValidID
@@ -478,7 +478,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.Literal");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueLiteralValueParserRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
@@ -494,19 +494,19 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class LiteralValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralValue");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.LiteralValue");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cWSTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cANY_OTHERTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final Keyword cReverseSolidusLessThanSignLessThanSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
-		//// needs to be escaped at BOL
 		//LiteralValue hidden():
-		//	(WS | ANY_OTHER | ID | "\\<<")+;
+		//	WS | ANY_OTHER | ID | '\\<<'+ // needs to be escaped at BOL
+		//;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(WS | ANY_OTHER | ID | "\\<<")+
+		//WS | ANY_OTHER | ID | '\\<<'+
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//WS
@@ -518,12 +518,12 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_2() { return cIDTerminalRuleCall_2; }
 
-		//"\\<<"
+		//'\\<<'
 		public Keyword getReverseSolidusLessThanSignLessThanSignKeyword_3() { return cReverseSolidusLessThanSignLessThanSignKeyword_3; }
 	}
 
 	public class DollarElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Dollar");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.Dollar");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDollarAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -532,25 +532,25 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDollarSignKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		
 		//Dollar hidden():
-		//	{Dollar} (escaped?="$$" | "$");
+		//	{Dollar} (escaped?='$$' | '$');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Dollar} (escaped?="$$" | "$")
+		//{Dollar} (escaped?='$$' | '$')
 		public Group getGroup() { return cGroup; }
 
 		//{Dollar}
 		public Action getDollarAction_0() { return cDollarAction_0; }
 
-		//escaped?="$$" | "$"
+		//(escaped?='$$' | '$')
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//escaped?="$$"
+		//escaped?='$$'
 		public Assignment getEscapedAssignment_1_0() { return cEscapedAssignment_1_0; }
 
-		//"$$"
+		//'$$'
 		public Keyword getEscapedDollarSignDollarSignKeyword_1_0_0() { return cEscapedDollarSignDollarSignKeyword_1_0_0; }
 
-		//"$"
+		//'$'
 		public Keyword getDollarSignKeyword_1_1() { return cDollarSignKeyword_1_1; }
 	}
 	
@@ -589,10 +589,10 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		this.pLiteral = new LiteralElements();
 		this.pLiteralValue = new LiteralValueElements();
 		this.pDollar = new DollarElements();
-		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID");
-		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "STRING");
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ANY_OTHER");
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.ID");
+		this.tSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.STRING");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.WS");
+		this.tANY_OTHER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.codetemplates.Codetemplates.ANY_OTHER");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -619,7 +619,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Codetemplates:
-	//	"templates" "for" language=[xtext::Grammar|FQN] ":" templates+=Codetemplate*;
+	//	'templates' 'for' language=[xtext::Grammar|FQN] ':'
+	//	templates+=Codetemplate*;
 	public CodetemplatesElements getCodetemplatesAccess() {
 		return pCodetemplates;
 	}
@@ -629,7 +630,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Codetemplate:
-	//	name=ValidID "(" id=ID "," description=STRING ")" "for" (context=[xtext::AbstractRule|ValidID] |
+	//	name=ValidID '(' id=ID ',' description=STRING ')' 'for' (context=[xtext::AbstractRule|ValidID] |
 	//	keywordContext=STRING) body=TemplateBodyWithQuotes;
 	public CodetemplateElements getCodetemplateAccess() {
 		return pCodetemplate;
@@ -639,10 +640,10 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		return getCodetemplateAccess().getRule();
 	}
 
-	//TemplateBodyWithQuotes returns TemplateBody hidden():
-	//	WS? // EOL
-	//	">>" TemplateBody // BOL
-	//	"<<";
+	//TemplateBodyWithQuotes TemplateBody hidden():
+	//	WS? '>>' // EOL
+	//	TemplateBody
+	//	'<<'
 	public TemplateBodyWithQuotesElements getTemplateBodyWithQuotesAccess() {
 		return pTemplateBodyWithQuotes;
 	}
@@ -671,8 +672,8 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		return getTemplatePartAccess().getRule();
 	}
 
-	//VariableOrDollar returns TemplatePart hidden():
-	//	Variable | Dollar;
+	//VariableOrDollar TemplatePart hidden():
+	//	Variable | Dollar
 	public VariableOrDollarElements getVariableOrDollarAccess() {
 		return pVariableOrDollar;
 	}
@@ -682,8 +683,9 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Variable hidden():
-	//	"${" WS* (name=ValidID | (name=ValidID WS*)? ":" WS* type=ValidID (WS* expectingParameters?="(" WS*
-	//	(parameters+=(STRING | FQN) (WS* "," WS* parameters+=(STRING | FQN))* WS*)? ")")?) WS* "}";
+	//	'${' WS* (name=ValidID
+	//	| (name=ValidID WS*)? ':' WS* type=ValidID (WS* expectingParameters?='(' WS* (parameters+=(STRING | FQN) (WS* ',' WS*
+	//	parameters+=(STRING | FQN))* WS*)? ')')?) WS* '}';
 	public VariableElements getVariableAccess() {
 		return pVariable;
 	}
@@ -693,7 +695,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ValidID hidden():
-	//	ID | "for" | "templates";
+	//	ID | 'for' | 'templates';
 	public ValidIDElements getValidIDAccess() {
 		return pValidID;
 	}
@@ -703,7 +705,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FQN hidden():
-	//	ValidID ("." ValidID)*;
+	//	ValidID ('.' ValidID)*;
 	public FQNElements getFQNAccess() {
 		return pFQN;
 	}
@@ -722,9 +724,9 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 		return getLiteralAccess().getRule();
 	}
 
-	//// needs to be escaped at BOL
 	//LiteralValue hidden():
-	//	(WS | ANY_OTHER | ID | "\\<<")+;
+	//	WS | ANY_OTHER | ID | '\\<<'+ // needs to be escaped at BOL
+	//;
 	public LiteralValueElements getLiteralValueAccess() {
 		return pLiteralValue;
 	}
@@ -734,7 +736,7 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Dollar hidden():
-	//	{Dollar} (escaped?="$$" | "$");
+	//	{Dollar} (escaped?='$$' | '$');
 	public DollarElements getDollarAccess() {
 		return pDollar;
 	}
@@ -744,19 +746,19 @@ public class CodetemplatesGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return tID;
 	} 
 
 	//terminal STRING:
-	//	"\'" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
+	//	"'" ('\\' ('b' | 't' | 'n' | 'f' | 'r' | '"' | "'" | '\\') | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return tSTRING;
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 

@@ -155,7 +155,9 @@ protected class Tree_NodesAssignment_1 extends AssignmentToken  {
 /************ begin Rule TreeNode ****************
  *
  * TreeNode:
- * 	name=ID (INDENT children+=TreeNode* DEDENT)?;
+ * 	name=ID (INDENT
+ * 	children+=TreeNode*
+ * 	DEDENT)?;
  *
  **/
 

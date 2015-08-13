@@ -100,7 +100,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_2_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -118,7 +118,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_3_0, 
-        		"Pair");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Pair");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -145,7 +145,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_6_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -163,7 +163,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_7_0, 
-        		"Pair");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Pair");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -190,7 +190,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_10_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -208,7 +208,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_11_0, 
-        		"Pair");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Pair");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -235,7 +235,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_14_0, 
-        		"Attribute");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Attribute");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -253,7 +253,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attribute",
         		lv_attribute_15_0, 
-        		"Pair");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage.Pair");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -297,7 +297,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -336,7 +336,7 @@ rulePair returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -358,7 +358,7 @@ rulePair returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

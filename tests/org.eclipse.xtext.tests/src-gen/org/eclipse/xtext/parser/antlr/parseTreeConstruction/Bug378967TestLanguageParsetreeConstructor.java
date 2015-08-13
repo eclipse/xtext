@@ -46,11 +46,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- * 	"1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4;
+ * 	'1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4;
  *
  **/
 
-// "1" element=Rule1 | "2" element=Rule2 | "3" element=Rule3 | "4" element=Rule4
+// '1' element=Rule1 | '2' element=Rule2 | '3' element=Rule3 | '4' element=Rule4
 protected class Root_Alternatives extends AlternativesToken {
 
 	public Root_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -82,7 +82,7 @@ protected class Root_Alternatives extends AlternativesToken {
 
 }
 
-// "1" element=Rule1
+// '1' element=Rule1
 protected class Root_Group_0 extends GroupToken {
 	
 	public Root_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -104,7 +104,7 @@ protected class Root_Group_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class Root_DigitOneKeyword_0_0 extends KeywordToken  {
 	
 	public Root_DigitOneKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -172,7 +172,7 @@ protected class Root_ElementAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "2" element=Rule2
+// '2' element=Rule2
 protected class Root_Group_1 extends GroupToken {
 	
 	public Root_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -194,7 +194,7 @@ protected class Root_Group_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Root_DigitTwoKeyword_1_0 extends KeywordToken  {
 	
 	public Root_DigitTwoKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -262,7 +262,7 @@ protected class Root_ElementAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "3" element=Rule3
+// '3' element=Rule3
 protected class Root_Group_2 extends GroupToken {
 	
 	public Root_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -284,7 +284,7 @@ protected class Root_Group_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Root_DigitThreeKeyword_2_0 extends KeywordToken  {
 	
 	public Root_DigitThreeKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -352,7 +352,7 @@ protected class Root_ElementAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "4" element=Rule4
+// '4' element=Rule4
 protected class Root_Group_3 extends GroupToken {
 	
 	public Root_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -374,7 +374,7 @@ protected class Root_Group_3 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Root_DigitFourKeyword_3_0 extends KeywordToken  {
 	
 	public Root_DigitFourKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -590,11 +590,11 @@ protected class Rule1_UnitAssignment_2 extends AssignmentToken  {
 /************ begin Rule Rule2 ****************
  *
  * Rule2:
- * 	"after" value=INT "s";
+ * 	'after' value=INT 's';
  *
  **/
 
-// "after" value=INT "s"
+// 'after' value=INT 's'
 protected class Rule2_Group extends GroupToken {
 	
 	public Rule2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -623,7 +623,7 @@ protected class Rule2_Group extends GroupToken {
 
 }
 
-// "after"
+// 'after'
 protected class Rule2_AfterKeyword_0 extends KeywordToken  {
 	
 	public Rule2_AfterKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -678,7 +678,7 @@ protected class Rule2_ValueAssignment_1 extends AssignmentToken  {
 
 }
 
-// "s"
+// 's'
 protected class Rule2_SKeyword_2 extends KeywordToken  {
 	
 	public Rule2_SKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -989,11 +989,11 @@ protected class Rule4_SAssignment_2 extends AssignmentToken  {
 /************ begin Rule AfterObj ****************
  *
  * AfterObj:
- * 	value="after";
+ * 	value='after';
  *
  **/
 
-// value="after"
+// value='after'
 protected class AfterObj_ValueAssignment extends AssignmentToken  {
 	
 	public AfterObj_ValueAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1034,11 +1034,11 @@ protected class AfterObj_ValueAssignment extends AssignmentToken  {
 /************ begin Rule SObj ****************
  *
  * SObj:
- * 	value="s";
+ * 	value='s';
  *
  **/
 
-// value="s"
+// value='s'
 protected class SObj_ValueAssignment extends AssignmentToken  {
 	
 	public SObj_ValueAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

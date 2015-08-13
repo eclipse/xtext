@@ -95,7 +95,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"model",
         		lv_model_1_0, 
-        		"Model2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.Model2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -119,7 +119,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attributeExclusion",
         		lv_attributeExclusion_3_1, 
-        		"AttributeExclusionTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.AttributeExclusionTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -134,7 +134,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"attributeExclusion",
         		lv_attributeExclusion_3_2, 
-        		"AttributeExclusionTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.AttributeExclusionTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -160,7 +160,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedType",
         		lv_nestedType_5_1, 
-        		"NestedTypeTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -175,7 +175,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedType",
         		lv_nestedType_5_2, 
-        		"NestedTypeTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -201,7 +201,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedTypeRecursiveTest2",
         		lv_nestedTypeRecursiveTest2_7_1, 
-        		"NestedTypeRecursiveTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeRecursiveTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -216,7 +216,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nestedTypeRecursiveTest2",
         		lv_nestedTypeRecursiveTest2_7_2, 
-        		"NestedTypeRecursiveTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeRecursiveTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -242,7 +242,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"parentRef",
         		lv_parentRef_9_1, 
-        		"ParentRefTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -257,7 +257,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"parentRef",
         		lv_parentRef_9_2, 
-        		"ParentRefTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -283,7 +283,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"quantityExclusion",
         		lv_quantityExclusion_11_1, 
-        		"QuantityExclusionTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.QuantityExclusionTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -298,7 +298,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"quantityExclusion",
         		lv_quantityExclusion_11_2, 
-        		"QuantityExclusionTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.QuantityExclusionTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -324,7 +324,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"valueExclusion",
         		lv_valueExclusion_13_1, 
-        		"ValueExclusionTest1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTest1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -339,7 +339,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"valueExclusion",
         		lv_valueExclusion_13_2, 
-        		"ValueExclusionTest2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTest2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -365,7 +365,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_15_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -383,7 +383,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nodeExclusion",
         		lv_nodeExclusion_16_1, 
-        		"NodeExclusion1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NodeExclusion1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -398,7 +398,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nodeExclusion",
         		lv_nodeExclusion_16_2, 
-        		"NodeExclusion2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NodeExclusion2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -424,7 +424,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_18_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -442,7 +442,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nodeExclusionList",
         		lv_nodeExclusionList_19_1, 
-        		"NodeExclusion1List");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NodeExclusion1List");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -457,7 +457,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"nodeExclusionList",
         		lv_nodeExclusionList_19_2, 
-        		"NodeExclusion2List");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NodeExclusion2List");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -534,7 +534,7 @@ ruleAttributeExclusionTest1 returns [EObject current=null]
        			$current, 
        			"attr1",
         		lv_attr1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -577,7 +577,7 @@ ruleAttributeExclusionTest2 returns [EObject current=null]
        			$current, 
        			"attr2",
         		lv_attr2_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -615,7 +615,7 @@ ruleNestedTypeTest1 returns [EObject current=null]
        			$current, 
        			"nested",
         		lv_nested_0_0, 
-        		"NestedTypeChild1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeChild1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -654,7 +654,7 @@ ruleNestedTypeTest2 returns [EObject current=null]
        			$current, 
        			"nested",
         		lv_nested_0_0, 
-        		"NestedTypeChild2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.NestedTypeChild2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -700,7 +700,7 @@ ruleNestedTypeChild1 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -743,7 +743,7 @@ ruleNestedTypeChild2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -867,7 +867,7 @@ ruleParentRefTest1 returns [EObject current=null]
        			$current, 
        			"child1",
         		lv_child1_1_0, 
-        		"ParentRefTestChild1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTestChild1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -910,7 +910,7 @@ ruleParentRefTest2 returns [EObject current=null]
        			$current, 
        			"child2",
         		lv_child2_1_0, 
-        		"ParentRefTestChild2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTestChild2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -959,7 +959,7 @@ ruleParentRefTestChild1 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"ParentRefTestChild1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTestChild1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1008,7 +1008,7 @@ ruleParentRefTestChild2 returns [EObject current=null]
        			$current, 
        			"child",
         		lv_child_2_0, 
-        		"ParentRefTestChild2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ParentRefTestChild2");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1052,7 +1052,7 @@ ruleQuantityExclusionTest1 returns [EObject current=null]
        			$current, 
        			"attr1",
         		lv_attr1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1070,7 +1070,7 @@ ruleQuantityExclusionTest1 returns [EObject current=null]
        			$current, 
        			"attr2",
         		lv_attr2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1113,7 +1113,7 @@ ruleQuantityExclusionTest2 returns [EObject current=null]
        			$current, 
        			"attr1",
         		lv_attr1_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1131,7 +1131,7 @@ ruleQuantityExclusionTest2 returns [EObject current=null]
        			$current, 
        			"attr2",
         		lv_attr2_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1169,7 +1169,7 @@ ruleValueExclusionTest1 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_0_0, 
-        		"ValueExclusionTestEn1");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTestEn1");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1208,7 +1208,7 @@ ruleValueExclusionTest2 returns [EObject current=null]
        			$current, 
        			"val",
         		lv_val_0_0, 
-        		"ValueExclusionTestEn2");
+        		"org.eclipse.xtext.serializer.ContextFinderTestLanguage.ValueExclusionTestEn2");
 	        afterParserOrEnumRuleCall();
 	    }
 

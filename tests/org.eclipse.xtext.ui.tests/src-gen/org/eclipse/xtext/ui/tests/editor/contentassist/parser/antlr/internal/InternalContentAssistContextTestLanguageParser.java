@@ -163,7 +163,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"secondLevelA",
             	            		lv_secondLevelA_0_0, 
-            	            		"SecondLevelA");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.SecondLevelA");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -212,7 +212,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"secondLevelB",
             	            		lv_secondLevelB_1_0, 
-            	            		"SecondLevelB");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.SecondLevelB");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -337,7 +337,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"thirdLevelA1",
             	            		lv_thirdLevelA1_0_0, 
-            	            		"ThirdLevelA1");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelA1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -391,7 +391,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"thirdLevelA2",
             	            		lv_thirdLevelA2_1_0, 
-            	            		"ThirdLevelA2");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelA2");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -520,7 +520,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"thirdLevelB1",
             	            		lv_thirdLevelB1_0_0, 
-            	            		"ThirdLevelB1");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelB1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -574,7 +574,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	           			current, 
             	           			"thirdLevelB2",
             	            		lv_thirdLevelB2_1_0, 
-            	            		"ThirdLevelB2");
+            	            		"org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage.ThirdLevelB2");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -707,7 +707,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                            			current, 
                            			"name",
                             		lv_name_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -832,7 +832,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                            			current, 
                            			"name",
                             		lv_name_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -957,7 +957,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                            			current, 
                            			"name",
                             		lv_name_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1082,7 +1082,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                            			current, 
                            			"name",
                             		lv_name_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }

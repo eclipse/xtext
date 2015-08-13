@@ -1,0 +1,9 @@
+org.eclipse.xtext.parser.fragments.idea.lang.psi.impl.FragmentTestLanguageFileImpl:a.fragmenttestlanguage(0,9)
+  org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ParserRuleFragmentsAction_0_ELEMENT_TYPE)(0,9)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ELEMENT_TYPE)(0,0)
+      <empty list>
+    PsiElement(ParserRuleFragments_NumberSignDigitOneKeyword_1_0_0_ELEMENT_TYPE)('#1')(0,2)
+    org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleFragments_ElementPRFNamedParserRuleCall_1_0_1_0_ELEMENT_TYPE)(2,9)
+      org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl(PRFNamed_PRFNamedFragmentParserRuleCall_0_ELEMENT_TYPE)(2,9)
+        PsiWhiteSpace(' ')(2,3)
+        PsiElement(PRFNamedFragment_NameIDTerminalRuleCall_0_ELEMENT_TYPE)('myName')(3,9)

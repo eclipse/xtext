@@ -90,7 +90,7 @@ ruleTree returns [EObject current=null]
        			$current, 
        			"nodes",
         		lv_nodes_1_0, 
-        		"TreeNode");
+        		"org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage.TreeNode");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleTreeNode returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -151,7 +151,7 @@ ruleTreeNode returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_2_0, 
-        		"TreeNode");
+        		"org.eclipse.xtext.parser.indentation.IndentationAwareTestLanguage.TreeNode");
 	        afterParserOrEnumRuleCall();
 	    }
 

@@ -24,10 +24,10 @@ import org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPac
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.GroupImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -69,8 +69,7 @@ public class GroupImpl extends RuleElementImpl implements Group
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<RuleElement> getElements()
+  public EList<RuleElement> getElements()
   {
     if (elements == null)
     {

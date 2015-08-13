@@ -49,7 +49,9 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	extends+=ExtendsNsURIEObject extends+=ExtendsPluginEObject extends+=ExtendsResourceEObject;
+ * 	extends+=ExtendsNsURIEObject
+ * 	extends+=ExtendsPluginEObject
+ * 	extends+=ExtendsResourceEObject;
  *
  **/
 
@@ -226,19 +228,22 @@ protected class Model_ExtendsAssignment_2 extends AssignmentToken  {
 /************ begin Rule ExtendsNsURIEObject ****************
  *
  * ExtendsNsURIEObject:
- * 	"ExtendsNsURIEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
- * 	eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
- * 	"ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsPluginEObject"
+ * 	'ExtendsNsURIEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+ * 	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+ * 	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
  * 	eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
  * 	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
- * 	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
- * 	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
+ * 	eObjectContainment+=ExtendsPluginEObject?
+ * 	eObjectContainment+=ExtendsResourceEObject?
+ * 	eObjectContainment+=EObject
+ * 	eObjectContainment+=EAttribute
+ * 	eObjectContainment+=MyEAttribute)?;
  *
  **/
 
-// "ExtendsNsURIEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
-// eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsPluginEObject"
+// 'ExtendsNsURIEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+// eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
 // eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
 // eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
 // eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
@@ -272,7 +277,7 @@ protected class ExtendsNsURIEObject_Group extends GroupToken {
 
 }
 
-// "ExtendsNsURIEObject"
+// 'ExtendsNsURIEObject'
 protected class ExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -327,9 +332,9 @@ protected class ExtendsNsURIEObject_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject] |
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] | "ExtendsResourceEObject"
-// eObjectReference1=[ExtendsResourceEObject]
+// ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
+// eObjectReference1=[ExtendsResourceEObject])
 protected class ExtendsNsURIEObject_Alternatives_2 extends AlternativesToken {
 
 	public ExtendsNsURIEObject_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -354,7 +359,7 @@ protected class ExtendsNsURIEObject_Alternatives_2 extends AlternativesToken {
 
 }
 
-// "EObject" eObjectReference1=[EObject]
+// 'EObject' eObjectReference1=[EObject]
 protected class ExtendsNsURIEObject_Group_2_0 extends GroupToken {
 	
 	public ExtendsNsURIEObject_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -376,7 +381,7 @@ protected class ExtendsNsURIEObject_Group_2_0 extends GroupToken {
 
 }
 
-// "EObject"
+// 'EObject'
 protected class ExtendsNsURIEObject_EObjectKeyword_2_0_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_EObjectKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -436,7 +441,7 @@ protected class ExtendsNsURIEObject_EObjectReference1Assignment_2_0_1 extends As
 }
 
 
-// "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject]
+// 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
 protected class ExtendsNsURIEObject_Group_2_1 extends GroupToken {
 	
 	public ExtendsNsURIEObject_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -458,7 +463,7 @@ protected class ExtendsNsURIEObject_Group_2_1 extends GroupToken {
 
 }
 
-// "ExtendsNsURIEObject"
+// 'ExtendsNsURIEObject'
 protected class ExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_2_1_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_ExtendsNsURIEObjectKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -518,7 +523,7 @@ protected class ExtendsNsURIEObject_EObjectReference1Assignment_2_1_1 extends As
 }
 
 
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject]
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
 protected class ExtendsNsURIEObject_Group_2_2 extends GroupToken {
 	
 	public ExtendsNsURIEObject_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -540,7 +545,7 @@ protected class ExtendsNsURIEObject_Group_2_2 extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsNsURIEObject_ExtendsPluginEObjectKeyword_2_2_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_ExtendsPluginEObjectKeyword_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -600,7 +605,7 @@ protected class ExtendsNsURIEObject_EObjectReference1Assignment_2_2_1 extends As
 }
 
 
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
 protected class ExtendsNsURIEObject_Group_2_3 extends GroupToken {
 	
 	public ExtendsNsURIEObject_Group_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -622,7 +627,7 @@ protected class ExtendsNsURIEObject_Group_2_3 extends GroupToken {
 
 }
 
-// "ExtendsResourceEObject"
+// 'ExtendsResourceEObject'
 protected class ExtendsNsURIEObject_ExtendsResourceEObjectKeyword_2_3_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_ExtendsResourceEObjectKeyword_2_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -683,7 +688,7 @@ protected class ExtendsNsURIEObject_EObjectReference1Assignment_2_3_1 extends As
 
 
 
-// ("ExtendsPluginEObject" eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject]
+// ('ExtendsPluginEObject' eAttributeReference=[MyEAttribute] eObjectReference2=[ExtendsNsURIEObject]
 // eObjectReference3=[ExtendsPluginEObject] eObjectReference4=[ExtendsResourceEObject]
 // eObjectContainment+=ExtendsNsURIEObject? eObjectContainment+=ExtendsPluginEObject?
 // eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject eObjectContainment+=EAttribute
@@ -709,7 +714,7 @@ protected class ExtendsNsURIEObject_Group_3 extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsNsURIEObject_ExtendsPluginEObjectKeyword_3_0 extends KeywordToken  {
 	
 	public ExtendsNsURIEObject_ExtendsPluginEObjectKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1169,11 +1174,11 @@ protected class ExtendsNsURIEObject_EObjectContainmentAssignment_3_10 extends As
 /************ begin Rule MyEAttribute ****************
  *
  * MyEAttribute:
- * 	{MyEAttribute} "MyEAttribute";
+ * 	{MyEAttribute} 'MyEAttribute';
  *
  **/
 
-// {MyEAttribute} "MyEAttribute"
+// {MyEAttribute} 'MyEAttribute'
 protected class MyEAttribute_Group extends GroupToken {
 	
 	public MyEAttribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1228,7 +1233,7 @@ protected class MyEAttribute_MyEAttributeAction_0 extends ActionToken  {
 	}
 }
 
-// "MyEAttribute"
+// 'MyEAttribute'
 protected class MyEAttribute_MyEAttributeKeyword_1 extends KeywordToken  {
 	
 	public MyEAttribute_MyEAttributeKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1257,11 +1262,11 @@ protected class MyEAttribute_MyEAttributeKeyword_1 extends KeywordToken  {
 /************ begin Rule EAttribute ****************
  *
  * EAttribute:
- * 	{EAttribute} "EAttribute";
+ * 	{EAttribute} 'EAttribute';
  *
  **/
 
-// {EAttribute} "EAttribute"
+// {EAttribute} 'EAttribute'
 protected class EAttribute_Group extends GroupToken {
 	
 	public EAttribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1316,7 +1321,7 @@ protected class EAttribute_EAttributeAction_0 extends ActionToken  {
 	}
 }
 
-// "EAttribute"
+// 'EAttribute'
 protected class EAttribute_EAttributeKeyword_1 extends KeywordToken  {
 	
 	public EAttribute_EAttributeKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1345,19 +1350,22 @@ protected class EAttribute_EAttributeKeyword_1 extends KeywordToken  {
 /************ begin Rule ExtendsPluginEObject ****************
  *
  * ExtendsPluginEObject:
- * 	"ExtendsPluginEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
- * 	eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
- * 	"ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsPluginEObject"
+ * 	'ExtendsPluginEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+ * 	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+ * 	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
  * 	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
  * 	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
- * 	eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
- * 	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
+ * 	eObjectContainment+=ExtendsPluginEObject?
+ * 	eObjectContainment+=ExtendsResourceEObject?
+ * 	eObjectContainment+=EObject
+ * 	eObjectContainment+=EAttribute
+ * 	eObjectContainment+=MyEAttribute)?;
  *
  **/
 
-// "ExtendsPluginEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
-// eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsPluginEObject"
+// 'ExtendsPluginEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+// eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsPluginEObject'
 // eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
 // eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
 // eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
@@ -1391,7 +1399,7 @@ protected class ExtendsPluginEObject_Group extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsPluginEObject_ExtendsPluginEObjectKeyword_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_ExtendsPluginEObjectKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1446,9 +1454,9 @@ protected class ExtendsPluginEObject_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject] |
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] | "ExtendsResourceEObject"
-// eObjectReference1=[ExtendsResourceEObject]
+// ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
+// eObjectReference1=[ExtendsResourceEObject])
 protected class ExtendsPluginEObject_Alternatives_2 extends AlternativesToken {
 
 	public ExtendsPluginEObject_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1473,7 +1481,7 @@ protected class ExtendsPluginEObject_Alternatives_2 extends AlternativesToken {
 
 }
 
-// "EObject" eObjectReference1=[EObject]
+// 'EObject' eObjectReference1=[EObject]
 protected class ExtendsPluginEObject_Group_2_0 extends GroupToken {
 	
 	public ExtendsPluginEObject_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1495,7 +1503,7 @@ protected class ExtendsPluginEObject_Group_2_0 extends GroupToken {
 
 }
 
-// "EObject"
+// 'EObject'
 protected class ExtendsPluginEObject_EObjectKeyword_2_0_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_EObjectKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1555,7 +1563,7 @@ protected class ExtendsPluginEObject_EObjectReference1Assignment_2_0_1 extends A
 }
 
 
-// "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject]
+// 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
 protected class ExtendsPluginEObject_Group_2_1 extends GroupToken {
 	
 	public ExtendsPluginEObject_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1577,7 +1585,7 @@ protected class ExtendsPluginEObject_Group_2_1 extends GroupToken {
 
 }
 
-// "ExtendsNsURIEObject"
+// 'ExtendsNsURIEObject'
 protected class ExtendsPluginEObject_ExtendsNsURIEObjectKeyword_2_1_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_ExtendsNsURIEObjectKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1637,7 +1645,7 @@ protected class ExtendsPluginEObject_EObjectReference1Assignment_2_1_1 extends A
 }
 
 
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject]
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
 protected class ExtendsPluginEObject_Group_2_2 extends GroupToken {
 	
 	public ExtendsPluginEObject_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1659,7 +1667,7 @@ protected class ExtendsPluginEObject_Group_2_2 extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsPluginEObject_ExtendsPluginEObjectKeyword_2_2_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_ExtendsPluginEObjectKeyword_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1719,7 +1727,7 @@ protected class ExtendsPluginEObject_EObjectReference1Assignment_2_2_1 extends A
 }
 
 
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
 protected class ExtendsPluginEObject_Group_2_3 extends GroupToken {
 	
 	public ExtendsPluginEObject_Group_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1741,7 +1749,7 @@ protected class ExtendsPluginEObject_Group_2_3 extends GroupToken {
 
 }
 
-// "ExtendsResourceEObject"
+// 'ExtendsResourceEObject'
 protected class ExtendsPluginEObject_ExtendsResourceEObjectKeyword_2_3_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_ExtendsResourceEObjectKeyword_2_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1802,7 +1810,7 @@ protected class ExtendsPluginEObject_EObjectReference1Assignment_2_3_1 extends A
 
 
 
-// ("ExtendsPluginEObject" eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
+// ('ExtendsPluginEObject' eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
 // eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject?
 // eObjectContainment+=ExtendsPluginEObject? eObjectContainment+=ExtendsResourceEObject? eObjectContainment+=EObject
 // eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?
@@ -1827,7 +1835,7 @@ protected class ExtendsPluginEObject_Group_3 extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsPluginEObject_ExtendsPluginEObjectKeyword_3_0 extends KeywordToken  {
 	
 	public ExtendsPluginEObject_ExtendsPluginEObjectKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2249,8 +2257,8 @@ protected class ExtendsPluginEObject_EObjectContainmentAssignment_3_9 extends As
 
 /************ begin Rule Unused_01 ****************
  *
- * Unused_01 returns ExtendsNsURIEObject:
- * 	{MyNamedElement_01} name=ValidID;
+ * Unused_01 ExtendsNsURIEObject:
+ * 	{MyNamedElement_01} name=ValidID
  *
  **/
 
@@ -2349,8 +2357,8 @@ protected class Unused_01_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Unused_02 ****************
  *
- * Unused_02 returns ExtendsResourceEObject:
- * 	{MyNamedElement_02} name=ValidID;
+ * Unused_02 ExtendsResourceEObject:
+ * 	{MyNamedElement_02} name=ValidID
  *
  **/
 
@@ -2449,8 +2457,8 @@ protected class Unused_02_NameAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule Unused_03 ****************
  *
- * Unused_03 returns ExtendsPluginEObject:
- * 	{MyNamedElement_03} name=ValidID;
+ * Unused_03 ExtendsPluginEObject:
+ * 	{MyNamedElement_03} name=ValidID
  *
  **/
 
@@ -2550,19 +2558,22 @@ protected class Unused_03_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExtendsResourceEObject ****************
  *
  * ExtendsResourceEObject:
- * 	"ExtendsResourceEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
- * 	eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
- * 	"ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsResourceEObject"
+ * 	'ExtendsResourceEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+ * 	eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+ * 	'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsResourceEObject'
  * 	eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
  * 	eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
- * 	eObjectContainment+=ExtendsPluginEObject eObjectContainment+=ExtendsResourceEObject eObjectContainment+=EObject
- * 	eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?;
+ * 	eObjectContainment+=ExtendsPluginEObject
+ * 	eObjectContainment+=ExtendsResourceEObject
+ * 	eObjectContainment+=EObject
+ * 	eObjectContainment+=EAttribute
+ * 	eObjectContainment+=MyEAttribute)?;
  *
  **/
 
-// "ExtendsResourceEObject" name=ValidID ("EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject"
-// eObjectReference1=[ExtendsNsURIEObject] | "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] |
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]) ("ExtendsResourceEObject"
+// 'ExtendsResourceEObject' name=ValidID ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject'
+// eObjectReference1=[ExtendsNsURIEObject] | 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] |
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]) ('ExtendsResourceEObject'
 // eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
 // eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
 // eObjectContainment+=ExtendsPluginEObject eObjectContainment+=ExtendsResourceEObject eObjectContainment+=EObject
@@ -2596,7 +2607,7 @@ protected class ExtendsResourceEObject_Group extends GroupToken {
 
 }
 
-// "ExtendsResourceEObject"
+// 'ExtendsResourceEObject'
 protected class ExtendsResourceEObject_ExtendsResourceEObjectKeyword_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_ExtendsResourceEObjectKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2651,9 +2662,9 @@ protected class ExtendsResourceEObject_NameAssignment_1 extends AssignmentToken 
 
 }
 
-// "EObject" eObjectReference1=[EObject] | "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject] |
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject] | "ExtendsResourceEObject"
-// eObjectReference1=[ExtendsResourceEObject]
+// ('EObject' eObjectReference1=[EObject] | 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject] |
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject] | 'ExtendsResourceEObject'
+// eObjectReference1=[ExtendsResourceEObject])
 protected class ExtendsResourceEObject_Alternatives_2 extends AlternativesToken {
 
 	public ExtendsResourceEObject_Alternatives_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2678,7 +2689,7 @@ protected class ExtendsResourceEObject_Alternatives_2 extends AlternativesToken 
 
 }
 
-// "EObject" eObjectReference1=[EObject]
+// 'EObject' eObjectReference1=[EObject]
 protected class ExtendsResourceEObject_Group_2_0 extends GroupToken {
 	
 	public ExtendsResourceEObject_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2700,7 +2711,7 @@ protected class ExtendsResourceEObject_Group_2_0 extends GroupToken {
 
 }
 
-// "EObject"
+// 'EObject'
 protected class ExtendsResourceEObject_EObjectKeyword_2_0_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_EObjectKeyword_2_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2760,7 +2771,7 @@ protected class ExtendsResourceEObject_EObjectReference1Assignment_2_0_1 extends
 }
 
 
-// "ExtendsNsURIEObject" eObjectReference1=[ExtendsNsURIEObject]
+// 'ExtendsNsURIEObject' eObjectReference1=[ExtendsNsURIEObject]
 protected class ExtendsResourceEObject_Group_2_1 extends GroupToken {
 	
 	public ExtendsResourceEObject_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2782,7 +2793,7 @@ protected class ExtendsResourceEObject_Group_2_1 extends GroupToken {
 
 }
 
-// "ExtendsNsURIEObject"
+// 'ExtendsNsURIEObject'
 protected class ExtendsResourceEObject_ExtendsNsURIEObjectKeyword_2_1_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_ExtendsNsURIEObjectKeyword_2_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2842,7 +2853,7 @@ protected class ExtendsResourceEObject_EObjectReference1Assignment_2_1_1 extends
 }
 
 
-// "ExtendsPluginEObject" eObjectReference1=[ExtendsPluginEObject]
+// 'ExtendsPluginEObject' eObjectReference1=[ExtendsPluginEObject]
 protected class ExtendsResourceEObject_Group_2_2 extends GroupToken {
 	
 	public ExtendsResourceEObject_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2864,7 +2875,7 @@ protected class ExtendsResourceEObject_Group_2_2 extends GroupToken {
 
 }
 
-// "ExtendsPluginEObject"
+// 'ExtendsPluginEObject'
 protected class ExtendsResourceEObject_ExtendsPluginEObjectKeyword_2_2_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_ExtendsPluginEObjectKeyword_2_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2924,7 +2935,7 @@ protected class ExtendsResourceEObject_EObjectReference1Assignment_2_2_1 extends
 }
 
 
-// "ExtendsResourceEObject" eObjectReference1=[ExtendsResourceEObject]
+// 'ExtendsResourceEObject' eObjectReference1=[ExtendsResourceEObject]
 protected class ExtendsResourceEObject_Group_2_3 extends GroupToken {
 	
 	public ExtendsResourceEObject_Group_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2946,7 +2957,7 @@ protected class ExtendsResourceEObject_Group_2_3 extends GroupToken {
 
 }
 
-// "ExtendsResourceEObject"
+// 'ExtendsResourceEObject'
 protected class ExtendsResourceEObject_ExtendsResourceEObjectKeyword_2_3_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_ExtendsResourceEObjectKeyword_2_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3007,7 +3018,7 @@ protected class ExtendsResourceEObject_EObjectReference1Assignment_2_3_1 extends
 
 
 
-// ("ExtendsResourceEObject" eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
+// ('ExtendsResourceEObject' eObjectReference2=[ExtendsNsURIEObject] eObjectReference3=[ExtendsPluginEObject]
 // eObjectReference4=[ExtendsResourceEObject] eObjectContainment+=ExtendsNsURIEObject
 // eObjectContainment+=ExtendsPluginEObject eObjectContainment+=ExtendsResourceEObject eObjectContainment+=EObject
 // eObjectContainment+=EAttribute eObjectContainment+=MyEAttribute)?
@@ -3032,7 +3043,7 @@ protected class ExtendsResourceEObject_Group_3 extends GroupToken {
 
 }
 
-// "ExtendsResourceEObject"
+// 'ExtendsResourceEObject'
 protected class ExtendsResourceEObject_ExtendsResourceEObjectKeyword_3_0 extends KeywordToken  {
 	
 	public ExtendsResourceEObject_ExtendsResourceEObjectKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3449,11 +3460,11 @@ protected class ExtendsResourceEObject_EObjectContainmentAssignment_3_9 extends 
 /************ begin Rule EObject ****************
  *
  * EObject:
- * 	{EObject} "object";
+ * 	{EObject} 'object';
  *
  **/
 
-// {EObject} "object"
+// {EObject} 'object'
 protected class EObject_Group extends GroupToken {
 	
 	public EObject_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3508,7 +3519,7 @@ protected class EObject_EObjectAction_0 extends ActionToken  {
 	}
 }
 
-// "object"
+// 'object'
 protected class EObject_ObjectKeyword_1 extends KeywordToken  {
 	
 	public EObject_ObjectKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

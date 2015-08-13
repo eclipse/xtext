@@ -19,11 +19,11 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	
 	public class DelegateModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DelegateModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parser.antlr.Bug301935ExTestLanguage.DelegateModel");
 		private final RuleCall cModelParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//DelegateModel returns Model:
-		//	Model;
+		//DelegateModel Model:
+		//	Model
 		@Override public ParserRule getRule() { return rule; }
 
 		//Model
@@ -72,8 +72,8 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	
-	//DelegateModel returns Model:
-	//	Model;
+	//DelegateModel Model:
+	//	Model
 	public DelegateModelElements getDelegateModelAccess() {
 		return pDelegateModel;
 	}
@@ -83,7 +83,8 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Model:
-	//	name=ID WS value=ID NL value2=ID WS;
+	//	name=ID WS value=ID NL
+	//	value2=ID WS;
 	public Bug301935TestLanguageGrammarAccess.ModelElements getModelAccess() {
 		return gaBug301935TestLanguage.getModelAccess();
 	}
@@ -93,7 +94,7 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//NL:
-	//	WS* ("\r"? "\n") WS*;
+	//	WS* ('\r'? '\n') WS*;
 	public Bug301935TestLanguageGrammarAccess.NLElements getNLAccess() {
 		return gaBug301935TestLanguage.getNLAccess();
 	}
@@ -103,13 +104,13 @@ public class Bug301935ExTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaBug301935TestLanguage.getIDRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t")+;
+	//	' ' | '\t'+;
 	public TerminalRule getWSRule() {
 		return gaBug301935TestLanguage.getWSRule();
 	} 

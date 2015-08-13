@@ -130,7 +130,7 @@ ruleTypes returns [EObject current=null]
        			$current, 
        			"types",
         		lv_types_2_0, 
-        		"Type");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -214,7 +214,7 @@ ruleSimpleType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -261,7 +261,7 @@ ruleCompositeType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -282,7 +282,7 @@ ruleCompositeType returns [EObject current=null]
        			$current, 
        			"baseType",
         		lv_baseType_3_0, 
-        		"CompositeTypeEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage.CompositeTypeEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 

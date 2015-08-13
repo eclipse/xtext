@@ -14,6 +14,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.nodemodel.BidiIterator;
@@ -30,6 +31,9 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 
 	@Inject
 	protected IValueConverterService valueConverter;
+	
+	@Inject
+	protected RuleNames ruleNames;
 
 	@Override
 	public void createSequence(EObject context, EObject semanticObject) {
@@ -46,7 +50,7 @@ public class NodeModelSemanticSequencer extends AbstractSemanticSequencer {
 					acceptSemantic(semanticObject, rc, semanticObject.eGet(feature), node.getFirst());
 				} else {
 					String strVal = NodeModelUtils.getTokenText(node.getFirst());
-					Object val = valueConverter.toValue(strVal, rc.getRule().getName(), node.getFirst());
+					Object val = valueConverter.toValue(strVal, ruleNames.getQualifiedName(rc.getRule()), node.getFirst());
 					acceptSemantic(semanticObject, rc, val, node.getFirst());
 				}
 			} else if (node.getSecond() instanceof Keyword)

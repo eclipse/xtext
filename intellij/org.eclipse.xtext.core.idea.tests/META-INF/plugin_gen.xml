@@ -47,6 +47,9 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
       							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+      	<lang.documentationProvider language="org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage"
+      							factoryClass="org.eclipse.xtext.testlanguages.indent.idea.IndentationAwareTestLanguageExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.indent.idea.facet.IndentationAwareTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.indent.idea.highlighting.IndentationAwareTestLanguageSemanticHighlightVisitor"/>

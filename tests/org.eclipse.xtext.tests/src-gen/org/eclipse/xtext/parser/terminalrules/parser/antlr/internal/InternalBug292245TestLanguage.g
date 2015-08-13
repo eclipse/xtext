@@ -101,7 +101,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"fix",
         		lv_fix_1_0, 
-        		"Fix");
+        		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Fix");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -124,7 +124,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"error",
         		lv_error_3_0, 
-        		"Error");
+        		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Error");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -147,7 +147,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"tick",
         		lv_tick_5_0, 
-        		"Apostrophe");
+        		"org.eclipse.xtext.parser.terminalrules.Bug292245TestLanguage.Apostrophe");
 	        afterParserOrEnumRuleCall();
 	    }
 

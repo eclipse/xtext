@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_0_0, 
-        		"Import");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -108,7 +108,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_1_0, 
-        		"Type");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Type");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -152,7 +152,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importURI",
         		lv_importURI_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -235,7 +235,7 @@ ruleDataType returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -282,7 +282,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -320,7 +320,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"properties",
         		lv_properties_5_0, 
-        		"Property");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Property");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -338,7 +338,7 @@ ruleClass returns [EObject current=null]
        			$current, 
        			"subClasses",
         		lv_subClasses_6_0, 
-        		"Class");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage.Class");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -426,7 +426,7 @@ ruleAttribute returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -490,7 +490,7 @@ ruleReference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

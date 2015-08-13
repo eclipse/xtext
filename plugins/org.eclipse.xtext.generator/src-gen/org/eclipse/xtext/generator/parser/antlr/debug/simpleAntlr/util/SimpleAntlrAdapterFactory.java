@@ -95,9 +95,24 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
         return createRuleAdapter();
       }
       @Override
+      public Adapter caseParameter(Parameter object)
+      {
+        return createParameterAdapter();
+      }
+      @Override
       public Adapter caseRuleElement(RuleElement object)
       {
         return createRuleElementAdapter();
+      }
+      @Override
+      public Adapter caseExpression(Expression object)
+      {
+        return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseReferenceOrLiteral(ReferenceOrLiteral object)
+      {
+        return createReferenceOrLiteralAdapter();
       }
       @Override
       public Adapter casePredicated(Predicated object)
@@ -148,6 +163,21 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
       public Adapter caseUntilElement(UntilElement object)
       {
         return createUntilElementAdapter();
+      }
+      @Override
+      public Adapter caseOrExpression(OrExpression object)
+      {
+        return createOrExpressionAdapter();
+      }
+      @Override
+      public Adapter caseAndExpression(AndExpression object)
+      {
+        return createAndExpressionAdapter();
+      }
+      @Override
+      public Adapter caseNotExpression(NotExpression object)
+      {
+        return createNotExpressionAdapter();
       }
       @Override
       public Adapter caseSkip(Skip object)
@@ -237,6 +267,21 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter
+   * @generated
+   */
+  public Adapter createParameterAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement <em>Rule Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -247,6 +292,36 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRuleElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression
+   * @generated
+   */
+  public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral <em>Reference Or Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral
+   * @generated
+   */
+  public Adapter createReferenceOrLiteralAdapter()
   {
     return null;
   }
@@ -397,6 +472,51 @@ public class SimpleAntlrAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUntilElementAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression <em>Or Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression
+   * @generated
+   */
+  public Adapter createOrExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression <em>And Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression
+   * @generated
+   */
+  public Adapter createAndExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression <em>Not Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression
+   * @generated
+   */
+  public Adapter createNotExpressionAdapter()
   {
     return null;
   }

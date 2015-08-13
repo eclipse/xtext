@@ -27,9 +27,10 @@ import org.eclipse.xtext.idea.generator.IdeaPluginClassNames
 
 import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
+import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 @Singleton
-class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
+class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
 	
 	@Inject
 	extension IdeaPluginClassNames
@@ -43,15 +44,15 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		options {
 			superClass=AbstractPsiAntlrParser;
 			«IF options.backtrack || options.memoize || options.k >= 0»
-			«IF options.backtrack»
-			backtrack=true;
-			«ENDIF»
-			«IF options.memoize»
-			memoize=true;
-			«ENDIF»
-			«IF options.k >= 0»
-			memoize=«options.k»;
-			«ENDIF»
+				«IF options.backtrack»
+					backtrack=true;
+				«ENDIF»
+				«IF options.memoize»
+					memoize=true;
+				«ENDIF»
+				«IF options.k >= 0»
+					memoize=«options.k»;
+				«ENDIF»
 			«ENDIF»
 		}
 	'''
@@ -64,7 +65,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 		import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 		«IF !allParserRules.map[eAllContentsAsList].flatten.filter(UnorderedGroup).empty && options.backtrack»
-		import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
+			import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 		«ENDIF»
 		import «gaFQName»;
 
@@ -105,16 +106,22 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		false
 	}
 	
-	override protected _compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		//Entry rule «entryRuleName»
-		«entryRuleName»«compileEntryInit(options)»:
-			{ «markComposite» }
-			«ruleName»
-			EOF;
-		«compileEntryFinally(options)»
+	override protected compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
+		«IF !it.fragment»
+			//Entry rule «entryRuleName»
+			«entryRuleName»«compileEntryInit(options)»:
+				{ «markComposite» }
+				«ruleName»«defaultArgumentList»
+				EOF;
+			«compileEntryFinally(options)»
+		«ENDIF»
 		
 		«compileEBNF(options)»
 	'''
+	
+	override protected compileInit(AbstractRule it, AntlrOptions options) '''
+		«IF it instanceof ParserRule»«getParameterList(!isPassCurrentIntoFragment)»«ENDIF»
+		«super.compileInit(it, options)»'''
 	
 	override protected _dataTypeEbnf2(Keyword it, boolean supportActions) {
 		if (supportActions) '''
@@ -133,7 +140,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 	
 	override protected _dataTypeEbnf2(RuleCall it, boolean supportActions) {
 		if (supportActions) {
-			switch rule {
+			switch it.getRule {
 				EnumRule case assigned,
 				ParserRule case assigned: 
 					super._dataTypeEbnf2(it, supportActions)
@@ -255,7 +262,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 		}
 	}
 	
-	override protected _crossrefEbnf(AbstractRule it, CrossReference ref, boolean supportActions) {
+	override protected crossrefEbnf(AbstractRule it, RuleCall call, CrossReference ref, boolean supportActions) {
 		if (supportActions) {
 			switch it {
 				EnumRule,
@@ -263,7 +270,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 					{
 						«ref.markComposite»
 					}
-					«super._crossrefEbnf(it, ref, supportActions)»
+					«super.crossrefEbnf(it, call, ref, supportActions)»
 					{
 						«ref.doneComposite»
 					}
@@ -272,7 +279,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 					{
 						«ref.markLeaf»
 					}
-					«ref.containingAssignment.localVar»=«super._crossrefEbnf(it, ref, supportActions)»
+					«ref.containingAssignment.localVar»=«super.crossrefEbnf(it, call, ref, supportActions)»
 					{
 						«ref.doneLeaf(ref.containingAssignment.localVar)»
 					}
@@ -281,7 +288,7 @@ class PsiAntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator 
 					throw new IllegalStateException("crossrefEbnf is not supported for " + it)
 			}
 		} else {
-			super._crossrefEbnf(it, ref, supportActions)
+			super.crossrefEbnf(it, call, ref, supportActions)
 		}
 	}
 	

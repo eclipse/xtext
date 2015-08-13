@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: Assignment.java,v 1.16 2010/04/06 14:10:18 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

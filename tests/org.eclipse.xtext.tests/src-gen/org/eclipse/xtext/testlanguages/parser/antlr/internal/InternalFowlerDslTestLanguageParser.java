@@ -23,8 +23,12 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'events'", "'end'", "'commands'", "'resetting'", "'state'", "'actions'", "'{'", "'}'", "'=>'"
     };
-    public static final int T__19=19;
     public static final int RULE_ID=4;
+    public static final int RULE_ANY_OTHER=10;
+    public static final int EOF=-1;
+    public static final int RULE_SL_COMMENT=8;
+    public static final int RULE_ML_COMMENT=7;
+    public static final int T__19=19;
     public static final int RULE_STRING=6;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -34,12 +38,8 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
-    public static final int RULE_ANY_OTHER=10;
     public static final int RULE_INT=5;
     public static final int RULE_WS=9;
-    public static final int RULE_SL_COMMENT=8;
-    public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=7;
 
     // delegates
     // delegators
@@ -178,7 +178,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"events",
             	            		lv_events_1_0, 
-            	            		"Event");
+            	            		"org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Event");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -235,7 +235,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"commands",
             	            		lv_commands_4_0, 
-            	            		"Command");
+            	            		"org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Command");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -288,7 +288,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"states",
             	            		lv_states_6_0, 
-            	            		"State");
+            	            		"org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.State");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -428,7 +428,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -454,7 +454,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"code",
                     		lv_code_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -553,7 +553,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -579,7 +579,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"code",
                     		lv_code_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -689,7 +689,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -804,7 +804,7 @@ public class InternalFowlerDslTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"transitions",
             	            		lv_transitions_6_0, 
-            	            		"Transition");
+            	            		"org.eclipse.xtext.testlanguages.FowlerDslTestLanguage.Transition");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

@@ -41,6 +41,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.service.AbstractElementFinder;
@@ -85,17 +86,19 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate(final LanguageConfig2 language) {
-    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
     Grammar _grammar = language.getGrammar();
-    String _name = _grammar.getName();
+    RuleNames.ensureAdapterInstalled(_grammar);
+    final GuiceModuleAccess.BindingFactory bindingFactory = new GuiceModuleAccess.BindingFactory();
+    Grammar _grammar_1 = language.getGrammar();
+    String _name = _grammar_1.getName();
     boolean _notEquals = (!Objects.equal(_name, "org.eclipse.xtext.common.Terminals"));
     if (_notEquals) {
       TypeReference _typeRef = TypeReference.typeRef(ClassLoader.class);
       bindingFactory.addTypeToInstance(_typeRef, "getClass().getClassLoader()");
     }
     TypeReference _typeRef_1 = TypeReference.typeRef(IGrammarAccess.class);
-    Grammar _grammar_1 = language.getGrammar();
-    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
+    Grammar _grammar_2 = language.getGrammar();
+    TypeReference _grammarAccess = this._grammarAccessExtensions.getGrammarAccess(_grammar_2);
     GuiceModuleAccess.BindingFactory _addTypeToType = bindingFactory.addTypeToType(_typeRef_1, _grammarAccess);
     GuiceModuleAccess _runtimeGenModule = language.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
@@ -114,6 +117,14 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     }
     this.doGenerateGrammarAccess(language);
     this.writeGrammar(language);
+  }
+  
+  protected String getQualifiedName(final AbstractRule rule) {
+    Grammar _grammar = GrammarUtil.getGrammar(rule);
+    String _name = _grammar.getName();
+    String _plus = (_name + ".");
+    String _name_1 = rule.getName();
+    return (_plus + _name_1);
   }
   
   protected void writeGrammar(final LanguageConfig2 language) {
@@ -580,8 +591,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.append(") ");
         _builder.append(GrammarUtil.class, "\t");
         _builder.append(".findRuleForName(getGrammar(), \"");
-        String _name = it.getName();
-        _builder.append(_name, "\t");
+        String _qualifiedName = GrammarAccessFragment2.this.getQualifiedName(it);
+        _builder.append(_qualifiedName, "\t");
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
         {
@@ -661,8 +672,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.append(") ");
         _builder.append(GrammarUtil.class, "\t");
         _builder.append(".findRuleForName(getGrammar(), \"");
-        String _name = it.getName();
-        _builder.append(_name, "\t");
+        String _qualifiedName = GrammarAccessFragment2.this.getQualifiedName(it);
+        _builder.append(_qualifiedName, "\t");
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
         {
@@ -817,8 +828,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.append(") ");
         _builder.append(GrammarUtil.class, "");
         _builder.append(".findRuleForName(getGrammar(), \"");
-        String _name = it.getName();
-        _builder.append(_name, "");
+        String _qualifiedName = GrammarAccessFragment2.this.getQualifiedName(it);
+        _builder.append(_qualifiedName, "");
         _builder.append("\");");
         _builder.newLineIfNotEmpty();
       }
@@ -859,8 +870,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
             TypeReference _grammarAccess = GrammarAccessFragment2.this._grammarAccessExtensions.getGrammarAccess(_grammar_1);
             _builder.append(_grammarAccess, "");
             _builder.append(".");
-            String _gaRuleAccessorClassName_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessorClassName(it);
-            _builder.append(_gaRuleAccessorClassName_1, "");
+            String _gaBaseRuleAccessorClassName = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseRuleAccessorClassName(it);
+            _builder.append(_gaBaseRuleAccessorClassName, "");
             _builder.append(" ");
             String _gaElementsAccessor_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
             _builder.append(_gaElementsAccessor_1, "");
@@ -872,8 +883,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
             String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(_usedGrammar);
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
             _builder.append(".");
-            String _gaElementsAccessor_2 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-            _builder.append(_gaElementsAccessor_2, "\t");
+            String _gaBaseElementsAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseElementsAccessor(it);
+            _builder.append(_gaBaseElementsAccessor, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
             _builder.append("}");
@@ -888,8 +899,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         _builder.append("return ");
-        String _gaElementsAccessor_3 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
-        _builder.append(_gaElementsAccessor_3, "\t");
+        String _gaElementsAccessor_2 = GrammarAccessFragment2.this._grammarAccessExtensions.gaElementsAccessor(it);
+        _builder.append(_gaElementsAccessor_2, "\t");
         _builder.append(".getRule();");
         _builder.newLineIfNotEmpty();
         _builder.append("}");
@@ -1005,8 +1016,8 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
             String _gaGrammarAccessLocalVarName = GrammarAccessFragment2.this.gaGrammarAccessLocalVarName(_usedGrammar);
             _builder.append(_gaGrammarAccessLocalVarName, "\t");
             _builder.append(".");
-            String _gaRuleAccessor_1 = GrammarAccessFragment2.this._grammarAccessExtensions.gaRuleAccessor(it);
-            _builder.append(_gaRuleAccessor_1, "\t");
+            String _gaBaseRuleAccessor = GrammarAccessFragment2.this._grammarAccessExtensions.gaBaseRuleAccessor(it);
+            _builder.append(_gaBaseRuleAccessor, "\t");
             _builder.append(";");
             _builder.newLineIfNotEmpty();
           }

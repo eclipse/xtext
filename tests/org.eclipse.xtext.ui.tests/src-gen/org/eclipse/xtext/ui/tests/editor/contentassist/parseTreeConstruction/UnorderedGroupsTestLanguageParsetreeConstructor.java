@@ -49,13 +49,17 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
- * 	fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model;
+ * 	'1' first=SimpleModel
+ * 	| '2' second=MandatoryModel
+ * 	| '3' thrird=LoopedModel
+ * 	| '4' forth=GroupLoopedModel
+ * 	| '5' fifth=LoopedAlternativeModel
+ * 	| 'bug304681' model=Bug304681Model;
  *
  **/
 
-// "1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
-// fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model
+// '1' first=SimpleModel | '2' second=MandatoryModel | '3' thrird=LoopedModel | '4' forth=GroupLoopedModel | '5'
+// fifth=LoopedAlternativeModel | 'bug304681' model=Bug304681Model
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -89,7 +93,7 @@ protected class Model_Alternatives extends AlternativesToken {
 
 }
 
-// "1" first=SimpleModel
+// '1' first=SimpleModel
 protected class Model_Group_0 extends GroupToken {
 	
 	public Model_Group_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -111,7 +115,7 @@ protected class Model_Group_0 extends GroupToken {
 
 }
 
-// "1"
+// '1'
 protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
 	
 	public Model_DigitOneKeyword_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -179,7 +183,7 @@ protected class Model_FirstAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// "2" second=MandatoryModel
+// '2' second=MandatoryModel
 protected class Model_Group_1 extends GroupToken {
 	
 	public Model_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -201,7 +205,7 @@ protected class Model_Group_1 extends GroupToken {
 
 }
 
-// "2"
+// '2'
 protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
 	
 	public Model_DigitTwoKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -269,7 +273,7 @@ protected class Model_SecondAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// "3" thrird=LoopedModel
+// '3' thrird=LoopedModel
 protected class Model_Group_2 extends GroupToken {
 	
 	public Model_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -291,7 +295,7 @@ protected class Model_Group_2 extends GroupToken {
 
 }
 
-// "3"
+// '3'
 protected class Model_DigitThreeKeyword_2_0 extends KeywordToken  {
 	
 	public Model_DigitThreeKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -359,7 +363,7 @@ protected class Model_ThrirdAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// "4" forth=GroupLoopedModel
+// '4' forth=GroupLoopedModel
 protected class Model_Group_3 extends GroupToken {
 	
 	public Model_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -381,7 +385,7 @@ protected class Model_Group_3 extends GroupToken {
 
 }
 
-// "4"
+// '4'
 protected class Model_DigitFourKeyword_3_0 extends KeywordToken  {
 	
 	public Model_DigitFourKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -449,7 +453,7 @@ protected class Model_ForthAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "5" fifth=LoopedAlternativeModel
+// '5' fifth=LoopedAlternativeModel
 protected class Model_Group_4 extends GroupToken {
 	
 	public Model_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -471,7 +475,7 @@ protected class Model_Group_4 extends GroupToken {
 
 }
 
-// "5"
+// '5'
 protected class Model_DigitFiveKeyword_4_0 extends KeywordToken  {
 	
 	public Model_DigitFiveKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -539,7 +543,7 @@ protected class Model_FifthAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// "bug304681" model=Bug304681Model
+// 'bug304681' model=Bug304681Model
 protected class Model_Group_5 extends GroupToken {
 	
 	public Model_Group_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -561,7 +565,7 @@ protected class Model_Group_5 extends GroupToken {
 
 }
 
-// "bug304681"
+// 'bug304681'
 protected class Model_Bug304681Keyword_5_0 extends KeywordToken  {
 	
 	public Model_Bug304681Keyword_5_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -636,13 +640,16 @@ protected class Model_ModelAssignment_5_1 extends AssignmentToken  {
 /************ begin Rule SimpleModel ****************
  *
  * SimpleModel:
- * 	(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
- * 	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+ * 	(visibility=('public' | 'private' | 'protected')?
+ * 	& static?='static'?
+ * 	& synchronized?='synchronized'?
+ * 	& (abstract?='abstract' | final?='final')?)
+ * 	'class' name=ID '{' '}';
  *
  **/
 
-// (visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-// (abstract?="abstract" | final?="final")?) "class" name=ID "{" "}"
+// (visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
+// (abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 protected class SimpleModel_Group extends GroupToken {
 	
 	public SimpleModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -671,8 +678,8 @@ protected class SimpleModel_Group extends GroupToken {
 
 }
 
-// visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-// (abstract?="abstract" | final?="final")?
+// (visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
+// (abstract?='abstract' | final?='final')?)
 protected class SimpleModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public SimpleModel_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -697,7 +704,7 @@ protected class SimpleModel_UnorderedGroup_0 extends UnorderedGroupToken {
 
 }
 
-// visibility=("public" | "private" | "protected")?
+// visibility=('public' | 'private' | 'protected')?
 protected class SimpleModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
 	public SimpleModel_VisibilityAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -740,7 +747,7 @@ protected class SimpleModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// static?="static"?
+// static?='static'?
 protected class SimpleModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
 	public SimpleModel_StaticAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -774,7 +781,7 @@ protected class SimpleModel_StaticAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// synchronized?="synchronized"?
+// synchronized?='synchronized'?
 protected class SimpleModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
 	public SimpleModel_SynchronizedAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -809,7 +816,7 @@ protected class SimpleModel_SynchronizedAssignment_0_2 extends AssignmentToken  
 
 }
 
-// (abstract?="abstract" | final?="final")?
+// (abstract?='abstract' | final?='final')?
 protected class SimpleModel_Alternatives_0_3 extends AlternativesToken {
 
 	public SimpleModel_Alternatives_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -832,7 +839,7 @@ protected class SimpleModel_Alternatives_0_3 extends AlternativesToken {
 
 }
 
-// abstract?="abstract"
+// abstract?='abstract'
 protected class SimpleModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
 	public SimpleModel_AbstractAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -868,7 +875,7 @@ protected class SimpleModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 
 }
 
-// final?="final"
+// final?='final'
 protected class SimpleModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
 	public SimpleModel_FinalAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -906,7 +913,7 @@ protected class SimpleModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 
 
 
-// "class"
+// 'class'
 protected class SimpleModel_ClassKeyword_1 extends KeywordToken  {
 	
 	public SimpleModel_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -962,7 +969,7 @@ protected class SimpleModel_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class SimpleModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public SimpleModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -984,7 +991,7 @@ protected class SimpleModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// "}"
+// '}'
 protected class SimpleModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public SimpleModel_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1013,13 +1020,15 @@ protected class SimpleModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule MandatoryModel ****************
  *
  * MandatoryModel:
- * 	(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
- * 	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+ * 	(visibility=('public' | 'private' | 'protected') & static?='static'
+ * 	& synchronized?='synchronized'
+ * 	& (abstract?='abstract' | final?='final')?)
+ * 	'class' name=ID '{' '}';
  *
  **/
 
-// (visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-// (abstract?="abstract" | final?="final")?) "class" name=ID "{" "}"
+// (visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
+// (abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 protected class MandatoryModel_Group extends GroupToken {
 	
 	public MandatoryModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1048,8 +1057,8 @@ protected class MandatoryModel_Group extends GroupToken {
 
 }
 
-// visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-// (abstract?="abstract" | final?="final")?
+// (visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
+// (abstract?='abstract' | final?='final')?)
 protected class MandatoryModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public MandatoryModel_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1072,7 +1081,7 @@ protected class MandatoryModel_UnorderedGroup_0 extends UnorderedGroupToken {
 
 }
 
-// visibility=("public" | "private" | "protected")
+// visibility=('public' | 'private' | 'protected')
 protected class MandatoryModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
 	public MandatoryModel_VisibilityAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1115,7 +1124,7 @@ protected class MandatoryModel_VisibilityAssignment_0_0 extends AssignmentToken 
 
 }
 
-// static?="static"
+// static?='static'
 protected class MandatoryModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
 	public MandatoryModel_StaticAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1149,7 +1158,7 @@ protected class MandatoryModel_StaticAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// synchronized?="synchronized"
+// synchronized?='synchronized'
 protected class MandatoryModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
 	public MandatoryModel_SynchronizedAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1183,7 +1192,7 @@ protected class MandatoryModel_SynchronizedAssignment_0_2 extends AssignmentToke
 
 }
 
-// (abstract?="abstract" | final?="final")?
+// (abstract?='abstract' | final?='final')?
 protected class MandatoryModel_Alternatives_0_3 extends AlternativesToken {
 
 	public MandatoryModel_Alternatives_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1206,7 +1215,7 @@ protected class MandatoryModel_Alternatives_0_3 extends AlternativesToken {
 
 }
 
-// abstract?="abstract"
+// abstract?='abstract'
 protected class MandatoryModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
 	public MandatoryModel_AbstractAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1240,7 +1249,7 @@ protected class MandatoryModel_AbstractAssignment_0_3_0 extends AssignmentToken 
 
 }
 
-// final?="final"
+// final?='final'
 protected class MandatoryModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
 	public MandatoryModel_FinalAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1276,7 +1285,7 @@ protected class MandatoryModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 
 
 
-// "class"
+// 'class'
 protected class MandatoryModel_ClassKeyword_1 extends KeywordToken  {
 	
 	public MandatoryModel_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1332,7 +1341,7 @@ protected class MandatoryModel_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class MandatoryModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public MandatoryModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1354,7 +1363,7 @@ protected class MandatoryModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// "}"
+// '}'
 protected class MandatoryModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public MandatoryModel_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1383,13 +1392,16 @@ protected class MandatoryModel_RightCurlyBracketKeyword_4 extends KeywordToken  
 /************ begin Rule LoopedModel ****************
  *
  * LoopedModel:
- * 	(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
- * 	(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}";
+ * 	(visibility+=('public' | 'private' | 'protected')*
+ * 	& static+='static'*
+ * 	& synchronized+='synchronized'*
+ * 	& (abstract+='abstract' | final+='final')*)
+ * 	'class' name=ID '{' '}';
  *
  **/
 
-// (visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-// (abstract+="abstract" | final+="final")*) "class" name=ID "{" "}"
+// (visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
+// (abstract+='abstract' | final+='final')*) 'class' name=ID '{' '}'
 protected class LoopedModel_Group extends GroupToken {
 	
 	public LoopedModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1418,8 +1430,8 @@ protected class LoopedModel_Group extends GroupToken {
 
 }
 
-// visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-// (abstract+="abstract" | final+="final")*
+// (visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
+// (abstract+='abstract' | final+='final')*)
 protected class LoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public LoopedModel_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1444,7 +1456,7 @@ protected class LoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 
 }
 
-// visibility+=("public" | "private" | "protected")*
+// visibility+=('public' | 'private' | 'protected')*
 protected class LoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
 	public LoopedModel_VisibilityAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1488,7 +1500,7 @@ protected class LoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// static+="static"*
+// static+='static'*
 protected class LoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
 	public LoopedModel_StaticAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1523,7 +1535,7 @@ protected class LoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// synchronized+="synchronized"*
+// synchronized+='synchronized'*
 protected class LoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
 	public LoopedModel_SynchronizedAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1559,7 +1571,7 @@ protected class LoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  
 
 }
 
-// (abstract+="abstract" | final+="final")*
+// (abstract+='abstract' | final+='final')*
 protected class LoopedModel_Alternatives_0_3 extends AlternativesToken {
 
 	public LoopedModel_Alternatives_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1582,7 +1594,7 @@ protected class LoopedModel_Alternatives_0_3 extends AlternativesToken {
 
 }
 
-// abstract+="abstract"
+// abstract+='abstract'
 protected class LoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
 	public LoopedModel_AbstractAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1619,7 +1631,7 @@ protected class LoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 
 }
 
-// final+="final"
+// final+='final'
 protected class LoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
 	public LoopedModel_FinalAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1658,7 +1670,7 @@ protected class LoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 
 
 
-// "class"
+// 'class'
 protected class LoopedModel_ClassKeyword_1 extends KeywordToken  {
 	
 	public LoopedModel_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1714,7 +1726,7 @@ protected class LoopedModel_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class LoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public LoopedModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1736,7 +1748,7 @@ protected class LoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 
 }
 
-// "}"
+// '}'
 protected class LoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public LoopedModel_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1765,13 +1777,15 @@ protected class LoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 /************ begin Rule GroupLoopedModel ****************
  *
  * GroupLoopedModel:
- * 	(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
- * 	(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}";
+ * 	(visibility+=('public' | 'private' | 'protected') & static+='static'
+ * 	& synchronized+='synchronized'
+ * 	& (abstract+='abstract' | final+='final'))*
+ * 	'class' name=ID '{' '}';
  *
  **/
 
-// (visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-// (abstract+="abstract" | final+="final"))* "class" name=ID "{" "}"
+// (visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
+// (abstract+='abstract' | final+='final'))* 'class' name=ID '{' '}'
 protected class GroupLoopedModel_Group extends GroupToken {
 	
 	public GroupLoopedModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1800,8 +1814,8 @@ protected class GroupLoopedModel_Group extends GroupToken {
 
 }
 
-// (visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-// (abstract+="abstract" | final+="final"))*
+// (visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
+// (abstract+='abstract' | final+='final'))*
 protected class GroupLoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 	
 	public GroupLoopedModel_UnorderedGroup_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1823,7 +1837,7 @@ protected class GroupLoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
 
 }
 
-// visibility+=("public" | "private" | "protected")
+// visibility+=('public' | 'private' | 'protected')
 protected class GroupLoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
 	public GroupLoopedModel_VisibilityAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1867,7 +1881,7 @@ protected class GroupLoopedModel_VisibilityAssignment_0_0 extends AssignmentToke
 
 }
 
-// static+="static"
+// static+='static'
 protected class GroupLoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
 	public GroupLoopedModel_StaticAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1901,7 +1915,7 @@ protected class GroupLoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
 
 }
 
-// synchronized+="synchronized"
+// synchronized+='synchronized'
 protected class GroupLoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
 	public GroupLoopedModel_SynchronizedAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1935,7 +1949,7 @@ protected class GroupLoopedModel_SynchronizedAssignment_0_2 extends AssignmentTo
 
 }
 
-// abstract+="abstract" | final+="final"
+// (abstract+='abstract' | final+='final')
 protected class GroupLoopedModel_Alternatives_0_3 extends AlternativesToken {
 
 	public GroupLoopedModel_Alternatives_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1958,7 +1972,7 @@ protected class GroupLoopedModel_Alternatives_0_3 extends AlternativesToken {
 
 }
 
-// abstract+="abstract"
+// abstract+='abstract'
 protected class GroupLoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
 	public GroupLoopedModel_AbstractAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1992,7 +2006,7 @@ protected class GroupLoopedModel_AbstractAssignment_0_3_0 extends AssignmentToke
 
 }
 
-// final+="final"
+// final+='final'
 protected class GroupLoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
 	public GroupLoopedModel_FinalAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2028,7 +2042,7 @@ protected class GroupLoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  
 
 
 
-// "class"
+// 'class'
 protected class GroupLoopedModel_ClassKeyword_1 extends KeywordToken  {
 	
 	public GroupLoopedModel_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2084,7 +2098,7 @@ protected class GroupLoopedModel_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class GroupLoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public GroupLoopedModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2106,7 +2120,7 @@ protected class GroupLoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken 
 
 }
 
-// "}"
+// '}'
 protected class GroupLoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public GroupLoopedModel_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2135,13 +2149,15 @@ protected class GroupLoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken
 /************ begin Rule LoopedAlternativeModel ****************
  *
  * LoopedAlternativeModel:
- * 	(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
- * 	(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}";
+ * 	(visibility+=('public' | 'private' | 'protected') | static+='static'
+ * 	| synchronized+='synchronized'
+ * 	| (abstract+='abstract' | final+='final') | 'before' 'after'*)*
+ * 	'class' name=ID '{' '}';
  *
  **/
 
-// (visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-// (abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}"
+// (visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
+// (abstract+='abstract' | final+='final') | 'before' 'after'*)* 'class' name=ID '{' '}'
 protected class LoopedAlternativeModel_Group extends GroupToken {
 	
 	public LoopedAlternativeModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2170,8 +2186,8 @@ protected class LoopedAlternativeModel_Group extends GroupToken {
 
 }
 
-// (visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-// (abstract+="abstract" | final+="final") | "before" "after"*)*
+// (visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
+// (abstract+='abstract' | final+='final') | 'before' 'after'*)*
 protected class LoopedAlternativeModel_Alternatives_0 extends AlternativesToken {
 
 	public LoopedAlternativeModel_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2196,7 +2212,7 @@ protected class LoopedAlternativeModel_Alternatives_0 extends AlternativesToken 
 
 }
 
-// visibility+=("public" | "private" | "protected")
+// visibility+=('public' | 'private' | 'protected')
 protected class LoopedAlternativeModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
 	public LoopedAlternativeModel_VisibilityAssignment_0_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2240,7 +2256,7 @@ protected class LoopedAlternativeModel_VisibilityAssignment_0_0 extends Assignme
 
 }
 
-// static+="static"
+// static+='static'
 protected class LoopedAlternativeModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
 	public LoopedAlternativeModel_StaticAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2274,7 +2290,7 @@ protected class LoopedAlternativeModel_StaticAssignment_0_1 extends AssignmentTo
 
 }
 
-// synchronized+="synchronized"
+// synchronized+='synchronized'
 protected class LoopedAlternativeModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
 	public LoopedAlternativeModel_SynchronizedAssignment_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2308,7 +2324,7 @@ protected class LoopedAlternativeModel_SynchronizedAssignment_0_2 extends Assign
 
 }
 
-// abstract+="abstract" | final+="final"
+// (abstract+='abstract' | final+='final')
 protected class LoopedAlternativeModel_Alternatives_0_3 extends AlternativesToken {
 
 	public LoopedAlternativeModel_Alternatives_0_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2331,7 +2347,7 @@ protected class LoopedAlternativeModel_Alternatives_0_3 extends AlternativesToke
 
 }
 
-// abstract+="abstract"
+// abstract+='abstract'
 protected class LoopedAlternativeModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
 	public LoopedAlternativeModel_AbstractAssignment_0_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2365,7 +2381,7 @@ protected class LoopedAlternativeModel_AbstractAssignment_0_3_0 extends Assignme
 
 }
 
-// final+="final"
+// final+='final'
 protected class LoopedAlternativeModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
 	public LoopedAlternativeModel_FinalAssignment_0_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2401,7 +2417,7 @@ protected class LoopedAlternativeModel_FinalAssignment_0_3_1 extends AssignmentT
 
 
 
-// "class"
+// 'class'
 protected class LoopedAlternativeModel_ClassKeyword_1 extends KeywordToken  {
 	
 	public LoopedAlternativeModel_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2457,7 +2473,7 @@ protected class LoopedAlternativeModel_NameAssignment_2 extends AssignmentToken 
 
 }
 
-// "{"
+// '{'
 protected class LoopedAlternativeModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
 	public LoopedAlternativeModel_LeftCurlyBracketKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2479,7 +2495,7 @@ protected class LoopedAlternativeModel_LeftCurlyBracketKeyword_3 extends Keyword
 
 }
 
-// "}"
+// '}'
 protected class LoopedAlternativeModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public LoopedAlternativeModel_RightCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2508,13 +2524,14 @@ protected class LoopedAlternativeModel_RightCurlyBracketKeyword_4 extends Keywor
 /************ begin Rule Bug304681Model ****************
  *
  * Bug304681Model:
- * 	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
- * 	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+ * 	{Bug304681Model}
+ * 	"{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag"
+ * 	";"? & features+=Bug304681Feature*) "}";
  *
  **/
 
-// {Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
-// ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+// {Bug304681Model} "{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"?
+// & flag?="flag" ";"? & features+=Bug304681Feature*) "}"
 protected class Bug304681Model_Group extends GroupToken {
 	
 	public Bug304681Model_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2591,8 +2608,8 @@ protected class Bug304681Model_LeftCurlyBracketKeyword_1 extends KeywordToken  {
 
 }
 
-// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
-// ";")? & features+=Bug304681Feature*
+// ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag" ";"? &
+// features+=Bug304681Feature*)
 protected class Bug304681Model_UnorderedGroup_2 extends UnorderedGroupToken {
 	
 	public Bug304681Model_UnorderedGroup_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2619,7 +2636,7 @@ protected class Bug304681Model_UnorderedGroup_2 extends UnorderedGroupToken {
 
 }
 
-// ("short" shortDescription=STRING ";")?
+// "short" shortDescription=STRING ";"?
 protected class Bug304681Model_Group_2_0 extends GroupToken {
 	
 	public Bug304681Model_Group_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2720,7 +2737,7 @@ protected class Bug304681Model_SemicolonKeyword_2_0_2 extends KeywordToken  {
 }
 
 
-// ("long" longDescription=STRING ";")?
+// "long" longDescription=STRING ";"?
 protected class Bug304681Model_Group_2_1 extends GroupToken {
 	
 	public Bug304681Model_Group_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2822,7 +2839,7 @@ protected class Bug304681Model_SemicolonKeyword_2_1_2 extends KeywordToken  {
 }
 
 
-// ("uid" uid=STRING ";")?
+// "uid" uid=STRING ";"?
 protected class Bug304681Model_Group_2_2 extends GroupToken {
 	
 	public Bug304681Model_Group_2_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2925,7 +2942,7 @@ protected class Bug304681Model_SemicolonKeyword_2_2_2 extends KeywordToken  {
 }
 
 
-// (flag?="flag" ";")?
+// flag?="flag" ";"?
 protected class Bug304681Model_Group_2_3 extends GroupToken {
 	
 	public Bug304681Model_Group_2_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3202,11 +3219,11 @@ protected class Bug304681Feature_Bug304681ReferenceParserRuleCall_1 extends Rule
 /************ begin Rule Bug304681Attribute ****************
  *
  * Bug304681Attribute:
- * 	"attr" name=ID ";";
+ * 	'attr' name=ID ';';
  *
  **/
 
-// "attr" name=ID ";"
+// 'attr' name=ID ';'
 protected class Bug304681Attribute_Group extends GroupToken {
 	
 	public Bug304681Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3235,7 +3252,7 @@ protected class Bug304681Attribute_Group extends GroupToken {
 
 }
 
-// "attr"
+// 'attr'
 protected class Bug304681Attribute_AttrKeyword_0 extends KeywordToken  {
 	
 	public Bug304681Attribute_AttrKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3290,7 +3307,7 @@ protected class Bug304681Attribute_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Bug304681Attribute_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Bug304681Attribute_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3319,11 +3336,11 @@ protected class Bug304681Attribute_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule Bug304681Reference ****************
  *
  * Bug304681Reference:
- * 	"ref" name=ID ";";
+ * 	'ref' name=ID ';';
  *
  **/
 
-// "ref" name=ID ";"
+// 'ref' name=ID ';'
 protected class Bug304681Reference_Group extends GroupToken {
 	
 	public Bug304681Reference_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3352,7 +3369,7 @@ protected class Bug304681Reference_Group extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Bug304681Reference_RefKeyword_0 extends KeywordToken  {
 	
 	public Bug304681Reference_RefKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3407,7 +3424,7 @@ protected class Bug304681Reference_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Bug304681Reference_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Bug304681Reference_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

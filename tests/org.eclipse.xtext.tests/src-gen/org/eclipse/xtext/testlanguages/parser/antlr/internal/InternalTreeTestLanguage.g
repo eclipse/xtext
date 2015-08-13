@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_0_0, 
-        		"Node");
+        		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -152,7 +152,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"attrib",
         		lv_attrib_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -177,7 +177,7 @@ ruleNode returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_5_0, 
-        		"Node");
+        		"org.eclipse.xtext.testlanguages.TreeTestLanguage.Node");
 	        afterParserOrEnumRuleCall();
 	    }
 

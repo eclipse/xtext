@@ -45,6 +45,9 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.Xtext"
       							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+      	<lang.documentationProvider language="org.eclipse.xtext.Xtext"
+      							factoryClass="org.eclipse.xtext.idea.XtextExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
 		<facetType implementation="org.eclipse.xtext.idea.facet.XtextFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.idea.highlighting.XtextColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.idea.highlighting.XtextSemanticHighlightVisitor"/>

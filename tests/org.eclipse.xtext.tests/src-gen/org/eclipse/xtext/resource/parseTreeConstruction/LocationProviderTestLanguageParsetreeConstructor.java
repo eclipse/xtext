@@ -48,7 +48,8 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	elements+=Element* components+=Component*;
+ * 	elements+=Element*
+ * 	components+=Component*;
  *
  **/
 
@@ -445,11 +446,12 @@ protected class Element_MultirefsAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule Component ****************
  *
  * Component:
- * 	(Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";";
+ * 	(Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)?
+ * 	'end' ';';
  *
  **/
 
-// (Bus | Processor) ("modes" (mode+=Mode | transition+=Transition)+)? "end" ";"
+// (Bus | Processor) ('modes' (mode+=Mode | transition+=Transition)+)? 'end' ';'
 protected class Component_Group extends GroupToken {
 	
 	public Component_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -479,7 +481,7 @@ protected class Component_Group extends GroupToken {
 
 }
 
-// Bus | Processor
+// (Bus | Processor)
 protected class Component_Alternatives_0 extends AlternativesToken {
 
 	public Component_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -575,7 +577,7 @@ protected class Component_ProcessorParserRuleCall_0_1 extends RuleCallToken {
 }
 
 
-// ("modes" (mode+=Mode | transition+=Transition)+)?
+// ('modes' (mode+=Mode | transition+=Transition)+)?
 protected class Component_Group_1 extends GroupToken {
 	
 	public Component_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -597,7 +599,7 @@ protected class Component_Group_1 extends GroupToken {
 
 }
 
-// "modes"
+// 'modes'
 protected class Component_ModesKeyword_1_0 extends KeywordToken  {
 	
 	public Component_ModesKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -738,7 +740,7 @@ protected class Component_TransitionAssignment_1_1_1 extends AssignmentToken  {
 
 
 
-// "end"
+// 'end'
 protected class Component_EndKeyword_2 extends KeywordToken  {
 	
 	public Component_EndKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -761,7 +763,7 @@ protected class Component_EndKeyword_2 extends KeywordToken  {
 
 }
 
-// ";"
+// ';'
 protected class Component_SemicolonKeyword_3 extends KeywordToken  {
 	
 	public Component_SemicolonKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -790,11 +792,12 @@ protected class Component_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule Bus ****************
  *
  * Bus:
- * 	"bus" name=ID port+=Port*;
+ * 	'bus' name=ID
+ * 	port+=Port*;
  *
  **/
 
-// "bus" name=ID port+=Port*
+// 'bus' name=ID port+=Port*
 protected class Bus_Group extends GroupToken {
 	
 	public Bus_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -824,7 +827,7 @@ protected class Bus_Group extends GroupToken {
 
 }
 
-// "bus"
+// 'bus'
 protected class Bus_BusKeyword_0 extends KeywordToken  {
 	
 	public Bus_BusKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -933,11 +936,12 @@ protected class Bus_PortAssignment_2 extends AssignmentToken  {
 /************ begin Rule Processor ****************
  *
  * Processor:
- * 	"processor" name=ID data+=Data*;
+ * 	'processor' name=ID
+ * 	data+=Data*;
  *
  **/
 
-// "processor" name=ID data+=Data*
+// 'processor' name=ID data+=Data*
 protected class Processor_Group extends GroupToken {
 	
 	public Processor_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -967,7 +971,7 @@ protected class Processor_Group extends GroupToken {
 
 }
 
-// "processor"
+// 'processor'
 protected class Processor_ProcessorKeyword_0 extends KeywordToken  {
 	
 	public Processor_ProcessorKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1076,11 +1080,11 @@ protected class Processor_DataAssignment_2 extends AssignmentToken  {
 /************ begin Rule Mode ****************
  *
  * Mode:
- * 	"mode" name=ID ";";
+ * 	'mode' name=ID ';';
  *
  **/
 
-// "mode" name=ID ";"
+// 'mode' name=ID ';'
 protected class Mode_Group extends GroupToken {
 	
 	public Mode_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1109,7 +1113,7 @@ protected class Mode_Group extends GroupToken {
 
 }
 
-// "mode"
+// 'mode'
 protected class Mode_ModeKeyword_0 extends KeywordToken  {
 	
 	public Mode_ModeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1164,7 +1168,7 @@ protected class Mode_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Mode_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Mode_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1193,11 +1197,11 @@ protected class Mode_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule Transition ****************
  *
  * Transition:
- * 	name=ID ":" source=[Mode] "->" destination=[Mode] ";";
+ * 	name=ID ':' source=[Mode] '->' destination=[Mode] ';';
  *
  **/
 
-// name=ID ":" source=[Mode] "->" destination=[Mode] ";"
+// name=ID ':' source=[Mode] '->' destination=[Mode] ';'
 protected class Transition_Group extends GroupToken {
 	
 	public Transition_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1259,7 +1263,7 @@ protected class Transition_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Transition_ColonKeyword_1 extends KeywordToken  {
 	
 	public Transition_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1318,7 +1322,7 @@ protected class Transition_SourceAssignment_2 extends AssignmentToken  {
 
 }
 
-// "->"
+// '->'
 protected class Transition_HyphenMinusGreaterThanSignKeyword_3 extends KeywordToken  {
 	
 	public Transition_HyphenMinusGreaterThanSignKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1377,7 +1381,7 @@ protected class Transition_DestinationAssignment_4 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Transition_SemicolonKeyword_5 extends KeywordToken  {
 	
 	public Transition_SemicolonKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1406,11 +1410,11 @@ protected class Transition_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule Port ****************
  *
  * Port:
- * 	"port" name=ID ";";
+ * 	'port' name=ID ';';
  *
  **/
 
-// "port" name=ID ";"
+// 'port' name=ID ';'
 protected class Port_Group extends GroupToken {
 	
 	public Port_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1439,7 +1443,7 @@ protected class Port_Group extends GroupToken {
 
 }
 
-// "port"
+// 'port'
 protected class Port_PortKeyword_0 extends KeywordToken  {
 	
 	public Port_PortKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1494,7 +1498,7 @@ protected class Port_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Port_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Port_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1523,11 +1527,11 @@ protected class Port_SemicolonKeyword_2 extends KeywordToken  {
 /************ begin Rule Data ****************
  *
  * Data:
- * 	"data" name=ID ";";
+ * 	'data' name=ID ';';
  *
  **/
 
-// "data" name=ID ";"
+// 'data' name=ID ';'
 protected class Data_Group extends GroupToken {
 	
 	public Data_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1556,7 +1560,7 @@ protected class Data_Group extends GroupToken {
 
 }
 
-// "data"
+// 'data'
 protected class Data_DataKeyword_0 extends KeywordToken  {
 	
 	public Data_DataKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1611,7 +1615,7 @@ protected class Data_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ";"
+// ';'
 protected class Data_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Data_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

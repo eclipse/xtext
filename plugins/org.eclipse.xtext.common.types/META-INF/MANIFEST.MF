@@ -18,7 +18,7 @@ Import-Package: org.apache.commons.logging;version="1.0.4";resolution:=optional,
  org.apache.log4j;version="1.2.15"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.common.types,
- org.eclipse.xtext.common.types.access;x-friends:="org.eclipse.xtext.common.types.ui",
+ org.eclipse.xtext.common.types.access;x-friends:="org.eclipse.xtext.common.types.ui,org.eclipse.xtext.xbase.ui",
  org.eclipse.xtext.common.types.access.binary;x-internal:=true,
  org.eclipse.xtext.common.types.access.binary.asm;x-friends:="org.eclipse.xtext.common.types.tests,org.eclipse.xtext.common.types.ui",
  org.eclipse.xtext.common.types.access.impl;x-friends:="org.eclipse.xtext.common.types.ui",

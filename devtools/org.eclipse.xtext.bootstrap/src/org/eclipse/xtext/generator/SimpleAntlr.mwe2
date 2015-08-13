@@ -1,0 +1,68 @@
+module org.eclipse.xtext.generator.SimpleAntlr
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var package = "org/eclipse/xtext/generator/parser/antlr/debug"
+var grammarURI = "classpath:/${package}/SimpleAntlr.xtext"
+var file.extensions = "simpleAntlr"
+var projectName = "org.eclipse.xtext.generator"
+var runtimeProject = "../../plugins/${projectName}"
+var backtrack = true
+var lineDelimiter = '\n'
+
+Workflow {
+	
+	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
+		platformUri = "${runtimeProject}"
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/${package}"
+	}
+	
+	component = Generator auto-inject {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = grammarURI
+			fileExtensions = file.extensions
+
+			// Java API to access grammar elements (required by several other fragments)
+			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+			
+			// generates Java API for the generated EPackages 
+			fragment = ecore.EcoreGeneratorFragment auto-inject {
+				emfRuntimeVersion = "2.9"
+				javaModelDirectory = "plugins/${projectName}/src-gen"
+				editDirectory = "/${projectName}.edit/src"
+				editorDirectory = "/${projectName}.editor/src"
+				xmiModelDirectory = "${runtimeProject}/src-gen/${package}"
+			}
+			
+			// the serialization component
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			
+			// a custom ResourceFactory for use with EMF 
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = file.extensions
+			}
+				
+			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+				options = auto-inject {}
+			}
+			
+			// java-based API for validation 
+			fragment = validation.JavaValidatorFragment {
+            }
+            
+			// formatter API 
+			fragment = formatting.FormatterFragment {}
+
+		}
+	}
+}

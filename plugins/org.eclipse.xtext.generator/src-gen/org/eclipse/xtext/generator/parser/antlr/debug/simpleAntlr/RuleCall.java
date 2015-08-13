@@ -2,6 +2,7 @@
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -10,10 +11,11 @@ package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall#getRule <em>Rule</em>}</li>
+ *   <li>{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall#getArguments <em>Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage#getRuleCall()
  * @model
@@ -46,5 +48,21 @@ public interface RuleCall extends RuleElement
    * @generated
    */
   void setRule(String value);
+
+  /**
+   * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Arguments</em>' containment reference list.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.SimpleAntlrPackage#getRuleCall_Arguments()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Expression> getArguments();
 
 } // RuleCall

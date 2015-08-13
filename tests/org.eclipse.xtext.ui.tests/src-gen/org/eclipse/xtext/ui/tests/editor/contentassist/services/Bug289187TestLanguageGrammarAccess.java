@@ -19,7 +19,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Model");
 		private final Assignment cClassesAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cClassesClassParserRuleCall_0 = (RuleCall)cClassesAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ClassElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Class");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Class");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cAbstractAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final Keyword cAbstractAbstractKeyword_0_0 = (Keyword)cAbstractAssignment_0.eContents().get(0);
@@ -83,31 +83,35 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cRightCurlyBracketKeyword_12 = (Keyword)cGroup.eContents().get(12);
 		
 		//Class:
-		//	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
-		//	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-		//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-		//	operations+=Operation* "}";
+		//	abstract?='abstract'?
+		//	transient?='transient'?
+		//	'class' name=ID ('extends' superClass=[Class])? ('implements' implementedInterfaces+=[Class] (',' 'implements'
+		//	implementedInterfaces+=[Class])*)?
+		//	'{' ('classNumber' '=' classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)?
+		//	attributes+=Attribute*
+		//	operations+=Operation*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
-		//implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-		//classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-		//operations+=Operation* "}"
+		//abstract?='abstract'? transient?='transient'? 'class' name=ID ('extends' superClass=[Class])? ('implements'
+		//implementedInterfaces+=[Class] (',' 'implements' implementedInterfaces+=[Class])*)? '{' ('classNumber' '='
+		//classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)? attributes+=Attribute*
+		//operations+=Operation* '}'
 		public Group getGroup() { return cGroup; }
 
-		//abstract?="abstract"?
+		//abstract?='abstract'?
 		public Assignment getAbstractAssignment_0() { return cAbstractAssignment_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_0() { return cAbstractAbstractKeyword_0_0; }
 
-		//transient?="transient"?
+		//transient?='transient'?
 		public Assignment getTransientAssignment_1() { return cTransientAssignment_1; }
 
-		//"transient"
+		//'transient'
 		public Keyword getTransientTransientKeyword_1_0() { return cTransientTransientKeyword_1_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_2() { return cClassKeyword_2; }
 
 		//name=ID
@@ -116,10 +120,10 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 
-		//("extends" superClass=[Class])?
+		//('extends' superClass=[Class])?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_4_0() { return cExtendsKeyword_4_0; }
 
 		//superClass=[Class]
@@ -131,10 +135,10 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getSuperClassClassIDTerminalRuleCall_4_1_0_1() { return cSuperClassClassIDTerminalRuleCall_4_1_0_1; }
 
-		//("implements" implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)?
+		//('implements' implementedInterfaces+=[Class] (',' 'implements' implementedInterfaces+=[Class])*)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"implements"
+		//'implements'
 		public Keyword getImplementsKeyword_5_0() { return cImplementsKeyword_5_0; }
 
 		//implementedInterfaces+=[Class]
@@ -146,13 +150,13 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getImplementedInterfacesClassIDTerminalRuleCall_5_1_0_1() { return cImplementedInterfacesClassIDTerminalRuleCall_5_1_0_1; }
 
-		//("," "implements" implementedInterfaces+=[Class])*
+		//(',' 'implements' implementedInterfaces+=[Class])*
 		public Group getGroup_5_2() { return cGroup_5_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
-		//"implements"
+		//'implements'
 		public Keyword getImplementsKeyword_5_2_1() { return cImplementsKeyword_5_2_1; }
 
 		//implementedInterfaces+=[Class]
@@ -164,16 +168,16 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getImplementedInterfacesClassIDTerminalRuleCall_5_2_2_0_1() { return cImplementedInterfacesClassIDTerminalRuleCall_5_2_2_0_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 
-		//("classNumber" "=" classNumber=INT)?
+		//('classNumber' '=' classNumber=INT)?
 		public Group getGroup_7() { return cGroup_7; }
 
-		//"classNumber"
+		//'classNumber'
 		public Keyword getClassNumberKeyword_7_0() { return cClassNumberKeyword_7_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_7_1() { return cEqualsSignKeyword_7_1; }
 
 		//classNumber=INT
@@ -182,13 +186,13 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getClassNumberINTTerminalRuleCall_7_2_0() { return cClassNumberINTTerminalRuleCall_7_2_0; }
 
-		//("quid" "=" quid=INT)?
+		//('quid' '=' quid=INT)?
 		public Group getGroup_8() { return cGroup_8; }
 
-		//"quid"
+		//'quid'
 		public Keyword getQuidKeyword_8_0() { return cQuidKeyword_8_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_8_1() { return cEqualsSignKeyword_8_1; }
 
 		//quid=INT
@@ -197,13 +201,13 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//INT
 		public RuleCall getQuidINTTerminalRuleCall_8_2_0() { return cQuidINTTerminalRuleCall_8_2_0; }
 
-		//("documentation" "=" documentation=STRING)?
+		//('documentation' '=' documentation=STRING)?
 		public Group getGroup_9() { return cGroup_9; }
 
-		//"documentation"
+		//'documentation'
 		public Keyword getDocumentationKeyword_9_0() { return cDocumentationKeyword_9_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_9_1() { return cEqualsSignKeyword_9_1; }
 
 		//documentation=STRING
@@ -224,12 +228,12 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Operation
 		public RuleCall getOperationsOperationParserRuleCall_11_0() { return cOperationsOperationParserRuleCall_11_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_12() { return cRightCurlyBracketKeyword_12; }
 	}
 
 	public class AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVisibilityAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_0_0 = (RuleCall)cVisibilityAssignment_0.eContents().get(0);
@@ -238,10 +242,10 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Attribute:
-		//	visibility=Visibility? "attribute" name=ID;
+		//	visibility=Visibility? 'attribute' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//visibility=Visibility? "attribute" name=ID
+		//visibility=Visibility? 'attribute' name=ID
 		public Group getGroup() { return cGroup; }
 
 		//visibility=Visibility?
@@ -250,7 +254,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Visibility
 		public RuleCall getVisibilityVisibilityEnumRuleCall_0_0() { return cVisibilityVisibilityEnumRuleCall_0_0; }
 
-		//"attribute"
+		//'attribute'
 		public Keyword getAttributeKeyword_1() { return cAttributeKeyword_1; }
 
 		//name=ID
@@ -261,7 +265,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class OperationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Operation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Operation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cVisibilityAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cVisibilityVisibilityEnumRuleCall_0_0 = (RuleCall)cVisibilityAssignment_0.eContents().get(0);
@@ -270,10 +274,10 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		
 		//Operation:
-		//	visibility=Visibility? "operation" name=ID;
+		//	visibility=Visibility? 'operation' name=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//visibility=Visibility? "operation" name=ID
+		//visibility=Visibility? 'operation' name=ID
 		public Group getGroup() { return cGroup; }
 
 		//visibility=Visibility?
@@ -282,7 +286,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//Visibility
 		public RuleCall getVisibilityVisibilityEnumRuleCall_0_0() { return cVisibilityVisibilityEnumRuleCall_0_0; }
 
-		//"operation"
+		//'operation'
 		public Keyword getOperationKeyword_1() { return cOperationKeyword_1; }
 
 		//name=ID
@@ -294,7 +298,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class VisibilityElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "Visibility");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage.Visibility");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cPRIVATEEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cPRIVATEPRIVATEKeyword_0_0 = (Keyword)cPRIVATEEnumLiteralDeclaration_0.eContents().get(0);
@@ -397,10 +401,14 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Class:
-	//	abstract?="abstract"? transient?="transient"? "class" name=ID ("extends" superClass=[Class])? ("implements"
-	//	implementedInterfaces+=[Class] ("," "implements" implementedInterfaces+=[Class])*)? "{" ("classNumber" "="
-	//	classNumber=INT)? ("quid" "=" quid=INT)? ("documentation" "=" documentation=STRING)? attributes+=Attribute*
-	//	operations+=Operation* "}";
+	//	abstract?='abstract'?
+	//	transient?='transient'?
+	//	'class' name=ID ('extends' superClass=[Class])? ('implements' implementedInterfaces+=[Class] (',' 'implements'
+	//	implementedInterfaces+=[Class])*)?
+	//	'{' ('classNumber' '=' classNumber=INT)? ('quid' '=' quid=INT)? ('documentation' '=' documentation=STRING)?
+	//	attributes+=Attribute*
+	//	operations+=Operation*
+	//	'}';
 	public ClassElements getClassAccess() {
 		return pClass;
 	}
@@ -410,7 +418,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Attribute:
-	//	visibility=Visibility? "attribute" name=ID;
+	//	visibility=Visibility? 'attribute' name=ID;
 	public AttributeElements getAttributeAccess() {
 		return pAttribute;
 	}
@@ -420,7 +428,7 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Operation:
-	//	visibility=Visibility? "operation" name=ID;
+	//	visibility=Visibility? 'operation' name=ID;
 	public OperationElements getOperationAccess() {
 		return pOperation;
 	}
@@ -440,38 +448,38 @@ public class Bug289187TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

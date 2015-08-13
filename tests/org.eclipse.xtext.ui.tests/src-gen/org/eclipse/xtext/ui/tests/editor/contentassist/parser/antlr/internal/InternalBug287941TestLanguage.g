@@ -91,7 +91,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_0_0, 
-        		"Import");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -109,7 +109,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"query",
         		lv_query_1_0, 
-        		"MQLquery");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.MQLquery");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -153,7 +153,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importURI",
         		lv_importURI_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -195,7 +195,7 @@ ruleMQLquery returns [EObject current=null]
        			$current, 
        			"selectEntries",
         		lv_selectEntries_1_0, 
-        		"SelectEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SelectEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -217,7 +217,7 @@ ruleMQLquery returns [EObject current=null]
        			$current, 
        			"selectEntries",
         		lv_selectEntries_3_0, 
-        		"SelectEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SelectEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -239,7 +239,7 @@ ruleMQLquery returns [EObject current=null]
        			$current, 
        			"fromEntries",
         		lv_fromEntries_5_0, 
-        		"FromEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.FromEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -261,7 +261,7 @@ ruleMQLquery returns [EObject current=null]
        			$current, 
        			"fromEntries",
         		lv_fromEntries_7_0, 
-        		"FromEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.FromEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -283,7 +283,7 @@ ruleMQLquery returns [EObject current=null]
        			$current, 
        			"whereEntries",
         		lv_whereEntries_9_0, 
-        		"WhereEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.WhereEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -406,7 +406,7 @@ ruleFromEntry returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ID");
 	    }
 
 )
@@ -423,7 +423,7 @@ ruleFromEntry returns [EObject current=null]
        			$current, 
        			"scopeClause",
         		lv_scopeClause_4_0, 
-        		"ScopeClause");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ScopeClause");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -481,7 +481,7 @@ ruleScopeClause returns [EObject current=null]
        			$current, 
        			"scope",
         		lv_scope_2_0, 
-        		"Scope");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.Scope");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -569,7 +569,7 @@ ruleResourceScope returns [EObject current=null]
        			$current, 
        			"uris",
         		lv_uris_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -591,7 +591,7 @@ ruleResourceScope returns [EObject current=null]
        			$current, 
        			"uris",
         		lv_uris_4_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -642,7 +642,7 @@ ruleElementScope returns [EObject current=null]
        			$current, 
        			"uris",
         		lv_uris_2_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -664,7 +664,7 @@ ruleElementScope returns [EObject current=null]
        			$current, 
        			"uris",
         		lv_uris_4_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -725,7 +725,7 @@ ruleWhereEntry returns [EObject current=null]
        			$current, 
        			"entries",
         		lv_entries_3_0, 
-        		"AndWhereEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.AndWhereEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -783,7 +783,7 @@ ruleAndWhereEntry returns [EObject current=null]
        			$current, 
        			"entries",
         		lv_entries_3_0, 
-        		"ConcreteWhereEntry");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.ConcreteWhereEntry");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1070,7 +1070,7 @@ ruleDoubleWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"NumericOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1089,7 +1089,7 @@ ruleDoubleWhereEntry returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_4_0, 
-        		"SIGNED_DOUBLE");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SIGNED_DOUBLE");
 	    }
 
 )
@@ -1157,7 +1157,7 @@ ruleLongWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"NumericOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1176,7 +1176,7 @@ ruleLongWhereEntry returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_4_0, 
-        		"SINGED_LONG");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.SINGED_LONG");
 	    }
 
 )
@@ -1244,7 +1244,7 @@ ruleVariableWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"NumericOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.NumericOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1343,7 +1343,7 @@ ruleStringAttributeWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"StringOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.StringOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1362,7 +1362,7 @@ ruleStringAttributeWhereEntry returns [EObject current=null]
        			$current, 
        			"pattern",
         		lv_pattern_4_0, 
-        		"STRING");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.STRING");
 	    }
 
 )
@@ -1430,7 +1430,7 @@ ruleBooleanAttributeWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"BooleanOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1519,7 +1519,7 @@ ruleNullWhereEntry returns [EObject current=null]
        			$current, 
        			"operator",
         		lv_operator_3_0, 
-        		"BooleanOperator");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.BooleanOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1683,7 +1683,7 @@ ruleSubselectWhereEntry returns [EObject current=null]
        			$current, 
        			"subQuery",
         		lv_subQuery_6_0, 
-        		"MQLquery");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage.MQLquery");
 	        afterParserOrEnumRuleCall();
 	    }
 

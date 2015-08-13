@@ -19,7 +19,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -41,19 +41,23 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cSubModelSubModelParserRuleCall_3_1_0 = (RuleCall)cSubModelAssignment_3_1.eContents().get(0);
 		
 		//Model:
-		//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
+		//	{Model} ('{'
+		//	strings+=STRING?
+		//	'}')* ('[' (keys+=STRING
+		//	values+=STRING)*
+		//	']')* ('subModel' subModel=SubModel)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?
+		//{Model} ('{' strings+=STRING? '}')* ('[' (keys+=STRING values+=STRING)* ']')* ('subModel' subModel=SubModel)?
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//("{" strings+=STRING? "}")*
+		//('{' strings+=STRING? '}')*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 
 		//strings+=STRING?
@@ -62,13 +66,13 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//STRING
 		public RuleCall getStringsSTRINGTerminalRuleCall_1_1_0() { return cStringsSTRINGTerminalRuleCall_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 
-		//("[" (keys+=STRING values+=STRING)* "]")*
+		//('[' (keys+=STRING values+=STRING)* ']')*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 
 		//(keys+=STRING values+=STRING)*
@@ -86,13 +90,13 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//STRING
 		public RuleCall getValuesSTRINGTerminalRuleCall_2_1_1_0() { return cValuesSTRINGTerminalRuleCall_2_1_1_0; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
 
-		//("subModel" subModel=SubModel)?
+		//('subModel' subModel=SubModel)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"subModel"
+		//'subModel'
 		public Keyword getSubModelKeyword_3_0() { return cSubModelKeyword_3_0; }
 
 		//subModel=SubModel
@@ -103,7 +107,7 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class SubModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.parsetree.reconstr.Bug299395TestLanguage.SubModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSubModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -113,22 +117,24 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cStringsSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cStringsAssignment_1_2.eContents().get(0);
 		
 		//SubModel:
-		//	{SubModel} ("1" "2" strings+=STRING?)*;
+		//	{SubModel} ('1'
+		//	'2'
+		//	strings+=STRING?)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{SubModel} ("1" "2" strings+=STRING?)*
+		//{SubModel} ('1' '2' strings+=STRING?)*
 		public Group getGroup() { return cGroup; }
 
 		//{SubModel}
 		public Action getSubModelAction_0() { return cSubModelAction_0; }
 
-		//("1" "2" strings+=STRING?)*
+		//('1' '2' strings+=STRING?)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"1"
+		//'1'
 		public Keyword getDigitOneKeyword_1_0() { return cDigitOneKeyword_1_0; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_1_1() { return cDigitTwoKeyword_1_1; }
 
 		//strings+=STRING?
@@ -183,7 +189,11 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//	{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* ("subModel" subModel=SubModel)?;
+	//	{Model} ('{'
+	//	strings+=STRING?
+	//	'}')* ('[' (keys+=STRING
+	//	values+=STRING)*
+	//	']')* ('subModel' subModel=SubModel)?;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -193,7 +203,9 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//SubModel:
-	//	{SubModel} ("1" "2" strings+=STRING?)*;
+	//	{SubModel} ('1'
+	//	'2'
+	//	strings+=STRING?)*;
 	public SubModelElements getSubModelAccess() {
 		return pSubModel;
 	}
@@ -203,38 +215,38 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

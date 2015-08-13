@@ -41,7 +41,9 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	name=ID enabled=UnassignedAction? reference=[Model]?;
+ * 	name=ID
+ * 	enabled=UnassignedAction?
+ * 	reference=[Model]?;
  *
  **/
 

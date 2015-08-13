@@ -163,7 +163,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"mixed",
         		lv_mixed_9_0, 
-        		"Mixed");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -207,7 +207,7 @@ ruleSimple returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -249,7 +249,7 @@ ruleDelegation returns [EObject current=null]
        			$current, 
        			"delegate",
         		lv_delegate_1_0, 
-        		"Delegate");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Delegate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -326,7 +326,7 @@ rulePrefixedUnassigned returns [EObject current=null]
        			$current, 
        			"delegate",
         		lv_delegate_1_0, 
-        		"PrefixedDelegate");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.PrefixedDelegate");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -400,7 +400,7 @@ ruleDelegate returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -457,7 +457,7 @@ ruleExpression returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_3_0, 
-        		"Primary");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Primary");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -503,7 +503,7 @@ rulePrimary returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -628,7 +628,7 @@ ruleDatatype
        			$current, 
        			"name",
         		lv_name_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -650,7 +650,7 @@ ruleDatatype
        			$current, 
        			"eobj",
         		lv_eobj_8_0, 
-        		"Mixed");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -669,7 +669,7 @@ ruleDatatype
        			$current, 
        			"datatype",
         		lv_datatype_9_0, 
-        		"Datatype");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Datatype");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -706,7 +706,7 @@ ruleDatatype
        			$current, 
        			"lit",
         		lv_lit_12_0, 
-        		"Enum");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Enum");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -738,7 +738,7 @@ ruleDatatype
        			$current, 
        			"body",
         		lv_body_16_0, 
-        		"Mixed");
+        		"org.eclipse.xtext.formatting2.regionaccess.internal.RegionAccessTestLanguage.Mixed");
 	        afterParserOrEnumRuleCall();
 	    }
 

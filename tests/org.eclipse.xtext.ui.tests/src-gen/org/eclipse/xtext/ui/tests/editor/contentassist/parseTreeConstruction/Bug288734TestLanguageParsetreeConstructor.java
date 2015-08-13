@@ -254,11 +254,12 @@ protected class TConstant_TBooleanConstantParserRuleCall_2 extends RuleCallToken
 /************ begin Rule TStringConstant ****************
  *
  * TStringConstant:
- * 	annotations+=TAnnotation* "constant" "string" name=ID;
+ * 	annotations+=TAnnotation*
+ * 	'constant' 'string' name=ID;
  *
  **/
 
-// annotations+=TAnnotation* "constant" "string" name=ID
+// annotations+=TAnnotation* 'constant' 'string' name=ID
 protected class TStringConstant_Group extends GroupToken {
 	
 	public TStringConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -333,7 +334,7 @@ protected class TStringConstant_AnnotationsAssignment_0 extends AssignmentToken 
 	}	
 }
 
-// "constant"
+// 'constant'
 protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 	
 	public TStringConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -355,7 +356,7 @@ protected class TStringConstant_ConstantKeyword_1 extends KeywordToken  {
 
 }
 
-// "string"
+// 'string'
 protected class TStringConstant_StringKeyword_2 extends KeywordToken  {
 	
 	public TStringConstant_StringKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -418,11 +419,12 @@ protected class TStringConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TIntegerConstant ****************
  *
  * TIntegerConstant:
- * 	annotations+=TAnnotation* "constant" "integer" name=ID;
+ * 	annotations+=TAnnotation*
+ * 	'constant' 'integer' name=ID;
  *
  **/
 
-// annotations+=TAnnotation* "constant" "integer" name=ID
+// annotations+=TAnnotation* 'constant' 'integer' name=ID
 protected class TIntegerConstant_Group extends GroupToken {
 	
 	public TIntegerConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -497,7 +499,7 @@ protected class TIntegerConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}	
 }
 
-// "constant"
+// 'constant'
 protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 	
 	public TIntegerConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -519,7 +521,7 @@ protected class TIntegerConstant_ConstantKeyword_1 extends KeywordToken  {
 
 }
 
-// "integer"
+// 'integer'
 protected class TIntegerConstant_IntegerKeyword_2 extends KeywordToken  {
 	
 	public TIntegerConstant_IntegerKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -582,11 +584,12 @@ protected class TIntegerConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TBooleanConstant ****************
  *
  * TBooleanConstant:
- * 	annotations+=TAnnotation* "constant" "boolean" name=ID;
+ * 	annotations+=TAnnotation*
+ * 	'constant' 'boolean' name=ID;
  *
  **/
 
-// annotations+=TAnnotation* "constant" "boolean" name=ID
+// annotations+=TAnnotation* 'constant' 'boolean' name=ID
 protected class TBooleanConstant_Group extends GroupToken {
 	
 	public TBooleanConstant_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -661,7 +664,7 @@ protected class TBooleanConstant_AnnotationsAssignment_0 extends AssignmentToken
 	}	
 }
 
-// "constant"
+// 'constant'
 protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 	
 	public TBooleanConstant_ConstantKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -683,7 +686,7 @@ protected class TBooleanConstant_ConstantKeyword_1 extends KeywordToken  {
 
 }
 
-// "boolean"
+// 'boolean'
 protected class TBooleanConstant_BooleanKeyword_2 extends KeywordToken  {
 	
 	public TBooleanConstant_BooleanKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -746,11 +749,11 @@ protected class TBooleanConstant_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule TAnnotation ****************
  *
  * TAnnotation:
- * 	"@desc" description=STRING;
+ * 	'@desc' description=STRING;
  *
  **/
 
-// "@desc" description=STRING
+// '@desc' description=STRING
 protected class TAnnotation_Group extends GroupToken {
 	
 	public TAnnotation_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -779,7 +782,7 @@ protected class TAnnotation_Group extends GroupToken {
 
 }
 
-// "@desc"
+// '@desc'
 protected class TAnnotation_DescKeyword_0 extends KeywordToken  {
 	
 	public TAnnotation_DescKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

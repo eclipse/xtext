@@ -40,11 +40,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	"keyword" qualifiedName=QualifiedName;
+ * 	'keyword' qualifiedName=QualifiedName;
  *
  **/
 
-// "keyword" qualifiedName=QualifiedName
+// 'keyword' qualifiedName=QualifiedName
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -73,7 +73,7 @@ protected class Element_Group extends GroupToken {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Element_KeywordKeyword_0 extends KeywordToken  {
 	
 	public Element_KeywordKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -19,7 +19,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cDigitOneKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -47,18 +47,22 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final RuleCall cModelBug304681ModelParserRuleCall_5_1_0 = (RuleCall)cModelAssignment_5_1.eContents().get(0);
 		
 		//Model:
-		//	"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
-		//	fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model;
+		//	'1' first=SimpleModel
+		//	| '2' second=MandatoryModel
+		//	| '3' thrird=LoopedModel
+		//	| '4' forth=GroupLoopedModel
+		//	| '5' fifth=LoopedAlternativeModel
+		//	| 'bug304681' model=Bug304681Model;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
-		//fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model
+		//'1' first=SimpleModel | '2' second=MandatoryModel | '3' thrird=LoopedModel | '4' forth=GroupLoopedModel | '5'
+		//fifth=LoopedAlternativeModel | 'bug304681' model=Bug304681Model
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"1" first=SimpleModel
+		//'1' first=SimpleModel
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"1"
+		//'1'
 		public Keyword getDigitOneKeyword_0_0() { return cDigitOneKeyword_0_0; }
 
 		//first=SimpleModel
@@ -67,10 +71,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//SimpleModel
 		public RuleCall getFirstSimpleModelParserRuleCall_0_1_0() { return cFirstSimpleModelParserRuleCall_0_1_0; }
 
-		//"2" second=MandatoryModel
+		//'2' second=MandatoryModel
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"2"
+		//'2'
 		public Keyword getDigitTwoKeyword_1_0() { return cDigitTwoKeyword_1_0; }
 
 		//second=MandatoryModel
@@ -79,10 +83,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//MandatoryModel
 		public RuleCall getSecondMandatoryModelParserRuleCall_1_1_0() { return cSecondMandatoryModelParserRuleCall_1_1_0; }
 
-		//"3" thrird=LoopedModel
+		//'3' thrird=LoopedModel
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"3"
+		//'3'
 		public Keyword getDigitThreeKeyword_2_0() { return cDigitThreeKeyword_2_0; }
 
 		//thrird=LoopedModel
@@ -91,10 +95,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//LoopedModel
 		public RuleCall getThrirdLoopedModelParserRuleCall_2_1_0() { return cThrirdLoopedModelParserRuleCall_2_1_0; }
 
-		//"4" forth=GroupLoopedModel
+		//'4' forth=GroupLoopedModel
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"4"
+		//'4'
 		public Keyword getDigitFourKeyword_3_0() { return cDigitFourKeyword_3_0; }
 
 		//forth=GroupLoopedModel
@@ -103,10 +107,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//GroupLoopedModel
 		public RuleCall getForthGroupLoopedModelParserRuleCall_3_1_0() { return cForthGroupLoopedModelParserRuleCall_3_1_0; }
 
-		//"5" fifth=LoopedAlternativeModel
+		//'5' fifth=LoopedAlternativeModel
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"5"
+		//'5'
 		public Keyword getDigitFiveKeyword_4_0() { return cDigitFiveKeyword_4_0; }
 
 		//fifth=LoopedAlternativeModel
@@ -115,10 +119,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//LoopedAlternativeModel
 		public RuleCall getFifthLoopedAlternativeModelParserRuleCall_4_1_0() { return cFifthLoopedAlternativeModelParserRuleCall_4_1_0; }
 
-		//"bug304681" model=Bug304681Model
+		//'bug304681' model=Bug304681Model
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"bug304681"
+		//'bug304681'
 		public Keyword getBug304681Keyword_5_0() { return cBug304681Keyword_5_0; }
 
 		//model=Bug304681Model
@@ -129,7 +133,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class SimpleModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.SimpleModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_0 = (UnorderedGroup)cGroup.eContents().get(0);
 		private final Assignment cVisibilityAssignment_0_0 = (Assignment)cUnorderedGroup_0.eContents().get(0);
@@ -153,61 +157,64 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//SimpleModel:
-		//	(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-		//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+		//	(visibility=('public' | 'private' | 'protected')?
+		//	& static?='static'?
+		//	& synchronized?='synchronized'?
+		//	& (abstract?='abstract' | final?='final')?)
+		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-		//(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}"
+		//(visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
+		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-		//(abstract?="abstract" | final?="final")?
+		//(visibility=('public' | 'private' | 'protected')? & static?='static'? & synchronized?='synchronized'? &
+		//(abstract?='abstract' | final?='final')?)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
-		//visibility=("public" | "private" | "protected")?
+		//visibility=('public' | 'private' | 'protected')?
 		public Assignment getVisibilityAssignment_0_0() { return cVisibilityAssignment_0_0; }
 
-		//"public" | "private" | "protected"
+		//('public' | 'private' | 'protected')
 		public Alternatives getVisibilityAlternatives_0_0_0() { return cVisibilityAlternatives_0_0_0; }
 
-		//"public"
+		//'public'
 		public Keyword getVisibilityPublicKeyword_0_0_0_0() { return cVisibilityPublicKeyword_0_0_0_0; }
 
-		//"private"
+		//'private'
 		public Keyword getVisibilityPrivateKeyword_0_0_0_1() { return cVisibilityPrivateKeyword_0_0_0_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getVisibilityProtectedKeyword_0_0_0_2() { return cVisibilityProtectedKeyword_0_0_0_2; }
 
-		//static?="static"?
+		//static?='static'?
 		public Assignment getStaticAssignment_0_1() { return cStaticAssignment_0_1; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_1_0() { return cStaticStaticKeyword_0_1_0; }
 
-		//synchronized?="synchronized"?
+		//synchronized?='synchronized'?
 		public Assignment getSynchronizedAssignment_0_2() { return cSynchronizedAssignment_0_2; }
 
-		//"synchronized"
+		//'synchronized'
 		public Keyword getSynchronizedSynchronizedKeyword_0_2_0() { return cSynchronizedSynchronizedKeyword_0_2_0; }
 
-		//(abstract?="abstract" | final?="final")?
+		//(abstract?='abstract' | final?='final')?
 		public Alternatives getAlternatives_0_3() { return cAlternatives_0_3; }
 
-		//abstract?="abstract"
+		//abstract?='abstract'
 		public Assignment getAbstractAssignment_0_3_0() { return cAbstractAssignment_0_3_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_3_0_0() { return cAbstractAbstractKeyword_0_3_0_0; }
 
-		//final?="final"
+		//final?='final'
 		public Assignment getFinalAssignment_0_3_1() { return cFinalAssignment_0_3_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_0_3_1_0() { return cFinalFinalKeyword_0_3_1_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -216,15 +223,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class MandatoryModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MandatoryModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.MandatoryModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_0 = (UnorderedGroup)cGroup.eContents().get(0);
 		private final Assignment cVisibilityAssignment_0_0 = (Assignment)cUnorderedGroup_0.eContents().get(0);
@@ -248,61 +255,63 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//MandatoryModel:
-		//	(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-		//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+		//	(visibility=('public' | 'private' | 'protected') & static?='static'
+		//	& synchronized?='synchronized'
+		//	& (abstract?='abstract' | final?='final')?)
+		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-		//(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}"
+		//(visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
+		//(abstract?='abstract' | final?='final')?) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-		//(abstract?="abstract" | final?="final")?
+		//(visibility=('public' | 'private' | 'protected') & static?='static' & synchronized?='synchronized' &
+		//(abstract?='abstract' | final?='final')?)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
-		//visibility=("public" | "private" | "protected")
+		//visibility=('public' | 'private' | 'protected')
 		public Assignment getVisibilityAssignment_0_0() { return cVisibilityAssignment_0_0; }
 
-		//"public" | "private" | "protected"
+		//('public' | 'private' | 'protected')
 		public Alternatives getVisibilityAlternatives_0_0_0() { return cVisibilityAlternatives_0_0_0; }
 
-		//"public"
+		//'public'
 		public Keyword getVisibilityPublicKeyword_0_0_0_0() { return cVisibilityPublicKeyword_0_0_0_0; }
 
-		//"private"
+		//'private'
 		public Keyword getVisibilityPrivateKeyword_0_0_0_1() { return cVisibilityPrivateKeyword_0_0_0_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getVisibilityProtectedKeyword_0_0_0_2() { return cVisibilityProtectedKeyword_0_0_0_2; }
 
-		//static?="static"
+		//static?='static'
 		public Assignment getStaticAssignment_0_1() { return cStaticAssignment_0_1; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_1_0() { return cStaticStaticKeyword_0_1_0; }
 
-		//synchronized?="synchronized"
+		//synchronized?='synchronized'
 		public Assignment getSynchronizedAssignment_0_2() { return cSynchronizedAssignment_0_2; }
 
-		//"synchronized"
+		//'synchronized'
 		public Keyword getSynchronizedSynchronizedKeyword_0_2_0() { return cSynchronizedSynchronizedKeyword_0_2_0; }
 
-		//(abstract?="abstract" | final?="final")?
+		//(abstract?='abstract' | final?='final')?
 		public Alternatives getAlternatives_0_3() { return cAlternatives_0_3; }
 
-		//abstract?="abstract"
+		//abstract?='abstract'
 		public Assignment getAbstractAssignment_0_3_0() { return cAbstractAssignment_0_3_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_3_0_0() { return cAbstractAbstractKeyword_0_3_0_0; }
 
-		//final?="final"
+		//final?='final'
 		public Assignment getFinalAssignment_0_3_1() { return cFinalAssignment_0_3_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_0_3_1_0() { return cFinalFinalKeyword_0_3_1_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -311,15 +320,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class LoopedModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LoopedModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_0 = (UnorderedGroup)cGroup.eContents().get(0);
 		private final Assignment cVisibilityAssignment_0_0 = (Assignment)cUnorderedGroup_0.eContents().get(0);
@@ -343,61 +352,64 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//LoopedModel:
-		//	(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-		//	(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}";
+		//	(visibility+=('public' | 'private' | 'protected')*
+		//	& static+='static'*
+		//	& synchronized+='synchronized'*
+		//	& (abstract+='abstract' | final+='final')*)
+		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-		//(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}"
+		//(visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
+		//(abstract+='abstract' | final+='final')*) 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-		//(abstract+="abstract" | final+="final")*
+		//(visibility+=('public' | 'private' | 'protected')* & static+='static'* & synchronized+='synchronized'* &
+		//(abstract+='abstract' | final+='final')*)
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
-		//visibility+=("public" | "private" | "protected")*
+		//visibility+=('public' | 'private' | 'protected')*
 		public Assignment getVisibilityAssignment_0_0() { return cVisibilityAssignment_0_0; }
 
-		//"public" | "private" | "protected"
+		//('public' | 'private' | 'protected')
 		public Alternatives getVisibilityAlternatives_0_0_0() { return cVisibilityAlternatives_0_0_0; }
 
-		//"public"
+		//'public'
 		public Keyword getVisibilityPublicKeyword_0_0_0_0() { return cVisibilityPublicKeyword_0_0_0_0; }
 
-		//"private"
+		//'private'
 		public Keyword getVisibilityPrivateKeyword_0_0_0_1() { return cVisibilityPrivateKeyword_0_0_0_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getVisibilityProtectedKeyword_0_0_0_2() { return cVisibilityProtectedKeyword_0_0_0_2; }
 
-		//static+="static"*
+		//static+='static'*
 		public Assignment getStaticAssignment_0_1() { return cStaticAssignment_0_1; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_1_0() { return cStaticStaticKeyword_0_1_0; }
 
-		//synchronized+="synchronized"*
+		//synchronized+='synchronized'*
 		public Assignment getSynchronizedAssignment_0_2() { return cSynchronizedAssignment_0_2; }
 
-		//"synchronized"
+		//'synchronized'
 		public Keyword getSynchronizedSynchronizedKeyword_0_2_0() { return cSynchronizedSynchronizedKeyword_0_2_0; }
 
-		//(abstract+="abstract" | final+="final")*
+		//(abstract+='abstract' | final+='final')*
 		public Alternatives getAlternatives_0_3() { return cAlternatives_0_3; }
 
-		//abstract+="abstract"
+		//abstract+='abstract'
 		public Assignment getAbstractAssignment_0_3_0() { return cAbstractAssignment_0_3_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_3_0_0() { return cAbstractAbstractKeyword_0_3_0_0; }
 
-		//final+="final"
+		//final+='final'
 		public Assignment getFinalAssignment_0_3_1() { return cFinalAssignment_0_3_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_0_3_1_0() { return cFinalFinalKeyword_0_3_1_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -406,15 +418,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class GroupLoopedModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GroupLoopedModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.GroupLoopedModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final UnorderedGroup cUnorderedGroup_0 = (UnorderedGroup)cGroup.eContents().get(0);
 		private final Assignment cVisibilityAssignment_0_0 = (Assignment)cUnorderedGroup_0.eContents().get(0);
@@ -438,61 +450,63 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GroupLoopedModel:
-		//	(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-		//	(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}";
+		//	(visibility+=('public' | 'private' | 'protected') & static+='static'
+		//	& synchronized+='synchronized'
+		//	& (abstract+='abstract' | final+='final'))*
+		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-		//(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}"
+		//(visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
+		//(abstract+='abstract' | final+='final'))* 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-		//(abstract+="abstract" | final+="final"))*
+		//(visibility+=('public' | 'private' | 'protected') & static+='static' & synchronized+='synchronized' &
+		//(abstract+='abstract' | final+='final'))*
 		public UnorderedGroup getUnorderedGroup_0() { return cUnorderedGroup_0; }
 
-		//visibility+=("public" | "private" | "protected")
+		//visibility+=('public' | 'private' | 'protected')
 		public Assignment getVisibilityAssignment_0_0() { return cVisibilityAssignment_0_0; }
 
-		//"public" | "private" | "protected"
+		//('public' | 'private' | 'protected')
 		public Alternatives getVisibilityAlternatives_0_0_0() { return cVisibilityAlternatives_0_0_0; }
 
-		//"public"
+		//'public'
 		public Keyword getVisibilityPublicKeyword_0_0_0_0() { return cVisibilityPublicKeyword_0_0_0_0; }
 
-		//"private"
+		//'private'
 		public Keyword getVisibilityPrivateKeyword_0_0_0_1() { return cVisibilityPrivateKeyword_0_0_0_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getVisibilityProtectedKeyword_0_0_0_2() { return cVisibilityProtectedKeyword_0_0_0_2; }
 
-		//static+="static"
+		//static+='static'
 		public Assignment getStaticAssignment_0_1() { return cStaticAssignment_0_1; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_1_0() { return cStaticStaticKeyword_0_1_0; }
 
-		//synchronized+="synchronized"
+		//synchronized+='synchronized'
 		public Assignment getSynchronizedAssignment_0_2() { return cSynchronizedAssignment_0_2; }
 
-		//"synchronized"
+		//'synchronized'
 		public Keyword getSynchronizedSynchronizedKeyword_0_2_0() { return cSynchronizedSynchronizedKeyword_0_2_0; }
 
-		//abstract+="abstract" | final+="final"
+		//(abstract+='abstract' | final+='final')
 		public Alternatives getAlternatives_0_3() { return cAlternatives_0_3; }
 
-		//abstract+="abstract"
+		//abstract+='abstract'
 		public Assignment getAbstractAssignment_0_3_0() { return cAbstractAssignment_0_3_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_3_0_0() { return cAbstractAbstractKeyword_0_3_0_0; }
 
-		//final+="final"
+		//final+='final'
 		public Assignment getFinalAssignment_0_3_1() { return cFinalAssignment_0_3_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_0_3_1_0() { return cFinalFinalKeyword_0_3_1_0; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -501,15 +515,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class LoopedAlternativeModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LoopedAlternativeModel");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedAlternativeModel");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment cVisibilityAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
@@ -536,70 +550,72 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//LoopedAlternativeModel:
-		//	(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-		//	(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}";
+		//	(visibility+=('public' | 'private' | 'protected') | static+='static'
+		//	| synchronized+='synchronized'
+		//	| (abstract+='abstract' | final+='final') | 'before' 'after'*)*
+		//	'class' name=ID '{' '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-		//(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}"
+		//(visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
+		//(abstract+='abstract' | final+='final') | 'before' 'after'*)* 'class' name=ID '{' '}'
 		public Group getGroup() { return cGroup; }
 
-		//(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-		//(abstract+="abstract" | final+="final") | "before" "after"*)*
+		//(visibility+=('public' | 'private' | 'protected') | static+='static' | synchronized+='synchronized' |
+		//(abstract+='abstract' | final+='final') | 'before' 'after'*)*
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//visibility+=("public" | "private" | "protected")
+		//visibility+=('public' | 'private' | 'protected')
 		public Assignment getVisibilityAssignment_0_0() { return cVisibilityAssignment_0_0; }
 
-		//"public" | "private" | "protected"
+		//('public' | 'private' | 'protected')
 		public Alternatives getVisibilityAlternatives_0_0_0() { return cVisibilityAlternatives_0_0_0; }
 
-		//"public"
+		//'public'
 		public Keyword getVisibilityPublicKeyword_0_0_0_0() { return cVisibilityPublicKeyword_0_0_0_0; }
 
-		//"private"
+		//'private'
 		public Keyword getVisibilityPrivateKeyword_0_0_0_1() { return cVisibilityPrivateKeyword_0_0_0_1; }
 
-		//"protected"
+		//'protected'
 		public Keyword getVisibilityProtectedKeyword_0_0_0_2() { return cVisibilityProtectedKeyword_0_0_0_2; }
 
-		//static+="static"
+		//static+='static'
 		public Assignment getStaticAssignment_0_1() { return cStaticAssignment_0_1; }
 
-		//"static"
+		//'static'
 		public Keyword getStaticStaticKeyword_0_1_0() { return cStaticStaticKeyword_0_1_0; }
 
-		//synchronized+="synchronized"
+		//synchronized+='synchronized'
 		public Assignment getSynchronizedAssignment_0_2() { return cSynchronizedAssignment_0_2; }
 
-		//"synchronized"
+		//'synchronized'
 		public Keyword getSynchronizedSynchronizedKeyword_0_2_0() { return cSynchronizedSynchronizedKeyword_0_2_0; }
 
-		//abstract+="abstract" | final+="final"
+		//(abstract+='abstract' | final+='final')
 		public Alternatives getAlternatives_0_3() { return cAlternatives_0_3; }
 
-		//abstract+="abstract"
+		//abstract+='abstract'
 		public Assignment getAbstractAssignment_0_3_0() { return cAbstractAssignment_0_3_0; }
 
-		//"abstract"
+		//'abstract'
 		public Keyword getAbstractAbstractKeyword_0_3_0_0() { return cAbstractAbstractKeyword_0_3_0_0; }
 
-		//final+="final"
+		//final+='final'
 		public Assignment getFinalAssignment_0_3_1() { return cFinalAssignment_0_3_1; }
 
-		//"final"
+		//'final'
 		public Keyword getFinalFinalKeyword_0_3_1_0() { return cFinalFinalKeyword_0_3_1_0; }
 
-		//"before" "after"*
+		//'before' 'after'*
 		public Group getGroup_0_4() { return cGroup_0_4; }
 
-		//"before"
+		//'before'
 		public Keyword getBeforeKeyword_0_4_0() { return cBeforeKeyword_0_4_0; }
 
-		//"after"*
+		//'after'*
 		public Keyword getAfterKeyword_0_4_1() { return cAfterKeyword_0_4_1; }
 
-		//"class"
+		//'class'
 		public Keyword getClassKeyword_1() { return cClassKeyword_1; }
 
 		//name=ID
@@ -608,15 +624,15 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class Bug304681ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug304681Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBug304681ModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -645,12 +661,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Bug304681Model:
-		//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
-		//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+		//	{Bug304681Model}
+		//	"{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag"
+		//	";"? & features+=Bug304681Feature*) "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING
-		//";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+		//{Bug304681Model} "{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"?
+		//& flag?="flag" ";"? & features+=Bug304681Feature*) "}"
 		public Group getGroup() { return cGroup; }
 
 		//{Bug304681Model}
@@ -659,11 +676,11 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid" uid=STRING ";")? & (flag?="flag"
-		//";")? & features+=Bug304681Feature*
+		//("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag" ";"? &
+		//features+=Bug304681Feature*)
 		public UnorderedGroup getUnorderedGroup_2() { return cUnorderedGroup_2; }
 
-		//("short" shortDescription=STRING ";")?
+		//"short" shortDescription=STRING ";"?
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"short"
@@ -678,7 +695,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_0_2() { return cSemicolonKeyword_2_0_2; }
 
-		//("long" longDescription=STRING ";")?
+		//"long" longDescription=STRING ";"?
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"long"
@@ -693,7 +710,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_1_2() { return cSemicolonKeyword_2_1_2; }
 
-		//("uid" uid=STRING ";")?
+		//"uid" uid=STRING ";"?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//"uid"
@@ -708,7 +725,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//";"
 		public Keyword getSemicolonKeyword_2_2_2() { return cSemicolonKeyword_2_2_2; }
 
-		//(flag?="flag" ";")?
+		//flag?="flag" ";"?
 		public Group getGroup_2_3() { return cGroup_2_3; }
 
 		//flag?="flag"
@@ -731,7 +748,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class Bug304681FeatureElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug304681Feature");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Feature");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBug304681AttributeParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cBug304681ReferenceParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -751,7 +768,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	public class Bug304681AttributeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug304681Attribute");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Attribute");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAttrKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -759,13 +776,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Bug304681Attribute:
-		//	"attr" name=ID ";";
+		//	'attr' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"attr" name=ID ";"
+		//'attr' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"attr"
+		//'attr'
 		public Keyword getAttrKeyword_0() { return cAttrKeyword_0; }
 
 		//name=ID
@@ -774,12 +791,12 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 
 	public class Bug304681ReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Bug304681Reference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Reference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -787,13 +804,13 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Bug304681Reference:
-		//	"ref" name=ID ";";
+		//	'ref' name=ID ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"ref" name=ID ";"
+		//'ref' name=ID ';'
 		public Group getGroup() { return cGroup; }
 
-		//"ref"
+		//'ref'
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 
 		//name=ID
@@ -802,7 +819,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
 	}
 	
@@ -867,8 +884,12 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 	
 	//Model:
-	//	"1" first=SimpleModel | "2" second=MandatoryModel | "3" thrird=LoopedModel | "4" forth=GroupLoopedModel | "5"
-	//	fifth=LoopedAlternativeModel | "bug304681" model=Bug304681Model;
+	//	'1' first=SimpleModel
+	//	| '2' second=MandatoryModel
+	//	| '3' thrird=LoopedModel
+	//	| '4' forth=GroupLoopedModel
+	//	| '5' fifth=LoopedAlternativeModel
+	//	| 'bug304681' model=Bug304681Model;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -878,8 +899,11 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//SimpleModel:
-	//	(visibility=("public" | "private" | "protected")? & static?="static"? & synchronized?="synchronized"? &
-	//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+	//	(visibility=('public' | 'private' | 'protected')?
+	//	& static?='static'?
+	//	& synchronized?='synchronized'?
+	//	& (abstract?='abstract' | final?='final')?)
+	//	'class' name=ID '{' '}';
 	public SimpleModelElements getSimpleModelAccess() {
 		return pSimpleModel;
 	}
@@ -889,8 +913,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//MandatoryModel:
-	//	(visibility=("public" | "private" | "protected") & static?="static" & synchronized?="synchronized" &
-	//	(abstract?="abstract" | final?="final")?) "class" name=ID "{" "}";
+	//	(visibility=('public' | 'private' | 'protected') & static?='static'
+	//	& synchronized?='synchronized'
+	//	& (abstract?='abstract' | final?='final')?)
+	//	'class' name=ID '{' '}';
 	public MandatoryModelElements getMandatoryModelAccess() {
 		return pMandatoryModel;
 	}
@@ -900,8 +926,11 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//LoopedModel:
-	//	(visibility+=("public" | "private" | "protected")* & static+="static"* & synchronized+="synchronized"* &
-	//	(abstract+="abstract" | final+="final")*) "class" name=ID "{" "}";
+	//	(visibility+=('public' | 'private' | 'protected')*
+	//	& static+='static'*
+	//	& synchronized+='synchronized'*
+	//	& (abstract+='abstract' | final+='final')*)
+	//	'class' name=ID '{' '}';
 	public LoopedModelElements getLoopedModelAccess() {
 		return pLoopedModel;
 	}
@@ -911,8 +940,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//GroupLoopedModel:
-	//	(visibility+=("public" | "private" | "protected") & static+="static" & synchronized+="synchronized" &
-	//	(abstract+="abstract" | final+="final"))* "class" name=ID "{" "}";
+	//	(visibility+=('public' | 'private' | 'protected') & static+='static'
+	//	& synchronized+='synchronized'
+	//	& (abstract+='abstract' | final+='final'))*
+	//	'class' name=ID '{' '}';
 	public GroupLoopedModelElements getGroupLoopedModelAccess() {
 		return pGroupLoopedModel;
 	}
@@ -922,8 +953,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//LoopedAlternativeModel:
-	//	(visibility+=("public" | "private" | "protected") | static+="static" | synchronized+="synchronized" |
-	//	(abstract+="abstract" | final+="final") | "before" "after"*)* "class" name=ID "{" "}";
+	//	(visibility+=('public' | 'private' | 'protected') | static+='static'
+	//	| synchronized+='synchronized'
+	//	| (abstract+='abstract' | final+='final') | 'before' 'after'*)*
+	//	'class' name=ID '{' '}';
 	public LoopedAlternativeModelElements getLoopedAlternativeModelAccess() {
 		return pLoopedAlternativeModel;
 	}
@@ -933,8 +966,9 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Bug304681Model:
-	//	{Bug304681Model} "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
-	//	uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+	//	{Bug304681Model}
+	//	"{" ("short" shortDescription=STRING ";"? & "long" longDescription=STRING ";"? & "uid" uid=STRING ";"? & flag?="flag"
+	//	";"? & features+=Bug304681Feature*) "}";
 	public Bug304681ModelElements getBug304681ModelAccess() {
 		return pBug304681Model;
 	}
@@ -954,7 +988,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Bug304681Attribute:
-	//	"attr" name=ID ";";
+	//	'attr' name=ID ';';
 	public Bug304681AttributeElements getBug304681AttributeAccess() {
 		return pBug304681Attribute;
 	}
@@ -964,7 +998,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//Bug304681Reference:
-	//	"ref" name=ID ";";
+	//	'ref' name=ID ';';
 	public Bug304681ReferenceElements getBug304681ReferenceAccess() {
 		return pBug304681Reference;
 	}
@@ -974,38 +1008,38 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

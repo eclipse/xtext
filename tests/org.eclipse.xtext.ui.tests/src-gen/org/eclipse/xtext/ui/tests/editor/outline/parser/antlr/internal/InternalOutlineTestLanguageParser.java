@@ -158,7 +158,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"elements",
             	            		lv_elements_0_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -267,7 +267,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -377,7 +377,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalAntlrPars
             	           			current, 
             	           			"children",
             	            		lv_children_5_0, 
-            	            		"Element");
+            	            		"org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage.Element");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 

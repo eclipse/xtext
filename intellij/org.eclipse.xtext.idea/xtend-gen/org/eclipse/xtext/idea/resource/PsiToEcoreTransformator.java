@@ -18,10 +18,12 @@ import com.intellij.psi.tree.IElementType;
 import java.io.Reader;
 import java.util.Arrays;
 import org.eclipse.emf.common.util.Enumerator;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.CrossReference;
@@ -31,6 +33,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.idea.lang.GrammarAwarePsiErrorElement;
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter;
@@ -52,6 +55,10 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class PsiToEcoreTransformator implements IParser {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private BaseXtextFile xtextFile;
+  
+  @Inject
+  @Extension
+  private RuleNames ruleNames;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
   private PsiToEcoreAdapter adapter;
@@ -82,28 +89,28 @@ public class PsiToEcoreTransformator implements IParser {
       FileASTNode _node = this.xtextFile.getNode();
       ASTNode[] _children = _node.getChildren(null);
       for (final ASTNode child : _children) {
-        this.transform(child, transformationContext);
+        this.transformNode(child, transformationContext);
       }
       _xblockexpression = transformationContext;
     }
     return _xblockexpression;
   }
   
-  protected void _transform(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transformNode(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     throw new IllegalStateException(("Unexpected ast node: " + it));
   }
   
-  protected void _transform(final LeafElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transformNode(final LeafElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     final IElementType elementType = it.getElementType();
     if ((elementType instanceof IGrammarAwareElementType)) {
       EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
-      this.transform(it, _grammarElement, transformationContext);
+      this.transform(it, _grammarElement, ((IGrammarAwareElementType)elementType), transformationContext);
     } else {
       transformationContext.newLeafNode(it);
     }
   }
   
-  protected void _transform(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transformNode(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof GrammarAwarePsiErrorElement) {
@@ -124,17 +131,17 @@ public class PsiToEcoreTransformator implements IParser {
         final IElementType elementType = it.getElementType();
         if ((elementType instanceof IGrammarAwareElementType)) {
           EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
-          this.transform(it, _grammarElement, transformationContext);
+          this.transform(it, _grammarElement, ((IGrammarAwareElementType)elementType), transformationContext);
         }
       }
     }
   }
   
-  protected void _transform(final ASTNode it, final EObject grammarElement, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final ASTNode it, final EObject grammarElement, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     throw new IllegalStateException(((("Unexpected grammar element: " + grammarElement) + ", for node: ") + it));
   }
   
-  protected void _transform(final LeafElement it, final EnumLiteralDeclaration enumLiteralDeclaration, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final LeafElement it, final EnumLiteralDeclaration enumLiteralDeclaration, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     EEnumLiteral _enumLiteral = enumLiteralDeclaration.getEnumLiteral();
     Enumerator _instance = _enumLiteral.getInstance();
     transformationContext.setEnumerator(_instance);
@@ -143,20 +150,20 @@ public class PsiToEcoreTransformator implements IParser {
     transformationContext.newLeafNode(it, enumLiteralDeclaration, _value);
   }
   
-  protected void _transform(final LeafElement it, final Keyword keyword, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final LeafElement it, final Keyword keyword, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     String _value = keyword.getValue();
     transformationContext.newLeafNode(it, keyword, _value);
   }
   
-  protected void _transform(final LeafElement it, final RuleCall ruleCall, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final LeafElement it, final RuleCall ruleCall, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     AbstractRule _rule = ruleCall.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
     if (!_matched) {
       if (rule instanceof TerminalRule) {
         _matched=true;
-        String _name = ((TerminalRule)rule).getName();
-        transformationContext.newLeafNode(it, ruleCall, _name);
+        String _qualifiedName = this.ruleNames.getQualifiedName(rule);
+        transformationContext.newLeafNode(it, ruleCall, _qualifiedName);
       }
     }
     if (!_matched) {
@@ -164,33 +171,131 @@ public class PsiToEcoreTransformator implements IParser {
     }
   }
   
-  protected void _transform(final CompositeElement it, final ParserRule rule, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final CompositeElement it, final ParserRule rule, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     transformationContext.newCompositeNode(it);
     this.transformChildren(it, transformationContext);
     transformationContext.compress();
   }
   
-  protected void _transform(final CompositeElement it, final Action action, @Extension final PsiToEcoreTransformationContext transformationContext) {
-    final PsiToEcoreTransformationContext actionTransformationContext = transformationContext.branch();
-    this.transformActionLeftElement(it, action, actionTransformationContext);
-    transformationContext.sync(actionTransformationContext);
-    final RuleCall actionRuleCall = actionTransformationContext.getActionRuleCall();
-    boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(actionRuleCall);
-    if (_ensureModelElementCreated) {
-      EObject _current = actionTransformationContext.getCurrent();
-      AbstractRule _rule = actionRuleCall.getRule();
-      String _name = _rule.getName();
-      transformationContext.assign(_current, actionRuleCall, _name);
+  protected void _transform(final CompositeElement it, final Action action, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    boolean _isInFragmentRule = elementType.isInFragmentRule();
+    if (_isInFragmentRule) {
+      transformationContext.setCreateModelInParentNode(true);
+      final PsiToEcoreTransformationContext actionTransformationContext = transformationContext.branch();
+      this.transformActionLeftElement(it, action, actionTransformationContext);
+      transformationContext.sync(actionTransformationContext);
+      final RuleCall actionRuleCall = actionTransformationContext.getActionRuleCall();
+      boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(actionRuleCall);
+      if (_ensureModelElementCreated) {
+        boolean _and = false;
+        EObject _current = transformationContext.getCurrent();
+        boolean _tripleNotEquals = (_current != null);
+        if (!_tripleNotEquals) {
+          _and = false;
+        } else {
+          EObject _current_1 = transformationContext.getCurrent();
+          EObject _eContainer = _current_1.eContainer();
+          boolean _tripleEquals = (_eContainer == null);
+          _and = _tripleEquals;
+        }
+        if (_and) {
+          EObject _current_2 = transformationContext.getCurrent();
+          actionTransformationContext.assign(_current_2, action);
+        } else {
+          EObject _current_3 = actionTransformationContext.getCurrent();
+          AbstractRule _rule = actionRuleCall.getRule();
+          String _qualifiedName = this.ruleNames.getQualifiedName(_rule);
+          transformationContext.assign(_current_3, actionRuleCall, _qualifiedName);
+        }
+      }
+      transformationContext.merge(actionTransformationContext, true);
+      transformationContext.compress();
+    } else {
+      transformationContext.setCreateModelInParentNode(false);
+      final PsiToEcoreTransformationContext actionTransformationContext_1 = transformationContext.branch();
+      this.transformActionLeftElement(it, action, actionTransformationContext_1);
+      transformationContext.sync(actionTransformationContext_1);
+      final RuleCall actionRuleCall_1 = actionTransformationContext_1.getActionRuleCall();
+      boolean _ensureModelElementCreated_1 = transformationContext.ensureModelElementCreated(actionRuleCall_1);
+      if (_ensureModelElementCreated_1) {
+        EObject _current_4 = actionTransformationContext_1.getCurrent();
+        AbstractRule _rule_1 = actionRuleCall_1.getRule();
+        String _qualifiedName_1 = this.ruleNames.getQualifiedName(_rule_1);
+        transformationContext.assign(_current_4, actionRuleCall_1, _qualifiedName_1);
+      }
+      transformationContext.merge(actionTransformationContext_1);
+      transformationContext.compress();
     }
-    transformationContext.merge(actionTransformationContext);
-    transformationContext.compress();
   }
   
-  protected void _transformActionLeftElement(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transformFirstNoneActionChild(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     throw new IllegalStateException(("Unexpected ast node: " + it));
   }
   
-  protected void _transformActionLeftElement(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transformFirstNoneActionChild(final LeafElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    final IElementType elementType = it.getElementType();
+    if ((elementType instanceof IGrammarAwareElementType)) {
+      EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+      this.transform(it, _grammarElement, ((IGrammarAwareElementType)elementType), transformationContext);
+    } else {
+      transformationContext.newLeafNode(it);
+    }
+  }
+  
+  protected void _transformFirstNoneActionChild(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof GrammarAwarePsiErrorElement) {
+        _matched=true;
+        EObject _grammarElement = ((GrammarAwarePsiErrorElement)it).getGrammarElement();
+        transformationContext.ensureModelElementCreated(_grammarElement);
+      }
+    }
+    if (!_matched) {
+      if (it instanceof PsiErrorElement) {
+        _matched=true;
+        this.transformChildren(it, transformationContext);
+        transformationContext.appendSyntaxError(((PsiErrorElement)it));
+      }
+    }
+    if (!_matched) {
+      {
+        final IElementType elementType = it.getElementType();
+        if ((elementType instanceof IGrammarAwareElementType)) {
+          EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
+          this.transformFirstNoneActionChild(it, _grammarElement, ((IGrammarAwareElementType)elementType), transformationContext);
+        }
+      }
+    }
+  }
+  
+  protected void _transformFirstNoneActionChild(final CompositeElement it, final EObject element, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    EClass _eClass = element.eClass();
+    String _name = _eClass.getName();
+    String _plus = ("Unexpected grammar element: " + _name);
+    throw new IllegalStateException(_plus);
+  }
+  
+  protected void _transformFirstNoneActionChild(final CompositeElement it, final Action action, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    ASTNode[] _children = it.getChildren(null);
+    final ASTNode firstChild = IterableExtensions.<ASTNode>head(((Iterable<ASTNode>)Conversions.doWrapArray(_children)));
+    this.transformFirstNoneActionChild(firstChild, transformationContext);
+  }
+  
+  protected void _transformFirstNoneActionChild(final CompositeElement it, final AbstractElement action, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    this.transformNode(it, transformationContext);
+  }
+  
+  protected void _transformFirstNoneActionChild(final CompositeElement it, final ParserRule rule, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    transformationContext.newCompositeNode(it);
+    this.transformChildren(it, transformationContext);
+  }
+  
+  protected void _transformActionLeftElementNode(final ASTNode it, @Extension final PsiToEcoreTransformationContext transformationContext) {
+    throw new IllegalStateException(("Unexpected ast node: " + it));
+  }
+  
+  protected void _transformActionLeftElementNode(final CompositeElement it, @Extension final PsiToEcoreTransformationContext transformationContext) {
     final IElementType elementType = it.getElementType();
     if ((elementType instanceof IGrammarAwareElementType)) {
       EObject _grammarElement = ((IGrammarAwareElementType)elementType).getGrammarElement();
@@ -213,7 +318,7 @@ public class PsiToEcoreTransformator implements IParser {
     final ASTNode[] children = it.getChildren(null);
     final ASTNode leftElement = IterableExtensions.<ASTNode>head(((Iterable<ASTNode>)Conversions.doWrapArray(children)));
     final PsiToEcoreTransformationContext leftElementTransformationContext = transformationContext.branch();
-    this.transformActionLeftElement(leftElement, leftElementTransformationContext);
+    this.transformActionLeftElementNode(leftElement, leftElementTransformationContext);
     PsiToEcoreTransformationContext _compress = leftElementTransformationContext.compress();
     transformationContext.sync(_compress);
     EObject _current = leftElementTransformationContext.getCurrent();
@@ -230,7 +335,7 @@ public class PsiToEcoreTransformator implements IParser {
     this.transformChildren(it, transformationContext);
   }
   
-  protected void _transform(final CompositeElement it, final RuleCall ruleCall, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final CompositeElement it, final RuleCall ruleCall, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     AbstractRule _rule = ruleCall.getRule();
     final AbstractRule rule = _rule;
     boolean _matched = false;
@@ -247,9 +352,24 @@ public class PsiToEcoreTransformator implements IParser {
           boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
           if (_ensureModelElementCreated) {
             final DatatypeRuleToken datatypeRuleToken = childTransformationContext.getDatatypeRuleToken();
-            String _name = ((ParserRule)rule).getName();
-            transformationContext.assign(datatypeRuleToken, ruleCall, _name);
+            String _qualifiedName = this.ruleNames.getQualifiedName(rule);
+            transformationContext.assign(datatypeRuleToken, ruleCall, _qualifiedName);
           }
+          transformationContext.merge(childTransformationContext);
+          transformationContext.compress();
+        }
+      }
+    }
+    if (!_matched) {
+      if (rule instanceof ParserRule) {
+        boolean _isFragment = ((ParserRule)rule).isFragment();
+        if (_isFragment) {
+          _matched=true;
+          transformationContext.ensureModelElementCreated(ruleCall);
+          transformationContext.newCompositeNode(it);
+          final PsiToEcoreTransformationContext childTransformationContext = transformationContext.branchAndKeepCurrent();
+          PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
+          transformationContext.sync(_transformChildren);
           transformationContext.merge(childTransformationContext);
           transformationContext.compress();
         }
@@ -258,37 +378,30 @@ public class PsiToEcoreTransformator implements IParser {
     if (!_matched) {
       if (rule instanceof EnumRule) {
         _matched=true;
-        transformationContext.newCompositeNode(it);
-        final PsiToEcoreTransformationContext childTransformationContext = transformationContext.branch();
-        PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
-        transformationContext.sync(_transformChildren);
-        boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
-        if (_ensureModelElementCreated) {
-          final Enumerator enumerator = childTransformationContext.getEnumerator();
-          boolean _notEquals = (!Objects.equal(enumerator, null));
-          if (_notEquals) {
-            String _name = ((EnumRule)rule).getName();
-            transformationContext.assign(enumerator, ruleCall, _name);
-          }
-        }
-        transformationContext.merge(childTransformationContext);
-        transformationContext.compress();
       }
-    }
-    if (!_matched) {
-      if (rule instanceof ParserRule) {
-        _matched=true;
+      if (!_matched) {
+        if (rule instanceof ParserRule) {
+          _matched=true;
+        }
+      }
+      if (_matched) {
         transformationContext.newCompositeNode(it);
         final PsiToEcoreTransformationContext childTransformationContext = transformationContext.branch();
         PsiToEcoreTransformationContext _transformChildren = this.transformChildren(it, childTransformationContext);
         transformationContext.sync(_transformChildren);
         boolean _ensureModelElementCreated = transformationContext.ensureModelElementCreated(ruleCall);
         if (_ensureModelElementCreated) {
-          final EObject child = childTransformationContext.getCurrent();
+          Object _xifexpression = null;
+          if ((rule instanceof ParserRule)) {
+            _xifexpression = childTransformationContext.getCurrent();
+          } else {
+            _xifexpression = childTransformationContext.getEnumerator();
+          }
+          final Object child = _xifexpression;
           boolean _notEquals = (!Objects.equal(child, null));
           if (_notEquals) {
-            String _name = ((ParserRule)rule).getName();
-            transformationContext.assign(child, ruleCall, _name);
+            String _qualifiedName = this.ruleNames.getQualifiedName(rule);
+            transformationContext.assign(child, ruleCall, _qualifiedName);
           }
         }
         transformationContext.merge(childTransformationContext);
@@ -300,12 +413,12 @@ public class PsiToEcoreTransformator implements IParser {
     }
   }
   
-  protected void _transform(final LeafElement it, final CrossReference crossReference, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final LeafElement it, final CrossReference crossReference, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     transformationContext.ensureModelElementCreated(crossReference);
     transformationContext.newLeafNode(it);
   }
   
-  protected void _transform(final CompositeElement it, final CrossReference crossReference, @Extension final PsiToEcoreTransformationContext transformationContext) {
+  protected void _transform(final CompositeElement it, final CrossReference crossReference, final IGrammarAwareElementType elementType, @Extension final PsiToEcoreTransformationContext transformationContext) {
     transformationContext.newCompositeNode(it);
     transformationContext.ensureModelElementCreated(crossReference);
     this.transformChildren(it, transformationContext);
@@ -325,7 +438,7 @@ public class PsiToEcoreTransformator implements IParser {
     PsiToEcoreTransformationContext _xblockexpression = null;
     {
       for (final ASTNode child : children) {
-        this.transform(child, transformationContext);
+        this.transformNode(child, transformationContext);
       }
       _xblockexpression = transformationContext;
     }
@@ -334,28 +447,28 @@ public class PsiToEcoreTransformator implements IParser {
   
   @Override
   public IParseResult parse(final ParserRule rule, final Reader reader) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException("Unexpected invocation");
   }
   
   @Override
   public IParseResult parse(final RuleCall ruleCall, final Reader reader, final int initialLookAhead) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException("Unexpected invocation");
   }
   
   @Override
   public IParseResult reparse(final IParseResult previousParseResult, final ReplaceRegion replaceRegion) {
-    throw new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw new UnsupportedOperationException("Unexpected invocation");
   }
   
-  protected void transform(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
+  protected void transformNode(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
     if (it instanceof CompositeElement) {
-      _transform((CompositeElement)it, transformationContext);
+      _transformNode((CompositeElement)it, transformationContext);
       return;
     } else if (it instanceof LeafElement) {
-      _transform((LeafElement)it, transformationContext);
+      _transformNode((LeafElement)it, transformationContext);
       return;
     } else if (it != null) {
-      _transform(it, transformationContext);
+      _transformNode(it, transformationContext);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
@@ -363,55 +476,90 @@ public class PsiToEcoreTransformator implements IParser {
     }
   }
   
-  protected void transform(final ASTNode it, final EObject action, final PsiToEcoreTransformationContext transformationContext) {
+  protected void transform(final ASTNode it, final EObject action, final IGrammarAwareElementType elementType, final PsiToEcoreTransformationContext transformationContext) {
     if (it instanceof CompositeElement
          && action instanceof Action) {
-      _transform((CompositeElement)it, (Action)action, transformationContext);
+      _transform((CompositeElement)it, (Action)action, elementType, transformationContext);
       return;
     } else if (it instanceof CompositeElement
          && action instanceof CrossReference) {
-      _transform((CompositeElement)it, (CrossReference)action, transformationContext);
+      _transform((CompositeElement)it, (CrossReference)action, elementType, transformationContext);
       return;
     } else if (it instanceof CompositeElement
          && action instanceof ParserRule) {
-      _transform((CompositeElement)it, (ParserRule)action, transformationContext);
+      _transform((CompositeElement)it, (ParserRule)action, elementType, transformationContext);
       return;
     } else if (it instanceof CompositeElement
          && action instanceof RuleCall) {
-      _transform((CompositeElement)it, (RuleCall)action, transformationContext);
+      _transform((CompositeElement)it, (RuleCall)action, elementType, transformationContext);
       return;
     } else if (it instanceof LeafElement
          && action instanceof CrossReference) {
-      _transform((LeafElement)it, (CrossReference)action, transformationContext);
+      _transform((LeafElement)it, (CrossReference)action, elementType, transformationContext);
       return;
     } else if (it instanceof LeafElement
          && action instanceof EnumLiteralDeclaration) {
-      _transform((LeafElement)it, (EnumLiteralDeclaration)action, transformationContext);
+      _transform((LeafElement)it, (EnumLiteralDeclaration)action, elementType, transformationContext);
       return;
     } else if (it instanceof LeafElement
          && action instanceof Keyword) {
-      _transform((LeafElement)it, (Keyword)action, transformationContext);
+      _transform((LeafElement)it, (Keyword)action, elementType, transformationContext);
       return;
     } else if (it instanceof LeafElement
          && action instanceof RuleCall) {
-      _transform((LeafElement)it, (RuleCall)action, transformationContext);
+      _transform((LeafElement)it, (RuleCall)action, elementType, transformationContext);
       return;
     } else if (it != null
          && action != null) {
-      _transform(it, action, transformationContext);
+      _transform(it, action, elementType, transformationContext);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, action, transformationContext).toString());
+        Arrays.<Object>asList(it, action, elementType, transformationContext).toString());
     }
   }
   
-  protected void transformActionLeftElement(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
+  protected void transformFirstNoneActionChild(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
     if (it instanceof CompositeElement) {
-      _transformActionLeftElement((CompositeElement)it, transformationContext);
+      _transformFirstNoneActionChild((CompositeElement)it, transformationContext);
+      return;
+    } else if (it instanceof LeafElement) {
+      _transformFirstNoneActionChild((LeafElement)it, transformationContext);
       return;
     } else if (it != null) {
-      _transformActionLeftElement(it, transformationContext);
+      _transformFirstNoneActionChild(it, transformationContext);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, transformationContext).toString());
+    }
+  }
+  
+  protected void transformFirstNoneActionChild(final CompositeElement it, final EObject action, final IGrammarAwareElementType elementType, final PsiToEcoreTransformationContext transformationContext) {
+    if (action instanceof Action) {
+      _transformFirstNoneActionChild(it, (Action)action, elementType, transformationContext);
+      return;
+    } else if (action instanceof ParserRule) {
+      _transformFirstNoneActionChild(it, (ParserRule)action, elementType, transformationContext);
+      return;
+    } else if (action instanceof AbstractElement) {
+      _transformFirstNoneActionChild(it, (AbstractElement)action, elementType, transformationContext);
+      return;
+    } else if (action != null) {
+      _transformFirstNoneActionChild(it, action, elementType, transformationContext);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, action, elementType, transformationContext).toString());
+    }
+  }
+  
+  protected void transformActionLeftElementNode(final ASTNode it, final PsiToEcoreTransformationContext transformationContext) {
+    if (it instanceof CompositeElement) {
+      _transformActionLeftElementNode((CompositeElement)it, transformationContext);
+      return;
+    } else if (it != null) {
+      _transformActionLeftElementNode(it, transformationContext);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +

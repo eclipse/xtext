@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: UnorderedGroup.java,v 1.1 2010/04/06 14:10:15 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

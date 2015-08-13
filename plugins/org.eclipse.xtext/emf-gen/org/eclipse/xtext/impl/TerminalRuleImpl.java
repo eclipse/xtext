@@ -1,15 +1,13 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: TerminalRuleImpl.java,v 1.1 2010/04/06 14:09:53 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
 
@@ -36,6 +34,7 @@ public class TerminalRuleImpl extends AbstractRuleImpl implements TerminalRule {
 	 * @ordered
 	 */
 	protected static final boolean FRAGMENT_EDEFAULT = false;
+
 	/**
 	 * The cached value of the '{@link #isFragment() <em>Fragment</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -73,7 +72,7 @@ public class TerminalRuleImpl extends AbstractRuleImpl implements TerminalRule {
 	public boolean isFragment() {
 		return fragment;
 	}
-
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -28,8 +28,9 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.idea.generator.parser.antlr.AbstractActionAwareAntlrGrammarGenerator;
+import org.eclipse.xtext.idea.generator.parser.antlr.AbstractAntlrGrammarWithActionsGenerator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -37,7 +38,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
-public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenerator {
+public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator {
   @Override
   protected String getGrammarFileName(final Grammar it) {
     return this._namingExtensions.getGrammarFileName(it, "");
@@ -291,16 +292,22 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
   }
   
   @Override
-  protected CharSequence _compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
+  protected String compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
-    String _compileEntryRule = this.compileEntryRule(it, grammar, options);
-    _builder.append(_compileEntryRule, "");
-    _builder.newLineIfNotEmpty();
+    {
+      boolean _isFragment = it.isFragment();
+      boolean _not = (!_isFragment);
+      if (_not) {
+        String _compileEntryRule = this.compileEntryRule(it, grammar, options);
+        _builder.append(_compileEntryRule, "");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.newLine();
     String _compileEBNF = this.compileEBNF(it, options);
     _builder.append(_compileEBNF, "");
     _builder.newLineIfNotEmpty();
-    return _builder;
+    return _builder.toString();
   }
   
   protected String compileEntryRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
@@ -331,6 +338,8 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
     _builder.append("=");
     String _ruleName_1 = this._grammarAccessExtensions.ruleName(it);
     _builder.append(_ruleName_1, "\t");
+    String _defaultArgumentList = AntlrGrammarGenUtil.getDefaultArgumentList(it);
+    _builder.append(_defaultArgumentList, "\t");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("{ $current=$iv_");
@@ -381,10 +390,17 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
   @Override
   protected String compileInit(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append(" ");
-    _builder.append("returns ");
+    {
+      if ((it instanceof ParserRule)) {
+        boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+        boolean _not = (!_isPassCurrentIntoFragment);
+        String _parameterList = AntlrGrammarGenUtil.getParameterList(((ParserRule)it), Boolean.valueOf(_not));
+        _builder.append(_parameterList, "");
+      }
+    }
+    _builder.append(" returns ");
     String _compileReturns = this.compileReturns(it, options);
-    _builder.append(_compileReturns, " ");
+    _builder.append(_compileReturns, "");
     _builder.newLineIfNotEmpty();
     _builder.append("@init {");
     _builder.newLine();
@@ -425,6 +441,15 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
         if (_isDatatypeRule) {
           _matched=true;
           _switchResult = "[AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]";
+        }
+      }
+    }
+    if (!_matched) {
+      if (it instanceof ParserRule) {
+        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(it);
+        if (_isEObjectFragmentRule) {
+          _matched=true;
+          _switchResult = "[EObject current=in_current]";
         }
       }
     }
@@ -517,6 +542,16 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
           _builder.append("=");
           String __dataTypeEbnf2 = super._dataTypeEbnf2(it, supportActions);
           _builder.append(__dataTypeEbnf2, "");
+          boolean _or = false;
+          boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+          boolean _not = (!_isPassCurrentIntoFragment);
+          if (_not) {
+            _or = true;
+          } else {
+            _or = (!supportActions);
+          }
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(it, Boolean.valueOf(_or));
+          _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");
           _builder.newLine();
@@ -763,6 +798,24 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
           }
           _builder.append("{");
           _builder.newLine();
+          {
+            boolean _isEObjectFragmentRuleCall = GrammarUtil.isEObjectFragmentRuleCall(it);
+            if (_isEObjectFragmentRuleCall) {
+              _builder.append("\t");
+              _builder.append("if ($current==null) {");
+              _builder.newLine();
+              _builder.append("\t");
+              _builder.append("\t");
+              _builder.append("$current = ");
+              CharSequence _createModelElement = this.createModelElement(it);
+              _builder.append(_createModelElement, "\t\t");
+              _builder.append(";");
+              _builder.newLineIfNotEmpty();
+              _builder.append("\t");
+              _builder.append("}");
+              _builder.newLine();
+            }
+          }
           _builder.append("\t");
           CharSequence _newCompositeNode = this.newCompositeNode(it);
           _builder.append(_newCompositeNode, "\t");
@@ -859,7 +912,7 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
   }
   
   @Override
-  protected String _crossrefEbnf(final AbstractRule it, final CrossReference ref, final boolean supportActions) {
+  protected String crossrefEbnf(final AbstractRule it, final RuleCall call, final CrossReference ref, final boolean supportActions) {
     String _xifexpression = null;
     if (supportActions) {
       String _switchResult = null;
@@ -885,6 +938,16 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
           _builder.newLine();
           String _ruleName = this._grammarAccessExtensions.ruleName(it);
           _builder.append(_ruleName, "");
+          boolean _or = false;
+          boolean _isPassCurrentIntoFragment = this.isPassCurrentIntoFragment();
+          boolean _not = (!_isPassCurrentIntoFragment);
+          if (_not) {
+            _or = true;
+          } else {
+            _or = (!supportActions);
+          }
+          String _argumentList = AntlrGrammarGenUtil.getArgumentList(call, Boolean.valueOf(_or));
+          _builder.append(_argumentList, "");
           _builder.newLineIfNotEmpty();
           _builder.append("{");
           _builder.newLine();
@@ -925,7 +988,7 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
       }
       _xifexpression = _switchResult;
     } else {
-      _xifexpression = super._crossrefEbnf(it, ref, supportActions);
+      _xifexpression = super.crossrefEbnf(it, call, ref, supportActions);
     }
     return _xifexpression;
   }
@@ -1005,8 +1068,8 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
       _builder.append(_feature, "\t");
       _builder.append("\", ");
       {
-        boolean _isBoolean = this._grammarAccessExtensions.isBoolean(assignment);
-        if (_isBoolean) {
+        boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
+        if (_isBooleanAssignment) {
           _builder.append("true");
         } else {
           String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
@@ -1090,8 +1153,8 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           {
-            boolean _isBoolean = this._grammarAccessExtensions.isBoolean(assignment);
-            if (_isBoolean) {
+            boolean _isBooleanAssignment = GrammarUtil.isBooleanAssignment(assignment);
+            if (_isBooleanAssignment) {
               _builder.append("true");
             } else {
               String _localVar_1 = this._grammarAccessExtensions.localVar(assignment, it);
@@ -1162,8 +1225,8 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
           _builder_1.newLineIfNotEmpty();
           _builder_1.append("\t\t");
           {
-            boolean _isBoolean_1 = this._grammarAccessExtensions.isBoolean(assignment);
-            if (_isBoolean_1) {
+            boolean _isBooleanAssignment_1 = GrammarUtil.isBooleanAssignment(assignment);
+            if (_isBooleanAssignment_1) {
               _builder_1.append("true");
             } else {
               String _localVar_4 = this._grammarAccessExtensions.localVar(assignment, it);
@@ -1190,6 +1253,11 @@ public class AntlrGrammarGenerator extends AbstractActionAwareAntlrGrammarGenera
       _xifexpression = super._assignmentEbnf(it, assignment, options, supportActions);
     }
     return _xifexpression;
+  }
+  
+  @Override
+  protected boolean isPassCurrentIntoFragment() {
+    return true;
   }
   
   protected CharSequence createModelElement(final EObject grammarElement) {

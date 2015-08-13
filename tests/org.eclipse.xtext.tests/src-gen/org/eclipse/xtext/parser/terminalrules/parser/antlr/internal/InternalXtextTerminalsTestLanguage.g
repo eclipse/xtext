@@ -94,7 +94,7 @@ ruleGrammar returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"GrammarID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.GrammarID");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -203,7 +203,7 @@ ruleGrammar returns [EObject current=null]
        			$current, 
        			"metamodelDeclarations",
         		lv_metamodelDeclarations_12_0, 
-        		"AbstractMetamodelDeclaration");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.AbstractMetamodelDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -221,7 +221,7 @@ ruleGrammar returns [EObject current=null]
        			$current, 
        			"rules",
         		lv_rules_13_0, 
-        		"AbstractRule");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.AbstractRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -396,7 +396,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -431,7 +431,7 @@ ruleGeneratedMetamodel returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -491,7 +491,7 @@ ruleReferencedMetamodel returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -530,7 +530,7 @@ ruleParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -551,7 +551,7 @@ ruleParserRule returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_2_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -626,7 +626,7 @@ ruleParserRule returns [EObject current=null]
        			$current, 
        			"alternatives",
         		lv_alternatives_10_0, 
-        		"Alternatives");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.Alternatives");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -739,7 +739,7 @@ ruleAlternatives returns [EObject current=null]
        			$current, 
        			"groups",
         		lv_groups_3_0, 
-        		"Group");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.Group");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -793,7 +793,7 @@ ruleGroup returns [EObject current=null]
        			$current, 
        			"tokens",
         		lv_tokens_2_0, 
-        		"AbstractToken");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.AbstractToken");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -958,7 +958,7 @@ ruleAction returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_1_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -981,7 +981,7 @@ ruleAction returns [EObject current=null]
        			$current, 
        			"feature",
         		lv_feature_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -1108,7 +1108,7 @@ ruleKeyword returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.STRING");
 	    }
 
 )
@@ -1181,7 +1181,7 @@ ruleAssignment returns [EObject current=null]
        			$current, 
        			"feature",
         		lv_feature_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -1240,7 +1240,7 @@ ruleAssignment returns [EObject current=null]
        			$current, 
        			"terminal",
         		lv_terminal_2_0, 
-        		"AssignableTerminal");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.AssignableTerminal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1396,7 +1396,7 @@ ruleAssignableAlternatives returns [EObject current=null]
        			$current, 
        			"groups",
         		lv_groups_3_0, 
-        		"AssignableTerminal");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.AssignableTerminal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1439,7 +1439,7 @@ ruleCrossReference returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_1_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1461,7 +1461,7 @@ ruleCrossReference returns [EObject current=null]
        			$current, 
        			"terminal",
         		lv_terminal_3_0, 
-        		"CrossReferenceableTerminal");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.CrossReferenceableTerminal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1587,7 +1587,7 @@ ruleTerminalRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -1608,7 +1608,7 @@ ruleTerminalRule returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1630,7 +1630,7 @@ ruleTerminalRule returns [EObject current=null]
        			$current, 
        			"alternatives",
         		lv_alternatives_5_0, 
-        		"TerminalAlternatives");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TerminalAlternatives");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1692,7 +1692,7 @@ ruleTerminalAlternatives returns [EObject current=null]
        			$current, 
        			"groups",
         		lv_groups_3_0, 
-        		"TerminalGroup");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TerminalGroup");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1746,7 +1746,7 @@ ruleTerminalGroup returns [EObject current=null]
        			$current, 
        			"tokens",
         		lv_tokens_2_0, 
-        		"TerminalToken");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TerminalToken");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2009,7 +2009,7 @@ ruleNegatedToken returns [EObject current=null]
        			$current, 
        			"terminal",
         		lv_terminal_1_0, 
-        		"TerminalTokenElement");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TerminalTokenElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2052,7 +2052,7 @@ ruleUntilToken returns [EObject current=null]
        			$current, 
        			"terminal",
         		lv_terminal_1_0, 
-        		"TerminalTokenElement");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TerminalTokenElement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2141,7 +2141,7 @@ ruleCharacterRange returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_3_0, 
-        		"Keyword");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.Keyword");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2185,7 +2185,7 @@ ruleEnumRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.ID");
 	    }
 
 )
@@ -2206,7 +2206,7 @@ ruleEnumRule returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2228,7 +2228,7 @@ ruleEnumRule returns [EObject current=null]
        			$current, 
        			"alternatives",
         		lv_alternatives_5_0, 
-        		"EnumLiterals");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.EnumLiterals");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2290,7 +2290,7 @@ ruleEnumLiterals returns [EObject current=null]
        			$current, 
        			"groups",
         		lv_groups_3_0, 
-        		"EnumLiteralDeclaration");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.EnumLiteralDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2346,7 +2346,7 @@ ruleEnumLiteralDeclaration returns [EObject current=null]
        			$current, 
        			"literal",
         		lv_literal_2_0, 
-        		"Keyword");
+        		"org.eclipse.xtext.parser.terminalrules.XtextTerminalsTestLanguage.Keyword");
 	        afterParserOrEnumRuleCall();
 	    }
 

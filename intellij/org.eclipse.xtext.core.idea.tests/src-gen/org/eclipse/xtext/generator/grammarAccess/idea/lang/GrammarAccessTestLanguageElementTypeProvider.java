@@ -122,63 +122,63 @@ public class GrammarAccessTestLanguageElementTypeProvider implements IElementTyp
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getRootElementType() {
 		return Root_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementsAssignmentElementType() {
 		return Root_ElementsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRoot_ElementsTypeParserRuleCall_0ElementType() {
 		return Root_ElementsTypeParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getTypeElementType() {
 		return Type_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_AlternativesElementType() {
 		return Type_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_ATypeParserRuleCall_0ElementType() {
 		return Type_ATypeParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getType_AnotherTypeParserRuleCall_1ElementType() {
 		return Type_AnotherTypeParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getATypeElementType() {
 		return AType_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAType_GroupElementType() {
 		return AType_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAType_FooKeyword_0ElementType() {
 		return AType_FooKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAType_ATypeAction_1ElementType() {
 		return AType_ATypeAction_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherTypeElementType() {
 		return AnotherType_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherType_GroupElementType() {
 		return AnotherType_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherType_BarKeyword_0ElementType() {
 		return AnotherType_BarKeyword_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getAnotherType_AnotherTypeAction_1ElementType() {
 		return AnotherType_AnotherTypeAction_1_ELEMENT_TYPE;
 	}

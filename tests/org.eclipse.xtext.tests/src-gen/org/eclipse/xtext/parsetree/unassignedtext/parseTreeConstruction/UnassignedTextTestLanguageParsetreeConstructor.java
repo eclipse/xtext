@@ -368,11 +368,11 @@ protected class CaseInsensitiveKeywordRule_ValAssignment_1 extends AssignmentTok
 /************ begin Rule PluralRule ****************
  *
  * PluralRule:
- * 	"contents:" count=INT Plural;
+ * 	'contents:' count=INT Plural;
  *
  **/
 
-// "contents:" count=INT Plural
+// 'contents:' count=INT Plural
 protected class PluralRule_Group extends GroupToken {
 	
 	public PluralRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -401,7 +401,7 @@ protected class PluralRule_Group extends GroupToken {
 
 }
 
-// "contents:"
+// 'contents:'
 protected class PluralRule_ContentsKeyword_0 extends KeywordToken  {
 	
 	public PluralRule_ContentsKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -485,11 +485,11 @@ protected class PluralRule_PluralTerminalRuleCall_2 extends UnassignedTextToken 
 /************ begin Rule MultiRule ****************
  *
  * MultiRule:
- * 	"multi" val=INT Multi Multi Multi;
+ * 	'multi' val=INT Multi Multi Multi;
  *
  **/
 
-// "multi" val=INT Multi Multi Multi
+// 'multi' val=INT Multi Multi Multi
 protected class MultiRule_Group extends GroupToken {
 	
 	public MultiRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -518,7 +518,7 @@ protected class MultiRule_Group extends GroupToken {
 
 }
 
-// "multi"
+// 'multi'
 protected class MultiRule_MultiKeyword_0 extends KeywordToken  {
 	
 	public MultiRule_MultiKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -646,11 +646,11 @@ protected class MultiRule_MultiTerminalRuleCall_4 extends UnassignedTextToken {
 /************ begin Rule DatatypeRule ****************
  *
  * DatatypeRule:
- * 	"datatype" val=INT Datatype;
+ * 	'datatype' val=INT Datatype;
  *
  **/
 
-// "datatype" val=INT Datatype
+// 'datatype' val=INT Datatype
 protected class DatatypeRule_Group extends GroupToken {
 	
 	public DatatypeRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -679,7 +679,7 @@ protected class DatatypeRule_Group extends GroupToken {
 
 }
 
-// "datatype"
+// 'datatype'
 protected class DatatypeRule_DatatypeKeyword_0 extends KeywordToken  {
 	
 	public DatatypeRule_DatatypeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -765,11 +765,11 @@ protected class DatatypeRule_DatatypeParserRuleCall_2 extends UnassignedTextToke
 /************ begin Rule CommonTerminalsRule ****************
  *
  * CommonTerminalsRule:
- * 	"terminals" ID INT STRING val=ID;
+ * 	'terminals' ID INT STRING val=ID;
  *
  **/
 
-// "terminals" ID INT STRING val=ID
+// 'terminals' ID INT STRING val=ID
 protected class CommonTerminalsRule_Group extends GroupToken {
 	
 	public CommonTerminalsRule_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -798,7 +798,7 @@ protected class CommonTerminalsRule_Group extends GroupToken {
 
 }
 
-// "terminals"
+// 'terminals'
 protected class CommonTerminalsRule_TerminalsKeyword_0 extends KeywordToken  {
 	
 	public CommonTerminalsRule_TerminalsKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -33,8 +33,8 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
-    public static final int RULE_ANY_OTHER=10;
     public static final int T__21=21;
+    public static final int RULE_ANY_OTHER=10;
     public static final int T__20=20;
     public static final int EOF=-1;
     public static final int T__19=19;
@@ -639,7 +639,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"type",
                     		lv_type_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -665,7 +665,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -770,7 +770,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"var",
                     		lv_var_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -875,7 +875,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"val",
                             		lv_val_3_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -920,7 +920,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"val",
                     	            		lv_val_5_0, 
-                    	            		"INT");
+                    	            		"org.eclipse.xtext.common.Terminals.INT");
                     	    	    
 
                     	    }
@@ -1049,7 +1049,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1094,7 +1094,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"param",
                             		lv_param_3_0, 
-                            		"Param");
+                            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1144,7 +1144,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"param",
                     	            		lv_param_5_0, 
-                    	            		"Param");
+                    	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Param");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -1264,7 +1264,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1294,7 +1294,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"type",
                     		lv_type_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1397,7 +1397,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1528,7 +1528,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"items",
             	            		lv_items_2_0, 
-            	            		"Line");
+            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1666,7 +1666,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"items",
             	            		lv_items_2_0, 
-            	            		"Line");
+            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1833,7 +1833,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"items",
             	                    		lv_items_3_1, 
-            	                    		"Line");
+            	                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Line");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 
@@ -1858,7 +1858,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	                   			current, 
             	                   			"items",
             	                    		lv_items_3_2, 
-            	                    		"TestIndentation");
+            	                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.TestIndentation");
             	            	        afterParserOrEnumRuleCall();
             	            	    
 
@@ -2016,7 +2016,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"FQN");
+                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.FQN");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2362,7 +2362,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val",
             	            		lv_val_1_0, 
-            	            		"Enum1");
+            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -2422,7 +2422,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
             	           			current, 
             	           			"val",
             	            		lv_val_3_0, 
-            	            		"Enum1");
+            	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Enum1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -2573,7 +2573,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                            			current, 
                            			"vals",
                             		lv_vals_2_0, 
-                            		"SuppressedHiddenSub");
+                            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -2623,7 +2623,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                     	           			current, 
                     	           			"vals",
                     	            		lv_vals_4_0, 
-                    	            		"SuppressedHiddenSub");
+                    	            		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.SuppressedHiddenSub");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -2882,7 +2882,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"idval",
                     		lv_idval_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2984,7 +2984,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"idval",
                     		lv_idval_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3338,7 +3338,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val1",
                     		lv_val1_1_0, 
-                    		"Datatype1");
+                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype1");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3373,7 +3373,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val2",
                     		lv_val2_3_0, 
-                    		"Datatype2");
+                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype2");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3404,7 +3404,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"val3",
                     		lv_val3_4_0, 
-                    		"Datatype3");
+                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.Datatype3");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3518,7 +3518,7 @@ public class InternalFormatterTestLanguageParser extends AbstractInternalAntlrPa
                    			current, 
                    			"datatype",
                     		lv_datatype_1_0, 
-                    		"WrappingDataType");
+                    		"org.eclipse.xtext.parsetree.formatter.FormatterTestLanguage.WrappingDataType");
             	        afterParserOrEnumRuleCall();
             	    
 

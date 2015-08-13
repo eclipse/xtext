@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: UntilTokenImpl.java,v 1.1 2010/04/06 14:10:01 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

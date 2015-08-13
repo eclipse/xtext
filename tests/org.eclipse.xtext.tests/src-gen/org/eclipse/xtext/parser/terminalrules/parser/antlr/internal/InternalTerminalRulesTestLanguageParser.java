@@ -201,7 +201,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"idValue",
                             		lv_idValue_0_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ID");
                     	    
 
                     }
@@ -233,7 +233,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"intValue",
                             		lv_intValue_1_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.INT");
                     	    
 
                     }
@@ -265,7 +265,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"stringValue",
                             		lv_stringValue_2_0, 
-                            		"STRING");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.STRING");
                     	    
 
                     }
@@ -297,7 +297,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"richStringValue",
                             		lv_richStringValue_3_0, 
-                            		"RICH_STRING");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.RICH_STRING");
                     	    
 
                     }
@@ -329,7 +329,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"mlCommentValue",
                             		lv_mlCommentValue_4_0, 
-                            		"ML_COMMENT");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ML_COMMENT");
                     	    
 
                     }
@@ -361,7 +361,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"slCommentValue",
                             		lv_slCommentValue_5_0, 
-                            		"SL_COMMENT");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.SL_COMMENT");
                     	    
 
                     }
@@ -393,7 +393,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"wsValue",
                             		lv_wsValue_6_0, 
-                            		"WS");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.WS");
                     	    
 
                     }
@@ -425,7 +425,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                            			current, 
                            			"anyValue",
                             		lv_anyValue_7_0, 
-                            		"ANY_OTHER");
+                            		"org.eclipse.xtext.parser.terminalrules.TerminalRulesTestLanguage.ANY_OTHER");
                     	    
 
                     }

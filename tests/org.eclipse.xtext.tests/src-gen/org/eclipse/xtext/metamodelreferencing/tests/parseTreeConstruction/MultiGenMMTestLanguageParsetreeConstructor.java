@@ -161,8 +161,8 @@ protected class Foo_NameRefsAssignment_1 extends AssignmentToken  {
 
 /************ begin Rule NameRef ****************
  *
- * NameRef returns other::FooBar:
- * 	name=STRING;
+ * NameRef other::FooBar:
+ * 	name=STRING
  *
  **/
 

@@ -208,11 +208,11 @@ protected class Identifier_NameAssignment extends AssignmentToken  {
 /************ begin Rule Literal ****************
  *
  * Literal:
- * 	num=NUMBER | str=STRING | bool="true" | bool="false";
+ * 	num=NUMBER | str=STRING | bool='true' | bool='false';
  *
  **/
 
-// num=NUMBER | str=STRING | bool="true" | bool="false"
+// num=NUMBER | str=STRING | bool='true' | bool='false'
 protected class Literal_Alternatives extends AlternativesToken {
 
 	public Literal_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -310,7 +310,7 @@ protected class Literal_StrAssignment_1 extends AssignmentToken  {
 
 }
 
-// bool="true"
+// bool='true'
 protected class Literal_BoolAssignment_2 extends AssignmentToken  {
 	
 	public Literal_BoolAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -343,7 +343,7 @@ protected class Literal_BoolAssignment_2 extends AssignmentToken  {
 
 }
 
-// bool="false"
+// bool='false'
 protected class Literal_BoolAssignment_3 extends AssignmentToken  {
 	
 	public Literal_BoolAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -497,11 +497,11 @@ protected class MyPrimary_IdentifierParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule MyPackage ****************
  *
  * MyPackage:
- * 	"package" LT* name=FQN LT* "{" LT* (directives+=MyClass LT*)* "}";
+ * 	'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}';
  *
  **/
 
-// "package" LT* name=FQN LT* "{" LT* (directives+=MyClass LT*)* "}"
+// 'package' LT* name=FQN LT* '{' LT* (directives+=MyClass LT*)* '}'
 protected class MyPackage_Group extends GroupToken {
 	
 	public MyPackage_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -530,7 +530,7 @@ protected class MyPackage_Group extends GroupToken {
 
 }
 
-// "package"
+// 'package'
 protected class MyPackage_PackageKeyword_0 extends KeywordToken  {
 	
 	public MyPackage_PackageKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -585,7 +585,7 @@ protected class MyPackage_NameAssignment_2 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class MyPackage_LeftCurlyBracketKeyword_4 extends KeywordToken  {
 	
 	public MyPackage_LeftCurlyBracketKeyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -677,7 +677,7 @@ protected class MyPackage_DirectivesAssignment_6_0 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class MyPackage_RightCurlyBracketKeyword_7 extends KeywordToken  {
 	
 	public MyPackage_RightCurlyBracketKeyword_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -707,11 +707,11 @@ protected class MyPackage_RightCurlyBracketKeyword_7 extends KeywordToken  {
 /************ begin Rule MyClass ****************
  *
  * MyClass:
- * 	"public"? "class" LT* name=ID LT* "{" LT* (directives+=MyField LT*)* "}";
+ * 	'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}';
  *
  **/
 
-// "public"? "class" LT* name=ID LT* "{" LT* (directives+=MyField LT*)* "}"
+// 'public'? 'class' LT* name=ID LT* '{' LT* (directives+=MyField LT*)* '}'
 protected class MyClass_Group extends GroupToken {
 	
 	public MyClass_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -740,7 +740,7 @@ protected class MyClass_Group extends GroupToken {
 
 }
 
-// "class"
+// 'class'
 protected class MyClass_ClassKeyword_1 extends KeywordToken  {
 	
 	public MyClass_ClassKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -795,7 +795,7 @@ protected class MyClass_NameAssignment_3 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class MyClass_LeftCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public MyClass_LeftCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -887,7 +887,7 @@ protected class MyClass_DirectivesAssignment_7_0 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class MyClass_RightCurlyBracketKeyword_8 extends KeywordToken  {
 	
 	public MyClass_RightCurlyBracketKeyword_8(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -917,11 +917,11 @@ protected class MyClass_RightCurlyBracketKeyword_8 extends KeywordToken  {
 /************ begin Rule MyAttribute ****************
  *
  * MyAttribute:
- * 	PUBLIC="public" | PRIVATE="private";
+ * 	PUBLIC='public' | PRIVATE='private';
  *
  **/
 
-// PUBLIC="public" | PRIVATE="private"
+// PUBLIC='public' | PRIVATE='private'
 protected class MyAttribute_Alternatives extends AlternativesToken {
 
 	public MyAttribute_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -951,7 +951,7 @@ protected class MyAttribute_Alternatives extends AlternativesToken {
 
 }
 
-// PUBLIC="public"
+// PUBLIC='public'
 protected class MyAttribute_PUBLICAssignment_0 extends AssignmentToken  {
 	
 	public MyAttribute_PUBLICAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -984,7 +984,7 @@ protected class MyAttribute_PUBLICAssignment_0 extends AssignmentToken  {
 
 }
 
-// PRIVATE="private"
+// PRIVATE='private'
 protected class MyAttribute_PRIVATEAssignment_1 extends AssignmentToken  {
 	
 	public MyAttribute_PRIVATEAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1138,11 +1138,11 @@ protected class MyAttributes_AttributesAssignment_1 extends AssignmentToken  {
 /************ begin Rule MyField ****************
  *
  * MyField:
- * 	attr=MyAttributes "var" LT* bindings+=MyBinding (LT* "," LT* bindings+=MyBinding)* VirtualSemi;
+ * 	attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi;
  *
  **/
 
-// attr=MyAttributes "var" LT* bindings+=MyBinding (LT* "," LT* bindings+=MyBinding)* VirtualSemi
+// attr=MyAttributes 'var' LT* bindings+=MyBinding (LT* ',' LT* bindings+=MyBinding)* VirtualSemi
 protected class MyField_Group extends GroupToken {
 	
 	public MyField_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1216,7 +1216,7 @@ protected class MyField_AttrAssignment_0 extends AssignmentToken  {
 	}	
 }
 
-// "var"
+// 'var'
 protected class MyField_VarKeyword_1 extends KeywordToken  {
 	
 	public MyField_VarKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1284,7 +1284,7 @@ protected class MyField_BindingsAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// (LT* "," LT* bindings+=MyBinding)*
+// (LT* ',' LT* bindings+=MyBinding)*
 protected class MyField_Group_4 extends GroupToken {
 	
 	public MyField_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1306,7 +1306,7 @@ protected class MyField_Group_4 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class MyField_CommaKeyword_4_1 extends KeywordToken  {
 	
 	public MyField_CommaKeyword_4_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1406,11 +1406,11 @@ protected class MyField_VirtualSemiParserRuleCall_5 extends UnassignedTextToken 
 /************ begin Rule MyBinding ****************
  *
  * MyBinding:
- * 	name=ID (LT* ":" LT* type=FQN)? (LT* "=" LT* expression=MyPrimary)?;
+ * 	name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?;
  *
  **/
 
-// name=ID (LT* ":" LT* type=FQN)? (LT* "=" LT* expression=MyPrimary)?
+// name=ID (LT* ':' LT* type=FQN)? (LT* '=' LT* expression=MyPrimary)?
 protected class MyBinding_Group extends GroupToken {
 	
 	public MyBinding_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1474,7 +1474,7 @@ protected class MyBinding_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// (LT* ":" LT* type=FQN)?
+// (LT* ':' LT* type=FQN)?
 protected class MyBinding_Group_1 extends GroupToken {
 	
 	public MyBinding_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1496,7 +1496,7 @@ protected class MyBinding_Group_1 extends GroupToken {
 
 }
 
-// ":"
+// ':'
 protected class MyBinding_ColonKeyword_1_1 extends KeywordToken  {
 	
 	public MyBinding_ColonKeyword_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1553,7 +1553,7 @@ protected class MyBinding_TypeAssignment_1_3 extends AssignmentToken  {
 }
 
 
-// (LT* "=" LT* expression=MyPrimary)?
+// (LT* '=' LT* expression=MyPrimary)?
 protected class MyBinding_Group_2 extends GroupToken {
 	
 	public MyBinding_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1575,7 +1575,7 @@ protected class MyBinding_Group_2 extends GroupToken {
 
 }
 
-// "="
+// '='
 protected class MyBinding_EqualsSignKeyword_2_1 extends KeywordToken  {
 	
 	public MyBinding_EqualsSignKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

@@ -193,7 +193,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"GrammarID");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.GrammarID");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -475,7 +475,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"metamodelDeclarations",
             	            		lv_metamodelDeclarations_12_0, 
-            	            		"AbstractMetamodelDeclaration");
+            	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.AbstractMetamodelDeclaration");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -525,7 +525,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"rules",
             	            		lv_rules_13_0, 
-            	            		"AbstractRule");
+            	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.AbstractRule");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1038,7 +1038,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1100,7 +1100,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"alias",
                             		lv_alias_4_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1247,7 +1247,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"alias",
                             		lv_alias_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -1364,7 +1364,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1409,7 +1409,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"type",
                             		lv_type_2_0, 
-                            		"TypeRef");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TypeRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -1584,7 +1584,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"alternatives",
                     		lv_alternatives_10_0, 
-                    		"Alternatives");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.Alternatives");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1890,7 +1890,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"groups",
                     	            		lv_groups_3_0, 
-                    	            		"Group");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.Group");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -2062,7 +2062,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"tokens",
                     	            		lv_tokens_2_0, 
-                    	            		"AbstractToken");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.AbstractToken");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -2565,7 +2565,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"type",
                     		lv_type_1_0, 
-                    		"TypeRef");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TypeRef");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2607,7 +2607,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"feature",
                             		lv_feature_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2934,7 +2934,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -3121,7 +3121,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"feature",
                     		lv_feature_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3240,7 +3240,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"terminal",
                     		lv_terminal_2_0, 
-                    		"AssignableTerminal");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.AssignableTerminal");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3675,7 +3675,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"groups",
                     	            		lv_groups_3_0, 
-                    	            		"AssignableTerminal");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.AssignableTerminal");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -3807,7 +3807,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"type",
                     		lv_type_1_0, 
-                    		"TypeRef");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TypeRef");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -3853,7 +3853,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"terminal",
                             		lv_terminal_3_0, 
-                            		"CrossReferenceableTerminal");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.CrossReferenceableTerminal");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4273,7 +4273,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"groups",
                     	            		lv_groups_3_0, 
-                    	            		"CrossReferenceableTerminal");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.CrossReferenceableTerminal");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -4498,7 +4498,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4543,7 +4543,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"type",
                             		lv_type_3_0, 
-                            		"TypeRef");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TypeRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -4584,7 +4584,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"alternatives",
                     		lv_alternatives_5_0, 
-                    		"TerminalAlternatives");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TerminalAlternatives");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -4749,7 +4749,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"groups",
                     	            		lv_groups_3_0, 
-                    	            		"TerminalGroup");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TerminalGroup");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -4921,7 +4921,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"tokens",
                     	            		lv_tokens_2_0, 
-                    	            		"TerminalToken");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TerminalToken");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -5659,7 +5659,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"terminal",
                     		lv_terminal_1_0, 
-                    		"TerminalTokenElement");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TerminalTokenElement");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -5768,7 +5768,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"terminal",
                     		lv_terminal_1_0, 
-                    		"TerminalTokenElement");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TerminalTokenElement");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -6000,7 +6000,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"right",
                             		lv_right_3_0, 
-                            		"Keyword");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.Keyword");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -6117,7 +6117,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -6162,7 +6162,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"type",
                             		lv_type_3_0, 
-                            		"TypeRef");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.TypeRef");
                     	        afterParserOrEnumRuleCall();
                     	    
 
@@ -6203,7 +6203,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"alternatives",
                     		lv_alternatives_5_0, 
-                    		"EnumLiterals");
+                    		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.EnumLiterals");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -6368,7 +6368,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"groups",
                     	            		lv_groups_3_0, 
-                    	            		"EnumLiteralDeclaration");
+                    	            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.EnumLiteralDeclaration");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -6529,7 +6529,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"literal",
                             		lv_literal_2_0, 
-                            		"Keyword");
+                            		"org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage.Keyword");
                     	        afterParserOrEnumRuleCall();
                     	    
 

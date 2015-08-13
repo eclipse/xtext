@@ -94,7 +94,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"first",
         		lv_first_1_0, 
-        		"SimpleModel");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.SimpleModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -117,7 +117,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"second",
         		lv_second_3_0, 
-        		"MandatoryModel");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.MandatoryModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -140,7 +140,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"thrird",
         		lv_thrird_5_0, 
-        		"LoopedModel");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -163,7 +163,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"forth",
         		lv_forth_7_0, 
-        		"GroupLoopedModel");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.GroupLoopedModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -186,7 +186,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"fifth",
         		lv_fifth_9_0, 
-        		"LoopedAlternativeModel");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.LoopedAlternativeModel");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -209,7 +209,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"model",
         		lv_model_11_0, 
-        		"Bug304681Model");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Model");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -420,7 +420,7 @@ ruleSimpleModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -639,7 +639,7 @@ ruleMandatoryModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -857,7 +857,7 @@ ruleLoopedModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1076,7 +1076,7 @@ ruleGroupLoopedModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1242,7 +1242,7 @@ ruleLoopedAlternativeModel returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1317,7 +1317,7 @@ ruleBug304681Model returns [EObject current=null]
        			$current, 
        			"shortDescription",
         		lv_shortDescription_4_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -1355,7 +1355,7 @@ ruleBug304681Model returns [EObject current=null]
        			$current, 
        			"longDescription",
         		lv_longDescription_7_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -1393,7 +1393,7 @@ ruleBug304681Model returns [EObject current=null]
        			$current, 
        			"uid",
         		lv_uid_10_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )
@@ -1457,7 +1457,7 @@ ruleBug304681Model returns [EObject current=null]
        			$current, 
        			"features",
         		lv_features_14_0, 
-        		"Bug304681Feature");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage.Bug304681Feature");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1559,7 +1559,7 @@ ruleBug304681Attribute returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1606,7 +1606,7 @@ ruleBug304681Reference returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

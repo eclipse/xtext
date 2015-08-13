@@ -10,6 +10,7 @@ package org.eclipse.xtext.conversion.impl;
 
 import static org.eclipse.xtext.GrammarUtil.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -54,6 +56,9 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 
 	@Inject 
 	protected DefaultTerminalConverter.Factory defaultTerminalConverterFactory;
+	
+	@Inject
+	private RuleNames ruleNames;
 	
 	@Inject
 	public void setGrammar(IGrammarAccess grammarAccess) {
@@ -105,33 +110,48 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
-	@SuppressWarnings("unchecked")
 	protected void internalRegisterForClass(Class<?> clazz, Map<String, IValueConverter<Object>> converters) {
+		recursiveRegisterForClass(clazz, converters);
+		registerEFactoryConverters(converters);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected void recursiveRegisterForClass(Class<?> clazz, Map<String, IValueConverter<Object>> converters) {
 		Method[] methods = clazz.getDeclaredMethods();
 		Set<String> thisConverters = Sets.newHashSet();
+		recursiveRegisterForClass(methods, thisConverters, true, converters);
+		recursiveRegisterForClass(methods, thisConverters, false, converters);
+		if (clazz.getSuperclass() != null) {
+			recursiveRegisterForClass(clazz.getSuperclass(), converters);
+		}
+	}
+
+	private void recursiveRegisterForClass(Method[] methods, Set<String> thisConverters, boolean onlyExplicitConverters,
+			Map<String, IValueConverter<Object>> converters) {
 		for (Method method : methods) {
 			if (isConfigurationMethod(method)) {
 				try {
 					String ruleName = method.getAnnotation(ValueConverter.class).rule();
-					AbstractRule rule = GrammarUtil.findRuleForName(getGrammar(), ruleName);
-					if (rule != null) {
-						if (rule instanceof TerminalRule) {
-							if (((TerminalRule) rule).isFragment())
-								throw new IllegalStateException("Tried to register a value converter for a fragment terminal rule: '" + ruleName + "'");
+					if (onlyExplicitConverters ^ ruleName.indexOf('.') < 0) {
+						AbstractRule rule = GrammarUtil.findRuleForName(getGrammar(), ruleName);
+						if (rule != null) {
+							if (rule instanceof TerminalRule) {
+								if (((TerminalRule) rule).isFragment())
+									throw new IllegalStateException("Tried to register a value converter for a fragment terminal rule: '" + ruleName + "'");
+							}
+							if (!thisConverters.add(ruleName)) {
+								throw new IllegalStateException("Tried to register two value converters for rule '" + ruleName + "'");
+							}
+							IValueConverter<Object> converter = registerIfMissing(ruleName, rule, method, converters);
+							String qualifiedName = ruleNames.getQualifiedName(rule);
+							registerIfMissing(qualifiedName, rule, converter, method, converters);
+						} else {
+							log.trace("Tried to register value converter for rule '" + ruleName
+									+ "' which is not available in the grammar.");
 						}
-						if (!thisConverters.add(ruleName)) {
-							throw new IllegalStateException("Tried to register two value converters for rule '" + ruleName + "'");
-						}
-						if (!converters.containsKey(ruleName)) {
-							IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
-							if (valueConverter instanceof IValueConverter.RuleSpecific)
-								((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
-							converters.put(ruleName, valueConverter);
-						}
-					} else
-						log.trace("Tried to register value converter for rule '" + ruleName
-								+ "' which is not available in the grammar.");
-
+					}
 				} catch (IllegalStateException e) {
 					throw e;
 				} catch (IllegalArgumentException e) {
@@ -141,10 +161,35 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 				}
 			}
 		}
-		if (clazz.getSuperclass() != null) {
-			internalRegisterForClass(clazz.getSuperclass(), converters);
+	}
+
+	private IValueConverter<Object> registerIfMissing(String name, AbstractRule rule, Method method,
+			Map<String, IValueConverter<Object>> converters) throws IllegalAccessException, InvocationTargetException {
+		if (!converters.containsKey(name)) {
+			IValueConverter<Object> valueConverter = reflectiveGetConverter(method, rule);
+			converters.put(name, valueConverter);
+			return valueConverter;
 		}
-		registerEFactoryConverters(converters);
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	private IValueConverter<Object> reflectiveGetConverter(Method method, AbstractRule rule)
+			throws IllegalAccessException, InvocationTargetException {
+		IValueConverter<Object> valueConverter = (IValueConverter<Object>) method.invoke(this);
+		if (valueConverter instanceof IValueConverter.RuleSpecific)
+			((IValueConverter.RuleSpecific) valueConverter).setRule(rule);
+		return valueConverter;
+	}
+	
+	private void registerIfMissing(String name, AbstractRule rule, IValueConverter<Object> valueConverter, Method method,
+			Map<String, IValueConverter<Object>> converters) throws IllegalAccessException, InvocationTargetException {
+		if (!converters.containsKey(name)) {
+			if (valueConverter == null) {
+				valueConverter = reflectiveGetConverter(method, rule);
+			}
+			converters.put(name, valueConverter);
+		}
 	}
 
 	protected boolean isConfigurationMethod(Method method) {
@@ -159,18 +204,31 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	 */
 	protected void registerEFactoryConverters(Map<String, IValueConverter<Object>> converters) {
 		for (ParserRule parserRule : allParserRules(getGrammar())) {
-			if (isDatatypeRule(parserRule) && !converters.containsKey(parserRule.getName())) {
-				EDataType datatype = (EDataType) parserRule.getType().getClassifier();
-				converters.put(parserRule.getName(), new EFactoryValueConverter(datatype));
+			if (isDatatypeRule(parserRule)) {
+				registerIfMissing(parserRule.getName(), parserRule, converters);
+				registerIfMissing(ruleNames.getQualifiedName(parserRule), parserRule, converters);
 			}
 		}
 		for (TerminalRule terminalRule : allTerminalRules(getGrammar())) {
 			if (!terminalRule.isFragment()) {
-				String terminalRuleName = terminalRule.getName();
-				if (!converters.containsKey(terminalRuleName)) {
-					converters.put(terminalRuleName, defaultTerminalConverterFactory.create(terminalRule));
-				}
+				registerIfMissing(terminalRule.getName(), terminalRule, converters);
+				registerIfMissing(ruleNames.getQualifiedName(terminalRule), terminalRule, converters);
 			}
+		}
+	}
+
+	private void registerIfMissing(String name, TerminalRule terminalRule,
+			Map<String, IValueConverter<Object>> converters) {
+		if (!converters.containsKey(name)) {
+			converters.put(name, defaultTerminalConverterFactory.create(terminalRule));
+		}
+	}
+
+	private void registerIfMissing(String name, ParserRule parserRule,
+			Map<String, IValueConverter<Object>> converters) {
+		if (!converters.containsKey(name)) {
+			EDataType datatype = (EDataType) parserRule.getType().getClassifier();
+			converters.put(name, new EFactoryValueConverter(datatype));
 		}
 	}
 	

@@ -97,11 +97,12 @@ protected class Main_ElementsAssignment extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	doc=STRING? name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}";
+ * 	doc=STRING?
+ * 	name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}';
  *
  **/
 
-// doc=STRING? name=ID "{" contained+=Element* ("ref" referenced+=[Element])* "}"
+// doc=STRING? name=ID '{' contained+=Element* ('ref' referenced+=[Element])* '}'
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -197,7 +198,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Element_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Element_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -266,7 +267,7 @@ protected class Element_ContainedAssignment_3 extends AssignmentToken  {
 	}	
 }
 
-// ("ref" referenced+=[Element])*
+// ('ref' referenced+=[Element])*
 protected class Element_Group_4 extends GroupToken {
 	
 	public Element_Group_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -288,7 +289,7 @@ protected class Element_Group_4 extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class Element_RefKeyword_4_0 extends KeywordToken  {
 	
 	public Element_RefKeyword_4_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -350,7 +351,7 @@ protected class Element_ReferencedAssignment_4_1 extends AssignmentToken  {
 }
 
 
-// "}"
+// '}'
 protected class Element_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public Element_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

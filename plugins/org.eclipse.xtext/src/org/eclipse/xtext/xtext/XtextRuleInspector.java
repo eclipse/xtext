@@ -23,7 +23,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextRuleInspector<Result, RuleType extends AbstractRule> extends XtextSwitch<Result> {
+public abstract class XtextRuleInspector<Result, RuleType extends AbstractRule> extends XtextSwitch<Result> {
 
 	private final ValidationMessageAcceptor acceptor;
 

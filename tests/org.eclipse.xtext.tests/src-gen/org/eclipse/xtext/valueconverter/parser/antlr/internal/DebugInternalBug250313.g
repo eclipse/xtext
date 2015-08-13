@@ -98,7 +98,7 @@ RULE_STRING :
 RULE_ML_COMMENT :
 	'/*' (
 		options { greedy = false ; } : .
-	)* '*/' {skip();}
+	)* '*/' { skip(); }
 ;
 
 RULE_SL_COMMENT :
@@ -107,7 +107,7 @@ RULE_SL_COMMENT :
 		'\r'
 	)* (
 		'\r'? '\n'
-	)? {skip();}
+	)? { skip(); }
 ;
 
 RULE_WS :
@@ -116,7 +116,7 @@ RULE_WS :
 		'\t' |
 		'\r' |
 		'\n'
-	)+ {skip();}
+	)+ { skip(); }
 ;
 
 RULE_ANY_OTHER :

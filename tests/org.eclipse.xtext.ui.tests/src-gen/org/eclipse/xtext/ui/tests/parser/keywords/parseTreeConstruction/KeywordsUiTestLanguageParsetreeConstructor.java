@@ -40,13 +40,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" |
- * 	seventh?="\'c\'" | eighth?="\"d\"";
+ * 	first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'"
+ * 	| eighth?='"d"';
  *
  **/
 
-// first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?="\'b\'" | seventh?="\'c\'"
-// | eighth?="\"d\""
+// first?="foo\\bar" | second?="foo\\" | third?="\\bar" | forth?="\\" | fifth?="\"a\"" | sixth?='\'b\'' | seventh?="'c'" |
+// eighth?='"d"'
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -247,7 +247,7 @@ protected class Model_FifthAssignment_4 extends AssignmentToken  {
 
 }
 
-// sixth?="\'b\'"
+// sixth?='\'b\''
 protected class Model_SixthAssignment_5 extends AssignmentToken  {
 	
 	public Model_SixthAssignment_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -280,7 +280,7 @@ protected class Model_SixthAssignment_5 extends AssignmentToken  {
 
 }
 
-// seventh?="\'c\'"
+// seventh?="'c'"
 protected class Model_SeventhAssignment_6 extends AssignmentToken  {
 	
 	public Model_SeventhAssignment_6(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -313,7 +313,7 @@ protected class Model_SeventhAssignment_6 extends AssignmentToken  {
 
 }
 
-// eighth?="\"d\""
+// eighth?='"d"'
 protected class Model_EighthAssignment_7 extends AssignmentToken  {
 	
 	public Model_EighthAssignment_7(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

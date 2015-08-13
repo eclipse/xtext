@@ -157,11 +157,14 @@ protected class NamedElement_ElementParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Namespace ****************
  *
  * Namespace:
- * 	"namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}";
+ * 	'namespace' name=QualifiedName '{'
+ * 	imports+=Import*
+ * 	elements+=NamedElement*
+ * 	'}';
  *
  **/
 
-// "namespace" name=QualifiedName "{" imports+=Import* elements+=NamedElement* "}"
+// 'namespace' name=QualifiedName '{' imports+=Import* elements+=NamedElement* '}'
 protected class Namespace_Group extends GroupToken {
 	
 	public Namespace_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -190,7 +193,7 @@ protected class Namespace_Group extends GroupToken {
 
 }
 
-// "namespace"
+// 'namespace'
 protected class Namespace_NamespaceKeyword_0 extends KeywordToken  {
 	
 	public Namespace_NamespaceKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -245,7 +248,7 @@ protected class Namespace_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "{"
+// '{'
 protected class Namespace_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 	
 	public Namespace_LeftCurlyBracketKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -362,7 +365,7 @@ protected class Namespace_ElementsAssignment_4 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class Namespace_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	
 	public Namespace_RightCurlyBracketKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -393,11 +396,11 @@ protected class Namespace_RightCurlyBracketKeyword_5 extends KeywordToken  {
 /************ begin Rule Import ****************
  *
  * Import:
- * 	"import" importedNamespace=QualifiedName;
+ * 	'import' importedNamespace=QualifiedName;
  *
  **/
 
-// "import" importedNamespace=QualifiedName
+// 'import' importedNamespace=QualifiedName
 protected class Import_Group extends GroupToken {
 	
 	public Import_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -426,7 +429,7 @@ protected class Import_Group extends GroupToken {
 
 }
 
-// "import"
+// 'import'
 protected class Import_ImportKeyword_0 extends KeywordToken  {
 	
 	public Import_ImportKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -488,12 +491,12 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- * 	"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName]
- * 	("," otherRefs+=[Element|QualifiedName])*)?;
+ * 	'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName]
+ * 	(',' otherRefs+=[Element|QualifiedName])*)?;
  *
  **/
 
-// "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs" otherRefs+=[Element|QualifiedName] (","
+// 'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName] (','
 // otherRefs+=[Element|QualifiedName])*)?
 protected class Element_Group extends GroupToken {
 	
@@ -525,7 +528,7 @@ protected class Element_Group extends GroupToken {
 
 }
 
-// "object"
+// 'object'
 protected class Element_ObjectKeyword_0 extends KeywordToken  {
 	
 	public Element_ObjectKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -580,7 +583,7 @@ protected class Element_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("references" references=[Element|QualifiedName])?
+// ('references' references=[Element|QualifiedName])?
 protected class Element_Group_2 extends GroupToken {
 	
 	public Element_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -602,7 +605,7 @@ protected class Element_Group_2 extends GroupToken {
 
 }
 
-// "references"
+// 'references'
 protected class Element_ReferencesKeyword_2_0 extends KeywordToken  {
 	
 	public Element_ReferencesKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -662,7 +665,7 @@ protected class Element_ReferencesAssignment_2_1 extends AssignmentToken  {
 }
 
 
-// ("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
+// ('otherRefs' otherRefs+=[Element|QualifiedName] (',' otherRefs+=[Element|QualifiedName])*)?
 protected class Element_Group_3 extends GroupToken {
 	
 	public Element_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -685,7 +688,7 @@ protected class Element_Group_3 extends GroupToken {
 
 }
 
-// "otherRefs"
+// 'otherRefs'
 protected class Element_OtherRefsKeyword_3_0 extends KeywordToken  {
 	
 	public Element_OtherRefsKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -745,7 +748,7 @@ protected class Element_OtherRefsAssignment_3_1 extends AssignmentToken  {
 
 }
 
-// ("," otherRefs+=[Element|QualifiedName])*
+// (',' otherRefs+=[Element|QualifiedName])*
 protected class Element_Group_3_2 extends GroupToken {
 	
 	public Element_Group_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -767,7 +770,7 @@ protected class Element_Group_3_2 extends GroupToken {
 
 }
 
-// ","
+// ','
 protected class Element_CommaKeyword_3_2_0 extends KeywordToken  {
 	
 	public Element_CommaKeyword_3_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

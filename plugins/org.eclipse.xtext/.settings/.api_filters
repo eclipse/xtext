@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="version will be generated during buckminster build" id="927989779">
+        <filter id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
                 <message_argument value="org.eclipse.xtext.util"/>
@@ -21,6 +21,175 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.IDerivedResourceMarkers"/>
                 <message_argument value="org.eclipse.xtext_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage">
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="GROUP_FEATURE_COUNT"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="PARSER_RULE_FEATURE_COUNT"/>
+                <message_argument value="5"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage"/>
+                <message_argument value="RULE_CALL_FEATURE_COUNT"/>
+                <message_argument value="4"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="emf-gen/org/eclipse/xtext/XtextPackage.java" type="org.eclipse.xtext.XtextPackage$Literals">
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="COMPOSITE_CONDITION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="COMPOSITE_CONDITION__LEFT"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="COMPOSITE_CONDITION__RIGHT"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="CONDITION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="CONJUNCTION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="DISJUNCTION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="GROUP__GUARD_CONDITION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="LITERAL_CONDITION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="LITERAL_CONDITION__TRUE"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NAMED_ARGUMENT"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NAMED_ARGUMENT__CALLED_BY_NAME"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NAMED_ARGUMENT__PARAMETER"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NAMED_ARGUMENT__VALUE"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NEGATION"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="NEGATION__VALUE"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARAMETER"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARAMETER_REFERENCE"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARAMETER_REFERENCE__PARAMETER"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARAMETER__NAME"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARSER_RULE__FRAGMENT"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARSER_RULE__PARAMETERS"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="PARSER_RULE__WILDCARD"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="RULE_CALL__ARGUMENTS"/>
+            </message_arguments>
+        </filter>
+        <filter id="403767336">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.XtextPackage.Literals"/>
+                <message_argument value="RULE_CALL__EXPLICITLY_CALLED"/>
             </message_arguments>
         </filter>
     </resource>

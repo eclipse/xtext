@@ -1390,1075 +1390,1075 @@ public class ExUnorderedGroupsTestLanguageElementTypeProvider implements IElemen
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getDelegateModelElementType() {
 		return DelegateModel_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getDelegateModel_ModelParserRuleCallElementType() {
 		return DelegateModel_ModelParserRuleCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_GroupElementType() {
 		return Model_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ModelAction_0ElementType() {
 		return Model_ModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Alternatives_1ElementType() {
 		return Model_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_0ElementType() {
 		return Model_Group_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneKeyword_1_0_0ElementType() {
 		return Model_DigitOneKeyword_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_0_1ElementType() {
 		return Model_UnorderedGroup_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_0_1_0ElementType() {
 		return Model_FirstAssignment_1_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_0_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_0_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_0_1_1ElementType() {
 		return Model_SecondAssignment_1_0_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_0_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_0_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_1ElementType() {
 		return Model_Group_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitTwoKeyword_1_1_0ElementType() {
 		return Model_DigitTwoKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_1_1ElementType() {
 		return Model_UnorderedGroup_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_1_1_0ElementType() {
 		return Model_FirstAssignment_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_1_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_1_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_1_1_1ElementType() {
 		return Model_SecondAssignment_1_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_1_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdAssignment_1_1_1_2ElementType() {
 		return Model_ThirdAssignment_1_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdCKeyword_1_1_1_2_0ElementType() {
 		return Model_ThirdCKeyword_1_1_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthAssignment_1_1_1_3ElementType() {
 		return Model_ForthAssignment_1_1_1_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthDKeyword_1_1_1_3_0ElementType() {
 		return Model_ForthDKeyword_1_1_1_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_2ElementType() {
 		return Model_Group_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitThreeKeyword_1_2_0ElementType() {
 		return Model_DigitThreeKeyword_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_2_1ElementType() {
 		return Model_UnorderedGroup_1_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_2_1_0ElementType() {
 		return Model_FirstAssignment_1_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_2_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_2_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_2_1_1ElementType() {
 		return Model_SecondAssignment_1_2_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_2_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_2_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_3ElementType() {
 		return Model_Group_1_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitFourKeyword_1_3_0ElementType() {
 		return Model_DigitFourKeyword_1_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_3_1ElementType() {
 		return Model_UnorderedGroup_1_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_3_1_0ElementType() {
 		return Model_FirstAssignment_1_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_3_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_3_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_3_1_1ElementType() {
 		return Model_SecondAssignment_1_3_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_3_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_3_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_4ElementType() {
 		return Model_Group_1_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitFiveKeyword_1_4_0ElementType() {
 		return Model_DigitFiveKeyword_1_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_4_1ElementType() {
 		return Model_UnorderedGroup_1_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_4_1_0ElementType() {
 		return Model_FirstAssignment_1_4_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_4_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_4_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_4_1_1ElementType() {
 		return Model_SecondAssignment_1_4_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_4_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_4_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_5ElementType() {
 		return Model_Group_1_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitSixKeyword_1_5_0ElementType() {
 		return Model_DigitSixKeyword_1_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_5_1ElementType() {
 		return Model_UnorderedGroup_1_5_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_5_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_5_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_5_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_5_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_5_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_5_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_5_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_5_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_6ElementType() {
 		return Model_Group_1_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitSevenKeyword_1_6_0ElementType() {
 		return Model_DigitSevenKeyword_1_6_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_6_1ElementType() {
 		return Model_UnorderedGroup_1_6_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_6_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_6_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_6_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_6_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_6_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_6_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_6_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_6_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_7ElementType() {
 		return Model_Group_1_7_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitEightKeyword_1_7_0ElementType() {
 		return Model_DigitEightKeyword_1_7_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_7_1ElementType() {
 		return Model_UnorderedGroup_1_7_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_7_1_0ElementType() {
 		return Model_Group_1_7_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AKeyword_1_7_1_0_0ElementType() {
 		return Model_AKeyword_1_7_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BKeyword_1_7_1_0_1ElementType() {
 		return Model_BKeyword_1_7_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_7_1_0_2ElementType() {
 		return Model_FirstAssignment_1_7_1_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstCKeyword_1_7_1_0_2_0ElementType() {
 		return Model_FirstCKeyword_1_7_1_0_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_7_1_1ElementType() {
 		return Model_Group_1_7_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AKeyword_1_7_1_1_0ElementType() {
 		return Model_AKeyword_1_7_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_BKeyword_1_7_1_1_1ElementType() {
 		return Model_BKeyword_1_7_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_7_1_1_2ElementType() {
 		return Model_SecondAssignment_1_7_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondDKeyword_1_7_1_1_2_0ElementType() {
 		return Model_SecondDKeyword_1_7_1_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_8ElementType() {
 		return Model_Group_1_8_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitNineKeyword_1_8_0ElementType() {
 		return Model_DigitNineKeyword_1_8_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_8_1ElementType() {
 		return Model_UnorderedGroup_1_8_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_8_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_8_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_8_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_8_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_8_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_8_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_8_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_8_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_9ElementType() {
 		return Model_Group_1_9_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneDigitZeroKeyword_1_9_0ElementType() {
 		return Model_DigitOneDigitZeroKeyword_1_9_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_9_1ElementType() {
 		return Model_UnorderedGroup_1_9_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_9_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_9_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_9_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_9_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_9_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_9_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_9_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_9_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_10ElementType() {
 		return Model_Group_1_10_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneDigitOneKeyword_1_10_0ElementType() {
 		return Model_DigitOneDigitOneKeyword_1_10_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_10_1ElementType() {
 		return Model_UnorderedGroup_1_10_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAssignment_1_10_1_0ElementType() {
 		return Model_FirstAssignment_1_10_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAKeyword_1_10_1_0_0ElementType() {
 		return Model_FirstAKeyword_1_10_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAssignment_1_10_1_1ElementType() {
 		return Model_SecondAssignment_1_10_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondBKeyword_1_10_1_1_0ElementType() {
 		return Model_SecondBKeyword_1_10_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_11ElementType() {
 		return Model_Group_1_11_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneDigitTwoKeyword_1_11_0ElementType() {
 		return Model_DigitOneDigitTwoKeyword_1_11_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_11_1ElementType() {
 		return Model_UnorderedGroup_1_11_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_11_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_11_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_11_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_11_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_11_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_11_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_11_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_11_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_11_2ElementType() {
 		return Model_UnorderedGroup_1_11_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_11_2_0ElementType() {
 		return Model_FirstAsListAssignment_1_11_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_11_2_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_11_2_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_11_2_1ElementType() {
 		return Model_SecondAsListAssignment_1_11_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_11_2_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_11_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_12ElementType() {
 		return Model_Group_1_12_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneDigitThreeKeyword_1_12_0ElementType() {
 		return Model_DigitOneDigitThreeKeyword_1_12_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_12_1ElementType() {
 		return Model_UnorderedGroup_1_12_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_12_1_0ElementType() {
 		return Model_FirstAsListAssignment_1_12_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_12_1_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_12_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_12_1_1ElementType() {
 		return Model_SecondAsListAssignment_1_12_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_12_1_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_12_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_12_2ElementType() {
 		return Model_FirstAsListAssignment_1_12_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_12_2_0ElementType() {
 		return Model_FirstAsListAKeyword_1_12_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_12_3ElementType() {
 		return Model_SecondAsListAssignment_1_12_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_12_3_0ElementType() {
 		return Model_SecondAsListBKeyword_1_12_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_13ElementType() {
 		return Model_Group_1_13_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DigitOneDigitFourKeyword_1_13_0ElementType() {
 		return Model_DigitOneDigitFourKeyword_1_13_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_13_1ElementType() {
 		return Model_UnorderedGroup_1_13_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_13_1_0ElementType() {
 		return Model_UnorderedGroup_1_13_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAssignment_1_13_1_0_0ElementType() {
 		return Model_FirstAsListAssignment_1_13_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FirstAsListAKeyword_1_13_1_0_0_0ElementType() {
 		return Model_FirstAsListAKeyword_1_13_1_0_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListAssignment_1_13_1_0_1ElementType() {
 		return Model_SecondAsListAssignment_1_13_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SecondAsListBKeyword_1_13_1_0_1_0ElementType() {
 		return Model_SecondAsListBKeyword_1_13_1_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_UnorderedGroup_1_13_1_1ElementType() {
 		return Model_UnorderedGroup_1_13_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdAsListAssignment_1_13_1_1_0ElementType() {
 		return Model_ThirdAsListAssignment_1_13_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ThirdAsListCKeyword_1_13_1_1_0_0ElementType() {
 		return Model_ThirdAsListCKeyword_1_13_1_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthAsListAssignment_1_13_1_1_1ElementType() {
 		return Model_ForthAsListAssignment_1_13_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ForthAsListDKeyword_1_13_1_1_1_0ElementType() {
 		return Model_ForthAsListDKeyword_1_13_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_14ElementType() {
 		return Model_Group_1_14_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_DatatypesKeyword_1_14_0ElementType() {
 		return Model_DatatypesKeyword_1_14_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueAssignment_1_14_1ElementType() {
 		return Model_ValueAssignment_1_14_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ValueUnorderedDatatypeParserRuleCall_1_14_1_0ElementType() {
 		return Model_ValueUnorderedDatatypeParserRuleCall_1_14_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_15ElementType() {
 		return Model_Group_1_15_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SerializationKeyword_1_15_0ElementType() {
 		return Model_SerializationKeyword_1_15_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SerializedAssignment_1_15_1ElementType() {
 		return Model_SerializedAssignment_1_15_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_SerializedUnorderedSerializationParserRuleCall_1_15_1_0ElementType() {
 		return Model_SerializedUnorderedSerializationParserRuleCall_1_15_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1_16ElementType() {
 		return Model_Group_1_16_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Bug302585Keyword_1_16_0ElementType() {
 		return Model_Bug302585Keyword_1_16_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NestedModelAssignment_1_16_1ElementType() {
 		return Model_NestedModelAssignment_1_16_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_NestedModelNestedModelParserRuleCall_1_16_1_0ElementType() {
 		return Model_NestedModelNestedModelParserRuleCall_1_16_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModelElementType() {
 		return NestedModel_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_GroupElementType() {
 		return NestedModel_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_NestedModelAction_0ElementType() {
 		return NestedModel_NestedModelAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_UnorderedGroup_1ElementType() {
 		return NestedModel_UnorderedGroup_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_FirstAssignment_1_0ElementType() {
 		return NestedModel_FirstAssignment_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_FirstAKeyword_1_0_0ElementType() {
 		return NestedModel_FirstAKeyword_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_SecondAssignment_1_1ElementType() {
 		return NestedModel_SecondAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_SecondBKeyword_1_1_0ElementType() {
 		return NestedModel_SecondBKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getNestedModel_NestedKeyword_2ElementType() {
 		return NestedModel_NestedKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatypeElementType() {
 		return UnorderedDatatype_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AlternativesElementType() {
 		return UnorderedDatatype_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_0ElementType() {
 		return UnorderedDatatype_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneKeyword_0_0ElementType() {
 		return UnorderedDatatype_DigitOneKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_0_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_0_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_0_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_0_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_1ElementType() {
 		return UnorderedDatatype_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitTwoKeyword_1_0ElementType() {
 		return UnorderedDatatype_DigitTwoKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_1_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_1_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_1_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_CKeyword_1_1_2ElementType() {
 		return UnorderedDatatype_CKeyword_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DKeyword_1_1_3ElementType() {
 		return UnorderedDatatype_DKeyword_1_1_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_2ElementType() {
 		return UnorderedDatatype_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitThreeKeyword_2_0ElementType() {
 		return UnorderedDatatype_DigitThreeKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_2_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_2_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_2_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_2_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_3ElementType() {
 		return UnorderedDatatype_Group_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitFourKeyword_3_0ElementType() {
 		return UnorderedDatatype_DigitFourKeyword_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_3_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_3_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_3_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_3_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_3_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_3_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_4ElementType() {
 		return UnorderedDatatype_Group_4_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitFiveKeyword_4_0ElementType() {
 		return UnorderedDatatype_DigitFiveKeyword_4_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_4_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_4_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_4_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_4_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_4_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_4_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_5ElementType() {
 		return UnorderedDatatype_Group_5_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitSixKeyword_5_0ElementType() {
 		return UnorderedDatatype_DigitSixKeyword_5_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_5_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_5_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_5_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_5_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_5_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_5_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_6ElementType() {
 		return UnorderedDatatype_Group_6_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitSevenKeyword_6_0ElementType() {
 		return UnorderedDatatype_DigitSevenKeyword_6_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_6_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_6_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_6_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_6_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_6_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_6_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_7ElementType() {
 		return UnorderedDatatype_Group_7_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitEightKeyword_7_0ElementType() {
 		return UnorderedDatatype_DigitEightKeyword_7_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_7_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_7_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_7_1_0ElementType() {
 		return UnorderedDatatype_Group_7_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_7_1_0_0ElementType() {
 		return UnorderedDatatype_AKeyword_7_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_7_1_0_1ElementType() {
 		return UnorderedDatatype_BKeyword_7_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_CKeyword_7_1_0_2ElementType() {
 		return UnorderedDatatype_CKeyword_7_1_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_7_1_1ElementType() {
 		return UnorderedDatatype_Group_7_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_7_1_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_7_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_7_1_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_7_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DKeyword_7_1_1_2ElementType() {
 		return UnorderedDatatype_DKeyword_7_1_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_8ElementType() {
 		return UnorderedDatatype_Group_8_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitNineKeyword_8_0ElementType() {
 		return UnorderedDatatype_DigitNineKeyword_8_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_8_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_8_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_8_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_8_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_8_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_8_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_9ElementType() {
 		return UnorderedDatatype_Group_9_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneDigitZeroKeyword_9_0ElementType() {
 		return UnorderedDatatype_DigitOneDigitZeroKeyword_9_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_9_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_9_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_9_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_9_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_9_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_9_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_10ElementType() {
 		return UnorderedDatatype_Group_10_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneDigitOneKeyword_10_0ElementType() {
 		return UnorderedDatatype_DigitOneDigitOneKeyword_10_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_10_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_10_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_10_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_10_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_10_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_10_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_11ElementType() {
 		return UnorderedDatatype_Group_11_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneDigitTwoKeyword_11_0ElementType() {
 		return UnorderedDatatype_DigitOneDigitTwoKeyword_11_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_11_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_11_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_11_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_11_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_11_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_11_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_11_2ElementType() {
 		return UnorderedDatatype_UnorderedGroup_11_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_11_2_0ElementType() {
 		return UnorderedDatatype_AKeyword_11_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_11_2_1ElementType() {
 		return UnorderedDatatype_BKeyword_11_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_12ElementType() {
 		return UnorderedDatatype_Group_12_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneDigitThreeKeyword_12_0ElementType() {
 		return UnorderedDatatype_DigitOneDigitThreeKeyword_12_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_12_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_12_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_12_1_0ElementType() {
 		return UnorderedDatatype_AKeyword_12_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_12_1_1ElementType() {
 		return UnorderedDatatype_BKeyword_12_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_12_2ElementType() {
 		return UnorderedDatatype_AKeyword_12_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_12_3ElementType() {
 		return UnorderedDatatype_BKeyword_12_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_Group_13ElementType() {
 		return UnorderedDatatype_Group_13_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DigitOneDigitFourKeyword_13_0ElementType() {
 		return UnorderedDatatype_DigitOneDigitFourKeyword_13_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_13_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_13_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_13_1_0ElementType() {
 		return UnorderedDatatype_UnorderedGroup_13_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_AKeyword_13_1_0_0ElementType() {
 		return UnorderedDatatype_AKeyword_13_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_BKeyword_13_1_0_1ElementType() {
 		return UnorderedDatatype_BKeyword_13_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_UnorderedGroup_13_1_1ElementType() {
 		return UnorderedDatatype_UnorderedGroup_13_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_CKeyword_13_1_1_0ElementType() {
 		return UnorderedDatatype_CKeyword_13_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedDatatype_DKeyword_13_1_1_1ElementType() {
 		return UnorderedDatatype_DKeyword_13_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerializationElementType() {
 		return UnorderedSerialization_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_GroupElementType() {
 		return UnorderedSerialization_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_UnorderedSerializationAction_0ElementType() {
 		return UnorderedSerialization_UnorderedSerializationAction_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_Alternatives_1ElementType() {
 		return UnorderedSerialization_Alternatives_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_UnorderedGroup_1_0ElementType() {
 		return UnorderedSerialization_UnorderedGroup_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_Group_1_0_0ElementType() {
 		return UnorderedSerialization_Group_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_DigitOneKeyword_1_0_0_0ElementType() {
 		return UnorderedSerialization_DigitOneKeyword_1_0_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAssignment_1_0_0_1ElementType() {
 		return UnorderedSerialization_FirstAssignment_1_0_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAKeyword_1_0_0_1_0ElementType() {
 		return UnorderedSerialization_FirstAKeyword_1_0_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondAssignment_1_0_1ElementType() {
 		return UnorderedSerialization_SecondAssignment_1_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondBKeyword_1_0_1_0ElementType() {
 		return UnorderedSerialization_SecondBKeyword_1_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_ThirdAssignment_1_0_2ElementType() {
 		return UnorderedSerialization_ThirdAssignment_1_0_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_ThirdCKeyword_1_0_2_0ElementType() {
 		return UnorderedSerialization_ThirdCKeyword_1_0_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_ForthAssignment_1_0_3ElementType() {
 		return UnorderedSerialization_ForthAssignment_1_0_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_ForthDKeyword_1_0_3_0ElementType() {
 		return UnorderedSerialization_ForthDKeyword_1_0_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_Group_1_1ElementType() {
 		return UnorderedSerialization_Group_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_DigitTwoKeyword_1_1_0ElementType() {
 		return UnorderedSerialization_DigitTwoKeyword_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_UnorderedGroup_1_1_1ElementType() {
 		return UnorderedSerialization_UnorderedGroup_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAsListAssignment_1_1_1_0ElementType() {
 		return UnorderedSerialization_FirstAsListAssignment_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAsListAKeyword_1_1_1_0_0ElementType() {
 		return UnorderedSerialization_FirstAsListAKeyword_1_1_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondAsListAssignment_1_1_1_1ElementType() {
 		return UnorderedSerialization_SecondAsListAssignment_1_1_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondAsListBKeyword_1_1_1_1_0ElementType() {
 		return UnorderedSerialization_SecondAsListBKeyword_1_1_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_Group_1_2ElementType() {
 		return UnorderedSerialization_Group_1_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_DigitThreeKeyword_1_2_0ElementType() {
 		return UnorderedSerialization_DigitThreeKeyword_1_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_UnorderedGroup_1_2_1ElementType() {
 		return UnorderedSerialization_UnorderedGroup_1_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAsListAssignment_1_2_1_0ElementType() {
 		return UnorderedSerialization_FirstAsListAssignment_1_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_FirstAsListAKeyword_1_2_1_0_0ElementType() {
 		return UnorderedSerialization_FirstAsListAKeyword_1_2_1_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondAssignment_1_2_1_1ElementType() {
 		return UnorderedSerialization_SecondAssignment_1_2_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getUnorderedSerialization_SecondBKeyword_1_2_1_1_0ElementType() {
 		return UnorderedSerialization_SecondBKeyword_1_2_1_1_0_ELEMENT_TYPE;
 	}

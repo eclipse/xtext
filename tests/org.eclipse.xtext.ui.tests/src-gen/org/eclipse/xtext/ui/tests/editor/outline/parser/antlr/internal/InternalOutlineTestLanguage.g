@@ -90,7 +90,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -172,7 +172,7 @@ ruleElement returns [EObject current=null]
        			$current, 
        			"children",
         		lv_children_5_0, 
-        		"Element");
+        		"org.eclipse.xtext.ui.tests.editor.outline.OutlineTestLanguage.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 

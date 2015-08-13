@@ -179,7 +179,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                            			current, 
                            			"groesse",
                             		lv_groesse_1_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -213,7 +213,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                                    			current, 
                                    			"beschreibung",
                                     		lv_beschreibung_2_0, 
-                                    		"STRING");
+                                    		"org.eclipse.xtext.common.Terminals.STRING");
                             	    
 
                             }
@@ -282,7 +282,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	           			current, 
                     	           			"kinder",
                     	            		lv_kinder_4_0, 
-                    	            		"Kind");
+                    	            		"org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.Kind");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -319,7 +319,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	           			current, 
                     	           			"erzieher",
                     	            		lv_erzieher_5_0, 
-                    	            		"Erwachsener");
+                    	            		"org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.Erwachsener");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -356,7 +356,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	           			current, 
                     	           			"spielzeuge",
                     	            		lv_spielzeuge_6_0, 
-                    	            		"Spielzeug");
+                    	            		"org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.Spielzeug");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -393,7 +393,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	           			current, 
                     	           			"familie",
                     	            		lv_familie_7_0, 
-                    	            		"Familie");
+                    	            		"org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.Familie");
                     	    	        afterParserOrEnumRuleCall();
                     	    	    
 
@@ -520,7 +520,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -546,7 +546,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"age",
                     		lv_age_3_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -660,7 +660,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -686,7 +686,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"age",
                     		lv_age_3_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -801,7 +801,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -831,7 +831,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                    			current, 
                    			"farbe",
                     		lv_farbe_3_0, 
-                    		"Farbe");
+                    		"org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage.Farbe");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -1176,7 +1176,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                            			current, 
                            			"name",
                             		lv_name_2_2, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -1196,7 +1196,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                            			current, 
                            			"name",
                             		lv_name_2_3, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }

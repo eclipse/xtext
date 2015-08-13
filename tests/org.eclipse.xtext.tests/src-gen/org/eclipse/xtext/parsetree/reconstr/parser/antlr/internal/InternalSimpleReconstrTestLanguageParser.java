@@ -54,8 +54,8 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -248,7 +248,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"values",
             	            		lv_values_2_0, 
-            	            		"Term");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Term");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -1085,7 +1085,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1312,7 +1312,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"num1",
                     		lv_num1_0_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -1338,7 +1338,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"num2",
                     		lv_num2_1_0, 
-                    		"INT");
+                    		"org.eclipse.xtext.common.Terminals.INT");
             	    
 
             }
@@ -1383,7 +1383,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"num3",
             	            		lv_num3_3_0, 
-            	            		"INT");
+            	            		"org.eclipse.xtext.common.Terminals.INT");
             	    	    
 
             	    }
@@ -1514,7 +1514,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"str1",
             	            		lv_str1_1_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -1546,7 +1546,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"str2",
                     		lv_str2_2_0, 
-                    		"STRING");
+                    		"org.eclipse.xtext.common.Terminals.STRING");
             	    
 
             }
@@ -1651,7 +1651,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1826,7 +1826,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"ref2",
                             		lv_ref2_1_2, 
-                            		"STRING");
+                            		"org.eclipse.xtext.common.Terminals.STRING");
                     	    
 
                     }
@@ -1953,7 +1953,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -1998,7 +1998,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"id",
             	            		lv_id_3_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -2149,7 +2149,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"value",
                     		lv_value_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2304,7 +2304,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"prec",
                             		lv_prec_2_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -2399,7 +2399,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                                    			current, 
                                    			"scale",
                                     		lv_scale_5_0, 
-                                    		"INT");
+                                    		"org.eclipse.xtext.common.Terminals.INT");
                             	    
 
                             }
@@ -2558,7 +2558,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"v1",
                     	            		lv_v1_2_0, 
-                    	            		"INT");
+                    	            		"org.eclipse.xtext.common.Terminals.INT");
                     	    	    
 
                     	    }
@@ -2590,7 +2590,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"v2",
                             		lv_v2_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -2644,7 +2644,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"v2",
                     	            		lv_v2_5_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -2676,7 +2676,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"v1",
                             		lv_v1_6_0, 
-                            		"INT");
+                            		"org.eclipse.xtext.common.Terminals.INT");
                     	    
 
                     }
@@ -2793,7 +2793,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"child",
                     		lv_child_1_0, 
-                    		"Consumed1");
+                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.Consumed1");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -2923,7 +2923,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -2970,7 +2970,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_4_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3151,7 +3151,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3210,7 +3210,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"id",
                             		lv_id_3_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3276,7 +3276,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"id",
                             		lv_id_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -3497,7 +3497,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_4_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3542,7 +3542,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"id",
             	            		lv_id_6_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -3734,7 +3734,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"id",
                     		lv_id_5_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -3972,7 +3972,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_3_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4273,7 +4273,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"items",
                     		lv_items_1_0, 
-                    		"EmptyObjectItems");
+                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItems");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -4386,7 +4386,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"list",
             	            		lv_list_0_0, 
-            	            		"EmptyObjectItem");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EmptyObjectItem");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -4493,7 +4493,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4601,7 +4601,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"val",
                     		lv_val_1_0, 
-                    		"ConcreteMulti");
+                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ConcreteMulti");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -4701,7 +4701,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"m1",
                     		lv_m1_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4727,7 +4727,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"m2",
                     		lv_m2_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -4837,7 +4837,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"obj",
                     		lv_obj_1_0, 
-                    		"EObjectElement");
+                    		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EObjectElement");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -4958,7 +4958,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5341,7 +5341,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5455,7 +5455,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5569,7 +5569,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5683,7 +5683,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_2_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -5816,7 +5816,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"x",
                             		lv_x_2_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5861,7 +5861,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"x",
                     	            		lv_x_4_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -5920,7 +5920,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"y",
                             		lv_y_6_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -5965,7 +5965,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"y",
                     	            		lv_y_8_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -6021,7 +6021,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"z",
                             		lv_z_10_0, 
-                            		"ID");
+                            		"org.eclipse.xtext.common.Terminals.ID");
                     	    
 
                     }
@@ -6066,7 +6066,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                     	           			current, 
                     	           			"z",
                     	            		lv_z_12_0, 
-                    	            		"ID");
+                    	            		"org.eclipse.xtext.common.Terminals.ID");
                     	    	    
 
                     	    }
@@ -6113,7 +6113,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                    			current, 
                    			"name",
                     		lv_name_13_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -6262,7 +6262,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"lits",
             	            		lv_lits_2_0, 
-            	            		"EnumBug310435Lit1");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit1");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6309,7 +6309,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"lits",
             	            		lv_lits_4_0, 
-            	            		"EnumBug310435Lit2");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.EnumBug310435Lit2");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6465,7 +6465,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"lits",
             	            		lv_lits_2_0, 
-            	            		"ID");
+            	            		"org.eclipse.xtext.common.Terminals.ID");
             	    	    
 
             	    }
@@ -6507,7 +6507,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"lits",
             	            		lv_lits_4_0, 
-            	            		"STRING");
+            	            		"org.eclipse.xtext.common.Terminals.STRING");
             	    	    
 
             	    }
@@ -6644,7 +6644,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
             	           			current, 
             	           			"named",
             	            		lv_named_1_0, 
-            	            		"CrossRefNamed");
+            	            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.CrossRefNamed");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -6878,7 +6878,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"name",
                             		lv_name_0_1, 
-                            		"ID1");
+                            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID1");
                     	    
 
                     }
@@ -6898,7 +6898,7 @@ public class InternalSimpleReconstrTestLanguageParser extends AbstractInternalAn
                            			current, 
                            			"name",
                             		lv_name_0_2, 
-                            		"ID2");
+                            		"org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage.ID2");
                     	    
 
                     }

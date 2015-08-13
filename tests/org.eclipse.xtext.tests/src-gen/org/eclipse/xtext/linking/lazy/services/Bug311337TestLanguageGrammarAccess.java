@@ -19,7 +19,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Model");
 		private final Assignment cDefAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cDefDefinitionParserRuleCall_0 = (RuleCall)cDefAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class DefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Definition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Definition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -47,13 +47,13 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefReferenceParserRuleCall_4_0 = (RuleCall)cRefAssignment_4.eContents().get(0);
 		
 		//Definition:
-		//	"(def)" name=ID ":" child+=Child ref+=Reference?;
+		//	'(def)' name=ID ':' child+=Child ref+=Reference?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(def)" name=ID ":" child+=Child ref+=Reference?
+		//'(def)' name=ID ':' child+=Child ref+=Reference?
 		public Group getGroup() { return cGroup; }
 
-		//"(def)"
+		//'(def)'
 		public Keyword getDefKeyword_0() { return cDefKeyword_0; }
 
 		//name=ID
@@ -62,7 +62,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//child+=Child
@@ -79,7 +79,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ChildElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Child");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Child");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cChildKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -90,13 +90,13 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cLinkDefinitionIDTerminalRuleCall_3_0_1 = (RuleCall)cLinkDefinitionCrossReference_3_0.eContents().get(1);
 		
 		//Child:
-		//	"(child)" name=ID ":" link=[Definition]?;
+		//	'(child)' name=ID ':' link=[Definition]?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(child)" name=ID ":" link=[Definition]?
+		//'(child)' name=ID ':' link=[Definition]?
 		public Group getGroup() { return cGroup; }
 
-		//"(child)"
+		//'(child)'
 		public Keyword getChildKeyword_0() { return cChildKeyword_0; }
 
 		//name=ID
@@ -105,7 +105,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
 
 		//link=[Definition]?
@@ -119,7 +119,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	public class ReferenceElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Reference");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.linking.lazy.Bug311337TestLanguage.Reference");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cRefChildAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -133,13 +133,13 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cRefChildChildIDTerminalRuleCall_2_2_0_1 = (RuleCall)cRefChildChildCrossReference_2_2_0.eContents().get(1);
 		
 		//Reference:
-		//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+		//	'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*
+		//'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*
 		public Group getGroup() { return cGroup; }
 
-		//"(ref)"
+		//'(ref)'
 		public Keyword getRefKeyword_0() { return cRefKeyword_0; }
 
 		//refChild=[Child]
@@ -151,10 +151,10 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		//ID
 		public RuleCall getRefChildChildIDTerminalRuleCall_1_0_1() { return cRefChildChildIDTerminalRuleCall_1_0_1; }
 
-		//(":" {NestedRef.left=current} refChild=[Child])*
+		//(':' {NestedRef.left=current} refChild=[Child])*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
 
 		//{NestedRef.left=current}
@@ -229,7 +229,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Definition:
-	//	"(def)" name=ID ":" child+=Child ref+=Reference?;
+	//	'(def)' name=ID ':' child+=Child ref+=Reference?;
 	public DefinitionElements getDefinitionAccess() {
 		return pDefinition;
 	}
@@ -239,7 +239,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Child:
-	//	"(child)" name=ID ":" link=[Definition]?;
+	//	'(child)' name=ID ':' link=[Definition]?;
 	public ChildElements getChildAccess() {
 		return pChild;
 	}
@@ -249,7 +249,7 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Reference:
-	//	"(ref)" refChild=[Child] (":" {NestedRef.left=current} refChild=[Child])*;
+	//	'(ref)' refChild=[Child] (':' {NestedRef.left=current} refChild=[Child])*;
 	public ReferenceElements getReferenceAccess() {
 		return pReference;
 	}
@@ -259,38 +259,38 @@ public class Bug311337TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

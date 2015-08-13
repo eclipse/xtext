@@ -20,12 +20,12 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Simp
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl#getLeft <em>Left</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl#getOperator <em>Operator</em>}</li>
  *   <li>{@link org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl#getRight <em>Right</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -97,8 +97,7 @@ public class ComparisonImpl extends ExpressionImpl implements Comparison
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getLeft()
+  public Expression getLeft()
   {
     return left;
   }
@@ -125,8 +124,7 @@ public Expression getLeft()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setLeft(Expression newLeft)
+  public void setLeft(Expression newLeft)
   {
     if (newLeft != left)
     {
@@ -147,8 +145,7 @@ public void setLeft(Expression newLeft)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getOperator()
+  public String getOperator()
   {
     return operator;
   }
@@ -158,8 +155,7 @@ public String getOperator()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setOperator(String newOperator)
+  public void setOperator(String newOperator)
   {
     String oldOperator = operator;
     operator = newOperator;
@@ -172,8 +168,7 @@ public void setOperator(String newOperator)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Expression getRight()
+  public Expression getRight()
   {
     return right;
   }
@@ -200,8 +195,7 @@ public Expression getRight()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setRight(Expression newRight)
+  public void setRight(Expression newRight)
   {
     if (newRight != right)
     {

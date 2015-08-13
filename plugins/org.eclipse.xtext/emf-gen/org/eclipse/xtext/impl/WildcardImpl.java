@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: WildcardImpl.java,v 1.4 2010/04/06 14:09:55 sefftinge Exp $
  */
 package org.eclipse.xtext.impl;
 

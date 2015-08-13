@@ -150,7 +150,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalAntlrP
             	           			current, 
             	           			"words",
             	            		lv_words_0_0, 
-            	            		"Word");
+            	            		"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.Word");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -249,7 +249,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalAntlrP
                    			current, 
                    			"value",
                     		lv_value_0_0, 
-                    		"LEXEME");
+                    		"org.eclipse.xtext.ui.tests.editor.encoding.EncodingUiTestLanguage.LEXEME");
             	    
 
             }

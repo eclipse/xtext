@@ -18,7 +18,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Model");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEnumsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cEnumsEnumNameEnumRuleCall_0_0 = (RuleCall)cEnumsAssignment_0.eContents().get(0);
@@ -34,7 +34,12 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final RuleCall cAsCharATerminalRuleCall_5_0 = (RuleCall)cAsAssignment_5.eContents().get(0);
 		
 		//Model:
-		//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
+		//	enums+=EnumName*
+		//	ycs+=Yc*
+		//	abs+=Ab*
+		//	xbs+=Xb*
+		//	ys+=CharY*
+		//	^as+=CharA*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*
@@ -78,7 +83,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class AbElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Ab");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Ab");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cXAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cXCharATerminalRuleCall_0_0 = (RuleCall)cXAssignment_0.eContents().get(0);
@@ -106,7 +111,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	public class XbElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Xb");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Xb");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cXAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cXCharXTerminalRuleCall_0_0 = (RuleCall)cXAssignment_0.eContents().get(0);
@@ -135,7 +140,7 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	
 	
 	public class EnumNameElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "EnumName");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.EnumName");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cAbcEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cAbcAbcKeyword_0_0 = (Keyword)cAbcEnumLiteralDeclaration_0.eContents().get(0);
@@ -143,16 +148,16 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		private final Keyword cEfgEfgKeyword_1_0 = (Keyword)cEfgEnumLiteralDeclaration_1.eContents().get(0);
 		
 		//enum EnumName:
-		//	abc="Abc" | efg="Efg";
+		//	abc='Abc' | efg="Efg";
 		public EnumRule getRule() { return rule; }
 
-		//abc="Abc" | efg="Efg"
+		//abc='Abc' | efg="Efg"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//abc="Abc"
+		//abc='Abc'
 		public EnumLiteralDeclaration getAbcEnumLiteralDeclaration_0() { return cAbcEnumLiteralDeclaration_0; }
 
-		//"Abc"
+		//'Abc'
 		public Keyword getAbcAbcKeyword_0_0() { return cAbcAbcKeyword_0_0; }
 
 		//efg="Efg"
@@ -183,15 +188,15 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 		this.pModel = new ModelElements();
 		this.pAb = new AbElements();
 		this.pXb = new XbElements();
-		this.tCharA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharA");
-		this.tCharb = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Charb");
-		this.tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharX");
-		this.tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "Yc");
-		this.tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharY");
-		this.tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "CharC");
+		this.tCharA = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharA");
+		this.tCharb = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Charb");
+		this.tCharX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharX");
+		this.tYc = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.Yc");
+		this.tCharY = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharY");
+		this.tCharC = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.CharC");
 		this.unknownRuleEnumName = new EnumNameElements();
-		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS");
-		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SL_COMMENT");
+		this.tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.WS");
+		this.tSL_COMMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage.SL_COMMENT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -218,7 +223,12 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 
 	
 	//Model:
-	//	enums+=EnumName* ycs+=Yc* abs+=Ab* xbs+=Xb* ys+=CharY* ^as+=CharA*;
+	//	enums+=EnumName*
+	//	ycs+=Yc*
+	//	abs+=Ab*
+	//	xbs+=Xb*
+	//	ys+=CharY*
+	//	^as+=CharA*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -248,19 +258,19 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal CharA:
-	//	"A";
+	//	'A';
 	public TerminalRule getCharARule() {
 		return tCharA;
 	} 
 
 	//terminal Charb:
-	//	"b";
+	//	'b';
 	public TerminalRule getCharbRule() {
 		return tCharb;
 	} 
 
 	//terminal CharX:
-	//	"X";
+	//	'X';
 	public TerminalRule getCharXRule() {
 		return tCharX;
 	} 
@@ -272,19 +282,19 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	} 
 
 	//terminal CharY:
-	//	"Y";
+	//	'Y';
 	public TerminalRule getCharYRule() {
 		return tCharY;
 	} 
 
 	//terminal CharC:
-	//	"c";
+	//	'c';
 	public TerminalRule getCharCRule() {
 		return tCharC;
 	} 
 
 	//enum EnumName:
-	//	abc="Abc" | efg="Efg";
+	//	abc='Abc' | efg="Efg";
 	public EnumNameElements getEnumNameAccess() {
 		return unknownRuleEnumName;
 	}
@@ -294,13 +304,13 @@ public class BacktrackingLexerTestLanguageGrammarAccess extends AbstractGrammarE
 	}
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return tWS;
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return tSL_COMMENT;
 	} 

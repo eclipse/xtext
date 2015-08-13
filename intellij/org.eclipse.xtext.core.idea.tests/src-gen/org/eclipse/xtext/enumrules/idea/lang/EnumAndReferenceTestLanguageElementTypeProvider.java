@@ -121,67 +121,67 @@ public class EnumAndReferenceTestLanguageElementTypeProvider implements IElement
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReferenceElementType() {
 		return EntityWithEnumAndReference_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_GroupElementType() {
 		return EntityWithEnumAndReference_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_TypeAssignment_0ElementType() {
 		return EntityWithEnumAndReference_TypeAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_TypeKindOfKeywordEnumRuleCall_0_0ElementType() {
 		return EntityWithEnumAndReference_TypeKindOfKeywordEnumRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_NameAssignment_1ElementType() {
 		return EntityWithEnumAndReference_NameAssignment_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType() {
 		return EntityWithEnumAndReference_NameIDTerminalRuleCall_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_ReferenceKeyword_2ElementType() {
 		return EntityWithEnumAndReference_ReferenceKeyword_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_RefAssignment_3ElementType() {
 		return EntityWithEnumAndReference_RefAssignment_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType() {
 		return EntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1ElementType() {
 		return EntityWithEnumAndReference_RefEntityWithEnumAndReferenceIDTerminalRuleCall_3_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeywordElementType() {
 		return KindOfKeyword_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeyword_AlternativesElementType() {
 		return KindOfKeyword_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0ElementType() {
 		return KindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeyword_KindOfKeywordKindOfKeywordKeyword_0_0ElementType() {
 		return KindOfKeyword_KindOfKeywordKindOfKeywordKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1ElementType() {
 		return KindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getKindOfKeyword_AnotherEnumLiteralAnotherEnumLiteralKeyword_1_0ElementType() {
 		return KindOfKeyword_AnotherEnumLiteralAnotherEnumLiteralKeyword_1_0_ELEMENT_TYPE;
 	}

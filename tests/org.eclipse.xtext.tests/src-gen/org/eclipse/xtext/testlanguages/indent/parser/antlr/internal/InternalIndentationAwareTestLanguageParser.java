@@ -23,8 +23,8 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NL", "RULE_BEGIN", "RULE_END", "RULE_OTHER"
     };
-    public static final int RULE_OTHER=7;
     public static final int RULE_END=6;
+    public static final int RULE_OTHER=7;
     public static final int RULE_BEGIN=5;
     public static final int RULE_NL=4;
     public static final int EOF=-1;
@@ -145,7 +145,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
                    			current, 
                    			"children",
                     		lv_children_0_0, 
-                    		"Node");
+                    		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -195,7 +195,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
             	           			current, 
             	           			"children",
             	            		lv_children_2_0, 
-            	            		"Node");
+            	            		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.Node");
             	    	        afterParserOrEnumRuleCall();
             	    	    
 
@@ -313,7 +313,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
                    			current, 
                    			"name",
                     		lv_name_0_0, 
-                    		"String");
+                    		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.String");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -367,7 +367,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
                            			current, 
                            			"children",
                             		lv_children_3_0, 
-                            		"NodeList");
+                            		"org.eclipse.xtext.testlanguages.indent.IndentationAwareTestLanguage.NodeList");
                     	        afterParserOrEnumRuleCall();
                     	    
 

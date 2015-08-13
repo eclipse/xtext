@@ -395,11 +395,11 @@ protected class Model_Action1ParserRuleCall_7 extends RuleCallToken {
 /************ begin Rule DatatypeBug286557 ****************
  *
  * DatatypeBug286557:
- * 	"#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";";
+ * 	'#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";";
  *
  **/
 
-// "#1" name=FQN ("ref" ref=[DatatypeBug286557|FQN])? ";"
+// '#1' name=FQN ('ref' ref=[DatatypeBug286557|FQN])? ";"
 protected class DatatypeBug286557_Group extends GroupToken {
 	
 	public DatatypeBug286557_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -428,7 +428,7 @@ protected class DatatypeBug286557_Group extends GroupToken {
 
 }
 
-// "#1"
+// '#1'
 protected class DatatypeBug286557_NumberSignDigitOneKeyword_0 extends KeywordToken  {
 	
 	public DatatypeBug286557_NumberSignDigitOneKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -483,7 +483,7 @@ protected class DatatypeBug286557_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// ("ref" ref=[DatatypeBug286557|FQN])?
+// ('ref' ref=[DatatypeBug286557|FQN])?
 protected class DatatypeBug286557_Group_2 extends GroupToken {
 	
 	public DatatypeBug286557_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -505,7 +505,7 @@ protected class DatatypeBug286557_Group_2 extends GroupToken {
 
 }
 
-// "ref"
+// 'ref'
 protected class DatatypeBug286557_RefKeyword_2_0 extends KeywordToken  {
 	
 	public DatatypeBug286557_RefKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -596,11 +596,11 @@ protected class DatatypeBug286557_SemicolonKeyword_3 extends KeywordToken  {
 /************ begin Rule EnumBug ****************
  *
  * EnumBug:
- * 	"#2" "kw1" return=EnumBugEnum name=ID;
+ * 	'#2' 'kw1' return=EnumBugEnum name=ID;
  *
  **/
 
-// "#2" "kw1" return=EnumBugEnum name=ID
+// '#2' 'kw1' return=EnumBugEnum name=ID
 protected class EnumBug_Group extends GroupToken {
 	
 	public EnumBug_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -629,7 +629,7 @@ protected class EnumBug_Group extends GroupToken {
 
 }
 
-// "#2"
+// '#2'
 protected class EnumBug_NumberSignDigitTwoKeyword_0 extends KeywordToken  {
 	
 	public EnumBug_NumberSignDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -650,7 +650,7 @@ protected class EnumBug_NumberSignDigitTwoKeyword_0 extends KeywordToken  {
 
 }
 
-// "kw1"
+// 'kw1'
 protected class EnumBug_Kw1Keyword_1 extends KeywordToken  {
 	
 	public EnumBug_Kw1Keyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -747,11 +747,11 @@ protected class EnumBug_NameAssignment_3 extends AssignmentToken  {
 /************ begin Rule Commentable ****************
  *
  * / * SuppressWarnings[noInstantiation] * / Commentable:
- * 	"#3" item+=CommentableItem*;
+ * 	'#3' item+=CommentableItem*;
  *
  **/
 
-// "#3" item+=CommentableItem*
+// '#3' item+=CommentableItem*
 protected class Commentable_Group extends GroupToken {
 	
 	public Commentable_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -781,7 +781,7 @@ protected class Commentable_Group extends GroupToken {
 
 }
 
-// "#3"
+// '#3'
 protected class Commentable_NumberSignDigitThreeKeyword_0 extends KeywordToken  {
 	
 	public Commentable_NumberSignDigitThreeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -856,11 +856,11 @@ protected class Commentable_ItemAssignment_1 extends AssignmentToken  {
 /************ begin Rule CommentableItem ****************
  *
  * CommentableItem:
- * 	"item" id=ID;
+ * 	'item' id=ID;
  *
  **/
 
-// "item" id=ID
+// 'item' id=ID
 protected class CommentableItem_Group extends GroupToken {
 	
 	public CommentableItem_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -889,7 +889,7 @@ protected class CommentableItem_Group extends GroupToken {
 
 }
 
-// "item"
+// 'item'
 protected class CommentableItem_ItemKeyword_0 extends KeywordToken  {
 	
 	public CommentableItem_ItemKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -951,11 +951,11 @@ protected class CommentableItem_IdAssignment_1 extends AssignmentToken  {
 /************ begin Rule ValueList ****************
  *
  * / * SuppressWarnings[noInstantiation] * / ValueList:
- * 	"#4" ids+=FQN*;
+ * 	'#4' ids+=FQN*;
  *
  **/
 
-// "#4" ids+=FQN*
+// '#4' ids+=FQN*
 protected class ValueList_Group extends GroupToken {
 	
 	public ValueList_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -985,7 +985,7 @@ protected class ValueList_Group extends GroupToken {
 
 }
 
-// "#4"
+// '#4'
 protected class ValueList_NumberSignDigitFourKeyword_0 extends KeywordToken  {
 	
 	public ValueList_NumberSignDigitFourKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1048,11 +1048,11 @@ protected class ValueList_IdsAssignment_1 extends AssignmentToken  {
 /************ begin Rule RefList ****************
  *
  * / * SuppressWarnings[noInstantiation] * / RefList:
- * 	"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+ * 	'#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*;
  *
  **/
 
-// "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*
+// '#5' objs+=RefObj* 'refs' refs+=[RefObj|FQN]*
 protected class RefList_Group extends GroupToken {
 	
 	public RefList_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1082,7 +1082,7 @@ protected class RefList_Group extends GroupToken {
 
 }
 
-// "#5"
+// '#5'
 protected class RefList_NumberSignDigitFiveKeyword_0 extends KeywordToken  {
 	
 	public RefList_NumberSignDigitFiveKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1150,7 +1150,7 @@ protected class RefList_ObjsAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "refs"
+// 'refs'
 protected class RefList_RefsKeyword_2 extends KeywordToken  {
 	
 	public RefList_RefsKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1263,11 +1263,11 @@ protected class RefObj_NameAssignment extends AssignmentToken  {
 /************ begin Rule SingleRef ****************
  *
  * SingleRef:
- * 	"#6" obj=RefObj "ref" ref=[RefObj|FQN];
+ * 	'#6' obj=RefObj 'ref' ref=[RefObj|FQN];
  *
  **/
 
-// "#6" obj=RefObj "ref" ref=[RefObj|FQN]
+// '#6' obj=RefObj 'ref' ref=[RefObj|FQN]
 protected class SingleRef_Group extends GroupToken {
 	
 	public SingleRef_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1296,7 +1296,7 @@ protected class SingleRef_Group extends GroupToken {
 
 }
 
-// "#6"
+// '#6'
 protected class SingleRef_NumberSignDigitSixKeyword_0 extends KeywordToken  {
 	
 	public SingleRef_NumberSignDigitSixKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1363,7 +1363,7 @@ protected class SingleRef_ObjAssignment_1 extends AssignmentToken  {
 	}	
 }
 
-// "ref"
+// 'ref'
 protected class SingleRef_RefKeyword_2 extends KeywordToken  {
 	
 	public SingleRef_RefKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1430,11 +1430,11 @@ protected class SingleRef_RefAssignment_3 extends AssignmentToken  {
  *
  * // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
  * / * SuppressWarnings[noInstantiation] * / AppendToFileEnd:
- * 	"#7" items+=AppendToFileEndItem*;
+ * 	'#7' items+=AppendToFileEndItem*;
  *
  **/
 
-// "#7" items+=AppendToFileEndItem*
+// '#7' items+=AppendToFileEndItem*
 protected class AppendToFileEnd_Group extends GroupToken {
 	
 	public AppendToFileEnd_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1464,7 +1464,7 @@ protected class AppendToFileEnd_Group extends GroupToken {
 
 }
 
-// "#7"
+// '#7'
 protected class AppendToFileEnd_NumberSignDigitSevenKeyword_0 extends KeywordToken  {
 	
 	public AppendToFileEnd_NumberSignDigitSevenKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1539,11 +1539,11 @@ protected class AppendToFileEnd_ItemsAssignment_1 extends AssignmentToken  {
 /************ begin Rule AppendToFileEndItem ****************
  *
  * AppendToFileEndItem:
- * 	"class" name=ID "endclass";
+ * 	'class' name=ID 'endclass';
  *
  **/
 
-// "class" name=ID "endclass"
+// 'class' name=ID 'endclass'
 protected class AppendToFileEndItem_Group extends GroupToken {
 	
 	public AppendToFileEndItem_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1572,7 +1572,7 @@ protected class AppendToFileEndItem_Group extends GroupToken {
 
 }
 
-// "class"
+// 'class'
 protected class AppendToFileEndItem_ClassKeyword_0 extends KeywordToken  {
 	
 	public AppendToFileEndItem_ClassKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1627,7 +1627,7 @@ protected class AppendToFileEndItem_NameAssignment_1 extends AssignmentToken  {
 
 }
 
-// "endclass"
+// 'endclass'
 protected class AppendToFileEndItem_EndclassKeyword_2 extends KeywordToken  {
 	
 	public AppendToFileEndItem_EndclassKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1656,11 +1656,11 @@ protected class AppendToFileEndItem_EndclassKeyword_2 extends KeywordToken  {
 /************ begin Rule Action1 ****************
  *
  * Action1:
- * 	"#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
+ * 	'#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2;
  *
  **/
 
-// "#8" {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
+// '#8' {Action1} name=ID actions2+=Action1Sub1 actions2+=Action1Sub2
 protected class Action1_Group extends GroupToken {
 	
 	public Action1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1689,7 +1689,7 @@ protected class Action1_Group extends GroupToken {
 
 }
 
-// "#8"
+// '#8'
 protected class Action1_NumberSignDigitEightKeyword_0 extends KeywordToken  {
 	
 	public Action1_NumberSignDigitEightKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

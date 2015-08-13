@@ -90,7 +90,7 @@ ruleEntryRule returns [EObject current=null]
        			$current, 
        			"multiFeature",
         		lv_multiFeature_0_0, 
-        		"AbstractRule");
+        		"org.eclipse.xtext.testlanguages.TestLanguage.AbstractRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -189,7 +189,7 @@ ruleChoiceRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -246,7 +246,7 @@ ruleReducibleRule returns [EObject current=null]
        			$current, 
        			"actionFeature",
         		lv_actionFeature_3_0, 
-        		"TerminalRule");
+        		"org.eclipse.xtext.testlanguages.TestLanguage.TerminalRule");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -286,7 +286,7 @@ ruleTerminalRule returns [EObject current=null]
        			$current, 
        			"stringFeature",
         		lv_stringFeature_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

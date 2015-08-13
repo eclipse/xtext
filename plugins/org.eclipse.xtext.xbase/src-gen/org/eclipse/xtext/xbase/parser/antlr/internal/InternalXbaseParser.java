@@ -532,7 +532,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"value",
                               		lv_value_3_0, 
-                              		"XAssignment");
+                              		"org.eclipse.xtext.xbase.Xbase.XAssignment");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -661,7 +661,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"rightOperand",
                                       		lv_rightOperand_7_0, 
-                                      		"XAssignment");
+                                      		"org.eclipse.xtext.xbase.Xbase.XAssignment");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -1234,7 +1234,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XAndExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XAndExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1534,7 +1534,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XEqualityExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XEqualityExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -1869,7 +1869,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XRelationalExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XRelationalExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2262,7 +2262,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"type",
             	              		lv_type_3_0, 
-            	              		"JvmTypeReference");
+            	              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2368,7 +2368,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_6_0, 
-            	              		"XOtherOperatorExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XOtherOperatorExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -2761,7 +2761,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XAdditiveExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XAdditiveExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -3382,7 +3382,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XMultiplicativeExpression");
+            	              		"org.eclipse.xtext.xbase.Xbase.XMultiplicativeExpression");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -3757,7 +3757,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"rightOperand",
             	              		lv_rightOperand_3_0, 
-            	              		"XUnaryOperation");
+            	              		"org.eclipse.xtext.xbase.Xbase.XUnaryOperation");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -4109,7 +4109,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"operand",
                               		lv_operand_2_0, 
-                              		"XUnaryOperation");
+                              		"org.eclipse.xtext.xbase.Xbase.XUnaryOperation");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -4463,7 +4463,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"type",
             	              		lv_type_3_0, 
-            	              		"JvmTypeReference");
+            	              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -5115,7 +5115,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"value",
             	              		lv_value_6_0, 
-            	              		"XAssignment");
+            	              		"org.eclipse.xtext.xbase.Xbase.XAssignment");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -5310,7 +5310,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	                     			current, 
             	                     			"typeArguments",
             	                      		lv_typeArguments_12_0, 
-            	                      		"JvmArgumentTypeReference");
+            	                      		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -5366,7 +5366,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	            	             			current, 
             	            	             			"typeArguments",
             	            	              		lv_typeArguments_14_0, 
-            	            	              		"JvmArgumentTypeReference");
+            	            	              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
             	            	      	        afterParserOrEnumRuleCall();
             	            	      	    
             	            	    }
@@ -5496,7 +5496,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	                             			current, 
             	                             			"memberCallArguments",
             	                              		lv_memberCallArguments_18_0, 
-            	                              		"XShortClosure");
+            	                              		"org.eclipse.xtext.xbase.Xbase.XShortClosure");
             	                      	        afterParserOrEnumRuleCall();
             	                      	    
             	                    }
@@ -5540,7 +5540,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	                             			current, 
             	                             			"memberCallArguments",
             	                              		lv_memberCallArguments_19_0, 
-            	                              		"XExpression");
+            	                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
             	                      	        afterParserOrEnumRuleCall();
             	                      	    
             	                    }
@@ -5596,7 +5596,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	                    	             			current, 
             	                    	             			"memberCallArguments",
             	                    	              		lv_memberCallArguments_21_0, 
-            	                    	              		"XExpression");
+            	                    	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
             	                    	      	        afterParserOrEnumRuleCall();
             	                    	      	    
             	                    	    }
@@ -5665,7 +5665,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	                     			current, 
             	                     			"memberCallArguments",
             	                      		lv_memberCallArguments_23_0, 
-            	                      		"XClosure");
+            	                      		"org.eclipse.xtext.xbase.Xbase.XClosure");
             	              	        afterParserOrEnumRuleCall();
             	              	    
             	            }
@@ -6718,7 +6718,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"elements",
                               		lv_elements_3_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -6774,7 +6774,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"elements",
                     	              		lv_elements_5_0, 
-                    	              		"XExpression");
+                    	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -6951,7 +6951,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"elements",
                               		lv_elements_3_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -7007,7 +7007,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"elements",
                     	              		lv_elements_5_0, 
-                    	              		"XExpression");
+                    	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -7202,7 +7202,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"declaredFormalParameters",
                                       		lv_declaredFormalParameters_2_0, 
-                                      		"JvmFormalParameter");
+                                      		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -7258,7 +7258,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                             	             			current, 
                             	             			"declaredFormalParameters",
                             	              		lv_declaredFormalParameters_4_0, 
-                            	              		"JvmFormalParameter");
+                            	              		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -7343,7 +7343,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_6_0, 
-                      		"XExpressionInClosure");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpressionInClosure");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -7492,7 +7492,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"expressions",
             	              		lv_expressions_1_0, 
-            	              		"XExpressionOrVarDeclaration");
+            	              		"org.eclipse.xtext.xbase.Xbase.XExpressionOrVarDeclaration");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -7674,7 +7674,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"declaredFormalParameters",
                               		lv_declaredFormalParameters_1_0, 
-                              		"JvmFormalParameter");
+                              		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -7730,7 +7730,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"declaredFormalParameters",
                     	              		lv_declaredFormalParameters_3_0, 
-                    	              		"JvmFormalParameter");
+                    	              		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -7812,7 +7812,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8068,7 +8068,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"if",
                       		lv_if_3_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8109,7 +8109,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"then",
                       		lv_then_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -8171,7 +8171,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"else",
                               		lv_else_7_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8351,7 +8351,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"declaredParam",
                               		lv_declaredParam_3_0, 
-                              		"JvmFormalParameter");
+                              		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8398,7 +8398,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"switch",
                               		lv_switch_5_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8461,7 +8461,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"declaredParam",
                                       		lv_declaredParam_7_0, 
-                                      		"JvmFormalParameter");
+                                      		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -8511,7 +8511,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"switch",
                               		lv_switch_9_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8573,7 +8573,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"cases",
             	              		lv_cases_11_0, 
-            	              		"XCasePart");
+            	              		"org.eclipse.xtext.xbase.Xbase.XCasePart");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -8637,7 +8637,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"default",
                               		lv_default_14_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8791,7 +8791,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"typeGuard",
                               		lv_typeGuard_1_0, 
-                              		"JvmTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8846,7 +8846,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"case",
                               		lv_case_3_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -8917,7 +8917,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"then",
                               		lv_then_5_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9111,7 +9111,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"declaredParam",
                       		lv_declaredParam_3_0, 
-                      		"JvmFormalParameter");
+                      		"org.eclipse.xtext.xbase.Xbase.JvmFormalParameter");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9158,7 +9158,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"forExpression",
                       		lv_forExpression_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9199,7 +9199,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"eachExpression",
                       		lv_eachExpression_7_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9366,7 +9366,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"initExpressions",
                               		lv_initExpressions_3_0, 
-                              		"XExpressionOrVarDeclaration");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpressionOrVarDeclaration");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9422,7 +9422,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"initExpressions",
                     	              		lv_initExpressions_5_0, 
-                    	              		"XExpressionOrVarDeclaration");
+                    	              		"org.eclipse.xtext.xbase.Xbase.XExpressionOrVarDeclaration");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -9486,7 +9486,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"expression",
                               		lv_expression_7_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9541,7 +9541,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"updateExpressions",
                               		lv_updateExpressions_9_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -9597,7 +9597,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"updateExpressions",
                     	              		lv_updateExpressions_11_0, 
-                    	              		"XExpression");
+                    	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -9653,7 +9653,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"eachExpression",
                       		lv_eachExpression_13_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9797,7 +9797,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"predicate",
                       		lv_predicate_3_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9838,7 +9838,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"body",
                       		lv_body_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -9977,7 +9977,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"body",
                       		lv_body_2_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -10024,7 +10024,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"predicate",
                       		lv_predicate_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -10181,7 +10181,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"expressions",
             	              		lv_expressions_2_0, 
-            	              		"XExpressionOrVarDeclaration");
+            	              		"org.eclipse.xtext.xbase.Xbase.XExpressionOrVarDeclaration");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -10604,7 +10604,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"type",
                               		lv_type_3_0, 
-                              		"JvmTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -10639,7 +10639,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"name",
                               		lv_name_4_0, 
-                              		"ValidID");
+                              		"org.eclipse.xtext.xbase.Xtype.ValidID");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -10686,7 +10686,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"name",
                               		lv_name_5_0, 
-                              		"ValidID");
+                              		"org.eclipse.xtext.xbase.Xtype.ValidID");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -10744,7 +10744,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"right",
                               		lv_right_7_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -10881,7 +10881,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"parameterType",
                               		lv_parameterType_0_0, 
-                              		"JvmTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -10919,7 +10919,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ValidID");
+                      		"org.eclipse.xtext.xbase.Xtype.ValidID");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -11035,7 +11035,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"parameterType",
                       		lv_parameterType_0_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -11070,7 +11070,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"name",
                       		lv_name_1_0, 
-                      		"ValidID");
+                      		"org.eclipse.xtext.xbase.Xtype.ValidID");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -11230,7 +11230,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"typeArguments",
                               		lv_typeArguments_2_0, 
-                              		"JvmArgumentTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -11286,7 +11286,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"typeArguments",
                     	              		lv_typeArguments_4_0, 
-                    	              		"JvmArgumentTypeReference");
+                    	              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -11416,7 +11416,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"featureCallArguments",
                                       		lv_featureCallArguments_8_0, 
-                                      		"XShortClosure");
+                                      		"org.eclipse.xtext.xbase.Xbase.XShortClosure");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -11460,7 +11460,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"featureCallArguments",
                                       		lv_featureCallArguments_9_0, 
-                                      		"XExpression");
+                                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -11516,7 +11516,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                             	             			current, 
                             	             			"featureCallArguments",
                             	              		lv_featureCallArguments_11_0, 
-                            	              		"XExpression");
+                            	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -11585,7 +11585,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"featureCallArguments",
                               		lv_featureCallArguments_13_0, 
-                              		"XClosure");
+                              		"org.eclipse.xtext.xbase.Xbase.XClosure");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -12117,7 +12117,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"typeArguments",
                               		lv_typeArguments_4_0, 
-                              		"JvmArgumentTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -12173,7 +12173,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"typeArguments",
                     	              		lv_typeArguments_6_0, 
-                    	              		"JvmArgumentTypeReference");
+                    	              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -12269,7 +12269,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"arguments",
                                       		lv_arguments_9_0, 
-                                      		"XShortClosure");
+                                      		"org.eclipse.xtext.xbase.Xbase.XShortClosure");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -12313,7 +12313,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"arguments",
                                       		lv_arguments_10_0, 
-                                      		"XExpression");
+                                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -12369,7 +12369,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                             	             			current, 
                             	             			"arguments",
                             	              		lv_arguments_12_0, 
-                            	              		"XExpression");
+                            	              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -12438,7 +12438,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"arguments",
                               		lv_arguments_14_0, 
-                              		"XClosure");
+                              		"org.eclipse.xtext.xbase.Xbase.XClosure");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -12822,7 +12822,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"value",
                       		lv_value_1_0, 
-                      		"Number");
+                      		"org.eclipse.xtext.xbase.Xbase.Number");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -12944,7 +12944,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"value",
                       		lv_value_1_0, 
-                      		"STRING");
+                      		"org.eclipse.xtext.xbase.Xtype.STRING");
               	    
             }
 
@@ -13131,7 +13131,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
             	             			current, 
             	             			"arrayDimensions",
             	              		lv_arrayDimensions_4_0, 
-            	              		"ArrayBrackets");
+            	              		"org.eclipse.xtext.xbase.Xtype.ArrayBrackets");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -13277,7 +13277,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_2_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -13415,7 +13415,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"expression",
                               		lv_expression_2_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -13560,7 +13560,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_2_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -13638,7 +13638,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"catchClauses",
                     	              		lv_catchClauses_3_0, 
-                    	              		"XCatchClause");
+                    	              		"org.eclipse.xtext.xbase.Xbase.XCatchClause");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -13711,7 +13711,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"finallyExpression",
                                       		lv_finallyExpression_5_0, 
-                                      		"XExpression");
+                                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -13770,7 +13770,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"finallyExpression",
                               		lv_finallyExpression_7_0, 
-                              		"XExpression");
+                              		"org.eclipse.xtext.xbase.Xbase.XExpression");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -13935,7 +13935,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"param",
                       		lv_param_3_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -13976,7 +13976,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_5_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14113,7 +14113,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"declaredParam",
                       		lv_declaredParam_2_0, 
-                      		"FullJvmFormalParameter");
+                      		"org.eclipse.xtext.xbase.Xbase.FullJvmFormalParameter");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -14154,7 +14154,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"expression",
                       		lv_expression_4_0, 
-                      		"XExpression");
+                      		"org.eclipse.xtext.xbase.Xbase.XExpression");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15058,7 +15058,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"paramTypes",
                                       		lv_paramTypes_1_0, 
-                                      		"JvmTypeReference");
+                                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -15114,7 +15114,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                             	             			current, 
                             	             			"paramTypes",
                             	              		lv_paramTypes_3_0, 
-                            	              		"JvmTypeReference");
+                            	              		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -15182,7 +15182,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"returnType",
                       		lv_returnType_6_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -15362,7 +15362,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"arguments",
                               		lv_arguments_2_0, 
-                              		"JvmArgumentTypeReference");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -15418,7 +15418,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"arguments",
                     	              		lv_arguments_4_0, 
-                    	              		"JvmArgumentTypeReference");
+                    	              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -15579,7 +15579,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	                     			current, 
                     	                     			"arguments",
                     	                      		lv_arguments_10_0, 
-                    	                      		"JvmArgumentTypeReference");
+                    	                      		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                     	              	        afterParserOrEnumRuleCall();
                     	              	    
                     	            }
@@ -15635,7 +15635,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	            	             			current, 
                     	            	             			"arguments",
                     	            	              		lv_arguments_12_0, 
-                    	            	              		"JvmArgumentTypeReference");
+                    	            	              		"org.eclipse.xtext.xbase.Xtype.JvmArgumentTypeReference");
                     	            	      	        afterParserOrEnumRuleCall();
                     	            	      	    
                     	            	    }
@@ -15968,7 +15968,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"constraints",
                               		lv_constraints_2_0, 
-                              		"JvmUpperBound");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmUpperBound");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -16015,7 +16015,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"constraints",
                     	              		lv_constraints_3_0, 
-                    	              		"JvmUpperBoundAnded");
+                    	              		"org.eclipse.xtext.xbase.Xtype.JvmUpperBoundAnded");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -16068,7 +16068,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"constraints",
                               		lv_constraints_4_0, 
-                              		"JvmLowerBound");
+                              		"org.eclipse.xtext.xbase.Xtype.JvmLowerBound");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
@@ -16115,7 +16115,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                     	             			current, 
                     	             			"constraints",
                     	              		lv_constraints_5_0, 
-                    	              		"JvmLowerBoundAnded");
+                    	              		"org.eclipse.xtext.xbase.Xtype.JvmLowerBoundAnded");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    
                     	    }
@@ -16251,7 +16251,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"typeReference",
                       		lv_typeReference_1_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16372,7 +16372,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"typeReference",
                       		lv_typeReference_1_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16493,7 +16493,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"typeReference",
                       		lv_typeReference_1_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -16614,7 +16614,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                      			current, 
                      			"typeReference",
                       		lv_typeReference_1_0, 
-                      		"JvmTypeReference");
+                      		"org.eclipse.xtext.xbase.Xtype.JvmTypeReference");
               	        afterParserOrEnumRuleCall();
               	    
             }
@@ -17098,7 +17098,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"memberName",
                                       		lv_memberName_5_0, 
-                                      		"ValidID");
+                                      		"org.eclipse.xtext.xbase.Xtype.ValidID");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -17188,7 +17188,7 @@ public class InternalXbaseParser extends AbstractInternalAntlrParser {
                              			current, 
                              			"importedNamespace",
                               		lv_importedNamespace_7_0, 
-                              		"QualifiedNameWithWildcard");
+                              		"org.eclipse.xtext.xbase.Xtype.QualifiedNameWithWildcard");
                       	        afterParserOrEnumRuleCall();
                       	    
                     }

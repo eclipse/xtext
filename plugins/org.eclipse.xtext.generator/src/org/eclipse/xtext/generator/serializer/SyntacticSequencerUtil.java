@@ -48,6 +48,9 @@ public class SyntacticSequencerUtil {
 
 	@Inject
 	protected Grammar grammar;
+	
+	@Inject
+	private InjectableRuleNames ruleNames;
 
 	protected List<ISynAbsorberState> getAllPDAs() {
 		List<ISynAbsorberState> result = Lists.newArrayList();
@@ -97,7 +100,7 @@ public class SyntacticSequencerUtil {
 		return ambiguousTransitions;
 	}
 
-	protected String elementAliasToIdentifyer(AbstractElementAlias alias, Set<String> rules, boolean isNested) {
+	protected String elementAliasToIdentifier(AbstractElementAlias alias, Set<String> rules, boolean isNested) {
 		String card = null;
 		if (alias.isMany() && alias.isOptional())
 			card = "a";
@@ -107,13 +110,13 @@ public class SyntacticSequencerUtil {
 			card = "q";
 		if (alias instanceof TokenAlias) {
 			TokenAlias ele = (TokenAlias) alias;
-			rules.add(GrammarUtil.containingRule(ele.getToken()).getName());
+			rules.add(ruleNames.getUniqueRuleName(GrammarUtil.containingRule(ele.getToken())));
 			card = card == null ? "" : "_" + card;
 			return GrammarAccessUtil.getUniqueElementName(ele.getToken()) + card;
 		} else if (alias instanceof GroupAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((GroupAlias) alias).getChildren())
-				children.add(elementAliasToIdentifyer(child, rules, true));
+				children.add(elementAliasToIdentifier(child, rules, true));
 			String body = Joiner.on("_").join(children);
 			if (isNested || card != null) {
 				card = card == null ? "" : card;
@@ -123,7 +126,7 @@ public class SyntacticSequencerUtil {
 		} else if (alias instanceof AlternativeAlias) {
 			List<String> children = Lists.newArrayList();
 			for (AbstractElementAlias child : ((AlternativeAlias) alias).getChildren())
-				children.add(elementAliasToIdentifyer(child, rules, true));
+				children.add(elementAliasToIdentifier(child, rules, true));
 			Collections.sort(children);
 			String body = Joiner.on("_or_").join(children);
 			if (isNested || card != null) {
@@ -168,7 +171,7 @@ public class SyntacticSequencerUtil {
 
 	protected String elementAliasToIdentifyer(AbstractElementAlias alias) {
 		Set<String> rulesSet = Sets.newHashSet();
-		String body = elementAliasToIdentifyer(alias, rulesSet, false);
+		String body = elementAliasToIdentifier(alias, rulesSet, false);
 		List<String> rulesList = Lists.newArrayList(rulesSet);
 		Collections.sort(rulesList);
 		String rule = Joiner.on("_").join(rulesList);

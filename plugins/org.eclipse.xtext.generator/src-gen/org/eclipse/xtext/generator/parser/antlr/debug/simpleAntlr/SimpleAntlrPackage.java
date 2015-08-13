@@ -196,13 +196,22 @@ public interface SimpleAntlrPackage extends EPackage
   int RULE__NAME = 1;
 
   /**
+   * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE__PARAMETERS = 2;
+
+  /**
    * The feature id for the '<em><b>Body</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE__BODY = 2;
+  int RULE__BODY = 3;
 
   /**
    * The number of structural features of the '<em>Rule</em>' class.
@@ -211,7 +220,44 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_FEATURE_COUNT = 3;
+  int RULE_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ParameterImpl <em>Parameter</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ParameterImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getParameter()
+   * @generated
+   */
+  int PARAMETER = 4;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER__NAME = 1;
+
+  /**
+   * The number of structural features of the '<em>Parameter</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PARAMETER_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleElementImpl <em>Rule Element</em>}' class.
@@ -221,7 +267,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getRuleElement()
    * @generated
    */
-  int RULE_ELEMENT = 4;
+  int RULE_ELEMENT = 5;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_ELEMENT__GUARD = 0;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_ELEMENT__GUARDED = 1;
 
   /**
    * The number of structural features of the '<em>Rule Element</em>' class.
@@ -230,7 +294,54 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    * @ordered
    */
-  int RULE_ELEMENT_FEATURE_COUNT = 0;
+  int RULE_ELEMENT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ExpressionImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 6;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ReferenceOrLiteralImpl <em>Reference Or Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ReferenceOrLiteralImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getReferenceOrLiteral()
+   * @generated
+   */
+  int REFERENCE_OR_LITERAL = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_OR_LITERAL__NAME = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Reference Or Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REFERENCE_OR_LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl <em>Predicated</em>}' class.
@@ -240,7 +351,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getPredicated()
    * @generated
    */
-  int PREDICATED = 5;
+  int PREDICATED = 8;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREDICATED__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PREDICATED__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Predicate</b></em>' containment reference.
@@ -277,7 +406,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getRuleOptions()
    * @generated
    */
-  int RULE_OPTIONS = 6;
+  int RULE_OPTIONS = 9;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_OPTIONS__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_OPTIONS__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Options</b></em>' containment reference.
@@ -314,7 +461,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getRuleCall()
    * @generated
    */
-  int RULE_CALL = 7;
+  int RULE_CALL = 10;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Rule</b></em>' attribute.
@@ -326,13 +491,22 @@ public interface SimpleAntlrPackage extends EPackage
   int RULE_CALL__RULE = RULE_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RULE_CALL__ARGUMENTS = RULE_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Rule Call</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int RULE_CALL_FEATURE_COUNT = RULE_ELEMENT_FEATURE_COUNT + 1;
+  int RULE_CALL_FEATURE_COUNT = RULE_ELEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.KeywordImpl <em>Keyword</em>}' class.
@@ -342,7 +516,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getKeyword()
    * @generated
    */
-  int KEYWORD = 8;
+  int KEYWORD = 11;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEYWORD__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -370,7 +562,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getWildcard()
    * @generated
    */
-  int WILDCARD = 9;
+  int WILDCARD = 12;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WILDCARD__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WILDCARD__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The number of structural features of the '<em>Wildcard</em>' class.
@@ -389,7 +599,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getAlternatives()
    * @generated
    */
-  int ALTERNATIVES = 10;
+  int ALTERNATIVES = 13;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVES__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ALTERNATIVES__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Groups</b></em>' containment reference list.
@@ -417,7 +645,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 11;
+  int GROUP = 14;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -445,7 +691,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getElementWithCardinality()
    * @generated
    */
-  int ELEMENT_WITH_CARDINALITY = 12;
+  int ELEMENT_WITH_CARDINALITY = 15;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT_WITH_CARDINALITY__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT_WITH_CARDINALITY__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -482,7 +746,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getNegatedElement()
    * @generated
    */
-  int NEGATED_ELEMENT = 13;
+  int NEGATED_ELEMENT = 16;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATED_ELEMENT__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NEGATED_ELEMENT__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Element</b></em>' containment reference.
@@ -510,7 +792,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getUntilElement()
    * @generated
    */
-  int UNTIL_ELEMENT = 14;
+  int UNTIL_ELEMENT = 17;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNTIL_ELEMENT__GUARD = RULE_ELEMENT__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNTIL_ELEMENT__GUARDED = RULE_ELEMENT__GUARDED;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -540,6 +840,108 @@ public interface SimpleAntlrPackage extends EPackage
   int UNTIL_ELEMENT_FEATURE_COUNT = RULE_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OrExpressionImpl <em>Or Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OrExpressionImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getOrExpression()
+   * @generated
+   */
+  int OR_EXPRESSION = 18;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Or Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AndExpressionImpl <em>And Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AndExpressionImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getAndExpression()
+   * @generated
+   */
+  int AND_EXPRESSION = 19;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>And Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NotExpressionImpl <em>Not Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NotExpressionImpl
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getNotExpression()
+   * @generated
+   */
+  int NOT_EXPRESSION = 20;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EXPRESSION__VALUE = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Not Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl <em>Skip</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -547,7 +949,25 @@ public interface SimpleAntlrPackage extends EPackage
    * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getSkip()
    * @generated
    */
-  int SKIP = 15;
+  int SKIP = 21;
+
+  /**
+   * The feature id for the '<em><b>Guard</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SKIP__GUARD = RULE_OPTIONS__GUARD;
+
+  /**
+   * The feature id for the '<em><b>Guarded</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SKIP__GUARDED = RULE_OPTIONS__GUARDED;
 
   /**
    * The feature id for the '<em><b>Options</b></em>' containment reference.
@@ -706,6 +1126,17 @@ public interface SimpleAntlrPackage extends EPackage
   EAttribute getRule_Name();
 
   /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Parameters</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getParameters()
+   * @see #getRule()
+   * @generated
+   */
+  EReference getRule_Parameters();
+
+  /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Rule#getBody <em>Body</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -717,6 +1148,38 @@ public interface SimpleAntlrPackage extends EPackage
   EReference getRule_Body();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter <em>Parameter</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Parameter</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter
+   * @generated
+   */
+  EClass getParameter();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter#getType()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Parameter#getName()
+   * @see #getParameter()
+   * @generated
+   */
+  EAttribute getParameter_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement <em>Rule Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -725,6 +1188,59 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    */
   EClass getRuleElement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement#getGuard <em>Guard</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Guard</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement#getGuard()
+   * @see #getRuleElement()
+   * @generated
+   */
+  EReference getRuleElement_Guard();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement#getGuarded <em>Guarded</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Guarded</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleElement#getGuarded()
+   * @see #getRuleElement()
+   * @generated
+   */
+  EReference getRuleElement_Guarded();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral <em>Reference Or Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Reference Or Literal</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral
+   * @generated
+   */
+  EClass getReferenceOrLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.ReferenceOrLiteral#getName()
+   * @see #getReferenceOrLiteral()
+   * @generated
+   */
+  EAttribute getReferenceOrLiteral_Name();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Predicated <em>Predicated</em>}'.
@@ -810,6 +1326,17 @@ public interface SimpleAntlrPackage extends EPackage
    * @generated
    */
   EAttribute getRuleCall_Rule();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall#getArguments <em>Arguments</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Arguments</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.RuleCall#getArguments()
+   * @see #getRuleCall()
+   * @generated
+   */
+  EReference getRuleCall_Arguments();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Keyword <em>Keyword</em>}'.
@@ -970,6 +1497,91 @@ public interface SimpleAntlrPackage extends EPackage
   EReference getUntilElement_Right();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression <em>Or Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Or Expression</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression
+   * @generated
+   */
+  EClass getOrExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression#getLeft()
+   * @see #getOrExpression()
+   * @generated
+   */
+  EReference getOrExpression_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.OrExpression#getRight()
+   * @see #getOrExpression()
+   * @generated
+   */
+  EReference getOrExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression <em>And Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>And Expression</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression
+   * @generated
+   */
+  EClass getAndExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression#getLeft()
+   * @see #getAndExpression()
+   * @generated
+   */
+  EReference getAndExpression_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.AndExpression#getRight()
+   * @see #getAndExpression()
+   * @generated
+   */
+  EReference getAndExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression <em>Not Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Not Expression</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression
+   * @generated
+   */
+  EClass getNotExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.NotExpression#getValue()
+   * @see #getNotExpression()
+   * @generated
+   */
+  EReference getNotExpression_Value();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.Skip <em>Skip</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1107,12 +1719,46 @@ public interface SimpleAntlrPackage extends EPackage
     EAttribute RULE__NAME = eINSTANCE.getRule_Name();
 
     /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE__PARAMETERS = eINSTANCE.getRule_Parameters();
+
+    /**
      * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     EReference RULE__BODY = eINSTANCE.getRule_Body();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ParameterImpl <em>Parameter</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ParameterImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getParameter()
+     * @generated
+     */
+    EClass PARAMETER = eINSTANCE.getParameter();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__TYPE = eINSTANCE.getParameter_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute PARAMETER__NAME = eINSTANCE.getParameter_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.RuleElementImpl <em>Rule Element</em>}' class.
@@ -1123,6 +1769,50 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EClass RULE_ELEMENT = eINSTANCE.getRuleElement();
+
+    /**
+     * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_ELEMENT__GUARD = eINSTANCE.getRuleElement_Guard();
+
+    /**
+     * The meta object literal for the '<em><b>Guarded</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_ELEMENT__GUARDED = eINSTANCE.getRuleElement_Guarded();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ExpressionImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ReferenceOrLiteralImpl <em>Reference Or Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.ReferenceOrLiteralImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getReferenceOrLiteral()
+     * @generated
+     */
+    EClass REFERENCE_OR_LITERAL = eINSTANCE.getReferenceOrLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REFERENCE_OR_LITERAL__NAME = eINSTANCE.getReferenceOrLiteral_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.PredicatedImpl <em>Predicated</em>}' class.
@@ -1193,6 +1883,14 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EAttribute RULE_CALL__RULE = eINSTANCE.getRuleCall_Rule();
+
+    /**
+     * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RULE_CALL__ARGUMENTS = eINSTANCE.getRuleCall_Arguments();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.KeywordImpl <em>Keyword</em>}' class.
@@ -1327,6 +2025,76 @@ public interface SimpleAntlrPackage extends EPackage
      * @generated
      */
     EReference UNTIL_ELEMENT__RIGHT = eINSTANCE.getUntilElement_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OrExpressionImpl <em>Or Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.OrExpressionImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getOrExpression()
+     * @generated
+     */
+    EClass OR_EXPRESSION = eINSTANCE.getOrExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OR_EXPRESSION__LEFT = eINSTANCE.getOrExpression_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference OR_EXPRESSION__RIGHT = eINSTANCE.getOrExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AndExpressionImpl <em>And Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.AndExpressionImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getAndExpression()
+     * @generated
+     */
+    EClass AND_EXPRESSION = eINSTANCE.getAndExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_EXPRESSION__LEFT = eINSTANCE.getAndExpression_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AND_EXPRESSION__RIGHT = eINSTANCE.getAndExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NotExpressionImpl <em>Not Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.NotExpressionImpl
+     * @see org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SimpleAntlrPackageImpl#getNotExpression()
+     * @generated
+     */
+    EClass NOT_EXPRESSION = eINSTANCE.getNotExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NOT_EXPRESSION__VALUE = eINSTANCE.getNotExpression_Value();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl.SkipImpl <em>Skip</em>}' class.

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id: CrossReference.java,v 1.8 2010/04/06 14:10:14 sefftinge Exp $
  */
 package org.eclipse.xtext;
 

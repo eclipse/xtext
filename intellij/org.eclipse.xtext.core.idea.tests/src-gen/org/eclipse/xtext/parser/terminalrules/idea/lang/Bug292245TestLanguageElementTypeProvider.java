@@ -218,135 +218,135 @@ public class Bug292245TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_AlternativesElementType() {
 		return Model_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_0ElementType() {
 		return Model_Group_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FIXKeyword_0_0ElementType() {
 		return Model_FIXKeyword_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FixAssignment_0_1ElementType() {
 		return Model_FixAssignment_0_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_FixFixParserRuleCall_0_1_0ElementType() {
 		return Model_FixFixParserRuleCall_0_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_1ElementType() {
 		return Model_Group_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ERRORKeyword_1_0ElementType() {
 		return Model_ERRORKeyword_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ErrorAssignment_1_1ElementType() {
 		return Model_ErrorAssignment_1_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ErrorErrorParserRuleCall_1_1_0ElementType() {
 		return Model_ErrorErrorParserRuleCall_1_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_Group_2ElementType() {
 		return Model_Group_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_TICKKeyword_2_0ElementType() {
 		return Model_TICKKeyword_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_TickAssignment_2_1ElementType() {
 		return Model_TickAssignment_2_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_TickApostropheParserRuleCall_2_1_0ElementType() {
 		return Model_TickApostropheParserRuleCall_2_1_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getErrorElementType() {
 		return Error_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getError_GroupElementType() {
 		return Error_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getError_APOSTROPHE_CHARTerminalRuleCall_0ElementType() {
 		return Error_APOSTROPHE_CHARTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getError_GraphicalParserRuleCall_1ElementType() {
 		return Error_GraphicalParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getError_APOSTROPHE_CHARTerminalRuleCall_2ElementType() {
 		return Error_APOSTROPHE_CHARTerminalRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFixElementType() {
 		return Fix_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFix_GroupElementType() {
 		return Fix_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFix_APOSTROPHE_CHARTerminalRuleCall_0ElementType() {
 		return Fix_APOSTROPHE_CHARTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFix_GraphicalParserRuleCall_1ElementType() {
 		return Fix_GraphicalParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFix_APOSTROPHE_CHARTerminalRuleCall_2ElementType() {
 		return Fix_APOSTROPHE_CHARTerminalRuleCall_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getFix_RehideParserRuleCall_3ElementType() {
 		return Fix_RehideParserRuleCall_3_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getApostropheElementType() {
 		return Apostrophe_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getApostrophe_APOSTROPHE_CHARTerminalRuleCallElementType() {
 		return Apostrophe_APOSTROPHE_CHARTerminalRuleCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRehideElementType() {
 		return Rehide_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRehide_CircumflexAccentKeywordElementType() {
 		return Rehide_CircumflexAccentKeyword_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGraphicalElementType() {
 		return Graphical_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGraphical_AlternativesElementType() {
 		return Graphical_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGraphical_CHARTerminalRuleCall_0ElementType() {
 		return Graphical_CHARTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getGraphical_WSTerminalRuleCall_1ElementType() {
 		return Graphical_WSTerminalRuleCall_1_ELEMENT_TYPE;
 	}

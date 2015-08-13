@@ -90,7 +90,7 @@ ruleRoot returns [EObject current=null]
        			$current, 
        			"childs",
         		lv_childs_0_0, 
-        		"Child");
+        		"org.eclipse.xtext.ui.tests.editor.contentassist.Bug377311TestLanguage.Child");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -141,7 +141,7 @@ ruleChild returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

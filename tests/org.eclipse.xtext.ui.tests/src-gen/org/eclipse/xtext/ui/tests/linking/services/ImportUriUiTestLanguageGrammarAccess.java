@@ -19,7 +19,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	
 	
 	public class MainElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Main");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.Main");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cImportsAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cImportsImportParserRuleCall_0_0 = (RuleCall)cImportsAssignment_0.eContents().get(0);
@@ -27,7 +27,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cTypesTypeParserRuleCall_1_0 = (RuleCall)cTypesAssignment_1.eContents().get(0);
 		
 		//Main:
-		//	imports+=Import* types+=Type*;
+		//	imports+=Import*
+		//	types+=Type*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//imports+=Import* types+=Type*
@@ -47,20 +48,20 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportURIAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportURISTRINGTerminalRuleCall_1_0 = (RuleCall)cImportURIAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importURI=STRING;
+		//	'import' importURI=STRING;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" importURI=STRING
+		//'import' importURI=STRING
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//importURI=STRING
@@ -71,7 +72,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Type");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage.Type");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cTypeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -82,13 +83,13 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_3_0_1 = (RuleCall)cExtendsTypeCrossReference_3_0.eContents().get(1);
 		
 		//Type:
-		//	"type" name=ID "extends" extends=[Type];
+		//	'type' name=ID 'extends' ^extends=[Type];
 		@Override public ParserRule getRule() { return rule; }
 
-		//"type" name=ID "extends" extends=[Type]
+		//'type' name=ID 'extends' ^extends=[Type]
 		public Group getGroup() { return cGroup; }
 
-		//"type"
+		//'type'
 		public Keyword getTypeKeyword_0() { return cTypeKeyword_0; }
 
 		//name=ID
@@ -97,10 +98,10 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"extends"
+		//'extends'
 		public Keyword getExtendsKeyword_2() { return cExtendsKeyword_2; }
 
-		//extends=[Type]
+		//^extends=[Type]
 		public Assignment getExtendsAssignment_3() { return cExtendsAssignment_3; }
 
 		//[Type]
@@ -157,7 +158,8 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 
 	
 	//Main:
-	//	imports+=Import* types+=Type*;
+	//	imports+=Import*
+	//	types+=Type*;
 	public MainElements getMainAccess() {
 		return pMain;
 	}
@@ -167,7 +169,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Import:
-	//	"import" importURI=STRING;
+	//	'import' importURI=STRING;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -177,7 +179,7 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//Type:
-	//	"type" name=ID "extends" extends=[Type];
+	//	'type' name=ID 'extends' ^extends=[Type];
 	public TypeElements getTypeAccess() {
 		return pType;
 	}
@@ -187,38 +189,38 @@ public class ImportUriUiTestLanguageGrammarAccess extends AbstractGrammarElement
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

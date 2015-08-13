@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.eclipse.xtext.impl;
 
@@ -14,7 +10,6 @@ import org.eclipse.xtext.XtextPackage;
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>EOF</b></em>'.
- * @since 2.0
  * <!-- end-user-doc -->
  *
  * @generated

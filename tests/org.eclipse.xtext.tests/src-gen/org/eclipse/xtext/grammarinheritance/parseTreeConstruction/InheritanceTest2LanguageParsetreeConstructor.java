@@ -41,7 +41,10 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	"model" name=ID "{" elements+=Element* ids+=FQN "}";
+ * 	"model" name=ID "{"
+ * 	elements+=Element*
+ * 	ids+=FQN
+ * 	"}";
  *
  **/
 

@@ -214,127 +214,127 @@ public class Bug297105TestLanguageElementTypeProvider implements IElementTypePro
 	public IGrammarAwareElementType findElementType(EObject grammarElement) {
 		return GRAMMAR_ELEMENT_TYPE.get(grammarElement);
 	}
-	
+
 	public IGrammarAwareElementType getModelElementType() {
 		return Model_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ExpressionsAssignmentElementType() {
 		return Model_ExpressionsAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getModel_ExpressionsExpressionParserRuleCall_0ElementType() {
 		return Model_ExpressionsExpressionParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpressionElementType() {
 		return Expression_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_GroupElementType() {
 		return Expression_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_LeftAssignment_0ElementType() {
 		return Expression_LeftAssignment_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_LeftLiteralParserRuleCall_0_0ElementType() {
 		return Expression_LeftLiteralParserRuleCall_0_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_PlusSignKeyword_1ElementType() {
 		return Expression_PlusSignKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_RightAssignment_2ElementType() {
 		return Expression_RightAssignment_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getExpression_RightLiteralParserRuleCall_2_0ElementType() {
 		return Expression_RightLiteralParserRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLiteralElementType() {
 		return Literal_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLiteral_AlternativesElementType() {
 		return Literal_Alternatives_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLiteral_RealLiteralParserRuleCall_0ElementType() {
 		return Literal_RealLiteralParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getLiteral_IntLiteralParserRuleCall_1ElementType() {
 		return Literal_IntLiteralParserRuleCall_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIntLiteralElementType() {
 		return IntLiteral_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIntLiteral_ValueAssignmentElementType() {
 		return IntLiteral_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIntLiteral_ValueIntValueParserRuleCall_0ElementType() {
 		return IntLiteral_ValueIntValueParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealLiteralElementType() {
 		return RealLiteral_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealLiteral_ValueAssignmentElementType() {
 		return RealLiteral_ValueAssignment_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealLiteral_ValueRealValueParserRuleCall_0ElementType() {
 		return RealLiteral_ValueRealValueParserRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIntValueElementType() {
 		return IntValue_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getIntValue_INTTerminalRuleCallElementType() {
 		return IntValue_INTTerminalRuleCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealValueElementType() {
 		return RealValue_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealValue_RealParserRuleCallElementType() {
 		return RealValue_RealParserRuleCall_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getRealElementType() {
 		return Real_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_GroupElementType() {
 		return Real_Group_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_INTTerminalRuleCall_0ElementType() {
 		return Real_INTTerminalRuleCall_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_FullStopKeyword_1ElementType() {
 		return Real_FullStopKeyword_1_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_Alternatives_2ElementType() {
 		return Real_Alternatives_2_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_EXT_INTTerminalRuleCall_2_0ElementType() {
 		return Real_EXT_INTTerminalRuleCall_2_0_ELEMENT_TYPE;
 	}
-	
+
 	public IGrammarAwareElementType getReal_INTTerminalRuleCall_2_1ElementType() {
 		return Real_INTTerminalRuleCall_2_1_ELEMENT_TYPE;
 	}

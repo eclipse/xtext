@@ -98,11 +98,11 @@ protected class Model_TypesAssignment extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- * 	(name=FQN | name="FQN") ("extends" superType=TypeRef)? ";";
+ * 	(name=FQN | name='FQN') ('extends' superType=TypeRef)? ';';
  *
  **/
 
-// (name=FQN | name="FQN") ("extends" superType=TypeRef)? ";"
+// (name=FQN | name='FQN') ('extends' superType=TypeRef)? ';'
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -131,7 +131,7 @@ protected class Type_Group extends GroupToken {
 
 }
 
-// name=FQN | name="FQN"
+// (name=FQN | name='FQN')
 protected class Type_Alternatives_0 extends AlternativesToken {
 
 	public Type_Alternatives_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -187,7 +187,7 @@ protected class Type_NameAssignment_0_0 extends AssignmentToken  {
 
 }
 
-// name="FQN"
+// name='FQN'
 protected class Type_NameAssignment_0_1 extends AssignmentToken  {
 	
 	public Type_NameAssignment_0_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -221,7 +221,7 @@ protected class Type_NameAssignment_0_1 extends AssignmentToken  {
 }
 
 
-// ("extends" superType=TypeRef)?
+// ('extends' superType=TypeRef)?
 protected class Type_Group_1 extends GroupToken {
 	
 	public Type_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -243,7 +243,7 @@ protected class Type_Group_1 extends GroupToken {
 
 }
 
-// "extends"
+// 'extends'
 protected class Type_ExtendsKeyword_1_0 extends KeywordToken  {
 	
 	public Type_ExtendsKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -312,7 +312,7 @@ protected class Type_SuperTypeAssignment_1_1 extends AssignmentToken  {
 }
 
 
-// ";"
+// ';'
 protected class Type_SemicolonKeyword_2 extends KeywordToken  {
 	
 	public Type_SemicolonKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

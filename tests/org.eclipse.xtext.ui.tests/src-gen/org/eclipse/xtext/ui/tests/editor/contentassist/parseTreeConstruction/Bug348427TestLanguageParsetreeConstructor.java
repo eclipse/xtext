@@ -61,9 +61,18 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- * 	element1=Scenario1_1 | element1=Scenario1_2 | element1=Scenario1_3 | element1=Scenario1_4 | element2=Scenario2_1 |
- * 	element2=Scenario2_2 | element2=Scenario2_3 | element2=Scenario2_4 | element2=Scenario2_5 | element2=Scenario2_6 |
- * 	element2=Scenario2_7 | element2=Scenario2_8;
+ * 	element1=Scenario1_1
+ * 	| element1=Scenario1_2
+ * 	| element1=Scenario1_3
+ * 	| element1=Scenario1_4
+ * 	| element2=Scenario2_1
+ * 	| element2=Scenario2_2
+ * 	| element2=Scenario2_3
+ * 	| element2=Scenario2_4
+ * 	| element2=Scenario2_5
+ * 	| element2=Scenario2_6
+ * 	| element2=Scenario2_7
+ * 	| element2=Scenario2_8;
  *
  **/
 
@@ -655,12 +664,15 @@ protected class Model_Element2Assignment_11 extends AssignmentToken  {
 
 /************ begin Rule Scenario1_1 ****************
  *
- * Scenario1_1 returns Scenario1:
- * 	"1.1" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) "next";
+ * Scenario1_1 Scenario1:
+ * 	'1.1' (child+=Child1_1
+ * 	| child+=Child1_2
+ * 	| child+=Child1_3)
+ * 	'next'
  *
  **/
 
-// "1.1" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) "next"
+// '1.1' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3) 'next'
 protected class Scenario1_1_Group extends GroupToken {
 	
 	public Scenario1_1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -689,7 +701,7 @@ protected class Scenario1_1_Group extends GroupToken {
 
 }
 
-// "1.1"
+// '1.1'
 protected class Scenario1_1_DigitOneFullStopDigitOneKeyword_0 extends KeywordToken  {
 	
 	public Scenario1_1_DigitOneFullStopDigitOneKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -710,7 +722,7 @@ protected class Scenario1_1_DigitOneFullStopDigitOneKeyword_0 extends KeywordTok
 
 }
 
-// child+=Child1_1 | child+=Child1_2 | child+=Child1_3
+// (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)
 protected class Scenario1_1_Alternatives_1 extends AlternativesToken {
 
 	public Scenario1_1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -873,7 +885,7 @@ protected class Scenario1_1_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario1_1_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario1_1_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -901,12 +913,15 @@ protected class Scenario1_1_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario1_2 ****************
  *
- * Scenario1_2 returns Scenario1:
- * 	"1.2" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ "next";
+ * Scenario1_2 Scenario1:
+ * 	'1.2' (child+=Child1_1
+ * 	| child+=Child1_2
+ * 	| child+=Child1_3)+
+ * 	'next'
  *
  **/
 
-// "1.2" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ "next"
+// '1.2' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)+ 'next'
 protected class Scenario1_2_Group extends GroupToken {
 	
 	public Scenario1_2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -935,7 +950,7 @@ protected class Scenario1_2_Group extends GroupToken {
 
 }
 
-// "1.2"
+// '1.2'
 protected class Scenario1_2_DigitOneFullStopDigitTwoKeyword_0 extends KeywordToken  {
 	
 	public Scenario1_2_DigitOneFullStopDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1122,7 +1137,7 @@ protected class Scenario1_2_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario1_2_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario1_2_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1150,12 +1165,16 @@ protected class Scenario1_2_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario1_3 ****************
  *
- * Scenario1_3 returns Scenario1:
- * 	{Scenario1} "1.3" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* "next";
+ * Scenario1_3 Scenario1:
+ * 	{Scenario1}
+ * 	'1.3' (child+=Child1_1
+ * 	| child+=Child1_2
+ * 	| child+=Child1_3)*
+ * 	'next'
  *
  **/
 
-// {Scenario1} "1.3" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* "next"
+// {Scenario1} '1.3' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)* 'next'
 protected class Scenario1_3_Group extends GroupToken {
 	
 	public Scenario1_3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1210,7 +1229,7 @@ protected class Scenario1_3_Scenario1Action_0 extends ActionToken  {
 	}
 }
 
-// "1.3"
+// '1.3'
 protected class Scenario1_3_DigitOneFullStopDigitThreeKeyword_1 extends KeywordToken  {
 	
 	public Scenario1_3_DigitOneFullStopDigitThreeKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1398,7 +1417,7 @@ protected class Scenario1_3_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario1_3_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario1_3_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1427,12 +1446,16 @@ protected class Scenario1_3_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Scenario1_4 ****************
  *
- * Scenario1_4 returns Scenario1:
- * 	{Scenario1} "1.4" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? "next";
+ * Scenario1_4 Scenario1:
+ * 	{Scenario1}
+ * 	'1.4' (child+=Child1_1
+ * 	| child+=Child1_2
+ * 	| child+=Child1_3)?
+ * 	'next'
  *
  **/
 
-// {Scenario1} "1.4" (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? "next"
+// {Scenario1} '1.4' (child+=Child1_1 | child+=Child1_2 | child+=Child1_3)? 'next'
 protected class Scenario1_4_Group extends GroupToken {
 	
 	public Scenario1_4_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1487,7 +1510,7 @@ protected class Scenario1_4_Scenario1Action_0 extends ActionToken  {
 	}
 }
 
-// "1.4"
+// '1.4'
 protected class Scenario1_4_DigitOneFullStopDigitFourKeyword_1 extends KeywordToken  {
 	
 	public Scenario1_4_DigitOneFullStopDigitFourKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1672,7 +1695,7 @@ protected class Scenario1_4_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario1_4_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario1_4_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1701,14 +1724,15 @@ protected class Scenario1_4_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Child1_1 ****************
  *
- * Child1_1 returns Child1:
- * 	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
- * 	EnumType "child1" "end";
+ * Child1_1 Child1:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	enumType=EnumType // this is not ok
+ * 	'child1' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
-// EnumType "child1" "end"
+// name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+// 'child1' 'end'
 protected class Child1_1_Group extends GroupToken {
 	
 	public Child1_1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1770,7 +1794,7 @@ protected class Child1_1_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child1_1_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child1_1_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1792,7 +1816,7 @@ protected class Child1_1_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child1_1_Group_2 extends GroupToken {
 	
 	public Child1_1_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1814,7 +1838,7 @@ protected class Child1_1_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child1_1_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child1_1_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1848,7 +1872,7 @@ protected class Child1_1_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child1_1_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child1_1_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1871,8 +1895,7 @@ protected class Child1_1_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// enumType= // this is not ok
-// EnumType
+// enumType=EnumType
 protected class Child1_1_EnumTypeAssignment_3 extends AssignmentToken  {
 	
 	public Child1_1_EnumTypeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1907,7 +1930,8 @@ protected class Child1_1_EnumTypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child1"
+// // this is not ok
+// 'child1'
 protected class Child1_1_Child1Keyword_4 extends KeywordToken  {
 	
 	public Child1_1_Child1Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1929,7 +1953,7 @@ protected class Child1_1_Child1Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child1_1_EndKeyword_5 extends KeywordToken  {
 	
 	public Child1_1_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1957,14 +1981,15 @@ protected class Child1_1_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child1_2 ****************
  *
- * Child1_2 returns Child1:
- * 	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
- * 	EnumType "child2" "end";
+ * Child1_2 Child1:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	enumType=EnumType // this is not ok
+ * 	'child2' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
-// EnumType "child2" "end"
+// name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+// 'child2' 'end'
 protected class Child1_2_Group extends GroupToken {
 	
 	public Child1_2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2026,7 +2051,7 @@ protected class Child1_2_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child1_2_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child1_2_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2048,7 +2073,7 @@ protected class Child1_2_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child1_2_Group_2 extends GroupToken {
 	
 	public Child1_2_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2070,7 +2095,7 @@ protected class Child1_2_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child1_2_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child1_2_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2104,7 +2129,7 @@ protected class Child1_2_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child1_2_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child1_2_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2127,8 +2152,7 @@ protected class Child1_2_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// enumType= // this is not ok
-// EnumType
+// enumType=EnumType
 protected class Child1_2_EnumTypeAssignment_3 extends AssignmentToken  {
 	
 	public Child1_2_EnumTypeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2163,7 +2187,8 @@ protected class Child1_2_EnumTypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child2"
+// // this is not ok
+// 'child2'
 protected class Child1_2_Child2Keyword_4 extends KeywordToken  {
 	
 	public Child1_2_Child2Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2185,7 +2210,7 @@ protected class Child1_2_Child2Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child1_2_EndKeyword_5 extends KeywordToken  {
 	
 	public Child1_2_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2213,14 +2238,15 @@ protected class Child1_2_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child1_3 ****************
  *
- * Child1_3 returns Child1:
- * 	name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
- * 	EnumType "child3" "end";
+ * Child1_3 Child1:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	enumType=EnumType // this is not ok
+ * 	'child3' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? enumType= // this is not ok
-// EnumType "child3" "end"
+// name=ID ':' (bool?='bool' 'keyword')? enumType=EnumType // this is not ok
+// 'child3' 'end'
 protected class Child1_3_Group extends GroupToken {
 	
 	public Child1_3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2282,7 +2308,7 @@ protected class Child1_3_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child1_3_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child1_3_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2304,7 +2330,7 @@ protected class Child1_3_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child1_3_Group_2 extends GroupToken {
 	
 	public Child1_3_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2326,7 +2352,7 @@ protected class Child1_3_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child1_3_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child1_3_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2360,7 +2386,7 @@ protected class Child1_3_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child1_3_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child1_3_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2383,8 +2409,7 @@ protected class Child1_3_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// enumType= // this is not ok
-// EnumType
+// enumType=EnumType
 protected class Child1_3_EnumTypeAssignment_3 extends AssignmentToken  {
 	
 	public Child1_3_EnumTypeAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2419,7 +2444,8 @@ protected class Child1_3_EnumTypeAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child3"
+// // this is not ok
+// 'child3'
 protected class Child1_3_Child3Keyword_4 extends KeywordToken  {
 	
 	public Child1_3_Child3Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2441,7 +2467,7 @@ protected class Child1_3_Child3Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child1_3_EndKeyword_5 extends KeywordToken  {
 	
 	public Child1_3_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2469,12 +2495,15 @@ protected class Child1_3_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Scenario2_1 ****************
  *
- * Scenario2_1 returns Scenario2:
- * 	"2.1" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) "next";
+ * Scenario2_1 Scenario2:
+ * 	'2.1' (child+=Child2_1
+ * 	| child+=Child2_2
+ * 	| child+=Child2_3)
+ * 	'next'
  *
  **/
 
-// "2.1" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) "next"
+// '2.1' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3) 'next'
 protected class Scenario2_1_Group extends GroupToken {
 	
 	public Scenario2_1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2503,7 +2532,7 @@ protected class Scenario2_1_Group extends GroupToken {
 
 }
 
-// "2.1"
+// '2.1'
 protected class Scenario2_1_DigitTwoFullStopDigitOneKeyword_0 extends KeywordToken  {
 	
 	public Scenario2_1_DigitTwoFullStopDigitOneKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2524,7 +2553,7 @@ protected class Scenario2_1_DigitTwoFullStopDigitOneKeyword_0 extends KeywordTok
 
 }
 
-// child+=Child2_1 | child+=Child2_2 | child+=Child2_3
+// (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)
 protected class Scenario2_1_Alternatives_1 extends AlternativesToken {
 
 	public Scenario2_1_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2687,7 +2716,7 @@ protected class Scenario2_1_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_1_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario2_1_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2715,12 +2744,15 @@ protected class Scenario2_1_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario2_2 ****************
  *
- * Scenario2_2 returns Scenario2:
- * 	"2.2" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ "next";
+ * Scenario2_2 Scenario2:
+ * 	'2.2' (child+=Child2_1
+ * 	| child+=Child2_2
+ * 	| child+=Child2_3)+
+ * 	'next'
  *
  **/
 
-// "2.2" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ "next"
+// '2.2' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)+ 'next'
 protected class Scenario2_2_Group extends GroupToken {
 	
 	public Scenario2_2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2749,7 +2781,7 @@ protected class Scenario2_2_Group extends GroupToken {
 
 }
 
-// "2.2"
+// '2.2'
 protected class Scenario2_2_DigitTwoFullStopDigitTwoKeyword_0 extends KeywordToken  {
 	
 	public Scenario2_2_DigitTwoFullStopDigitTwoKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2936,7 +2968,7 @@ protected class Scenario2_2_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_2_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario2_2_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2964,12 +2996,15 @@ protected class Scenario2_2_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario2_3 ****************
  *
- * Scenario2_3 returns Scenario2:
- * 	"2.3" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) "next";
+ * Scenario2_3 Scenario2:
+ * 	'2.3' (child+=Child2_4
+ * 	| child+=Child2_5
+ * 	| child+=Child2_6)
+ * 	'next'
  *
  **/
 
-// "2.3" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) "next"
+// '2.3' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6) 'next'
 protected class Scenario2_3_Group extends GroupToken {
 	
 	public Scenario2_3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -2998,7 +3033,7 @@ protected class Scenario2_3_Group extends GroupToken {
 
 }
 
-// "2.3"
+// '2.3'
 protected class Scenario2_3_DigitTwoFullStopDigitThreeKeyword_0 extends KeywordToken  {
 	
 	public Scenario2_3_DigitTwoFullStopDigitThreeKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3019,7 +3054,7 @@ protected class Scenario2_3_DigitTwoFullStopDigitThreeKeyword_0 extends KeywordT
 
 }
 
-// child+=Child2_4 | child+=Child2_5 | child+=Child2_6
+// (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)
 protected class Scenario2_3_Alternatives_1 extends AlternativesToken {
 
 	public Scenario2_3_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3182,7 +3217,7 @@ protected class Scenario2_3_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_3_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario2_3_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3210,12 +3245,15 @@ protected class Scenario2_3_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario2_4 ****************
  *
- * Scenario2_4 returns Scenario2:
- * 	"2.4" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ "next";
+ * Scenario2_4 Scenario2:
+ * 	'2.4' (child+=Child2_4
+ * 	| child+=Child2_5
+ * 	| child+=Child2_6)+
+ * 	'next'
  *
  **/
 
-// "2.4" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ "next"
+// '2.4' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)+ 'next'
 protected class Scenario2_4_Group extends GroupToken {
 	
 	public Scenario2_4_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3244,7 +3282,7 @@ protected class Scenario2_4_Group extends GroupToken {
 
 }
 
-// "2.4"
+// '2.4'
 protected class Scenario2_4_DigitTwoFullStopDigitFourKeyword_0 extends KeywordToken  {
 	
 	public Scenario2_4_DigitTwoFullStopDigitFourKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3431,7 +3469,7 @@ protected class Scenario2_4_ChildAssignment_1_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_4_NextKeyword_2 extends KeywordToken  {
 	
 	public Scenario2_4_NextKeyword_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3459,12 +3497,16 @@ protected class Scenario2_4_NextKeyword_2 extends KeywordToken  {
 
 /************ begin Rule Scenario2_5 ****************
  *
- * Scenario2_5 returns Scenario2:
- * 	{Scenario2} "2.5" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? "next";
+ * Scenario2_5 Scenario2:
+ * 	{Scenario2}
+ * 	'2.5' (child+=Child2_1
+ * 	| child+=Child2_2
+ * 	| child+=Child2_3)?
+ * 	'next'
  *
  **/
 
-// {Scenario2} "2.5" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? "next"
+// {Scenario2} '2.5' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)? 'next'
 protected class Scenario2_5_Group extends GroupToken {
 	
 	public Scenario2_5_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3519,7 +3561,7 @@ protected class Scenario2_5_Scenario2Action_0 extends ActionToken  {
 	}
 }
 
-// "2.5"
+// '2.5'
 protected class Scenario2_5_DigitTwoFullStopDigitFiveKeyword_1 extends KeywordToken  {
 	
 	public Scenario2_5_DigitTwoFullStopDigitFiveKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3704,7 +3746,7 @@ protected class Scenario2_5_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_5_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario2_5_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3733,12 +3775,16 @@ protected class Scenario2_5_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Scenario2_6 ****************
  *
- * Scenario2_6 returns Scenario2:
- * 	{Scenario2} "2.6" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* "next";
+ * Scenario2_6 Scenario2:
+ * 	{Scenario2}
+ * 	'2.6' (child+=Child2_1
+ * 	| child+=Child2_2
+ * 	| child+=Child2_3)*
+ * 	'next'
  *
  **/
 
-// {Scenario2} "2.6" (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* "next"
+// {Scenario2} '2.6' (child+=Child2_1 | child+=Child2_2 | child+=Child2_3)* 'next'
 protected class Scenario2_6_Group extends GroupToken {
 	
 	public Scenario2_6_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3793,7 +3839,7 @@ protected class Scenario2_6_Scenario2Action_0 extends ActionToken  {
 	}
 }
 
-// "2.6"
+// '2.6'
 protected class Scenario2_6_DigitTwoFullStopDigitSixKeyword_1 extends KeywordToken  {
 	
 	public Scenario2_6_DigitTwoFullStopDigitSixKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3981,7 +4027,7 @@ protected class Scenario2_6_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_6_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario2_6_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4010,12 +4056,16 @@ protected class Scenario2_6_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Scenario2_7 ****************
  *
- * Scenario2_7 returns Scenario2:
- * 	{Scenario2} "2.7" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? "next";
+ * Scenario2_7 Scenario2:
+ * 	{Scenario2}
+ * 	'2.7' (child+=Child2_4
+ * 	| child+=Child2_5
+ * 	| child+=Child2_6)?
+ * 	'next'
  *
  **/
 
-// {Scenario2} "2.7" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? "next"
+// {Scenario2} '2.7' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)? 'next'
 protected class Scenario2_7_Group extends GroupToken {
 	
 	public Scenario2_7_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4070,7 +4120,7 @@ protected class Scenario2_7_Scenario2Action_0 extends ActionToken  {
 	}
 }
 
-// "2.7"
+// '2.7'
 protected class Scenario2_7_DigitTwoFullStopDigitSevenKeyword_1 extends KeywordToken  {
 	
 	public Scenario2_7_DigitTwoFullStopDigitSevenKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4255,7 +4305,7 @@ protected class Scenario2_7_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_7_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario2_7_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4284,12 +4334,16 @@ protected class Scenario2_7_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Scenario2_8 ****************
  *
- * Scenario2_8 returns Scenario2:
- * 	{Scenario2} "2.8" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* "next";
+ * Scenario2_8 Scenario2:
+ * 	{Scenario2}
+ * 	'2.8' (child+=Child2_4
+ * 	| child+=Child2_5
+ * 	| child+=Child2_6)*
+ * 	'next'
  *
  **/
 
-// {Scenario2} "2.8" (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* "next"
+// {Scenario2} '2.8' (child+=Child2_4 | child+=Child2_5 | child+=Child2_6)* 'next'
 protected class Scenario2_8_Group extends GroupToken {
 	
 	public Scenario2_8_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4344,7 +4398,7 @@ protected class Scenario2_8_Scenario2Action_0 extends ActionToken  {
 	}
 }
 
-// "2.8"
+// '2.8'
 protected class Scenario2_8_DigitTwoFullStopDigitEightKeyword_1 extends KeywordToken  {
 	
 	public Scenario2_8_DigitTwoFullStopDigitEightKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4532,7 +4586,7 @@ protected class Scenario2_8_ChildAssignment_2_2 extends AssignmentToken  {
 }
 
 
-// "next"
+// 'next'
 protected class Scenario2_8_NextKeyword_3 extends KeywordToken  {
 	
 	public Scenario2_8_NextKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4561,12 +4615,14 @@ protected class Scenario2_8_NextKeyword_3 extends KeywordToken  {
 
 /************ begin Rule Child2_1 ****************
  *
- * Child2_1 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child1" "end";
+ * Child2_1 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	string=('a' | 'b')
+ * 	'child1' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child1" "end"
+// name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child1' 'end'
 protected class Child2_1_Group extends GroupToken {
 	
 	public Child2_1_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4628,7 +4684,7 @@ protected class Child2_1_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_1_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_1_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4650,7 +4706,7 @@ protected class Child2_1_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_1_Group_2 extends GroupToken {
 	
 	public Child2_1_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4672,7 +4728,7 @@ protected class Child2_1_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_1_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_1_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4706,7 +4762,7 @@ protected class Child2_1_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_1_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_1_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4729,7 +4785,7 @@ protected class Child2_1_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string=("a" | "b")
+// string=('a' | 'b')
 protected class Child2_1_StringAssignment_3 extends AssignmentToken  {
 	
 	public Child2_1_StringAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4769,7 +4825,7 @@ protected class Child2_1_StringAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child1"
+// 'child1'
 protected class Child2_1_Child1Keyword_4 extends KeywordToken  {
 	
 	public Child2_1_Child1Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4791,7 +4847,7 @@ protected class Child2_1_Child1Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_1_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_1_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4819,12 +4875,14 @@ protected class Child2_1_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child2_2 ****************
  *
- * Child2_2 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child2" "end";
+ * Child2_2 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	string=('a' | 'b')
+ * 	'child2' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child2" "end"
+// name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child2' 'end'
 protected class Child2_2_Group extends GroupToken {
 	
 	public Child2_2_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4886,7 +4944,7 @@ protected class Child2_2_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_2_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_2_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4908,7 +4966,7 @@ protected class Child2_2_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_2_Group_2 extends GroupToken {
 	
 	public Child2_2_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4930,7 +4988,7 @@ protected class Child2_2_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_2_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_2_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4964,7 +5022,7 @@ protected class Child2_2_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_2_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_2_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4987,7 +5045,7 @@ protected class Child2_2_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string=("a" | "b")
+// string=('a' | 'b')
 protected class Child2_2_StringAssignment_3 extends AssignmentToken  {
 	
 	public Child2_2_StringAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5027,7 +5085,7 @@ protected class Child2_2_StringAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child2"
+// 'child2'
 protected class Child2_2_Child2Keyword_4 extends KeywordToken  {
 	
 	public Child2_2_Child2Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5049,7 +5107,7 @@ protected class Child2_2_Child2Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_2_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_2_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5077,12 +5135,14 @@ protected class Child2_2_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child2_3 ****************
  *
- * Child2_3 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child3" "end";
+ * Child2_3 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')?
+ * 	string=('a' | 'b')
+ * 	'child3' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? string=("a" | "b") "child3" "end"
+// name=ID ':' (bool?='bool' 'keyword')? string=('a' | 'b') 'child3' 'end'
 protected class Child2_3_Group extends GroupToken {
 	
 	public Child2_3_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5144,7 +5204,7 @@ protected class Child2_3_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_3_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_3_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5166,7 +5226,7 @@ protected class Child2_3_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_3_Group_2 extends GroupToken {
 	
 	public Child2_3_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5188,7 +5248,7 @@ protected class Child2_3_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_3_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_3_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5222,7 +5282,7 @@ protected class Child2_3_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_3_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_3_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5245,7 +5305,7 @@ protected class Child2_3_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string=("a" | "b")
+// string=('a' | 'b')
 protected class Child2_3_StringAssignment_3 extends AssignmentToken  {
 	
 	public Child2_3_StringAssignment_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5285,7 +5345,7 @@ protected class Child2_3_StringAssignment_3 extends AssignmentToken  {
 
 }
 
-// "child3"
+// 'child3'
 protected class Child2_3_Child3Keyword_4 extends KeywordToken  {
 	
 	public Child2_3_Child3Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5307,7 +5367,7 @@ protected class Child2_3_Child3Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_3_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_3_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5335,12 +5395,13 @@ protected class Child2_3_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child2_4 ****************
  *
- * Child2_4 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child1" "end";
+ * Child2_4 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+ * 	'child1' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child1" "end"
+// name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child1' 'end'
 protected class Child2_4_Group extends GroupToken {
 	
 	public Child2_4_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5402,7 +5463,7 @@ protected class Child2_4_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_4_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_4_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5424,7 +5485,7 @@ protected class Child2_4_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_4_Group_2 extends GroupToken {
 	
 	public Child2_4_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5446,7 +5507,7 @@ protected class Child2_4_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_4_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_4_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5480,7 +5541,7 @@ protected class Child2_4_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_4_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_4_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5503,7 +5564,7 @@ protected class Child2_4_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string="a" | string="b"
+// (string='a' | string='b')
 protected class Child2_4_Alternatives_3 extends AlternativesToken {
 
 	public Child2_4_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5526,7 +5587,7 @@ protected class Child2_4_Alternatives_3 extends AlternativesToken {
 
 }
 
-// string="a"
+// string='a'
 protected class Child2_4_StringAssignment_3_0 extends AssignmentToken  {
 	
 	public Child2_4_StringAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5561,7 +5622,7 @@ protected class Child2_4_StringAssignment_3_0 extends AssignmentToken  {
 
 }
 
-// string="b"
+// string='b'
 protected class Child2_4_StringAssignment_3_1 extends AssignmentToken  {
 	
 	public Child2_4_StringAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5597,7 +5658,7 @@ protected class Child2_4_StringAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "child1"
+// 'child1'
 protected class Child2_4_Child1Keyword_4 extends KeywordToken  {
 	
 	public Child2_4_Child1Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5619,7 +5680,7 @@ protected class Child2_4_Child1Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_4_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_4_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5647,12 +5708,13 @@ protected class Child2_4_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child2_5 ****************
  *
- * Child2_5 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child2" "end";
+ * Child2_5 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+ * 	'child2' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child2" "end"
+// name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child2' 'end'
 protected class Child2_5_Group extends GroupToken {
 	
 	public Child2_5_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5714,7 +5776,7 @@ protected class Child2_5_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_5_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_5_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5736,7 +5798,7 @@ protected class Child2_5_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_5_Group_2 extends GroupToken {
 	
 	public Child2_5_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5758,7 +5820,7 @@ protected class Child2_5_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_5_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_5_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5792,7 +5854,7 @@ protected class Child2_5_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_5_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_5_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5815,7 +5877,7 @@ protected class Child2_5_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string="a" | string="b"
+// (string='a' | string='b')
 protected class Child2_5_Alternatives_3 extends AlternativesToken {
 
 	public Child2_5_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5838,7 +5900,7 @@ protected class Child2_5_Alternatives_3 extends AlternativesToken {
 
 }
 
-// string="a"
+// string='a'
 protected class Child2_5_StringAssignment_3_0 extends AssignmentToken  {
 	
 	public Child2_5_StringAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5873,7 +5935,7 @@ protected class Child2_5_StringAssignment_3_0 extends AssignmentToken  {
 
 }
 
-// string="b"
+// string='b'
 protected class Child2_5_StringAssignment_3_1 extends AssignmentToken  {
 	
 	public Child2_5_StringAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5909,7 +5971,7 @@ protected class Child2_5_StringAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "child2"
+// 'child2'
 protected class Child2_5_Child2Keyword_4 extends KeywordToken  {
 	
 	public Child2_5_Child2Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5931,7 +5993,7 @@ protected class Child2_5_Child2Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_5_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_5_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -5959,12 +6021,13 @@ protected class Child2_5_EndKeyword_5 extends KeywordToken  {
 
 /************ begin Rule Child2_6 ****************
  *
- * Child2_6 returns Child2:
- * 	name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child3" "end";
+ * Child2_6 Child2:
+ * 	name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b')
+ * 	'child3' 'end'
  *
  **/
 
-// name=ID ":" (bool?="bool" "keyword")? (string="a" | string="b") "child3" "end"
+// name=ID ':' (bool?='bool' 'keyword')? (string='a' | string='b') 'child3' 'end'
 protected class Child2_6_Group extends GroupToken {
 	
 	public Child2_6_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6026,7 +6089,7 @@ protected class Child2_6_NameAssignment_0 extends AssignmentToken  {
 
 }
 
-// ":"
+// ':'
 protected class Child2_6_ColonKeyword_1 extends KeywordToken  {
 	
 	public Child2_6_ColonKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6048,7 +6111,7 @@ protected class Child2_6_ColonKeyword_1 extends KeywordToken  {
 
 }
 
-// (bool?="bool" "keyword")?
+// (bool?='bool' 'keyword')?
 protected class Child2_6_Group_2 extends GroupToken {
 	
 	public Child2_6_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6070,7 +6133,7 @@ protected class Child2_6_Group_2 extends GroupToken {
 
 }
 
-// bool?="bool"
+// bool?='bool'
 protected class Child2_6_BoolAssignment_2_0 extends AssignmentToken  {
 	
 	public Child2_6_BoolAssignment_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6104,7 +6167,7 @@ protected class Child2_6_BoolAssignment_2_0 extends AssignmentToken  {
 
 }
 
-// "keyword"
+// 'keyword'
 protected class Child2_6_KeywordKeyword_2_1 extends KeywordToken  {
 	
 	public Child2_6_KeywordKeyword_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6127,7 +6190,7 @@ protected class Child2_6_KeywordKeyword_2_1 extends KeywordToken  {
 }
 
 
-// string="a" | string="b"
+// (string='a' | string='b')
 protected class Child2_6_Alternatives_3 extends AlternativesToken {
 
 	public Child2_6_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6150,7 +6213,7 @@ protected class Child2_6_Alternatives_3 extends AlternativesToken {
 
 }
 
-// string="a"
+// string='a'
 protected class Child2_6_StringAssignment_3_0 extends AssignmentToken  {
 	
 	public Child2_6_StringAssignment_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6185,7 +6248,7 @@ protected class Child2_6_StringAssignment_3_0 extends AssignmentToken  {
 
 }
 
-// string="b"
+// string='b'
 protected class Child2_6_StringAssignment_3_1 extends AssignmentToken  {
 	
 	public Child2_6_StringAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6221,7 +6284,7 @@ protected class Child2_6_StringAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// "child3"
+// 'child3'
 protected class Child2_6_Child3Keyword_4 extends KeywordToken  {
 	
 	public Child2_6_Child3Keyword_4(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -6243,7 +6306,7 @@ protected class Child2_6_Child3Keyword_4 extends KeywordToken  {
 
 }
 
-// "end"
+// 'end'
 protected class Child2_6_EndKeyword_5 extends KeywordToken  {
 	
 	public Child2_6_EndKeyword_5(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {

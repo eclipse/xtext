@@ -42,12 +42,14 @@ protected class ThisRootNode extends RootToken {
 
 /************ begin Rule RootModel ****************
  *
- * RootModel returns ModelElement:
- * 	({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?;
+ * RootModel ModelElement:
+ * 	{RootModel} name=ID type=[ModelElement]? ('{'
+ * 	elements+=ModelAttribute*
+ * 	'}')??
  *
  **/
 
-// ({RootModel} name=ID type=[ModelElement]? ("{" elements+=ModelAttribute* "}")?)?
+// {RootModel} name=ID type=[ModelElement]? ('{' elements+=ModelAttribute* '}')??
 protected class RootModel_Group extends GroupToken {
 	
 	public RootModel_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -175,7 +177,7 @@ protected class RootModel_TypeAssignment_2 extends AssignmentToken  {
 
 }
 
-// ("{" elements+=ModelAttribute* "}")?
+// ('{' elements+=ModelAttribute* '}')?
 protected class RootModel_Group_3 extends GroupToken {
 	
 	public RootModel_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -197,7 +199,7 @@ protected class RootModel_Group_3 extends GroupToken {
 
 }
 
-// "{"
+// '{'
 protected class RootModel_LeftCurlyBracketKeyword_3_0 extends KeywordToken  {
 	
 	public RootModel_LeftCurlyBracketKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -267,7 +269,7 @@ protected class RootModel_ElementsAssignment_3_1 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class RootModel_RightCurlyBracketKeyword_3_2 extends KeywordToken  {
 	
 	public RootModel_RightCurlyBracketKeyword_3_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -297,12 +299,12 @@ protected class RootModel_RightCurlyBracketKeyword_3_2 extends KeywordToken  {
 /************ begin Rule ModelElement ****************
  *
  * ModelElement:
- * 	firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute*
- * 	"}");
+ * 	firstReference=[ModelElement] (':' name=ID)? secondReference=[ModelElement]? (';'
+ * 	| '{' elements+=ModelAttribute* '}');
  *
  **/
 
-// firstReference=[ModelElement] (":" name=ID)? secondReference=[ModelElement]? (";" | "{" elements+=ModelAttribute* "}")
+// firstReference=[ModelElement] (':' name=ID)? secondReference=[ModelElement]? (';' | '{' elements+=ModelAttribute* '}')
 protected class ModelElement_Group extends GroupToken {
 	
 	public ModelElement_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -367,7 +369,7 @@ protected class ModelElement_FirstReferenceAssignment_0 extends AssignmentToken 
 
 }
 
-// (":" name=ID)?
+// (':' name=ID)?
 protected class ModelElement_Group_1 extends GroupToken {
 	
 	public ModelElement_Group_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -389,7 +391,7 @@ protected class ModelElement_Group_1 extends GroupToken {
 
 }
 
-// ":"
+// ':'
 protected class ModelElement_ColonKeyword_1_0 extends KeywordToken  {
 	
 	public ModelElement_ColonKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -484,7 +486,7 @@ protected class ModelElement_SecondReferenceAssignment_2 extends AssignmentToken
 
 }
 
-// ";" | "{" elements+=ModelAttribute* "}"
+// (';' | '{' elements+=ModelAttribute* '}')
 protected class ModelElement_Alternatives_3 extends AlternativesToken {
 
 	public ModelElement_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -507,7 +509,7 @@ protected class ModelElement_Alternatives_3 extends AlternativesToken {
 
 }
 
-// ";"
+// ';'
 protected class ModelElement_SemicolonKeyword_3_0 extends KeywordToken  {
 	
 	public ModelElement_SemicolonKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -531,7 +533,7 @@ protected class ModelElement_SemicolonKeyword_3_0 extends KeywordToken  {
 
 }
 
-// "{" elements+=ModelAttribute* "}"
+// '{' elements+=ModelAttribute* '}'
 protected class ModelElement_Group_3_1 extends GroupToken {
 	
 	public ModelElement_Group_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -553,7 +555,7 @@ protected class ModelElement_Group_3_1 extends GroupToken {
 
 }
 
-// "{"
+// '{'
 protected class ModelElement_LeftCurlyBracketKeyword_3_1_0 extends KeywordToken  {
 	
 	public ModelElement_LeftCurlyBracketKeyword_3_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -624,7 +626,7 @@ protected class ModelElement_ElementsAssignment_3_1_1 extends AssignmentToken  {
 	}	
 }
 
-// "}"
+// '}'
 protected class ModelElement_RightCurlyBracketKeyword_3_1_2 extends KeywordToken  {
 	
 	public ModelElement_RightCurlyBracketKeyword_3_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -769,11 +771,11 @@ protected class ModelAttribute_AttributeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule Attribute ****************
  *
  * Attribute:
- * 	feature=[ModelElement] "=" value=STRING;
+ * 	feature=[ModelElement] '=' value=STRING;
  *
  **/
 
-// feature=[ModelElement] "=" value=STRING
+// feature=[ModelElement] '=' value=STRING
 protected class Attribute_Group extends GroupToken {
 	
 	public Attribute_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -838,7 +840,7 @@ protected class Attribute_FeatureAssignment_0 extends AssignmentToken  {
 
 }
 
-// "="
+// '='
 protected class Attribute_EqualsSignKeyword_1 extends KeywordToken  {
 	
 	public Attribute_EqualsSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
