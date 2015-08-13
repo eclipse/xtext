@@ -33,6 +33,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.NamedArgument;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -409,10 +410,32 @@ public class XtextLinker extends Linker {
 		}
 		final List<RuleCall> allRuleCalls = EcoreUtil2.getAllContentsOfType(grammar, RuleCall.class);
 		for (RuleCall call : allRuleCalls) {
-			if (call.getRule() != null && !call.isExplicitlyCalled()) {
-				AbstractRule rule = rulePerName.get(call.getRule().getName());
-				if (rule != null)
+			AbstractRule calledRule = call.getRule();
+			if (calledRule != null && !call.isExplicitlyCalled()) {
+				AbstractRule rule = rulePerName.get(calledRule.getName());
+				if (rule != null) {
 					call.setRule(rule);
+					if (!call.getArguments().isEmpty()) {
+						if (calledRule instanceof ParserRule && rule instanceof ParserRule) {
+							updateNamedArguments(
+									call,
+									((ParserRule) calledRule).getParameters(),
+									((ParserRule) rule).getParameters());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private void updateNamedArguments(RuleCall call, List<Parameter> superParams,
+			List<Parameter> overridingParameters) {
+		for(NamedArgument argument: call.getArguments()) {
+			Parameter superParameter = argument.getParameter();
+			for(int i = 0, max = Math.min(superParams.size(), overridingParameters.size()); i <  max ; i++) {
+				if (superParams.get(i) == superParameter) {
+					argument.setParameter(overridingParameters.get(i));
+				}
 			}
 		}
 	}
