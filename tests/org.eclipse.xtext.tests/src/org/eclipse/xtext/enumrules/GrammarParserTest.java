@@ -278,6 +278,6 @@ public class GrammarParserTest extends AbstractEnumRulesTest {
 		assertEquals(grammar.eResource().getErrors().toString(), 1, grammar.eResource().getErrors().size());
 		TransformationDiagnostic diag = (TransformationDiagnostic) grammar.eResource().getErrors().get(0);
 		int offset = diag.getOffset();
-		assertEquals(modelAsString.lastIndexOf("enum ExistingEnum"), offset);
+		assertEquals(modelAsString.lastIndexOf("ExistingEnum"), offset);
 	}
 }

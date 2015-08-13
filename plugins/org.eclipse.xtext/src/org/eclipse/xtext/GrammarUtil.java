@@ -194,9 +194,11 @@ public class GrammarUtil {
 	public static boolean isEObjectRule(EObject grammarElement) {
 		if (grammarElement instanceof ParserRule) {
 			ParserRule rule = (ParserRule) grammarElement;
+			if (rule.isWildcard()) {
+				return true;
+			}
 			TypeRef type = rule.getType();
-			// wildcard fragments are considered to be EObjectRules, too
-			return type == null || type.getClassifier() instanceof EClass;
+			return type != null && type.getClassifier() instanceof EClass;
 		}
 		return false;
 	}
