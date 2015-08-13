@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.commands.operations.IUndoableOperation;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -24,6 +27,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.undo.MoveResourcesOperation;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -61,6 +66,7 @@ import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
+import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -113,6 +119,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private OverrideHelper overrideHelper;
 	
 	@Inject private IBatchTypeResolver batchTypeResolver;
+	
+	@Inject private ProjectUtil projectUtil; 
 	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			Diagnostic.LINKING_DIAGNOSTIC,
@@ -481,6 +489,26 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							file.setPackage(newPackageName);
 						}
 			});
+		}
+	}
+
+	@Fix(IssueCodes.WRONG_FILE)
+	public void fixFileName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData() != null && issue.getData().length == 1) {
+			final String expectedFileName = issue.getData()[0];
+			final IFile iFile = projectUtil.findFileStorage(issue.getUriToProblem(), true);
+			final IPath pathToMoveTo = iFile.getParent().getProjectRelativePath().append(expectedFileName)
+					.addFileExtension(iFile.getFileExtension());
+			if (!iFile.getProject().exists(pathToMoveTo)) {
+				final String label = "Rename file to '" + expectedFileName + ".xtend'";
+				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
+					@Override
+					public void apply(IModificationContext context) throws Exception {
+						IUndoableOperation op = new MoveResourcesOperation(iFile, pathToMoveTo, label);
+						PlatformUI.getWorkbench().getOperationSupport().getOperationHistory().execute(op, null, null);
+					}
+				});
+			}
 		}
 	}
 

@@ -111,7 +111,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					}
 				}
 			''',
-			'UserCode.xtend' -> '''
+			'Bug441081Client.xtend' -> '''
 				import bug441081.Bug441081
 				
 				@Bug441081
@@ -2571,7 +2571,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					}
 				}
 			",
-			'myusercode/UserCode.xtend' -> '''
+			'myusercode/MyClass.xtend' -> '''
 				package myusercode
 				
 				class MyClass {

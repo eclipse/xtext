@@ -253,7 +253,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("UserCode.xtend", _builder_1.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("Bug441081Client.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       @Override
       public void apply(final CompilationUnitImpl it) {
@@ -5320,7 +5320,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
+    Pair<String, String> _mappedTo_1 = Pair.<String, String>of("myusercode/MyClass.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
       @Override
       public void apply(final CompilationUnitImpl it) {
