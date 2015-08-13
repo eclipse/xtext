@@ -116,11 +116,7 @@ RuleCall :
 
 NamedArgument:
 	( parameter=[Parameter|ID] calledByName?= '=')?
-	( value=ConditionOrLiteral )
-;
-
-ConditionOrLiteral returns Condition:
-	LiteralCondition | Disjunction
+	( value=Disjunction )
 ;
 
 LiteralCondition:
@@ -140,7 +136,7 @@ Negation returns Condition:
 ;
 
 Atom returns Condition:
-	ParameterReference | ParenthesizedCondition
+	ParameterReference | ParenthesizedCondition | LiteralCondition
 ;
 
 ParenthesizedCondition returns Condition:
@@ -161,10 +157,6 @@ RuleID returns ecore::EString:
 
 ValidID returns ecore::EString:
   ID | 'true' | 'false'
-;
-
-Boolean returns ecore::EBoolean:
-	'true' | 'false'
 ;
 
 PredicatedKeyword returns Keyword:
