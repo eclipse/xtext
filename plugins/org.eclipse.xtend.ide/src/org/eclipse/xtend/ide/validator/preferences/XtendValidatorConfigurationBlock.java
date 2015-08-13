@@ -28,17 +28,18 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 		super.fillSettingsPage(composite, nColumns, defaultIndent);
-		fillDispatchSection(new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns),
-				defaultIndent));
+		fillDispatchSection(
+				new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns), defaultIndent));
 		fillJavaDocSection(new ComboBoxBuilder(this, createSection("Javadoc", composite, nColumns), defaultIndent));
-		fillActiveAnnotationSection(new ComboBoxBuilder(this, createSection("Active Annotations", composite, nColumns),
-				defaultIndent));
+		fillActiveAnnotationSection(
+				new ComboBoxBuilder(this, createSection("Active Annotations", composite, nColumns), defaultIndent));
 	}
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
 		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:")
 				.addComboBox(SINGLE_DISPATCH_FUNCTION, "Single dispatch method:")
-				.addComboBox(DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS, "Dispatch method arguments with different primitive types:");
+				.addComboBox(DISPATCH_FUNCTIONS_DIFFERENT_PRIMITIVE_ARGS,
+						"Dispatch method arguments with different primitive types:");
 	}
 
 	/**
@@ -68,7 +69,8 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	protected void fillCodingStyleSection(ComboBoxBuilder builder) {
 		super.fillCodingStyleSection(builder);
 		builder.addComboBox(API_TYPE_INFERENCE, "Type inference for API methods/fields:")
-				.addComboBox(IMPLICIT_RETURN, "Implicit return:");
+				.addComboBox(IMPLICIT_RETURN, "Implicit return:")
+				.addComboBox(WRONG_FILE, "File name doesn't match type name:");
 	}
 
 	@Override
@@ -77,14 +79,14 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		createHorizontalLine(settingsPage, nColumns);
 		String[] values = new String[] { SeverityConverter.SEVERITY_ERROR, SeverityConverter.SEVERITY_WARNING,
 				SeverityConverter.SEVERITY_IGNORE };
-		String[] valueLabels = new String[] { "Errors only",
-				"All", "None" };
+		String[] valueLabels = new String[] { "Errors only", "All", "None" };
 		Composite composite = new Composite(settingsPage, SWT.NONE);
 		GridLayout layout = new GridLayout(nColumns, false);
 		layout.marginHeight = 0;
 		composite.setLayoutData(new GridData(GridData.FILL, GridData.CENTER, true, false, nColumns, 1));
 		composite.setLayout(layout);
-		addComboBox(composite, "Display Java Problems in Xtend", IssueCodes.COPY_JAVA_PROBLEMS, defaultIndent, values, valueLabels);
+		addComboBox(composite, "Display Java Problems in Xtend", IssueCodes.COPY_JAVA_PROBLEMS, defaultIndent, values,
+				valueLabels);
 	}
 
 	private void createHorizontalLine(Composite settingsPage, int nColumns) {
@@ -92,17 +94,18 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		horizontalLine.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, false, nColumns, 1));
 		horizontalLine.setFont(settingsPage.getFont());
 	}
-	
+
 	@Override
 	public void dispose() {
 		storeSectionExpansionStates(getDialogSettings());
 		super.dispose();
 	}
+
 	@Override
 	protected IDialogSettings getDialogSettings() {
 		IDialogSettings dialogSettings = super.getDialogSettings();
 		IDialogSettings section = dialogSettings.getSection(SETTINGS_SECTION_NAME);
-		if(section==null) {
+		if (section == null) {
 			return dialogSettings.addNewSection(SETTINGS_SECTION_NAME);
 		}
 		return section;
