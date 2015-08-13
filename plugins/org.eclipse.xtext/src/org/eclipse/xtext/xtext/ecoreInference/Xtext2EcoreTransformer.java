@@ -231,6 +231,11 @@ public class Xtext2EcoreTransformer {
 						throw new IllegalStateException("Unknown rule type: " + rule.eClass().getName());
 					}
 				}
+				if (isWildcardFragment(rule)) {
+					for (Grammar usedGrammar: grammar.getUsedGrammars()) {
+						deriveTypeHierarchyFromOverridden((ParserRule) rule, usedGrammar);
+					}
+				}
 			}
 			catch (TransformationException e) {
 				reportError(e);
@@ -964,7 +969,7 @@ public class Xtext2EcoreTransformer {
 	private EClassifierInfo findOrCreateEClassifierInfo(TypeRef typeRef, String name, boolean createIfMissing) throws TransformationException {
 		if (typeRef.getClassifier() != null && typeRef.getMetamodel() == null)
 			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias,
-					"Cannot find metamodel for type '" + typeRef.getClassifier().getName() + "'", typeRef);
+					"Cannot find EPackage for type '" + typeRef.getClassifier().getName() + "'", typeRef);
 		EClassifierInfo info = eClassifierInfos.getInfo(typeRef);
 		if (info == null) {
 			// we assumend EString for terminal rules and datatype rules, so
@@ -996,7 +1001,7 @@ public class Xtext2EcoreTransformer {
 		AbstractMetamodelDeclaration metaModel = typeRef.getMetamodel();
 		if (metaModel == null)
 			throw new TransformationException(TransformationErrorCode.UnknownMetaModelAlias, "Cannot create type for " + classifierName
-					+ " because its MetaModel is unknown.", typeRef);
+					+ " because its EPackage is unknown.", typeRef);
 		EPackage generatedEPackage = getGeneratedEPackage(metaModel);
 		if (generatedEPackage == null) {
 			throw new TransformationException(TransformationErrorCode.CannotCreateTypeInSealedMetamodel,
