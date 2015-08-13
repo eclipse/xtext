@@ -399,7 +399,7 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
       }
     }
     _builder.append(" returns ");
-    CharSequence _compileReturns = this.compileReturns(it, options);
+    String _compileReturns = this.compileReturns(it, options);
     _builder.append(_compileReturns, "");
     _builder.newLineIfNotEmpty();
     _builder.append("@init {");
@@ -426,8 +426,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     return _builder.toString();
   }
   
-  protected CharSequence compileReturns(final AbstractRule it, final AntlrOptions options) {
-    CharSequence _switchResult = null;
+  protected String compileReturns(final AbstractRule it, final AntlrOptions options) {
+    String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (it instanceof EnumRule) {
@@ -446,19 +446,17 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     }
     if (!_matched) {
       if (it instanceof ParserRule) {
-        _matched=true;
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("[EObject current=");
-        {
-          boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(it);
-          if (_isEObjectFragmentRule) {
-            _builder.append("in_current");
-          } else {
-            _builder.append("null");
-          }
+        boolean _isEObjectFragmentRule = GrammarUtil.isEObjectFragmentRule(it);
+        if (_isEObjectFragmentRule) {
+          _matched=true;
+          _switchResult = "[EObject current=in_current]";
         }
-        _builder.append("]");
-        _switchResult = _builder;
+      }
+    }
+    if (!_matched) {
+      if (it instanceof ParserRule) {
+        _matched=true;
+        _switchResult = "[EObject current=null]";
       }
     }
     if (!_matched) {

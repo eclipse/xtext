@@ -42,8 +42,8 @@ String toJavaIdentifier(String text, boolean uppercaseFirst):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.toJavaIdentifier(java.lang.String, java.lang.Boolean);
 	
 /** 
- * Creates an identifier for a Rule which is a valid Java idetifier and unique within 
- * the Rule's grammar.
+ * Creates an identifier for a Rule which is a valid Java identifier and unique within 
+ * the Rule's grammar including its super grammars.
  * @param rule the Rule
  * @return the identifier
  */
@@ -51,12 +51,12 @@ String gaRuleIdentifyer(AbstractRule this):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getUniqueRuleName(org.eclipse.xtext.AbstractRule);
 	
 /** 
- * Creates an identifier for a Rule which is a valid Java idetifier and unique within 
- * the Rule's grammar.
+ * Creates an identifier for a Rule which is a valid Java identifier and unique within 
+ * the Rule's grammar (excluding its super grammars).
  * @param rule the Rule
  * @return the identifier
  */
-String gaBaseRuleIdentifyer(AbstractRule rule):
+String gaBaseRuleIdentifier(AbstractRule rule):
 	rule.name.toJavaIdentifier(true);
 	
 /**
@@ -103,7 +103,7 @@ String gaRuleAccessMethodName(AbstractRule rule):
  * @return the method's name.
  */
 String gaBaseRuleAccessMethodName(AbstractRule rule):
-	"get" + rule.gaBaseRuleIdentifyer() + "Rule";
+	"get" + rule.gaBaseRuleIdentifier() + "Rule";
 		
 /**
  * Returns the method name for accessing a rule's content via a ParseRuleAccess implementation.
@@ -119,7 +119,7 @@ String gaRuleElementsMethodName(AbstractRule rule):
  * @return the method's name.
  */
 String gaBaseRuleElementsMethodName(AbstractRule rule):
-	"get" + rule.gaBaseRuleIdentifyer() + "Access";
+	"get" + rule.gaBaseRuleIdentifier() + "Access";
 
 /**
  * Returns the method name for accessing an element via a GrammarAccess implementation.
@@ -145,7 +145,7 @@ String gaRuleAccessorClassName(AbstractRule rule):
  * @return the simple class name
  */	
 String gaBaseRuleAccessorClassName(AbstractRule rule):
-	rule.gaBaseRuleIdentifyer() + "Elements";
+	rule.gaBaseRuleIdentifier() + "Elements";
 	
 /**
  * Returns the invokation of the rule accessor method as Java statement.
