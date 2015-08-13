@@ -1611,9 +1611,9 @@ ruleNamedArgument returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getNamedArgumentAccess().getValueConditionOrLiteralParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getNamedArgumentAccess().getValueDisjunctionParserRuleCall_1_0()); 
 	    }
-		lv_value_2_0=ruleConditionOrLiteral		{
+		lv_value_2_0=ruleDisjunction		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getNamedArgumentRule());
 	        }
@@ -1621,52 +1621,12 @@ ruleNamedArgument returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"org.eclipse.xtext.Xtext.ConditionOrLiteral");
+        		"org.eclipse.xtext.Xtext.Disjunction");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
 ))
-;
-
-
-
-
-
-// Entry rule entryRuleConditionOrLiteral
-entryRuleConditionOrLiteral returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getConditionOrLiteralRule()); }
-	 iv_ruleConditionOrLiteral=ruleConditionOrLiteral 
-	 { $current=$iv_ruleConditionOrLiteral.current; } 
-	 EOF 
-;
-
-// Rule ConditionOrLiteral
-ruleConditionOrLiteral returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-    { 
-        newCompositeNode(grammarAccess.getConditionOrLiteralAccess().getLiteralConditionParserRuleCall_0()); 
-    }
-    this_LiteralCondition_0=ruleLiteralCondition
-    { 
-        $current = $this_LiteralCondition_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getConditionOrLiteralAccess().getDisjunctionParserRuleCall_1()); 
-    }
-    this_Disjunction_1=ruleDisjunction
-    { 
-        $current = $this_Disjunction_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
 ;
 
 
@@ -1928,6 +1888,16 @@ ruleAtom returns [EObject current=null]
         $current = $this_ParenthesizedCondition_1.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getAtomAccess().getLiteralConditionParserRuleCall_2()); 
+    }
+    this_LiteralCondition_2=ruleLiteralCondition
+    { 
+        $current = $this_LiteralCondition_2.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2129,8 +2099,6 @@ ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 )
     ;
-
-
 
 
 

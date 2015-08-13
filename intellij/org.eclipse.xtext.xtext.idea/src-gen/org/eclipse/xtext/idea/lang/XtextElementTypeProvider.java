@@ -1239,8 +1239,8 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createNamedArgument_ValueAssignment_1ElementType() {
 			return new IGrammarAwareElementType("NamedArgument_ValueAssignment_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedArgumentAccess().getValueAssignment_1());
 		}
-		public static IGrammarAwareElementType createNamedArgument_ValueConditionOrLiteralParserRuleCall_1_0ElementType() {
-			return new IGrammarAwareElementType("NamedArgument_ValueConditionOrLiteralParserRuleCall_1_0_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedArgumentAccess().getValueConditionOrLiteralParserRuleCall_1_0());
+		public static IGrammarAwareElementType createNamedArgument_ValueDisjunctionParserRuleCall_1_0ElementType() {
+			return new IGrammarAwareElementType("NamedArgument_ValueDisjunctionParserRuleCall_1_0_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getNamedArgumentAccess().getValueDisjunctionParserRuleCall_1_0());
 		}
 	}
 
@@ -1262,30 +1262,7 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType NamedArgument_ValueAssignment_1_ELEMENT_TYPE = associate(NamedArgumentFactory.createNamedArgument_ValueAssignment_1ElementType());
 
-	public static final IGrammarAwareElementType NamedArgument_ValueConditionOrLiteralParserRuleCall_1_0_ELEMENT_TYPE = associate(NamedArgumentFactory.createNamedArgument_ValueConditionOrLiteralParserRuleCall_1_0ElementType());
-
-	private static class ConditionOrLiteralFactory {
-		public static IGrammarAwareElementType createConditionOrLiteralElementType() {
-			return new IGrammarAwareElementType("ConditionOrLiteral_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getConditionOrLiteralRule());
-		}
-		public static IGrammarAwareElementType createConditionOrLiteral_AlternativesElementType() {
-			return new IGrammarAwareElementType("ConditionOrLiteral_Alternatives_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getConditionOrLiteralAccess().getAlternatives());
-		}
-		public static IGrammarAwareElementType createConditionOrLiteral_LiteralConditionParserRuleCall_0ElementType() {
-			return new IGrammarAwareElementType("ConditionOrLiteral_LiteralConditionParserRuleCall_0_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getConditionOrLiteralAccess().getLiteralConditionParserRuleCall_0());
-		}
-		public static IGrammarAwareElementType createConditionOrLiteral_DisjunctionParserRuleCall_1ElementType() {
-			return new IGrammarAwareElementType("ConditionOrLiteral_DisjunctionParserRuleCall_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getConditionOrLiteralAccess().getDisjunctionParserRuleCall_1());
-		}
-	}
-
-	public static final IGrammarAwareElementType ConditionOrLiteral_ELEMENT_TYPE = associate(ConditionOrLiteralFactory.createConditionOrLiteralElementType());
-
-	public static final IGrammarAwareElementType ConditionOrLiteral_Alternatives_ELEMENT_TYPE = associate(ConditionOrLiteralFactory.createConditionOrLiteral_AlternativesElementType());
-
-	public static final IGrammarAwareElementType ConditionOrLiteral_LiteralConditionParserRuleCall_0_ELEMENT_TYPE = associate(ConditionOrLiteralFactory.createConditionOrLiteral_LiteralConditionParserRuleCall_0ElementType());
-
-	public static final IGrammarAwareElementType ConditionOrLiteral_DisjunctionParserRuleCall_1_ELEMENT_TYPE = associate(ConditionOrLiteralFactory.createConditionOrLiteral_DisjunctionParserRuleCall_1ElementType());
+	public static final IGrammarAwareElementType NamedArgument_ValueDisjunctionParserRuleCall_1_0_ELEMENT_TYPE = associate(NamedArgumentFactory.createNamedArgument_ValueDisjunctionParserRuleCall_1_0ElementType());
 
 	private static class LiteralConditionFactory {
 		public static IGrammarAwareElementType createLiteralConditionElementType() {
@@ -1467,6 +1444,9 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createAtom_ParenthesizedConditionParserRuleCall_1ElementType() {
 			return new IGrammarAwareElementType("Atom_ParenthesizedConditionParserRuleCall_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getAtomAccess().getParenthesizedConditionParserRuleCall_1());
 		}
+		public static IGrammarAwareElementType createAtom_LiteralConditionParserRuleCall_2ElementType() {
+			return new IGrammarAwareElementType("Atom_LiteralConditionParserRuleCall_2_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getAtomAccess().getLiteralConditionParserRuleCall_2());
+		}
 	}
 
 	public static final IGrammarAwareElementType Atom_ELEMENT_TYPE = associate(AtomFactory.createAtomElementType());
@@ -1476,6 +1456,8 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 	public static final IGrammarAwareElementType Atom_ParameterReferenceParserRuleCall_0_ELEMENT_TYPE = associate(AtomFactory.createAtom_ParameterReferenceParserRuleCall_0ElementType());
 
 	public static final IGrammarAwareElementType Atom_ParenthesizedConditionParserRuleCall_1_ELEMENT_TYPE = associate(AtomFactory.createAtom_ParenthesizedConditionParserRuleCall_1ElementType());
+
+	public static final IGrammarAwareElementType Atom_LiteralConditionParserRuleCall_2_ELEMENT_TYPE = associate(AtomFactory.createAtom_LiteralConditionParserRuleCall_2ElementType());
 
 	private static class ParenthesizedConditionFactory {
 		public static IGrammarAwareElementType createParenthesizedConditionElementType() {
@@ -1611,29 +1593,6 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 	public static final IGrammarAwareElementType ValidID_TrueKeyword_1_ELEMENT_TYPE = associate(ValidIDFactory.createValidID_TrueKeyword_1ElementType());
 
 	public static final IGrammarAwareElementType ValidID_FalseKeyword_2_ELEMENT_TYPE = associate(ValidIDFactory.createValidID_FalseKeyword_2ElementType());
-
-	private static class BooleanFactory {
-		public static IGrammarAwareElementType createBooleanElementType() {
-			return new IGrammarAwareElementType("Boolean_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getBooleanRule());
-		}
-		public static IGrammarAwareElementType createBoolean_AlternativesElementType() {
-			return new IGrammarAwareElementType("Boolean_Alternatives_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getBooleanAccess().getAlternatives());
-		}
-		public static IGrammarAwareElementType createBoolean_TrueKeyword_0ElementType() {
-			return new IGrammarAwareElementType("Boolean_TrueKeyword_0_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getBooleanAccess().getTrueKeyword_0());
-		}
-		public static IGrammarAwareElementType createBoolean_FalseKeyword_1ElementType() {
-			return new IGrammarAwareElementType("Boolean_FalseKeyword_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getBooleanAccess().getFalseKeyword_1());
-		}
-	}
-
-	public static final IGrammarAwareElementType Boolean_ELEMENT_TYPE = associate(BooleanFactory.createBooleanElementType());
-
-	public static final IGrammarAwareElementType Boolean_Alternatives_ELEMENT_TYPE = associate(BooleanFactory.createBoolean_AlternativesElementType());
-
-	public static final IGrammarAwareElementType Boolean_TrueKeyword_0_ELEMENT_TYPE = associate(BooleanFactory.createBoolean_TrueKeyword_0ElementType());
-
-	public static final IGrammarAwareElementType Boolean_FalseKeyword_1_ELEMENT_TYPE = associate(BooleanFactory.createBoolean_FalseKeyword_1ElementType());
 
 	private static class PredicatedKeywordFactory {
 		public static IGrammarAwareElementType createPredicatedKeywordElementType() {
@@ -3716,24 +3675,8 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		return NamedArgument_ValueAssignment_1_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getNamedArgument_ValueConditionOrLiteralParserRuleCall_1_0ElementType() {
-		return NamedArgument_ValueConditionOrLiteralParserRuleCall_1_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getConditionOrLiteralElementType() {
-		return ConditionOrLiteral_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getConditionOrLiteral_AlternativesElementType() {
-		return ConditionOrLiteral_Alternatives_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getConditionOrLiteral_LiteralConditionParserRuleCall_0ElementType() {
-		return ConditionOrLiteral_LiteralConditionParserRuleCall_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getConditionOrLiteral_DisjunctionParserRuleCall_1ElementType() {
-		return ConditionOrLiteral_DisjunctionParserRuleCall_1_ELEMENT_TYPE;
+	public IGrammarAwareElementType getNamedArgument_ValueDisjunctionParserRuleCall_1_0ElementType() {
+		return NamedArgument_ValueDisjunctionParserRuleCall_1_0_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getLiteralConditionElementType() {
@@ -3876,6 +3819,10 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		return Atom_ParenthesizedConditionParserRuleCall_1_ELEMENT_TYPE;
 	}
 
+	public IGrammarAwareElementType getAtom_LiteralConditionParserRuleCall_2ElementType() {
+		return Atom_LiteralConditionParserRuleCall_2_ELEMENT_TYPE;
+	}
+
 	public IGrammarAwareElementType getParenthesizedConditionElementType() {
 		return ParenthesizedCondition_ELEMENT_TYPE;
 	}
@@ -3970,22 +3917,6 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 
 	public IGrammarAwareElementType getValidID_FalseKeyword_2ElementType() {
 		return ValidID_FalseKeyword_2_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getBooleanElementType() {
-		return Boolean_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getBoolean_AlternativesElementType() {
-		return Boolean_Alternatives_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getBoolean_TrueKeyword_0ElementType() {
-		return Boolean_TrueKeyword_0_ELEMENT_TYPE;
-	}
-
-	public IGrammarAwareElementType getBoolean_FalseKeyword_1ElementType() {
-		return Boolean_FalseKeyword_1_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getPredicatedKeywordElementType() {

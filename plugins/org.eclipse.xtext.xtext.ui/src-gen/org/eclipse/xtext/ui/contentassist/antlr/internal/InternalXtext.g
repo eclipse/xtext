@@ -644,34 +644,6 @@ finally {
 
 
 
-// Entry rule entryRuleConditionOrLiteral
-entryRuleConditionOrLiteral 
-:
-{ before(grammarAccess.getConditionOrLiteralRule()); }
-	 ruleConditionOrLiteral
-{ after(grammarAccess.getConditionOrLiteralRule()); } 
-	 EOF 
-;
-
-// Rule ConditionOrLiteral
-ruleConditionOrLiteral
-    @init {
-		int stackSize = keepStackSize();
-    }
-	:
-(
-{ before(grammarAccess.getConditionOrLiteralAccess().getAlternatives()); }
-(rule__ConditionOrLiteral__Alternatives)
-{ after(grammarAccess.getConditionOrLiteralAccess().getAlternatives()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 // Entry rule entryRuleLiteralCondition
 entryRuleLiteralCondition 
 :
@@ -949,8 +921,6 @@ ruleValidID
 finally {
 	restoreStackSize(stackSize);
 }
-
-
 
 
 
@@ -1921,28 +1891,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ConditionOrLiteral__Alternatives
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getConditionOrLiteralAccess().getLiteralConditionParserRuleCall_0()); }
-	ruleLiteralCondition
-{ after(grammarAccess.getConditionOrLiteralAccess().getLiteralConditionParserRuleCall_0()); }
-)
-
-    |(
-{ before(grammarAccess.getConditionOrLiteralAccess().getDisjunctionParserRuleCall_1()); }
-	ruleDisjunction
-{ after(grammarAccess.getConditionOrLiteralAccess().getDisjunctionParserRuleCall_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
 rule__LiteralCondition__Alternatives_1
     @init {
 		int stackSize = keepStackSize();
@@ -2006,6 +1954,12 @@ rule__Atom__Alternatives
 { after(grammarAccess.getAtomAccess().getParenthesizedConditionParserRuleCall_1()); }
 )
 
+    |(
+{ before(grammarAccess.getAtomAccess().getLiteralConditionParserRuleCall_2()); }
+	ruleLiteralCondition
+{ after(grammarAccess.getAtomAccess().getLiteralConditionParserRuleCall_2()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2042,7 +1996,6 @@ rule__ValidID__Alternatives
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 rule__PredicatedKeyword__Alternatives_0
     @init {
@@ -10287,8 +10240,8 @@ rule__NamedArgument__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getNamedArgumentAccess().getValueConditionOrLiteralParserRuleCall_1_0()); }
-	ruleConditionOrLiteral{ after(grammarAccess.getNamedArgumentAccess().getValueConditionOrLiteralParserRuleCall_1_0()); }
+{ before(grammarAccess.getNamedArgumentAccess().getValueDisjunctionParserRuleCall_1_0()); }
+	ruleDisjunction{ after(grammarAccess.getNamedArgumentAccess().getValueDisjunctionParserRuleCall_1_0()); }
 )
 
 ;

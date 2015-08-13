@@ -1274,41 +1274,14 @@ ruleNamedArgument:
 		(
 			(
 				{
-					markComposite(elementTypeProvider.getNamedArgument_ValueConditionOrLiteralParserRuleCall_1_0ElementType());
+					markComposite(elementTypeProvider.getNamedArgument_ValueDisjunctionParserRuleCall_1_0ElementType());
 				}
-				lv_value_2_0=ruleConditionOrLiteral
+				lv_value_2_0=ruleDisjunction
 				{
 					doneComposite();
 				}
 			)
 		)
-	)
-;
-
-//Entry rule entryRuleConditionOrLiteral
-entryRuleConditionOrLiteral:
-	{ markComposite(elementTypeProvider.getConditionOrLiteralElementType()); }
-	ruleConditionOrLiteral
-	EOF;
-
-// Rule ConditionOrLiteral
-ruleConditionOrLiteral:
-	(
-		{
-			markComposite(elementTypeProvider.getConditionOrLiteral_LiteralConditionParserRuleCall_0ElementType());
-		}
-		ruleLiteralCondition
-		{
-			doneComposite();
-		}
-		    |
-		{
-			markComposite(elementTypeProvider.getConditionOrLiteral_DisjunctionParserRuleCall_1ElementType());
-		}
-		ruleDisjunction
-		{
-			doneComposite();
-		}
 	)
 ;
 
@@ -1508,6 +1481,14 @@ ruleAtom:
 			markComposite(elementTypeProvider.getAtom_ParenthesizedConditionParserRuleCall_1ElementType());
 		}
 		ruleParenthesizedCondition
+		{
+			doneComposite();
+		}
+		    |
+		{
+			markComposite(elementTypeProvider.getAtom_LiteralConditionParserRuleCall_2ElementType());
+		}
+		ruleLiteralCondition
 		{
 			doneComposite();
 		}

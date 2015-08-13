@@ -47,12 +47,10 @@ public class XtextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAlternatives_1_0(), "rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0");
 					put(grammarAccess.getActionAccess().getOperatorAlternatives_2_2_0(), "rule__Action__OperatorAlternatives_2_2_0");
 					put(grammarAccess.getAbstractTerminalAccess().getAlternatives(), "rule__AbstractTerminal__Alternatives");
-					put(grammarAccess.getConditionOrLiteralAccess().getAlternatives(), "rule__ConditionOrLiteral__Alternatives");
 					put(grammarAccess.getLiteralConditionAccess().getAlternatives_1(), "rule__LiteralCondition__Alternatives_1");
 					put(grammarAccess.getNegationAccess().getAlternatives(), "rule__Negation__Alternatives");
 					put(grammarAccess.getAtomAccess().getAlternatives(), "rule__Atom__Alternatives");
 					put(grammarAccess.getValidIDAccess().getAlternatives(), "rule__ValidID__Alternatives");
-					put(grammarAccess.getBooleanAccess().getAlternatives(), "rule__Boolean__Alternatives");
 					put(grammarAccess.getPredicatedKeywordAccess().getAlternatives_0(), "rule__PredicatedKeyword__Alternatives_0");
 					put(grammarAccess.getPredicatedRuleCallAccess().getAlternatives_0(), "rule__PredicatedRuleCall__Alternatives_0");
 					put(grammarAccess.getAssignmentAccess().getAlternatives_0(), "rule__Assignment__Alternatives_0");

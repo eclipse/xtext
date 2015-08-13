@@ -1037,14 +1037,14 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cCalledByNameAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
 		private final Keyword cCalledByNameEqualsSignKeyword_0_1_0 = (Keyword)cCalledByNameAssignment_0_1.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueConditionOrLiteralParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueDisjunctionParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//NamedArgument:
 		//	(parameter=[Parameter] calledByName?='=')?
-		//	value=ConditionOrLiteral;
+		//	value=Disjunction;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(parameter=[Parameter] calledByName?='=')? value=ConditionOrLiteral
+		//(parameter=[Parameter] calledByName?='=')? value=Disjunction
 		public Group getGroup() { return cGroup; }
 
 		//(parameter=[Parameter] calledByName?='=')?
@@ -1065,31 +1065,11 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//'='
 		public Keyword getCalledByNameEqualsSignKeyword_0_1_0() { return cCalledByNameEqualsSignKeyword_0_1_0; }
 
-		//value=ConditionOrLiteral
+		//value=Disjunction
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 
-		//ConditionOrLiteral
-		public RuleCall getValueConditionOrLiteralParserRuleCall_1_0() { return cValueConditionOrLiteralParserRuleCall_1_0; }
-	}
-
-	public class ConditionOrLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.Xtext.ConditionOrLiteral");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cLiteralConditionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cDisjunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//ConditionOrLiteral Condition:
-		//	LiteralCondition | Disjunction
-		@Override public ParserRule getRule() { return rule; }
-
-		//LiteralCondition | Disjunction
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//LiteralCondition
-		public RuleCall getLiteralConditionParserRuleCall_0() { return cLiteralConditionParserRuleCall_0; }
-
 		//Disjunction
-		public RuleCall getDisjunctionParserRuleCall_1() { return cDisjunctionParserRuleCall_1; }
+		public RuleCall getValueDisjunctionParserRuleCall_1_0() { return cValueDisjunctionParserRuleCall_1_0; }
 	}
 
 	public class LiteralConditionElements extends AbstractParserRuleElementFinder {
@@ -1237,12 +1217,13 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cParameterReferenceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cParenthesizedConditionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLiteralConditionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Atom Condition:
-		//	ParameterReference | ParenthesizedCondition
+		//	ParameterReference | ParenthesizedCondition | LiteralCondition
 		@Override public ParserRule getRule() { return rule; }
 
-		//ParameterReference | ParenthesizedCondition
+		//ParameterReference | ParenthesizedCondition | LiteralCondition
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//ParameterReference
@@ -1250,6 +1231,9 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ParenthesizedCondition
 		public RuleCall getParenthesizedConditionParserRuleCall_1() { return cParenthesizedConditionParserRuleCall_1; }
+
+		//LiteralCondition
+		public RuleCall getLiteralConditionParserRuleCall_2() { return cLiteralConditionParserRuleCall_2; }
 	}
 
 	public class ParenthesizedConditionElements extends AbstractParserRuleElementFinder {
@@ -1366,26 +1350,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//'false'
 		public Keyword getFalseKeyword_2() { return cFalseKeyword_2; }
-	}
-
-	public class BooleanElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.Xtext.Boolean");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cTrueKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cFalseKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		
-		//Boolean ecore::EBoolean:
-		//	'true' | 'false'
-		@Override public ParserRule getRule() { return rule; }
-
-		//'true' | 'false'
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//'true'
-		public Keyword getTrueKeyword_0() { return cTrueKeyword_0; }
-
-		//'false'
-		public Keyword getFalseKeyword_1() { return cFalseKeyword_1; }
 	}
 
 	public class PredicatedKeywordElements extends AbstractParserRuleElementFinder {
@@ -2366,7 +2330,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private final KeywordElements pKeyword;
 	private final RuleCallElements pRuleCall;
 	private final NamedArgumentElements pNamedArgument;
-	private final ConditionOrLiteralElements pConditionOrLiteral;
 	private final LiteralConditionElements pLiteralCondition;
 	private final DisjunctionElements pDisjunction;
 	private final ConjunctionElements pConjunction;
@@ -2377,7 +2340,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private final TerminalRuleCallElements pTerminalRuleCall;
 	private final RuleIDElements pRuleID;
 	private final ValidIDElements pValidID;
-	private final BooleanElements pBoolean;
 	private final PredicatedKeywordElements pPredicatedKeyword;
 	private final PredicatedRuleCallElements pPredicatedRuleCall;
 	private final AssignmentElements pAssignment;
@@ -2434,7 +2396,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		this.pKeyword = new KeywordElements();
 		this.pRuleCall = new RuleCallElements();
 		this.pNamedArgument = new NamedArgumentElements();
-		this.pConditionOrLiteral = new ConditionOrLiteralElements();
 		this.pLiteralCondition = new LiteralConditionElements();
 		this.pDisjunction = new DisjunctionElements();
 		this.pConjunction = new ConjunctionElements();
@@ -2445,7 +2406,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		this.pTerminalRuleCall = new TerminalRuleCallElements();
 		this.pRuleID = new RuleIDElements();
 		this.pValidID = new ValidIDElements();
-		this.pBoolean = new BooleanElements();
 		this.pPredicatedKeyword = new PredicatedKeywordElements();
 		this.pPredicatedRuleCall = new PredicatedRuleCallElements();
 		this.pAssignment = new AssignmentElements();
@@ -2719,23 +2679,13 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 
 	//NamedArgument:
 	//	(parameter=[Parameter] calledByName?='=')?
-	//	value=ConditionOrLiteral;
+	//	value=Disjunction;
 	public NamedArgumentElements getNamedArgumentAccess() {
 		return pNamedArgument;
 	}
 	
 	public ParserRule getNamedArgumentRule() {
 		return getNamedArgumentAccess().getRule();
-	}
-
-	//ConditionOrLiteral Condition:
-	//	LiteralCondition | Disjunction
-	public ConditionOrLiteralElements getConditionOrLiteralAccess() {
-		return pConditionOrLiteral;
-	}
-	
-	public ParserRule getConditionOrLiteralRule() {
-		return getConditionOrLiteralAccess().getRule();
 	}
 
 	//LiteralCondition:
@@ -2779,7 +2729,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Atom Condition:
-	//	ParameterReference | ParenthesizedCondition
+	//	ParameterReference | ParenthesizedCondition | LiteralCondition
 	public AtomElements getAtomAccess() {
 		return pAtom;
 	}
@@ -2836,16 +2786,6 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getValidIDRule() {
 		return getValidIDAccess().getRule();
-	}
-
-	//Boolean ecore::EBoolean:
-	//	'true' | 'false'
-	public BooleanElements getBooleanAccess() {
-		return pBoolean;
-	}
-	
-	public ParserRule getBooleanRule() {
-		return getBooleanAccess().getRule();
 	}
 
 	//PredicatedKeyword Keyword:
