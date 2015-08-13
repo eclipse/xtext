@@ -9,6 +9,7 @@ import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.xbase.compiler.JavaVersion
 import org.eclipse.xtext.xbase.validation.IssueCodes
 import org.junit.After
+import org.junit.Assume
 import org.junit.Ignore
 import org.junit.Test
 
@@ -243,6 +244,27 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
+	}
+		
+	@Test
+	def void fixWrongFile() {
+		val model = '''
+			class Foo|1 {
+			}
+		'''
+		create('Foo.xtend', model).assertIssueCodes(WRONG_FILE).assertResolutionLabels("Rename file to 'Foo1.xtend'").
+			assertModelAfterQuickfix(model.replace('|', ''))
+		assertNotNull(getFile("Foo1.xtend"))
+		assertTrue(getFile("Foo1.xtend").exists)
+		assertFalse(getFile("Foo.xtend").exists)
+	}
+	
+	@Test
+	def void fixCantMoveWrongFile() {
+		create('Foo1.xtend', '''class Foo|2{} class Foo3{}''')
+		create('Foo.xtend', '''class Foo|1 {}''')
+			.assertIssueCodes(WRONG_FILE)
+			.assertResolutionLabels("")
 	}
 		
 	@Test 
@@ -3552,7 +3574,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 
 	/**
 	 * This test is disabled due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=463547
-	 * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link org.junit.Assume})
+	 * ({@link AbstractXtendUITestCase#setJavaVersion(JavaVersion)} uses {@link Assume})
 	 */
 	@Ignore @Test
 	def void conflictingDefaultMethods() {
