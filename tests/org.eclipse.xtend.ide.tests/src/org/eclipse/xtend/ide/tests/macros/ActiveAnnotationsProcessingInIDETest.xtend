@@ -49,8 +49,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 	@Test
 	def void testDocumentationProvider() {
 		assertProcessing(
-			'annotation/ChangeDoc.xtend' -> '''
-				package annotation
+			'myannotation/ChangeDoc.xtend' -> '''
+				package myannotation
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
@@ -83,7 +83,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 			'usercode/UserCode.xtend' -> '''
 				package usercode
 				
-				import annotation.ChangeDoc
+				import myannotation.ChangeDoc
 				
 				/** 
 				 *	 Comment
@@ -96,8 +96,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 				}
 			''') [
 			val xtendClass = xtendFile.xtendTypes.filter(XtendClass).head
-			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Comment''', xtendClass)
-			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
+			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Comment''', xtendClass)
+			assertDocumentation('''@<a href="eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1">ChangeDoc</a><br>Hello World!''', xtendClass.members.filter(XtendField).filter[name.equals("object")].head.type.type)
 		]
 	}
 	
@@ -120,6 +120,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
 				"org.eclipse.xtend.core.tests",
 				"org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject"))
+		macroProject.project.addExportedPackages("myannotation")
 	}
 	
 	@AfterClass
@@ -129,12 +130,13 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		userProject = null
 	}
 
-	@After 
+	@After
 	def void tearDown() throws Exception {
 		clientFile.delete(true, null)
 		macroFile.delete(true, null)
-		macroProject.project.removeExportedPackages(exportedPackage)
-		waitForBuild
+		if ("myannotation" != exportedPackage)
+			if (macroProject.project.removeExportedPackages(exportedPackage))
+				waitForBuild
 	}
 	
 	IFile macroFile
@@ -148,8 +150,8 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotat
 		val lidx = macroContent.key.lastIndexOf('/')
 		if (lidx != -1) {
 			exportedPackage = macroContent.key.substring(0, lidx).replace('/', '.')
-			macroProject.project.addExportedPackages(exportedPackage)
-			reallyWaitForAutoBuild()
+			if(macroProject.project.addExportedPackages(exportedPackage))
+				reallyWaitForAutoBuild()
 		}
 		
 		clientFile = userProject.newSource(clientContent.key, clientContent.value.toString)

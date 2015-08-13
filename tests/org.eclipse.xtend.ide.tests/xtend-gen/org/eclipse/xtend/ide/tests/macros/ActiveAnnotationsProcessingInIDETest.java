@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.macros;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -66,7 +67,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   @Test
   public void testDocumentationProvider() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package annotation");
+    _builder.append("package myannotation");
     _builder.newLine();
     _builder.newLine();
     _builder.append("import java.util.List");
@@ -127,12 +128,12 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("annotation/ChangeDoc.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/ChangeDoc.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package usercode");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import annotation.ChangeDoc");
+    _builder_1.append("import myannotation.ChangeDoc");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("/** ");
@@ -163,10 +164,10 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
         final XtendClass xtendClass = IterableExtensions.<XtendClass>head(_filter);
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
+        _builder.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Comment");
         ActiveAnnotationsProcessingInIDETest.this.assertDocumentation(_builder, xtendClass);
         StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/annotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
+        _builder_1.append("@<a href=\"eclipse-xtext-doc:platform:/resource/macroProject/src/myannotation/ChangeDoc.xtend%23/1\">ChangeDoc</a><br>Hello World!");
         EList<XtendMember> _members = xtendClass.getMembers();
         Iterable<XtendField> _filter_1 = Iterables.<XtendField>filter(_members, XtendField.class);
         final Function1<XtendField, Boolean> _function = new Function1<XtendField, Boolean>() {
@@ -216,6 +217,8 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
       ActiveAnnotationsProcessingInIDETest.userProject = _create_1;
+      IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
+      WorkbenchTestHelper.addExportedPackages(_project, "myannotation");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -236,9 +239,14 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
   public void tearDown() throws Exception {
     this.clientFile.delete(true, null);
     this.macroFile.delete(true, null);
-    IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
-    WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
-    IResourcesSetupUtil.waitForBuild();
+    boolean _notEquals = (!Objects.equal("myannotation", this.exportedPackage));
+    if (_notEquals) {
+      IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
+      boolean _removeExportedPackages = WorkbenchTestHelper.removeExportedPackages(_project, this.exportedPackage);
+      if (_removeExportedPackages) {
+        IResourcesSetupUtil.waitForBuild();
+      }
+    }
   }
   
   private IFile macroFile;
@@ -263,8 +271,10 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActive
         String _replace = _substring.replace("/", ".");
         this.exportedPackage = _replace;
         IProject _project = ActiveAnnotationsProcessingInIDETest.macroProject.getProject();
-        WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
-        IResourcesSetupUtil.reallyWaitForAutoBuild();
+        boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, this.exportedPackage);
+        if (_addExportedPackages) {
+          IResourcesSetupUtil.reallyWaitForAutoBuild();
+        }
       }
       String _key_3 = clientContent.getKey();
       String _value_1 = clientContent.getValue();

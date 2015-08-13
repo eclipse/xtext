@@ -16,6 +16,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +24,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -63,13 +63,16 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.util.JREContainerProvider;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
+import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
 import org.eclipse.xtext.xbase.lib.Functions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -319,64 +322,81 @@ public class WorkbenchTestHelper extends Assert {
 		javaProject.setOptions(options);
 	}
 	
-	public static String changeBree(IJavaProject javaProject, final JavaVersion javaVersion) throws Exception {
+	/**
+	 * @return a {@link Pair}, where the <code>key</code> is the BREE that was set and the <code>value</code> indicates that the BREE was changed.
+	 */
+	public static Pair<String, Boolean> changeBree(IJavaProject javaProject, final JavaVersion javaVersion)
+			throws Exception {
 		final AtomicReference<String> bree = new AtomicReference<String>();
-		changeManifest(javaProject.getProject(), new Procedure1<Manifest>() {
+		boolean changed = changeManifest(javaProject.getProject(), new Function<MergeableManifest, Boolean>() {
 			@Override
-			public void apply(Manifest mf) {
-				bree.set(getBree(javaVersion));
-				mf.getMainAttributes().putValue("Bundle-RequiredExecutionEnvironment", bree.get());
+			public Boolean apply(MergeableManifest mf) {
+				mf.setBREE(getBree(javaVersion));
+				return mf.isModified();
 			}
 		});
-		JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree.get());
-		return bree.get();
+		if (changed) {
+			JavaProjectSetupUtil.addJreClasspathEntry(javaProject, bree.get());
+		}
+		return Pair.of(bree.get(), changed);
+	}
+
+	public static boolean  addExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
+		return changeManifest(project, new Function<MergeableManifest,Boolean>() {
+			@Override
+			public Boolean apply(MergeableManifest mf) {
+				 mf.addExportedPackages(exportedPackages);
+				return mf.isModified();
+			}
+		});
 	}
 	
-	public static void addExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
-		changeManifest(project, new Procedure1<Manifest>() {
+	public static boolean  removeExportedPackages(IProject project, final String... exportedPackages) throws Exception {
+		return changeManifest(project, new Function<MergeableManifest, Boolean>() {
 			@Override
-			public void apply(Manifest mf) {
-				String value = mf.getMainAttributes().getValue("Export-Package");
-				for (String exported : exportedPackages) {
-					if (value == null) {
-						value = exported;
-					} else {
-						value += ","+exported;
+			public Boolean apply(MergeableManifest mf) {
+				Attributes attrs = mf.getMainAttributes();
+				Attributes.Name expPackKey = new Attributes.Name("Export-Package");
+				String oldValue = attrs.getValue(expPackKey);
+				if (!Strings.isNullOrEmpty(oldValue)) {
+					String[] existingExports = oldValue.split(",(\\s+)?");
+					System.out.println(Arrays.toString(existingExports));
+					List<String> exportsToKeep = new ArrayList<String>();
+					for (String string : existingExports) {
+						exportsToKeep.add(string.trim());
+					}
+					boolean changed = exportsToKeep.removeAll(Arrays.asList(exportedPackages));
+					String valueToSet = Joiner.on(',').join(exportsToKeep);
+					if (changed) {
+						if (valueToSet.isEmpty()) {
+							attrs.remove(expPackKey);
+						} else {
+							attrs.put(expPackKey, valueToSet);
+						}
+						return true;
 					}
 				}
-				mf.getMainAttributes().putValue("Export-Package", value);
+				return false;
 			}
 		});
 	}
-	
-	public static void removeExportedPackages(IProject project, final String ... exportedPackages) throws Exception{
-		changeManifest(project, new Procedure1<Manifest>() {
-			@Override
-			public void apply(Manifest mf) {
-				Attributes attrs = mf.getMainAttributes();
-				if (attrs.containsKey("Export-Package")) {
-					String[] existingExports = ((String)attrs.get("Export-Package")).split(",");
-					List<String> exportsToKeep = Arrays.asList(existingExports);
-					exportsToKeep.removeAll(Arrays.asList(exportedPackages));
-					attrs.putValue("Export-Package", Joiner.on(',').join(exportsToKeep));
-				}
-			}
-		});
-	}
-	
-	public static void changeManifest(IProject project, Procedure1<Manifest> config) throws Exception {
+
+	public static boolean changeManifest(IProject project, Function<MergeableManifest, Boolean> config) throws Exception {
 		IFile manifest = project.getFile("META-INF/MANIFEST.MF");
 		InputStream content = manifest.getContents();
-		Manifest mf;
+		MergeableManifest mf;
 		try {
-			mf = new Manifest(content);
+			mf = new MergeableManifest(content);
 		} finally {
 			content.close();
 		}
-		config.apply(mf);
-		ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		mf.write(stream);
-		manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, true, null);
+		if (config.apply(mf)) {
+			ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			mf.write(stream);
+			manifest.setContents(new ByteArrayInputStream(stream.toByteArray()), true, false, null);
+			return true;
+		}
+		return false;
 	}
 
 	public static void deleteProject(IProject project) throws CoreException {

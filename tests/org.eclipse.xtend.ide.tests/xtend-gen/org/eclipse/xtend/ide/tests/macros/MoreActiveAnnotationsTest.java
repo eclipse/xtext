@@ -83,8 +83,10 @@ public class MoreActiveAnnotationsTest {
       _builder.newLine();
       this.newSource(macroProject, "annotation/DItemMini.xtend", _builder.toString());
       IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForBuild();
+      boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      if (_addExportedPackages) {
+        IResourcesSetupUtil.waitForBuild();
+      }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -171,8 +173,10 @@ public class MoreActiveAnnotationsTest {
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForBuild();
+      boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      if (_addExportedPackages) {
+        IResourcesSetupUtil.waitForBuild();
+      }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -266,8 +270,10 @@ public class MoreActiveAnnotationsTest {
       _builder_1.newLine();
       this.newSource(macroProject, "annotation/StaticFeatures.xtend", _builder_1.toString());
       IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForBuild();
+      boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      if (_addExportedPackages) {
+        IResourcesSetupUtil.waitForBuild();
+      }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);
@@ -401,8 +407,10 @@ public class MoreActiveAnnotationsTest {
       _builder_2.newLine();
       this.newSource(macroProject, "annotation/MyClass.java", _builder_2.toString());
       IProject _project = macroProject.getProject();
-      WorkbenchTestHelper.addExportedPackages(_project, "annotation");
-      IResourcesSetupUtil.waitForBuild();
+      boolean _addExportedPackages = WorkbenchTestHelper.addExportedPackages(_project, "annotation");
+      if (_addExportedPackages) {
+        IResourcesSetupUtil.waitForBuild();
+      }
       IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib", 
         "org.eclipse.xtend.core.tests", "org.eclipse.xtext.xbase.lib", "org.eclipse.xtend.ide.tests.data", "org.junit", "macroProject");
       final IJavaProject userProject = JavaCore.create(_createPluginProject_1);

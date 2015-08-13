@@ -87,7 +87,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   @Test
   public void testBug453273() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("package annotation");
+    _builder.append("package myannotation");
     _builder.newLine();
     _builder.newLine();
     _builder.append("import java.lang.annotation.ElementType");
@@ -145,12 +145,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String, String> _mappedTo = Pair.<String, String>of("annotation/AddNestedTypes.xtend", _builder.toString());
+    Pair<String, String> _mappedTo = Pair.<String, String>of("myannotation/AddNestedTypes.xtend", _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("package my.client");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("@annotation.AddNestedTypes");
+    _builder_1.append("@myannotation.AddNestedTypes");
     _builder_1.newLine();
     _builder_1.append("class TopLevelClass {");
     _builder_1.newLine();
