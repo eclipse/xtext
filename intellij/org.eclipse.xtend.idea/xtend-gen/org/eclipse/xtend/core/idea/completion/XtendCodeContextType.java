@@ -7,17 +7,24 @@
  */
 package org.eclipse.xtend.core.idea.completion;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -70,6 +77,41 @@ public abstract class XtendCodeContextType extends TemplateContextType {
     public Member() {
       super("xtend.member", "Member", XtendCodeContextType.Generic.class);
       this.registerFollowElementsfor(XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS);
+    }
+  }
+  
+  public static class TemplateExpression extends XtendCodeContextType {
+    @Inject
+    private ParserDefinition parserDefinition;
+    
+    @Inject
+    private XtendTokenSetProvider tokenSetProvider;
+    
+    public TemplateExpression() {
+      super("xtend.template", "Template", XtendCodeContextType.Generic.class);
+    }
+    
+    @Override
+    public boolean internalIsInContext(final PsiFile file, final int offset) {
+      boolean _xblockexpression = false;
+      {
+        Project _project = file.getProject();
+        final Lexer lexer = this.parserDefinition.createLexer(_project);
+        String _text = file.getText();
+        lexer.start(_text);
+        while (((!Objects.equal(lexer.getTokenType(), null)) && (lexer.getTokenEnd() <= offset))) {
+          lexer.advance();
+        }
+        final IElementType tokenType = lexer.getTokenType();
+        boolean _equals = Objects.equal(tokenType, null);
+        if (_equals) {
+          return false;
+        }
+        TokenSet _tokenSet = this.tokenSetProvider.getTokenSet(tokenType);
+        TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
+        _xblockexpression = Objects.equal(_tokenSet, _richStringLiteralTokens);
+      }
+      return _xblockexpression;
     }
   }
   
