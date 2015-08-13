@@ -164,7 +164,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					error(String.format("Expected %d arguments but got %d", parameters.size(), usedParameters.size()),
 							call, XtextPackage.Literals.RULE_CALL__RULE);
 				} else if (hasNamedArgument) {
-					for(int i = 0, max = Math.min(usedParameters.size(), parameters.size()); i < max; i++) {
+					for(int i = 0, max = usedParameters.size(); i < max; i++) {
 						NamedArgument argument = call.getArguments().get(i);
 						Parameter param = parameters.get(i);
 						if (argument.isCalledByName() && argument.getParameter() != param) {
