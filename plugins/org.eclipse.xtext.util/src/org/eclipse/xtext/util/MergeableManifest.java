@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import static com.google.common.collect.Sets.*;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +26,7 @@ import java.util.Set;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 /**
@@ -215,6 +218,25 @@ public class MergeableManifest extends Manifest {
 		getMainAttributes().put(REQUIRE_BUNDLE, result);
 	}
 
+	/**
+	 * @since 2.9
+	 */
+	public String getBREE() {
+		return (String) getMainAttributes().get(BUNDLE_REQUIRED_EXECUTION_ENV);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setBREE(String bree) {
+		String oldValue = getBREE();
+		if(Objects.equal(oldValue, bree)) {
+			return;
+		}
+		getMainAttributes().put(BUNDLE_REQUIRED_EXECUTION_ENV, bree);
+		this.modified = true;
+	}
+	
 	public boolean isModified() {
 		return modified;
 	}
@@ -258,6 +280,18 @@ public class MergeableManifest extends Manifest {
 		String result = mergeIntoCommaSeparatedList(s, packages, modified);
 		this.modified = modified.get();
 		getMainAttributes().put(EXPORT_PACKAGE, result);
+	}
+	
+	/**
+	 * adds the qualified names to the export-package attribute, if not already
+	 * present.
+	 *
+	 * @param packages - packages to add
+	 *
+	 * @since 2.9
+	 */
+	public void addExportedPackages(String... packages) {
+		addExportedPackages(newHashSet(packages));
 	}
 
 	public void addImportedPackages(Set<String> packages) {
