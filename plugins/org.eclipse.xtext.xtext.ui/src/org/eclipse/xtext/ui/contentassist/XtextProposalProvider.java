@@ -50,6 +50,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
@@ -317,7 +318,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		EClassifier type = rule.getType().getClassifier();
 		if (type instanceof EClass) {
 			Iterable<EStructuralFeature> features = ((EClass) type).getEAllStructuralFeatures();
-			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory("ID", context);
+			Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(grammarAccess.getValidIDRule().getName(), context);
 			Iterable<String> processedFeatures = completeStructuralFeatures(context, factory, acceptor, features);
 			if(rule.getType().getMetamodel() instanceof GeneratedMetamodel) {
 				if(notNull(rule.getName()).toLowerCase().startsWith("import")) {
@@ -395,7 +396,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			EClassifier classifier = action.getType().getClassifier();
 			if (classifier instanceof EClass) {
 				List<EReference> containments = ((EClass) classifier).getEAllContainments();
-				Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory("ID", context);
+				Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(grammarAccess.getValidIDRule().getName(), context);
 				completeStructuralFeatures(context, factory, acceptor, containments);
 			}
 		}
@@ -443,7 +444,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		String alias = declaration.getAlias();
 		QualifiedName prefix = (!Strings.isEmpty(alias)) ? QualifiedName.create(getValueConverter().toString(alias,
-				"ID")) : null;
+				grammarAccess.getValidIDRule().getName())) : null;
 		boolean createDatatypeProposals = !(model instanceof AbstractElement)
 				&& modelOrContainerIs(model, AbstractRule.class);
 		boolean createEnumProposals = !(model instanceof AbstractElement) && modelOrContainerIs(model, EnumRule.class);
@@ -452,7 +453,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		for (EClassifier classifier : declaration.getEPackage().getEClassifiers()) {
 			if (classifier instanceof EDataType && createDatatypeProposals || classifier instanceof EEnum
 					&& createEnumProposals || classifier instanceof EClass && createClassProposals) {
-				String classifierName = getValueConverter().toString(classifier.getName(), "ID");
+				String classifierName = getValueConverter().toString(classifier.getName(), grammarAccess.getValidIDRule().getName());
 				QualifiedName proposalQualifiedName = (prefix != null) ? prefix.append(classifierName) : QualifiedName
 						.create(classifierName);
 				IEObjectDescription description = EObjectDescription.create(proposalQualifiedName, classifier);
@@ -498,18 +499,36 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	protected void createOverrideProposal(final AbstractRule overrideMe, final Grammar grammar,
 			final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		StringBuilder proposal = new StringBuilder();
+		String ruleKind = "parser rule";
 		if (overrideMe instanceof TerminalRule) {
 			proposal.append("terminal ");
-			if (((TerminalRule) overrideMe).isFragment())
+			if (((TerminalRule) overrideMe).isFragment()) {
 				proposal.append("fragment ");
+				ruleKind = "terminal fragment";
+			} else {
+				ruleKind = "terminal rule";
+			}
 		}
-		if (overrideMe instanceof EnumRule)
+		if (overrideMe instanceof EnumRule) {
 			proposal.append("enum ");
+			ruleKind = "enum rule";
+		}
+		if (overrideMe instanceof ParserRule && ((ParserRule) overrideMe).isFragment()) {
+			proposal.append("fragment ");
+			ruleKind = "parser fragment";
+		}
 		proposal.append(overrideMe.getName());
+		String paramList = getParamList(overrideMe);
+		proposal.append(paramList);
 		boolean foundPack = appendReturnType(overrideMe, grammar, proposal);
-		proposal = proposal.append(":\n\t\n;");
+		proposal.append(":\n\t");
+		final int selectionStart = proposal.length();
+		proposal.append("super");
+		proposal.append(paramList);
+		final int selectionEnd = proposal.length();
+		proposal.append("\n;");
 		ConfigurableCompletionProposal completionProposal = (ConfigurableCompletionProposal) createCompletionProposal(
-				proposal.toString(), overrideMe.getName() + " - override rule " + overrideMe.getName(),
+				proposal.toString(), overrideMe.getName() + " - override " + ruleKind + " " + overrideMe.getName() + paramList, 
 				getImage(overrideMe), context.copy().setMatcher(new PrefixMatcher() {
 					@Override
 					public boolean isCandidateMatchingPrefix(String name, String prefix) {
@@ -518,7 +537,10 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 					}
 				}).toContext());
 		if (completionProposal != null) {
-			completionProposal.setCursorPosition(proposal.length() - 3);
+			completionProposal.setSelectionStart(selectionStart + completionProposal.getReplacementOffset());
+			completionProposal.setSelectionLength(selectionEnd - selectionStart);
+			completionProposal.setCursorPosition(selectionEnd);
+			completionProposal.setSimpleLinkedMode(context.getViewer(), '\t', '\n', '\r');
 			if (!foundPack) {
 				// we need to add a new import statement to the grammar
 				completionProposal.setTextApplier(new ConfigurableCompletionProposal.IReplacementTextApplier() {
@@ -554,13 +576,15 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 						// add import statement
 						EPackage classifierPackage = overrideMe.getType().getClassifier().getEPackage();
 						StringBuilder insertMe = new StringBuilder("import ").append(getValueConverter().toString(
-								classifierPackage.getNsURI(), "STRING"));
+								classifierPackage.getNsURI(), grammarAccess.getSTRINGRule().getName()));
 						if (startWithLB)
 							insertMe.insert(0, '\n');
-						insertMe.append(" as ").append(getValueConverter().toString(classifierPackage.getName(), "ID"));
+						insertMe.append(" as ").append(getValueConverter().toString(classifierPackage.getName(), grammarAccess.getValidIDRule().getName()));
 						insertMe.append('\n');
 						document.replace(offset, 0, insertMe.toString());
 						proposal.setCursorPosition(proposal.getCursorPosition() + insertMe.length() - 3);
+						proposal.setSelectionStart(selectionStart + proposal.getReplacementOffset() + insertMe.length());
+						proposal.setCursorPosition(selectionEnd + insertMe.length());
 					}
 				});
 			}
@@ -568,50 +592,73 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		}
 	}
 
+	private String getParamList(final AbstractRule overrideMe) {
+		StringBuilder paramBuilder = new StringBuilder(); 
+		if (overrideMe instanceof ParserRule && !((ParserRule) overrideMe).getParameters().isEmpty()) {
+			List<Parameter> parameters = ((ParserRule) overrideMe).getParameters();
+			paramBuilder.append("<");
+			for(int i = 0; i < parameters.size(); i++) {
+				if (i != 0) {
+					paramBuilder.append(", ");
+				}
+				String name = getValueConverter().toString(parameters.get(i).getName(), grammarAccess.getIDRule().getName());
+				paramBuilder.append(name);
+			}
+			paramBuilder.append(">");
+		}
+		return paramBuilder.toString();
+	}
+
 	protected boolean appendReturnType(final AbstractRule overrideMe, final Grammar grammar,
 			StringBuilder newRuleFragment) {
-		EClassifier classifier = overrideMe.getType().getClassifier();
-		final EPackage classifierPackage = classifier.getEPackage();
-		boolean foundPack = false;
-		for (AbstractMetamodelDeclaration metamodel : grammar.getMetamodelDeclarations()) {
-			EPackage available = metamodel.getEPackage();
-			if (classifierPackage == available) {
-				EDataType eString = GrammarUtil.findEString(grammar);
-				if (eString == null)
-					eString = EcorePackage.Literals.ESTRING;
-				if (classifier != eString
-						&& (!Strings.isEmpty(metamodel.getAlias()) || !classifier.getName()
-								.equals(overrideMe.getName()))) {
-					newRuleFragment.append(" returns ");
-					if (!Strings.isEmpty(metamodel.getAlias())) {
-						newRuleFragment.append(metamodel.getAlias()).append("::");
+		if (overrideMe instanceof ParserRule && ((ParserRule) overrideMe).isWildcard()) {
+			newRuleFragment.append(" *");
+			// no need to add an import to the grammar
+			return true;
+		} else {
+			EClassifier classifier = overrideMe.getType().getClassifier();
+			final EPackage classifierPackage = classifier.getEPackage();
+			boolean foundPack = false;
+			for (AbstractMetamodelDeclaration metamodel : grammar.getMetamodelDeclarations()) {
+				EPackage available = metamodel.getEPackage();
+				if (classifierPackage == available) {
+					EDataType eString = GrammarUtil.findEString(grammar);
+					if (eString == null)
+						eString = EcorePackage.Literals.ESTRING;
+					if (classifier != eString
+							&& (!Strings.isEmpty(metamodel.getAlias()) || !classifier.getName()
+									.equals(overrideMe.getName()))) {
+						newRuleFragment.append(" returns ");
+						if (!Strings.isEmpty(metamodel.getAlias())) {
+							newRuleFragment.append(metamodel.getAlias()).append("::");
+						}
+						newRuleFragment.append(classifier.getName());
 					}
-					newRuleFragment.append(classifier.getName());
-				}
-				foundPack = true;
-				break;
-			}
-		}
-		if (!foundPack) {
-			EDataType eString = GrammarUtil.findEString(grammar);
-			if (eString == null)
-				eString = EcorePackage.Literals.ESTRING;
-			if (classifier == eString) {
-				for (AbstractMetamodelDeclaration mm : GrammarUtil.allMetamodelDeclarations(grammar)) {
-					if (mm.getEPackage() == classifierPackage) {
-						foundPack = true;
-						break;
-					}
+					foundPack = true;
+					break;
 				}
 			}
 			if (!foundPack) {
-				newRuleFragment.append(" returns ");
-				newRuleFragment.append(classifierPackage.getName());
-				newRuleFragment.append("::");
-				newRuleFragment.append(classifier.getName());
+				EDataType eString = GrammarUtil.findEString(grammar);
+				if (eString == null)
+					eString = EcorePackage.Literals.ESTRING;
+				if (classifier == eString) {
+					for (AbstractMetamodelDeclaration mm : GrammarUtil.allMetamodelDeclarations(grammar)) {
+						if (mm.getEPackage() == classifierPackage) {
+							foundPack = true;
+							break;
+						}
+					}
+				}
+				if (!foundPack) {
+					newRuleFragment.append(" returns ");
+					newRuleFragment.append(classifierPackage.getName());
+					newRuleFragment.append("::");
+					newRuleFragment.append(classifier.getName());
+				}
 			}
+			return foundPack;
 		}
-		return foundPack;
 	}
 
 	protected Set<AbstractRule> collectOverrideCandidates(final Grammar grammar) {
@@ -621,7 +668,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		for (Grammar usedGrammar : usedGrammars) {
 			usedRulesFinder.compute(usedGrammar);
 		}
-		if (allRules.isEmpty()) { // inherit only terminal rules
+		if (allRules.isEmpty()) { // super lang has only terminal rules
 			for (Grammar usedGrammar : usedGrammars) {
 				allRules.addAll(usedGrammar.getRules());
 			}

@@ -925,7 +925,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("ST")
 	        .assertText(
-	        		"terminal STRING:\n\t\n;",
+	        		"terminal STRING:\n\tsuper\n;",
 	        		"<", // parameterized rule
 	        		":");
     }
@@ -935,7 +935,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .append("IN")
 	        .assertText(
-	        		"terminal INT returns ecore::EInt:\n\t\n;",
+	        		"terminal INT returns ecore::EInt:\n\tsuper\n;",
 	        		"<", // parameterized rule
 	        		":");
     }
@@ -946,7 +946,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ec")
 	        .append("IN")
 	        .assertText(
-	        		"terminal INT returns ec::EInt:\n\t\n;",
+	        		"terminal INT returns ec::EInt:\n\tsuper\n;",
 	        		"<", // parameterized rule
 	        		":");
     }
@@ -957,7 +957,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"")
 	        .append("IN")
 	        .assertText(
-	        		"terminal INT returns EInt:\n\t\n;",
+	        		"terminal INT returns EInt:\n\tsuper\n;",
 	        		"<", // parameterized rule
 	        		":");
     }
@@ -967,7 +967,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	    	.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.xtext.ui.editor.contentassist.GrammarWithTerminalFragment")
 	    	.append("ESC")
 	    	.assertText(
-	    			"terminal fragment ESCAPED_CHAR:\n\t\n;",
+	    			"terminal fragment ESCAPED_CHAR:\n\tsuper\n;",
 	    			"<", // parameterized rule
 	    			":");
     }
