@@ -66,8 +66,7 @@ class ConfigurationProducerExtensions {
 		if (xtextFile == null) {
 			return emptySet
 		}
-		val IIdeaTrace trace = traceProvider.getTraceToTarget(
-			new VirtualFileInProject(xtextFile.virtualFile, xtextFile.project))
+		val IIdeaTrace trace = traceProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(xtextFile))
 		if (trace !== null) {
 			val javaFiles = newArrayList
 			for (uri : trace.allAssociatedLocations) {

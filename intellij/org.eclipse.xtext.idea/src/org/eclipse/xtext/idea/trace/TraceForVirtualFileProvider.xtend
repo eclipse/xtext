@@ -11,12 +11,12 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.vfs.JarFileSystem
 import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiFile
-import com.intellij.util.indexing.IndexingDataKeys
+import com.intellij.psi.util.PsiUtilCore
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
@@ -33,7 +33,6 @@ import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.workspace.IProjectConfig
-import com.intellij.openapi.vfs.JarFileSystem
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -70,15 +69,10 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	@Inject Provider<VirtualFileBasedTrace> traceProvider
 	
 	override getGeneratedElements(PsiElement element) {
-		val containgFile = element.containingFile
-		if (containgFile === null) {
+		if (PsiUtilCore.getVirtualFile(element) === null) {
 			return emptyList
 		}
-		val vFile = tryHardToFindVirtualFile(element.containingFile)
-		if (vFile === null) {
-			return emptyList
-		}
-		val fileInProject = new VirtualFileInProject(vFile, element.project)
+		val fileInProject = VirtualFileInProject.forPsiElement(element)
 		val traceToTarget = getTraceToTarget(fileInProject)
 		return getTracedElements(traceToTarget, element)
 	}
@@ -114,21 +108,8 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		return result
 	}
 	
-	private def VirtualFile tryHardToFindVirtualFile(PsiFile psiFile) {
-		val originalFile = psiFile.getOriginalFile();
-		if (originalFile !== psiFile && originalFile !== null) {
-			return tryHardToFindVirtualFile(originalFile);
-		}
-		val result = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
-		if (result !== null) {
-			return result;
-		}
-		return psiFile.getViewProvider().getVirtualFile();
-	}
-	
 	override getOriginalElements(PsiElement element) {
-		val vFile = tryHardToFindVirtualFile(element.containingFile)
-		val fileInProject = new VirtualFileInProject(vFile, element.project)
+		val fileInProject = VirtualFileInProject.forPsiElement(element)
 		val traceToSource = getTraceToSource(fileInProject)
 		return getTracedElements(traceToSource, element)
 	}

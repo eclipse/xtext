@@ -24,11 +24,9 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiUtil;
 import com.intellij.util.DocumentUtil;
 import com.sun.jdi.AbsentInformationException;
 import com.sun.jdi.Location;
@@ -47,7 +45,7 @@ import org.eclipse.xtext.idea.debug.DebugProcessExtensions;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
-import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider;
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
 import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
@@ -74,7 +72,7 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
     private DebugProcessExtensions _debugProcessExtensions;
     
     @Inject
-    private TraceForVirtualFileProvider traceForVirtualFileProvider;
+    private ITraceForVirtualFileProvider traceForVirtualFileProvider;
     
     public TraceBasedPositionManager(final DebugProcess process, final IXtextLanguage language) {
       this.process = process;
@@ -281,10 +279,8 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             final Document document = _instance.getDocument(_containingFile);
             int _line = position.getLine();
             final TextRange range = DocumentUtil.getLineTextRange(document, _line);
-            VirtualFile _virtualFile = PsiUtil.getVirtualFile(psi);
-            Project _project_1 = psi.getProject();
-            VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(_virtualFile, _project_1);
-            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_virtualFileInProject);
+            VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(psi);
+            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_forPsiElement);
             boolean _equals = Objects.equal(traceToTarget, null);
             if (_equals) {
               throw NoDataException.INSTANCE;
