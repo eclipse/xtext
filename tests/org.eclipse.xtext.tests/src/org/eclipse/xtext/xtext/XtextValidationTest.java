@@ -82,6 +82,24 @@ public class XtextValidationTest extends AbstractValidationMessageAcceptingTestC
 		state.context = newHashMap();
 	}
 	
+	@Test public void testRuleCalledSuper() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar com.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'myURI'\n" +
+				"Model: super=super;\n" + 
+				"super: name=ID;");
+
+		IResourceValidator validator = get(IResourceValidator.class);
+		List<Issue> issues = validator.validate(resource, CheckMode.FAST_ONLY, CancelIndicator.NullImpl);
+		assertEquals(issues.toString(), 1, issues.size());
+		assertEquals("Discouraged rule name 'super'", issues.get(0).getMessage());
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		AbstractRule model = grammar.getRules().get(0);
+		Assignment assignment = (Assignment) model.getAlternatives();
+		RuleCall ruleCall = (RuleCall) assignment.getTerminal();
+		assertSame(grammar.getRules().get(1), ruleCall.getRule());
+	}
+	
 	@Test public void testMissingArgument() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar com.acme.Bar with org.eclipse.xtext.common.Terminals\n" +
