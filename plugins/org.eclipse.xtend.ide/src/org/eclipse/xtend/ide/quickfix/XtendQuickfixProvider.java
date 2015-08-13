@@ -497,14 +497,14 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length == 1) {
 			final String expectedFileName = issue.getData()[0];
 			final IFile iFile = projectUtil.findFileStorage(issue.getUriToProblem(), true);
-			final IPath pathToMoveTo = iFile.getParent().getProjectRelativePath().append(expectedFileName)
+			final IPath pathToMoveTo = iFile.getParent().getFullPath().append(expectedFileName)
 					.addFileExtension(iFile.getFileExtension());
-			if (!iFile.getProject().exists(pathToMoveTo)) {
+			if (!iFile.getWorkspace().getRoot().exists(pathToMoveTo)) {
 				final String label = "Rename file to '" + expectedFileName + ".xtend'";
 				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
 					@Override
 					public void apply(IModificationContext context) throws Exception {
-						IUndoableOperation op = new MoveResourcesOperation(iFile, pathToMoveTo, label);
+						IUndoableOperation op = new MoveResourcesOperation(iFile,pathToMoveTo, label);
 						PlatformUI.getWorkbench().getOperationSupport().getOperationHistory().execute(op, null, null);
 					}
 				});
