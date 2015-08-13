@@ -693,6 +693,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					if (!superGrammar)
 						message = message + " This grammar contains another rule '" + name + "'.";
 					error(message, XtextPackage.Literals.ABSTRACT_RULE__NAME);
+					return;
 				}
 			}
 			else {
@@ -710,7 +711,11 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					builder.append("'").append(name).append("'");
 				}
 				error(message + " The conflicting rules are " + builder + ".", XtextPackage.Literals.ABSTRACT_RULE__NAME);
+				return;
 			}
+		}
+		if (SuperCallScope.SUPER.equals(rule.getName())) {
+			addIssue("Discouraged rule name 'super'", rule, XtextPackage.Literals.ABSTRACT_RULE__NAME, DISCOURAGED_RULE_NAME);
 		}
 	}
 
