@@ -58,8 +58,8 @@ class MoreActiveAnnotationsTest {
 			
 			}
 		''')
-		macroProject.project.addExportedPackages("annotation")
-		waitForBuild
+		if(macroProject.project.addExportedPackages("annotation"))
+			waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -107,8 +107,8 @@ class MoreActiveAnnotationsTest {
 				public final static String FOOBAR = "Foo" + BAR 
 			}
 		''')
-		macroProject.project.addExportedPackages("annotation")
-		waitForBuild
+		if(macroProject.project.addExportedPackages("annotation"))
+			waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -160,8 +160,8 @@ class MoreActiveAnnotationsTest {
 				VAL1, VAL2
 			}
 		''')
-		macroProject.project.addExportedPackages("annotation")
-		waitForBuild
+		if(macroProject.project.addExportedPackages("annotation"))
+			waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
@@ -235,8 +235,8 @@ class MoreActiveAnnotationsTest {
 			public class MyClass {
 			}
 		''')
-		macroProject.project.addExportedPackages("annotation")
-		waitForBuild
+		if(macroProject.project.addExportedPackages("annotation"))
+			waitForBuild
 				
 		val userProject = JavaCore.create(
 			createPluginProject("userProject", "com.google.inject", "org.eclipse.xtend.lib",
