@@ -280,8 +280,23 @@
   <setupTask
       xsi:type="git:GitCloneTask"
       id="git.clone.xtext"
-      remoteURI="git@github.com:eclipse/xtext.git"
+      remoteURI="eclipse/xtext"
       checkoutBranch="${xtext.git.branch}">
+    <annotation
+        source="http://www.eclipse.org/oomph/setup/InducedChoices">
+      <detail
+          key="inherit">
+        <value>github.remoteURIs</value>
+      </detail>
+      <detail
+          key="label">
+        <value>Github Repository</value>
+      </detail>
+      <detail
+          key="target">
+        <value>remoteURI</value>
+      </detail>
+    </annotation>
     <description>${scope.project.label}</description>
   </setupTask>
   <setupTask
