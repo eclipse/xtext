@@ -91,4 +91,14 @@ public class ClassWithVarArgs {
 		return String.format("logInfo2(%s, args...)", msg);
 	}
 	
+	private List<String> values;
+	
+	public void setValues(String ... values) {
+		this.values = stringsToList(values);
+	}
+	
+	public List<String> getValues() {
+		return values;
+	}
+	
 }
