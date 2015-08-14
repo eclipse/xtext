@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templateSet group="Xtend">
+  <template name="for" value="«FOR $ELEMEN$:$EXPRESSION$»&#10;    $END$&#10;«ENDFOR»" description="Create for loop expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.template" value="true" />
+    </context>
+  </template>
+  <template name="if" value="«IF $CONDITION$»&#10;    $END$&#10;«ENDIF»" description="Create if expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.template" value="true" />
+    </context>
+  </template>
+</templateSet>
