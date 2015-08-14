@@ -882,7 +882,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(file, XbasePackage.Literals.XCONSTRUCTOR_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISMATCH, 
 				"Bounds mismatch: The type argument <Object> is not a valid substitute " +
-				"for the bounded type parameter <T extends Comparable<T>> of the constructor C(T)");
+				"for the bounded type parameter <T extends Comparable<T>> of the constructor C<T>(T)");
 	}
 
 	@Test public void testConstructorCallTypeBounds_03() throws Exception {
@@ -909,7 +909,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(file, XbasePackage.Literals.XCONSTRUCTOR_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISMATCH, 
 				"Bounds mismatch: The type argument <Object> is not a valid substitute " +
-				"for the bounded type parameter <T extends Comparable<T>> of the constructor C(T)");
+				"for the bounded type parameter <T extends Comparable<T>> of the constructor C<T>(T)");
 	}
 	@Test
 	@Ignore("TODO improve error message - shouldn't be Could not resolve reference")
