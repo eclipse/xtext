@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.junit.ComparisonFailure
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.intellij.psi.PsiDocumentManager
 
 /**
  */
@@ -41,6 +42,29 @@ class IdeaIntegrationTest extends LightXtendTest {
 		// should be regenerated immediately
 		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(regenerated.exists)
+	}
+	
+	def void testNoChangeDoesntTouch() {
+		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		val file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
+		assertTrue(file.exists)
+		val stamp = file.modificationStamp
+		val document = PsiDocumentManager.getInstance(project).getDocument(xtendFile)
+		ApplicationManager.application.runWriteAction [
+			document.text = '''
+				package otherPackage
+				class Foo {
+					// doesn't go into target
+				}
+			'''
+		]
+		// should be regenerated immediately
+		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
+		assertEquals(stamp, regenerated.modificationStamp)
 	}
 	
 	def void testRemoveAndAddFacet() {
