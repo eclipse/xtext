@@ -43,7 +43,7 @@ public class PsiInternalLiveContainerTestLanguageParser extends AbstractPsiAntlr
         
 
     public String[] getTokenNames() { return PsiInternalLiveContainerTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalLiveContainerTestLanguage.g"; }
 
 
 
@@ -67,19 +67,19 @@ public class PsiInternalLiveContainerTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalLiveContainerTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalLiveContainerTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalLiveContainerTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -96,24 +96,24 @@ public class PsiInternalLiveContainerTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:58:1: ruleModel : ( (lv_name_0_0= RULE_ID ) ) ;
+    // PsiInternalLiveContainerTestLanguage.g:58:1: ruleModel : ( (lv_name_0_0= RULE_ID ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:58:10: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalLiveContainerTestLanguage.g:58:10: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // PsiInternalLiveContainerTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalLiveContainerTestLanguage.g:59:2: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalLiveContainerTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerTestLanguage.g:61:4: lv_name_0_0= RULE_ID
+            // PsiInternalLiveContainerTestLanguage.g:60:3: (lv_name_0_0= RULE_ID )
+            // PsiInternalLiveContainerTestLanguage.g:61:4: lv_name_0_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_0ElementType());
             			
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel82); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			
@@ -144,9 +144,8 @@ public class PsiInternalLiveContainerTestLanguageParser extends AbstractPsiAntlr
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel82 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

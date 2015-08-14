@@ -51,7 +51,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
         
 
     public String[] getTokenNames() { return InternalNoJdtTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalNoJdtTestLanguage.g"; }
 
 
 
@@ -76,7 +76,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalNoJdtTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -84,17 +84,17 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalNoJdtTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalNoJdtTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -112,7 +112,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_greetings_0_0= ruleGreeting ) ) ;
+    // InternalNoJdtTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_greetings_0_0= ruleGreeting ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -122,19 +122,19 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:79:28: ( ( (lv_greetings_0_0= ruleGreeting ) ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:80:1: ( (lv_greetings_0_0= ruleGreeting ) )
+            // InternalNoJdtTestLanguage.g:79:28: ( ( (lv_greetings_0_0= ruleGreeting ) ) )
+            // InternalNoJdtTestLanguage.g:80:1: ( (lv_greetings_0_0= ruleGreeting ) )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:80:1: ( (lv_greetings_0_0= ruleGreeting ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:81:1: (lv_greetings_0_0= ruleGreeting )
+            // InternalNoJdtTestLanguage.g:80:1: ( (lv_greetings_0_0= ruleGreeting ) )
+            // InternalNoJdtTestLanguage.g:81:1: (lv_greetings_0_0= ruleGreeting )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:81:1: (lv_greetings_0_0= ruleGreeting )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:82:3: lv_greetings_0_0= ruleGreeting
+            // InternalNoJdtTestLanguage.g:81:1: (lv_greetings_0_0= ruleGreeting )
+            // InternalNoJdtTestLanguage.g:82:3: lv_greetings_0_0= ruleGreeting
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getGreetingsGreetingParserRuleCall_0()); 
             	    
-            pushFollow(FOLLOW_ruleGreeting_in_ruleModel130);
+            pushFollow(FOLLOW_2);
             lv_greetings_0_0=ruleGreeting();
 
             state._fsp--;
@@ -147,7 +147,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"greetings",
                     		lv_greetings_0_0, 
-                    		"Greeting");
+                    		"org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.Greeting");
             	        afterParserOrEnumRuleCall();
             	    
 
@@ -174,7 +174,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "entryRuleGreeting"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:106:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
+    // InternalNoJdtTestLanguage.g:106:1: entryRuleGreeting returns [EObject current=null] : iv_ruleGreeting= ruleGreeting EOF ;
     public final EObject entryRuleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -182,17 +182,17 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
         try {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:107:2: (iv_ruleGreeting= ruleGreeting EOF )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:108:2: iv_ruleGreeting= ruleGreeting EOF
+            // InternalNoJdtTestLanguage.g:107:2: (iv_ruleGreeting= ruleGreeting EOF )
+            // InternalNoJdtTestLanguage.g:108:2: iv_ruleGreeting= ruleGreeting EOF
             {
              newCompositeNode(grammarAccess.getGreetingRule()); 
-            pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting165);
+            pushFollow(FOLLOW_1);
             iv_ruleGreeting=ruleGreeting();
 
             state._fsp--;
 
              current =iv_ruleGreeting; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGreeting175); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -210,7 +210,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start "ruleGreeting"
-    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:115:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' ) ;
+    // InternalNoJdtTestLanguage.g:115:1: ruleGreeting returns [EObject current=null] : (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' ) ;
     public final EObject ruleGreeting() throws RecognitionException {
         EObject current = null;
 
@@ -225,23 +225,23 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:118:28: ( (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:119:1: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' )
+            // InternalNoJdtTestLanguage.g:118:28: ( (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' ) )
+            // InternalNoJdtTestLanguage.g:119:1: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:119:1: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:119:3: otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!'
+            // InternalNoJdtTestLanguage.g:119:1: (otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!' )
+            // InternalNoJdtTestLanguage.g:119:3: otherlv_0= 'Hello' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )? otherlv_6= '!'
             {
-            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleGreeting212); 
+            otherlv_0=(Token)match(input,11,FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getGreetingAccess().getHelloKeyword_0());
                 
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            // InternalNoJdtTestLanguage.g:123:1: ( (lv_name_1_0= RULE_ID ) )
+            // InternalNoJdtTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:125:3: lv_name_1_0= RULE_ID
+            // InternalNoJdtTestLanguage.g:124:1: (lv_name_1_0= RULE_ID )
+            // InternalNoJdtTestLanguage.g:125:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting229); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_4); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -253,7 +253,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
                    			current, 
                    			"name",
                     		lv_name_1_0, 
-                    		"ID");
+                    		"org.eclipse.xtext.common.Terminals.ID");
             	    
 
             }
@@ -261,7 +261,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:141:2: (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )?
+            // InternalNoJdtTestLanguage.g:141:2: (otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -270,28 +270,28 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:141:4: otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')'
+                    // InternalNoJdtTestLanguage.g:141:4: otherlv_2= '(' otherlv_3= 'from' ( (otherlv_4= RULE_ID ) ) otherlv_5= ')'
                     {
-                    otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleGreeting247); 
+                    otherlv_2=(Token)match(input,12,FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getGreetingAccess().getLeftParenthesisKeyword_2_0());
                         
-                    otherlv_3=(Token)match(input,13,FOLLOW_13_in_ruleGreeting259); 
+                    otherlv_3=(Token)match(input,13,FOLLOW_3); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getGreetingAccess().getFromKeyword_2_1());
                         
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:149:1: ( (otherlv_4= RULE_ID ) )
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:150:1: (otherlv_4= RULE_ID )
+                    // InternalNoJdtTestLanguage.g:149:1: ( (otherlv_4= RULE_ID ) )
+                    // InternalNoJdtTestLanguage.g:150:1: (otherlv_4= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:150:1: (otherlv_4= RULE_ID )
-                    // ../org.eclipse.xtext.testlanguages/src-gen/org/eclipse/xtext/testlanguages/noJdt/parser/antlr/internal/InternalNoJdtTestLanguage.g:151:3: otherlv_4= RULE_ID
+                    // InternalNoJdtTestLanguage.g:150:1: (otherlv_4= RULE_ID )
+                    // InternalNoJdtTestLanguage.g:151:3: otherlv_4= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getGreetingRule());
                     	        }
                             
-                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting279); 
+                    otherlv_4=(Token)match(input,RULE_ID,FOLLOW_6); 
 
                     		newLeafNode(otherlv_4, grammarAccess.getGreetingAccess().getOtherGreetingCrossReference_2_2_0()); 
                     	
@@ -301,7 +301,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
                     }
 
-                    otherlv_5=(Token)match(input,14,FOLLOW_14_in_ruleGreeting291); 
+                    otherlv_5=(Token)match(input,14,FOLLOW_7); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getGreetingAccess().getRightParenthesisKeyword_2_3());
                         
@@ -311,7 +311,7 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
-            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleGreeting305); 
+            otherlv_6=(Token)match(input,15,FOLLOW_2); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getGreetingAccess().getExclamationMarkKeyword_3());
                 
@@ -339,17 +339,12 @@ public class InternalNoJdtTestLanguageParser extends AbstractInternalAntlrParser
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGreeting_in_ruleModel130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting165 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGreeting175 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleGreeting212 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting229 = new BitSet(new long[]{0x0000000000009000L});
-    public static final BitSet FOLLOW_12_in_ruleGreeting247 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleGreeting259 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting279 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleGreeting291 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleGreeting305 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000009000L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000008000L});
 
 }

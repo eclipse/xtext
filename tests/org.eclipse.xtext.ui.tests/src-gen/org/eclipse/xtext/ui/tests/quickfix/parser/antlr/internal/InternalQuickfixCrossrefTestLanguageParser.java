@@ -49,7 +49,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
         
 
     public String[] getTokenNames() { return InternalQuickfixCrossrefTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalQuickfixCrossrefTestLanguage.g"; }
 
 
 
@@ -74,7 +74,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:67:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // InternalQuickfixCrossrefTestLanguage.g:67:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -82,17 +82,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:68:2: (iv_ruleMain= ruleMain EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
+            // InternalQuickfixCrossrefTestLanguage.g:68:2: (iv_ruleMain= ruleMain EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
             {
              newCompositeNode(grammarAccess.getMainRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMain_in_entryRuleMain75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleMain=ruleMain();
 
             state._fsp--;
 
              current =iv_ruleMain; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMain85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -110,7 +110,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalQuickfixCrossrefTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -120,10 +120,10 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalQuickfixCrossrefTestLanguage.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalQuickfixCrossrefTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalQuickfixCrossrefTestLanguage.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -136,15 +136,15 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalQuickfixCrossrefTestLanguage.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:82:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleMain130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
@@ -190,7 +190,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalQuickfixCrossrefTestLanguage.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -198,17 +198,17 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalQuickfixCrossrefTestLanguage.g:107:2: (iv_ruleElement= ruleElement EOF )
+            // InternalQuickfixCrossrefTestLanguage.g:108:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement166);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleElement=ruleElement();
 
             state._fsp--;
 
              current =iv_ruleElement; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement176); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -226,7 +226,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:115:1: ruleElement returns [EObject current=null] : ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) ;
+    // InternalQuickfixCrossrefTestLanguage.g:115:1: ruleElement returns [EObject current=null] : ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -242,13 +242,13 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:118:28: ( ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
+            // InternalQuickfixCrossrefTestLanguage.g:118:28: ( ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' ) )
+            // InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:119:2: ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}'
+            // InternalQuickfixCrossrefTestLanguage.g:119:1: ( ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}' )
+            // InternalQuickfixCrossrefTestLanguage.g:119:2: ( (lv_doc_0_0= RULE_STRING ) )? ( (lv_name_1_0= RULE_ID ) ) otherlv_2= '{' ( (lv_contained_3_0= ruleElement ) )* (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )* otherlv_6= '}'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:119:2: ( (lv_doc_0_0= RULE_STRING ) )?
+            // InternalQuickfixCrossrefTestLanguage.g:119:2: ( (lv_doc_0_0= RULE_STRING ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -257,12 +257,12 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:120:1: (lv_doc_0_0= RULE_STRING )
+                    // InternalQuickfixCrossrefTestLanguage.g:120:1: (lv_doc_0_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:120:1: (lv_doc_0_0= RULE_STRING )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:121:3: lv_doc_0_0= RULE_STRING
+                    // InternalQuickfixCrossrefTestLanguage.g:120:1: (lv_doc_0_0= RULE_STRING )
+                    // InternalQuickfixCrossrefTestLanguage.g:121:3: lv_doc_0_0= RULE_STRING
                     {
-                    lv_doc_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleElement218); 
+                    lv_doc_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_4); 
 
                     			newLeafNode(lv_doc_0_0, grammarAccess.getElementAccess().getDocSTRINGTerminalRuleCall_0_0()); 
                     		
@@ -285,13 +285,13 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:137:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:138:1: (lv_name_1_0= RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:137:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalQuickfixCrossrefTestLanguage.g:138:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:138:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:139:3: lv_name_1_0= RULE_ID
+            // InternalQuickfixCrossrefTestLanguage.g:138:1: (lv_name_1_0= RULE_ID )
+            // InternalQuickfixCrossrefTestLanguage.g:139:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement241); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -311,11 +311,11 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
             }
 
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement258); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:159:1: ( (lv_contained_3_0= ruleElement ) )*
+            // InternalQuickfixCrossrefTestLanguage.g:159:1: ( (lv_contained_3_0= ruleElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -328,15 +328,15 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:160:1: (lv_contained_3_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:160:1: (lv_contained_3_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:160:1: (lv_contained_3_0= ruleElement )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:161:3: lv_contained_3_0= ruleElement
+            	    // InternalQuickfixCrossrefTestLanguage.g:160:1: (lv_contained_3_0= ruleElement )
+            	    // InternalQuickfixCrossrefTestLanguage.g:161:3: lv_contained_3_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getElementAccess().getContainedElementParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleElement279);
+            	    pushFollow(FollowSets000.FOLLOW_6);
             	    lv_contained_3_0=ruleElement();
 
             	    state._fsp--;
@@ -364,7 +364,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:177:3: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )*
+            // InternalQuickfixCrossrefTestLanguage.g:177:3: (otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) ) )*
             loop4:
             do {
                 int alt4=2;
@@ -377,24 +377,24 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:177:5: otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) )
+            	    // InternalQuickfixCrossrefTestLanguage.g:177:5: otherlv_4= 'ref' ( (otherlv_5= RULE_ID ) )
             	    {
-            	    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement293); 
+            	    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
             	        	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRefKeyword_4_0());
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:181:1: ( (otherlv_5= RULE_ID ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:182:1: (otherlv_5= RULE_ID )
+            	    // InternalQuickfixCrossrefTestLanguage.g:181:1: ( (otherlv_5= RULE_ID ) )
+            	    // InternalQuickfixCrossrefTestLanguage.g:182:1: (otherlv_5= RULE_ID )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:182:1: (otherlv_5= RULE_ID )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/parser/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:183:3: otherlv_5= RULE_ID
+            	    // InternalQuickfixCrossrefTestLanguage.g:182:1: (otherlv_5= RULE_ID )
+            	    // InternalQuickfixCrossrefTestLanguage.g:183:3: otherlv_5= RULE_ID
             	    {
 
             	    			if (current==null) {
             	    	            current = createModelElement(grammarAccess.getElementRule());
             	    	        }
             	            
-            	    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement313); 
+            	    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
             	    		newLeafNode(otherlv_5, grammarAccess.getElementAccess().getReferencedElementCrossReference_4_1_0()); 
             	    	
@@ -413,7 +413,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
                 }
             } while (true);
 
-            otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleElement327); 
+            otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_5());
                 
@@ -443,18 +443,13 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleMain_in_entryRuleMain75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMain85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleMain130 = new BitSet(new long[]{0x0000000000000032L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleElement218 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement241 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleElement258 = new BitSet(new long[]{0x0000000000003030L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleElement279 = new BitSet(new long[]{0x0000000000003030L});
-        public static final BitSet FOLLOW_12_in_ruleElement293 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement313 = new BitSet(new long[]{0x0000000000003000L});
-        public static final BitSet FOLLOW_13_in_ruleElement327 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000032L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000003030L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000003000L});
     }
 
 

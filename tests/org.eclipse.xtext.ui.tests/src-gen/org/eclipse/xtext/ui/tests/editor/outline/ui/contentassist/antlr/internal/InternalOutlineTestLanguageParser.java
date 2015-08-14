@@ -51,7 +51,7 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
         
 
     public String[] getTokenNames() { return InternalOutlineTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalOutlineTestLanguage.g"; }
 
 
      
@@ -75,20 +75,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
+    // InternalOutlineTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:61:1: ( ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:62:1: ruleModel EOF
+            // InternalOutlineTestLanguage.g:61:1: ( ruleModel EOF )
+            // InternalOutlineTestLanguage.g:62:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -105,20 +105,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:69:1: ruleModel : ( ( rule__Model__ElementsAssignment )* ) ;
+    // InternalOutlineTestLanguage.g:69:1: ruleModel : ( ( rule__Model__ElementsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:73:2: ( ( ( rule__Model__ElementsAssignment )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:74:1: ( ( rule__Model__ElementsAssignment )* )
+            // InternalOutlineTestLanguage.g:73:2: ( ( ( rule__Model__ElementsAssignment )* ) )
+            // InternalOutlineTestLanguage.g:74:1: ( ( rule__Model__ElementsAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:74:1: ( ( rule__Model__ElementsAssignment )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:75:1: ( rule__Model__ElementsAssignment )*
+            // InternalOutlineTestLanguage.g:74:1: ( ( rule__Model__ElementsAssignment )* )
+            // InternalOutlineTestLanguage.g:75:1: ( rule__Model__ElementsAssignment )*
             {
              before(grammarAccess.getModelAccess().getElementsAssignment()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:76:1: ( rule__Model__ElementsAssignment )*
+            // InternalOutlineTestLanguage.g:76:1: ( rule__Model__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -131,9 +131,9 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:76:2: rule__Model__ElementsAssignment
+            	    // InternalOutlineTestLanguage.g:76:2: rule__Model__ElementsAssignment
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Model__ElementsAssignment();
 
             	    state._fsp--;
@@ -170,20 +170,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:88:1: entryRuleElement : ruleElement EOF ;
+    // InternalOutlineTestLanguage.g:88:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:89:1: ( ruleElement EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:90:1: ruleElement EOF
+            // InternalOutlineTestLanguage.g:89:1: ( ruleElement EOF )
+            // InternalOutlineTestLanguage.g:90:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement122);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleElement();
 
             state._fsp--;
 
              after(grammarAccess.getElementRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement129); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -200,23 +200,23 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:97:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
+    // InternalOutlineTestLanguage.g:97:1: ruleElement : ( ( rule__Element__Group__0 ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:101:2: ( ( ( rule__Element__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:102:1: ( ( rule__Element__Group__0 ) )
+            // InternalOutlineTestLanguage.g:101:2: ( ( ( rule__Element__Group__0 ) ) )
+            // InternalOutlineTestLanguage.g:102:1: ( ( rule__Element__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:102:1: ( ( rule__Element__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:103:1: ( rule__Element__Group__0 )
+            // InternalOutlineTestLanguage.g:102:1: ( ( rule__Element__Group__0 ) )
+            // InternalOutlineTestLanguage.g:103:1: ( rule__Element__Group__0 )
             {
              before(grammarAccess.getElementAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:104:1: ( rule__Element__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:104:2: rule__Element__Group__0
+            // InternalOutlineTestLanguage.g:104:1: ( rule__Element__Group__0 )
+            // InternalOutlineTestLanguage.g:104:2: rule__Element__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0_in_ruleElement155);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__0();
 
             state._fsp--;
@@ -247,21 +247,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:118:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
+    // InternalOutlineTestLanguage.g:118:1: rule__Element__Group__0 : rule__Element__Group__0__Impl rule__Element__Group__1 ;
     public final void rule__Element__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:122:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:123:2: rule__Element__Group__0__Impl rule__Element__Group__1
+            // InternalOutlineTestLanguage.g:122:1: ( rule__Element__Group__0__Impl rule__Element__Group__1 )
+            // InternalOutlineTestLanguage.g:123:2: rule__Element__Group__0__Impl rule__Element__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189);
+            pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__1();
 
             state._fsp--;
@@ -285,23 +285,23 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:130:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
+    // InternalOutlineTestLanguage.g:130:1: rule__Element__Group__0__Impl : ( ( rule__Element__NameAssignment_0 ) ) ;
     public final void rule__Element__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:134:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:135:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalOutlineTestLanguage.g:134:1: ( ( ( rule__Element__NameAssignment_0 ) ) )
+            // InternalOutlineTestLanguage.g:135:1: ( ( rule__Element__NameAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:135:1: ( ( rule__Element__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:136:1: ( rule__Element__NameAssignment_0 )
+            // InternalOutlineTestLanguage.g:135:1: ( ( rule__Element__NameAssignment_0 ) )
+            // InternalOutlineTestLanguage.g:136:1: ( rule__Element__NameAssignment_0 )
             {
              before(grammarAccess.getElementAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:137:1: ( rule__Element__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:137:2: rule__Element__NameAssignment_0
+            // InternalOutlineTestLanguage.g:137:1: ( rule__Element__NameAssignment_0 )
+            // InternalOutlineTestLanguage.g:137:2: rule__Element__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__NameAssignment_0_in_rule__Element__Group__0__Impl219);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__NameAssignment_0();
 
             state._fsp--;
@@ -332,21 +332,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:147:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
+    // InternalOutlineTestLanguage.g:147:1: rule__Element__Group__1 : rule__Element__Group__1__Impl rule__Element__Group__2 ;
     public final void rule__Element__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:151:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:152:2: rule__Element__Group__1__Impl rule__Element__Group__2
+            // InternalOutlineTestLanguage.g:151:1: ( rule__Element__Group__1__Impl rule__Element__Group__2 )
+            // InternalOutlineTestLanguage.g:152:2: rule__Element__Group__1__Impl rule__Element__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1249);
+            pushFollow(FollowSets000.FOLLOW_4);
             rule__Element__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1252);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__2();
 
             state._fsp--;
@@ -370,20 +370,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:159:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
+    // InternalOutlineTestLanguage.g:159:1: rule__Element__Group__1__Impl : ( ( rule__Element__Group_1__0 )? ) ;
     public final void rule__Element__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:163:1: ( ( ( rule__Element__Group_1__0 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:164:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalOutlineTestLanguage.g:163:1: ( ( ( rule__Element__Group_1__0 )? ) )
+            // InternalOutlineTestLanguage.g:164:1: ( ( rule__Element__Group_1__0 )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:164:1: ( ( rule__Element__Group_1__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:165:1: ( rule__Element__Group_1__0 )?
+            // InternalOutlineTestLanguage.g:164:1: ( ( rule__Element__Group_1__0 )? )
+            // InternalOutlineTestLanguage.g:165:1: ( rule__Element__Group_1__0 )?
             {
              before(grammarAccess.getElementAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:166:1: ( rule__Element__Group_1__0 )?
+            // InternalOutlineTestLanguage.g:166:1: ( rule__Element__Group_1__0 )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -392,9 +392,9 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:166:2: rule__Element__Group_1__0
+                    // InternalOutlineTestLanguage.g:166:2: rule__Element__Group_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0_in_rule__Element__Group__1__Impl279);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     rule__Element__Group_1__0();
 
                     state._fsp--;
@@ -428,21 +428,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:176:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
+    // InternalOutlineTestLanguage.g:176:1: rule__Element__Group__2 : rule__Element__Group__2__Impl rule__Element__Group__3 ;
     public final void rule__Element__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:180:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:181:2: rule__Element__Group__2__Impl rule__Element__Group__3
+            // InternalOutlineTestLanguage.g:180:1: ( rule__Element__Group__2__Impl rule__Element__Group__3 )
+            // InternalOutlineTestLanguage.g:181:2: rule__Element__Group__2__Impl rule__Element__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2310);
+            pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2313);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__3();
 
             state._fsp--;
@@ -466,20 +466,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:188:1: rule__Element__Group__2__Impl : ( '{' ) ;
+    // InternalOutlineTestLanguage.g:188:1: rule__Element__Group__2__Impl : ( '{' ) ;
     public final void rule__Element__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:192:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:193:1: ( '{' )
+            // InternalOutlineTestLanguage.g:192:1: ( ( '{' ) )
+            // InternalOutlineTestLanguage.g:193:1: ( '{' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:193:1: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:194:1: '{'
+            // InternalOutlineTestLanguage.g:193:1: ( '{' )
+            // InternalOutlineTestLanguage.g:194:1: '{'
             {
              before(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Element__Group__2__Impl341); 
+            match(input,11,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2()); 
 
             }
@@ -503,21 +503,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:207:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
+    // InternalOutlineTestLanguage.g:207:1: rule__Element__Group__3 : rule__Element__Group__3__Impl rule__Element__Group__4 ;
     public final void rule__Element__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:211:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:212:2: rule__Element__Group__3__Impl rule__Element__Group__4
+            // InternalOutlineTestLanguage.g:211:1: ( rule__Element__Group__3__Impl rule__Element__Group__4 )
+            // InternalOutlineTestLanguage.g:212:2: rule__Element__Group__3__Impl rule__Element__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372);
+            pushFollow(FollowSets000.FOLLOW_5);
             rule__Element__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__4_in_rule__Element__Group__3375);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__4();
 
             state._fsp--;
@@ -541,20 +541,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:219:1: rule__Element__Group__3__Impl : ( ( rule__Element__ChildrenAssignment_3 )* ) ;
+    // InternalOutlineTestLanguage.g:219:1: rule__Element__Group__3__Impl : ( ( rule__Element__ChildrenAssignment_3 )* ) ;
     public final void rule__Element__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:223:1: ( ( ( rule__Element__ChildrenAssignment_3 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:224:1: ( ( rule__Element__ChildrenAssignment_3 )* )
+            // InternalOutlineTestLanguage.g:223:1: ( ( ( rule__Element__ChildrenAssignment_3 )* ) )
+            // InternalOutlineTestLanguage.g:224:1: ( ( rule__Element__ChildrenAssignment_3 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:224:1: ( ( rule__Element__ChildrenAssignment_3 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:225:1: ( rule__Element__ChildrenAssignment_3 )*
+            // InternalOutlineTestLanguage.g:224:1: ( ( rule__Element__ChildrenAssignment_3 )* )
+            // InternalOutlineTestLanguage.g:225:1: ( rule__Element__ChildrenAssignment_3 )*
             {
              before(grammarAccess.getElementAccess().getChildrenAssignment_3()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:226:1: ( rule__Element__ChildrenAssignment_3 )*
+            // InternalOutlineTestLanguage.g:226:1: ( rule__Element__ChildrenAssignment_3 )*
             loop3:
             do {
                 int alt3=2;
@@ -567,9 +567,9 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:226:2: rule__Element__ChildrenAssignment_3
+            	    // InternalOutlineTestLanguage.g:226:2: rule__Element__ChildrenAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Element__ChildrenAssignment_3_in_rule__Element__Group__3__Impl402);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__ChildrenAssignment_3();
 
             	    state._fsp--;
@@ -606,16 +606,16 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__4"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:236:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
+    // InternalOutlineTestLanguage.g:236:1: rule__Element__Group__4 : rule__Element__Group__4__Impl ;
     public final void rule__Element__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:240:1: ( rule__Element__Group__4__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:241:2: rule__Element__Group__4__Impl
+            // InternalOutlineTestLanguage.g:240:1: ( rule__Element__Group__4__Impl )
+            // InternalOutlineTestLanguage.g:241:2: rule__Element__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group__4__Impl_in_rule__Element__Group__4433);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group__4__Impl();
 
             state._fsp--;
@@ -639,20 +639,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group__4__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:247:1: rule__Element__Group__4__Impl : ( '}' ) ;
+    // InternalOutlineTestLanguage.g:247:1: rule__Element__Group__4__Impl : ( '}' ) ;
     public final void rule__Element__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:251:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:252:1: ( '}' )
+            // InternalOutlineTestLanguage.g:251:1: ( ( '}' ) )
+            // InternalOutlineTestLanguage.g:252:1: ( '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:252:1: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:253:1: '}'
+            // InternalOutlineTestLanguage.g:252:1: ( '}' )
+            // InternalOutlineTestLanguage.g:253:1: '}'
             {
              before(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Element__Group__4__Impl461); 
+            match(input,12,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4()); 
 
             }
@@ -676,21 +676,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:276:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
+    // InternalOutlineTestLanguage.g:276:1: rule__Element__Group_1__0 : rule__Element__Group_1__0__Impl rule__Element__Group_1__1 ;
     public final void rule__Element__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:280:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:281:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
+            // InternalOutlineTestLanguage.g:280:1: ( rule__Element__Group_1__0__Impl rule__Element__Group_1__1 )
+            // InternalOutlineTestLanguage.g:281:2: rule__Element__Group_1__0__Impl rule__Element__Group_1__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__0__Impl_in_rule__Element__Group_1__0502);
+            pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__1_in_rule__Element__Group_1__0505);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1__1();
 
             state._fsp--;
@@ -714,20 +714,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:288:1: rule__Element__Group_1__0__Impl : ( '(' ) ;
+    // InternalOutlineTestLanguage.g:288:1: rule__Element__Group_1__0__Impl : ( '(' ) ;
     public final void rule__Element__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:292:1: ( ( '(' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:293:1: ( '(' )
+            // InternalOutlineTestLanguage.g:292:1: ( ( '(' ) )
+            // InternalOutlineTestLanguage.g:293:1: ( '(' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:293:1: ( '(' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:294:1: '('
+            // InternalOutlineTestLanguage.g:293:1: ( '(' )
+            // InternalOutlineTestLanguage.g:294:1: '('
             {
              before(grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__Element__Group_1__0__Impl533); 
+            match(input,13,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getLeftParenthesisKeyword_1_0()); 
 
             }
@@ -751,21 +751,21 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:307:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
+    // InternalOutlineTestLanguage.g:307:1: rule__Element__Group_1__1 : rule__Element__Group_1__1__Impl rule__Element__Group_1__2 ;
     public final void rule__Element__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:311:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:312:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
+            // InternalOutlineTestLanguage.g:311:1: ( rule__Element__Group_1__1__Impl rule__Element__Group_1__2 )
+            // InternalOutlineTestLanguage.g:312:2: rule__Element__Group_1__1__Impl rule__Element__Group_1__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1564);
+            pushFollow(FollowSets000.FOLLOW_6);
             rule__Element__Group_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__2_in_rule__Element__Group_1__1567);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1__2();
 
             state._fsp--;
@@ -789,20 +789,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:319:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__XrefsAssignment_1_1 )* ) ;
+    // InternalOutlineTestLanguage.g:319:1: rule__Element__Group_1__1__Impl : ( ( rule__Element__XrefsAssignment_1_1 )* ) ;
     public final void rule__Element__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:323:1: ( ( ( rule__Element__XrefsAssignment_1_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:324:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
+            // InternalOutlineTestLanguage.g:323:1: ( ( ( rule__Element__XrefsAssignment_1_1 )* ) )
+            // InternalOutlineTestLanguage.g:324:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:324:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:325:1: ( rule__Element__XrefsAssignment_1_1 )*
+            // InternalOutlineTestLanguage.g:324:1: ( ( rule__Element__XrefsAssignment_1_1 )* )
+            // InternalOutlineTestLanguage.g:325:1: ( rule__Element__XrefsAssignment_1_1 )*
             {
              before(grammarAccess.getElementAccess().getXrefsAssignment_1_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:326:1: ( rule__Element__XrefsAssignment_1_1 )*
+            // InternalOutlineTestLanguage.g:326:1: ( rule__Element__XrefsAssignment_1_1 )*
             loop4:
             do {
                 int alt4=2;
@@ -815,9 +815,9 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:326:2: rule__Element__XrefsAssignment_1_1
+            	    // InternalOutlineTestLanguage.g:326:2: rule__Element__XrefsAssignment_1_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Element__XrefsAssignment_1_1_in_rule__Element__Group_1__1__Impl594);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Element__XrefsAssignment_1_1();
 
             	    state._fsp--;
@@ -854,16 +854,16 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:336:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
+    // InternalOutlineTestLanguage.g:336:1: rule__Element__Group_1__2 : rule__Element__Group_1__2__Impl ;
     public final void rule__Element__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:340:1: ( rule__Element__Group_1__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:341:2: rule__Element__Group_1__2__Impl
+            // InternalOutlineTestLanguage.g:340:1: ( rule__Element__Group_1__2__Impl )
+            // InternalOutlineTestLanguage.g:341:2: rule__Element__Group_1__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Element__Group_1__2__Impl_in_rule__Element__Group_1__2625);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Element__Group_1__2__Impl();
 
             state._fsp--;
@@ -887,20 +887,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__Group_1__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:347:1: rule__Element__Group_1__2__Impl : ( ')' ) ;
+    // InternalOutlineTestLanguage.g:347:1: rule__Element__Group_1__2__Impl : ( ')' ) ;
     public final void rule__Element__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:351:1: ( ( ')' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:352:1: ( ')' )
+            // InternalOutlineTestLanguage.g:351:1: ( ( ')' ) )
+            // InternalOutlineTestLanguage.g:352:1: ( ')' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:352:1: ( ')' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:353:1: ')'
+            // InternalOutlineTestLanguage.g:352:1: ( ')' )
+            // InternalOutlineTestLanguage.g:353:1: ')'
             {
              before(grammarAccess.getElementAccess().getRightParenthesisKeyword_1_2()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__Element__Group_1__2__Impl653); 
+            match(input,14,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getRightParenthesisKeyword_1_2()); 
 
             }
@@ -924,20 +924,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Model__ElementsAssignment"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:373:1: rule__Model__ElementsAssignment : ( ruleElement ) ;
+    // InternalOutlineTestLanguage.g:373:1: rule__Model__ElementsAssignment : ( ruleElement ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:377:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:378:1: ( ruleElement )
+            // InternalOutlineTestLanguage.g:377:1: ( ( ruleElement ) )
+            // InternalOutlineTestLanguage.g:378:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:378:1: ( ruleElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:379:1: ruleElement
+            // InternalOutlineTestLanguage.g:378:1: ( ruleElement )
+            // InternalOutlineTestLanguage.g:379:1: ruleElement
             {
              before(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Model__ElementsAssignment695);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleElement();
 
             state._fsp--;
@@ -965,20 +965,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__NameAssignment_0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:388:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
+    // InternalOutlineTestLanguage.g:388:1: rule__Element__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Element__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:392:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:393:1: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:392:1: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:393:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:393:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:394:1: RULE_ID
+            // InternalOutlineTestLanguage.g:393:1: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:394:1: RULE_ID
             {
              before(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Element__NameAssignment_0726); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -1002,24 +1002,24 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__XrefsAssignment_1_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:403:1: rule__Element__XrefsAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // InternalOutlineTestLanguage.g:403:1: rule__Element__XrefsAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__Element__XrefsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:407:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:408:1: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:407:1: ( ( ( RULE_ID ) ) )
+            // InternalOutlineTestLanguage.g:408:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:408:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:409:1: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:408:1: ( ( RULE_ID ) )
+            // InternalOutlineTestLanguage.g:409:1: ( RULE_ID )
             {
              before(grammarAccess.getElementAccess().getXrefsElementCrossReference_1_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:410:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:411:1: RULE_ID
+            // InternalOutlineTestLanguage.g:410:1: ( RULE_ID )
+            // InternalOutlineTestLanguage.g:411:1: RULE_ID
             {
              before(grammarAccess.getElementAccess().getXrefsElementIDTerminalRuleCall_1_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Element__XrefsAssignment_1_1761); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getElementAccess().getXrefsElementIDTerminalRuleCall_1_1_0_1()); 
 
             }
@@ -1047,20 +1047,20 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
 
     // $ANTLR start "rule__Element__ChildrenAssignment_3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:422:1: rule__Element__ChildrenAssignment_3 : ( ruleElement ) ;
+    // InternalOutlineTestLanguage.g:422:1: rule__Element__ChildrenAssignment_3 : ( ruleElement ) ;
     public final void rule__Element__ChildrenAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:426:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:427:1: ( ruleElement )
+            // InternalOutlineTestLanguage.g:426:1: ( ( ruleElement ) )
+            // InternalOutlineTestLanguage.g:427:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:427:1: ( ruleElement )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/outline/ui/contentassist/antlr/internal/InternalOutlineTestLanguage.g:428:1: ruleElement
+            // InternalOutlineTestLanguage.g:427:1: ( ruleElement )
+            // InternalOutlineTestLanguage.g:428:1: ruleElement
             {
              before(grammarAccess.getElementAccess().getChildrenElementParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Element__ChildrenAssignment_3796);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleElement();
 
             state._fsp--;
@@ -1093,38 +1093,12 @@ public class InternalOutlineTestLanguageParser extends AbstractInternalContentAs
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel61 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement122 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__0_in_ruleElement155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__0__Impl_in_rule__Element__Group__0189 = new BitSet(new long[]{0x0000000000002800L});
-        public static final BitSet FOLLOW_rule__Element__Group__1_in_rule__Element__Group__0192 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__NameAssignment_0_in_rule__Element__Group__0__Impl219 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__1__Impl_in_rule__Element__Group__1249 = new BitSet(new long[]{0x0000000000002800L});
-        public static final BitSet FOLLOW_rule__Element__Group__2_in_rule__Element__Group__1252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__0_in_rule__Element__Group__1__Impl279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__2__Impl_in_rule__Element__Group__2310 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_rule__Element__Group__3_in_rule__Element__Group__2313 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Element__Group__2__Impl341 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group__3__Impl_in_rule__Element__Group__3372 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_rule__Element__Group__4_in_rule__Element__Group__3375 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__ChildrenAssignment_3_in_rule__Element__Group__3__Impl402 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__Element__Group__4__Impl_in_rule__Element__Group__4433 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Element__Group__4__Impl461 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__0__Impl_in_rule__Element__Group_1__0502 = new BitSet(new long[]{0x0000000000004010L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__1_in_rule__Element__Group_1__0505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Element__Group_1__0__Impl533 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__1__Impl_in_rule__Element__Group_1__1564 = new BitSet(new long[]{0x0000000000004010L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__2_in_rule__Element__Group_1__1567 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Element__XrefsAssignment_1_1_in_rule__Element__Group_1__1__Impl594 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__Element__Group_1__2__Impl_in_rule__Element__Group_1__2625 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__Element__Group_1__2__Impl653 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_rule__Model__ElementsAssignment695 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Element__NameAssignment_0726 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Element__XrefsAssignment_1_1761 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_rule__Element__ChildrenAssignment_3796 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000002800L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000004010L});
     }
 
 

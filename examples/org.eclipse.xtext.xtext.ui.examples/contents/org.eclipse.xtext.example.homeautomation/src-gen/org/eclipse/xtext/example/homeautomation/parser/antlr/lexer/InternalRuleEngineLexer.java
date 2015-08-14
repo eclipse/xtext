@@ -116,15 +116,15 @@ public class InternalRuleEngineLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g"; }
+    public String getGrammarFileName() { return "InternalRuleEngineLexer.g"; }
 
     // $ANTLR start "Synchronized"
     public final void mSynchronized() throws RecognitionException {
         try {
             int _type = Synchronized;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:19:14: ( 'synchronized' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:19:16: 'synchronized'
+            // InternalRuleEngineLexer.g:19:14: ( 'synchronized' )
+            // InternalRuleEngineLexer.g:19:16: 'synchronized'
             {
             match("synchronized"); 
 
@@ -144,8 +144,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Instanceof;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:21:12: ( 'instanceof' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:21:14: 'instanceof'
+            // InternalRuleEngineLexer.g:21:12: ( 'instanceof' )
+            // InternalRuleEngineLexer.g:21:14: 'instanceof'
             {
             match("instanceof"); 
 
@@ -165,8 +165,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Extension;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:23:11: ( 'extension' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:23:13: 'extension'
+            // InternalRuleEngineLexer.g:23:11: ( 'extension' )
+            // InternalRuleEngineLexer.g:23:13: 'extension'
             {
             match("extension"); 
 
@@ -186,8 +186,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Default;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:25:9: ( 'default' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:25:11: 'default'
+            // InternalRuleEngineLexer.g:25:9: ( 'default' )
+            // InternalRuleEngineLexer.g:25:11: 'default'
             {
             match("default"); 
 
@@ -207,8 +207,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Extends;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:27:9: ( 'extends' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:27:11: 'extends'
+            // InternalRuleEngineLexer.g:27:9: ( 'extends' )
+            // InternalRuleEngineLexer.g:27:11: 'extends'
             {
             match("extends"); 
 
@@ -228,8 +228,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Finally;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:29:9: ( 'finally' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:29:11: 'finally'
+            // InternalRuleEngineLexer.g:29:9: ( 'finally' )
+            // InternalRuleEngineLexer.g:29:11: 'finally'
             {
             match("finally"); 
 
@@ -249,8 +249,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Device;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:31:8: ( 'Device' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:31:10: 'Device'
+            // InternalRuleEngineLexer.g:31:8: ( 'Device' )
+            // InternalRuleEngineLexer.g:31:10: 'Device'
             {
             match("Device"); 
 
@@ -270,8 +270,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Import;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:33:8: ( 'import' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:33:10: 'import'
+            // InternalRuleEngineLexer.g:33:8: ( 'import' )
+            // InternalRuleEngineLexer.g:33:10: 'import'
             {
             match("import"); 
 
@@ -291,8 +291,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Return;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:35:8: ( 'return' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:35:10: 'return'
+            // InternalRuleEngineLexer.g:35:8: ( 'return' )
+            // InternalRuleEngineLexer.g:35:10: 'return'
             {
             match("return"); 
 
@@ -312,8 +312,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Static;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:37:8: ( 'static' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:37:10: 'static'
+            // InternalRuleEngineLexer.g:37:8: ( 'static' )
+            // InternalRuleEngineLexer.g:37:10: 'static'
             {
             match("static"); 
 
@@ -333,8 +333,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Switch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:39:8: ( 'switch' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:39:10: 'switch'
+            // InternalRuleEngineLexer.g:39:8: ( 'switch' )
+            // InternalRuleEngineLexer.g:39:10: 'switch'
             {
             match("switch"); 
 
@@ -354,8 +354,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Typeof;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:41:8: ( 'typeof' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:41:10: 'typeof'
+            // InternalRuleEngineLexer.g:41:8: ( 'typeof' )
+            // InternalRuleEngineLexer.g:41:10: 'typeof'
             {
             match("typeof"); 
 
@@ -375,8 +375,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Catch;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:43:7: ( 'catch' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:43:9: 'catch'
+            // InternalRuleEngineLexer.g:43:7: ( 'catch' )
+            // InternalRuleEngineLexer.g:43:9: 'catch'
             {
             match("catch"); 
 
@@ -396,8 +396,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = False;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:45:7: ( 'false' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:45:9: 'false'
+            // InternalRuleEngineLexer.g:45:7: ( 'false' )
+            // InternalRuleEngineLexer.g:45:9: 'false'
             {
             match("false"); 
 
@@ -417,8 +417,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Super;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:47:7: ( 'super' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:47:9: 'super'
+            // InternalRuleEngineLexer.g:47:7: ( 'super' )
+            // InternalRuleEngineLexer.g:47:9: 'super'
             {
             match("super"); 
 
@@ -438,8 +438,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Throw;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:49:7: ( 'throw' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:49:9: 'throw'
+            // InternalRuleEngineLexer.g:49:7: ( 'throw' )
+            // InternalRuleEngineLexer.g:49:9: 'throw'
             {
             match("throw"); 
 
@@ -459,8 +459,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = While;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:51:7: ( 'while' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:51:9: 'while'
+            // InternalRuleEngineLexer.g:51:7: ( 'while' )
+            // InternalRuleEngineLexer.g:51:9: 'while'
             {
             match("while"); 
 
@@ -480,8 +480,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Rule;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:53:6: ( 'Rule' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:53:8: 'Rule'
+            // InternalRuleEngineLexer.g:53:6: ( 'Rule' )
+            // InternalRuleEngineLexer.g:53:8: 'Rule'
             {
             match("Rule"); 
 
@@ -501,8 +501,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Case;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:55:6: ( 'case' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:55:8: 'case'
+            // InternalRuleEngineLexer.g:55:6: ( 'case' )
+            // InternalRuleEngineLexer.g:55:8: 'case'
             {
             match("case"); 
 
@@ -522,8 +522,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Else;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:57:6: ( 'else' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:57:8: 'else'
+            // InternalRuleEngineLexer.g:57:6: ( 'else' )
+            // InternalRuleEngineLexer.g:57:8: 'else'
             {
             match("else"); 
 
@@ -543,8 +543,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Null;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:59:6: ( 'null' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:59:8: 'null'
+            // InternalRuleEngineLexer.g:59:6: ( 'null' )
+            // InternalRuleEngineLexer.g:59:8: 'null'
             {
             match("null"); 
 
@@ -564,8 +564,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Then;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:61:6: ( 'then' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:61:8: 'then'
+            // InternalRuleEngineLexer.g:61:6: ( 'then' )
+            // InternalRuleEngineLexer.g:61:8: 'then'
             {
             match("then"); 
 
@@ -585,8 +585,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = True;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:63:6: ( 'true' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:63:8: 'true'
+            // InternalRuleEngineLexer.g:63:6: ( 'true' )
+            // InternalRuleEngineLexer.g:63:8: 'true'
             {
             match("true"); 
 
@@ -606,8 +606,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = When;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:65:6: ( 'when' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:65:8: 'when'
+            // InternalRuleEngineLexer.g:65:6: ( 'when' )
+            // InternalRuleEngineLexer.g:65:8: 'when'
             {
             match("when"); 
 
@@ -627,8 +627,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = ExclamationMarkEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:67:37: ( '!==' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:67:39: '!=='
+            // InternalRuleEngineLexer.g:67:37: ( '!==' )
+            // InternalRuleEngineLexer.g:67:39: '!=='
             {
             match("!=="); 
 
@@ -648,8 +648,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = FullStopFullStopLessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:69:30: ( '..<' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:69:32: '..<'
+            // InternalRuleEngineLexer.g:69:30: ( '..<' )
+            // InternalRuleEngineLexer.g:69:32: '..<'
             {
             match("..<"); 
 
@@ -669,8 +669,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = EqualsSignEqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:71:32: ( '===' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:71:34: '==='
+            // InternalRuleEngineLexer.g:71:32: ( '===' )
+            // InternalRuleEngineLexer.g:71:34: '==='
             {
             match("==="); 
 
@@ -690,8 +690,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Can;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:73:5: ( 'can' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:73:7: 'can'
+            // InternalRuleEngineLexer.g:73:5: ( 'can' )
+            // InternalRuleEngineLexer.g:73:7: 'can'
             {
             match("can"); 
 
@@ -711,8 +711,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = For;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:75:5: ( 'for' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:75:7: 'for'
+            // InternalRuleEngineLexer.g:75:5: ( 'for' )
+            // InternalRuleEngineLexer.g:75:7: 'for'
             {
             match("for"); 
 
@@ -732,8 +732,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = New;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:77:5: ( 'new' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:77:7: 'new'
+            // InternalRuleEngineLexer.g:77:5: ( 'new' )
+            // InternalRuleEngineLexer.g:77:7: 'new'
             {
             match("new"); 
 
@@ -753,8 +753,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Try;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:79:5: ( 'try' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:79:7: 'try'
+            // InternalRuleEngineLexer.g:79:5: ( 'try' )
+            // InternalRuleEngineLexer.g:79:7: 'try'
             {
             match("try"); 
 
@@ -774,8 +774,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Val;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:81:5: ( 'val' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:81:7: 'val'
+            // InternalRuleEngineLexer.g:81:5: ( 'val' )
+            // InternalRuleEngineLexer.g:81:7: 'val'
             {
             match("val"); 
 
@@ -795,8 +795,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Var;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:83:5: ( 'var' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:83:7: 'var'
+            // InternalRuleEngineLexer.g:83:5: ( 'var' )
+            // InternalRuleEngineLexer.g:83:7: 'var'
             {
             match("var"); 
 
@@ -816,8 +816,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = ExclamationMarkEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:85:27: ( '!=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:85:29: '!='
+            // InternalRuleEngineLexer.g:85:27: ( '!=' )
+            // InternalRuleEngineLexer.g:85:29: '!='
             {
             match("!="); 
 
@@ -837,8 +837,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = PercentSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:87:23: ( '%=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:87:25: '%='
+            // InternalRuleEngineLexer.g:87:23: ( '%=' )
+            // InternalRuleEngineLexer.g:87:25: '%='
             {
             match("%="); 
 
@@ -858,8 +858,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = AmpersandAmpersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:89:20: ( '&&' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:89:22: '&&'
+            // InternalRuleEngineLexer.g:89:20: ( '&&' )
+            // InternalRuleEngineLexer.g:89:22: '&&'
             {
             match("&&"); 
 
@@ -879,8 +879,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = AsteriskAsterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:91:18: ( '**' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:91:20: '**'
+            // InternalRuleEngineLexer.g:91:18: ( '**' )
+            // InternalRuleEngineLexer.g:91:20: '**'
             {
             match("**"); 
 
@@ -900,8 +900,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = AsteriskEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:93:20: ( '*=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:93:22: '*='
+            // InternalRuleEngineLexer.g:93:20: ( '*=' )
+            // InternalRuleEngineLexer.g:93:22: '*='
             {
             match("*="); 
 
@@ -921,8 +921,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = PlusSignPlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:95:18: ( '++' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:95:20: '++'
+            // InternalRuleEngineLexer.g:95:18: ( '++' )
+            // InternalRuleEngineLexer.g:95:20: '++'
             {
             match("++"); 
 
@@ -942,8 +942,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = PlusSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:97:20: ( '+=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:97:22: '+='
+            // InternalRuleEngineLexer.g:97:20: ( '+=' )
+            // InternalRuleEngineLexer.g:97:22: '+='
             {
             match("+="); 
 
@@ -963,8 +963,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = HyphenMinusHyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:99:24: ( '--' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:99:26: '--'
+            // InternalRuleEngineLexer.g:99:24: ( '--' )
+            // InternalRuleEngineLexer.g:99:26: '--'
             {
             match("--"); 
 
@@ -984,8 +984,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = HyphenMinusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:101:23: ( '-=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:101:25: '-='
+            // InternalRuleEngineLexer.g:101:23: ( '-=' )
+            // InternalRuleEngineLexer.g:101:25: '-='
             {
             match("-="); 
 
@@ -1005,8 +1005,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = HyphenMinusGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:103:28: ( '->' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:103:30: '->'
+            // InternalRuleEngineLexer.g:103:28: ( '->' )
+            // InternalRuleEngineLexer.g:103:30: '->'
             {
             match("->"); 
 
@@ -1026,8 +1026,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = FullStopFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:105:18: ( '..' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:105:20: '..'
+            // InternalRuleEngineLexer.g:105:18: ( '..' )
+            // InternalRuleEngineLexer.g:105:20: '..'
             {
             match(".."); 
 
@@ -1047,8 +1047,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = SolidusEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:107:19: ( '/=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:107:21: '/='
+            // InternalRuleEngineLexer.g:107:19: ( '/=' )
+            // InternalRuleEngineLexer.g:107:21: '/='
             {
             match("/="); 
 
@@ -1068,8 +1068,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = ColonColon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:109:12: ( '::' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:109:14: '::'
+            // InternalRuleEngineLexer.g:109:12: ( '::' )
+            // InternalRuleEngineLexer.g:109:14: '::'
             {
             match("::"); 
 
@@ -1089,8 +1089,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = LessThanSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:111:29: ( '<>' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:111:31: '<>'
+            // InternalRuleEngineLexer.g:111:29: ( '<>' )
+            // InternalRuleEngineLexer.g:111:31: '<>'
             {
             match("<>"); 
 
@@ -1110,8 +1110,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = EqualsSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:113:22: ( '==' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:113:24: '=='
+            // InternalRuleEngineLexer.g:113:22: ( '==' )
+            // InternalRuleEngineLexer.g:113:24: '=='
             {
             match("=="); 
 
@@ -1131,8 +1131,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = EqualsSignGreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:115:27: ( '=>' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:115:29: '=>'
+            // InternalRuleEngineLexer.g:115:27: ( '=>' )
+            // InternalRuleEngineLexer.g:115:29: '=>'
             {
             match("=>"); 
 
@@ -1152,8 +1152,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = GreaterThanSignEqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:117:27: ( '>=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:117:29: '>='
+            // InternalRuleEngineLexer.g:117:27: ( '>=' )
+            // InternalRuleEngineLexer.g:117:29: '>='
             {
             match(">="); 
 
@@ -1173,8 +1173,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = QuestionMarkFullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:119:22: ( '?.' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:119:24: '?.'
+            // InternalRuleEngineLexer.g:119:22: ( '?.' )
+            // InternalRuleEngineLexer.g:119:24: '?.'
             {
             match("?."); 
 
@@ -1194,8 +1194,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = QuestionMarkColon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:121:19: ( '?:' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:121:21: '?:'
+            // InternalRuleEngineLexer.g:121:19: ( '?:' )
+            // InternalRuleEngineLexer.g:121:21: '?:'
             {
             match("?:"); 
 
@@ -1215,8 +1215,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = As;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:123:4: ( 'as' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:123:6: 'as'
+            // InternalRuleEngineLexer.g:123:4: ( 'as' )
+            // InternalRuleEngineLexer.g:123:6: 'as'
             {
             match("as"); 
 
@@ -1236,8 +1236,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Be;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:125:4: ( 'be' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:125:6: 'be'
+            // InternalRuleEngineLexer.g:125:4: ( 'be' )
+            // InternalRuleEngineLexer.g:125:6: 'be'
             {
             match("be"); 
 
@@ -1257,8 +1257,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Do;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:127:4: ( 'do' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:127:6: 'do'
+            // InternalRuleEngineLexer.g:127:4: ( 'do' )
+            // InternalRuleEngineLexer.g:127:6: 'do'
             {
             match("do"); 
 
@@ -1278,8 +1278,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = If;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:129:4: ( 'if' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:129:6: 'if'
+            // InternalRuleEngineLexer.g:129:4: ( 'if' )
+            // InternalRuleEngineLexer.g:129:6: 'if'
             {
             match("if"); 
 
@@ -1299,8 +1299,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = VerticalLineVerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:131:26: ( '||' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:131:28: '||'
+            // InternalRuleEngineLexer.g:131:26: ( '||' )
+            // InternalRuleEngineLexer.g:131:28: '||'
             {
             match("||"); 
 
@@ -1320,8 +1320,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = ExclamationMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:133:17: ( '!' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:133:19: '!'
+            // InternalRuleEngineLexer.g:133:17: ( '!' )
+            // InternalRuleEngineLexer.g:133:19: '!'
             {
             match('!'); 
 
@@ -1340,8 +1340,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = NumberSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:135:12: ( '#' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:135:14: '#'
+            // InternalRuleEngineLexer.g:135:12: ( '#' )
+            // InternalRuleEngineLexer.g:135:14: '#'
             {
             match('#'); 
 
@@ -1360,8 +1360,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = PercentSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:137:13: ( '%' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:137:15: '%'
+            // InternalRuleEngineLexer.g:137:13: ( '%' )
+            // InternalRuleEngineLexer.g:137:15: '%'
             {
             match('%'); 
 
@@ -1380,8 +1380,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Ampersand;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:139:11: ( '&' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:139:13: '&'
+            // InternalRuleEngineLexer.g:139:11: ( '&' )
+            // InternalRuleEngineLexer.g:139:13: '&'
             {
             match('&'); 
 
@@ -1400,8 +1400,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = LeftParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:141:17: ( '(' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:141:19: '('
+            // InternalRuleEngineLexer.g:141:17: ( '(' )
+            // InternalRuleEngineLexer.g:141:19: '('
             {
             match('('); 
 
@@ -1420,8 +1420,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RightParenthesis;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:143:18: ( ')' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:143:20: ')'
+            // InternalRuleEngineLexer.g:143:18: ( ')' )
+            // InternalRuleEngineLexer.g:143:20: ')'
             {
             match(')'); 
 
@@ -1440,8 +1440,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Asterisk;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:145:10: ( '*' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:145:12: '*'
+            // InternalRuleEngineLexer.g:145:10: ( '*' )
+            // InternalRuleEngineLexer.g:145:12: '*'
             {
             match('*'); 
 
@@ -1460,8 +1460,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = PlusSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:147:10: ( '+' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:147:12: '+'
+            // InternalRuleEngineLexer.g:147:10: ( '+' )
+            // InternalRuleEngineLexer.g:147:12: '+'
             {
             match('+'); 
 
@@ -1480,8 +1480,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Comma;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:149:7: ( ',' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:149:9: ','
+            // InternalRuleEngineLexer.g:149:7: ( ',' )
+            // InternalRuleEngineLexer.g:149:9: ','
             {
             match(','); 
 
@@ -1500,8 +1500,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = HyphenMinus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:151:13: ( '-' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:151:15: '-'
+            // InternalRuleEngineLexer.g:151:13: ( '-' )
+            // InternalRuleEngineLexer.g:151:15: '-'
             {
             match('-'); 
 
@@ -1520,8 +1520,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = FullStop;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:153:10: ( '.' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:153:12: '.'
+            // InternalRuleEngineLexer.g:153:10: ( '.' )
+            // InternalRuleEngineLexer.g:153:12: '.'
             {
             match('.'); 
 
@@ -1540,8 +1540,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Solidus;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:155:9: ( '/' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:155:11: '/'
+            // InternalRuleEngineLexer.g:155:9: ( '/' )
+            // InternalRuleEngineLexer.g:155:11: '/'
             {
             match('/'); 
 
@@ -1560,8 +1560,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Colon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:157:7: ( ':' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:157:9: ':'
+            // InternalRuleEngineLexer.g:157:7: ( ':' )
+            // InternalRuleEngineLexer.g:157:9: ':'
             {
             match(':'); 
 
@@ -1580,8 +1580,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = Semicolon;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:159:11: ( ';' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:159:13: ';'
+            // InternalRuleEngineLexer.g:159:11: ( ';' )
+            // InternalRuleEngineLexer.g:159:13: ';'
             {
             match(';'); 
 
@@ -1600,8 +1600,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = LessThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:161:14: ( '<' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:161:16: '<'
+            // InternalRuleEngineLexer.g:161:14: ( '<' )
+            // InternalRuleEngineLexer.g:161:16: '<'
             {
             match('<'); 
 
@@ -1620,8 +1620,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = EqualsSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:163:12: ( '=' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:163:14: '='
+            // InternalRuleEngineLexer.g:163:12: ( '=' )
+            // InternalRuleEngineLexer.g:163:14: '='
             {
             match('='); 
 
@@ -1640,8 +1640,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = GreaterThanSign;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:165:17: ( '>' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:165:19: '>'
+            // InternalRuleEngineLexer.g:165:17: ( '>' )
+            // InternalRuleEngineLexer.g:165:19: '>'
             {
             match('>'); 
 
@@ -1660,8 +1660,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = QuestionMark;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:167:14: ( '?' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:167:16: '?'
+            // InternalRuleEngineLexer.g:167:14: ( '?' )
+            // InternalRuleEngineLexer.g:167:16: '?'
             {
             match('?'); 
 
@@ -1680,8 +1680,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = LeftSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:169:19: ( '[' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:169:21: '['
+            // InternalRuleEngineLexer.g:169:19: ( '[' )
+            // InternalRuleEngineLexer.g:169:21: '['
             {
             match('['); 
 
@@ -1700,8 +1700,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RightSquareBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:171:20: ( ']' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:171:22: ']'
+            // InternalRuleEngineLexer.g:171:20: ( ']' )
+            // InternalRuleEngineLexer.g:171:22: ']'
             {
             match(']'); 
 
@@ -1720,8 +1720,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = LeftCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:173:18: ( '{' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:173:20: '{'
+            // InternalRuleEngineLexer.g:173:18: ( '{' )
+            // InternalRuleEngineLexer.g:173:20: '{'
             {
             match('{'); 
 
@@ -1740,8 +1740,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = VerticalLine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:175:14: ( '|' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:175:16: '|'
+            // InternalRuleEngineLexer.g:175:14: ( '|' )
+            // InternalRuleEngineLexer.g:175:16: '|'
             {
             match('|'); 
 
@@ -1760,8 +1760,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RightCurlyBracket;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:177:19: ( '}' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:177:21: '}'
+            // InternalRuleEngineLexer.g:177:19: ( '}' )
+            // InternalRuleEngineLexer.g:177:21: '}'
             {
             match('}'); 
 
@@ -1778,8 +1778,8 @@ public class InternalRuleEngineLexer extends Lexer {
     // $ANTLR start "RULE_BEGIN"
     public final void mRULE_BEGIN() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:181:21: ()
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:181:23: 
+            // InternalRuleEngineLexer.g:181:21: ()
+            // InternalRuleEngineLexer.g:181:23: 
             {
             }
 
@@ -1792,8 +1792,8 @@ public class InternalRuleEngineLexer extends Lexer {
     // $ANTLR start "RULE_END"
     public final void mRULE_END() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:183:19: ()
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:183:21: 
+            // InternalRuleEngineLexer.g:183:19: ()
+            // InternalRuleEngineLexer.g:183:21: 
             {
             }
 
@@ -1808,10 +1808,10 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalRuleEngineLexer.g:185:10: ( ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )? )
+            // InternalRuleEngineLexer.g:185:12: ( '0x' | '0X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+ ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:12: ( '0x' | '0X' )
+            // InternalRuleEngineLexer.g:185:12: ( '0x' | '0X' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1839,7 +1839,7 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:13: '0x'
+                    // InternalRuleEngineLexer.g:185:13: '0x'
                     {
                     match("0x"); 
 
@@ -1847,7 +1847,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:18: '0X'
+                    // InternalRuleEngineLexer.g:185:18: '0X'
                     {
                     match("0X"); 
 
@@ -1857,7 +1857,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
+            // InternalRuleEngineLexer.g:185:24: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' | '_' )+
             int cnt2=0;
             loop2:
             do {
@@ -1871,7 +1871,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:
+            	    // InternalRuleEngineLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='F')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='f') ) {
             	        input.consume();
@@ -1895,7 +1895,7 @@ public class InternalRuleEngineLexer extends Lexer {
                 cnt2++;
             } while (true);
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
+            // InternalRuleEngineLexer.g:185:58: ( '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1904,10 +1904,10 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalRuleEngineLexer.g:185:59: '#' ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     {
                     match('#'); 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
+                    // InternalRuleEngineLexer.g:185:63: ( ( 'b' | 'B' ) ( 'i' | 'I' ) | ( 'l' | 'L' ) )
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -1925,7 +1925,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:64: ( 'b' | 'B' ) ( 'i' | 'I' )
+                            // InternalRuleEngineLexer.g:185:64: ( 'b' | 'B' ) ( 'i' | 'I' )
                             {
                             if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                                 input.consume();
@@ -1949,7 +1949,7 @@ public class InternalRuleEngineLexer extends Lexer {
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:185:84: ( 'l' | 'L' )
+                            // InternalRuleEngineLexer.g:185:84: ( 'l' | 'L' )
                             {
                             if ( input.LA(1)=='L'||input.LA(1)=='l' ) {
                                 input.consume();
@@ -1988,11 +1988,11 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:187:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:187:12: '0' .. '9' ( '0' .. '9' | '_' )*
+            // InternalRuleEngineLexer.g:187:10: ( '0' .. '9' ( '0' .. '9' | '_' )* )
+            // InternalRuleEngineLexer.g:187:12: '0' .. '9' ( '0' .. '9' | '_' )*
             {
             matchRange('0','9'); 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:187:21: ( '0' .. '9' | '_' )*
+            // InternalRuleEngineLexer.g:187:21: ( '0' .. '9' | '_' )*
             loop5:
             do {
                 int alt5=2;
@@ -2005,7 +2005,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:
+            	    // InternalRuleEngineLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||input.LA(1)=='_' ) {
             	        input.consume();
@@ -2041,11 +2041,11 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_DECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalRuleEngineLexer.g:189:14: ( RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )? )
+            // InternalRuleEngineLexer.g:189:16: RULE_INT ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )? ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             {
             mRULE_INT(); 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
+            // InternalRuleEngineLexer.g:189:25: ( ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT )?
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -2054,7 +2054,7 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
+                    // InternalRuleEngineLexer.g:189:26: ( 'e' | 'E' ) ( '+' | '-' )? RULE_INT
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -2065,7 +2065,7 @@ public class InternalRuleEngineLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:36: ( '+' | '-' )?
+                    // InternalRuleEngineLexer.g:189:36: ( '+' | '-' )?
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -2074,7 +2074,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:
+                            // InternalRuleEngineLexer.g:
                             {
                             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                                 input.consume();
@@ -2098,7 +2098,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
+            // InternalRuleEngineLexer.g:189:58: ( ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' ) | ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' ) )?
             int alt8=3;
             int LA8_0 = input.LA(1);
 
@@ -2110,7 +2110,7 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
+                    // InternalRuleEngineLexer.g:189:59: ( 'b' | 'B' ) ( 'i' | 'I' | 'd' | 'D' )
                     {
                     if ( input.LA(1)=='B'||input.LA(1)=='b' ) {
                         input.consume();
@@ -2134,7 +2134,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:189:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
+                    // InternalRuleEngineLexer.g:189:87: ( 'l' | 'L' | 'd' | 'D' | 'f' | 'F' )
                     {
                     if ( input.LA(1)=='D'||input.LA(1)=='F'||input.LA(1)=='L'||input.LA(1)=='d'||input.LA(1)=='f'||input.LA(1)=='l' ) {
                         input.consume();
@@ -2167,10 +2167,10 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:191:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:191:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalRuleEngineLexer.g:191:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )* )
+            // InternalRuleEngineLexer.g:191:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:191:11: ( '^' )?
+            // InternalRuleEngineLexer.g:191:11: ( '^' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2179,7 +2179,7 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:191:11: '^'
+                    // InternalRuleEngineLexer.g:191:11: '^'
                     {
                     match('^'); 
 
@@ -2197,7 +2197,7 @@ public class InternalRuleEngineLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:191:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
+            // InternalRuleEngineLexer.g:191:44: ( 'a' .. 'z' | 'A' .. 'Z' | '$' | '_' | '0' .. '9' )*
             loop10:
             do {
                 int alt10=2;
@@ -2210,7 +2210,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:
+            	    // InternalRuleEngineLexer.g:
             	    {
             	    if ( input.LA(1)=='$'||(input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -2246,10 +2246,10 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalRuleEngineLexer.g:193:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? ) )
+            // InternalRuleEngineLexer.g:193:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
+            // InternalRuleEngineLexer.g:193:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )? | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )? )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -2267,10 +2267,10 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
+                    // InternalRuleEngineLexer.g:193:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* ( '\"' )?
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalRuleEngineLexer.g:193:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -2286,7 +2286,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:21: '\\\\' .
+                    	    // InternalRuleEngineLexer.g:193:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2294,7 +2294,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalRuleEngineLexer.g:193:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2314,7 +2314,7 @@ public class InternalRuleEngineLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:44: ( '\"' )?
+                    // InternalRuleEngineLexer.g:193:44: ( '\"' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -2323,7 +2323,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:44: '\"'
+                            // InternalRuleEngineLexer.g:193:44: '\"'
                             {
                             match('\"'); 
 
@@ -2336,10 +2336,10 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
+                    // InternalRuleEngineLexer.g:193:49: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* ( '\\'' )?
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalRuleEngineLexer.g:193:54: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop13:
                     do {
                         int alt13=3;
@@ -2355,7 +2355,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                         switch (alt13) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:55: '\\\\' .
+                    	    // InternalRuleEngineLexer.g:193:55: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -2363,7 +2363,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:62: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalRuleEngineLexer.g:193:62: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -2383,7 +2383,7 @@ public class InternalRuleEngineLexer extends Lexer {
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:79: ( '\\'' )?
+                    // InternalRuleEngineLexer.g:193:79: ( '\\'' )?
                     int alt14=2;
                     int LA14_0 = input.LA(1);
 
@@ -2392,7 +2392,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     switch (alt14) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:193:79: '\\''
+                            // InternalRuleEngineLexer.g:193:79: '\\''
                             {
                             match('\''); 
 
@@ -2423,12 +2423,12 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:195:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:195:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalRuleEngineLexer.g:195:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalRuleEngineLexer.g:195:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:195:24: ( options {greedy=false; } : . )*
+            // InternalRuleEngineLexer.g:195:24: ( options {greedy=false; } : . )*
             loop16:
             do {
                 int alt16=2;
@@ -2453,7 +2453,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt16) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:195:52: .
+            	    // InternalRuleEngineLexer.g:195:52: .
             	    {
             	    matchAny(); 
 
@@ -2483,12 +2483,12 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalRuleEngineLexer.g:197:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalRuleEngineLexer.g:197:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalRuleEngineLexer.g:197:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop17:
             do {
                 int alt17=2;
@@ -2501,7 +2501,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt17) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalRuleEngineLexer.g:197:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2521,7 +2521,7 @@ public class InternalRuleEngineLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:40: ( ( '\\r' )? '\\n' )?
+            // InternalRuleEngineLexer.g:197:40: ( ( '\\r' )? '\\n' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -2530,9 +2530,9 @@ public class InternalRuleEngineLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:41: ( '\\r' )? '\\n'
+                    // InternalRuleEngineLexer.g:197:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:41: ( '\\r' )?
+                    // InternalRuleEngineLexer.g:197:41: ( '\\r' )?
                     int alt18=2;
                     int LA18_0 = input.LA(1);
 
@@ -2541,7 +2541,7 @@ public class InternalRuleEngineLexer extends Lexer {
                     }
                     switch (alt18) {
                         case 1 :
-                            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:197:41: '\\r'
+                            // InternalRuleEngineLexer.g:197:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2573,10 +2573,10 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:199:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRuleEngineLexer.g:199:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalRuleEngineLexer.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRuleEngineLexer.g:199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt20=0;
             loop20:
             do {
@@ -2590,7 +2590,7 @@ public class InternalRuleEngineLexer extends Lexer {
 
                 switch (alt20) {
             	case 1 :
-            	    // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:
+            	    // InternalRuleEngineLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -2630,8 +2630,8 @@ public class InternalRuleEngineLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:201:16: ( . )
-            // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:201:18: .
+            // InternalRuleEngineLexer.g:201:16: ( . )
+            // InternalRuleEngineLexer.g:201:18: .
             {
             matchAny(); 
 
@@ -2646,628 +2646,628 @@ public class InternalRuleEngineLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:8: ( Synchronized | Instanceof | Extension | Default | Extends | Finally | Device | Import | Return | Static | Switch | Typeof | Catch | False | Super | Throw | While | Rule | Case | Else | Null | Then | True | When | ExclamationMarkEqualsSignEqualsSign | FullStopFullStopLessThanSign | EqualsSignEqualsSignEqualsSign | Can | For | New | Try | Val | Var | ExclamationMarkEqualsSign | PercentSignEqualsSign | AmpersandAmpersand | AsteriskAsterisk | AsteriskEqualsSign | PlusSignPlusSign | PlusSignEqualsSign | HyphenMinusHyphenMinus | HyphenMinusEqualsSign | HyphenMinusGreaterThanSign | FullStopFullStop | SolidusEqualsSign | ColonColon | LessThanSignGreaterThanSign | EqualsSignEqualsSign | EqualsSignGreaterThanSign | GreaterThanSignEqualsSign | QuestionMarkFullStop | QuestionMarkColon | As | Be | Do | If | VerticalLineVerticalLine | ExclamationMark | NumberSign | PercentSign | Ampersand | LeftParenthesis | RightParenthesis | Asterisk | PlusSign | Comma | HyphenMinus | FullStop | Solidus | Colon | Semicolon | LessThanSign | EqualsSign | GreaterThanSign | QuestionMark | LeftSquareBracket | RightSquareBracket | LeftCurlyBracket | VerticalLine | RightCurlyBracket | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalRuleEngineLexer.g:1:8: ( Synchronized | Instanceof | Extension | Default | Extends | Finally | Device | Import | Return | Static | Switch | Typeof | Catch | False | Super | Throw | While | Rule | Case | Else | Null | Then | True | When | ExclamationMarkEqualsSignEqualsSign | FullStopFullStopLessThanSign | EqualsSignEqualsSignEqualsSign | Can | For | New | Try | Val | Var | ExclamationMarkEqualsSign | PercentSignEqualsSign | AmpersandAmpersand | AsteriskAsterisk | AsteriskEqualsSign | PlusSignPlusSign | PlusSignEqualsSign | HyphenMinusHyphenMinus | HyphenMinusEqualsSign | HyphenMinusGreaterThanSign | FullStopFullStop | SolidusEqualsSign | ColonColon | LessThanSignGreaterThanSign | EqualsSignEqualsSign | EqualsSignGreaterThanSign | GreaterThanSignEqualsSign | QuestionMarkFullStop | QuestionMarkColon | As | Be | Do | If | VerticalLineVerticalLine | ExclamationMark | NumberSign | PercentSign | Ampersand | LeftParenthesis | RightParenthesis | Asterisk | PlusSign | Comma | HyphenMinus | FullStop | Solidus | Colon | Semicolon | LessThanSign | EqualsSign | GreaterThanSign | QuestionMark | LeftSquareBracket | RightSquareBracket | LeftCurlyBracket | VerticalLine | RightCurlyBracket | RULE_HEX | RULE_INT | RULE_DECIMAL | RULE_ID | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt21=89;
         alt21 = dfa21.predict(input);
         switch (alt21) {
             case 1 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:10: Synchronized
+                // InternalRuleEngineLexer.g:1:10: Synchronized
                 {
                 mSynchronized(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:23: Instanceof
+                // InternalRuleEngineLexer.g:1:23: Instanceof
                 {
                 mInstanceof(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:34: Extension
+                // InternalRuleEngineLexer.g:1:34: Extension
                 {
                 mExtension(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:44: Default
+                // InternalRuleEngineLexer.g:1:44: Default
                 {
                 mDefault(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:52: Extends
+                // InternalRuleEngineLexer.g:1:52: Extends
                 {
                 mExtends(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:60: Finally
+                // InternalRuleEngineLexer.g:1:60: Finally
                 {
                 mFinally(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:68: Device
+                // InternalRuleEngineLexer.g:1:68: Device
                 {
                 mDevice(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:75: Import
+                // InternalRuleEngineLexer.g:1:75: Import
                 {
                 mImport(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:82: Return
+                // InternalRuleEngineLexer.g:1:82: Return
                 {
                 mReturn(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:89: Static
+                // InternalRuleEngineLexer.g:1:89: Static
                 {
                 mStatic(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:96: Switch
+                // InternalRuleEngineLexer.g:1:96: Switch
                 {
                 mSwitch(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:103: Typeof
+                // InternalRuleEngineLexer.g:1:103: Typeof
                 {
                 mTypeof(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:110: Catch
+                // InternalRuleEngineLexer.g:1:110: Catch
                 {
                 mCatch(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:116: False
+                // InternalRuleEngineLexer.g:1:116: False
                 {
                 mFalse(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:122: Super
+                // InternalRuleEngineLexer.g:1:122: Super
                 {
                 mSuper(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:128: Throw
+                // InternalRuleEngineLexer.g:1:128: Throw
                 {
                 mThrow(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:134: While
+                // InternalRuleEngineLexer.g:1:134: While
                 {
                 mWhile(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:140: Rule
+                // InternalRuleEngineLexer.g:1:140: Rule
                 {
                 mRule(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:145: Case
+                // InternalRuleEngineLexer.g:1:145: Case
                 {
                 mCase(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:150: Else
+                // InternalRuleEngineLexer.g:1:150: Else
                 {
                 mElse(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:155: Null
+                // InternalRuleEngineLexer.g:1:155: Null
                 {
                 mNull(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:160: Then
+                // InternalRuleEngineLexer.g:1:160: Then
                 {
                 mThen(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:165: True
+                // InternalRuleEngineLexer.g:1:165: True
                 {
                 mTrue(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:170: When
+                // InternalRuleEngineLexer.g:1:170: When
                 {
                 mWhen(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:175: ExclamationMarkEqualsSignEqualsSign
+                // InternalRuleEngineLexer.g:1:175: ExclamationMarkEqualsSignEqualsSign
                 {
                 mExclamationMarkEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:211: FullStopFullStopLessThanSign
+                // InternalRuleEngineLexer.g:1:211: FullStopFullStopLessThanSign
                 {
                 mFullStopFullStopLessThanSign(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:240: EqualsSignEqualsSignEqualsSign
+                // InternalRuleEngineLexer.g:1:240: EqualsSignEqualsSignEqualsSign
                 {
                 mEqualsSignEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:271: Can
+                // InternalRuleEngineLexer.g:1:271: Can
                 {
                 mCan(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:275: For
+                // InternalRuleEngineLexer.g:1:275: For
                 {
                 mFor(); 
 
                 }
                 break;
             case 30 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:279: New
+                // InternalRuleEngineLexer.g:1:279: New
                 {
                 mNew(); 
 
                 }
                 break;
             case 31 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:283: Try
+                // InternalRuleEngineLexer.g:1:283: Try
                 {
                 mTry(); 
 
                 }
                 break;
             case 32 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:287: Val
+                // InternalRuleEngineLexer.g:1:287: Val
                 {
                 mVal(); 
 
                 }
                 break;
             case 33 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:291: Var
+                // InternalRuleEngineLexer.g:1:291: Var
                 {
                 mVar(); 
 
                 }
                 break;
             case 34 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:295: ExclamationMarkEqualsSign
+                // InternalRuleEngineLexer.g:1:295: ExclamationMarkEqualsSign
                 {
                 mExclamationMarkEqualsSign(); 
 
                 }
                 break;
             case 35 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:321: PercentSignEqualsSign
+                // InternalRuleEngineLexer.g:1:321: PercentSignEqualsSign
                 {
                 mPercentSignEqualsSign(); 
 
                 }
                 break;
             case 36 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:343: AmpersandAmpersand
+                // InternalRuleEngineLexer.g:1:343: AmpersandAmpersand
                 {
                 mAmpersandAmpersand(); 
 
                 }
                 break;
             case 37 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:362: AsteriskAsterisk
+                // InternalRuleEngineLexer.g:1:362: AsteriskAsterisk
                 {
                 mAsteriskAsterisk(); 
 
                 }
                 break;
             case 38 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:379: AsteriskEqualsSign
+                // InternalRuleEngineLexer.g:1:379: AsteriskEqualsSign
                 {
                 mAsteriskEqualsSign(); 
 
                 }
                 break;
             case 39 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:398: PlusSignPlusSign
+                // InternalRuleEngineLexer.g:1:398: PlusSignPlusSign
                 {
                 mPlusSignPlusSign(); 
 
                 }
                 break;
             case 40 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:415: PlusSignEqualsSign
+                // InternalRuleEngineLexer.g:1:415: PlusSignEqualsSign
                 {
                 mPlusSignEqualsSign(); 
 
                 }
                 break;
             case 41 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:434: HyphenMinusHyphenMinus
+                // InternalRuleEngineLexer.g:1:434: HyphenMinusHyphenMinus
                 {
                 mHyphenMinusHyphenMinus(); 
 
                 }
                 break;
             case 42 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:457: HyphenMinusEqualsSign
+                // InternalRuleEngineLexer.g:1:457: HyphenMinusEqualsSign
                 {
                 mHyphenMinusEqualsSign(); 
 
                 }
                 break;
             case 43 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:479: HyphenMinusGreaterThanSign
+                // InternalRuleEngineLexer.g:1:479: HyphenMinusGreaterThanSign
                 {
                 mHyphenMinusGreaterThanSign(); 
 
                 }
                 break;
             case 44 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:506: FullStopFullStop
+                // InternalRuleEngineLexer.g:1:506: FullStopFullStop
                 {
                 mFullStopFullStop(); 
 
                 }
                 break;
             case 45 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:523: SolidusEqualsSign
+                // InternalRuleEngineLexer.g:1:523: SolidusEqualsSign
                 {
                 mSolidusEqualsSign(); 
 
                 }
                 break;
             case 46 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:541: ColonColon
+                // InternalRuleEngineLexer.g:1:541: ColonColon
                 {
                 mColonColon(); 
 
                 }
                 break;
             case 47 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:552: LessThanSignGreaterThanSign
+                // InternalRuleEngineLexer.g:1:552: LessThanSignGreaterThanSign
                 {
                 mLessThanSignGreaterThanSign(); 
 
                 }
                 break;
             case 48 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:580: EqualsSignEqualsSign
+                // InternalRuleEngineLexer.g:1:580: EqualsSignEqualsSign
                 {
                 mEqualsSignEqualsSign(); 
 
                 }
                 break;
             case 49 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:601: EqualsSignGreaterThanSign
+                // InternalRuleEngineLexer.g:1:601: EqualsSignGreaterThanSign
                 {
                 mEqualsSignGreaterThanSign(); 
 
                 }
                 break;
             case 50 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:627: GreaterThanSignEqualsSign
+                // InternalRuleEngineLexer.g:1:627: GreaterThanSignEqualsSign
                 {
                 mGreaterThanSignEqualsSign(); 
 
                 }
                 break;
             case 51 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:653: QuestionMarkFullStop
+                // InternalRuleEngineLexer.g:1:653: QuestionMarkFullStop
                 {
                 mQuestionMarkFullStop(); 
 
                 }
                 break;
             case 52 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:674: QuestionMarkColon
+                // InternalRuleEngineLexer.g:1:674: QuestionMarkColon
                 {
                 mQuestionMarkColon(); 
 
                 }
                 break;
             case 53 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:692: As
+                // InternalRuleEngineLexer.g:1:692: As
                 {
                 mAs(); 
 
                 }
                 break;
             case 54 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:695: Be
+                // InternalRuleEngineLexer.g:1:695: Be
                 {
                 mBe(); 
 
                 }
                 break;
             case 55 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:698: Do
+                // InternalRuleEngineLexer.g:1:698: Do
                 {
                 mDo(); 
 
                 }
                 break;
             case 56 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:701: If
+                // InternalRuleEngineLexer.g:1:701: If
                 {
                 mIf(); 
 
                 }
                 break;
             case 57 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:704: VerticalLineVerticalLine
+                // InternalRuleEngineLexer.g:1:704: VerticalLineVerticalLine
                 {
                 mVerticalLineVerticalLine(); 
 
                 }
                 break;
             case 58 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:729: ExclamationMark
+                // InternalRuleEngineLexer.g:1:729: ExclamationMark
                 {
                 mExclamationMark(); 
 
                 }
                 break;
             case 59 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:745: NumberSign
+                // InternalRuleEngineLexer.g:1:745: NumberSign
                 {
                 mNumberSign(); 
 
                 }
                 break;
             case 60 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:756: PercentSign
+                // InternalRuleEngineLexer.g:1:756: PercentSign
                 {
                 mPercentSign(); 
 
                 }
                 break;
             case 61 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:768: Ampersand
+                // InternalRuleEngineLexer.g:1:768: Ampersand
                 {
                 mAmpersand(); 
 
                 }
                 break;
             case 62 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:778: LeftParenthesis
+                // InternalRuleEngineLexer.g:1:778: LeftParenthesis
                 {
                 mLeftParenthesis(); 
 
                 }
                 break;
             case 63 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:794: RightParenthesis
+                // InternalRuleEngineLexer.g:1:794: RightParenthesis
                 {
                 mRightParenthesis(); 
 
                 }
                 break;
             case 64 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:811: Asterisk
+                // InternalRuleEngineLexer.g:1:811: Asterisk
                 {
                 mAsterisk(); 
 
                 }
                 break;
             case 65 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:820: PlusSign
+                // InternalRuleEngineLexer.g:1:820: PlusSign
                 {
                 mPlusSign(); 
 
                 }
                 break;
             case 66 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:829: Comma
+                // InternalRuleEngineLexer.g:1:829: Comma
                 {
                 mComma(); 
 
                 }
                 break;
             case 67 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:835: HyphenMinus
+                // InternalRuleEngineLexer.g:1:835: HyphenMinus
                 {
                 mHyphenMinus(); 
 
                 }
                 break;
             case 68 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:847: FullStop
+                // InternalRuleEngineLexer.g:1:847: FullStop
                 {
                 mFullStop(); 
 
                 }
                 break;
             case 69 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:856: Solidus
+                // InternalRuleEngineLexer.g:1:856: Solidus
                 {
                 mSolidus(); 
 
                 }
                 break;
             case 70 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:864: Colon
+                // InternalRuleEngineLexer.g:1:864: Colon
                 {
                 mColon(); 
 
                 }
                 break;
             case 71 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:870: Semicolon
+                // InternalRuleEngineLexer.g:1:870: Semicolon
                 {
                 mSemicolon(); 
 
                 }
                 break;
             case 72 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:880: LessThanSign
+                // InternalRuleEngineLexer.g:1:880: LessThanSign
                 {
                 mLessThanSign(); 
 
                 }
                 break;
             case 73 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:893: EqualsSign
+                // InternalRuleEngineLexer.g:1:893: EqualsSign
                 {
                 mEqualsSign(); 
 
                 }
                 break;
             case 74 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:904: GreaterThanSign
+                // InternalRuleEngineLexer.g:1:904: GreaterThanSign
                 {
                 mGreaterThanSign(); 
 
                 }
                 break;
             case 75 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:920: QuestionMark
+                // InternalRuleEngineLexer.g:1:920: QuestionMark
                 {
                 mQuestionMark(); 
 
                 }
                 break;
             case 76 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:933: LeftSquareBracket
+                // InternalRuleEngineLexer.g:1:933: LeftSquareBracket
                 {
                 mLeftSquareBracket(); 
 
                 }
                 break;
             case 77 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:951: RightSquareBracket
+                // InternalRuleEngineLexer.g:1:951: RightSquareBracket
                 {
                 mRightSquareBracket(); 
 
                 }
                 break;
             case 78 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:970: LeftCurlyBracket
+                // InternalRuleEngineLexer.g:1:970: LeftCurlyBracket
                 {
                 mLeftCurlyBracket(); 
 
                 }
                 break;
             case 79 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:987: VerticalLine
+                // InternalRuleEngineLexer.g:1:987: VerticalLine
                 {
                 mVerticalLine(); 
 
                 }
                 break;
             case 80 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1000: RightCurlyBracket
+                // InternalRuleEngineLexer.g:1:1000: RightCurlyBracket
                 {
                 mRightCurlyBracket(); 
 
                 }
                 break;
             case 81 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1018: RULE_HEX
+                // InternalRuleEngineLexer.g:1:1018: RULE_HEX
                 {
                 mRULE_HEX(); 
 
                 }
                 break;
             case 82 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1027: RULE_INT
+                // InternalRuleEngineLexer.g:1:1027: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 83 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1036: RULE_DECIMAL
+                // InternalRuleEngineLexer.g:1:1036: RULE_DECIMAL
                 {
                 mRULE_DECIMAL(); 
 
                 }
                 break;
             case 84 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1049: RULE_ID
+                // InternalRuleEngineLexer.g:1:1049: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 85 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1057: RULE_STRING
+                // InternalRuleEngineLexer.g:1:1057: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 86 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1069: RULE_ML_COMMENT
+                // InternalRuleEngineLexer.g:1:1069: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 87 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1085: RULE_SL_COMMENT
+                // InternalRuleEngineLexer.g:1:1085: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 88 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1101: RULE_WS
+                // InternalRuleEngineLexer.g:1:1101: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 89 :
-                // ../org.eclipse.xtext.example.homeautomation/src-gen/org/eclipse/xtext/example/homeautomation/parser/antlr/lexer/InternalRuleEngineLexer.g:1:1109: RULE_ANY_OTHER
+                // InternalRuleEngineLexer.g:1:1109: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

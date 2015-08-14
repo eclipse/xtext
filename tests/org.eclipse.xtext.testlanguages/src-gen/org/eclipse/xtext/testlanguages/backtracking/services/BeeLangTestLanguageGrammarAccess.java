@@ -19,7 +19,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Model");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Assignment cUnitsAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
 		private final RuleCall cUnitsUnitParserRuleCall_0_0 = (RuleCall)cUnitsAssignment_0.eContents().get(0);
@@ -28,7 +28,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//// Initially copied from BeeLang.xtext rev 1029
 		//Model:
-		//	units+=Unit* | functions+=Function*;
+		//	units+=Unit*
+		//	| functions+=Function*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//units+=Unit* | functions+=Function*
@@ -48,7 +49,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class UnitElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Unit");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Unit");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnitAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cDocumentationAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -106,18 +107,22 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//Unit:
-		//	{Unit} documentation=DOCUMENTATION? "unit" name=ID? ("version" version=ID)? ("implements" implements+=SimpleTypeRef
-		//	("," implements+=SimpleTypeRef)*)? "{" (("source" ":" sourceLocation=Path ";")? & ("output" ":" outputLocation=Path
-		//	";")? & ("provides" ":" providedCapabilities+=ProvidedCapability ";")* & ("requires" ":"
-		//	requiredCapabilities+=AliasedRequiredCapability ";")* & ("requires" "env" ":"
-		//	metaRequiredCapabilities+=RequiredCapability ";")* & functions+=Function*) "}";
+		//	{Unit} documentation=DOCUMENTATION?
+		//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
+		//	'{' ('source' ':' sourceLocation=Path ';'?
+		//	& 'output' ':' outputLocation=Path ';'?
+		//	& 'provides' ':' providedCapabilities+=ProvidedCapability ';'*
+		//	& 'requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'*
+		//	& 'requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';'*
+		//	& functions+=Function*)
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Unit} documentation=DOCUMENTATION? "unit" name=ID? ("version" version=ID)? ("implements" implements+=SimpleTypeRef (","
-		//implements+=SimpleTypeRef)*)? "{" (("source" ":" sourceLocation=Path ";")? & ("output" ":" outputLocation=Path ";")? &
-		//("provides" ":" providedCapabilities+=ProvidedCapability ";")* & ("requires" ":"
-		//requiredCapabilities+=AliasedRequiredCapability ";")* & ("requires" "env" ":"
-		//metaRequiredCapabilities+=RequiredCapability ";")* & functions+=Function*) "}"
+		//{Unit} documentation=DOCUMENTATION? 'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (','
+		//implements+=SimpleTypeRef)*)? '{' ('source' ':' sourceLocation=Path ';'? & 'output' ':' outputLocation=Path ';'? &
+		//'provides' ':' providedCapabilities+=ProvidedCapability ';'* & 'requires' ':'
+		//requiredCapabilities+=AliasedRequiredCapability ';'* & 'requires' 'env' ':'
+		//metaRequiredCapabilities+=RequiredCapability ';'* & functions+=Function*) '}'
 		public Group getGroup() { return cGroup; }
 
 		//{Unit}
@@ -129,7 +134,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//DOCUMENTATION
 		public RuleCall getDocumentationDOCUMENTATIONTerminalRuleCall_1_0() { return cDocumentationDOCUMENTATIONTerminalRuleCall_1_0; }
 
-		//"unit"
+		//'unit'
 		public Keyword getUnitKeyword_2() { return cUnitKeyword_2; }
 
 		//name=ID?
@@ -138,10 +143,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 
-		//("version" version=ID)?
+		//('version' version=ID)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"version"
+		//'version'
 		public Keyword getVersionKeyword_4_0() { return cVersionKeyword_4_0; }
 
 		//version=ID
@@ -150,10 +155,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getVersionIDTerminalRuleCall_4_1_0() { return cVersionIDTerminalRuleCall_4_1_0; }
 
-		//("implements" implements+=SimpleTypeRef ("," implements+=SimpleTypeRef)*)?
+		//('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"implements"
+		//'implements'
 		public Keyword getImplementsKeyword_5_0() { return cImplementsKeyword_5_0; }
 
 		//implements+=SimpleTypeRef
@@ -162,10 +167,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//SimpleTypeRef
 		public RuleCall getImplementsSimpleTypeRefParserRuleCall_5_1_0() { return cImplementsSimpleTypeRefParserRuleCall_5_1_0; }
 
-		//("," implements+=SimpleTypeRef)*
+		//(',' implements+=SimpleTypeRef)*
 		public Group getGroup_5_2() { return cGroup_5_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_5_2_0() { return cCommaKeyword_5_2_0; }
 
 		//implements+=SimpleTypeRef
@@ -174,21 +179,21 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//SimpleTypeRef
 		public RuleCall getImplementsSimpleTypeRefParserRuleCall_5_2_1_0() { return cImplementsSimpleTypeRefParserRuleCall_5_2_1_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 
-		//("source" ":" sourceLocation=Path ";")? & ("output" ":" outputLocation=Path ";")? & ("provides" ":"
-		//providedCapabilities+=ProvidedCapability ";")* & ("requires" ":" requiredCapabilities+=AliasedRequiredCapability ";")*
-		//& ("requires" "env" ":" metaRequiredCapabilities+=RequiredCapability ";")* & functions+=Function*
+		//('source' ':' sourceLocation=Path ';'? & 'output' ':' outputLocation=Path ';'? & 'provides' ':'
+		//providedCapabilities+=ProvidedCapability ';'* & 'requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'* &
+		//'requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';'* & functions+=Function*)
 		public UnorderedGroup getUnorderedGroup_7() { return cUnorderedGroup_7; }
 
-		//("source" ":" sourceLocation=Path ";")?
+		//'source' ':' sourceLocation=Path ';'?
 		public Group getGroup_7_0() { return cGroup_7_0; }
 
-		//"source"
+		//'source'
 		public Keyword getSourceKeyword_7_0_0() { return cSourceKeyword_7_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_7_0_1() { return cColonKeyword_7_0_1; }
 
 		//sourceLocation=Path
@@ -197,16 +202,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Path
 		public RuleCall getSourceLocationPathParserRuleCall_7_0_2_0() { return cSourceLocationPathParserRuleCall_7_0_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_7_0_3() { return cSemicolonKeyword_7_0_3; }
 
-		//("output" ":" outputLocation=Path ";")?
+		//'output' ':' outputLocation=Path ';'?
 		public Group getGroup_7_1() { return cGroup_7_1; }
 
-		//"output"
+		//'output'
 		public Keyword getOutputKeyword_7_1_0() { return cOutputKeyword_7_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_7_1_1() { return cColonKeyword_7_1_1; }
 
 		//outputLocation=Path
@@ -215,16 +220,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Path
 		public RuleCall getOutputLocationPathParserRuleCall_7_1_2_0() { return cOutputLocationPathParserRuleCall_7_1_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_7_1_3() { return cSemicolonKeyword_7_1_3; }
 
-		//("provides" ":" providedCapabilities+=ProvidedCapability ";")*
+		//'provides' ':' providedCapabilities+=ProvidedCapability ';'*
 		public Group getGroup_7_2() { return cGroup_7_2; }
 
-		//"provides"
+		//'provides'
 		public Keyword getProvidesKeyword_7_2_0() { return cProvidesKeyword_7_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_7_2_1() { return cColonKeyword_7_2_1; }
 
 		//providedCapabilities+=ProvidedCapability
@@ -233,16 +238,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ProvidedCapability
 		public RuleCall getProvidedCapabilitiesProvidedCapabilityParserRuleCall_7_2_2_0() { return cProvidedCapabilitiesProvidedCapabilityParserRuleCall_7_2_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_7_2_3() { return cSemicolonKeyword_7_2_3; }
 
-		//("requires" ":" requiredCapabilities+=AliasedRequiredCapability ";")*
+		//'requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'*
 		public Group getGroup_7_3() { return cGroup_7_3; }
 
-		//"requires"
+		//'requires'
 		public Keyword getRequiresKeyword_7_3_0() { return cRequiresKeyword_7_3_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_7_3_1() { return cColonKeyword_7_3_1; }
 
 		//requiredCapabilities+=AliasedRequiredCapability
@@ -251,19 +256,19 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//AliasedRequiredCapability
 		public RuleCall getRequiredCapabilitiesAliasedRequiredCapabilityParserRuleCall_7_3_2_0() { return cRequiredCapabilitiesAliasedRequiredCapabilityParserRuleCall_7_3_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_7_3_3() { return cSemicolonKeyword_7_3_3; }
 
-		//("requires" "env" ":" metaRequiredCapabilities+=RequiredCapability ";")*
+		//'requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';'*
 		public Group getGroup_7_4() { return cGroup_7_4; }
 
-		//"requires"
+		//'requires'
 		public Keyword getRequiresKeyword_7_4_0() { return cRequiresKeyword_7_4_0; }
 
-		//"env"
+		//'env'
 		public Keyword getEnvKeyword_7_4_1() { return cEnvKeyword_7_4_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_7_4_2() { return cColonKeyword_7_4_2; }
 
 		//metaRequiredCapabilities+=RequiredCapability
@@ -272,7 +277,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//RequiredCapability
 		public RuleCall getMetaRequiredCapabilitiesRequiredCapabilityParserRuleCall_7_4_3_0() { return cMetaRequiredCapabilitiesRequiredCapabilityParserRuleCall_7_4_3_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_7_4_4() { return cSemicolonKeyword_7_4_4; }
 
 		//functions+=Function*
@@ -281,12 +286,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Function
 		public RuleCall getFunctionsFunctionParserRuleCall_7_5_0() { return cFunctionsFunctionParserRuleCall_7_5_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class ProvidedCapabilityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ProvidedCapability");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ProvidedCapability");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cProvidedCapabilityAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -317,18 +322,19 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//ProvidedCapability:
-		//	{ProvidedCapability} (nameSpace=ID | "unit") ("{" (("when" ":" condExpr=Expression ";")? & "name" ":" name=ID ";" &
-		//	("version" ":" version=ID ";")?) "}")?;
+		//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ('when' ':' condExpr=Expression ';'?
+		//	& "name" ':' name=ID ';' & "version" ':' version=ID ';'?)
+		//	'}')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ProvidedCapability} (nameSpace=ID | "unit") ("{" (("when" ":" condExpr=Expression ";")? & "name" ":" name=ID ";" &
-		//("version" ":" version=ID ";")?) "}")?
+		//{ProvidedCapability} (nameSpace=ID | "unit") ('{' ('when' ':' condExpr=Expression ';'? & "name" ':' name=ID ';' &
+		//"version" ':' version=ID ';'?) '}')?
 		public Group getGroup() { return cGroup; }
 
 		//{ProvidedCapability}
 		public Action getProvidedCapabilityAction_0() { return cProvidedCapabilityAction_0; }
 
-		//nameSpace=ID | "unit"
+		//(nameSpace=ID | "unit")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//nameSpace=ID
@@ -340,22 +346,22 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//"unit"
 		public Keyword getUnitKeyword_1_1() { return cUnitKeyword_1_1; }
 
-		//("{" (("when" ":" condExpr=Expression ";")? & "name" ":" name=ID ";" & ("version" ":" version=ID ";")?) "}")?
+		//('{' ('when' ':' condExpr=Expression ';'? & "name" ':' name=ID ';' & "version" ':' version=ID ';'?) '}')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
 
-		//("when" ":" condExpr=Expression ";")? & "name" ":" name=ID ";" & ("version" ":" version=ID ";")?
+		//('when' ':' condExpr=Expression ';'? & "name" ':' name=ID ';' & "version" ':' version=ID ';'?)
 		public UnorderedGroup getUnorderedGroup_2_1() { return cUnorderedGroup_2_1; }
 
-		//("when" ":" condExpr=Expression ";")?
+		//'when' ':' condExpr=Expression ';'?
 		public Group getGroup_2_1_0() { return cGroup_2_1_0; }
 
-		//"when"
+		//'when'
 		public Keyword getWhenKeyword_2_1_0_0() { return cWhenKeyword_2_1_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_1_0_1() { return cColonKeyword_2_1_0_1; }
 
 		//condExpr=Expression
@@ -364,16 +370,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getCondExprExpressionParserRuleCall_2_1_0_2_0() { return cCondExprExpressionParserRuleCall_2_1_0_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1_0_3() { return cSemicolonKeyword_2_1_0_3; }
 
-		//"name" ":" name=ID ";"
+		//"name" ':' name=ID ';'
 		public Group getGroup_2_1_1() { return cGroup_2_1_1; }
 
 		//"name"
 		public Keyword getNameKeyword_2_1_1_0() { return cNameKeyword_2_1_1_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_1_1_1() { return cColonKeyword_2_1_1_1; }
 
 		//name=ID
@@ -382,16 +388,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_1_1_2_0() { return cNameIDTerminalRuleCall_2_1_1_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1_1_3() { return cSemicolonKeyword_2_1_1_3; }
 
-		//("version" ":" version=ID ";")?
+		//"version" ':' version=ID ';'?
 		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
 
 		//"version"
 		public Keyword getVersionKeyword_2_1_2_0() { return cVersionKeyword_2_1_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_1_2_1() { return cColonKeyword_2_1_2_1; }
 
 		//version=ID
@@ -400,15 +406,15 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getVersionIDTerminalRuleCall_2_1_2_2_0() { return cVersionIDTerminalRuleCall_2_1_2_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1_2_3() { return cSemicolonKeyword_2_1_2_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
 	}
 
 	public class AliasedRequiredCapabilityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AliasedRequiredCapability");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AliasedRequiredCapability");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Assignment cNameSpaceAssignment_0_0 = (Assignment)cAlternatives_0.eContents().get(0);
@@ -454,15 +460,19 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//AliasedRequiredCapability:
-		//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")?
-		//	& ("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?) "}");
+		//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ('when' ':' condExpr=Expression ';'?
+		//	& greedy?="greedy" ';'?
+		//	& "requires-min" ':' min=INT ';'?
+		//	& "requires-max" ':' max=INT ';'?
+		//	& "version" ':' versionRange=ID ';'?)
+		//	'}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")? &
-		//("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?) "}")
+		//(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? &
+		//"requires-min" ':' min=INT ';'? & "requires-max" ':' max=INT ';'? & "version" ':' versionRange=ID ';'?) '}')
 		public Group getGroup() { return cGroup; }
 
-		//nameSpace=ID | "unit"
+		//(nameSpace=ID | "unit")
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
 		//nameSpace=ID
@@ -492,24 +502,24 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getAliasIDTerminalRuleCall_2_1_0() { return cAliasIDTerminalRuleCall_2_1_0; }
 
-		//"{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")? & ("requires-min" ":" min=INT ";")? &
-		//("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?) "}"
+		//('{' ('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? & "requires-min" ':' min=INT ';'? & "requires-max" ':'
+		//max=INT ';'? & "version" ':' versionRange=ID ';'?) '}')
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")? & ("requires-min" ":" min=INT ";")? & ("requires-max"
-		//":" max=INT ";")? & ("version" ":" versionRange=ID ";")?
+		//('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? & "requires-min" ':' min=INT ';'? & "requires-max" ':'
+		//max=INT ';'? & "version" ':' versionRange=ID ';'?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 
-		//("when" ":" condExpr=Expression ";")?
+		//'when' ':' condExpr=Expression ';'?
 		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
 
-		//"when"
+		//'when'
 		public Keyword getWhenKeyword_3_1_0_0() { return cWhenKeyword_3_1_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_0_1() { return cColonKeyword_3_1_0_1; }
 
 		//condExpr=Expression
@@ -518,10 +528,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getCondExprExpressionParserRuleCall_3_1_0_2_0() { return cCondExprExpressionParserRuleCall_3_1_0_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_0_3() { return cSemicolonKeyword_3_1_0_3; }
 
-		//(greedy?="greedy" ";")?
+		//greedy?="greedy" ';'?
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
 		//greedy?="greedy"
@@ -530,16 +540,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//"greedy"
 		public Keyword getGreedyGreedyKeyword_3_1_1_0_0() { return cGreedyGreedyKeyword_3_1_1_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_1_1() { return cSemicolonKeyword_3_1_1_1; }
 
-		//("requires-min" ":" min=INT ";")?
+		//"requires-min" ':' min=INT ';'?
 		public Group getGroup_3_1_2() { return cGroup_3_1_2; }
 
 		//"requires-min"
 		public Keyword getRequiresMinKeyword_3_1_2_0() { return cRequiresMinKeyword_3_1_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_2_1() { return cColonKeyword_3_1_2_1; }
 
 		//min=INT
@@ -548,16 +558,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//INT
 		public RuleCall getMinINTTerminalRuleCall_3_1_2_2_0() { return cMinINTTerminalRuleCall_3_1_2_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_2_3() { return cSemicolonKeyword_3_1_2_3; }
 
-		//("requires-max" ":" max=INT ";")?
+		//"requires-max" ':' max=INT ';'?
 		public Group getGroup_3_1_3() { return cGroup_3_1_3; }
 
 		//"requires-max"
 		public Keyword getRequiresMaxKeyword_3_1_3_0() { return cRequiresMaxKeyword_3_1_3_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_3_1() { return cColonKeyword_3_1_3_1; }
 
 		//max=INT
@@ -566,16 +576,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//INT
 		public RuleCall getMaxINTTerminalRuleCall_3_1_3_2_0() { return cMaxINTTerminalRuleCall_3_1_3_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_3_3() { return cSemicolonKeyword_3_1_3_3; }
 
-		//("version" ":" versionRange=ID ";")?
+		//"version" ':' versionRange=ID ';'?
 		public Group getGroup_3_1_4() { return cGroup_3_1_4; }
 
 		//"version"
 		public Keyword getVersionKeyword_3_1_4_0() { return cVersionKeyword_3_1_4_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_4_1() { return cColonKeyword_3_1_4_1; }
 
 		//versionRange=ID
@@ -584,15 +594,15 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getVersionRangeIDTerminalRuleCall_3_1_4_2_0() { return cVersionRangeIDTerminalRuleCall_3_1_4_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_4_3() { return cSemicolonKeyword_3_1_4_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class RequiredCapabilityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RequiredCapability");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RequiredCapability");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRequiredCapabilityAction_0 = (Action)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -635,20 +645,22 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_3_2 = (Keyword)cGroup_3.eContents().get(2);
 		
 		//RequiredCapability:
-		//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy"
-		//	";")? & ("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?)
-		//	"}");
+		//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ('when' ':' condExpr=Expression ';'?
+		//	& greedy?="greedy" ';'?
+		//	& "requires-min" ':' min=INT ';'?
+		//	& "requires-max" ':' max=INT ';'?
+		//	& "version" ':' versionRange=ID ';'?)
+		//	'}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//{RequiredCapability} (nameSpace=ID | "unit") name=ID ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy"
-		//";")? & ("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?)
-		//"}")
+		//{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? &
+		//"requires-min" ':' min=INT ';'? & "requires-max" ':' max=INT ';'? & "version" ':' versionRange=ID ';'?) '}')
 		public Group getGroup() { return cGroup; }
 
 		//{RequiredCapability}
 		public Action getRequiredCapabilityAction_0() { return cRequiredCapabilityAction_0; }
 
-		//nameSpace=ID | "unit"
+		//(nameSpace=ID | "unit")
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//nameSpace=ID
@@ -666,24 +678,24 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
 
-		//"{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")? & ("requires-min" ":" min=INT ";")? &
-		//("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?) "}"
+		//('{' ('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? & "requires-min" ':' min=INT ';'? & "requires-max" ':'
+		//max=INT ';'? & "version" ':' versionRange=ID ';'?) '}')
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_3_0() { return cLeftCurlyBracketKeyword_3_0; }
 
-		//("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")? & ("requires-min" ":" min=INT ";")? & ("requires-max"
-		//":" max=INT ";")? & ("version" ":" versionRange=ID ";")?
+		//('when' ':' condExpr=Expression ';'? & greedy?="greedy" ';'? & "requires-min" ':' min=INT ';'? & "requires-max" ':'
+		//max=INT ';'? & "version" ':' versionRange=ID ';'?)
 		public UnorderedGroup getUnorderedGroup_3_1() { return cUnorderedGroup_3_1; }
 
-		//("when" ":" condExpr=Expression ";")?
+		//'when' ':' condExpr=Expression ';'?
 		public Group getGroup_3_1_0() { return cGroup_3_1_0; }
 
-		//"when"
+		//'when'
 		public Keyword getWhenKeyword_3_1_0_0() { return cWhenKeyword_3_1_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_0_1() { return cColonKeyword_3_1_0_1; }
 
 		//condExpr=Expression
@@ -692,10 +704,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getCondExprExpressionParserRuleCall_3_1_0_2_0() { return cCondExprExpressionParserRuleCall_3_1_0_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_0_3() { return cSemicolonKeyword_3_1_0_3; }
 
-		//(greedy?="greedy" ";")?
+		//greedy?="greedy" ';'?
 		public Group getGroup_3_1_1() { return cGroup_3_1_1; }
 
 		//greedy?="greedy"
@@ -704,16 +716,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//"greedy"
 		public Keyword getGreedyGreedyKeyword_3_1_1_0_0() { return cGreedyGreedyKeyword_3_1_1_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_1_1() { return cSemicolonKeyword_3_1_1_1; }
 
-		//("requires-min" ":" min=INT ";")?
+		//"requires-min" ':' min=INT ';'?
 		public Group getGroup_3_1_2() { return cGroup_3_1_2; }
 
 		//"requires-min"
 		public Keyword getRequiresMinKeyword_3_1_2_0() { return cRequiresMinKeyword_3_1_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_2_1() { return cColonKeyword_3_1_2_1; }
 
 		//min=INT
@@ -722,16 +734,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//INT
 		public RuleCall getMinINTTerminalRuleCall_3_1_2_2_0() { return cMinINTTerminalRuleCall_3_1_2_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_2_3() { return cSemicolonKeyword_3_1_2_3; }
 
-		//("requires-max" ":" max=INT ";")?
+		//"requires-max" ':' max=INT ';'?
 		public Group getGroup_3_1_3() { return cGroup_3_1_3; }
 
 		//"requires-max"
 		public Keyword getRequiresMaxKeyword_3_1_3_0() { return cRequiresMaxKeyword_3_1_3_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_3_1() { return cColonKeyword_3_1_3_1; }
 
 		//max=INT
@@ -740,16 +752,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//INT
 		public RuleCall getMaxINTTerminalRuleCall_3_1_3_2_0() { return cMaxINTTerminalRuleCall_3_1_3_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_3_3() { return cSemicolonKeyword_3_1_3_3; }
 
-		//("version" ":" versionRange=ID ";")?
+		//"version" ':' versionRange=ID ';'?
 		public Group getGroup_3_1_4() { return cGroup_3_1_4; }
 
 		//"version"
 		public Keyword getVersionKeyword_3_1_4_0() { return cVersionKeyword_3_1_4_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3_1_4_1() { return cColonKeyword_3_1_4_1; }
 
 		//versionRange=ID
@@ -758,15 +770,15 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getVersionRangeIDTerminalRuleCall_3_1_4_2_0() { return cVersionRangeIDTerminalRuleCall_3_1_4_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3_1_4_3() { return cSemicolonKeyword_3_1_4_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3_2() { return cRightCurlyBracketKeyword_3_2; }
 	}
 
 	public class PathElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Path");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Path");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSTRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
@@ -778,39 +790,40 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cSolidusKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//Path hidden():
-		//	STRING | "/"? QID ("/" QID)* "/"?;
+		//	STRING
+		//	| '/'? QID ('/' QID)* '/'?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//STRING | "/"? QID ("/" QID)* "/"?
+		//STRING | '/'? QID ('/' QID)* '/'?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//STRING
 		public RuleCall getSTRINGTerminalRuleCall_0() { return cSTRINGTerminalRuleCall_0; }
 
-		//"/"? QID ("/" QID)* "/"?
+		//'/'? QID ('/' QID)* '/'?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"/"?
+		//'/'?
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
 
 		//QID
 		public RuleCall getQIDParserRuleCall_1_1() { return cQIDParserRuleCall_1_1; }
 
-		//("/" QID)*
+		//('/' QID)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//"/"
+		//'/'
 		public Keyword getSolidusKeyword_1_2_0() { return cSolidusKeyword_1_2_0; }
 
 		//QID
 		public RuleCall getQIDParserRuleCall_1_2_1() { return cQIDParserRuleCall_1_2_1; }
 
-		//"/"?
+		//'/'?
 		public Keyword getSolidusKeyword_1_3() { return cSolidusKeyword_1_3; }
 	}
 
 	public class ParameterListElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterList");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterList");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cParametersAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cParametersFirstParameterParserRuleCall_0_0 = (RuleCall)cParametersAssignment_0.eContents().get(0);
@@ -846,13 +859,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class FirstParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FirstParameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FirstParameter");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cClosureParameterParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cParameterParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//FirstParameter returns Parameter:
-		//	ClosureParameter | Parameter;
+		//FirstParameter Parameter:
+		//	ClosureParameter
+		//	| Parameter
 		@Override public ParserRule getRule() { return rule; }
 
 		//ClosureParameter | Parameter
@@ -866,7 +880,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Parameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Parameter");
 		private final Assignment cExprAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cExprExpressionParserRuleCall_0 = (RuleCall)cExprAssignment.eContents().get(0);
 		
@@ -882,7 +896,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ClosureParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClosureParameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ClosureParameter");
 		private final Assignment cExprAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cExprClosureExpressionParserRuleCall_0 = (RuleCall)cExprAssignment.eContents().get(0);
 		
@@ -898,7 +912,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ParameterDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParameterDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cTypeTypeRefParserRuleCall_0_0 = (RuleCall)cTypeAssignment_0.eContents().get(0);
@@ -926,7 +940,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class FunctionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Function");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Function");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cDocumentationAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cDocumentationDOCUMENTATIONTerminalRuleCall_0_0 = (RuleCall)cDocumentationAssignment_0.eContents().get(0);
@@ -975,16 +989,20 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cFuncExprBlockExpressionParserRuleCall_8_1_0 = (RuleCall)cFuncExprAssignment_8_1.eContents().get(0);
 		
 		//Function:
-		//	documentation=DOCUMENTATION? visibility=ID? final?="final"? "function" returnType=TypeRef? name=ID ("("
-		//	(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
-		//	parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ")")? ("when"
-		//	guard=GuardExpression)? (":" funcExpr=Expression ";" | funcExpr=BlockExpression);
+		//	documentation=DOCUMENTATION?
+		//	visibility=ID?
+		//	final?="final"?
+		//	"function"
+		//	returnType=TypeRef?
+		//	name=ID ('(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
+		//	parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ')')? ("when"
+		//	guard=GuardExpression)? (':' funcExpr=Expression ';' | funcExpr=BlockExpression);
 		@Override public ParserRule getRule() { return rule; }
 
-		//documentation=DOCUMENTATION? visibility=ID? final?="final"? "function" returnType=TypeRef? name=ID ("("
-		//(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
-		//parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ")")? ("when"
-		//guard=GuardExpression)? (":" funcExpr=Expression ";" | funcExpr=BlockExpression)
+		//documentation=DOCUMENTATION? visibility=ID? final?="final"? "function" returnType=TypeRef? name=ID ('('
+		//(parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
+		//parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ')')? ("when"
+		//guard=GuardExpression)? (':' funcExpr=Expression ';' | funcExpr=BlockExpression)
 		public Group getGroup() { return cGroup; }
 
 		//documentation=DOCUMENTATION?
@@ -1020,18 +1038,18 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_5_0() { return cNameIDTerminalRuleCall_5_0; }
 
-		//("(" (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
-		//parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ")")?
+		//('(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
+		//parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ')')?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_6_0() { return cLeftParenthesisKeyword_6_0; }
 
-		//(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
+		//(parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
 		//parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)?
 		public Alternatives getAlternatives_6_1() { return cAlternatives_6_1; }
 
-		//parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
+		//parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
 		//parameters+=ParameterDeclaration)?
 		public Group getGroup_6_1_0() { return cGroup_6_1_0; }
 
@@ -1041,10 +1059,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_6_1_0_0_0() { return cParametersParameterDeclarationParserRuleCall_6_1_0_0_0; }
 
-		//("," parameters+=ParameterDeclaration)*
+		//(',' parameters+=ParameterDeclaration)*
 		public Group getGroup_6_1_0_1() { return cGroup_6_1_0_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_6_1_0_1_0() { return cCommaKeyword_6_1_0_1_0; }
 
 		//parameters+=ParameterDeclaration
@@ -1053,10 +1071,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_6_1_0_1_1_0() { return cParametersParameterDeclarationParserRuleCall_6_1_0_1_1_0; }
 
-		//("," varArgs?="..." parameters+=ParameterDeclaration)?
+		//(',' varArgs?="..." parameters+=ParameterDeclaration)?
 		public Group getGroup_6_1_0_2() { return cGroup_6_1_0_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_6_1_0_2_0() { return cCommaKeyword_6_1_0_2_0; }
 
 		//varArgs?="..."
@@ -1086,7 +1104,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_6_1_1_1_0() { return cParametersParameterDeclarationParserRuleCall_6_1_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_6_2() { return cRightParenthesisKeyword_6_2; }
 
 		//("when" guard=GuardExpression)?
@@ -1101,13 +1119,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//GuardExpression
 		public RuleCall getGuardGuardExpressionParserRuleCall_7_1_0() { return cGuardGuardExpressionParserRuleCall_7_1_0; }
 
-		//":" funcExpr=Expression ";" | funcExpr=BlockExpression
+		//(':' funcExpr=Expression ';' | funcExpr=BlockExpression)
 		public Alternatives getAlternatives_8() { return cAlternatives_8; }
 
-		//":" funcExpr=Expression ";"
+		//':' funcExpr=Expression ';'
 		public Group getGroup_8_0() { return cGroup_8_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_8_0_0() { return cColonKeyword_8_0_0; }
 
 		//funcExpr=Expression
@@ -1116,7 +1134,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getFuncExprExpressionParserRuleCall_8_0_1_0() { return cFuncExprExpressionParserRuleCall_8_0_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_8_0_2() { return cSemicolonKeyword_8_0_2; }
 
 		//funcExpr=BlockExpression
@@ -1127,7 +1145,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class GuardExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GuardExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.GuardExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cColonKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -1138,16 +1156,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cGuardExprBlockExpressionParserRuleCall_1_0 = (RuleCall)cGuardExprAssignment_1.eContents().get(0);
 		
 		//GuardExpression:
-		//	":" guardExpr=Expression ";" | guardExpr=BlockExpression;
+		//	':' guardExpr=Expression ';' | guardExpr=BlockExpression;
 		@Override public ParserRule getRule() { return rule; }
 
-		//":" guardExpr=Expression ";" | guardExpr=BlockExpression
+		//':' guardExpr=Expression ';' | guardExpr=BlockExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//":" guardExpr=Expression ";"
+		//':' guardExpr=Expression ';'
 		public Group getGroup_0() { return cGroup_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_0_0() { return cColonKeyword_0_0; }
 
 		//guardExpr=Expression
@@ -1156,7 +1174,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getGuardExprExpressionParserRuleCall_0_1_0() { return cGuardExprExpressionParserRuleCall_0_1_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_0_2() { return cSemicolonKeyword_0_2; }
 
 		//guardExpr=BlockExpression
@@ -1167,7 +1185,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class AssignmentOperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentOperator");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AssignmentOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cPlusSignEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -1177,25 +1195,25 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cPercentSignEqualsSignKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		
 		//AssignmentOperator:
-		//	"=" | "+=" | "-=" | "*=" | "/=" | "%=";
+		//	'=' | '+=' | '-=' | '*=' | '/=' | "%=";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"=" | "+=" | "-=" | "*=" | "/=" | "%="
+		//'=' | '+=' | '-=' | '*=' | '/=' | "%="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
 
-		//"+="
+		//'+='
 		public Keyword getPlusSignEqualsSignKeyword_1() { return cPlusSignEqualsSignKeyword_1; }
 
-		//"-="
+		//'-='
 		public Keyword getHyphenMinusEqualsSignKeyword_2() { return cHyphenMinusEqualsSignKeyword_2; }
 
-		//"*="
+		//'*='
 		public Keyword getAsteriskEqualsSignKeyword_3() { return cAsteriskEqualsSignKeyword_3; }
 
-		//"/="
+		//'/='
 		public Keyword getSolidusEqualsSignKeyword_4() { return cSolidusEqualsSignKeyword_4; }
 
 		//"%="
@@ -1203,7 +1221,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class RelationalOperatorElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RelationalOperator");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RelationalOperator");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Keyword cTildeEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cEqualsSignEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
@@ -1216,7 +1234,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cLessThanSignKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
 		
 		//RelationalOperator:
-		//	"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<";
+		//	"~=" | "==" | "===" | "!=" | "!=="
+		//	| ">=" | "<=" | ">" | "<";
 		@Override public ParserRule getRule() { return rule; }
 
 		//"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<"
@@ -1251,14 +1270,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class TopLevelExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TopLevelExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TopLevelExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVarDeclarationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cValDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cAssignmentExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//TopLevelExpression returns Expression:
-		//	VarDeclaration | ValDeclaration | AssignmentExpression;
+		//TopLevelExpression Expression:
+		//	VarDeclaration
+		//	| ValDeclaration
+		//	| AssignmentExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//VarDeclaration | ValDeclaration | AssignmentExpression
@@ -1275,7 +1296,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 		private final RuleCall cAssignmentExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Expression:
@@ -1287,7 +1308,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class AssignmentExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignmentExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AssignmentExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCachedExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1297,9 +1318,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprAssignmentExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//AssignmentExpression returns Expression:
+		//AssignmentExpression Expression:
 		//	CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
-		//	rightExpr=AssignmentExpression)?;
+		//	rightExpr=AssignmentExpression)?
 		@Override public ParserRule getRule() { return rule; }
 
 		//CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
@@ -1329,7 +1350,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class VarDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.VarDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDefValueAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFinalAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1346,11 +1367,11 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cValueExprAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cValueExprExpressionParserRuleCall_3_1_0 = (RuleCall)cValueExprAssignment_3_1.eContents().get(0);
 		
-		//VarDeclaration returns Expression:
-		//	{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ("=" valueExpr=Expression)?;
+		//VarDeclaration Expression:
+		//	{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ('=' valueExpr=Expression)?
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ("=" valueExpr=Expression)?
+		//{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ('=' valueExpr=Expression)?
 		public Group getGroup() { return cGroup; }
 
 		//{DefValue}
@@ -1362,10 +1383,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//"final"
 		public Keyword getFinalFinalKeyword_1_0() { return cFinalFinalKeyword_1_0; }
 
-		//("var" | type=TypeRef) name=ID
+		//(("var" | type=TypeRef) name=ID)
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"var" | type=TypeRef
+		//("var" | type=TypeRef)
 		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
 
 		//"var"
@@ -1383,10 +1404,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_2_1_0() { return cNameIDTerminalRuleCall_2_1_0; }
 
-		//("=" valueExpr=Expression)?
+		//('=' valueExpr=Expression)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_3_0() { return cEqualsSignKeyword_3_0; }
 
 		//valueExpr=Expression
@@ -1397,7 +1418,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ValDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValDeclaration");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ValDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDefValueAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFinalAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1412,11 +1433,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cValueExprAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cValueExprExpressionParserRuleCall_6_0 = (RuleCall)cValueExprAssignment_6.eContents().get(0);
 		
-		//ValDeclaration returns Expression:
-		//	{DefValue} final?="final"? immutable?="val" type=TypeRef? name=ID "=" valueExpr=Expression;
+		//ValDeclaration Expression:
+		//	{DefValue} final?="final"?
+		//	immutable?="val" type=TypeRef? name=ID
+		//	'=' valueExpr=Expression
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DefValue} final?="final"? immutable?="val" type=TypeRef? name=ID "=" valueExpr=Expression
+		//{DefValue} final?="final"? immutable?="val" type=TypeRef? name=ID '=' valueExpr=Expression
 		public Group getGroup() { return cGroup; }
 
 		//{DefValue}
@@ -1446,7 +1469,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_4_0() { return cNameIDTerminalRuleCall_4_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_5() { return cEqualsSignKeyword_5; }
 
 		//valueExpr=Expression
@@ -1457,13 +1480,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class TypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cClosureTypeRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cSimpleTypeRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//TypeRef:
-		//	ClosureTypeRef | SimpleTypeRef;
+		//	ClosureTypeRef
+		//	| SimpleTypeRef;
 		@Override public ParserRule getRule() { return rule; }
 
 		//ClosureTypeRef | SimpleTypeRef
@@ -1477,7 +1501,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class SimpleTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleTypeRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.SimpleTypeRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cRawTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cRawTypeIDTerminalRuleCall_0_0 = (RuleCall)cRawTypeAssignment_0.eContents().get(0);
@@ -1492,10 +1516,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//SimpleTypeRef:
-		//	rawType=ID ("<" actualArgumentsList+=ID ("," actualArgumentsList+=ID)* ">")?;
+		//	rawType=ID ('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//rawType=ID ("<" actualArgumentsList+=ID ("," actualArgumentsList+=ID)* ">")?
+		//rawType=ID ('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>')?
 		public Group getGroup() { return cGroup; }
 
 		//rawType=ID
@@ -1504,10 +1528,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getRawTypeIDTerminalRuleCall_0_0() { return cRawTypeIDTerminalRuleCall_0_0; }
 
-		//("<" actualArgumentsList+=ID ("," actualArgumentsList+=ID)* ">")?
+		//('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"<"
+		//'<'
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
 		//actualArgumentsList+=ID
@@ -1516,10 +1540,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getActualArgumentsListIDTerminalRuleCall_1_1_0() { return cActualArgumentsListIDTerminalRuleCall_1_1_0; }
 
-		//("," actualArgumentsList+=ID)*
+		//(',' actualArgumentsList+=ID)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
 		//actualArgumentsList+=ID
@@ -1528,12 +1552,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getActualArgumentsListIDTerminalRuleCall_1_2_1_0() { return cActualArgumentsListIDTerminalRuleCall_1_2_1_0; }
 
-		//">"
+		//'>'
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
 
 	public class ClosureTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClosureTypeRef");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ClosureTypeRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -1561,22 +1585,23 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cReturnTypeIDTerminalRuleCall_4_0 = (RuleCall)cReturnTypeAssignment_4.eContents().get(0);
 		
 		//ClosureTypeRef:
-		//	"(" (parameterTypes+=ID ("," parameterTypes+=ID)* ("," varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
-		//	parameterTypes+=ID)? ")" "=>" returnType=ID;
+		//	'(' (parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
+		//	parameterTypes+=ID)?
+		//	')' '=>' returnType=ID;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" (parameterTypes+=ID ("," parameterTypes+=ID)* ("," varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
-		//parameterTypes+=ID)? ")" "=>" returnType=ID
+		//'(' (parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
+		//parameterTypes+=ID)? ')' '=>' returnType=ID
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
-		//(parameterTypes+=ID ("," parameterTypes+=ID)* ("," varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
+		//(parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
 		//parameterTypes+=ID)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//parameterTypes+=ID ("," parameterTypes+=ID)* ("," varArgs?="..." parameterTypes+=ID)?
+		//parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//parameterTypes+=ID
@@ -1585,10 +1610,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getParameterTypesIDTerminalRuleCall_1_0_0_0() { return cParameterTypesIDTerminalRuleCall_1_0_0_0; }
 
-		//("," parameterTypes+=ID)*
+		//(',' parameterTypes+=ID)*
 		public Group getGroup_1_0_1() { return cGroup_1_0_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_0_1_0() { return cCommaKeyword_1_0_1_0; }
 
 		//parameterTypes+=ID
@@ -1597,10 +1622,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getParameterTypesIDTerminalRuleCall_1_0_1_1_0() { return cParameterTypesIDTerminalRuleCall_1_0_1_1_0; }
 
-		//("," varArgs?="..." parameterTypes+=ID)?
+		//(',' varArgs?="..." parameterTypes+=ID)?
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_0_2_0() { return cCommaKeyword_1_0_2_0; }
 
 		//varArgs?="..."
@@ -1630,10 +1655,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getParameterTypesIDTerminalRuleCall_1_1_1_0() { return cParameterTypesIDTerminalRuleCall_1_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
-		//"=>"
+		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_3() { return cEqualsSignGreaterThanSignKeyword_3; }
 
 		//returnType=ID
@@ -1644,7 +1669,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class CachedExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CachedExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.CachedExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Action cCachedExpressionAction_0_0 = (Action)cGroup_0.eContents().get(0);
@@ -1653,8 +1678,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cExprOrExpressionParserRuleCall_0_2_0 = (RuleCall)cExprAssignment_0_2.eContents().get(0);
 		private final RuleCall cOrExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//CachedExpression returns Expression:
-		//	{CachedExpression} "cached" expr=OrExpression | OrExpression;
+		//CachedExpression Expression:
+		//	{CachedExpression} "cached" expr=OrExpression | OrExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//{CachedExpression} "cached" expr=OrExpression | OrExpression
@@ -1680,7 +1705,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class OrExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OrExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.OrExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAndExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1689,8 +1714,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprAndExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//OrExpression returns Expression:
-		//	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*;
+		//OrExpression Expression:
+		//	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*
@@ -1716,7 +1741,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class AndExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AndExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AndExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cRelationalExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1725,8 +1750,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprRelationalExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//AndExpression returns Expression:
-		//	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*;
+		//AndExpression Expression:
+		//	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*
@@ -1752,7 +1777,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class RelationalExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RelationalExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RelationalExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cAdditiveExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1762,9 +1787,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprAdditiveExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//RelationalExpression returns Expression:
+		//RelationalExpression Expression:
 		//	AdditiveExpression ({BinaryOpExpression.leftExpr=current} functionName=RelationalOperator
-		//	rightExpr=AdditiveExpression)*;
+		//	rightExpr=AdditiveExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//AdditiveExpression ({BinaryOpExpression.leftExpr=current} functionName=RelationalOperator rightExpr=AdditiveExpression)*
@@ -1793,7 +1818,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class AdditiveExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AdditiveExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AdditiveExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicativeExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1805,9 +1830,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprMultiplicativeExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//AdditiveExpression returns Expression:
+		//AdditiveExpression Expression:
 		//	MultiplicativeExpression ({BinaryOpExpression.leftExpr=current} functionName=("+" | "-")
-		//	rightExpr=MultiplicativeExpression)*;
+		//	rightExpr=MultiplicativeExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//MultiplicativeExpression ({BinaryOpExpression.leftExpr=current} functionName=("+" | "-")
@@ -1826,7 +1851,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//functionName=("+" | "-")
 		public Assignment getFunctionNameAssignment_1_1() { return cFunctionNameAssignment_1_1; }
 
-		//"+" | "-"
+		//("+" | "-")
 		public Alternatives getFunctionNameAlternatives_1_1_0() { return cFunctionNameAlternatives_1_1_0; }
 
 		//"+"
@@ -1843,7 +1868,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class MultiplicativeExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MultiplicativeExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.MultiplicativeExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cSetExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1856,8 +1881,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprSetExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//MultiplicativeExpression returns Expression:
-		//	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*;
+		//MultiplicativeExpression Expression:
+		//	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*
@@ -1875,7 +1900,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//functionName=("*" | "/" | "%")
 		public Assignment getFunctionNameAssignment_1_1() { return cFunctionNameAssignment_1_1; }
 
-		//"*" | "/" | "%"
+		//("*" | "/" | "%")
 		public Alternatives getFunctionNameAlternatives_1_1_0() { return cFunctionNameAlternatives_1_1_0; }
 
 		//"*"
@@ -1895,7 +1920,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class SetExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SetExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.SetExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cUnaryOrInfixExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -1905,8 +1930,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightExprUnaryOrInfixExpressionParserRuleCall_1_2_0 = (RuleCall)cRightExprAssignment_1_2.eContents().get(0);
 		
-		//SetExpression returns Expression:
-		//	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*;
+		//SetExpression Expression:
+		//	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*
@@ -1935,14 +1960,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class UnaryOrInfixExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnaryOrInfixExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.UnaryOrInfixExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPostopExpressionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cUnaryExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPreopExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//UnaryOrInfixExpression returns Expression:
-		//	PostopExpression | UnaryExpression | PreopExpression;
+		//UnaryOrInfixExpression Expression:
+		//	PostopExpression
+		//	| UnaryExpression
+		//	| PreopExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//PostopExpression | UnaryExpression | PreopExpression
@@ -1959,7 +1986,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class UnaryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnaryExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.UnaryExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnaryOpExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFunctionNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1969,8 +1996,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cExprAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cExprInfixExpressionParserRuleCall_2_0 = (RuleCall)cExprAssignment_2.eContents().get(0);
 		
-		//UnaryExpression returns Expression:
-		//	{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression;
+		//UnaryExpression Expression:
+		//	{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression
@@ -1982,7 +2009,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//functionName=("!" | "-")
 		public Assignment getFunctionNameAssignment_1() { return cFunctionNameAssignment_1; }
 
-		//"!" | "-"
+		//("!" | "-")
 		public Alternatives getFunctionNameAlternatives_1_0() { return cFunctionNameAlternatives_1_0; }
 
 		//"!"
@@ -1999,7 +2026,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class PreopExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PreopExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.PreopExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cUnaryPreOpExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFunctionNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2009,8 +2036,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cExprAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cExprInfixExpressionParserRuleCall_2_0 = (RuleCall)cExprAssignment_2.eContents().get(0);
 		
-		//PreopExpression returns Expression:
-		//	{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression;
+		//PreopExpression Expression:
+		//	{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression
@@ -2022,7 +2049,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//functionName=("++" | "--")
 		public Assignment getFunctionNameAssignment_1() { return cFunctionNameAssignment_1; }
 
-		//"++" | "--"
+		//("++" | "--")
 		public Alternatives getFunctionNameAlternatives_1_0() { return cFunctionNameAlternatives_1_0; }
 
 		//"++"
@@ -2039,7 +2066,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class PostopExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PostopExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.PostopExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cInfixExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2049,8 +2076,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cFunctionNameHyphenMinusHyphenMinusKeyword_1_1_0_0 = (Keyword)cFunctionNameAlternatives_1_1_0.eContents().get(0);
 		private final Keyword cFunctionNamePlusSignPlusSignKeyword_1_1_0_1 = (Keyword)cFunctionNameAlternatives_1_1_0.eContents().get(1);
 		
-		//PostopExpression returns Expression:
-		//	InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?;
+		//PostopExpression Expression:
+		//	InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?
 		@Override public ParserRule getRule() { return rule; }
 
 		//InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?
@@ -2068,7 +2095,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//functionName=("--" | "++")
 		public Assignment getFunctionNameAssignment_1_1() { return cFunctionNameAssignment_1_1; }
 
-		//"--" | "++"
+		//("--" | "++")
 		public Alternatives getFunctionNameAlternatives_1_1_0() { return cFunctionNameAlternatives_1_1_0; }
 
 		//"--"
@@ -2079,7 +2106,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class InfixExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InfixExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InfixExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cCallExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -2104,21 +2131,20 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cFeatureNameAssignment_1_2_2 = (Assignment)cGroup_1_2.eContents().get(2);
 		private final RuleCall cFeatureNameIDTerminalRuleCall_1_2_2_0 = (RuleCall)cFeatureNameAssignment_1_2_2.eContents().get(0);
 		
-		//InfixExpression returns Expression:
+		//InfixExpression Expression:
 		//	CallExpression ({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" |
-		//	{AtExpression.objExpr=current} "[" indexExpr=Expression "]" | {FeatureExpression.objExpr=current} "."
-		//	featureName=ID)*;
+		//	{AtExpression.objExpr=current} '[' indexExpr=Expression ']' | {FeatureExpression.objExpr=current} "." featureName=ID)*
 		@Override public ParserRule getRule() { return rule; }
 
 		//CallExpression ({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" |
-		//{AtExpression.objExpr=current} "[" indexExpr=Expression "]" | {FeatureExpression.objExpr=current} "." featureName=ID)*
+		//{AtExpression.objExpr=current} '[' indexExpr=Expression ']' | {FeatureExpression.objExpr=current} "." featureName=ID)*
 		public Group getGroup() { return cGroup; }
 
 		//CallExpression
 		public RuleCall getCallExpressionParserRuleCall_0() { return cCallExpressionParserRuleCall_0; }
 
-		//({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" | {AtExpression.objExpr=current} "["
-		//indexExpr=Expression "]" | {FeatureExpression.objExpr=current} "." featureName=ID)*
+		//({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" | {AtExpression.objExpr=current} '['
+		//indexExpr=Expression ']' | {FeatureExpression.objExpr=current} "." featureName=ID)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//{CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")"
@@ -2148,13 +2174,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//")"
 		public Keyword getRightParenthesisKeyword_1_0_5() { return cRightParenthesisKeyword_1_0_5; }
 
-		//{AtExpression.objExpr=current} "[" indexExpr=Expression "]"
+		//{AtExpression.objExpr=current} '[' indexExpr=Expression ']'
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//{AtExpression.objExpr=current}
 		public Action getAtExpressionObjExprAction_1_1_0() { return cAtExpressionObjExprAction_1_1_0; }
 
-		//"["
+		//'['
 		public Keyword getLeftSquareBracketKeyword_1_1_1() { return cLeftSquareBracketKeyword_1_1_1; }
 
 		//indexExpr=Expression
@@ -2163,7 +2189,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getIndexExprExpressionParserRuleCall_1_1_2_0() { return cIndexExprExpressionParserRuleCall_1_1_2_0; }
 
-		//"]"
+		//']'
 		public Keyword getRightSquareBracketKeyword_1_1_3() { return cRightSquareBracketKeyword_1_1_3; }
 
 		//{FeatureExpression.objExpr=current} "." featureName=ID
@@ -2183,7 +2209,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class CallExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CallExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.CallExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimaryExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2193,8 +2219,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cParameterListParameterListParserRuleCall_1_2_0 = (RuleCall)cParameterListAssignment_1_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//CallExpression returns Expression:
-		//	PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*;
+		//CallExpression Expression:
+		//	PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*
 		@Override public ParserRule getRule() { return rule; }
 
 		//PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*
@@ -2223,7 +2249,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class PrimaryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimaryExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.PrimaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cFeatureCallParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cConstructorCallExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -2235,9 +2261,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cWithExpressionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		private final RuleCall cWithContextExpressionParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
-		//PrimaryExpression returns Expression:
-		//	FeatureCall | ConstructorCallExpression | Value | Literal | KeywordVariables | ParanthesizedExpression |
-		//	BlockExpression | WithExpression | WithContextExpression;
+		//PrimaryExpression Expression:
+		//	FeatureCall
+		//	| ConstructorCallExpression
+		//	| Value
+		//	| Literal
+		//	| KeywordVariables
+		//	| ParanthesizedExpression
+		//	| BlockExpression
+		//	| WithExpression
+		//	| WithContextExpression
 		@Override public ParserRule getRule() { return rule; }
 
 		//FeatureCall | ConstructorCallExpression | Value | Literal | KeywordVariables | ParanthesizedExpression | BlockExpression
@@ -2273,7 +2306,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class WithExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.WithExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2295,18 +2328,18 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cRightCurlyBracketKeyword_2_1_2 = (Keyword)cGroup_2_1.eContents().get(2);
 		
 		//WithExpression:
-		//	"with" (referencedAdvice+=ID ("," referencedAdvice+=ID)*)? (":" funcExpr=Expression | "{"
-		//	funcExpr=BlockExpressionWithoutBrackets "}");
+		//	'with' (referencedAdvice+=ID (',' referencedAdvice+=ID)*)? (':' funcExpr=Expression | '{'
+		//	funcExpr=BlockExpressionWithoutBrackets '}');
 		@Override public ParserRule getRule() { return rule; }
 
-		//"with" (referencedAdvice+=ID ("," referencedAdvice+=ID)*)? (":" funcExpr=Expression | "{"
-		//funcExpr=BlockExpressionWithoutBrackets "}")
+		//'with' (referencedAdvice+=ID (',' referencedAdvice+=ID)*)? (':' funcExpr=Expression | '{'
+		//funcExpr=BlockExpressionWithoutBrackets '}')
 		public Group getGroup() { return cGroup; }
 
-		//"with"
+		//'with'
 		public Keyword getWithKeyword_0() { return cWithKeyword_0; }
 
-		//(referencedAdvice+=ID ("," referencedAdvice+=ID)*)?
+		//(referencedAdvice+=ID (',' referencedAdvice+=ID)*)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//referencedAdvice+=ID
@@ -2315,10 +2348,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getReferencedAdviceIDTerminalRuleCall_1_0_0() { return cReferencedAdviceIDTerminalRuleCall_1_0_0; }
 
-		//("," referencedAdvice+=ID)*
+		//(',' referencedAdvice+=ID)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_1_1_0() { return cCommaKeyword_1_1_0; }
 
 		//referencedAdvice+=ID
@@ -2327,13 +2360,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getReferencedAdviceIDTerminalRuleCall_1_1_1_0() { return cReferencedAdviceIDTerminalRuleCall_1_1_1_0; }
 
-		//":" funcExpr=Expression | "{" funcExpr=BlockExpressionWithoutBrackets "}"
+		//(':' funcExpr=Expression | '{' funcExpr=BlockExpressionWithoutBrackets '}')
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//":" funcExpr=Expression
+		//':' funcExpr=Expression
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_0_0() { return cColonKeyword_2_0_0; }
 
 		//funcExpr=Expression
@@ -2342,10 +2375,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//Expression
 		public RuleCall getFuncExprExpressionParserRuleCall_2_0_1_0() { return cFuncExprExpressionParserRuleCall_2_0_1_0; }
 
-		//"{" funcExpr=BlockExpressionWithoutBrackets "}"
+		//'{' funcExpr=BlockExpressionWithoutBrackets '}'
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_1_0() { return cLeftCurlyBracketKeyword_2_1_0; }
 
 		//funcExpr=BlockExpressionWithoutBrackets
@@ -2354,12 +2387,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//BlockExpressionWithoutBrackets
 		public RuleCall getFuncExprBlockExpressionWithoutBracketsParserRuleCall_2_1_1_0() { return cFuncExprBlockExpressionWithoutBracketsParserRuleCall_2_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_1_2() { return cRightCurlyBracketKeyword_2_1_2; }
 	}
 
 	public class WithContextExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WithContextExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.WithContextExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWithKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cContextKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2411,7 +2444,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class BlockExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BlockExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cChainedExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2421,20 +2454,21 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cSemicolonKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//BlockExpression returns Expression:
-		//	{ChainedExpression} "{" (expressions+=TopLevelExpression ";")* "}";
+		//BlockExpression Expression:
+		//	{ChainedExpression}
+		//	'{' (expressions+=TopLevelExpression ';')* '}'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ChainedExpression} "{" (expressions+=TopLevelExpression ";")* "}"
+		//{ChainedExpression} '{' (expressions+=TopLevelExpression ';')* '}'
 		public Group getGroup() { return cGroup; }
 
 		//{ChainedExpression}
 		public Action getChainedExpressionAction_0() { return cChainedExpressionAction_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//(expressions+=TopLevelExpression ";")*
+		//(expressions+=TopLevelExpression ';')*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//expressions+=TopLevelExpression
@@ -2443,22 +2477,22 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//TopLevelExpression
 		public RuleCall getExpressionsTopLevelExpressionParserRuleCall_2_0_0() { return cExpressionsTopLevelExpressionParserRuleCall_2_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 
 	public class ValueElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Value");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Value");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVariableExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		//Value returns Expression:
-		//	{VariableExpression} name=ID;
+		//Value Expression:
+		//	{VariableExpression} name=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//{VariableExpression} name=ID
@@ -2475,7 +2509,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class KeywordVariablesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "KeywordVariables");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.KeywordVariables");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVariableExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2488,8 +2522,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cNameUnitKeyword_1_0_5 = (Keyword)cNameAlternatives_1_0.eContents().get(5);
 		private final Keyword cNameThisKeyword_1_0_6 = (Keyword)cNameAlternatives_1_0.eContents().get(6);
 		
-		//KeywordVariables returns Expression:
-		//	{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this");
+		//KeywordVariables Expression:
+		//	{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
 		@Override public ParserRule getRule() { return rule; }
 
 		//{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
@@ -2501,7 +2535,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//"input" | "output" | "source" | "properties" | "builder" | "unit" | "this"
+		//("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
 		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
 
 		//"input"
@@ -2527,14 +2561,11 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class FeatureCallElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCall");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FeatureCall");
 		private final RuleCall cOperationCallParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//// Removed (see BeeLang rev 1333)
-		////	| ({CallFeature} "." name=ID  "(" (parameterList = ParameterList)? ")")
-		////	| ({FeatureExpression} "." featureName=ID)
-		//FeatureCall returns Expression:
-		//	OperationCall;
+		//FeatureCall Expression:
+		//	OperationCall
 		@Override public ParserRule getRule() { return rule; }
 
 		//OperationCall
@@ -2542,7 +2573,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class OperationCallElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OperationCall");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.OperationCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cCallNamedFunctionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2552,11 +2583,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cParameterListParameterListParserRuleCall_3_0 = (RuleCall)cParameterListAssignment_3.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//OperationCall returns CallExpression:
-		//	{CallNamedFunction} name=ID "(" parameterList=ParameterList? ")";
+		//OperationCall CallExpression:
+		//	{CallNamedFunction} name=ID
+		//	'(' parameterList=ParameterList? ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{CallNamedFunction} name=ID "(" parameterList=ParameterList? ")"
+		//{CallNamedFunction} name=ID '(' parameterList=ParameterList? ')'
 		public Group getGroup() { return cGroup; }
 
 		//{CallNamedFunction}
@@ -2568,7 +2600,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//parameterList=ParameterList?
@@ -2577,12 +2609,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterList
 		public RuleCall getParameterListParameterListParserRuleCall_3_0() { return cParameterListParameterListParserRuleCall_3_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
 	public class ConstructorCallExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConstructorCallExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ConstructorCallExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cCreateExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cNewKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2600,12 +2632,13 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cContextBlockAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cContextBlockInitializationBlockExpressionParserRuleCall_5_0 = (RuleCall)cContextBlockAssignment_5.eContents().get(0);
 		
-		//ConstructorCallExpression returns Expression:
-		//	{CreateExpression} "new" typeExpr=ID ("(" parameterList=ParameterList? ")")? ("as" alias=ID)?
-		//	contextBlock=InitializationBlockExpression?;
+		//ConstructorCallExpression Expression:
+		//	{CreateExpression}
+		//	"new" typeExpr=ID ('(' parameterList=ParameterList? ')')? ("as" alias=ID)?
+		//	contextBlock=InitializationBlockExpression?
 		@Override public ParserRule getRule() { return rule; }
 
-		//{CreateExpression} "new" typeExpr=ID ("(" parameterList=ParameterList? ")")? ("as" alias=ID)?
+		//{CreateExpression} "new" typeExpr=ID ('(' parameterList=ParameterList? ')')? ("as" alias=ID)?
 		//contextBlock=InitializationBlockExpression?
 		public Group getGroup() { return cGroup; }
 
@@ -2621,10 +2654,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getTypeExprIDTerminalRuleCall_2_0() { return cTypeExprIDTerminalRuleCall_2_0; }
 
-		//("(" parameterList=ParameterList? ")")?
+		//('(' parameterList=ParameterList? ')')?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_3_0() { return cLeftParenthesisKeyword_3_0; }
 
 		//parameterList=ParameterList?
@@ -2633,7 +2666,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterList
 		public RuleCall getParameterListParameterListParserRuleCall_3_1_0() { return cParameterListParameterListParserRuleCall_3_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3_2() { return cRightParenthesisKeyword_3_2; }
 
 		//("as" alias=ID)?
@@ -2656,7 +2689,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class InitializationBlockExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InitializationBlockExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InitializationBlockExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cChainedExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -2665,17 +2698,18 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//InitializationBlockExpression returns Expression:
-		//	{ChainedExpression} "{" expressions+=InitializationExpression ";" "}";
+		//InitializationBlockExpression Expression:
+		//	{ChainedExpression}
+		//	'{' expressions+=InitializationExpression ';' '}'
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ChainedExpression} "{" expressions+=InitializationExpression ";" "}"
+		//{ChainedExpression} '{' expressions+=InitializationExpression ';' '}'
 		public Group getGroup() { return cGroup; }
 
 		//{ChainedExpression}
 		public Action getChainedExpressionAction_0() { return cChainedExpressionAction_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//expressions+=InitializationExpression
@@ -2684,15 +2718,15 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//InitializationExpression
 		public RuleCall getExpressionsInitializationExpressionParserRuleCall_2_0() { return cExpressionsInitializationExpressionParserRuleCall_2_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class InitializationExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InitializationExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InitializationExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cAssignmentExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cLeftExprAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -2702,8 +2736,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cRightExprAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cRightExprExpressionParserRuleCall_3_0 = (RuleCall)cRightExprAssignment_3.eContents().get(0);
 		
-		//InitializationExpression returns Expression:
-		//	{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression;
+		//InitializationExpression Expression:
+		//	{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression
 		@Override public ParserRule getRule() { return rule; }
 
 		//{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression
@@ -2732,14 +2766,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class FeatureOfThisElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureOfThis");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FeatureOfThis");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cFeatureExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cFeatureNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cFeatureNameIDTerminalRuleCall_1_0 = (RuleCall)cFeatureNameAssignment_1.eContents().get(0);
 		
-		//FeatureOfThis returns Expression:
-		//	{FeatureExpression} featureName=ID;
+		//FeatureOfThis Expression:
+		//	{FeatureExpression} featureName=ID
 		@Override public ParserRule getRule() { return rule; }
 
 		//{FeatureExpression} featureName=ID
@@ -2756,13 +2790,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Literal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cValueLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cLiteralFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//Literal returns Expression:
-		//	ValueLiteral | LiteralFunction;
+		//Literal Expression:
+		//	ValueLiteral
+		//	| LiteralFunction
 		@Override public ParserRule getRule() { return rule; }
 
 		//ValueLiteral | LiteralFunction
@@ -2776,31 +2811,31 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class LiteralFunctionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LiteralFunction");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.LiteralFunction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cClosureExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//LiteralFunction returns Expression:
-		//	"{" ClosureExpression "}";
+		//LiteralFunction Expression:
+		//	'{' ClosureExpression '}'
 		@Override public ParserRule getRule() { return rule; }
 
-		//"{" ClosureExpression "}"
+		//'{' ClosureExpression '}'
 		public Group getGroup() { return cGroup; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
 
 		//ClosureExpression
 		public RuleCall getClosureExpressionParserRuleCall_1() { return cClosureExpressionParserRuleCall_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
 	}
 
 	public class ClosureExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClosureExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ClosureExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cFunctionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2833,24 +2868,25 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cFuncExprAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cFuncExprOneOrManyExpressionsParserRuleCall_4_0 = (RuleCall)cFuncExprAssignment_4.eContents().get(0);
 		
-		//ClosureExpression returns Expression:
-		//	{Function} ("<" returnType=TypeRef ">")? ("|"? (parameters+=ParameterDeclaration (","
-		//	parameters+=ParameterDeclaration)* ("," varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
-		//	parameters+=ParameterDeclaration)? "|" funcExpr=OneOrManyExpressions;
+		//ClosureExpression Expression:
+		//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
+		//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
+		//	parameters+=ParameterDeclaration)?
+		//	'|' funcExpr=OneOrManyExpressions
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Function} ("<" returnType=TypeRef ">")? ("|"? (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)*
-		//("," varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)? "|"
+		//{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)*
+		//(',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)? '|'
 		//funcExpr=OneOrManyExpressions
 		public Group getGroup() { return cGroup; }
 
 		//{Function}
 		public Action getFunctionAction_0() { return cFunctionAction_0; }
 
-		//("<" returnType=TypeRef ">")?
+		//('<' returnType=TypeRef '>')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"<"
+		//'<'
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
 		//returnType=TypeRef
@@ -2859,22 +2895,22 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//TypeRef
 		public RuleCall getReturnTypeTypeRefParserRuleCall_1_1_0() { return cReturnTypeTypeRefParserRuleCall_1_1_0; }
 
-		//">"
+		//'>'
 		public Keyword getGreaterThanSignKeyword_1_2() { return cGreaterThanSignKeyword_1_2; }
 
-		//("|"? (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
+		//('|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
 		//parameters+=ParameterDeclaration)?) | varArgs?="..." parameters+=ParameterDeclaration)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//"|"? (parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
+		//'|'? (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
 		//parameters+=ParameterDeclaration)?)
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
-		//"|"?
+		//'|'?
 		public Keyword getVerticalLineKeyword_2_0_0() { return cVerticalLineKeyword_2_0_0; }
 
-		//parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
-		//parameters+=ParameterDeclaration)?
+		//(parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
+		//parameters+=ParameterDeclaration)?)
 		public Group getGroup_2_0_1() { return cGroup_2_0_1; }
 
 		//parameters+=ParameterDeclaration
@@ -2883,10 +2919,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_2_0_1_0_0() { return cParametersParameterDeclarationParserRuleCall_2_0_1_0_0; }
 
-		//("," parameters+=ParameterDeclaration)*
+		//(',' parameters+=ParameterDeclaration)*
 		public Group getGroup_2_0_1_1() { return cGroup_2_0_1_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0_1_1_0() { return cCommaKeyword_2_0_1_1_0; }
 
 		//parameters+=ParameterDeclaration
@@ -2895,10 +2931,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_2_0_1_1_1_0() { return cParametersParameterDeclarationParserRuleCall_2_0_1_1_1_0; }
 
-		//("," varArgs?="..." parameters+=ParameterDeclaration)?
+		//(',' varArgs?="..." parameters+=ParameterDeclaration)?
 		public Group getGroup_2_0_1_2() { return cGroup_2_0_1_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0_1_2_0() { return cCommaKeyword_2_0_1_2_0; }
 
 		//varArgs?="..."
@@ -2928,7 +2964,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ParameterDeclaration
 		public RuleCall getParametersParameterDeclarationParserRuleCall_2_1_1_0() { return cParametersParameterDeclarationParserRuleCall_2_1_1_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_3() { return cVerticalLineKeyword_3; }
 
 		//funcExpr=OneOrManyExpressions
@@ -2939,13 +2975,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class OneOrManyExpressionsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "OneOrManyExpressions");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.OneOrManyExpressions");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cBlockExpressionWithoutBracketsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//OneOrManyExpressions returns Expression:
-		//	BlockExpressionWithoutBrackets | Expression;
+		//OneOrManyExpressions Expression:
+		//	BlockExpressionWithoutBrackets
+		//	| Expression
 		@Override public ParserRule getRule() { return rule; }
 
 		//BlockExpressionWithoutBrackets | Expression
@@ -2959,7 +2996,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class BlockExpressionWithoutBracketsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BlockExpressionWithoutBrackets");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpressionWithoutBrackets");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cChainedExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -2967,17 +3004,17 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final RuleCall cExpressionsTopLevelExpressionParserRuleCall_1_0_0 = (RuleCall)cExpressionsAssignment_1_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
-		//BlockExpressionWithoutBrackets returns Expression:
-		//	{ChainedExpression} (expressions+=TopLevelExpression ";")+;
+		//BlockExpressionWithoutBrackets Expression:
+		//	{ChainedExpression} (expressions+=TopLevelExpression ';')+
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ChainedExpression} (expressions+=TopLevelExpression ";")+
+		//{ChainedExpression} (expressions+=TopLevelExpression ';')+
 		public Group getGroup() { return cGroup; }
 
 		//{ChainedExpression}
 		public Action getChainedExpressionAction_0() { return cChainedExpressionAction_0; }
 
-		//(expressions+=TopLevelExpression ";")+
+		//(expressions+=TopLevelExpression ';')+
 		public Group getGroup_1() { return cGroup_1; }
 
 		//expressions+=TopLevelExpression
@@ -2986,12 +3023,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//TopLevelExpression
 		public RuleCall getExpressionsTopLevelExpressionParserRuleCall_1_0_0() { return cExpressionsTopLevelExpressionParserRuleCall_1_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_1_1() { return cSemicolonKeyword_1_1; }
 	}
 
 	public class ValueLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValueLiteral");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ValueLiteral");
 		private final Assignment cValueAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cValueSTRINGTerminalRuleCall_0 = (RuleCall)cValueAssignment.eContents().get(0);
 		
@@ -3007,31 +3044,31 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	public class ParanthesizedExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParanthesizedExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParanthesizedExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final RuleCall cExpressionParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//ParanthesizedExpression returns Expression:
-		//	"(" Expression ")";
+		//ParanthesizedExpression Expression:
+		//	'(' Expression ')'
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Expression ")"
+		//'(' Expression ')'
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//Expression
 		public RuleCall getExpressionParserRuleCall_1() { return cExpressionParserRuleCall_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
 
 	public class QIDElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QID");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.QID");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
@@ -3048,10 +3085,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		
 		//// Qualified name
 		//QID hidden():
-		//	ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*;
+		//	ID (INT | HEX | ID)* ('.' ID (INT | HEX | ID)*)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*
+		//ID (INT | HEX | ID)* ('.' ID (INT | HEX | ID)*)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
@@ -3069,10 +3106,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		//ID
 		public RuleCall getIDTerminalRuleCall_1_2() { return cIDTerminalRuleCall_1_2; }
 
-		//("." ID (INT | HEX | ID)*)*
+		//('.' ID (INT | HEX | ID)*)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
 
 		//ID
@@ -3216,8 +3253,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		this.pValueLiteral = new ValueLiteralElements();
 		this.pParanthesizedExpression = new ParanthesizedExpressionElements();
 		this.pQID = new QIDElements();
-		this.tDOCUMENTATION = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DOCUMENTATION");
-		this.tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "HEX");
+		this.tDOCUMENTATION = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.DOCUMENTATION");
+		this.tHEX = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.HEX");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -3249,7 +3286,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	
 	//// Initially copied from BeeLang.xtext rev 1029
 	//Model:
-	//	units+=Unit* | functions+=Function*;
+	//	units+=Unit*
+	//	| functions+=Function*;
 	public ModelElements getModelAccess() {
 		return pModel;
 	}
@@ -3259,11 +3297,15 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Unit:
-	//	{Unit} documentation=DOCUMENTATION? "unit" name=ID? ("version" version=ID)? ("implements" implements+=SimpleTypeRef
-	//	("," implements+=SimpleTypeRef)*)? "{" (("source" ":" sourceLocation=Path ";")? & ("output" ":" outputLocation=Path
-	//	";")? & ("provides" ":" providedCapabilities+=ProvidedCapability ";")* & ("requires" ":"
-	//	requiredCapabilities+=AliasedRequiredCapability ";")* & ("requires" "env" ":"
-	//	metaRequiredCapabilities+=RequiredCapability ";")* & functions+=Function*) "}";
+	//	{Unit} documentation=DOCUMENTATION?
+	//	'unit' name=ID? ('version' version=ID)? ('implements' implements+=SimpleTypeRef (',' implements+=SimpleTypeRef)*)?
+	//	'{' ('source' ':' sourceLocation=Path ';'?
+	//	& 'output' ':' outputLocation=Path ';'?
+	//	& 'provides' ':' providedCapabilities+=ProvidedCapability ';'*
+	//	& 'requires' ':' requiredCapabilities+=AliasedRequiredCapability ';'*
+	//	& 'requires' 'env' ':' metaRequiredCapabilities+=RequiredCapability ';'*
+	//	& functions+=Function*)
+	//	'}';
 	public UnitElements getUnitAccess() {
 		return pUnit;
 	}
@@ -3273,8 +3315,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//ProvidedCapability:
-	//	{ProvidedCapability} (nameSpace=ID | "unit") ("{" (("when" ":" condExpr=Expression ";")? & "name" ":" name=ID ";" &
-	//	("version" ":" version=ID ";")?) "}")?;
+	//	{ProvidedCapability} (nameSpace=ID | "unit") ('{' ('when' ':' condExpr=Expression ';'?
+	//	& "name" ':' name=ID ';' & "version" ':' version=ID ';'?)
+	//	'}')?;
 	public ProvidedCapabilityElements getProvidedCapabilityAccess() {
 		return pProvidedCapability;
 	}
@@ -3284,8 +3327,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//AliasedRequiredCapability:
-	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy" ";")?
-	//	& ("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?) "}");
+	//	(nameSpace=ID | "unit") name=ID ("as" alias=ID)? ('{' ('when' ':' condExpr=Expression ';'?
+	//	& greedy?="greedy" ';'?
+	//	& "requires-min" ':' min=INT ';'?
+	//	& "requires-max" ':' max=INT ';'?
+	//	& "version" ':' versionRange=ID ';'?)
+	//	'}');
 	public AliasedRequiredCapabilityElements getAliasedRequiredCapabilityAccess() {
 		return pAliasedRequiredCapability;
 	}
@@ -3295,9 +3342,12 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//RequiredCapability:
-	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ("{" (("when" ":" condExpr=Expression ";")? & (greedy?="greedy"
-	//	";")? & ("requires-min" ":" min=INT ";")? & ("requires-max" ":" max=INT ";")? & ("version" ":" versionRange=ID ";")?)
-	//	"}");
+	//	{RequiredCapability} (nameSpace=ID | "unit") name=ID ('{' ('when' ':' condExpr=Expression ';'?
+	//	& greedy?="greedy" ';'?
+	//	& "requires-min" ':' min=INT ';'?
+	//	& "requires-max" ':' max=INT ';'?
+	//	& "version" ':' versionRange=ID ';'?)
+	//	'}');
 	public RequiredCapabilityElements getRequiredCapabilityAccess() {
 		return pRequiredCapability;
 	}
@@ -3307,7 +3357,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Path hidden():
-	//	STRING | "/"? QID ("/" QID)* "/"?;
+	//	STRING
+	//	| '/'? QID ('/' QID)* '/'?;
 	public PathElements getPathAccess() {
 		return pPath;
 	}
@@ -3326,8 +3377,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getParameterListAccess().getRule();
 	}
 
-	//FirstParameter returns Parameter:
-	//	ClosureParameter | Parameter;
+	//FirstParameter Parameter:
+	//	ClosureParameter
+	//	| Parameter
 	public FirstParameterElements getFirstParameterAccess() {
 		return pFirstParameter;
 	}
@@ -3367,10 +3419,14 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Function:
-	//	documentation=DOCUMENTATION? visibility=ID? final?="final"? "function" returnType=TypeRef? name=ID ("("
-	//	(parameters+=ParameterDeclaration ("," parameters+=ParameterDeclaration)* ("," varArgs?="..."
-	//	parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ")")? ("when"
-	//	guard=GuardExpression)? (":" funcExpr=Expression ";" | funcExpr=BlockExpression);
+	//	documentation=DOCUMENTATION?
+	//	visibility=ID?
+	//	final?="final"?
+	//	"function"
+	//	returnType=TypeRef?
+	//	name=ID ('(' (parameters+=ParameterDeclaration (',' parameters+=ParameterDeclaration)* (',' varArgs?="..."
+	//	parameters+=ParameterDeclaration)? | varArgs?="..." parameters+=ParameterDeclaration)? ')')? ("when"
+	//	guard=GuardExpression)? (':' funcExpr=Expression ';' | funcExpr=BlockExpression);
 	public FunctionElements getFunctionAccess() {
 		return pFunction;
 	}
@@ -3380,7 +3436,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//GuardExpression:
-	//	":" guardExpr=Expression ";" | guardExpr=BlockExpression;
+	//	':' guardExpr=Expression ';' | guardExpr=BlockExpression;
 	public GuardExpressionElements getGuardExpressionAccess() {
 		return pGuardExpression;
 	}
@@ -3390,7 +3446,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//AssignmentOperator:
-	//	"=" | "+=" | "-=" | "*=" | "/=" | "%=";
+	//	'=' | '+=' | '-=' | '*=' | '/=' | "%=";
 	public AssignmentOperatorElements getAssignmentOperatorAccess() {
 		return pAssignmentOperator;
 	}
@@ -3400,7 +3456,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//RelationalOperator:
-	//	"~=" | "==" | "===" | "!=" | "!==" | ">=" | "<=" | ">" | "<";
+	//	"~=" | "==" | "===" | "!=" | "!=="
+	//	| ">=" | "<=" | ">" | "<";
 	public RelationalOperatorElements getRelationalOperatorAccess() {
 		return pRelationalOperator;
 	}
@@ -3409,8 +3466,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getRelationalOperatorAccess().getRule();
 	}
 
-	//TopLevelExpression returns Expression:
-	//	VarDeclaration | ValDeclaration | AssignmentExpression;
+	//TopLevelExpression Expression:
+	//	VarDeclaration
+	//	| ValDeclaration
+	//	| AssignmentExpression
 	public TopLevelExpressionElements getTopLevelExpressionAccess() {
 		return pTopLevelExpression;
 	}
@@ -3429,9 +3488,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getExpressionAccess().getRule();
 	}
 
-	//AssignmentExpression returns Expression:
+	//AssignmentExpression Expression:
 	//	CachedExpression ({AssignmentExpression.leftExpr=current} functionName=AssignmentOperator
-	//	rightExpr=AssignmentExpression)?;
+	//	rightExpr=AssignmentExpression)?
 	public AssignmentExpressionElements getAssignmentExpressionAccess() {
 		return pAssignmentExpression;
 	}
@@ -3440,8 +3499,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getAssignmentExpressionAccess().getRule();
 	}
 
-	//VarDeclaration returns Expression:
-	//	{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ("=" valueExpr=Expression)?;
+	//VarDeclaration Expression:
+	//	{DefValue} final?="final"? (("var" | type=TypeRef) name=ID) ('=' valueExpr=Expression)?
 	public VarDeclarationElements getVarDeclarationAccess() {
 		return pVarDeclaration;
 	}
@@ -3450,8 +3509,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getVarDeclarationAccess().getRule();
 	}
 
-	//ValDeclaration returns Expression:
-	//	{DefValue} final?="final"? immutable?="val" type=TypeRef? name=ID "=" valueExpr=Expression;
+	//ValDeclaration Expression:
+	//	{DefValue} final?="final"?
+	//	immutable?="val" type=TypeRef? name=ID
+	//	'=' valueExpr=Expression
 	public ValDeclarationElements getValDeclarationAccess() {
 		return pValDeclaration;
 	}
@@ -3461,7 +3522,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//TypeRef:
-	//	ClosureTypeRef | SimpleTypeRef;
+	//	ClosureTypeRef
+	//	| SimpleTypeRef;
 	public TypeRefElements getTypeRefAccess() {
 		return pTypeRef;
 	}
@@ -3471,7 +3533,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//SimpleTypeRef:
-	//	rawType=ID ("<" actualArgumentsList+=ID ("," actualArgumentsList+=ID)* ">")?;
+	//	rawType=ID ('<' actualArgumentsList+=ID (',' actualArgumentsList+=ID)* '>')?;
 	public SimpleTypeRefElements getSimpleTypeRefAccess() {
 		return pSimpleTypeRef;
 	}
@@ -3481,8 +3543,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//ClosureTypeRef:
-	//	"(" (parameterTypes+=ID ("," parameterTypes+=ID)* ("," varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
-	//	parameterTypes+=ID)? ")" "=>" returnType=ID;
+	//	'(' (parameterTypes+=ID (',' parameterTypes+=ID)* (',' varArgs?="..." parameterTypes+=ID)? | varArgs?="..."
+	//	parameterTypes+=ID)?
+	//	')' '=>' returnType=ID;
 	public ClosureTypeRefElements getClosureTypeRefAccess() {
 		return pClosureTypeRef;
 	}
@@ -3491,8 +3554,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getClosureTypeRefAccess().getRule();
 	}
 
-	//CachedExpression returns Expression:
-	//	{CachedExpression} "cached" expr=OrExpression | OrExpression;
+	//CachedExpression Expression:
+	//	{CachedExpression} "cached" expr=OrExpression | OrExpression
 	public CachedExpressionElements getCachedExpressionAccess() {
 		return pCachedExpression;
 	}
@@ -3501,8 +3564,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getCachedExpressionAccess().getRule();
 	}
 
-	//OrExpression returns Expression:
-	//	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*;
+	//OrExpression Expression:
+	//	AndExpression ({OrExpression.leftExpr=current} "||" rightExpr=AndExpression)*
 	public OrExpressionElements getOrExpressionAccess() {
 		return pOrExpression;
 	}
@@ -3511,8 +3574,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getOrExpressionAccess().getRule();
 	}
 
-	//AndExpression returns Expression:
-	//	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*;
+	//AndExpression Expression:
+	//	RelationalExpression ({AndExpression.leftExpr=current} "&&" rightExpr=RelationalExpression)*
 	public AndExpressionElements getAndExpressionAccess() {
 		return pAndExpression;
 	}
@@ -3521,9 +3584,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getAndExpressionAccess().getRule();
 	}
 
-	//RelationalExpression returns Expression:
+	//RelationalExpression Expression:
 	//	AdditiveExpression ({BinaryOpExpression.leftExpr=current} functionName=RelationalOperator
-	//	rightExpr=AdditiveExpression)*;
+	//	rightExpr=AdditiveExpression)*
 	public RelationalExpressionElements getRelationalExpressionAccess() {
 		return pRelationalExpression;
 	}
@@ -3532,9 +3595,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getRelationalExpressionAccess().getRule();
 	}
 
-	//AdditiveExpression returns Expression:
+	//AdditiveExpression Expression:
 	//	MultiplicativeExpression ({BinaryOpExpression.leftExpr=current} functionName=("+" | "-")
-	//	rightExpr=MultiplicativeExpression)*;
+	//	rightExpr=MultiplicativeExpression)*
 	public AdditiveExpressionElements getAdditiveExpressionAccess() {
 		return pAdditiveExpression;
 	}
@@ -3543,8 +3606,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getAdditiveExpressionAccess().getRule();
 	}
 
-	//MultiplicativeExpression returns Expression:
-	//	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*;
+	//MultiplicativeExpression Expression:
+	//	SetExpression ({BinaryOpExpression.leftExpr=current} functionName=("*" | "/" | "%") rightExpr=SetExpression)*
 	public MultiplicativeExpressionElements getMultiplicativeExpressionAccess() {
 		return pMultiplicativeExpression;
 	}
@@ -3553,8 +3616,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getMultiplicativeExpressionAccess().getRule();
 	}
 
-	//SetExpression returns Expression:
-	//	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*;
+	//SetExpression Expression:
+	//	UnaryOrInfixExpression ({BinaryOpExpression.leftExpr=current} functionName=".." rightExpr=UnaryOrInfixExpression)*
 	public SetExpressionElements getSetExpressionAccess() {
 		return pSetExpression;
 	}
@@ -3563,8 +3626,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getSetExpressionAccess().getRule();
 	}
 
-	//UnaryOrInfixExpression returns Expression:
-	//	PostopExpression | UnaryExpression | PreopExpression;
+	//UnaryOrInfixExpression Expression:
+	//	PostopExpression
+	//	| UnaryExpression
+	//	| PreopExpression
 	public UnaryOrInfixExpressionElements getUnaryOrInfixExpressionAccess() {
 		return pUnaryOrInfixExpression;
 	}
@@ -3573,8 +3638,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getUnaryOrInfixExpressionAccess().getRule();
 	}
 
-	//UnaryExpression returns Expression:
-	//	{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression;
+	//UnaryExpression Expression:
+	//	{UnaryOpExpression} functionName=("!" | "-") expr=InfixExpression
 	public UnaryExpressionElements getUnaryExpressionAccess() {
 		return pUnaryExpression;
 	}
@@ -3583,8 +3648,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getUnaryExpressionAccess().getRule();
 	}
 
-	//PreopExpression returns Expression:
-	//	{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression;
+	//PreopExpression Expression:
+	//	{UnaryPreOpExpression} functionName=("++" | "--") expr=InfixExpression
 	public PreopExpressionElements getPreopExpressionAccess() {
 		return pPreopExpression;
 	}
@@ -3593,8 +3658,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getPreopExpressionAccess().getRule();
 	}
 
-	//PostopExpression returns Expression:
-	//	InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?;
+	//PostopExpression Expression:
+	//	InfixExpression ({UnaryPostOpExpression.expr=current} functionName=("--" | "++"))?
 	public PostopExpressionElements getPostopExpressionAccess() {
 		return pPostopExpression;
 	}
@@ -3603,10 +3668,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getPostopExpressionAccess().getRule();
 	}
 
-	//InfixExpression returns Expression:
+	//InfixExpression Expression:
 	//	CallExpression ({CallFeature.funcExpr=current} "." name=ID "(" parameterList=ParameterList? ")" |
-	//	{AtExpression.objExpr=current} "[" indexExpr=Expression "]" | {FeatureExpression.objExpr=current} "."
-	//	featureName=ID)*;
+	//	{AtExpression.objExpr=current} '[' indexExpr=Expression ']' | {FeatureExpression.objExpr=current} "." featureName=ID)*
 	public InfixExpressionElements getInfixExpressionAccess() {
 		return pInfixExpression;
 	}
@@ -3615,8 +3679,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getInfixExpressionAccess().getRule();
 	}
 
-	//CallExpression returns Expression:
-	//	PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*;
+	//CallExpression Expression:
+	//	PrimaryExpression ({CallFunction.funcExpr=current} "(" parameterList=ParameterList? ")")*
 	public CallExpressionElements getCallExpressionAccess() {
 		return pCallExpression;
 	}
@@ -3625,9 +3689,16 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getCallExpressionAccess().getRule();
 	}
 
-	//PrimaryExpression returns Expression:
-	//	FeatureCall | ConstructorCallExpression | Value | Literal | KeywordVariables | ParanthesizedExpression |
-	//	BlockExpression | WithExpression | WithContextExpression;
+	//PrimaryExpression Expression:
+	//	FeatureCall
+	//	| ConstructorCallExpression
+	//	| Value
+	//	| Literal
+	//	| KeywordVariables
+	//	| ParanthesizedExpression
+	//	| BlockExpression
+	//	| WithExpression
+	//	| WithContextExpression
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -3637,8 +3708,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//WithExpression:
-	//	"with" (referencedAdvice+=ID ("," referencedAdvice+=ID)*)? (":" funcExpr=Expression | "{"
-	//	funcExpr=BlockExpressionWithoutBrackets "}");
+	//	'with' (referencedAdvice+=ID (',' referencedAdvice+=ID)*)? (':' funcExpr=Expression | '{'
+	//	funcExpr=BlockExpressionWithoutBrackets '}');
 	public WithExpressionElements getWithExpressionAccess() {
 		return pWithExpression;
 	}
@@ -3657,8 +3728,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getWithContextExpressionAccess().getRule();
 	}
 
-	//BlockExpression returns Expression:
-	//	{ChainedExpression} "{" (expressions+=TopLevelExpression ";")* "}";
+	//BlockExpression Expression:
+	//	{ChainedExpression}
+	//	'{' (expressions+=TopLevelExpression ';')* '}'
 	public BlockExpressionElements getBlockExpressionAccess() {
 		return pBlockExpression;
 	}
@@ -3667,8 +3739,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getBlockExpressionAccess().getRule();
 	}
 
-	//Value returns Expression:
-	//	{VariableExpression} name=ID;
+	//Value Expression:
+	//	{VariableExpression} name=ID
 	public ValueElements getValueAccess() {
 		return pValue;
 	}
@@ -3677,8 +3749,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getValueAccess().getRule();
 	}
 
-	//KeywordVariables returns Expression:
-	//	{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this");
+	//KeywordVariables Expression:
+	//	{VariableExpression} name=("input" | "output" | "source" | "properties" | "builder" | "unit" | "this")
 	public KeywordVariablesElements getKeywordVariablesAccess() {
 		return pKeywordVariables;
 	}
@@ -3687,11 +3759,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getKeywordVariablesAccess().getRule();
 	}
 
-	//// Removed (see BeeLang rev 1333)
-	////	| ({CallFeature} "." name=ID  "(" (parameterList = ParameterList)? ")")
-	////	| ({FeatureExpression} "." featureName=ID)
-	//FeatureCall returns Expression:
-	//	OperationCall;
+	//FeatureCall Expression:
+	//	OperationCall
 	public FeatureCallElements getFeatureCallAccess() {
 		return pFeatureCall;
 	}
@@ -3700,8 +3769,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getFeatureCallAccess().getRule();
 	}
 
-	//OperationCall returns CallExpression:
-	//	{CallNamedFunction} name=ID "(" parameterList=ParameterList? ")";
+	//OperationCall CallExpression:
+	//	{CallNamedFunction} name=ID
+	//	'(' parameterList=ParameterList? ')'
 	public OperationCallElements getOperationCallAccess() {
 		return pOperationCall;
 	}
@@ -3710,9 +3780,10 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getOperationCallAccess().getRule();
 	}
 
-	//ConstructorCallExpression returns Expression:
-	//	{CreateExpression} "new" typeExpr=ID ("(" parameterList=ParameterList? ")")? ("as" alias=ID)?
-	//	contextBlock=InitializationBlockExpression?;
+	//ConstructorCallExpression Expression:
+	//	{CreateExpression}
+	//	"new" typeExpr=ID ('(' parameterList=ParameterList? ')')? ("as" alias=ID)?
+	//	contextBlock=InitializationBlockExpression?
 	public ConstructorCallExpressionElements getConstructorCallExpressionAccess() {
 		return pConstructorCallExpression;
 	}
@@ -3721,8 +3792,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getConstructorCallExpressionAccess().getRule();
 	}
 
-	//InitializationBlockExpression returns Expression:
-	//	{ChainedExpression} "{" expressions+=InitializationExpression ";" "}";
+	//InitializationBlockExpression Expression:
+	//	{ChainedExpression}
+	//	'{' expressions+=InitializationExpression ';' '}'
 	public InitializationBlockExpressionElements getInitializationBlockExpressionAccess() {
 		return pInitializationBlockExpression;
 	}
@@ -3731,8 +3803,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getInitializationBlockExpressionAccess().getRule();
 	}
 
-	//InitializationExpression returns Expression:
-	//	{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression;
+	//InitializationExpression Expression:
+	//	{AssignmentExpression} leftExpr=FeatureOfThis functionName=":" rightExpr=Expression
 	public InitializationExpressionElements getInitializationExpressionAccess() {
 		return pInitializationExpression;
 	}
@@ -3741,8 +3813,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getInitializationExpressionAccess().getRule();
 	}
 
-	//FeatureOfThis returns Expression:
-	//	{FeatureExpression} featureName=ID;
+	//FeatureOfThis Expression:
+	//	{FeatureExpression} featureName=ID
 	public FeatureOfThisElements getFeatureOfThisAccess() {
 		return pFeatureOfThis;
 	}
@@ -3751,8 +3823,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getFeatureOfThisAccess().getRule();
 	}
 
-	//Literal returns Expression:
-	//	ValueLiteral | LiteralFunction;
+	//Literal Expression:
+	//	ValueLiteral
+	//	| LiteralFunction
 	public LiteralElements getLiteralAccess() {
 		return pLiteral;
 	}
@@ -3761,8 +3834,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getLiteralAccess().getRule();
 	}
 
-	//LiteralFunction returns Expression:
-	//	"{" ClosureExpression "}";
+	//LiteralFunction Expression:
+	//	'{' ClosureExpression '}'
 	public LiteralFunctionElements getLiteralFunctionAccess() {
 		return pLiteralFunction;
 	}
@@ -3771,10 +3844,11 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getLiteralFunctionAccess().getRule();
 	}
 
-	//ClosureExpression returns Expression:
-	//	{Function} ("<" returnType=TypeRef ">")? ("|"? (parameters+=ParameterDeclaration (","
-	//	parameters+=ParameterDeclaration)* ("," varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
-	//	parameters+=ParameterDeclaration)? "|" funcExpr=OneOrManyExpressions;
+	//ClosureExpression Expression:
+	//	{Function} ('<' returnType=TypeRef '>')? ('|'? (parameters+=ParameterDeclaration (','
+	//	parameters+=ParameterDeclaration)* (',' varArgs?="..." parameters+=ParameterDeclaration)?) | varArgs?="..."
+	//	parameters+=ParameterDeclaration)?
+	//	'|' funcExpr=OneOrManyExpressions
 	public ClosureExpressionElements getClosureExpressionAccess() {
 		return pClosureExpression;
 	}
@@ -3783,8 +3857,9 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getClosureExpressionAccess().getRule();
 	}
 
-	//OneOrManyExpressions returns Expression:
-	//	BlockExpressionWithoutBrackets | Expression;
+	//OneOrManyExpressions Expression:
+	//	BlockExpressionWithoutBrackets
+	//	| Expression
 	public OneOrManyExpressionsElements getOneOrManyExpressionsAccess() {
 		return pOneOrManyExpressions;
 	}
@@ -3793,8 +3868,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getOneOrManyExpressionsAccess().getRule();
 	}
 
-	//BlockExpressionWithoutBrackets returns Expression:
-	//	{ChainedExpression} (expressions+=TopLevelExpression ";")+;
+	//BlockExpressionWithoutBrackets Expression:
+	//	{ChainedExpression} (expressions+=TopLevelExpression ';')+
 	public BlockExpressionWithoutBracketsElements getBlockExpressionWithoutBracketsAccess() {
 		return pBlockExpressionWithoutBrackets;
 	}
@@ -3813,8 +3888,8 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		return getValueLiteralAccess().getRule();
 	}
 
-	//ParanthesizedExpression returns Expression:
-	//	"(" Expression ")";
+	//ParanthesizedExpression Expression:
+	//	'(' Expression ')'
 	public ParanthesizedExpressionElements getParanthesizedExpressionAccess() {
 		return pParanthesizedExpression;
 	}
@@ -3825,7 +3900,7 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 
 	//// Qualified name
 	//QID hidden():
-	//	ID (INT | HEX | ID)* ("." ID (INT | HEX | ID)*)*;
+	//	ID (INT | HEX | ID)* ('.' ID (INT | HEX | ID)*)*;
 	public QIDElements getQIDAccess() {
 		return pQID;
 	}
@@ -3835,50 +3910,50 @@ public class BeeLangTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//terminal DOCUMENTATION:
-	//	"/ **"->"* /";
+	//	'/ **'->'* /';
 	public TerminalRule getDOCUMENTATIONRule() {
 		return tDOCUMENTATION;
 	} 
 
 	//terminal HEX:
-	//	"0" ("x" | "X") ("0".."9" | "a".."f" | "A".."F")+;
+	//	'0' ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 	public TerminalRule getHEXRule() {
 		return tHEX;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

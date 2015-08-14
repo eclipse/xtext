@@ -27,8 +27,8 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
     public static final int RULE_INDENT=5;
     public static final int RULE_DEDENT=6;
     public static final int RULE_WS=11;
-    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=7;
+    public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=10;
 
     // delegates
@@ -45,7 +45,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
         
 
     public String[] getTokenNames() { return PsiInternalIndentationAwareTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalIndentationAwareTestLanguage.g"; }
 
 
 
@@ -69,19 +69,19 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleTree"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:52:1: entryRuleTree : ruleTree EOF ;
+    // PsiInternalIndentationAwareTestLanguage.g:52:1: entryRuleTree : ruleTree EOF ;
     public final void entryRuleTree() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:52:14: ( ruleTree EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:53:2: ruleTree EOF
+            // PsiInternalIndentationAwareTestLanguage.g:52:14: ( ruleTree EOF )
+            // PsiInternalIndentationAwareTestLanguage.g:53:2: ruleTree EOF
             {
              markComposite(elementTypeProvider.getTreeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTree_in_entryRuleTree54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleTree();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTree57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -98,17 +98,17 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "ruleTree"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:58:1: ruleTree : ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) ;
+    // PsiInternalIndentationAwareTestLanguage.g:58:1: ruleTree : ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) ;
     public final void ruleTree() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:58:9: ( ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:59:2: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
+            // PsiInternalIndentationAwareTestLanguage.g:58:9: ( ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) )
+            // PsiInternalIndentationAwareTestLanguage.g:59:2: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:59:2: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:60:3: () ( (lv_nodes_1_0= ruleTreeNode ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:59:2: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
+            // PsiInternalIndentationAwareTestLanguage.g:60:3: () ( (lv_nodes_1_0= ruleTreeNode ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:60:3: ()
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:61:4: 
+            // PsiInternalIndentationAwareTestLanguage.g:60:3: ()
+            // PsiInternalIndentationAwareTestLanguage.g:61:4: 
             {
 
             				precedeComposite(elementTypeProvider.getTree_TreeAction_0ElementType());
@@ -117,7 +117,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:66:3: ( (lv_nodes_1_0= ruleTreeNode ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:66:3: ( (lv_nodes_1_0= ruleTreeNode ) )*
             loop1:
             do {
                 int alt1=2;
@@ -130,15 +130,15 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:67:4: (lv_nodes_1_0= ruleTreeNode )
+            	    // PsiInternalIndentationAwareTestLanguage.g:67:4: (lv_nodes_1_0= ruleTreeNode )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:67:4: (lv_nodes_1_0= ruleTreeNode )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:68:5: lv_nodes_1_0= ruleTreeNode
+            	    // PsiInternalIndentationAwareTestLanguage.g:67:4: (lv_nodes_1_0= ruleTreeNode )
+            	    // PsiInternalIndentationAwareTestLanguage.g:68:5: lv_nodes_1_0= ruleTreeNode
             	    {
 
             	    					markComposite(elementTypeProvider.getTree_NodesTreeNodeParserRuleCall_1_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_ruleTree102);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleTreeNode();
 
             	    state._fsp--;
@@ -177,19 +177,19 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleTreeNode"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:81:1: entryRuleTreeNode : ruleTreeNode EOF ;
+    // PsiInternalIndentationAwareTestLanguage.g:81:1: entryRuleTreeNode : ruleTreeNode EOF ;
     public final void entryRuleTreeNode() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:81:18: ( ruleTreeNode EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:82:2: ruleTreeNode EOF
+            // PsiInternalIndentationAwareTestLanguage.g:81:18: ( ruleTreeNode EOF )
+            // PsiInternalIndentationAwareTestLanguage.g:82:2: ruleTreeNode EOF
             {
              markComposite(elementTypeProvider.getTreeNodeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_entryRuleTreeNode134);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleTreeNode();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTreeNode137); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -206,29 +206,29 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "ruleTreeNode"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:87:1: ruleTreeNode : ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) ;
+    // PsiInternalIndentationAwareTestLanguage.g:87:1: ruleTreeNode : ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) ;
     public final void ruleTreeNode() throws RecognitionException {
         Token lv_name_0_0=null;
         Token this_INDENT_1=null;
         Token this_DEDENT_3=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:87:13: ( ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
+            // PsiInternalIndentationAwareTestLanguage.g:87:13: ( ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) )
+            // PsiInternalIndentationAwareTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
+            // PsiInternalIndentationAwareTestLanguage.g:88:2: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
+            // PsiInternalIndentationAwareTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalIndentationAwareTestLanguage.g:89:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalIndentationAwareTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:91:5: lv_name_0_0= RULE_ID
+            // PsiInternalIndentationAwareTestLanguage.g:90:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalIndentationAwareTestLanguage.g:91:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getTreeNode_NameIDTerminalRuleCall_0_0ElementType());
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTreeNode169); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_name_0_0);
             				
@@ -238,7 +238,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:100:3: (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
+            // PsiInternalIndentationAwareTestLanguage.g:100:3: (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -247,16 +247,16 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:101:4: this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT
+                    // PsiInternalIndentationAwareTestLanguage.g:101:4: this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT
                     {
 
                     				markLeaf(elementTypeProvider.getTreeNode_INDENTTerminalRuleCall_1_0ElementType());
                     			
-                    this_INDENT_1=(Token)match(input,RULE_INDENT,FollowSets000.FOLLOW_RULE_INDENT_in_ruleTreeNode200); 
+                    this_INDENT_1=(Token)match(input,RULE_INDENT,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(this_INDENT_1);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:108:4: ( (lv_children_2_0= ruleTreeNode ) )*
+                    // PsiInternalIndentationAwareTestLanguage.g:108:4: ( (lv_children_2_0= ruleTreeNode ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -269,15 +269,15 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleTreeNode )
+                    	    // PsiInternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleTreeNode )
                     	    {
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleTreeNode )
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:110:6: lv_children_2_0= ruleTreeNode
+                    	    // PsiInternalIndentationAwareTestLanguage.g:109:5: (lv_children_2_0= ruleTreeNode )
+                    	    // PsiInternalIndentationAwareTestLanguage.g:110:6: lv_children_2_0= ruleTreeNode
                     	    {
 
                     	    						markComposite(elementTypeProvider.getTreeNode_ChildrenTreeNodeParserRuleCall_1_1_0ElementType());
                     	    					
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_ruleTreeNode232);
+                    	    pushFollow(FollowSets000.FOLLOW_5);
                     	    ruleTreeNode();
 
                     	    state._fsp--;
@@ -300,7 +300,7 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
                     				markLeaf(elementTypeProvider.getTreeNode_DEDENTTerminalRuleCall_1_2ElementType());
                     			
-                    this_DEDENT_3=(Token)match(input,RULE_DEDENT,FollowSets000.FOLLOW_RULE_DEDENT_in_ruleTreeNode263); 
+                    this_DEDENT_3=(Token)match(input,RULE_DEDENT,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(this_DEDENT_3);
                     			
@@ -334,15 +334,11 @@ public class PsiInternalIndentationAwareTestLanguageParser extends AbstractPsiAn
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleTree_in_entryRuleTree54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTree57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_ruleTree102 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_entryRuleTreeNode134 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTreeNode137 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTreeNode169 = new BitSet(new long[]{0x0000000000000022L});
-        public static final BitSet FOLLOW_RULE_INDENT_in_ruleTreeNode200 = new BitSet(new long[]{0x0000000000000050L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_ruleTreeNode232 = new BitSet(new long[]{0x0000000000000050L});
-        public static final BitSet FOLLOW_RULE_DEDENT_in_ruleTreeNode263 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000050L});
     }
 
 

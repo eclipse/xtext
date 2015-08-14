@@ -52,15 +52,15 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalAssignmentFinderTestLanguage.g"; }
 
     // $ANTLR start "T__13"
     public final void mT__13() throws RecognitionException {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:11:7: ( '#00' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:11:9: '#00'
+            // InternalAssignmentFinderTestLanguage.g:11:7: ( '#00' )
+            // InternalAssignmentFinderTestLanguage.g:11:9: '#00'
             {
             match("#00"); 
 
@@ -80,8 +80,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:12:7: ( '#01' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:12:9: '#01'
+            // InternalAssignmentFinderTestLanguage.g:12:7: ( '#01' )
+            // InternalAssignmentFinderTestLanguage.g:12:9: '#01'
             {
             match("#01"); 
 
@@ -101,8 +101,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:13:7: ( '#02' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:13:9: '#02'
+            // InternalAssignmentFinderTestLanguage.g:13:7: ( '#02' )
+            // InternalAssignmentFinderTestLanguage.g:13:9: '#02'
             {
             match("#02"); 
 
@@ -122,8 +122,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:14:7: ( '#03' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:14:9: '#03'
+            // InternalAssignmentFinderTestLanguage.g:14:7: ( '#03' )
+            // InternalAssignmentFinderTestLanguage.g:14:9: '#03'
             {
             match("#03"); 
 
@@ -143,8 +143,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:15:7: ( '#04' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:15:9: '#04'
+            // InternalAssignmentFinderTestLanguage.g:15:7: ( '#04' )
+            // InternalAssignmentFinderTestLanguage.g:15:9: '#04'
             {
             match("#04"); 
 
@@ -164,8 +164,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:16:7: ( '#05' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:16:9: '#05'
+            // InternalAssignmentFinderTestLanguage.g:16:7: ( '#05' )
+            // InternalAssignmentFinderTestLanguage.g:16:9: '#05'
             {
             match("#05"); 
 
@@ -185,8 +185,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:17:7: ( '#06' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:17:9: '#06'
+            // InternalAssignmentFinderTestLanguage.g:17:7: ( '#06' )
+            // InternalAssignmentFinderTestLanguage.g:17:9: '#06'
             {
             match("#06"); 
 
@@ -206,8 +206,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:18:7: ( '#07' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:18:9: '#07'
+            // InternalAssignmentFinderTestLanguage.g:18:7: ( '#07' )
+            // InternalAssignmentFinderTestLanguage.g:18:9: '#07'
             {
             match("#07"); 
 
@@ -227,8 +227,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:19:7: ( '#08' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:19:9: '#08'
+            // InternalAssignmentFinderTestLanguage.g:19:7: ( '#08' )
+            // InternalAssignmentFinderTestLanguage.g:19:9: '#08'
             {
             match("#08"); 
 
@@ -248,8 +248,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:20:7: ( '#09' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:20:9: '#09'
+            // InternalAssignmentFinderTestLanguage.g:20:7: ( '#09' )
+            // InternalAssignmentFinderTestLanguage.g:20:9: '#09'
             {
             match("#09"); 
 
@@ -269,8 +269,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:21:7: ( 'kw1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:21:9: 'kw1'
+            // InternalAssignmentFinderTestLanguage.g:21:7: ( 'kw1' )
+            // InternalAssignmentFinderTestLanguage.g:21:9: 'kw1'
             {
             match("kw1"); 
 
@@ -290,8 +290,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:22:7: ( 'kw2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:22:9: 'kw2'
+            // InternalAssignmentFinderTestLanguage.g:22:7: ( 'kw2' )
+            // InternalAssignmentFinderTestLanguage.g:22:9: 'kw2'
             {
             match("kw2"); 
 
@@ -311,8 +311,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:23:7: ( '%foo' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:23:9: '%foo'
+            // InternalAssignmentFinderTestLanguage.g:23:7: ( '%foo' )
+            // InternalAssignmentFinderTestLanguage.g:23:9: '%foo'
             {
             match("%foo"); 
 
@@ -332,8 +332,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:24:7: ( 'true' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:24:9: 'true'
+            // InternalAssignmentFinderTestLanguage.g:24:7: ( 'true' )
+            // InternalAssignmentFinderTestLanguage.g:24:9: 'true'
             {
             match("true"); 
 
@@ -353,8 +353,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:25:7: ( 'false' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:25:9: 'false'
+            // InternalAssignmentFinderTestLanguage.g:25:7: ( 'false' )
+            // InternalAssignmentFinderTestLanguage.g:25:9: 'false'
             {
             match("false"); 
 
@@ -374,8 +374,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:26:7: ( 'lit3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:26:9: 'lit3'
+            // InternalAssignmentFinderTestLanguage.g:26:7: ( 'lit3' )
+            // InternalAssignmentFinderTestLanguage.g:26:9: 'lit3'
             {
             match("lit3"); 
 
@@ -395,8 +395,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:27:7: ( 'lit1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:27:9: 'lit1'
+            // InternalAssignmentFinderTestLanguage.g:27:7: ( 'lit1' )
+            // InternalAssignmentFinderTestLanguage.g:27:9: 'lit1'
             {
             match("lit1"); 
 
@@ -416,8 +416,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:28:7: ( 'lit2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:28:9: 'lit2'
+            // InternalAssignmentFinderTestLanguage.g:28:7: ( 'lit2' )
+            // InternalAssignmentFinderTestLanguage.g:28:9: 'lit2'
             {
             match("lit2"); 
 
@@ -437,11 +437,11 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL1;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1115:16: ( '%' ( 'A' .. 'Z' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1115:18: '%' ( 'A' .. 'Z' )*
+            // InternalAssignmentFinderTestLanguage.g:1115:16: ( '%' ( 'A' .. 'Z' )* )
+            // InternalAssignmentFinderTestLanguage.g:1115:18: '%' ( 'A' .. 'Z' )*
             {
             match('%'); 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1115:22: ( 'A' .. 'Z' )*
+            // InternalAssignmentFinderTestLanguage.g:1115:22: ( 'A' .. 'Z' )*
             loop1:
             do {
                 int alt1=2;
@@ -454,7 +454,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1115:23: 'A' .. 'Z'
+            	    // InternalAssignmentFinderTestLanguage.g:1115:23: 'A' .. 'Z'
             	    {
             	    matchRange('A','Z'); 
 
@@ -482,11 +482,11 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL2;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1117:16: ( '%' ( 'a' .. 'z' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1117:18: '%' ( 'a' .. 'z' )*
+            // InternalAssignmentFinderTestLanguage.g:1117:16: ( '%' ( 'a' .. 'z' )* )
+            // InternalAssignmentFinderTestLanguage.g:1117:18: '%' ( 'a' .. 'z' )*
             {
             match('%'); 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1117:22: ( 'a' .. 'z' )*
+            // InternalAssignmentFinderTestLanguage.g:1117:22: ( 'a' .. 'z' )*
             loop2:
             do {
                 int alt2=2;
@@ -499,7 +499,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1117:23: 'a' .. 'z'
+            	    // InternalAssignmentFinderTestLanguage.g:1117:23: 'a' .. 'z'
             	    {
             	    matchRange('a','z'); 
 
@@ -527,10 +527,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1119:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1119:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalAssignmentFinderTestLanguage.g:1119:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalAssignmentFinderTestLanguage.g:1119:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1119:11: ( '^' )?
+            // InternalAssignmentFinderTestLanguage.g:1119:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -539,7 +539,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1119:11: '^'
+                    // InternalAssignmentFinderTestLanguage.g:1119:11: '^'
                     {
                     match('^'); 
 
@@ -557,7 +557,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1119:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalAssignmentFinderTestLanguage.g:1119:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -570,7 +570,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:
+            	    // InternalAssignmentFinderTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -606,10 +606,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1121:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1121:12: ( '0' .. '9' )+
+            // InternalAssignmentFinderTestLanguage.g:1121:10: ( ( '0' .. '9' )+ )
+            // InternalAssignmentFinderTestLanguage.g:1121:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1121:12: ( '0' .. '9' )+
+            // InternalAssignmentFinderTestLanguage.g:1121:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -623,7 +623,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1121:13: '0' .. '9'
+            	    // InternalAssignmentFinderTestLanguage.g:1121:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -655,10 +655,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalAssignmentFinderTestLanguage.g:1123:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalAssignmentFinderTestLanguage.g:1123:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalAssignmentFinderTestLanguage.g:1123:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -676,10 +676,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalAssignmentFinderTestLanguage.g:1123:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalAssignmentFinderTestLanguage.g:1123:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -695,7 +695,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:21: '\\\\' .
+                    	    // InternalAssignmentFinderTestLanguage.g:1123:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -703,7 +703,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalAssignmentFinderTestLanguage.g:1123:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -728,10 +728,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalAssignmentFinderTestLanguage.g:1123:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalAssignmentFinderTestLanguage.g:1123:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -747,7 +747,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:54: '\\\\' .
+                    	    // InternalAssignmentFinderTestLanguage.g:1123:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -755,7 +755,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1123:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalAssignmentFinderTestLanguage.g:1123:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -798,12 +798,12 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1125:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1125:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalAssignmentFinderTestLanguage.g:1125:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalAssignmentFinderTestLanguage.g:1125:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1125:24: ( options {greedy=false; } : . )*
+            // InternalAssignmentFinderTestLanguage.g:1125:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -828,7 +828,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1125:52: .
+            	    // InternalAssignmentFinderTestLanguage.g:1125:52: .
             	    {
             	    matchAny(); 
 
@@ -858,12 +858,12 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalAssignmentFinderTestLanguage.g:1127:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalAssignmentFinderTestLanguage.g:1127:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalAssignmentFinderTestLanguage.g:1127:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -876,7 +876,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalAssignmentFinderTestLanguage.g:1127:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -896,7 +896,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:40: ( ( '\\r' )? '\\n' )?
+            // InternalAssignmentFinderTestLanguage.g:1127:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -905,9 +905,9 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:41: ( '\\r' )? '\\n'
+                    // InternalAssignmentFinderTestLanguage.g:1127:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:41: ( '\\r' )?
+                    // InternalAssignmentFinderTestLanguage.g:1127:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -916,7 +916,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1127:41: '\\r'
+                            // InternalAssignmentFinderTestLanguage.g:1127:41: '\\r'
                             {
                             match('\r'); 
 
@@ -948,10 +948,10 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1129:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalAssignmentFinderTestLanguage.g:1129:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalAssignmentFinderTestLanguage.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalAssignmentFinderTestLanguage.g:1129:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -965,7 +965,7 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:
+            	    // InternalAssignmentFinderTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1005,8 +1005,8 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1131:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1131:18: .
+            // InternalAssignmentFinderTestLanguage.g:1131:16: ( . )
+            // InternalAssignmentFinderTestLanguage.g:1131:18: .
             {
             matchAny(); 
 
@@ -1021,194 +1021,194 @@ public class InternalAssignmentFinderTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_TERMINAL1 | RULE_TERMINAL2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalAssignmentFinderTestLanguage.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_TERMINAL1 | RULE_TERMINAL2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=27;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:10: T__13
+                // InternalAssignmentFinderTestLanguage.g:1:10: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:16: T__14
+                // InternalAssignmentFinderTestLanguage.g:1:16: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:22: T__15
+                // InternalAssignmentFinderTestLanguage.g:1:22: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:28: T__16
+                // InternalAssignmentFinderTestLanguage.g:1:28: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:34: T__17
+                // InternalAssignmentFinderTestLanguage.g:1:34: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:40: T__18
+                // InternalAssignmentFinderTestLanguage.g:1:40: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:46: T__19
+                // InternalAssignmentFinderTestLanguage.g:1:46: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:52: T__20
+                // InternalAssignmentFinderTestLanguage.g:1:52: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:58: T__21
+                // InternalAssignmentFinderTestLanguage.g:1:58: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:64: T__22
+                // InternalAssignmentFinderTestLanguage.g:1:64: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:70: T__23
+                // InternalAssignmentFinderTestLanguage.g:1:70: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:76: T__24
+                // InternalAssignmentFinderTestLanguage.g:1:76: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:82: T__25
+                // InternalAssignmentFinderTestLanguage.g:1:82: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:88: T__26
+                // InternalAssignmentFinderTestLanguage.g:1:88: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:94: T__27
+                // InternalAssignmentFinderTestLanguage.g:1:94: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:100: T__28
+                // InternalAssignmentFinderTestLanguage.g:1:100: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:106: T__29
+                // InternalAssignmentFinderTestLanguage.g:1:106: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:112: T__30
+                // InternalAssignmentFinderTestLanguage.g:1:112: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:118: RULE_TERMINAL1
+                // InternalAssignmentFinderTestLanguage.g:1:118: RULE_TERMINAL1
                 {
                 mRULE_TERMINAL1(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:133: RULE_TERMINAL2
+                // InternalAssignmentFinderTestLanguage.g:1:133: RULE_TERMINAL2
                 {
                 mRULE_TERMINAL2(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:148: RULE_ID
+                // InternalAssignmentFinderTestLanguage.g:1:148: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:156: RULE_INT
+                // InternalAssignmentFinderTestLanguage.g:1:156: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:165: RULE_STRING
+                // InternalAssignmentFinderTestLanguage.g:1:165: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:177: RULE_ML_COMMENT
+                // InternalAssignmentFinderTestLanguage.g:1:177: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:193: RULE_SL_COMMENT
+                // InternalAssignmentFinderTestLanguage.g:1:193: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:209: RULE_WS
+                // InternalAssignmentFinderTestLanguage.g:1:209: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalAssignmentFinderTestLanguage.g:1:217: RULE_ANY_OTHER
+                // InternalAssignmentFinderTestLanguage.g:1:217: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

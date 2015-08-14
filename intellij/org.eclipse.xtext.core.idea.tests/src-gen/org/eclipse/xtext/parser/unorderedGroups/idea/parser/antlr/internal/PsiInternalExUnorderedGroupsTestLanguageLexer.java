@@ -27,8 +27,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=8;
     public static final int RULE_ML_COMMENT=7;
-    public static final int T__30=30;
     public static final int T__19=19;
+    public static final int T__30=30;
     public static final int T__31=31;
     public static final int T__32=32;
     public static final int RULE_STRING=6;
@@ -54,15 +54,15 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalExUnorderedGroupsTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:11:7: ( '1' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:11:9: '1'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:11:7: ( '1' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:11:9: '1'
             {
             match('1'); 
 
@@ -81,8 +81,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:12:7: ( 'a' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:12:9: 'a'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:12:7: ( 'a' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:12:9: 'a'
             {
             match('a'); 
 
@@ -101,8 +101,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:13:7: ( 'b' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:13:9: 'b'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:13:7: ( 'b' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:13:9: 'b'
             {
             match('b'); 
 
@@ -121,8 +121,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:14:7: ( '2' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:14:9: '2'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:14:7: ( '2' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:14:9: '2'
             {
             match('2'); 
 
@@ -141,8 +141,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:15:7: ( 'c' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:15:9: 'c'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:15:7: ( 'c' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:15:9: 'c'
             {
             match('c'); 
 
@@ -161,8 +161,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:16:7: ( 'd' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:16:9: 'd'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:16:7: ( 'd' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:16:9: 'd'
             {
             match('d'); 
 
@@ -181,8 +181,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:17:7: ( '3' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:17:9: '3'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:17:7: ( '3' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:17:9: '3'
             {
             match('3'); 
 
@@ -201,8 +201,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:18:7: ( '4' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:18:9: '4'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:18:7: ( '4' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:18:9: '4'
             {
             match('4'); 
 
@@ -221,8 +221,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:19:7: ( '5' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:19:9: '5'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:19:7: ( '5' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:19:9: '5'
             {
             match('5'); 
 
@@ -241,8 +241,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:20:7: ( '6' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:20:9: '6'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:20:7: ( '6' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:20:9: '6'
             {
             match('6'); 
 
@@ -261,8 +261,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:21:7: ( '7' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:21:9: '7'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:21:7: ( '7' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:21:9: '7'
             {
             match('7'); 
 
@@ -281,8 +281,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:22:7: ( '8' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:22:9: '8'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:22:7: ( '8' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:22:9: '8'
             {
             match('8'); 
 
@@ -301,8 +301,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:23:7: ( '9' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:23:9: '9'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:23:7: ( '9' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:23:9: '9'
             {
             match('9'); 
 
@@ -321,8 +321,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:24:7: ( '10' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:24:9: '10'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:24:7: ( '10' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:24:9: '10'
             {
             match("10"); 
 
@@ -342,8 +342,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:25:7: ( '11' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:25:9: '11'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:25:7: ( '11' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:25:9: '11'
             {
             match("11"); 
 
@@ -363,8 +363,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:26:7: ( '12' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:26:9: '12'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:26:7: ( '12' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:26:9: '12'
             {
             match("12"); 
 
@@ -384,8 +384,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:27:7: ( '13' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:27:9: '13'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:27:7: ( '13' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:27:9: '13'
             {
             match("13"); 
 
@@ -405,8 +405,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:28:7: ( '14' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:28:9: '14'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:28:7: ( '14' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:28:9: '14'
             {
             match("14"); 
 
@@ -426,8 +426,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:29:7: ( 'datatypes' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:29:9: 'datatypes'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:29:7: ( 'datatypes' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:29:9: 'datatypes'
             {
             match("datatypes"); 
 
@@ -447,8 +447,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:30:7: ( 'serialization' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:30:9: 'serialization'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:30:7: ( 'serialization' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:30:9: 'serialization'
             {
             match("serialization"); 
 
@@ -468,8 +468,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:31:7: ( 'bug302585' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:31:9: 'bug302585'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:31:7: ( 'bug302585' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:31:9: 'bug302585'
             {
             match("bug302585"); 
 
@@ -489,8 +489,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:32:7: ( 'nested' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:32:9: 'nested'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:32:7: ( 'nested' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:32:9: 'nested'
             {
             match("nested"); 
 
@@ -510,10 +510,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2707:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2707:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: ( '^' )?
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -522,7 +522,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: '^'
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2707:11: '^'
                     {
                     match('^'); 
 
@@ -540,7 +540,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2707:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2707:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -553,7 +553,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:
+            	    // PsiInternalExUnorderedGroupsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -589,10 +589,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2709:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2709:12: ( '0' .. '9' )+
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2709:10: ( ( '0' .. '9' )+ )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2709:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2709:12: ( '0' .. '9' )+
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2709:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -606,7 +606,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2709:13: '0' .. '9'
+            	    // PsiInternalExUnorderedGroupsTestLanguage.g:2709:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -638,10 +638,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2711:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2711:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2711:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -659,10 +659,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -678,7 +678,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:21: '\\\\' .
+                    	    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -686,7 +686,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -711,10 +711,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -730,7 +730,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:54: '\\\\' .
+                    	    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -738,7 +738,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2711:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalExUnorderedGroupsTestLanguage.g:2711:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -781,12 +781,12 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2713:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2713:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2713:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2713:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2713:24: ( options {greedy=false; } : . )*
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2713:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -811,7 +811,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2713:52: .
+            	    // PsiInternalExUnorderedGroupsTestLanguage.g:2713:52: .
             	    {
             	    matchAny(); 
 
@@ -841,12 +841,12 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2715:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2715:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2715:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -859,7 +859,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalExUnorderedGroupsTestLanguage.g:2715:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -879,7 +879,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2715:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -888,9 +888,9 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: ( '\\r' )? '\\n'
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: ( '\\r' )?
+                    // PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -899,7 +899,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: '\\r'
+                            // PsiInternalExUnorderedGroupsTestLanguage.g:2715:41: '\\r'
                             {
                             match('\r'); 
 
@@ -931,10 +931,10 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2717:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2717:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2717:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2717:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2717:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2717:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -948,7 +948,7 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:
+            	    // PsiInternalExUnorderedGroupsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -988,8 +988,8 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2719:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:2719:18: .
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2719:16: ( . )
+            // PsiInternalExUnorderedGroupsTestLanguage.g:2719:18: .
             {
             matchAny(); 
 
@@ -1004,208 +1004,208 @@ public class PsiInternalExUnorderedGroupsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalExUnorderedGroupsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=29;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:10: T__11
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:16: T__12
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:22: T__13
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:28: T__14
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:34: T__15
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:40: T__16
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:46: T__17
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:52: T__18
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:58: T__19
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:64: T__20
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:70: T__21
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:76: T__22
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:82: T__23
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:88: T__24
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:88: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:94: T__25
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:94: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 16 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:100: T__26
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:100: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 17 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:106: T__27
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:106: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 18 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:112: T__28
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:112: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 19 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:118: T__29
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:118: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 20 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:124: T__30
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:124: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 21 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:130: T__31
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:130: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 22 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:136: T__32
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:136: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 23 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:142: RULE_ID
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:142: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 24 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:150: RULE_INT
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:150: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 25 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:159: RULE_STRING
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:159: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 26 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:171: RULE_ML_COMMENT
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:171: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 27 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:187: RULE_SL_COMMENT
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:187: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 28 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:203: RULE_WS
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:203: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 29 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/idea/parser/antlr/internal/PsiInternalExUnorderedGroupsTestLanguage.g:1:211: RULE_ANY_OTHER
+                // PsiInternalExUnorderedGroupsTestLanguage.g:1:211: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

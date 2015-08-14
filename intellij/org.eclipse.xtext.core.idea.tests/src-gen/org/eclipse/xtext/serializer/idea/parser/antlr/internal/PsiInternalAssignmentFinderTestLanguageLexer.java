@@ -52,15 +52,15 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalAssignmentFinderTestLanguage.g"; }
 
     // $ANTLR start "T__13"
     public final void mT__13() throws RecognitionException {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:11:7: ( '#00' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:11:9: '#00'
+            // PsiInternalAssignmentFinderTestLanguage.g:11:7: ( '#00' )
+            // PsiInternalAssignmentFinderTestLanguage.g:11:9: '#00'
             {
             match("#00"); 
 
@@ -80,8 +80,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:12:7: ( '#01' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:12:9: '#01'
+            // PsiInternalAssignmentFinderTestLanguage.g:12:7: ( '#01' )
+            // PsiInternalAssignmentFinderTestLanguage.g:12:9: '#01'
             {
             match("#01"); 
 
@@ -101,8 +101,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:13:7: ( '#02' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:13:9: '#02'
+            // PsiInternalAssignmentFinderTestLanguage.g:13:7: ( '#02' )
+            // PsiInternalAssignmentFinderTestLanguage.g:13:9: '#02'
             {
             match("#02"); 
 
@@ -122,8 +122,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:14:7: ( '#03' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:14:9: '#03'
+            // PsiInternalAssignmentFinderTestLanguage.g:14:7: ( '#03' )
+            // PsiInternalAssignmentFinderTestLanguage.g:14:9: '#03'
             {
             match("#03"); 
 
@@ -143,8 +143,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:15:7: ( '#04' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:15:9: '#04'
+            // PsiInternalAssignmentFinderTestLanguage.g:15:7: ( '#04' )
+            // PsiInternalAssignmentFinderTestLanguage.g:15:9: '#04'
             {
             match("#04"); 
 
@@ -164,8 +164,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:16:7: ( '#05' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:16:9: '#05'
+            // PsiInternalAssignmentFinderTestLanguage.g:16:7: ( '#05' )
+            // PsiInternalAssignmentFinderTestLanguage.g:16:9: '#05'
             {
             match("#05"); 
 
@@ -185,8 +185,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:17:7: ( '#06' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:17:9: '#06'
+            // PsiInternalAssignmentFinderTestLanguage.g:17:7: ( '#06' )
+            // PsiInternalAssignmentFinderTestLanguage.g:17:9: '#06'
             {
             match("#06"); 
 
@@ -206,8 +206,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:18:7: ( '#07' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:18:9: '#07'
+            // PsiInternalAssignmentFinderTestLanguage.g:18:7: ( '#07' )
+            // PsiInternalAssignmentFinderTestLanguage.g:18:9: '#07'
             {
             match("#07"); 
 
@@ -227,8 +227,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:19:7: ( '#08' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:19:9: '#08'
+            // PsiInternalAssignmentFinderTestLanguage.g:19:7: ( '#08' )
+            // PsiInternalAssignmentFinderTestLanguage.g:19:9: '#08'
             {
             match("#08"); 
 
@@ -248,8 +248,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:20:7: ( '#09' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:20:9: '#09'
+            // PsiInternalAssignmentFinderTestLanguage.g:20:7: ( '#09' )
+            // PsiInternalAssignmentFinderTestLanguage.g:20:9: '#09'
             {
             match("#09"); 
 
@@ -269,8 +269,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:21:7: ( 'kw1' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:21:9: 'kw1'
+            // PsiInternalAssignmentFinderTestLanguage.g:21:7: ( 'kw1' )
+            // PsiInternalAssignmentFinderTestLanguage.g:21:9: 'kw1'
             {
             match("kw1"); 
 
@@ -290,8 +290,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:22:7: ( 'kw2' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:22:9: 'kw2'
+            // PsiInternalAssignmentFinderTestLanguage.g:22:7: ( 'kw2' )
+            // PsiInternalAssignmentFinderTestLanguage.g:22:9: 'kw2'
             {
             match("kw2"); 
 
@@ -311,8 +311,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:23:7: ( '%foo' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:23:9: '%foo'
+            // PsiInternalAssignmentFinderTestLanguage.g:23:7: ( '%foo' )
+            // PsiInternalAssignmentFinderTestLanguage.g:23:9: '%foo'
             {
             match("%foo"); 
 
@@ -332,8 +332,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:24:7: ( 'true' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:24:9: 'true'
+            // PsiInternalAssignmentFinderTestLanguage.g:24:7: ( 'true' )
+            // PsiInternalAssignmentFinderTestLanguage.g:24:9: 'true'
             {
             match("true"); 
 
@@ -353,8 +353,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:25:7: ( 'false' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:25:9: 'false'
+            // PsiInternalAssignmentFinderTestLanguage.g:25:7: ( 'false' )
+            // PsiInternalAssignmentFinderTestLanguage.g:25:9: 'false'
             {
             match("false"); 
 
@@ -374,8 +374,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:26:7: ( 'lit3' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:26:9: 'lit3'
+            // PsiInternalAssignmentFinderTestLanguage.g:26:7: ( 'lit3' )
+            // PsiInternalAssignmentFinderTestLanguage.g:26:9: 'lit3'
             {
             match("lit3"); 
 
@@ -395,8 +395,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:27:7: ( 'lit1' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:27:9: 'lit1'
+            // PsiInternalAssignmentFinderTestLanguage.g:27:7: ( 'lit1' )
+            // PsiInternalAssignmentFinderTestLanguage.g:27:9: 'lit1'
             {
             match("lit1"); 
 
@@ -416,8 +416,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:28:7: ( 'lit2' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:28:9: 'lit2'
+            // PsiInternalAssignmentFinderTestLanguage.g:28:7: ( 'lit2' )
+            // PsiInternalAssignmentFinderTestLanguage.g:28:9: 'lit2'
             {
             match("lit2"); 
 
@@ -437,11 +437,11 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL1;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:799:16: ( '%' ( 'A' .. 'Z' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:799:18: '%' ( 'A' .. 'Z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:799:16: ( '%' ( 'A' .. 'Z' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:799:18: '%' ( 'A' .. 'Z' )*
             {
             match('%'); 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:799:22: ( 'A' .. 'Z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:799:22: ( 'A' .. 'Z' )*
             loop1:
             do {
                 int alt1=2;
@@ -454,7 +454,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:799:23: 'A' .. 'Z'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:799:23: 'A' .. 'Z'
             	    {
             	    matchRange('A','Z'); 
 
@@ -482,11 +482,11 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_TERMINAL2;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:801:16: ( '%' ( 'a' .. 'z' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:801:18: '%' ( 'a' .. 'z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:801:16: ( '%' ( 'a' .. 'z' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:801:18: '%' ( 'a' .. 'z' )*
             {
             match('%'); 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:801:22: ( 'a' .. 'z' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:801:22: ( 'a' .. 'z' )*
             loop2:
             do {
                 int alt2=2;
@@ -499,7 +499,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:801:23: 'a' .. 'z'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:801:23: 'a' .. 'z'
             	    {
             	    matchRange('a','z'); 
 
@@ -527,10 +527,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:803:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:803:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:803:11: ( '^' )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -539,7 +539,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:803:11: '^'
+                    // PsiInternalAssignmentFinderTestLanguage.g:803:11: '^'
                     {
                     match('^'); 
 
@@ -557,7 +557,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:803:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalAssignmentFinderTestLanguage.g:803:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -570,7 +570,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:
+            	    // PsiInternalAssignmentFinderTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -606,10 +606,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:805:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:805:10: ( ( '0' .. '9' )+ )
+            // PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:805:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -623,7 +623,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:805:13: '0' .. '9'
+            	    // PsiInternalAssignmentFinderTestLanguage.g:805:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -655,10 +655,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAssignmentFinderTestLanguage.g:807:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalAssignmentFinderTestLanguage.g:807:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -676,10 +676,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalAssignmentFinderTestLanguage.g:807:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalAssignmentFinderTestLanguage.g:807:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -695,7 +695,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:21: '\\\\' .
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -703,7 +703,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -728,10 +728,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalAssignmentFinderTestLanguage.g:807:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalAssignmentFinderTestLanguage.g:807:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -747,7 +747,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:54: '\\\\' .
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -755,7 +755,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:807:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalAssignmentFinderTestLanguage.g:807:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -798,12 +798,12 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:809:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:809:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalAssignmentFinderTestLanguage.g:809:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalAssignmentFinderTestLanguage.g:809:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:809:24: ( options {greedy=false; } : . )*
+            // PsiInternalAssignmentFinderTestLanguage.g:809:24: ( options {greedy=false; } : . )*
             loop9:
             do {
                 int alt9=2;
@@ -828,7 +828,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:809:52: .
+            	    // PsiInternalAssignmentFinderTestLanguage.g:809:52: .
             	    {
             	    matchAny(); 
 
@@ -858,12 +858,12 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:811:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalAssignmentFinderTestLanguage.g:811:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalAssignmentFinderTestLanguage.g:811:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop10:
             do {
                 int alt10=2;
@@ -876,7 +876,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalAssignmentFinderTestLanguage.g:811:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -896,7 +896,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalAssignmentFinderTestLanguage.g:811:40: ( ( '\\r' )? '\\n' )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -905,9 +905,9 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
             }
             switch (alt12) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )? '\\n'
+                    // PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )?
+                    // PsiInternalAssignmentFinderTestLanguage.g:811:41: ( '\\r' )?
                     int alt11=2;
                     int LA11_0 = input.LA(1);
 
@@ -916,7 +916,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
                     }
                     switch (alt11) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:811:41: '\\r'
+                            // PsiInternalAssignmentFinderTestLanguage.g:811:41: '\\r'
                             {
                             match('\r'); 
 
@@ -948,10 +948,10 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:813:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:813:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalAssignmentFinderTestLanguage.g:813:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt13=0;
             loop13:
             do {
@@ -965,7 +965,7 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:
+            	    // PsiInternalAssignmentFinderTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1005,8 +1005,8 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:815:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:815:18: .
+            // PsiInternalAssignmentFinderTestLanguage.g:815:16: ( . )
+            // PsiInternalAssignmentFinderTestLanguage.g:815:18: .
             {
             matchAny(); 
 
@@ -1021,194 +1021,194 @@ public class PsiInternalAssignmentFinderTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_TERMINAL1 | RULE_TERMINAL2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalAssignmentFinderTestLanguage.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | RULE_TERMINAL1 | RULE_TERMINAL2 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt14=27;
         alt14 = dfa14.predict(input);
         switch (alt14) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:10: T__13
+                // PsiInternalAssignmentFinderTestLanguage.g:1:10: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:16: T__14
+                // PsiInternalAssignmentFinderTestLanguage.g:1:16: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:22: T__15
+                // PsiInternalAssignmentFinderTestLanguage.g:1:22: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:28: T__16
+                // PsiInternalAssignmentFinderTestLanguage.g:1:28: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:34: T__17
+                // PsiInternalAssignmentFinderTestLanguage.g:1:34: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:40: T__18
+                // PsiInternalAssignmentFinderTestLanguage.g:1:40: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:46: T__19
+                // PsiInternalAssignmentFinderTestLanguage.g:1:46: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:52: T__20
+                // PsiInternalAssignmentFinderTestLanguage.g:1:52: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:58: T__21
+                // PsiInternalAssignmentFinderTestLanguage.g:1:58: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:64: T__22
+                // PsiInternalAssignmentFinderTestLanguage.g:1:64: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:70: T__23
+                // PsiInternalAssignmentFinderTestLanguage.g:1:70: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:76: T__24
+                // PsiInternalAssignmentFinderTestLanguage.g:1:76: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:82: T__25
+                // PsiInternalAssignmentFinderTestLanguage.g:1:82: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:88: T__26
+                // PsiInternalAssignmentFinderTestLanguage.g:1:88: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:94: T__27
+                // PsiInternalAssignmentFinderTestLanguage.g:1:94: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 16 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:100: T__28
+                // PsiInternalAssignmentFinderTestLanguage.g:1:100: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 17 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:106: T__29
+                // PsiInternalAssignmentFinderTestLanguage.g:1:106: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 18 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:112: T__30
+                // PsiInternalAssignmentFinderTestLanguage.g:1:112: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 19 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:118: RULE_TERMINAL1
+                // PsiInternalAssignmentFinderTestLanguage.g:1:118: RULE_TERMINAL1
                 {
                 mRULE_TERMINAL1(); 
 
                 }
                 break;
             case 20 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:133: RULE_TERMINAL2
+                // PsiInternalAssignmentFinderTestLanguage.g:1:133: RULE_TERMINAL2
                 {
                 mRULE_TERMINAL2(); 
 
                 }
                 break;
             case 21 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:148: RULE_ID
+                // PsiInternalAssignmentFinderTestLanguage.g:1:148: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 22 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:156: RULE_INT
+                // PsiInternalAssignmentFinderTestLanguage.g:1:156: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 23 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:165: RULE_STRING
+                // PsiInternalAssignmentFinderTestLanguage.g:1:165: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 24 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:177: RULE_ML_COMMENT
+                // PsiInternalAssignmentFinderTestLanguage.g:1:177: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 25 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:193: RULE_SL_COMMENT
+                // PsiInternalAssignmentFinderTestLanguage.g:1:193: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 26 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:209: RULE_WS
+                // PsiInternalAssignmentFinderTestLanguage.g:1:209: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 27 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/serializer/idea/parser/antlr/internal/PsiInternalAssignmentFinderTestLanguage.g:1:217: RULE_ANY_OTHER
+                // PsiInternalAssignmentFinderTestLanguage.g:1:217: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

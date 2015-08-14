@@ -26,10 +26,10 @@ import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.Reference
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl.ModelImpl#getReferenceHolder <em>Reference Holder</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -71,8 +71,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<ReferenceHolder> getReferenceHolder()
+  public EList<ReferenceHolder> getReferenceHolder()
   {
     if (referenceHolder == null)
     {

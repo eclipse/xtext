@@ -57,7 +57,7 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
         
 
     public String[] getTokenNames() { return InternalDomainModelTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalDomainModelTestLanguage.g"; }
 
 
      
@@ -81,20 +81,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
+    // InternalDomainModelTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:61:1: ( ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:62:1: ruleModel EOF
+            // InternalDomainModelTestLanguage.g:61:1: ( ruleModel EOF )
+            // InternalDomainModelTestLanguage.g:62:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -111,23 +111,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:69:1: ruleModel : ( ( rule__Model__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:69:1: ruleModel : ( ( rule__Model__Group__0 ) ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:73:2: ( ( ( rule__Model__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:74:1: ( ( rule__Model__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:73:2: ( ( ( rule__Model__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:74:1: ( ( rule__Model__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:74:1: ( ( rule__Model__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:75:1: ( rule__Model__Group__0 )
+            // InternalDomainModelTestLanguage.g:74:1: ( ( rule__Model__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:75:1: ( rule__Model__Group__0 )
             {
              before(grammarAccess.getModelAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:76:1: ( rule__Model__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:76:2: rule__Model__Group__0
+            // InternalDomainModelTestLanguage.g:76:1: ( rule__Model__Group__0 )
+            // InternalDomainModelTestLanguage.g:76:2: rule__Model__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Model__Group__0_in_ruleModel94);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group__0();
 
             state._fsp--;
@@ -158,20 +158,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:88:1: entryRuleImport : ruleImport EOF ;
+    // InternalDomainModelTestLanguage.g:88:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:89:1: ( ruleImport EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:90:1: ruleImport EOF
+            // InternalDomainModelTestLanguage.g:89:1: ( ruleImport EOF )
+            // InternalDomainModelTestLanguage.g:90:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport121);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleImport();
 
             state._fsp--;
 
              after(grammarAccess.getImportRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImport128); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -188,23 +188,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:97:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:97:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:101:2: ( ( ( rule__Import__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:102:1: ( ( rule__Import__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:101:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:102:1: ( ( rule__Import__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:102:1: ( ( rule__Import__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:103:1: ( rule__Import__Group__0 )
+            // InternalDomainModelTestLanguage.g:102:1: ( ( rule__Import__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:103:1: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:104:1: ( rule__Import__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:104:2: rule__Import__Group__0
+            // InternalDomainModelTestLanguage.g:104:1: ( rule__Import__Group__0 )
+            // InternalDomainModelTestLanguage.g:104:2: rule__Import__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Import__Group__0_in_ruleImport154);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__0();
 
             state._fsp--;
@@ -235,20 +235,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:116:1: entryRuleType : ruleType EOF ;
+    // InternalDomainModelTestLanguage.g:116:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:117:1: ( ruleType EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:118:1: ruleType EOF
+            // InternalDomainModelTestLanguage.g:117:1: ( ruleType EOF )
+            // InternalDomainModelTestLanguage.g:118:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleType_in_entryRuleType181);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleType();
 
             state._fsp--;
 
              after(grammarAccess.getTypeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleType188); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -265,23 +265,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:125:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
+    // InternalDomainModelTestLanguage.g:125:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
     public final void ruleType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:129:2: ( ( ( rule__Type__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:130:1: ( ( rule__Type__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:129:2: ( ( ( rule__Type__Alternatives ) ) )
+            // InternalDomainModelTestLanguage.g:130:1: ( ( rule__Type__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:130:1: ( ( rule__Type__Alternatives ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:131:1: ( rule__Type__Alternatives )
+            // InternalDomainModelTestLanguage.g:130:1: ( ( rule__Type__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:131:1: ( rule__Type__Alternatives )
             {
              before(grammarAccess.getTypeAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:132:1: ( rule__Type__Alternatives )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:132:2: rule__Type__Alternatives
+            // InternalDomainModelTestLanguage.g:132:1: ( rule__Type__Alternatives )
+            // InternalDomainModelTestLanguage.g:132:2: rule__Type__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Type__Alternatives_in_ruleType214);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Type__Alternatives();
 
             state._fsp--;
@@ -312,20 +312,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleDataType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:144:1: entryRuleDataType : ruleDataType EOF ;
+    // InternalDomainModelTestLanguage.g:144:1: entryRuleDataType : ruleDataType EOF ;
     public final void entryRuleDataType() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:145:1: ( ruleDataType EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:146:1: ruleDataType EOF
+            // InternalDomainModelTestLanguage.g:145:1: ( ruleDataType EOF )
+            // InternalDomainModelTestLanguage.g:146:1: ruleDataType EOF
             {
              before(grammarAccess.getDataTypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDataType_in_entryRuleDataType241);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleDataType();
 
             state._fsp--;
 
              after(grammarAccess.getDataTypeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataType248); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -342,23 +342,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleDataType"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:153:1: ruleDataType : ( ( rule__DataType__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:153:1: ruleDataType : ( ( rule__DataType__Group__0 ) ) ;
     public final void ruleDataType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:157:2: ( ( ( rule__DataType__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:158:1: ( ( rule__DataType__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:157:2: ( ( ( rule__DataType__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:158:1: ( ( rule__DataType__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:158:1: ( ( rule__DataType__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:159:1: ( rule__DataType__Group__0 )
+            // InternalDomainModelTestLanguage.g:158:1: ( ( rule__DataType__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:159:1: ( rule__DataType__Group__0 )
             {
              before(grammarAccess.getDataTypeAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:160:1: ( rule__DataType__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:160:2: rule__DataType__Group__0
+            // InternalDomainModelTestLanguage.g:160:1: ( rule__DataType__Group__0 )
+            // InternalDomainModelTestLanguage.g:160:2: rule__DataType__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__0_in_ruleDataType274);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__0();
 
             state._fsp--;
@@ -389,20 +389,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleClass"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:172:1: entryRuleClass : ruleClass EOF ;
+    // InternalDomainModelTestLanguage.g:172:1: entryRuleClass : ruleClass EOF ;
     public final void entryRuleClass() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:173:1: ( ruleClass EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:174:1: ruleClass EOF
+            // InternalDomainModelTestLanguage.g:173:1: ( ruleClass EOF )
+            // InternalDomainModelTestLanguage.g:174:1: ruleClass EOF
             {
              before(grammarAccess.getClassRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleClass_in_entryRuleClass301);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleClass();
 
             state._fsp--;
 
              after(grammarAccess.getClassRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClass308); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -419,23 +419,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleClass"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:181:1: ruleClass : ( ( rule__Class__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:181:1: ruleClass : ( ( rule__Class__Group__0 ) ) ;
     public final void ruleClass() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:185:2: ( ( ( rule__Class__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:186:1: ( ( rule__Class__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:185:2: ( ( ( rule__Class__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:186:1: ( ( rule__Class__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:186:1: ( ( rule__Class__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:187:1: ( rule__Class__Group__0 )
+            // InternalDomainModelTestLanguage.g:186:1: ( ( rule__Class__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:187:1: ( rule__Class__Group__0 )
             {
              before(grammarAccess.getClassAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:188:1: ( rule__Class__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:188:2: rule__Class__Group__0
+            // InternalDomainModelTestLanguage.g:188:1: ( rule__Class__Group__0 )
+            // InternalDomainModelTestLanguage.g:188:2: rule__Class__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__0_in_ruleClass334);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__0();
 
             state._fsp--;
@@ -466,20 +466,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleProperty"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:200:1: entryRuleProperty : ruleProperty EOF ;
+    // InternalDomainModelTestLanguage.g:200:1: entryRuleProperty : ruleProperty EOF ;
     public final void entryRuleProperty() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:201:1: ( ruleProperty EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:202:1: ruleProperty EOF
+            // InternalDomainModelTestLanguage.g:201:1: ( ruleProperty EOF )
+            // InternalDomainModelTestLanguage.g:202:1: ruleProperty EOF
             {
              before(grammarAccess.getPropertyRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleProperty_in_entryRuleProperty361);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleProperty();
 
             state._fsp--;
 
              after(grammarAccess.getPropertyRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleProperty368); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -496,23 +496,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleProperty"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:209:1: ruleProperty : ( ( rule__Property__Alternatives ) ) ;
+    // InternalDomainModelTestLanguage.g:209:1: ruleProperty : ( ( rule__Property__Alternatives ) ) ;
     public final void ruleProperty() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:213:2: ( ( ( rule__Property__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:214:1: ( ( rule__Property__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:213:2: ( ( ( rule__Property__Alternatives ) ) )
+            // InternalDomainModelTestLanguage.g:214:1: ( ( rule__Property__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:214:1: ( ( rule__Property__Alternatives ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:215:1: ( rule__Property__Alternatives )
+            // InternalDomainModelTestLanguage.g:214:1: ( ( rule__Property__Alternatives ) )
+            // InternalDomainModelTestLanguage.g:215:1: ( rule__Property__Alternatives )
             {
              before(grammarAccess.getPropertyAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:216:1: ( rule__Property__Alternatives )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:216:2: rule__Property__Alternatives
+            // InternalDomainModelTestLanguage.g:216:1: ( rule__Property__Alternatives )
+            // InternalDomainModelTestLanguage.g:216:2: rule__Property__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Property__Alternatives_in_ruleProperty394);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Property__Alternatives();
 
             state._fsp--;
@@ -543,20 +543,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleAttribute"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:228:1: entryRuleAttribute : ruleAttribute EOF ;
+    // InternalDomainModelTestLanguage.g:228:1: entryRuleAttribute : ruleAttribute EOF ;
     public final void entryRuleAttribute() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:229:1: ( ruleAttribute EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:230:1: ruleAttribute EOF
+            // InternalDomainModelTestLanguage.g:229:1: ( ruleAttribute EOF )
+            // InternalDomainModelTestLanguage.g:230:1: ruleAttribute EOF
             {
              before(grammarAccess.getAttributeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_entryRuleAttribute421);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleAttribute();
 
             state._fsp--;
 
              after(grammarAccess.getAttributeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAttribute428); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -573,23 +573,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleAttribute"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:237:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:237:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
     public final void ruleAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:241:2: ( ( ( rule__Attribute__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:242:1: ( ( rule__Attribute__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:241:2: ( ( ( rule__Attribute__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:242:1: ( ( rule__Attribute__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:242:1: ( ( rule__Attribute__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:243:1: ( rule__Attribute__Group__0 )
+            // InternalDomainModelTestLanguage.g:242:1: ( ( rule__Attribute__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:243:1: ( rule__Attribute__Group__0 )
             {
              before(grammarAccess.getAttributeAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:244:1: ( rule__Attribute__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:244:2: rule__Attribute__Group__0
+            // InternalDomainModelTestLanguage.g:244:1: ( rule__Attribute__Group__0 )
+            // InternalDomainModelTestLanguage.g:244:2: rule__Attribute__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__0_in_ruleAttribute454);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__0();
 
             state._fsp--;
@@ -620,20 +620,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "entryRuleReference"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:256:1: entryRuleReference : ruleReference EOF ;
+    // InternalDomainModelTestLanguage.g:256:1: entryRuleReference : ruleReference EOF ;
     public final void entryRuleReference() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:257:1: ( ruleReference EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:258:1: ruleReference EOF
+            // InternalDomainModelTestLanguage.g:257:1: ( ruleReference EOF )
+            // InternalDomainModelTestLanguage.g:258:1: ruleReference EOF
             {
              before(grammarAccess.getReferenceRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleReference_in_entryRuleReference481);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleReference();
 
             state._fsp--;
 
              after(grammarAccess.getReferenceRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReference488); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -650,23 +650,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "ruleReference"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:265:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
+    // InternalDomainModelTestLanguage.g:265:1: ruleReference : ( ( rule__Reference__Group__0 ) ) ;
     public final void ruleReference() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:269:2: ( ( ( rule__Reference__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:270:1: ( ( rule__Reference__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:269:2: ( ( ( rule__Reference__Group__0 ) ) )
+            // InternalDomainModelTestLanguage.g:270:1: ( ( rule__Reference__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:270:1: ( ( rule__Reference__Group__0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:271:1: ( rule__Reference__Group__0 )
+            // InternalDomainModelTestLanguage.g:270:1: ( ( rule__Reference__Group__0 ) )
+            // InternalDomainModelTestLanguage.g:271:1: ( rule__Reference__Group__0 )
             {
              before(grammarAccess.getReferenceAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:272:1: ( rule__Reference__Group__0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:272:2: rule__Reference__Group__0
+            // InternalDomainModelTestLanguage.g:272:1: ( rule__Reference__Group__0 )
+            // InternalDomainModelTestLanguage.g:272:2: rule__Reference__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__0_in_ruleReference514);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__0();
 
             state._fsp--;
@@ -697,13 +697,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Type__Alternatives"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:284:1: rule__Type__Alternatives : ( ( ruleDataType ) | ( ruleClass ) );
+    // InternalDomainModelTestLanguage.g:284:1: rule__Type__Alternatives : ( ( ruleDataType ) | ( ruleClass ) );
     public final void rule__Type__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:288:1: ( ( ruleDataType ) | ( ruleClass ) )
+            // InternalDomainModelTestLanguage.g:288:1: ( ( ruleDataType ) | ( ruleClass ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -721,13 +721,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:289:1: ( ruleDataType )
+                    // InternalDomainModelTestLanguage.g:289:1: ( ruleDataType )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:289:1: ( ruleDataType )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:290:1: ruleDataType
+                    // InternalDomainModelTestLanguage.g:289:1: ( ruleDataType )
+                    // InternalDomainModelTestLanguage.g:290:1: ruleDataType
                     {
                      before(grammarAccess.getTypeAccess().getDataTypeParserRuleCall_0()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleDataType_in_rule__Type__Alternatives550);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleDataType();
 
                     state._fsp--;
@@ -740,13 +740,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:295:6: ( ruleClass )
+                    // InternalDomainModelTestLanguage.g:295:6: ( ruleClass )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:295:6: ( ruleClass )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:296:1: ruleClass
+                    // InternalDomainModelTestLanguage.g:295:6: ( ruleClass )
+                    // InternalDomainModelTestLanguage.g:296:1: ruleClass
                     {
                      before(grammarAccess.getTypeAccess().getClassParserRuleCall_1()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleClass_in_rule__Type__Alternatives567);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleClass();
 
                     state._fsp--;
@@ -776,13 +776,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Property__Alternatives"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:306:1: rule__Property__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
+    // InternalDomainModelTestLanguage.g:306:1: rule__Property__Alternatives : ( ( ruleAttribute ) | ( ruleReference ) );
     public final void rule__Property__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:310:1: ( ( ruleAttribute ) | ( ruleReference ) )
+            // InternalDomainModelTestLanguage.g:310:1: ( ( ruleAttribute ) | ( ruleReference ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -800,13 +800,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:311:1: ( ruleAttribute )
+                    // InternalDomainModelTestLanguage.g:311:1: ( ruleAttribute )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:311:1: ( ruleAttribute )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:312:1: ruleAttribute
+                    // InternalDomainModelTestLanguage.g:311:1: ( ruleAttribute )
+                    // InternalDomainModelTestLanguage.g:312:1: ruleAttribute
                     {
                      before(grammarAccess.getPropertyAccess().getAttributeParserRuleCall_0()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_rule__Property__Alternatives599);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleAttribute();
 
                     state._fsp--;
@@ -819,13 +819,13 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:317:6: ( ruleReference )
+                    // InternalDomainModelTestLanguage.g:317:6: ( ruleReference )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:317:6: ( ruleReference )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:318:1: ruleReference
+                    // InternalDomainModelTestLanguage.g:317:6: ( ruleReference )
+                    // InternalDomainModelTestLanguage.g:318:1: ruleReference
                     {
                      before(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleReference_in_rule__Property__Alternatives616);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleReference();
 
                     state._fsp--;
@@ -855,21 +855,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:330:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
+    // InternalDomainModelTestLanguage.g:330:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
     public final void rule__Model__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:334:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:335:2: rule__Model__Group__0__Impl rule__Model__Group__1
+            // InternalDomainModelTestLanguage.g:334:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
+            // InternalDomainModelTestLanguage.g:335:2: rule__Model__Group__0__Impl rule__Model__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__0646);
+            pushFollow(FollowSets000.FOLLOW_3);
             rule__Model__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0649);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group__1();
 
             state._fsp--;
@@ -893,20 +893,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:342:1: rule__Model__Group__0__Impl : ( ( rule__Model__ImportsAssignment_0 )* ) ;
+    // InternalDomainModelTestLanguage.g:342:1: rule__Model__Group__0__Impl : ( ( rule__Model__ImportsAssignment_0 )* ) ;
     public final void rule__Model__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:346:1: ( ( ( rule__Model__ImportsAssignment_0 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:347:1: ( ( rule__Model__ImportsAssignment_0 )* )
+            // InternalDomainModelTestLanguage.g:346:1: ( ( ( rule__Model__ImportsAssignment_0 )* ) )
+            // InternalDomainModelTestLanguage.g:347:1: ( ( rule__Model__ImportsAssignment_0 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:347:1: ( ( rule__Model__ImportsAssignment_0 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:348:1: ( rule__Model__ImportsAssignment_0 )*
+            // InternalDomainModelTestLanguage.g:347:1: ( ( rule__Model__ImportsAssignment_0 )* )
+            // InternalDomainModelTestLanguage.g:348:1: ( rule__Model__ImportsAssignment_0 )*
             {
              before(grammarAccess.getModelAccess().getImportsAssignment_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:349:1: ( rule__Model__ImportsAssignment_0 )*
+            // InternalDomainModelTestLanguage.g:349:1: ( rule__Model__ImportsAssignment_0 )*
             loop3:
             do {
                 int alt3=2;
@@ -919,9 +919,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:349:2: rule__Model__ImportsAssignment_0
+            	    // InternalDomainModelTestLanguage.g:349:2: rule__Model__ImportsAssignment_0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Model__ImportsAssignment_0_in_rule__Model__Group__0__Impl676);
+            	    pushFollow(FollowSets000.FOLLOW_4);
             	    rule__Model__ImportsAssignment_0();
 
             	    state._fsp--;
@@ -958,16 +958,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:359:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
+    // InternalDomainModelTestLanguage.g:359:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
     public final void rule__Model__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:363:1: ( rule__Model__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:364:2: rule__Model__Group__1__Impl
+            // InternalDomainModelTestLanguage.g:363:1: ( rule__Model__Group__1__Impl )
+            // InternalDomainModelTestLanguage.g:364:2: rule__Model__Group__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__1707);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Model__Group__1__Impl();
 
             state._fsp--;
@@ -991,20 +991,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:370:1: rule__Model__Group__1__Impl : ( ( rule__Model__ElementsAssignment_1 )* ) ;
+    // InternalDomainModelTestLanguage.g:370:1: rule__Model__Group__1__Impl : ( ( rule__Model__ElementsAssignment_1 )* ) ;
     public final void rule__Model__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:374:1: ( ( ( rule__Model__ElementsAssignment_1 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:375:1: ( ( rule__Model__ElementsAssignment_1 )* )
+            // InternalDomainModelTestLanguage.g:374:1: ( ( ( rule__Model__ElementsAssignment_1 )* ) )
+            // InternalDomainModelTestLanguage.g:375:1: ( ( rule__Model__ElementsAssignment_1 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:375:1: ( ( rule__Model__ElementsAssignment_1 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:376:1: ( rule__Model__ElementsAssignment_1 )*
+            // InternalDomainModelTestLanguage.g:375:1: ( ( rule__Model__ElementsAssignment_1 )* )
+            // InternalDomainModelTestLanguage.g:376:1: ( rule__Model__ElementsAssignment_1 )*
             {
              before(grammarAccess.getModelAccess().getElementsAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:377:1: ( rule__Model__ElementsAssignment_1 )*
+            // InternalDomainModelTestLanguage.g:377:1: ( rule__Model__ElementsAssignment_1 )*
             loop4:
             do {
                 int alt4=2;
@@ -1017,9 +1017,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:377:2: rule__Model__ElementsAssignment_1
+            	    // InternalDomainModelTestLanguage.g:377:2: rule__Model__ElementsAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Model__ElementsAssignment_1_in_rule__Model__Group__1__Impl734);
+            	    pushFollow(FollowSets000.FOLLOW_5);
             	    rule__Model__ElementsAssignment_1();
 
             	    state._fsp--;
@@ -1056,21 +1056,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:391:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalDomainModelTestLanguage.g:391:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:395:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:396:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalDomainModelTestLanguage.g:395:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalDomainModelTestLanguage.g:396:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__0769);
+            pushFollow(FollowSets000.FOLLOW_6);
             rule__Import__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0772);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__1();
 
             state._fsp--;
@@ -1094,20 +1094,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:403:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalDomainModelTestLanguage.g:403:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:407:1: ( ( 'import' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:408:1: ( 'import' )
+            // InternalDomainModelTestLanguage.g:407:1: ( ( 'import' ) )
+            // InternalDomainModelTestLanguage.g:408:1: ( 'import' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:408:1: ( 'import' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:409:1: 'import'
+            // InternalDomainModelTestLanguage.g:408:1: ( 'import' )
+            // InternalDomainModelTestLanguage.g:409:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Import__Group__0__Impl800); 
+            match(input,11,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getImportAccess().getImportKeyword_0()); 
 
             }
@@ -1131,16 +1131,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:422:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalDomainModelTestLanguage.g:422:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:426:1: ( rule__Import__Group__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:427:2: rule__Import__Group__1__Impl
+            // InternalDomainModelTestLanguage.g:426:1: ( rule__Import__Group__1__Impl )
+            // InternalDomainModelTestLanguage.g:427:2: rule__Import__Group__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__1831);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__Group__1__Impl();
 
             state._fsp--;
@@ -1164,23 +1164,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:433:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:433:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportURIAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:437:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:438:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:437:1: ( ( ( rule__Import__ImportURIAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:438:1: ( ( rule__Import__ImportURIAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:438:1: ( ( rule__Import__ImportURIAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:439:1: ( rule__Import__ImportURIAssignment_1 )
+            // InternalDomainModelTestLanguage.g:438:1: ( ( rule__Import__ImportURIAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:439:1: ( rule__Import__ImportURIAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportURIAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:440:1: ( rule__Import__ImportURIAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:440:2: rule__Import__ImportURIAssignment_1
+            // InternalDomainModelTestLanguage.g:440:1: ( rule__Import__ImportURIAssignment_1 )
+            // InternalDomainModelTestLanguage.g:440:2: rule__Import__ImportURIAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1__Impl858);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Import__ImportURIAssignment_1();
 
             state._fsp--;
@@ -1211,21 +1211,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:454:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
+    // InternalDomainModelTestLanguage.g:454:1: rule__DataType__Group__0 : rule__DataType__Group__0__Impl rule__DataType__Group__1 ;
     public final void rule__DataType__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:458:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:459:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
+            // InternalDomainModelTestLanguage.g:458:1: ( rule__DataType__Group__0__Impl rule__DataType__Group__1 )
+            // InternalDomainModelTestLanguage.g:459:2: rule__DataType__Group__0__Impl rule__DataType__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__0892);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__DataType__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__0895);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__1();
 
             state._fsp--;
@@ -1249,20 +1249,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:466:1: rule__DataType__Group__0__Impl : ( 'datatype' ) ;
+    // InternalDomainModelTestLanguage.g:466:1: rule__DataType__Group__0__Impl : ( 'datatype' ) ;
     public final void rule__DataType__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:470:1: ( ( 'datatype' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:471:1: ( 'datatype' )
+            // InternalDomainModelTestLanguage.g:470:1: ( ( 'datatype' ) )
+            // InternalDomainModelTestLanguage.g:471:1: ( 'datatype' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:471:1: ( 'datatype' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:472:1: 'datatype'
+            // InternalDomainModelTestLanguage.g:471:1: ( 'datatype' )
+            // InternalDomainModelTestLanguage.g:472:1: 'datatype'
             {
              before(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__DataType__Group__0__Impl923); 
+            match(input,12,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getDataTypeAccess().getDatatypeKeyword_0()); 
 
             }
@@ -1286,21 +1286,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:485:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl rule__DataType__Group__2 ;
+    // InternalDomainModelTestLanguage.g:485:1: rule__DataType__Group__1 : rule__DataType__Group__1__Impl rule__DataType__Group__2 ;
     public final void rule__DataType__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:489:1: ( rule__DataType__Group__1__Impl rule__DataType__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:490:2: rule__DataType__Group__1__Impl rule__DataType__Group__2
+            // InternalDomainModelTestLanguage.g:489:1: ( rule__DataType__Group__1__Impl rule__DataType__Group__2 )
+            // InternalDomainModelTestLanguage.g:490:2: rule__DataType__Group__1__Impl rule__DataType__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__1954);
+            pushFollow(FollowSets000.FOLLOW_8);
             rule__DataType__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__2_in_rule__DataType__Group__1957);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__2();
 
             state._fsp--;
@@ -1324,23 +1324,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:497:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:497:1: rule__DataType__Group__1__Impl : ( ( rule__DataType__NameAssignment_1 ) ) ;
     public final void rule__DataType__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:501:1: ( ( ( rule__DataType__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:502:1: ( ( rule__DataType__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:501:1: ( ( ( rule__DataType__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:502:1: ( ( rule__DataType__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:502:1: ( ( rule__DataType__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:503:1: ( rule__DataType__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:502:1: ( ( rule__DataType__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:503:1: ( rule__DataType__NameAssignment_1 )
             {
              before(grammarAccess.getDataTypeAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:504:1: ( rule__DataType__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:504:2: rule__DataType__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:504:1: ( rule__DataType__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:504:2: rule__DataType__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__NameAssignment_1_in_rule__DataType__Group__1__Impl984);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__NameAssignment_1();
 
             state._fsp--;
@@ -1371,16 +1371,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:514:1: rule__DataType__Group__2 : rule__DataType__Group__2__Impl ;
+    // InternalDomainModelTestLanguage.g:514:1: rule__DataType__Group__2 : rule__DataType__Group__2__Impl ;
     public final void rule__DataType__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:518:1: ( rule__DataType__Group__2__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:519:2: rule__DataType__Group__2__Impl
+            // InternalDomainModelTestLanguage.g:518:1: ( rule__DataType__Group__2__Impl )
+            // InternalDomainModelTestLanguage.g:519:2: rule__DataType__Group__2__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DataType__Group__2__Impl_in_rule__DataType__Group__21014);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__DataType__Group__2__Impl();
 
             state._fsp--;
@@ -1404,20 +1404,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:525:1: rule__DataType__Group__2__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:525:1: rule__DataType__Group__2__Impl : ( ( ';' )? ) ;
     public final void rule__DataType__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:529:1: ( ( ( ';' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:530:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:529:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:530:1: ( ( ';' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:530:1: ( ( ';' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:531:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:530:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:531:1: ( ';' )?
             {
              before(grammarAccess.getDataTypeAccess().getSemicolonKeyword_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:532:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:532:1: ( ';' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1426,9 +1426,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:533:2: ';'
+                    // InternalDomainModelTestLanguage.g:533:2: ';'
                     {
-                    match(input,13,FollowSets000.FOLLOW_13_in_rule__DataType__Group__2__Impl1043); 
+                    match(input,13,FollowSets000.FOLLOW_2); 
 
                     }
                     break;
@@ -1458,21 +1458,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:550:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
+    // InternalDomainModelTestLanguage.g:550:1: rule__Class__Group__0 : rule__Class__Group__0__Impl rule__Class__Group__1 ;
     public final void rule__Class__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:554:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:555:2: rule__Class__Group__0__Impl rule__Class__Group__1
+            // InternalDomainModelTestLanguage.g:554:1: ( rule__Class__Group__0__Impl rule__Class__Group__1 )
+            // InternalDomainModelTestLanguage.g:555:2: rule__Class__Group__0__Impl rule__Class__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__0__Impl_in_rule__Class__Group__01082);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Class__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1_in_rule__Class__Group__01085);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__1();
 
             state._fsp--;
@@ -1496,20 +1496,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:562:1: rule__Class__Group__0__Impl : ( 'class' ) ;
+    // InternalDomainModelTestLanguage.g:562:1: rule__Class__Group__0__Impl : ( 'class' ) ;
     public final void rule__Class__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:566:1: ( ( 'class' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:567:1: ( 'class' )
+            // InternalDomainModelTestLanguage.g:566:1: ( ( 'class' ) )
+            // InternalDomainModelTestLanguage.g:567:1: ( 'class' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:567:1: ( 'class' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:568:1: 'class'
+            // InternalDomainModelTestLanguage.g:567:1: ( 'class' )
+            // InternalDomainModelTestLanguage.g:568:1: 'class'
             {
              before(grammarAccess.getClassAccess().getClassKeyword_0()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__Class__Group__0__Impl1113); 
+            match(input,14,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getClassKeyword_0()); 
 
             }
@@ -1533,21 +1533,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:581:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
+    // InternalDomainModelTestLanguage.g:581:1: rule__Class__Group__1 : rule__Class__Group__1__Impl rule__Class__Group__2 ;
     public final void rule__Class__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:585:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:586:2: rule__Class__Group__1__Impl rule__Class__Group__2
+            // InternalDomainModelTestLanguage.g:585:1: ( rule__Class__Group__1__Impl rule__Class__Group__2 )
+            // InternalDomainModelTestLanguage.g:586:2: rule__Class__Group__1__Impl rule__Class__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1__Impl_in_rule__Class__Group__11144);
+            pushFollow(FollowSets000.FOLLOW_9);
             rule__Class__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2_in_rule__Class__Group__11147);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__2();
 
             state._fsp--;
@@ -1571,23 +1571,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:593:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:593:1: rule__Class__Group__1__Impl : ( ( rule__Class__NameAssignment_1 ) ) ;
     public final void rule__Class__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:597:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:598:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:597:1: ( ( ( rule__Class__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:598:1: ( ( rule__Class__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:598:1: ( ( rule__Class__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:599:1: ( rule__Class__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:598:1: ( ( rule__Class__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:599:1: ( rule__Class__NameAssignment_1 )
             {
              before(grammarAccess.getClassAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:600:1: ( rule__Class__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:600:2: rule__Class__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:600:1: ( rule__Class__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:600:2: rule__Class__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1__Impl1174);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__NameAssignment_1();
 
             state._fsp--;
@@ -1618,21 +1618,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:610:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
+    // InternalDomainModelTestLanguage.g:610:1: rule__Class__Group__2 : rule__Class__Group__2__Impl rule__Class__Group__3 ;
     public final void rule__Class__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:614:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:615:2: rule__Class__Group__2__Impl rule__Class__Group__3
+            // InternalDomainModelTestLanguage.g:614:1: ( rule__Class__Group__2__Impl rule__Class__Group__3 )
+            // InternalDomainModelTestLanguage.g:615:2: rule__Class__Group__2__Impl rule__Class__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2__Impl_in_rule__Class__Group__21204);
+            pushFollow(FollowSets000.FOLLOW_9);
             rule__Class__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3_in_rule__Class__Group__21207);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__3();
 
             state._fsp--;
@@ -1656,20 +1656,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:622:1: rule__Class__Group__2__Impl : ( ( rule__Class__Group_2__0 )? ) ;
+    // InternalDomainModelTestLanguage.g:622:1: rule__Class__Group__2__Impl : ( ( rule__Class__Group_2__0 )? ) ;
     public final void rule__Class__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:626:1: ( ( ( rule__Class__Group_2__0 )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:627:1: ( ( rule__Class__Group_2__0 )? )
+            // InternalDomainModelTestLanguage.g:626:1: ( ( ( rule__Class__Group_2__0 )? ) )
+            // InternalDomainModelTestLanguage.g:627:1: ( ( rule__Class__Group_2__0 )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:627:1: ( ( rule__Class__Group_2__0 )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:628:1: ( rule__Class__Group_2__0 )?
+            // InternalDomainModelTestLanguage.g:627:1: ( ( rule__Class__Group_2__0 )? )
+            // InternalDomainModelTestLanguage.g:628:1: ( rule__Class__Group_2__0 )?
             {
              before(grammarAccess.getClassAccess().getGroup_2()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:629:1: ( rule__Class__Group_2__0 )?
+            // InternalDomainModelTestLanguage.g:629:1: ( rule__Class__Group_2__0 )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1678,9 +1678,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:629:2: rule__Class__Group_2__0
+                    // InternalDomainModelTestLanguage.g:629:2: rule__Class__Group_2__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Class__Group_2__0_in_rule__Class__Group__2__Impl1234);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     rule__Class__Group_2__0();
 
                     state._fsp--;
@@ -1714,21 +1714,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:639:1: rule__Class__Group__3 : rule__Class__Group__3__Impl rule__Class__Group__4 ;
+    // InternalDomainModelTestLanguage.g:639:1: rule__Class__Group__3 : rule__Class__Group__3__Impl rule__Class__Group__4 ;
     public final void rule__Class__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:643:1: ( rule__Class__Group__3__Impl rule__Class__Group__4 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:644:2: rule__Class__Group__3__Impl rule__Class__Group__4
+            // InternalDomainModelTestLanguage.g:643:1: ( rule__Class__Group__3__Impl rule__Class__Group__4 )
+            // InternalDomainModelTestLanguage.g:644:2: rule__Class__Group__3__Impl rule__Class__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3__Impl_in_rule__Class__Group__31265);
+            pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__4_in_rule__Class__Group__31268);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__4();
 
             state._fsp--;
@@ -1752,20 +1752,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:651:1: rule__Class__Group__3__Impl : ( '{' ) ;
+    // InternalDomainModelTestLanguage.g:651:1: rule__Class__Group__3__Impl : ( '{' ) ;
     public final void rule__Class__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:655:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:656:1: ( '{' )
+            // InternalDomainModelTestLanguage.g:655:1: ( ( '{' ) )
+            // InternalDomainModelTestLanguage.g:656:1: ( '{' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:656:1: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:657:1: '{'
+            // InternalDomainModelTestLanguage.g:656:1: ( '{' )
+            // InternalDomainModelTestLanguage.g:657:1: '{'
             {
              before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__Class__Group__3__Impl1296); 
+            match(input,15,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
@@ -1789,21 +1789,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__4"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:670:1: rule__Class__Group__4 : rule__Class__Group__4__Impl rule__Class__Group__5 ;
+    // InternalDomainModelTestLanguage.g:670:1: rule__Class__Group__4 : rule__Class__Group__4__Impl rule__Class__Group__5 ;
     public final void rule__Class__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:674:1: ( rule__Class__Group__4__Impl rule__Class__Group__5 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:675:2: rule__Class__Group__4__Impl rule__Class__Group__5
+            // InternalDomainModelTestLanguage.g:674:1: ( rule__Class__Group__4__Impl rule__Class__Group__5 )
+            // InternalDomainModelTestLanguage.g:675:2: rule__Class__Group__4__Impl rule__Class__Group__5
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__4__Impl_in_rule__Class__Group__41327);
+            pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__4__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__5_in_rule__Class__Group__41330);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__5();
 
             state._fsp--;
@@ -1827,20 +1827,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__4__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:682:1: rule__Class__Group__4__Impl : ( ( rule__Class__PropertiesAssignment_4 )* ) ;
+    // InternalDomainModelTestLanguage.g:682:1: rule__Class__Group__4__Impl : ( ( rule__Class__PropertiesAssignment_4 )* ) ;
     public final void rule__Class__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:686:1: ( ( ( rule__Class__PropertiesAssignment_4 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:687:1: ( ( rule__Class__PropertiesAssignment_4 )* )
+            // InternalDomainModelTestLanguage.g:686:1: ( ( ( rule__Class__PropertiesAssignment_4 )* ) )
+            // InternalDomainModelTestLanguage.g:687:1: ( ( rule__Class__PropertiesAssignment_4 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:687:1: ( ( rule__Class__PropertiesAssignment_4 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:688:1: ( rule__Class__PropertiesAssignment_4 )*
+            // InternalDomainModelTestLanguage.g:687:1: ( ( rule__Class__PropertiesAssignment_4 )* )
+            // InternalDomainModelTestLanguage.g:688:1: ( rule__Class__PropertiesAssignment_4 )*
             {
              before(grammarAccess.getClassAccess().getPropertiesAssignment_4()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:689:1: ( rule__Class__PropertiesAssignment_4 )*
+            // InternalDomainModelTestLanguage.g:689:1: ( rule__Class__PropertiesAssignment_4 )*
             loop7:
             do {
                 int alt7=2;
@@ -1853,9 +1853,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:689:2: rule__Class__PropertiesAssignment_4
+            	    // InternalDomainModelTestLanguage.g:689:2: rule__Class__PropertiesAssignment_4
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Class__PropertiesAssignment_4_in_rule__Class__Group__4__Impl1357);
+            	    pushFollow(FollowSets000.FOLLOW_11);
             	    rule__Class__PropertiesAssignment_4();
 
             	    state._fsp--;
@@ -1892,21 +1892,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__5"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:699:1: rule__Class__Group__5 : rule__Class__Group__5__Impl rule__Class__Group__6 ;
+    // InternalDomainModelTestLanguage.g:699:1: rule__Class__Group__5 : rule__Class__Group__5__Impl rule__Class__Group__6 ;
     public final void rule__Class__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:703:1: ( rule__Class__Group__5__Impl rule__Class__Group__6 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:704:2: rule__Class__Group__5__Impl rule__Class__Group__6
+            // InternalDomainModelTestLanguage.g:703:1: ( rule__Class__Group__5__Impl rule__Class__Group__6 )
+            // InternalDomainModelTestLanguage.g:704:2: rule__Class__Group__5__Impl rule__Class__Group__6
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__5__Impl_in_rule__Class__Group__51388);
+            pushFollow(FollowSets000.FOLLOW_10);
             rule__Class__Group__5__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__6_in_rule__Class__Group__51391);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__6();
 
             state._fsp--;
@@ -1930,20 +1930,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__5__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:711:1: rule__Class__Group__5__Impl : ( ( rule__Class__SubClassesAssignment_5 )* ) ;
+    // InternalDomainModelTestLanguage.g:711:1: rule__Class__Group__5__Impl : ( ( rule__Class__SubClassesAssignment_5 )* ) ;
     public final void rule__Class__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:715:1: ( ( ( rule__Class__SubClassesAssignment_5 )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:716:1: ( ( rule__Class__SubClassesAssignment_5 )* )
+            // InternalDomainModelTestLanguage.g:715:1: ( ( ( rule__Class__SubClassesAssignment_5 )* ) )
+            // InternalDomainModelTestLanguage.g:716:1: ( ( rule__Class__SubClassesAssignment_5 )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:716:1: ( ( rule__Class__SubClassesAssignment_5 )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:717:1: ( rule__Class__SubClassesAssignment_5 )*
+            // InternalDomainModelTestLanguage.g:716:1: ( ( rule__Class__SubClassesAssignment_5 )* )
+            // InternalDomainModelTestLanguage.g:717:1: ( rule__Class__SubClassesAssignment_5 )*
             {
              before(grammarAccess.getClassAccess().getSubClassesAssignment_5()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:718:1: ( rule__Class__SubClassesAssignment_5 )*
+            // InternalDomainModelTestLanguage.g:718:1: ( rule__Class__SubClassesAssignment_5 )*
             loop8:
             do {
                 int alt8=2;
@@ -1956,9 +1956,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:718:2: rule__Class__SubClassesAssignment_5
+            	    // InternalDomainModelTestLanguage.g:718:2: rule__Class__SubClassesAssignment_5
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Class__SubClassesAssignment_5_in_rule__Class__Group__5__Impl1418);
+            	    pushFollow(FollowSets000.FOLLOW_5);
             	    rule__Class__SubClassesAssignment_5();
 
             	    state._fsp--;
@@ -1995,16 +1995,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__6"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:728:1: rule__Class__Group__6 : rule__Class__Group__6__Impl ;
+    // InternalDomainModelTestLanguage.g:728:1: rule__Class__Group__6 : rule__Class__Group__6__Impl ;
     public final void rule__Class__Group__6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:732:1: ( rule__Class__Group__6__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:733:2: rule__Class__Group__6__Impl
+            // InternalDomainModelTestLanguage.g:732:1: ( rule__Class__Group__6__Impl )
+            // InternalDomainModelTestLanguage.g:733:2: rule__Class__Group__6__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__6__Impl_in_rule__Class__Group__61449);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group__6__Impl();
 
             state._fsp--;
@@ -2028,20 +2028,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group__6__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:739:1: rule__Class__Group__6__Impl : ( '}' ) ;
+    // InternalDomainModelTestLanguage.g:739:1: rule__Class__Group__6__Impl : ( '}' ) ;
     public final void rule__Class__Group__6__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:743:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:744:1: ( '}' )
+            // InternalDomainModelTestLanguage.g:743:1: ( ( '}' ) )
+            // InternalDomainModelTestLanguage.g:744:1: ( '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:744:1: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:745:1: '}'
+            // InternalDomainModelTestLanguage.g:744:1: ( '}' )
+            // InternalDomainModelTestLanguage.g:745:1: '}'
             {
              before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_6()); 
-            match(input,16,FollowSets000.FOLLOW_16_in_rule__Class__Group__6__Impl1477); 
+            match(input,16,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_6()); 
 
             }
@@ -2065,21 +2065,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:772:1: rule__Class__Group_2__0 : rule__Class__Group_2__0__Impl rule__Class__Group_2__1 ;
+    // InternalDomainModelTestLanguage.g:772:1: rule__Class__Group_2__0 : rule__Class__Group_2__0__Impl rule__Class__Group_2__1 ;
     public final void rule__Class__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:776:1: ( rule__Class__Group_2__0__Impl rule__Class__Group_2__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:777:2: rule__Class__Group_2__0__Impl rule__Class__Group_2__1
+            // InternalDomainModelTestLanguage.g:776:1: ( rule__Class__Group_2__0__Impl rule__Class__Group_2__1 )
+            // InternalDomainModelTestLanguage.g:777:2: rule__Class__Group_2__0__Impl rule__Class__Group_2__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_2__0__Impl_in_rule__Class__Group_2__01522);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Class__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_2__1_in_rule__Class__Group_2__01525);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group_2__1();
 
             state._fsp--;
@@ -2103,20 +2103,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:784:1: rule__Class__Group_2__0__Impl : ( 'extends' ) ;
+    // InternalDomainModelTestLanguage.g:784:1: rule__Class__Group_2__0__Impl : ( 'extends' ) ;
     public final void rule__Class__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:788:1: ( ( 'extends' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:789:1: ( 'extends' )
+            // InternalDomainModelTestLanguage.g:788:1: ( ( 'extends' ) )
+            // InternalDomainModelTestLanguage.g:789:1: ( 'extends' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:789:1: ( 'extends' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:790:1: 'extends'
+            // InternalDomainModelTestLanguage.g:789:1: ( 'extends' )
+            // InternalDomainModelTestLanguage.g:790:1: 'extends'
             {
              before(grammarAccess.getClassAccess().getExtendsKeyword_2_0()); 
-            match(input,17,FollowSets000.FOLLOW_17_in_rule__Class__Group_2__0__Impl1553); 
+            match(input,17,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getExtendsKeyword_2_0()); 
 
             }
@@ -2140,16 +2140,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:803:1: rule__Class__Group_2__1 : rule__Class__Group_2__1__Impl ;
+    // InternalDomainModelTestLanguage.g:803:1: rule__Class__Group_2__1 : rule__Class__Group_2__1__Impl ;
     public final void rule__Class__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:807:1: ( rule__Class__Group_2__1__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:808:2: rule__Class__Group_2__1__Impl
+            // InternalDomainModelTestLanguage.g:807:1: ( rule__Class__Group_2__1__Impl )
+            // InternalDomainModelTestLanguage.g:808:2: rule__Class__Group_2__1__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_2__1__Impl_in_rule__Class__Group_2__11584);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__Group_2__1__Impl();
 
             state._fsp--;
@@ -2173,23 +2173,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__Group_2__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:814:1: rule__Class__Group_2__1__Impl : ( ( rule__Class__SuperClassAssignment_2_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:814:1: rule__Class__Group_2__1__Impl : ( ( rule__Class__SuperClassAssignment_2_1 ) ) ;
     public final void rule__Class__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:818:1: ( ( ( rule__Class__SuperClassAssignment_2_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:819:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
+            // InternalDomainModelTestLanguage.g:818:1: ( ( ( rule__Class__SuperClassAssignment_2_1 ) ) )
+            // InternalDomainModelTestLanguage.g:819:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:819:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:820:1: ( rule__Class__SuperClassAssignment_2_1 )
+            // InternalDomainModelTestLanguage.g:819:1: ( ( rule__Class__SuperClassAssignment_2_1 ) )
+            // InternalDomainModelTestLanguage.g:820:1: ( rule__Class__SuperClassAssignment_2_1 )
             {
              before(grammarAccess.getClassAccess().getSuperClassAssignment_2_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:821:1: ( rule__Class__SuperClassAssignment_2_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:821:2: rule__Class__SuperClassAssignment_2_1
+            // InternalDomainModelTestLanguage.g:821:1: ( rule__Class__SuperClassAssignment_2_1 )
+            // InternalDomainModelTestLanguage.g:821:2: rule__Class__SuperClassAssignment_2_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Class__SuperClassAssignment_2_1_in_rule__Class__Group_2__1__Impl1611);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Class__SuperClassAssignment_2_1();
 
             state._fsp--;
@@ -2220,21 +2220,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:835:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
+    // InternalDomainModelTestLanguage.g:835:1: rule__Attribute__Group__0 : rule__Attribute__Group__0__Impl rule__Attribute__Group__1 ;
     public final void rule__Attribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:839:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:840:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
+            // InternalDomainModelTestLanguage.g:839:1: ( rule__Attribute__Group__0__Impl rule__Attribute__Group__1 )
+            // InternalDomainModelTestLanguage.g:840:2: rule__Attribute__Group__0__Impl rule__Attribute__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__0__Impl_in_rule__Attribute__Group__01645);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Attribute__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__01648);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__1();
 
             state._fsp--;
@@ -2258,20 +2258,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:847:1: rule__Attribute__Group__0__Impl : ( 'attr' ) ;
+    // InternalDomainModelTestLanguage.g:847:1: rule__Attribute__Group__0__Impl : ( 'attr' ) ;
     public final void rule__Attribute__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:851:1: ( ( 'attr' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:852:1: ( 'attr' )
+            // InternalDomainModelTestLanguage.g:851:1: ( ( 'attr' ) )
+            // InternalDomainModelTestLanguage.g:852:1: ( 'attr' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:852:1: ( 'attr' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:853:1: 'attr'
+            // InternalDomainModelTestLanguage.g:852:1: ( 'attr' )
+            // InternalDomainModelTestLanguage.g:853:1: 'attr'
             {
              before(grammarAccess.getAttributeAccess().getAttrKeyword_0()); 
-            match(input,18,FollowSets000.FOLLOW_18_in_rule__Attribute__Group__0__Impl1676); 
+            match(input,18,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getAttrKeyword_0()); 
 
             }
@@ -2295,21 +2295,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:866:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
+    // InternalDomainModelTestLanguage.g:866:1: rule__Attribute__Group__1 : rule__Attribute__Group__1__Impl rule__Attribute__Group__2 ;
     public final void rule__Attribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:870:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:871:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
+            // InternalDomainModelTestLanguage.g:870:1: ( rule__Attribute__Group__1__Impl rule__Attribute__Group__2 )
+            // InternalDomainModelTestLanguage.g:871:2: rule__Attribute__Group__1__Impl rule__Attribute__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__1__Impl_in_rule__Attribute__Group__11707);
+            pushFollow(FollowSets000.FOLLOW_12);
             rule__Attribute__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__11710);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__2();
 
             state._fsp--;
@@ -2333,23 +2333,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:878:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:878:1: rule__Attribute__Group__1__Impl : ( ( rule__Attribute__NameAssignment_1 ) ) ;
     public final void rule__Attribute__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:882:1: ( ( ( rule__Attribute__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:883:1: ( ( rule__Attribute__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:882:1: ( ( ( rule__Attribute__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:883:1: ( ( rule__Attribute__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:883:1: ( ( rule__Attribute__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:884:1: ( rule__Attribute__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:883:1: ( ( rule__Attribute__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:884:1: ( rule__Attribute__NameAssignment_1 )
             {
              before(grammarAccess.getAttributeAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:885:1: ( rule__Attribute__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:885:2: rule__Attribute__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:885:1: ( rule__Attribute__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:885:2: rule__Attribute__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__NameAssignment_1_in_rule__Attribute__Group__1__Impl1737);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__NameAssignment_1();
 
             state._fsp--;
@@ -2380,21 +2380,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:895:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
+    // InternalDomainModelTestLanguage.g:895:1: rule__Attribute__Group__2 : rule__Attribute__Group__2__Impl rule__Attribute__Group__3 ;
     public final void rule__Attribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:899:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:900:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
+            // InternalDomainModelTestLanguage.g:899:1: ( rule__Attribute__Group__2__Impl rule__Attribute__Group__3 )
+            // InternalDomainModelTestLanguage.g:900:2: rule__Attribute__Group__2__Impl rule__Attribute__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__2__Impl_in_rule__Attribute__Group__21767);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Attribute__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__3_in_rule__Attribute__Group__21770);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__3();
 
             state._fsp--;
@@ -2418,20 +2418,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:907:1: rule__Attribute__Group__2__Impl : ( ':' ) ;
+    // InternalDomainModelTestLanguage.g:907:1: rule__Attribute__Group__2__Impl : ( ':' ) ;
     public final void rule__Attribute__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:911:1: ( ( ':' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:912:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:911:1: ( ( ':' ) )
+            // InternalDomainModelTestLanguage.g:912:1: ( ':' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:912:1: ( ':' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:913:1: ':'
+            // InternalDomainModelTestLanguage.g:912:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:913:1: ':'
             {
              before(grammarAccess.getAttributeAccess().getColonKeyword_2()); 
-            match(input,19,FollowSets000.FOLLOW_19_in_rule__Attribute__Group__2__Impl1798); 
+            match(input,19,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getColonKeyword_2()); 
 
             }
@@ -2455,21 +2455,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:926:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl rule__Attribute__Group__4 ;
+    // InternalDomainModelTestLanguage.g:926:1: rule__Attribute__Group__3 : rule__Attribute__Group__3__Impl rule__Attribute__Group__4 ;
     public final void rule__Attribute__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:930:1: ( rule__Attribute__Group__3__Impl rule__Attribute__Group__4 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:931:2: rule__Attribute__Group__3__Impl rule__Attribute__Group__4
+            // InternalDomainModelTestLanguage.g:930:1: ( rule__Attribute__Group__3__Impl rule__Attribute__Group__4 )
+            // InternalDomainModelTestLanguage.g:931:2: rule__Attribute__Group__3__Impl rule__Attribute__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__3__Impl_in_rule__Attribute__Group__31829);
+            pushFollow(FollowSets000.FOLLOW_8);
             rule__Attribute__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__4_in_rule__Attribute__Group__31832);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__4();
 
             state._fsp--;
@@ -2493,23 +2493,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:938:1: rule__Attribute__Group__3__Impl : ( ( rule__Attribute__TypeAssignment_3 ) ) ;
+    // InternalDomainModelTestLanguage.g:938:1: rule__Attribute__Group__3__Impl : ( ( rule__Attribute__TypeAssignment_3 ) ) ;
     public final void rule__Attribute__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:942:1: ( ( ( rule__Attribute__TypeAssignment_3 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:943:1: ( ( rule__Attribute__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:942:1: ( ( ( rule__Attribute__TypeAssignment_3 ) ) )
+            // InternalDomainModelTestLanguage.g:943:1: ( ( rule__Attribute__TypeAssignment_3 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:943:1: ( ( rule__Attribute__TypeAssignment_3 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:944:1: ( rule__Attribute__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:943:1: ( ( rule__Attribute__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:944:1: ( rule__Attribute__TypeAssignment_3 )
             {
              before(grammarAccess.getAttributeAccess().getTypeAssignment_3()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:945:1: ( rule__Attribute__TypeAssignment_3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:945:2: rule__Attribute__TypeAssignment_3
+            // InternalDomainModelTestLanguage.g:945:1: ( rule__Attribute__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:945:2: rule__Attribute__TypeAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__TypeAssignment_3_in_rule__Attribute__Group__3__Impl1859);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__TypeAssignment_3();
 
             state._fsp--;
@@ -2540,16 +2540,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__4"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:955:1: rule__Attribute__Group__4 : rule__Attribute__Group__4__Impl ;
+    // InternalDomainModelTestLanguage.g:955:1: rule__Attribute__Group__4 : rule__Attribute__Group__4__Impl ;
     public final void rule__Attribute__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:959:1: ( rule__Attribute__Group__4__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:960:2: rule__Attribute__Group__4__Impl
+            // InternalDomainModelTestLanguage.g:959:1: ( rule__Attribute__Group__4__Impl )
+            // InternalDomainModelTestLanguage.g:960:2: rule__Attribute__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__4__Impl_in_rule__Attribute__Group__41889);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Attribute__Group__4__Impl();
 
             state._fsp--;
@@ -2573,20 +2573,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__Group__4__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:966:1: rule__Attribute__Group__4__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:966:1: rule__Attribute__Group__4__Impl : ( ( ';' )? ) ;
     public final void rule__Attribute__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:970:1: ( ( ( ';' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:971:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:970:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:971:1: ( ( ';' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:971:1: ( ( ';' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:972:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:971:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:972:1: ( ';' )?
             {
              before(grammarAccess.getAttributeAccess().getSemicolonKeyword_4()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:973:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:973:1: ( ';' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2595,9 +2595,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:974:2: ';'
+                    // InternalDomainModelTestLanguage.g:974:2: ';'
                     {
-                    match(input,13,FollowSets000.FOLLOW_13_in_rule__Attribute__Group__4__Impl1918); 
+                    match(input,13,FollowSets000.FOLLOW_2); 
 
                     }
                     break;
@@ -2627,21 +2627,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:995:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
+    // InternalDomainModelTestLanguage.g:995:1: rule__Reference__Group__0 : rule__Reference__Group__0__Impl rule__Reference__Group__1 ;
     public final void rule__Reference__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:999:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1000:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
+            // InternalDomainModelTestLanguage.g:999:1: ( rule__Reference__Group__0__Impl rule__Reference__Group__1 )
+            // InternalDomainModelTestLanguage.g:1000:2: rule__Reference__Group__0__Impl rule__Reference__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__0__Impl_in_rule__Reference__Group__01961);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Reference__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01964);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__1();
 
             state._fsp--;
@@ -2665,20 +2665,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__0__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1007:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
+    // InternalDomainModelTestLanguage.g:1007:1: rule__Reference__Group__0__Impl : ( 'ref' ) ;
     public final void rule__Reference__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1011:1: ( ( 'ref' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1012:1: ( 'ref' )
+            // InternalDomainModelTestLanguage.g:1011:1: ( ( 'ref' ) )
+            // InternalDomainModelTestLanguage.g:1012:1: ( 'ref' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1012:1: ( 'ref' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1013:1: 'ref'
+            // InternalDomainModelTestLanguage.g:1012:1: ( 'ref' )
+            // InternalDomainModelTestLanguage.g:1013:1: 'ref'
             {
              before(grammarAccess.getReferenceAccess().getRefKeyword_0()); 
-            match(input,20,FollowSets000.FOLLOW_20_in_rule__Reference__Group__0__Impl1992); 
+            match(input,20,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getReferenceAccess().getRefKeyword_0()); 
 
             }
@@ -2702,21 +2702,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1026:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
+    // InternalDomainModelTestLanguage.g:1026:1: rule__Reference__Group__1 : rule__Reference__Group__1__Impl rule__Reference__Group__2 ;
     public final void rule__Reference__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1030:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1031:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
+            // InternalDomainModelTestLanguage.g:1030:1: ( rule__Reference__Group__1__Impl rule__Reference__Group__2 )
+            // InternalDomainModelTestLanguage.g:1031:2: rule__Reference__Group__1__Impl rule__Reference__Group__2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__1__Impl_in_rule__Reference__Group__12023);
+            pushFollow(FollowSets000.FOLLOW_12);
             rule__Reference__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__12026);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__2();
 
             state._fsp--;
@@ -2740,23 +2740,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__1__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1038:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__NameAssignment_1 ) ) ;
+    // InternalDomainModelTestLanguage.g:1038:1: rule__Reference__Group__1__Impl : ( ( rule__Reference__NameAssignment_1 ) ) ;
     public final void rule__Reference__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1042:1: ( ( ( rule__Reference__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1043:1: ( ( rule__Reference__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:1042:1: ( ( ( rule__Reference__NameAssignment_1 ) ) )
+            // InternalDomainModelTestLanguage.g:1043:1: ( ( rule__Reference__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1043:1: ( ( rule__Reference__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1044:1: ( rule__Reference__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:1043:1: ( ( rule__Reference__NameAssignment_1 ) )
+            // InternalDomainModelTestLanguage.g:1044:1: ( rule__Reference__NameAssignment_1 )
             {
              before(grammarAccess.getReferenceAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1045:1: ( rule__Reference__NameAssignment_1 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1045:2: rule__Reference__NameAssignment_1
+            // InternalDomainModelTestLanguage.g:1045:1: ( rule__Reference__NameAssignment_1 )
+            // InternalDomainModelTestLanguage.g:1045:2: rule__Reference__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__1__Impl2053);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__NameAssignment_1();
 
             state._fsp--;
@@ -2787,21 +2787,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1055:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
+    // InternalDomainModelTestLanguage.g:1055:1: rule__Reference__Group__2 : rule__Reference__Group__2__Impl rule__Reference__Group__3 ;
     public final void rule__Reference__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1059:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1060:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
+            // InternalDomainModelTestLanguage.g:1059:1: ( rule__Reference__Group__2__Impl rule__Reference__Group__3 )
+            // InternalDomainModelTestLanguage.g:1060:2: rule__Reference__Group__2__Impl rule__Reference__Group__3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__2__Impl_in_rule__Reference__Group__22083);
+            pushFollow(FollowSets000.FOLLOW_7);
             rule__Reference__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__22086);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__3();
 
             state._fsp--;
@@ -2825,20 +2825,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__2__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1067:1: rule__Reference__Group__2__Impl : ( ':' ) ;
+    // InternalDomainModelTestLanguage.g:1067:1: rule__Reference__Group__2__Impl : ( ':' ) ;
     public final void rule__Reference__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1071:1: ( ( ':' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1072:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:1071:1: ( ( ':' ) )
+            // InternalDomainModelTestLanguage.g:1072:1: ( ':' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1072:1: ( ':' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1073:1: ':'
+            // InternalDomainModelTestLanguage.g:1072:1: ( ':' )
+            // InternalDomainModelTestLanguage.g:1073:1: ':'
             {
              before(grammarAccess.getReferenceAccess().getColonKeyword_2()); 
-            match(input,19,FollowSets000.FOLLOW_19_in_rule__Reference__Group__2__Impl2114); 
+            match(input,19,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getReferenceAccess().getColonKeyword_2()); 
 
             }
@@ -2862,21 +2862,21 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1086:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
+    // InternalDomainModelTestLanguage.g:1086:1: rule__Reference__Group__3 : rule__Reference__Group__3__Impl rule__Reference__Group__4 ;
     public final void rule__Reference__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1090:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1091:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
+            // InternalDomainModelTestLanguage.g:1090:1: ( rule__Reference__Group__3__Impl rule__Reference__Group__4 )
+            // InternalDomainModelTestLanguage.g:1091:2: rule__Reference__Group__3__Impl rule__Reference__Group__4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__3__Impl_in_rule__Reference__Group__32145);
+            pushFollow(FollowSets000.FOLLOW_8);
             rule__Reference__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__32148);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__4();
 
             state._fsp--;
@@ -2900,23 +2900,23 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__3__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1098:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__TypeAssignment_3 ) ) ;
+    // InternalDomainModelTestLanguage.g:1098:1: rule__Reference__Group__3__Impl : ( ( rule__Reference__TypeAssignment_3 ) ) ;
     public final void rule__Reference__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1102:1: ( ( ( rule__Reference__TypeAssignment_3 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1103:1: ( ( rule__Reference__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:1102:1: ( ( ( rule__Reference__TypeAssignment_3 ) ) )
+            // InternalDomainModelTestLanguage.g:1103:1: ( ( rule__Reference__TypeAssignment_3 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1103:1: ( ( rule__Reference__TypeAssignment_3 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1104:1: ( rule__Reference__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:1103:1: ( ( rule__Reference__TypeAssignment_3 ) )
+            // InternalDomainModelTestLanguage.g:1104:1: ( rule__Reference__TypeAssignment_3 )
             {
              before(grammarAccess.getReferenceAccess().getTypeAssignment_3()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1105:1: ( rule__Reference__TypeAssignment_3 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1105:2: rule__Reference__TypeAssignment_3
+            // InternalDomainModelTestLanguage.g:1105:1: ( rule__Reference__TypeAssignment_3 )
+            // InternalDomainModelTestLanguage.g:1105:2: rule__Reference__TypeAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__3__Impl2175);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__TypeAssignment_3();
 
             state._fsp--;
@@ -2947,16 +2947,16 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__4"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1115:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
+    // InternalDomainModelTestLanguage.g:1115:1: rule__Reference__Group__4 : rule__Reference__Group__4__Impl ;
     public final void rule__Reference__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1119:1: ( rule__Reference__Group__4__Impl )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1120:2: rule__Reference__Group__4__Impl
+            // InternalDomainModelTestLanguage.g:1119:1: ( rule__Reference__Group__4__Impl )
+            // InternalDomainModelTestLanguage.g:1120:2: rule__Reference__Group__4__Impl
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Reference__Group__4__Impl_in_rule__Reference__Group__42205);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Reference__Group__4__Impl();
 
             state._fsp--;
@@ -2980,20 +2980,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__Group__4__Impl"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1126:1: rule__Reference__Group__4__Impl : ( ( ';' )? ) ;
+    // InternalDomainModelTestLanguage.g:1126:1: rule__Reference__Group__4__Impl : ( ( ';' )? ) ;
     public final void rule__Reference__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1130:1: ( ( ( ';' )? ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1131:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:1130:1: ( ( ( ';' )? ) )
+            // InternalDomainModelTestLanguage.g:1131:1: ( ( ';' )? )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1131:1: ( ( ';' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1132:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:1131:1: ( ( ';' )? )
+            // InternalDomainModelTestLanguage.g:1132:1: ( ';' )?
             {
              before(grammarAccess.getReferenceAccess().getSemicolonKeyword_4()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1133:1: ( ';' )?
+            // InternalDomainModelTestLanguage.g:1133:1: ( ';' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -3002,9 +3002,9 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1134:2: ';'
+                    // InternalDomainModelTestLanguage.g:1134:2: ';'
                     {
-                    match(input,13,FollowSets000.FOLLOW_13_in_rule__Reference__Group__4__Impl2234); 
+                    match(input,13,FollowSets000.FOLLOW_2); 
 
                     }
                     break;
@@ -3034,20 +3034,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__ImportsAssignment_0"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1156:1: rule__Model__ImportsAssignment_0 : ( ruleImport ) ;
+    // InternalDomainModelTestLanguage.g:1156:1: rule__Model__ImportsAssignment_0 : ( ruleImport ) ;
     public final void rule__Model__ImportsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1160:1: ( ( ruleImport ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1161:1: ( ruleImport )
+            // InternalDomainModelTestLanguage.g:1160:1: ( ( ruleImport ) )
+            // InternalDomainModelTestLanguage.g:1161:1: ( ruleImport )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1161:1: ( ruleImport )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1162:1: ruleImport
+            // InternalDomainModelTestLanguage.g:1161:1: ( ruleImport )
+            // InternalDomainModelTestLanguage.g:1162:1: ruleImport
             {
              before(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_02282);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleImport();
 
             state._fsp--;
@@ -3075,20 +3075,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Model__ElementsAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1171:1: rule__Model__ElementsAssignment_1 : ( ruleType ) ;
+    // InternalDomainModelTestLanguage.g:1171:1: rule__Model__ElementsAssignment_1 : ( ruleType ) ;
     public final void rule__Model__ElementsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1175:1: ( ( ruleType ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1176:1: ( ruleType )
+            // InternalDomainModelTestLanguage.g:1175:1: ( ( ruleType ) )
+            // InternalDomainModelTestLanguage.g:1176:1: ( ruleType )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1176:1: ( ruleType )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1177:1: ruleType
+            // InternalDomainModelTestLanguage.g:1176:1: ( ruleType )
+            // InternalDomainModelTestLanguage.g:1177:1: ruleType
             {
              before(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleType_in_rule__Model__ElementsAssignment_12313);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleType();
 
             state._fsp--;
@@ -3116,20 +3116,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Import__ImportURIAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1186:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    // InternalDomainModelTestLanguage.g:1186:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Import__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1190:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1191:1: ( RULE_STRING )
+            // InternalDomainModelTestLanguage.g:1190:1: ( ( RULE_STRING ) )
+            // InternalDomainModelTestLanguage.g:1191:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1191:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1192:1: RULE_STRING
+            // InternalDomainModelTestLanguage.g:1191:1: ( RULE_STRING )
+            // InternalDomainModelTestLanguage.g:1192:1: RULE_STRING
             {
              before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_12344); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -3153,20 +3153,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__DataType__NameAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1201:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1201:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__DataType__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1205:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1206:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1205:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1206:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1206:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1207:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1206:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1207:1: RULE_ID
             {
              before(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_12375); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3190,20 +3190,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__NameAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1216:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1216:1: rule__Class__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Class__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1220:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1221:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1220:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1221:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1221:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1222:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1221:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1222:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__NameAssignment_12406); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3227,24 +3227,24 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__SuperClassAssignment_2_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1231:1: rule__Class__SuperClassAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1231:1: rule__Class__SuperClassAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__Class__SuperClassAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1235:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1236:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1235:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1236:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1236:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1237:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1236:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1237:1: ( RULE_ID )
             {
              before(grammarAccess.getClassAccess().getSuperClassClassCrossReference_2_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1238:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1239:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1238:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1239:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_2_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_2_12441); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_2_1_0_1()); 
 
             }
@@ -3272,20 +3272,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__PropertiesAssignment_4"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1250:1: rule__Class__PropertiesAssignment_4 : ( ruleProperty ) ;
+    // InternalDomainModelTestLanguage.g:1250:1: rule__Class__PropertiesAssignment_4 : ( ruleProperty ) ;
     public final void rule__Class__PropertiesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1254:1: ( ( ruleProperty ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1255:1: ( ruleProperty )
+            // InternalDomainModelTestLanguage.g:1254:1: ( ( ruleProperty ) )
+            // InternalDomainModelTestLanguage.g:1255:1: ( ruleProperty )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1255:1: ( ruleProperty )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1256:1: ruleProperty
+            // InternalDomainModelTestLanguage.g:1255:1: ( ruleProperty )
+            // InternalDomainModelTestLanguage.g:1256:1: ruleProperty
             {
              before(grammarAccess.getClassAccess().getPropertiesPropertyParserRuleCall_4_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleProperty_in_rule__Class__PropertiesAssignment_42476);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleProperty();
 
             state._fsp--;
@@ -3313,20 +3313,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Class__SubClassesAssignment_5"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1265:1: rule__Class__SubClassesAssignment_5 : ( ruleClass ) ;
+    // InternalDomainModelTestLanguage.g:1265:1: rule__Class__SubClassesAssignment_5 : ( ruleClass ) ;
     public final void rule__Class__SubClassesAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1269:1: ( ( ruleClass ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1270:1: ( ruleClass )
+            // InternalDomainModelTestLanguage.g:1269:1: ( ( ruleClass ) )
+            // InternalDomainModelTestLanguage.g:1270:1: ( ruleClass )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1270:1: ( ruleClass )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1271:1: ruleClass
+            // InternalDomainModelTestLanguage.g:1270:1: ( ruleClass )
+            // InternalDomainModelTestLanguage.g:1271:1: ruleClass
             {
              before(grammarAccess.getClassAccess().getSubClassesClassParserRuleCall_5_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleClass_in_rule__Class__SubClassesAssignment_52507);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleClass();
 
             state._fsp--;
@@ -3354,20 +3354,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__NameAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1280:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1280:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribute__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1284:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1285:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1284:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1285:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1285:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1286:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1285:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1286:1: RULE_ID
             {
              before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_12538); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3391,24 +3391,24 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Attribute__TypeAssignment_3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1295:1: rule__Attribute__TypeAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1295:1: rule__Attribute__TypeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Attribute__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1299:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1300:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1299:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1300:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1300:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1301:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1300:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1301:1: ( RULE_ID )
             {
              before(grammarAccess.getAttributeAccess().getTypeDataTypeCrossReference_3_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1302:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1303:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1302:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1303:1: RULE_ID
             {
              before(grammarAccess.getAttributeAccess().getTypeDataTypeIDTerminalRuleCall_3_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_32573); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getAttributeAccess().getTypeDataTypeIDTerminalRuleCall_3_0_1()); 
 
             }
@@ -3436,20 +3436,20 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__NameAssignment_1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1314:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalDomainModelTestLanguage.g:1314:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Reference__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1318:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1319:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1318:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1319:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1319:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1320:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1319:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1320:1: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12608); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3473,24 +3473,24 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
 
     // $ANTLR start "rule__Reference__TypeAssignment_3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1329:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
+    // InternalDomainModelTestLanguage.g:1329:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Reference__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1333:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1334:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1333:1: ( ( ( RULE_ID ) ) )
+            // InternalDomainModelTestLanguage.g:1334:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1334:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1335:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1334:1: ( ( RULE_ID ) )
+            // InternalDomainModelTestLanguage.g:1335:1: ( RULE_ID )
             {
              before(grammarAccess.getReferenceAccess().getTypeClassCrossReference_3_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1336:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalDomainModelTestLanguage.g:1337:1: RULE_ID
+            // InternalDomainModelTestLanguage.g:1336:1: ( RULE_ID )
+            // InternalDomainModelTestLanguage.g:1337:1: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getTypeClassIDTerminalRuleCall_3_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32643); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getReferenceAccess().getTypeClassIDTerminalRuleCall_3_0_1()); 
 
             }
@@ -3523,117 +3523,18 @@ public class InternalDomainModelTestLanguageParser extends AbstractInternalConte
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel61 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__Group__0_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImport_in_entryRuleImport121 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleImport128 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport154 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleType_in_entryRuleType181 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleType188 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType214 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataType_in_entryRuleDataType241 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDataType248 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DataType__Group__0_in_ruleDataType274 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClass_in_entryRuleClass301 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleClass308 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__0_in_ruleClass334 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty361 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleProperty368 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Property__Alternatives_in_ruleProperty394 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute421 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAttribute428 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__0_in_ruleAttribute454 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReference_in_entryRuleReference481 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleReference488 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__0_in_ruleReference514 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataType_in_rule__Type__Alternatives550 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClass_in_rule__Type__Alternatives567 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAttribute_in_rule__Property__Alternatives599 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReference_in_rule__Property__Alternatives616 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__0646 = new BitSet(new long[]{0x0000000000005000L});
-        public static final BitSet FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0649 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__ImportsAssignment_0_in_rule__Model__Group__0__Impl676 = new BitSet(new long[]{0x0000000000000802L});
-        public static final BitSet FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__1707 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__ElementsAssignment_1_in_rule__Model__Group__1__Impl734 = new BitSet(new long[]{0x0000000000005002L});
-        public static final BitSet FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__0769 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0772 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Import__Group__0__Impl800 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__1831 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1__Impl858 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DataType__Group__0__Impl_in_rule__DataType__Group__0892 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__DataType__Group__1_in_rule__DataType__Group__0895 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__DataType__Group__0__Impl923 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DataType__Group__1__Impl_in_rule__DataType__Group__1954 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__DataType__Group__2_in_rule__DataType__Group__1957 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DataType__NameAssignment_1_in_rule__DataType__Group__1__Impl984 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DataType__Group__2__Impl_in_rule__DataType__Group__21014 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__DataType__Group__2__Impl1043 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__0__Impl_in_rule__Class__Group__01082 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Class__Group__1_in_rule__Class__Group__01085 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__Class__Group__0__Impl1113 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__1__Impl_in_rule__Class__Group__11144 = new BitSet(new long[]{0x0000000000028000L});
-        public static final BitSet FOLLOW_rule__Class__Group__2_in_rule__Class__Group__11147 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1__Impl1174 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__2__Impl_in_rule__Class__Group__21204 = new BitSet(new long[]{0x0000000000028000L});
-        public static final BitSet FOLLOW_rule__Class__Group__3_in_rule__Class__Group__21207 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group_2__0_in_rule__Class__Group__2__Impl1234 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__3__Impl_in_rule__Class__Group__31265 = new BitSet(new long[]{0x0000000000155000L});
-        public static final BitSet FOLLOW_rule__Class__Group__4_in_rule__Class__Group__31268 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__Class__Group__3__Impl1296 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group__4__Impl_in_rule__Class__Group__41327 = new BitSet(new long[]{0x0000000000155000L});
-        public static final BitSet FOLLOW_rule__Class__Group__5_in_rule__Class__Group__41330 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__PropertiesAssignment_4_in_rule__Class__Group__4__Impl1357 = new BitSet(new long[]{0x0000000000140002L});
-        public static final BitSet FOLLOW_rule__Class__Group__5__Impl_in_rule__Class__Group__51388 = new BitSet(new long[]{0x0000000000155000L});
-        public static final BitSet FOLLOW_rule__Class__Group__6_in_rule__Class__Group__51391 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__SubClassesAssignment_5_in_rule__Class__Group__5__Impl1418 = new BitSet(new long[]{0x0000000000005002L});
-        public static final BitSet FOLLOW_rule__Class__Group__6__Impl_in_rule__Class__Group__61449 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rule__Class__Group__6__Impl1477 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group_2__0__Impl_in_rule__Class__Group_2__01522 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Class__Group_2__1_in_rule__Class__Group_2__01525 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_rule__Class__Group_2__0__Impl1553 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__Group_2__1__Impl_in_rule__Class__Group_2__11584 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Class__SuperClassAssignment_2_1_in_rule__Class__Group_2__1__Impl1611 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__0__Impl_in_rule__Attribute__Group__01645 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__01648 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_rule__Attribute__Group__0__Impl1676 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__1__Impl_in_rule__Attribute__Group__11707 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__11710 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__NameAssignment_1_in_rule__Attribute__Group__1__Impl1737 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__2__Impl_in_rule__Attribute__Group__21767 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__3_in_rule__Attribute__Group__21770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_rule__Attribute__Group__2__Impl1798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__3__Impl_in_rule__Attribute__Group__31829 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__4_in_rule__Attribute__Group__31832 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__TypeAssignment_3_in_rule__Attribute__Group__3__Impl1859 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__4__Impl_in_rule__Attribute__Group__41889 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Attribute__Group__4__Impl1918 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__0__Impl_in_rule__Reference__Group__01961 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01964 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_rule__Reference__Group__0__Impl1992 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__1__Impl_in_rule__Reference__Group__12023 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__12026 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__1__Impl2053 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__2__Impl_in_rule__Reference__Group__22083 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__22086 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_rule__Reference__Group__2__Impl2114 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__3__Impl_in_rule__Reference__Group__32145 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__32148 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__3__Impl2175 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Reference__Group__4__Impl_in_rule__Reference__Group__42205 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__Reference__Group__4__Impl2234 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_02282 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleType_in_rule__Model__ElementsAssignment_12313 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_12344 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_12375 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_12406 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_2_12441 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleProperty_in_rule__Class__PropertiesAssignment_42476 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleClass_in_rule__Class__SubClassesAssignment_52507 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_12538 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__TypeAssignment_32573 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12608 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32643 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000005000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000005002L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000028000L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000155000L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000140002L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000080000L});
     }
 
 

@@ -48,7 +48,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
         
 
     public String[] getTokenNames() { return InternalIndentationAwareTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g"; }
+    public String getGrammarFileName() { return "InternalIndentationAwareTestLanguageParser.g"; }
 
 
 
@@ -74,7 +74,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleTree"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:61:1: entryRuleTree returns [EObject current=null] : iv_ruleTree= ruleTree EOF ;
+    // InternalIndentationAwareTestLanguageParser.g:61:1: entryRuleTree returns [EObject current=null] : iv_ruleTree= ruleTree EOF ;
     public final EObject entryRuleTree() throws RecognitionException {
         EObject current = null;
 
@@ -82,17 +82,17 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:62:2: (iv_ruleTree= ruleTree EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:63:2: iv_ruleTree= ruleTree EOF
+            // InternalIndentationAwareTestLanguageParser.g:62:2: (iv_ruleTree= ruleTree EOF )
+            // InternalIndentationAwareTestLanguageParser.g:63:2: iv_ruleTree= ruleTree EOF
             {
              newCompositeNode(grammarAccess.getTreeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTree_in_entryRuleTree67);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTree=ruleTree();
 
             state._fsp--;
 
              current =iv_ruleTree; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTree77); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -110,7 +110,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleTree"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:70:1: ruleTree returns [EObject current=null] : ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) ;
+    // InternalIndentationAwareTestLanguageParser.g:70:1: ruleTree returns [EObject current=null] : ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) ;
     public final EObject ruleTree() throws RecognitionException {
         EObject current = null;
 
@@ -120,14 +120,14 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:73:28: ( ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:74:1: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
+            // InternalIndentationAwareTestLanguageParser.g:73:28: ( ( () ( (lv_nodes_1_0= ruleTreeNode ) )* ) )
+            // InternalIndentationAwareTestLanguageParser.g:74:1: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:74:1: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:74:2: () ( (lv_nodes_1_0= ruleTreeNode ) )*
+            // InternalIndentationAwareTestLanguageParser.g:74:1: ( () ( (lv_nodes_1_0= ruleTreeNode ) )* )
+            // InternalIndentationAwareTestLanguageParser.g:74:2: () ( (lv_nodes_1_0= ruleTreeNode ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:74:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:75:5: 
+            // InternalIndentationAwareTestLanguageParser.g:74:2: ()
+            // InternalIndentationAwareTestLanguageParser.g:75:5: 
             {
 
                     current = forceCreateModelElement(
@@ -137,7 +137,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:80:2: ( (lv_nodes_1_0= ruleTreeNode ) )*
+            // InternalIndentationAwareTestLanguageParser.g:80:2: ( (lv_nodes_1_0= ruleTreeNode ) )*
             loop1:
             do {
                 int alt1=2;
@@ -150,15 +150,15 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:81:1: (lv_nodes_1_0= ruleTreeNode )
+            	    // InternalIndentationAwareTestLanguageParser.g:81:1: (lv_nodes_1_0= ruleTreeNode )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:81:1: (lv_nodes_1_0= ruleTreeNode )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:82:3: lv_nodes_1_0= ruleTreeNode
+            	    // InternalIndentationAwareTestLanguageParser.g:81:1: (lv_nodes_1_0= ruleTreeNode )
+            	    // InternalIndentationAwareTestLanguageParser.g:82:3: lv_nodes_1_0= ruleTreeNode
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getTreeAccess().getNodesTreeNodeParserRuleCall_1_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_ruleTree132);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_nodes_1_0=ruleTreeNode();
 
             	    state._fsp--;
@@ -207,7 +207,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleTreeNode"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:106:1: entryRuleTreeNode returns [EObject current=null] : iv_ruleTreeNode= ruleTreeNode EOF ;
+    // InternalIndentationAwareTestLanguageParser.g:106:1: entryRuleTreeNode returns [EObject current=null] : iv_ruleTreeNode= ruleTreeNode EOF ;
     public final EObject entryRuleTreeNode() throws RecognitionException {
         EObject current = null;
 
@@ -215,17 +215,17 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:107:2: (iv_ruleTreeNode= ruleTreeNode EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:108:2: iv_ruleTreeNode= ruleTreeNode EOF
+            // InternalIndentationAwareTestLanguageParser.g:107:2: (iv_ruleTreeNode= ruleTreeNode EOF )
+            // InternalIndentationAwareTestLanguageParser.g:108:2: iv_ruleTreeNode= ruleTreeNode EOF
             {
              newCompositeNode(grammarAccess.getTreeNodeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_entryRuleTreeNode168);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTreeNode=ruleTreeNode();
 
             state._fsp--;
 
              current =iv_ruleTreeNode; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTreeNode178); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -243,7 +243,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleTreeNode"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:115:1: ruleTreeNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) ;
+    // InternalIndentationAwareTestLanguageParser.g:115:1: ruleTreeNode returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) ;
     public final EObject ruleTreeNode() throws RecognitionException {
         EObject current = null;
 
@@ -256,19 +256,19 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:118:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
+            // InternalIndentationAwareTestLanguageParser.g:118:28: ( ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? ) )
+            // InternalIndentationAwareTestLanguageParser.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:119:2: ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
+            // InternalIndentationAwareTestLanguageParser.g:119:1: ( ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )? )
+            // InternalIndentationAwareTestLanguageParser.g:119:2: ( (lv_name_0_0= RULE_ID ) ) (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:119:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:120:1: (lv_name_0_0= RULE_ID )
+            // InternalIndentationAwareTestLanguageParser.g:119:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalIndentationAwareTestLanguageParser.g:120:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:120:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:121:3: lv_name_0_0= RULE_ID
+            // InternalIndentationAwareTestLanguageParser.g:120:1: (lv_name_0_0= RULE_ID )
+            // InternalIndentationAwareTestLanguageParser.g:121:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTreeNode220); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getTreeNodeAccess().getNameIDTerminalRuleCall_0_0()); 
             		
@@ -288,7 +288,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:137:2: (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
+            // InternalIndentationAwareTestLanguageParser.g:137:2: (this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -297,13 +297,13 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:137:3: this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT
+                    // InternalIndentationAwareTestLanguageParser.g:137:3: this_INDENT_1= RULE_INDENT ( (lv_children_2_0= ruleTreeNode ) )* this_DEDENT_3= RULE_DEDENT
                     {
-                    this_INDENT_1=(Token)match(input,RULE_INDENT,FollowSets000.FOLLOW_RULE_INDENT_in_ruleTreeNode237); 
+                    this_INDENT_1=(Token)match(input,RULE_INDENT,FollowSets000.FOLLOW_5); 
                      
                         newLeafNode(this_INDENT_1, grammarAccess.getTreeNodeAccess().getINDENTTerminalRuleCall_1_0()); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:141:1: ( (lv_children_2_0= ruleTreeNode ) )*
+                    // InternalIndentationAwareTestLanguageParser.g:141:1: ( (lv_children_2_0= ruleTreeNode ) )*
                     loop2:
                     do {
                         int alt2=2;
@@ -316,15 +316,15 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:142:1: (lv_children_2_0= ruleTreeNode )
+                    	    // InternalIndentationAwareTestLanguageParser.g:142:1: (lv_children_2_0= ruleTreeNode )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:142:1: (lv_children_2_0= ruleTreeNode )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/internal/InternalIndentationAwareTestLanguageParser.g:143:3: lv_children_2_0= ruleTreeNode
+                    	    // InternalIndentationAwareTestLanguageParser.g:142:1: (lv_children_2_0= ruleTreeNode )
+                    	    // InternalIndentationAwareTestLanguageParser.g:143:3: lv_children_2_0= ruleTreeNode
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTreeNodeAccess().getChildrenTreeNodeParserRuleCall_1_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTreeNode_in_ruleTreeNode257);
+                    	    pushFollow(FollowSets000.FOLLOW_5);
                     	    lv_children_2_0=ruleTreeNode();
 
                     	    state._fsp--;
@@ -352,7 +352,7 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
                         }
                     } while (true);
 
-                    this_DEDENT_3=(Token)match(input,RULE_DEDENT,FollowSets000.FOLLOW_RULE_DEDENT_in_ruleTreeNode269); 
+                    this_DEDENT_3=(Token)match(input,RULE_DEDENT,FollowSets000.FOLLOW_2); 
                      
                         newLeafNode(this_DEDENT_3, grammarAccess.getTreeNodeAccess().getDEDENTTerminalRuleCall_1_2()); 
                         
@@ -388,15 +388,11 @@ public class InternalIndentationAwareTestLanguageParser extends AbstractInternal
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleTree_in_entryRuleTree67 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTree77 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_ruleTree132 = new BitSet(new long[]{0x0000000000000082L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_entryRuleTreeNode168 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTreeNode178 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTreeNode220 = new BitSet(new long[]{0x0000000000000022L});
-        public static final BitSet FOLLOW_RULE_INDENT_in_ruleTreeNode237 = new BitSet(new long[]{0x00000000000000C0L});
-        public static final BitSet FOLLOW_ruleTreeNode_in_ruleTreeNode257 = new BitSet(new long[]{0x00000000000000C0L});
-        public static final BitSet FOLLOW_RULE_DEDENT_in_ruleTreeNode269 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000082L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x00000000000000C0L});
     }
 
 

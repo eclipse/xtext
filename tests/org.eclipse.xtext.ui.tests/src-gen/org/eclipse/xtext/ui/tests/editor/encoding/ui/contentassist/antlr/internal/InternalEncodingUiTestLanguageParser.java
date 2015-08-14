@@ -43,7 +43,7 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
         
 
     public String[] getTokenNames() { return InternalEncodingUiTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEncodingUiTestLanguage.g"; }
 
 
      
@@ -67,20 +67,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
+    // InternalEncodingUiTestLanguage.g:60:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:61:1: ( ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:62:1: ruleModel EOF
+            // InternalEncodingUiTestLanguage.g:61:1: ( ruleModel EOF )
+            // InternalEncodingUiTestLanguage.g:62:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel61);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel68); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -97,20 +97,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:69:1: ruleModel : ( ( rule__Model__WordsAssignment )* ) ;
+    // InternalEncodingUiTestLanguage.g:69:1: ruleModel : ( ( rule__Model__WordsAssignment )* ) ;
     public final void ruleModel() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:73:2: ( ( ( rule__Model__WordsAssignment )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:74:1: ( ( rule__Model__WordsAssignment )* )
+            // InternalEncodingUiTestLanguage.g:73:2: ( ( ( rule__Model__WordsAssignment )* ) )
+            // InternalEncodingUiTestLanguage.g:74:1: ( ( rule__Model__WordsAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:74:1: ( ( rule__Model__WordsAssignment )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:75:1: ( rule__Model__WordsAssignment )*
+            // InternalEncodingUiTestLanguage.g:74:1: ( ( rule__Model__WordsAssignment )* )
+            // InternalEncodingUiTestLanguage.g:75:1: ( rule__Model__WordsAssignment )*
             {
              before(grammarAccess.getModelAccess().getWordsAssignment()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:76:1: ( rule__Model__WordsAssignment )*
+            // InternalEncodingUiTestLanguage.g:76:1: ( rule__Model__WordsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -123,9 +123,9 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:76:2: rule__Model__WordsAssignment
+            	    // InternalEncodingUiTestLanguage.g:76:2: rule__Model__WordsAssignment
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Model__WordsAssignment_in_ruleModel94);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    rule__Model__WordsAssignment();
 
             	    state._fsp--;
@@ -162,20 +162,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "entryRuleWord"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:88:1: entryRuleWord : ruleWord EOF ;
+    // InternalEncodingUiTestLanguage.g:88:1: entryRuleWord : ruleWord EOF ;
     public final void entryRuleWord() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:89:1: ( ruleWord EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:90:1: ruleWord EOF
+            // InternalEncodingUiTestLanguage.g:89:1: ( ruleWord EOF )
+            // InternalEncodingUiTestLanguage.g:90:1: ruleWord EOF
             {
              before(grammarAccess.getWordRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleWord_in_entryRuleWord122);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleWord();
 
             state._fsp--;
 
              after(grammarAccess.getWordRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWord129); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -192,23 +192,23 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "ruleWord"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:97:1: ruleWord : ( ( rule__Word__ValueAssignment ) ) ;
+    // InternalEncodingUiTestLanguage.g:97:1: ruleWord : ( ( rule__Word__ValueAssignment ) ) ;
     public final void ruleWord() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:101:2: ( ( ( rule__Word__ValueAssignment ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:102:1: ( ( rule__Word__ValueAssignment ) )
+            // InternalEncodingUiTestLanguage.g:101:2: ( ( ( rule__Word__ValueAssignment ) ) )
+            // InternalEncodingUiTestLanguage.g:102:1: ( ( rule__Word__ValueAssignment ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:102:1: ( ( rule__Word__ValueAssignment ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:103:1: ( rule__Word__ValueAssignment )
+            // InternalEncodingUiTestLanguage.g:102:1: ( ( rule__Word__ValueAssignment ) )
+            // InternalEncodingUiTestLanguage.g:103:1: ( rule__Word__ValueAssignment )
             {
              before(grammarAccess.getWordAccess().getValueAssignment()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:104:1: ( rule__Word__ValueAssignment )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:104:2: rule__Word__ValueAssignment
+            // InternalEncodingUiTestLanguage.g:104:1: ( rule__Word__ValueAssignment )
+            // InternalEncodingUiTestLanguage.g:104:2: rule__Word__ValueAssignment
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Word__ValueAssignment_in_ruleWord155);
+            pushFollow(FollowSets000.FOLLOW_2);
             rule__Word__ValueAssignment();
 
             state._fsp--;
@@ -239,20 +239,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__Model__WordsAssignment"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:119:1: rule__Model__WordsAssignment : ( ruleWord ) ;
+    // InternalEncodingUiTestLanguage.g:119:1: rule__Model__WordsAssignment : ( ruleWord ) ;
     public final void rule__Model__WordsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:123:1: ( ( ruleWord ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:124:1: ( ruleWord )
+            // InternalEncodingUiTestLanguage.g:123:1: ( ( ruleWord ) )
+            // InternalEncodingUiTestLanguage.g:124:1: ( ruleWord )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:124:1: ( ruleWord )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:125:1: ruleWord
+            // InternalEncodingUiTestLanguage.g:124:1: ( ruleWord )
+            // InternalEncodingUiTestLanguage.g:125:1: ruleWord
             {
              before(grammarAccess.getModelAccess().getWordsWordParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleWord_in_rule__Model__WordsAssignment194);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleWord();
 
             state._fsp--;
@@ -280,20 +280,20 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
 
     // $ANTLR start "rule__Word__ValueAssignment"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:134:1: rule__Word__ValueAssignment : ( RULE_LEXEME ) ;
+    // InternalEncodingUiTestLanguage.g:134:1: rule__Word__ValueAssignment : ( RULE_LEXEME ) ;
     public final void rule__Word__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:138:1: ( ( RULE_LEXEME ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:139:1: ( RULE_LEXEME )
+            // InternalEncodingUiTestLanguage.g:138:1: ( ( RULE_LEXEME ) )
+            // InternalEncodingUiTestLanguage.g:139:1: ( RULE_LEXEME )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:139:1: ( RULE_LEXEME )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:140:1: RULE_LEXEME
+            // InternalEncodingUiTestLanguage.g:139:1: ( RULE_LEXEME )
+            // InternalEncodingUiTestLanguage.g:140:1: RULE_LEXEME
             {
              before(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
-            match(input,RULE_LEXEME,FollowSets000.FOLLOW_RULE_LEXEME_in_rule__Word__ValueAssignment225); 
+            match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
              after(grammarAccess.getWordAccess().getValueLEXEMETerminalRuleCall_0()); 
 
             }
@@ -322,14 +322,9 @@ public class InternalEncodingUiTestLanguageParser extends AbstractInternalConten
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel61 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Model__WordsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleWord_in_entryRuleWord122 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWord129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Word__ValueAssignment_in_ruleWord155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWord_in_rule__Model__WordsAssignment194 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_LEXEME_in_rule__Word__ValueAssignment225 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
     }
 
 

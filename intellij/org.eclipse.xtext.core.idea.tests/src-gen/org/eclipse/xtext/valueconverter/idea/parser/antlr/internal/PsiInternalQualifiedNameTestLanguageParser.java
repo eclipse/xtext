@@ -46,7 +46,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
         
 
     public String[] getTokenNames() { return PsiInternalQualifiedNameTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalQualifiedNameTestLanguage.g"; }
 
 
 
@@ -70,19 +70,19 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:52:1: entryRuleElement : ruleElement EOF ;
+    // PsiInternalQualifiedNameTestLanguage.g:52:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:52:17: ( ruleElement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:53:2: ruleElement EOF
+            // PsiInternalQualifiedNameTestLanguage.g:52:17: ( ruleElement EOF )
+            // PsiInternalQualifiedNameTestLanguage.g:53:2: ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleElement();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -99,34 +99,34 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:58:1: ruleElement : (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) ;
+    // PsiInternalQualifiedNameTestLanguage.g:58:1: ruleElement : (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) ;
     public final void ruleElement() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:58:12: ( (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:58:12: ( (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:60:3: otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
+            // PsiInternalQualifiedNameTestLanguage.g:59:2: (otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) ) )
+            // PsiInternalQualifiedNameTestLanguage.g:60:3: otherlv_0= 'keyword' ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
             {
 
             			markLeaf(elementTypeProvider.getElement_KeywordKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement76); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:67:3: ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
+            // PsiInternalQualifiedNameTestLanguage.g:67:3: ( (lv_qualifiedName_1_0= ruleQualifiedName ) )
+            // PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:69:5: lv_qualifiedName_1_0= ruleQualifiedName
+            // PsiInternalQualifiedNameTestLanguage.g:68:4: (lv_qualifiedName_1_0= ruleQualifiedName )
+            // PsiInternalQualifiedNameTestLanguage.g:69:5: lv_qualifiedName_1_0= ruleQualifiedName
             {
 
             					markComposite(elementTypeProvider.getElement_QualifiedNameQualifiedNameParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_ruleElement103);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleQualifiedName();
 
             state._fsp--;
@@ -159,19 +159,19 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:82:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
+    // PsiInternalQualifiedNameTestLanguage.g:82:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:82:23: ( ruleQualifiedName EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:83:2: ruleQualifiedName EOF
+            // PsiInternalQualifiedNameTestLanguage.g:82:23: ( ruleQualifiedName EOF )
+            // PsiInternalQualifiedNameTestLanguage.g:83:2: ruleQualifiedName EOF
             {
              markComposite(elementTypeProvider.getQualifiedNameElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName134);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleQualifiedName();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQualifiedName137); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -188,27 +188,27 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleQualifiedName"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:88:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) ;
+    // PsiInternalQualifiedNameTestLanguage.g:88:1: ruleQualifiedName : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) ;
     public final void ruleQualifiedName() throws RecognitionException {
         Token this_ID_0=null;
         Token kw=null;
         Token this_ID_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:88:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
+            // PsiInternalQualifiedNameTestLanguage.g:88:18: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? ) )
+            // PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:90:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )?
+            // PsiInternalQualifiedNameTestLanguage.g:89:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )? )
+            // PsiInternalQualifiedNameTestLanguage.g:90:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* (kw= '.' kw= '*' )?
             {
 
             			markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_0ElementType());
             		
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQualifiedName156); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             			doneLeaf(this_ID_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:97:3: (kw= '.' this_ID_2= RULE_ID )*
+            // PsiInternalQualifiedNameTestLanguage.g:97:3: (kw= '.' this_ID_2= RULE_ID )*
             loop1:
             do {
                 int alt1=2;
@@ -227,19 +227,19 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:98:4: kw= '.' this_ID_2= RULE_ID
+            	    // PsiInternalQualifiedNameTestLanguage.g:98:4: kw= '.' this_ID_2= RULE_ID
             	    {
 
             	    				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_1_0ElementType());
             	    			
-            	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleQualifiedName176); 
+            	    kw=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
             	    				doneLeaf(kw);
             	    			
 
             	    				markLeaf(elementTypeProvider.getQualifiedName_IDTerminalRuleCall_1_1ElementType());
             	    			
-            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQualifiedName193); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             	    				doneLeaf(this_ID_2);
             	    			
@@ -252,7 +252,7 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:113:3: (kw= '.' kw= '*' )?
+            // PsiInternalQualifiedNameTestLanguage.g:113:3: (kw= '.' kw= '*' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -261,19 +261,19 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/valueconverter/idea/parser/antlr/internal/PsiInternalQualifiedNameTestLanguage.g:114:4: kw= '.' kw= '*'
+                    // PsiInternalQualifiedNameTestLanguage.g:114:4: kw= '.' kw= '*'
                     {
 
                     				markLeaf(elementTypeProvider.getQualifiedName_FullStopKeyword_2_0ElementType());
                     			
-                    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleQualifiedName219); 
+                    kw=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(kw);
                     			
 
                     				markLeaf(elementTypeProvider.getQualifiedName_AsteriskKeyword_2_1ElementType());
                     			
-                    kw=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleQualifiedName236); 
+                    kw=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(kw);
                     			
@@ -307,17 +307,11 @@ public class PsiInternalQualifiedNameTestLanguageParser extends AbstractPsiAntlr
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleElement76 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleQualifiedName_in_ruleElement103 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName134 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName137 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName156 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleQualifiedName176 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQualifiedName193 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleQualifiedName219 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_13_in_ruleQualifiedName236 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002000L});
     }
 
 

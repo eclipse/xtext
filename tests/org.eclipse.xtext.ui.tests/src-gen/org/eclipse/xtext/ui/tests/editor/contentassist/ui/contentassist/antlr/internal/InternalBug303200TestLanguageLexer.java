@@ -38,15 +38,15 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBug303200TestLanguage.g"; }
 
     // $ANTLR start "T__7"
     public final void mT__7() throws RecognitionException {
         try {
             int _type = T__7;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:11:6: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:11:8: ';'
+            // InternalBug303200TestLanguage.g:11:6: ( ';' )
+            // InternalBug303200TestLanguage.g:11:8: ';'
             {
             match(';'); 
 
@@ -65,8 +65,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:12:6: ( 'function' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:12:8: 'function'
+            // InternalBug303200TestLanguage.g:12:6: ( 'function' )
+            // InternalBug303200TestLanguage.g:12:8: 'function'
             {
             match("function"); 
 
@@ -86,8 +86,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:13:6: ( '[' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:13:8: '['
+            // InternalBug303200TestLanguage.g:13:6: ( '[' )
+            // InternalBug303200TestLanguage.g:13:8: '['
             {
             match('['); 
 
@@ -106,8 +106,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:14:7: ( ']' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:14:9: ']'
+            // InternalBug303200TestLanguage.g:14:7: ( ']' )
+            // InternalBug303200TestLanguage.g:14:9: ']'
             {
             match(']'); 
 
@@ -126,8 +126,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:15:7: ( '(' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:15:9: '('
+            // InternalBug303200TestLanguage.g:15:7: ( '(' )
+            // InternalBug303200TestLanguage.g:15:9: '('
             {
             match('('); 
 
@@ -146,8 +146,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:16:7: ( ')' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:16:9: ')'
+            // InternalBug303200TestLanguage.g:16:7: ( ')' )
+            // InternalBug303200TestLanguage.g:16:9: ')'
             {
             match(')'); 
 
@@ -166,8 +166,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:17:7: ( ',' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:17:9: ','
+            // InternalBug303200TestLanguage.g:17:7: ( ',' )
+            // InternalBug303200TestLanguage.g:17:9: ','
             {
             match(','); 
 
@@ -186,8 +186,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:18:7: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:18:9: '{'
+            // InternalBug303200TestLanguage.g:18:7: ( '{' )
+            // InternalBug303200TestLanguage.g:18:9: '{'
             {
             match('{'); 
 
@@ -206,8 +206,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:19:7: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:19:9: '}'
+            // InternalBug303200TestLanguage.g:19:7: ( '}' )
+            // InternalBug303200TestLanguage.g:19:9: '}'
             {
             match('}'); 
 
@@ -226,8 +226,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:20:7: ( '.' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:20:9: '.'
+            // InternalBug303200TestLanguage.g:20:7: ( '.' )
+            // InternalBug303200TestLanguage.g:20:9: '.'
             {
             match('.'); 
 
@@ -246,10 +246,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:3213:9: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // InternalBug303200TestLanguage.g:3213:11: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -263,7 +263,7 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:
+            	    // InternalBug303200TestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -303,10 +303,10 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:9: ( ( ' ' | '\\t' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:3215:9: ( ( ' ' | '\\t' )+ )
+            // InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
+            // InternalBug303200TestLanguage.g:3215:11: ( ' ' | '\\t' )+
             int cnt2=0;
             loop2:
             do {
@@ -320,7 +320,7 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:
+            	    // InternalBug303200TestLanguage.g:
             	    {
             	    if ( input.LA(1)=='\t'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -360,8 +360,8 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_LT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3217:9: ( ( '\\r' | '\\n' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:3217:11: ( '\\r' | '\\n' )
+            // InternalBug303200TestLanguage.g:3217:9: ( ( '\\r' | '\\n' ) )
+            // InternalBug303200TestLanguage.g:3217:11: ( '\\r' | '\\n' )
             {
             if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
                 input.consume();
@@ -384,96 +384,96 @@ public class InternalBug303200TestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_LT"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:8: ( T__7 | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | RULE_ID | RULE_WS | RULE_LT )
+        // InternalBug303200TestLanguage.g:1:8: ( T__7 | T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | RULE_ID | RULE_WS | RULE_LT )
         int alt3=13;
         alt3 = dfa3.predict(input);
         switch (alt3) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:10: T__7
+                // InternalBug303200TestLanguage.g:1:10: T__7
                 {
                 mT__7(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:15: T__8
+                // InternalBug303200TestLanguage.g:1:15: T__8
                 {
                 mT__8(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:20: T__9
+                // InternalBug303200TestLanguage.g:1:20: T__9
                 {
                 mT__9(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:25: T__10
+                // InternalBug303200TestLanguage.g:1:25: T__10
                 {
                 mT__10(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:31: T__11
+                // InternalBug303200TestLanguage.g:1:31: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:37: T__12
+                // InternalBug303200TestLanguage.g:1:37: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:43: T__13
+                // InternalBug303200TestLanguage.g:1:43: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:49: T__14
+                // InternalBug303200TestLanguage.g:1:49: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:55: T__15
+                // InternalBug303200TestLanguage.g:1:55: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:61: T__16
+                // InternalBug303200TestLanguage.g:1:61: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:67: RULE_ID
+                // InternalBug303200TestLanguage.g:1:67: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:75: RULE_WS
+                // InternalBug303200TestLanguage.g:1:75: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBug303200TestLanguage.g:1:83: RULE_LT
+                // InternalBug303200TestLanguage.g:1:83: RULE_LT
                 {
                 mRULE_LT(); 
 

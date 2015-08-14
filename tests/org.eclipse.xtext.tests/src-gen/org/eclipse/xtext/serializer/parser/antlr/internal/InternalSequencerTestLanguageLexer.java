@@ -27,12 +27,12 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int T__55=55;
     public static final int T__19=19;
-    public static final int T__51=51;
     public static final int T__16=16;
+    public static final int T__51=51;
     public static final int T__15=15;
     public static final int T__52=52;
-    public static final int T__18=18;
     public static final int T__53=53;
+    public static final int T__18=18;
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__14=14;
@@ -77,15 +77,15 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalSequencerTestLanguage.g"; }
 
     // $ANTLR start "T__14"
     public final void mT__14() throws RecognitionException {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:11:7: ( '#1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:11:9: '#1'
+            // InternalSequencerTestLanguage.g:11:7: ( '#1' )
+            // InternalSequencerTestLanguage.g:11:9: '#1'
             {
             match("#1"); 
 
@@ -105,8 +105,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:12:7: ( '#2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:12:9: '#2'
+            // InternalSequencerTestLanguage.g:12:7: ( '#2' )
+            // InternalSequencerTestLanguage.g:12:9: '#2'
             {
             match("#2"); 
 
@@ -126,8 +126,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:13:7: ( 'kw1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:13:9: 'kw1'
+            // InternalSequencerTestLanguage.g:13:7: ( 'kw1' )
+            // InternalSequencerTestLanguage.g:13:9: 'kw1'
             {
             match("kw1"); 
 
@@ -147,8 +147,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:14:7: ( 'kw2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:14:9: 'kw2'
+            // InternalSequencerTestLanguage.g:14:7: ( 'kw2' )
+            // InternalSequencerTestLanguage.g:14:9: 'kw2'
             {
             match("kw2"); 
 
@@ -168,8 +168,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:15:7: ( '#3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:15:9: '#3'
+            // InternalSequencerTestLanguage.g:15:7: ( '#3' )
+            // InternalSequencerTestLanguage.g:15:9: '#3'
             {
             match("#3"); 
 
@@ -189,8 +189,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:16:7: ( 'kw3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:16:9: 'kw3'
+            // InternalSequencerTestLanguage.g:16:7: ( 'kw3' )
+            // InternalSequencerTestLanguage.g:16:9: 'kw3'
             {
             match("kw3"); 
 
@@ -210,8 +210,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:17:7: ( '#4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:17:9: '#4'
+            // InternalSequencerTestLanguage.g:17:7: ( '#4' )
+            // InternalSequencerTestLanguage.g:17:9: '#4'
             {
             match("#4"); 
 
@@ -231,8 +231,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:18:7: ( '#5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:18:9: '#5'
+            // InternalSequencerTestLanguage.g:18:7: ( '#5' )
+            // InternalSequencerTestLanguage.g:18:9: '#5'
             {
             match("#5"); 
 
@@ -252,8 +252,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:19:7: ( 'kw4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:19:9: 'kw4'
+            // InternalSequencerTestLanguage.g:19:7: ( 'kw4' )
+            // InternalSequencerTestLanguage.g:19:9: 'kw4'
             {
             match("kw4"); 
 
@@ -273,8 +273,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:20:7: ( 'kw5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:20:9: 'kw5'
+            // InternalSequencerTestLanguage.g:20:7: ( 'kw5' )
+            // InternalSequencerTestLanguage.g:20:9: 'kw5'
             {
             match("kw5"); 
 
@@ -294,8 +294,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:21:7: ( '#6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:21:9: '#6'
+            // InternalSequencerTestLanguage.g:21:7: ( '#6' )
+            // InternalSequencerTestLanguage.g:21:9: '#6'
             {
             match("#6"); 
 
@@ -315,8 +315,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:22:7: ( ',' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:22:9: ','
+            // InternalSequencerTestLanguage.g:22:7: ( ',' )
+            // InternalSequencerTestLanguage.g:22:9: ','
             {
             match(','); 
 
@@ -335,8 +335,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:23:7: ( '#7' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:23:9: '#7'
+            // InternalSequencerTestLanguage.g:23:7: ( '#7' )
+            // InternalSequencerTestLanguage.g:23:9: '#7'
             {
             match("#7"); 
 
@@ -356,8 +356,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:24:7: ( '#8' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:24:9: '#8'
+            // InternalSequencerTestLanguage.g:24:7: ( '#8' )
+            // InternalSequencerTestLanguage.g:24:9: '#8'
             {
             match("#8"); 
 
@@ -377,8 +377,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:25:7: ( '#9' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:25:9: '#9'
+            // InternalSequencerTestLanguage.g:25:7: ( '#9' )
+            // InternalSequencerTestLanguage.g:25:9: '#9'
             {
             match("#9"); 
 
@@ -398,8 +398,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:26:7: ( 'kw' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:26:9: 'kw'
+            // InternalSequencerTestLanguage.g:26:7: ( 'kw' )
+            // InternalSequencerTestLanguage.g:26:9: 'kw'
             {
             match("kw"); 
 
@@ -419,8 +419,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:27:7: ( '#10' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:27:9: '#10'
+            // InternalSequencerTestLanguage.g:27:7: ( '#10' )
+            // InternalSequencerTestLanguage.g:27:9: '#10'
             {
             match("#10"); 
 
@@ -440,8 +440,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:28:7: ( '#11' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:28:9: '#11'
+            // InternalSequencerTestLanguage.g:28:7: ( '#11' )
+            // InternalSequencerTestLanguage.g:28:9: '#11'
             {
             match("#11"); 
 
@@ -461,8 +461,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:29:7: ( '#12' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:29:9: '#12'
+            // InternalSequencerTestLanguage.g:29:7: ( '#12' )
+            // InternalSequencerTestLanguage.g:29:9: '#12'
             {
             match("#12"); 
 
@@ -482,8 +482,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:30:7: ( '#13' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:30:9: '#13'
+            // InternalSequencerTestLanguage.g:30:7: ( '#13' )
+            // InternalSequencerTestLanguage.g:30:9: '#13'
             {
             match("#13"); 
 
@@ -503,8 +503,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:31:7: ( '#14' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:31:9: '#14'
+            // InternalSequencerTestLanguage.g:31:7: ( '#14' )
+            // InternalSequencerTestLanguage.g:31:9: '#14'
             {
             match("#14"); 
 
@@ -524,8 +524,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:32:7: ( '#15' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:32:9: '#15'
+            // InternalSequencerTestLanguage.g:32:7: ( '#15' )
+            // InternalSequencerTestLanguage.g:32:9: '#15'
             {
             match("#15"); 
 
@@ -545,8 +545,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:33:7: ( '#16' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:33:9: '#16'
+            // InternalSequencerTestLanguage.g:33:7: ( '#16' )
+            // InternalSequencerTestLanguage.g:33:9: '#16'
             {
             match("#16"); 
 
@@ -566,8 +566,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:34:7: ( '#17' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:34:9: '#17'
+            // InternalSequencerTestLanguage.g:34:7: ( '#17' )
+            // InternalSequencerTestLanguage.g:34:9: '#17'
             {
             match("#17"); 
 
@@ -587,8 +587,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:35:7: ( '#18' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:35:9: '#18'
+            // InternalSequencerTestLanguage.g:35:7: ( '#18' )
+            // InternalSequencerTestLanguage.g:35:9: '#18'
             {
             match("#18"); 
 
@@ -608,8 +608,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:36:7: ( '#19' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:36:9: '#19'
+            // InternalSequencerTestLanguage.g:36:7: ( '#19' )
+            // InternalSequencerTestLanguage.g:36:9: '#19'
             {
             match("#19"); 
 
@@ -629,8 +629,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:37:7: ( '#20' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:37:9: '#20'
+            // InternalSequencerTestLanguage.g:37:7: ( '#20' )
+            // InternalSequencerTestLanguage.g:37:9: '#20'
             {
             match("#20"); 
 
@@ -650,8 +650,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:38:7: ( '#21' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:38:9: '#21'
+            // InternalSequencerTestLanguage.g:38:7: ( '#21' )
+            // InternalSequencerTestLanguage.g:38:9: '#21'
             {
             match("#21"); 
 
@@ -671,8 +671,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:39:7: ( '#22' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:39:9: '#22'
+            // InternalSequencerTestLanguage.g:39:7: ( '#22' )
+            // InternalSequencerTestLanguage.g:39:9: '#22'
             {
             match("#22"); 
 
@@ -692,8 +692,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:40:7: ( 'Bye' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:40:9: 'Bye'
+            // InternalSequencerTestLanguage.g:40:7: ( 'Bye' )
+            // InternalSequencerTestLanguage.g:40:9: 'Bye'
             {
             match("Bye"); 
 
@@ -713,8 +713,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:41:7: ( '#23' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:41:9: '#23'
+            // InternalSequencerTestLanguage.g:41:7: ( '#23' )
+            // InternalSequencerTestLanguage.g:41:9: '#23'
             {
             match("#23"); 
 
@@ -734,8 +734,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:42:7: ( '#24' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:42:9: '#24'
+            // InternalSequencerTestLanguage.g:42:7: ( '#24' )
+            // InternalSequencerTestLanguage.g:42:9: '#24'
             {
             match("#24"); 
 
@@ -755,8 +755,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:43:7: ( '#25' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:43:9: '#25'
+            // InternalSequencerTestLanguage.g:43:7: ( '#25' )
+            // InternalSequencerTestLanguage.g:43:9: '#25'
             {
             match("#25"); 
 
@@ -776,8 +776,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:44:7: ( '#26' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:44:9: '#26'
+            // InternalSequencerTestLanguage.g:44:7: ( '#26' )
+            // InternalSequencerTestLanguage.g:44:9: '#26'
             {
             match("#26"); 
 
@@ -797,8 +797,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:45:7: ( '#27' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:45:9: '#27'
+            // InternalSequencerTestLanguage.g:45:7: ( '#27' )
+            // InternalSequencerTestLanguage.g:45:9: '#27'
             {
             match("#27"); 
 
@@ -818,8 +818,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:46:7: ( 'kw6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:46:9: 'kw6'
+            // InternalSequencerTestLanguage.g:46:7: ( 'kw6' )
+            // InternalSequencerTestLanguage.g:46:9: 'kw6'
             {
             match("kw6"); 
 
@@ -839,8 +839,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:47:7: ( '#28' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:47:9: '#28'
+            // InternalSequencerTestLanguage.g:47:7: ( '#28' )
+            // InternalSequencerTestLanguage.g:47:9: '#28'
             {
             match("#28"); 
 
@@ -860,8 +860,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:48:7: ( '.' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:48:9: '.'
+            // InternalSequencerTestLanguage.g:48:7: ( '.' )
+            // InternalSequencerTestLanguage.g:48:9: '.'
             {
             match('.'); 
 
@@ -880,8 +880,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:49:7: ( '#29' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:49:9: '#29'
+            // InternalSequencerTestLanguage.g:49:7: ( '#29' )
+            // InternalSequencerTestLanguage.g:49:9: '#29'
             {
             match("#29"); 
 
@@ -901,8 +901,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:50:7: ( '#30' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:50:9: '#30'
+            // InternalSequencerTestLanguage.g:50:7: ( '#30' )
+            // InternalSequencerTestLanguage.g:50:9: '#30'
             {
             match("#30"); 
 
@@ -922,8 +922,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:51:7: ( '#31' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:51:9: '#31'
+            // InternalSequencerTestLanguage.g:51:7: ( '#31' )
+            // InternalSequencerTestLanguage.g:51:9: '#31'
             {
             match("#31"); 
 
@@ -943,8 +943,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:52:7: ( '#32' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:52:9: '#32'
+            // InternalSequencerTestLanguage.g:52:7: ( '#32' )
+            // InternalSequencerTestLanguage.g:52:9: '#32'
             {
             match("#32"); 
 
@@ -964,8 +964,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID1;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4068:10: ( '$1' RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4068:12: '$1' RULE_ID
+            // InternalSequencerTestLanguage.g:4068:10: ( '$1' RULE_ID )
+            // InternalSequencerTestLanguage.g:4068:12: '$1' RULE_ID
             {
             match("$1"); 
 
@@ -986,8 +986,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID2;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4070:10: ( '$2' RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4070:12: '$2' RULE_ID
+            // InternalSequencerTestLanguage.g:4070:10: ( '$2' RULE_ID )
+            // InternalSequencerTestLanguage.g:4070:12: '$2' RULE_ID
             {
             match("$2"); 
 
@@ -1008,8 +1008,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID3;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4072:10: ( '$3' RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4072:12: '$3' RULE_ID
+            // InternalSequencerTestLanguage.g:4072:10: ( '$3' RULE_ID )
+            // InternalSequencerTestLanguage.g:4072:12: '$3' RULE_ID
             {
             match("$3"); 
 
@@ -1030,10 +1030,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4074:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4074:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSequencerTestLanguage.g:4074:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSequencerTestLanguage.g:4074:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4074:11: ( '^' )?
+            // InternalSequencerTestLanguage.g:4074:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1042,7 +1042,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4074:11: '^'
+                    // InternalSequencerTestLanguage.g:4074:11: '^'
                     {
                     match('^'); 
 
@@ -1060,7 +1060,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4074:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSequencerTestLanguage.g:4074:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1073,7 +1073,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:
+            	    // InternalSequencerTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -1109,10 +1109,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4076:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4076:12: ( '0' .. '9' )+
+            // InternalSequencerTestLanguage.g:4076:10: ( ( '0' .. '9' )+ )
+            // InternalSequencerTestLanguage.g:4076:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4076:12: ( '0' .. '9' )+
+            // InternalSequencerTestLanguage.g:4076:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1126,7 +1126,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4076:13: '0' .. '9'
+            	    // InternalSequencerTestLanguage.g:4076:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1158,10 +1158,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSequencerTestLanguage.g:4078:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalSequencerTestLanguage.g:4078:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSequencerTestLanguage.g:4078:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1179,10 +1179,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalSequencerTestLanguage.g:4078:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalSequencerTestLanguage.g:4078:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1198,7 +1198,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:21: '\\\\' .
+                    	    // InternalSequencerTestLanguage.g:4078:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1206,7 +1206,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalSequencerTestLanguage.g:4078:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1231,10 +1231,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalSequencerTestLanguage.g:4078:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalSequencerTestLanguage.g:4078:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1250,7 +1250,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:54: '\\\\' .
+                    	    // InternalSequencerTestLanguage.g:4078:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1258,7 +1258,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4078:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalSequencerTestLanguage.g:4078:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1301,12 +1301,12 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4080:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4080:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalSequencerTestLanguage.g:4080:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalSequencerTestLanguage.g:4080:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4080:24: ( options {greedy=false; } : . )*
+            // InternalSequencerTestLanguage.g:4080:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1331,7 +1331,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4080:52: .
+            	    // InternalSequencerTestLanguage.g:4080:52: .
             	    {
             	    matchAny(); 
 
@@ -1361,12 +1361,12 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalSequencerTestLanguage.g:4082:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalSequencerTestLanguage.g:4082:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalSequencerTestLanguage.g:4082:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1379,7 +1379,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalSequencerTestLanguage.g:4082:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1399,7 +1399,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:40: ( ( '\\r' )? '\\n' )?
+            // InternalSequencerTestLanguage.g:4082:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1408,9 +1408,9 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:41: ( '\\r' )? '\\n'
+                    // InternalSequencerTestLanguage.g:4082:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:41: ( '\\r' )?
+                    // InternalSequencerTestLanguage.g:4082:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1419,7 +1419,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4082:41: '\\r'
+                            // InternalSequencerTestLanguage.g:4082:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1451,10 +1451,10 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4084:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4084:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSequencerTestLanguage.g:4084:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSequencerTestLanguage.g:4084:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4084:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSequencerTestLanguage.g:4084:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1468,7 +1468,7 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:
+            	    // InternalSequencerTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1508,8 +1508,8 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4086:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:4086:18: .
+            // InternalSequencerTestLanguage.g:4086:16: ( . )
+            // InternalSequencerTestLanguage.g:4086:18: .
             {
             matchAny(); 
 
@@ -1524,369 +1524,369 @@ public class InternalSequencerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | RULE_ID1 | RULE_ID2 | RULE_ID3 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalSequencerTestLanguage.g:1:8: ( T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | RULE_ID1 | RULE_ID2 | RULE_ID3 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=52;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:10: T__14
+                // InternalSequencerTestLanguage.g:1:10: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:16: T__15
+                // InternalSequencerTestLanguage.g:1:16: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:22: T__16
+                // InternalSequencerTestLanguage.g:1:22: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:28: T__17
+                // InternalSequencerTestLanguage.g:1:28: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:34: T__18
+                // InternalSequencerTestLanguage.g:1:34: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:40: T__19
+                // InternalSequencerTestLanguage.g:1:40: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:46: T__20
+                // InternalSequencerTestLanguage.g:1:46: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:52: T__21
+                // InternalSequencerTestLanguage.g:1:52: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:58: T__22
+                // InternalSequencerTestLanguage.g:1:58: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:64: T__23
+                // InternalSequencerTestLanguage.g:1:64: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:70: T__24
+                // InternalSequencerTestLanguage.g:1:70: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:76: T__25
+                // InternalSequencerTestLanguage.g:1:76: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:82: T__26
+                // InternalSequencerTestLanguage.g:1:82: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:88: T__27
+                // InternalSequencerTestLanguage.g:1:88: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:94: T__28
+                // InternalSequencerTestLanguage.g:1:94: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:100: T__29
+                // InternalSequencerTestLanguage.g:1:100: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:106: T__30
+                // InternalSequencerTestLanguage.g:1:106: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:112: T__31
+                // InternalSequencerTestLanguage.g:1:112: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:118: T__32
+                // InternalSequencerTestLanguage.g:1:118: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:124: T__33
+                // InternalSequencerTestLanguage.g:1:124: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:130: T__34
+                // InternalSequencerTestLanguage.g:1:130: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:136: T__35
+                // InternalSequencerTestLanguage.g:1:136: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:142: T__36
+                // InternalSequencerTestLanguage.g:1:142: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:148: T__37
+                // InternalSequencerTestLanguage.g:1:148: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:154: T__38
+                // InternalSequencerTestLanguage.g:1:154: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:160: T__39
+                // InternalSequencerTestLanguage.g:1:160: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:166: T__40
+                // InternalSequencerTestLanguage.g:1:166: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:172: T__41
+                // InternalSequencerTestLanguage.g:1:172: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:178: T__42
+                // InternalSequencerTestLanguage.g:1:178: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 30 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:184: T__43
+                // InternalSequencerTestLanguage.g:1:184: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 31 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:190: T__44
+                // InternalSequencerTestLanguage.g:1:190: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 32 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:196: T__45
+                // InternalSequencerTestLanguage.g:1:196: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 33 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:202: T__46
+                // InternalSequencerTestLanguage.g:1:202: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 34 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:208: T__47
+                // InternalSequencerTestLanguage.g:1:208: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 35 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:214: T__48
+                // InternalSequencerTestLanguage.g:1:214: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 36 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:220: T__49
+                // InternalSequencerTestLanguage.g:1:220: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
             case 37 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:226: T__50
+                // InternalSequencerTestLanguage.g:1:226: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
             case 38 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:232: T__51
+                // InternalSequencerTestLanguage.g:1:232: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
             case 39 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:238: T__52
+                // InternalSequencerTestLanguage.g:1:238: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
             case 40 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:244: T__53
+                // InternalSequencerTestLanguage.g:1:244: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
             case 41 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:250: T__54
+                // InternalSequencerTestLanguage.g:1:250: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
             case 42 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:256: T__55
+                // InternalSequencerTestLanguage.g:1:256: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
             case 43 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:262: RULE_ID1
+                // InternalSequencerTestLanguage.g:1:262: RULE_ID1
                 {
                 mRULE_ID1(); 
 
                 }
                 break;
             case 44 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:271: RULE_ID2
+                // InternalSequencerTestLanguage.g:1:271: RULE_ID2
                 {
                 mRULE_ID2(); 
 
                 }
                 break;
             case 45 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:280: RULE_ID3
+                // InternalSequencerTestLanguage.g:1:280: RULE_ID3
                 {
                 mRULE_ID3(); 
 
                 }
                 break;
             case 46 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:289: RULE_ID
+                // InternalSequencerTestLanguage.g:1:289: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 47 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:297: RULE_INT
+                // InternalSequencerTestLanguage.g:1:297: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 48 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:306: RULE_STRING
+                // InternalSequencerTestLanguage.g:1:306: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 49 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:318: RULE_ML_COMMENT
+                // InternalSequencerTestLanguage.g:1:318: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 50 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:334: RULE_SL_COMMENT
+                // InternalSequencerTestLanguage.g:1:334: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 51 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:350: RULE_WS
+                // InternalSequencerTestLanguage.g:1:350: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 52 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/serializer/parser/antlr/internal/InternalSequencerTestLanguage.g:1:358: RULE_ANY_OTHER
+                // InternalSequencerTestLanguage.g:1:358: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

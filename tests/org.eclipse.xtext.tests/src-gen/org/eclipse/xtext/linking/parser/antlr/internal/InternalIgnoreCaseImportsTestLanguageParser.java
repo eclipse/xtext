@@ -48,7 +48,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
         
 
     public String[] getTokenNames() { return InternalIgnoreCaseImportsTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalIgnoreCaseImportsTestLanguage.g"; }
 
 
 
@@ -73,7 +73,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalIgnoreCaseImportsTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -81,17 +81,17 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalIgnoreCaseImportsTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalIgnoreCaseImportsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -109,7 +109,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) ;
+    // InternalIgnoreCaseImportsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,13 +121,13 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
+            // InternalIgnoreCaseImportsTestLanguage.g:79:28: ( ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+
+            // InternalIgnoreCaseImportsTestLanguage.g:80:1: ( ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+ )
+            // InternalIgnoreCaseImportsTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )* ( (lv_elements_1_0= ruleElement ) )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )*
+            // InternalIgnoreCaseImportsTestLanguage.g:80:2: ( (lv_imports_0_0= ruleImport ) )*
             loop1:
             do {
                 int alt1=2;
@@ -140,15 +140,15 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:82:3: lv_imports_0_0= ruleImport
+            	    // InternalIgnoreCaseImportsTestLanguage.g:81:1: (lv_imports_0_0= ruleImport )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:82:3: lv_imports_0_0= ruleImport
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getImportsImportParserRuleCall_0_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleImport_in_ruleModel131);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_imports_0_0=ruleImport();
 
             	    state._fsp--;
@@ -176,7 +176,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:98:3: ( (lv_elements_1_0= ruleElement ) )+
+            // InternalIgnoreCaseImportsTestLanguage.g:98:3: ( (lv_elements_1_0= ruleElement ) )+
             int cnt2=0;
             loop2:
             do {
@@ -190,15 +190,15 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:99:1: (lv_elements_1_0= ruleElement )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:99:1: (lv_elements_1_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:99:1: (lv_elements_1_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:100:3: lv_elements_1_0= ruleElement
+            	    // InternalIgnoreCaseImportsTestLanguage.g:99:1: (lv_elements_1_0= ruleElement )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:100:3: lv_elements_1_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_1_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel153);
+            	    pushFollow(FollowSets000.FOLLOW_4);
             	    lv_elements_1_0=ruleElement();
 
             	    state._fsp--;
@@ -251,7 +251,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:124:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // InternalIgnoreCaseImportsTestLanguage.g:124:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -259,17 +259,17 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:125:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:126:2: iv_ruleImport= ruleImport EOF
+            // InternalIgnoreCaseImportsTestLanguage.g:125:2: (iv_ruleImport= ruleImport EOF )
+            // InternalIgnoreCaseImportsTestLanguage.g:126:2: iv_ruleImport= ruleImport EOF
             {
              newCompositeNode(grammarAccess.getImportRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport190);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleImport=ruleImport();
 
             state._fsp--;
 
              current =iv_ruleImport; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleImport200); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -287,7 +287,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:133:1: ruleImport returns [EObject current=null] : ( (lv_importURI_0_0= RULE_STRING ) ) ;
+    // InternalIgnoreCaseImportsTestLanguage.g:133:1: ruleImport returns [EObject current=null] : ( (lv_importURI_0_0= RULE_STRING ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -296,16 +296,16 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:136:28: ( ( (lv_importURI_0_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:137:1: ( (lv_importURI_0_0= RULE_STRING ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:136:28: ( ( (lv_importURI_0_0= RULE_STRING ) ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:137:1: ( (lv_importURI_0_0= RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:137:1: ( (lv_importURI_0_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:138:1: (lv_importURI_0_0= RULE_STRING )
+            // InternalIgnoreCaseImportsTestLanguage.g:137:1: ( (lv_importURI_0_0= RULE_STRING ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:138:1: (lv_importURI_0_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:138:1: (lv_importURI_0_0= RULE_STRING )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:139:3: lv_importURI_0_0= RULE_STRING
+            // InternalIgnoreCaseImportsTestLanguage.g:138:1: (lv_importURI_0_0= RULE_STRING )
+            // InternalIgnoreCaseImportsTestLanguage.g:139:3: lv_importURI_0_0= RULE_STRING
             {
-            lv_importURI_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleImport241); 
+            lv_importURI_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_importURI_0_0, grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_0()); 
             		
@@ -343,7 +343,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:163:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalIgnoreCaseImportsTestLanguage.g:163:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -351,17 +351,17 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:164:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:165:2: iv_ruleElement= ruleElement EOF
+            // InternalIgnoreCaseImportsTestLanguage.g:164:2: (iv_ruleElement= ruleElement EOF )
+            // InternalIgnoreCaseImportsTestLanguage.g:165:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement281);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleElement=ruleElement();
 
             state._fsp--;
 
              current =iv_ruleElement; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement291); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -379,7 +379,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:172:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
+    // InternalIgnoreCaseImportsTestLanguage.g:172:1: ruleElement returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -393,19 +393,19 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:175:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:176:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalIgnoreCaseImportsTestLanguage.g:175:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:176:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:176:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:176:2: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
+            // InternalIgnoreCaseImportsTestLanguage.g:176:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}' )
+            // InternalIgnoreCaseImportsTestLanguage.g:176:2: ( (lv_name_0_0= RULE_ID ) ) ( (otherlv_1= RULE_ID ) )? otherlv_2= '{' ( (lv_elements_3_0= ruleElement ) )* otherlv_4= '}'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:176:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:177:1: (lv_name_0_0= RULE_ID )
+            // InternalIgnoreCaseImportsTestLanguage.g:176:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalIgnoreCaseImportsTestLanguage.g:177:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:177:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:178:3: lv_name_0_0= RULE_ID
+            // InternalIgnoreCaseImportsTestLanguage.g:177:1: (lv_name_0_0= RULE_ID )
+            // InternalIgnoreCaseImportsTestLanguage.g:178:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement333); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_0_0()); 
             		
@@ -425,7 +425,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:194:2: ( (otherlv_1= RULE_ID ) )?
+            // InternalIgnoreCaseImportsTestLanguage.g:194:2: ( (otherlv_1= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -434,17 +434,17 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:195:1: (otherlv_1= RULE_ID )
+                    // InternalIgnoreCaseImportsTestLanguage.g:195:1: (otherlv_1= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:195:1: (otherlv_1= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:196:3: otherlv_1= RULE_ID
+                    // InternalIgnoreCaseImportsTestLanguage.g:195:1: (otherlv_1= RULE_ID )
+                    // InternalIgnoreCaseImportsTestLanguage.g:196:3: otherlv_1= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getElementRule());
                     	        }
                             
-                    otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement358); 
+                    otherlv_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     		newLeafNode(otherlv_1, grammarAccess.getElementAccess().getReferenceElementCrossReference_1_0()); 
                     	
@@ -457,11 +457,11 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
             }
 
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement371); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_7); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getLeftCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:211:1: ( (lv_elements_3_0= ruleElement ) )*
+            // InternalIgnoreCaseImportsTestLanguage.g:211:1: ( (lv_elements_3_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -474,15 +474,15 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:212:1: (lv_elements_3_0= ruleElement )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:212:1: (lv_elements_3_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:212:1: (lv_elements_3_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalIgnoreCaseImportsTestLanguage.g:213:3: lv_elements_3_0= ruleElement
+            	    // InternalIgnoreCaseImportsTestLanguage.g:212:1: (lv_elements_3_0= ruleElement )
+            	    // InternalIgnoreCaseImportsTestLanguage.g:213:3: lv_elements_3_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_3_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleElement392);
+            	    pushFollow(FollowSets000.FOLLOW_7);
             	    lv_elements_3_0=ruleElement();
 
             	    state._fsp--;
@@ -510,7 +510,7 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
                 }
             } while (true);
 
-            otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement405); 
+            otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getElementAccess().getRightCurlyBracketKeyword_4());
                 
@@ -540,20 +540,13 @@ public class InternalIgnoreCaseImportsTestLanguageParser extends AbstractInterna
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleImport_in_ruleModel131 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleModel153 = new BitSet(new long[]{0x0000000000000022L});
-        public static final BitSet FOLLOW_ruleImport_in_entryRuleImport190 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleImport200 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleImport241 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement281 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement291 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement333 = new BitSet(new long[]{0x0000000000000820L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement358 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleElement371 = new BitSet(new long[]{0x0000000000001020L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleElement392 = new BitSet(new long[]{0x0000000000001020L});
-        public static final BitSet FOLLOW_12_in_ruleElement405 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000820L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000001020L});
     }
 
 

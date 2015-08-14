@@ -64,7 +64,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug348199TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBug348199TestLanguage.g"; }
 
 
 
@@ -89,7 +89,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTimeperiod"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:67:1: entryRuleTimeperiod returns [EObject current=null] : iv_ruleTimeperiod= ruleTimeperiod EOF ;
+    // InternalBug348199TestLanguage.g:67:1: entryRuleTimeperiod returns [EObject current=null] : iv_ruleTimeperiod= ruleTimeperiod EOF ;
     public final EObject entryRuleTimeperiod() throws RecognitionException {
         EObject current = null;
 
@@ -97,17 +97,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:68:2: (iv_ruleTimeperiod= ruleTimeperiod EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:69:2: iv_ruleTimeperiod= ruleTimeperiod EOF
+            // InternalBug348199TestLanguage.g:68:2: (iv_ruleTimeperiod= ruleTimeperiod EOF )
+            // InternalBug348199TestLanguage.g:69:2: iv_ruleTimeperiod= ruleTimeperiod EOF
             {
              newCompositeNode(grammarAccess.getTimeperiodRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTimeperiod_in_entryRuleTimeperiod75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTimeperiod=ruleTimeperiod();
 
             state._fsp--;
 
              current =iv_ruleTimeperiod; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTimeperiod85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -125,7 +125,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTimeperiod"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:76:1: ruleTimeperiod returns [EObject current=null] : ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) ) ;
+    // InternalBug348199TestLanguage.g:76:1: ruleTimeperiod returns [EObject current=null] : ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) ) ;
     public final EObject ruleTimeperiod() throws RecognitionException {
         EObject current = null;
 
@@ -287,14 +287,14 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:79:28: ( ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:80:1: ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) )
+            // InternalBug348199TestLanguage.g:79:28: ( ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) ) )
+            // InternalBug348199TestLanguage.g:80:1: ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:80:1: ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:80:2: () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) )
+            // InternalBug348199TestLanguage.g:80:1: ( () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) ) )
+            // InternalBug348199TestLanguage.g:80:2: () otherlv_1= 'define' otherlv_2= 'timeperiod' ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:80:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:81:5: 
+            // InternalBug348199TestLanguage.g:80:2: ()
+            // InternalBug348199TestLanguage.g:81:5: 
             {
 
                     current = forceCreateModelElement(
@@ -304,15 +304,15 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleTimeperiod131); 
+            otherlv_1=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getTimeperiodAccess().getDefineKeyword_1());
                 
-            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleTimeperiod143); 
+            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getTimeperiodAccess().getTimeperiodKeyword_2());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:94:1: ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) )
+            // InternalBug348199TestLanguage.g:94:1: ( (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' ) | (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' ) | (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' ) | (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' ) | (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' ) | (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' ) | (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' ) | (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' ) )
             int alt83=8;
             switch ( input.LA(1) ) {
             case 14:
@@ -364,29 +364,29 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
             switch (alt83) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:94:2: (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' )
+                    // InternalBug348199TestLanguage.g:94:2: (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:94:2: (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:94:4: otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}'
+                    // InternalBug348199TestLanguage.g:94:2: (otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}' )
+                    // InternalBug348199TestLanguage.g:94:4: otherlv_3= '1' otherlv_4= '{' ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )* ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) ) (this_NL_18= RULE_NL )+ otherlv_19= '}'
                     {
-                    otherlv_3=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleTimeperiod157); 
+                    otherlv_3=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getTimeperiodAccess().getDigitOneKeyword_3_0_0());
                         
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod169); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_0_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:102:1: ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )*
+                    // InternalBug348199TestLanguage.g:102:1: ( (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) ) )*
                     loop2:
                     do {
                         int alt2=2;
                         alt2 = dfa2.predict(input);
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:102:2: (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:102:2: (this_NL_5= RULE_NL )+ ( (lv_time_6_0= ruleTimeDef1 ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:102:2: (this_NL_5= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:102:2: (this_NL_5= RULE_NL )+
                     	    int cnt1=0;
                     	    loop1:
                     	    do {
@@ -400,9 +400,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt1) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:102:3: this_NL_5= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:102:3: this_NL_5= RULE_NL
                     	    	    {
-                    	    	    this_NL_5=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod182); 
+                    	    	    this_NL_5=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_7); 
                     	    	     
                     	    	        newLeafNode(this_NL_5, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_2_0()); 
                     	    	        
@@ -419,16 +419,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt1++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:106:3: ( (lv_time_6_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:107:1: (lv_time_6_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:106:3: ( (lv_time_6_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:107:1: (lv_time_6_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:107:1: (lv_time_6_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:108:3: lv_time_6_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:107:1: (lv_time_6_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:108:3: lv_time_6_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_0_2_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod204);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_6_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -459,19 +459,19 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:124:4: ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:126:1: ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) )
+                    // InternalBug348199TestLanguage.g:124:4: ( ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) ) )
+                    // InternalBug348199TestLanguage.g:126:1: ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:126:1: ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:127:2: ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?)
+                    // InternalBug348199TestLanguage.g:126:1: ( ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?) )
+                    // InternalBug348199TestLanguage.g:127:2: ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3());
                     	
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:130:2: ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:131:3: ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?
+                    // InternalBug348199TestLanguage.g:130:2: ( ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?)
+                    // InternalBug348199TestLanguage.g:131:3: ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:131:3: ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+
+                    // InternalBug348199TestLanguage.g:131:3: ( ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) ) | ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) ) )+
                     int cnt9=0;
                     loop9:
                     do {
@@ -479,30 +479,30 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         alt9 = dfa9.predict(input);
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:133:4: ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:133:4: ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:133:4: ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:134:5: {...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:133:4: ({...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:134:5: {...}? => ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:134:111: ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:135:6: ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) )
+                    	    // InternalBug348199TestLanguage.g:134:111: ( ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:135:6: ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:6: ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:7: {...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:138:6: ({...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* ) )
+                    	    // InternalBug348199TestLanguage.g:138:7: {...}? => ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:16: ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:17: (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:138:16: ( (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:138:17: (this_NL_8= RULE_NL )+ otherlv_9= 'timeperiod_name' ( (lv_name_10_0= RULE_ID ) ) ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:17: (this_NL_8= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:138:17: (this_NL_8= RULE_NL )+
                     	    int cnt3=0;
                     	    loop3:
                     	    do {
@@ -516,9 +516,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt3) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:138:18: this_NL_8= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:138:18: this_NL_8= RULE_NL
                     	    	    {
-                    	    	    this_NL_8=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod264); 
+                    	    	    this_NL_8=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_8); 
                     	    	     
                     	    	        newLeafNode(this_NL_8, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_3_0_0()); 
                     	    	        
@@ -535,17 +535,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt3++;
                     	    } while (true);
 
-                    	    otherlv_9=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod277); 
+                    	    otherlv_9=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_9, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_0_3_0_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:146:1: ( (lv_name_10_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:147:1: (lv_name_10_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:146:1: ( (lv_name_10_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:147:1: (lv_name_10_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:147:1: (lv_name_10_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:148:3: lv_name_10_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:147:1: (lv_name_10_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:148:3: lv_name_10_0= RULE_ID
                     	    {
-                    	    lv_name_10_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod294); 
+                    	    lv_name_10_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_10_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_0_3_0_2_0()); 
                     	    		
@@ -565,16 +565,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:164:2: ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:164:2: ( (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) ) )*
                     	    loop5:
                     	    do {
                     	        int alt5=2;
                     	        alt5 = dfa5.predict(input);
                     	        switch (alt5) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:164:3: (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:164:3: (this_NL_11= RULE_NL )+ ( (lv_time_12_0= ruleTimeDef2 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:164:3: (this_NL_11= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:164:3: (this_NL_11= RULE_NL )+
                     	    	    int cnt4=0;
                     	    	    loop4:
                     	    	    do {
@@ -588,9 +588,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt4) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:164:4: this_NL_11= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:164:4: this_NL_11= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_11=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod312); 
+                    	    	    	    this_NL_11=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_10); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_11, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_3_0_3_0()); 
                     	    	    	        
@@ -607,16 +607,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt4++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:168:3: ( (lv_time_12_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:169:1: (lv_time_12_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:168:3: ( (lv_time_12_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:169:1: (lv_time_12_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:169:1: (lv_time_12_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:170:3: lv_time_12_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:169:1: (lv_time_12_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:170:3: lv_time_12_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_0_3_0_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod334);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_12_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -666,30 +666,30 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:193:4: ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:193:4: ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:193:4: ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:194:5: {...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:193:4: ({...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:194:5: {...}? => ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:194:111: ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:195:6: ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) )
+                    	    // InternalBug348199TestLanguage.g:194:111: ( ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:195:6: ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_0_3(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:6: ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:7: {...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:198:6: ({...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* ) )
+                    	    // InternalBug348199TestLanguage.g:198:7: {...}? => ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:16: ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:17: (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:198:16: ( (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:198:17: (this_NL_13= RULE_NL )+ otherlv_14= 'otherelement' ( (lv_alias_15_0= RULE_ID ) ) ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:17: (this_NL_13= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:198:17: (this_NL_13= RULE_NL )+
                     	    int cnt6=0;
                     	    loop6:
                     	    do {
@@ -703,9 +703,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt6) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:198:18: this_NL_13= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:198:18: this_NL_13= RULE_NL
                     	    	    {
-                    	    	    this_NL_13=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod404); 
+                    	    	    this_NL_13=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_11); 
                     	    	     
                     	    	        newLeafNode(this_NL_13, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_3_1_0()); 
                     	    	        
@@ -722,17 +722,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt6++;
                     	    } while (true);
 
-                    	    otherlv_14=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod417); 
+                    	    otherlv_14=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_14, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_0_3_1_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:206:1: ( (lv_alias_15_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:207:1: (lv_alias_15_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:206:1: ( (lv_alias_15_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:207:1: (lv_alias_15_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:207:1: (lv_alias_15_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:208:3: lv_alias_15_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:207:1: (lv_alias_15_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:208:3: lv_alias_15_0= RULE_ID
                     	    {
-                    	    lv_alias_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod434); 
+                    	    lv_alias_15_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_15_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_0_3_1_2_0()); 
                     	    		
@@ -752,16 +752,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:224:2: ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:224:2: ( (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) ) )*
                     	    loop8:
                     	    do {
                     	        int alt8=2;
                     	        alt8 = dfa8.predict(input);
                     	        switch (alt8) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:224:3: (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:224:3: (this_NL_16= RULE_NL )+ ( (lv_time_17_0= ruleTimeDef3 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:224:3: (this_NL_16= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:224:3: (this_NL_16= RULE_NL )+
                     	    	    int cnt7=0;
                     	    	    loop7:
                     	    	    do {
@@ -775,9 +775,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt7) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:224:4: this_NL_16= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:224:4: this_NL_16= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_16=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod452); 
+                    	    	    	    this_NL_16=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_12); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_16, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_3_1_3_0()); 
                     	    	    	        
@@ -794,16 +794,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt7++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:228:3: ( (lv_time_17_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:229:1: (lv_time_17_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:228:3: ( (lv_time_17_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:229:1: (lv_time_17_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:229:1: (lv_time_17_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:230:3: lv_time_17_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:229:1: (lv_time_17_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:230:3: lv_time_17_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_0_3_1_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod474);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_17_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -877,7 +877,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:261:2: (this_NL_18= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:261:2: (this_NL_18= RULE_NL )+
                     int cnt10=0;
                     loop10:
                     do {
@@ -891,9 +891,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt10) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:261:3: this_NL_18= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:261:3: this_NL_18= RULE_NL
                     	    {
-                    	    this_NL_18=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod535); 
+                    	    this_NL_18=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_13); 
                     	     
                     	        newLeafNode(this_NL_18, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_0_4()); 
                     	        
@@ -910,7 +910,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt10++;
                     } while (true);
 
-                    otherlv_19=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod548); 
+                    otherlv_19=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_19, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_0_5());
                         
@@ -921,29 +921,29 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:270:6: (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' )
+                    // InternalBug348199TestLanguage.g:270:6: (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:270:6: (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:270:8: otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}'
+                    // InternalBug348199TestLanguage.g:270:6: (otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}' )
+                    // InternalBug348199TestLanguage.g:270:8: otherlv_20= '2' otherlv_21= '{' ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )* ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? ) (this_NL_34= RULE_NL )+ otherlv_35= '}'
                     {
-                    otherlv_20=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleTimeperiod568); 
+                    otherlv_20=(Token)match(input,19,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_20, grammarAccess.getTimeperiodAccess().getDigitTwoKeyword_3_1_0());
                         
-                    otherlv_21=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod580); 
+                    otherlv_21=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_21, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_1_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:278:1: ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )*
+                    // InternalBug348199TestLanguage.g:278:1: ( (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) ) )*
                     loop12:
                     do {
                         int alt12=2;
                         alt12 = dfa12.predict(input);
                         switch (alt12) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:278:2: (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:278:2: (this_NL_22= RULE_NL )+ ( (lv_time_23_0= ruleTimeDef1 ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:278:2: (this_NL_22= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:278:2: (this_NL_22= RULE_NL )+
                     	    int cnt11=0;
                     	    loop11:
                     	    do {
@@ -957,9 +957,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt11) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:278:3: this_NL_22= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:278:3: this_NL_22= RULE_NL
                     	    	    {
-                    	    	    this_NL_22=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod593); 
+                    	    	    this_NL_22=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_7); 
                     	    	     
                     	    	        newLeafNode(this_NL_22, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_2_0()); 
                     	    	        
@@ -976,16 +976,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt11++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:282:3: ( (lv_time_23_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:283:1: (lv_time_23_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:282:3: ( (lv_time_23_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:283:1: (lv_time_23_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:283:1: (lv_time_23_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:284:3: lv_time_23_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:283:1: (lv_time_23_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:284:3: lv_time_23_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_1_2_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod615);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_23_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -1016,17 +1016,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:4: ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? )
+                    // InternalBug348199TestLanguage.g:300:4: ( ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )? )
                     int alt20=2;
                     alt20 = dfa20.predict(input);
                     switch (alt20) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:5: ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* )
+                            // InternalBug348199TestLanguage.g:300:5: ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:5: ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:6: (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )*
+                            // InternalBug348199TestLanguage.g:300:5: ( (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )* )
+                            // InternalBug348199TestLanguage.g:300:6: (this_NL_24= RULE_NL )+ otherlv_25= 'timeperiod_name' ( (lv_name_26_0= RULE_ID ) ) ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )*
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:6: (this_NL_24= RULE_NL )+
+                            // InternalBug348199TestLanguage.g:300:6: (this_NL_24= RULE_NL )+
                             int cnt13=0;
                             loop13:
                             do {
@@ -1040,9 +1040,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                 switch (alt13) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:300:7: this_NL_24= RULE_NL
+                            	    // InternalBug348199TestLanguage.g:300:7: this_NL_24= RULE_NL
                             	    {
-                            	    this_NL_24=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod631); 
+                            	    this_NL_24=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_8); 
                             	     
                             	        newLeafNode(this_NL_24, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_3_0_0()); 
                             	        
@@ -1059,17 +1059,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                                 cnt13++;
                             } while (true);
 
-                            otherlv_25=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod644); 
+                            otherlv_25=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                                 	newLeafNode(otherlv_25, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_1_3_0_1());
                                 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:308:1: ( (lv_name_26_0= RULE_ID ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:309:1: (lv_name_26_0= RULE_ID )
+                            // InternalBug348199TestLanguage.g:308:1: ( (lv_name_26_0= RULE_ID ) )
+                            // InternalBug348199TestLanguage.g:309:1: (lv_name_26_0= RULE_ID )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:309:1: (lv_name_26_0= RULE_ID )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:310:3: lv_name_26_0= RULE_ID
+                            // InternalBug348199TestLanguage.g:309:1: (lv_name_26_0= RULE_ID )
+                            // InternalBug348199TestLanguage.g:310:3: lv_name_26_0= RULE_ID
                             {
-                            lv_name_26_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod661); 
+                            lv_name_26_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                             			newLeafNode(lv_name_26_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_1_3_0_2_0()); 
                             		
@@ -1089,16 +1089,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:326:2: ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )*
+                            // InternalBug348199TestLanguage.g:326:2: ( (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) ) )*
                             loop15:
                             do {
                                 int alt15=2;
                                 alt15 = dfa15.predict(input);
                                 switch (alt15) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:326:3: (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) )
+                            	    // InternalBug348199TestLanguage.g:326:3: (this_NL_27= RULE_NL )+ ( (lv_time_28_0= ruleTimeDef2 ) )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:326:3: (this_NL_27= RULE_NL )+
+                            	    // InternalBug348199TestLanguage.g:326:3: (this_NL_27= RULE_NL )+
                             	    int cnt14=0;
                             	    loop14:
                             	    do {
@@ -1112,9 +1112,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                             	        switch (alt14) {
                             	    	case 1 :
-                            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:326:4: this_NL_27= RULE_NL
+                            	    	    // InternalBug348199TestLanguage.g:326:4: this_NL_27= RULE_NL
                             	    	    {
-                            	    	    this_NL_27=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod679); 
+                            	    	    this_NL_27=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_10); 
                             	    	     
                             	    	        newLeafNode(this_NL_27, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_3_0_3_0()); 
                             	    	        
@@ -1131,16 +1131,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                             	        cnt14++;
                             	    } while (true);
 
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:330:3: ( (lv_time_28_0= ruleTimeDef2 ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:331:1: (lv_time_28_0= ruleTimeDef2 )
+                            	    // InternalBug348199TestLanguage.g:330:3: ( (lv_time_28_0= ruleTimeDef2 ) )
+                            	    // InternalBug348199TestLanguage.g:331:1: (lv_time_28_0= ruleTimeDef2 )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:331:1: (lv_time_28_0= ruleTimeDef2 )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:332:3: lv_time_28_0= ruleTimeDef2
+                            	    // InternalBug348199TestLanguage.g:331:1: (lv_time_28_0= ruleTimeDef2 )
+                            	    // InternalBug348199TestLanguage.g:332:3: lv_time_28_0= ruleTimeDef2
                             	    {
                             	     
                             	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_1_3_0_3_1_0()); 
                             	    	    
-                            	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod701);
+                            	    pushFollow(FollowSets000.FOLLOW_6);
                             	    lv_time_28_0=ruleTimeDef2();
 
                             	    state._fsp--;
@@ -1178,16 +1178,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:349:6: ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )?
+                            // InternalBug348199TestLanguage.g:349:6: ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )?
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:349:6: ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )?
+                            // InternalBug348199TestLanguage.g:349:6: ( (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )* )?
                             int alt19=2;
                             alt19 = dfa19.predict(input);
                             switch (alt19) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:349:7: (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )*
+                                    // InternalBug348199TestLanguage.g:349:7: (this_NL_29= RULE_NL )+ otherlv_30= 'otherelement' ( (lv_alias_31_0= RULE_ID ) ) ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )*
                                     {
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:349:7: (this_NL_29= RULE_NL )+
+                                    // InternalBug348199TestLanguage.g:349:7: (this_NL_29= RULE_NL )+
                                     int cnt16=0;
                                     loop16:
                                     do {
@@ -1201,9 +1201,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                         switch (alt16) {
                                     	case 1 :
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:349:8: this_NL_29= RULE_NL
+                                    	    // InternalBug348199TestLanguage.g:349:8: this_NL_29= RULE_NL
                                     	    {
-                                    	    this_NL_29=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod723); 
+                                    	    this_NL_29=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_11); 
                                     	     
                                     	        newLeafNode(this_NL_29, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_3_1_0()); 
                                     	        
@@ -1220,17 +1220,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                                         cnt16++;
                                     } while (true);
 
-                                    otherlv_30=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod736); 
+                                    otherlv_30=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                                         	newLeafNode(otherlv_30, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_1_3_1_1());
                                         
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:357:1: ( (lv_alias_31_0= RULE_ID ) )
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:358:1: (lv_alias_31_0= RULE_ID )
+                                    // InternalBug348199TestLanguage.g:357:1: ( (lv_alias_31_0= RULE_ID ) )
+                                    // InternalBug348199TestLanguage.g:358:1: (lv_alias_31_0= RULE_ID )
                                     {
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:358:1: (lv_alias_31_0= RULE_ID )
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:359:3: lv_alias_31_0= RULE_ID
+                                    // InternalBug348199TestLanguage.g:358:1: (lv_alias_31_0= RULE_ID )
+                                    // InternalBug348199TestLanguage.g:359:3: lv_alias_31_0= RULE_ID
                                     {
-                                    lv_alias_31_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod753); 
+                                    lv_alias_31_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                                     			newLeafNode(lv_alias_31_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_1_3_1_2_0()); 
                                     		
@@ -1250,16 +1250,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                     }
 
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:375:2: ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )*
+                                    // InternalBug348199TestLanguage.g:375:2: ( (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) ) )*
                                     loop18:
                                     do {
                                         int alt18=2;
                                         alt18 = dfa18.predict(input);
                                         switch (alt18) {
                                     	case 1 :
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:375:3: (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) )
+                                    	    // InternalBug348199TestLanguage.g:375:3: (this_NL_32= RULE_NL )+ ( (lv_time_33_0= ruleTimeDef3 ) )
                                     	    {
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:375:3: (this_NL_32= RULE_NL )+
+                                    	    // InternalBug348199TestLanguage.g:375:3: (this_NL_32= RULE_NL )+
                                     	    int cnt17=0;
                                     	    loop17:
                                     	    do {
@@ -1273,9 +1273,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                     	        switch (alt17) {
                                     	    	case 1 :
-                                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:375:4: this_NL_32= RULE_NL
+                                    	    	    // InternalBug348199TestLanguage.g:375:4: this_NL_32= RULE_NL
                                     	    	    {
-                                    	    	    this_NL_32=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod771); 
+                                    	    	    this_NL_32=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_12); 
                                     	    	     
                                     	    	        newLeafNode(this_NL_32, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_3_1_3_0()); 
                                     	    	        
@@ -1292,16 +1292,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                                     	        cnt17++;
                                     	    } while (true);
 
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:379:3: ( (lv_time_33_0= ruleTimeDef3 ) )
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:380:1: (lv_time_33_0= ruleTimeDef3 )
+                                    	    // InternalBug348199TestLanguage.g:379:3: ( (lv_time_33_0= ruleTimeDef3 ) )
+                                    	    // InternalBug348199TestLanguage.g:380:1: (lv_time_33_0= ruleTimeDef3 )
                                     	    {
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:380:1: (lv_time_33_0= ruleTimeDef3 )
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:381:3: lv_time_33_0= ruleTimeDef3
+                                    	    // InternalBug348199TestLanguage.g:380:1: (lv_time_33_0= ruleTimeDef3 )
+                                    	    // InternalBug348199TestLanguage.g:381:3: lv_time_33_0= ruleTimeDef3
                                     	    {
                                     	     
                                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_1_3_1_3_1_0()); 
                                     	    	    
-                                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod793);
+                                    	    pushFollow(FollowSets000.FOLLOW_6);
                                     	    lv_time_33_0=ruleTimeDef3();
 
                                     	    state._fsp--;
@@ -1344,7 +1344,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:397:7: (this_NL_34= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:397:7: (this_NL_34= RULE_NL )+
                     int cnt21=0;
                     loop21:
                     do {
@@ -1358,9 +1358,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt21) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:397:8: this_NL_34= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:397:8: this_NL_34= RULE_NL
                     	    {
-                    	    this_NL_34=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod810); 
+                    	    this_NL_34=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_13); 
                     	     
                     	        newLeafNode(this_NL_34, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_1_4()); 
                     	        
@@ -1377,7 +1377,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt21++;
                     } while (true);
 
-                    otherlv_35=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod823); 
+                    otherlv_35=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_35, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_1_5());
                         
@@ -1388,29 +1388,29 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:406:6: (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' )
+                    // InternalBug348199TestLanguage.g:406:6: (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:406:6: (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:406:8: otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}'
+                    // InternalBug348199TestLanguage.g:406:6: (otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}' )
+                    // InternalBug348199TestLanguage.g:406:8: otherlv_36= '3' otherlv_37= '{' ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )* ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+ (this_NL_50= RULE_NL )+ otherlv_51= '}'
                     {
-                    otherlv_36=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleTimeperiod843); 
+                    otherlv_36=(Token)match(input,20,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_36, grammarAccess.getTimeperiodAccess().getDigitThreeKeyword_3_2_0());
                         
-                    otherlv_37=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod855); 
+                    otherlv_37=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_37, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_2_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:414:1: ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )*
+                    // InternalBug348199TestLanguage.g:414:1: ( (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) ) )*
                     loop23:
                     do {
                         int alt23=2;
                         alt23 = dfa23.predict(input);
                         switch (alt23) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:414:2: (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:414:2: (this_NL_38= RULE_NL )+ ( (lv_time_39_0= ruleTimeDef1 ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:414:2: (this_NL_38= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:414:2: (this_NL_38= RULE_NL )+
                     	    int cnt22=0;
                     	    loop22:
                     	    do {
@@ -1424,9 +1424,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt22) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:414:3: this_NL_38= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:414:3: this_NL_38= RULE_NL
                     	    	    {
-                    	    	    this_NL_38=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod868); 
+                    	    	    this_NL_38=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_7); 
                     	    	     
                     	    	        newLeafNode(this_NL_38, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_2_0()); 
                     	    	        
@@ -1443,16 +1443,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt22++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:418:3: ( (lv_time_39_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:419:1: (lv_time_39_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:418:3: ( (lv_time_39_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:419:1: (lv_time_39_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:419:1: (lv_time_39_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:420:3: lv_time_39_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:419:1: (lv_time_39_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:420:3: lv_time_39_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_2_2_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod890);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_39_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -1483,7 +1483,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:4: ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+
+                    // InternalBug348199TestLanguage.g:436:4: ( ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* ) )+
                     int cnt30=0;
                     loop30:
                     do {
@@ -1491,12 +1491,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         alt30 = dfa30.predict(input);
                         switch (alt30) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:5: ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:436:5: ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:5: ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:6: (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:436:5: ( (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:436:6: (this_NL_40= RULE_NL )+ otherlv_41= 'timeperiod_name' ( (lv_name_42_0= RULE_ID ) ) ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:6: (this_NL_40= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:436:6: (this_NL_40= RULE_NL )+
                     	    int cnt24=0;
                     	    loop24:
                     	    do {
@@ -1510,9 +1510,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt24) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:436:7: this_NL_40= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:436:7: this_NL_40= RULE_NL
                     	    	    {
-                    	    	    this_NL_40=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod906); 
+                    	    	    this_NL_40=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_8); 
                     	    	     
                     	    	        newLeafNode(this_NL_40, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_3_0_0()); 
                     	    	        
@@ -1529,17 +1529,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt24++;
                     	    } while (true);
 
-                    	    otherlv_41=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod919); 
+                    	    otherlv_41=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_41, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_2_3_0_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:444:1: ( (lv_name_42_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:445:1: (lv_name_42_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:444:1: ( (lv_name_42_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:445:1: (lv_name_42_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:445:1: (lv_name_42_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:446:3: lv_name_42_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:445:1: (lv_name_42_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:446:3: lv_name_42_0= RULE_ID
                     	    {
-                    	    lv_name_42_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod936); 
+                    	    lv_name_42_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_42_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_2_3_0_2_0()); 
                     	    		
@@ -1559,16 +1559,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:462:2: ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:462:2: ( (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) ) )*
                     	    loop26:
                     	    do {
                     	        int alt26=2;
                     	        alt26 = dfa26.predict(input);
                     	        switch (alt26) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:462:3: (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:462:3: (this_NL_43= RULE_NL )+ ( (lv_time_44_0= ruleTimeDef2 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:462:3: (this_NL_43= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:462:3: (this_NL_43= RULE_NL )+
                     	    	    int cnt25=0;
                     	    	    loop25:
                     	    	    do {
@@ -1582,9 +1582,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt25) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:462:4: this_NL_43= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:462:4: this_NL_43= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_43=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod954); 
+                    	    	    	    this_NL_43=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_10); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_43, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_3_0_3_0()); 
                     	    	    	        
@@ -1601,16 +1601,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt25++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:466:3: ( (lv_time_44_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:467:1: (lv_time_44_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:466:3: ( (lv_time_44_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:467:1: (lv_time_44_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:467:1: (lv_time_44_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:468:3: lv_time_44_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:467:1: (lv_time_44_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:468:3: lv_time_44_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_2_3_0_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod976);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_44_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -1648,12 +1648,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:485:6: ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:485:6: ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:485:6: ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:485:7: (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:485:6: ( (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:485:7: (this_NL_45= RULE_NL )+ otherlv_46= 'otherelement' ( (lv_alias_47_0= RULE_ID ) ) ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:485:7: (this_NL_45= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:485:7: (this_NL_45= RULE_NL )+
                     	    int cnt27=0;
                     	    loop27:
                     	    do {
@@ -1667,9 +1667,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt27) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:485:8: this_NL_45= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:485:8: this_NL_45= RULE_NL
                     	    	    {
-                    	    	    this_NL_45=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod998); 
+                    	    	    this_NL_45=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_11); 
                     	    	     
                     	    	        newLeafNode(this_NL_45, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_3_1_0()); 
                     	    	        
@@ -1686,17 +1686,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt27++;
                     	    } while (true);
 
-                    	    otherlv_46=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod1011); 
+                    	    otherlv_46=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_46, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_2_3_1_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:493:1: ( (lv_alias_47_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:494:1: (lv_alias_47_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:493:1: ( (lv_alias_47_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:494:1: (lv_alias_47_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:494:1: (lv_alias_47_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:495:3: lv_alias_47_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:494:1: (lv_alias_47_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:495:3: lv_alias_47_0= RULE_ID
                     	    {
-                    	    lv_alias_47_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1028); 
+                    	    lv_alias_47_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_47_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_2_3_1_2_0()); 
                     	    		
@@ -1716,16 +1716,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:511:2: ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:511:2: ( (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) ) )*
                     	    loop29:
                     	    do {
                     	        int alt29=2;
                     	        alt29 = dfa29.predict(input);
                     	        switch (alt29) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:511:3: (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:511:3: (this_NL_48= RULE_NL )+ ( (lv_time_49_0= ruleTimeDef3 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:511:3: (this_NL_48= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:511:3: (this_NL_48= RULE_NL )+
                     	    	    int cnt28=0;
                     	    	    loop28:
                     	    	    do {
@@ -1739,9 +1739,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt28) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:511:4: this_NL_48= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:511:4: this_NL_48= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_48=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1046); 
+                    	    	    	    this_NL_48=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_12); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_48, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_3_1_3_0()); 
                     	    	    	        
@@ -1758,16 +1758,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt28++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:515:3: ( (lv_time_49_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:516:1: (lv_time_49_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:515:3: ( (lv_time_49_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:516:1: (lv_time_49_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:516:1: (lv_time_49_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:517:3: lv_time_49_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:516:1: (lv_time_49_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:517:3: lv_time_49_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_2_3_1_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod1068);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_49_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -1814,7 +1814,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt30++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:533:7: (this_NL_50= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:533:7: (this_NL_50= RULE_NL )+
                     int cnt31=0;
                     loop31:
                     do {
@@ -1828,9 +1828,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt31) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:533:8: this_NL_50= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:533:8: this_NL_50= RULE_NL
                     	    {
-                    	    this_NL_50=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1085); 
+                    	    this_NL_50=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_13); 
                     	     
                     	        newLeafNode(this_NL_50, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_2_4()); 
                     	        
@@ -1847,7 +1847,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt31++;
                     } while (true);
 
-                    otherlv_51=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod1098); 
+                    otherlv_51=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_51, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_2_5());
                         
@@ -1858,29 +1858,29 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:542:6: (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' )
+                    // InternalBug348199TestLanguage.g:542:6: (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:542:6: (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:542:8: otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}'
+                    // InternalBug348199TestLanguage.g:542:6: (otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}' )
+                    // InternalBug348199TestLanguage.g:542:8: otherlv_52= '4' otherlv_53= '{' ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )* ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )* (this_NL_66= RULE_NL )+ otherlv_67= '}'
                     {
-                    otherlv_52=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleTimeperiod1118); 
+                    otherlv_52=(Token)match(input,21,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_52, grammarAccess.getTimeperiodAccess().getDigitFourKeyword_3_3_0());
                         
-                    otherlv_53=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod1130); 
+                    otherlv_53=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_53, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_3_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:550:1: ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )*
+                    // InternalBug348199TestLanguage.g:550:1: ( (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) ) )*
                     loop33:
                     do {
                         int alt33=2;
                         alt33 = dfa33.predict(input);
                         switch (alt33) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:550:2: (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:550:2: (this_NL_54= RULE_NL )+ ( (lv_time_55_0= ruleTimeDef1 ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:550:2: (this_NL_54= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:550:2: (this_NL_54= RULE_NL )+
                     	    int cnt32=0;
                     	    loop32:
                     	    do {
@@ -1894,9 +1894,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt32) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:550:3: this_NL_54= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:550:3: this_NL_54= RULE_NL
                     	    	    {
-                    	    	    this_NL_54=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1143); 
+                    	    	    this_NL_54=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_7); 
                     	    	     
                     	    	        newLeafNode(this_NL_54, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_2_0()); 
                     	    	        
@@ -1913,16 +1913,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt32++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:554:3: ( (lv_time_55_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:555:1: (lv_time_55_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:554:3: ( (lv_time_55_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:555:1: (lv_time_55_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:555:1: (lv_time_55_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:556:3: lv_time_55_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:555:1: (lv_time_55_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:556:3: lv_time_55_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_3_2_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod1165);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_55_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -1953,19 +1953,19 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:4: ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )*
+                    // InternalBug348199TestLanguage.g:572:4: ( ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* ) | ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* ) )*
                     loop40:
                     do {
                         int alt40=3;
                         alt40 = dfa40.predict(input);
                         switch (alt40) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:5: ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:572:5: ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:5: ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:6: (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:572:5: ( (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:572:6: (this_NL_56= RULE_NL )+ otherlv_57= 'timeperiod_name' ( (lv_name_58_0= RULE_ID ) ) ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:6: (this_NL_56= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:572:6: (this_NL_56= RULE_NL )+
                     	    int cnt34=0;
                     	    loop34:
                     	    do {
@@ -1979,9 +1979,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt34) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:572:7: this_NL_56= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:572:7: this_NL_56= RULE_NL
                     	    	    {
-                    	    	    this_NL_56=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1181); 
+                    	    	    this_NL_56=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_8); 
                     	    	     
                     	    	        newLeafNode(this_NL_56, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_3_0_0()); 
                     	    	        
@@ -1998,17 +1998,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt34++;
                     	    } while (true);
 
-                    	    otherlv_57=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod1194); 
+                    	    otherlv_57=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_57, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_3_3_0_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:580:1: ( (lv_name_58_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:581:1: (lv_name_58_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:580:1: ( (lv_name_58_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:581:1: (lv_name_58_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:581:1: (lv_name_58_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:582:3: lv_name_58_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:581:1: (lv_name_58_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:582:3: lv_name_58_0= RULE_ID
                     	    {
-                    	    lv_name_58_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1211); 
+                    	    lv_name_58_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_58_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_3_3_0_2_0()); 
                     	    		
@@ -2028,16 +2028,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:598:2: ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:598:2: ( (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) ) )*
                     	    loop36:
                     	    do {
                     	        int alt36=2;
                     	        alt36 = dfa36.predict(input);
                     	        switch (alt36) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:598:3: (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:598:3: (this_NL_59= RULE_NL )+ ( (lv_time_60_0= ruleTimeDef2 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:598:3: (this_NL_59= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:598:3: (this_NL_59= RULE_NL )+
                     	    	    int cnt35=0;
                     	    	    loop35:
                     	    	    do {
@@ -2051,9 +2051,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt35) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:598:4: this_NL_59= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:598:4: this_NL_59= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_59=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1229); 
+                    	    	    	    this_NL_59=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_10); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_59, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_3_0_3_0()); 
                     	    	    	        
@@ -2070,16 +2070,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt35++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:602:3: ( (lv_time_60_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:603:1: (lv_time_60_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:602:3: ( (lv_time_60_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:603:1: (lv_time_60_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:603:1: (lv_time_60_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:604:3: lv_time_60_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:603:1: (lv_time_60_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:604:3: lv_time_60_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_3_3_0_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod1251);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_60_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -2117,12 +2117,12 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:621:6: ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:621:6: ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:621:6: ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:621:7: (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:621:6: ( (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )* )
+                    	    // InternalBug348199TestLanguage.g:621:7: (this_NL_61= RULE_NL )+ otherlv_62= 'otherelement' ( (lv_alias_63_0= RULE_ID ) ) ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )*
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:621:7: (this_NL_61= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:621:7: (this_NL_61= RULE_NL )+
                     	    int cnt37=0;
                     	    loop37:
                     	    do {
@@ -2136,9 +2136,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt37) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:621:8: this_NL_61= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:621:8: this_NL_61= RULE_NL
                     	    	    {
-                    	    	    this_NL_61=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1273); 
+                    	    	    this_NL_61=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_11); 
                     	    	     
                     	    	        newLeafNode(this_NL_61, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_3_1_0()); 
                     	    	        
@@ -2155,17 +2155,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt37++;
                     	    } while (true);
 
-                    	    otherlv_62=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod1286); 
+                    	    otherlv_62=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_62, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_3_3_1_1());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:629:1: ( (lv_alias_63_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:630:1: (lv_alias_63_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:629:1: ( (lv_alias_63_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:630:1: (lv_alias_63_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:630:1: (lv_alias_63_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:631:3: lv_alias_63_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:630:1: (lv_alias_63_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:631:3: lv_alias_63_0= RULE_ID
                     	    {
-                    	    lv_alias_63_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1303); 
+                    	    lv_alias_63_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_63_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_3_3_1_2_0()); 
                     	    		
@@ -2185,16 +2185,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:647:2: ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )*
+                    	    // InternalBug348199TestLanguage.g:647:2: ( (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) ) )*
                     	    loop39:
                     	    do {
                     	        int alt39=2;
                     	        alt39 = dfa39.predict(input);
                     	        switch (alt39) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:647:3: (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:647:3: (this_NL_64= RULE_NL )+ ( (lv_time_65_0= ruleTimeDef3 ) )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:647:3: (this_NL_64= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:647:3: (this_NL_64= RULE_NL )+
                     	    	    int cnt38=0;
                     	    	    loop38:
                     	    	    do {
@@ -2208,9 +2208,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt38) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:647:4: this_NL_64= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:647:4: this_NL_64= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_64=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1321); 
+                    	    	    	    this_NL_64=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_12); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_64, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_3_1_3_0()); 
                     	    	    	        
@@ -2227,16 +2227,16 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    	        cnt38++;
                     	    	    } while (true);
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:651:3: ( (lv_time_65_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:652:1: (lv_time_65_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:651:3: ( (lv_time_65_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:652:1: (lv_time_65_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:652:1: (lv_time_65_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:653:3: lv_time_65_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:652:1: (lv_time_65_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:653:3: lv_time_65_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_3_3_1_3_1_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod1343);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_65_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -2279,7 +2279,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:669:7: (this_NL_66= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:669:7: (this_NL_66= RULE_NL )+
                     int cnt41=0;
                     loop41:
                     do {
@@ -2293,9 +2293,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt41) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:669:8: this_NL_66= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:669:8: this_NL_66= RULE_NL
                     	    {
-                    	    this_NL_66=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1360); 
+                    	    this_NL_66=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_13); 
                     	     
                     	        newLeafNode(this_NL_66, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_3_4()); 
                     	        
@@ -2312,7 +2312,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt41++;
                     } while (true);
 
-                    otherlv_67=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod1373); 
+                    otherlv_67=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_67, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_3_5());
                         
@@ -2323,20 +2323,20 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:678:6: (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' )
+                    // InternalBug348199TestLanguage.g:678:6: (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:678:6: (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:678:8: otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}'
+                    // InternalBug348199TestLanguage.g:678:6: (otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}' )
+                    // InternalBug348199TestLanguage.g:678:8: otherlv_68= '5' otherlv_69= '{' (this_NL_70= RULE_NL )+ ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )* ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) ) otherlv_84= '}'
                     {
-                    otherlv_68=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleTimeperiod1393); 
+                    otherlv_68=(Token)match(input,22,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_68, grammarAccess.getTimeperiodAccess().getDigitFiveKeyword_3_4_0());
                         
-                    otherlv_69=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod1405); 
+                    otherlv_69=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_69, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_4_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:686:1: (this_NL_70= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:686:1: (this_NL_70= RULE_NL )+
                     int cnt42=0;
                     loop42:
                     do {
@@ -2350,9 +2350,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt42) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:686:2: this_NL_70= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:686:2: this_NL_70= RULE_NL
                     	    {
-                    	    this_NL_70=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1417); 
+                    	    this_NL_70=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_14); 
                     	     
                     	        newLeafNode(this_NL_70, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_2()); 
                     	        
@@ -2369,7 +2369,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt42++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:690:3: ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )*
+                    // InternalBug348199TestLanguage.g:690:3: ( ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+ )*
                     loop44:
                     do {
                         int alt44=2;
@@ -2382,18 +2382,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt44) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:690:4: ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:690:4: ( (lv_time_71_0= ruleTimeDef1 ) ) (this_NL_72= RULE_NL )+
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:690:4: ( (lv_time_71_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:691:1: (lv_time_71_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:690:4: ( (lv_time_71_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:691:1: (lv_time_71_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:691:1: (lv_time_71_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:692:3: lv_time_71_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:691:1: (lv_time_71_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:692:3: lv_time_71_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_4_3_0_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod1440);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_71_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -2415,7 +2415,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:708:2: (this_NL_72= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:708:2: (this_NL_72= RULE_NL )+
                     	    int cnt43=0;
                     	    loop43:
                     	    do {
@@ -2429,9 +2429,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt43) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:708:3: this_NL_72= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:708:3: this_NL_72= RULE_NL
                     	    	    {
-                    	    	    this_NL_72=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1452); 
+                    	    	    this_NL_72=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_14); 
                     	    	     
                     	    	        newLeafNode(this_NL_72, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_3_1()); 
                     	    	        
@@ -2457,19 +2457,19 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:712:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:714:1: ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) )
+                    // InternalBug348199TestLanguage.g:712:5: ( ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) ) )
+                    // InternalBug348199TestLanguage.g:714:1: ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:714:1: ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:715:2: ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?)
+                    // InternalBug348199TestLanguage.g:714:1: ( ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?) )
+                    // InternalBug348199TestLanguage.g:715:2: ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?)
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4());
                     	
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:718:2: ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?)
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:719:3: ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?
+                    // InternalBug348199TestLanguage.g:718:2: ( ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?)
+                    // InternalBug348199TestLanguage.g:719:3: ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+ {...}?
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:719:3: ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+
+                    // InternalBug348199TestLanguage.g:719:3: ( ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) ) | ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) ) )+
                     int cnt51=0;
                     loop51:
                     do {
@@ -2486,40 +2486,40 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt51) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:721:4: ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:721:4: ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:721:4: ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:722:5: {...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:721:4: ({...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:722:5: {...}? => ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:722:111: ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:723:6: ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) )
+                    	    // InternalBug348199TestLanguage.g:722:111: ( ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:723:6: ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:726:6: ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:726:7: {...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:726:6: ({...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* ) )
+                    	    // InternalBug348199TestLanguage.g:726:7: {...}? => (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:726:16: (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:726:18: otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:726:16: (otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:726:18: otherlv_74= 'timeperiod_name' ( (lv_name_75_0= RULE_ID ) ) (this_NL_76= RULE_NL )+ ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )*
                     	    {
-                    	    otherlv_74=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod1513); 
+                    	    otherlv_74=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_74, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_4_4_0_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:730:1: ( (lv_name_75_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:731:1: (lv_name_75_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:730:1: ( (lv_name_75_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:731:1: (lv_name_75_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:731:1: (lv_name_75_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:732:3: lv_name_75_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:731:1: (lv_name_75_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:732:3: lv_name_75_0= RULE_ID
                     	    {
-                    	    lv_name_75_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1530); 
+                    	    lv_name_75_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_75_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_4_4_0_1_0()); 
                     	    		
@@ -2539,7 +2539,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:748:2: (this_NL_76= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:748:2: (this_NL_76= RULE_NL )+
                     	    int cnt45=0;
                     	    loop45:
                     	    do {
@@ -2553,9 +2553,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt45) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:748:3: this_NL_76= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:748:3: this_NL_76= RULE_NL
                     	    	    {
-                    	    	    this_NL_76=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1547); 
+                    	    	    this_NL_76=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	     
                     	    	        newLeafNode(this_NL_76, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_4_0_2()); 
                     	    	        
@@ -2572,7 +2572,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt45++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:752:3: ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:752:3: ( ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+ )*
                     	    loop47:
                     	    do {
                     	        int alt47=2;
@@ -2585,18 +2585,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt47) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:752:4: ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:752:4: ( (lv_time_77_0= ruleTimeDef2 ) ) (this_NL_78= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:752:4: ( (lv_time_77_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:753:1: (lv_time_77_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:752:4: ( (lv_time_77_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:753:1: (lv_time_77_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:753:1: (lv_time_77_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:754:3: lv_time_77_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:753:1: (lv_time_77_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:754:3: lv_time_77_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_4_4_0_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod1570);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_77_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -2618,7 +2618,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:770:2: (this_NL_78= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:770:2: (this_NL_78= RULE_NL )+
                     	    	    int cnt46=0;
                     	    	    loop46:
                     	    	    do {
@@ -2632,9 +2632,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt46) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:770:3: this_NL_78= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:770:3: this_NL_78= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_78=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1582); 
+                    	    	    	    this_NL_78=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_78, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_4_0_3_1()); 
                     	    	    	        
@@ -2679,40 +2679,40 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:781:4: ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:781:4: ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:781:4: ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:782:5: {...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:781:4: ({...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) ) )
+                    	    // InternalBug348199TestLanguage.g:782:5: {...}? => ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) )
                     	    {
                     	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "getUnorderedGroupHelper().canSelect(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:782:111: ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:783:6: ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) )
+                    	    // InternalBug348199TestLanguage.g:782:111: ( ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) ) )
+                    	    // InternalBug348199TestLanguage.g:783:6: ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getTimeperiodAccess().getUnorderedGroup_3_4_4(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:786:6: ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:786:7: {...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:786:6: ({...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* ) )
+                    	    // InternalBug348199TestLanguage.g:786:7: {...}? => (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* )
                     	    {
                     	    if ( !((true)) ) {
                     	        throw new FailedPredicateException(input, "ruleTimeperiod", "true");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:786:16: (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:786:18: otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:786:16: (otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:786:18: otherlv_79= 'otherelement' ( (lv_alias_80_0= RULE_ID ) ) (this_NL_81= RULE_NL )+ ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )*
                     	    {
-                    	    otherlv_79=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod1653); 
+                    	    otherlv_79=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_79, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_4_4_1_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:790:1: ( (lv_alias_80_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:791:1: (lv_alias_80_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:790:1: ( (lv_alias_80_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:791:1: (lv_alias_80_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:791:1: (lv_alias_80_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:792:3: lv_alias_80_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:791:1: (lv_alias_80_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:792:3: lv_alias_80_0= RULE_ID
                     	    {
-                    	    lv_alias_80_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1670); 
+                    	    lv_alias_80_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_80_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_4_4_1_1_0()); 
                     	    		
@@ -2732,7 +2732,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:808:2: (this_NL_81= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:808:2: (this_NL_81= RULE_NL )+
                     	    int cnt48=0;
                     	    loop48:
                     	    do {
@@ -2746,9 +2746,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt48) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:808:3: this_NL_81= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:808:3: this_NL_81= RULE_NL
                     	    	    {
-                    	    	    this_NL_81=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1687); 
+                    	    	    this_NL_81=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	     
                     	    	        newLeafNode(this_NL_81, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_4_1_2()); 
                     	    	        
@@ -2765,7 +2765,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt48++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:812:3: ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:812:3: ( ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+ )*
                     	    loop50:
                     	    do {
                     	        int alt50=2;
@@ -2778,18 +2778,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt50) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:812:4: ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:812:4: ( (lv_time_82_0= ruleTimeDef3 ) ) (this_NL_83= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:812:4: ( (lv_time_82_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:813:1: (lv_time_82_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:812:4: ( (lv_time_82_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:813:1: (lv_time_82_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:813:1: (lv_time_82_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:814:3: lv_time_82_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:813:1: (lv_time_82_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:814:3: lv_time_82_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_4_4_1_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod1710);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_82_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -2811,7 +2811,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:830:2: (this_NL_83= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:830:2: (this_NL_83= RULE_NL )+
                     	    	    int cnt49=0;
                     	    	    loop49:
                     	    	    do {
@@ -2825,9 +2825,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt49) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:830:3: this_NL_83= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:830:3: this_NL_83= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_83=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1722); 
+                    	    	    	    this_NL_83=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_83, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_4_4_1_3_1()); 
                     	    	    	        
@@ -2896,7 +2896,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    otherlv_84=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod1784); 
+                    otherlv_84=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_84, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_4_5());
                         
@@ -2907,20 +2907,20 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:854:6: (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' )
+                    // InternalBug348199TestLanguage.g:854:6: (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:854:6: (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:854:8: otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}'
+                    // InternalBug348199TestLanguage.g:854:6: (otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}' )
+                    // InternalBug348199TestLanguage.g:854:8: otherlv_85= '6' otherlv_86= '{' (this_NL_87= RULE_NL )+ ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )* ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? ) otherlv_100= '}'
                     {
-                    otherlv_85=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleTimeperiod1804); 
+                    otherlv_85=(Token)match(input,23,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_85, grammarAccess.getTimeperiodAccess().getDigitSixKeyword_3_5_0());
                         
-                    otherlv_86=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod1816); 
+                    otherlv_86=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_86, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_5_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:862:1: (this_NL_87= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:862:1: (this_NL_87= RULE_NL )+
                     int cnt52=0;
                     loop52:
                     do {
@@ -2934,9 +2934,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt52) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:862:2: this_NL_87= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:862:2: this_NL_87= RULE_NL
                     	    {
-                    	    this_NL_87=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1828); 
+                    	    this_NL_87=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_17); 
                     	     
                     	        newLeafNode(this_NL_87, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_2()); 
                     	        
@@ -2953,7 +2953,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt52++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:866:3: ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )*
+                    // InternalBug348199TestLanguage.g:866:3: ( ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+ )*
                     loop54:
                     do {
                         int alt54=2;
@@ -2966,18 +2966,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt54) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:866:4: ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:866:4: ( (lv_time_88_0= ruleTimeDef1 ) ) (this_NL_89= RULE_NL )+
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:866:4: ( (lv_time_88_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:867:1: (lv_time_88_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:866:4: ( (lv_time_88_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:867:1: (lv_time_88_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:867:1: (lv_time_88_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:868:3: lv_time_88_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:867:1: (lv_time_88_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:868:3: lv_time_88_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_5_3_0_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod1851);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_88_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -2999,7 +2999,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:884:2: (this_NL_89= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:884:2: (this_NL_89= RULE_NL )+
                     	    int cnt53=0;
                     	    loop53:
                     	    do {
@@ -3013,9 +3013,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt53) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:884:3: this_NL_89= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:884:3: this_NL_89= RULE_NL
                     	    	    {
-                    	    	    this_NL_89=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1863); 
+                    	    	    this_NL_89=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_17); 
                     	    	     
                     	    	        newLeafNode(this_NL_89, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_3_1()); 
                     	    	        
@@ -3041,7 +3041,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:888:5: ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? )
+                    // InternalBug348199TestLanguage.g:888:5: ( (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* ) | (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )? )
                     int alt62=2;
                     int LA62_0 = input.LA(1);
 
@@ -3059,22 +3059,22 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     switch (alt62) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:888:6: (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* )
+                            // InternalBug348199TestLanguage.g:888:6: (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:888:6: (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:888:8: otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )*
+                            // InternalBug348199TestLanguage.g:888:6: (otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )* )
+                            // InternalBug348199TestLanguage.g:888:8: otherlv_90= 'timeperiod_name' ( (lv_name_91_0= RULE_ID ) ) (this_NL_92= RULE_NL )+ ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )*
                             {
-                            otherlv_90=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod1880); 
+                            otherlv_90=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                                 	newLeafNode(otherlv_90, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_5_4_0_0());
                                 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:892:1: ( (lv_name_91_0= RULE_ID ) )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:893:1: (lv_name_91_0= RULE_ID )
+                            // InternalBug348199TestLanguage.g:892:1: ( (lv_name_91_0= RULE_ID ) )
+                            // InternalBug348199TestLanguage.g:893:1: (lv_name_91_0= RULE_ID )
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:893:1: (lv_name_91_0= RULE_ID )
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:894:3: lv_name_91_0= RULE_ID
+                            // InternalBug348199TestLanguage.g:893:1: (lv_name_91_0= RULE_ID )
+                            // InternalBug348199TestLanguage.g:894:3: lv_name_91_0= RULE_ID
                             {
-                            lv_name_91_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1897); 
+                            lv_name_91_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                             			newLeafNode(lv_name_91_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_5_4_0_1_0()); 
                             		
@@ -3094,7 +3094,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                             }
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:910:2: (this_NL_92= RULE_NL )+
+                            // InternalBug348199TestLanguage.g:910:2: (this_NL_92= RULE_NL )+
                             int cnt55=0;
                             loop55:
                             do {
@@ -3108,9 +3108,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                 switch (alt55) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:910:3: this_NL_92= RULE_NL
+                            	    // InternalBug348199TestLanguage.g:910:3: this_NL_92= RULE_NL
                             	    {
-                            	    this_NL_92=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1914); 
+                            	    this_NL_92=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_18); 
                             	     
                             	        newLeafNode(this_NL_92, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_4_0_2()); 
                             	        
@@ -3127,7 +3127,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                                 cnt55++;
                             } while (true);
 
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:914:3: ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )*
+                            // InternalBug348199TestLanguage.g:914:3: ( ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+ )*
                             loop57:
                             do {
                                 int alt57=2;
@@ -3140,18 +3140,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                 switch (alt57) {
                             	case 1 :
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:914:4: ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+
+                            	    // InternalBug348199TestLanguage.g:914:4: ( (lv_time_93_0= ruleTimeDef2 ) ) (this_NL_94= RULE_NL )+
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:914:4: ( (lv_time_93_0= ruleTimeDef2 ) )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:915:1: (lv_time_93_0= ruleTimeDef2 )
+                            	    // InternalBug348199TestLanguage.g:914:4: ( (lv_time_93_0= ruleTimeDef2 ) )
+                            	    // InternalBug348199TestLanguage.g:915:1: (lv_time_93_0= ruleTimeDef2 )
                             	    {
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:915:1: (lv_time_93_0= ruleTimeDef2 )
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:916:3: lv_time_93_0= ruleTimeDef2
+                            	    // InternalBug348199TestLanguage.g:915:1: (lv_time_93_0= ruleTimeDef2 )
+                            	    // InternalBug348199TestLanguage.g:916:3: lv_time_93_0= ruleTimeDef2
                             	    {
                             	     
                             	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_5_4_0_3_0_0()); 
                             	    	    
-                            	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod1937);
+                            	    pushFollow(FollowSets000.FOLLOW_6);
                             	    lv_time_93_0=ruleTimeDef2();
 
                             	    state._fsp--;
@@ -3173,7 +3173,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                             	    }
 
-                            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:932:2: (this_NL_94= RULE_NL )+
+                            	    // InternalBug348199TestLanguage.g:932:2: (this_NL_94= RULE_NL )+
                             	    int cnt56=0;
                             	    loop56:
                             	    do {
@@ -3187,9 +3187,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                             	        switch (alt56) {
                             	    	case 1 :
-                            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:932:3: this_NL_94= RULE_NL
+                            	    	    // InternalBug348199TestLanguage.g:932:3: this_NL_94= RULE_NL
                             	    	    {
-                            	    	    this_NL_94=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod1949); 
+                            	    	    this_NL_94=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_18); 
                             	    	     
                             	    	        newLeafNode(this_NL_94, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_4_0_3_1()); 
                             	    	        
@@ -3222,9 +3222,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:937:6: (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )?
+                            // InternalBug348199TestLanguage.g:937:6: (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )?
                             {
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:937:6: (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )?
+                            // InternalBug348199TestLanguage.g:937:6: (otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )* )?
                             int alt61=2;
                             int LA61_0 = input.LA(1);
 
@@ -3233,19 +3233,19 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                             }
                             switch (alt61) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:937:8: otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )*
+                                    // InternalBug348199TestLanguage.g:937:8: otherlv_95= 'otherelement' ( (lv_alias_96_0= RULE_ID ) ) (this_NL_97= RULE_NL )+ ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )*
                                     {
-                                    otherlv_95=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod1972); 
+                                    otherlv_95=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                                         	newLeafNode(otherlv_95, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_5_4_1_0());
                                         
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:941:1: ( (lv_alias_96_0= RULE_ID ) )
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:942:1: (lv_alias_96_0= RULE_ID )
+                                    // InternalBug348199TestLanguage.g:941:1: ( (lv_alias_96_0= RULE_ID ) )
+                                    // InternalBug348199TestLanguage.g:942:1: (lv_alias_96_0= RULE_ID )
                                     {
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:942:1: (lv_alias_96_0= RULE_ID )
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:943:3: lv_alias_96_0= RULE_ID
+                                    // InternalBug348199TestLanguage.g:942:1: (lv_alias_96_0= RULE_ID )
+                                    // InternalBug348199TestLanguage.g:943:3: lv_alias_96_0= RULE_ID
                                     {
-                                    lv_alias_96_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod1989); 
+                                    lv_alias_96_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                                     			newLeafNode(lv_alias_96_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_5_4_1_1_0()); 
                                     		
@@ -3265,7 +3265,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                     }
 
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:959:2: (this_NL_97= RULE_NL )+
+                                    // InternalBug348199TestLanguage.g:959:2: (this_NL_97= RULE_NL )+
                                     int cnt58=0;
                                     loop58:
                                     do {
@@ -3279,9 +3279,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                         switch (alt58) {
                                     	case 1 :
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:959:3: this_NL_97= RULE_NL
+                                    	    // InternalBug348199TestLanguage.g:959:3: this_NL_97= RULE_NL
                                     	    {
-                                    	    this_NL_97=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2006); 
+                                    	    this_NL_97=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_19); 
                                     	     
                                     	        newLeafNode(this_NL_97, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_4_1_2()); 
                                     	        
@@ -3298,7 +3298,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                                         cnt58++;
                                     } while (true);
 
-                                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:963:3: ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )*
+                                    // InternalBug348199TestLanguage.g:963:3: ( ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+ )*
                                     loop60:
                                     do {
                                         int alt60=2;
@@ -3311,18 +3311,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                         switch (alt60) {
                                     	case 1 :
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:963:4: ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+
+                                    	    // InternalBug348199TestLanguage.g:963:4: ( (lv_time_98_0= ruleTimeDef3 ) ) (this_NL_99= RULE_NL )+
                                     	    {
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:963:4: ( (lv_time_98_0= ruleTimeDef3 ) )
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:964:1: (lv_time_98_0= ruleTimeDef3 )
+                                    	    // InternalBug348199TestLanguage.g:963:4: ( (lv_time_98_0= ruleTimeDef3 ) )
+                                    	    // InternalBug348199TestLanguage.g:964:1: (lv_time_98_0= ruleTimeDef3 )
                                     	    {
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:964:1: (lv_time_98_0= ruleTimeDef3 )
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:965:3: lv_time_98_0= ruleTimeDef3
+                                    	    // InternalBug348199TestLanguage.g:964:1: (lv_time_98_0= ruleTimeDef3 )
+                                    	    // InternalBug348199TestLanguage.g:965:3: lv_time_98_0= ruleTimeDef3
                                     	    {
                                     	     
                                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_5_4_1_3_0_0()); 
                                     	    	    
-                                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod2029);
+                                    	    pushFollow(FollowSets000.FOLLOW_6);
                                     	    lv_time_98_0=ruleTimeDef3();
 
                                     	    state._fsp--;
@@ -3344,7 +3344,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                     	    }
 
-                                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:981:2: (this_NL_99= RULE_NL )+
+                                    	    // InternalBug348199TestLanguage.g:981:2: (this_NL_99= RULE_NL )+
                                     	    int cnt59=0;
                                     	    loop59:
                                     	    do {
@@ -3358,9 +3358,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                                     	        switch (alt59) {
                                     	    	case 1 :
-                                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:981:3: this_NL_99= RULE_NL
+                                    	    	    // InternalBug348199TestLanguage.g:981:3: this_NL_99= RULE_NL
                                     	    	    {
-                                    	    	    this_NL_99=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2041); 
+                                    	    	    this_NL_99=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_19); 
                                     	    	     
                                     	    	        newLeafNode(this_NL_99, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_5_4_1_3_1()); 
                                     	    	        
@@ -3398,7 +3398,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     }
 
-                    otherlv_100=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod2059); 
+                    otherlv_100=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_100, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_5_5());
                         
@@ -3409,20 +3409,20 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:990:6: (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' )
+                    // InternalBug348199TestLanguage.g:990:6: (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:990:6: (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:990:8: otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}'
+                    // InternalBug348199TestLanguage.g:990:6: (otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}' )
+                    // InternalBug348199TestLanguage.g:990:8: otherlv_101= '7' otherlv_102= '{' (this_NL_103= RULE_NL )+ ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )* ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+ otherlv_116= '}'
                     {
-                    otherlv_101=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleTimeperiod2079); 
+                    otherlv_101=(Token)match(input,24,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_101, grammarAccess.getTimeperiodAccess().getDigitSevenKeyword_3_6_0());
                         
-                    otherlv_102=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod2091); 
+                    otherlv_102=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_102, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_6_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:998:1: (this_NL_103= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:998:1: (this_NL_103= RULE_NL )+
                     int cnt63=0;
                     loop63:
                     do {
@@ -3436,9 +3436,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt63) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:998:2: this_NL_103= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:998:2: this_NL_103= RULE_NL
                     	    {
-                    	    this_NL_103=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2103); 
+                    	    this_NL_103=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_14); 
                     	     
                     	        newLeafNode(this_NL_103, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_2()); 
                     	        
@@ -3455,7 +3455,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt63++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1002:3: ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )*
+                    // InternalBug348199TestLanguage.g:1002:3: ( ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+ )*
                     loop65:
                     do {
                         int alt65=2;
@@ -3468,18 +3468,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt65) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1002:4: ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1002:4: ( (lv_time_104_0= ruleTimeDef1 ) ) (this_NL_105= RULE_NL )+
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1002:4: ( (lv_time_104_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1003:1: (lv_time_104_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:1002:4: ( (lv_time_104_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:1003:1: (lv_time_104_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1003:1: (lv_time_104_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1004:3: lv_time_104_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:1003:1: (lv_time_104_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:1004:3: lv_time_104_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_6_3_0_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod2126);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_104_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -3501,7 +3501,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1020:2: (this_NL_105= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1020:2: (this_NL_105= RULE_NL )+
                     	    int cnt64=0;
                     	    loop64:
                     	    do {
@@ -3515,9 +3515,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt64) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1020:3: this_NL_105= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1020:3: this_NL_105= RULE_NL
                     	    	    {
-                    	    	    this_NL_105=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2138); 
+                    	    	    this_NL_105=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_14); 
                     	    	     
                     	    	        newLeafNode(this_NL_105, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_3_1()); 
                     	    	        
@@ -3543,7 +3543,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1024:5: ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+
+                    // InternalBug348199TestLanguage.g:1024:5: ( (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* ) | (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* ) )+
                     int cnt72=0;
                     loop72:
                     do {
@@ -3560,22 +3560,22 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt72) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1024:6: (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1024:6: (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1024:6: (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1024:8: otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1024:6: (otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1024:8: otherlv_106= 'timeperiod_name' ( (lv_name_107_0= RULE_ID ) ) (this_NL_108= RULE_NL )+ ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )*
                     	    {
-                    	    otherlv_106=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod2155); 
+                    	    otherlv_106=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_106, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_6_4_0_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1028:1: ( (lv_name_107_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1029:1: (lv_name_107_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1028:1: ( (lv_name_107_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:1029:1: (lv_name_107_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1029:1: (lv_name_107_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1030:3: lv_name_107_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:1029:1: (lv_name_107_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1030:3: lv_name_107_0= RULE_ID
                     	    {
-                    	    lv_name_107_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod2172); 
+                    	    lv_name_107_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_107_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_6_4_0_1_0()); 
                     	    		
@@ -3595,7 +3595,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1046:2: (this_NL_108= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1046:2: (this_NL_108= RULE_NL )+
                     	    int cnt66=0;
                     	    loop66:
                     	    do {
@@ -3609,9 +3609,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt66) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1046:3: this_NL_108= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1046:3: this_NL_108= RULE_NL
                     	    	    {
-                    	    	    this_NL_108=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2189); 
+                    	    	    this_NL_108=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	     
                     	    	        newLeafNode(this_NL_108, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_4_0_2()); 
                     	    	        
@@ -3628,7 +3628,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt66++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1050:3: ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1050:3: ( ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+ )*
                     	    loop68:
                     	    do {
                     	        int alt68=2;
@@ -3641,18 +3641,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt68) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1050:4: ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1050:4: ( (lv_time_109_0= ruleTimeDef2 ) ) (this_NL_110= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1050:4: ( (lv_time_109_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1051:1: (lv_time_109_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:1050:4: ( (lv_time_109_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:1051:1: (lv_time_109_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1051:1: (lv_time_109_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1052:3: lv_time_109_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:1051:1: (lv_time_109_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:1052:3: lv_time_109_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_6_4_0_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod2212);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_109_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -3674,7 +3674,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1068:2: (this_NL_110= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1068:2: (this_NL_110= RULE_NL )+
                     	    	    int cnt67=0;
                     	    	    loop67:
                     	    	    do {
@@ -3688,9 +3688,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt67) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1068:3: this_NL_110= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:1068:3: this_NL_110= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_110=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2224); 
+                    	    	    	    this_NL_110=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_110, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_4_0_3_1()); 
                     	    	    	        
@@ -3723,22 +3723,22 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1073:6: (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1073:6: (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1073:6: (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1073:8: otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1073:6: (otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1073:8: otherlv_111= 'otherelement' ( (lv_alias_112_0= RULE_ID ) ) (this_NL_113= RULE_NL )+ ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )*
                     	    {
-                    	    otherlv_111=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod2247); 
+                    	    otherlv_111=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_111, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_6_4_1_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1077:1: ( (lv_alias_112_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1078:1: (lv_alias_112_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1077:1: ( (lv_alias_112_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:1078:1: (lv_alias_112_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1078:1: (lv_alias_112_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1079:3: lv_alias_112_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:1078:1: (lv_alias_112_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1079:3: lv_alias_112_0= RULE_ID
                     	    {
-                    	    lv_alias_112_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod2264); 
+                    	    lv_alias_112_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_112_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_6_4_1_1_0()); 
                     	    		
@@ -3758,7 +3758,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1095:2: (this_NL_113= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1095:2: (this_NL_113= RULE_NL )+
                     	    int cnt69=0;
                     	    loop69:
                     	    do {
@@ -3772,9 +3772,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt69) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1095:3: this_NL_113= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1095:3: this_NL_113= RULE_NL
                     	    	    {
-                    	    	    this_NL_113=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2281); 
+                    	    	    this_NL_113=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	     
                     	    	        newLeafNode(this_NL_113, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_4_1_2()); 
                     	    	        
@@ -3791,7 +3791,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt69++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1099:3: ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1099:3: ( ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+ )*
                     	    loop71:
                     	    do {
                     	        int alt71=2;
@@ -3804,18 +3804,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt71) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1099:4: ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1099:4: ( (lv_time_114_0= ruleTimeDef3 ) ) (this_NL_115= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1099:4: ( (lv_time_114_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1100:1: (lv_time_114_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:1099:4: ( (lv_time_114_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:1100:1: (lv_time_114_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1100:1: (lv_time_114_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1101:3: lv_time_114_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:1100:1: (lv_time_114_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:1101:3: lv_time_114_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_6_4_1_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod2304);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_114_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -3837,7 +3837,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1117:2: (this_NL_115= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1117:2: (this_NL_115= RULE_NL )+
                     	    	    int cnt70=0;
                     	    	    loop70:
                     	    	    do {
@@ -3851,9 +3851,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt70) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1117:3: this_NL_115= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:1117:3: this_NL_115= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_115=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2316); 
+                    	    	    	    this_NL_115=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_115, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_6_4_1_3_1()); 
                     	    	    	        
@@ -3895,7 +3895,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt72++;
                     } while (true);
 
-                    otherlv_116=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod2334); 
+                    otherlv_116=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_116, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_6_5());
                         
@@ -3906,20 +3906,20 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1126:6: (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' )
+                    // InternalBug348199TestLanguage.g:1126:6: (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1126:6: (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1126:8: otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}'
+                    // InternalBug348199TestLanguage.g:1126:6: (otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}' )
+                    // InternalBug348199TestLanguage.g:1126:8: otherlv_117= '8' otherlv_118= '{' (this_NL_119= RULE_NL )+ ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )* ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )* otherlv_132= '}'
                     {
-                    otherlv_117=(Token)match(input,25,FollowSets000.FOLLOW_25_in_ruleTimeperiod2354); 
+                    otherlv_117=(Token)match(input,25,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_117, grammarAccess.getTimeperiodAccess().getDigitEightKeyword_3_7_0());
                         
-                    otherlv_118=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleTimeperiod2366); 
+                    otherlv_118=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_118, grammarAccess.getTimeperiodAccess().getLeftCurlyBracketKeyword_3_7_1());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1134:1: (this_NL_119= RULE_NL )+
+                    // InternalBug348199TestLanguage.g:1134:1: (this_NL_119= RULE_NL )+
                     int cnt73=0;
                     loop73:
                     do {
@@ -3933,9 +3933,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt73) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1134:2: this_NL_119= RULE_NL
+                    	    // InternalBug348199TestLanguage.g:1134:2: this_NL_119= RULE_NL
                     	    {
-                    	    this_NL_119=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2378); 
+                    	    this_NL_119=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_17); 
                     	     
                     	        newLeafNode(this_NL_119, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_2()); 
                     	        
@@ -3952,7 +3952,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         cnt73++;
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1138:3: ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )*
+                    // InternalBug348199TestLanguage.g:1138:3: ( ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+ )*
                     loop75:
                     do {
                         int alt75=2;
@@ -3965,18 +3965,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt75) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1138:4: ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1138:4: ( (lv_time_120_0= ruleTimeDef1 ) ) (this_NL_121= RULE_NL )+
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1138:4: ( (lv_time_120_0= ruleTimeDef1 ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1139:1: (lv_time_120_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:1138:4: ( (lv_time_120_0= ruleTimeDef1 ) )
+                    	    // InternalBug348199TestLanguage.g:1139:1: (lv_time_120_0= ruleTimeDef1 )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1139:1: (lv_time_120_0= ruleTimeDef1 )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1140:3: lv_time_120_0= ruleTimeDef1
+                    	    // InternalBug348199TestLanguage.g:1139:1: (lv_time_120_0= ruleTimeDef1 )
+                    	    // InternalBug348199TestLanguage.g:1140:3: lv_time_120_0= ruleTimeDef1
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef1ParserRuleCall_3_7_3_0_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_ruleTimeperiod2401);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_time_120_0=ruleTimeDef1();
 
                     	    state._fsp--;
@@ -3998,7 +3998,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1156:2: (this_NL_121= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1156:2: (this_NL_121= RULE_NL )+
                     	    int cnt74=0;
                     	    loop74:
                     	    do {
@@ -4012,9 +4012,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt74) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1156:3: this_NL_121= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1156:3: this_NL_121= RULE_NL
                     	    	    {
-                    	    	    this_NL_121=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2413); 
+                    	    	    this_NL_121=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_17); 
                     	    	     
                     	    	        newLeafNode(this_NL_121, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_3_1()); 
                     	    	        
@@ -4040,7 +4040,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1160:5: ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )*
+                    // InternalBug348199TestLanguage.g:1160:5: ( (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* ) | (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* ) )*
                     loop82:
                     do {
                         int alt82=3;
@@ -4056,22 +4056,22 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt82) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1160:6: (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1160:6: (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1160:6: (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1160:8: otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1160:6: (otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1160:8: otherlv_122= 'timeperiod_name' ( (lv_name_123_0= RULE_ID ) ) (this_NL_124= RULE_NL )+ ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )*
                     	    {
-                    	    otherlv_122=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleTimeperiod2430); 
+                    	    otherlv_122=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_122, grammarAccess.getTimeperiodAccess().getTimeperiod_nameKeyword_3_7_4_0_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1164:1: ( (lv_name_123_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1165:1: (lv_name_123_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1164:1: ( (lv_name_123_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:1165:1: (lv_name_123_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1165:1: (lv_name_123_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1166:3: lv_name_123_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:1165:1: (lv_name_123_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1166:3: lv_name_123_0= RULE_ID
                     	    {
-                    	    lv_name_123_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod2447); 
+                    	    lv_name_123_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_name_123_0, grammarAccess.getTimeperiodAccess().getNameIDTerminalRuleCall_3_7_4_0_1_0()); 
                     	    		
@@ -4091,7 +4091,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1182:2: (this_NL_124= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1182:2: (this_NL_124= RULE_NL )+
                     	    int cnt76=0;
                     	    loop76:
                     	    do {
@@ -4105,9 +4105,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt76) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1182:3: this_NL_124= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1182:3: this_NL_124= RULE_NL
                     	    	    {
-                    	    	    this_NL_124=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2464); 
+                    	    	    this_NL_124=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	     
                     	    	        newLeafNode(this_NL_124, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_4_0_2()); 
                     	    	        
@@ -4124,7 +4124,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt76++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1186:3: ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1186:3: ( ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+ )*
                     	    loop78:
                     	    do {
                     	        int alt78=2;
@@ -4137,18 +4137,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt78) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1186:4: ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1186:4: ( (lv_time_125_0= ruleTimeDef2 ) ) (this_NL_126= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1186:4: ( (lv_time_125_0= ruleTimeDef2 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1187:1: (lv_time_125_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:1186:4: ( (lv_time_125_0= ruleTimeDef2 ) )
+                    	    	    // InternalBug348199TestLanguage.g:1187:1: (lv_time_125_0= ruleTimeDef2 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1187:1: (lv_time_125_0= ruleTimeDef2 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1188:3: lv_time_125_0= ruleTimeDef2
+                    	    	    // InternalBug348199TestLanguage.g:1187:1: (lv_time_125_0= ruleTimeDef2 )
+                    	    	    // InternalBug348199TestLanguage.g:1188:3: lv_time_125_0= ruleTimeDef2
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef2ParserRuleCall_3_7_4_0_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_ruleTimeperiod2487);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_125_0=ruleTimeDef2();
 
                     	    	    state._fsp--;
@@ -4170,7 +4170,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1204:2: (this_NL_126= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1204:2: (this_NL_126= RULE_NL )+
                     	    	    int cnt77=0;
                     	    	    loop77:
                     	    	    do {
@@ -4184,9 +4184,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt77) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1204:3: this_NL_126= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:1204:3: this_NL_126= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_126=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2499); 
+                    	    	    	    this_NL_126=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_15); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_126, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_4_0_3_1()); 
                     	    	    	        
@@ -4219,22 +4219,22 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1209:6: (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1209:6: (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1209:6: (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1209:8: otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1209:6: (otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )* )
+                    	    // InternalBug348199TestLanguage.g:1209:8: otherlv_127= 'otherelement' ( (lv_alias_128_0= RULE_ID ) ) (this_NL_129= RULE_NL )+ ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )*
                     	    {
-                    	    otherlv_127=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleTimeperiod2522); 
+                    	    otherlv_127=(Token)match(input,17,FollowSets000.FOLLOW_9); 
 
                     	        	newLeafNode(otherlv_127, grammarAccess.getTimeperiodAccess().getOtherelementKeyword_3_7_4_1_0());
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1213:1: ( (lv_alias_128_0= RULE_ID ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1214:1: (lv_alias_128_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1213:1: ( (lv_alias_128_0= RULE_ID ) )
+                    	    // InternalBug348199TestLanguage.g:1214:1: (lv_alias_128_0= RULE_ID )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1214:1: (lv_alias_128_0= RULE_ID )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1215:3: lv_alias_128_0= RULE_ID
+                    	    // InternalBug348199TestLanguage.g:1214:1: (lv_alias_128_0= RULE_ID )
+                    	    // InternalBug348199TestLanguage.g:1215:3: lv_alias_128_0= RULE_ID
                     	    {
-                    	    lv_alias_128_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTimeperiod2539); 
+                    	    lv_alias_128_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     	    			newLeafNode(lv_alias_128_0, grammarAccess.getTimeperiodAccess().getAliasIDTerminalRuleCall_3_7_4_1_1_0()); 
                     	    		
@@ -4254,7 +4254,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    }
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1231:2: (this_NL_129= RULE_NL )+
+                    	    // InternalBug348199TestLanguage.g:1231:2: (this_NL_129= RULE_NL )+
                     	    int cnt79=0;
                     	    loop79:
                     	    do {
@@ -4268,9 +4268,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt79) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1231:3: this_NL_129= RULE_NL
+                    	    	    // InternalBug348199TestLanguage.g:1231:3: this_NL_129= RULE_NL
                     	    	    {
-                    	    	    this_NL_129=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2556); 
+                    	    	    this_NL_129=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	     
                     	    	        newLeafNode(this_NL_129, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_4_1_2()); 
                     	    	        
@@ -4287,7 +4287,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                     	        cnt79++;
                     	    } while (true);
 
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1235:3: ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )*
+                    	    // InternalBug348199TestLanguage.g:1235:3: ( ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+ )*
                     	    loop81:
                     	    do {
                     	        int alt81=2;
@@ -4300,18 +4300,18 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	        switch (alt81) {
                     	    	case 1 :
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1235:4: ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1235:4: ( (lv_time_130_0= ruleTimeDef3 ) ) (this_NL_131= RULE_NL )+
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1235:4: ( (lv_time_130_0= ruleTimeDef3 ) )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1236:1: (lv_time_130_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:1235:4: ( (lv_time_130_0= ruleTimeDef3 ) )
+                    	    	    // InternalBug348199TestLanguage.g:1236:1: (lv_time_130_0= ruleTimeDef3 )
                     	    	    {
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1236:1: (lv_time_130_0= ruleTimeDef3 )
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1237:3: lv_time_130_0= ruleTimeDef3
+                    	    	    // InternalBug348199TestLanguage.g:1236:1: (lv_time_130_0= ruleTimeDef3 )
+                    	    	    // InternalBug348199TestLanguage.g:1237:3: lv_time_130_0= ruleTimeDef3
                     	    	    {
                     	    	     
                     	    	    	        newCompositeNode(grammarAccess.getTimeperiodAccess().getTimeTimeDef3ParserRuleCall_3_7_4_1_3_0_0()); 
                     	    	    	    
-                    	    	    pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_ruleTimeperiod2579);
+                    	    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    	    lv_time_130_0=ruleTimeDef3();
 
                     	    	    state._fsp--;
@@ -4333,7 +4333,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	    }
 
-                    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1253:2: (this_NL_131= RULE_NL )+
+                    	    	    // InternalBug348199TestLanguage.g:1253:2: (this_NL_131= RULE_NL )+
                     	    	    int cnt80=0;
                     	    	    loop80:
                     	    	    do {
@@ -4347,9 +4347,9 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
                     	    	        switch (alt80) {
                     	    	    	case 1 :
-                    	    	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1253:3: this_NL_131= RULE_NL
+                    	    	    	    // InternalBug348199TestLanguage.g:1253:3: this_NL_131= RULE_NL
                     	    	    	    {
-                    	    	    	    this_NL_131=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_RULE_NL_in_ruleTimeperiod2591); 
+                    	    	    	    this_NL_131=(Token)match(input,RULE_NL,FollowSets000.FOLLOW_16); 
                     	    	    	     
                     	    	    	        newLeafNode(this_NL_131, grammarAccess.getTimeperiodAccess().getNLTerminalRuleCall_3_7_4_1_3_1()); 
                     	    	    	        
@@ -4387,7 +4387,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
                         }
                     } while (true);
 
-                    otherlv_132=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleTimeperiod2609); 
+                    otherlv_132=(Token)match(input,18,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_132, grammarAccess.getTimeperiodAccess().getRightCurlyBracketKeyword_3_7_5());
                         
@@ -4421,7 +4421,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTimeDef1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1269:1: entryRuleTimeDef1 returns [EObject current=null] : iv_ruleTimeDef1= ruleTimeDef1 EOF ;
+    // InternalBug348199TestLanguage.g:1269:1: entryRuleTimeDef1 returns [EObject current=null] : iv_ruleTimeDef1= ruleTimeDef1 EOF ;
     public final EObject entryRuleTimeDef1() throws RecognitionException {
         EObject current = null;
 
@@ -4429,17 +4429,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1270:2: (iv_ruleTimeDef1= ruleTimeDef1 EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1271:2: iv_ruleTimeDef1= ruleTimeDef1 EOF
+            // InternalBug348199TestLanguage.g:1270:2: (iv_ruleTimeDef1= ruleTimeDef1 EOF )
+            // InternalBug348199TestLanguage.g:1271:2: iv_ruleTimeDef1= ruleTimeDef1 EOF
             {
              newCompositeNode(grammarAccess.getTimeDef1Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTimeDef1_in_entryRuleTimeDef12647);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTimeDef1=ruleTimeDef1();
 
             state._fsp--;
 
              current =iv_ruleTimeDef1; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTimeDef12657); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -4457,7 +4457,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTimeDef1"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1278:1: ruleTimeDef1 returns [EObject current=null] : (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) ) ;
+    // InternalBug348199TestLanguage.g:1278:1: ruleTimeDef1 returns [EObject current=null] : (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) ) ;
     public final EObject ruleTimeDef1() throws RecognitionException {
         EObject current = null;
 
@@ -4467,23 +4467,23 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1281:28: ( (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1282:1: (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1281:28: ( (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) ) )
+            // InternalBug348199TestLanguage.g:1282:1: (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1282:1: (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1282:3: otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1282:1: (otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1282:3: otherlv_0= 'july' ( (lv_day_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_26_in_ruleTimeDef12694); 
+            otherlv_0=(Token)match(input,26,FollowSets000.FOLLOW_20); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTimeDef1Access().getJulyKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1286:1: ( (lv_day_1_0= RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1287:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1286:1: ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1287:1: (lv_day_1_0= RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1287:1: (lv_day_1_0= RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1288:3: lv_day_1_0= RULE_INT
+            // InternalBug348199TestLanguage.g:1287:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1288:3: lv_day_1_0= RULE_INT
             {
-            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleTimeDef12711); 
+            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_day_1_0, grammarAccess.getTimeDef1Access().getDayINTTerminalRuleCall_1_0()); 
             		
@@ -4524,7 +4524,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTimeDef2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1312:1: entryRuleTimeDef2 returns [EObject current=null] : iv_ruleTimeDef2= ruleTimeDef2 EOF ;
+    // InternalBug348199TestLanguage.g:1312:1: entryRuleTimeDef2 returns [EObject current=null] : iv_ruleTimeDef2= ruleTimeDef2 EOF ;
     public final EObject entryRuleTimeDef2() throws RecognitionException {
         EObject current = null;
 
@@ -4532,17 +4532,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1313:2: (iv_ruleTimeDef2= ruleTimeDef2 EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1314:2: iv_ruleTimeDef2= ruleTimeDef2 EOF
+            // InternalBug348199TestLanguage.g:1313:2: (iv_ruleTimeDef2= ruleTimeDef2 EOF )
+            // InternalBug348199TestLanguage.g:1314:2: iv_ruleTimeDef2= ruleTimeDef2 EOF
             {
              newCompositeNode(grammarAccess.getTimeDef2Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTimeDef2_in_entryRuleTimeDef22752);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTimeDef2=ruleTimeDef2();
 
             state._fsp--;
 
              current =iv_ruleTimeDef2; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTimeDef22762); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -4560,7 +4560,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTimeDef2"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1321:1: ruleTimeDef2 returns [EObject current=null] : (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) ) ;
+    // InternalBug348199TestLanguage.g:1321:1: ruleTimeDef2 returns [EObject current=null] : (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) ) ;
     public final EObject ruleTimeDef2() throws RecognitionException {
         EObject current = null;
 
@@ -4570,23 +4570,23 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1324:28: ( (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1325:1: (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1324:28: ( (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) ) )
+            // InternalBug348199TestLanguage.g:1325:1: (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1325:1: (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1325:3: otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1325:1: (otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1325:3: otherlv_0= 'august' ( (lv_day_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_27_in_ruleTimeDef22799); 
+            otherlv_0=(Token)match(input,27,FollowSets000.FOLLOW_20); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTimeDef2Access().getAugustKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1329:1: ( (lv_day_1_0= RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1330:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1329:1: ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1330:1: (lv_day_1_0= RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1330:1: (lv_day_1_0= RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1331:3: lv_day_1_0= RULE_INT
+            // InternalBug348199TestLanguage.g:1330:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1331:3: lv_day_1_0= RULE_INT
             {
-            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleTimeDef22816); 
+            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_day_1_0, grammarAccess.getTimeDef2Access().getDayINTTerminalRuleCall_1_0()); 
             		
@@ -4627,7 +4627,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleTimeDef3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1355:1: entryRuleTimeDef3 returns [EObject current=null] : iv_ruleTimeDef3= ruleTimeDef3 EOF ;
+    // InternalBug348199TestLanguage.g:1355:1: entryRuleTimeDef3 returns [EObject current=null] : iv_ruleTimeDef3= ruleTimeDef3 EOF ;
     public final EObject entryRuleTimeDef3() throws RecognitionException {
         EObject current = null;
 
@@ -4635,17 +4635,17 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1356:2: (iv_ruleTimeDef3= ruleTimeDef3 EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1357:2: iv_ruleTimeDef3= ruleTimeDef3 EOF
+            // InternalBug348199TestLanguage.g:1356:2: (iv_ruleTimeDef3= ruleTimeDef3 EOF )
+            // InternalBug348199TestLanguage.g:1357:2: iv_ruleTimeDef3= ruleTimeDef3 EOF
             {
              newCompositeNode(grammarAccess.getTimeDef3Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTimeDef3_in_entryRuleTimeDef32857);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleTimeDef3=ruleTimeDef3();
 
             state._fsp--;
 
              current =iv_ruleTimeDef3; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTimeDef32867); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -4663,7 +4663,7 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleTimeDef3"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1364:1: ruleTimeDef3 returns [EObject current=null] : (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) ) ;
+    // InternalBug348199TestLanguage.g:1364:1: ruleTimeDef3 returns [EObject current=null] : (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) ) ;
     public final EObject ruleTimeDef3() throws RecognitionException {
         EObject current = null;
 
@@ -4673,23 +4673,23 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1367:28: ( (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1368:1: (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1367:28: ( (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) ) )
+            // InternalBug348199TestLanguage.g:1368:1: (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1368:1: (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1368:3: otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1368:1: (otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) ) )
+            // InternalBug348199TestLanguage.g:1368:3: otherlv_0= 'september' ( (lv_day_1_0= RULE_INT ) )
             {
-            otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_28_in_ruleTimeDef32904); 
+            otherlv_0=(Token)match(input,28,FollowSets000.FOLLOW_20); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getTimeDef3Access().getSeptemberKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1372:1: ( (lv_day_1_0= RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1373:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1372:1: ( (lv_day_1_0= RULE_INT ) )
+            // InternalBug348199TestLanguage.g:1373:1: (lv_day_1_0= RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1373:1: (lv_day_1_0= RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug348199TestLanguage.g:1374:3: lv_day_1_0= RULE_INT
+            // InternalBug348199TestLanguage.g:1373:1: (lv_day_1_0= RULE_INT )
+            // InternalBug348199TestLanguage.g:1374:3: lv_day_1_0= RULE_INT
             {
-            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleTimeDef32921); 
+            lv_day_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_day_1_0, grammarAccess.getTimeDef3Access().getDayINTTerminalRuleCall_1_0()); 
             		
@@ -5668,150 +5668,26 @@ public class InternalBug348199TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleTimeperiod_in_entryRuleTimeperiod75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTimeperiod85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleTimeperiod131 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_13_in_ruleTimeperiod143 = new BitSet(new long[]{0x0000000003F84000L});
-        public static final BitSet FOLLOW_14_in_ruleTimeperiod157 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod169 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod182 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod204 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod264 = new BitSet(new long[]{0x0000000000010010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod277 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod294 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod312 = new BitSet(new long[]{0x0000000008000010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod334 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod404 = new BitSet(new long[]{0x0000000000020010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod417 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod434 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod452 = new BitSet(new long[]{0x0000000010000010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod474 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod535 = new BitSet(new long[]{0x0000000000040010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod548 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleTimeperiod568 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod580 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod593 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod615 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod631 = new BitSet(new long[]{0x0000000000010010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod644 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod661 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod679 = new BitSet(new long[]{0x0000000008000010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod701 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod723 = new BitSet(new long[]{0x0000000000020010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod736 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod753 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod771 = new BitSet(new long[]{0x0000000010000010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod793 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod810 = new BitSet(new long[]{0x0000000000040010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod823 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleTimeperiod843 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod855 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod868 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod890 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod906 = new BitSet(new long[]{0x0000000000010010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod919 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod936 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod954 = new BitSet(new long[]{0x0000000008000010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod976 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod998 = new BitSet(new long[]{0x0000000000020010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod1011 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1028 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1046 = new BitSet(new long[]{0x0000000010000010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod1068 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1085 = new BitSet(new long[]{0x0000000000040010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod1098 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleTimeperiod1118 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod1130 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1143 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod1165 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1181 = new BitSet(new long[]{0x0000000000010010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod1194 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1211 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1229 = new BitSet(new long[]{0x0000000008000010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod1251 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1273 = new BitSet(new long[]{0x0000000000020010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod1286 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1303 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1321 = new BitSet(new long[]{0x0000000010000010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod1343 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1360 = new BitSet(new long[]{0x0000000000040010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod1373 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_ruleTimeperiod1393 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod1405 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1417 = new BitSet(new long[]{0x0000000004030010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod1440 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1452 = new BitSet(new long[]{0x0000000004030010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod1513 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1530 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1547 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod1570 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1582 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod1653 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1670 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1687 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod1710 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1722 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod1784 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleTimeperiod1804 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod1816 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1828 = new BitSet(new long[]{0x0000000004070010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod1851 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1863 = new BitSet(new long[]{0x0000000004070010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod1880 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1897 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1914 = new BitSet(new long[]{0x0000000008040010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod1937 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod1949 = new BitSet(new long[]{0x0000000008040010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod1972 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod1989 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2006 = new BitSet(new long[]{0x0000000010040010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod2029 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2041 = new BitSet(new long[]{0x0000000010040010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod2059 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_ruleTimeperiod2079 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod2091 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2103 = new BitSet(new long[]{0x0000000004030010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod2126 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2138 = new BitSet(new long[]{0x0000000004030010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod2155 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod2172 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2189 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod2212 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2224 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod2247 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod2264 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2281 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod2304 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2316 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod2334 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_25_in_ruleTimeperiod2354 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleTimeperiod2366 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2378 = new BitSet(new long[]{0x0000000004070010L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_ruleTimeperiod2401 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2413 = new BitSet(new long[]{0x0000000004070010L});
-        public static final BitSet FOLLOW_16_in_ruleTimeperiod2430 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod2447 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2464 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_ruleTimeperiod2487 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2499 = new BitSet(new long[]{0x0000000008070010L});
-        public static final BitSet FOLLOW_17_in_ruleTimeperiod2522 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleTimeperiod2539 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2556 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_ruleTimeperiod2579 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_NL_in_ruleTimeperiod2591 = new BitSet(new long[]{0x0000000010070010L});
-        public static final BitSet FOLLOW_18_in_ruleTimeperiod2609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTimeDef1_in_entryRuleTimeDef12647 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTimeDef12657 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_ruleTimeDef12694 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleTimeDef12711 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTimeDef2_in_entryRuleTimeDef22752 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTimeDef22762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_27_in_ruleTimeDef22799 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleTimeDef22816 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTimeDef3_in_entryRuleTimeDef32857 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTimeDef32867 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_28_in_ruleTimeDef32904 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleTimeDef32921 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000003F84000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000004000010L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010010L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000008000010L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000020010L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000010000010L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000040010L});
+        public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000004030010L});
+        public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000008070010L});
+        public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000010070010L});
+        public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000004070010L});
+        public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000008040010L});
+        public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000010040010L});
+        public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000040L});
     }
 
 

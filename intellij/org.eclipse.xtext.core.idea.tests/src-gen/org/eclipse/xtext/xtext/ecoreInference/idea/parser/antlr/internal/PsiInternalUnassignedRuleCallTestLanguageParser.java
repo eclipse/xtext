@@ -47,7 +47,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         
 
     public String[] getTokenNames() { return PsiInternalUnassignedRuleCallTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalUnassignedRuleCallTestLanguage.g"; }
 
 
 
@@ -71,19 +71,19 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -100,26 +100,26 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token this_INT_1=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:58:10: ( (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:58:10: ( (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:60:3: otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:59:2: (otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:60:3: otherlv_0= 'model' (this_INT_1= RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel76); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:67:3: (this_INT_1= RULE_INT )+
+            // PsiInternalUnassignedRuleCallTestLanguage.g:67:3: (this_INT_1= RULE_INT )+
             int cnt1=0;
             loop1:
             do {
@@ -133,12 +133,12 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:68:4: this_INT_1= RULE_INT
+            	    // PsiInternalUnassignedRuleCallTestLanguage.g:68:4: this_INT_1= RULE_INT
             	    {
 
             	    				markLeaf(elementTypeProvider.getModel_INTTerminalRuleCall_1ElementType());
             	    			
-            	    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleModel96); 
+            	    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_4); 
 
             	    				doneLeaf(this_INT_1);
             	    			
@@ -155,16 +155,16 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
                 cnt1++;
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:76:3: ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:76:3: ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:78:5: lv_modelFeatures_2_0= ruleModelFeatures
+            // PsiInternalUnassignedRuleCallTestLanguage.g:77:4: (lv_modelFeatures_2_0= ruleModelFeatures )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:78:5: lv_modelFeatures_2_0= ruleModelFeatures
             {
 
             					markComposite(elementTypeProvider.getModel_ModelFeaturesModelFeaturesParserRuleCall_2_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleModelFeatures_in_ruleModel129);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleModelFeatures();
 
             state._fsp--;
@@ -197,19 +197,19 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModelFeatures"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:91:1: entryRuleModelFeatures : ruleModelFeatures EOF ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:91:1: entryRuleModelFeatures : ruleModelFeatures EOF ;
     public final void entryRuleModelFeatures() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:91:23: ( ruleModelFeatures EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:92:2: ruleModelFeatures EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:91:23: ( ruleModelFeatures EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:92:2: ruleModelFeatures EOF
             {
              markComposite(elementTypeProvider.getModelFeaturesElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures160);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModelFeatures();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModelFeatures163); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -226,36 +226,36 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleModelFeatures"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:97:1: ruleModelFeatures : (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:97:1: ruleModelFeatures : (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) ;
     public final void ruleModelFeatures() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
         Token otherlv_3=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:97:18: ( (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:97:18: ( (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:99:3: otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';'
+            // PsiInternalUnassignedRuleCallTestLanguage.g:98:2: (otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';' )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:99:3: otherlv_0= 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule otherlv_3= ';'
             {
 
             			markLeaf(elementTypeProvider.getModelFeatures_FeatureKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModelFeatures182); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:106:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:106:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:108:5: lv_name_1_0= RULE_ID
+            // PsiInternalUnassignedRuleCallTestLanguage.g:107:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:108:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getModelFeatures_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModelFeatures209); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -268,7 +268,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             			markComposite(elementTypeProvider.getModelFeatures_DataTypeRuleParserRuleCall_2ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_ruleModelFeatures232);
+            pushFollow(FollowSets000.FOLLOW_6);
             ruleDataTypeRule();
 
             state._fsp--;
@@ -279,7 +279,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
             			markLeaf(elementTypeProvider.getModelFeatures_SemicolonKeyword_3ElementType());
             		
-            otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleModelFeatures246); 
+            otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
             			doneLeaf(otherlv_3);
             		
@@ -302,19 +302,19 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleDataTypeRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:135:1: entryRuleDataTypeRule : ruleDataTypeRule EOF ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:135:1: entryRuleDataTypeRule : ruleDataTypeRule EOF ;
     public final void entryRuleDataTypeRule() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:135:22: ( ruleDataTypeRule EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:136:2: ruleDataTypeRule EOF
+            // PsiInternalUnassignedRuleCallTestLanguage.g:135:22: ( ruleDataTypeRule EOF )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:136:2: ruleDataTypeRule EOF
             {
              markComposite(elementTypeProvider.getDataTypeRuleElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule266);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleDataTypeRule();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataTypeRule269); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -331,7 +331,7 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleDataTypeRule"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:141:1: ruleDataTypeRule : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
+    // PsiInternalUnassignedRuleCallTestLanguage.g:141:1: ruleDataTypeRule : (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) ;
     public final void ruleDataTypeRule() throws RecognitionException {
         Token this_INT_0=null;
         Token kw=null;
@@ -339,34 +339,34 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
         Token this_STRING_3=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:141:17: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:141:17: ( (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? ) )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:143:3: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
+            // PsiInternalUnassignedRuleCallTestLanguage.g:142:2: (this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )? )
+            // PsiInternalUnassignedRuleCallTestLanguage.g:143:3: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
             {
 
             			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_0ElementType());
             		
-            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule288); 
+            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_7); 
 
             			doneLeaf(this_INT_0);
             		
 
             			markLeaf(elementTypeProvider.getDataTypeRule_KeywordKeyword_1ElementType());
             		
-            kw=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDataTypeRule302); 
+            kw=(Token)match(input,14,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(kw);
             		
 
             			markLeaf(elementTypeProvider.getDataTypeRule_INTTerminalRuleCall_2ElementType());
             		
-            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule316); 
+            this_INT_2=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_8); 
 
             			doneLeaf(this_INT_2);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:164:3: (this_STRING_3= RULE_STRING )?
+            // PsiInternalUnassignedRuleCallTestLanguage.g:164:3: (this_STRING_3= RULE_STRING )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -375,12 +375,12 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/idea/parser/antlr/internal/PsiInternalUnassignedRuleCallTestLanguage.g:165:4: this_STRING_3= RULE_STRING
+                    // PsiInternalUnassignedRuleCallTestLanguage.g:165:4: this_STRING_3= RULE_STRING
                     {
 
                     				markLeaf(elementTypeProvider.getDataTypeRule_STRINGTerminalRuleCall_3ElementType());
                     			
-                    this_STRING_3=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataTypeRule336); 
+                    this_STRING_3=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(this_STRING_3);
                     			
@@ -414,23 +414,14 @@ public class PsiInternalUnassignedRuleCallTestLanguageParser extends AbstractPsi
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel76 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleModel96 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_ruleModelFeatures_in_ruleModel129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures160 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModelFeatures163 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleModelFeatures182 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModelFeatures209 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleDataTypeRule_in_ruleModelFeatures232 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_13_in_ruleModelFeatures246 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule266 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeRule269 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule288 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleDataTypeRule302 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule316 = new BitSet(new long[]{0x0000000000000042L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataTypeRule336 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000042L});
     }
 
 

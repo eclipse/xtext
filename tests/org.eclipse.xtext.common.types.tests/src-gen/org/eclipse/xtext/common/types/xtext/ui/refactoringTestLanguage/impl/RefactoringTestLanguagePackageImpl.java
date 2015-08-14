@@ -109,8 +109,7 @@ public class RefactoringTestLanguagePackageImpl extends EPackageImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -120,8 +119,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_ReferenceHolder()
+  public EReference getModel_ReferenceHolder()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -131,8 +129,7 @@ public EReference getModel_ReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReferenceHolder()
+  public EClass getReferenceHolder()
   {
     return referenceHolderEClass;
   }
@@ -142,8 +139,7 @@ public EClass getReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getReferenceHolder_Name()
+  public EAttribute getReferenceHolder_Name()
   {
     return (EAttribute)referenceHolderEClass.getEStructuralFeatures().get(0);
   }
@@ -153,8 +149,7 @@ public EAttribute getReferenceHolder_Name()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceHolder_DefaultReference()
+  public EReference getReferenceHolder_DefaultReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(1);
   }
@@ -164,8 +159,7 @@ public EReference getReferenceHolder_DefaultReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RefactoringTestLanguageFactory getRefactoringTestLanguageFactory()
+  public RefactoringTestLanguageFactory getRefactoringTestLanguageFactory()
   {
     return (RefactoringTestLanguageFactory)getEFactoryInstance();
   }

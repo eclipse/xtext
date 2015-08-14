@@ -15,8 +15,8 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     public static final int Foo=5;
     public static final int Case=4;
     public static final int RULE_WS=6;
-    public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=7;
+    public static final int EOF=-1;
 
     // delegates
     // delegators
@@ -29,15 +29,15 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g"; }
+    public String getGrammarFileName() { return "InternalIgnoreCaseLexerTestLanguageLexer.g"; }
 
     // $ANTLR start "Case"
     public final void mCase() throws RecognitionException {
         try {
             int _type = Case;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:6: ( ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:19:8: ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:19:6: ( ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' ) )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:19:8: ( 'C' | 'c' ) ( 'A' | 'a' ) ( 'S' | 's' ) ( 'E' | 'e' )
             {
             if ( input.LA(1)=='C'||input.LA(1)=='c' ) {
                 input.consume();
@@ -91,8 +91,8 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = Foo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:5: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:21:7: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:21:5: ( ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' ) )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:21:7: ( 'F' | 'f' ) ( 'O' | 'o' ) ( 'O' | 'o' )
             {
             if ( input.LA(1)=='F'||input.LA(1)=='f' ) {
                 input.consume();
@@ -137,10 +137,10 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:25:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:25:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:25:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:25:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:25:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:25:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -154,7 +154,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:
+            	    // InternalIgnoreCaseLexerTestLanguageLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -194,12 +194,12 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:27:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:27:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:27:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -212,7 +212,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalIgnoreCaseLexerTestLanguageLexer.g:27:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -232,7 +232,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:40: ( ( '\\r' )? '\\n' )?
+            // InternalIgnoreCaseLexerTestLanguageLexer.g:27:40: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -241,9 +241,9 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: ( '\\r' )? '\\n'
+                    // InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: ( '\\r' )?
+                    // InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -252,7 +252,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: '\\r'
+                            // InternalIgnoreCaseLexerTestLanguageLexer.g:27:41: '\\r'
                             {
                             match('\r'); 
 
@@ -280,7 +280,7 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:8: ( Case | Foo | RULE_WS | RULE_SL_COMMENT )
+        // InternalIgnoreCaseLexerTestLanguageLexer.g:1:8: ( Case | Foo | RULE_WS | RULE_SL_COMMENT )
         int alt5=4;
         switch ( input.LA(1) ) {
         case 'C':
@@ -317,28 +317,28 @@ public class InternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
         switch (alt5) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:10: Case
+                // InternalIgnoreCaseLexerTestLanguageLexer.g:1:10: Case
                 {
                 mCase(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:15: Foo
+                // InternalIgnoreCaseLexerTestLanguageLexer.g:1:15: Foo
                 {
                 mFoo(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:19: RULE_WS
+                // InternalIgnoreCaseLexerTestLanguageLexer.g:1:19: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/lexer/InternalIgnoreCaseLexerTestLanguageLexer.g:1:27: RULE_SL_COMMENT
+                // InternalIgnoreCaseLexerTestLanguageLexer.g:1:27: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 

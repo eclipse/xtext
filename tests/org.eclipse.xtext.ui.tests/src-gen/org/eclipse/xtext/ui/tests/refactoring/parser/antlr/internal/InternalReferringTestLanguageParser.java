@@ -48,7 +48,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalReferringTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalReferringTestLanguage.g"; }
 
 
 
@@ -73,7 +73,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:67:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
+    // InternalReferringTestLanguage.g:67:1: entryRuleMain returns [EObject current=null] : iv_ruleMain= ruleMain EOF ;
     public final EObject entryRuleMain() throws RecognitionException {
         EObject current = null;
 
@@ -81,17 +81,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:68:2: (iv_ruleMain= ruleMain EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
+            // InternalReferringTestLanguage.g:68:2: (iv_ruleMain= ruleMain EOF )
+            // InternalReferringTestLanguage.g:69:2: iv_ruleMain= ruleMain EOF
             {
              newCompositeNode(grammarAccess.getMainRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMain_in_entryRuleMain75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleMain=ruleMain();
 
             state._fsp--;
 
              current =iv_ruleMain; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMain85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -109,7 +109,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleMain"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_referenced_0_0= ruleReference ) )* ;
+    // InternalReferringTestLanguage.g:76:1: ruleMain returns [EObject current=null] : ( (lv_referenced_0_0= ruleReference ) )* ;
     public final EObject ruleMain() throws RecognitionException {
         EObject current = null;
 
@@ -119,10 +119,10 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:79:28: ( ( (lv_referenced_0_0= ruleReference ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:80:1: ( (lv_referenced_0_0= ruleReference ) )*
+            // InternalReferringTestLanguage.g:79:28: ( ( (lv_referenced_0_0= ruleReference ) )* )
+            // InternalReferringTestLanguage.g:80:1: ( (lv_referenced_0_0= ruleReference ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:80:1: ( (lv_referenced_0_0= ruleReference ) )*
+            // InternalReferringTestLanguage.g:80:1: ( (lv_referenced_0_0= ruleReference ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,15 +135,15 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:81:1: (lv_referenced_0_0= ruleReference )
+            	    // InternalReferringTestLanguage.g:81:1: (lv_referenced_0_0= ruleReference )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:81:1: (lv_referenced_0_0= ruleReference )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:82:3: lv_referenced_0_0= ruleReference
+            	    // InternalReferringTestLanguage.g:81:1: (lv_referenced_0_0= ruleReference )
+            	    // InternalReferringTestLanguage.g:82:3: lv_referenced_0_0= ruleReference
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getMainAccess().getReferencedReferenceParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleReference_in_ruleMain130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_referenced_0_0=ruleReference();
 
             	    state._fsp--;
@@ -189,7 +189,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleReference"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:106:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // InternalReferringTestLanguage.g:106:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -197,17 +197,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:107:2: (iv_ruleReference= ruleReference EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:108:2: iv_ruleReference= ruleReference EOF
+            // InternalReferringTestLanguage.g:107:2: (iv_ruleReference= ruleReference EOF )
+            // InternalReferringTestLanguage.g:108:2: iv_ruleReference= ruleReference EOF
             {
              newCompositeNode(grammarAccess.getReferenceRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleReference_in_entryRuleReference166);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleReference=ruleReference();
 
             state._fsp--;
 
              current =iv_ruleReference; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReference176); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -225,7 +225,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleReference"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:115:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( ( ruleFQN ) ) ) ;
+    // InternalReferringTestLanguage.g:115:1: ruleReference returns [EObject current=null] : (otherlv_0= 'ref' ( ( ruleFQN ) ) ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -234,21 +234,21 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:118:28: ( (otherlv_0= 'ref' ( ( ruleFQN ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:119:1: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:118:28: ( (otherlv_0= 'ref' ( ( ruleFQN ) ) ) )
+            // InternalReferringTestLanguage.g:119:1: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:119:1: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:119:3: otherlv_0= 'ref' ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:119:1: (otherlv_0= 'ref' ( ( ruleFQN ) ) )
+            // InternalReferringTestLanguage.g:119:3: otherlv_0= 'ref' ( ( ruleFQN ) )
             {
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleReference213); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getReferenceAccess().getRefKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:123:1: ( ( ruleFQN ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:124:1: ( ruleFQN )
+            // InternalReferringTestLanguage.g:123:1: ( ( ruleFQN ) )
+            // InternalReferringTestLanguage.g:124:1: ( ruleFQN )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:124:1: ( ruleFQN )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:125:3: ruleFQN
+            // InternalReferringTestLanguage.g:124:1: ( ruleFQN )
+            // InternalReferringTestLanguage.g:125:3: ruleFQN
             {
 
             			if (current==null) {
@@ -258,7 +258,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
              
             	        newCompositeNode(grammarAccess.getReferenceAccess().getReferencedEObjectCrossReference_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_ruleReference236);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleFQN();
 
             state._fsp--;
@@ -293,7 +293,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleFQN"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:146:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalReferringTestLanguage.g:146:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -301,17 +301,17 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:147:2: (iv_ruleFQN= ruleFQN EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:148:2: iv_ruleFQN= ruleFQN EOF
+            // InternalReferringTestLanguage.g:147:2: (iv_ruleFQN= ruleFQN EOF )
+            // InternalReferringTestLanguage.g:148:2: iv_ruleFQN= ruleFQN EOF
             {
              newCompositeNode(grammarAccess.getFQNRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFQN_in_entryRuleFQN273);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleFQN=ruleFQN();
 
             state._fsp--;
 
              current =iv_ruleFQN.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFQN284); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -329,7 +329,7 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleFQN"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:155:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalReferringTestLanguage.g:155:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -340,20 +340,20 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:158:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:159:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalReferringTestLanguage.g:158:28: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalReferringTestLanguage.g:159:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:159:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:159:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalReferringTestLanguage.g:159:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalReferringTestLanguage.g:159:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN324); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             		current.merge(this_ID_0);
                 
              
                 newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:166:1: (kw= '.' this_ID_2= RULE_ID )*
+            // InternalReferringTestLanguage.g:166:1: (kw= '.' this_ID_2= RULE_ID )*
             loop2:
             do {
                 int alt2=2;
@@ -366,14 +366,14 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/refactoring/parser/antlr/internal/InternalReferringTestLanguage.g:167:2: kw= '.' this_ID_2= RULE_ID
+            	    // InternalReferringTestLanguage.g:167:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleFQN343); 
+            	    kw=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFQN358); 
+            	    this_ID_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             	    		current.merge(this_ID_2);
             	        
@@ -415,18 +415,11 @@ public class InternalReferringTestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleMain_in_entryRuleMain75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMain85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReference_in_ruleMain130 = new BitSet(new long[]{0x0000000000000802L});
-        public static final BitSet FOLLOW_ruleReference_in_entryRuleReference166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleReference176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleReference213 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleFQN_in_ruleReference236 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFQN_in_entryRuleFQN273 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFQN284 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN324 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleFQN343 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFQN358 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001002L});
     }
 
 

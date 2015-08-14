@@ -43,7 +43,7 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
         
 
     public String[] getTokenNames() { return PsiInternalMetamodelRefTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalMetamodelRefTestLanguage.g"; }
 
 
 
@@ -67,19 +67,19 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleFoo"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:52:1: entryRuleFoo : ruleFoo EOF ;
+    // PsiInternalMetamodelRefTestLanguage.g:52:1: entryRuleFoo : ruleFoo EOF ;
     public final void entryRuleFoo() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:52:13: ( ruleFoo EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:53:2: ruleFoo EOF
+            // PsiInternalMetamodelRefTestLanguage.g:52:13: ( ruleFoo EOF )
+            // PsiInternalMetamodelRefTestLanguage.g:53:2: ruleFoo EOF
             {
              markComposite(elementTypeProvider.getFooElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFoo_in_entryRuleFoo54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleFoo();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFoo57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -96,27 +96,27 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleFoo"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:58:1: ruleFoo : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
+    // PsiInternalMetamodelRefTestLanguage.g:58:1: ruleFoo : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
     public final void ruleFoo() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:58:8: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMetamodelRefTestLanguage.g:58:8: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
+            // PsiInternalMetamodelRefTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMetamodelRefTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMetamodelRefTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMetamodelRefTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalMetamodelRefTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:62:5: lv_name_0_0= RULE_ID
+            // PsiInternalMetamodelRefTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMetamodelRefTestLanguage.g:62:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFoo89); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_0_0);
             				
@@ -126,7 +126,7 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:71:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMetamodelRefTestLanguage.g:71:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,15 +139,15 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMetamodelRefTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:73:5: lv_nameRefs_1_0= ruleNameRef
+            	    // PsiInternalMetamodelRefTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMetamodelRefTestLanguage.g:73:5: lv_nameRefs_1_0= ruleNameRef
             	    {
 
             	    					markComposite(elementTypeProvider.getFoo_NameRefsNameRefParserRuleCall_1_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_ruleFoo127);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleNameRef();
 
             	    state._fsp--;
@@ -186,19 +186,19 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleNameRef"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:86:1: entryRuleNameRef : ruleNameRef EOF ;
+    // PsiInternalMetamodelRefTestLanguage.g:86:1: entryRuleNameRef : ruleNameRef EOF ;
     public final void entryRuleNameRef() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:86:17: ( ruleNameRef EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:87:2: ruleNameRef EOF
+            // PsiInternalMetamodelRefTestLanguage.g:86:17: ( ruleNameRef EOF )
+            // PsiInternalMetamodelRefTestLanguage.g:87:2: ruleNameRef EOF
             {
              markComposite(elementTypeProvider.getNameRefElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_entryRuleNameRef159);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleNameRef();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNameRef162); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -215,24 +215,24 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleNameRef"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:92:1: ruleNameRef : ( (otherlv_0= RULE_ID ) ) ;
+    // PsiInternalMetamodelRefTestLanguage.g:92:1: ruleNameRef : ( (otherlv_0= RULE_ID ) ) ;
     public final void ruleNameRef() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:92:12: ( ( (otherlv_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:93:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalMetamodelRefTestLanguage.g:92:12: ( ( (otherlv_0= RULE_ID ) ) )
+            // PsiInternalMetamodelRefTestLanguage.g:93:2: ( (otherlv_0= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:93:2: ( (otherlv_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:94:3: (otherlv_0= RULE_ID )
+            // PsiInternalMetamodelRefTestLanguage.g:93:2: ( (otherlv_0= RULE_ID ) )
+            // PsiInternalMetamodelRefTestLanguage.g:94:3: (otherlv_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:94:3: (otherlv_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMetamodelRefTestLanguage.g:95:4: otherlv_0= RULE_ID
+            // PsiInternalMetamodelRefTestLanguage.g:94:3: (otherlv_0= RULE_ID )
+            // PsiInternalMetamodelRefTestLanguage.g:95:4: otherlv_0= RULE_ID
             {
 
             				markLeaf(elementTypeProvider.getNameRef_RuleParserRuleCrossReference_0ElementType());
             			
-            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNameRef187); 
+            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(otherlv_0);
             			
@@ -263,13 +263,9 @@ public class PsiInternalMetamodelRefTestLanguageParser extends AbstractPsiAntlrP
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFoo57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFoo89 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo127 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef159 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNameRef162 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleNameRef187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
     }
 
 

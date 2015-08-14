@@ -39,7 +39,7 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
         
 
     public String[] getTokenNames() { return PsiInternalEncodingTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalEncodingTestLanguage.g"; }
 
 
 
@@ -63,19 +63,19 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalEncodingTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEncodingTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalEncodingTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -92,13 +92,13 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:58:1: ruleModel : ( (lv_words_0_0= ruleWord ) )* ;
+    // PsiInternalEncodingTestLanguage.g:58:1: ruleModel : ( (lv_words_0_0= ruleWord ) )* ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:58:10: ( ( (lv_words_0_0= ruleWord ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
+            // PsiInternalEncodingTestLanguage.g:58:10: ( ( (lv_words_0_0= ruleWord ) )* )
+            // PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
+            // PsiInternalEncodingTestLanguage.g:59:2: ( (lv_words_0_0= ruleWord ) )*
             loop1:
             do {
                 int alt1=2;
@@ -111,15 +111,15 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
+            	    // PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:61:4: lv_words_0_0= ruleWord
+            	    // PsiInternalEncodingTestLanguage.g:60:3: (lv_words_0_0= ruleWord )
+            	    // PsiInternalEncodingTestLanguage.g:61:4: lv_words_0_0= ruleWord
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_WordsWordParserRuleCall_0ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleWord_in_ruleModel82);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleWord();
 
             	    state._fsp--;
@@ -155,19 +155,19 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "entryRuleWord"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:73:1: entryRuleWord : ruleWord EOF ;
+    // PsiInternalEncodingTestLanguage.g:73:1: entryRuleWord : ruleWord EOF ;
     public final void entryRuleWord() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:73:14: ( ruleWord EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:74:2: ruleWord EOF
+            // PsiInternalEncodingTestLanguage.g:73:14: ( ruleWord EOF )
+            // PsiInternalEncodingTestLanguage.g:74:2: ruleWord EOF
             {
              markComposite(elementTypeProvider.getWordElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleWord_in_entryRuleWord108);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleWord();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWord111); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -184,24 +184,24 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
 
     // $ANTLR start "ruleWord"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:79:1: ruleWord : ( (lv_value_0_0= RULE_LEXEME ) ) ;
+    // PsiInternalEncodingTestLanguage.g:79:1: ruleWord : ( (lv_value_0_0= RULE_LEXEME ) ) ;
     public final void ruleWord() throws RecognitionException {
         Token lv_value_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:79:9: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
+            // PsiInternalEncodingTestLanguage.g:79:9: ( ( (lv_value_0_0= RULE_LEXEME ) ) )
+            // PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
+            // PsiInternalEncodingTestLanguage.g:80:2: ( (lv_value_0_0= RULE_LEXEME ) )
+            // PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/encoding/idea/parser/antlr/internal/PsiInternalEncodingTestLanguage.g:82:4: lv_value_0_0= RULE_LEXEME
+            // PsiInternalEncodingTestLanguage.g:81:3: (lv_value_0_0= RULE_LEXEME )
+            // PsiInternalEncodingTestLanguage.g:82:4: lv_value_0_0= RULE_LEXEME
             {
 
             				markLeaf(elementTypeProvider.getWord_ValueLEXEMETerminalRuleCall_0ElementType());
             			
-            lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_RULE_LEXEME_in_ruleWord136); 
+            lv_value_0_0=(Token)match(input,RULE_LEXEME,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_value_0_0);
             			
@@ -232,12 +232,9 @@ public class PsiInternalEncodingTestLanguageParser extends AbstractPsiAntlrParse
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWord_in_ruleModel82 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_ruleWord_in_entryRuleWord108 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWord111 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_LEXEME_in_ruleWord136 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000012L});
     }
 
 

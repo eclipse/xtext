@@ -4,7 +4,7 @@
     editDirectory="/org.eclipse.xtext.common.types.tests.edit/src" editorDirectory="/org.eclipse.xtext.common.types.tests.editor/src"
     modelPluginID="org.eclipse.xtext.common.types.tests" forceOverwrite="true" modelName="ContentAssistTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.tests.edit"
+    complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.tests.edit"
     editorPluginID="org.eclipse.xtext.common.types.tests.editor" runtimeVersion="2.9"
     usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <genPackages prefix="ContentAssistTestLanguage" basePackage="org.eclipse.xtext.common.types.xtext.ui"

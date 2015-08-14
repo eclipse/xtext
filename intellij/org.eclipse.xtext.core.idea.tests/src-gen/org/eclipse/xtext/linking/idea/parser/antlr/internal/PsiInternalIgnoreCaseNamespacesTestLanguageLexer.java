@@ -34,15 +34,15 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalIgnoreCaseNamespacesTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:11:7: ( '{' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:11:9: '{'
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:11:7: ( '{' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:11:9: '{'
             {
             match('{'); 
 
@@ -61,8 +61,8 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:12:7: ( '}' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:12:9: '}'
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:12:7: ( '}' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:12:9: '}'
             {
             match('}'); 
 
@@ -81,10 +81,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -93,7 +93,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: '^'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:11: '^'
                     {
                     match('^'); 
 
@@ -111,7 +111,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:165:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -124,7 +124,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -160,10 +160,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:10: ( ( '0' .. '9' )+ )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -177,7 +177,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:13: '0' .. '9'
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:167:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -209,10 +209,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -230,10 +230,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -249,7 +249,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:21: '\\\\' .
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -257,7 +257,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -282,10 +282,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -301,7 +301,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:54: '\\\\' .
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -309,7 +309,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:169:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -352,12 +352,12 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:24: ( options {greedy=false; } : . )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -382,7 +382,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:52: .
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:171:52: .
             	    {
             	    matchAny(); 
 
@@ -412,12 +412,12 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -430,7 +430,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -450,7 +450,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -459,9 +459,9 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )? '\\n'
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )?
+                    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -470,7 +470,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: '\\r'
+                            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:173:41: '\\r'
                             {
                             match('\r'); 
 
@@ -502,10 +502,10 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:175:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -519,7 +519,7 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:
+            	    // PsiInternalIgnoreCaseNamespacesTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -559,8 +559,8 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:18: .
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:16: ( . )
+            // PsiInternalIgnoreCaseNamespacesTestLanguage.g:177:18: .
             {
             matchAny(); 
 
@@ -575,68 +575,68 @@ public class PsiInternalIgnoreCaseNamespacesTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:8: ( T__11 | T__12 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:8: ( T__11 | T__12 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=9;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:10: T__11
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:16: T__12
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:22: RULE_ID
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:22: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:30: RULE_INT
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:30: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:39: RULE_STRING
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:39: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:51: RULE_ML_COMMENT
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:51: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:67: RULE_SL_COMMENT
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:67: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:83: RULE_WS
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:83: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/linking/idea/parser/antlr/internal/PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:91: RULE_ANY_OTHER
+                // PsiInternalIgnoreCaseNamespacesTestLanguage.g:1:91: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

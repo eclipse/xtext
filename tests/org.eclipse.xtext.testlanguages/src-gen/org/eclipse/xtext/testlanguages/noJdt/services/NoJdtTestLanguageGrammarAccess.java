@@ -19,7 +19,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	
 	
 	public class ModelElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Model");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.Model");
 		private final Assignment cGreetingsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cGreetingsGreetingParserRuleCall_0 = (RuleCall)cGreetingsAssignment.eContents().get(0);
 		
@@ -35,7 +35,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	public class GreetingElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Greeting");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage.Greeting");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cHelloKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -50,13 +50,13 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Keyword cExclamationMarkKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Greeting:
-		//	"Hello" name=ID ("(" "from" other=[Greeting] ")")? "!";
+		//	'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Hello" name=ID ("(" "from" other=[Greeting] ")")? "!"
+		//'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!'
 		public Group getGroup() { return cGroup; }
 
-		//"Hello"
+		//'Hello'
 		public Keyword getHelloKeyword_0() { return cHelloKeyword_0; }
 
 		//name=ID
@@ -65,13 +65,13 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("(" "from" other=[Greeting] ")")?
+		//('(' 'from' other=[Greeting] ')')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 
-		//"from"
+		//'from'
 		public Keyword getFromKeyword_2_1() { return cFromKeyword_2_1; }
 
 		//other=[Greeting]
@@ -83,10 +83,10 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getOtherGreetingIDTerminalRuleCall_2_2_0_1() { return cOtherGreetingIDTerminalRuleCall_2_2_0_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 
-		//"!"
+		//'!'
 		public Keyword getExclamationMarkKeyword_3() { return cExclamationMarkKeyword_3; }
 	}
 	
@@ -145,7 +145,7 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Greeting:
-	//	"Hello" name=ID ("(" "from" other=[Greeting] ")")? "!";
+	//	'Hello' name=ID ('(' 'from' other=[Greeting] ')')? '!';
 	public GreetingElements getGreetingAccess() {
 		return pGreeting;
 	}
@@ -155,38 +155,38 @@ public class NoJdtTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

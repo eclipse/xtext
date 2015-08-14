@@ -48,7 +48,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug377311TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBug377311TestLanguage.g"; }
 
 
 
@@ -73,7 +73,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleRoot"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:67:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // InternalBug377311TestLanguage.g:67:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -81,17 +81,17 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:68:2: (iv_ruleRoot= ruleRoot EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:69:2: iv_ruleRoot= ruleRoot EOF
+            // InternalBug377311TestLanguage.g:68:2: (iv_ruleRoot= ruleRoot EOF )
+            // InternalBug377311TestLanguage.g:69:2: iv_ruleRoot= ruleRoot EOF
             {
              newCompositeNode(grammarAccess.getRootRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleRoot_in_entryRuleRoot75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleRoot=ruleRoot();
 
             state._fsp--;
 
              current =iv_ruleRoot; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -109,7 +109,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleRoot"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:76:1: ruleRoot returns [EObject current=null] : ( (lv_childs_0_0= ruleChild ) )* ;
+    // InternalBug377311TestLanguage.g:76:1: ruleRoot returns [EObject current=null] : ( (lv_childs_0_0= ruleChild ) )* ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -119,10 +119,10 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:79:28: ( ( (lv_childs_0_0= ruleChild ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:80:1: ( (lv_childs_0_0= ruleChild ) )*
+            // InternalBug377311TestLanguage.g:79:28: ( ( (lv_childs_0_0= ruleChild ) )* )
+            // InternalBug377311TestLanguage.g:80:1: ( (lv_childs_0_0= ruleChild ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:80:1: ( (lv_childs_0_0= ruleChild ) )*
+            // InternalBug377311TestLanguage.g:80:1: ( (lv_childs_0_0= ruleChild ) )*
             loop1:
             do {
                 int alt1=2;
@@ -135,15 +135,15 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:81:1: (lv_childs_0_0= ruleChild )
+            	    // InternalBug377311TestLanguage.g:81:1: (lv_childs_0_0= ruleChild )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:81:1: (lv_childs_0_0= ruleChild )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:82:3: lv_childs_0_0= ruleChild
+            	    // InternalBug377311TestLanguage.g:81:1: (lv_childs_0_0= ruleChild )
+            	    // InternalBug377311TestLanguage.g:82:3: lv_childs_0_0= ruleChild
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getRootAccess().getChildsChildParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleChild_in_ruleRoot130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_childs_0_0=ruleChild();
 
             	    state._fsp--;
@@ -189,7 +189,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleChild"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:106:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
+    // InternalBug377311TestLanguage.g:106:1: entryRuleChild returns [EObject current=null] : iv_ruleChild= ruleChild EOF ;
     public final EObject entryRuleChild() throws RecognitionException {
         EObject current = null;
 
@@ -200,17 +200,17 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
         	
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:110:2: (iv_ruleChild= ruleChild EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:111:2: iv_ruleChild= ruleChild EOF
+            // InternalBug377311TestLanguage.g:110:2: (iv_ruleChild= ruleChild EOF )
+            // InternalBug377311TestLanguage.g:111:2: iv_ruleChild= ruleChild EOF
             {
              newCompositeNode(grammarAccess.getChildRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleChild_in_entryRuleChild172);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleChild=ruleChild();
 
             state._fsp--;
 
              current =iv_ruleChild; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleChild182); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -231,7 +231,7 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleChild"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:121:1: ruleChild returns [EObject current=null] : (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) ) ;
+    // InternalBug377311TestLanguage.g:121:1: ruleChild returns [EObject current=null] : (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleChild() throws RecognitionException {
         EObject current = null;
 
@@ -242,23 +242,23 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
         		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ID");
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:125:28: ( (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:126:1: (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) )
+            // InternalBug377311TestLanguage.g:125:28: ( (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) ) )
+            // InternalBug377311TestLanguage.g:126:1: (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:126:1: (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:126:3: otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) )
+            // InternalBug377311TestLanguage.g:126:1: (otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) ) )
+            // InternalBug377311TestLanguage.g:126:3: otherlv_0= 'child' ( (lv_name_1_0= RULE_STRING ) )
             {
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleChild223); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getChildAccess().getChildKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:130:1: ( (lv_name_1_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:131:1: (lv_name_1_0= RULE_STRING )
+            // InternalBug377311TestLanguage.g:130:1: ( (lv_name_1_0= RULE_STRING ) )
+            // InternalBug377311TestLanguage.g:131:1: (lv_name_1_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:131:1: (lv_name_1_0= RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug377311TestLanguage.g:132:3: lv_name_1_0= RULE_STRING
+            // InternalBug377311TestLanguage.g:131:1: (lv_name_1_0= RULE_STRING )
+            // InternalBug377311TestLanguage.g:132:3: lv_name_1_0= RULE_STRING
             {
-            lv_name_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleChild240); 
+            lv_name_1_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getChildAccess().getNameSTRINGTerminalRuleCall_1_0()); 
             		
@@ -307,13 +307,10 @@ public class InternalBug377311TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleRoot85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleChild_in_ruleRoot130 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_ruleChild_in_entryRuleChild172 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleChild182 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleChild223 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleChild240 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

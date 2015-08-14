@@ -53,7 +53,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug443221TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g"; }
+    public String getGrammarFileName() { return "InternalBug443221TestLanguageParser.g"; }
 
 
 
@@ -79,7 +79,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:61:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug443221TestLanguageParser.g:61:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -87,17 +87,17 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:62:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
+            // InternalBug443221TestLanguageParser.g:62:2: (iv_ruleModel= ruleModel EOF )
+            // InternalBug443221TestLanguageParser.g:63:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel67);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel77); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -115,7 +115,7 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) ;
+    // InternalBug443221TestLanguageParser.g:70:1: ruleModel returns [EObject current=null] : ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -131,14 +131,14 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:73:28: ( ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
+            // InternalBug443221TestLanguageParser.g:73:28: ( ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 ) )
+            // InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:74:2: () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1
+            // InternalBug443221TestLanguageParser.g:74:1: ( () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1 )
+            // InternalBug443221TestLanguageParser.g:74:2: () otherlv_1= Dummy ( (lv_name_2_0= RULE_ID ) ) otherlv_3= KW__ otherlv_4= KW__dummy_ otherlv_5= KW___dummy__ otherlv_6= KW___dummy___1 otherlv_7= DollarSign otherlv_8= DollarSign_1
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:74:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:75:5: 
+            // InternalBug443221TestLanguageParser.g:74:2: ()
+            // InternalBug443221TestLanguageParser.g:75:5: 
             {
 
                     current = forceCreateModelElement(
@@ -148,17 +148,17 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_1=(Token)match(input,Dummy,FollowSets000.FOLLOW_Dummy_in_ruleModel124); 
+            otherlv_1=(Token)match(input,Dummy,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getModelAccess().getDummyKeyword_1());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:85:1: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
+            // InternalBug443221TestLanguageParser.g:85:1: ( (lv_name_2_0= RULE_ID ) )
+            // InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug443221TestLanguageParser.g:87:3: lv_name_2_0= RULE_ID
+            // InternalBug443221TestLanguageParser.g:86:1: (lv_name_2_0= RULE_ID )
+            // InternalBug443221TestLanguageParser.g:87:3: lv_name_2_0= RULE_ID
             {
-            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel140); 
+            lv_name_2_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             			newLeafNode(lv_name_2_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_2_0()); 
             		
@@ -178,27 +178,27 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_3=(Token)match(input,KW__,FollowSets000.FOLLOW_KW___in_ruleModel158); 
+            otherlv_3=(Token)match(input,KW__,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getModelAccess().get_Keyword_3());
                 
-            otherlv_4=(Token)match(input,KW__dummy_,FollowSets000.FOLLOW_KW__dummy__in_ruleModel170); 
+            otherlv_4=(Token)match(input,KW__dummy_,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_4, grammarAccess.getModelAccess().get_dummy_Keyword_4());
                 
-            otherlv_5=(Token)match(input,KW___dummy__,FollowSets000.FOLLOW_KW___dummy___in_ruleModel182); 
+            otherlv_5=(Token)match(input,KW___dummy__,FollowSets000.FOLLOW_7); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getModelAccess().get__dummy__Keyword_5());
                 
-            otherlv_6=(Token)match(input,KW___dummy___1,FollowSets000.FOLLOW_KW___dummy___1_in_ruleModel194); 
+            otherlv_6=(Token)match(input,KW___dummy___1,FollowSets000.FOLLOW_8); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getModelAccess().get__dummy__Keyword_6());
                 
-            otherlv_7=(Token)match(input,DollarSign,FollowSets000.FOLLOW_DollarSign_in_ruleModel206); 
+            otherlv_7=(Token)match(input,DollarSign,FollowSets000.FOLLOW_9); 
 
                 	newLeafNode(otherlv_7, grammarAccess.getModelAccess().getDollarSignKeyword_7());
                 
-            otherlv_8=(Token)match(input,DollarSign_1,FollowSets000.FOLLOW_DollarSign_1_in_ruleModel218); 
+            otherlv_8=(Token)match(input,DollarSign_1,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_8, grammarAccess.getModelAccess().getDollarSignKeyword_8());
                 
@@ -228,16 +228,15 @@ public class InternalBug443221TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_Dummy_in_ruleModel124 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel140 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_KW___in_ruleModel158 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_KW__dummy__in_ruleModel170 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_KW___dummy___in_ruleModel182 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_KW___dummy___1_in_ruleModel194 = new BitSet(new long[]{0x0000000000000200L});
-        public static final BitSet FOLLOW_DollarSign_in_ruleModel206 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_DollarSign_1_in_ruleModel218 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000400L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000080L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000200L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000020L});
     }
 
 

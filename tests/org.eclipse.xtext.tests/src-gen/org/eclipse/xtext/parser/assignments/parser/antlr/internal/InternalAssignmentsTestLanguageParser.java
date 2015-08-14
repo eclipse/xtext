@@ -60,7 +60,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
         
 
     public String[] getTokenNames() { return InternalAssignmentsTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalAssignmentsTestLanguage.g"; }
 
 
 
@@ -85,7 +85,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalAssignmentsTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -93,17 +93,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalAssignmentsTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalAssignmentsTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -121,7 +121,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
+    // InternalAssignmentsTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -147,10 +147,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:79:28: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:80:1: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:79:28: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:80:1: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:80:1: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:80:1: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -168,16 +168,16 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:80:2: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:80:2: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:80:2: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:80:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:80:2: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:80:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     {
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel123); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getModelAccess().getSimpleKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:84:1: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:84:1: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     int alt1=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -217,18 +217,18 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
                     switch (alt1) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:84:2: ( (lv_single_1_0= ruleSingleValue ) )
+                            // InternalAssignmentsTestLanguage.g:84:2: ( (lv_single_1_0= ruleSingleValue ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:84:2: ( (lv_single_1_0= ruleSingleValue ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:85:1: (lv_single_1_0= ruleSingleValue )
+                            // InternalAssignmentsTestLanguage.g:84:2: ( (lv_single_1_0= ruleSingleValue ) )
+                            // InternalAssignmentsTestLanguage.g:85:1: (lv_single_1_0= ruleSingleValue )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:85:1: (lv_single_1_0= ruleSingleValue )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:86:3: lv_single_1_0= ruleSingleValue
+                            // InternalAssignmentsTestLanguage.g:85:1: (lv_single_1_0= ruleSingleValue )
+                            // InternalAssignmentsTestLanguage.g:86:3: lv_single_1_0= ruleSingleValue
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getSingleSingleValueParserRuleCall_0_1_0_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_ruleModel145);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_single_1_0=ruleSingleValue();
 
                             state._fsp--;
@@ -254,18 +254,18 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:103:6: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // InternalAssignmentsTestLanguage.g:103:6: ( (lv_multi_2_0= ruleMultiValue ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:103:6: ( (lv_multi_2_0= ruleMultiValue ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:104:1: (lv_multi_2_0= ruleMultiValue )
+                            // InternalAssignmentsTestLanguage.g:103:6: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // InternalAssignmentsTestLanguage.g:104:1: (lv_multi_2_0= ruleMultiValue )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:104:1: (lv_multi_2_0= ruleMultiValue )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:105:3: lv_multi_2_0= ruleMultiValue
+                            // InternalAssignmentsTestLanguage.g:104:1: (lv_multi_2_0= ruleMultiValue )
+                            // InternalAssignmentsTestLanguage.g:105:3: lv_multi_2_0= ruleMultiValue
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getMultiMultiValueParserRuleCall_0_1_1_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_ruleModel172);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_multi_2_0=ruleMultiValue();
 
                             state._fsp--;
@@ -291,18 +291,18 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 3 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:122:6: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // InternalAssignmentsTestLanguage.g:122:6: ( (lv_single_3_0= ruleSingleDatatype ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:122:6: ( (lv_single_3_0= ruleSingleDatatype ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:123:1: (lv_single_3_0= ruleSingleDatatype )
+                            // InternalAssignmentsTestLanguage.g:122:6: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // InternalAssignmentsTestLanguage.g:123:1: (lv_single_3_0= ruleSingleDatatype )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:123:1: (lv_single_3_0= ruleSingleDatatype )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:124:3: lv_single_3_0= ruleSingleDatatype
+                            // InternalAssignmentsTestLanguage.g:123:1: (lv_single_3_0= ruleSingleDatatype )
+                            // InternalAssignmentsTestLanguage.g:124:3: lv_single_3_0= ruleSingleDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getSingleSingleDatatypeParserRuleCall_0_1_2_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_ruleModel199);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_single_3_0=ruleSingleDatatype();
 
                             state._fsp--;
@@ -328,18 +328,18 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 4 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:141:6: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // InternalAssignmentsTestLanguage.g:141:6: ( (lv_multi_4_0= ruleMultiDatatype ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:141:6: ( (lv_multi_4_0= ruleMultiDatatype ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:142:1: (lv_multi_4_0= ruleMultiDatatype )
+                            // InternalAssignmentsTestLanguage.g:141:6: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // InternalAssignmentsTestLanguage.g:142:1: (lv_multi_4_0= ruleMultiDatatype )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:142:1: (lv_multi_4_0= ruleMultiDatatype )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:143:3: lv_multi_4_0= ruleMultiDatatype
+                            // InternalAssignmentsTestLanguage.g:142:1: (lv_multi_4_0= ruleMultiDatatype )
+                            // InternalAssignmentsTestLanguage.g:143:3: lv_multi_4_0= ruleMultiDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getMultiMultiDatatypeParserRuleCall_0_1_3_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_ruleModel226);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_multi_4_0=ruleMultiDatatype();
 
                             state._fsp--;
@@ -374,22 +374,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:160:6: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:160:6: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:160:6: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:160:8: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:160:6: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:160:8: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
                     {
-                    otherlv_5=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel247); 
+                    otherlv_5=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
                         	newLeafNode(otherlv_5, grammarAccess.getModelAccess().getComplexKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:164:1: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:165:1: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:164:1: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:165:1: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:165:1: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:166:1: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // InternalAssignmentsTestLanguage.g:165:1: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:166:1: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:166:1: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // InternalAssignmentsTestLanguage.g:166:1: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     int alt2=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -429,12 +429,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
                     switch (alt2) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:167:3: lv_object_6_1= ruleSingleValue
+                            // InternalAssignmentsTestLanguage.g:167:3: lv_object_6_1= ruleSingleValue
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getObjectSingleValueParserRuleCall_1_1_0_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_ruleModel270);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_object_6_1=ruleSingleValue();
 
                             state._fsp--;
@@ -454,12 +454,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:182:8: lv_object_6_2= ruleMultiValue
+                            // InternalAssignmentsTestLanguage.g:182:8: lv_object_6_2= ruleMultiValue
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getObjectMultiValueParserRuleCall_1_1_0_1()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_ruleModel289);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_object_6_2=ruleMultiValue();
 
                             state._fsp--;
@@ -479,12 +479,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 3 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:197:8: lv_object_6_3= ruleSingleDatatype
+                            // InternalAssignmentsTestLanguage.g:197:8: lv_object_6_3= ruleSingleDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getObjectSingleDatatypeParserRuleCall_1_1_0_2()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_ruleModel308);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_object_6_3=ruleSingleDatatype();
 
                             state._fsp--;
@@ -504,12 +504,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 4 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:212:8: lv_object_6_4= ruleMultiDatatype
+                            // InternalAssignmentsTestLanguage.g:212:8: lv_object_6_4= ruleMultiDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getModelAccess().getObjectMultiDatatypeParserRuleCall_1_1_0_3()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_ruleModel327);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_object_6_4=ruleMultiDatatype();
 
                             state._fsp--;
@@ -564,7 +564,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleSingleValue"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:238:1: entryRuleSingleValue returns [EObject current=null] : iv_ruleSingleValue= ruleSingleValue EOF ;
+    // InternalAssignmentsTestLanguage.g:238:1: entryRuleSingleValue returns [EObject current=null] : iv_ruleSingleValue= ruleSingleValue EOF ;
     public final EObject entryRuleSingleValue() throws RecognitionException {
         EObject current = null;
 
@@ -572,17 +572,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:239:2: (iv_ruleSingleValue= ruleSingleValue EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:240:2: iv_ruleSingleValue= ruleSingleValue EOF
+            // InternalAssignmentsTestLanguage.g:239:2: (iv_ruleSingleValue= ruleSingleValue EOF )
+            // InternalAssignmentsTestLanguage.g:240:2: iv_ruleSingleValue= ruleSingleValue EOF
             {
              newCompositeNode(grammarAccess.getSingleValueRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_entryRuleSingleValue367);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSingleValue=ruleSingleValue();
 
             state._fsp--;
 
              current =iv_ruleSingleValue; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleValue377); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -600,7 +600,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleSingleValue"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:247:1: ruleSingleValue returns [EObject current=null] : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    // InternalAssignmentsTestLanguage.g:247:1: ruleSingleValue returns [EObject current=null] : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
     public final EObject ruleSingleValue() throws RecognitionException {
         EObject current = null;
 
@@ -615,10 +615,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:250:28: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:251:1: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // InternalAssignmentsTestLanguage.g:250:28: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:251:1: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:251:1: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // InternalAssignmentsTestLanguage.g:251:1: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -645,22 +645,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:251:2: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // InternalAssignmentsTestLanguage.g:251:2: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:251:2: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:251:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
+                    // InternalAssignmentsTestLanguage.g:251:2: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // InternalAssignmentsTestLanguage.g:251:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
                     {
-                    otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleSingleValue415); 
+                    otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getSingleValueAccess().getIdKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:255:1: ( (lv_value_1_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:256:1: (lv_value_1_0= RULE_ID )
+                    // InternalAssignmentsTestLanguage.g:255:1: ( (lv_value_1_0= RULE_ID ) )
+                    // InternalAssignmentsTestLanguage.g:256:1: (lv_value_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:256:1: (lv_value_1_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:257:3: lv_value_1_0= RULE_ID
+                    // InternalAssignmentsTestLanguage.g:256:1: (lv_value_1_0= RULE_ID )
+                    // InternalAssignmentsTestLanguage.g:257:3: lv_value_1_0= RULE_ID
                     {
-                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleValue432); 
+                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     			newLeafNode(lv_value_1_0, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_0_1_0()); 
                     		
@@ -687,22 +687,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:274:6: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:274:6: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:274:6: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:274:8: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:274:6: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:274:8: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
-                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleValue457); 
+                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getSingleValueAccess().getAlternativeKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:278:1: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:279:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:278:1: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:279:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:279:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:280:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:279:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:280:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:280:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:280:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -720,9 +720,9 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     switch (alt4) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:281:3: lv_value_3_1= RULE_ID
+                            // InternalAssignmentsTestLanguage.g:281:3: lv_value_3_1= RULE_ID
                             {
-                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleValue476); 
+                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             			newLeafNode(lv_value_3_1, grammarAccess.getSingleValueAccess().getValueIDTerminalRuleCall_1_1_0_0()); 
                             		
@@ -740,9 +740,9 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:296:8: lv_value_3_2= RULE_STRING
+                            // InternalAssignmentsTestLanguage.g:296:8: lv_value_3_2= RULE_STRING
                             {
-                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSingleValue496); 
+                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             			newLeafNode(lv_value_3_2, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1()); 
                             		
@@ -775,22 +775,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:315:6: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:315:6: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:315:6: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:315:8: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:315:6: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:315:8: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
                     {
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleValue524); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getSingleValueAccess().getStringKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:319:1: ( (lv_value_5_0= RULE_STRING ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:320:1: (lv_value_5_0= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:319:1: ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:320:1: (lv_value_5_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:320:1: (lv_value_5_0= RULE_STRING )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:321:3: lv_value_5_0= RULE_STRING
+                    // InternalAssignmentsTestLanguage.g:320:1: (lv_value_5_0= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:321:3: lv_value_5_0= RULE_STRING
                     {
-                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSingleValue541); 
+                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     			newLeafNode(lv_value_5_0, grammarAccess.getSingleValueAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
                     		
@@ -837,7 +837,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleMultiValue"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:345:1: entryRuleMultiValue returns [EObject current=null] : iv_ruleMultiValue= ruleMultiValue EOF ;
+    // InternalAssignmentsTestLanguage.g:345:1: entryRuleMultiValue returns [EObject current=null] : iv_ruleMultiValue= ruleMultiValue EOF ;
     public final EObject entryRuleMultiValue() throws RecognitionException {
         EObject current = null;
 
@@ -845,17 +845,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:346:2: (iv_ruleMultiValue= ruleMultiValue EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:347:2: iv_ruleMultiValue= ruleMultiValue EOF
+            // InternalAssignmentsTestLanguage.g:346:2: (iv_ruleMultiValue= ruleMultiValue EOF )
+            // InternalAssignmentsTestLanguage.g:347:2: iv_ruleMultiValue= ruleMultiValue EOF
             {
              newCompositeNode(grammarAccess.getMultiValueRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_entryRuleMultiValue583);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleMultiValue=ruleMultiValue();
 
             state._fsp--;
 
              current =iv_ruleMultiValue; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiValue593); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -873,7 +873,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleMultiValue"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:354:1: ruleMultiValue returns [EObject current=null] : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    // InternalAssignmentsTestLanguage.g:354:1: ruleMultiValue returns [EObject current=null] : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
     public final EObject ruleMultiValue() throws RecognitionException {
         EObject current = null;
 
@@ -888,10 +888,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:357:28: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:358:1: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // InternalAssignmentsTestLanguage.g:357:28: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:358:1: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:358:1: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // InternalAssignmentsTestLanguage.g:358:1: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt7=3;
             switch ( input.LA(1) ) {
             case 16:
@@ -918,22 +918,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:358:2: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // InternalAssignmentsTestLanguage.g:358:2: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:358:2: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:358:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
+                    // InternalAssignmentsTestLanguage.g:358:2: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // InternalAssignmentsTestLanguage.g:358:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
                     {
-                    otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMultiValue631); 
+                    otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getMultiValueAccess().getIdsKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:362:1: ( (lv_value_1_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:363:1: (lv_value_1_0= RULE_ID )
+                    // InternalAssignmentsTestLanguage.g:362:1: ( (lv_value_1_0= RULE_ID ) )
+                    // InternalAssignmentsTestLanguage.g:363:1: (lv_value_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:363:1: (lv_value_1_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:364:3: lv_value_1_0= RULE_ID
+                    // InternalAssignmentsTestLanguage.g:363:1: (lv_value_1_0= RULE_ID )
+                    // InternalAssignmentsTestLanguage.g:364:3: lv_value_1_0= RULE_ID
                     {
-                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMultiValue648); 
+                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     			newLeafNode(lv_value_1_0, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_0_1_0()); 
                     		
@@ -960,22 +960,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:381:6: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:381:6: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:381:6: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:381:8: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:381:6: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:381:8: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMultiValue673); 
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getMultiValueAccess().getAlternativesKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:385:1: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:386:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:385:1: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:386:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:386:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:387:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:386:1: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:387:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:387:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:387:1: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -993,9 +993,9 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:388:3: lv_value_3_1= RULE_ID
+                            // InternalAssignmentsTestLanguage.g:388:3: lv_value_3_1= RULE_ID
                             {
-                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMultiValue692); 
+                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             			newLeafNode(lv_value_3_1, grammarAccess.getMultiValueAccess().getValueIDTerminalRuleCall_1_1_0_0()); 
                             		
@@ -1013,9 +1013,9 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:403:8: lv_value_3_2= RULE_STRING
+                            // InternalAssignmentsTestLanguage.g:403:8: lv_value_3_2= RULE_STRING
                             {
-                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleMultiValue712); 
+                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             			newLeafNode(lv_value_3_2, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_1_1_0_1()); 
                             		
@@ -1048,22 +1048,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:422:6: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:422:6: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:422:6: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:422:8: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:422:6: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // InternalAssignmentsTestLanguage.g:422:8: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
                     {
-                    otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleMultiValue740); 
+                    otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getMultiValueAccess().getStringsKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:426:1: ( (lv_value_5_0= RULE_STRING ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:427:1: (lv_value_5_0= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:426:1: ( (lv_value_5_0= RULE_STRING ) )
+                    // InternalAssignmentsTestLanguage.g:427:1: (lv_value_5_0= RULE_STRING )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:427:1: (lv_value_5_0= RULE_STRING )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:428:3: lv_value_5_0= RULE_STRING
+                    // InternalAssignmentsTestLanguage.g:427:1: (lv_value_5_0= RULE_STRING )
+                    // InternalAssignmentsTestLanguage.g:428:3: lv_value_5_0= RULE_STRING
                     {
-                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleMultiValue757); 
+                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     			newLeafNode(lv_value_5_0, grammarAccess.getMultiValueAccess().getValueSTRINGTerminalRuleCall_2_1_0()); 
                     		
@@ -1110,7 +1110,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleSingleDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:452:1: entryRuleSingleDatatype returns [EObject current=null] : iv_ruleSingleDatatype= ruleSingleDatatype EOF ;
+    // InternalAssignmentsTestLanguage.g:452:1: entryRuleSingleDatatype returns [EObject current=null] : iv_ruleSingleDatatype= ruleSingleDatatype EOF ;
     public final EObject entryRuleSingleDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1118,17 +1118,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:453:2: (iv_ruleSingleDatatype= ruleSingleDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:454:2: iv_ruleSingleDatatype= ruleSingleDatatype EOF
+            // InternalAssignmentsTestLanguage.g:453:2: (iv_ruleSingleDatatype= ruleSingleDatatype EOF )
+            // InternalAssignmentsTestLanguage.g:454:2: iv_ruleSingleDatatype= ruleSingleDatatype EOF
             {
              newCompositeNode(grammarAccess.getSingleDatatypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_entryRuleSingleDatatype799);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSingleDatatype=ruleSingleDatatype();
 
             state._fsp--;
 
              current =iv_ruleSingleDatatype; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleDatatype809); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1146,7 +1146,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleSingleDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:461:1: ruleSingleDatatype returns [EObject current=null] : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    // InternalAssignmentsTestLanguage.g:461:1: ruleSingleDatatype returns [EObject current=null] : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
     public final EObject ruleSingleDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1165,10 +1165,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:464:28: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:465:1: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // InternalAssignmentsTestLanguage.g:464:28: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:465:1: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:465:1: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // InternalAssignmentsTestLanguage.g:465:1: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
             case 19:
@@ -1195,25 +1195,25 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:465:2: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:465:2: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:465:2: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:465:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:465:2: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:465:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
-                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleSingleDatatype847); 
+                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getSingleDatatypeAccess().getDatatypeidKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:469:1: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:470:1: (lv_value_1_0= ruleIdDatatype )
+                    // InternalAssignmentsTestLanguage.g:469:1: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:470:1: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:470:1: (lv_value_1_0= ruleIdDatatype )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:471:3: lv_value_1_0= ruleIdDatatype
+                    // InternalAssignmentsTestLanguage.g:470:1: (lv_value_1_0= ruleIdDatatype )
+                    // InternalAssignmentsTestLanguage.g:471:3: lv_value_1_0= ruleIdDatatype
                     {
                      
                     	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleSingleDatatype868);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_value_1_0=ruleIdDatatype();
 
                     state._fsp--;
@@ -1242,22 +1242,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:488:6: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:488:6: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:488:6: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:488:8: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:488:6: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:488:8: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
-                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleSingleDatatype888); 
+                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getSingleDatatypeAccess().getDatatypealternativeKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:492:1: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:493:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:492:1: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:493:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:493:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:494:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:493:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:494:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:494:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:494:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1275,12 +1275,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:495:3: lv_value_3_1= ruleIdDatatype
+                            // InternalAssignmentsTestLanguage.g:495:3: lv_value_3_1= ruleIdDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleSingleDatatype911);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_value_3_1=ruleIdDatatype();
 
                             state._fsp--;
@@ -1300,12 +1300,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:510:8: lv_value_3_2= ruleStringDatatype
+                            // InternalAssignmentsTestLanguage.g:510:8: lv_value_3_2= ruleStringDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleSingleDatatype930);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_value_3_2=ruleStringDatatype();
 
                             state._fsp--;
@@ -1340,25 +1340,25 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:529:6: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:529:6: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:529:6: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:529:8: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:529:6: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:529:8: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
-                    otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleSingleDatatype953); 
+                    otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getSingleDatatypeAccess().getDatatypestringKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:533:1: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:534:1: (lv_value_5_0= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:533:1: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:534:1: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:534:1: (lv_value_5_0= ruleStringDatatype )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:535:3: lv_value_5_0= ruleStringDatatype
+                    // InternalAssignmentsTestLanguage.g:534:1: (lv_value_5_0= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:535:3: lv_value_5_0= ruleStringDatatype
                     {
                      
                     	        newCompositeNode(grammarAccess.getSingleDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleSingleDatatype974);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_value_5_0=ruleStringDatatype();
 
                     state._fsp--;
@@ -1407,7 +1407,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleMultiDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:559:1: entryRuleMultiDatatype returns [EObject current=null] : iv_ruleMultiDatatype= ruleMultiDatatype EOF ;
+    // InternalAssignmentsTestLanguage.g:559:1: entryRuleMultiDatatype returns [EObject current=null] : iv_ruleMultiDatatype= ruleMultiDatatype EOF ;
     public final EObject entryRuleMultiDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1415,17 +1415,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:560:2: (iv_ruleMultiDatatype= ruleMultiDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:561:2: iv_ruleMultiDatatype= ruleMultiDatatype EOF
+            // InternalAssignmentsTestLanguage.g:560:2: (iv_ruleMultiDatatype= ruleMultiDatatype EOF )
+            // InternalAssignmentsTestLanguage.g:561:2: iv_ruleMultiDatatype= ruleMultiDatatype EOF
             {
              newCompositeNode(grammarAccess.getMultiDatatypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_entryRuleMultiDatatype1011);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleMultiDatatype=ruleMultiDatatype();
 
             state._fsp--;
 
              current =iv_ruleMultiDatatype; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiDatatype1021); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1443,7 +1443,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleMultiDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:568:1: ruleMultiDatatype returns [EObject current=null] : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    // InternalAssignmentsTestLanguage.g:568:1: ruleMultiDatatype returns [EObject current=null] : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
     public final EObject ruleMultiDatatype() throws RecognitionException {
         EObject current = null;
 
@@ -1462,10 +1462,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:571:28: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:572:1: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // InternalAssignmentsTestLanguage.g:571:28: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // InternalAssignmentsTestLanguage.g:572:1: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:572:1: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // InternalAssignmentsTestLanguage.g:572:1: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt11=3;
             switch ( input.LA(1) ) {
             case 22:
@@ -1492,25 +1492,25 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:572:2: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:572:2: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:572:2: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:572:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:572:2: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:572:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
-                    otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleMultiDatatype1059); 
+                    otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getMultiDatatypeAccess().getDatatypeidsKeyword_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:576:1: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:577:1: (lv_value_1_0= ruleIdDatatype )
+                    // InternalAssignmentsTestLanguage.g:576:1: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:577:1: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:577:1: (lv_value_1_0= ruleIdDatatype )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:578:3: lv_value_1_0= ruleIdDatatype
+                    // InternalAssignmentsTestLanguage.g:577:1: (lv_value_1_0= ruleIdDatatype )
+                    // InternalAssignmentsTestLanguage.g:578:3: lv_value_1_0= ruleIdDatatype
                     {
                      
                     	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_0_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1080);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_value_1_0=ruleIdDatatype();
 
                     state._fsp--;
@@ -1539,22 +1539,22 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:595:6: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:595:6: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:595:6: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:595:8: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:595:6: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // InternalAssignmentsTestLanguage.g:595:8: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
-                    otherlv_2=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleMultiDatatype1100); 
+                    otherlv_2=(Token)match(input,23,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getMultiDatatypeAccess().getDatatypealternativesKeyword_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:599:1: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:600:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:599:1: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:600:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:600:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:601:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:600:1: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:601:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:601:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:601:1: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1572,12 +1572,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:602:3: lv_value_3_1= ruleIdDatatype
+                            // InternalAssignmentsTestLanguage.g:602:3: lv_value_3_1= ruleIdDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueIdDatatypeParserRuleCall_1_1_0_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1123);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_value_3_1=ruleIdDatatype();
 
                             state._fsp--;
@@ -1597,12 +1597,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:617:8: lv_value_3_2= ruleStringDatatype
+                            // InternalAssignmentsTestLanguage.g:617:8: lv_value_3_2= ruleStringDatatype
                             {
                              
                             	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_1_1_0_1()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1142);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_value_3_2=ruleStringDatatype();
 
                             state._fsp--;
@@ -1637,25 +1637,25 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:636:6: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:636:6: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:636:6: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:636:8: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:636:6: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // InternalAssignmentsTestLanguage.g:636:8: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
-                    otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiDatatype1165); 
+                    otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getMultiDatatypeAccess().getDatatypestringsKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:640:1: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:641:1: (lv_value_5_0= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:640:1: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // InternalAssignmentsTestLanguage.g:641:1: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:641:1: (lv_value_5_0= ruleStringDatatype )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:642:3: lv_value_5_0= ruleStringDatatype
+                    // InternalAssignmentsTestLanguage.g:641:1: (lv_value_5_0= ruleStringDatatype )
+                    // InternalAssignmentsTestLanguage.g:642:3: lv_value_5_0= ruleStringDatatype
                     {
                      
                     	        newCompositeNode(grammarAccess.getMultiDatatypeAccess().getValueStringDatatypeParserRuleCall_2_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1186);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_value_5_0=ruleStringDatatype();
 
                     state._fsp--;
@@ -1704,7 +1704,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleIdDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:666:1: entryRuleIdDatatype returns [String current=null] : iv_ruleIdDatatype= ruleIdDatatype EOF ;
+    // InternalAssignmentsTestLanguage.g:666:1: entryRuleIdDatatype returns [String current=null] : iv_ruleIdDatatype= ruleIdDatatype EOF ;
     public final String entryRuleIdDatatype() throws RecognitionException {
         String current = null;
 
@@ -1712,17 +1712,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:667:2: (iv_ruleIdDatatype= ruleIdDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:668:2: iv_ruleIdDatatype= ruleIdDatatype EOF
+            // InternalAssignmentsTestLanguage.g:667:2: (iv_ruleIdDatatype= ruleIdDatatype EOF )
+            // InternalAssignmentsTestLanguage.g:668:2: iv_ruleIdDatatype= ruleIdDatatype EOF
             {
              newCompositeNode(grammarAccess.getIdDatatypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_entryRuleIdDatatype1224);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleIdDatatype=ruleIdDatatype();
 
             state._fsp--;
 
              current =iv_ruleIdDatatype.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdDatatype1235); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1740,7 +1740,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleIdDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:675:1: ruleIdDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalAssignmentsTestLanguage.g:675:1: ruleIdDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleIdDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1749,10 +1749,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:678:28: (this_ID_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:679:5: this_ID_0= RULE_ID
+            // InternalAssignmentsTestLanguage.g:678:28: (this_ID_0= RULE_ID )
+            // InternalAssignmentsTestLanguage.g:679:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIdDatatype1274); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             		current.merge(this_ID_0);
                 
@@ -1777,7 +1777,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "entryRuleStringDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:694:1: entryRuleStringDatatype returns [String current=null] : iv_ruleStringDatatype= ruleStringDatatype EOF ;
+    // InternalAssignmentsTestLanguage.g:694:1: entryRuleStringDatatype returns [String current=null] : iv_ruleStringDatatype= ruleStringDatatype EOF ;
     public final String entryRuleStringDatatype() throws RecognitionException {
         String current = null;
 
@@ -1785,17 +1785,17 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:695:2: (iv_ruleStringDatatype= ruleStringDatatype EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:696:2: iv_ruleStringDatatype= ruleStringDatatype EOF
+            // InternalAssignmentsTestLanguage.g:695:2: (iv_ruleStringDatatype= ruleStringDatatype EOF )
+            // InternalAssignmentsTestLanguage.g:696:2: iv_ruleStringDatatype= ruleStringDatatype EOF
             {
              newCompositeNode(grammarAccess.getStringDatatypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_entryRuleStringDatatype1319);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleStringDatatype=ruleStringDatatype();
 
             state._fsp--;
 
              current =iv_ruleStringDatatype.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringDatatype1330); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1813,7 +1813,7 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
 
     // $ANTLR start "ruleStringDatatype"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:703:1: ruleStringDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
+    // InternalAssignmentsTestLanguage.g:703:1: ruleStringDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_STRING_0= RULE_STRING ;
     public final AntlrDatatypeRuleToken ruleStringDatatype() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -1822,10 +1822,10 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:706:28: (this_STRING_0= RULE_STRING )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/assignments/parser/antlr/internal/InternalAssignmentsTestLanguage.g:707:5: this_STRING_0= RULE_STRING
+            // InternalAssignmentsTestLanguage.g:706:28: (this_STRING_0= RULE_STRING )
+            // InternalAssignmentsTestLanguage.g:707:5: this_STRING_0= RULE_STRING
             {
-            this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleStringDatatype1369); 
+            this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             		current.merge(this_STRING_0);
                 
@@ -1855,60 +1855,12 @@ public class InternalAssignmentsTestLanguageParser extends AbstractInternalAntlr
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel123 = new BitSet(new long[]{0x0000000001FFE000L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_ruleModel145 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_ruleModel172 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_ruleModel199 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_ruleModel226 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleModel247 = new BitSet(new long[]{0x0000000001FFE000L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_ruleModel270 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_ruleModel289 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_ruleModel308 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_ruleModel327 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_entryRuleSingleValue367 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSingleValue377 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleSingleValue415 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleValue432 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleSingleValue457 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleValue476 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleValue496 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleSingleValue524 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleValue541 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_entryRuleMultiValue583 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiValue593 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleMultiValue631 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMultiValue648 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleMultiValue673 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMultiValue692 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleMultiValue712 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleMultiValue740 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleMultiValue757 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_entryRuleSingleDatatype799 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSingleDatatype809 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleSingleDatatype847 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleSingleDatatype868 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleSingleDatatype888 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleSingleDatatype911 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleSingleDatatype930 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleSingleDatatype953 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleSingleDatatype974 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_entryRuleMultiDatatype1011 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiDatatype1021 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_ruleMultiDatatype1059 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1080 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleMultiDatatype1100 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1123 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1142 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_ruleMultiDatatype1165 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1186 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_entryRuleIdDatatype1224 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIdDatatype1235 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleIdDatatype1274 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_entryRuleStringDatatype1319 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStringDatatype1330 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleStringDatatype1369 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000001FFE000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
     }
 
 

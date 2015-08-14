@@ -21,12 +21,12 @@ import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Referen
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ReferenceHolderImpl#getDefaultReference <em>Default Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ReferenceHolderImpl#getCustomizedReference <em>Customized Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ReferenceHolderImpl#getSubtypeReference <em>Subtype Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -88,8 +88,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public JvmType getDefaultReference()
+  public JvmType getDefaultReference()
   {
     if (defaultReference != null && defaultReference.eIsProxy())
     {
@@ -119,8 +118,7 @@ public JvmType getDefaultReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDefaultReference(JvmType newDefaultReference)
+  public void setDefaultReference(JvmType newDefaultReference)
   {
     JvmType oldDefaultReference = defaultReference;
     defaultReference = newDefaultReference;
@@ -133,8 +131,7 @@ public void setDefaultReference(JvmType newDefaultReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public JvmType getCustomizedReference()
+  public JvmType getCustomizedReference()
   {
     if (customizedReference != null && customizedReference.eIsProxy())
     {
@@ -164,8 +161,7 @@ public JvmType getCustomizedReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setCustomizedReference(JvmType newCustomizedReference)
+  public void setCustomizedReference(JvmType newCustomizedReference)
   {
     JvmType oldCustomizedReference = customizedReference;
     customizedReference = newCustomizedReference;
@@ -178,8 +174,7 @@ public void setCustomizedReference(JvmType newCustomizedReference)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public JvmType getSubtypeReference()
+  public JvmType getSubtypeReference()
   {
     if (subtypeReference != null && subtypeReference.eIsProxy())
     {
@@ -209,8 +204,7 @@ public JvmType getSubtypeReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setSubtypeReference(JvmType newSubtypeReference)
+  public void setSubtypeReference(JvmType newSubtypeReference)
   {
     JvmType oldSubtypeReference = subtypeReference;
     subtypeReference = newSubtypeReference;

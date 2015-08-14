@@ -125,7 +125,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"units",
         		lv_units_0_0, 
-        		"Unit");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Unit");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -144,7 +144,7 @@ ruleModel returns [EObject current=null]
        			$current, 
        			"functions",
         		lv_functions_1_0, 
-        		"Function");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Function");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -204,7 +204,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"documentation",
         		lv_documentation_1_0, 
-        		"DOCUMENTATION");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.DOCUMENTATION");
 	    }
 
 )
@@ -227,7 +227,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -250,7 +250,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"version",
         		lv_version_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -272,7 +272,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"implements",
         		lv_implements_7_0, 
-        		"SimpleTypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.SimpleTypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -295,7 +295,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"implements",
         		lv_implements_9_0, 
-        		"SimpleTypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.SimpleTypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -342,7 +342,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"sourceLocation",
         		lv_sourceLocation_14_0, 
-        		"Path");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Path");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -387,7 +387,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"outputLocation",
         		lv_outputLocation_18_0, 
-        		"Path");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Path");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -432,7 +432,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"providedCapabilities",
         		lv_providedCapabilities_22_0, 
-        		"ProvidedCapability");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ProvidedCapability");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -477,7 +477,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"requiredCapabilities",
         		lv_requiredCapabilities_26_0, 
-        		"AliasedRequiredCapability");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AliasedRequiredCapability");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -527,7 +527,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"metaRequiredCapabilities",
         		lv_metaRequiredCapabilities_31_0, 
-        		"RequiredCapability");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RequiredCapability");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -562,7 +562,7 @@ ruleUnit returns [EObject current=null]
        			$current, 
        			"functions",
         		lv_functions_33_0, 
-        		"Function");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Function");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -644,7 +644,7 @@ ruleProvidedCapability returns [EObject current=null]
        			$current, 
        			"nameSpace",
         		lv_nameSpace_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -696,7 +696,7 @@ ruleProvidedCapability returns [EObject current=null]
        			$current, 
        			"condExpr",
         		lv_condExpr_7_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -742,7 +742,7 @@ ruleProvidedCapability returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_11_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -787,7 +787,7 @@ ruleProvidedCapability returns [EObject current=null]
        			$current, 
        			"version",
         		lv_version_15_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -865,7 +865,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"nameSpace",
         		lv_nameSpace_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -889,7 +889,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -912,7 +912,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -958,7 +958,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"condExpr",
         		lv_condExpr_9_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1037,7 +1037,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"min",
         		lv_min_15_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -1082,7 +1082,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"max",
         		lv_max_19_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -1127,7 +1127,7 @@ ruleAliasedRequiredCapability returns [EObject current=null]
        			$current, 
        			"versionRange",
         		lv_versionRange_23_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1213,7 +1213,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"nameSpace",
         		lv_nameSpace_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1237,7 +1237,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1283,7 +1283,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"condExpr",
         		lv_condExpr_8_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1362,7 +1362,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"min",
         		lv_min_14_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -1407,7 +1407,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"max",
         		lv_max_18_0, 
-        		"INT");
+        		"org.eclipse.xtext.common.Terminals.INT");
 	    }
 
 )
@@ -1452,7 +1452,7 @@ ruleRequiredCapability returns [EObject current=null]
        			$current, 
        			"versionRange",
         		lv_versionRange_22_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1597,7 +1597,7 @@ ruleParameterList returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_0_0, 
-        		"FirstParameter");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FirstParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1620,7 +1620,7 @@ ruleParameterList returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_2_0, 
-        		"FirstParameter");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FirstParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1705,7 +1705,7 @@ ruleParameter returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_0_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1744,7 +1744,7 @@ ruleClosureParameter returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_0_0, 
-        		"ClosureExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ClosureExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1783,7 +1783,7 @@ ruleParameterDeclaration returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_0_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1802,7 +1802,7 @@ ruleParameterDeclaration returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1841,7 +1841,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"documentation",
         		lv_documentation_0_0, 
-        		"DOCUMENTATION");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.DOCUMENTATION");
 	    }
 
 )
@@ -1859,7 +1859,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"visibility",
         		lv_visibility_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1897,7 +1897,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"returnType",
         		lv_returnType_4_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1916,7 +1916,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_5_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -1938,7 +1938,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_7_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1961,7 +1961,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_9_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2000,7 +2000,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_12_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2035,7 +2035,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_14_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2063,7 +2063,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"guard",
         		lv_guard_17_0, 
-        		"GuardExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.GuardExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2086,7 +2086,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"funcExpr",
         		lv_funcExpr_19_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2110,7 +2110,7 @@ ruleFunction returns [EObject current=null]
        			$current, 
        			"funcExpr",
         		lv_funcExpr_21_0, 
-        		"BlockExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2154,7 +2154,7 @@ ruleGuardExpression returns [EObject current=null]
        			$current, 
        			"guardExpr",
         		lv_guardExpr_1_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2178,7 +2178,7 @@ ruleGuardExpression returns [EObject current=null]
        			$current, 
        			"guardExpr",
         		lv_guardExpr_3_0, 
-        		"BlockExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2477,7 +2477,7 @@ ruleAssignmentExpression returns [EObject current=null]
        			$current, 
        			"functionName",
         		lv_functionName_2_0, 
-        		"AssignmentOperator");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AssignmentOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2495,7 +2495,7 @@ ruleAssignmentExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"AssignmentExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AssignmentExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2565,7 +2565,7 @@ ruleVarDeclaration returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2584,7 +2584,7 @@ ruleVarDeclaration returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2606,7 +2606,7 @@ ruleVarDeclaration returns [EObject current=null]
        			$current, 
        			"valueExpr",
         		lv_valueExpr_6_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2686,7 +2686,7 @@ ruleValDeclaration returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_3_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2705,7 +2705,7 @@ ruleValDeclaration returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2727,7 +2727,7 @@ ruleValDeclaration returns [EObject current=null]
        			$current, 
        			"valueExpr",
         		lv_valueExpr_6_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2813,7 +2813,7 @@ ruleSimpleTypeRef returns [EObject current=null]
        			$current, 
        			"rawType",
         		lv_rawType_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2836,7 +2836,7 @@ ruleSimpleTypeRef returns [EObject current=null]
        			$current, 
        			"actualArgumentsList",
         		lv_actualArgumentsList_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2859,7 +2859,7 @@ ruleSimpleTypeRef returns [EObject current=null]
        			$current, 
        			"actualArgumentsList",
         		lv_actualArgumentsList_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2908,7 +2908,7 @@ ruleClosureTypeRef returns [EObject current=null]
        			$current, 
        			"parameterTypes",
         		lv_parameterTypes_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2931,7 +2931,7 @@ ruleClosureTypeRef returns [EObject current=null]
        			$current, 
        			"parameterTypes",
         		lv_parameterTypes_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -2970,7 +2970,7 @@ ruleClosureTypeRef returns [EObject current=null]
        			$current, 
        			"parameterTypes",
         		lv_parameterTypes_6_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3005,7 +3005,7 @@ ruleClosureTypeRef returns [EObject current=null]
        			$current, 
        			"parameterTypes",
         		lv_parameterTypes_8_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3033,7 +3033,7 @@ ruleClosureTypeRef returns [EObject current=null]
        			$current, 
        			"returnType",
         		lv_returnType_11_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3085,7 +3085,7 @@ ruleCachedExpression returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_2_0, 
-        		"OrExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.OrExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3163,7 +3163,7 @@ ruleOrExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"AndExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AndExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3228,7 +3228,7 @@ ruleAndExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"RelationalExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RelationalExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3288,7 +3288,7 @@ ruleRelationalExpression returns [EObject current=null]
        			$current, 
        			"functionName",
         		lv_functionName_2_0, 
-        		"RelationalOperator");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.RelationalOperator");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3306,7 +3306,7 @@ ruleRelationalExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"AdditiveExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.AdditiveExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3398,7 +3398,7 @@ ruleAdditiveExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"MultiplicativeExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.MultiplicativeExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3503,7 +3503,7 @@ ruleMultiplicativeExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"SetExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.SetExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3579,7 +3579,7 @@ ruleSetExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"UnaryOrInfixExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.UnaryOrInfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3718,7 +3718,7 @@ ruleUnaryExpression returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_2_0, 
-        		"InfixExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3798,7 +3798,7 @@ rulePreopExpression returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_2_0, 
-        		"InfixExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InfixExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3938,7 +3938,7 @@ ruleInfixExpression returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -3960,7 +3960,7 @@ ruleInfixExpression returns [EObject current=null]
        			$current, 
        			"parameterList",
         		lv_parameterList_5_0, 
-        		"ParameterList");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterList");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3998,7 +3998,7 @@ ruleInfixExpression returns [EObject current=null]
        			$current, 
        			"indexExpr",
         		lv_indexExpr_9_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4037,7 +4037,7 @@ ruleInfixExpression returns [EObject current=null]
        			$current, 
        			"featureName",
         		lv_featureName_13_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4101,7 +4101,7 @@ ruleCallExpression returns [EObject current=null]
        			$current, 
        			"parameterList",
         		lv_parameterList_3_0, 
-        		"ParameterList");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterList");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4288,7 +4288,7 @@ ruleWithExpression returns [EObject current=null]
        			$current, 
        			"referencedAdvice",
         		lv_referencedAdvice_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4311,7 +4311,7 @@ ruleWithExpression returns [EObject current=null]
        			$current, 
        			"referencedAdvice",
         		lv_referencedAdvice_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4333,7 +4333,7 @@ ruleWithExpression returns [EObject current=null]
        			$current, 
        			"funcExpr",
         		lv_funcExpr_5_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4357,7 +4357,7 @@ ruleWithExpression returns [EObject current=null]
        			$current, 
        			"funcExpr",
         		lv_funcExpr_7_0, 
-        		"BlockExpressionWithoutBrackets");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpressionWithoutBrackets");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4411,7 +4411,7 @@ ruleWithContextExpression returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_2_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4435,7 +4435,7 @@ ruleWithContextExpression returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_4_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4452,7 +4452,7 @@ ruleWithContextExpression returns [EObject current=null]
        			$current, 
        			"contextBlock",
         		lv_contextBlock_5_0, 
-        		"BlockExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.BlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4505,7 +4505,7 @@ ruleBlockExpression returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_2_0, 
-        		"TopLevelExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TopLevelExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4564,7 +4564,7 @@ ruleValue returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4772,7 +4772,7 @@ ruleOperationCall returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4794,7 +4794,7 @@ ruleOperationCall returns [EObject current=null]
        			$current, 
        			"parameterList",
         		lv_parameterList_3_0, 
-        		"ParameterList");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterList");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4853,7 +4853,7 @@ ruleConstructorCallExpression returns [EObject current=null]
        			$current, 
        			"typeExpr",
         		lv_typeExpr_2_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4875,7 +4875,7 @@ ruleConstructorCallExpression returns [EObject current=null]
        			$current, 
        			"parameterList",
         		lv_parameterList_4_0, 
-        		"ParameterList");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterList");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4904,7 +4904,7 @@ ruleConstructorCallExpression returns [EObject current=null]
        			$current, 
        			"alias",
         		lv_alias_7_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -4921,7 +4921,7 @@ ruleConstructorCallExpression returns [EObject current=null]
        			$current, 
        			"contextBlock",
         		lv_contextBlock_8_0, 
-        		"InitializationBlockExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InitializationBlockExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -4974,7 +4974,7 @@ ruleInitializationBlockExpression returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_2_0, 
-        		"InitializationExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.InitializationExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5032,7 +5032,7 @@ ruleInitializationExpression returns [EObject current=null]
        			$current, 
        			"leftExpr",
         		lv_leftExpr_1_0, 
-        		"FeatureOfThis");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.FeatureOfThis");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5066,7 +5066,7 @@ ruleInitializationExpression returns [EObject current=null]
        			$current, 
        			"rightExpr",
         		lv_rightExpr_3_0, 
-        		"Expression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5115,7 +5115,7 @@ ruleFeatureOfThis returns [EObject current=null]
        			$current, 
        			"featureName",
         		lv_featureName_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -5256,7 +5256,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"returnType",
         		lv_returnType_2_0, 
-        		"TypeRef");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TypeRef");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5284,7 +5284,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_5_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5307,7 +5307,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_7_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5346,7 +5346,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_10_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5381,7 +5381,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_12_0, 
-        		"ParameterDeclaration");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.ParameterDeclaration");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5404,7 +5404,7 @@ ruleClosureExpression returns [EObject current=null]
        			$current, 
        			"funcExpr",
         		lv_funcExpr_14_0, 
-        		"OneOrManyExpressions");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.OneOrManyExpressions");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5498,7 +5498,7 @@ ruleBlockExpressionWithoutBrackets returns [EObject current=null]
        			$current, 
        			"expressions",
         		lv_expressions_1_0, 
-        		"TopLevelExpression");
+        		"org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage.TopLevelExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5543,7 +5543,7 @@ ruleValueLiteral returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_0_0, 
-        		"STRING");
+        		"org.eclipse.xtext.common.Terminals.STRING");
 	    }
 
 )

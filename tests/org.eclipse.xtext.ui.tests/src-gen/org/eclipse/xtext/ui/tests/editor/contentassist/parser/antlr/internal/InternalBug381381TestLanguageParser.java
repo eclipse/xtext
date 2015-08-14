@@ -55,7 +55,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug381381TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBug381381TestLanguage.g"; }
 
 
 
@@ -80,7 +80,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug381381TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -88,17 +88,17 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalBug381381TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalBug381381TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -116,7 +116,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) ) ;
+    // InternalBug381381TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -126,19 +126,19 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:79:28: ( ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:80:1: ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) )
+            // InternalBug381381TestLanguage.g:79:28: ( ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) ) )
+            // InternalBug381381TestLanguage.g:80:1: ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:80:1: ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:81:1: (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt )
+            // InternalBug381381TestLanguage.g:80:1: ( (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt ) )
+            // InternalBug381381TestLanguage.g:81:1: (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:81:1: (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:82:3: lv_stmt_0_0= ruleCopyFieldNameToVariableStmt
+            // InternalBug381381TestLanguage.g:81:1: (lv_stmt_0_0= ruleCopyFieldNameToVariableStmt )
+            // InternalBug381381TestLanguage.g:82:3: lv_stmt_0_0= ruleCopyFieldNameToVariableStmt
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getStmtCopyFieldNameToVariableStmtParserRuleCall_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleCopyFieldNameToVariableStmt_in_ruleModel130);
+            pushFollow(FollowSets000.FOLLOW_2);
             lv_stmt_0_0=ruleCopyFieldNameToVariableStmt();
 
             state._fsp--;
@@ -178,7 +178,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleCopyFieldNameToVariableStmt"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:106:1: entryRuleCopyFieldNameToVariableStmt returns [EObject current=null] : iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF ;
+    // InternalBug381381TestLanguage.g:106:1: entryRuleCopyFieldNameToVariableStmt returns [EObject current=null] : iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF ;
     public final EObject entryRuleCopyFieldNameToVariableStmt() throws RecognitionException {
         EObject current = null;
 
@@ -186,17 +186,17 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:107:2: (iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:108:2: iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF
+            // InternalBug381381TestLanguage.g:107:2: (iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF )
+            // InternalBug381381TestLanguage.g:108:2: iv_ruleCopyFieldNameToVariableStmt= ruleCopyFieldNameToVariableStmt EOF
             {
              newCompositeNode(grammarAccess.getCopyFieldNameToVariableStmtRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleCopyFieldNameToVariableStmt_in_entryRuleCopyFieldNameToVariableStmt165);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleCopyFieldNameToVariableStmt=ruleCopyFieldNameToVariableStmt();
 
             state._fsp--;
 
              current =iv_ruleCopyFieldNameToVariableStmt; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCopyFieldNameToVariableStmt175); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -214,7 +214,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleCopyFieldNameToVariableStmt"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:115:1: ruleCopyFieldNameToVariableStmt returns [EObject current=null] : (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) ) ;
+    // InternalBug381381TestLanguage.g:115:1: ruleCopyFieldNameToVariableStmt returns [EObject current=null] : (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) ) ;
     public final EObject ruleCopyFieldNameToVariableStmt() throws RecognitionException {
         EObject current = null;
 
@@ -239,29 +239,29 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:118:28: ( (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:119:1: (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) )
+            // InternalBug381381TestLanguage.g:118:28: ( (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) ) )
+            // InternalBug381381TestLanguage.g:119:1: (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:119:1: (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:119:3: otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) )
+            // InternalBug381381TestLanguage.g:119:1: (otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) ) )
+            // InternalBug381381TestLanguage.g:119:3: otherlv_0= 'FIELD-NAME-TO-VARIABLE' ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) )
             {
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleCopyFieldNameToVariableStmt212); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getCopyFieldNameToVariableStmtAccess().getFIELDNAMETOVARIABLEKeyword_0());
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:123:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:125:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) )
+            // InternalBug381381TestLanguage.g:123:1: ( ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) ) )
+            // InternalBug381381TestLanguage.g:125:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:125:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:126:2: ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?)
+            // InternalBug381381TestLanguage.g:125:1: ( ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?) )
+            // InternalBug381381TestLanguage.g:126:2: ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?)
             {
              
             	  getUnorderedGroupHelper().enter(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1());
             	
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:129:2: ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?)
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:130:3: ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?
+            // InternalBug381381TestLanguage.g:129:2: ( ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?)
+            // InternalBug381381TestLanguage.g:130:3: ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+ {...}?
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:130:3: ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+
+            // InternalBug381381TestLanguage.g:130:3: ( ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) ) | ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) ) | ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) ) )+
             int cnt1=0;
             loop1:
             do {
@@ -287,52 +287,52 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:132:4: ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) )
+            	    // InternalBug381381TestLanguage.g:132:4: ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:132:4: ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:133:5: {...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) )
+            	    // InternalBug381381TestLanguage.g:132:4: ({...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) ) )
+            	    // InternalBug381381TestLanguage.g:133:5: {...}? => ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:133:124: ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:134:6: ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) )
+            	    // InternalBug381381TestLanguage.g:133:124: ( ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) ) )
+            	    // InternalBug381381TestLanguage.g:134:6: ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 0);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:137:6: ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:137:7: {...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' )
+            	    // InternalBug381381TestLanguage.g:137:6: ({...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' ) )
+            	    // InternalBug381381TestLanguage.g:137:7: {...}? => (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "true");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:137:16: (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:137:18: otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')'
+            	    // InternalBug381381TestLanguage.g:137:16: (otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')' )
+            	    // InternalBug381381TestLanguage.g:137:18: otherlv_2= ',' otherlv_3= 'SCREEN' otherlv_4= '=' otherlv_5= '(' ( (lv_line_6_0= RULE_INT ) ) otherlv_7= ',' ( (lv_column_8_0= RULE_INT ) ) otherlv_9= ')'
             	    {
-            	    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleCopyFieldNameToVariableStmt270); 
+            	    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_0_0());
             	        
-            	    otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleCopyFieldNameToVariableStmt282); 
+            	    otherlv_3=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
             	        	newLeafNode(otherlv_3, grammarAccess.getCopyFieldNameToVariableStmtAccess().getSCREENKeyword_1_0_1());
             	        
-            	    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleCopyFieldNameToVariableStmt294); 
+            	    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
             	        	newLeafNode(otherlv_4, grammarAccess.getCopyFieldNameToVariableStmtAccess().getEqualsSignKeyword_1_0_2());
             	        
-            	    otherlv_5=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleCopyFieldNameToVariableStmt306); 
+            	    otherlv_5=(Token)match(input,15,FollowSets000.FOLLOW_7); 
 
             	        	newLeafNode(otherlv_5, grammarAccess.getCopyFieldNameToVariableStmtAccess().getLeftParenthesisKeyword_1_0_3());
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:153:1: ( (lv_line_6_0= RULE_INT ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:154:1: (lv_line_6_0= RULE_INT )
+            	    // InternalBug381381TestLanguage.g:153:1: ( (lv_line_6_0= RULE_INT ) )
+            	    // InternalBug381381TestLanguage.g:154:1: (lv_line_6_0= RULE_INT )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:154:1: (lv_line_6_0= RULE_INT )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:155:3: lv_line_6_0= RULE_INT
+            	    // InternalBug381381TestLanguage.g:154:1: (lv_line_6_0= RULE_INT )
+            	    // InternalBug381381TestLanguage.g:155:3: lv_line_6_0= RULE_INT
             	    {
-            	    lv_line_6_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleCopyFieldNameToVariableStmt323); 
+            	    lv_line_6_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_3); 
 
             	    			newLeafNode(lv_line_6_0, grammarAccess.getCopyFieldNameToVariableStmtAccess().getLineINTTerminalRuleCall_1_0_4_0()); 
             	    		
@@ -352,17 +352,17 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
             	    }
 
-            	    otherlv_7=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleCopyFieldNameToVariableStmt340); 
+            	    otherlv_7=(Token)match(input,12,FollowSets000.FOLLOW_7); 
 
             	        	newLeafNode(otherlv_7, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_0_5());
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:175:1: ( (lv_column_8_0= RULE_INT ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:176:1: (lv_column_8_0= RULE_INT )
+            	    // InternalBug381381TestLanguage.g:175:1: ( (lv_column_8_0= RULE_INT ) )
+            	    // InternalBug381381TestLanguage.g:176:1: (lv_column_8_0= RULE_INT )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:176:1: (lv_column_8_0= RULE_INT )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:177:3: lv_column_8_0= RULE_INT
+            	    // InternalBug381381TestLanguage.g:176:1: (lv_column_8_0= RULE_INT )
+            	    // InternalBug381381TestLanguage.g:177:3: lv_column_8_0= RULE_INT
             	    {
-            	    lv_column_8_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleCopyFieldNameToVariableStmt357); 
+            	    lv_column_8_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_8); 
 
             	    			newLeafNode(lv_column_8_0, grammarAccess.getCopyFieldNameToVariableStmtAccess().getColumnINTTerminalRuleCall_1_0_6_0()); 
             	    		
@@ -382,7 +382,7 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
             	    }
 
-            	    otherlv_9=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleCopyFieldNameToVariableStmt374); 
+            	    otherlv_9=(Token)match(input,16,FollowSets000.FOLLOW_9); 
 
             	        	newLeafNode(otherlv_9, grammarAccess.getCopyFieldNameToVariableStmtAccess().getRightParenthesisKeyword_1_0_7());
             	        
@@ -405,48 +405,48 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:204:4: ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) )
+            	    // InternalBug381381TestLanguage.g:204:4: ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:204:4: ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:205:5: {...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) )
+            	    // InternalBug381381TestLanguage.g:204:4: ({...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) ) )
+            	    // InternalBug381381TestLanguage.g:205:5: {...}? => ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:205:124: ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:206:6: ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) )
+            	    // InternalBug381381TestLanguage.g:205:124: ( ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) ) )
+            	    // InternalBug381381TestLanguage.g:206:6: ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 1);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:209:6: ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:209:7: {...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) )
+            	    // InternalBug381381TestLanguage.g:209:6: ({...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) ) )
+            	    // InternalBug381381TestLanguage.g:209:7: {...}? => (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "true");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:209:16: (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:209:18: otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) )
+            	    // InternalBug381381TestLanguage.g:209:16: (otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) ) )
+            	    // InternalBug381381TestLanguage.g:209:18: otherlv_10= ',' otherlv_11= 'VAR' otherlv_12= '=' ( (lv_name_13_0= RULE_ID ) )
             	    {
-            	    otherlv_10=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleCopyFieldNameToVariableStmt442); 
+            	    otherlv_10=(Token)match(input,12,FollowSets000.FOLLOW_10); 
 
             	        	newLeafNode(otherlv_10, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_1_0());
             	        
-            	    otherlv_11=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleCopyFieldNameToVariableStmt454); 
+            	    otherlv_11=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
             	        	newLeafNode(otherlv_11, grammarAccess.getCopyFieldNameToVariableStmtAccess().getVARKeyword_1_1_1());
             	        
-            	    otherlv_12=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleCopyFieldNameToVariableStmt466); 
+            	    otherlv_12=(Token)match(input,14,FollowSets000.FOLLOW_11); 
 
             	        	newLeafNode(otherlv_12, grammarAccess.getCopyFieldNameToVariableStmtAccess().getEqualsSignKeyword_1_1_2());
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:221:1: ( (lv_name_13_0= RULE_ID ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:222:1: (lv_name_13_0= RULE_ID )
+            	    // InternalBug381381TestLanguage.g:221:1: ( (lv_name_13_0= RULE_ID ) )
+            	    // InternalBug381381TestLanguage.g:222:1: (lv_name_13_0= RULE_ID )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:222:1: (lv_name_13_0= RULE_ID )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:223:3: lv_name_13_0= RULE_ID
+            	    // InternalBug381381TestLanguage.g:222:1: (lv_name_13_0= RULE_ID )
+            	    // InternalBug381381TestLanguage.g:223:3: lv_name_13_0= RULE_ID
             	    {
-            	    lv_name_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleCopyFieldNameToVariableStmt483); 
+            	    lv_name_13_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_9); 
 
             	    			newLeafNode(lv_name_13_0, grammarAccess.getCopyFieldNameToVariableStmtAccess().getNameIDTerminalRuleCall_1_1_3_0()); 
             	    		
@@ -485,42 +485,42 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:246:4: ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) )
+            	    // InternalBug381381TestLanguage.g:246:4: ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:246:4: ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:247:5: {...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) )
+            	    // InternalBug381381TestLanguage.g:246:4: ({...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) ) )
+            	    // InternalBug381381TestLanguage.g:247:5: {...}? => ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) )
             	    {
             	    if ( ! getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "getUnorderedGroupHelper().canSelect(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:247:124: ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:248:6: ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) )
+            	    // InternalBug381381TestLanguage.g:247:124: ( ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) ) )
+            	    // InternalBug381381TestLanguage.g:248:6: ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getCopyFieldNameToVariableStmtAccess().getUnorderedGroup_1(), 2);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:251:6: ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:251:7: {...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' )
+            	    // InternalBug381381TestLanguage.g:251:6: ({...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' ) )
+            	    // InternalBug381381TestLanguage.g:251:7: {...}? => (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' )
             	    {
             	    if ( !((true)) ) {
             	        throw new FailedPredicateException(input, "ruleCopyFieldNameToVariableStmt", "true");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:251:16: (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug381381TestLanguage.g:251:18: otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE'
+            	    // InternalBug381381TestLanguage.g:251:16: (otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE' )
+            	    // InternalBug381381TestLanguage.g:251:18: otherlv_14= ',' otherlv_15= 'TYPE' otherlv_16= '=' otherlv_17= 'REPLACE'
             	    {
-            	    otherlv_14=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleCopyFieldNameToVariableStmt556); 
+            	    otherlv_14=(Token)match(input,12,FollowSets000.FOLLOW_12); 
 
             	        	newLeafNode(otherlv_14, grammarAccess.getCopyFieldNameToVariableStmtAccess().getCommaKeyword_1_2_0());
             	        
-            	    otherlv_15=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleCopyFieldNameToVariableStmt568); 
+            	    otherlv_15=(Token)match(input,18,FollowSets000.FOLLOW_5); 
 
             	        	newLeafNode(otherlv_15, grammarAccess.getCopyFieldNameToVariableStmtAccess().getTYPEKeyword_1_2_1());
             	        
-            	    otherlv_16=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleCopyFieldNameToVariableStmt580); 
+            	    otherlv_16=(Token)match(input,14,FollowSets000.FOLLOW_13); 
 
             	        	newLeafNode(otherlv_16, grammarAccess.getCopyFieldNameToVariableStmtAccess().getEqualsSignKeyword_1_2_2());
             	        
-            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleCopyFieldNameToVariableStmt592); 
+            	    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_9); 
 
             	        	newLeafNode(otherlv_17, grammarAccess.getCopyFieldNameToVariableStmtAccess().getREPLACEKeyword_1_2_3());
             	        
@@ -593,28 +593,19 @@ public class InternalBug381381TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCopyFieldNameToVariableStmt_in_ruleModel130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCopyFieldNameToVariableStmt_in_entryRuleCopyFieldNameToVariableStmt165 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCopyFieldNameToVariableStmt175 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleCopyFieldNameToVariableStmt212 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleCopyFieldNameToVariableStmt270 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_13_in_ruleCopyFieldNameToVariableStmt282 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleCopyFieldNameToVariableStmt294 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleCopyFieldNameToVariableStmt306 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleCopyFieldNameToVariableStmt323 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleCopyFieldNameToVariableStmt340 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleCopyFieldNameToVariableStmt357 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleCopyFieldNameToVariableStmt374 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleCopyFieldNameToVariableStmt442 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleCopyFieldNameToVariableStmt454 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleCopyFieldNameToVariableStmt466 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleCopyFieldNameToVariableStmt483 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleCopyFieldNameToVariableStmt556 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleCopyFieldNameToVariableStmt568 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_14_in_ruleCopyFieldNameToVariableStmt580 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_19_in_ruleCopyFieldNameToVariableStmt592 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000080000L});
     }
 
 

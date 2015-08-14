@@ -47,7 +47,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
         
 
     public String[] getTokenNames() { return InternalEcoreFragmentTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEcoreFragmentTestLanguage.g"; }
 
 
 
@@ -72,7 +72,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleSecond"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:67:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
+    // InternalEcoreFragmentTestLanguage.g:67:1: entryRuleSecond returns [EObject current=null] : iv_ruleSecond= ruleSecond EOF ;
     public final EObject entryRuleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -80,17 +80,17 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:68:2: (iv_ruleSecond= ruleSecond EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:69:2: iv_ruleSecond= ruleSecond EOF
+            // InternalEcoreFragmentTestLanguage.g:68:2: (iv_ruleSecond= ruleSecond EOF )
+            // InternalEcoreFragmentTestLanguage.g:69:2: iv_ruleSecond= ruleSecond EOF
             {
              newCompositeNode(grammarAccess.getSecondRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecond_in_entryRuleSecond75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSecond=ruleSecond();
 
             state._fsp--;
 
              current =iv_ruleSecond; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecond85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -108,7 +108,7 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleSecond"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:76:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
+    // InternalEcoreFragmentTestLanguage.g:76:1: ruleSecond returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) ;
     public final EObject ruleSecond() throws RecognitionException {
         EObject current = null;
 
@@ -119,19 +119,19 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) ) )
+            // InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) ) )
+            // InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) otherlv_1= 'first' ( (otherlv_2= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:82:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond127); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getSecondAccess().getNameIDTerminalRuleCall_0_0()); 
             		
@@ -151,22 +151,22 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
             }
 
-            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleSecond144); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getSecondAccess().getFirstKeyword_1());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:102:1: ( (otherlv_2= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:102:1: ( (otherlv_2= RULE_ID ) )
+            // InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalEcoreFragmentTestLanguage.g:104:3: otherlv_2= RULE_ID
+            // InternalEcoreFragmentTestLanguage.g:103:1: (otherlv_2= RULE_ID )
+            // InternalEcoreFragmentTestLanguage.g:104:3: otherlv_2= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getSecondRule());
             	        }
                     
-            otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSecond164); 
+            otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             		newLeafNode(otherlv_2, grammarAccess.getSecondAccess().getFirstFirstCrossReference_2_0()); 
             	
@@ -202,11 +202,10 @@ public class InternalEcoreFragmentTestLanguageParser extends AbstractInternalAnt
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleSecond_in_entryRuleSecond75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSecond85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond127 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleSecond144 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSecond164 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

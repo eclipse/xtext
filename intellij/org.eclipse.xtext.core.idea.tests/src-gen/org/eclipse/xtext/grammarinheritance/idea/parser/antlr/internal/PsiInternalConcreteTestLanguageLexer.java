@@ -43,15 +43,15 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalConcreteTestLanguage.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:11:7: ( 'model' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:11:9: 'model'
+            // PsiInternalConcreteTestLanguage.g:11:7: ( 'model' )
+            // PsiInternalConcreteTestLanguage.g:11:9: 'model'
             {
             match("model"); 
 
@@ -71,8 +71,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:12:7: ( ':' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:12:9: ':'
+            // PsiInternalConcreteTestLanguage.g:12:7: ( ':' )
+            // PsiInternalConcreteTestLanguage.g:12:9: ':'
             {
             match(':'); 
 
@@ -91,8 +91,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:13:7: ( 'overriddenelement' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:13:9: 'overriddenelement'
+            // PsiInternalConcreteTestLanguage.g:13:7: ( 'overriddenelement' )
+            // PsiInternalConcreteTestLanguage.g:13:9: 'overriddenelement'
             {
             match("overriddenelement"); 
 
@@ -112,8 +112,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:14:7: ( 'overridden other element' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:14:9: 'overridden other element'
+            // PsiInternalConcreteTestLanguage.g:14:7: ( 'overridden other element' )
+            // PsiInternalConcreteTestLanguage.g:14:9: 'overridden other element'
             {
             match("overridden other element"); 
 
@@ -133,8 +133,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:15:7: ( '-' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:15:9: '-'
+            // PsiInternalConcreteTestLanguage.g:15:7: ( '-' )
+            // PsiInternalConcreteTestLanguage.g:15:9: '-'
             {
             match('-'); 
 
@@ -153,8 +153,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:16:7: ( 'subrule1' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:16:9: 'subrule1'
+            // PsiInternalConcreteTestLanguage.g:16:7: ( 'subrule1' )
+            // PsiInternalConcreteTestLanguage.g:16:9: 'subrule1'
             {
             match("subrule1"); 
 
@@ -174,8 +174,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:17:7: ( 'subrule3' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:17:9: 'subrule3'
+            // PsiInternalConcreteTestLanguage.g:17:7: ( 'subrule3' )
+            // PsiInternalConcreteTestLanguage.g:17:9: 'subrule3'
             {
             match("subrule3"); 
 
@@ -195,8 +195,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:18:7: ( 'element' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:18:9: 'element'
+            // PsiInternalConcreteTestLanguage.g:18:7: ( 'element' )
+            // PsiInternalConcreteTestLanguage.g:18:9: 'element'
             {
             match("element"); 
 
@@ -216,8 +216,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:19:7: ( 'overridemodel' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:19:9: 'overridemodel'
+            // PsiInternalConcreteTestLanguage.g:19:7: ( 'overridemodel' )
+            // PsiInternalConcreteTestLanguage.g:19:9: 'overridemodel'
             {
             match("overridemodel"); 
 
@@ -237,8 +237,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:20:7: ( 'extendedmodel' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:20:9: 'extendedmodel'
+            // PsiInternalConcreteTestLanguage.g:20:7: ( 'extendedmodel' )
+            // PsiInternalConcreteTestLanguage.g:20:9: 'extendedmodel'
             {
             match("extendedmodel"); 
 
@@ -258,8 +258,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_REAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:510:11: ( RULE_INT '.' RULE_INT )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:510:13: RULE_INT '.' RULE_INT
+            // PsiInternalConcreteTestLanguage.g:510:11: ( RULE_INT '.' RULE_INT )
+            // PsiInternalConcreteTestLanguage.g:510:13: RULE_INT '.' RULE_INT
             {
             mRULE_INT(); 
             match('.'); 
@@ -280,10 +280,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:512:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:512:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalConcreteTestLanguage.g:512:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalConcreteTestLanguage.g:512:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '\\u00F6' | '\\u00E4' | '\\u00FC' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:512:11: ( '^' )?
+            // PsiInternalConcreteTestLanguage.g:512:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -292,7 +292,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:512:11: '^'
+                    // PsiInternalConcreteTestLanguage.g:512:11: '^'
                     {
                     match('^'); 
 
@@ -310,7 +310,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:512:67: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalConcreteTestLanguage.g:512:67: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -323,7 +323,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:
+            	    // PsiInternalConcreteTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -359,10 +359,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:514:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:514:12: ( '0' .. '9' )+
+            // PsiInternalConcreteTestLanguage.g:514:10: ( ( '0' .. '9' )+ )
+            // PsiInternalConcreteTestLanguage.g:514:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:514:12: ( '0' .. '9' )+
+            // PsiInternalConcreteTestLanguage.g:514:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -376,7 +376,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:514:13: '0' .. '9'
+            	    // PsiInternalConcreteTestLanguage.g:514:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -408,10 +408,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalConcreteTestLanguage.g:516:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalConcreteTestLanguage.g:516:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalConcreteTestLanguage.g:516:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -429,10 +429,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalConcreteTestLanguage.g:516:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalConcreteTestLanguage.g:516:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -448,7 +448,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:21: '\\\\' .
+                    	    // PsiInternalConcreteTestLanguage.g:516:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -456,7 +456,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalConcreteTestLanguage.g:516:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -481,10 +481,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalConcreteTestLanguage.g:516:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalConcreteTestLanguage.g:516:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -500,7 +500,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:54: '\\\\' .
+                    	    // PsiInternalConcreteTestLanguage.g:516:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -508,7 +508,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:516:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalConcreteTestLanguage.g:516:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -551,12 +551,12 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:518:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:518:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalConcreteTestLanguage.g:518:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalConcreteTestLanguage.g:518:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:518:24: ( options {greedy=false; } : . )*
+            // PsiInternalConcreteTestLanguage.g:518:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -581,7 +581,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:518:52: .
+            	    // PsiInternalConcreteTestLanguage.g:518:52: .
             	    {
             	    matchAny(); 
 
@@ -611,12 +611,12 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalConcreteTestLanguage.g:520:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalConcreteTestLanguage.g:520:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalConcreteTestLanguage.g:520:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -629,7 +629,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalConcreteTestLanguage.g:520:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -649,7 +649,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalConcreteTestLanguage.g:520:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -658,9 +658,9 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:41: ( '\\r' )? '\\n'
+                    // PsiInternalConcreteTestLanguage.g:520:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:41: ( '\\r' )?
+                    // PsiInternalConcreteTestLanguage.g:520:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -669,7 +669,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:520:41: '\\r'
+                            // PsiInternalConcreteTestLanguage.g:520:41: '\\r'
                             {
                             match('\r'); 
 
@@ -701,10 +701,10 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:522:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:522:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalConcreteTestLanguage.g:522:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalConcreteTestLanguage.g:522:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:522:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalConcreteTestLanguage.g:522:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -718,7 +718,7 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:
+            	    // PsiInternalConcreteTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -758,8 +758,8 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:524:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:524:18: .
+            // PsiInternalConcreteTestLanguage.g:524:16: ( . )
+            // PsiInternalConcreteTestLanguage.g:524:18: .
             {
             matchAny(); 
 
@@ -774,131 +774,131 @@ public class PsiInternalConcreteTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_REAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalConcreteTestLanguage.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | RULE_REAL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=18;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:10: T__12
+                // PsiInternalConcreteTestLanguage.g:1:10: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:16: T__13
+                // PsiInternalConcreteTestLanguage.g:1:16: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:22: T__14
+                // PsiInternalConcreteTestLanguage.g:1:22: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:28: T__15
+                // PsiInternalConcreteTestLanguage.g:1:28: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:34: T__16
+                // PsiInternalConcreteTestLanguage.g:1:34: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:40: T__17
+                // PsiInternalConcreteTestLanguage.g:1:40: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:46: T__18
+                // PsiInternalConcreteTestLanguage.g:1:46: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:52: T__19
+                // PsiInternalConcreteTestLanguage.g:1:52: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:58: T__20
+                // PsiInternalConcreteTestLanguage.g:1:58: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:64: T__21
+                // PsiInternalConcreteTestLanguage.g:1:64: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:70: RULE_REAL
+                // PsiInternalConcreteTestLanguage.g:1:70: RULE_REAL
                 {
                 mRULE_REAL(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:80: RULE_ID
+                // PsiInternalConcreteTestLanguage.g:1:80: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:88: RULE_INT
+                // PsiInternalConcreteTestLanguage.g:1:88: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:97: RULE_STRING
+                // PsiInternalConcreteTestLanguage.g:1:97: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:109: RULE_ML_COMMENT
+                // PsiInternalConcreteTestLanguage.g:1:109: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 16 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:125: RULE_SL_COMMENT
+                // PsiInternalConcreteTestLanguage.g:1:125: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 17 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:141: RULE_WS
+                // PsiInternalConcreteTestLanguage.g:1:141: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 18 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalConcreteTestLanguage.g:1:149: RULE_ANY_OTHER
+                // PsiInternalConcreteTestLanguage.g:1:149: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

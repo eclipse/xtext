@@ -45,15 +45,15 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g"; }
+    public String getGrammarFileName() { return "InternalParametersTestLanguageExLexer.g"; }
 
     // $ANTLR start "Keyword"
     public final void mKeyword() throws RecognitionException {
         try {
             int _type = Keyword;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:19:9: ( 'keyword' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:19:11: 'keyword'
+            // InternalParametersTestLanguageExLexer.g:19:9: ( 'keyword' )
+            // InternalParametersTestLanguageExLexer.g:19:11: 'keyword'
             {
             match("keyword"); 
 
@@ -73,8 +73,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitOneDigitZero;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:21:29: ( '#10' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:21:31: '#10'
+            // InternalParametersTestLanguageExLexer.g:21:29: ( '#10' )
+            // InternalParametersTestLanguageExLexer.g:21:31: '#10'
             {
             match("#10"); 
 
@@ -94,8 +94,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitOneDigitOne;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:23:28: ( '#11' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:23:30: '#11'
+            // InternalParametersTestLanguageExLexer.g:23:28: ( '#11' )
+            // InternalParametersTestLanguageExLexer.g:23:30: '#11'
             {
             match("#11"); 
 
@@ -115,8 +115,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitOneDigitTwo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:25:28: ( '#12' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:25:30: '#12'
+            // InternalParametersTestLanguageExLexer.g:25:28: ( '#12' )
+            // InternalParametersTestLanguageExLexer.g:25:30: '#12'
             {
             match("#12"); 
 
@@ -136,8 +136,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitOne;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:27:20: ( '#1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:27:22: '#1'
+            // InternalParametersTestLanguageExLexer.g:27:20: ( '#1' )
+            // InternalParametersTestLanguageExLexer.g:27:22: '#1'
             {
             match("#1"); 
 
@@ -157,8 +157,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitTwo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:29:20: ( '#2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:29:22: '#2'
+            // InternalParametersTestLanguageExLexer.g:29:20: ( '#2' )
+            // InternalParametersTestLanguageExLexer.g:29:22: '#2'
             {
             match("#2"); 
 
@@ -178,8 +178,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitThree;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:31:22: ( '#3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:31:24: '#3'
+            // InternalParametersTestLanguageExLexer.g:31:22: ( '#3' )
+            // InternalParametersTestLanguageExLexer.g:31:24: '#3'
             {
             match("#3"); 
 
@@ -199,8 +199,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitFour;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:33:21: ( '#4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:33:23: '#4'
+            // InternalParametersTestLanguageExLexer.g:33:21: ( '#4' )
+            // InternalParametersTestLanguageExLexer.g:33:23: '#4'
             {
             match("#4"); 
 
@@ -220,8 +220,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitFive;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:35:21: ( '#5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:35:23: '#5'
+            // InternalParametersTestLanguageExLexer.g:35:21: ( '#5' )
+            // InternalParametersTestLanguageExLexer.g:35:23: '#5'
             {
             match("#5"); 
 
@@ -241,8 +241,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitSix;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:37:20: ( '#6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:37:22: '#6'
+            // InternalParametersTestLanguageExLexer.g:37:20: ( '#6' )
+            // InternalParametersTestLanguageExLexer.g:37:22: '#6'
             {
             match("#6"); 
 
@@ -262,8 +262,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitSeven;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:39:22: ( '#7' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:39:24: '#7'
+            // InternalParametersTestLanguageExLexer.g:39:22: ( '#7' )
+            // InternalParametersTestLanguageExLexer.g:39:24: '#7'
             {
             match("#7"); 
 
@@ -283,8 +283,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitEight;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:41:22: ( '#8' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:41:24: '#8'
+            // InternalParametersTestLanguageExLexer.g:41:22: ( '#8' )
+            // InternalParametersTestLanguageExLexer.g:41:24: '#8'
             {
             match("#8"); 
 
@@ -304,8 +304,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = NumberSignDigitNine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:43:21: ( '#9' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:43:23: '#9'
+            // InternalParametersTestLanguageExLexer.g:43:21: ( '#9' )
+            // InternalParametersTestLanguageExLexer.g:43:23: '#9'
             {
             match("#9"); 
 
@@ -325,10 +325,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:47:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:47:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalParametersTestLanguageExLexer.g:47:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalParametersTestLanguageExLexer.g:47:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:47:11: ( '^' )?
+            // InternalParametersTestLanguageExLexer.g:47:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -337,7 +337,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:47:11: '^'
+                    // InternalParametersTestLanguageExLexer.g:47:11: '^'
                     {
                     match('^'); 
 
@@ -355,7 +355,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:47:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalParametersTestLanguageExLexer.g:47:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -368,7 +368,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:
+            	    // InternalParametersTestLanguageExLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -404,10 +404,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:49:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:49:12: ( '0' .. '9' )+
+            // InternalParametersTestLanguageExLexer.g:49:10: ( ( '0' .. '9' )+ )
+            // InternalParametersTestLanguageExLexer.g:49:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:49:12: ( '0' .. '9' )+
+            // InternalParametersTestLanguageExLexer.g:49:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -421,7 +421,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:49:13: '0' .. '9'
+            	    // InternalParametersTestLanguageExLexer.g:49:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -453,10 +453,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalParametersTestLanguageExLexer.g:51:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalParametersTestLanguageExLexer.g:51:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalParametersTestLanguageExLexer.g:51:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -474,10 +474,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalParametersTestLanguageExLexer.g:51:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalParametersTestLanguageExLexer.g:51:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -493,7 +493,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:21: '\\\\' .
+                    	    // InternalParametersTestLanguageExLexer.g:51:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -501,7 +501,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalParametersTestLanguageExLexer.g:51:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -526,10 +526,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalParametersTestLanguageExLexer.g:51:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalParametersTestLanguageExLexer.g:51:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -545,7 +545,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:54: '\\\\' .
+                    	    // InternalParametersTestLanguageExLexer.g:51:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -553,7 +553,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:51:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalParametersTestLanguageExLexer.g:51:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -596,12 +596,12 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:53:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:53:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalParametersTestLanguageExLexer.g:53:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalParametersTestLanguageExLexer.g:53:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:53:24: ( options {greedy=false; } : . )*
+            // InternalParametersTestLanguageExLexer.g:53:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -626,7 +626,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:53:52: .
+            	    // InternalParametersTestLanguageExLexer.g:53:52: .
             	    {
             	    matchAny(); 
 
@@ -656,12 +656,12 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalParametersTestLanguageExLexer.g:55:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalParametersTestLanguageExLexer.g:55:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalParametersTestLanguageExLexer.g:55:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -674,7 +674,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalParametersTestLanguageExLexer.g:55:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -694,7 +694,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:40: ( ( '\\r' )? '\\n' )?
+            // InternalParametersTestLanguageExLexer.g:55:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -703,9 +703,9 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:41: ( '\\r' )? '\\n'
+                    // InternalParametersTestLanguageExLexer.g:55:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:41: ( '\\r' )?
+                    // InternalParametersTestLanguageExLexer.g:55:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -714,7 +714,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:55:41: '\\r'
+                            // InternalParametersTestLanguageExLexer.g:55:41: '\\r'
                             {
                             match('\r'); 
 
@@ -746,10 +746,10 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:57:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:57:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalParametersTestLanguageExLexer.g:57:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalParametersTestLanguageExLexer.g:57:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:57:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalParametersTestLanguageExLexer.g:57:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -763,7 +763,7 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:
+            	    // InternalParametersTestLanguageExLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -803,8 +803,8 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:59:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:59:18: .
+            // InternalParametersTestLanguageExLexer.g:59:16: ( . )
+            // InternalParametersTestLanguageExLexer.g:59:18: .
             {
             matchAny(); 
 
@@ -819,145 +819,145 @@ public class InternalParametersTestLanguageExLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:8: ( Keyword | NumberSignDigitOneDigitZero | NumberSignDigitOneDigitOne | NumberSignDigitOneDigitTwo | NumberSignDigitOne | NumberSignDigitTwo | NumberSignDigitThree | NumberSignDigitFour | NumberSignDigitFive | NumberSignDigitSix | NumberSignDigitSeven | NumberSignDigitEight | NumberSignDigitNine | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalParametersTestLanguageExLexer.g:1:8: ( Keyword | NumberSignDigitOneDigitZero | NumberSignDigitOneDigitOne | NumberSignDigitOneDigitTwo | NumberSignDigitOne | NumberSignDigitTwo | NumberSignDigitThree | NumberSignDigitFour | NumberSignDigitFive | NumberSignDigitSix | NumberSignDigitSeven | NumberSignDigitEight | NumberSignDigitNine | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=20;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:10: Keyword
+                // InternalParametersTestLanguageExLexer.g:1:10: Keyword
                 {
                 mKeyword(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:18: NumberSignDigitOneDigitZero
+                // InternalParametersTestLanguageExLexer.g:1:18: NumberSignDigitOneDigitZero
                 {
                 mNumberSignDigitOneDigitZero(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:46: NumberSignDigitOneDigitOne
+                // InternalParametersTestLanguageExLexer.g:1:46: NumberSignDigitOneDigitOne
                 {
                 mNumberSignDigitOneDigitOne(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:73: NumberSignDigitOneDigitTwo
+                // InternalParametersTestLanguageExLexer.g:1:73: NumberSignDigitOneDigitTwo
                 {
                 mNumberSignDigitOneDigitTwo(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:100: NumberSignDigitOne
+                // InternalParametersTestLanguageExLexer.g:1:100: NumberSignDigitOne
                 {
                 mNumberSignDigitOne(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:119: NumberSignDigitTwo
+                // InternalParametersTestLanguageExLexer.g:1:119: NumberSignDigitTwo
                 {
                 mNumberSignDigitTwo(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:138: NumberSignDigitThree
+                // InternalParametersTestLanguageExLexer.g:1:138: NumberSignDigitThree
                 {
                 mNumberSignDigitThree(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:159: NumberSignDigitFour
+                // InternalParametersTestLanguageExLexer.g:1:159: NumberSignDigitFour
                 {
                 mNumberSignDigitFour(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:179: NumberSignDigitFive
+                // InternalParametersTestLanguageExLexer.g:1:179: NumberSignDigitFive
                 {
                 mNumberSignDigitFive(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:199: NumberSignDigitSix
+                // InternalParametersTestLanguageExLexer.g:1:199: NumberSignDigitSix
                 {
                 mNumberSignDigitSix(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:218: NumberSignDigitSeven
+                // InternalParametersTestLanguageExLexer.g:1:218: NumberSignDigitSeven
                 {
                 mNumberSignDigitSeven(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:239: NumberSignDigitEight
+                // InternalParametersTestLanguageExLexer.g:1:239: NumberSignDigitEight
                 {
                 mNumberSignDigitEight(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:260: NumberSignDigitNine
+                // InternalParametersTestLanguageExLexer.g:1:260: NumberSignDigitNine
                 {
                 mNumberSignDigitNine(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:280: RULE_ID
+                // InternalParametersTestLanguageExLexer.g:1:280: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:288: RULE_INT
+                // InternalParametersTestLanguageExLexer.g:1:288: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:297: RULE_STRING
+                // InternalParametersTestLanguageExLexer.g:1:297: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:309: RULE_ML_COMMENT
+                // InternalParametersTestLanguageExLexer.g:1:309: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:325: RULE_SL_COMMENT
+                // InternalParametersTestLanguageExLexer.g:1:325: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:341: RULE_WS
+                // InternalParametersTestLanguageExLexer.g:1:341: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/lexer/InternalParametersTestLanguageExLexer.g:1:349: RULE_ANY_OTHER
+                // InternalParametersTestLanguageExLexer.g:1:349: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

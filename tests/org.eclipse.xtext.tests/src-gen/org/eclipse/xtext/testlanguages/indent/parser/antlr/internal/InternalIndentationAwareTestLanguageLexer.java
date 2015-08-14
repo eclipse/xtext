@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalIndentationAwareTestLanguageLexer extends Lexer {
-    public static final int RULE_END=6;
     public static final int RULE_OTHER=7;
+    public static final int RULE_END=6;
     public static final int RULE_BEGIN=5;
     public static final int RULE_NL=4;
     public static final int EOF=-1;
@@ -29,17 +29,17 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalIndentationAwareTestLanguage.g"; }
 
     // $ANTLR start "RULE_NL"
     public final void mRULE_NL() throws RecognitionException {
         try {
             int _type = RULE_NL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:224:9: ( ( '\\r' | '\\n' )+ ( '\\t' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:224:11: ( '\\r' | '\\n' )+ ( '\\t' )*
+            // InternalIndentationAwareTestLanguage.g:224:9: ( ( '\\r' | '\\n' )+ ( '\\t' )* )
+            // InternalIndentationAwareTestLanguage.g:224:11: ( '\\r' | '\\n' )+ ( '\\t' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:224:11: ( '\\r' | '\\n' )+
+            // InternalIndentationAwareTestLanguage.g:224:11: ( '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -53,7 +53,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:
+            	    // InternalIndentationAwareTestLanguage.g:
             	    {
             	    if ( input.LA(1)=='\n'||input.LA(1)=='\r' ) {
             	        input.consume();
@@ -77,7 +77,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                 cnt1++;
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:224:24: ( '\\t' )*
+            // InternalIndentationAwareTestLanguage.g:224:24: ( '\\t' )*
             loop2:
             do {
                 int alt2=2;
@@ -90,7 +90,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:224:24: '\\t'
+            	    // InternalIndentationAwareTestLanguage.g:224:24: '\\t'
             	    {
             	    match('\t'); 
 
@@ -118,8 +118,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_BEGIN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:226:12: ( '{' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:226:14: '{'
+            // InternalIndentationAwareTestLanguage.g:226:12: ( '{' )
+            // InternalIndentationAwareTestLanguage.g:226:14: '{'
             {
             match('{'); 
 
@@ -138,8 +138,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_END;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:228:10: ( '}' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:228:12: '}'
+            // InternalIndentationAwareTestLanguage.g:228:10: ( '}' )
+            // InternalIndentationAwareTestLanguage.g:228:12: '}'
             {
             match('}'); 
 
@@ -158,8 +158,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:230:12: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:230:14: .
+            // InternalIndentationAwareTestLanguage.g:230:12: ( . )
+            // InternalIndentationAwareTestLanguage.g:230:14: .
             {
             matchAny(); 
 
@@ -174,7 +174,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:1:8: ( RULE_NL | RULE_BEGIN | RULE_END | RULE_OTHER )
+        // InternalIndentationAwareTestLanguage.g:1:8: ( RULE_NL | RULE_BEGIN | RULE_END | RULE_OTHER )
         int alt3=4;
         int LA3_0 = input.LA(1);
 
@@ -195,28 +195,28 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         }
         switch (alt3) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:1:10: RULE_NL
+                // InternalIndentationAwareTestLanguage.g:1:10: RULE_NL
                 {
                 mRULE_NL(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:1:18: RULE_BEGIN
+                // InternalIndentationAwareTestLanguage.g:1:18: RULE_BEGIN
                 {
                 mRULE_BEGIN(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:1:29: RULE_END
+                // InternalIndentationAwareTestLanguage.g:1:29: RULE_END
                 {
                 mRULE_END(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/testlanguages/indent/parser/antlr/internal/InternalIndentationAwareTestLanguage.g:1:38: RULE_OTHER
+                // InternalIndentationAwareTestLanguage.g:1:38: RULE_OTHER
                 {
                 mRULE_OTHER(); 
 

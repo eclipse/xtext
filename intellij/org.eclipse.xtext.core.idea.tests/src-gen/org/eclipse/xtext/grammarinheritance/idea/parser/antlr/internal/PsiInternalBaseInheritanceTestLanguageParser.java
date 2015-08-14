@@ -44,7 +44,7 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
         
 
     public String[] getTokenNames() { return PsiInternalBaseInheritanceTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalBaseInheritanceTestLanguage.g"; }
 
 
 
@@ -68,19 +68,19 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalBaseInheritanceTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalBaseInheritanceTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalBaseInheritanceTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -97,35 +97,35 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // PsiInternalBaseInheritanceTestLanguage.g:58:1: ruleModel : (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:58:10: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:58:10: ( (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:60:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:59:2: (otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:60:3: otherlv_0= 'model' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getModel_ModelKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel76); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBaseInheritanceTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/grammarinheritance/idea/parser/antlr/internal/PsiInternalBaseInheritanceTestLanguage.g:69:5: lv_name_1_0= RULE_ID
+            // PsiInternalBaseInheritanceTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalBaseInheritanceTestLanguage.g:69:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getModel_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel103); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -159,10 +159,9 @@ public class PsiInternalBaseInheritanceTestLanguageParser extends AbstractPsiAnt
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel76 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel103 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

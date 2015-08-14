@@ -103,15 +103,15 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBacktrackingContentAssistTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11:7: ( '.' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:11:9: '.'
+            // InternalBacktrackingContentAssistTestLanguage.g:11:7: ( '.' )
+            // InternalBacktrackingContentAssistTestLanguage.g:11:9: '.'
             {
             match('.'); 
 
@@ -130,8 +130,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12:7: ( '->' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:12:9: '->'
+            // InternalBacktrackingContentAssistTestLanguage.g:12:7: ( '->' )
+            // InternalBacktrackingContentAssistTestLanguage.g:12:9: '->'
             {
             match("->"); 
 
@@ -151,8 +151,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13:7: ( '^^' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:13:9: '^^'
+            // InternalBacktrackingContentAssistTestLanguage.g:13:7: ( '^^' )
+            // InternalBacktrackingContentAssistTestLanguage.g:13:9: '^^'
             {
             match("^^"); 
 
@@ -172,8 +172,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14:7: ( '^' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14:9: '^'
+            // InternalBacktrackingContentAssistTestLanguage.g:14:7: ( '^' )
+            // InternalBacktrackingContentAssistTestLanguage.g:14:9: '^'
             {
             match('^'); 
 
@@ -192,8 +192,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:15:7: ( 'e' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:15:9: 'e'
+            // InternalBacktrackingContentAssistTestLanguage.g:15:7: ( 'e' )
+            // InternalBacktrackingContentAssistTestLanguage.g:15:9: 'e'
             {
             match('e'); 
 
@@ -212,8 +212,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:16:7: ( 'E' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:16:9: 'E'
+            // InternalBacktrackingContentAssistTestLanguage.g:16:7: ( 'E' )
+            // InternalBacktrackingContentAssistTestLanguage.g:16:9: 'E'
             {
             match('E'); 
 
@@ -232,8 +232,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:17:7: ( '+' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:17:9: '+'
+            // InternalBacktrackingContentAssistTestLanguage.g:17:7: ( '+' )
+            // InternalBacktrackingContentAssistTestLanguage.g:17:9: '+'
             {
             match('+'); 
 
@@ -252,8 +252,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:18:7: ( '-' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:18:9: '-'
+            // InternalBacktrackingContentAssistTestLanguage.g:18:7: ( '-' )
+            // InternalBacktrackingContentAssistTestLanguage.g:18:9: '-'
             {
             match('-'); 
 
@@ -272,8 +272,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:19:7: ( 'Boolean' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:19:9: 'Boolean'
+            // InternalBacktrackingContentAssistTestLanguage.g:19:7: ( 'Boolean' )
+            // InternalBacktrackingContentAssistTestLanguage.g:19:9: 'Boolean'
             {
             match("Boolean"); 
 
@@ -293,8 +293,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:20:7: ( 'Integer' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:20:9: 'Integer'
+            // InternalBacktrackingContentAssistTestLanguage.g:20:7: ( 'Integer' )
+            // InternalBacktrackingContentAssistTestLanguage.g:20:9: 'Integer'
             {
             match("Integer"); 
 
@@ -314,8 +314,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:21:7: ( 'Real' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:21:9: 'Real'
+            // InternalBacktrackingContentAssistTestLanguage.g:21:7: ( 'Real' )
+            // InternalBacktrackingContentAssistTestLanguage.g:21:9: 'Real'
             {
             match("Real"); 
 
@@ -335,8 +335,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:22:7: ( 'String' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:22:9: 'String'
+            // InternalBacktrackingContentAssistTestLanguage.g:22:7: ( 'String' )
+            // InternalBacktrackingContentAssistTestLanguage.g:22:9: 'String'
             {
             match("String"); 
 
@@ -356,8 +356,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:23:7: ( 'UnlimitedNatural' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:23:9: 'UnlimitedNatural'
+            // InternalBacktrackingContentAssistTestLanguage.g:23:7: ( 'UnlimitedNatural' )
+            // InternalBacktrackingContentAssistTestLanguage.g:23:9: 'UnlimitedNatural'
             {
             match("UnlimitedNatural"); 
 
@@ -377,8 +377,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:24:7: ( 'OclAny' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:24:9: 'OclAny'
+            // InternalBacktrackingContentAssistTestLanguage.g:24:7: ( 'OclAny' )
+            // InternalBacktrackingContentAssistTestLanguage.g:24:9: 'OclAny'
             {
             match("OclAny"); 
 
@@ -398,8 +398,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:25:7: ( 'OclInvalid' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:25:9: 'OclInvalid'
+            // InternalBacktrackingContentAssistTestLanguage.g:25:7: ( 'OclInvalid' )
+            // InternalBacktrackingContentAssistTestLanguage.g:25:9: 'OclInvalid'
             {
             match("OclInvalid"); 
 
@@ -419,8 +419,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:26:7: ( 'OclVoid' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:26:9: 'OclVoid'
+            // InternalBacktrackingContentAssistTestLanguage.g:26:7: ( 'OclVoid' )
+            // InternalBacktrackingContentAssistTestLanguage.g:26:9: 'OclVoid'
             {
             match("OclVoid"); 
 
@@ -440,8 +440,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:27:7: ( 'Set' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:27:9: 'Set'
+            // InternalBacktrackingContentAssistTestLanguage.g:27:7: ( 'Set' )
+            // InternalBacktrackingContentAssistTestLanguage.g:27:9: 'Set'
             {
             match("Set"); 
 
@@ -461,8 +461,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:28:7: ( 'Bag' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:28:9: 'Bag'
+            // InternalBacktrackingContentAssistTestLanguage.g:28:7: ( 'Bag' )
+            // InternalBacktrackingContentAssistTestLanguage.g:28:9: 'Bag'
             {
             match("Bag"); 
 
@@ -482,8 +482,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:29:7: ( 'Sequence' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:29:9: 'Sequence'
+            // InternalBacktrackingContentAssistTestLanguage.g:29:7: ( 'Sequence' )
+            // InternalBacktrackingContentAssistTestLanguage.g:29:9: 'Sequence'
             {
             match("Sequence"); 
 
@@ -503,8 +503,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:30:7: ( 'Collection' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:30:9: 'Collection'
+            // InternalBacktrackingContentAssistTestLanguage.g:30:7: ( 'Collection' )
+            // InternalBacktrackingContentAssistTestLanguage.g:30:9: 'Collection'
             {
             match("Collection"); 
 
@@ -524,8 +524,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:31:7: ( 'OrderedSet' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:31:9: 'OrderedSet'
+            // InternalBacktrackingContentAssistTestLanguage.g:31:7: ( 'OrderedSet' )
+            // InternalBacktrackingContentAssistTestLanguage.g:31:9: 'OrderedSet'
             {
             match("OrderedSet"); 
 
@@ -545,8 +545,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:32:7: ( 'false' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:32:9: 'false'
+            // InternalBacktrackingContentAssistTestLanguage.g:32:7: ( 'false' )
+            // InternalBacktrackingContentAssistTestLanguage.g:32:9: 'false'
             {
             match("false"); 
 
@@ -566,8 +566,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:33:7: ( '=' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:33:9: '='
+            // InternalBacktrackingContentAssistTestLanguage.g:33:7: ( '=' )
+            // InternalBacktrackingContentAssistTestLanguage.g:33:9: '='
             {
             match('='); 
 
@@ -586,8 +586,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:34:7: ( '<>' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:34:9: '<>'
+            // InternalBacktrackingContentAssistTestLanguage.g:34:7: ( '<>' )
+            // InternalBacktrackingContentAssistTestLanguage.g:34:9: '<>'
             {
             match("<>"); 
 
@@ -607,8 +607,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:35:7: ( '>' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:35:9: '>'
+            // InternalBacktrackingContentAssistTestLanguage.g:35:7: ( '>' )
+            // InternalBacktrackingContentAssistTestLanguage.g:35:9: '>'
             {
             match('>'); 
 
@@ -627,8 +627,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:36:7: ( '<' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:36:9: '<'
+            // InternalBacktrackingContentAssistTestLanguage.g:36:7: ( '<' )
+            // InternalBacktrackingContentAssistTestLanguage.g:36:9: '<'
             {
             match('<'); 
 
@@ -647,8 +647,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:37:7: ( '>=' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:37:9: '>='
+            // InternalBacktrackingContentAssistTestLanguage.g:37:7: ( '>=' )
+            // InternalBacktrackingContentAssistTestLanguage.g:37:9: '>='
             {
             match(">="); 
 
@@ -668,8 +668,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:38:7: ( '<=' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:38:9: '<='
+            // InternalBacktrackingContentAssistTestLanguage.g:38:7: ( '<=' )
+            // InternalBacktrackingContentAssistTestLanguage.g:38:9: '<='
             {
             match("<="); 
 
@@ -689,8 +689,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:39:7: ( '*' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:39:9: '*'
+            // InternalBacktrackingContentAssistTestLanguage.g:39:7: ( '*' )
+            // InternalBacktrackingContentAssistTestLanguage.g:39:9: '*'
             {
             match('*'); 
 
@@ -709,8 +709,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:40:7: ( '/' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:40:9: '/'
+            // InternalBacktrackingContentAssistTestLanguage.g:40:7: ( '/' )
+            // InternalBacktrackingContentAssistTestLanguage.g:40:9: '/'
             {
             match('/'); 
 
@@ -729,8 +729,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:41:7: ( 'not' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:41:9: 'not'
+            // InternalBacktrackingContentAssistTestLanguage.g:41:7: ( 'not' )
+            // InternalBacktrackingContentAssistTestLanguage.g:41:9: 'not'
             {
             match("not"); 
 
@@ -750,8 +750,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:42:7: ( 'body' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:42:9: 'body'
+            // InternalBacktrackingContentAssistTestLanguage.g:42:7: ( 'body' )
+            // InternalBacktrackingContentAssistTestLanguage.g:42:9: 'body'
             {
             match("body"); 
 
@@ -771,8 +771,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:43:7: ( ':' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:43:9: ':'
+            // InternalBacktrackingContentAssistTestLanguage.g:43:7: ( ':' )
+            // InternalBacktrackingContentAssistTestLanguage.g:43:9: ':'
             {
             match(':'); 
 
@@ -791,8 +791,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:44:7: ( 'context' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:44:9: 'context'
+            // InternalBacktrackingContentAssistTestLanguage.g:44:7: ( 'context' )
+            // InternalBacktrackingContentAssistTestLanguage.g:44:9: 'context'
             {
             match("context"); 
 
@@ -812,8 +812,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:45:7: ( 'def' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:45:9: 'def'
+            // InternalBacktrackingContentAssistTestLanguage.g:45:7: ( 'def' )
+            // InternalBacktrackingContentAssistTestLanguage.g:45:9: 'def'
             {
             match("def"); 
 
@@ -833,8 +833,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:46:7: ( '(' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:46:9: '('
+            // InternalBacktrackingContentAssistTestLanguage.g:46:7: ( '(' )
+            // InternalBacktrackingContentAssistTestLanguage.g:46:9: '('
             {
             match('('); 
 
@@ -853,8 +853,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:47:7: ( ')' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:47:9: ')'
+            // InternalBacktrackingContentAssistTestLanguage.g:47:7: ( ')' )
+            // InternalBacktrackingContentAssistTestLanguage.g:47:9: ')'
             {
             match(')'); 
 
@@ -873,8 +873,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:48:7: ( ',' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:48:9: ','
+            // InternalBacktrackingContentAssistTestLanguage.g:48:7: ( ',' )
+            // InternalBacktrackingContentAssistTestLanguage.g:48:9: ','
             {
             match(','); 
 
@@ -893,8 +893,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:49:7: ( 'derive' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:49:9: 'derive'
+            // InternalBacktrackingContentAssistTestLanguage.g:49:7: ( 'derive' )
+            // InternalBacktrackingContentAssistTestLanguage.g:49:9: 'derive'
             {
             match("derive"); 
 
@@ -914,8 +914,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:50:7: ( 'init' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:50:9: 'init'
+            // InternalBacktrackingContentAssistTestLanguage.g:50:7: ( 'init' )
+            // InternalBacktrackingContentAssistTestLanguage.g:50:9: 'init'
             {
             match("init"); 
 
@@ -935,8 +935,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:51:7: ( 'inv' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:51:9: 'inv'
+            // InternalBacktrackingContentAssistTestLanguage.g:51:7: ( 'inv' )
+            // InternalBacktrackingContentAssistTestLanguage.g:51:9: 'inv'
             {
             match("inv"); 
 
@@ -956,8 +956,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:52:7: ( 'package' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:52:9: 'package'
+            // InternalBacktrackingContentAssistTestLanguage.g:52:7: ( 'package' )
+            // InternalBacktrackingContentAssistTestLanguage.g:52:9: 'package'
             {
             match("package"); 
 
@@ -977,8 +977,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:53:7: ( 'endpackage' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:53:9: 'endpackage'
+            // InternalBacktrackingContentAssistTestLanguage.g:53:7: ( 'endpackage' )
+            // InternalBacktrackingContentAssistTestLanguage.g:53:9: 'endpackage'
             {
             match("endpackage"); 
 
@@ -998,8 +998,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:54:7: ( 'post' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:54:9: 'post'
+            // InternalBacktrackingContentAssistTestLanguage.g:54:7: ( 'post' )
+            // InternalBacktrackingContentAssistTestLanguage.g:54:9: 'post'
             {
             match("post"); 
 
@@ -1019,8 +1019,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:55:7: ( 'pre' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:55:9: 'pre'
+            // InternalBacktrackingContentAssistTestLanguage.g:55:7: ( 'pre' )
+            // InternalBacktrackingContentAssistTestLanguage.g:55:9: 'pre'
             {
             match("pre"); 
 
@@ -1040,8 +1040,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:56:7: ( '::' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:56:9: '::'
+            // InternalBacktrackingContentAssistTestLanguage.g:56:7: ( '::' )
+            // InternalBacktrackingContentAssistTestLanguage.g:56:9: '::'
             {
             match("::"); 
 
@@ -1061,8 +1061,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:57:7: ( '?' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:57:9: '?'
+            // InternalBacktrackingContentAssistTestLanguage.g:57:7: ( '?' )
+            // InternalBacktrackingContentAssistTestLanguage.g:57:9: '?'
             {
             match('?'); 
 
@@ -1081,8 +1081,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:58:7: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:58:9: '{'
+            // InternalBacktrackingContentAssistTestLanguage.g:58:7: ( '{' )
+            // InternalBacktrackingContentAssistTestLanguage.g:58:9: '{'
             {
             match('{'); 
 
@@ -1101,8 +1101,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:59:7: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:59:9: '}'
+            // InternalBacktrackingContentAssistTestLanguage.g:59:7: ( '}' )
+            // InternalBacktrackingContentAssistTestLanguage.g:59:9: '}'
             {
             match('}'); 
 
@@ -1121,8 +1121,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:60:7: ( '..' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:60:9: '..'
+            // InternalBacktrackingContentAssistTestLanguage.g:60:7: ( '..' )
+            // InternalBacktrackingContentAssistTestLanguage.g:60:9: '..'
             {
             match(".."); 
 
@@ -1142,8 +1142,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:61:7: ( 'Tuple' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:61:9: 'Tuple'
+            // InternalBacktrackingContentAssistTestLanguage.g:61:7: ( 'Tuple' )
+            // InternalBacktrackingContentAssistTestLanguage.g:61:9: 'Tuple'
             {
             match("Tuple"); 
 
@@ -1163,8 +1163,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:62:7: ( 'invalid' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:62:9: 'invalid'
+            // InternalBacktrackingContentAssistTestLanguage.g:62:7: ( 'invalid' )
+            // InternalBacktrackingContentAssistTestLanguage.g:62:9: 'invalid'
             {
             match("invalid"); 
 
@@ -1184,8 +1184,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:63:7: ( 'null' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:63:9: 'null'
+            // InternalBacktrackingContentAssistTestLanguage.g:63:7: ( 'null' )
+            // InternalBacktrackingContentAssistTestLanguage.g:63:9: 'null'
             {
             match("null"); 
 
@@ -1205,8 +1205,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:64:7: ( '@' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:64:9: '@'
+            // InternalBacktrackingContentAssistTestLanguage.g:64:7: ( '@' )
+            // InternalBacktrackingContentAssistTestLanguage.g:64:9: '@'
             {
             match('@'); 
 
@@ -1225,8 +1225,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:65:7: ( '|' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:65:9: '|'
+            // InternalBacktrackingContentAssistTestLanguage.g:65:7: ( '|' )
+            // InternalBacktrackingContentAssistTestLanguage.g:65:9: '|'
             {
             match('|'); 
 
@@ -1245,8 +1245,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:66:7: ( ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:66:9: ';'
+            // InternalBacktrackingContentAssistTestLanguage.g:66:7: ( ';' )
+            // InternalBacktrackingContentAssistTestLanguage.g:66:9: ';'
             {
             match(';'); 
 
@@ -1265,8 +1265,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:67:7: ( '[' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:67:9: '['
+            // InternalBacktrackingContentAssistTestLanguage.g:67:7: ( '[' )
+            // InternalBacktrackingContentAssistTestLanguage.g:67:9: '['
             {
             match('['); 
 
@@ -1285,8 +1285,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:68:7: ( ']' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:68:9: ']'
+            // InternalBacktrackingContentAssistTestLanguage.g:68:7: ( ']' )
+            // InternalBacktrackingContentAssistTestLanguage.g:68:9: ']'
             {
             match(']'); 
 
@@ -1305,8 +1305,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__69;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:69:7: ( 'self' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:69:9: 'self'
+            // InternalBacktrackingContentAssistTestLanguage.g:69:7: ( 'self' )
+            // InternalBacktrackingContentAssistTestLanguage.g:69:9: 'self'
             {
             match("self"); 
 
@@ -1326,8 +1326,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__70;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:70:7: ( 'if' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:70:9: 'if'
+            // InternalBacktrackingContentAssistTestLanguage.g:70:7: ( 'if' )
+            // InternalBacktrackingContentAssistTestLanguage.g:70:9: 'if'
             {
             match("if"); 
 
@@ -1347,8 +1347,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__71;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:71:7: ( 'then' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:71:9: 'then'
+            // InternalBacktrackingContentAssistTestLanguage.g:71:7: ( 'then' )
+            // InternalBacktrackingContentAssistTestLanguage.g:71:9: 'then'
             {
             match("then"); 
 
@@ -1368,8 +1368,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__72;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:72:7: ( 'else' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:72:9: 'else'
+            // InternalBacktrackingContentAssistTestLanguage.g:72:7: ( 'else' )
+            // InternalBacktrackingContentAssistTestLanguage.g:72:9: 'else'
             {
             match("else"); 
 
@@ -1389,8 +1389,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__73;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:73:7: ( 'endif' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:73:9: 'endif'
+            // InternalBacktrackingContentAssistTestLanguage.g:73:7: ( 'endif' )
+            // InternalBacktrackingContentAssistTestLanguage.g:73:9: 'endif'
             {
             match("endif"); 
 
@@ -1410,8 +1410,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__74;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:74:7: ( 'let' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:74:9: 'let'
+            // InternalBacktrackingContentAssistTestLanguage.g:74:7: ( 'let' )
+            // InternalBacktrackingContentAssistTestLanguage.g:74:9: 'let'
             {
             match("let"); 
 
@@ -1431,8 +1431,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__75;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:75:7: ( 'in' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:75:9: 'in'
+            // InternalBacktrackingContentAssistTestLanguage.g:75:7: ( 'in' )
+            // InternalBacktrackingContentAssistTestLanguage.g:75:9: 'in'
             {
             match("in"); 
 
@@ -1452,8 +1452,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__76;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:76:7: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:76:9: 'static'
+            // InternalBacktrackingContentAssistTestLanguage.g:76:7: ( 'static' )
+            // InternalBacktrackingContentAssistTestLanguage.g:76:9: 'static'
             {
             match("static"); 
 
@@ -1473,8 +1473,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__77;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:77:7: ( 'true' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:77:9: 'true'
+            // InternalBacktrackingContentAssistTestLanguage.g:77:7: ( 'true' )
+            // InternalBacktrackingContentAssistTestLanguage.g:77:9: 'true'
             {
             match("true"); 
 
@@ -1494,8 +1494,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__78;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:78:7: ( 'implies' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:78:9: 'implies'
+            // InternalBacktrackingContentAssistTestLanguage.g:78:7: ( 'implies' )
+            // InternalBacktrackingContentAssistTestLanguage.g:78:9: 'implies'
             {
             match("implies"); 
 
@@ -1515,8 +1515,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__79;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:79:7: ( 'xor' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:79:9: 'xor'
+            // InternalBacktrackingContentAssistTestLanguage.g:79:7: ( 'xor' )
+            // InternalBacktrackingContentAssistTestLanguage.g:79:9: 'xor'
             {
             match("xor"); 
 
@@ -1536,8 +1536,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__80;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:80:7: ( 'or' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:80:9: 'or'
+            // InternalBacktrackingContentAssistTestLanguage.g:80:7: ( 'or' )
+            // InternalBacktrackingContentAssistTestLanguage.g:80:9: 'or'
             {
             match("or"); 
 
@@ -1557,8 +1557,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = T__81;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:81:7: ( 'and' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:81:9: 'and'
+            // InternalBacktrackingContentAssistTestLanguage.g:81:7: ( 'and' )
+            // InternalBacktrackingContentAssistTestLanguage.g:81:9: 'and'
             {
             match("and"); 
 
@@ -1578,10 +1578,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14652:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14652:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBacktrackingContentAssistTestLanguage.g:14652:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalBacktrackingContentAssistTestLanguage.g:14652:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14652:11: ( '^' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:14652:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1590,7 +1590,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14652:11: '^'
+                    // InternalBacktrackingContentAssistTestLanguage.g:14652:11: '^'
                     {
                     match('^'); 
 
@@ -1608,7 +1608,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14652:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalBacktrackingContentAssistTestLanguage.g:14652:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1621,7 +1621,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:
+            	    // InternalBacktrackingContentAssistTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -1657,10 +1657,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14654:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14654:12: ( '0' .. '9' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:14654:10: ( ( '0' .. '9' )+ )
+            // InternalBacktrackingContentAssistTestLanguage.g:14654:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14654:12: ( '0' .. '9' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:14654:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1674,7 +1674,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14654:13: '0' .. '9'
+            	    // InternalBacktrackingContentAssistTestLanguage.g:14654:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1706,10 +1706,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBacktrackingContentAssistTestLanguage.g:14656:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalBacktrackingContentAssistTestLanguage.g:14656:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalBacktrackingContentAssistTestLanguage.g:14656:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1727,10 +1727,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalBacktrackingContentAssistTestLanguage.g:14656:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalBacktrackingContentAssistTestLanguage.g:14656:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1746,7 +1746,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:21: '\\\\' .
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:14656:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1754,7 +1754,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:14656:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1779,10 +1779,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalBacktrackingContentAssistTestLanguage.g:14656:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalBacktrackingContentAssistTestLanguage.g:14656:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1798,7 +1798,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:54: '\\\\' .
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:14656:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1806,7 +1806,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14656:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalBacktrackingContentAssistTestLanguage.g:14656:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1849,12 +1849,12 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14658:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14658:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalBacktrackingContentAssistTestLanguage.g:14658:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalBacktrackingContentAssistTestLanguage.g:14658:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14658:24: ( options {greedy=false; } : . )*
+            // InternalBacktrackingContentAssistTestLanguage.g:14658:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1879,7 +1879,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14658:52: .
+            	    // InternalBacktrackingContentAssistTestLanguage.g:14658:52: .
             	    {
             	    matchAny(); 
 
@@ -1909,12 +1909,12 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:14660:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBacktrackingContentAssistTestLanguage.g:14660:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBacktrackingContentAssistTestLanguage.g:14660:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1927,7 +1927,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalBacktrackingContentAssistTestLanguage.g:14660:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1947,7 +1947,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:40: ( ( '\\r' )? '\\n' )?
+            // InternalBacktrackingContentAssistTestLanguage.g:14660:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1956,9 +1956,9 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:41: ( '\\r' )? '\\n'
+                    // InternalBacktrackingContentAssistTestLanguage.g:14660:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:41: ( '\\r' )?
+                    // InternalBacktrackingContentAssistTestLanguage.g:14660:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1967,7 +1967,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14660:41: '\\r'
+                            // InternalBacktrackingContentAssistTestLanguage.g:14660:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1999,10 +1999,10 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14662:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14662:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:14662:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBacktrackingContentAssistTestLanguage.g:14662:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14662:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBacktrackingContentAssistTestLanguage.g:14662:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -2016,7 +2016,7 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:
+            	    // InternalBacktrackingContentAssistTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -2056,8 +2056,8 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14664:16: ( . )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:14664:18: .
+            // InternalBacktrackingContentAssistTestLanguage.g:14664:16: ( . )
+            // InternalBacktrackingContentAssistTestLanguage.g:14664:18: .
             {
             matchAny(); 
 
@@ -2072,551 +2072,551 @@ public class InternalBacktrackingContentAssistTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalBacktrackingContentAssistTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | T__51 | T__52 | T__53 | T__54 | T__55 | T__56 | T__57 | T__58 | T__59 | T__60 | T__61 | T__62 | T__63 | T__64 | T__65 | T__66 | T__67 | T__68 | T__69 | T__70 | T__71 | T__72 | T__73 | T__74 | T__75 | T__76 | T__77 | T__78 | T__79 | T__80 | T__81 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=78;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:10: T__11
+                // InternalBacktrackingContentAssistTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:16: T__12
+                // InternalBacktrackingContentAssistTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:22: T__13
+                // InternalBacktrackingContentAssistTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:28: T__14
+                // InternalBacktrackingContentAssistTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:34: T__15
+                // InternalBacktrackingContentAssistTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:40: T__16
+                // InternalBacktrackingContentAssistTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:46: T__17
+                // InternalBacktrackingContentAssistTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:52: T__18
+                // InternalBacktrackingContentAssistTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:58: T__19
+                // InternalBacktrackingContentAssistTestLanguage.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:64: T__20
+                // InternalBacktrackingContentAssistTestLanguage.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:70: T__21
+                // InternalBacktrackingContentAssistTestLanguage.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:76: T__22
+                // InternalBacktrackingContentAssistTestLanguage.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:82: T__23
+                // InternalBacktrackingContentAssistTestLanguage.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:88: T__24
+                // InternalBacktrackingContentAssistTestLanguage.g:1:88: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:94: T__25
+                // InternalBacktrackingContentAssistTestLanguage.g:1:94: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:100: T__26
+                // InternalBacktrackingContentAssistTestLanguage.g:1:100: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:106: T__27
+                // InternalBacktrackingContentAssistTestLanguage.g:1:106: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:112: T__28
+                // InternalBacktrackingContentAssistTestLanguage.g:1:112: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:118: T__29
+                // InternalBacktrackingContentAssistTestLanguage.g:1:118: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:124: T__30
+                // InternalBacktrackingContentAssistTestLanguage.g:1:124: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:130: T__31
+                // InternalBacktrackingContentAssistTestLanguage.g:1:130: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:136: T__32
+                // InternalBacktrackingContentAssistTestLanguage.g:1:136: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:142: T__33
+                // InternalBacktrackingContentAssistTestLanguage.g:1:142: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:148: T__34
+                // InternalBacktrackingContentAssistTestLanguage.g:1:148: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:154: T__35
+                // InternalBacktrackingContentAssistTestLanguage.g:1:154: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:160: T__36
+                // InternalBacktrackingContentAssistTestLanguage.g:1:160: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:166: T__37
+                // InternalBacktrackingContentAssistTestLanguage.g:1:166: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:172: T__38
+                // InternalBacktrackingContentAssistTestLanguage.g:1:172: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:178: T__39
+                // InternalBacktrackingContentAssistTestLanguage.g:1:178: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 30 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:184: T__40
+                // InternalBacktrackingContentAssistTestLanguage.g:1:184: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 31 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:190: T__41
+                // InternalBacktrackingContentAssistTestLanguage.g:1:190: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 32 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:196: T__42
+                // InternalBacktrackingContentAssistTestLanguage.g:1:196: T__42
                 {
                 mT__42(); 
 
                 }
                 break;
             case 33 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:202: T__43
+                // InternalBacktrackingContentAssistTestLanguage.g:1:202: T__43
                 {
                 mT__43(); 
 
                 }
                 break;
             case 34 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:208: T__44
+                // InternalBacktrackingContentAssistTestLanguage.g:1:208: T__44
                 {
                 mT__44(); 
 
                 }
                 break;
             case 35 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:214: T__45
+                // InternalBacktrackingContentAssistTestLanguage.g:1:214: T__45
                 {
                 mT__45(); 
 
                 }
                 break;
             case 36 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:220: T__46
+                // InternalBacktrackingContentAssistTestLanguage.g:1:220: T__46
                 {
                 mT__46(); 
 
                 }
                 break;
             case 37 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:226: T__47
+                // InternalBacktrackingContentAssistTestLanguage.g:1:226: T__47
                 {
                 mT__47(); 
 
                 }
                 break;
             case 38 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:232: T__48
+                // InternalBacktrackingContentAssistTestLanguage.g:1:232: T__48
                 {
                 mT__48(); 
 
                 }
                 break;
             case 39 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:238: T__49
+                // InternalBacktrackingContentAssistTestLanguage.g:1:238: T__49
                 {
                 mT__49(); 
 
                 }
                 break;
             case 40 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:244: T__50
+                // InternalBacktrackingContentAssistTestLanguage.g:1:244: T__50
                 {
                 mT__50(); 
 
                 }
                 break;
             case 41 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:250: T__51
+                // InternalBacktrackingContentAssistTestLanguage.g:1:250: T__51
                 {
                 mT__51(); 
 
                 }
                 break;
             case 42 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:256: T__52
+                // InternalBacktrackingContentAssistTestLanguage.g:1:256: T__52
                 {
                 mT__52(); 
 
                 }
                 break;
             case 43 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:262: T__53
+                // InternalBacktrackingContentAssistTestLanguage.g:1:262: T__53
                 {
                 mT__53(); 
 
                 }
                 break;
             case 44 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:268: T__54
+                // InternalBacktrackingContentAssistTestLanguage.g:1:268: T__54
                 {
                 mT__54(); 
 
                 }
                 break;
             case 45 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:274: T__55
+                // InternalBacktrackingContentAssistTestLanguage.g:1:274: T__55
                 {
                 mT__55(); 
 
                 }
                 break;
             case 46 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:280: T__56
+                // InternalBacktrackingContentAssistTestLanguage.g:1:280: T__56
                 {
                 mT__56(); 
 
                 }
                 break;
             case 47 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:286: T__57
+                // InternalBacktrackingContentAssistTestLanguage.g:1:286: T__57
                 {
                 mT__57(); 
 
                 }
                 break;
             case 48 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:292: T__58
+                // InternalBacktrackingContentAssistTestLanguage.g:1:292: T__58
                 {
                 mT__58(); 
 
                 }
                 break;
             case 49 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:298: T__59
+                // InternalBacktrackingContentAssistTestLanguage.g:1:298: T__59
                 {
                 mT__59(); 
 
                 }
                 break;
             case 50 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:304: T__60
+                // InternalBacktrackingContentAssistTestLanguage.g:1:304: T__60
                 {
                 mT__60(); 
 
                 }
                 break;
             case 51 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:310: T__61
+                // InternalBacktrackingContentAssistTestLanguage.g:1:310: T__61
                 {
                 mT__61(); 
 
                 }
                 break;
             case 52 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:316: T__62
+                // InternalBacktrackingContentAssistTestLanguage.g:1:316: T__62
                 {
                 mT__62(); 
 
                 }
                 break;
             case 53 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:322: T__63
+                // InternalBacktrackingContentAssistTestLanguage.g:1:322: T__63
                 {
                 mT__63(); 
 
                 }
                 break;
             case 54 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:328: T__64
+                // InternalBacktrackingContentAssistTestLanguage.g:1:328: T__64
                 {
                 mT__64(); 
 
                 }
                 break;
             case 55 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:334: T__65
+                // InternalBacktrackingContentAssistTestLanguage.g:1:334: T__65
                 {
                 mT__65(); 
 
                 }
                 break;
             case 56 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:340: T__66
+                // InternalBacktrackingContentAssistTestLanguage.g:1:340: T__66
                 {
                 mT__66(); 
 
                 }
                 break;
             case 57 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:346: T__67
+                // InternalBacktrackingContentAssistTestLanguage.g:1:346: T__67
                 {
                 mT__67(); 
 
                 }
                 break;
             case 58 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:352: T__68
+                // InternalBacktrackingContentAssistTestLanguage.g:1:352: T__68
                 {
                 mT__68(); 
 
                 }
                 break;
             case 59 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:358: T__69
+                // InternalBacktrackingContentAssistTestLanguage.g:1:358: T__69
                 {
                 mT__69(); 
 
                 }
                 break;
             case 60 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:364: T__70
+                // InternalBacktrackingContentAssistTestLanguage.g:1:364: T__70
                 {
                 mT__70(); 
 
                 }
                 break;
             case 61 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:370: T__71
+                // InternalBacktrackingContentAssistTestLanguage.g:1:370: T__71
                 {
                 mT__71(); 
 
                 }
                 break;
             case 62 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:376: T__72
+                // InternalBacktrackingContentAssistTestLanguage.g:1:376: T__72
                 {
                 mT__72(); 
 
                 }
                 break;
             case 63 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:382: T__73
+                // InternalBacktrackingContentAssistTestLanguage.g:1:382: T__73
                 {
                 mT__73(); 
 
                 }
                 break;
             case 64 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:388: T__74
+                // InternalBacktrackingContentAssistTestLanguage.g:1:388: T__74
                 {
                 mT__74(); 
 
                 }
                 break;
             case 65 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:394: T__75
+                // InternalBacktrackingContentAssistTestLanguage.g:1:394: T__75
                 {
                 mT__75(); 
 
                 }
                 break;
             case 66 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:400: T__76
+                // InternalBacktrackingContentAssistTestLanguage.g:1:400: T__76
                 {
                 mT__76(); 
 
                 }
                 break;
             case 67 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:406: T__77
+                // InternalBacktrackingContentAssistTestLanguage.g:1:406: T__77
                 {
                 mT__77(); 
 
                 }
                 break;
             case 68 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:412: T__78
+                // InternalBacktrackingContentAssistTestLanguage.g:1:412: T__78
                 {
                 mT__78(); 
 
                 }
                 break;
             case 69 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:418: T__79
+                // InternalBacktrackingContentAssistTestLanguage.g:1:418: T__79
                 {
                 mT__79(); 
 
                 }
                 break;
             case 70 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:424: T__80
+                // InternalBacktrackingContentAssistTestLanguage.g:1:424: T__80
                 {
                 mT__80(); 
 
                 }
                 break;
             case 71 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:430: T__81
+                // InternalBacktrackingContentAssistTestLanguage.g:1:430: T__81
                 {
                 mT__81(); 
 
                 }
                 break;
             case 72 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:436: RULE_ID
+                // InternalBacktrackingContentAssistTestLanguage.g:1:436: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 73 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:444: RULE_INT
+                // InternalBacktrackingContentAssistTestLanguage.g:1:444: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 74 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:453: RULE_STRING
+                // InternalBacktrackingContentAssistTestLanguage.g:1:453: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 75 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:465: RULE_ML_COMMENT
+                // InternalBacktrackingContentAssistTestLanguage.g:1:465: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 76 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:481: RULE_SL_COMMENT
+                // InternalBacktrackingContentAssistTestLanguage.g:1:481: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 77 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:497: RULE_WS
+                // InternalBacktrackingContentAssistTestLanguage.g:1:497: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 78 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/ui/contentassist/antlr/internal/InternalBacktrackingContentAssistTestLanguage.g:1:505: RULE_ANY_OTHER
+                // InternalBacktrackingContentAssistTestLanguage.g:1:505: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
-    public static final int RULE_EDATE=6;
-    public static final int RULE_EDOUBLE=5;
-    public static final int T__10=10;
     public static final int RULE_EINT=4;
+    public static final int RULE_EDATE=6;
     public static final int RULE_WS=7;
     public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__8=8;
+    public static final int T__10=10;
+    public static final int RULE_EDOUBLE=5;
 
     // delegates
     // delegators
@@ -32,15 +32,15 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEcoreTerminalsTestLanguage.g"; }
 
     // $ANTLR start "T__8"
     public final void mT__8() throws RecognitionException {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:11:6: ( 'int' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:11:8: 'int'
+            // InternalEcoreTerminalsTestLanguage.g:11:6: ( 'int' )
+            // InternalEcoreTerminalsTestLanguage.g:11:8: 'int'
             {
             match("int"); 
 
@@ -60,8 +60,8 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:12:6: ( 'double' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:12:8: 'double'
+            // InternalEcoreTerminalsTestLanguage.g:12:6: ( 'double' )
+            // InternalEcoreTerminalsTestLanguage.g:12:8: 'double'
             {
             match("double"); 
 
@@ -81,8 +81,8 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:13:7: ( 'date' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:13:9: 'date'
+            // InternalEcoreTerminalsTestLanguage.g:13:7: ( 'date' )
+            // InternalEcoreTerminalsTestLanguage.g:13:9: 'date'
             {
             match("date"); 
 
@@ -102,10 +102,10 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EDOUBLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:14: ( ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
+            // InternalEcoreTerminalsTestLanguage.g:155:14: ( ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )? )
+            // InternalEcoreTerminalsTestLanguage.g:155:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* ) ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* )
+            // InternalEcoreTerminalsTestLanguage.g:155:16: ( '.' ( '0' .. '9' )+ | ( '0' .. '9' )+ '.' ( '0' .. '9' )* )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -123,10 +123,10 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:17: '.' ( '0' .. '9' )+
+                    // InternalEcoreTerminalsTestLanguage.g:155:17: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:21: ( '0' .. '9' )+
+                    // InternalEcoreTerminalsTestLanguage.g:155:21: ( '0' .. '9' )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -140,7 +140,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:22: '0' .. '9'
+                    	    // InternalEcoreTerminalsTestLanguage.g:155:22: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -160,9 +160,9 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:33: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
+                    // InternalEcoreTerminalsTestLanguage.g:155:33: ( '0' .. '9' )+ '.' ( '0' .. '9' )*
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:33: ( '0' .. '9' )+
+                    // InternalEcoreTerminalsTestLanguage.g:155:33: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -176,7 +176,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:34: '0' .. '9'
+                    	    // InternalEcoreTerminalsTestLanguage.g:155:34: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -193,7 +193,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     } while (true);
 
                     match('.'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:49: ( '0' .. '9' )*
+                    // InternalEcoreTerminalsTestLanguage.g:155:49: ( '0' .. '9' )*
                     loop3:
                     do {
                         int alt3=2;
@@ -206,7 +206,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:50: '0' .. '9'
+                    	    // InternalEcoreTerminalsTestLanguage.g:155:50: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -224,7 +224,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:62: ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
+            // InternalEcoreTerminalsTestLanguage.g:155:62: ( ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+ )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -233,7 +233,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:63: ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+
+                    // InternalEcoreTerminalsTestLanguage.g:155:63: ( 'E' | 'e' ) ( '-' | ( '+' )? ) ( '0' .. '9' )+
                     {
                     if ( input.LA(1)=='E'||input.LA(1)=='e' ) {
                         input.consume();
@@ -244,7 +244,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:73: ( '-' | ( '+' )? )
+                    // InternalEcoreTerminalsTestLanguage.g:155:73: ( '-' | ( '+' )? )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -262,16 +262,16 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:74: '-'
+                            // InternalEcoreTerminalsTestLanguage.g:155:74: '-'
                             {
                             match('-'); 
 
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:78: ( '+' )?
+                            // InternalEcoreTerminalsTestLanguage.g:155:78: ( '+' )?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:78: ( '+' )?
+                            // InternalEcoreTerminalsTestLanguage.g:155:78: ( '+' )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -280,7 +280,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:78: '+'
+                                    // InternalEcoreTerminalsTestLanguage.g:155:78: '+'
                                     {
                                     match('+'); 
 
@@ -295,7 +295,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:84: ( '0' .. '9' )+
+                    // InternalEcoreTerminalsTestLanguage.g:155:84: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -309,7 +309,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:155:85: '0' .. '9'
+                    	    // InternalEcoreTerminalsTestLanguage.g:155:85: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -347,8 +347,8 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EDATE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:157:12: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:157:14: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9'
+            // InternalEcoreTerminalsTestLanguage.g:157:12: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' )
+            // InternalEcoreTerminalsTestLanguage.g:157:14: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' '-' '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' ':' '0' .. '9' '0' .. '9' '.' '0' .. '9' '0' .. '9' '0' .. '9' ( '+' | '-' ) '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9'
             {
             matchRange('0','9'); 
             matchRange('0','9'); 
@@ -402,10 +402,10 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_EINT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:11: ( ( '-' )? ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:13: ( '-' )? ( '0' .. '9' )+
+            // InternalEcoreTerminalsTestLanguage.g:159:11: ( ( '-' )? ( '0' .. '9' )+ )
+            // InternalEcoreTerminalsTestLanguage.g:159:13: ( '-' )? ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:13: ( '-' )?
+            // InternalEcoreTerminalsTestLanguage.g:159:13: ( '-' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -414,7 +414,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:13: '-'
+                    // InternalEcoreTerminalsTestLanguage.g:159:13: '-'
                     {
                     match('-'); 
 
@@ -423,7 +423,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:18: ( '0' .. '9' )+
+            // InternalEcoreTerminalsTestLanguage.g:159:18: ( '0' .. '9' )+
             int cnt10=0;
             loop10:
             do {
@@ -437,7 +437,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:159:19: '0' .. '9'
+            	    // InternalEcoreTerminalsTestLanguage.g:159:19: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -469,10 +469,10 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:161:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:161:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcoreTerminalsTestLanguage.g:161:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEcoreTerminalsTestLanguage.g:161:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:161:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcoreTerminalsTestLanguage.g:161:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -486,7 +486,7 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:
+            	    // InternalEcoreTerminalsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -522,54 +522,54 @@ public class InternalEcoreTerminalsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_WS"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:8: ( T__8 | T__9 | T__10 | RULE_EDOUBLE | RULE_EDATE | RULE_EINT | RULE_WS )
+        // InternalEcoreTerminalsTestLanguage.g:1:8: ( T__8 | T__9 | T__10 | RULE_EDOUBLE | RULE_EDATE | RULE_EINT | RULE_WS )
         int alt12=7;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:10: T__8
+                // InternalEcoreTerminalsTestLanguage.g:1:10: T__8
                 {
                 mT__8(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:15: T__9
+                // InternalEcoreTerminalsTestLanguage.g:1:15: T__9
                 {
                 mT__9(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:20: T__10
+                // InternalEcoreTerminalsTestLanguage.g:1:20: T__10
                 {
                 mT__10(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:26: RULE_EDOUBLE
+                // InternalEcoreTerminalsTestLanguage.g:1:26: RULE_EDOUBLE
                 {
                 mRULE_EDOUBLE(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:39: RULE_EDATE
+                // InternalEcoreTerminalsTestLanguage.g:1:39: RULE_EDATE
                 {
                 mRULE_EDATE(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:50: RULE_EINT
+                // InternalEcoreTerminalsTestLanguage.g:1:50: RULE_EINT
                 {
                 mRULE_EINT(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalEcoreTerminalsTestLanguage.g:1:60: RULE_WS
+                // InternalEcoreTerminalsTestLanguage.g:1:60: RULE_WS
                 {
                 mRULE_WS(); 
 

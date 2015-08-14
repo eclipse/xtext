@@ -21,11 +21,11 @@ import org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.Reference
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl.ReferenceHolderImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl.ReferenceHolderImpl#getDefaultReference <em>Default Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -87,8 +87,7 @@ public class ReferenceHolderImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getName()
+  public String getName()
   {
     return name;
   }
@@ -98,8 +97,7 @@ public String getName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setName(String newName)
+  public void setName(String newName)
   {
     String oldName = name;
     name = newName;
@@ -112,8 +110,7 @@ public void setName(String newName)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public JvmType getDefaultReference()
+  public JvmType getDefaultReference()
   {
     if (defaultReference != null && defaultReference.eIsProxy())
     {
@@ -143,8 +140,7 @@ public JvmType getDefaultReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setDefaultReference(JvmType newDefaultReference)
+  public void setDefaultReference(JvmType newDefaultReference)
   {
     JvmType oldDefaultReference = defaultReference;
     defaultReference = newDefaultReference;

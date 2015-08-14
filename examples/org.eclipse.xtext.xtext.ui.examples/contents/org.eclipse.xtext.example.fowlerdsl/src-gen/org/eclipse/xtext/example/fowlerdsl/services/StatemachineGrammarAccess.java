@@ -19,7 +19,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class StatemachineElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statemachine");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.fowlerdsl.Statemachine.Statemachine");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cStatemachineAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -42,21 +42,27 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStatesStateParserRuleCall_4_0 = (RuleCall)cStatesAssignment_4.eContents().get(0);
 		
 		//Statemachine:
-		//	{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
-		//	commands+=Command+ "end")? states+=State*;
+		//	{Statemachine} ('events'
+		//	events+=Event+
+		//	'end')? ('resetEvents'
+		//	resetEvents+=[Event]+
+		//	'end')? ('commands'
+		//	commands+=Command+
+		//	'end')?
+		//	states+=State*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
-		//commands+=Command+ "end")? states+=State*
+		//{Statemachine} ('events' events+=Event+ 'end')? ('resetEvents' resetEvents+=[Event]+ 'end')? ('commands'
+		//commands+=Command+ 'end')? states+=State*
 		public Group getGroup() { return cGroup; }
 
 		//{Statemachine}
 		public Action getStatemachineAction_0() { return cStatemachineAction_0; }
 
-		//("events" events+=Event+ "end")?
+		//('events' events+=Event+ 'end')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"events"
+		//'events'
 		public Keyword getEventsKeyword_1_0() { return cEventsKeyword_1_0; }
 
 		//events+=Event+
@@ -65,13 +71,13 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//Event
 		public RuleCall getEventsEventParserRuleCall_1_1_0() { return cEventsEventParserRuleCall_1_1_0; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_1_2() { return cEndKeyword_1_2; }
 
-		//("resetEvents" resetEvents+=[Event]+ "end")?
+		//('resetEvents' resetEvents+=[Event]+ 'end')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"resetEvents"
+		//'resetEvents'
 		public Keyword getResetEventsKeyword_2_0() { return cResetEventsKeyword_2_0; }
 
 		//resetEvents+=[Event]+
@@ -83,13 +89,13 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getResetEventsEventIDTerminalRuleCall_2_1_0_1() { return cResetEventsEventIDTerminalRuleCall_2_1_0_1; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_2_2() { return cEndKeyword_2_2; }
 
-		//("commands" commands+=Command+ "end")?
+		//('commands' commands+=Command+ 'end')?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"commands"
+		//'commands'
 		public Keyword getCommandsKeyword_3_0() { return cCommandsKeyword_3_0; }
 
 		//commands+=Command+
@@ -98,7 +104,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//Command
 		public RuleCall getCommandsCommandParserRuleCall_3_1_0() { return cCommandsCommandParserRuleCall_3_1_0; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_3_2() { return cEndKeyword_3_2; }
 
 		//states+=State*
@@ -109,7 +115,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class EventElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Event");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.fowlerdsl.Statemachine.Event");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -137,7 +143,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class CommandElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Command");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.fowlerdsl.Statemachine.Command");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -165,7 +171,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class StateElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "State");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.fowlerdsl.Statemachine.State");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cStateKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -182,13 +188,15 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//State:
-		//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+		//	'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
+		//	transitions+=Transition*
+		//	'end';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end"
+		//'state' name=ID ('actions' '{' actions+=[Command]+ '}')? transitions+=Transition* 'end'
 		public Group getGroup() { return cGroup; }
 
-		//"state"
+		//'state'
 		public Keyword getStateKeyword_0() { return cStateKeyword_0; }
 
 		//name=ID
@@ -197,13 +205,13 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("actions" "{" actions+=[Command]+ "}")?
+		//('actions' '{' actions+=[Command]+ '}')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"actions"
+		//'actions'
 		public Keyword getActionsKeyword_2_0() { return cActionsKeyword_2_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2_1() { return cLeftCurlyBracketKeyword_2_1; }
 
 		//actions+=[Command]+
@@ -215,7 +223,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getActionsCommandIDTerminalRuleCall_2_2_0_1() { return cActionsCommandIDTerminalRuleCall_2_2_0_1; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_3() { return cRightCurlyBracketKeyword_2_3; }
 
 		//transitions+=Transition*
@@ -224,12 +232,12 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//Transition
 		public RuleCall getTransitionsTransitionParserRuleCall_3_0() { return cTransitionsTransitionParserRuleCall_3_0; }
 
-		//"end"
+		//'end'
 		public Keyword getEndKeyword_4() { return cEndKeyword_4; }
 	}
 
 	public class TransitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Transition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cEventAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cEventEventCrossReference_0_0 = (CrossReference)cEventAssignment_0.eContents().get(0);
@@ -240,10 +248,10 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStateStateIDTerminalRuleCall_2_0_1 = (RuleCall)cStateStateCrossReference_2_0.eContents().get(1);
 		
 		//Transition:
-		//	event=[Event] "=>" state=[State];
+		//	event=[Event] '=>' state=[State];
 		@Override public ParserRule getRule() { return rule; }
 
-		//event=[Event] "=>" state=[State]
+		//event=[Event] '=>' state=[State]
 		public Group getGroup() { return cGroup; }
 
 		//event=[Event]
@@ -255,7 +263,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getEventEventIDTerminalRuleCall_0_0_1() { return cEventEventIDTerminalRuleCall_0_0_1; }
 
-		//"=>"
+		//'=>'
 		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
 
 		//state=[State]
@@ -319,8 +327,14 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Statemachine:
-	//	{Statemachine} ("events" events+=Event+ "end")? ("resetEvents" resetEvents+=[Event]+ "end")? ("commands"
-	//	commands+=Command+ "end")? states+=State*;
+	//	{Statemachine} ('events'
+	//	events+=Event+
+	//	'end')? ('resetEvents'
+	//	resetEvents+=[Event]+
+	//	'end')? ('commands'
+	//	commands+=Command+
+	//	'end')?
+	//	states+=State*;
 	public StatemachineElements getStatemachineAccess() {
 		return pStatemachine;
 	}
@@ -350,7 +364,9 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//State:
-	//	"state" name=ID ("actions" "{" actions+=[Command]+ "}")? transitions+=Transition* "end";
+	//	'state' name=ID ('actions' '{' actions+=[Command]+ '}')?
+	//	transitions+=Transition*
+	//	'end';
 	public StateElements getStateAccess() {
 		return pState;
 	}
@@ -360,7 +376,7 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Transition:
-	//	event=[Event] "=>" state=[State];
+	//	event=[Event] '=>' state=[State];
 	public TransitionElements getTransitionAccess() {
 		return pTransition;
 	}
@@ -370,38 +386,38 @@ public class StatemachineGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"0".."9"+;
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

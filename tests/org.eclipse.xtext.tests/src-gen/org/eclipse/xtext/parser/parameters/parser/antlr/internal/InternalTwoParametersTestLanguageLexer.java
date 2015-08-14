@@ -45,15 +45,15 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalTwoParametersTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:11:7: ( '#1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:11:9: '#1'
+            // InternalTwoParametersTestLanguage.g:11:7: ( '#1' )
+            // InternalTwoParametersTestLanguage.g:11:9: '#1'
             {
             match("#1"); 
 
@@ -73,8 +73,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:12:7: ( '#2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:12:9: '#2'
+            // InternalTwoParametersTestLanguage.g:12:7: ( '#2' )
+            // InternalTwoParametersTestLanguage.g:12:9: '#2'
             {
             match("#2"); 
 
@@ -94,8 +94,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:13:7: ( '#3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:13:9: '#3'
+            // InternalTwoParametersTestLanguage.g:13:7: ( '#3' )
+            // InternalTwoParametersTestLanguage.g:13:9: '#3'
             {
             match("#3"); 
 
@@ -115,8 +115,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:14:7: ( '#4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:14:9: '#4'
+            // InternalTwoParametersTestLanguage.g:14:7: ( '#4' )
+            // InternalTwoParametersTestLanguage.g:14:9: '#4'
             {
             match("#4"); 
 
@@ -136,8 +136,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:15:7: ( '#5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:15:9: '#5'
+            // InternalTwoParametersTestLanguage.g:15:7: ( '#5' )
+            // InternalTwoParametersTestLanguage.g:15:9: '#5'
             {
             match("#5"); 
 
@@ -157,8 +157,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:16:7: ( '#6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:16:9: '#6'
+            // InternalTwoParametersTestLanguage.g:16:7: ( '#6' )
+            // InternalTwoParametersTestLanguage.g:16:9: '#6'
             {
             match("#6"); 
 
@@ -178,8 +178,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:17:7: ( '#7' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:17:9: '#7'
+            // InternalTwoParametersTestLanguage.g:17:7: ( '#7' )
+            // InternalTwoParametersTestLanguage.g:17:9: '#7'
             {
             match("#7"); 
 
@@ -199,8 +199,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:18:7: ( '#8' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:18:9: '#8'
+            // InternalTwoParametersTestLanguage.g:18:7: ( '#8' )
+            // InternalTwoParametersTestLanguage.g:18:9: '#8'
             {
             match("#8"); 
 
@@ -220,8 +220,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:19:7: ( '#9' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:19:9: '#9'
+            // InternalTwoParametersTestLanguage.g:19:7: ( '#9' )
+            // InternalTwoParametersTestLanguage.g:19:9: '#9'
             {
             match("#9"); 
 
@@ -241,8 +241,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:20:7: ( 'keyword' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:20:9: 'keyword'
+            // InternalTwoParametersTestLanguage.g:20:7: ( 'keyword' )
+            // InternalTwoParametersTestLanguage.g:20:9: 'keyword'
             {
             match("keyword"); 
 
@@ -262,8 +262,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:21:7: ( '#10' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:21:9: '#10'
+            // InternalTwoParametersTestLanguage.g:21:7: ( '#10' )
+            // InternalTwoParametersTestLanguage.g:21:9: '#10'
             {
             match("#10"); 
 
@@ -283,8 +283,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:22:7: ( '#11' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:22:9: '#11'
+            // InternalTwoParametersTestLanguage.g:22:7: ( '#11' )
+            // InternalTwoParametersTestLanguage.g:22:9: '#11'
             {
             match("#11"); 
 
@@ -304,8 +304,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:23:7: ( '#12' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:23:9: '#12'
+            // InternalTwoParametersTestLanguage.g:23:7: ( '#12' )
+            // InternalTwoParametersTestLanguage.g:23:9: '#12'
             {
             match("#12"); 
 
@@ -325,10 +325,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:771:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:771:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTwoParametersTestLanguage.g:771:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalTwoParametersTestLanguage.g:771:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:771:11: ( '^' )?
+            // InternalTwoParametersTestLanguage.g:771:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -337,7 +337,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:771:11: '^'
+                    // InternalTwoParametersTestLanguage.g:771:11: '^'
                     {
                     match('^'); 
 
@@ -355,7 +355,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:771:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTwoParametersTestLanguage.g:771:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -368,7 +368,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:
+            	    // InternalTwoParametersTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -404,10 +404,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:773:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:773:12: ( '0' .. '9' )+
+            // InternalTwoParametersTestLanguage.g:773:10: ( ( '0' .. '9' )+ )
+            // InternalTwoParametersTestLanguage.g:773:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:773:12: ( '0' .. '9' )+
+            // InternalTwoParametersTestLanguage.g:773:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -421,7 +421,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:773:13: '0' .. '9'
+            	    // InternalTwoParametersTestLanguage.g:773:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -453,10 +453,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTwoParametersTestLanguage.g:775:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalTwoParametersTestLanguage.g:775:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTwoParametersTestLanguage.g:775:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -474,10 +474,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalTwoParametersTestLanguage.g:775:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalTwoParametersTestLanguage.g:775:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -493,7 +493,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:21: '\\\\' .
+                    	    // InternalTwoParametersTestLanguage.g:775:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -501,7 +501,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalTwoParametersTestLanguage.g:775:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -526,10 +526,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalTwoParametersTestLanguage.g:775:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalTwoParametersTestLanguage.g:775:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -545,7 +545,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:54: '\\\\' .
+                    	    // InternalTwoParametersTestLanguage.g:775:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -553,7 +553,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:775:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalTwoParametersTestLanguage.g:775:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -596,12 +596,12 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:777:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:777:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalTwoParametersTestLanguage.g:777:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalTwoParametersTestLanguage.g:777:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:777:24: ( options {greedy=false; } : . )*
+            // InternalTwoParametersTestLanguage.g:777:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -626,7 +626,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:777:52: .
+            	    // InternalTwoParametersTestLanguage.g:777:52: .
             	    {
             	    matchAny(); 
 
@@ -656,12 +656,12 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalTwoParametersTestLanguage.g:779:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalTwoParametersTestLanguage.g:779:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalTwoParametersTestLanguage.g:779:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -674,7 +674,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalTwoParametersTestLanguage.g:779:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -694,7 +694,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:40: ( ( '\\r' )? '\\n' )?
+            // InternalTwoParametersTestLanguage.g:779:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -703,9 +703,9 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:41: ( '\\r' )? '\\n'
+                    // InternalTwoParametersTestLanguage.g:779:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:41: ( '\\r' )?
+                    // InternalTwoParametersTestLanguage.g:779:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -714,7 +714,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:779:41: '\\r'
+                            // InternalTwoParametersTestLanguage.g:779:41: '\\r'
                             {
                             match('\r'); 
 
@@ -746,10 +746,10 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:781:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:781:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTwoParametersTestLanguage.g:781:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalTwoParametersTestLanguage.g:781:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:781:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTwoParametersTestLanguage.g:781:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -763,7 +763,7 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:
+            	    // InternalTwoParametersTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -803,8 +803,8 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:783:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:783:18: .
+            // InternalTwoParametersTestLanguage.g:783:16: ( . )
+            // InternalTwoParametersTestLanguage.g:783:18: .
             {
             matchAny(); 
 
@@ -819,145 +819,145 @@ public class InternalTwoParametersTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalTwoParametersTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=20;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:10: T__11
+                // InternalTwoParametersTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:16: T__12
+                // InternalTwoParametersTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:22: T__13
+                // InternalTwoParametersTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:28: T__14
+                // InternalTwoParametersTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:34: T__15
+                // InternalTwoParametersTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:40: T__16
+                // InternalTwoParametersTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:46: T__17
+                // InternalTwoParametersTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:52: T__18
+                // InternalTwoParametersTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:58: T__19
+                // InternalTwoParametersTestLanguage.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:64: T__20
+                // InternalTwoParametersTestLanguage.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:70: T__21
+                // InternalTwoParametersTestLanguage.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:76: T__22
+                // InternalTwoParametersTestLanguage.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:82: T__23
+                // InternalTwoParametersTestLanguage.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:88: RULE_ID
+                // InternalTwoParametersTestLanguage.g:1:88: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:96: RULE_INT
+                // InternalTwoParametersTestLanguage.g:1:96: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:105: RULE_STRING
+                // InternalTwoParametersTestLanguage.g:1:105: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:117: RULE_ML_COMMENT
+                // InternalTwoParametersTestLanguage.g:1:117: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:133: RULE_SL_COMMENT
+                // InternalTwoParametersTestLanguage.g:1:133: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:149: RULE_WS
+                // InternalTwoParametersTestLanguage.g:1:149: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalTwoParametersTestLanguage.g:1:157: RULE_ANY_OTHER
+                // InternalTwoParametersTestLanguage.g:1:157: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

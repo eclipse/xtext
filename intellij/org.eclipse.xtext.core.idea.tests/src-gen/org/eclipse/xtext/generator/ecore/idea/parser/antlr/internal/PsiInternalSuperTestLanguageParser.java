@@ -44,7 +44,7 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
         
 
     public String[] getTokenNames() { return PsiInternalSuperTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalSuperTestLanguage.g"; }
 
 
 
@@ -68,19 +68,19 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "entryRuleSuperMain"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:52:1: entryRuleSuperMain : ruleSuperMain EOF ;
+    // PsiInternalSuperTestLanguage.g:52:1: entryRuleSuperMain : ruleSuperMain EOF ;
     public final void entryRuleSuperMain() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:52:19: ( ruleSuperMain EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:53:2: ruleSuperMain EOF
+            // PsiInternalSuperTestLanguage.g:52:19: ( ruleSuperMain EOF )
+            // PsiInternalSuperTestLanguage.g:53:2: ruleSuperMain EOF
             {
              markComposite(elementTypeProvider.getSuperMainElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSuperMain_in_entryRuleSuperMain54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleSuperMain();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSuperMain57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -97,35 +97,35 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "ruleSuperMain"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:58:1: ruleSuperMain : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // PsiInternalSuperTestLanguage.g:58:1: ruleSuperMain : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final void ruleSuperMain() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:58:14: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSuperTestLanguage.g:58:14: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:60:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSuperTestLanguage.g:59:2: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // PsiInternalSuperTestLanguage.g:60:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
 
             			markLeaf(elementTypeProvider.getSuperMain_SuperKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleSuperMain76); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSuperTestLanguage.g:67:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/generator/ecore/idea/parser/antlr/internal/PsiInternalSuperTestLanguage.g:69:5: lv_name_1_0= RULE_ID
+            // PsiInternalSuperTestLanguage.g:68:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalSuperTestLanguage.g:69:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getSuperMain_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSuperMain103); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -159,10 +159,9 @@ public class PsiInternalSuperTestLanguageParser extends AbstractPsiAntlrParser {
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleSuperMain_in_entryRuleSuperMain54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSuperMain57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleSuperMain76 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSuperMain103 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

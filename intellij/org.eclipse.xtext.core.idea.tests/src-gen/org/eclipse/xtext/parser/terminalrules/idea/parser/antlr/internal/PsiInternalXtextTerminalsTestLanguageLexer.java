@@ -63,15 +63,15 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalXtextTerminalsTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:11:7: ( 'grammar' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:11:9: 'grammar'
+            // PsiInternalXtextTerminalsTestLanguage.g:11:7: ( 'grammar' )
+            // PsiInternalXtextTerminalsTestLanguage.g:11:9: 'grammar'
             {
             match("grammar"); 
 
@@ -91,8 +91,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:12:7: ( 'with' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:12:9: 'with'
+            // PsiInternalXtextTerminalsTestLanguage.g:12:7: ( 'with' )
+            // PsiInternalXtextTerminalsTestLanguage.g:12:9: 'with'
             {
             match("with"); 
 
@@ -112,8 +112,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:13:7: ( ',' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:13:9: ','
+            // PsiInternalXtextTerminalsTestLanguage.g:13:7: ( ',' )
+            // PsiInternalXtextTerminalsTestLanguage.g:13:9: ','
             {
             match(','); 
 
@@ -132,8 +132,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:14:7: ( 'hidden' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:14:9: 'hidden'
+            // PsiInternalXtextTerminalsTestLanguage.g:14:7: ( 'hidden' )
+            // PsiInternalXtextTerminalsTestLanguage.g:14:9: 'hidden'
             {
             match("hidden"); 
 
@@ -153,8 +153,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:15:7: ( '(' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:15:9: '('
+            // PsiInternalXtextTerminalsTestLanguage.g:15:7: ( '(' )
+            // PsiInternalXtextTerminalsTestLanguage.g:15:9: '('
             {
             match('('); 
 
@@ -173,8 +173,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:16:7: ( ')' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:16:9: ')'
+            // PsiInternalXtextTerminalsTestLanguage.g:16:7: ( ')' )
+            // PsiInternalXtextTerminalsTestLanguage.g:16:9: ')'
             {
             match(')'); 
 
@@ -193,8 +193,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:17:7: ( '.' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:17:9: '.'
+            // PsiInternalXtextTerminalsTestLanguage.g:17:7: ( '.' )
+            // PsiInternalXtextTerminalsTestLanguage.g:17:9: '.'
             {
             match('.'); 
 
@@ -213,8 +213,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:18:7: ( 'generate' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:18:9: 'generate'
+            // PsiInternalXtextTerminalsTestLanguage.g:18:7: ( 'generate' )
+            // PsiInternalXtextTerminalsTestLanguage.g:18:9: 'generate'
             {
             match("generate"); 
 
@@ -234,8 +234,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:19:7: ( 'as' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:19:9: 'as'
+            // PsiInternalXtextTerminalsTestLanguage.g:19:7: ( 'as' )
+            // PsiInternalXtextTerminalsTestLanguage.g:19:9: 'as'
             {
             match("as"); 
 
@@ -255,8 +255,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:20:7: ( 'import' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:20:9: 'import'
+            // PsiInternalXtextTerminalsTestLanguage.g:20:7: ( 'import' )
+            // PsiInternalXtextTerminalsTestLanguage.g:20:9: 'import'
             {
             match("import"); 
 
@@ -276,8 +276,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:21:7: ( 'returns' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:21:9: 'returns'
+            // PsiInternalXtextTerminalsTestLanguage.g:21:7: ( 'returns' )
+            // PsiInternalXtextTerminalsTestLanguage.g:21:9: 'returns'
             {
             match("returns"); 
 
@@ -297,8 +297,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:22:7: ( ':' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:22:9: ':'
+            // PsiInternalXtextTerminalsTestLanguage.g:22:7: ( ':' )
+            // PsiInternalXtextTerminalsTestLanguage.g:22:9: ':'
             {
             match(':'); 
 
@@ -317,8 +317,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:23:7: ( ';' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:23:9: ';'
+            // PsiInternalXtextTerminalsTestLanguage.g:23:7: ( ';' )
+            // PsiInternalXtextTerminalsTestLanguage.g:23:9: ';'
             {
             match(';'); 
 
@@ -337,8 +337,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:24:7: ( '::' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:24:9: '::'
+            // PsiInternalXtextTerminalsTestLanguage.g:24:7: ( '::' )
+            // PsiInternalXtextTerminalsTestLanguage.g:24:9: '::'
             {
             match("::"); 
 
@@ -358,8 +358,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:25:7: ( '|' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:25:9: '|'
+            // PsiInternalXtextTerminalsTestLanguage.g:25:7: ( '|' )
+            // PsiInternalXtextTerminalsTestLanguage.g:25:9: '|'
             {
             match('|'); 
 
@@ -378,8 +378,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:26:7: ( '?' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:26:9: '?'
+            // PsiInternalXtextTerminalsTestLanguage.g:26:7: ( '?' )
+            // PsiInternalXtextTerminalsTestLanguage.g:26:9: '?'
             {
             match('?'); 
 
@@ -398,8 +398,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:27:7: ( '*' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:27:9: '*'
+            // PsiInternalXtextTerminalsTestLanguage.g:27:7: ( '*' )
+            // PsiInternalXtextTerminalsTestLanguage.g:27:9: '*'
             {
             match('*'); 
 
@@ -418,8 +418,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:28:7: ( '+' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:28:9: '+'
+            // PsiInternalXtextTerminalsTestLanguage.g:28:7: ( '+' )
+            // PsiInternalXtextTerminalsTestLanguage.g:28:9: '+'
             {
             match('+'); 
 
@@ -438,8 +438,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:29:7: ( '{' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:29:9: '{'
+            // PsiInternalXtextTerminalsTestLanguage.g:29:7: ( '{' )
+            // PsiInternalXtextTerminalsTestLanguage.g:29:9: '{'
             {
             match('{'); 
 
@@ -458,8 +458,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:30:7: ( '=' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:30:9: '='
+            // PsiInternalXtextTerminalsTestLanguage.g:30:7: ( '=' )
+            // PsiInternalXtextTerminalsTestLanguage.g:30:9: '='
             {
             match('='); 
 
@@ -478,8 +478,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:31:7: ( '+=' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:31:9: '+='
+            // PsiInternalXtextTerminalsTestLanguage.g:31:7: ( '+=' )
+            // PsiInternalXtextTerminalsTestLanguage.g:31:9: '+='
             {
             match("+="); 
 
@@ -499,8 +499,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:32:7: ( 'current' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:32:9: 'current'
+            // PsiInternalXtextTerminalsTestLanguage.g:32:7: ( 'current' )
+            // PsiInternalXtextTerminalsTestLanguage.g:32:9: 'current'
             {
             match("current"); 
 
@@ -520,8 +520,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:33:7: ( '}' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:33:9: '}'
+            // PsiInternalXtextTerminalsTestLanguage.g:33:7: ( '}' )
+            // PsiInternalXtextTerminalsTestLanguage.g:33:9: '}'
             {
             match('}'); 
 
@@ -540,8 +540,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:34:7: ( '?=' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:34:9: '?='
+            // PsiInternalXtextTerminalsTestLanguage.g:34:7: ( '?=' )
+            // PsiInternalXtextTerminalsTestLanguage.g:34:9: '?='
             {
             match("?="); 
 
@@ -561,8 +561,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:35:7: ( '[' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:35:9: '['
+            // PsiInternalXtextTerminalsTestLanguage.g:35:7: ( '[' )
+            // PsiInternalXtextTerminalsTestLanguage.g:35:9: '['
             {
             match('['); 
 
@@ -581,8 +581,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:36:7: ( ']' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:36:9: ']'
+            // PsiInternalXtextTerminalsTestLanguage.g:36:7: ( ']' )
+            // PsiInternalXtextTerminalsTestLanguage.g:36:9: ']'
             {
             match(']'); 
 
@@ -601,8 +601,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:37:7: ( 'terminal' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:37:9: 'terminal'
+            // PsiInternalXtextTerminalsTestLanguage.g:37:7: ( 'terminal' )
+            // PsiInternalXtextTerminalsTestLanguage.g:37:9: 'terminal'
             {
             match("terminal"); 
 
@@ -622,8 +622,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:38:7: ( '!' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:38:9: '!'
+            // PsiInternalXtextTerminalsTestLanguage.g:38:7: ( '!' )
+            // PsiInternalXtextTerminalsTestLanguage.g:38:9: '!'
             {
             match('!'); 
 
@@ -642,8 +642,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:39:7: ( '->' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:39:9: '->'
+            // PsiInternalXtextTerminalsTestLanguage.g:39:7: ( '->' )
+            // PsiInternalXtextTerminalsTestLanguage.g:39:9: '->'
             {
             match("->"); 
 
@@ -663,8 +663,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:40:7: ( '..' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:40:9: '..'
+            // PsiInternalXtextTerminalsTestLanguage.g:40:7: ( '..' )
+            // PsiInternalXtextTerminalsTestLanguage.g:40:9: '..'
             {
             match(".."); 
 
@@ -684,8 +684,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:41:7: ( 'enum' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:41:9: 'enum'
+            // PsiInternalXtextTerminalsTestLanguage.g:41:7: ( 'enum' )
+            // PsiInternalXtextTerminalsTestLanguage.g:41:9: 'enum'
             {
             match("enum"); 
 
@@ -705,10 +705,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1831:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1831:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalXtextTerminalsTestLanguage.g:1831:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalXtextTerminalsTestLanguage.g:1831:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1831:11: ( '^' )?
+            // PsiInternalXtextTerminalsTestLanguage.g:1831:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -717,7 +717,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1831:11: '^'
+                    // PsiInternalXtextTerminalsTestLanguage.g:1831:11: '^'
                     {
                     match('^'); 
 
@@ -735,7 +735,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1831:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalXtextTerminalsTestLanguage.g:1831:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -748,7 +748,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:
+            	    // PsiInternalXtextTerminalsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -784,10 +784,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1833:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1833:12: ( '0' .. '9' )+
+            // PsiInternalXtextTerminalsTestLanguage.g:1833:10: ( ( '0' .. '9' )+ )
+            // PsiInternalXtextTerminalsTestLanguage.g:1833:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1833:12: ( '0' .. '9' )+
+            // PsiInternalXtextTerminalsTestLanguage.g:1833:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -801,7 +801,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1833:13: '0' .. '9'
+            	    // PsiInternalXtextTerminalsTestLanguage.g:1833:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -833,10 +833,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalXtextTerminalsTestLanguage.g:1835:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalXtextTerminalsTestLanguage.g:1835:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalXtextTerminalsTestLanguage.g:1835:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -854,10 +854,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalXtextTerminalsTestLanguage.g:1835:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalXtextTerminalsTestLanguage.g:1835:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -873,7 +873,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // PsiInternalXtextTerminalsTestLanguage.g:1835:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -889,7 +889,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalXtextTerminalsTestLanguage.g:1835:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -914,10 +914,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalXtextTerminalsTestLanguage.g:1835:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalXtextTerminalsTestLanguage.g:1835:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -933,7 +933,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // PsiInternalXtextTerminalsTestLanguage.g:1835:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -949,7 +949,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1835:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalXtextTerminalsTestLanguage.g:1835:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -992,12 +992,12 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1837:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1837:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalXtextTerminalsTestLanguage.g:1837:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalXtextTerminalsTestLanguage.g:1837:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1837:24: ( options {greedy=false; } : . )*
+            // PsiInternalXtextTerminalsTestLanguage.g:1837:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1022,7 +1022,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1837:52: .
+            	    // PsiInternalXtextTerminalsTestLanguage.g:1837:52: .
             	    {
             	    matchAny(); 
 
@@ -1052,12 +1052,12 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalXtextTerminalsTestLanguage.g:1839:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalXtextTerminalsTestLanguage.g:1839:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalXtextTerminalsTestLanguage.g:1839:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1070,7 +1070,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalXtextTerminalsTestLanguage.g:1839:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1090,7 +1090,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalXtextTerminalsTestLanguage.g:1839:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1099,9 +1099,9 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:41: ( '\\r' )? '\\n'
+                    // PsiInternalXtextTerminalsTestLanguage.g:1839:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:41: ( '\\r' )?
+                    // PsiInternalXtextTerminalsTestLanguage.g:1839:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1110,7 +1110,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1839:41: '\\r'
+                            // PsiInternalXtextTerminalsTestLanguage.g:1839:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1142,10 +1142,10 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1841:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalXtextTerminalsTestLanguage.g:1841:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalXtextTerminalsTestLanguage.g:1841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalXtextTerminalsTestLanguage.g:1841:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1159,7 +1159,7 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:
+            	    // PsiInternalXtextTerminalsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1199,8 +1199,8 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1843:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1843:18: .
+            // PsiInternalXtextTerminalsTestLanguage.g:1843:16: ( . )
+            // PsiInternalXtextTerminalsTestLanguage.g:1843:18: .
             {
             matchAny(); 
 
@@ -1215,271 +1215,271 @@ public class PsiInternalXtextTerminalsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalXtextTerminalsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=38;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:10: T__11
+                // PsiInternalXtextTerminalsTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:16: T__12
+                // PsiInternalXtextTerminalsTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:22: T__13
+                // PsiInternalXtextTerminalsTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:28: T__14
+                // PsiInternalXtextTerminalsTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:34: T__15
+                // PsiInternalXtextTerminalsTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:40: T__16
+                // PsiInternalXtextTerminalsTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:46: T__17
+                // PsiInternalXtextTerminalsTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:52: T__18
+                // PsiInternalXtextTerminalsTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:58: T__19
+                // PsiInternalXtextTerminalsTestLanguage.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:64: T__20
+                // PsiInternalXtextTerminalsTestLanguage.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:70: T__21
+                // PsiInternalXtextTerminalsTestLanguage.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:76: T__22
+                // PsiInternalXtextTerminalsTestLanguage.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:82: T__23
+                // PsiInternalXtextTerminalsTestLanguage.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:88: T__24
+                // PsiInternalXtextTerminalsTestLanguage.g:1:88: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:94: T__25
+                // PsiInternalXtextTerminalsTestLanguage.g:1:94: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 16 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:100: T__26
+                // PsiInternalXtextTerminalsTestLanguage.g:1:100: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 17 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:106: T__27
+                // PsiInternalXtextTerminalsTestLanguage.g:1:106: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 18 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:112: T__28
+                // PsiInternalXtextTerminalsTestLanguage.g:1:112: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 19 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:118: T__29
+                // PsiInternalXtextTerminalsTestLanguage.g:1:118: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 20 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:124: T__30
+                // PsiInternalXtextTerminalsTestLanguage.g:1:124: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 21 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:130: T__31
+                // PsiInternalXtextTerminalsTestLanguage.g:1:130: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 22 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:136: T__32
+                // PsiInternalXtextTerminalsTestLanguage.g:1:136: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 23 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:142: T__33
+                // PsiInternalXtextTerminalsTestLanguage.g:1:142: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 24 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:148: T__34
+                // PsiInternalXtextTerminalsTestLanguage.g:1:148: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 25 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:154: T__35
+                // PsiInternalXtextTerminalsTestLanguage.g:1:154: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 26 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:160: T__36
+                // PsiInternalXtextTerminalsTestLanguage.g:1:160: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 27 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:166: T__37
+                // PsiInternalXtextTerminalsTestLanguage.g:1:166: T__37
                 {
                 mT__37(); 
 
                 }
                 break;
             case 28 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:172: T__38
+                // PsiInternalXtextTerminalsTestLanguage.g:1:172: T__38
                 {
                 mT__38(); 
 
                 }
                 break;
             case 29 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:178: T__39
+                // PsiInternalXtextTerminalsTestLanguage.g:1:178: T__39
                 {
                 mT__39(); 
 
                 }
                 break;
             case 30 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:184: T__40
+                // PsiInternalXtextTerminalsTestLanguage.g:1:184: T__40
                 {
                 mT__40(); 
 
                 }
                 break;
             case 31 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:190: T__41
+                // PsiInternalXtextTerminalsTestLanguage.g:1:190: T__41
                 {
                 mT__41(); 
 
                 }
                 break;
             case 32 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:196: RULE_ID
+                // PsiInternalXtextTerminalsTestLanguage.g:1:196: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 33 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:204: RULE_INT
+                // PsiInternalXtextTerminalsTestLanguage.g:1:204: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 34 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:213: RULE_STRING
+                // PsiInternalXtextTerminalsTestLanguage.g:1:213: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 35 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:225: RULE_ML_COMMENT
+                // PsiInternalXtextTerminalsTestLanguage.g:1:225: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 36 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:241: RULE_SL_COMMENT
+                // PsiInternalXtextTerminalsTestLanguage.g:1:241: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 37 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:257: RULE_WS
+                // PsiInternalXtextTerminalsTestLanguage.g:1:257: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 38 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalXtextTerminalsTestLanguage.g:1:265: RULE_ANY_OTHER
+                // PsiInternalXtextTerminalsTestLanguage.g:1:265: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

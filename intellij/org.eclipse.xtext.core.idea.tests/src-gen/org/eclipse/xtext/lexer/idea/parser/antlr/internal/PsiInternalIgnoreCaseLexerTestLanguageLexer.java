@@ -30,15 +30,15 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalIgnoreCaseLexerTestLanguage.g"; }
 
     // $ANTLR start "T__6"
     public final void mT__6() throws RecognitionException {
         try {
             int _type = T__6;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:11:6: ( 'case' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:11:8: 'case'
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:11:6: ( 'case' )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:11:8: 'case'
             {
             match("case"); 
 
@@ -58,8 +58,8 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = T__7;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:12:6: ( 'foo' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:12:8: 'foo'
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:12:6: ( 'foo' )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:12:8: 'foo'
             {
             match("foo"); 
 
@@ -79,8 +79,8 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:13:6: ( 'CaSe' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:13:8: 'CaSe'
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:13:6: ( 'CaSe' )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:13:8: 'CaSe'
             {
             match("CaSe"); 
 
@@ -100,10 +100,10 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:90:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:90:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:90:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:90:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:90:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:90:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -117,7 +117,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:
+            	    // PsiInternalIgnoreCaseLexerTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -157,12 +157,12 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:92:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:92:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:92:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -175,7 +175,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalIgnoreCaseLexerTestLanguage.g:92:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -195,7 +195,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalIgnoreCaseLexerTestLanguage.g:92:40: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -204,9 +204,9 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: ( '\\r' )? '\\n'
+                    // PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: ( '\\r' )?
+                    // PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -215,7 +215,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: '\\r'
+                            // PsiInternalIgnoreCaseLexerTestLanguage.g:92:41: '\\r'
                             {
                             match('\r'); 
 
@@ -243,7 +243,7 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:8: ( T__6 | T__7 | T__8 | RULE_WS | RULE_SL_COMMENT )
+        // PsiInternalIgnoreCaseLexerTestLanguage.g:1:8: ( T__6 | T__7 | T__8 | RULE_WS | RULE_SL_COMMENT )
         int alt5=5;
         switch ( input.LA(1) ) {
         case 'c':
@@ -283,35 +283,35 @@ public class PsiInternalIgnoreCaseLexerTestLanguageLexer extends Lexer {
 
         switch (alt5) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:10: T__6
+                // PsiInternalIgnoreCaseLexerTestLanguage.g:1:10: T__6
                 {
                 mT__6(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:15: T__7
+                // PsiInternalIgnoreCaseLexerTestLanguage.g:1:15: T__7
                 {
                 mT__7(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:20: T__8
+                // PsiInternalIgnoreCaseLexerTestLanguage.g:1:20: T__8
                 {
                 mT__8(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:25: RULE_WS
+                // PsiInternalIgnoreCaseLexerTestLanguage.g:1:25: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalIgnoreCaseLexerTestLanguage.g:1:33: RULE_SL_COMMENT
+                // PsiInternalIgnoreCaseLexerTestLanguage.g:1:33: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 

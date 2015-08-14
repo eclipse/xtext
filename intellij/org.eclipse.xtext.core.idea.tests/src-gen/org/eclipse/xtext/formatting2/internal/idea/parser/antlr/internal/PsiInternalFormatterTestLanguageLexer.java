@@ -39,15 +39,15 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalFormatterTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:11:7: ( 'idlist' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:11:9: 'idlist'
+            // PsiInternalFormatterTestLanguage.g:11:7: ( 'idlist' )
+            // PsiInternalFormatterTestLanguage.g:11:9: 'idlist'
             {
             match("idlist"); 
 
@@ -67,8 +67,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:12:7: ( 'kwlist' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:12:9: 'kwlist'
+            // PsiInternalFormatterTestLanguage.g:12:7: ( 'kwlist' )
+            // PsiInternalFormatterTestLanguage.g:12:9: 'kwlist'
             {
             match("kwlist"); 
 
@@ -88,8 +88,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:13:7: ( 'kw1' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:13:9: 'kw1'
+            // PsiInternalFormatterTestLanguage.g:13:7: ( 'kw1' )
+            // PsiInternalFormatterTestLanguage.g:13:9: 'kw1'
             {
             match("kw1"); 
 
@@ -109,8 +109,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:14:7: ( 'kw2' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:14:9: 'kw2'
+            // PsiInternalFormatterTestLanguage.g:14:7: ( 'kw2' )
+            // PsiInternalFormatterTestLanguage.g:14:9: 'kw2'
             {
             match("kw2"); 
 
@@ -130,8 +130,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:15:7: ( 'kw3' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:15:9: 'kw3'
+            // PsiInternalFormatterTestLanguage.g:15:7: ( 'kw3' )
+            // PsiInternalFormatterTestLanguage.g:15:9: 'kw3'
             {
             match("kw3"); 
 
@@ -151,8 +151,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:16:7: ( 'kw4' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:16:9: 'kw4'
+            // PsiInternalFormatterTestLanguage.g:16:7: ( 'kw4' )
+            // PsiInternalFormatterTestLanguage.g:16:9: 'kw4'
             {
             match("kw4"); 
 
@@ -172,8 +172,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:17:7: ( 'kw5' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:17:9: 'kw5'
+            // PsiInternalFormatterTestLanguage.g:17:7: ( 'kw5' )
+            // PsiInternalFormatterTestLanguage.g:17:9: 'kw5'
             {
             match("kw5"); 
 
@@ -193,10 +193,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:194:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:194:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalFormatterTestLanguage.g:194:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalFormatterTestLanguage.g:194:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:194:11: ( '^' )?
+            // PsiInternalFormatterTestLanguage.g:194:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -205,7 +205,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:194:11: '^'
+                    // PsiInternalFormatterTestLanguage.g:194:11: '^'
                     {
                     match('^'); 
 
@@ -223,7 +223,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:194:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalFormatterTestLanguage.g:194:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -236,7 +236,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:
+            	    // PsiInternalFormatterTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -272,10 +272,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:196:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:196:12: ( '0' .. '9' )+
+            // PsiInternalFormatterTestLanguage.g:196:10: ( ( '0' .. '9' )+ )
+            // PsiInternalFormatterTestLanguage.g:196:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:196:12: ( '0' .. '9' )+
+            // PsiInternalFormatterTestLanguage.g:196:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -289,7 +289,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:196:13: '0' .. '9'
+            	    // PsiInternalFormatterTestLanguage.g:196:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -321,10 +321,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalFormatterTestLanguage.g:198:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalFormatterTestLanguage.g:198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalFormatterTestLanguage.g:198:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -342,10 +342,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalFormatterTestLanguage.g:198:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalFormatterTestLanguage.g:198:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -361,7 +361,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:21: '\\\\' .
+                    	    // PsiInternalFormatterTestLanguage.g:198:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -369,7 +369,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalFormatterTestLanguage.g:198:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -394,10 +394,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalFormatterTestLanguage.g:198:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalFormatterTestLanguage.g:198:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -413,7 +413,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:54: '\\\\' .
+                    	    // PsiInternalFormatterTestLanguage.g:198:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -421,7 +421,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:198:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalFormatterTestLanguage.g:198:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -464,12 +464,12 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:200:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:200:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalFormatterTestLanguage.g:200:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalFormatterTestLanguage.g:200:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:200:24: ( options {greedy=false; } : . )*
+            // PsiInternalFormatterTestLanguage.g:200:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -494,7 +494,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:200:52: .
+            	    // PsiInternalFormatterTestLanguage.g:200:52: .
             	    {
             	    matchAny(); 
 
@@ -524,12 +524,12 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalFormatterTestLanguage.g:202:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalFormatterTestLanguage.g:202:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalFormatterTestLanguage.g:202:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -542,7 +542,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalFormatterTestLanguage.g:202:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -562,7 +562,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalFormatterTestLanguage.g:202:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -571,9 +571,9 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:41: ( '\\r' )? '\\n'
+                    // PsiInternalFormatterTestLanguage.g:202:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:41: ( '\\r' )?
+                    // PsiInternalFormatterTestLanguage.g:202:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -582,7 +582,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:202:41: '\\r'
+                            // PsiInternalFormatterTestLanguage.g:202:41: '\\r'
                             {
                             match('\r'); 
 
@@ -614,10 +614,10 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:204:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalFormatterTestLanguage.g:204:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalFormatterTestLanguage.g:204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalFormatterTestLanguage.g:204:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -631,7 +631,7 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:
+            	    // PsiInternalFormatterTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -671,8 +671,8 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:206:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:206:18: .
+            // PsiInternalFormatterTestLanguage.g:206:16: ( . )
+            // PsiInternalFormatterTestLanguage.g:206:18: .
             {
             matchAny(); 
 
@@ -687,103 +687,103 @@ public class PsiInternalFormatterTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalFormatterTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=14;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:10: T__11
+                // PsiInternalFormatterTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:16: T__12
+                // PsiInternalFormatterTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:22: T__13
+                // PsiInternalFormatterTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:28: T__14
+                // PsiInternalFormatterTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:34: T__15
+                // PsiInternalFormatterTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:40: T__16
+                // PsiInternalFormatterTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:46: T__17
+                // PsiInternalFormatterTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:52: RULE_ID
+                // PsiInternalFormatterTestLanguage.g:1:52: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:60: RULE_INT
+                // PsiInternalFormatterTestLanguage.g:1:60: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:69: RULE_STRING
+                // PsiInternalFormatterTestLanguage.g:1:69: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:81: RULE_ML_COMMENT
+                // PsiInternalFormatterTestLanguage.g:1:81: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:97: RULE_SL_COMMENT
+                // PsiInternalFormatterTestLanguage.g:1:97: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:113: RULE_WS
+                // PsiInternalFormatterTestLanguage.g:1:113: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/formatting2/internal/idea/parser/antlr/internal/PsiInternalFormatterTestLanguage.g:1:121: RULE_ANY_OTHER
+                // PsiInternalFormatterTestLanguage.g:1:121: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

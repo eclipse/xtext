@@ -51,15 +51,15 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalRegionAccessTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:11:7: ( '5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:11:9: '5'
+            // InternalRegionAccessTestLanguage.g:11:7: ( '5' )
+            // InternalRegionAccessTestLanguage.g:11:9: '5'
             {
             match('5'); 
 
@@ -78,8 +78,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:12:7: ( '6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:12:9: '6'
+            // InternalRegionAccessTestLanguage.g:12:7: ( '6' )
+            // InternalRegionAccessTestLanguage.g:12:9: '6'
             {
             match('6'); 
 
@@ -98,8 +98,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:13:7: ( '7' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:13:9: '7'
+            // InternalRegionAccessTestLanguage.g:13:7: ( '7' )
+            // InternalRegionAccessTestLanguage.g:13:9: '7'
             {
             match('7'); 
 
@@ -118,8 +118,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:14:7: ( '1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:14:9: '1'
+            // InternalRegionAccessTestLanguage.g:14:7: ( '1' )
+            // InternalRegionAccessTestLanguage.g:14:9: '1'
             {
             match('1'); 
 
@@ -138,8 +138,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:15:7: ( '2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:15:9: '2'
+            // InternalRegionAccessTestLanguage.g:15:7: ( '2' )
+            // InternalRegionAccessTestLanguage.g:15:9: '2'
             {
             match('2'); 
 
@@ -158,8 +158,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:16:7: ( '3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:16:9: '3'
+            // InternalRegionAccessTestLanguage.g:16:7: ( '3' )
+            // InternalRegionAccessTestLanguage.g:16:9: '3'
             {
             match('3'); 
 
@@ -178,8 +178,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:17:7: ( '4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:17:9: '4'
+            // InternalRegionAccessTestLanguage.g:17:7: ( '4' )
+            // InternalRegionAccessTestLanguage.g:17:9: '4'
             {
             match('4'); 
 
@@ -198,8 +198,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:18:7: ( 'prefix' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:18:9: 'prefix'
+            // InternalRegionAccessTestLanguage.g:18:7: ( 'prefix' )
+            // InternalRegionAccessTestLanguage.g:18:9: 'prefix'
             {
             match("prefix"); 
 
@@ -219,8 +219,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:19:7: ( '+' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:19:9: '+'
+            // InternalRegionAccessTestLanguage.g:19:7: ( '+' )
+            // InternalRegionAccessTestLanguage.g:19:9: '+'
             {
             match('+'); 
 
@@ -239,8 +239,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:20:7: ( '(' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:20:9: '('
+            // InternalRegionAccessTestLanguage.g:20:7: ( '(' )
+            // InternalRegionAccessTestLanguage.g:20:9: '('
             {
             match('('); 
 
@@ -259,8 +259,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:21:7: ( ')' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:21:9: ')'
+            // InternalRegionAccessTestLanguage.g:21:7: ( ')' )
+            // InternalRegionAccessTestLanguage.g:21:9: ')'
             {
             match(')'); 
 
@@ -279,8 +279,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:22:7: ( 'unassigned' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:22:9: 'unassigned'
+            // InternalRegionAccessTestLanguage.g:22:7: ( 'unassigned' )
+            // InternalRegionAccessTestLanguage.g:22:9: 'unassigned'
             {
             match("unassigned"); 
 
@@ -300,8 +300,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:23:7: ( 'child' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:23:9: 'child'
+            // InternalRegionAccessTestLanguage.g:23:7: ( 'child' )
+            // InternalRegionAccessTestLanguage.g:23:9: 'child'
             {
             match("child"); 
 
@@ -321,8 +321,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:24:7: ( 'ref' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:24:9: 'ref'
+            // InternalRegionAccessTestLanguage.g:24:7: ( 'ref' )
+            // InternalRegionAccessTestLanguage.g:24:9: 'ref'
             {
             match("ref"); 
 
@@ -342,8 +342,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:25:7: ( 'action' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:25:9: 'action'
+            // InternalRegionAccessTestLanguage.g:25:7: ( 'action' )
+            // InternalRegionAccessTestLanguage.g:25:9: 'action'
             {
             match("action"); 
 
@@ -363,8 +363,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:26:7: ( 'end' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:26:9: 'end'
+            // InternalRegionAccessTestLanguage.g:26:7: ( 'end' )
+            // InternalRegionAccessTestLanguage.g:26:9: 'end'
             {
             match("end"); 
 
@@ -384,8 +384,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:27:7: ( 'datatype' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:27:9: 'datatype'
+            // InternalRegionAccessTestLanguage.g:27:7: ( 'datatype' )
+            // InternalRegionAccessTestLanguage.g:27:9: 'datatype'
             {
             match("datatype"); 
 
@@ -405,8 +405,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:28:7: ( 'lit1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:28:9: 'lit1'
+            // InternalRegionAccessTestLanguage.g:28:7: ( 'lit1' )
+            // InternalRegionAccessTestLanguage.g:28:9: 'lit1'
             {
             match("lit1"); 
 
@@ -426,8 +426,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:29:7: ( 'lit2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:29:9: 'lit2'
+            // InternalRegionAccessTestLanguage.g:29:7: ( 'lit2' )
+            // InternalRegionAccessTestLanguage.g:29:9: 'lit2'
             {
             match("lit2"); 
 
@@ -447,10 +447,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:822:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:822:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRegionAccessTestLanguage.g:822:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalRegionAccessTestLanguage.g:822:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:822:11: ( '^' )?
+            // InternalRegionAccessTestLanguage.g:822:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -459,7 +459,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:822:11: '^'
+                    // InternalRegionAccessTestLanguage.g:822:11: '^'
                     {
                     match('^'); 
 
@@ -477,7 +477,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:822:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalRegionAccessTestLanguage.g:822:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -490,7 +490,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:
+            	    // InternalRegionAccessTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -526,10 +526,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:824:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:824:12: ( '0' .. '9' )+
+            // InternalRegionAccessTestLanguage.g:824:10: ( ( '0' .. '9' )+ )
+            // InternalRegionAccessTestLanguage.g:824:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:824:12: ( '0' .. '9' )+
+            // InternalRegionAccessTestLanguage.g:824:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -543,7 +543,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:824:13: '0' .. '9'
+            	    // InternalRegionAccessTestLanguage.g:824:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -575,10 +575,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRegionAccessTestLanguage.g:826:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalRegionAccessTestLanguage.g:826:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalRegionAccessTestLanguage.g:826:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -596,10 +596,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalRegionAccessTestLanguage.g:826:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalRegionAccessTestLanguage.g:826:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -615,7 +615,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:21: '\\\\' .
+                    	    // InternalRegionAccessTestLanguage.g:826:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -623,7 +623,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalRegionAccessTestLanguage.g:826:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -648,10 +648,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalRegionAccessTestLanguage.g:826:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalRegionAccessTestLanguage.g:826:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -667,7 +667,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:54: '\\\\' .
+                    	    // InternalRegionAccessTestLanguage.g:826:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -675,7 +675,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:826:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalRegionAccessTestLanguage.g:826:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -718,12 +718,12 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:828:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:828:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalRegionAccessTestLanguage.g:828:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalRegionAccessTestLanguage.g:828:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:828:24: ( options {greedy=false; } : . )*
+            // InternalRegionAccessTestLanguage.g:828:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -748,7 +748,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:828:52: .
+            	    // InternalRegionAccessTestLanguage.g:828:52: .
             	    {
             	    matchAny(); 
 
@@ -778,12 +778,12 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalRegionAccessTestLanguage.g:830:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalRegionAccessTestLanguage.g:830:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalRegionAccessTestLanguage.g:830:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -796,7 +796,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalRegionAccessTestLanguage.g:830:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -816,7 +816,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:40: ( ( '\\r' )? '\\n' )?
+            // InternalRegionAccessTestLanguage.g:830:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -825,9 +825,9 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:41: ( '\\r' )? '\\n'
+                    // InternalRegionAccessTestLanguage.g:830:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:41: ( '\\r' )?
+                    // InternalRegionAccessTestLanguage.g:830:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -836,7 +836,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:830:41: '\\r'
+                            // InternalRegionAccessTestLanguage.g:830:41: '\\r'
                             {
                             match('\r'); 
 
@@ -868,10 +868,10 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:832:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:832:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRegionAccessTestLanguage.g:832:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalRegionAccessTestLanguage.g:832:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:832:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalRegionAccessTestLanguage.g:832:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -885,7 +885,7 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:
+            	    // InternalRegionAccessTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -925,8 +925,8 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:834:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:834:18: .
+            // InternalRegionAccessTestLanguage.g:834:16: ( . )
+            // InternalRegionAccessTestLanguage.g:834:18: .
             {
             matchAny(); 
 
@@ -941,187 +941,187 @@ public class InternalRegionAccessTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalRegionAccessTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=26;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:10: T__11
+                // InternalRegionAccessTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:16: T__12
+                // InternalRegionAccessTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:22: T__13
+                // InternalRegionAccessTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:28: T__14
+                // InternalRegionAccessTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:34: T__15
+                // InternalRegionAccessTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:40: T__16
+                // InternalRegionAccessTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:46: T__17
+                // InternalRegionAccessTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:52: T__18
+                // InternalRegionAccessTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:58: T__19
+                // InternalRegionAccessTestLanguage.g:1:58: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:64: T__20
+                // InternalRegionAccessTestLanguage.g:1:64: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:70: T__21
+                // InternalRegionAccessTestLanguage.g:1:70: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:76: T__22
+                // InternalRegionAccessTestLanguage.g:1:76: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:82: T__23
+                // InternalRegionAccessTestLanguage.g:1:82: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:88: T__24
+                // InternalRegionAccessTestLanguage.g:1:88: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:94: T__25
+                // InternalRegionAccessTestLanguage.g:1:94: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:100: T__26
+                // InternalRegionAccessTestLanguage.g:1:100: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:106: T__27
+                // InternalRegionAccessTestLanguage.g:1:106: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:112: T__28
+                // InternalRegionAccessTestLanguage.g:1:112: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:118: T__29
+                // InternalRegionAccessTestLanguage.g:1:118: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:124: RULE_ID
+                // InternalRegionAccessTestLanguage.g:1:124: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:132: RULE_INT
+                // InternalRegionAccessTestLanguage.g:1:132: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:141: RULE_STRING
+                // InternalRegionAccessTestLanguage.g:1:141: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:153: RULE_ML_COMMENT
+                // InternalRegionAccessTestLanguage.g:1:153: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:169: RULE_SL_COMMENT
+                // InternalRegionAccessTestLanguage.g:1:169: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:185: RULE_WS
+                // InternalRegionAccessTestLanguage.g:1:185: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/formatting2/regionaccess/internal/parser/antlr/internal/InternalRegionAccessTestLanguage.g:1:193: RULE_ANY_OTHER
+                // InternalRegionAccessTestLanguage.g:1:193: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

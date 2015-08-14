@@ -47,7 +47,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
         
 
     public String[] getTokenNames() { return InternalUnicodeTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalUnicodeTestLanguage.g"; }
 
 
 
@@ -72,7 +72,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalUnicodeTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -80,17 +80,17 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalUnicodeTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalUnicodeTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -108,7 +108,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_strings_0_0= ruleAbstractString ) )* ;
+    // InternalUnicodeTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_strings_0_0= ruleAbstractString ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -118,10 +118,10 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:79:28: ( ( (lv_strings_0_0= ruleAbstractString ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:80:1: ( (lv_strings_0_0= ruleAbstractString ) )*
+            // InternalUnicodeTestLanguage.g:79:28: ( ( (lv_strings_0_0= ruleAbstractString ) )* )
+            // InternalUnicodeTestLanguage.g:80:1: ( (lv_strings_0_0= ruleAbstractString ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:80:1: ( (lv_strings_0_0= ruleAbstractString ) )*
+            // InternalUnicodeTestLanguage.g:80:1: ( (lv_strings_0_0= ruleAbstractString ) )*
             loop1:
             do {
                 int alt1=2;
@@ -134,15 +134,15 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:81:1: (lv_strings_0_0= ruleAbstractString )
+            	    // InternalUnicodeTestLanguage.g:81:1: (lv_strings_0_0= ruleAbstractString )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:81:1: (lv_strings_0_0= ruleAbstractString )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:82:3: lv_strings_0_0= ruleAbstractString
+            	    // InternalUnicodeTestLanguage.g:81:1: (lv_strings_0_0= ruleAbstractString )
+            	    // InternalUnicodeTestLanguage.g:82:3: lv_strings_0_0= ruleAbstractString
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getStringsAbstractStringParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleAbstractString_in_ruleModel130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_strings_0_0=ruleAbstractString();
 
             	    state._fsp--;
@@ -188,7 +188,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleAbstractString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:106:1: entryRuleAbstractString returns [EObject current=null] : iv_ruleAbstractString= ruleAbstractString EOF ;
+    // InternalUnicodeTestLanguage.g:106:1: entryRuleAbstractString returns [EObject current=null] : iv_ruleAbstractString= ruleAbstractString EOF ;
     public final EObject entryRuleAbstractString() throws RecognitionException {
         EObject current = null;
 
@@ -196,17 +196,17 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:107:2: (iv_ruleAbstractString= ruleAbstractString EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:108:2: iv_ruleAbstractString= ruleAbstractString EOF
+            // InternalUnicodeTestLanguage.g:107:2: (iv_ruleAbstractString= ruleAbstractString EOF )
+            // InternalUnicodeTestLanguage.g:108:2: iv_ruleAbstractString= ruleAbstractString EOF
             {
              newCompositeNode(grammarAccess.getAbstractStringRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractString_in_entryRuleAbstractString166);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleAbstractString=ruleAbstractString();
 
             state._fsp--;
 
              current =iv_ruleAbstractString; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractString176); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -224,7 +224,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleAbstractString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:115:1: ruleAbstractString returns [EObject current=null] : (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) ;
+    // InternalUnicodeTestLanguage.g:115:1: ruleAbstractString returns [EObject current=null] : (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) ;
     public final EObject ruleAbstractString() throws RecognitionException {
         EObject current = null;
 
@@ -236,10 +236,10 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:118:28: ( (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:119:1: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
+            // InternalUnicodeTestLanguage.g:118:28: ( (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString ) )
+            // InternalUnicodeTestLanguage.g:119:1: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:119:1: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
+            // InternalUnicodeTestLanguage.g:119:1: (this_GString_0= ruleGString | this_QuotedString_1= ruleQuotedString )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -257,12 +257,12 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:120:5: this_GString_0= ruleGString
+                    // InternalUnicodeTestLanguage.g:120:5: this_GString_0= ruleGString
                     {
                      
                             newCompositeNode(grammarAccess.getAbstractStringAccess().getGStringParserRuleCall_0()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleGString_in_ruleAbstractString223);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     this_GString_0=ruleGString();
 
                     state._fsp--;
@@ -275,12 +275,12 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:130:5: this_QuotedString_1= ruleQuotedString
+                    // InternalUnicodeTestLanguage.g:130:5: this_QuotedString_1= ruleQuotedString
                     {
                      
                             newCompositeNode(grammarAccess.getAbstractStringAccess().getQuotedStringParserRuleCall_1()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleQuotedString_in_ruleAbstractString250);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     this_QuotedString_1=ruleQuotedString();
 
                     state._fsp--;
@@ -313,7 +313,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleGString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:146:1: entryRuleGString returns [EObject current=null] : iv_ruleGString= ruleGString EOF ;
+    // InternalUnicodeTestLanguage.g:146:1: entryRuleGString returns [EObject current=null] : iv_ruleGString= ruleGString EOF ;
     public final EObject entryRuleGString() throws RecognitionException {
         EObject current = null;
 
@@ -321,17 +321,17 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:147:2: (iv_ruleGString= ruleGString EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:148:2: iv_ruleGString= ruleGString EOF
+            // InternalUnicodeTestLanguage.g:147:2: (iv_ruleGString= ruleGString EOF )
+            // InternalUnicodeTestLanguage.g:148:2: iv_ruleGString= ruleGString EOF
             {
              newCompositeNode(grammarAccess.getGStringRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleGString_in_entryRuleGString285);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleGString=ruleGString();
 
             state._fsp--;
 
              current =iv_ruleGString; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGString295); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -349,7 +349,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleGString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:155:1: ruleGString returns [EObject current=null] : ( (lv_name_0_0= RULE_GERMAN_STRING ) ) ;
+    // InternalUnicodeTestLanguage.g:155:1: ruleGString returns [EObject current=null] : ( (lv_name_0_0= RULE_GERMAN_STRING ) ) ;
     public final EObject ruleGString() throws RecognitionException {
         EObject current = null;
 
@@ -358,16 +358,16 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:158:28: ( ( (lv_name_0_0= RULE_GERMAN_STRING ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:159:1: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
+            // InternalUnicodeTestLanguage.g:158:28: ( ( (lv_name_0_0= RULE_GERMAN_STRING ) ) )
+            // InternalUnicodeTestLanguage.g:159:1: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:159:1: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:160:1: (lv_name_0_0= RULE_GERMAN_STRING )
+            // InternalUnicodeTestLanguage.g:159:1: ( (lv_name_0_0= RULE_GERMAN_STRING ) )
+            // InternalUnicodeTestLanguage.g:160:1: (lv_name_0_0= RULE_GERMAN_STRING )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:160:1: (lv_name_0_0= RULE_GERMAN_STRING )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:161:3: lv_name_0_0= RULE_GERMAN_STRING
+            // InternalUnicodeTestLanguage.g:160:1: (lv_name_0_0= RULE_GERMAN_STRING )
+            // InternalUnicodeTestLanguage.g:161:3: lv_name_0_0= RULE_GERMAN_STRING
             {
-            lv_name_0_0=(Token)match(input,RULE_GERMAN_STRING,FollowSets000.FOLLOW_RULE_GERMAN_STRING_in_ruleGString336); 
+            lv_name_0_0=(Token)match(input,RULE_GERMAN_STRING,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getGStringAccess().getNameGERMAN_STRINGTerminalRuleCall_0()); 
             		
@@ -405,7 +405,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "entryRuleQuotedString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:185:1: entryRuleQuotedString returns [EObject current=null] : iv_ruleQuotedString= ruleQuotedString EOF ;
+    // InternalUnicodeTestLanguage.g:185:1: entryRuleQuotedString returns [EObject current=null] : iv_ruleQuotedString= ruleQuotedString EOF ;
     public final EObject entryRuleQuotedString() throws RecognitionException {
         EObject current = null;
 
@@ -413,17 +413,17 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:186:2: (iv_ruleQuotedString= ruleQuotedString EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:187:2: iv_ruleQuotedString= ruleQuotedString EOF
+            // InternalUnicodeTestLanguage.g:186:2: (iv_ruleQuotedString= ruleQuotedString EOF )
+            // InternalUnicodeTestLanguage.g:187:2: iv_ruleQuotedString= ruleQuotedString EOF
             {
              newCompositeNode(grammarAccess.getQuotedStringRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleQuotedString_in_entryRuleQuotedString376);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleQuotedString=ruleQuotedString();
 
             state._fsp--;
 
              current =iv_ruleQuotedString; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQuotedString386); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -441,7 +441,7 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start "ruleQuotedString"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:194:1: ruleQuotedString returns [EObject current=null] : ( (lv_name_0_0= RULE_STRING ) ) ;
+    // InternalUnicodeTestLanguage.g:194:1: ruleQuotedString returns [EObject current=null] : ( (lv_name_0_0= RULE_STRING ) ) ;
     public final EObject ruleQuotedString() throws RecognitionException {
         EObject current = null;
 
@@ -450,16 +450,16 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:197:28: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:198:1: ( (lv_name_0_0= RULE_STRING ) )
+            // InternalUnicodeTestLanguage.g:197:28: ( ( (lv_name_0_0= RULE_STRING ) ) )
+            // InternalUnicodeTestLanguage.g:198:1: ( (lv_name_0_0= RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:198:1: ( (lv_name_0_0= RULE_STRING ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:199:1: (lv_name_0_0= RULE_STRING )
+            // InternalUnicodeTestLanguage.g:198:1: ( (lv_name_0_0= RULE_STRING ) )
+            // InternalUnicodeTestLanguage.g:199:1: (lv_name_0_0= RULE_STRING )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:199:1: (lv_name_0_0= RULE_STRING )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalUnicodeTestLanguage.g:200:3: lv_name_0_0= RULE_STRING
+            // InternalUnicodeTestLanguage.g:199:1: (lv_name_0_0= RULE_STRING )
+            // InternalUnicodeTestLanguage.g:200:3: lv_name_0_0= RULE_STRING
             {
-            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleQuotedString427); 
+            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getQuotedStringAccess().getNameSTRINGTerminalRuleCall_0()); 
             		
@@ -502,19 +502,9 @@ public class InternalUnicodeTestLanguageParser extends AbstractInternalAntlrPars
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractString_in_ruleModel130 = new BitSet(new long[]{0x0000000000000032L});
-        public static final BitSet FOLLOW_ruleAbstractString_in_entryRuleAbstractString166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractString176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGString_in_ruleAbstractString223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQuotedString_in_ruleAbstractString250 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleGString_in_entryRuleGString285 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleGString295 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_GERMAN_STRING_in_ruleGString336 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQuotedString_in_entryRuleQuotedString376 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleQuotedString386 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleQuotedString427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000032L});
     }
 
 

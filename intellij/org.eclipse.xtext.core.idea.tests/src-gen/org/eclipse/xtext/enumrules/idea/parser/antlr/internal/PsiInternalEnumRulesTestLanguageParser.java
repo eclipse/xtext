@@ -48,7 +48,7 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
         
 
     public String[] getTokenNames() { return PsiInternalEnumRulesTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalEnumRulesTestLanguage.g"; }
 
 
 
@@ -72,19 +72,19 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalEnumRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalEnumRulesTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalEnumRulesTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -101,17 +101,17 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
+    // PsiInternalEnumRulesTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:58:10: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:58:10: ( ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:59:2: ( (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? ) | (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) ) )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -129,28 +129,28 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:61:4: otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
+                    // PsiInternalEnumRulesTestLanguage.g:60:3: (otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )? )
+                    // PsiInternalEnumRulesTestLanguage.g:61:4: otherlv_0= 'existing' ( (lv_existing_1_0= ruleExistingEnum ) ) (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     {
 
                     				markLeaf(elementTypeProvider.getModel_ExistingKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel82); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:68:4: ( (lv_existing_1_0= ruleExistingEnum ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:68:4: ( (lv_existing_1_0= ruleExistingEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:70:6: lv_existing_1_0= ruleExistingEnum
+                    // PsiInternalEnumRulesTestLanguage.g:69:5: (lv_existing_1_0= ruleExistingEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:70:6: lv_existing_1_0= ruleExistingEnum
                     {
 
                     						markComposite(elementTypeProvider.getModel_ExistingExistingEnumEnumRuleCall_0_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleExistingEnum_in_ruleModel114);
+                    pushFollow(FollowSets000.FOLLOW_4);
                     ruleExistingEnum();
 
                     state._fsp--;
@@ -164,7 +164,7 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
                     }
 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:79:4: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
+                    // PsiInternalEnumRulesTestLanguage.g:79:4: (otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) ) )?
                     int alt1=2;
                     int LA1_0 = input.LA(1);
 
@@ -173,25 +173,25 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     switch (alt1) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:80:5: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // PsiInternalEnumRulesTestLanguage.g:80:5: otherlv_2= 'generated' ( (lv_generated_3_0= ruleGeneratedEnum ) )
                             {
 
                             					markLeaf(elementTypeProvider.getModel_GeneratedKeyword_0_2_0ElementType());
                             				
-                            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel151); 
+                            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                             					doneLeaf(otherlv_2);
                             				
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:87:5: ( (lv_generated_3_0= ruleGeneratedEnum ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
+                            // PsiInternalEnumRulesTestLanguage.g:87:5: ( (lv_generated_3_0= ruleGeneratedEnum ) )
+                            // PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:89:7: lv_generated_3_0= ruleGeneratedEnum
+                            // PsiInternalEnumRulesTestLanguage.g:88:6: (lv_generated_3_0= ruleGeneratedEnum )
+                            // PsiInternalEnumRulesTestLanguage.g:89:7: lv_generated_3_0= ruleGeneratedEnum
                             {
 
                             							markComposite(elementTypeProvider.getModel_GeneratedGeneratedEnumEnumRuleCall_0_2_1_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleGeneratedEnum_in_ruleModel188);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleGeneratedEnum();
 
                             state._fsp--;
@@ -218,28 +218,28 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:102:4: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:101:3: (otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) ) )
+                    // PsiInternalEnumRulesTestLanguage.g:102:4: otherlv_4= 'generated' ( (lv_generated_5_0= ruleGeneratedEnum ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_GeneratedKeyword_1_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel243); 
+                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:109:4: ( (lv_generated_5_0= ruleGeneratedEnum ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:109:4: ( (lv_generated_5_0= ruleGeneratedEnum ) )
+                    // PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:111:6: lv_generated_5_0= ruleGeneratedEnum
+                    // PsiInternalEnumRulesTestLanguage.g:110:5: (lv_generated_5_0= ruleGeneratedEnum )
+                    // PsiInternalEnumRulesTestLanguage.g:111:6: lv_generated_5_0= ruleGeneratedEnum
                     {
 
                     						markComposite(elementTypeProvider.getModel_GeneratedGeneratedEnumEnumRuleCall_1_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleGeneratedEnum_in_ruleModel275);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleGeneratedEnum();
 
                     state._fsp--;
@@ -278,17 +278,17 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleExistingEnum"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:125:1: ruleExistingEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
+    // PsiInternalEnumRulesTestLanguage.g:125:1: ruleExistingEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) ;
     public final void ruleExistingEnum() throws RecognitionException {
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
         Token enumLiteral_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:125:17: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:125:17: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:126:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'overridden' ) | (enumLiteral_2= 'DifferentLiteral' ) )
             int alt3=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -315,15 +315,15 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:128:4: enumLiteral_0= 'SameName'
+                    // PsiInternalEnumRulesTestLanguage.g:127:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:128:4: enumLiteral_0= 'SameName'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_SameNameEnumLiteralDeclaration_0ElementType());
                     			
-                    enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExistingEnum326); 
+                    enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_0);
                     			
@@ -334,15 +334,15 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
+                    // PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:138:4: enumLiteral_1= 'overridden'
+                    // PsiInternalEnumRulesTestLanguage.g:137:3: (enumLiteral_1= 'overridden' )
+                    // PsiInternalEnumRulesTestLanguage.g:138:4: enumLiteral_1= 'overridden'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_OverriddenLiteralEnumLiteralDeclaration_1ElementType());
                     			
-                    enumLiteral_1=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExistingEnum359); 
+                    enumLiteral_1=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_1);
                     			
@@ -353,15 +353,15 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:148:4: enumLiteral_2= 'DifferentLiteral'
+                    // PsiInternalEnumRulesTestLanguage.g:147:3: (enumLiteral_2= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:148:4: enumLiteral_2= 'DifferentLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getExistingEnum_DifferentNameEnumLiteralDeclaration_2ElementType());
                     			
-                    enumLiteral_2=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleExistingEnum392); 
+                    enumLiteral_2=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_2);
                     			
@@ -390,16 +390,16 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
 
     // $ANTLR start "ruleGeneratedEnum"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:160:1: ruleGeneratedEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
+    // PsiInternalEnumRulesTestLanguage.g:160:1: ruleGeneratedEnum : ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) ;
     public final void ruleGeneratedEnum() throws RecognitionException {
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:160:18: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:160:18: ( ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) ) )
+            // PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
+            // PsiInternalEnumRulesTestLanguage.g:161:2: ( (enumLiteral_0= 'SameName' ) | (enumLiteral_1= 'DifferentLiteral' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -417,15 +417,15 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:163:4: enumLiteral_0= 'SameName'
+                    // PsiInternalEnumRulesTestLanguage.g:162:3: (enumLiteral_0= 'SameName' )
+                    // PsiInternalEnumRulesTestLanguage.g:163:4: enumLiteral_0= 'SameName'
                     {
 
                     				markLeaf(elementTypeProvider.getGeneratedEnum_SameNameEnumLiteralDeclaration_0ElementType());
                     			
-                    enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleGeneratedEnum430); 
+                    enumLiteral_0=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_0);
                     			
@@ -436,15 +436,15 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumRulesTestLanguage.g:173:4: enumLiteral_1= 'DifferentLiteral'
+                    // PsiInternalEnumRulesTestLanguage.g:172:3: (enumLiteral_1= 'DifferentLiteral' )
+                    // PsiInternalEnumRulesTestLanguage.g:173:4: enumLiteral_1= 'DifferentLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getGeneratedEnum_DifferentNameEnumLiteralDeclaration_1ElementType());
                     			
-                    enumLiteral_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleGeneratedEnum463); 
+                    enumLiteral_1=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_1);
                     			
@@ -478,19 +478,11 @@ public class PsiInternalEnumRulesTestLanguageParser extends AbstractPsiAntlrPars
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel82 = new BitSet(new long[]{0x000000000000E000L});
-        public static final BitSet FOLLOW_ruleExistingEnum_in_ruleModel114 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleModel151 = new BitSet(new long[]{0x000000000000A000L});
-        public static final BitSet FOLLOW_ruleGeneratedEnum_in_ruleModel188 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleModel243 = new BitSet(new long[]{0x000000000000A000L});
-        public static final BitSet FOLLOW_ruleGeneratedEnum_in_ruleModel275 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleExistingEnum326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleExistingEnum359 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleExistingEnum392 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleGeneratedEnum430 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleGeneratedEnum463 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000000000000E000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x000000000000A000L});
     }
 
 
