@@ -12,6 +12,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
@@ -57,6 +58,26 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 				"class Test { def Object foo() throws Exception {" + xbaseCode + "} }";
 		String javaCode = testHelper.toJavaCode(xtendCode);
 		testHelper.assertEvaluatesTo(expectedResult, xtendCode, javaCode);
+	}
+	
+	@Test public void testAnonymousConstructorVarArgs_01() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "(new testdata.ClassWithVarArgs() {}).defaultConstructor");
+	}
+	
+	@Test public void testAnonymousConstructorVarArgs_02() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "(new testdata.ClassWithVarArgs(1) {}).varArgConstructor");
+	}
+	
+	@Test public void testAnonymousConstructorVarArgs_03() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "(new testdata.ClassWithVarArgs(1, '') {}).varArgConstructor");
+	}
+	
+	@Test public void testAnonymousConstructorVarArgs_04() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "(new testdata.ClassWithVarArgs(1, '', '') {}).varArgConstructor");
+	}
+	
+	@Test public void testAnonymousConstructorVarArgs_05() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "(new testdata.ClassWithVarArgs(1, '', '', '') {}).varArgConstructor");
 	}
 
 }

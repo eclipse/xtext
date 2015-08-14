@@ -820,6 +820,7 @@ public class XtendReentrantTypeResolver extends LogicalContainerAwareReentrantTy
 		} else
 			constructor.setVisibility(JvmVisibility.PRIVATE);
 		constructor.setSimpleName(inferredLocalClass.getSimpleName());
+		constructor.setVarArgs(superConstructor.isVarArgs());
 		final List<JvmFormalParameter> parameters = superConstructor.getParameters();
 		for(JvmFormalParameter parameter: parameters) {
 			parameter.getName(); // trigger name computation
