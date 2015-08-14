@@ -18,6 +18,7 @@ import com.intellij.openapi.editor.ScrollType
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiDocumentManager
 import com.intellij.psi.codeStyle.CodeStyleManager
+import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
@@ -33,11 +34,13 @@ import org.eclipse.xtext.xbase.typesystem.^override.IResolvedConstructor
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedExecutable
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 
+import static extension com.intellij.openapi.editor.EditorModificationUtil.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 
 	@Inject extension XtextPsiExtensions
+	@Inject XtendTokenSetProvider tokenSetProvider
 	@Inject IJvmModelAssociations jvmModelAssociations
 	@Inject OverrideProposalUtil overrideProposalUtil
 	@Inject RewritableImportSection.Factory importSectionfactory
@@ -50,6 +53,18 @@ class XtendCompletionContributor extends AbstractXtendCompletionContributor {
 	new(AbstractXtextLanguage lang) {
 		super(lang)
 		completeAbstractSuperMethods
+		completeFrenchQuote
+	}
+	
+	protected def void completeFrenchQuote() {
+		extend(
+			CompletionType.BASIC,
+			#[tokenSetProvider.richStringLiteralTokens]
+		) [
+			$2 += LookupElementBuilder.create('«').withInsertHandler[ context, item |
+				context.editor.insertStringAtCaret('»', false, false)
+			]
+		]
 	}
 
 	protected def completeAbstractSuperMethods() {

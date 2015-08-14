@@ -104,7 +104,8 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
     XtendCodeContextTypeTest.ContextTypeAssertion _is_1 = this.is(XtendCodeContextType.Member.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _not = this.not(XtendCodeContextType.Statement.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _not_1 = this.not(XtendCodeContextType.Expression.class);
-    this.assertContext(_builder, _is, _is_1, _not, _not_1);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_2 = this.not(XtendCodeContextType.TemplateExpression.class);
+    this.assertContext(_builder, _is, _is_1, _not, _not_1, _not_2);
   }
   
   public void testContexts_02() {
@@ -123,7 +124,8 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
     XtendCodeContextTypeTest.ContextTypeAssertion _not = this.not(XtendCodeContextType.Member.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _not_1 = this.not(XtendCodeContextType.Statement.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _not_2 = this.not(XtendCodeContextType.Expression.class);
-    this.assertContext(_builder, _is, _not, _not_1, _not_2);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_3 = this.not(XtendCodeContextType.TemplateExpression.class);
+    this.assertContext(_builder, _is, _not, _not_1, _not_2, _not_3);
   }
   
   public void testContexts_03() {
@@ -145,7 +147,8 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
     XtendCodeContextTypeTest.ContextTypeAssertion _not = this.not(XtendCodeContextType.Member.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _is_1 = this.is(XtendCodeContextType.Statement.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _is_2 = this.is(XtendCodeContextType.Expression.class);
-    this.assertContext(_builder, _is, _not, _is_1, _is_2);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_1 = this.not(XtendCodeContextType.TemplateExpression.class);
+    this.assertContext(_builder, _is, _not, _is_1, _is_2, _not_1);
   }
   
   public void testContexts_04() {
@@ -176,7 +179,33 @@ public class XtendCodeContextTypeTest extends LightXtendTest {
     XtendCodeContextTypeTest.ContextTypeAssertion _not = this.not(XtendCodeContextType.Member.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _not_1 = this.not(XtendCodeContextType.Statement.class);
     XtendCodeContextTypeTest.ContextTypeAssertion _is_1 = this.is(XtendCodeContextType.Expression.class);
-    this.assertContext(_builder, _is, _not, _not_1, _is_1);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_2 = this.not(XtendCodeContextType.TemplateExpression.class);
+    this.assertContext(_builder, _is, _not, _not_1, _is_1, _not_2);
+  }
+  
+  public void testContexts_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendCodeContextTypeTest.ContextTypeAssertion _is = this.is(XtendCodeContextType.Generic.class);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not = this.not(XtendCodeContextType.Member.class);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_1 = this.not(XtendCodeContextType.Statement.class);
+    XtendCodeContextTypeTest.ContextTypeAssertion _not_2 = this.not(XtendCodeContextType.Expression.class);
+    XtendCodeContextTypeTest.ContextTypeAssertion _is_1 = this.is(XtendCodeContextType.TemplateExpression.class);
+    this.assertContext(_builder, _is, _not, _not_1, _not_2, _is_1);
   }
   
   protected void assertContext(final CharSequence text, final XtendCodeContextTypeTest.ContextTypeAssertion... contextTypes) {

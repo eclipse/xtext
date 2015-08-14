@@ -21,9 +21,14 @@ import com.intellij.codeInsight.completion.JavaPsiClassReferenceElement;
 import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Document;
+import com.intellij.patterns.PlatformPatterns;
+import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiModifier;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
 import java.util.List;
@@ -97,6 +102,28 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
     this.completeXImportDeclaration_ImportedType();
     this.completeXConstructorCall_Constructor();
     this.completeXTypeLiteral_Type();
+    this.completeJavaTypeWithinMultiLineComment();
+  }
+  
+  protected void completeJavaTypeWithinMultiLineComment() {
+    TokenSet _multiLineCommentTokens = this._tokenSetProvider.getMultiLineCommentTokens();
+    IElementType[] _types = _multiLineCommentTokens.getTypes();
+    for (final IElementType mlCommentTokenType : _types) {
+      PsiElementPattern.Capture<PsiElement> _psiElement = PlatformPatterns.psiElement(mlCommentTokenType);
+      final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
+        @Override
+        protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
+          final Function1<JavaPsiClassReferenceElement, Boolean> _function = new Function1<JavaPsiClassReferenceElement, Boolean>() {
+            @Override
+            public Boolean apply(final JavaPsiClassReferenceElement it) {
+              return Boolean.valueOf(true);
+            }
+          };
+          XbaseCompletionContributor.this.completeJavaTypes($0, $2, false, _function);
+        }
+      };
+      this.extend(CompletionType.BASIC, _psiElement, _function);
+    }
   }
   
   protected void completeJvmParameterizedTypeReference_Type() {
