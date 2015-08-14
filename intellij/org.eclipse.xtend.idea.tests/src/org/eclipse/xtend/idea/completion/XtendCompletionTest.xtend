@@ -476,7 +476,6 @@ class XtendCompletionTest extends LightXtendTest {
 		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
 	}
 	
-	
 	def void testOverrideCompletion_11() {
 		'''
 		   class Foo {
@@ -488,6 +487,78 @@ class XtendCompletionTest extends LightXtendTest {
 		'''.toString.complete
 		val lookupElementStrings = myFixture.lookupElementStrings
 		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("override toString()"))
+	}
+	
+	def void testSingleLineComment() {
+		'''
+			// Array<caret>
+			class Foo {}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testMultiLineComment() {
+		'''
+			/* Array<caret> */
+			class Foo {}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertTrue(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testStringLiteral_01() {
+		'''
+			class Foo {
+				def foo() {
+					'Array<caret>'
+				}
+			}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testStringLiteral_02() {
+		'''
+			class Foo {
+				def foo() {
+					"Array<caret>"
+				}
+			}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testRichString_01() {
+		'''
+			class Foo {
+				def foo() '«»''
+					Array<caret>
+				'«»''
+			}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings
+		assertFalse(lookupElementStrings.toString, lookupElementStrings.contains("ArrayList"))
+	}
+	
+	def void testRichString_02() {
+		'''
+			class Foo {
+				def foo() '«»''
+					<caret>
+				'«»''
+			}
+		'''.toString.complete
+		myFixture.type('\n')
+		assertEquals('''
+			class Foo {
+				def foo() '«»''
+					«'«'»«'»'»
+				'«»''
+			}
+		'''.toString,myFixture.editor.document.text.toString)
 	}
 	
 }
