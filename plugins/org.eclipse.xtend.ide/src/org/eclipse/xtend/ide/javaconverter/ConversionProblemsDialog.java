@@ -84,10 +84,10 @@ public class ConversionProblemsDialog extends Dialog {
 					ti.setChecked(true);
 				}
 			}
-		}
-		if (javaFilesTable.getItems().length > 0) {
-			javaFilesTable.select(0);
-			handleMemberSelect(javaFilesTable.getItems()[0]);
+			if (javaFilesTable.getItems().length > 0) {
+				javaFilesTable.select(0);
+				handleMemberSelect(javaFilesTable.getItems()[0]);
+			}
 		}
 	}
 
