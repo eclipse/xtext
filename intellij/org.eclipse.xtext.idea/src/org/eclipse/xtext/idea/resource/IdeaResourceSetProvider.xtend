@@ -17,6 +17,7 @@ import java.io.ByteArrayOutputStream
 import java.io.FileNotFoundException
 import java.io.IOException
 import java.io.InputStream
+import java.util.Arrays
 import java.util.Map
 import java.util.Set
 import org.eclipse.emf.common.notify.Notifier
@@ -87,7 +88,10 @@ class IdeaResourceSetProvider {
 				val timeStamp = System.currentTimeMillis
 				for (uri : localWritten.keySet) {
 					var file = getOrCreateVirtualFile(uri)
-					file.setBinaryContent(localWritten.get(uri), -1, timeStamp, requestor)
+					val newContent = localWritten.get(uri)
+					val oldContent = file.contentsToByteArray
+					if (!Arrays.equals(newContent, oldContent))
+						file.setBinaryContent(newContent, -1, timeStamp, requestor)
 				}
 				for (uri : localDeleted) {
 					val file = getVirtualFile(uri)
