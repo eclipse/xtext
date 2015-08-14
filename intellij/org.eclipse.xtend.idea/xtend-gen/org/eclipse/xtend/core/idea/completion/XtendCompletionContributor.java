@@ -21,6 +21,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.RangeMarker;
 import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.editor.ScrollingModel;
@@ -31,6 +32,7 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.ProcessingContext;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.idea.completion.AbstractXtendCompletionContributor;
+import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -74,6 +77,9 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
   private XtextPsiExtensions _xtextPsiExtensions;
   
   @Inject
+  private XtendTokenSetProvider tokenSetProvider;
+  
+  @Inject
   private IJvmModelAssociations jvmModelAssociations;
   
   @Inject
@@ -93,6 +99,29 @@ public class XtendCompletionContributor extends AbstractXtendCompletionContribut
   public XtendCompletionContributor(final AbstractXtextLanguage lang) {
     super(lang);
     this.completeAbstractSuperMethods();
+    this.completeFrenchQuote();
+  }
+  
+  protected void completeFrenchQuote() {
+    TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
+    final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
+      @Override
+      protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
+        LookupElementBuilder _create = LookupElementBuilder.create("«");
+        final InsertHandler<LookupElement> _function = new InsertHandler<LookupElement>() {
+          @Override
+          public void handleInsert(final InsertionContext context, final LookupElement item) {
+            Editor _editor = context.getEditor();
+            EditorModificationUtil.insertStringAtCaret(_editor, "»", false, false);
+          }
+        };
+        LookupElementBuilder _withInsertHandler = _create.withInsertHandler(_function);
+        XtendCompletionContributor.this._completionExtensions.operator_add($2, _withInsertHandler);
+      }
+    };
+    this.extend(
+      CompletionType.BASIC, 
+      new TokenSet[] { _richStringLiteralTokens }, _function);
   }
   
   protected void completeAbstractSuperMethods() {

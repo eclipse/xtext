@@ -166,10 +166,29 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   
   private ExecutorService pool = Executors.newFixedThreadPool(3);
   
-  private Map<CompletionType, Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>> myContributors = CollectionLiterals.<CompletionType, Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>>newHashMap();
+  private final Map<CompletionType, Multimap<TokenSet, CompletionProvider<CompletionParameters>>> myContributors = CollectionLiterals.<CompletionType, Multimap<TokenSet, CompletionProvider<CompletionParameters>>>newHashMap();
+  
+  private final Map<CompletionType, Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>> myFollowElementBasedContributors = CollectionLiterals.<CompletionType, Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>>newHashMap();
   
   public AbstractCompletionContributor(final AbstractXtextLanguage lang) {
     lang.injectMembers(this);
+  }
+  
+  protected void extend(final CompletionType type, final CompletionProvider<CompletionParameters> contrib) {
+    this.extend(type, new TokenSet[] { null }, contrib);
+  }
+  
+  protected void extend(final CompletionType type, final TokenSet[] tokenSets, final CompletionProvider<CompletionParameters> contrib) {
+    boolean _containsKey = this.myContributors.containsKey(type);
+    boolean _not = (!_containsKey);
+    if (_not) {
+      ArrayListMultimap<TokenSet, CompletionProvider<CompletionParameters>> _create = ArrayListMultimap.<TokenSet, CompletionProvider<CompletionParameters>>create();
+      this.myContributors.put(type, _create);
+    }
+    for (final TokenSet tokenSet : tokenSets) {
+      Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(type);
+      _get.put(tokenSet, contrib);
+    }
   }
   
   protected void extend(final CompletionType type, final EStructuralFeature feature, final CompletionProvider<CompletionParameters> contrib) {
@@ -192,13 +211,13 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void extend(final CompletionType type, final TokenSet[] tokenSets, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {
-    boolean _containsKey = this.myContributors.containsKey(type);
+    boolean _containsKey = this.myFollowElementBasedContributors.containsKey(type);
     boolean _not = (!_containsKey);
     if (_not) {
       HashMap<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _newHashMap = CollectionLiterals.<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>>newHashMap();
-      this.myContributors.put(type, _newHashMap);
+      this.myFollowElementBasedContributors.put(type, _newHashMap);
     }
-    final Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> map = this.myContributors.get(type);
+    final Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> map = this.myFollowElementBasedContributors.get(type);
     for (final TokenSet tokenSet : tokenSets) {
       {
         boolean _containsKey_1 = map.containsKey(tokenSet);
@@ -237,12 +256,13 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     }, this);
     this.createMatcherBasedProposals(parameters, filteredResult);
     this.createReferenceBasedProposals(parameters, filteredResult);
+    this.createTokenSetBasedProposals(parameters, filteredResult);
     this.createFollowElementBasedProposals(parameters, filteredResult);
     this.createParserBasedProposals(parameters, filteredResult);
     result.stopHere();
   }
   
-  protected void createFollowElementBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+  protected void createTokenSetBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
     boolean _or = false;
     boolean _isEmpty = this.myContributors.isEmpty();
     if (_isEmpty) {
@@ -260,7 +280,45 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
     int _offset = parameters.getOffset();
     final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
     CompletionType _completionType_1 = parameters.getCompletionType();
-    Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myContributors.get(_completionType_1);
+    Multimap<TokenSet, CompletionProvider<CompletionParameters>> _get = this.myContributors.get(_completionType_1);
+    final Collection<CompletionProvider<CompletionParameters>> providers = _get.get(tokenSet);
+    boolean _equals = Objects.equal(providers, null);
+    if (_equals) {
+      return;
+    }
+    final HashSet<CompletionProvider<CompletionParameters>> calledProviders = CollectionLiterals.<CompletionProvider<CompletionParameters>>newHashSet();
+    final ProcessingContext context = new ProcessingContext();
+    for (final CompletionProvider<CompletionParameters> provider : providers) {
+      boolean _add = calledProviders.add(provider);
+      if (_add) {
+        provider.addCompletionVariants(parameters, context, result);
+        boolean _isStopped = result.isStopped();
+        if (_isStopped) {
+          return;
+        }
+      }
+    }
+  }
+  
+  protected void createFollowElementBasedProposals(final CompletionParameters parameters, final CompletionResultSet result) {
+    boolean _or = false;
+    boolean _isEmpty = this.myFollowElementBasedContributors.isEmpty();
+    if (_isEmpty) {
+      _or = true;
+    } else {
+      CompletionType _completionType = parameters.getCompletionType();
+      boolean _containsKey = this.myFollowElementBasedContributors.containsKey(_completionType);
+      boolean _not = (!_containsKey);
+      _or = _not;
+    }
+    if (_or) {
+      return;
+    }
+    Editor _editor = parameters.getEditor();
+    int _offset = parameters.getOffset();
+    final TokenSet tokenSet = this._tokenSetProvider.getTokenSet(((EditorEx) _editor), _offset);
+    CompletionType _completionType_1 = parameters.getCompletionType();
+    Map<TokenSet, Multimap<AbstractElement, CompletionProvider<CompletionParameters>>> _get = this.myFollowElementBasedContributors.get(_completionType_1);
     final Multimap<AbstractElement, CompletionProvider<CompletionParameters>> element2provider = _get.get(tokenSet);
     boolean _equals = Objects.equal(element2provider, null);
     if (_equals) {
