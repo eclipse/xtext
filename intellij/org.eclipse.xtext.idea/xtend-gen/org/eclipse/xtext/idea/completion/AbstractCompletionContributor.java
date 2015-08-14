@@ -175,7 +175,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void extend(final CompletionType type, final CompletionProvider<CompletionParameters> contrib) {
-    this.extend(type, new TokenSet[] { null }, contrib);
+    TokenSet _defaultTokens = this._tokenSetProvider.getDefaultTokens();
+    this.extend(type, new TokenSet[] { _defaultTokens }, contrib);
   }
   
   protected void extend(final CompletionType type, final TokenSet[] tokenSets, final CompletionProvider<CompletionParameters> contrib) {
@@ -192,7 +193,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void extend(final CompletionType type, final EStructuralFeature feature, final CompletionProvider<CompletionParameters> contrib) {
-    this.extend(type, new TokenSet[] { null }, feature, contrib);
+    TokenSet _defaultTokens = this._tokenSetProvider.getDefaultTokens();
+    this.extend(type, new TokenSet[] { _defaultTokens }, feature, contrib);
   }
   
   protected void extend(final CompletionType type, final TokenSet[] tokenSets, final EStructuralFeature feature, final CompletionProvider<CompletionParameters> contrib) {
@@ -207,7 +209,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void extend(final CompletionType type, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {
-    this.extend(type, new TokenSet[] { null }, followElement, contrib);
+    TokenSet _defaultTokens = this._tokenSetProvider.getDefaultTokens();
+    this.extend(type, new TokenSet[] { _defaultTokens }, followElement, contrib);
   }
   
   protected void extend(final CompletionType type, final TokenSet[] tokenSets, final AbstractElement followElement, final CompletionProvider<CompletionParameters> contrib) {
@@ -417,7 +420,8 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected boolean supportParserBasedProposals(final TokenSet tokenSet) {
-    return Objects.equal(tokenSet, null);
+    TokenSet _defaultTokens = this._tokenSetProvider.getDefaultTokens();
+    return Objects.equal(tokenSet, _defaultTokens);
   }
   
   protected ContentAssistContextFactory getParserBasedDelegate() {

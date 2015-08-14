@@ -71,7 +71,7 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
     if (_contains_3) {
       return this.getCommentTokens();
     }
-    return null;
+    return this.getDefaultTokens();
   }
   
   protected IElementType getTokenType(final EditorEx editor, final int offset) {
@@ -172,5 +172,10 @@ public class DefaultTokenSetProvider implements TokenSetProvider {
       _xblockexpression = document.getText(_textRange);
     }
     return _xblockexpression;
+  }
+  
+  @Override
+  public TokenSet getDefaultTokens() {
+    return null;
   }
 }

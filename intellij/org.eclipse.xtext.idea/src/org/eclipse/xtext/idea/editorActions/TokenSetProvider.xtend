@@ -37,5 +37,7 @@ interface TokenSetProvider {
 	def TokenSet getMultiLineCommentTokens()
 	
 	def TokenSet getStringLiteralTokens()
+	
+	def TokenSet getDefaultTokens()
 
 }

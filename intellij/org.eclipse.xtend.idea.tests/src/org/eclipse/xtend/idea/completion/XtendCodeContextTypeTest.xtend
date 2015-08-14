@@ -27,7 +27,8 @@ class XtendCodeContextTypeTest extends LightXtendTest {
 			is(XtendCodeContextType.Generic),
 			is(XtendCodeContextType.Member),
 			not(XtendCodeContextType.Statement),
-			not(XtendCodeContextType.Expression)
+			not(XtendCodeContextType.Expression),
+			not(XtendCodeContextType.TemplateExpression)
 		)
 	}
 	
@@ -41,7 +42,8 @@ class XtendCodeContextTypeTest extends LightXtendTest {
 			is(XtendCodeContextType.Generic),
 			not(XtendCodeContextType.Member),
 			not(XtendCodeContextType.Statement),
-			not(XtendCodeContextType.Expression)
+			not(XtendCodeContextType.Expression),
+			not(XtendCodeContextType.TemplateExpression)
 		)
 	}
 	
@@ -56,7 +58,8 @@ class XtendCodeContextTypeTest extends LightXtendTest {
 			is(XtendCodeContextType.Generic),
 			not(XtendCodeContextType.Member),
 			is(XtendCodeContextType.Statement),
-			is(XtendCodeContextType.Expression)
+			is(XtendCodeContextType.Expression),
+			not(XtendCodeContextType.TemplateExpression)
 		)
 	}
 	
@@ -74,10 +77,26 @@ class XtendCodeContextTypeTest extends LightXtendTest {
 			is(XtendCodeContextType.Generic),
 			not(XtendCodeContextType.Member),
 			not(XtendCodeContextType.Statement),
-			is(XtendCodeContextType.Expression)
+			is(XtendCodeContextType.Expression),
+			not(XtendCodeContextType.TemplateExpression)
 		)
 	}
 	
+	def void testContexts_05() {
+		'''
+			class MyClass {
+				def foo() '«»''
+					<caret>
+				'«»''
+			}
+		'''.assertContext(
+			is(XtendCodeContextType.Generic),
+			not(XtendCodeContextType.Member),
+			not(XtendCodeContextType.Statement),
+			not(XtendCodeContextType.Expression),
+			is(XtendCodeContextType.TemplateExpression)
+		)
+	}
 	
 	protected def assertContext(CharSequence text, ContextTypeAssertion ...contextTypes) {
 		val file = configureByText(text.toString)

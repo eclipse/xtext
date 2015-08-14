@@ -48,7 +48,7 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 			return multiLineCommentTokens
 		if (commentTokens.contains(tokenType))
 			return commentTokens
-		return null
+		return defaultTokens
 	}
 
 	protected def getTokenType(EditorEx editor, int offset) {
@@ -104,6 +104,10 @@ class DefaultTokenSetProvider implements TokenSetProvider {
 		val lineNumber = editor.document.getLineNumber(offset)
 		val lineEndOffset = editor.document.getLineEndOffset(lineNumber)
 		document.getText(new TextRange(offset, lineEndOffset))
+	}
+	
+	override getDefaultTokens() {
+		null
 	}
 
 }

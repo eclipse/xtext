@@ -38,4 +38,6 @@ public interface TokenSetProvider {
   public abstract TokenSet getMultiLineCommentTokens();
   
   public abstract TokenSet getStringLiteralTokens();
+  
+  public abstract TokenSet getDefaultTokens();
 }

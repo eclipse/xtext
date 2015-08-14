@@ -69,7 +69,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def extend(CompletionType type, CompletionProvider<CompletionParameters> contrib) {
-		extend(type, #[null], contrib)
+		extend(type, #[defaultTokens], contrib)
 	}
 	
 	protected def extend(CompletionType type, TokenSet[] tokenSets, CompletionProvider<CompletionParameters> contrib) {
@@ -83,7 +83,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	
 	
 	protected def extend(CompletionType type, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
-		extend(type, #[null], feature, contrib)
+		extend(type, #[defaultTokens], feature, contrib)
 	}
 	
 	protected def extend(CompletionType type, TokenSet[] tokenSets, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
@@ -93,7 +93,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def extend(CompletionType type, AbstractElement followElement, CompletionProvider<CompletionParameters> contrib) {
-		extend(type, #[null], followElement, contrib)
+		extend(type, #[defaultTokens], followElement, contrib)
 	}
 	
 	protected def extend(CompletionType type, TokenSet[] tokenSets, AbstractElement followElement, CompletionProvider<CompletionParameters> contrib) {
@@ -210,7 +210,7 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def supportParserBasedProposals(TokenSet tokenSet) {
-		tokenSet == null
+		tokenSet == defaultTokens
 	}
 
 	protected def getParserBasedDelegate() {

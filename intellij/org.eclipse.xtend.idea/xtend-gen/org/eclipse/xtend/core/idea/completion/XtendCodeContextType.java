@@ -58,6 +58,8 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   public static class Statement extends XtendCodeContextType {
     public Statement() {
       super("xtend.statement", "Statement", XtendCodeContextType.Generic.class);
+      TokenSet _defaultTokens = this.tokenSetProvider.getDefaultTokens();
+      this.tokenSets.add(_defaultTokens);
       XtendGrammarAccess.XVariableDeclarationElements _xVariableDeclarationAccess = this.grammarAccess.getXVariableDeclarationAccess();
       Keyword _valKeyword_0_0_1_0_0_1 = _xVariableDeclarationAccess.getValKeyword_0_0_1_0_0_1();
       this.followElements.add(_valKeyword_0_0_1_0_0_1);
@@ -67,6 +69,8 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   public static class Expression extends XtendCodeContextType {
     public Expression() {
       super("xtend.expression", "Expression", XtendCodeContextType.Statement.class);
+      TokenSet _defaultTokens = this.tokenSetProvider.getDefaultTokens();
+      this.tokenSets.add(_defaultTokens);
       XbaseGrammarAccess.XPrimaryExpressionElements _xPrimaryExpressionAccess = this.grammarAccess.getXPrimaryExpressionAccess();
       RuleCall _xFeatureCallParserRuleCall_4 = _xPrimaryExpressionAccess.getXFeatureCallParserRuleCall_4();
       this.followElements.add(_xFeatureCallParserRuleCall_4);
@@ -76,42 +80,17 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   public static class Member extends XtendCodeContextType {
     public Member() {
       super("xtend.member", "Member", XtendCodeContextType.Generic.class);
+      TokenSet _defaultTokens = this.tokenSetProvider.getDefaultTokens();
+      this.tokenSets.add(_defaultTokens);
       this.registerFollowElementsfor(XtendPackage.Literals.XTEND_TYPE_DECLARATION__MEMBERS);
     }
   }
   
   public static class TemplateExpression extends XtendCodeContextType {
-    @Inject
-    private ParserDefinition parserDefinition;
-    
-    @Inject
-    private XtendTokenSetProvider tokenSetProvider;
-    
     public TemplateExpression() {
       super("xtend.template", "Template", XtendCodeContextType.Generic.class);
-    }
-    
-    @Override
-    public boolean internalIsInContext(final PsiFile file, final int offset) {
-      boolean _xblockexpression = false;
-      {
-        Project _project = file.getProject();
-        final Lexer lexer = this.parserDefinition.createLexer(_project);
-        String _text = file.getText();
-        lexer.start(_text);
-        while (((!Objects.equal(lexer.getTokenType(), null)) && (lexer.getTokenEnd() <= offset))) {
-          lexer.advance();
-        }
-        final IElementType tokenType = lexer.getTokenType();
-        boolean _equals = Objects.equal(tokenType, null);
-        if (_equals) {
-          return false;
-        }
-        TokenSet _tokenSet = this.tokenSetProvider.getTokenSet(tokenType);
-        TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
-        _xblockexpression = Objects.equal(_tokenSet, _richStringLiteralTokens);
-      }
-      return _xblockexpression;
+      TokenSet _richStringLiteralTokens = this.tokenSetProvider.getRichStringLiteralTokens();
+      this.tokenSets.add(_richStringLiteralTokens);
     }
   }
   
@@ -123,6 +102,14 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   
   @Inject
   protected FollowElementComputer followElementComputer;
+  
+  @Inject
+  protected ParserDefinition parserDefinition;
+  
+  @Inject
+  protected XtendTokenSetProvider tokenSetProvider;
+  
+  protected HashSet<TokenSet> tokenSets = CollectionLiterals.<TokenSet>newHashSet();
   
   protected HashSet<AbstractElement> followElements = CollectionLiterals.<AbstractElement>newHashSet();
   
@@ -153,6 +140,35 @@ public abstract class XtendCodeContextType extends TemplateContextType {
   }
   
   public boolean internalIsInContext(final PsiFile file, final int offset) {
+    boolean _and = false;
+    boolean _isEmpty = this.tokenSets.isEmpty();
+    if (!_isEmpty) {
+      _and = false;
+    } else {
+      boolean _isEmpty_1 = this.followElements.isEmpty();
+      _and = _isEmpty_1;
+    }
+    if (_and) {
+      return true;
+    }
+    boolean _isEmpty_2 = this.tokenSets.isEmpty();
+    boolean _not = (!_isEmpty_2);
+    if (_not) {
+      final Object tokenSet = this.getTokenSet(file, offset);
+      boolean _contains = this.tokenSets.contains(tokenSet);
+      boolean _not_1 = (!_contains);
+      if (_not_1) {
+        return false;
+      }
+      boolean _isEmpty_3 = this.followElements.isEmpty();
+      if (_isEmpty_3) {
+        return true;
+      }
+    }
+    boolean _isEmpty_4 = this.followElements.isEmpty();
+    if (_isEmpty_4) {
+      return false;
+    }
     final PsiElement element = file.findElementAt(offset);
     ASTNode _node = null;
     if (element!=null) {
@@ -187,6 +203,26 @@ public abstract class XtendCodeContextType extends TemplateContextType {
     };
     this.followElementComputer.computeFollowElements(elements, _function);
     return hasFollowElement.get();
+  }
+  
+  protected Object getTokenSet(final PsiFile file, final int offset) {
+    TokenSet _xblockexpression = null;
+    {
+      Project _project = file.getProject();
+      final Lexer lexer = this.parserDefinition.createLexer(_project);
+      String _text = file.getText();
+      lexer.start(_text);
+      while (((!Objects.equal(lexer.getTokenType(), null)) && (lexer.getTokenEnd() <= offset))) {
+        lexer.advance();
+      }
+      final IElementType tokenType = lexer.getTokenType();
+      boolean _equals = Objects.equal(tokenType, null);
+      if (_equals) {
+        return Boolean.valueOf(false);
+      }
+      _xblockexpression = this.tokenSetProvider.getTokenSet(tokenType);
+    }
+    return _xblockexpression;
   }
   
   @Override

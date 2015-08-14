@@ -925,4 +925,148 @@ public class XtendCompletionTest extends LightXtendTest {
     boolean _contains = lookupElementStrings.contains("override toString()");
     TestCase.assertFalse(_string_1, _contains);
   }
+  
+  public void testSingleLineComment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("// Array<caret>");
+    _builder.newLine();
+    _builder.append("class Foo {}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testMultiLineComment() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/* Array<caret> */");
+    _builder.newLine();
+    _builder.append("class Foo {}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertTrue(_string_1, _contains);
+  }
+  
+  public void testStringLiteral_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'Array<caret>\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testStringLiteral_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\"Array<caret>\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testRichString_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Array<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    final List<String> lookupElementStrings = this.myFixture.getLookupElementStrings();
+    String _string_1 = lookupElementStrings.toString();
+    boolean _contains = lookupElementStrings.contains("ArrayList");
+    TestCase.assertFalse(_string_1, _contains);
+  }
+  
+  public void testRichString_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() \'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    this.myFixture.type("\n");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() \'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("«", "\t\t");
+    _builder_1.append("»", "\t\t");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("\'");
+    _builder_1.append("\'\'");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    String _string_1 = _builder_1.toString();
+    Editor _editor = this.myFixture.getEditor();
+    Document _document = _editor.getDocument();
+    String _text = _document.getText();
+    String _string_2 = _text.toString();
+    TestCase.assertEquals(_string_1, _string_2);
+  }
 }
