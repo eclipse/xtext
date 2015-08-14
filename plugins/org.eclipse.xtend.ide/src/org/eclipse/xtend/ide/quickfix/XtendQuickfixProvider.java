@@ -504,7 +504,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
 					@Override
 					public void apply(IModificationContext context) throws Exception {
-						IUndoableOperation op = new MoveResourcesOperation(iFile,pathToMoveTo, label);
+						IUndoableOperation op = new MoveResourcesOperation(iFile, pathToMoveTo, label);
 						PlatformUI.getWorkbench().getOperationSupport().getOperationHistory().execute(op, null, null);
 					}
 				});
