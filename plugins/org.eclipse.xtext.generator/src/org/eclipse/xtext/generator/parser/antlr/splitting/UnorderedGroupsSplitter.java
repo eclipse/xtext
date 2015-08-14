@@ -124,7 +124,7 @@ public class UnorderedGroupsSplitter {
 	public boolean shouldSimplify(String line) {
 		String trimmedLine = line.trim();
 		return (trimmedLine.startsWith("else if") || trimmedLine.startsWith("if"))
-				&& (trimmedLine.contains("getUnorderedGroupHelper()") || (trimmedLine.contains("p_") && !trimmedLine.contains("boolean p_")));
+				&& (trimmedLine.contains("getUnorderedGroupHelper()") || (!trimmedLine.contains("state.backtracking>0") && trimmedLine.contains("p_") && !trimmedLine.contains("boolean p_")));
 	}
 
 }
