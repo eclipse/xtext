@@ -119,6 +119,86 @@ class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest<Boolea
 		assertEquals(warnings.toString(), 0, warnings.size())
 	}
 
+	@Test def void testFragment_07() throws Exception {
+		var String grammarAsString = '''
+			grammar org.foo with org.eclipse.xtext.common.Terminals
+			generate metamodel 'foo.sample'
+			EntryRule:
+				name=ID FragmentWithAction
+			;
+			fragment FragmentWithAction returns EntryRule:
+				{EntryRule.prev=current} name=ID
+			;
+		'''
+		val grammar = getGrammar(grammarAsString)
+		val rule = GrammarUtil.findRuleForName(grammar, "EntryRule") as ParserRule
+		rule.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+		val fragment = GrammarUtil.findRuleForName(grammar, "FragmentWithAction") as ParserRule
+		fragment.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+	}
+	
+	@Test def void testFragment_08() throws Exception {
+		var String grammarAsString = '''
+			grammar org.foo with org.eclipse.xtext.common.Terminals
+			generate metamodel 'foo.sample'
+			EntryRule:
+				name=ID FragmentWithAction
+			;
+			fragment FragmentWithAction returns EntryRule:
+				name=ID {EntryRule.prev=current} name=ID
+			;
+		'''
+		val grammar = getGrammar(grammarAsString)
+		val rule = GrammarUtil.findRuleForName(grammar, "EntryRule") as ParserRule
+		rule.validateRule
+		assertEquals(warnings.toString(), 2, warnings.size())
+		val fragment = GrammarUtil.findRuleForName(grammar, "FragmentWithAction") as ParserRule
+		fragment.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+	}
+	
+	@Test def void testFragment_09() throws Exception {
+		var String grammarAsString = '''
+			grammar org.foo with org.eclipse.xtext.common.Terminals
+			generate metamodel 'foo.sample'
+			EntryRule:
+				name=ID FragmentWithAction
+			;
+			fragment FragmentWithAction returns EntryRule:
+				name=ID {EntryRule.prev=current}
+			;
+		'''
+		val grammar = getGrammar(grammarAsString)
+		val rule = GrammarUtil.findRuleForName(grammar, "EntryRule") as ParserRule
+		rule.validateRule
+		assertEquals(warnings.toString(), 2, warnings.size())
+		val fragment = GrammarUtil.findRuleForName(grammar, "FragmentWithAction") as ParserRule
+		fragment.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+	}
+	
+	@Test def void testFragment_10() throws Exception {
+		var String grammarAsString = '''
+			grammar org.foo with org.eclipse.xtext.common.Terminals
+			generate metamodel 'foo.sample'
+			EntryRule:
+				name=ID FragmentWithAction*
+			;
+			fragment FragmentWithAction returns EntryRule:
+				({EntryRule.prev=current} name=ID)*
+			;
+		'''
+		val grammar = getGrammar(grammarAsString)
+		val rule = GrammarUtil.findRuleForName(grammar, "EntryRule") as ParserRule
+		rule.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+		val fragment = GrammarUtil.findRuleForName(grammar, "FragmentWithAction") as ParserRule
+		fragment.validateRule
+		assertEquals(warnings.toString(), 0, warnings.size())
+	}
+	
 	@Test def void testBug280011_01() throws Exception {
 		var String grammarAsString = '''
 			grammar org.foo with org.eclipse.xtext.common.Terminals
