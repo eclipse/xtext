@@ -24,6 +24,7 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
+import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
 import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
@@ -88,6 +89,22 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		}
 		String[] result = params.toArray(new String[params.size()]);
 		return result;
+	}
+	
+	private AntlrCodeQualityHelper codeQualityHelper = new AntlrCodeQualityHelper();
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setCodeQualityHelper(AntlrCodeQualityHelper codeQualityHelper) {
+		this.codeQualityHelper = codeQualityHelper;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public AntlrCodeQualityHelper getCodeQualityHelper() {
+		return codeQualityHelper;
 	}
 	
 	/**
@@ -323,11 +340,16 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 */
 	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
 			String absoluteParserGrammarFileName, Charset encoding) {
-
+		String lexerJavaFile = absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix());
+		String parserJavaFile = absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix());
+		if (codeQualityHelper != null) {
+			codeQualityHelper.stripUnnecessaryComments(lexerJavaFile, parserJavaFile, encoding);
+			codeQualityHelper.removeDuplicateBitsets(parserJavaFile, encoding);
+		}
 		if (getOptions().isClassSplitting()) {
 			try {
-				splitLexerClassFile(absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix()), encoding);
-				splitParserClassFile(absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix()), encoding);
+				splitLexerClassFile(lexerJavaFile, encoding);
+				splitParserClassFile(parserJavaFile, encoding);
 			} catch (IOException e) {
 				throw new RuntimeException(e);
 			}
