@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -27,8 +27,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.undo.MoveResourcesOperation;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -504,8 +502,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
 					@Override
 					public void apply(IModificationContext context) throws Exception {
-						IUndoableOperation op = new MoveResourcesOperation(iFile, pathToMoveTo, label);
-						PlatformUI.getWorkbench().getOperationSupport().getOperationHistory().execute(op, null, null);
+						iFile.move(pathToMoveTo, IResource.KEEP_HISTORY, null);
 					}
 				});
 			}
