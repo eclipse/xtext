@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -111,9 +112,14 @@ public class IdeaResourceSetProvider {
             for (final URI uri : _keySet) {
               {
                 VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
-                byte[] _get = localWritten.get(uri);
-                Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
-                file.setBinaryContent(_get, (-1), timeStamp, _requestor);
+                final byte[] newContent = localWritten.get(uri);
+                final byte[] oldContent = file.contentsToByteArray();
+                boolean _equals = Arrays.equals(newContent, oldContent);
+                boolean _not = (!_equals);
+                if (_not) {
+                  Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
+                  file.setBinaryContent(newContent, (-1), timeStamp, _requestor);
+                }
               }
             }
             for (final URI uri_1 : localDeleted) {
