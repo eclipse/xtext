@@ -49,7 +49,7 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 		val firstFileMarkers = firstFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
 		assertEquals(printMarker(firstFileMarkers), 1, firstFileMarkers.length)
 		assertEquals('The type A is already defined in B.xtend.', firstFileMarkers.head.getAttribute(IMarker.MESSAGE))
-		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
+		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).onlyErrors
 		assertEquals(printMarker(secondFileMarkers), 1, secondFileMarkers.length)
 		assertEquals('The type A is already defined in A.xtend.', secondFileMarkers.head.getAttribute(IMarker.MESSAGE))
 	}
@@ -89,7 +89,7 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 			''')
 		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, XtextBuilder.BUILDER_ID, emptyStringMap, null)
 		first.build(IncrementalProjectBuilder.INCREMENTAL_BUILD, JavaCore.BUILDER_ID, emptyStringMap, null)
-		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE)
+		val secondFileMarkers = secondFile.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE).onlyErrors
 		assertEquals(printMarker(secondFileMarkers), 1, secondFileMarkers.length)
 		assertEquals('The type A is already defined in A.java.', secondFileMarkers.head.getAttribute(IMarker.MESSAGE))
 	}
@@ -141,6 +141,12 @@ class UniqueClassNameValidatorUITest extends AbstractXtendUITestCase {
 	
 	def static private Map<String,String> emptyStringMap(){
 		return <String,String>emptyMap
+	}
+	
+	def onlyErrors(Iterable<IMarker> markers) {
+		return markers.filter[
+			IMarker.SEVERITY_ERROR == it.getAttribute(IMarker.SEVERITY)
+		]
 	}
 	
 	@Before override setUp() throws Exception {

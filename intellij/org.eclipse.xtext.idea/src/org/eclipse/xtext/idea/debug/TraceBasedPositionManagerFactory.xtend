@@ -24,7 +24,7 @@ import com.sun.jdi.ReferenceType
 import java.util.List
 import java.util.Set
 import org.eclipse.xtext.idea.lang.IXtextLanguage
-import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider
+import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 import org.eclipse.xtext.idea.trace.VirtualFileInProject
 import org.eclipse.xtext.util.TextRegion
 
@@ -50,7 +50,7 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 		val IXtextLanguage language
 		
 		@Inject extension DebugProcessExtensions
-		@Inject TraceForVirtualFileProvider traceForVirtualFileProvider
+		@Inject ITraceForVirtualFileProvider traceForVirtualFileProvider
 	
 		new (DebugProcess process, IXtextLanguage language) {
 			this.process = process
@@ -144,7 +144,7 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 				val psi = position.elementAt
 				val document = PsiDocumentManager.getInstance(psi.project).getDocument(psi.containingFile)
 				val range = DocumentUtil.getLineTextRange(document, position.line)
-				val traceToTarget = traceForVirtualFileProvider.getTraceToTarget(new VirtualFileInProject(PsiUtil.getVirtualFile(psi), psi.project))
+				val traceToTarget = traceForVirtualFileProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(psi))
 				if (traceToTarget == null) {
 					throw NoDataException.INSTANCE
 				}

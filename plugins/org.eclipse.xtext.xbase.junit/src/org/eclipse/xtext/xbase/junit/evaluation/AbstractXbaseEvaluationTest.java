@@ -3381,6 +3381,26 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("logInfo2(foo, args...)", "new testdata.ClassWithVarArgs().logInfo2('foo', 's1', 's2', 's3')");
 	}
 	
+	@Test public void testAssignmentVarArgs_01() throws Exception {
+		assertEvaluatesTo(Collections.emptyList(), "{ var x = new testdata.ClassWithVarArgs x.values = #[] x.values }");
+	}
+	
+	@Test public void testAssignmentVarArgs_02() throws Exception {
+		assertEvaluatesTo(null, "{ var x = new testdata.ClassWithVarArgs x.values = null x.values }");
+	}
+	
+	@Test public void testAssignmentVarArgs_03() throws Exception {
+		assertEvaluatesTo(newArrayList("s1"), "{ var x = new testdata.ClassWithVarArgs x.values = 's1' x.values }");
+	}
+	
+	@Test public void testAssignmentVarArgs_04() throws Exception {
+		assertEvaluatesTo(newArrayList("s1", "s2"), "{ var x = new testdata.ClassWithVarArgs x.values = #['s1', 's2'] x.values }");
+	}
+	
+	@Test public void testAssignmentVarArgs_05() throws Exception {
+		assertEvaluatesTo(newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs x.values = #['s1', 's2', 's3'] x.values }");
+	}
+	
 	@Test public void testIterableExtension_01() throws Exception {
 		assertEvaluatesTo(null, "new java.util.ArrayList<String>().findFirst(String e|e.length==0)");
 	}

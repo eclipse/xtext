@@ -27,6 +27,9 @@ class XtendTokenSetProvider extends DefaultTokenSetProvider {
 
 	@Accessors
 	val TokenSet richStringLiteralTokens
+	
+	@Accessors
+	val TokenSet richStringCommentTokens
 
 	@Inject
 	new(TokenTypeProvider tokenTypeProvider) {
@@ -37,11 +40,18 @@ class XtendTokenSetProvider extends DefaultTokenSetProvider {
 			tokenTypeProvider.getIElementType(RULE_RICH_TEXT_INBETWEEN),
 			XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE
 		)
+		richStringCommentTokens = TokenSet.create(
+			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_INBETWEEN),
+			tokenTypeProvider.getIElementType(RULE_COMMENT_RICH_TEXT_END)
+		)
 	}
 
 	override getTokenSet(IElementType tokenType) {
 		if (richStringLiteralTokens.contains(tokenType)) {
 			return richStringLiteralTokens
+		}
+		if (richStringCommentTokens.contains(tokenType)) {
+			return richStringCommentTokens
 		}
 		super.getTokenSet(tokenType)
 	}

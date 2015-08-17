@@ -15,8 +15,10 @@ import com.intellij.facet.FacetTypeId;
 import com.intellij.facet.ModifiableFacetModel;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,6 +70,45 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
     boolean _exists_1 = regenerated.exists();
     TestCase.assertTrue(_exists_1);
+  }
+  
+  public void testNoChangeDoesntTouch() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    final VirtualFile file = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    boolean _exists = file.exists();
+    TestCase.assertTrue(_exists);
+    final long stamp = file.getModificationStamp();
+    Project _project = this.getProject();
+    PsiDocumentManager _instance = PsiDocumentManager.getInstance(_project);
+    final Document document = _instance.getDocument(xtendFile);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("package otherPackage");
+        _builder.newLine();
+        _builder.append("class Foo {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("// doesn\'t go into target");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        document.setText(_builder);
+      }
+    };
+    _application.runWriteAction(_function);
+    final VirtualFile regenerated = this.myFixture.findFileInTempDir("xtend-gen/otherPackage/Foo.java");
+    long _modificationStamp = regenerated.getModificationStamp();
+    TestCase.assertEquals(stamp, _modificationStamp);
   }
   
   public void testRemoveAndAddFacet() {

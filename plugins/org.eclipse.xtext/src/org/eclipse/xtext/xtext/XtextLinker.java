@@ -163,12 +163,23 @@ public class XtextLinker extends Linker {
 			if (!argument.isCalledByName()) {
 				RuleCall ruleCall = EcoreUtil2.getContainerOfType(argument, RuleCall.class);
 				AbstractRule calledRule = ruleCall.getRule();
-				if (calledRule instanceof ParserRule && !calledRule.eIsProxy()) {
+				if (!(calledRule instanceof ParserRule)) {
+					producer.addDiagnostic(new DiagnosticMessage("Arguments can only be used with parser rules.", Severity.ERROR, null));	
+					return;
+				}
+				if (!calledRule.eIsProxy()) {
 					ParserRule casted = (ParserRule) calledRule;
 					int idx = ruleCall.getArguments().indexOf(argument);
 					if (idx < casted.getParameters().size()) {
 						argument.setParameter(casted.getParameters().get(idx));
 						return;
+					} else if (casted.getParameters().size() == 0) {
+						producer.addDiagnostic(new DiagnosticMessage(
+								"Rule " + calledRule.getName() + " has no arguments.", Severity.ERROR, null));
+					} else {
+						String message = "Invalid number of arguments for rule " + calledRule.getName() + ", expecting "
+								+ casted.getParameters().size() + " but was " + (idx+1);
+						producer.addDiagnostic(new DiagnosticMessage(message, Severity.ERROR, null));
 					}
 				}
 			}

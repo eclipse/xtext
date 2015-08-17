@@ -88,17 +88,17 @@ class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
 	
 	@Test 
 	def void renameXtendClassWithAA() {
-		val barEditor = bot.newXtendEditor('Zonk', '''
+		val barEditor = bot.newXtendEditor('Fonk', '''
 			import org.eclipse.xtend.lib.annotations.Data
 			@Data
-			class ?Zonk? {}
+			class ?Fonk? {}
 		''')
-		barEditor.renameInXtendEditor('NewZonk', 'Rename Element')
+		barEditor.renameInXtendEditor('NewFonk', 'Rename Element')
 		assertEquals('''
 			import org.eclipse.xtend.lib.annotations.Data
 			@Data
-			class NewZonk {}
+			class NewFonk {}
 		''', barEditor.text)
-		assertEquals('NewZonk.xtend', barEditor.title)
+		assertEquals('NewFonk.xtend', barEditor.title)
 	}
 }

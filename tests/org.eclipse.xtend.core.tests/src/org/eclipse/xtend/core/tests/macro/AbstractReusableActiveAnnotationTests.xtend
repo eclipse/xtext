@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.macro
 import com.google.inject.Inject
 import org.eclipse.xtend.core.compiler.XtendGenerator
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmClassDeclarationImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmFieldDeclarationImpl
 import org.eclipse.xtend.core.macro.declaration.MutableJvmMethodDeclarationImpl
@@ -20,13 +21,11 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.junit4.internal.LineDelimiters
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
+import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.junit.Ignore
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
-import org.eclipse.xtend.core.macro.declaration.ExpressionImpl
-
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
@@ -37,8 +36,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Test def void testBug453273() {
 		assertProcessing(
-			'annotation/AddNestedTypes.xtend' -> '''
-				package annotation
+			'myannotation/AddNestedTypes.xtend' -> '''
+				package myannotation
 				
 				import java.lang.annotation.ElementType
 				import java.lang.annotation.Target
@@ -68,7 +67,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'my/client/UserCode.xtend' -> '''
 				package my.client
 				
-				@annotation.AddNestedTypes
+				@myannotation.AddNestedTypes
 				class TopLevelClass {
 				}
 			'''
@@ -111,7 +110,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					}
 				}
 			''',
-			'UserCode.xtend' -> '''
+			'Bug441081Client.xtend' -> '''
 				import bug441081.Bug441081
 				
 				@Bug441081
@@ -2571,7 +2570,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 					}
 				}
 			",
-			'myusercode/UserCode.xtend' -> '''
+			'myusercode/MyClass.xtend' -> '''
 				package myusercode
 				
 				class MyClass {

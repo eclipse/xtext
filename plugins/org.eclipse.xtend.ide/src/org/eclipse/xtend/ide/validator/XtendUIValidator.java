@@ -30,6 +30,7 @@ import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -122,6 +123,17 @@ public class XtendUIValidator extends XbaseUIValidator {
 		if(expectedPackage != null && !((isEmpty(expectedPackage) && declaredPackage == null) || expectedPackage.equals(declaredPackage))) {
 			error("The declared package '" + notNull(declaredPackage) + "' does not match the expected package '" + notNull(expectedPackage) + "'",
 					XtendPackage.Literals.XTEND_FILE__PACKAGE, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.WRONG_PACKAGE, expectedPackage);
+		}
+
+		if (xtendFile.getXtendTypes().size() == 1) {
+			XtendTypeDeclaration xtendType = xtendFile.getXtendTypes().get(0);
+			String currentFileName = xtendFile.eResource().getURI().trimFileExtension().lastSegment();
+			String expectedFileName = xtendType.getName();
+			if (expectedFileName != null && !equal(currentFileName, expectedFileName)) {
+				addIssue("The type name '" + expectedFileName + "' doesn't match the file name '" + currentFileName + "'",
+						xtendType, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME,
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, IssueCodes.WRONG_FILE, expectedFileName);
+			}
 		}
 	}
 	

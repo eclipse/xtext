@@ -13,6 +13,12 @@ import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
+import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -72,7 +78,14 @@ class SwtBotProjectHelper {
 	}
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
-		menu('File').menu('New').menu('Xtend Class').click
+		try {
+			menu('File').menu('New').menu('Xtend Class').click
+		} catch (WidgetNotFoundException e) {
+			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
+			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
+				it.shells.filter[active].head.widget)
+			throw e
+		}
 		shell('Xtend Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
 		textWithLabel('Package:').text = packageName
@@ -132,7 +145,11 @@ class SwtBotProjectHelper {
 	
 	static def clearSourceFolderContents(SWTWorkbenchBot it, String project) {
 		try {
-			val srcNode = tree.expandNode(project).expandNode('src')
+			var packageExplorerTree = tree
+			if(!tree.hasItems) {
+				packageExplorerTree = viewByTitle("Package Explorer").bot.tree
+			}
+			val srcNode = packageExplorerTree.expandNode(project).expandNode('src')
 			for(source: srcNode.items) {
 				if(!source.widget.disposed) {
 					println(text)
@@ -143,8 +160,21 @@ class SwtBotProjectHelper {
 				}
 			}
 		} catch(WidgetNotFoundException exc) {
-			// ignore
+			ResourcesPlugin.workspace.root.getProject(project).getFolder('src').members.forEach[delete(true,null)]
 		}
+	}
+	
+	static def SWTBotTreeItem expandNode(AbstractSWTBot<?> bot, String node) {
+		var SWTBotTreeItem item = null
+		if (bot instanceof SWTBotTree) {
+			item = bot.getTreeItem(node)
+		} else if (bot instanceof SWTBotTreeItem) {
+			item = bot.getNode(node)
+		}
+		if (!item.expanded) {
+			item.expand
+		}
+		return item
 	}
 }
 

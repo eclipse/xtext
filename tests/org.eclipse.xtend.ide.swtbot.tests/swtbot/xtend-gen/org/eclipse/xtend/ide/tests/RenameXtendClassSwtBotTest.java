@@ -144,20 +144,20 @@ public class RenameXtendClassSwtBotTest extends AbstractRefactoringSwtBotTest {
     _builder.newLine();
     _builder.append("@Data");
     _builder.newLine();
-    _builder.append("class ?Zonk? {}");
+    _builder.append("class ?Fonk? {}");
     _builder.newLine();
-    final SWTBotEclipseEditor barEditor = SwtBotProjectHelper.newXtendEditor(_bot, "Zonk", _builder);
-    this.renameInXtendEditor(barEditor, "NewZonk", "Rename Element");
+    final SWTBotEclipseEditor barEditor = SwtBotProjectHelper.newXtendEditor(_bot, "Fonk", _builder);
+    this.renameInXtendEditor(barEditor, "NewFonk", "Rename Element");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import org.eclipse.xtend.lib.annotations.Data");
     _builder_1.newLine();
     _builder_1.append("@Data");
     _builder_1.newLine();
-    _builder_1.append("class NewZonk {}");
+    _builder_1.append("class NewFonk {}");
     _builder_1.newLine();
     String _text = barEditor.getText();
     this.assertEquals(_builder_1, _text);
     String _title = barEditor.getTitle();
-    this.assertEquals("NewZonk.xtend", _title);
+    this.assertEquals("NewFonk.xtend", _title);
   }
 }

@@ -100,17 +100,15 @@ public class ConfigurationProducerExtensions {
     if (_equals) {
       return CollectionLiterals.<PsiFile>emptySet();
     }
-    VirtualFile _virtualFile = xtextFile.getVirtualFile();
-    Project _project = xtextFile.getProject();
-    VirtualFileInProject _virtualFileInProject = new VirtualFileInProject(_virtualFile, _project);
-    final IIdeaTrace trace = this.traceProvider.getTraceToTarget(_virtualFileInProject);
+    VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(xtextFile);
+    final IIdeaTrace trace = this.traceProvider.getTraceToTarget(_forPsiElement);
     if ((trace != null)) {
       final ArrayList<PsiFile> javaFiles = CollectionLiterals.<PsiFile>newArrayList();
       Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
       for (final ILocationInVirtualFile uri : _allAssociatedLocations) {
         {
-          Project _project_1 = xtextFile.getProject();
-          PsiManager _instance = PsiManager.getInstance(_project_1);
+          Project _project = xtextFile.getProject();
+          PsiManager _instance = PsiManager.getInstance(_project);
           VirtualFileInProject _platformResource = uri.getPlatformResource();
           VirtualFile _file = _platformResource.getFile();
           final PsiFile javaPsiFile = _instance.findFile(_file);

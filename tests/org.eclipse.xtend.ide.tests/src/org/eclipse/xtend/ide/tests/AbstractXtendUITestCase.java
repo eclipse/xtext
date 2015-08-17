@@ -14,6 +14,7 @@ import org.eclipse.xtend.ide.internal.XtendActivator;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.compiler.JavaVersion;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -60,13 +61,15 @@ public abstract class AbstractXtendUITestCase extends Assert {
 
 	protected void setJavaVersion(JavaVersion javaVersion) throws Exception {
 		IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(WorkbenchTestHelper.TESTPROJECT_NAME);
-		String bree = WorkbenchTestHelper.changeBree(javaProject, javaVersion);
-		IExecutionEnvironment execEnv = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(bree);
+		Pair<String,Boolean> result = WorkbenchTestHelper.changeBree(javaProject, javaVersion);
+		IExecutionEnvironment execEnv = JavaRuntime.getExecutionEnvironmentsManager().getEnvironment(result.getKey());
 		Assume.assumeNotNull("Execution environment not found for: " + javaVersion.getLabel(), execEnv);
 		Assume.assumeTrue("No compatible VM was found for: " + javaVersion.getLabel(),
 				execEnv.getCompatibleVMs().length > 0);
-		WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
-		IResourcesSetupUtil.reallyWaitForAutoBuild();
+		if(result.getValue()) {
+			WorkbenchTestHelper.makeCompliantFor(javaProject, javaVersion);
+			IResourcesSetupUtil.reallyWaitForAutoBuild();
+		}
 	}
 
 }

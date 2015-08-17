@@ -132,6 +132,11 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 	
 	@Override
+	protected String getSimpleFeatureName() {
+		return getActualType(getFeature(), true).getHumanReadableName();
+	}
+	
+	@Override
 	public boolean isAnonymousClassConstructorCall() {
 		return description.isAnonymousClassConstructorCall();
 	}

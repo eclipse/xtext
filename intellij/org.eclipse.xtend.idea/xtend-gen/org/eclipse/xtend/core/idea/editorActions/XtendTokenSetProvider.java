@@ -29,6 +29,9 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
   @Accessors
   private final TokenSet richStringLiteralTokens;
   
+  @Accessors
+  private final TokenSet richStringCommentTokens;
+  
   @Inject
   public XtendTokenSetProvider(final TokenTypeProvider tokenTypeProvider) {
     IElementType _iElementType = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_RICH_TEXT);
@@ -38,6 +41,10 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
     TokenSet _create = TokenSet.create(_iElementType, _iElementType_1, _iElementType_2, _iElementType_3, 
       XtendHighlightingLexer.GUILLEMET_ELEMENT_TYPE);
     this.richStringLiteralTokens = _create;
+    IElementType _iElementType_4 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_INBETWEEN);
+    IElementType _iElementType_5 = tokenTypeProvider.getIElementType(PsiInternalXtendParser.RULE_COMMENT_RICH_TEXT_END);
+    TokenSet _create_1 = TokenSet.create(_iElementType_4, _iElementType_5);
+    this.richStringCommentTokens = _create_1;
   }
   
   @Override
@@ -47,6 +54,10 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
       boolean _contains = this.richStringLiteralTokens.contains(tokenType);
       if (_contains) {
         return this.richStringLiteralTokens;
+      }
+      boolean _contains_1 = this.richStringCommentTokens.contains(tokenType);
+      if (_contains_1) {
+        return this.richStringCommentTokens;
       }
       _xblockexpression = super.getTokenSet(tokenType);
     }
@@ -108,5 +119,10 @@ public class XtendTokenSetProvider extends DefaultTokenSetProvider {
   @Pure
   public TokenSet getRichStringLiteralTokens() {
     return this.richStringLiteralTokens;
+  }
+  
+  @Pure
+  public TokenSet getRichStringCommentTokens() {
+    return this.richStringCommentTokens;
   }
 }

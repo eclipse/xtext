@@ -1204,8 +1204,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _doEvaluate(XAssignment assignment, IEvaluationContext context, CancelIndicator indicator) {
+		JvmIdentifiableElement feature = assignment.getFeature();
+		if (feature instanceof JvmOperation && ((JvmOperation) feature).isVarArgs()) {
+			return _doEvaluate((XAbstractFeatureCall) assignment, context, indicator);
+		}
 		Object value = internalEvaluate(assignment.getValue(), context, indicator);
-		Object assign = assignValueTo(assignment.getFeature(), assignment, value, context, indicator);
+		Object assign = assignValueTo(feature, assignment, value, context, indicator);
 		return assign;
 	}
 	

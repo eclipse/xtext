@@ -108,12 +108,12 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   }
   
   protected List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
-    if ((element == null)) {
-      return Collections.<PsiElement>emptyList();
-    }
     if ((element instanceof PsiNameIdentifierOwner)) {
-      PsiElement _nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
-      return this.getGeneratedElements(_nameIdentifier);
+      final PsiElement nameIdentifier = ((PsiNameIdentifierOwner)element).getNameIdentifier();
+      if ((nameIdentifier == null)) {
+        return Collections.<PsiElement>emptyList();
+      }
+      return this.getGeneratedElements(nameIdentifier);
     }
     final ArrayList<PsiNamedElement> result = CollectionLiterals.<PsiNamedElement>newArrayList();
     List<? extends PsiElement> _generatedElements = this.traceProvider.getGeneratedElements(element);

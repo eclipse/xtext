@@ -27,6 +27,7 @@ import org.eclipse.xtext.idea.util.CancelProgressIndicator;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.SyntheticCompositeNode;
 import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.XtextPsiUtils;
 import org.eclipse.xtext.psi.stubs.XtextFileStub;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
@@ -188,15 +189,7 @@ public abstract class BaseXtextFile extends PsiFileBase {
 	
 	 
 	protected VirtualFile findVirtualFile(final PsiFile psiFile) {
-		PsiFile originalFile = psiFile.getOriginalFile();
-		if (originalFile != psiFile && originalFile != null) {
-			return findVirtualFile(originalFile);
-		}
-		VirtualFile virtualFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
-		if (virtualFile != null) {
-			return virtualFile;
-		}
-		return psiFile.getViewProvider().getVirtualFile();
+		return XtextPsiUtils.findVirtualFile(psiFile);
 	}
 
 	protected void initialize(final Resource resource) {
