@@ -24,6 +24,9 @@ import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.swt.finder.SWTBot;
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper;
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences;
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils;
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotButton;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotList;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
@@ -80,7 +83,7 @@ public class SwtBotProjectHelper {
       SWTBotShell _shell = it.shell("New Project");
       _shell.activate();
       SWTBotTree _tree = it.tree();
-      SWTBotTreeItem _expandNode = _tree.expandNode("Java");
+      SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(_tree, "Java");
       _expandNode.select("Java Project");
       SWTBotButton _button = it.button("Next >");
       _button.click();
@@ -167,22 +170,39 @@ public class SwtBotProjectHelper {
       } catch (final Throwable _t) {
         if (_t instanceof WidgetNotFoundException) {
           final WidgetNotFoundException e = (WidgetNotFoundException)_t;
-          it.captureScreenshot("MenuFileNotFound");
           SWTBotShell[] _shells = it.shells();
           final Procedure1<SWTBotShell> _function = new Procedure1<SWTBotShell>() {
             @Override
             public void apply(final SWTBotShell it) {
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Shell: ");
+              _builder.append("Shell: \'");
               String _text = it.getText();
               _builder.append(_text, "");
-              _builder.append(" active: ");
+              _builder.append("\', active: ");
               boolean _isActive = it.isActive();
               _builder.append(_isActive, "");
               InputOutput.<String>println(_builder.toString());
             }
           };
           IterableExtensions.<SWTBotShell>forEach(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells)), _function);
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append(SWTBotPreferences.SCREENSHOTS_DIR, "");
+          _builder.append("/MenuFileNotFound");
+          long _currentTimeMillis = System.currentTimeMillis();
+          _builder.append(_currentTimeMillis, "");
+          _builder.append(".");
+          _builder.append(SWTBotPreferences.SCREENSHOT_FORMAT, "");
+          SWTBotShell[] _shells_1 = it.shells();
+          final Function1<SWTBotShell, Boolean> _function_1 = new Function1<SWTBotShell, Boolean>() {
+            @Override
+            public Boolean apply(final SWTBotShell it) {
+              return Boolean.valueOf(it.isActive());
+            }
+          };
+          Iterable<SWTBotShell> _filter = IterableExtensions.<SWTBotShell>filter(((Iterable<SWTBotShell>)Conversions.doWrapArray(_shells_1)), _function_1);
+          SWTBotShell _head = IterableExtensions.<SWTBotShell>head(_filter);
+          SWTUtils.captureScreenshot(_builder.toString(), 
+            _head.widget);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -297,8 +317,8 @@ public class SwtBotProjectHelper {
           SWTBotTree _tree_1 = _bot.tree();
           packageExplorerTree = _tree_1;
         }
-        SWTBotTreeItem _expandNode = packageExplorerTree.expandNode(project);
-        final SWTBotTreeItem srcNode = _expandNode.expandNode("src");
+        SWTBotTreeItem _expandNode = SwtBotProjectHelper.expandNode(packageExplorerTree, project);
+        final SWTBotTreeItem srcNode = SwtBotProjectHelper.expandNode(_expandNode, "src");
         SWTBotTreeItem[] _items = srcNode.getItems();
         for (final SWTBotTreeItem source : _items) {
           boolean _isDisposed = source.widget.isDisposed();
@@ -342,5 +362,24 @@ public class SwtBotProjectHelper {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public static SWTBotTreeItem expandNode(final AbstractSWTBot<?> bot, final String node) {
+    SWTBotTreeItem item = null;
+    if ((bot instanceof SWTBotTree)) {
+      SWTBotTreeItem _treeItem = ((SWTBotTree)bot).getTreeItem(node);
+      item = _treeItem;
+    } else {
+      if ((bot instanceof SWTBotTreeItem)) {
+        SWTBotTreeItem _node = ((SWTBotTreeItem)bot).getNode(node);
+        item = _node;
+      }
+    }
+    boolean _isExpanded = item.isExpanded();
+    boolean _not = (!_isExpanded);
+    if (_not) {
+      item.expand();
+    }
+    return item;
   }
 }

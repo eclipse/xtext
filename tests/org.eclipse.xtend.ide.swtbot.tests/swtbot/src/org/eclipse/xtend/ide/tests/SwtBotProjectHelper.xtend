@@ -14,6 +14,11 @@ import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
 import org.eclipse.core.resources.ResourcesPlugin
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree
+import org.eclipse.swtbot.swt.finder.widgets.SWTBotTreeItem
+import org.eclipse.swtbot.swt.finder.widgets.AbstractSWTBot
+import org.eclipse.swtbot.swt.finder.utils.SWTUtils
+import org.eclipse.swtbot.swt.finder.utils.SWTBotPreferences
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -76,8 +81,9 @@ class SwtBotProjectHelper {
 		try {
 			menu('File').menu('New').menu('Xtend Class').click
 		} catch (WidgetNotFoundException e) {
-			it.captureScreenshot("MenuFileNotFound")
-			it.shells.forEach[println('''Shell: «text» active: «active»''')]
+			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
+			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
+				it.shells.filter[active].head.widget)
 		}
 		shell('Xtend Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
@@ -155,6 +161,19 @@ class SwtBotProjectHelper {
 		} catch(WidgetNotFoundException exc) {
 			ResourcesPlugin.workspace.root.getProject(project).getFolder('src').members.forEach[delete(true,null)]
 		}
+	}
+	
+	static def SWTBotTreeItem expandNode(AbstractSWTBot<?> bot, String node) {
+		var SWTBotTreeItem item = null
+		if (bot instanceof SWTBotTree) {
+			item = bot.getTreeItem(node)
+		} else if (bot instanceof SWTBotTreeItem) {
+			item = bot.getNode(node)
+		}
+		if (!item.expanded) {
+			item.expand
+		}
+		return item
 	}
 }
 
