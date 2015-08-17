@@ -37,6 +37,7 @@ import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
+import org.jetbrains.annotations.NotNull
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -51,7 +52,7 @@ class XtendLibraryManager {
 		ensureXtendLibAvailable(rootModel, module, null)
 	}
 
-	def ensureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
+	def ensureXtendLibAvailable(@NotNull ModifiableRootModel rootModel, @NotNull Module module, PsiFile context) {
 		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(Data.name,
 			GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module));
 		if (psiClass == null) {

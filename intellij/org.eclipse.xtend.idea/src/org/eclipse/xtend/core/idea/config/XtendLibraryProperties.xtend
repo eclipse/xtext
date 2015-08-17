@@ -12,10 +12,10 @@ import com.intellij.openapi.roots.libraries.LibraryProperties
 /**
  * @author kosyakov - Initial contribution and API
  */
-class XtendLibraryProperties extends LibraryProperties<XtendLibraryProperties> {
+final class XtendLibraryProperties extends LibraryProperties<XtendLibraryProperties> {
 
 	override equals(Object obj) {
-		true
+		return obj instanceof XtendLibraryProperties
 	}
 
 	override hashCode() {

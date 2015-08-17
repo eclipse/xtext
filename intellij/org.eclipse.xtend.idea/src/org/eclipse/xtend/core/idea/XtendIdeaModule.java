@@ -46,8 +46,6 @@ import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
 import org.eclipse.xtext.idea.intentions.IdeaIntentionsProvider;
 import org.eclipse.xtext.idea.presentation.ItemPresentationProvider;
 import org.eclipse.xtext.idea.structureview.XtextFileAwareStructureViewBuilder;
-import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider;
-import org.eclipse.xtext.idea.trace.TraceForVirtualFileProvider;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.antlr.LexerProvider;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
