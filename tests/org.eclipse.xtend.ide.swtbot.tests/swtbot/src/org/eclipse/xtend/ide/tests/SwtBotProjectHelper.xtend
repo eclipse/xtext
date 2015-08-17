@@ -84,6 +84,7 @@ class SwtBotProjectHelper {
 			it.shells.forEach[println('''Shell: '«text»', active: «active»''')]
 			SWTUtils.captureScreenshot('''«SWTBotPreferences.SCREENSHOTS_DIR»/MenuFileNotFound«System.currentTimeMillis».«SWTBotPreferences.SCREENSHOT_FORMAT»''',
 				it.shells.filter[active].head.widget)
+			throw e
 		}
 		shell('Xtend Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
