@@ -26,7 +26,7 @@ public class VirtualFileInProject {
     final VirtualFile virtualFile = XtextPsiUtils.findVirtualFile(element);
     boolean _equals = Objects.equal(virtualFile, null);
     if (_equals) {
-      throw new NullPointerException("virtualFile");
+      return null;
     }
     Project _project = element.getProject();
     return new VirtualFileInProject(virtualFile, _project);

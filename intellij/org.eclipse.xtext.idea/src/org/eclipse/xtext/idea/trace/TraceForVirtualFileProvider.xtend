@@ -16,7 +16,6 @@ import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.psi.PsiElement
-import com.intellij.psi.util.PsiUtilCore
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
@@ -69,10 +68,10 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	@Inject Provider<VirtualFileBasedTrace> traceProvider
 	
 	override getGeneratedElements(PsiElement element) {
-		if (element === null || PsiUtilCore.getVirtualFile(element) === null) {
+		val fileInProject = VirtualFileInProject.forPsiElement(element)
+		if (fileInProject === null) {
 			return emptyList
 		}
-		val fileInProject = VirtualFileInProject.forPsiElement(element)
 		val traceToTarget = getTraceToTarget(fileInProject)
 		return getTracedElements(traceToTarget, element)
 	}
@@ -110,6 +109,9 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 	
 	override getOriginalElements(PsiElement element) {
 		val fileInProject = VirtualFileInProject.forPsiElement(element)
+		if (fileInProject === null)
+			return emptyList
+
 		val traceToSource = getTraceToSource(fileInProject)
 		return getTracedElements(traceToSource, element)
 	}

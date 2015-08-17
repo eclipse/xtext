@@ -63,10 +63,14 @@ class ConfigurationProducerExtensions {
 
 	def private Iterable<PsiFile> getJavaFiles(@NotNull PsiElement xtextElement) {
 		val xtextFile = xtextElement.getParentOfType(BaseXtextFile, false)
-		if (xtextFile == null) {
+		if (xtextFile === null) {
 			return emptySet
 		}
-		val IIdeaTrace trace = traceProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(xtextFile))
+		val fileInProject = VirtualFileInProject.forPsiElement(xtextFile)
+		if (fileInProject == null) {
+			return emptySet
+		}
+		val IIdeaTrace trace = traceProvider.getTraceToTarget(fileInProject)
 		if (trace !== null) {
 			val javaFiles = newArrayList
 			for (uri : trace.allAssociatedLocations) {
