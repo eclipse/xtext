@@ -26,6 +26,7 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaListFormatter;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -95,6 +96,63 @@ public class ContextPDAProviderTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
+	}
+	
+	@Test
+	@Ignore("TODO implement me, expectation is not correct so far")
+	public void testFragmentWithAction() throws Exception {
+		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> {Act.val2=}\n");
+		expected.append("  val3=ID -> stop\n");
+		expected.append("  {Act.val2=} -> val3=ID\n");
+		expected.append("Rule_Act_1:\n");
+		expected.append("  start -> val1=ID\n");
+		expected.append("  val1=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement me, expectation is not correct so far")
+	public void testFragmentWithActionRecursive() throws Exception {
+		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID F?;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> a1=ID\n");
+		expected.append("  'kw1' -> a2=ID\n");
+		expected.append("  'kw2' -> a2=ID\n");
+		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
+		expected.append("  a2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement me, expectation is not correct so far")
+	public void testFragmentWithActionTwice() throws Exception {
+		String actual = getParserRule("R: f1=ID F; fragment F returns R: {A.prev=current} f2=ID {A.prev=current} f2=ID;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> a1=ID\n");
+		expected.append("  'kw1' -> a2=ID\n");
+		expected.append("  'kw2' -> a2=ID\n");
+		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
+		expected.append("  a2=ID -> stop");
+		assertEquals(expected.toString(), actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement me, expectation is not correct so far")
+	public void testFragmentWithActionLoop() throws Exception {
+		String actual = getParserRule("R: f1=ID F; fragment F returns R: ({A.prev=current} f2=ID)*;");
+		StringBuilder expected = new StringBuilder();
+		expected.append("Rule:\n");
+		expected.append("  start -> a1=ID\n");
+		expected.append("  'kw1' -> a2=ID\n");
+		expected.append("  'kw2' -> a2=ID\n");
+		expected.append("  a1=ID -> 'kw1', 'kw2'\n");
+		expected.append("  a2=ID -> stop");
+		assertEquals(expected.toString(), actual);
 	}
 
 	@Test

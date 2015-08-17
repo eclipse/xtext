@@ -20,6 +20,7 @@ import org.eclipse.xtext.serializer.analysis.Context2NameFunction;
 import org.eclipse.xtext.serializer.analysis.IContextProvider;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -71,6 +72,54 @@ public class ContextProviderTest extends AbstractXtextTests {
 	public void testSimple() throws Exception {
 		String actual = getContexts("Rule: foo=ID;");
 		String expected = "Rule returns Rule";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement in context provider")
+	public void testFragmentIsNotAContext() throws Exception {
+		String actual = getContexts("Rule: foo=ID; fragment Fragment: name=ID WCFragment; fragment WCFragment*: desc=STRING;");
+		String expected = "Rule returns Rule";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement in context provider")
+	public void testActionInFragment() throws Exception {
+		String actual = getContexts("Rule: foo=ID Fragment; fragment Fragment returns AbstractRule: {AnotherRule.prev=current} name=ID;");
+		String expected = "Fragment_AnotherRule_0 returns Rule\n" + 
+				"Rule returns AnotherRule";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement in context provider")
+	public void testTwoActionsInFragment() throws Exception {
+		String actual = getContexts("Rule0: f1=ID Fragment; fragment Fragment returns Rule: {Rule1.prev=current} f2=ID {Rule2.prev=current} f3=ID;");
+		String expected = "Fragment_Rule1_0 returns Rule0\n" + 
+				"Fragment_Rule2_2 returns Rule1\n" +
+				"Rule0 returns Rule2";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement in context provider")
+	public void testActionsInFragmentTwoCallers() throws Exception {
+		String actual = getContexts(
+				"Rule0: f1=ID Fragment; Rule1: f2=ID Fragment; fragment Fragment returns Rule: {Rule2.prev=current} f3=ID;");
+		String expected = "Fragment_Rule2_0 returns Rule0, Rule1\n" +
+				"Rule0 returns Rule2\n" +
+				"Rule1 returns Rule2";
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	@Ignore("TODO implement in context provider")
+	public void testActionsInFragmentTwoPrecedingActions() throws Exception {
+		String actual = getContexts(
+				"Rule0: ({Rule1} f1=ID | {Rule2} f1=STRING) Fragment?; fragment Fragment returns Rule: {Rule3.prev=current} f3=ID;");
+		String expected = "Fragment_Rule3_0 returns Rule1, Rule2\n" +
+				"Rule0 returns Rule1, Rule2, Rule3";
 		assertEquals(expected, actual);
 	}
 
