@@ -27,6 +27,7 @@ import com.intellij.openapi.roots.libraries.Library;
 import com.intellij.openapi.roots.libraries.LibraryTable;
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar;
 import com.intellij.openapi.roots.libraries.NewLibraryConfiguration;
+import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -52,7 +53,6 @@ import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.idea.maven.dom.MavenDomUtil;
 import org.jetbrains.idea.maven.dom.model.MavenDomDependency;
 import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel;
@@ -83,12 +83,29 @@ public class XtendLibraryManager {
     this.ensureXtendLibAvailable(rootModel, module, null);
   }
   
-  public void ensureXtendLibAvailable(@NotNull final ModifiableRootModel rootModel, @NotNull final Module module, final PsiFile context) {
+  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module, final PsiFile context) {
+    final Project project = module.getProject();
+    boolean _isInitialized = project.isInitialized();
+    if (_isInitialized) {
+      this.doEnsureXtendLibAvailable(rootModel, module, context);
+    } else {
+      StartupManager _instance = StartupManager.getInstance(project);
+      final Runnable _function = new Runnable() {
+        @Override
+        public void run() {
+          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, module, context);
+        }
+      };
+      _instance.registerPostStartupActivity(_function);
+    }
+  }
+  
+  protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module, final PsiFile context) {
+    final GlobalSearchScope scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
     Project _project = module.getProject();
     JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
     String _name = Data.class.getName();
-    GlobalSearchScope _moduleWithDependenciesAndLibrariesScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
-    final PsiClass psiClass = _instance.findClass(_name, _moduleWithDependenciesAndLibrariesScope);
+    final PsiClass psiClass = _instance.findClass(_name, scope);
     boolean _equals = Objects.equal(psiClass, null);
     if (_equals) {
       boolean _isMavenizedModule = this.isMavenizedModule(module);

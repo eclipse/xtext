@@ -15,6 +15,7 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.SourceFolder
+import com.intellij.openapi.vfs.VfsUtil
 import com.intellij.openapi.vfs.VirtualFile
 import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
@@ -38,13 +39,13 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	) {
 		val entry = rootModel.contentEntries.head
 		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
-		var VirtualFile xtendGenMain = mainSrc.createOrGetInParentDir("xtend-gen")
+		var VirtualFile xtendGenMain = mainSrc.createOrGetInParentDir('xtend-gen')
 		if (xtendGenMain != null) {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
 		}
 		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
-		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir("xtend-gen")
+		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir('xtend-gen')
 		if (xtendGenTest != null) {
 			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
 			entry.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
@@ -67,15 +68,12 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
 	}
 
-	def VirtualFile createOrGetInParentDir(SourceFolder sibling, String folderName) {
+	def VirtualFile createOrGetInParentDir(SourceFolder sibling, String relativePath) {
 		val parent = sibling?.file?.parent
 		if (parent === null)
 			return null
-		val existing = parent.children.findFirst[it.name == name]
-		if (existing !== null) {
-			return existing
-		}
-		return parent.createChildDirectory(null, folderName)
+
+		VfsUtil.createDirectoryIfMissing(parent, relativePath)
 	}
 
 	override createComponent() {

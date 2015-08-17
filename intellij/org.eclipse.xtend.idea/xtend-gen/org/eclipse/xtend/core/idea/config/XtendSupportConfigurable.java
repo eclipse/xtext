@@ -22,6 +22,7 @@ import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.roots.ui.configuration.libraries.CustomLibraryDescription;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import javax.inject.Provider;
 import javax.swing.JComponent;
@@ -146,34 +147,25 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
   }
   
-  public VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String folderName) {
+  public VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String relativePath) {
     try {
-      VirtualFile _file = null;
-      if (sibling!=null) {
-        _file=sibling.getFile();
-      }
-      VirtualFile _parent = null;
-      if (_file!=null) {
-        _parent=_file.getParent();
-      }
-      final VirtualFile parent = _parent;
-      if ((parent == null)) {
-        return null;
-      }
-      VirtualFile[] _children = parent.getChildren();
-      final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
-        @Override
-        public Boolean apply(final VirtualFile it) {
-          String _name = it.getName();
-          String _name_1 = it.getName();
-          return Boolean.valueOf(Objects.equal(_name, _name_1));
+      VirtualFile _xblockexpression = null;
+      {
+        VirtualFile _file = null;
+        if (sibling!=null) {
+          _file=sibling.getFile();
         }
-      };
-      final VirtualFile existing = IterableExtensions.<VirtualFile>findFirst(((Iterable<VirtualFile>)Conversions.doWrapArray(_children)), _function);
-      if ((existing != null)) {
-        return existing;
+        VirtualFile _parent = null;
+        if (_file!=null) {
+          _parent=_file.getParent();
+        }
+        final VirtualFile parent = _parent;
+        if ((parent == null)) {
+          return null;
+        }
+        _xblockexpression = VfsUtil.createDirectoryIfMissing(parent, relativePath);
       }
-      return parent.createChildDirectory(null, folderName);
+      return _xblockexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
