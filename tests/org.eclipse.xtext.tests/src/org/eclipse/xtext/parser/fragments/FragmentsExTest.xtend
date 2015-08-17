@@ -10,7 +10,7 @@ package org.eclipse.xtext.parser.fragments
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class FragmentExsTest extends AbstractFragmentsTest {
+class FragmentsExTest extends AbstractFragmentsTest {
 	override void setUp() throws Exception {
 		super.setUp();
 		with(new FragmentTestLanguageExStandaloneSetup());
