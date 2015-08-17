@@ -15,6 +15,7 @@ import org.eclipse.xtext.generator.*
 var projectName = "org.eclipse.xtext.tests"
 var runtimeProject = "../${projectName}"
 var lineDelimiter = '\n'
+var generateDebugData = false
 
 Workflow {
 	bean = StandaloneSetup {

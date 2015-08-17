@@ -14,7 +14,7 @@ import org.eclipse.xtext.parser.fragments.FragmentTestLanguageExStandaloneSetup;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class FragmentExsTest extends AbstractFragmentsTest {
+public class FragmentsExTest extends AbstractFragmentsTest {
   @Override
   public void setUp() throws Exception {
     super.setUp();
