@@ -1,13 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templateSet group="Xtend">
-  <template name="for" value="«FOR $ELEMEN$:$EXPRESSION$»&#10;    $END$&#10;«ENDFOR»" description="Create for loop expression" toReformat="true" toShortenFQNames="true">
-  	<variable name="EXPRESSION" expression="" defaultValue="" alwaysStopAt="true" />
+  <template name="def" value="def $NAME$($PARAMS$) {&#10;    $END$&#10;}" description="public method" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="protecteddef" value="protected def $NAME$($PARAMS$) {&#10;    $END$&#10;}" description="protected method" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="privatedef" value="private def $NAME$($PARAMS$) {&#10;    $END$&#10;}" description="private method" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="main" value="def static void main(String[] args) {&#10;    $END$&#10;}" description="main method" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="create" value="def create $CONSTRUCTOR$ $NAME$($PARAMS$) {&#10;    $END$&#10;}" description="create method" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONSTRUCTOR" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="PARAMS" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="val" value="val $NAME$ = $END$" description="unmodifiable variable" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<context>
+      <option name="xtend.member" value="true" />
+      <option name="xtend.statement" value="true" />
+    </context>
+  </template>
+  <template name="var" value="var $NAME$ = $END$" description="modifiable variable" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<context>
+      <option name="xtend.member" value="true" />
+      <option name="xtend.statement" value="true" />
+    </context>
+  </template>
+  <template name="const" value="static val $NAME$ = $END$" description="private constant" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="protectedconst" value="protected static val $NAME$ = $END$" description="protected constant" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="publicconst" value="public static val $NAME$ = $END$" description="public constant" toReformat="true" toShortenFQNames="true">
+  	<variable name="NAME" expression="" defaultValue="" alwaysStopAt="true" />
+  	<context>
+      <option name="xtend.member" value="true" />
+    </context>
+  </template>
+  <template name="if" value="if ($CONDITION$) {&#10;    $SELECTION$$END$&#10;}" description="if expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="ifelse" value="if ($CONDITION$) {&#10;    $SELECTION$$END$&#10;} else {&#10;    &#10;}" description="if-else expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="instanceof" value="if ($VALUE$ instanceof $TYPE$) {&#10;    $END$&#10;}" description="type test and autocast" toReformat="true" toShortenFQNames="true">
+  	<variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="iter" value="for ($ELEMENT$ : $ITERABLE$) {&#10;    $SELECTION$$END$&#10;}" description="for loop over an Iterable" toReformat="true" toShortenFQNames="true">
+  	<variable name="ITERABLE" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="while" value="while ($CONDITION$) {&#10;    $SELECTION$$END$&#10;}" description="while loop with condition" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="do" value="do {&#10;    $SELECTION$$END$&#10;} while ($CONDITION$) " description="do-while loop with condition" toReformat="true" toShortenFQNames="true">
+  	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="switch" value="switch ($KEY$) {&#10;    case $VALUE$: {&#10;        $END$&#10;    }&#10;    default: {&#10;        &#10;    }&#10;}" description="switch expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="KEY" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="VALUE" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="try" value="try {&#10;    $SELECTION$$END$&#10;} catch ($TYPE$ $EXCEPTION$) {&#10;    &#10;}" description="try-catch block" toReformat="true" toShortenFQNames="true">
+  	<variable name="TYPE" expression="" defaultValue="" alwaysStopAt="true" />
+  	<variable name="EXCEPTION" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="sysout" value="println($SELECTION$$END$)" description="print to standard output" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="syserr" value="System.err.println($SELECTION$$END$)" description="print to standard error stream" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="synchronized" value="synchronized ($MUTEX$) {&#10;    $SELECTION$$END$&#10;}" description="synchronized expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="MUTEX" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="xtend.expression" value="true" />
+    </context>
+  </template>
+  <template name="FOR" value="«FOR $ELEMEN$:$ITERABLE$»&#10;    $END$&#10;«ENDFOR»" description="Create for loop expression" toReformat="true" toShortenFQNames="true">
+  	<variable name="ITERABLE" expression="" defaultValue="" alwaysStopAt="true" />
   	<variable name="ELEMENT" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="xtend.template" value="true" />
     </context>
   </template>
-  <template name="if" value="«IF $CONDITION$»&#10;    $END$&#10;«ENDIF»" description="Create if expression" toReformat="true" toShortenFQNames="true">
+  <template name="IF" value="«IF $CONDITION$»&#10;    $END$&#10;«ENDIF»" description="Create if expression" toReformat="true" toShortenFQNames="true">
   	<variable name="CONDITION" expression="" defaultValue="" alwaysStopAt="true" />
     <context>
       <option name="xtend.template" value="true" />
