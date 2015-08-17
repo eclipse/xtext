@@ -31,7 +31,7 @@ CompositeGeneratorFragment {
 	}
 	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
-	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+//	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
 	fragment = serializer.SerializerFragment auto-inject {}
     fragment = org.eclipse.xtext.idea.generator.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {
     	options = auto-inject {}
