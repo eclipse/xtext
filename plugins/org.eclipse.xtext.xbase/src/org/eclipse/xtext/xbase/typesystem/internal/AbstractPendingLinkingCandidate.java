@@ -267,7 +267,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (!isVisible()) {
 			String message = String.format("The %1$s %2$s%3$s is not visible", 
 					getFeatureTypeName(),
-					getFeature().getSimpleName(),
+					getSimpleFeatureName(),
 					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
@@ -279,6 +279,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			return false;
 		}
 		return true;
+	}
+
+	protected String getSimpleFeatureName() {
+		return getFeature().getSimpleName();
 	}
 
 	protected EReference getDefaultValidationFeature() {
@@ -296,12 +300,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			if (getArguments().isEmpty()) {
 				message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable without arguments" , 
 						getFeatureTypeName(), 
-						getFeature().getSimpleName(), 
+						getSimpleFeatureName(), 
 						getFeatureParameterTypesAsString());
 			} else {
 				message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable for the arguments %4$s" , 
 						getFeatureTypeName(), 
-						getFeature().getSimpleName(), 
+						getSimpleFeatureName(), 
 						getFeatureParameterTypesAsString(), 
 						getArgumentTypesAsString());
 			}
@@ -321,7 +325,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (getTypeArityMismatch() != 0) {
 			String message = String.format("Invalid number of type arguments. The %1$s %2$s%3$s is not applicable for the type arguments %4$s",
 					getFeatureTypeName(), 
-					getFeature().getSimpleName(), 
+					getSimpleFeatureName(), 
 					getFeatureTypeParametersAsString(true),
 					getTypeArgumentsAsString(getSyntacticTypeArguments()));
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -757,7 +761,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					getTypeArgumentsAsString(typeArguments),
 					getFeatureTypeParametersAsString(true),
 					getFeatureTypeName(),
-					getFeature().getSimpleName(),
+					getSimpleFeatureName(),
 					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
