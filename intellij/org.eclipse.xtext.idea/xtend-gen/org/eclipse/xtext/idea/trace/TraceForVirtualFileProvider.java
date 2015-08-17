@@ -122,9 +122,15 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
-    VirtualFile _virtualFile = PsiUtilCore.getVirtualFile(element);
-    boolean _tripleEquals = (_virtualFile == null);
-    if (_tripleEquals) {
+    boolean _or = false;
+    if ((element == null)) {
+      _or = true;
+    } else {
+      VirtualFile _virtualFile = PsiUtilCore.getVirtualFile(element);
+      boolean _tripleEquals = (_virtualFile == null);
+      _or = _tripleEquals;
+    }
+    if (_or) {
       return CollectionLiterals.<PsiElement>emptyList();
     }
     final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);

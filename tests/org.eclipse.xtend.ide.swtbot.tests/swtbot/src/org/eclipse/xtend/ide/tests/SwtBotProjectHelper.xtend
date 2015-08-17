@@ -13,6 +13,7 @@ import org.eclipse.swtbot.swt.finder.finders.ContextMenuHelper
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException
+import org.eclipse.core.resources.ResourcesPlugin
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -72,7 +73,12 @@ class SwtBotProjectHelper {
 	}
 	
 	static def newXtendEditor(SWTWorkbenchBot it, String typeName, String packageName, String sourceFolderPath) {
-		menu('File').menu('New').menu('Xtend Class').click
+		try {
+			menu('File').menu('New').menu('Xtend Class').click
+		} catch (WidgetNotFoundException e) {
+			it.captureScreenshot("MenuFileNotFound")
+			it.shells.forEach[println('''Shell: «text» active: «active»''')]
+		}
 		shell('Xtend Class').activate
 		textWithLabel('Source folder:').text = sourceFolderPath
 		textWithLabel('Package:').text = packageName
@@ -132,7 +138,11 @@ class SwtBotProjectHelper {
 	
 	static def clearSourceFolderContents(SWTWorkbenchBot it, String project) {
 		try {
-			val srcNode = tree.expandNode(project).expandNode('src')
+			var packageExplorerTree = tree
+			if(!tree.hasItems) {
+				packageExplorerTree = viewByTitle("Package Explorer").bot.tree
+			}
+			val srcNode = packageExplorerTree.expandNode(project).expandNode('src')
 			for(source: srcNode.items) {
 				if(!source.widget.disposed) {
 					println(text)
@@ -143,7 +153,7 @@ class SwtBotProjectHelper {
 				}
 			}
 		} catch(WidgetNotFoundException exc) {
-			// ignore
+			ResourcesPlugin.workspace.root.getProject(project).getFolder('src').members.forEach[delete(true,null)]
 		}
 	}
 }
