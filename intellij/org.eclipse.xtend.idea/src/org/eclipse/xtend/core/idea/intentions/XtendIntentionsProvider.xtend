@@ -183,9 +183,11 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 
 		override invoke(Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
 			val module = ModuleUtil.findModuleForPsiElement(file)
-			val model = ModuleRootManager.getInstance(module).modifiableModel
-			libraryManager.ensureXtendLibAvailable(model, module, file)
-			model.commit
+			if (module !== null) {
+				val model = ModuleRootManager.getInstance(module).modifiableModel
+				libraryManager.ensureXtendLibAvailable(model, module, file)
+				model.commit
+			}
 		}
 
 	}

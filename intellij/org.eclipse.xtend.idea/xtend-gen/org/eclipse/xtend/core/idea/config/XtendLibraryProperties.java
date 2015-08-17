@@ -13,10 +13,10 @@ import com.intellij.openapi.roots.libraries.LibraryProperties;
  * @author kosyakov - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class XtendLibraryProperties extends LibraryProperties<XtendLibraryProperties> {
+public final class XtendLibraryProperties extends LibraryProperties<XtendLibraryProperties> {
   @Override
   public boolean equals(final Object obj) {
-    return true;
+    return (obj instanceof XtendLibraryProperties);
   }
   
   @Override

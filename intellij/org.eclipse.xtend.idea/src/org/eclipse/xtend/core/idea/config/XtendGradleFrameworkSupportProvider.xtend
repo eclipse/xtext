@@ -49,7 +49,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("mavenCentral()").
 			addDependencyNotation('''compile '«XtendLibraryManager.xtendLibMavenId.key»' ''')
 
-		if (XtendLibraryManager.xtendLibMavenId.version.endsWith("-SNAPSHOT")) {
+		if (XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")) {
 			script.addRepositoriesDefinition('''
 			maven {
 				url 'http://oss.sonatype.org/content/repositories/snapshots'

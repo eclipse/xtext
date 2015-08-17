@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.lib.MapExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.idea.maven.dom.MavenDomUtil;
 import org.jetbrains.idea.maven.dom.model.MavenDomDependency;
 import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel;
@@ -82,7 +83,7 @@ public class XtendLibraryManager {
     this.ensureXtendLibAvailable(rootModel, module, null);
   }
   
-  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module, final PsiFile context) {
+  public void ensureXtendLibAvailable(@NotNull final ModifiableRootModel rootModel, @NotNull final Module module, final PsiFile context) {
     Project _project = module.getProject();
     JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
     String _name = Data.class.getName();

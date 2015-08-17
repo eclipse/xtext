@@ -82,7 +82,10 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     _addRepositoriesDefinition.addDependencyNotation(_builder_1.toString());
     MavenId _xtendLibMavenId_1 = XtendLibraryManager.xtendLibMavenId();
     String _version = _xtendLibMavenId_1.getVersion();
-    boolean _endsWith = _version.endsWith("-SNAPSHOT");
+    boolean _endsWith = false;
+    if (_version!=null) {
+      _endsWith=_version.endsWith("-SNAPSHOT");
+    }
     if (_endsWith) {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("maven {");

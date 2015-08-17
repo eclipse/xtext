@@ -329,10 +329,12 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
     @Override
     public void invoke(final Project project, final Editor editor, final PsiFile file) throws IncorrectOperationException {
       final Module module = ModuleUtil.findModuleForPsiElement(file);
-      ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-      final ModifiableRootModel model = _instance.getModifiableModel();
-      this.libraryManager.ensureXtendLibAvailable(model, module, file);
-      model.commit();
+      if ((module != null)) {
+        ModuleRootManager _instance = ModuleRootManager.getInstance(module);
+        final ModifiableRootModel model = _instance.getModifiableModel();
+        this.libraryManager.ensureXtendLibAvailable(model, module, file);
+        model.commit();
+      }
     }
   }
   
