@@ -203,6 +203,7 @@ public class SwtBotProjectHelper {
           SWTBotShell _head = IterableExtensions.<SWTBotShell>head(_filter);
           SWTUtils.captureScreenshot(_builder.toString(), 
             _head.widget);
+          throw e;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
