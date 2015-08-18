@@ -27,11 +27,15 @@ import org.eclipse.xtext.idea.lang.AbstractXtextLanguage
 import org.eclipse.xtext.psi.impl.BaseXtextFile
 import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.imports.RewritableImportSection
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xtype.XtypePackage
+import com.intellij.codeInsight.completion.CompletionSorter
 
 class XbaseCompletionContributor extends XtypeCompletionContributor {
 	
-	@Inject ImportAddingInsertHandler importAddingInsertHandler 
+	@Inject XbaseGrammarAccess grammarAccess
+	
+	@Inject ImportAddingInsertHandler importAddingInsertHandler
 
 	new(AbstractXtextLanguage lang) {
 		super(lang)
@@ -40,6 +44,23 @@ class XbaseCompletionContributor extends XtypeCompletionContributor {
 		completeXConstructorCall_Constructor
 		completeXTypeLiteral_Type
 		completeJavaTypeWithinMultiLineComment
+		completeJavaTypeWithinExpressionContext
+	}
+
+	protected override getCompletionSorter(CompletionParameters parameters, CompletionResultSet result) {
+		CompletionSorter.defaultSorter(parameters, result.prefixMatcher).weighBefore("liftShorter", new XbaseLookupElementWeigher)
+	}
+	
+	protected def void completeJavaTypeWithinExpressionContext() {
+		for (expressionContextFollowElement : expressionContextFollowElements) {
+			extend(CompletionType.BASIC, expressionContextFollowElement) [
+				completeJavaTypes($0, $2, true) [true]
+			]
+		}
+	}
+	
+	protected def getExpressionContextFollowElements() {
+		#{grammarAccess.XPrimaryExpressionAccess.XFeatureCallParserRuleCall_4}
 	}
 	
 	protected def void completeJavaTypeWithinMultiLineComment() {
