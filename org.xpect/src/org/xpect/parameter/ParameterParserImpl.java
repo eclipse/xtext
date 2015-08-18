@@ -1,6 +1,5 @@
 package org.xpect.parameter;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -13,15 +12,17 @@ import org.eclipse.xtext.util.formallang.FollowerFunctionImpl;
 import org.eclipse.xtext.util.formallang.Nfa;
 import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.NfaUtil.BacktrackHandler;
+import org.eclipse.xtext.util.formallang.ProductionUtil;
 import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
+import org.junit.ComparisonFailure;
 import org.xpect.XpectImport;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectReplace;
+import org.xpect.expectation.impl.TargetSyntaxSupport;
 import org.xpect.runner.ArgumentContributor;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Configuration;
-import org.xpect.state.StateContainer;
 import org.xpect.text.IRegion;
 import org.xpect.text.Region;
 
@@ -122,23 +123,60 @@ public class ParameterParserImpl extends ArgumentContributor {
 	private final ParameterParser annotation;
 	private final ParameterRegion parameterRegion;
 	private final XpectInvocation statement;
+	private final TargetSyntaxSupport syntax;
 
-	public ParameterParserImpl(StateContainer state, XpectInvocation statement) {
+	public ParameterParserImpl(TargetSyntaxSupport syntax, XpectInvocation statement) {
 		this.annotation = statement.getMethod().getJavaMethod().getAnnotation(ParameterParser.class);
 		this.parameterRegion = statement.getRelatedRegion(ParameterRegion.class);
 		this.statement = statement;
+		this.syntax = syntax;
 	}
 
 	@Override
 	public void contributeArguments(Configuration[] configurations) {
-		if (annotation == null)
+		if (annotation == null || Strings.isEmpty(annotation.syntax()))
 			return;
-		Map<String, IStatementRelatedRegion> parsed = parseParams(annotation.syntax(), statement, parameterRegion);
+		AssignedProduction syntax = new AssignedProduction(annotation.syntax());
+		Map<String, IStatementRelatedRegion> parsed = parseParams(annotation.syntax(), syntax, statement, parameterRegion);
+		Map<String, Token> defaults = getDefaults(syntax);
 		for (int i = 0; i < configurations.length; i++) {
-			IStatementRelatedRegion value = parsed.get("arg" + i);
-			if (value != null)
+			String key = "arg" + i;
+			IStatementRelatedRegion value = parsed.get(key);
+			if (value != null) {
 				configurations[i].addDefaultValue(value);
+			} else {
+				Token token = defaults.get(key);
+				if (token != null) {
+					IStatementRelatedRegion default1 = convertDefault(token);
+					configurations[i].addDefaultValue(default1);
+				}
+			}
 		}
+	}
+
+	protected Map<String, Token> getDefaults(AssignedProduction syntax) {
+		Map<String, Token> result = Maps.newHashMap();
+		for (ProdElement ele : new ProductionUtil().getAllChildren(syntax, syntax.getRoot())) {
+			String name = ele.getName();
+			if (!Strings.isEmpty(name))
+				result.put(name, Token.valueOf(ele.getValue()));
+		}
+		return result;
+	}
+
+	protected IStatementRelatedRegion convertDefault(Token token) {
+		switch (token) {
+		case OFFSET:
+			int offset = syntax.findFirstSemanticCharAfterStatement(statement);
+			return new OffsetRegion(parameterRegion, offset);
+		case INT:
+			return new IntegerRegion(parameterRegion);
+		case STRING:
+		case TEXT:
+		case ID:
+			return new StringRegion(parameterRegion);
+		}
+		throw new RuntimeException();
 	}
 
 	protected IStatementRelatedRegion convertValue(XpectInvocation invocation, Token token, IRegion claim, IRegion match) {
@@ -159,8 +197,7 @@ public class ParameterParserImpl extends ArgumentContributor {
 		return annotation;
 	}
 
-	protected Nfa<ProdElement> getParameterNfa(String syntax) {
-		AssignedProduction prod = new AssignedProduction(syntax);
+	protected Nfa<ProdElement> getParameterNfa(AssignedProduction prod) {
 		FollowerFunctionImpl<ProdElement, String> ff = new FollowerFunctionImpl<ProdElement, String>(prod);
 		ProdElement start = prod.new ProdElement(StringProduction.ElementType.TOKEN);
 		ProdElement stop = prod.new ProdElement(StringProduction.ElementType.TOKEN);
@@ -168,12 +205,10 @@ public class ParameterParserImpl extends ArgumentContributor {
 		return result;
 	}
 
-	protected Map<String, IStatementRelatedRegion> parseParams(String paramSyntax, XpectInvocation invocation, IRegion claim) {
-		if (Strings.isEmpty(paramSyntax))
-			return Collections.emptyMap();
+	protected Map<String, IStatementRelatedRegion> parseParams(String syntax, AssignedProduction production, XpectInvocation invocation, IRegion claim) {
 		String document = invocation.getFile().getDocument();
 		final String text = document.substring(claim.getOffset(), claim.getOffset() + claim.getLength());
-		Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
+		Nfa<ProdElement> nfa = getParameterNfa(production);
 		Matcher ws = WS.matcher(text);
 		List<ParameterParserImpl.BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(ws.find() ? ws.end() : 0),
 				new BacktrackHandler<ProdElement, ParameterParserImpl.BacktrackItem>() {
@@ -216,7 +251,15 @@ public class ParameterParserImpl extends ArgumentContributor {
 					}
 				});
 		Map<String, IStatementRelatedRegion> result = Maps.newHashMap();
+		String trimmed = text.trim();
 		if (trace != null && !trace.isEmpty()) {
+			IRegion last = trace.get(trace.size() - 1).region;
+			int end = last.getOffset() + last.getLength();
+			if (end < claim.getLength()) {
+				String trailing = text.substring(end).trim();
+				if (!trailing.isEmpty())
+					errorLeftoverTrailingText(claim, end, trailing, syntax);
+			}
 			for (ParameterParserImpl.BacktrackItem item : trace) {
 				if (item.token != null && item.token.getName() != null) {
 					String key = item.token.getName();
@@ -226,6 +269,16 @@ public class ParameterParserImpl extends ArgumentContributor {
 			}
 			return result;
 		}
-		throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");
+		if (trimmed.isEmpty())
+			throw new RuntimeException("Parameters that match syntax \"" + syntax + "\" are required, but have not been provided.");
+		throw new RuntimeException("could not parse \"" + trimmed + "\" with grammar \"" + syntax + "\"");
+	}
+
+	protected void errorLeftoverTrailingText(IRegion claim, int offset, String leftover, String syntax) {
+		String expected = claim.getDocument().toString();
+		String actual = expected.substring(0, claim.getOffset() + offset) + expected.substring(claim.getOffset() + claim.getLength());
+		String text = claim.getRegionText().trim();
+		String msg = "When parsing \"" + text + "\" with syntax \"" + syntax + "\", the trailing part \"" + leftover + "\" remains unmatched.";
+		throw new ComparisonFailure(msg, expected, actual);
 	}
 }

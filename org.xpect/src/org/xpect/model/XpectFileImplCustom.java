@@ -9,16 +9,19 @@ package org.xpect.model;
 
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.xpect.Member;
 import org.xpect.XpectIgnore;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectTest;
+import org.xpect.parameter.IStatementRelatedRegion;
 import org.xpect.registry.ITestSuiteInfo;
 import org.xpect.registry.LazyClass;
 import org.xpect.setup.ISetupInitializer;
@@ -83,6 +86,24 @@ public class XpectFileImplCustom extends XpectFileImpl {
 		if (id2invocation == null)
 			initalizeInvocationsIDs();
 		return id2invocation.get(id);
+	}
+
+	@Override
+	public XpectInvocation getInvocationAt(int offset) {
+		if (offset < 0)
+			return null;
+		EList<Member> members = getMembers();
+		for (Member member : members) {
+			if (member instanceof XpectInvocation) {
+				XpectInvocation invocation = (XpectInvocation) member;
+				IStatementRelatedRegion region = invocation.getExtendedRegion();
+				int o = region.getOffset();
+				int e = o + region.getLength();
+				if (o <= offset && offset <= e)
+					return invocation;
+			}
+		}
+		return null;
 	}
 
 	@Override

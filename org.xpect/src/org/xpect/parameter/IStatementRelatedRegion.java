@@ -7,6 +7,4 @@ public interface IStatementRelatedRegion extends IRegion {
 
 	XpectInvocation getStatement();
 
-	String getRegionText();
-
 }

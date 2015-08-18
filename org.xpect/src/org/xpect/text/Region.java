@@ -43,6 +43,16 @@ public class Region implements IRegion {
 		return offset;
 	}
 
+	public String getRegionText() {
+		if (offset >= 0 && length >= 0) {
+			int endIndex = offset + length;
+			String result = document.subSequence(offset, endIndex).toString();
+			return result;
+		} else {
+			return null;
+		}
+	}
+
 	@Override
 	public int hashCode() {
 		return length + (offset * 13);

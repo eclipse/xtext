@@ -1,0 +1,30 @@
+  XPECT_SETUP org.xpect.tests.parameter.ParameterParserTest END_SETUP
+  
+// match
+XPECT intOffset at f|oo --> 147
+XPECT intOffset at foo| --> 149
+foo
+
+// no match
+XPECT testFailureMessage --> OFFSET 'doesntexist' not found.
+XPECT intOffset at doesntexist
+
+// no offset specified
+XPECT intOffset --> 370
+XPECT intOffset at |bar --> 370
+test title
+XPECT intOffset --> 370
+bar
+
+// match
+XPECT regionOffset at f|oo --> Offset 1 in foo
+XPECT regionOffset at foo| --> Offset 3 in foo
+foo
+
+// no match
+XPECT testFailureMessage --> OFFSET 'doesntexist' not found.
+XPECT regionOffset at doesntexist
+
+// no offset specified
+XPECT testFailureMessage --> Reached end of the file before finding a value for OFFSET.
+XPECT regionOffset --> xxx

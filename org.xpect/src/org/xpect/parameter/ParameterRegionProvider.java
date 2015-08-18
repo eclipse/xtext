@@ -23,10 +23,10 @@ public class ParameterRegionProvider implements IStatementRelatedRegionProvider 
 			for (IRegion claim : allRegions)
 				if (claim != this) {
 					int claimOffset = claim instanceof IExpectationRegion ? ((IExpectationRegion) claim).getOpeningSeparatorOffset() : claim.getOffset();
-					int claimEnd = claimOffset + claim.getLength();
-					if (end > claimOffset && end < claimEnd)
+					int claimEnd = claim.getOffset() + claim.getLength();
+					if (end > claimOffset && end <= claimEnd)
 						end = claimOffset;
-					if (start > claimOffset && start < claimEnd)
+					if (start >= claimOffset && start < claimEnd)
 						start = claimEnd;
 				}
 			return new ParameterRegion(getStatement(), start, end - start);

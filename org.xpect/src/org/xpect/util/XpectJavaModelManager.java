@@ -73,7 +73,7 @@ public class XpectJavaModelManager {
 		if (result != null)
 			return result;
 		JvmTypeReference type = getTypeReferences().getTypeForName(clazz, xtextResourceSet);
-		result = createJavaModel((JvmDeclaredType) type.getType());
+		result = createJavaModel(xtextResourceSet, (JvmDeclaredType) type.getType());
 		return result;
 	}
 

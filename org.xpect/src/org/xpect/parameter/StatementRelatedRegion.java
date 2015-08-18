@@ -12,14 +12,6 @@ public class StatementRelatedRegion extends Region implements IStatementRelatedR
 		this.statement = statement;
 	}
 
-	public String getRegionText() {
-		int offset = getOffset();
-		int endIndex = offset + getLength();
-		CharSequence document = getDocument();
-		String result = document.subSequence(offset, endIndex).toString();
-		return result;
-	}
-
 	public XpectInvocation getStatement() {
 		return statement;
 	}

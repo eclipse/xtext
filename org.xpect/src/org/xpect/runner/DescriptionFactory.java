@@ -39,9 +39,9 @@ public class DescriptionFactory {
 
 	public static Description createTestDescription(Class<?> javaClass, IXpectURIProvider uriProvider, XpectInvocation invocation) {
 		URI uri = uriProvider.deresolveToProject(EcoreUtil.getURI(invocation));
-		String title = new XpectTestTitleProvider().getTitle(invocation);
-		if (title != null)
-			return Description.createTestDescription(javaClass, uri.toString() + ": " + title);
+		TestTitleRegion titleRegion = invocation.getRelatedRegion(TestTitleRegion.class);
+		if (titleRegion != null && titleRegion.getTitle() != null)
+			return Description.createTestDescription(javaClass, uri.toString() + ": " + titleRegion.getTitle());
 		else
 			return Description.createTestDescription(javaClass, uri.toString());
 	}
@@ -51,9 +51,9 @@ public class DescriptionFactory {
 		Preconditions.checkArgument(uri.isPlatform());
 		String className = invocation.getFile().getJavaModel().getTestOrSuite().getJvmClass().getQualifiedName();
 		String text = Joiner.on('/').join(uri.segmentsList().subList(2, uri.segmentCount())) + "#" + uri.fragment();
-		String title = new XpectTestTitleProvider().getTitle(invocation);
-		if (title != null)
-			return Description.createTestDescription(className, text + ": " + title);
+		TestTitleRegion titleRegion = invocation.getRelatedRegion(TestTitleRegion.class);
+		if (titleRegion != null && titleRegion.getTitle() != null)
+			return Description.createTestDescription(className, text + ": " + titleRegion.getTitle());
 		else
 			return Description.createTestDescription(className, text);
 	}

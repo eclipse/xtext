@@ -12,6 +12,7 @@ import org.xpect.XjmContribution;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectArgument;
 import org.xpect.XpectFactory;
+import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectPackage;
 import org.xpect.parameter.IStatementRelatedRegion;
@@ -42,6 +43,11 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 			}
 		}
 		return super.getArguments();
+	}
+
+	@Override
+	public XpectFile getFile() {
+		return (XpectFile) eContainer();
 	}
 
 	@Override

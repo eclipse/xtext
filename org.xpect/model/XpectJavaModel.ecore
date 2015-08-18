@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xpect" nsURI="http://www.eclipse.org/xpect/XpectJavaModel" nsPrefix="xpect">
   <eClassifiers xsi:type="ecore:EClass" name="XpectJavaModel">
     <eOperations name="getContributions">
-      <eGenericType eClassifier="ecore:EDataType platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Iterable">
+      <eGenericType eClassifier="ecore:EDataType ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Iterable">
         <eTypeArguments eClassifier="#//XjmContribution"/>
       </eGenericType>
       <eParameters name="role">
@@ -15,7 +15,7 @@
       </eParameters>
     </eOperations>
     <eOperations name="getContributions">
-      <eGenericType eClassifier="ecore:EDataType platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Iterable">
+      <eGenericType eClassifier="ecore:EDataType ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Iterable">
         <eTypeArguments eClassifier="#//XjmContribution"/>
       </eGenericType>
       <eParameters name="role">
@@ -41,7 +41,7 @@
         eType="#//XjmClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmClass" abstract="true" eSuperTypes="#//XjmElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmClass" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClass" derived="true">
       <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
         <eTypeArguments/>
@@ -74,7 +74,7 @@
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//XjmTest"
         changeable="false" resolveProxies="false" eOpposite="#//XjmTest/methods"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmMethod" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmMethod" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"
         resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaMethod" eType="#//JavaMethod"
         changeable="false"/>

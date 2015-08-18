@@ -2,9 +2,13 @@ package org.xpect.xtext.lib.util;
 
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
+import org.xpect.XpectInvocation;
 import org.xpect.expectation.impl.TargetSyntaxSupport;
+import org.xpect.parameter.IStatementRelatedRegion;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.text.IReplacement;
@@ -149,6 +153,22 @@ public class XtextTargetSyntaxSupport extends TargetSyntaxSupport {
 
 	public boolean supportsMultiLineLiteral() {
 		return getFirstMLCommentRule() != null;
+	}
+
+	@Override
+	public int findFirstSemanticCharAfterStatement(XpectInvocation statement) {
+		IStatementRelatedRegion region = statement.getExtendedRegion();
+		int end = region.getOffset() + region.getLength();
+		ILeafNode node = NodeModelUtils.findLeafNodeAtOffset(resource.getParseResult().getRootNode(), end);
+		if (!node.isHidden())
+			return node.getOffset();
+		NodeIterator it = new NodeIterator(node);
+		while (it.hasNext()) {
+			INode next = it.next();
+			if (next instanceof ILeafNode && !((ILeafNode) next).isHidden())
+				return next.getOffset();
+		}
+		throw new RuntimeException("Reached end of file while looking for semantic element for OFFSET");
 	}
 
 }

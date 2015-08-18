@@ -3,24 +3,19 @@ package org.xpect.parameter;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 
+import com.google.common.base.Preconditions;
+
 @XpectSetupFactory
 public class StringProvider {
 	private final StringRegion region;
 
-	public StringProvider() {
-		super();
-		this.region = null;
-	}
-
 	public StringProvider(StringRegion region) {
-		super();
+		Preconditions.checkNotNull(region);
 		this.region = region;
 	}
 
 	@Creates
 	public String getStringValue() {
-		if (region == null)
-			return null;
 		String text = region.getRegionText();
 		return text;
 	}

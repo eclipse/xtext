@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.xpect.Environment;
 import org.xpect.XjmClass;
 import org.xpect.XjmContribution;
@@ -74,7 +75,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 					contributions.put(qualifiedName, contribution);
 				}
 			}
-			if (contribution != null)
+			if (contribution != null && owner != null)
 				owner.getImports().add(contribution);
 		}
 		Set<JvmAnnotationTarget> targets = Sets.newLinkedHashSet();
@@ -160,6 +161,10 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 	private void initContributions() {
 		Set<Object> visited = Sets.newHashSet();
 		Map<String, XjmContribution> contributions = Maps.newLinkedHashMap();
+		XjmTest root = getTestOrSuite();
+		List<JvmDeclaredType> runners = JvmAnnotationUtil.getAnnotationTypeValue(root.getJvmClass(), RunWith.class);
+		for (JvmDeclaredType runner : runners)
+			collectContributions(runner, root, contributions, visited);
 		for (XjmTest test : getTests()) {
 			collectContributions(test, contributions, visited);
 			for (XjmMethod method : test.getMethods()) {

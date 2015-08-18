@@ -250,7 +250,10 @@ public class XtextOffsetAdapter {
 
 		public EStructuralFeatureAndEObjectProvider(@ThisResource XtextResource resource, XpectInvocation statement, OffsetRegion region) {
 			int offset = region.getMatchedOffset();
-			this.structuralFeatureAndEObject = findAtOffset(resource, region, offset);
+			if (region.getMatchedRegion() == null)
+				this.structuralFeatureAndEObject = findAfterOffset(resource, offset);
+			else
+				this.structuralFeatureAndEObject = findAtOffset(resource, region, offset);
 		}
 
 		protected EStructuralFeatureAndEObject create(EObject object, EStructuralFeature feat) {

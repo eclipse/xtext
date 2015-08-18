@@ -4,31 +4,24 @@ import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 import org.xpect.text.IRegion;
 
+import com.google.common.base.Preconditions;
+
 @XpectSetupFactory
 public class OffsetProvider {
 	private final OffsetRegion region;
 
 	public OffsetProvider(OffsetRegion region) {
-		super();
+		Preconditions.checkNotNull(region);
 		this.region = region;
-	}
-
-	public OffsetProvider() {
-		super();
-		this.region = null;
 	}
 
 	@Creates
 	public int getMatchedOffset() {
-		if (region == null)
-			return 0;
 		return region.getMatchedOffset();
 	}
 
 	@Creates
 	public IRegion getMatchedRegion() {
-		if (region == null)
-			return null;
 		return region.getMatchedRegion();
 	}
 }

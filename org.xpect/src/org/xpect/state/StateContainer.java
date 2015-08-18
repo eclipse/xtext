@@ -226,7 +226,6 @@ public class StateContainer {
 		Value value = config.getValue(annotatedWith, expectedType);
 		if (value == null) {
 			if (throwException) {
-				System.out.println(this);
 				throw new IllegalStateException("Unknown key @" + annotatedWith.getName() + " " + expectedType.getName());
 			} else
 				return null;
@@ -449,23 +448,5 @@ public class StateContainer {
 	@Override
 	public String toString() {
 		return new ToString().toString();
-		// key, status, scope, value, dependencies/errors
-		// List<String> values = Lists.newArrayList();
-		// List<String> factories = Lists.newArrayList();
-		// for (Map.Entry<Value, Instance> e : state.value2instance.entrySet())
-		// values.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
-		// for (Map.Entry<Factory, FactoryInstance> e : state.factory2instance.entrySet())
-		// factories.add(e.getKey() + " -> " + e.getValue().toString().replace("\n", "\n  "));
-		// Collections.sort(values);
-		// Collections.sort(factories);
-		// StringBuilder result = new StringBuilder();
-		// result.append(getClass().getSimpleName());
-		// result.append(" {\n  Values {\n    ");
-		// result.append(Joiner.on("\n").join(values).replace("\n", "\n    "));
-		// result.append("\n  } Factories {\n    ");
-		// result.append(Joiner.on("\n").join(factories).replace("\n", "\n    "));
-		// result.append("\n  } Configuration {\n    ");
-		// result.append(config.toString().replace("\n", "\n    "));
-		// return result.toString();
 	}
 }

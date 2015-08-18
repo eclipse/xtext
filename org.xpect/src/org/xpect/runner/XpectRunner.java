@@ -30,6 +30,7 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
 import org.xpect.XjmContribution;
 import org.xpect.XpectFile;
+import org.xpect.XpectImport;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
 import org.xpect.expectation.impl.TargetSyntaxSupport;
@@ -54,6 +55,7 @@ import com.google.inject.Injector;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectImport(TestTitleProvider.class)
 public class XpectRunner extends ParentRunner<Runner> {
 
 	public static XpectRunner INSTANCE = null;

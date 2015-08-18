@@ -3,27 +3,24 @@ package org.xpect.parameter;
 import org.xpect.setup.XpectSetupFactory;
 import org.xpect.state.Creates;
 
+import com.google.common.base.Preconditions;
+
 @XpectSetupFactory
 public class IntegerProvider {
 
 	private final IntegerRegion region;
 
-	public IntegerProvider() {
-		super();
-		this.region = null;
-	}
-
 	public IntegerProvider(IntegerRegion region) {
-		super();
+		Preconditions.checkNotNull(region);
 		this.region = region;
 	}
 
 	@Creates
 	public int getIntegerValue() {
-		if (region == null)
-			return 0;
 		String text = region.getRegionText();
-		return Integer.valueOf(text);
+		if (text != null)
+			return Integer.valueOf(text);
+		return 0;
 	}
 
 }
