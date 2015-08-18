@@ -829,6 +829,67 @@ public class BuildAffectionTest {
   }
   
   @Test
+  public void testAffected_dependentProject_Java_WithExpression() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("public class Foo {}");
+      _builder.newLine();
+      final IFile foo = this.workbenchTestHelper.createFile("Foo.java", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class Client extends Foo {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("def void m(String s) {");
+      _builder_1.newLine();
+      _builder_1.append("\t\t");
+      _builder_1.append("s.length");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("}");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      this.createClientProjectFile("Client", _builder_1);
+      this.autoBuild();
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("public class Foo {");
+      _builder_2.newLine();
+      _builder_2.append("\t");
+      _builder_2.append("protected int foo;");
+      _builder_2.newLine();
+      _builder_2.append("}");
+      _builder_2.newLine();
+      this.changeContent(foo, _builder_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.project");
+      _builder_3.newLine();
+      _builder_3.append("Build test.project in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("indexing platform:/resource/test.client/src/Client.xtend");
+      _builder_3.newLine();
+      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.newLine();
+      _builder_3.append("Building test.client");
+      _builder_3.newLine();
+      _builder_3.append("Build test.client in \\d+ ms");
+      _builder_3.newLine();
+      this.assertBuildLogs(_builder_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testAffected_annotationProcessorChanged_singleFile() {
     try {
       StringConcatenation _builder = new StringConcatenation();
