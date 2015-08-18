@@ -17,7 +17,7 @@ public class XjmTestImplCustom extends XjmTestImpl {
 
 	@Override
 	public EList<XjmMethod> getMethods() {
-		((XpectJavaModelImplCustom) eContainer()).initTestClassMethods();
+		((XpectJavaModelImplCustom) eContainer()).getMethods();
 		return super.getMethods();
 	}
 

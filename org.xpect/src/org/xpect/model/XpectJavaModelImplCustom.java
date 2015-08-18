@@ -132,26 +132,32 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 
 	@Override
 	public EList<XjmContribution> getContributions() {
-		initContributions();
+		if (!contributionsInitialized) {
+			initContributions();
+			contributionsInitialized = true;
+		}
 		return super.getContributions();
 	}
 
 	@Override
 	public EMap<String, XjmMethod> getMethods() {
-		initTestClassMethods();
+		if (!methodsInitialized) {
+			initTestClassMethods();
+			methodsInitialized = true;
+		}
 		return super.getMethods();
 	}
 
 	@Override
 	public EList<XjmTest> getTests() {
-		initTestClasses();
+		if (!testsInitalized) {
+			initTestClasses();
+			testsInitalized = true;
+		}
 		return super.getTests();
 	}
 
-	public void initContributions() {
-		if (contributionsInitialized)
-			return;
-
+	private void initContributions() {
 		Set<Object> visited = Sets.newHashSet();
 		Map<String, XjmContribution> contributions = Maps.newLinkedHashMap();
 		for (XjmTest test : getTests()) {
@@ -174,10 +180,10 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 				}
 			}
 		}
-		Collection<XjmContribution> values = contributions.values();
-		initSubstitutions(values);
-		super.getContributions().addAll(values);
-		contributionsInitialized = true;
+		EList<XjmContribution> newContributions = super.getContributions();
+		newContributions.clear();
+		newContributions.addAll(contributions.values());
+		initSubstitutions(newContributions);
 	}
 
 	private void initSubstitutions(Collection<XjmContribution> contributions) {
@@ -199,9 +205,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		}
 	}
 
-	public void initTestClasses() {
-		if (testsInitalized)
-			return;
+	private void initTestClasses() {
 		Map<String, XjmTest> name2test = Maps.newLinkedHashMap();
 		XjmTest test = getTestOrSuite();
 		EList<XjmTest> newTests = super.getTests();
@@ -214,13 +218,9 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 				newTests.addAll(name2test.values());
 			}
 		}
-		testsInitalized = true;
 	}
 
-	public void initTestClassMethods() {
-		if (methodsInitialized)
-			return;
-
+	private void initTestClassMethods() {
 		// collect all methods
 		Multimap<Pair<Boolean, String>, Pair<XjmTest, JvmOperation>> xpectMethods = LinkedHashMultimap.create();
 		for (XjmTest type : getTests())
@@ -243,8 +243,6 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 				((XjmTestImplCustom) pair.getFirst()).addMethod(method);
 				name2method.put(method.getName(), method);
 			}
-
-		methodsInitialized = true;
 	}
 
 	private String toQualifiedName(JvmIdentifiableElement element) {
