@@ -11,6 +11,7 @@ import com.google.common.io.CharStreams
 import com.intellij.facet.Facet
 import com.intellij.facet.FacetManager
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.psi.PsiDocumentManager
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.idea.facet.XtendFacetType
@@ -22,7 +23,6 @@ import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.junit.ComparisonFailure
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import com.intellij.psi.PsiDocumentManager
 
 /**
  */
@@ -493,19 +493,46 @@ class IdeaIntegrationTest extends LightXtendTest {
 		val after = URI.createURI("temp:///src/Foo.xtend")
 		assertNull(index.getResourceDescription(after))
 		assertNotNull(index.getResourceDescription(before))
-		ApplicationManager.application.runWriteAction [
-			vf.move(null, vf.parent.parent)
+		
+		builder.runOperation [
+			ApplicationManager.application.runWriteAction [
+				vf.move(null, vf.parent.parent)
+			]
+		]
+		assertNotNull(index.getResourceDescription(after))
+		assertNull(index.getResourceDescription(before))
+	}
+	
+	def void testRenameFile_01() {
+		val xtendFile = myFixture.addFileToProject('mypackage/Foo.xtend', '''
+			package mypackage
+			
+			class Foo {
+				
+			}
+		''')
+		
+		val before = URI.createURI("temp:///src/mypackage/Foo.xtend")
+		val after = URI.createURI("temp:///src/mypackage/Bar.xtend")
+		assertNull(index.getResourceDescription(after))
+		assertNotNull(index.getResourceDescription(before))
+		
+		builder.runOperation [
+			myFixture.renameElement(xtendFile, 'Bar.xtend')
 		]
 		assertNotNull(index.getResourceDescription(after))
 		assertNull(index.getResourceDescription(before))
 	}
 	
 	def getIndex() {
-		val builder = project.getComponent(XtextAutoBuilderComponent)
 		val rs = new XtextResourceSet()
 		builder.installCopyOfResourceDescriptions(rs)
 		val index = ChunkedResourceDescriptions.findInEmfObject(rs)
 		return index
+	}
+	
+	def getBuilder() {
+		project.getComponent(XtextAutoBuilderComponent)
 	}
 	
 	def void assertFileContents(String path, CharSequence sequence) {
