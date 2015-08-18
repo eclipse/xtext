@@ -113,6 +113,7 @@ public class ConfigurationProducerExtensions {
           Project _project = xtextFile.getProject();
           PsiManager _instance = PsiManager.getInstance(_project);
           VirtualFileInProject _platformResource = uri.getPlatformResource();
+          
           VirtualFile _file = _platformResource.getFile();
           final PsiFile javaPsiFile = _instance.findFile(_file);
           javaFiles.add(javaPsiFile);
