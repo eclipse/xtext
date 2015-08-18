@@ -168,12 +168,10 @@ class ImportsCollector {
 		if (firstDelimiter == -1) {
 			firstDelimiter = text.indexOf(Character.valueOf('$').charValue)
 		} else {
-
 			var int dollar = text.indexOf(Character.valueOf('$').charValue)
 			if (dollar != -1) {
 				firstDelimiter = Math.min(firstDelimiter, dollar)
 			}
-
 		}
 		if (firstDelimiter == -1) {
 			firstDelimiter = text.indexOf("::")
@@ -181,14 +179,11 @@ class ImportsCollector {
 				text = text.substring(0, firstDelimiter)
 				firstDelimiter = -1
 			}
-
 		} else {
-
 			var int colon = text.indexOf("::")
 			if (colon != text.length() - 2 && colon != -1) {
 				firstDelimiter = Math.min(firstDelimiter, colon)
 			}
-
 		}
 		if (firstDelimiter != -1) {
 			return text.substring(0, firstDelimiter)
