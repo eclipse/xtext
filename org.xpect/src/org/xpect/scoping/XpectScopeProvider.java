@@ -115,7 +115,8 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		List<IEObjectDescription> descriptions = Lists.newArrayList();
 		for (JvmDeclaredType type : types)
 			descriptions.add(EObjectDescription.create(QualifiedName.create(type.getSimpleName()), type));
-		return new SimpleScope(descriptions);
+		SimpleTypeScope typeScope = new SimpleTypeScope(typeProviderFactory.findOrCreateTypeProvider(context.eResource().getResourceSet()));
+		return new SimpleScope(typeScope, descriptions);
 	}
 
 	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {

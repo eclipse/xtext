@@ -1,5 +1,7 @@
 package org.xpect.scoping;
 
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -19,15 +21,15 @@ public class SimpleTypeScope implements IScope {
 	}
 
 	public Iterable<IEObjectDescription> getAllElements() {
-		throw new UnsupportedOperationException();
+		return Collections.emptyList();
 	}
 
 	public Iterable<IEObjectDescription> getElements(EObject object) {
-		throw new UnsupportedOperationException();
+		return Collections.emptyList();
 	}
 
 	public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-		throw new UnsupportedOperationException();
+		return Collections.singletonList(getSingleElement(name));
 	}
 
 	public IEObjectDescription getSingleElement(EObject object) {
