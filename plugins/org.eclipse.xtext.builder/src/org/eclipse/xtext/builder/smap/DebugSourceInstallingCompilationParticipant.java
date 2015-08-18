@@ -146,8 +146,13 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 						InputStream contents = javaClassFile.getContents();
 						try {
 							byte[] byteCode = installer.installTrace(ByteStreams.toByteArray(contents));
-							if (byteCode != null)
+							if (byteCode != null) {
 								javaClassFile.setContents(new ByteArrayInputStream(byteCode), 0, null);
+							} else {
+								// we need to touch the class file to do a respin of the build
+								// otherwise a needsRebuild request is ignored since no IResourceDelta is available
+								javaClassFile.touch(null);
+							}
 						} finally {
 							contents.close();
 						}
