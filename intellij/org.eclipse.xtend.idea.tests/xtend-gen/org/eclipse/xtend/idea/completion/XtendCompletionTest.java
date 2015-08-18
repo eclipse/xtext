@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.idea.completion;
 
+import com.google.common.base.Objects;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
@@ -16,6 +17,9 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class XtendCompletionTest extends LightXtendTest {
@@ -1068,5 +1072,56 @@ public class XtendCompletionTest extends LightXtendTest {
     String _text = _document.getText();
     String _string_2 = _text.toString();
     TestCase.assertEquals(_string_1, _string_2);
+  }
+  
+  public void testJavaTypeInExpressionContext() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("<caret>");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def zzz() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    String _string = _builder.toString();
+    this.complete(_string);
+    List<String> _lookupElementStrings = this.myFixture.getLookupElementStrings();
+    final Iterable<Pair<Integer, String>> lookupElementStrings = IterableExtensions.<String>indexed(_lookupElementStrings);
+    final Function1<Pair<Integer, String>, Boolean> _function = new Function1<Pair<Integer, String>, Boolean>() {
+      @Override
+      public Boolean apply(final Pair<Integer, String> it) {
+        String _value = it.getValue();
+        return Boolean.valueOf(Objects.equal(_value, "zzz"));
+      }
+    };
+    final Pair<Integer, String> methodProposal = IterableExtensions.<Pair<Integer, String>>findFirst(lookupElementStrings, _function);
+    TestCase.assertNotNull(methodProposal);
+    final Function1<Pair<Integer, String>, Boolean> _function_1 = new Function1<Pair<Integer, String>, Boolean>() {
+      @Override
+      public Boolean apply(final Pair<Integer, String> it) {
+        String _value = it.getValue();
+        return Boolean.valueOf(Objects.equal(_value, "ArrayList"));
+      }
+    };
+    final Pair<Integer, String> typeProposal = IterableExtensions.<Pair<Integer, String>>findFirst(lookupElementStrings, _function_1);
+    TestCase.assertNotNull(typeProposal);
+    Integer _key = methodProposal.getKey();
+    Integer _key_1 = typeProposal.getKey();
+    boolean _lessThan = (_key.compareTo(_key_1) < 0);
+    TestCase.assertTrue(_lessThan);
   }
 }

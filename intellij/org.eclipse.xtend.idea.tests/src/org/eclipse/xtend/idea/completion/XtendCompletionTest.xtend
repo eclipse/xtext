@@ -561,4 +561,27 @@ class XtendCompletionTest extends LightXtendTest {
 		'''.toString,myFixture.editor.document.text.toString)
 	}
 	
+	def void testJavaTypeInExpressionContext() {
+		'''
+			class Foo {
+
+				def foo() {
+					<caret>
+				}
+
+				def zzz() {
+				}
+			}
+		'''.toString.complete
+		val lookupElementStrings = myFixture.lookupElementStrings.indexed
+		
+		val methodProposal = lookupElementStrings.findFirst[value == 'zzz']
+		assertNotNull(methodProposal)
+		
+		val typeProposal = lookupElementStrings.findFirst[value == 'ArrayList']
+		assertNotNull(typeProposal)
+		
+		assertTrue(methodProposal.key < typeProposal.key)
+	}
+	
 }
