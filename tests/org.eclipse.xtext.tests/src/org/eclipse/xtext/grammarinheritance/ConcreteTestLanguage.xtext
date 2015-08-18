@@ -44,3 +44,7 @@ Subrule3:
 	
 CallExtendedParserRule:
 	call=AbstractCallExtendedParserRule;
+	
+terminal ID:
+	super
+;
