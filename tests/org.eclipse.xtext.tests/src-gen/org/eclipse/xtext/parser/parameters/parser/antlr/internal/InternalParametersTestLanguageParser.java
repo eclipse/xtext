@@ -60,7 +60,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
         
 
     public String[] getTokenNames() { return InternalParametersTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalParametersTestLanguage.g"; }
 
 
 
@@ -85,7 +85,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleParserRuleParameters"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:67:1: entryRuleParserRuleParameters returns [EObject current=null] : iv_ruleParserRuleParameters= ruleParserRuleParameters EOF ;
+    // InternalParametersTestLanguage.g:67:1: entryRuleParserRuleParameters returns [EObject current=null] : iv_ruleParserRuleParameters= ruleParserRuleParameters EOF ;
     public final EObject entryRuleParserRuleParameters() throws RecognitionException {
         EObject current = null;
 
@@ -93,13 +93,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:68:2: (iv_ruleParserRuleParameters= ruleParserRuleParameters EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:69:2: iv_ruleParserRuleParameters= ruleParserRuleParameters EOF
+            // InternalParametersTestLanguage.g:68:2: (iv_ruleParserRuleParameters= ruleParserRuleParameters EOF )
+            // InternalParametersTestLanguage.g:69:2: iv_ruleParserRuleParameters= ruleParserRuleParameters EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getParserRuleParametersRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParserRuleParameters_in_entryRuleParserRuleParameters75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleParserRuleParameters=ruleParserRuleParameters();
 
             state._fsp--;
@@ -107,7 +107,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleParserRuleParameters; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParserRuleParameters85); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -125,7 +125,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleParserRuleParameters"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:76:1: ruleParserRuleParameters returns [EObject current=null] : ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) ) ;
+    // InternalParametersTestLanguage.g:76:1: ruleParserRuleParameters returns [EObject current=null] : ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) ) ;
     public final EObject ruleParserRuleParameters() throws RecognitionException {
         EObject current = null;
 
@@ -181,14 +181,14 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:79:28: ( ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:80:1: ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) )
+            // InternalParametersTestLanguage.g:79:28: ( ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) ) )
+            // InternalParametersTestLanguage.g:80:1: ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:80:1: ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:80:2: () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) )
+            // InternalParametersTestLanguage.g:80:1: ( () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) ) )
+            // InternalParametersTestLanguage.g:80:2: () ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:80:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:81:5: 
+            // InternalParametersTestLanguage.g:80:2: ()
+            // InternalParametersTestLanguage.g:81:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -200,34 +200,34 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:86:2: ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) )
+            // InternalParametersTestLanguage.g:86:2: ( (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) ) | (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) ) | (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) ) | (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) ) | ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) ) | ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) ) | (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) ) | (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) ) | (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) ) | (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) ) | (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) ) | (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) ) )
             int alt9=12;
             alt9 = dfa9.predict(input);
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:86:3: (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) )
+                    // InternalParametersTestLanguage.g:86:3: (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:86:3: (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:86:5: otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) )
+                    // InternalParametersTestLanguage.g:86:3: (otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) ) )
+                    // InternalParametersTestLanguage.g:86:5: otherlv_1= '#1' ( (lv_scenario_2_0= ruleScenario1[true] ) )
                     {
-                    otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleParserRuleParameters133); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_1, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitOneKeyword_1_0_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:90:1: ( (lv_scenario_2_0= ruleScenario1[true] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:91:1: (lv_scenario_2_0= ruleScenario1[true] )
+                    // InternalParametersTestLanguage.g:90:1: ( (lv_scenario_2_0= ruleScenario1[true] ) )
+                    // InternalParametersTestLanguage.g:91:1: (lv_scenario_2_0= ruleScenario1[true] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:91:1: (lv_scenario_2_0= ruleScenario1[true] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:92:3: lv_scenario_2_0= ruleScenario1[true]
+                    // InternalParametersTestLanguage.g:91:1: (lv_scenario_2_0= ruleScenario1[true] )
+                    // InternalParametersTestLanguage.g:92:3: lv_scenario_2_0= ruleScenario1[true]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario1ParserRuleCall_1_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario1_in_ruleParserRuleParameters154);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_2_0=ruleScenario1(true);
 
                     state._fsp--;
@@ -258,29 +258,29 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:109:6: (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) )
+                    // InternalParametersTestLanguage.g:109:6: (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:109:6: (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:109:8: otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) )
+                    // InternalParametersTestLanguage.g:109:6: (otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) ) )
+                    // InternalParametersTestLanguage.g:109:8: otherlv_3= '#2' ( (lv_scenario_4_0= ruleScenario1[false] ) )
                     {
-                    otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleParserRuleParameters175); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_3); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_3, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitTwoKeyword_1_1_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:113:1: ( (lv_scenario_4_0= ruleScenario1[false] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:114:1: (lv_scenario_4_0= ruleScenario1[false] )
+                    // InternalParametersTestLanguage.g:113:1: ( (lv_scenario_4_0= ruleScenario1[false] ) )
+                    // InternalParametersTestLanguage.g:114:1: (lv_scenario_4_0= ruleScenario1[false] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:114:1: (lv_scenario_4_0= ruleScenario1[false] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:115:3: lv_scenario_4_0= ruleScenario1[false]
+                    // InternalParametersTestLanguage.g:114:1: (lv_scenario_4_0= ruleScenario1[false] )
+                    // InternalParametersTestLanguage.g:115:3: lv_scenario_4_0= ruleScenario1[false]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario1ParserRuleCall_1_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario1_in_ruleParserRuleParameters196);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_4_0=ruleScenario1(false);
 
                     state._fsp--;
@@ -311,29 +311,29 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:132:6: (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) )
+                    // InternalParametersTestLanguage.g:132:6: (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:132:6: (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:132:8: otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) )
+                    // InternalParametersTestLanguage.g:132:6: (otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) ) )
+                    // InternalParametersTestLanguage.g:132:8: otherlv_5= '#3' ( (lv_scenario_6_0= ruleScenario2[true] ) )
                     {
-                    otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleParserRuleParameters217); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_5, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitThreeKeyword_1_2_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:136:1: ( (lv_scenario_6_0= ruleScenario2[true] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:137:1: (lv_scenario_6_0= ruleScenario2[true] )
+                    // InternalParametersTestLanguage.g:136:1: ( (lv_scenario_6_0= ruleScenario2[true] ) )
+                    // InternalParametersTestLanguage.g:137:1: (lv_scenario_6_0= ruleScenario2[true] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:137:1: (lv_scenario_6_0= ruleScenario2[true] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:138:3: lv_scenario_6_0= ruleScenario2[true]
+                    // InternalParametersTestLanguage.g:137:1: (lv_scenario_6_0= ruleScenario2[true] )
+                    // InternalParametersTestLanguage.g:138:3: lv_scenario_6_0= ruleScenario2[true]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters238);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_6_0=ruleScenario2(true);
 
                     state._fsp--;
@@ -364,29 +364,29 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:155:6: (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) )
+                    // InternalParametersTestLanguage.g:155:6: (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:155:6: (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:155:8: otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) )
+                    // InternalParametersTestLanguage.g:155:6: (otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) ) )
+                    // InternalParametersTestLanguage.g:155:8: otherlv_7= '#4' ( (lv_scenario_8_0= ruleScenario2[false] ) )
                     {
-                    otherlv_7=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleParserRuleParameters259); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,14,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_7, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitFourKeyword_1_3_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:159:1: ( (lv_scenario_8_0= ruleScenario2[false] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:160:1: (lv_scenario_8_0= ruleScenario2[false] )
+                    // InternalParametersTestLanguage.g:159:1: ( (lv_scenario_8_0= ruleScenario2[false] ) )
+                    // InternalParametersTestLanguage.g:160:1: (lv_scenario_8_0= ruleScenario2[false] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:160:1: (lv_scenario_8_0= ruleScenario2[false] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:161:3: lv_scenario_8_0= ruleScenario2[false]
+                    // InternalParametersTestLanguage.g:160:1: (lv_scenario_8_0= ruleScenario2[false] )
+                    // InternalParametersTestLanguage.g:161:3: lv_scenario_8_0= ruleScenario2[false]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_3_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters280);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_8_0=ruleScenario2(false);
 
                     state._fsp--;
@@ -417,32 +417,32 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:6: ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) )
+                    // InternalParametersTestLanguage.g:178:6: ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:6: ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:7: ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) )
+                    // InternalParametersTestLanguage.g:178:6: ( ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) ) )
+                    // InternalParametersTestLanguage.g:178:7: ( ( '#5' ( ( ruleScenario2[true] ) ) ) )=> (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:183:6: (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:183:8: otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) )
+                    // InternalParametersTestLanguage.g:183:6: (otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) ) )
+                    // InternalParametersTestLanguage.g:183:8: otherlv_9= '#5' ( (lv_scenario_10_0= ruleScenario2[true] ) )
                     {
-                    otherlv_9=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleParserRuleParameters321); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,15,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_9, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitFiveKeyword_1_4_0_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:187:1: ( (lv_scenario_10_0= ruleScenario2[true] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:188:1: (lv_scenario_10_0= ruleScenario2[true] )
+                    // InternalParametersTestLanguage.g:187:1: ( (lv_scenario_10_0= ruleScenario2[true] ) )
+                    // InternalParametersTestLanguage.g:188:1: (lv_scenario_10_0= ruleScenario2[true] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:188:1: (lv_scenario_10_0= ruleScenario2[true] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:189:3: lv_scenario_10_0= ruleScenario2[true]
+                    // InternalParametersTestLanguage.g:188:1: (lv_scenario_10_0= ruleScenario2[true] )
+                    // InternalParametersTestLanguage.g:189:3: lv_scenario_10_0= ruleScenario2[true]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_4_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters342);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_10_0=ruleScenario2(true);
 
                     state._fsp--;
@@ -476,32 +476,32 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:6: ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) )
+                    // InternalParametersTestLanguage.g:206:6: ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:6: ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:7: ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) )
+                    // InternalParametersTestLanguage.g:206:6: ( ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) ) )
+                    // InternalParametersTestLanguage.g:206:7: ( ( '#6' ( ( ruleScenario2[false] ) ) ) )=> (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:211:6: (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:211:8: otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) )
+                    // InternalParametersTestLanguage.g:211:6: (otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) ) )
+                    // InternalParametersTestLanguage.g:211:8: otherlv_11= '#6' ( (lv_scenario_12_0= ruleScenario2[false] ) )
                     {
-                    otherlv_11=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleParserRuleParameters384); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,16,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_11, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitSixKeyword_1_5_0_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:215:1: ( (lv_scenario_12_0= ruleScenario2[false] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:216:1: (lv_scenario_12_0= ruleScenario2[false] )
+                    // InternalParametersTestLanguage.g:215:1: ( (lv_scenario_12_0= ruleScenario2[false] ) )
+                    // InternalParametersTestLanguage.g:216:1: (lv_scenario_12_0= ruleScenario2[false] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:216:1: (lv_scenario_12_0= ruleScenario2[false] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:217:3: lv_scenario_12_0= ruleScenario2[false]
+                    // InternalParametersTestLanguage.g:216:1: (lv_scenario_12_0= ruleScenario2[false] )
+                    // InternalParametersTestLanguage.g:217:3: lv_scenario_12_0= ruleScenario2[false]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_5_0_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters405);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_12_0=ruleScenario2(false);
 
                     state._fsp--;
@@ -535,29 +535,29 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 7 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:234:6: (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) )
+                    // InternalParametersTestLanguage.g:234:6: (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:234:6: (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:234:8: otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) )
+                    // InternalParametersTestLanguage.g:234:6: (otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) ) )
+                    // InternalParametersTestLanguage.g:234:8: otherlv_13= '#7' ( (lv_scenario_14_0= ruleScenario3[true] ) )
                     {
-                    otherlv_13=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleParserRuleParameters427); if (state.failed) return current;
+                    otherlv_13=(Token)match(input,17,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_13, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitSevenKeyword_1_6_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:238:1: ( (lv_scenario_14_0= ruleScenario3[true] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:239:1: (lv_scenario_14_0= ruleScenario3[true] )
+                    // InternalParametersTestLanguage.g:238:1: ( (lv_scenario_14_0= ruleScenario3[true] ) )
+                    // InternalParametersTestLanguage.g:239:1: (lv_scenario_14_0= ruleScenario3[true] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:239:1: (lv_scenario_14_0= ruleScenario3[true] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:240:3: lv_scenario_14_0= ruleScenario3[true]
+                    // InternalParametersTestLanguage.g:239:1: (lv_scenario_14_0= ruleScenario3[true] )
+                    // InternalParametersTestLanguage.g:240:3: lv_scenario_14_0= ruleScenario3[true]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario3ParserRuleCall_1_6_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario3_in_ruleParserRuleParameters448);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_14_0=ruleScenario3(true);
 
                     state._fsp--;
@@ -588,29 +588,29 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 8 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:257:6: (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) )
+                    // InternalParametersTestLanguage.g:257:6: (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:257:6: (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:257:8: otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) )
+                    // InternalParametersTestLanguage.g:257:6: (otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) ) )
+                    // InternalParametersTestLanguage.g:257:8: otherlv_15= '#8' ( (lv_scenario_16_0= ruleScenario3[false] ) )
                     {
-                    otherlv_15=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleParserRuleParameters469); if (state.failed) return current;
+                    otherlv_15=(Token)match(input,18,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_15, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitEightKeyword_1_7_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:261:1: ( (lv_scenario_16_0= ruleScenario3[false] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:262:1: (lv_scenario_16_0= ruleScenario3[false] )
+                    // InternalParametersTestLanguage.g:261:1: ( (lv_scenario_16_0= ruleScenario3[false] ) )
+                    // InternalParametersTestLanguage.g:262:1: (lv_scenario_16_0= ruleScenario3[false] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:262:1: (lv_scenario_16_0= ruleScenario3[false] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:263:3: lv_scenario_16_0= ruleScenario3[false]
+                    // InternalParametersTestLanguage.g:262:1: (lv_scenario_16_0= ruleScenario3[false] )
+                    // InternalParametersTestLanguage.g:263:3: lv_scenario_16_0= ruleScenario3[false]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario3ParserRuleCall_1_7_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleScenario3_in_ruleParserRuleParameters490);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_scenario_16_0=ruleScenario3(false);
 
                     state._fsp--;
@@ -641,18 +641,18 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 9 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:280:6: (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:280:6: (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:280:6: (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:280:8: otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:280:6: (otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:280:8: otherlv_17= '#9' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) )
                     {
-                    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleParserRuleParameters511); if (state.failed) return current;
+                    otherlv_17=(Token)match(input,19,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_17, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitNineKeyword_1_8_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:284:1: ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:284:1: ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? ) )
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -727,20 +727,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     switch (alt2) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:284:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) )
+                            // InternalParametersTestLanguage.g:284:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:284:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:284:3: ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] )
+                            // InternalParametersTestLanguage.g:284:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] ) )
+                            // InternalParametersTestLanguage.g:284:3: ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_18_0= ruleScenario4[true] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:289:1: (lv_scenario_18_0= ruleScenario4[true] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:290:3: lv_scenario_18_0= ruleScenario4[true]
+                            // InternalParametersTestLanguage.g:289:1: (lv_scenario_18_0= ruleScenario4[true] )
+                            // InternalParametersTestLanguage.g:290:3: lv_scenario_18_0= ruleScenario4[true]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_8_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario4_in_ruleParserRuleParameters544);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_scenario_18_0=ruleScenario4(true);
 
                             state._fsp--;
@@ -768,23 +768,23 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:307:6: ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:307:6: ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:307:6: ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:307:7: ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )?
+                            // InternalParametersTestLanguage.g:307:6: ( ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:307:7: ( (lv_scenario_19_0= ruleScenario2[true] ) ) (otherlv_20= 'keyword' )?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:307:7: ( (lv_scenario_19_0= ruleScenario2[true] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:308:1: (lv_scenario_19_0= ruleScenario2[true] )
+                            // InternalParametersTestLanguage.g:307:7: ( (lv_scenario_19_0= ruleScenario2[true] ) )
+                            // InternalParametersTestLanguage.g:308:1: (lv_scenario_19_0= ruleScenario2[true] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:308:1: (lv_scenario_19_0= ruleScenario2[true] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:309:3: lv_scenario_19_0= ruleScenario2[true]
+                            // InternalParametersTestLanguage.g:308:1: (lv_scenario_19_0= ruleScenario2[true] )
+                            // InternalParametersTestLanguage.g:309:3: lv_scenario_19_0= ruleScenario2[true]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_8_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters573);
+                            pushFollow(FollowSets000.FOLLOW_5);
                             lv_scenario_19_0=ruleScenario2(true);
 
                             state._fsp--;
@@ -808,7 +808,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                             }
 
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:325:2: (otherlv_20= 'keyword' )?
+                            // InternalParametersTestLanguage.g:325:2: (otherlv_20= 'keyword' )?
                             int alt1=2;
                             int LA1_0 = input.LA(1);
 
@@ -817,9 +817,9 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             switch (alt1) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:325:4: otherlv_20= 'keyword'
+                                    // InternalParametersTestLanguage.g:325:4: otherlv_20= 'keyword'
                                     {
-                                    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleParserRuleParameters587); if (state.failed) return current;
+                                    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_20, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_8_1_1_1());
@@ -847,18 +847,18 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 10 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:330:6: (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:330:6: (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:330:6: (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:330:8: otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:330:6: (otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:330:8: otherlv_21= '#10' ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) )
                     {
-                    otherlv_21=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleParserRuleParameters611); if (state.failed) return current;
+                    otherlv_21=(Token)match(input,21,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_21, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitOneDigitZeroKeyword_1_9_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:334:1: ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:334:1: ( ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) ) | ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? ) )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -933,20 +933,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     switch (alt4) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:334:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) )
+                            // InternalParametersTestLanguage.g:334:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:334:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:334:3: ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] )
+                            // InternalParametersTestLanguage.g:334:2: ( ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] ) )
+                            // InternalParametersTestLanguage.g:334:3: ( ( ruleIdOrKeyword[true] ) )=> (lv_scenario_22_0= ruleScenario4[true] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:339:1: (lv_scenario_22_0= ruleScenario4[true] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:340:3: lv_scenario_22_0= ruleScenario4[true]
+                            // InternalParametersTestLanguage.g:339:1: (lv_scenario_22_0= ruleScenario4[true] )
+                            // InternalParametersTestLanguage.g:340:3: lv_scenario_22_0= ruleScenario4[true]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_9_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario4_in_ruleParserRuleParameters644);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_scenario_22_0=ruleScenario4(true);
 
                             state._fsp--;
@@ -974,23 +974,23 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:357:6: ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:357:6: ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:357:6: ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:357:7: ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )?
+                            // InternalParametersTestLanguage.g:357:6: ( ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:357:7: ( (lv_scenario_23_0= ruleScenario2[false] ) ) (otherlv_24= 'keyword' )?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:357:7: ( (lv_scenario_23_0= ruleScenario2[false] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:358:1: (lv_scenario_23_0= ruleScenario2[false] )
+                            // InternalParametersTestLanguage.g:357:7: ( (lv_scenario_23_0= ruleScenario2[false] ) )
+                            // InternalParametersTestLanguage.g:358:1: (lv_scenario_23_0= ruleScenario2[false] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:358:1: (lv_scenario_23_0= ruleScenario2[false] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:359:3: lv_scenario_23_0= ruleScenario2[false]
+                            // InternalParametersTestLanguage.g:358:1: (lv_scenario_23_0= ruleScenario2[false] )
+                            // InternalParametersTestLanguage.g:359:3: lv_scenario_23_0= ruleScenario2[false]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_9_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters673);
+                            pushFollow(FollowSets000.FOLLOW_5);
                             lv_scenario_23_0=ruleScenario2(false);
 
                             state._fsp--;
@@ -1014,7 +1014,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                             }
 
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:375:2: (otherlv_24= 'keyword' )?
+                            // InternalParametersTestLanguage.g:375:2: (otherlv_24= 'keyword' )?
                             int alt3=2;
                             int LA3_0 = input.LA(1);
 
@@ -1023,9 +1023,9 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             switch (alt3) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:375:4: otherlv_24= 'keyword'
+                                    // InternalParametersTestLanguage.g:375:4: otherlv_24= 'keyword'
                                     {
-                                    otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleParserRuleParameters687); if (state.failed) return current;
+                                    otherlv_24=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_24, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_9_1_1_1());
@@ -1053,18 +1053,18 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 11 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:380:6: (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:380:6: (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:380:6: (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:380:8: otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:380:6: (otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:380:8: otherlv_25= '#11' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) )
                     {
-                    otherlv_25=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleParserRuleParameters711); if (state.failed) return current;
+                    otherlv_25=(Token)match(input,22,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_25, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitOneDigitOneKeyword_1_10_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:384:1: ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:384:1: ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? ) )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -1139,20 +1139,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:384:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) )
+                            // InternalParametersTestLanguage.g:384:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:384:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:384:3: ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] )
+                            // InternalParametersTestLanguage.g:384:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] ) )
+                            // InternalParametersTestLanguage.g:384:3: ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_26_0= ruleScenario4[false] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:389:1: (lv_scenario_26_0= ruleScenario4[false] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:390:3: lv_scenario_26_0= ruleScenario4[false]
+                            // InternalParametersTestLanguage.g:389:1: (lv_scenario_26_0= ruleScenario4[false] )
+                            // InternalParametersTestLanguage.g:390:3: lv_scenario_26_0= ruleScenario4[false]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_10_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario4_in_ruleParserRuleParameters744);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_scenario_26_0=ruleScenario4(false);
 
                             state._fsp--;
@@ -1180,23 +1180,23 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:407:6: ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:407:6: ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:407:6: ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:407:7: ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )?
+                            // InternalParametersTestLanguage.g:407:6: ( ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:407:7: ( (lv_scenario_27_0= ruleScenario2[true] ) ) (otherlv_28= 'keyword' )?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:407:7: ( (lv_scenario_27_0= ruleScenario2[true] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:408:1: (lv_scenario_27_0= ruleScenario2[true] )
+                            // InternalParametersTestLanguage.g:407:7: ( (lv_scenario_27_0= ruleScenario2[true] ) )
+                            // InternalParametersTestLanguage.g:408:1: (lv_scenario_27_0= ruleScenario2[true] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:408:1: (lv_scenario_27_0= ruleScenario2[true] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:409:3: lv_scenario_27_0= ruleScenario2[true]
+                            // InternalParametersTestLanguage.g:408:1: (lv_scenario_27_0= ruleScenario2[true] )
+                            // InternalParametersTestLanguage.g:409:3: lv_scenario_27_0= ruleScenario2[true]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_10_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters773);
+                            pushFollow(FollowSets000.FOLLOW_5);
                             lv_scenario_27_0=ruleScenario2(true);
 
                             state._fsp--;
@@ -1220,7 +1220,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                             }
 
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:425:2: (otherlv_28= 'keyword' )?
+                            // InternalParametersTestLanguage.g:425:2: (otherlv_28= 'keyword' )?
                             int alt5=2;
                             int LA5_0 = input.LA(1);
 
@@ -1229,9 +1229,9 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             switch (alt5) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:425:4: otherlv_28= 'keyword'
+                                    // InternalParametersTestLanguage.g:425:4: otherlv_28= 'keyword'
                                     {
-                                    otherlv_28=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleParserRuleParameters787); if (state.failed) return current;
+                                    otherlv_28=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_28, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_10_1_1_1());
@@ -1259,18 +1259,18 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 12 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:430:6: (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:430:6: (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:430:6: (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:430:8: otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:430:6: (otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) ) )
+                    // InternalParametersTestLanguage.g:430:8: otherlv_29= '#12' ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) )
                     {
-                    otherlv_29=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleParserRuleParameters811); if (state.failed) return current;
+                    otherlv_29=(Token)match(input,23,FollowSets000.FOLLOW_4); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                           	newLeafNode(otherlv_29, grammarAccess.getParserRuleParametersAccess().getNumberSignDigitOneDigitTwoKeyword_1_11_0());
                           
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:434:1: ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) )
+                    // InternalParametersTestLanguage.g:434:1: ( ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) ) | ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? ) )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1345,20 +1345,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:434:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) )
+                            // InternalParametersTestLanguage.g:434:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:434:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:434:3: ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] )
+                            // InternalParametersTestLanguage.g:434:2: ( ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] ) )
+                            // InternalParametersTestLanguage.g:434:3: ( ( ruleIdOrKeyword[false] ) )=> (lv_scenario_30_0= ruleScenario4[false] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:439:1: (lv_scenario_30_0= ruleScenario4[false] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:440:3: lv_scenario_30_0= ruleScenario4[false]
+                            // InternalParametersTestLanguage.g:439:1: (lv_scenario_30_0= ruleScenario4[false] )
+                            // InternalParametersTestLanguage.g:440:3: lv_scenario_30_0= ruleScenario4[false]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_11_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario4_in_ruleParserRuleParameters844);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             lv_scenario_30_0=ruleScenario4(false);
 
                             state._fsp--;
@@ -1386,23 +1386,23 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             break;
                         case 2 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:457:6: ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:457:6: ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:457:6: ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:457:7: ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )?
+                            // InternalParametersTestLanguage.g:457:6: ( ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )? )
+                            // InternalParametersTestLanguage.g:457:7: ( (lv_scenario_31_0= ruleScenario2[false] ) ) (otherlv_32= 'keyword' )?
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:457:7: ( (lv_scenario_31_0= ruleScenario2[false] ) )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:458:1: (lv_scenario_31_0= ruleScenario2[false] )
+                            // InternalParametersTestLanguage.g:457:7: ( (lv_scenario_31_0= ruleScenario2[false] ) )
+                            // InternalParametersTestLanguage.g:458:1: (lv_scenario_31_0= ruleScenario2[false] )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:458:1: (lv_scenario_31_0= ruleScenario2[false] )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:459:3: lv_scenario_31_0= ruleScenario2[false]
+                            // InternalParametersTestLanguage.g:458:1: (lv_scenario_31_0= ruleScenario2[false] )
+                            // InternalParametersTestLanguage.g:459:3: lv_scenario_31_0= ruleScenario2[false]
                             {
                             if ( state.backtracking==0 ) {
                                
                               	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_11_1_1_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_ruleParserRuleParameters873);
+                            pushFollow(FollowSets000.FOLLOW_5);
                             lv_scenario_31_0=ruleScenario2(false);
 
                             state._fsp--;
@@ -1426,7 +1426,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
                             }
 
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:475:2: (otherlv_32= 'keyword' )?
+                            // InternalParametersTestLanguage.g:475:2: (otherlv_32= 'keyword' )?
                             int alt7=2;
                             int LA7_0 = input.LA(1);
 
@@ -1435,9 +1435,9 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                             }
                             switch (alt7) {
                                 case 1 :
-                                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:475:4: otherlv_32= 'keyword'
+                                    // InternalParametersTestLanguage.g:475:4: otherlv_32= 'keyword'
                                     {
-                                    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleParserRuleParameters887); if (state.failed) return current;
+                                    otherlv_32=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                                     if ( state.backtracking==0 ) {
 
                                           	newLeafNode(otherlv_32, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_11_1_1_1());
@@ -1490,7 +1490,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleScenario1"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:487:1: entryRuleScenario1 returns [EObject current=null] : iv_ruleScenario1= ruleScenario1[false] EOF ;
+    // InternalParametersTestLanguage.g:487:1: entryRuleScenario1 returns [EObject current=null] : iv_ruleScenario1= ruleScenario1[false] EOF ;
     public final EObject entryRuleScenario1() throws RecognitionException {
         EObject current = null;
 
@@ -1498,13 +1498,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:488:2: (iv_ruleScenario1= ruleScenario1[false] EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:489:2: iv_ruleScenario1= ruleScenario1[false] EOF
+            // InternalParametersTestLanguage.g:488:2: (iv_ruleScenario1= ruleScenario1[false] EOF )
+            // InternalParametersTestLanguage.g:489:2: iv_ruleScenario1= ruleScenario1[false] EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getScenario1Rule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleScenario1_in_entryRuleScenario1929);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleScenario1=ruleScenario1(false);
 
             state._fsp--;
@@ -1512,7 +1512,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleScenario1; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleScenario1940); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -1530,7 +1530,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleScenario1"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:496:1: ruleScenario1[boolean p_Param] returns [EObject current=null] : ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) ) ;
+    // InternalParametersTestLanguage.g:496:1: ruleScenario1[boolean p_Param] returns [EObject current=null] : ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) ) ;
     public final EObject ruleScenario1(boolean p_Param) throws RecognitionException {
         EObject current = null;
 
@@ -1540,10 +1540,10 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:499:28: ( ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:1: ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) )
+            // InternalParametersTestLanguage.g:499:28: ( ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) ) )
+            // InternalParametersTestLanguage.g:500:1: ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:1: ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) )
+            // InternalParametersTestLanguage.g:500:1: ( ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) ) | ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1573,25 +1573,25 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:2: ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) )
+                    // InternalParametersTestLanguage.g:500:2: ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:2: ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:3: {...}? => ( ( (lv_first_0_0= RULE_ID ) ) )
+                    // InternalParametersTestLanguage.g:500:2: ({...}? => ( ( (lv_first_0_0= RULE_ID ) ) ) )
+                    // InternalParametersTestLanguage.g:500:3: {...}? => ( ( (lv_first_0_0= RULE_ID ) ) )
                     {
                     if ( ! p_Param ) {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         throw new FailedPredicateException(input, "ruleScenario1", "p_Param");
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:15: ( ( (lv_first_0_0= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:16: ( (lv_first_0_0= RULE_ID ) )
+                    // InternalParametersTestLanguage.g:500:15: ( ( (lv_first_0_0= RULE_ID ) ) )
+                    // InternalParametersTestLanguage.g:500:16: ( (lv_first_0_0= RULE_ID ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:500:16: ( (lv_first_0_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:501:1: (lv_first_0_0= RULE_ID )
+                    // InternalParametersTestLanguage.g:500:16: ( (lv_first_0_0= RULE_ID ) )
+                    // InternalParametersTestLanguage.g:501:1: (lv_first_0_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:501:1: (lv_first_0_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:502:3: lv_first_0_0= RULE_ID
+                    // InternalParametersTestLanguage.g:501:1: (lv_first_0_0= RULE_ID )
+                    // InternalParametersTestLanguage.g:502:3: lv_first_0_0= RULE_ID
                     {
-                    lv_first_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleScenario1988); if (state.failed) return current;
+                    lv_first_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			newLeafNode(lv_first_0_0, grammarAccess.getScenario1Access().getFirstIDTerminalRuleCall_0_0_0()); 
@@ -1625,25 +1625,25 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:6: ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) )
+                    // InternalParametersTestLanguage.g:520:6: ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:6: ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:7: {...}? => ( ( (lv_second_1_0= RULE_ID ) ) )
+                    // InternalParametersTestLanguage.g:520:6: ({...}? => ( ( (lv_second_1_0= RULE_ID ) ) ) )
+                    // InternalParametersTestLanguage.g:520:7: {...}? => ( ( (lv_second_1_0= RULE_ID ) ) )
                     {
                     if ( p_Param ) {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         throw new FailedPredicateException(input, "ruleScenario1", "!p_Param");
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:20: ( ( (lv_second_1_0= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:21: ( (lv_second_1_0= RULE_ID ) )
+                    // InternalParametersTestLanguage.g:520:20: ( ( (lv_second_1_0= RULE_ID ) ) )
+                    // InternalParametersTestLanguage.g:520:21: ( (lv_second_1_0= RULE_ID ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:520:21: ( (lv_second_1_0= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:521:1: (lv_second_1_0= RULE_ID )
+                    // InternalParametersTestLanguage.g:520:21: ( (lv_second_1_0= RULE_ID ) )
+                    // InternalParametersTestLanguage.g:521:1: (lv_second_1_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:521:1: (lv_second_1_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:522:3: lv_second_1_0= RULE_ID
+                    // InternalParametersTestLanguage.g:521:1: (lv_second_1_0= RULE_ID )
+                    // InternalParametersTestLanguage.g:522:3: lv_second_1_0= RULE_ID
                     {
-                    lv_second_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleScenario11023); if (state.failed) return current;
+                    lv_second_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			newLeafNode(lv_second_1_0, grammarAccess.getScenario1Access().getSecondIDTerminalRuleCall_1_0_0()); 
@@ -1699,7 +1699,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleScenario2"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:547:1: entryRuleScenario2 returns [EObject current=null] : iv_ruleScenario2= ruleScenario2[false] EOF ;
+    // InternalParametersTestLanguage.g:547:1: entryRuleScenario2 returns [EObject current=null] : iv_ruleScenario2= ruleScenario2[false] EOF ;
     public final EObject entryRuleScenario2() throws RecognitionException {
         EObject current = null;
 
@@ -1707,13 +1707,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:548:2: (iv_ruleScenario2= ruleScenario2[false] EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:549:2: iv_ruleScenario2= ruleScenario2[false] EOF
+            // InternalParametersTestLanguage.g:548:2: (iv_ruleScenario2= ruleScenario2[false] EOF )
+            // InternalParametersTestLanguage.g:549:2: iv_ruleScenario2= ruleScenario2[false] EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getScenario2Rule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_entryRuleScenario21067);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleScenario2=ruleScenario2(false);
 
             state._fsp--;
@@ -1721,7 +1721,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleScenario2; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleScenario21078); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -1739,7 +1739,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleScenario2"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:556:1: ruleScenario2[boolean p_AllowKeyword] returns [EObject current=null] : ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) ) ;
+    // InternalParametersTestLanguage.g:556:1: ruleScenario2[boolean p_AllowKeyword] returns [EObject current=null] : ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) ) ;
     public final EObject ruleScenario2(boolean p_AllowKeyword) throws RecognitionException {
         EObject current = null;
 
@@ -1749,21 +1749,21 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:559:28: ( ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:560:1: ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) )
+            // InternalParametersTestLanguage.g:559:28: ( ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) ) )
+            // InternalParametersTestLanguage.g:560:1: ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:560:1: ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:561:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] )
+            // InternalParametersTestLanguage.g:560:1: ( (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] ) )
+            // InternalParametersTestLanguage.g:561:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:561:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:562:3: lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword]
+            // InternalParametersTestLanguage.g:561:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword] )
+            // InternalParametersTestLanguage.g:562:3: lv_first_0_0= ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword]
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getScenario2Access().getFirstIdOrKeywordParserRuleCall_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_ruleScenario21125);
+            pushFollow(FollowSets000.FOLLOW_2);
             lv_first_0_0=ruleIdOrKeyword(p_AllowKeyword);
 
             state._fsp--;
@@ -1807,7 +1807,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleScenario3"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:586:1: entryRuleScenario3 returns [EObject current=null] : iv_ruleScenario3= ruleScenario3[false] EOF ;
+    // InternalParametersTestLanguage.g:586:1: entryRuleScenario3 returns [EObject current=null] : iv_ruleScenario3= ruleScenario3[false] EOF ;
     public final EObject entryRuleScenario3() throws RecognitionException {
         EObject current = null;
 
@@ -1815,13 +1815,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:587:2: (iv_ruleScenario3= ruleScenario3[false] EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:588:2: iv_ruleScenario3= ruleScenario3[false] EOF
+            // InternalParametersTestLanguage.g:587:2: (iv_ruleScenario3= ruleScenario3[false] EOF )
+            // InternalParametersTestLanguage.g:588:2: iv_ruleScenario3= ruleScenario3[false] EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getScenario3Rule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleScenario3_in_entryRuleScenario31161);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleScenario3=ruleScenario3(false);
 
             state._fsp--;
@@ -1829,7 +1829,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleScenario3; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleScenario31172); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -1847,7 +1847,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleScenario3"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:595:1: ruleScenario3[boolean p_AllowKeyword] returns [EObject current=null] : ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) ) ;
+    // InternalParametersTestLanguage.g:595:1: ruleScenario3[boolean p_AllowKeyword] returns [EObject current=null] : ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) ) ;
     public final EObject ruleScenario3(boolean p_AllowKeyword) throws RecognitionException {
         EObject current = null;
 
@@ -1858,10 +1858,10 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:598:28: ( ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) )
+            // InternalParametersTestLanguage.g:598:28: ( ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) ) )
+            // InternalParametersTestLanguage.g:599:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) )
+            // InternalParametersTestLanguage.g:599:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) ) | ( (lv_second_1_0= 'keyword' ) ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1894,20 +1894,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:2: ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
+                    // InternalParametersTestLanguage.g:599:2: ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:2: ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:3: ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
+                    // InternalParametersTestLanguage.g:599:2: ( ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
+                    // InternalParametersTestLanguage.g:599:3: ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )=> (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:604:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:605:3: lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
+                    // InternalParametersTestLanguage.g:604:1: (lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
+                    // InternalParametersTestLanguage.g:605:3: lv_first_0_0= ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getScenario3Access().getFirstIdOrKeywordParserRuleCall_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_ruleScenario31231);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_first_0_0=ruleIdOrKeyword(p_AllowKeyword);
 
                     state._fsp--;
@@ -1935,15 +1935,15 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:622:6: ( (lv_second_1_0= 'keyword' ) )
+                    // InternalParametersTestLanguage.g:622:6: ( (lv_second_1_0= 'keyword' ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:622:6: ( (lv_second_1_0= 'keyword' ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:623:1: (lv_second_1_0= 'keyword' )
+                    // InternalParametersTestLanguage.g:622:6: ( (lv_second_1_0= 'keyword' ) )
+                    // InternalParametersTestLanguage.g:623:1: (lv_second_1_0= 'keyword' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:623:1: (lv_second_1_0= 'keyword' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:624:3: lv_second_1_0= 'keyword'
+                    // InternalParametersTestLanguage.g:623:1: (lv_second_1_0= 'keyword' )
+                    // InternalParametersTestLanguage.g:624:3: lv_second_1_0= 'keyword'
                     {
-                    lv_second_1_0=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleScenario31256); if (state.failed) return current;
+                    lv_second_1_0=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               newLeafNode(lv_second_1_0, grammarAccess.getScenario3Access().getSecondKeywordKeyword_1_0());
@@ -1989,7 +1989,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleScenario4"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:645:1: entryRuleScenario4 returns [EObject current=null] : iv_ruleScenario4= ruleScenario4[false] EOF ;
+    // InternalParametersTestLanguage.g:645:1: entryRuleScenario4 returns [EObject current=null] : iv_ruleScenario4= ruleScenario4[false] EOF ;
     public final EObject entryRuleScenario4() throws RecognitionException {
         EObject current = null;
 
@@ -1997,13 +1997,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:646:2: (iv_ruleScenario4= ruleScenario4[false] EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:647:2: iv_ruleScenario4= ruleScenario4[false] EOF
+            // InternalParametersTestLanguage.g:646:2: (iv_ruleScenario4= ruleScenario4[false] EOF )
+            // InternalParametersTestLanguage.g:647:2: iv_ruleScenario4= ruleScenario4[false] EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getScenario4Rule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleScenario4_in_entryRuleScenario41305);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleScenario4=ruleScenario4(false);
 
             state._fsp--;
@@ -2011,7 +2011,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleScenario4; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleScenario41316); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -2029,7 +2029,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleScenario4"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:654:1: ruleScenario4[boolean p_AllowKeyword] returns [EObject current=null] : ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' ) ;
+    // InternalParametersTestLanguage.g:654:1: ruleScenario4[boolean p_AllowKeyword] returns [EObject current=null] : ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' ) ;
     public final EObject ruleScenario4(boolean p_AllowKeyword) throws RecognitionException {
         EObject current = null;
 
@@ -2040,24 +2040,24 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:657:28: ( ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:658:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' )
+            // InternalParametersTestLanguage.g:657:28: ( ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' ) )
+            // InternalParametersTestLanguage.g:658:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:658:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:658:2: ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword'
+            // InternalParametersTestLanguage.g:658:1: ( ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword' )
+            // InternalParametersTestLanguage.g:658:2: ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) ) otherlv_1= 'keyword'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:658:2: ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:658:3: ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] )
+            // InternalParametersTestLanguage.g:658:2: ( ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )
+            // InternalParametersTestLanguage.g:658:3: ( ( ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] ) )=> (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:663:1: (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:664:3: lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
+            // InternalParametersTestLanguage.g:663:1: (lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword] )
+            // InternalParametersTestLanguage.g:664:3: lv_second_0_0= ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_ruleScenario41375);
+            pushFollow(FollowSets000.FOLLOW_6);
             lv_second_0_0=ruleIdOrKeyword(p_AllowKeyword);
 
             state._fsp--;
@@ -2081,7 +2081,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
             }
 
-            otherlv_1=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleScenario41388); if (state.failed) return current;
+            otherlv_1=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getScenario4Access().getKeywordKeyword_1());
@@ -2110,7 +2110,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "entryRuleIdOrKeyword"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:692:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF ;
+    // InternalParametersTestLanguage.g:692:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF ;
     public final String entryRuleIdOrKeyword() throws RecognitionException {
         String current = null;
 
@@ -2118,13 +2118,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:693:2: (iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:694:2: iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF
+            // InternalParametersTestLanguage.g:693:2: (iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF )
+            // InternalParametersTestLanguage.g:694:2: iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdOrKeywordRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_entryRuleIdOrKeyword1425);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleIdOrKeyword=ruleIdOrKeyword(false);
 
             state._fsp--;
@@ -2132,7 +2132,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             if ( state.backtracking==0 ) {
                current =iv_ruleIdOrKeyword.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdOrKeyword1437); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_2); if (state.failed) return current;
 
             }
 
@@ -2150,7 +2150,7 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
 
     // $ANTLR start "ruleIdOrKeyword"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:701:1: ruleIdOrKeyword[boolean p_Keyword] returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) ;
+    // InternalParametersTestLanguage.g:701:1: ruleIdOrKeyword[boolean p_Keyword] returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleIdOrKeyword(boolean p_Keyword) throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2160,10 +2160,10 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:704:28: ( ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // InternalParametersTestLanguage.g:704:28: ( ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) )
+            // InternalParametersTestLanguage.g:705:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // InternalParametersTestLanguage.g:705:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -2182,19 +2182,19 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:2: ({...}? => (kw= 'keyword' ) )
+                    // InternalParametersTestLanguage.g:705:2: ({...}? => (kw= 'keyword' ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:2: ({...}? => (kw= 'keyword' ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:3: {...}? => (kw= 'keyword' )
+                    // InternalParametersTestLanguage.g:705:2: ({...}? => (kw= 'keyword' ) )
+                    // InternalParametersTestLanguage.g:705:3: {...}? => (kw= 'keyword' )
                     {
                     if ( ! p_Keyword ) {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         throw new FailedPredicateException(input, "ruleIdOrKeyword", "p_Keyword");
                     }
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:705:17: (kw= 'keyword' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:706:2: kw= 'keyword'
+                    // InternalParametersTestLanguage.g:705:17: (kw= 'keyword' )
+                    // InternalParametersTestLanguage.g:706:2: kw= 'keyword'
                     {
-                    kw=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleIdOrKeyword1481); if (state.failed) return current;
+                    kw=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -2211,9 +2211,9 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:713:10: this_ID_1= RULE_ID
+                    // InternalParametersTestLanguage.g:713:10: this_ID_1= RULE_ID
                     {
-                    this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIdOrKeyword1505); if (state.failed) return current;
+                    this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_ID_1);
@@ -2250,20 +2250,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred1_InternalParametersTestLanguage
     public final void synpred1_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:7: ( ( '#5' ( ( ruleScenario2[true] ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:8: ( '#5' ( ( ruleScenario2[true] ) ) )
+        // InternalParametersTestLanguage.g:178:7: ( ( '#5' ( ( ruleScenario2[true] ) ) ) )
+        // InternalParametersTestLanguage.g:178:8: ( '#5' ( ( ruleScenario2[true] ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:8: ( '#5' ( ( ruleScenario2[true] ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:178:10: '#5' ( ( ruleScenario2[true] ) )
+        // InternalParametersTestLanguage.g:178:8: ( '#5' ( ( ruleScenario2[true] ) ) )
+        // InternalParametersTestLanguage.g:178:10: '#5' ( ( ruleScenario2[true] ) )
         {
-        match(input,15,FollowSets000.FOLLOW_15_in_synpred1_InternalParametersTestLanguage301); if (state.failed) return ;
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:179:1: ( ( ruleScenario2[true] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:180:1: ( ruleScenario2[true] )
+        match(input,15,FollowSets000.FOLLOW_4); if (state.failed) return ;
+        // InternalParametersTestLanguage.g:179:1: ( ( ruleScenario2[true] ) )
+        // InternalParametersTestLanguage.g:180:1: ( ruleScenario2[true] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:180:1: ( ruleScenario2[true] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:181:1: ruleScenario2[true]
+        // InternalParametersTestLanguage.g:180:1: ( ruleScenario2[true] )
+        // InternalParametersTestLanguage.g:181:1: ruleScenario2[true]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_synpred1_InternalParametersTestLanguage308);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleScenario2(true);
 
         state._fsp--;
@@ -2284,20 +2284,20 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred2_InternalParametersTestLanguage
     public final void synpred2_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:7: ( ( '#6' ( ( ruleScenario2[false] ) ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:8: ( '#6' ( ( ruleScenario2[false] ) ) )
+        // InternalParametersTestLanguage.g:206:7: ( ( '#6' ( ( ruleScenario2[false] ) ) ) )
+        // InternalParametersTestLanguage.g:206:8: ( '#6' ( ( ruleScenario2[false] ) ) )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:8: ( '#6' ( ( ruleScenario2[false] ) ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:206:10: '#6' ( ( ruleScenario2[false] ) )
+        // InternalParametersTestLanguage.g:206:8: ( '#6' ( ( ruleScenario2[false] ) ) )
+        // InternalParametersTestLanguage.g:206:10: '#6' ( ( ruleScenario2[false] ) )
         {
-        match(input,16,FollowSets000.FOLLOW_16_in_synpred2_InternalParametersTestLanguage364); if (state.failed) return ;
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:207:1: ( ( ruleScenario2[false] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:208:1: ( ruleScenario2[false] )
+        match(input,16,FollowSets000.FOLLOW_4); if (state.failed) return ;
+        // InternalParametersTestLanguage.g:207:1: ( ( ruleScenario2[false] ) )
+        // InternalParametersTestLanguage.g:208:1: ( ruleScenario2[false] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:208:1: ( ruleScenario2[false] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:209:1: ruleScenario2[false]
+        // InternalParametersTestLanguage.g:208:1: ( ruleScenario2[false] )
+        // InternalParametersTestLanguage.g:209:1: ruleScenario2[false]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleScenario2_in_synpred2_InternalParametersTestLanguage371);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleScenario2(false);
 
         state._fsp--;
@@ -2318,13 +2318,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred3_InternalParametersTestLanguage
     public final void synpred3_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:284:3: ( ( ruleIdOrKeyword[true] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:285:1: ( ruleIdOrKeyword[true] )
+        // InternalParametersTestLanguage.g:284:3: ( ( ruleIdOrKeyword[true] ) )
+        // InternalParametersTestLanguage.g:285:1: ( ruleIdOrKeyword[true] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:285:1: ( ruleIdOrKeyword[true] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:286:1: ruleIdOrKeyword[true]
+        // InternalParametersTestLanguage.g:285:1: ( ruleIdOrKeyword[true] )
+        // InternalParametersTestLanguage.g:286:1: ruleIdOrKeyword[true]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_synpred3_InternalParametersTestLanguage526);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleIdOrKeyword(true);
 
         state._fsp--;
@@ -2339,13 +2339,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred4_InternalParametersTestLanguage
     public final void synpred4_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:334:3: ( ( ruleIdOrKeyword[true] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:335:1: ( ruleIdOrKeyword[true] )
+        // InternalParametersTestLanguage.g:334:3: ( ( ruleIdOrKeyword[true] ) )
+        // InternalParametersTestLanguage.g:335:1: ( ruleIdOrKeyword[true] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:335:1: ( ruleIdOrKeyword[true] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:336:1: ruleIdOrKeyword[true]
+        // InternalParametersTestLanguage.g:335:1: ( ruleIdOrKeyword[true] )
+        // InternalParametersTestLanguage.g:336:1: ruleIdOrKeyword[true]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_synpred4_InternalParametersTestLanguage626);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleIdOrKeyword(true);
 
         state._fsp--;
@@ -2360,13 +2360,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred5_InternalParametersTestLanguage
     public final void synpred5_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:384:3: ( ( ruleIdOrKeyword[false] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:385:1: ( ruleIdOrKeyword[false] )
+        // InternalParametersTestLanguage.g:384:3: ( ( ruleIdOrKeyword[false] ) )
+        // InternalParametersTestLanguage.g:385:1: ( ruleIdOrKeyword[false] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:385:1: ( ruleIdOrKeyword[false] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:386:1: ruleIdOrKeyword[false]
+        // InternalParametersTestLanguage.g:385:1: ( ruleIdOrKeyword[false] )
+        // InternalParametersTestLanguage.g:386:1: ruleIdOrKeyword[false]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_synpred5_InternalParametersTestLanguage726);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleIdOrKeyword(false);
 
         state._fsp--;
@@ -2381,13 +2381,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred6_InternalParametersTestLanguage
     public final void synpred6_InternalParametersTestLanguage_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:434:3: ( ( ruleIdOrKeyword[false] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:435:1: ( ruleIdOrKeyword[false] )
+        // InternalParametersTestLanguage.g:434:3: ( ( ruleIdOrKeyword[false] ) )
+        // InternalParametersTestLanguage.g:435:1: ( ruleIdOrKeyword[false] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:435:1: ( ruleIdOrKeyword[false] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:436:1: ruleIdOrKeyword[false]
+        // InternalParametersTestLanguage.g:435:1: ( ruleIdOrKeyword[false] )
+        // InternalParametersTestLanguage.g:436:1: ruleIdOrKeyword[false]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_synpred6_InternalParametersTestLanguage826);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleIdOrKeyword(false);
 
         state._fsp--;
@@ -2402,13 +2402,13 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     // $ANTLR start synpred7_InternalParametersTestLanguage
     public final void synpred7_InternalParametersTestLanguage_fragment(boolean p_AllowKeyword) throws RecognitionException {   
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:599:3: ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:600:1: ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
+        // InternalParametersTestLanguage.g:599:3: ( ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] ) )
+        // InternalParametersTestLanguage.g:600:1: ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
         {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:600:1: ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/parameters/parser/antlr/internal/InternalParametersTestLanguage.g:601:1: ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
+        // InternalParametersTestLanguage.g:600:1: ( ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword] )
+        // InternalParametersTestLanguage.g:601:1: ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
         {
-        pushFollow(FollowSets000.FOLLOW_ruleIdOrKeyword_in_synpred7_InternalParametersTestLanguage1213);
+        pushFollow(FollowSets000.FOLLOW_2);
         ruleIdOrKeyword(p_AllowKeyword);
 
         state._fsp--;
@@ -2635,68 +2635,12 @@ public class InternalParametersTestLanguageParser extends AbstractInternalAntlrP
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleParserRuleParameters_in_entryRuleParserRuleParameters75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleParserRuleParameters85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleParserRuleParameters133 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleScenario1_in_ruleParserRuleParameters154 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleParserRuleParameters175 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleScenario1_in_ruleParserRuleParameters196 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleParserRuleParameters217 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters238 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleParserRuleParameters259 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters280 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleParserRuleParameters321 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters342 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleParserRuleParameters384 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters405 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleParserRuleParameters427 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario3_in_ruleParserRuleParameters448 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleParserRuleParameters469 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario3_in_ruleParserRuleParameters490 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleParserRuleParameters511 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario4_in_ruleParserRuleParameters544 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters573 = new BitSet(new long[]{0x0000000000100002L});
-        public static final BitSet FOLLOW_20_in_ruleParserRuleParameters587 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleParserRuleParameters611 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario4_in_ruleParserRuleParameters644 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters673 = new BitSet(new long[]{0x0000000000100002L});
-        public static final BitSet FOLLOW_20_in_ruleParserRuleParameters687 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_ruleParserRuleParameters711 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario4_in_ruleParserRuleParameters744 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters773 = new BitSet(new long[]{0x0000000000100002L});
-        public static final BitSet FOLLOW_20_in_ruleParserRuleParameters787 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleParserRuleParameters811 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario4_in_ruleParserRuleParameters844 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario2_in_ruleParserRuleParameters873 = new BitSet(new long[]{0x0000000000100002L});
-        public static final BitSet FOLLOW_20_in_ruleParserRuleParameters887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario1_in_entryRuleScenario1929 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleScenario1940 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleScenario1988 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleScenario11023 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario2_in_entryRuleScenario21067 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleScenario21078 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_ruleScenario21125 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario3_in_entryRuleScenario31161 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleScenario31172 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_ruleScenario31231 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleScenario31256 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleScenario4_in_entryRuleScenario41305 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleScenario41316 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_ruleScenario41375 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleScenario41388 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_entryRuleIdOrKeyword1425 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIdOrKeyword1437 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleIdOrKeyword1481 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleIdOrKeyword1505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_synpred1_InternalParametersTestLanguage301 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_synpred1_InternalParametersTestLanguage308 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_synpred2_InternalParametersTestLanguage364 = new BitSet(new long[]{0x0000000000100010L});
-        public static final BitSet FOLLOW_ruleScenario2_in_synpred2_InternalParametersTestLanguage371 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_synpred3_InternalParametersTestLanguage526 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_synpred4_InternalParametersTestLanguage626 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_synpred5_InternalParametersTestLanguage726 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_synpred6_InternalParametersTestLanguage826 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdOrKeyword_in_synpred7_InternalParametersTestLanguage1213 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000100010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000100002L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000100000L});
     }
 
 

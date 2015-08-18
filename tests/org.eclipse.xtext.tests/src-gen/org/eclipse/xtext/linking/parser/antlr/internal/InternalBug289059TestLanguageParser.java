@@ -47,7 +47,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
         
 
     public String[] getTokenNames() { return InternalBug289059TestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBug289059TestLanguage.g"; }
 
 
 
@@ -72,7 +72,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug289059TestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -80,17 +80,17 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalBug289059TestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalBug289059TestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -108,7 +108,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) ;
+    // InternalBug289059TestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -120,19 +120,19 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
+            // InternalBug289059TestLanguage.g:79:28: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? ) )
+            // InternalBug289059TestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )?
+            // InternalBug289059TestLanguage.g:80:1: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )? )
+            // InternalBug289059TestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) ) ( (lv_enabled_1_0= ruleUnassignedAction ) )? ( (otherlv_2= RULE_ID ) )?
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalBug289059TestLanguage.g:80:2: ( (lv_name_0_0= RULE_ID ) )
+            // InternalBug289059TestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalBug289059TestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalBug289059TestLanguage.g:82:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel127); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0()); 
             		
@@ -152,7 +152,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:98:2: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
+            // InternalBug289059TestLanguage.g:98:2: ( (lv_enabled_1_0= ruleUnassignedAction ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -161,15 +161,15 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:99:1: (lv_enabled_1_0= ruleUnassignedAction )
+                    // InternalBug289059TestLanguage.g:99:1: (lv_enabled_1_0= ruleUnassignedAction )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:99:1: (lv_enabled_1_0= ruleUnassignedAction )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:100:3: lv_enabled_1_0= ruleUnassignedAction
+                    // InternalBug289059TestLanguage.g:99:1: (lv_enabled_1_0= ruleUnassignedAction )
+                    // InternalBug289059TestLanguage.g:100:3: lv_enabled_1_0= ruleUnassignedAction
                     {
                      
                     	        newCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleUnassignedAction_in_ruleModel153);
+                    pushFollow(FollowSets000.FOLLOW_4);
                     lv_enabled_1_0=ruleUnassignedAction();
 
                     state._fsp--;
@@ -194,7 +194,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:116:3: ( (otherlv_2= RULE_ID ) )?
+            // InternalBug289059TestLanguage.g:116:3: ( (otherlv_2= RULE_ID ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -203,17 +203,17 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:117:1: (otherlv_2= RULE_ID )
+                    // InternalBug289059TestLanguage.g:117:1: (otherlv_2= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:117:1: (otherlv_2= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:118:3: otherlv_2= RULE_ID
+                    // InternalBug289059TestLanguage.g:117:1: (otherlv_2= RULE_ID )
+                    // InternalBug289059TestLanguage.g:118:3: otherlv_2= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getModelRule());
                     	        }
                             
-                    otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel174); 
+                    otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     		newLeafNode(otherlv_2, grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0()); 
                     	
@@ -247,7 +247,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "entryRuleUnassignedAction"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:137:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
+    // InternalBug289059TestLanguage.g:137:1: entryRuleUnassignedAction returns [EObject current=null] : iv_ruleUnassignedAction= ruleUnassignedAction EOF ;
     public final EObject entryRuleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -255,17 +255,17 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:138:2: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:139:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
+            // InternalBug289059TestLanguage.g:138:2: (iv_ruleUnassignedAction= ruleUnassignedAction EOF )
+            // InternalBug289059TestLanguage.g:139:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
             {
              newCompositeNode(grammarAccess.getUnassignedActionRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction211);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleUnassignedAction=ruleUnassignedAction();
 
             state._fsp--;
 
              current =iv_ruleUnassignedAction; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedAction221); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -283,7 +283,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start "ruleUnassignedAction"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:146:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
+    // InternalBug289059TestLanguage.g:146:1: ruleUnassignedAction returns [EObject current=null] : ( () otherlv_1= 'enabled' ) ;
     public final EObject ruleUnassignedAction() throws RecognitionException {
         EObject current = null;
 
@@ -292,14 +292,14 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:149:28: ( ( () otherlv_1= 'enabled' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:150:1: ( () otherlv_1= 'enabled' )
+            // InternalBug289059TestLanguage.g:149:28: ( ( () otherlv_1= 'enabled' ) )
+            // InternalBug289059TestLanguage.g:150:1: ( () otherlv_1= 'enabled' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:150:1: ( () otherlv_1= 'enabled' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:150:2: () otherlv_1= 'enabled'
+            // InternalBug289059TestLanguage.g:150:1: ( () otherlv_1= 'enabled' )
+            // InternalBug289059TestLanguage.g:150:2: () otherlv_1= 'enabled'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:150:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:151:5: 
+            // InternalBug289059TestLanguage.g:150:2: ()
+            // InternalBug289059TestLanguage.g:151:5: 
             {
 
                     current = forceCreateModelElement(
@@ -309,7 +309,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleUnassignedAction267); 
+            otherlv_1=(Token)match(input,11,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1());
                 
@@ -339,14 +339,10 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel127 = new BitSet(new long[]{0x0000000000000812L});
-        public static final BitSet FOLLOW_ruleUnassignedAction_in_ruleModel153 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel174 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction211 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedAction221 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleUnassignedAction267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000812L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000012L});
     }
 
 

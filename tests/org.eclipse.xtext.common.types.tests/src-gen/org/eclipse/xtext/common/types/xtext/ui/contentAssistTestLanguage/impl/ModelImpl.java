@@ -30,12 +30,12 @@ import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Referen
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ModelImpl#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ModelImpl#getGenerateDirective <em>Generate Directive</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ModelImpl#getReferenceHolder <em>Reference Holder</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -97,8 +97,7 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EList<Import> getImports()
+  public EList<Import> getImports()
   {
     if (imports == null)
     {
@@ -112,8 +111,7 @@ public EList<Import> getImports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public GenerateDirective getGenerateDirective()
+  public GenerateDirective getGenerateDirective()
   {
     return generateDirective;
   }
@@ -140,8 +138,7 @@ public GenerateDirective getGenerateDirective()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setGenerateDirective(GenerateDirective newGenerateDirective)
+  public void setGenerateDirective(GenerateDirective newGenerateDirective)
   {
     if (newGenerateDirective != generateDirective)
     {
@@ -162,8 +159,7 @@ public void setGenerateDirective(GenerateDirective newGenerateDirective)
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferenceHolder getReferenceHolder()
+  public ReferenceHolder getReferenceHolder()
   {
     return referenceHolder;
   }
@@ -190,8 +186,7 @@ public ReferenceHolder getReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setReferenceHolder(ReferenceHolder newReferenceHolder)
+  public void setReferenceHolder(ReferenceHolder newReferenceHolder)
   {
     if (newReferenceHolder != referenceHolder)
     {

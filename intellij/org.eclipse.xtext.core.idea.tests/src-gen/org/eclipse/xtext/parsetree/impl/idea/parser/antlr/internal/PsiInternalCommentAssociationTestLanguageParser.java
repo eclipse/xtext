@@ -45,7 +45,7 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         
 
     public String[] getTokenNames() { return PsiInternalCommentAssociationTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalCommentAssociationTestLanguage.g"; }
 
 
 
@@ -69,19 +69,19 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalCommentAssociationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalCommentAssociationTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalCommentAssociationTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -98,13 +98,13 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )* ;
+    // PsiInternalCommentAssociationTestLanguage.g:58:1: ruleModel : ( (lv_elements_0_0= ruleElement ) )* ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalCommentAssociationTestLanguage.g:58:10: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
+            // PsiInternalCommentAssociationTestLanguage.g:59:2: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -117,15 +117,15 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:61:4: lv_elements_0_0= ruleElement
+            	    // PsiInternalCommentAssociationTestLanguage.g:60:3: (lv_elements_0_0= ruleElement )
+            	    // PsiInternalCommentAssociationTestLanguage.g:61:4: lv_elements_0_0= ruleElement
             	    {
 
             	    				markComposite(elementTypeProvider.getModel_ElementsElementParserRuleCall_0ElementType());
             	    			
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel82);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleElement();
 
             	    state._fsp--;
@@ -161,19 +161,19 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "entryRuleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
+    // PsiInternalCommentAssociationTestLanguage.g:73:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:73:17: ( ruleElement EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:74:2: ruleElement EOF
+            // PsiInternalCommentAssociationTestLanguage.g:73:17: ( ruleElement EOF )
+            // PsiInternalCommentAssociationTestLanguage.g:74:2: ruleElement EOF
             {
              markComposite(elementTypeProvider.getElementElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement108);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleElement();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement111); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -190,7 +190,7 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
 
     // $ANTLR start "ruleElement"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:79:1: ruleElement : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
+    // PsiInternalCommentAssociationTestLanguage.g:79:1: ruleElement : (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) ;
     public final void ruleElement() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
@@ -198,29 +198,29 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
         Token lv_name_4_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:79:12: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // PsiInternalCommentAssociationTestLanguage.g:79:12: ( (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? ) )
+            // PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:81:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+            // PsiInternalCommentAssociationTestLanguage.g:80:2: (otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )? )
+            // PsiInternalCommentAssociationTestLanguage.g:81:3: otherlv_0= 'element' ( (lv_name_1_0= RULE_ID ) ) ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             {
 
             			markLeaf(elementTypeProvider.getElement_ElementKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement130); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalCommentAssociationTestLanguage.g:88:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:90:5: lv_name_1_0= RULE_ID
+            // PsiInternalCommentAssociationTestLanguage.g:89:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalCommentAssociationTestLanguage.g:90:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement157); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -230,7 +230,7 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:99:3: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
+            // PsiInternalCommentAssociationTestLanguage.g:99:3: ( () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -239,10 +239,10 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:100:4: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
+                    // PsiInternalCommentAssociationTestLanguage.g:100:4: () otherlv_3= 'parent' ( (lv_name_4_0= RULE_ID ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:100:4: ()
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:101:5: 
+                    // PsiInternalCommentAssociationTestLanguage.g:100:4: ()
+                    // PsiInternalCommentAssociationTestLanguage.g:101:5: 
                     {
 
                     					precedeComposite(elementTypeProvider.getElement_ElementChildAction_2_0ElementType());
@@ -254,20 +254,20 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
                     				markLeaf(elementTypeProvider.getElement_ParentKeyword_2_1ElementType());
                     			
-                    otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement204); 
+                    otherlv_3=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
                     				doneLeaf(otherlv_3);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:113:4: ( (lv_name_4_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
+                    // PsiInternalCommentAssociationTestLanguage.g:113:4: ( (lv_name_4_0= RULE_ID ) )
+                    // PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/impl/idea/parser/antlr/internal/PsiInternalCommentAssociationTestLanguage.g:115:6: lv_name_4_0= RULE_ID
+                    // PsiInternalCommentAssociationTestLanguage.g:114:5: (lv_name_4_0= RULE_ID )
+                    // PsiInternalCommentAssociationTestLanguage.g:115:6: lv_name_4_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getElement_NameIDTerminalRuleCall_2_2_0ElementType());
                     					
-                    lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement236); 
+                    lv_name_4_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_name_4_0);
                     					
@@ -307,15 +307,11 @@ public class PsiInternalCommentAssociationTestLanguageParser extends AbstractPsi
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleModel82 = new BitSet(new long[]{0x0000000000000802L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement108 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement111 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleElement130 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement157 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_12_in_ruleElement204 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement236 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001002L});
     }
 
 

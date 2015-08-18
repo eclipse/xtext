@@ -13,12 +13,12 @@ import org.eclipse.xtext.common.types.JvmType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ReferenceHolder#getDefaultReference <em>Default Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ReferenceHolder#getCustomizedReference <em>Customized Reference</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ReferenceHolder#getSubtypeReference <em>Subtype Reference</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.ContentAssistTestLanguagePackage#getReferenceHolder()
  * @model

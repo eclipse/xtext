@@ -91,6 +91,9 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 
 	@Override
 	public Boolean caseAction(Action object) {
+		if (!fragmentStack.isEmpty()) {
+			return Boolean.TRUE;
+		}
 		assignedFeatures = newMultimap();
 		if (GrammarUtil.isMultipleAssignment(object))
 			return null;
@@ -187,10 +190,13 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 		Multimap<String, AbstractElement> mergedAssignedFeatures = LinkedHashMultimap.create();
 		Set<AbstractRule> prevPermanentlyVisited = permanentlyVisited;
 		Set<AbstractRule> mergedPermanentlyVisited = Sets.newHashSet();
+		boolean allAborted = true;
 		for (AbstractElement element : object.getElements()) {
 			assignedFeatures = newMultimap(prevAssignedFeatures);
 			permanentlyVisited = Sets.newHashSet(prevPermanentlyVisited);
-			doSwitch(element);
+			if (!doSwitch(element)) {
+				allAborted = false;
+			}
 			mergedAssignedFeatures.putAll(assignedFeatures);
 			mergedPermanentlyVisited.addAll(prevPermanentlyVisited);
 		}
@@ -198,7 +204,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 			mergedAssignedFeatures.putAll(prevAssignedFeatures);
 		}
 		assignedFeatures = mergedAssignedFeatures;
-		if (GrammarUtil.isMultipleCardinality(object)) {
+		if (!allAborted && GrammarUtil.isMultipleCardinality(object)) {
 			prevAssignedFeatures = assignedFeatures;
 			for (AbstractElement element : object.getElements()) {
 				assignedFeatures = newMultimap(prevAssignedFeatures);
@@ -215,12 +221,21 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	private Multimap<String, AbstractElement> newMultimap(Multimap<String, AbstractElement> from) {
 		return LinkedHashMultimap.create(from);
 	}
+	
+	@Override
+	public Boolean caseAbstractElement(AbstractElement object) {
+		return Boolean.FALSE;
+	}
 
 	@Override
 	public Boolean caseCompoundElement(CompoundElement object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = newMultimap(assignedFeatures);
 		for (AbstractElement element : object.getElements()) {
-			doSwitch(element);
+			if (doSwitch(element)) {
+				if (GrammarUtil.isOptionalCardinality(object))
+					assignedFeatures.putAll(prevAssignedFeatures);
+				return Boolean.TRUE;
+			}
 		}
 		if (GrammarUtil.isMultipleCardinality(object)) {
 			for (AbstractElement element : object.getElements()) {

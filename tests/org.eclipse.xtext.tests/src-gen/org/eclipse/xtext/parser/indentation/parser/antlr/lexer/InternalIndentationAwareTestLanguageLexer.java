@@ -34,19 +34,19 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g"; }
+    public String getGrammarFileName() { return "InternalIndentationAwareTestLanguageLexer.g"; }
 
     // $ANTLR start "RULE_SL_COMMENT"
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:21:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:21:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIndentationAwareTestLanguageLexer.g:21:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
+            // InternalIndentationAwareTestLanguageLexer.g:21:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:21:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalIndentationAwareTestLanguageLexer.g:21:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -59,7 +59,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:21:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalIndentationAwareTestLanguageLexer.g:21:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -93,8 +93,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_INDENT"
     public final void mRULE_INDENT() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:23:22: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:23:24: 
+            // InternalIndentationAwareTestLanguageLexer.g:23:22: ()
+            // InternalIndentationAwareTestLanguageLexer.g:23:24: 
             {
             }
 
@@ -107,8 +107,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR start "RULE_DEDENT"
     public final void mRULE_DEDENT() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:25:22: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:25:24: 
+            // InternalIndentationAwareTestLanguageLexer.g:25:22: ()
+            // InternalIndentationAwareTestLanguageLexer.g:25:24: 
             {
             }
 
@@ -123,10 +123,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:27:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:27:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIndentationAwareTestLanguageLexer.g:27:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalIndentationAwareTestLanguageLexer.g:27:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:27:11: ( '^' )?
+            // InternalIndentationAwareTestLanguageLexer.g:27:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -135,7 +135,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:27:11: '^'
+                    // InternalIndentationAwareTestLanguageLexer.g:27:11: '^'
                     {
                     match('^'); 
 
@@ -153,7 +153,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:27:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalIndentationAwareTestLanguageLexer.g:27:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -166,7 +166,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:
+            	    // InternalIndentationAwareTestLanguageLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -202,10 +202,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:29:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:29:12: ( '0' .. '9' )+
+            // InternalIndentationAwareTestLanguageLexer.g:29:10: ( ( '0' .. '9' )+ )
+            // InternalIndentationAwareTestLanguageLexer.g:29:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:29:12: ( '0' .. '9' )+
+            // InternalIndentationAwareTestLanguageLexer.g:29:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -219,7 +219,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:29:13: '0' .. '9'
+            	    // InternalIndentationAwareTestLanguageLexer.g:29:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -251,10 +251,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIndentationAwareTestLanguageLexer.g:31:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalIndentationAwareTestLanguageLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalIndentationAwareTestLanguageLexer.g:31:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -272,10 +272,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalIndentationAwareTestLanguageLexer.g:31:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalIndentationAwareTestLanguageLexer.g:31:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -291,7 +291,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:21: '\\\\' .
+                    	    // InternalIndentationAwareTestLanguageLexer.g:31:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -299,7 +299,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalIndentationAwareTestLanguageLexer.g:31:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -324,10 +324,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalIndentationAwareTestLanguageLexer.g:31:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalIndentationAwareTestLanguageLexer.g:31:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -343,7 +343,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:54: '\\\\' .
+                    	    // InternalIndentationAwareTestLanguageLexer.g:31:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -351,7 +351,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:31:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalIndentationAwareTestLanguageLexer.g:31:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -394,12 +394,12 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:33:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:33:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalIndentationAwareTestLanguageLexer.g:33:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalIndentationAwareTestLanguageLexer.g:33:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:33:24: ( options {greedy=false; } : . )*
+            // InternalIndentationAwareTestLanguageLexer.g:33:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -424,7 +424,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:33:52: .
+            	    // InternalIndentationAwareTestLanguageLexer.g:33:52: .
             	    {
             	    matchAny(); 
 
@@ -454,10 +454,10 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:35:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:35:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIndentationAwareTestLanguageLexer.g:35:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalIndentationAwareTestLanguageLexer.g:35:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:35:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalIndentationAwareTestLanguageLexer.g:35:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt9=0;
             loop9:
             do {
@@ -471,7 +471,7 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:
+            	    // InternalIndentationAwareTestLanguageLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -511,8 +511,8 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:37:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:37:18: .
+            // InternalIndentationAwareTestLanguageLexer.g:37:16: ( . )
+            // InternalIndentationAwareTestLanguageLexer.g:37:18: .
             {
             matchAny(); 
 
@@ -527,54 +527,54 @@ public class InternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:8: ( RULE_SL_COMMENT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalIndentationAwareTestLanguageLexer.g:1:8: ( RULE_SL_COMMENT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt10=7;
         alt10 = dfa10.predict(input);
         switch (alt10) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:10: RULE_SL_COMMENT
+                // InternalIndentationAwareTestLanguageLexer.g:1:10: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:26: RULE_ID
+                // InternalIndentationAwareTestLanguageLexer.g:1:26: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:34: RULE_INT
+                // InternalIndentationAwareTestLanguageLexer.g:1:34: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:43: RULE_STRING
+                // InternalIndentationAwareTestLanguageLexer.g:1:43: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:55: RULE_ML_COMMENT
+                // InternalIndentationAwareTestLanguageLexer.g:1:55: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:71: RULE_WS
+                // InternalIndentationAwareTestLanguageLexer.g:1:71: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/indentation/parser/antlr/lexer/InternalIndentationAwareTestLanguageLexer.g:1:79: RULE_ANY_OTHER
+                // InternalIndentationAwareTestLanguageLexer.g:1:79: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

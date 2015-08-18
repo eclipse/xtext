@@ -50,7 +50,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
         
 
     public String[] getTokenNames() { return InternalPartialSerializationTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalPartialSerializationTestLanguage.g"; }
 
 
 
@@ -75,7 +75,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalPartialSerializationTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -83,17 +83,17 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalPartialSerializationTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalPartialSerializationTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -111,7 +111,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:76:1: ruleModel returns [EObject current=null] : this_NodeRoot_0= ruleNodeRoot ;
+    // InternalPartialSerializationTestLanguage.g:76:1: ruleModel returns [EObject current=null] : this_NodeRoot_0= ruleNodeRoot ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -121,13 +121,13 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:79:28: (this_NodeRoot_0= ruleNodeRoot )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:81:5: this_NodeRoot_0= ruleNodeRoot
+            // InternalPartialSerializationTestLanguage.g:79:28: (this_NodeRoot_0= ruleNodeRoot )
+            // InternalPartialSerializationTestLanguage.g:81:5: this_NodeRoot_0= ruleNodeRoot
             {
              
                     newCompositeNode(grammarAccess.getModelAccess().getNodeRootParserRuleCall()); 
                 
-            pushFollow(FollowSets000.FOLLOW_ruleNodeRoot_in_ruleModel131);
+            pushFollow(FollowSets000.FOLLOW_2);
             this_NodeRoot_0=ruleNodeRoot();
 
             state._fsp--;
@@ -154,7 +154,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleNodeRoot"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:97:1: entryRuleNodeRoot returns [EObject current=null] : iv_ruleNodeRoot= ruleNodeRoot EOF ;
+    // InternalPartialSerializationTestLanguage.g:97:1: entryRuleNodeRoot returns [EObject current=null] : iv_ruleNodeRoot= ruleNodeRoot EOF ;
     public final EObject entryRuleNodeRoot() throws RecognitionException {
         EObject current = null;
 
@@ -162,17 +162,17 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:98:2: (iv_ruleNodeRoot= ruleNodeRoot EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:99:2: iv_ruleNodeRoot= ruleNodeRoot EOF
+            // InternalPartialSerializationTestLanguage.g:98:2: (iv_ruleNodeRoot= ruleNodeRoot EOF )
+            // InternalPartialSerializationTestLanguage.g:99:2: iv_ruleNodeRoot= ruleNodeRoot EOF
             {
              newCompositeNode(grammarAccess.getNodeRootRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNodeRoot_in_entryRuleNodeRoot165);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleNodeRoot=ruleNodeRoot();
 
             state._fsp--;
 
              current =iv_ruleNodeRoot; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNodeRoot175); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -190,7 +190,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleNodeRoot"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:106:1: ruleNodeRoot returns [EObject current=null] : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
+    // InternalPartialSerializationTestLanguage.g:106:1: ruleNodeRoot returns [EObject current=null] : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
     public final EObject ruleNodeRoot() throws RecognitionException {
         EObject current = null;
 
@@ -201,26 +201,26 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:109:28: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:110:1: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // InternalPartialSerializationTestLanguage.g:109:28: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
+            // InternalPartialSerializationTestLanguage.g:110:1: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:110:1: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:110:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
+            // InternalPartialSerializationTestLanguage.g:110:1: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // InternalPartialSerializationTestLanguage.g:110:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
             {
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleNodeRoot212); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getNodeRootAccess().getNumberSignDigitOneKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:114:1: ( (lv_node_1_0= ruleNode ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:115:1: (lv_node_1_0= ruleNode )
+            // InternalPartialSerializationTestLanguage.g:114:1: ( (lv_node_1_0= ruleNode ) )
+            // InternalPartialSerializationTestLanguage.g:115:1: (lv_node_1_0= ruleNode )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:115:1: (lv_node_1_0= ruleNode )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:116:3: lv_node_1_0= ruleNode
+            // InternalPartialSerializationTestLanguage.g:115:1: (lv_node_1_0= ruleNode )
+            // InternalPartialSerializationTestLanguage.g:116:3: lv_node_1_0= ruleNode
             {
              
             	        newCompositeNode(grammarAccess.getNodeRootAccess().getNodeNodeParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleNode_in_ruleNodeRoot233);
+            pushFollow(FollowSets000.FOLLOW_2);
             lv_node_1_0=ruleNode();
 
             state._fsp--;
@@ -263,7 +263,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "entryRuleNode"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:140:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
+    // InternalPartialSerializationTestLanguage.g:140:1: entryRuleNode returns [EObject current=null] : iv_ruleNode= ruleNode EOF ;
     public final EObject entryRuleNode() throws RecognitionException {
         EObject current = null;
 
@@ -271,17 +271,17 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:141:2: (iv_ruleNode= ruleNode EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:142:2: iv_ruleNode= ruleNode EOF
+            // InternalPartialSerializationTestLanguage.g:141:2: (iv_ruleNode= ruleNode EOF )
+            // InternalPartialSerializationTestLanguage.g:142:2: iv_ruleNode= ruleNode EOF
             {
              newCompositeNode(grammarAccess.getNodeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNode_in_entryRuleNode269);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleNode=ruleNode();
 
             state._fsp--;
 
              current =iv_ruleNode; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNode279); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -299,7 +299,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
 
     // $ANTLR start "ruleNode"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:149:1: ruleNode returns [EObject current=null] : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
+    // InternalPartialSerializationTestLanguage.g:149:1: ruleNode returns [EObject current=null] : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
     public final EObject ruleNode() throws RecognitionException {
         EObject current = null;
 
@@ -313,23 +313,23 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:152:28: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:153:1: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // InternalPartialSerializationTestLanguage.g:152:28: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
+            // InternalPartialSerializationTestLanguage.g:153:1: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:153:1: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:153:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // InternalPartialSerializationTestLanguage.g:153:1: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // InternalPartialSerializationTestLanguage.g:153:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             {
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleNode316); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getNodeAccess().getNodeKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:157:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:158:1: (lv_name_1_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:157:1: ( (lv_name_1_0= RULE_ID ) )
+            // InternalPartialSerializationTestLanguage.g:158:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:158:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:159:3: lv_name_1_0= RULE_ID
+            // InternalPartialSerializationTestLanguage.g:158:1: (lv_name_1_0= RULE_ID )
+            // InternalPartialSerializationTestLanguage.g:159:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNode333); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getNodeAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -349,7 +349,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:175:2: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // InternalPartialSerializationTestLanguage.g:175:2: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -358,13 +358,13 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:175:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
+                    // InternalPartialSerializationTestLanguage.g:175:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
                     {
-                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleNode351); 
+                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getNodeAccess().getLeftParenthesisKeyword_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:179:1: ( (lv_children_3_0= ruleNode ) )+
+                    // InternalPartialSerializationTestLanguage.g:179:1: ( (lv_children_3_0= ruleNode ) )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -378,15 +378,15 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:180:1: (lv_children_3_0= ruleNode )
+                    	    // InternalPartialSerializationTestLanguage.g:180:1: (lv_children_3_0= ruleNode )
                     	    {
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:180:1: (lv_children_3_0= ruleNode )
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalPartialSerializationTestLanguage.g:181:3: lv_children_3_0= ruleNode
+                    	    // InternalPartialSerializationTestLanguage.g:180:1: (lv_children_3_0= ruleNode )
+                    	    // InternalPartialSerializationTestLanguage.g:181:3: lv_children_3_0= ruleNode
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getNodeAccess().getChildrenNodeParserRuleCall_2_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleNode_in_ruleNode372);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_children_3_0=ruleNode();
 
                     	    state._fsp--;
@@ -418,7 +418,7 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
                         cnt1++;
                     } while (true);
 
-                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleNode385); 
+                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getNodeAccess().getRightParenthesisKeyword_2_2());
                         
@@ -454,20 +454,12 @@ public class InternalPartialSerializationTestLanguageParser extends AbstractInte
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNodeRoot_in_ruleModel131 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNodeRoot_in_entryRuleNodeRoot165 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNodeRoot175 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleNodeRoot212 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_ruleNode_in_ruleNodeRoot233 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNode_in_entryRuleNode269 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNode279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleNode316 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleNode333 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleNode351 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_ruleNode_in_ruleNode372 = new BitSet(new long[]{0x0000000000005000L});
-        public static final BitSet FOLLOW_14_in_ruleNode385 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000005000L});
     }
 
 

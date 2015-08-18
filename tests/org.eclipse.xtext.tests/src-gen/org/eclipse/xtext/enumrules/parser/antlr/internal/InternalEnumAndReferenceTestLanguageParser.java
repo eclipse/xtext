@@ -50,7 +50,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
         
 
     public String[] getTokenNames() { return InternalEnumAndReferenceTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEnumAndReferenceTestLanguage.g"; }
 
 
 
@@ -75,7 +75,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "entryRuleEntityWithEnumAndReference"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:68:1: entryRuleEntityWithEnumAndReference returns [EObject current=null] : iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF ;
+    // InternalEnumAndReferenceTestLanguage.g:68:1: entryRuleEntityWithEnumAndReference returns [EObject current=null] : iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF ;
     public final EObject entryRuleEntityWithEnumAndReference() throws RecognitionException {
         EObject current = null;
 
@@ -83,17 +83,17 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:69:2: (iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:70:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
+            // InternalEnumAndReferenceTestLanguage.g:69:2: (iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF )
+            // InternalEnumAndReferenceTestLanguage.g:70:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
             {
              newCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference();
 
             state._fsp--;
 
              current =iv_ruleEntityWithEnumAndReference; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -111,7 +111,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleEntityWithEnumAndReference"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:77:1: ruleEntityWithEnumAndReference returns [EObject current=null] : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
+    // InternalEnumAndReferenceTestLanguage.g:77:1: ruleEntityWithEnumAndReference returns [EObject current=null] : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
     public final EObject ruleEntityWithEnumAndReference() throws RecognitionException {
         EObject current = null;
 
@@ -124,22 +124,22 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:80:28: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:81:1: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // InternalEnumAndReferenceTestLanguage.g:80:28: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
+            // InternalEnumAndReferenceTestLanguage.g:81:1: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:81:1: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:81:2: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
+            // InternalEnumAndReferenceTestLanguage.g:81:1: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // InternalEnumAndReferenceTestLanguage.g:81:2: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:81:2: ( (lv_type_0_0= ruleKindOfKeyword ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:82:1: (lv_type_0_0= ruleKindOfKeyword )
+            // InternalEnumAndReferenceTestLanguage.g:81:2: ( (lv_type_0_0= ruleKindOfKeyword ) )
+            // InternalEnumAndReferenceTestLanguage.g:82:1: (lv_type_0_0= ruleKindOfKeyword )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:82:1: (lv_type_0_0= ruleKindOfKeyword )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:83:3: lv_type_0_0= ruleKindOfKeyword
+            // InternalEnumAndReferenceTestLanguage.g:82:1: (lv_type_0_0= ruleKindOfKeyword )
+            // InternalEnumAndReferenceTestLanguage.g:83:3: lv_type_0_0= ruleKindOfKeyword
             {
              
             	        newCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference131);
+            pushFollow(FollowSets000.FOLLOW_3);
             lv_type_0_0=ruleKindOfKeyword();
 
             state._fsp--;
@@ -161,13 +161,13 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:99:2: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:100:1: (lv_name_1_0= RULE_ID )
+            // InternalEnumAndReferenceTestLanguage.g:99:2: ( (lv_name_1_0= RULE_ID ) )
+            // InternalEnumAndReferenceTestLanguage.g:100:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:100:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:101:3: lv_name_1_0= RULE_ID
+            // InternalEnumAndReferenceTestLanguage.g:100:1: (lv_name_1_0= RULE_ID )
+            // InternalEnumAndReferenceTestLanguage.g:101:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference148); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -187,22 +187,22 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
             }
 
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleEntityWithEnumAndReference165); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:121:1: ( (otherlv_3= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:122:1: (otherlv_3= RULE_ID )
+            // InternalEnumAndReferenceTestLanguage.g:121:1: ( (otherlv_3= RULE_ID ) )
+            // InternalEnumAndReferenceTestLanguage.g:122:1: (otherlv_3= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:122:1: (otherlv_3= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:123:3: otherlv_3= RULE_ID
+            // InternalEnumAndReferenceTestLanguage.g:122:1: (otherlv_3= RULE_ID )
+            // InternalEnumAndReferenceTestLanguage.g:123:3: otherlv_3= RULE_ID
             {
 
             			if (current==null) {
             	            current = createModelElement(grammarAccess.getEntityWithEnumAndReferenceRule());
             	        }
                     
-            otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference185); 
+            otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             		newLeafNode(otherlv_3, grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0()); 
             	
@@ -233,7 +233,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start "ruleKindOfKeyword"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:142:1: ruleKindOfKeyword returns [Enumerator current=null] : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
+    // InternalEnumAndReferenceTestLanguage.g:142:1: ruleKindOfKeyword returns [Enumerator current=null] : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
     public final Enumerator ruleKindOfKeyword() throws RecognitionException {
         Enumerator current = null;
 
@@ -242,10 +242,10 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
          enterRule(); 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:144:28: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:145:1: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // InternalEnumAndReferenceTestLanguage.g:144:28: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
+            // InternalEnumAndReferenceTestLanguage.g:145:1: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:145:1: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // InternalEnumAndReferenceTestLanguage.g:145:1: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -263,12 +263,12 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:145:2: (enumLiteral_0= 'kindOfKeyword' )
+                    // InternalEnumAndReferenceTestLanguage.g:145:2: (enumLiteral_0= 'kindOfKeyword' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:145:2: (enumLiteral_0= 'kindOfKeyword' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:145:4: enumLiteral_0= 'kindOfKeyword'
+                    // InternalEnumAndReferenceTestLanguage.g:145:2: (enumLiteral_0= 'kindOfKeyword' )
+                    // InternalEnumAndReferenceTestLanguage.g:145:4: enumLiteral_0= 'kindOfKeyword'
                     {
-                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleKindOfKeyword235); 
+                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_0, grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0()); 
@@ -280,12 +280,12 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:151:6: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // InternalEnumAndReferenceTestLanguage.g:151:6: (enumLiteral_1= 'anotherEnumLiteral' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:151:6: (enumLiteral_1= 'anotherEnumLiteral' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:151:8: enumLiteral_1= 'anotherEnumLiteral'
+                    // InternalEnumAndReferenceTestLanguage.g:151:6: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // InternalEnumAndReferenceTestLanguage.g:151:8: enumLiteral_1= 'anotherEnumLiteral'
                     {
-                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKindOfKeyword252); 
+                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             newLeafNode(enumLiteral_1, grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1()); 
@@ -322,14 +322,10 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference131 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference148 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference165 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference185 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleKindOfKeyword235 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleKindOfKeyword252 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000800L});
     }
 
 

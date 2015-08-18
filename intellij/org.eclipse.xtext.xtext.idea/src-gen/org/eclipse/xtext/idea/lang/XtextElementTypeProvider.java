@@ -1670,8 +1670,8 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		public static IGrammarAwareElementType createPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType() {
 			return new IGrammarAwareElementType("PredicatedRuleCall_RuleAbstractRuleCrossReference_1_0_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0());
 		}
-		public static IGrammarAwareElementType createPredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1ElementType() {
-			return new IGrammarAwareElementType("PredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getPredicatedRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_1_0_1());
+		public static IGrammarAwareElementType createPredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1ElementType() {
+			return new IGrammarAwareElementType("PredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getPredicatedRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_1_0_1());
 		}
 		public static IGrammarAwareElementType createPredicatedRuleCall_Group_2ElementType() {
 			return new IGrammarAwareElementType("PredicatedRuleCall_Group_2_ELEMENT_TYPE", XtextLanguage.INSTANCE, GRAMMAR_ACCESS.getPredicatedRuleCallAccess().getGroup_2());
@@ -1720,7 +1720,7 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 
 	public static final IGrammarAwareElementType PredicatedRuleCall_RuleAbstractRuleCrossReference_1_0_ELEMENT_TYPE = associate(PredicatedRuleCallFactory.createPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType());
 
-	public static final IGrammarAwareElementType PredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1_ELEMENT_TYPE = associate(PredicatedRuleCallFactory.createPredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1ElementType());
+	public static final IGrammarAwareElementType PredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1_ELEMENT_TYPE = associate(PredicatedRuleCallFactory.createPredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1ElementType());
 
 	public static final IGrammarAwareElementType PredicatedRuleCall_Group_2_ELEMENT_TYPE = associate(PredicatedRuleCallFactory.createPredicatedRuleCall_Group_2ElementType());
 
@@ -3991,8 +3991,8 @@ public class XtextElementTypeProvider implements IElementTypeProvider {
 		return PredicatedRuleCall_RuleAbstractRuleCrossReference_1_0_ELEMENT_TYPE;
 	}
 
-	public IGrammarAwareElementType getPredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1ElementType() {
-		return PredicatedRuleCall_RuleAbstractRuleIDTerminalRuleCall_1_0_1_ELEMENT_TYPE;
+	public IGrammarAwareElementType getPredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1ElementType() {
+		return PredicatedRuleCall_RuleAbstractRuleRuleIDParserRuleCall_1_0_1_ELEMENT_TYPE;
 	}
 
 	public IGrammarAwareElementType getPredicatedRuleCall_Group_2ElementType() {

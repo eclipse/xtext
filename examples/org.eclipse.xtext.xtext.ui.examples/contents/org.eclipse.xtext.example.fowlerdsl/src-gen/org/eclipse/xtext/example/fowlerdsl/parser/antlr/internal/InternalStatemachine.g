@@ -100,7 +100,7 @@ ruleStatemachine returns [EObject current=null]
        			$current, 
        			"events",
         		lv_events_2_0, 
-        		"Event");
+        		"org.eclipse.xtext.example.fowlerdsl.Statemachine.Event");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -147,7 +147,7 @@ ruleStatemachine returns [EObject current=null]
        			$current, 
        			"commands",
         		lv_commands_8_0, 
-        		"Command");
+        		"org.eclipse.xtext.example.fowlerdsl.Statemachine.Command");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -169,7 +169,7 @@ ruleStatemachine returns [EObject current=null]
        			$current, 
        			"states",
         		lv_states_10_0, 
-        		"State");
+        		"org.eclipse.xtext.example.fowlerdsl.Statemachine.State");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -209,7 +209,7 @@ ruleEvent returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -227,7 +227,7 @@ ruleEvent returns [EObject current=null]
        			$current, 
        			"code",
         		lv_code_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -266,7 +266,7 @@ ruleCommand returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -284,7 +284,7 @@ ruleCommand returns [EObject current=null]
        			$current, 
        			"code",
         		lv_code_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -327,7 +327,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -369,7 +369,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"transitions",
         		lv_transitions_6_0, 
-        		"Transition");
+        		"org.eclipse.xtext.example.fowlerdsl.Statemachine.Transition");
 	        afterParserOrEnumRuleCall();
 	    }
 

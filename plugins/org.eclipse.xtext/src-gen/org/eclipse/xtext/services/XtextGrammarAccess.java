@@ -1402,7 +1402,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0 = (Keyword)cFirstSetPredicatedAssignment_0_1.eContents().get(0);
 		private final Assignment cRuleAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cRuleAbstractRuleCrossReference_1_0 = (CrossReference)cRuleAssignment_1.eContents().get(0);
-		private final RuleCall cRuleAbstractRuleIDTerminalRuleCall_1_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_1_0.eContents().get(1);
+		private final RuleCall cRuleAbstractRuleRuleIDParserRuleCall_1_0_1 = (RuleCall)cRuleAbstractRuleCrossReference_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLessThanSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cArgumentsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
@@ -1414,11 +1414,11 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_2_3 = (Keyword)cGroup_2.eContents().get(3);
 		
 		//PredicatedRuleCall RuleCall:
-		//	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule] ('<' arguments+=NamedArgument (','
+		//	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (','
 		//	arguments+=NamedArgument)* '>')?
 		@Override public ParserRule getRule() { return rule; }
 
-		//(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule] ('<' arguments+=NamedArgument (','
+		//(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (','
 		//arguments+=NamedArgument)* '>')?
 		public Group getGroup() { return cGroup; }
 
@@ -1437,14 +1437,14 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 		//'->'
 		public Keyword getFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0() { return cFirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0; }
 
-		//rule=[AbstractRule]
+		//rule=[AbstractRule|RuleID]
 		public Assignment getRuleAssignment_1() { return cRuleAssignment_1; }
 
-		//[AbstractRule]
+		//[AbstractRule|RuleID]
 		public CrossReference getRuleAbstractRuleCrossReference_1_0() { return cRuleAbstractRuleCrossReference_1_0; }
 
-		//ID
-		public RuleCall getRuleAbstractRuleIDTerminalRuleCall_1_0_1() { return cRuleAbstractRuleIDTerminalRuleCall_1_0_1; }
+		//RuleID
+		public RuleCall getRuleAbstractRuleRuleIDParserRuleCall_1_0_1() { return cRuleAbstractRuleRuleIDParserRuleCall_1_0_1; }
 
 		//('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
 		public Group getGroup_2() { return cGroup_2; }
@@ -2799,7 +2799,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PredicatedRuleCall RuleCall:
-	//	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule] ('<' arguments+=NamedArgument (','
+	//	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (','
 	//	arguments+=NamedArgument)* '>')?
 	public PredicatedRuleCallElements getPredicatedRuleCallAccess() {
 		return pPredicatedRuleCall;

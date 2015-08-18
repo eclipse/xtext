@@ -78,11 +78,6 @@ public abstract class AbstractFragmentTestLanguageExRuntimeModule extends org.ec
 		return org.eclipse.xtext.parser.fragments.services.FragmentTestLanguageExGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.fragments.parseTreeConstruction.FragmentTestLanguageExParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.fragments.serializer.FragmentTestLanguageExSemanticSequencer.class;

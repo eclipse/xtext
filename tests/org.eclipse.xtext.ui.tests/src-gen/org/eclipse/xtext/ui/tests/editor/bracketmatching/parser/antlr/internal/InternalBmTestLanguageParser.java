@@ -52,7 +52,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return InternalBmTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalBmTestLanguage.g"; }
 
 
 
@@ -77,7 +77,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFile"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:67:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
+    // InternalBmTestLanguage.g:67:1: entryRuleFile returns [EObject current=null] : iv_ruleFile= ruleFile EOF ;
     public final EObject entryRuleFile() throws RecognitionException {
         EObject current = null;
 
@@ -85,17 +85,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:68:2: (iv_ruleFile= ruleFile EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:69:2: iv_ruleFile= ruleFile EOF
+            // InternalBmTestLanguage.g:68:2: (iv_ruleFile= ruleFile EOF )
+            // InternalBmTestLanguage.g:69:2: iv_ruleFile= ruleFile EOF
             {
              newCompositeNode(grammarAccess.getFileRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFile_in_entryRuleFile75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleFile=ruleFile();
 
             state._fsp--;
 
              current =iv_ruleFile; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFile85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -113,7 +113,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFile"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:76:1: ruleFile returns [EObject current=null] : ( (lv_expression_0_0= ruleExpression ) )* ;
+    // InternalBmTestLanguage.g:76:1: ruleFile returns [EObject current=null] : ( (lv_expression_0_0= ruleExpression ) )* ;
     public final EObject ruleFile() throws RecognitionException {
         EObject current = null;
 
@@ -123,10 +123,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:79:28: ( ( (lv_expression_0_0= ruleExpression ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:80:1: ( (lv_expression_0_0= ruleExpression ) )*
+            // InternalBmTestLanguage.g:79:28: ( ( (lv_expression_0_0= ruleExpression ) )* )
+            // InternalBmTestLanguage.g:80:1: ( (lv_expression_0_0= ruleExpression ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:80:1: ( (lv_expression_0_0= ruleExpression ) )*
+            // InternalBmTestLanguage.g:80:1: ( (lv_expression_0_0= ruleExpression ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,15 +139,15 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:81:1: (lv_expression_0_0= ruleExpression )
+            	    // InternalBmTestLanguage.g:81:1: (lv_expression_0_0= ruleExpression )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:81:1: (lv_expression_0_0= ruleExpression )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:82:3: lv_expression_0_0= ruleExpression
+            	    // InternalBmTestLanguage.g:81:1: (lv_expression_0_0= ruleExpression )
+            	    // InternalBmTestLanguage.g:82:3: lv_expression_0_0= ruleExpression
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getFileAccess().getExpressionExpressionParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleFile130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_expression_0_0=ruleExpression();
 
             	    state._fsp--;
@@ -193,7 +193,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:106:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
+    // InternalBmTestLanguage.g:106:1: entryRuleExpression returns [EObject current=null] : iv_ruleExpression= ruleExpression EOF ;
     public final EObject entryRuleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -201,17 +201,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:107:2: (iv_ruleExpression= ruleExpression EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:108:2: iv_ruleExpression= ruleExpression EOF
+            // InternalBmTestLanguage.g:107:2: (iv_ruleExpression= ruleExpression EOF )
+            // InternalBmTestLanguage.g:108:2: iv_ruleExpression= ruleExpression EOF
             {
              newCompositeNode(grammarAccess.getExpressionRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression166);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleExpression=ruleExpression();
 
             state._fsp--;
 
              current =iv_ruleExpression; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression176); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -229,7 +229,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:115:1: ruleExpression returns [EObject current=null] : (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) ;
+    // InternalBmTestLanguage.g:115:1: ruleExpression returns [EObject current=null] : (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) ;
     public final EObject ruleExpression() throws RecognitionException {
         EObject current = null;
 
@@ -245,10 +245,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:118:28: ( (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:119:1: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
+            // InternalBmTestLanguage.g:118:28: ( (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) ) )
+            // InternalBmTestLanguage.g:119:1: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:119:1: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
+            // InternalBmTestLanguage.g:119:1: (this_SExpression_0= ruleSExpression | this_Atom_1= ruleAtom | (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -278,12 +278,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:120:5: this_SExpression_0= ruleSExpression
+                    // InternalBmTestLanguage.g:120:5: this_SExpression_0= ruleSExpression
                     {
                      
                             newCompositeNode(grammarAccess.getExpressionAccess().getSExpressionParserRuleCall_0()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_ruleExpression223);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     this_SExpression_0=ruleSExpression();
 
                     state._fsp--;
@@ -296,12 +296,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:130:5: this_Atom_1= ruleAtom
+                    // InternalBmTestLanguage.g:130:5: this_Atom_1= ruleAtom
                     {
                      
                             newCompositeNode(grammarAccess.getExpressionAccess().getAtomParserRuleCall_1()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleAtom_in_ruleExpression250);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     this_Atom_1=ruleAtom();
 
                     state._fsp--;
@@ -314,19 +314,19 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:139:6: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
+                    // InternalBmTestLanguage.g:139:6: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:139:6: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:139:8: otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']'
+                    // InternalBmTestLanguage.g:139:6: (otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']' )
+                    // InternalBmTestLanguage.g:139:8: otherlv_2= '[' this_Expression_3= ruleExpression otherlv_4= ']'
                     {
-                    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleExpression268); 
+                    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0());
                         
                      
                             newCompositeNode(grammarAccess.getExpressionAccess().getExpressionParserRuleCall_2_1()); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleExpression290);
+                    pushFollow(FollowSets000.FOLLOW_5);
                     this_Expression_3=ruleExpression();
 
                     state._fsp--;
@@ -335,7 +335,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                             current = this_Expression_3; 
                             afterParserOrEnumRuleCall();
                         
-                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleExpression301); 
+                    otherlv_4=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2());
                         
@@ -366,7 +366,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:164:1: entryRuleSExpression returns [EObject current=null] : iv_ruleSExpression= ruleSExpression EOF ;
+    // InternalBmTestLanguage.g:164:1: entryRuleSExpression returns [EObject current=null] : iv_ruleSExpression= ruleSExpression EOF ;
     public final EObject entryRuleSExpression() throws RecognitionException {
         EObject current = null;
 
@@ -374,17 +374,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:165:2: (iv_ruleSExpression= ruleSExpression EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:166:2: iv_ruleSExpression= ruleSExpression EOF
+            // InternalBmTestLanguage.g:165:2: (iv_ruleSExpression= ruleSExpression EOF )
+            // InternalBmTestLanguage.g:166:2: iv_ruleSExpression= ruleSExpression EOF
             {
              newCompositeNode(grammarAccess.getSExpressionRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_entryRuleSExpression338);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSExpression=ruleSExpression();
 
             state._fsp--;
 
              current =iv_ruleSExpression; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSExpression348); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -402,7 +402,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSExpression"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:173:1: ruleSExpression returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) ;
+    // InternalBmTestLanguage.g:173:1: ruleSExpression returns [EObject current=null] : ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) ;
     public final EObject ruleSExpression() throws RecognitionException {
         EObject current = null;
 
@@ -418,14 +418,14 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:176:28: ( ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:177:1: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
+            // InternalBmTestLanguage.g:176:28: ( ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) ) )
+            // InternalBmTestLanguage.g:177:1: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:177:1: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:177:2: () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
+            // InternalBmTestLanguage.g:177:1: ( () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) ) )
+            // InternalBmTestLanguage.g:177:2: () ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:177:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:178:5: 
+            // InternalBmTestLanguage.g:177:2: ()
+            // InternalBmTestLanguage.g:178:5: 
             {
 
                     current = forceCreateModelElement(
@@ -435,7 +435,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:183:2: ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
+            // InternalBmTestLanguage.g:183:2: ( (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' ) | (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -453,16 +453,16 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:183:3: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
+                    // InternalBmTestLanguage.g:183:3: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:183:3: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:183:5: otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')'
+                    // InternalBmTestLanguage.g:183:3: (otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')' )
+                    // InternalBmTestLanguage.g:183:5: otherlv_1= '(' ( (lv_element_2_0= ruleExpression ) )* otherlv_3= ')'
                     {
-                    otherlv_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleSExpression396); 
+                    otherlv_1=(Token)match(input,13,FollowSets000.FOLLOW_6); 
 
                         	newLeafNode(otherlv_1, grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:187:1: ( (lv_element_2_0= ruleExpression ) )*
+                    // InternalBmTestLanguage.g:187:1: ( (lv_element_2_0= ruleExpression ) )*
                     loop3:
                     do {
                         int alt3=2;
@@ -475,15 +475,15 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt3) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:188:1: (lv_element_2_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:188:1: (lv_element_2_0= ruleExpression )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:188:1: (lv_element_2_0= ruleExpression )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:189:3: lv_element_2_0= ruleExpression
+                    	    // InternalBmTestLanguage.g:188:1: (lv_element_2_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:189:3: lv_element_2_0= ruleExpression
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_0_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleSExpression417);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    lv_element_2_0=ruleExpression();
 
                     	    state._fsp--;
@@ -511,7 +511,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_3=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSExpression430); 
+                    otherlv_3=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_3, grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2());
                         
@@ -522,16 +522,16 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:210:6: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
+                    // InternalBmTestLanguage.g:210:6: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:210:6: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:210:8: otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end'
+                    // InternalBmTestLanguage.g:210:6: (otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end' )
+                    // InternalBmTestLanguage.g:210:8: otherlv_4= 'begin' ( (lv_element_5_0= ruleExpression ) )* otherlv_6= 'end'
                     {
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSExpression450); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_7); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0());
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:214:1: ( (lv_element_5_0= ruleExpression ) )*
+                    // InternalBmTestLanguage.g:214:1: ( (lv_element_5_0= ruleExpression ) )*
                     loop4:
                     do {
                         int alt4=2;
@@ -544,15 +544,15 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:215:1: (lv_element_5_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:215:1: (lv_element_5_0= ruleExpression )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:215:1: (lv_element_5_0= ruleExpression )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:216:3: lv_element_5_0= ruleExpression
+                    	    // InternalBmTestLanguage.g:215:1: (lv_element_5_0= ruleExpression )
+                    	    // InternalBmTestLanguage.g:216:3: lv_element_5_0= ruleExpression
                     	    {
                     	     
                     	    	        newCompositeNode(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_1_1_0()); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleExpression_in_ruleSExpression471);
+                    	    pushFollow(FollowSets000.FOLLOW_7);
                     	    lv_element_5_0=ruleExpression();
 
                     	    state._fsp--;
@@ -580,7 +580,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleSExpression484); 
+                    otherlv_6=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2());
                         
@@ -614,7 +614,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAtom"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:244:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
+    // InternalBmTestLanguage.g:244:1: entryRuleAtom returns [EObject current=null] : iv_ruleAtom= ruleAtom EOF ;
     public final EObject entryRuleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -622,17 +622,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:245:2: (iv_ruleAtom= ruleAtom EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:246:2: iv_ruleAtom= ruleAtom EOF
+            // InternalBmTestLanguage.g:245:2: (iv_ruleAtom= ruleAtom EOF )
+            // InternalBmTestLanguage.g:246:2: iv_ruleAtom= ruleAtom EOF
             {
              newCompositeNode(grammarAccess.getAtomRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAtom_in_entryRuleAtom522);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleAtom=ruleAtom();
 
             state._fsp--;
 
              current =iv_ruleAtom; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAtom532); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -650,7 +650,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAtom"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:253:1: ruleAtom returns [EObject current=null] : ( (lv_value_0_0= ruleVALUE ) ) ;
+    // InternalBmTestLanguage.g:253:1: ruleAtom returns [EObject current=null] : ( (lv_value_0_0= ruleVALUE ) ) ;
     public final EObject ruleAtom() throws RecognitionException {
         EObject current = null;
 
@@ -660,19 +660,19 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:256:28: ( ( (lv_value_0_0= ruleVALUE ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:257:1: ( (lv_value_0_0= ruleVALUE ) )
+            // InternalBmTestLanguage.g:256:28: ( ( (lv_value_0_0= ruleVALUE ) ) )
+            // InternalBmTestLanguage.g:257:1: ( (lv_value_0_0= ruleVALUE ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:257:1: ( (lv_value_0_0= ruleVALUE ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:258:1: (lv_value_0_0= ruleVALUE )
+            // InternalBmTestLanguage.g:257:1: ( (lv_value_0_0= ruleVALUE ) )
+            // InternalBmTestLanguage.g:258:1: (lv_value_0_0= ruleVALUE )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:258:1: (lv_value_0_0= ruleVALUE )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:259:3: lv_value_0_0= ruleVALUE
+            // InternalBmTestLanguage.g:258:1: (lv_value_0_0= ruleVALUE )
+            // InternalBmTestLanguage.g:259:3: lv_value_0_0= ruleVALUE
             {
              
             	        newCompositeNode(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_ruleAtom577);
+            pushFollow(FollowSets000.FOLLOW_2);
             lv_value_0_0=ruleVALUE();
 
             state._fsp--;
@@ -712,7 +712,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVALUE"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:283:1: entryRuleVALUE returns [String current=null] : iv_ruleVALUE= ruleVALUE EOF ;
+    // InternalBmTestLanguage.g:283:1: entryRuleVALUE returns [String current=null] : iv_ruleVALUE= ruleVALUE EOF ;
     public final String entryRuleVALUE() throws RecognitionException {
         String current = null;
 
@@ -720,17 +720,17 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:284:2: (iv_ruleVALUE= ruleVALUE EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:285:2: iv_ruleVALUE= ruleVALUE EOF
+            // InternalBmTestLanguage.g:284:2: (iv_ruleVALUE= ruleVALUE EOF )
+            // InternalBmTestLanguage.g:285:2: iv_ruleVALUE= ruleVALUE EOF
             {
              newCompositeNode(grammarAccess.getVALUERule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_entryRuleVALUE613);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleVALUE=ruleVALUE();
 
             state._fsp--;
 
              current =iv_ruleVALUE.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVALUE624); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -748,7 +748,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVALUE"
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:292:1: ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) ;
+    // InternalBmTestLanguage.g:292:1: ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleVALUE() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -759,10 +759,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:295:28: ( (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:296:1: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
+            // InternalBmTestLanguage.g:295:28: ( (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING ) )
+            // InternalBmTestLanguage.g:296:1: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:296:1: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
+            // InternalBmTestLanguage.g:296:1: (this_ID_0= RULE_ID | this_INT_1= RULE_INT | this_STRING_2= RULE_STRING )
             int alt6=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -789,9 +789,9 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:296:6: this_ID_0= RULE_ID
+                    // InternalBmTestLanguage.g:296:6: this_ID_0= RULE_ID
                     {
-                    this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleVALUE664); 
+                    this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     		current.merge(this_ID_0);
                         
@@ -802,9 +802,9 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:304:10: this_INT_1= RULE_INT
+                    // InternalBmTestLanguage.g:304:10: this_INT_1= RULE_INT
                     {
-                    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleVALUE690); 
+                    this_INT_1=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     		current.merge(this_INT_1);
                         
@@ -815,9 +815,9 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.g:312:10: this_STRING_2= RULE_STRING
+                    // InternalBmTestLanguage.g:312:10: this_STRING_2= RULE_STRING
                     {
-                    this_STRING_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleVALUE716); 
+                    this_STRING_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     		current.merge(this_STRING_2);
                         
@@ -853,32 +853,13 @@ public class InternalBmTestLanguageParser extends AbstractInternalAntlrParser {
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleFile_in_entryRuleFile75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFile85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleFile130 = new BitSet(new long[]{0x000000000000A872L});
-        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSExpression_in_ruleExpression223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAtom_in_ruleExpression250 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleExpression268 = new BitSet(new long[]{0x000000000000B870L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleExpression290 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleExpression301 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSExpression_in_entryRuleSExpression338 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSExpression348 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleSExpression396 = new BitSet(new long[]{0x000000000000E870L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleSExpression417 = new BitSet(new long[]{0x000000000000E870L});
-        public static final BitSet FOLLOW_14_in_ruleSExpression430 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleSExpression450 = new BitSet(new long[]{0x000000000001A870L});
-        public static final BitSet FOLLOW_ruleExpression_in_ruleSExpression471 = new BitSet(new long[]{0x000000000001A870L});
-        public static final BitSet FOLLOW_16_in_ruleSExpression484 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom522 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAtom532 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVALUE_in_ruleAtom577 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVALUE_in_entryRuleVALUE613 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleVALUE624 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleVALUE664 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleVALUE690 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleVALUE716 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x000000000000A872L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x000000000000B870L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x000000000000E870L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x000000000001A870L});
     }
 
 

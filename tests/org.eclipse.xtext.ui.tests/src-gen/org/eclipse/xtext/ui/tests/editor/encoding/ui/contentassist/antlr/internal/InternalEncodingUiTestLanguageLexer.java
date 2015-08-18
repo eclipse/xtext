@@ -28,17 +28,17 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEncodingUiTestLanguage.g"; }
 
     // $ANTLR start "RULE_LEXEME"
     public final void mRULE_LEXEME() throws RecognitionException {
         try {
             int _type = RULE_LEXEME;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:150:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:150:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // InternalEncodingUiTestLanguage.g:150:13: ( ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )* )
+            // InternalEncodingUiTestLanguage.g:150:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:150:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
+            // InternalEncodingUiTestLanguage.g:150:15: ( 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '\\u00E4' | '\\u00F6' | '\\u00FC' | '\\u00DF' | '\\u00C4' | '\\u00D6' | '\\u00DC' )*
             loop1:
             do {
                 int alt1=2;
@@ -51,7 +51,7 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:
+            	    // InternalEncodingUiTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z')||input.LA(1)=='\u00C4'||input.LA(1)=='\u00D6'||input.LA(1)=='\u00DC'||input.LA(1)=='\u00DF'||input.LA(1)=='\u00E4'||input.LA(1)=='\u00F6'||input.LA(1)=='\u00FC' ) {
             	        input.consume();
@@ -87,10 +87,10 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:152:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:152:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEncodingUiTestLanguage.g:152:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEncodingUiTestLanguage.g:152:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:152:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEncodingUiTestLanguage.g:152:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -104,7 +104,7 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:
+            	    // InternalEncodingUiTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -144,8 +144,8 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:154:16: ( . )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:154:18: .
+            // InternalEncodingUiTestLanguage.g:154:16: ( . )
+            // InternalEncodingUiTestLanguage.g:154:18: .
             {
             matchAny(); 
 
@@ -160,7 +160,7 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:1:8: ( RULE_LEXEME | RULE_WS | RULE_ANY_OTHER )
+        // InternalEncodingUiTestLanguage.g:1:8: ( RULE_LEXEME | RULE_WS | RULE_ANY_OTHER )
         int alt3=3;
         int LA3_0 = input.LA(1);
 
@@ -177,21 +177,21 @@ public class InternalEncodingUiTestLanguageLexer extends Lexer {
             alt3 = mTokensHelper004();}
         switch (alt3) {
             case 1 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:1:10: RULE_LEXEME
+                // InternalEncodingUiTestLanguage.g:1:10: RULE_LEXEME
                 {
                 mRULE_LEXEME(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:1:22: RULE_WS
+                // InternalEncodingUiTestLanguage.g:1:22: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/encoding/ui/contentassist/antlr/internal/InternalEncodingUiTestLanguage.g:1:30: RULE_ANY_OTHER
+                // InternalEncodingUiTestLanguage.g:1:30: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

@@ -5,7 +5,7 @@
     modelPluginID="org.eclipse.xtext.example.homeautomation" forceOverwrite="true"
     modelName="RuleEngine" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="6.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.homeautomation.edit"
-    editorPluginID="org.eclipse.xtext.example.homeautomation.editor" runtimeVersion="2.10"
+    editorPluginID="org.eclipse.xtext.example.homeautomation.editor" runtimeVersion="2.11"
     usedGenPackages="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <genPackages prefix="RuleEngine" basePackage="org.eclipse.xtext.example.homeautomation"
       disposableProviderFactory="true" fileExtensions="rules" ecorePackage="RuleEngine.ecore#/">

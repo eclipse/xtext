@@ -46,7 +46,7 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
         
 
     public String[] getTokenNames() { return PsiInternalTerminalRulesTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalTerminalRulesTestLanguage.g"; }
 
 
 
@@ -70,19 +70,19 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalTerminalRulesTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalTerminalRulesTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalTerminalRulesTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -99,7 +99,7 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:58:1: ruleModel : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
+    // PsiInternalTerminalRulesTestLanguage.g:58:1: ruleModel : ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token lv_idValue_0_0=null;
         Token lv_intValue_1_0=null;
@@ -111,10 +111,10 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
         Token lv_anyValue_7_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:58:10: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:58:10: ( ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
+            // PsiInternalTerminalRulesTestLanguage.g:59:2: ( ( (lv_idValue_0_0= RULE_ID ) ) | ( (lv_intValue_1_0= RULE_INT ) ) | ( (lv_stringValue_2_0= RULE_STRING ) ) | ( (lv_richStringValue_3_0= RULE_RICH_STRING ) ) | ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) ) | ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) ) | ( (lv_wsValue_6_0= RULE_WS ) ) | ( (lv_anyValue_7_0= RULE_ANY_OTHER ) ) )
             int alt1=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -166,18 +166,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
+                    // PsiInternalTerminalRulesTestLanguage.g:60:3: ( (lv_idValue_0_0= RULE_ID ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:62:5: lv_idValue_0_0= RULE_ID
+                    // PsiInternalTerminalRulesTestLanguage.g:61:4: (lv_idValue_0_0= RULE_ID )
+                    // PsiInternalTerminalRulesTestLanguage.g:62:5: lv_idValue_0_0= RULE_ID
                     {
 
                     					markLeaf(elementTypeProvider.getModel_IdValueIDTerminalRuleCall_0_0ElementType());
                     				
-                    lv_idValue_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel89); 
+                    lv_idValue_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_idValue_0_0);
                     				
@@ -191,18 +191,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
+                    // PsiInternalTerminalRulesTestLanguage.g:72:3: ( (lv_intValue_1_0= RULE_INT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:74:5: lv_intValue_1_0= RULE_INT
+                    // PsiInternalTerminalRulesTestLanguage.g:73:4: (lv_intValue_1_0= RULE_INT )
+                    // PsiInternalTerminalRulesTestLanguage.g:74:5: lv_intValue_1_0= RULE_INT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_IntValueINTTerminalRuleCall_1_0ElementType());
                     				
-                    lv_intValue_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleModel135); 
+                    lv_intValue_1_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_intValue_1_0);
                     				
@@ -216,18 +216,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:84:3: ( (lv_stringValue_2_0= RULE_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:86:5: lv_stringValue_2_0= RULE_STRING
+                    // PsiInternalTerminalRulesTestLanguage.g:85:4: (lv_stringValue_2_0= RULE_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:86:5: lv_stringValue_2_0= RULE_STRING
                     {
 
                     					markLeaf(elementTypeProvider.getModel_StringValueSTRINGTerminalRuleCall_2_0ElementType());
                     				
-                    lv_stringValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleModel181); 
+                    lv_stringValue_2_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_stringValue_2_0);
                     				
@@ -241,18 +241,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 4 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:96:3: ( (lv_richStringValue_3_0= RULE_RICH_STRING ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:98:5: lv_richStringValue_3_0= RULE_RICH_STRING
+                    // PsiInternalTerminalRulesTestLanguage.g:97:4: (lv_richStringValue_3_0= RULE_RICH_STRING )
+                    // PsiInternalTerminalRulesTestLanguage.g:98:5: lv_richStringValue_3_0= RULE_RICH_STRING
                     {
 
                     					markLeaf(elementTypeProvider.getModel_RichStringValueRICH_STRINGTerminalRuleCall_3_0ElementType());
                     				
-                    lv_richStringValue_3_0=(Token)match(input,RULE_RICH_STRING,FollowSets000.FOLLOW_RULE_RICH_STRING_in_ruleModel227); 
+                    lv_richStringValue_3_0=(Token)match(input,RULE_RICH_STRING,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_richStringValue_3_0);
                     				
@@ -266,18 +266,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 5 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:108:3: ( (lv_mlCommentValue_4_0= RULE_ML_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:110:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
+                    // PsiInternalTerminalRulesTestLanguage.g:109:4: (lv_mlCommentValue_4_0= RULE_ML_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:110:5: lv_mlCommentValue_4_0= RULE_ML_COMMENT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_MlCommentValueML_COMMENTTerminalRuleCall_4_0ElementType());
                     				
-                    lv_mlCommentValue_4_0=(Token)match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_RULE_ML_COMMENT_in_ruleModel273); 
+                    lv_mlCommentValue_4_0=(Token)match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_mlCommentValue_4_0);
                     				
@@ -291,18 +291,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 6 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:120:3: ( (lv_slCommentValue_5_0= RULE_SL_COMMENT ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:122:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
+                    // PsiInternalTerminalRulesTestLanguage.g:121:4: (lv_slCommentValue_5_0= RULE_SL_COMMENT )
+                    // PsiInternalTerminalRulesTestLanguage.g:122:5: lv_slCommentValue_5_0= RULE_SL_COMMENT
                     {
 
                     					markLeaf(elementTypeProvider.getModel_SlCommentValueSL_COMMENTTerminalRuleCall_5_0ElementType());
                     				
-                    lv_slCommentValue_5_0=(Token)match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_RULE_SL_COMMENT_in_ruleModel319); 
+                    lv_slCommentValue_5_0=(Token)match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_slCommentValue_5_0);
                     				
@@ -316,18 +316,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 7 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
+                    // PsiInternalTerminalRulesTestLanguage.g:132:3: ( (lv_wsValue_6_0= RULE_WS ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:134:5: lv_wsValue_6_0= RULE_WS
+                    // PsiInternalTerminalRulesTestLanguage.g:133:4: (lv_wsValue_6_0= RULE_WS )
+                    // PsiInternalTerminalRulesTestLanguage.g:134:5: lv_wsValue_6_0= RULE_WS
                     {
 
                     					markLeaf(elementTypeProvider.getModel_WsValueWSTerminalRuleCall_6_0ElementType());
                     				
-                    lv_wsValue_6_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_RULE_WS_in_ruleModel365); 
+                    lv_wsValue_6_0=(Token)match(input,RULE_WS,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_wsValue_6_0);
                     				
@@ -341,18 +341,18 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
                     }
                     break;
                 case 8 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // PsiInternalTerminalRulesTestLanguage.g:144:3: ( (lv_anyValue_7_0= RULE_ANY_OTHER ) )
+                    // PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalTerminalRulesTestLanguage.g:146:5: lv_anyValue_7_0= RULE_ANY_OTHER
+                    // PsiInternalTerminalRulesTestLanguage.g:145:4: (lv_anyValue_7_0= RULE_ANY_OTHER )
+                    // PsiInternalTerminalRulesTestLanguage.g:146:5: lv_anyValue_7_0= RULE_ANY_OTHER
                     {
 
                     					markLeaf(elementTypeProvider.getModel_AnyValueANY_OTHERTerminalRuleCall_7_0ElementType());
                     				
-                    lv_anyValue_7_0=(Token)match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_RULE_ANY_OTHER_in_ruleModel411); 
+                    lv_anyValue_7_0=(Token)match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_2); 
 
                     					doneLeaf(lv_anyValue_7_0);
                     				
@@ -389,16 +389,8 @@ public class PsiInternalTerminalRulesTestLanguageParser extends AbstractPsiAntlr
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel89 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleModel135 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleModel181 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_RICH_STRING_in_ruleModel227 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel273 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel319 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_WS_in_ruleModel365 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel411 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

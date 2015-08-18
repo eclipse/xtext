@@ -12,12 +12,6 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
-    public static final int RULE_ANY_OTHER=7;
-    public static final int RULE_SL_COMMENT=6;
-    public static final int EOF=-1;
-    public static final int T__9=9;
-    public static final int T__8=8;
-    public static final int RULE_ML_COMMENT=5;
     public static final int T__19=19;
     public static final int T__16=16;
     public static final int T__15=15;
@@ -27,8 +21,14 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
     public static final int T__11=11;
     public static final int T__14=14;
     public static final int T__13=13;
+    public static final int RULE_ANY_OTHER=7;
     public static final int T__10=10;
     public static final int RULE_WS=4;
+    public static final int RULE_SL_COMMENT=6;
+    public static final int EOF=-1;
+    public static final int T__9=9;
+    public static final int T__8=8;
+    public static final int RULE_ML_COMMENT=5;
 
     // delegates
     // delegators
@@ -41,15 +41,15 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalHiddenTerminalsTestLanguage.g"; }
 
     // $ANTLR start "T__8"
     public final void mT__8() throws RecognitionException {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:11:6: ( 'without' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:11:8: 'without'
+            // InternalHiddenTerminalsTestLanguage.g:11:6: ( 'without' )
+            // InternalHiddenTerminalsTestLanguage.g:11:8: 'without'
             {
             match("without"); 
 
@@ -69,8 +69,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:12:6: ( 'hiddens' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:12:8: 'hiddens'
+            // InternalHiddenTerminalsTestLanguage.g:12:6: ( 'hiddens' )
+            // InternalHiddenTerminalsTestLanguage.g:12:8: 'hiddens'
             {
             match("hiddens"); 
 
@@ -90,8 +90,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:13:7: ( ';' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:13:9: ';'
+            // InternalHiddenTerminalsTestLanguage.g:13:7: ( ';' )
+            // InternalHiddenTerminalsTestLanguage.g:13:9: ';'
             {
             match(';'); 
 
@@ -110,8 +110,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:14:7: ( 'with' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:14:9: 'with'
+            // InternalHiddenTerminalsTestLanguage.g:14:7: ( 'with' )
+            // InternalHiddenTerminalsTestLanguage.g:14:9: 'with'
             {
             match("with"); 
 
@@ -131,8 +131,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:15:7: ( 'overriding' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:15:9: 'overriding'
+            // InternalHiddenTerminalsTestLanguage.g:15:7: ( 'overriding' )
+            // InternalHiddenTerminalsTestLanguage.g:15:9: 'overriding'
             {
             match("overriding"); 
 
@@ -152,8 +152,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:16:7: ( '(' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:16:9: '('
+            // InternalHiddenTerminalsTestLanguage.g:16:7: ( '(' )
+            // InternalHiddenTerminalsTestLanguage.g:16:9: '('
             {
             match('('); 
 
@@ -172,8 +172,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:17:7: ( ')' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:17:9: ')'
+            // InternalHiddenTerminalsTestLanguage.g:17:7: ( ')' )
+            // InternalHiddenTerminalsTestLanguage.g:17:9: ')'
             {
             match(')'); 
 
@@ -192,8 +192,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:18:7: ( 'call' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:18:9: 'call'
+            // InternalHiddenTerminalsTestLanguage.g:18:7: ( 'call' )
+            // InternalHiddenTerminalsTestLanguage.g:18:9: 'call'
             {
             match("call"); 
 
@@ -213,8 +213,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:19:7: ( 'inheriting' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:19:9: 'inheriting'
+            // InternalHiddenTerminalsTestLanguage.g:19:7: ( 'inheriting' )
+            // InternalHiddenTerminalsTestLanguage.g:19:9: 'inheriting'
             {
             match("inheriting"); 
 
@@ -234,8 +234,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:20:7: ( 'datatype' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:20:9: 'datatype'
+            // InternalHiddenTerminalsTestLanguage.g:20:7: ( 'datatype' )
+            // InternalHiddenTerminalsTestLanguage.g:20:9: 'datatype'
             {
             match("datatype"); 
 
@@ -255,8 +255,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:21:7: ( 'rule' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:21:9: 'rule'
+            // InternalHiddenTerminalsTestLanguage.g:21:7: ( 'rule' )
+            // InternalHiddenTerminalsTestLanguage.g:21:9: 'rule'
             {
             match("rule"); 
 
@@ -276,8 +276,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:22:7: ( 'hiding' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:22:9: 'hiding'
+            // InternalHiddenTerminalsTestLanguage.g:22:7: ( 'hiding' )
+            // InternalHiddenTerminalsTestLanguage.g:22:9: 'hiding'
             {
             match("hiding"); 
 
@@ -297,12 +297,12 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:714:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:714:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalHiddenTerminalsTestLanguage.g:714:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalHiddenTerminalsTestLanguage.g:714:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:714:24: ( options {greedy=false; } : . )*
+            // InternalHiddenTerminalsTestLanguage.g:714:24: ( options {greedy=false; } : . )*
             loop1:
             do {
                 int alt1=2;
@@ -327,7 +327,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:714:52: .
+            	    // InternalHiddenTerminalsTestLanguage.g:714:52: .
             	    {
             	    matchAny(); 
 
@@ -357,12 +357,12 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalHiddenTerminalsTestLanguage.g:716:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalHiddenTerminalsTestLanguage.g:716:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalHiddenTerminalsTestLanguage.g:716:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -375,7 +375,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalHiddenTerminalsTestLanguage.g:716:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -395,7 +395,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:40: ( ( '\\r' )? '\\n' )?
+            // InternalHiddenTerminalsTestLanguage.g:716:40: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -404,9 +404,9 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:41: ( '\\r' )? '\\n'
+                    // InternalHiddenTerminalsTestLanguage.g:716:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:41: ( '\\r' )?
+                    // InternalHiddenTerminalsTestLanguage.g:716:41: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -415,7 +415,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:716:41: '\\r'
+                            // InternalHiddenTerminalsTestLanguage.g:716:41: '\\r'
                             {
                             match('\r'); 
 
@@ -447,10 +447,10 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:718:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:718:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalHiddenTerminalsTestLanguage.g:718:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalHiddenTerminalsTestLanguage.g:718:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:718:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalHiddenTerminalsTestLanguage.g:718:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt5=0;
             loop5:
             do {
@@ -464,7 +464,7 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:
+            	    // InternalHiddenTerminalsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -504,8 +504,8 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:720:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:720:18: .
+            // InternalHiddenTerminalsTestLanguage.g:720:16: ( . )
+            // InternalHiddenTerminalsTestLanguage.g:720:18: .
             {
             matchAny(); 
 
@@ -520,117 +520,117 @@ public class InternalHiddenTerminalsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:8: ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalHiddenTerminalsTestLanguage.g:1:8: ( T__8 | T__9 | T__10 | T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt6=16;
         alt6 = dfa6.predict(input);
         switch (alt6) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:10: T__8
+                // InternalHiddenTerminalsTestLanguage.g:1:10: T__8
                 {
                 mT__8(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:15: T__9
+                // InternalHiddenTerminalsTestLanguage.g:1:15: T__9
                 {
                 mT__9(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:20: T__10
+                // InternalHiddenTerminalsTestLanguage.g:1:20: T__10
                 {
                 mT__10(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:26: T__11
+                // InternalHiddenTerminalsTestLanguage.g:1:26: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:32: T__12
+                // InternalHiddenTerminalsTestLanguage.g:1:32: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:38: T__13
+                // InternalHiddenTerminalsTestLanguage.g:1:38: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:44: T__14
+                // InternalHiddenTerminalsTestLanguage.g:1:44: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:50: T__15
+                // InternalHiddenTerminalsTestLanguage.g:1:50: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:56: T__16
+                // InternalHiddenTerminalsTestLanguage.g:1:56: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:62: T__17
+                // InternalHiddenTerminalsTestLanguage.g:1:62: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:68: T__18
+                // InternalHiddenTerminalsTestLanguage.g:1:68: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:74: T__19
+                // InternalHiddenTerminalsTestLanguage.g:1:74: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:80: RULE_ML_COMMENT
+                // InternalHiddenTerminalsTestLanguage.g:1:80: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:96: RULE_SL_COMMENT
+                // InternalHiddenTerminalsTestLanguage.g:1:96: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:112: RULE_WS
+                // InternalHiddenTerminalsTestLanguage.g:1:112: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalHiddenTerminalsTestLanguage.g:1:120: RULE_ANY_OTHER
+                // InternalHiddenTerminalsTestLanguage.g:1:120: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

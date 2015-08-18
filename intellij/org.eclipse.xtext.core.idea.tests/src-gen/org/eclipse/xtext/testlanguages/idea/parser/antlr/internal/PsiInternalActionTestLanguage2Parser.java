@@ -45,7 +45,7 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
         
 
     public String[] getTokenNames() { return PsiInternalActionTestLanguage2Parser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g"; }
+    public String getGrammarFileName() { return "PsiInternalActionTestLanguage2.g"; }
 
 
 
@@ -69,19 +69,19 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleORing"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:52:1: entryRuleORing : ruleORing EOF ;
+    // PsiInternalActionTestLanguage2.g:52:1: entryRuleORing : ruleORing EOF ;
     public final void entryRuleORing() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:52:15: ( ruleORing EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:53:2: ruleORing EOF
+            // PsiInternalActionTestLanguage2.g:52:15: ( ruleORing EOF )
+            // PsiInternalActionTestLanguage2.g:53:2: ruleORing EOF
             {
              markComposite(elementTypeProvider.getORingElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleORing_in_entryRuleORing54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleORing();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleORing57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -98,21 +98,21 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleORing"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:58:1: ruleORing : ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
+    // PsiInternalActionTestLanguage2.g:58:1: ruleORing : ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) ;
     public final void ruleORing() throws RecognitionException {
         Token otherlv_2=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:58:10: ( ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:59:2: ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // PsiInternalActionTestLanguage2.g:58:10: ( ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* ) )
+            // PsiInternalActionTestLanguage2.g:59:2: ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:59:2: ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:60:3: ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+            // PsiInternalActionTestLanguage2.g:59:2: ( ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )* )
+            // PsiInternalActionTestLanguage2.g:60:3: ruleValue ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             {
 
             			markComposite(elementTypeProvider.getORing_ValueParserRuleCall_0ElementType());
             		
-            pushFollow(FollowSets000.FOLLOW_ruleValue_in_ruleORing74);
+            pushFollow(FollowSets000.FOLLOW_3);
             ruleValue();
 
             state._fsp--;
@@ -120,7 +120,7 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
             			doneComposite();
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:67:3: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
+            // PsiInternalActionTestLanguage2.g:67:3: ( () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -133,10 +133,10 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:68:4: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // PsiInternalActionTestLanguage2.g:68:4: () otherlv_2= '|' ( (lv_disjuncts_3_0= ruleValue ) )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:68:4: ()
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:69:5: 
+            	    // PsiInternalActionTestLanguage2.g:68:4: ()
+            	    // PsiInternalActionTestLanguage2.g:69:5: 
             	    {
 
             	    					precedeComposite(elementTypeProvider.getORing_ORingDisjunctsAction_1_0ElementType());
@@ -148,20 +148,20 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
             	    				markLeaf(elementTypeProvider.getORing_VerticalLineKeyword_1_1ElementType());
             	    			
-            	    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleORing110); 
+            	    otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
             	    				doneLeaf(otherlv_2);
             	    			
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:81:4: ( (lv_disjuncts_3_0= ruleValue ) )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:82:5: (lv_disjuncts_3_0= ruleValue )
+            	    // PsiInternalActionTestLanguage2.g:81:4: ( (lv_disjuncts_3_0= ruleValue ) )
+            	    // PsiInternalActionTestLanguage2.g:82:5: (lv_disjuncts_3_0= ruleValue )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:82:5: (lv_disjuncts_3_0= ruleValue )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:83:6: lv_disjuncts_3_0= ruleValue
+            	    // PsiInternalActionTestLanguage2.g:82:5: (lv_disjuncts_3_0= ruleValue )
+            	    // PsiInternalActionTestLanguage2.g:83:6: lv_disjuncts_3_0= ruleValue
             	    {
 
             	    						markComposite(elementTypeProvider.getORing_DisjunctsValueParserRuleCall_1_2_0ElementType());
             	    					
-            	    pushFollow(FollowSets000.FOLLOW_ruleValue_in_ruleORing142);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleValue();
 
             	    state._fsp--;
@@ -203,19 +203,19 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "entryRuleValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:97:1: entryRuleValue : ruleValue EOF ;
+    // PsiInternalActionTestLanguage2.g:97:1: entryRuleValue : ruleValue EOF ;
     public final void entryRuleValue() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:97:15: ( ruleValue EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:98:2: ruleValue EOF
+            // PsiInternalActionTestLanguage2.g:97:15: ( ruleValue EOF )
+            // PsiInternalActionTestLanguage2.g:98:2: ruleValue EOF
             {
              markComposite(elementTypeProvider.getValueElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleValue_in_entryRuleValue181);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleValue();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValue184); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -232,24 +232,24 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
 
     // $ANTLR start "ruleValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:103:1: ruleValue : ( (lv_value_0_0= 'a' ) ) ;
+    // PsiInternalActionTestLanguage2.g:103:1: ruleValue : ( (lv_value_0_0= 'a' ) ) ;
     public final void ruleValue() throws RecognitionException {
         Token lv_value_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:103:10: ( ( (lv_value_0_0= 'a' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:104:2: ( (lv_value_0_0= 'a' ) )
+            // PsiInternalActionTestLanguage2.g:103:10: ( ( (lv_value_0_0= 'a' ) ) )
+            // PsiInternalActionTestLanguage2.g:104:2: ( (lv_value_0_0= 'a' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:104:2: ( (lv_value_0_0= 'a' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:105:3: (lv_value_0_0= 'a' )
+            // PsiInternalActionTestLanguage2.g:104:2: ( (lv_value_0_0= 'a' ) )
+            // PsiInternalActionTestLanguage2.g:105:3: (lv_value_0_0= 'a' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:105:3: (lv_value_0_0= 'a' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/testlanguages/idea/parser/antlr/internal/PsiInternalActionTestLanguage2.g:106:4: lv_value_0_0= 'a'
+            // PsiInternalActionTestLanguage2.g:105:3: (lv_value_0_0= 'a' )
+            // PsiInternalActionTestLanguage2.g:106:4: lv_value_0_0= 'a'
             {
 
             				markLeaf(elementTypeProvider.getValue_ValueAKeyword_0ElementType());
             			
-            lv_value_0_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleValue209); 
+            lv_value_0_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_value_0_0);
             			
@@ -280,14 +280,10 @@ public class PsiInternalActionTestLanguage2Parser extends AbstractPsiAntlrParser
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleORing_in_entryRuleORing54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleORing57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValue_in_ruleORing74 = new BitSet(new long[]{0x0000000000000802L});
-        public static final BitSet FOLLOW_11_in_ruleORing110 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_ruleValue_in_ruleORing142 = new BitSet(new long[]{0x0000000000000802L});
-        public static final BitSet FOLLOW_ruleValue_in_entryRuleValue181 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleValue184 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleValue209 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000802L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001000L});
     }
 
 

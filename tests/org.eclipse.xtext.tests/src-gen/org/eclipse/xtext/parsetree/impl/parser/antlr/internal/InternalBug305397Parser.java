@@ -49,7 +49,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return InternalBug305397Parser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g"; }
+    public String getGrammarFileName() { return "InternalBug305397.g"; }
 
 
 
@@ -74,7 +74,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalBug305397.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -82,17 +82,17 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalBug305397.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalBug305397.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -110,7 +110,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // InternalBug305397.g:76:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -120,10 +120,10 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalBug305397.g:79:28: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // InternalBug305397.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
+            // InternalBug305397.g:80:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -136,15 +136,15 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalBug305397.g:81:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:81:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:82:3: lv_elements_0_0= ruleElement
+            	    // InternalBug305397.g:81:1: (lv_elements_0_0= ruleElement )
+            	    // InternalBug305397.g:82:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleModel130);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    lv_elements_0_0=ruleElement();
 
             	    state._fsp--;
@@ -190,7 +190,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // InternalBug305397.g:106:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -198,17 +198,17 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:107:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:108:2: iv_ruleElement= ruleElement EOF
+            // InternalBug305397.g:107:2: (iv_ruleElement= ruleElement EOF )
+            // InternalBug305397.g:108:2: iv_ruleElement= ruleElement EOF
             {
              newCompositeNode(grammarAccess.getElementRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement166);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleElement=ruleElement();
 
             state._fsp--;
 
              current =iv_ruleElement; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleElement176); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -226,7 +226,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:115:1: ruleElement returns [EObject current=null] : ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' ) ;
+    // InternalBug305397.g:115:1: ruleElement returns [EObject current=null] : ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -240,14 +240,14 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:118:28: ( ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:119:1: ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' )
+            // InternalBug305397.g:118:28: ( ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' ) )
+            // InternalBug305397.g:119:1: ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:119:1: ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:119:2: () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end'
+            // InternalBug305397.g:119:1: ( () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end' )
+            // InternalBug305397.g:119:2: () ( (lv_a_1_0= 'a' ) )? otherlv_2= 'element' ( (lv_name_3_0= RULE_ID ) )? ( (lv_elements_4_0= ruleElement ) )* otherlv_5= 'end'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:119:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:120:5: 
+            // InternalBug305397.g:119:2: ()
+            // InternalBug305397.g:120:5: 
             {
 
                     current = forceCreateModelElement(
@@ -257,7 +257,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:125:2: ( (lv_a_1_0= 'a' ) )?
+            // InternalBug305397.g:125:2: ( (lv_a_1_0= 'a' ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -266,12 +266,12 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:126:1: (lv_a_1_0= 'a' )
+                    // InternalBug305397.g:126:1: (lv_a_1_0= 'a' )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:126:1: (lv_a_1_0= 'a' )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:127:3: lv_a_1_0= 'a'
+                    // InternalBug305397.g:126:1: (lv_a_1_0= 'a' )
+                    // InternalBug305397.g:127:3: lv_a_1_0= 'a'
                     {
-                    lv_a_1_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleElement228); 
+                    lv_a_1_0=(Token)match(input,11,FollowSets000.FOLLOW_4); 
 
                             newLeafNode(lv_a_1_0, grammarAccess.getElementAccess().getAAKeyword_1_0());
                         
@@ -290,11 +290,11 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleElement254); 
+            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getElementAccess().getElementKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:144:1: ( (lv_name_3_0= RULE_ID ) )?
+            // InternalBug305397.g:144:1: ( (lv_name_3_0= RULE_ID ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -303,12 +303,12 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:145:1: (lv_name_3_0= RULE_ID )
+                    // InternalBug305397.g:145:1: (lv_name_3_0= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:145:1: (lv_name_3_0= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:146:3: lv_name_3_0= RULE_ID
+                    // InternalBug305397.g:145:1: (lv_name_3_0= RULE_ID )
+                    // InternalBug305397.g:146:3: lv_name_3_0= RULE_ID
                     {
-                    lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement271); 
+                    lv_name_3_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_6); 
 
                     			newLeafNode(lv_name_3_0, grammarAccess.getElementAccess().getNameIDTerminalRuleCall_3_0()); 
                     		
@@ -331,7 +331,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:162:3: ( (lv_elements_4_0= ruleElement ) )*
+            // InternalBug305397.g:162:3: ( (lv_elements_4_0= ruleElement ) )*
             loop4:
             do {
                 int alt4=2;
@@ -344,15 +344,15 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:163:1: (lv_elements_4_0= ruleElement )
+            	    // InternalBug305397.g:163:1: (lv_elements_4_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:163:1: (lv_elements_4_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parsetree/impl/parser/antlr/internal/InternalBug305397.g:164:3: lv_elements_4_0= ruleElement
+            	    // InternalBug305397.g:163:1: (lv_elements_4_0= ruleElement )
+            	    // InternalBug305397.g:164:3: lv_elements_4_0= ruleElement
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getElementAccess().getElementsElementParserRuleCall_4_0()); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleElement_in_ruleElement298);
+            	    pushFollow(FollowSets000.FOLLOW_6);
             	    lv_elements_4_0=ruleElement();
 
             	    state._fsp--;
@@ -380,7 +380,7 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleElement311); 
+            otherlv_5=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getElementAccess().getEndKeyword_5());
                 
@@ -410,16 +410,12 @@ public class InternalBug305397Parser extends AbstractInternalAntlrParser {
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleModel130 = new BitSet(new long[]{0x0000000000001802L});
-        public static final BitSet FOLLOW_ruleElement_in_entryRuleElement166 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleElement176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleElement228 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleElement254 = new BitSet(new long[]{0x0000000000003810L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleElement271 = new BitSet(new long[]{0x0000000000003800L});
-        public static final BitSet FOLLOW_ruleElement_in_ruleElement298 = new BitSet(new long[]{0x0000000000003800L});
-        public static final BitSet FOLLOW_13_in_ruleElement311 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000001802L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000003810L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000003800L});
     }
 
 

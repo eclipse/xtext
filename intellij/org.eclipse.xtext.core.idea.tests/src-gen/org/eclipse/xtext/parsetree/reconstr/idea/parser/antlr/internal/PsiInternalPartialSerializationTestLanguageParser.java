@@ -47,7 +47,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         
 
     public String[] getTokenNames() { return PsiInternalPartialSerializationTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalPartialSerializationTestLanguage.g"; }
 
 
 
@@ -71,19 +71,19 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalPartialSerializationTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalPartialSerializationTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -100,16 +100,16 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:58:1: ruleModel : ruleNodeRoot ;
+    // PsiInternalPartialSerializationTestLanguage.g:58:1: ruleModel : ruleNodeRoot ;
     public final void ruleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:58:10: ( ruleNodeRoot )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:59:2: ruleNodeRoot
+            // PsiInternalPartialSerializationTestLanguage.g:58:10: ( ruleNodeRoot )
+            // PsiInternalPartialSerializationTestLanguage.g:59:2: ruleNodeRoot
             {
 
             		markComposite(elementTypeProvider.getModel_NodeRootParserRuleCallElementType());
             	
-            pushFollow(FollowSets000.FOLLOW_ruleNodeRoot_in_ruleModel69);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleNodeRoot();
 
             state._fsp--;
@@ -133,19 +133,19 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "entryRuleNodeRoot"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:69:1: entryRuleNodeRoot : ruleNodeRoot EOF ;
+    // PsiInternalPartialSerializationTestLanguage.g:69:1: entryRuleNodeRoot : ruleNodeRoot EOF ;
     public final void entryRuleNodeRoot() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:69:18: ( ruleNodeRoot EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:70:2: ruleNodeRoot EOF
+            // PsiInternalPartialSerializationTestLanguage.g:69:18: ( ruleNodeRoot EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:70:2: ruleNodeRoot EOF
             {
              markComposite(elementTypeProvider.getNodeRootElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNodeRoot_in_entryRuleNodeRoot85);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleNodeRoot();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNodeRoot88); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -162,34 +162,34 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "ruleNodeRoot"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:75:1: ruleNodeRoot : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
+    // PsiInternalPartialSerializationTestLanguage.g:75:1: ruleNodeRoot : (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) ;
     public final void ruleNodeRoot() throws RecognitionException {
         Token otherlv_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:75:13: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:75:13: ( (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:77:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
+            // PsiInternalPartialSerializationTestLanguage.g:76:2: (otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) ) )
+            // PsiInternalPartialSerializationTestLanguage.g:77:3: otherlv_0= '#1' ( (lv_node_1_0= ruleNode ) )
             {
 
             			markLeaf(elementTypeProvider.getNodeRoot_NumberSignDigitOneKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleNodeRoot107); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:84:3: ( (lv_node_1_0= ruleNode ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
+            // PsiInternalPartialSerializationTestLanguage.g:84:3: ( (lv_node_1_0= ruleNode ) )
+            // PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:86:5: lv_node_1_0= ruleNode
+            // PsiInternalPartialSerializationTestLanguage.g:85:4: (lv_node_1_0= ruleNode )
+            // PsiInternalPartialSerializationTestLanguage.g:86:5: lv_node_1_0= ruleNode
             {
 
             					markComposite(elementTypeProvider.getNodeRoot_NodeNodeParserRuleCall_1_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleNode_in_ruleNodeRoot134);
+            pushFollow(FollowSets000.FOLLOW_2);
             ruleNode();
 
             state._fsp--;
@@ -222,19 +222,19 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "entryRuleNode"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:99:1: entryRuleNode : ruleNode EOF ;
+    // PsiInternalPartialSerializationTestLanguage.g:99:1: entryRuleNode : ruleNode EOF ;
     public final void entryRuleNode() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:99:14: ( ruleNode EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:100:2: ruleNode EOF
+            // PsiInternalPartialSerializationTestLanguage.g:99:14: ( ruleNode EOF )
+            // PsiInternalPartialSerializationTestLanguage.g:100:2: ruleNode EOF
             {
              markComposite(elementTypeProvider.getNodeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNode_in_entryRuleNode165);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleNode();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNode168); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -251,7 +251,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
 
     // $ANTLR start "ruleNode"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:105:1: ruleNode : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
+    // PsiInternalPartialSerializationTestLanguage.g:105:1: ruleNode : (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) ;
     public final void ruleNode() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
@@ -259,29 +259,29 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:105:9: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // PsiInternalPartialSerializationTestLanguage.g:105:9: ( (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? ) )
+            // PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:107:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // PsiInternalPartialSerializationTestLanguage.g:106:2: (otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )? )
+            // PsiInternalPartialSerializationTestLanguage.g:107:3: otherlv_0= 'node' ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             {
 
             			markLeaf(elementTypeProvider.getNode_NodeKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleNode187); 
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_4); 
 
             			doneLeaf(otherlv_0);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:114:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalPartialSerializationTestLanguage.g:114:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:116:5: lv_name_1_0= RULE_ID
+            // PsiInternalPartialSerializationTestLanguage.g:115:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalPartialSerializationTestLanguage.g:116:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getNode_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNode214); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -291,7 +291,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:125:3: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
+            // PsiInternalPartialSerializationTestLanguage.g:125:3: (otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -300,16 +300,16 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:126:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
+                    // PsiInternalPartialSerializationTestLanguage.g:126:4: otherlv_2= '(' ( (lv_children_3_0= ruleNode ) )+ otherlv_4= ')'
                     {
 
                     				markLeaf(elementTypeProvider.getNode_LeftParenthesisKeyword_2_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleNode245); 
+                    otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:133:4: ( (lv_children_3_0= ruleNode ) )+
+                    // PsiInternalPartialSerializationTestLanguage.g:133:4: ( (lv_children_3_0= ruleNode ) )+
                     int cnt1=0;
                     loop1:
                     do {
@@ -323,15 +323,15 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
+                    	    // PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
                     	    {
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/idea/parser/antlr/internal/PsiInternalPartialSerializationTestLanguage.g:135:6: lv_children_3_0= ruleNode
+                    	    // PsiInternalPartialSerializationTestLanguage.g:134:5: (lv_children_3_0= ruleNode )
+                    	    // PsiInternalPartialSerializationTestLanguage.g:135:6: lv_children_3_0= ruleNode
                     	    {
 
                     	    						markComposite(elementTypeProvider.getNode_ChildrenNodeParserRuleCall_2_1_0ElementType());
                     	    					
-                    	    pushFollow(FollowSets000.FOLLOW_ruleNode_in_ruleNode277);
+                    	    pushFollow(FollowSets000.FOLLOW_6);
                     	    ruleNode();
 
                     	    state._fsp--;
@@ -358,7 +358,7 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
                     				markLeaf(elementTypeProvider.getNode_RightParenthesisKeyword_2_2ElementType());
                     			
-                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleNode308); 
+                    otherlv_4=(Token)match(input,14,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(otherlv_4);
                     			
@@ -392,20 +392,12 @@ public class PsiInternalPartialSerializationTestLanguageParser extends AbstractP
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNodeRoot_in_ruleModel69 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNodeRoot_in_entryRuleNodeRoot85 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNodeRoot88 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleNodeRoot107 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_ruleNode_in_ruleNodeRoot134 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNode_in_entryRuleNode165 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNode168 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleNode187 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleNode214 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleNode245 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_ruleNode_in_ruleNode277 = new BitSet(new long[]{0x0000000000005000L});
-        public static final BitSet FOLLOW_14_in_ruleNode308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000005000L});
     }
 
 

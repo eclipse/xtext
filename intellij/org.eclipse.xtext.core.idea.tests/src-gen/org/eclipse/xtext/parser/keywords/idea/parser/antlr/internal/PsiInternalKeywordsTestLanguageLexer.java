@@ -40,15 +40,15 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalKeywordsTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:11:7: ( 'foo\\\\bar' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:11:9: 'foo\\\\bar'
+            // PsiInternalKeywordsTestLanguage.g:11:7: ( 'foo\\\\bar' )
+            // PsiInternalKeywordsTestLanguage.g:11:9: 'foo\\\\bar'
             {
             match("foo\\bar"); 
 
@@ -68,8 +68,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:12:7: ( 'foo\\\\' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:12:9: 'foo\\\\'
+            // PsiInternalKeywordsTestLanguage.g:12:7: ( 'foo\\\\' )
+            // PsiInternalKeywordsTestLanguage.g:12:9: 'foo\\\\'
             {
             match("foo\\"); 
 
@@ -89,8 +89,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:13:7: ( '\\\\bar' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:13:9: '\\\\bar'
+            // PsiInternalKeywordsTestLanguage.g:13:7: ( '\\\\bar' )
+            // PsiInternalKeywordsTestLanguage.g:13:9: '\\\\bar'
             {
             match("\\bar"); 
 
@@ -110,8 +110,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:14:7: ( '\\\\' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:14:9: '\\\\'
+            // PsiInternalKeywordsTestLanguage.g:14:7: ( '\\\\' )
+            // PsiInternalKeywordsTestLanguage.g:14:9: '\\\\'
             {
             match('\\'); 
 
@@ -130,8 +130,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:15:7: ( '\"a\"' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:15:9: '\"a\"'
+            // PsiInternalKeywordsTestLanguage.g:15:7: ( '\"a\"' )
+            // PsiInternalKeywordsTestLanguage.g:15:9: '\"a\"'
             {
             match("\"a\""); 
 
@@ -151,8 +151,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:16:7: ( '\\'b\\'' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:16:9: '\\'b\\''
+            // PsiInternalKeywordsTestLanguage.g:16:7: ( '\\'b\\'' )
+            // PsiInternalKeywordsTestLanguage.g:16:9: '\\'b\\''
             {
             match("'b'"); 
 
@@ -172,8 +172,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:17:7: ( '\\'c\\'' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:17:9: '\\'c\\''
+            // PsiInternalKeywordsTestLanguage.g:17:7: ( '\\'c\\'' )
+            // PsiInternalKeywordsTestLanguage.g:17:9: '\\'c\\''
             {
             match("'c'"); 
 
@@ -193,8 +193,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:18:7: ( '\"d\"' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:18:9: '\"d\"'
+            // PsiInternalKeywordsTestLanguage.g:18:7: ( '\"d\"' )
+            // PsiInternalKeywordsTestLanguage.g:18:9: '\"d\"'
             {
             match("\"d\""); 
 
@@ -214,10 +214,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:158:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:158:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalKeywordsTestLanguage.g:158:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalKeywordsTestLanguage.g:158:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:158:11: ( '^' )?
+            // PsiInternalKeywordsTestLanguage.g:158:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -226,7 +226,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:158:11: '^'
+                    // PsiInternalKeywordsTestLanguage.g:158:11: '^'
                     {
                     match('^'); 
 
@@ -244,7 +244,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:158:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalKeywordsTestLanguage.g:158:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -257,7 +257,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:
+            	    // PsiInternalKeywordsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -293,10 +293,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:160:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:160:12: ( '0' .. '9' )+
+            // PsiInternalKeywordsTestLanguage.g:160:10: ( ( '0' .. '9' )+ )
+            // PsiInternalKeywordsTestLanguage.g:160:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:160:12: ( '0' .. '9' )+
+            // PsiInternalKeywordsTestLanguage.g:160:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -310,7 +310,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:160:13: '0' .. '9'
+            	    // PsiInternalKeywordsTestLanguage.g:160:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -342,10 +342,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalKeywordsTestLanguage.g:162:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalKeywordsTestLanguage.g:162:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalKeywordsTestLanguage.g:162:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -363,10 +363,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalKeywordsTestLanguage.g:162:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalKeywordsTestLanguage.g:162:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -382,7 +382,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:21: '\\\\' .
+                    	    // PsiInternalKeywordsTestLanguage.g:162:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -390,7 +390,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalKeywordsTestLanguage.g:162:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -415,10 +415,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalKeywordsTestLanguage.g:162:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalKeywordsTestLanguage.g:162:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -434,7 +434,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:54: '\\\\' .
+                    	    // PsiInternalKeywordsTestLanguage.g:162:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -442,7 +442,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:162:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalKeywordsTestLanguage.g:162:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -485,12 +485,12 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:164:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:164:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalKeywordsTestLanguage.g:164:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalKeywordsTestLanguage.g:164:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:164:24: ( options {greedy=false; } : . )*
+            // PsiInternalKeywordsTestLanguage.g:164:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -515,7 +515,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:164:52: .
+            	    // PsiInternalKeywordsTestLanguage.g:164:52: .
             	    {
             	    matchAny(); 
 
@@ -545,12 +545,12 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalKeywordsTestLanguage.g:166:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalKeywordsTestLanguage.g:166:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalKeywordsTestLanguage.g:166:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -563,7 +563,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalKeywordsTestLanguage.g:166:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -583,7 +583,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalKeywordsTestLanguage.g:166:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -592,9 +592,9 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:41: ( '\\r' )? '\\n'
+                    // PsiInternalKeywordsTestLanguage.g:166:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:41: ( '\\r' )?
+                    // PsiInternalKeywordsTestLanguage.g:166:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -603,7 +603,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:166:41: '\\r'
+                            // PsiInternalKeywordsTestLanguage.g:166:41: '\\r'
                             {
                             match('\r'); 
 
@@ -635,10 +635,10 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:168:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:168:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalKeywordsTestLanguage.g:168:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalKeywordsTestLanguage.g:168:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:168:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalKeywordsTestLanguage.g:168:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -652,7 +652,7 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:
+            	    // PsiInternalKeywordsTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -692,8 +692,8 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:170:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:170:18: .
+            // PsiInternalKeywordsTestLanguage.g:170:16: ( . )
+            // PsiInternalKeywordsTestLanguage.g:170:18: .
             {
             matchAny(); 
 
@@ -708,110 +708,110 @@ public class PsiInternalKeywordsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalKeywordsTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=15;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:10: T__11
+                // PsiInternalKeywordsTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:16: T__12
+                // PsiInternalKeywordsTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:22: T__13
+                // PsiInternalKeywordsTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:28: T__14
+                // PsiInternalKeywordsTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:34: T__15
+                // PsiInternalKeywordsTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:40: T__16
+                // PsiInternalKeywordsTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:46: T__17
+                // PsiInternalKeywordsTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:52: T__18
+                // PsiInternalKeywordsTestLanguage.g:1:52: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:58: RULE_ID
+                // PsiInternalKeywordsTestLanguage.g:1:58: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:66: RULE_INT
+                // PsiInternalKeywordsTestLanguage.g:1:66: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 11 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:75: RULE_STRING
+                // PsiInternalKeywordsTestLanguage.g:1:75: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 12 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:87: RULE_ML_COMMENT
+                // PsiInternalKeywordsTestLanguage.g:1:87: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 13 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:103: RULE_SL_COMMENT
+                // PsiInternalKeywordsTestLanguage.g:1:103: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 14 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:119: RULE_WS
+                // PsiInternalKeywordsTestLanguage.g:1:119: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 15 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/keywords/idea/parser/antlr/internal/PsiInternalKeywordsTestLanguage.g:1:127: RULE_ANY_OTHER
+                // PsiInternalKeywordsTestLanguage.g:1:127: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

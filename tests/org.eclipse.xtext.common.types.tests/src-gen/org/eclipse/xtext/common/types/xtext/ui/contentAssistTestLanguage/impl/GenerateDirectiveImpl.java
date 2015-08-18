@@ -18,10 +18,10 @@ import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Generat
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.GenerateDirectiveImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -73,8 +73,7 @@ public class GenerateDirectiveImpl extends MinimalEObjectImpl.Container implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getTypeName()
+  public String getTypeName()
   {
     return typeName;
   }
@@ -84,8 +83,7 @@ public String getTypeName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setTypeName(String newTypeName)
+  public void setTypeName(String newTypeName)
   {
     String oldTypeName = typeName;
     typeName = newTypeName;

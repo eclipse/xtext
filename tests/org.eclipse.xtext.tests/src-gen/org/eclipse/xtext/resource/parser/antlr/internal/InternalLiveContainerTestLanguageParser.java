@@ -46,7 +46,7 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
         
 
     public String[] getTokenNames() { return InternalLiveContainerTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalLiveContainerTestLanguage.g"; }
 
 
 
@@ -71,7 +71,7 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalLiveContainerTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -79,17 +79,17 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalLiveContainerTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalLiveContainerTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
+    // InternalLiveContainerTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( (lv_name_0_0= RULE_ID ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -116,16 +116,16 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:79:28: ( ( (lv_name_0_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:79:28: ( ( (lv_name_0_0= RULE_ID ) ) )
+            // InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:80:1: ( (lv_name_0_0= RULE_ID ) )
+            // InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalLiveContainerTestLanguage.g:82:3: lv_name_0_0= RULE_ID
+            // InternalLiveContainerTestLanguage.g:81:1: (lv_name_0_0= RULE_ID )
+            // InternalLiveContainerTestLanguage.g:82:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel126); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0()); 
             		
@@ -168,9 +168,8 @@ public class InternalLiveContainerTestLanguageParser extends AbstractInternalAnt
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleModel126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

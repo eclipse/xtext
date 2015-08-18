@@ -35,15 +35,15 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalEnumAndReferenceTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:11:7: ( 'reference' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:11:9: 'reference'
+            // PsiInternalEnumAndReferenceTestLanguage.g:11:7: ( 'reference' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:11:9: 'reference'
             {
             match("reference"); 
 
@@ -63,8 +63,8 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:12:7: ( 'kindOfKeyword' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:12:9: 'kindOfKeyword'
+            // PsiInternalEnumAndReferenceTestLanguage.g:12:7: ( 'kindOfKeyword' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:12:9: 'kindOfKeyword'
             {
             match("kindOfKeyword"); 
 
@@ -84,8 +84,8 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:13:7: ( 'anotherEnumLiteral' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:13:9: 'anotherEnumLiteral'
+            // PsiInternalEnumAndReferenceTestLanguage.g:13:7: ( 'anotherEnumLiteral' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:13:9: 'anotherEnumLiteral'
             {
             match("anotherEnumLiteral"); 
 
@@ -105,10 +105,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:128:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:128:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:128:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -117,7 +117,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:128:11: '^'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:128:11: '^'
                     {
                     match('^'); 
 
@@ -135,7 +135,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:128:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:128:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -148,7 +148,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -184,10 +184,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:130:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:130:10: ( ( '0' .. '9' )+ )
+            // PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:130:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -201,7 +201,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:130:13: '0' .. '9'
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:130:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -233,10 +233,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:132:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:132:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -254,10 +254,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:132:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalEnumAndReferenceTestLanguage.g:132:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -273,7 +273,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:21: '\\\\' .
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -281,7 +281,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -306,10 +306,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalEnumAndReferenceTestLanguage.g:132:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalEnumAndReferenceTestLanguage.g:132:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -325,7 +325,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:54: '\\\\' .
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -333,7 +333,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:132:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalEnumAndReferenceTestLanguage.g:132:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -376,12 +376,12 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:134:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:134:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalEnumAndReferenceTestLanguage.g:134:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalEnumAndReferenceTestLanguage.g:134:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:134:24: ( options {greedy=false; } : . )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:134:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -406,7 +406,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:134:52: .
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:134:52: .
             	    {
             	    matchAny(); 
 
@@ -436,12 +436,12 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:136:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalEnumAndReferenceTestLanguage.g:136:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalEnumAndReferenceTestLanguage.g:136:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -454,7 +454,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:136:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -474,7 +474,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalEnumAndReferenceTestLanguage.g:136:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -483,9 +483,9 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )? '\\n'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )?
+                    // PsiInternalEnumAndReferenceTestLanguage.g:136:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -494,7 +494,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:136:41: '\\r'
+                            // PsiInternalEnumAndReferenceTestLanguage.g:136:41: '\\r'
                             {
                             match('\r'); 
 
@@ -526,10 +526,10 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:138:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:138:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalEnumAndReferenceTestLanguage.g:138:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -543,7 +543,7 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:
+            	    // PsiInternalEnumAndReferenceTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -583,8 +583,8 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:140:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:140:18: .
+            // PsiInternalEnumAndReferenceTestLanguage.g:140:16: ( . )
+            // PsiInternalEnumAndReferenceTestLanguage.g:140:18: .
             {
             matchAny(); 
 
@@ -599,75 +599,75 @@ public class PsiInternalEnumAndReferenceTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalEnumAndReferenceTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=10;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:10: T__11
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:16: T__12
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:22: T__13
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:28: RULE_ID
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:28: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:36: RULE_INT
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:36: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:45: RULE_STRING
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:45: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:57: RULE_ML_COMMENT
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:57: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:73: RULE_SL_COMMENT
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:73: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:89: RULE_WS
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:89: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:1:97: RULE_ANY_OTHER
+                // PsiInternalEnumAndReferenceTestLanguage.g:1:97: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

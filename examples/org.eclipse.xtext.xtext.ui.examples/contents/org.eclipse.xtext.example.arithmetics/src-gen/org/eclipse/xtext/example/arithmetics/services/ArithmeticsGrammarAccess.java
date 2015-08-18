@@ -19,7 +19,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class ModuleElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Module");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Module");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModuleKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -30,13 +30,15 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStatementsStatementParserRuleCall_3_0 = (RuleCall)cStatementsAssignment_3.eContents().get(0);
 		
 		//Module:
-		//	"module" name=ID imports+=Import* statements+=Statement*;
+		//	'module' name=ID
+		//	imports+=Import*
+		//	statements+=Statement*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"module" name=ID imports+=Import* statements+=Statement*
+		//'module' name=ID imports+=Import* statements+=Statement*
 		public Group getGroup() { return cGroup; }
 
-		//"module"
+		//'module'
 		public Keyword getModuleKeyword_0() { return cModuleKeyword_0; }
 
 		//name=ID
@@ -59,20 +61,20 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ImportElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Import");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cImportedNamespaceImportNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	"import" importedNamespace=ImportName;
+		//	'import' importedNamespace=ImportName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=ImportName
+		//'import' importedNamespace=ImportName
 		public Group getGroup() { return cGroup; }
 
-		//"import"
+		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
 		//importedNamespace=ImportName
@@ -83,7 +85,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ImportNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImportName");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.ImportName");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -91,27 +93,27 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		
 		//ImportName:
-		//	ID ("." "*")?;
+		//	ID ('.' '*')?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ID ("." "*")?
+		//ID ('.' '*')?
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." "*")?
+		//('.' '*')?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"."
+		//'.'
 		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
-		//"*"
+		//'*'
 		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Statement");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Statement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEvaluationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -131,7 +133,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class DefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Definition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Definition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDefKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -151,13 +153,14 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Definition:
-		//	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
+		//	'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
+		//	':' expr=Expression ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";"
+		//'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')? ':' expr=Expression ';'
 		public Group getGroup() { return cGroup; }
 
-		//"def"
+		//'def'
 		public Keyword getDefKeyword_0() { return cDefKeyword_0; }
 
 		//name=ID
@@ -166,10 +169,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 
-		//("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")?
+		//('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2_0() { return cLeftParenthesisKeyword_2_0; }
 
 		//args+=DeclaredParameter
@@ -178,10 +181,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//DeclaredParameter
 		public RuleCall getArgsDeclaredParameterParserRuleCall_2_1_0() { return cArgsDeclaredParameterParserRuleCall_2_1_0; }
 
-		//("," args+=DeclaredParameter)*
+		//(',' args+=DeclaredParameter)*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
 		//args+=DeclaredParameter
@@ -190,10 +193,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//DeclaredParameter
 		public RuleCall getArgsDeclaredParameterParserRuleCall_2_2_1_0() { return cArgsDeclaredParameterParserRuleCall_2_2_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
 		//expr=Expression
@@ -202,12 +205,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getExprExpressionParserRuleCall_4_0() { return cExprExpressionParserRuleCall_4_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
 	public class DeclaredParameterElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeclaredParameter");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.DeclaredParameter");
 		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
@@ -223,7 +226,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class AbstractDefinitionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AbstractDefinition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.AbstractDefinition");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDefinitionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDeclaredParameterParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -243,17 +246,17 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class EvaluationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Evaluation");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Evaluation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cExpressionAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cExpressionExpressionParserRuleCall_0_0 = (RuleCall)cExpressionAssignment_0.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//Evaluation:
-		//	expression=Expression ";";
+		//	expression=Expression ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//expression=Expression ";"
+		//expression=Expression ';'
 		public Group getGroup() { return cGroup; }
 
 		//expression=Expression
@@ -262,12 +265,12 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getExpressionExpressionParserRuleCall_0_0() { return cExpressionExpressionParserRuleCall_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
 	public class ExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Expression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Expression");
 		private final RuleCall cAdditionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//Expression:
@@ -279,7 +282,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class AdditionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Addition");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Addition");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cMultiplicationParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -293,38 +296,38 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cRightMultiplicationParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
-		//Addition returns Expression:
-		//	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
+		//Addition Expression:
+		//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
+		//Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 		public Group getGroup() { return cGroup; }
 
 		//Multiplication
 		public RuleCall getMultiplicationParserRuleCall_0() { return cMultiplicationParserRuleCall_0; }
 
-		//(({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*
+		//(({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Plus.left=current} "+" | {Minus.left=current} "-"
+		//({Plus.left=current} '+' | {Minus.left=current} '-')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
-		//{Plus.left=current} "+"
+		//{Plus.left=current} '+'
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 
 		//{Plus.left=current}
 		public Action getPlusLeftAction_1_0_0_0() { return cPlusLeftAction_1_0_0_0; }
 
-		//"+"
+		//'+'
 		public Keyword getPlusSignKeyword_1_0_0_1() { return cPlusSignKeyword_1_0_0_1; }
 
-		//{Minus.left=current} "-"
+		//{Minus.left=current} '-'
 		public Group getGroup_1_0_1() { return cGroup_1_0_1; }
 
 		//{Minus.left=current}
 		public Action getMinusLeftAction_1_0_1_0() { return cMinusLeftAction_1_0_1_0; }
 
-		//"-"
+		//'-'
 		public Keyword getHyphenMinusKeyword_1_0_1_1() { return cHyphenMinusKeyword_1_0_1_1; }
 
 		//right=Multiplication
@@ -335,7 +338,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class MultiplicationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Multiplication");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.Multiplication");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cPrimaryExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
@@ -349,38 +352,38 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cRightAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cRightPrimaryExpressionParserRuleCall_1_1_0 = (RuleCall)cRightAssignment_1_1.eContents().get(0);
 		
-		//Multiplication returns Expression:
-		//	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
+		//Multiplication Expression:
+		//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 		@Override public ParserRule getRule() { return rule; }
 
-		//PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
+		//PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//PrimaryExpression
 		public RuleCall getPrimaryExpressionParserRuleCall_0() { return cPrimaryExpressionParserRuleCall_0; }
 
-		//(({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*
+		//(({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 		public Group getGroup_1() { return cGroup_1; }
 
-		//{Multi.left=current} "*" | {Div.left=current} "/"
+		//({Multi.left=current} '*' | {Div.left=current} '/')
 		public Alternatives getAlternatives_1_0() { return cAlternatives_1_0; }
 
-		//{Multi.left=current} "*"
+		//{Multi.left=current} '*'
 		public Group getGroup_1_0_0() { return cGroup_1_0_0; }
 
 		//{Multi.left=current}
 		public Action getMultiLeftAction_1_0_0_0() { return cMultiLeftAction_1_0_0_0; }
 
-		//"*"
+		//'*'
 		public Keyword getAsteriskKeyword_1_0_0_1() { return cAsteriskKeyword_1_0_0_1; }
 
-		//{Div.left=current} "/"
+		//{Div.left=current} '/'
 		public Group getGroup_1_0_1() { return cGroup_1_0_1; }
 
 		//{Div.left=current}
 		public Action getDivLeftAction_1_0_1_0() { return cDivLeftAction_1_0_1_0; }
 
-		//"/"
+		//'/'
 		public Keyword getSolidusKeyword_1_0_1_1() { return cSolidusKeyword_1_0_1_1; }
 
 		//right=PrimaryExpression
@@ -391,7 +394,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class PrimaryExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimaryExpression");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.PrimaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
@@ -416,25 +419,25 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArgsExpressionParserRuleCall_2_2_2_1_0 = (RuleCall)cArgsAssignment_2_2_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2_3 = (Keyword)cGroup_2_2.eContents().get(3);
 		
-		//PrimaryExpression returns Expression:
-		//	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
-		//	("," args+=Expression)* ")")?;
+		//PrimaryExpression Expression:
+		//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
+		//	(',' args+=Expression)* ')')?
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression (","
-		//args+=Expression)* ")")?
+		//'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (','
+		//args+=Expression)* ')')?
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//"(" Expression ")"
+		//'(' Expression ')'
 		public Group getGroup_0() { return cGroup_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
 
 		//Expression
 		public RuleCall getExpressionParserRuleCall_0_1() { return cExpressionParserRuleCall_0_1; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_0_2() { return cRightParenthesisKeyword_0_2; }
 
 		//{NumberLiteral} value=NUMBER
@@ -449,7 +452,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//NUMBER
 		public RuleCall getValueNUMBERTerminalRuleCall_1_1_0() { return cValueNUMBERTerminalRuleCall_1_1_0; }
 
-		//{FunctionCall} func=[AbstractDefinition] ("(" args+=Expression ("," args+=Expression)* ")")?
+		//{FunctionCall} func=[AbstractDefinition] ('(' args+=Expression (',' args+=Expression)* ')')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//{FunctionCall}
@@ -464,10 +467,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getFuncAbstractDefinitionIDTerminalRuleCall_2_1_0_1() { return cFuncAbstractDefinitionIDTerminalRuleCall_2_1_0_1; }
 
-		//("(" args+=Expression ("," args+=Expression)* ")")?
+		//('(' args+=Expression (',' args+=Expression)* ')')?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2_2_0() { return cLeftParenthesisKeyword_2_2_0; }
 
 		//args+=Expression
@@ -476,10 +479,10 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getArgsExpressionParserRuleCall_2_2_1_0() { return cArgsExpressionParserRuleCall_2_2_1_0; }
 
-		//("," args+=Expression)*
+		//(',' args+=Expression)*
 		public Group getGroup_2_2_2() { return cGroup_2_2_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_2_2_0() { return cCommaKeyword_2_2_2_0; }
 
 		//args+=Expression
@@ -488,7 +491,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		//Expression
 		public RuleCall getArgsExpressionParserRuleCall_2_2_2_1_0() { return cArgsExpressionParserRuleCall_2_2_2_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2_2_3() { return cRightParenthesisKeyword_2_2_3; }
 	}
 	
@@ -529,8 +532,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		this.pAddition = new AdditionElements();
 		this.pMultiplication = new MultiplicationElements();
 		this.pPrimaryExpression = new PrimaryExpressionElements();
-		this.tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NUMBER");
-		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "INT");
+		this.tNUMBER = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.NUMBER");
+		this.tINT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.example.arithmetics.Arithmetics.INT");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -561,7 +564,9 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Module:
-	//	"module" name=ID imports+=Import* statements+=Statement*;
+	//	'module' name=ID
+	//	imports+=Import*
+	//	statements+=Statement*;
 	public ModuleElements getModuleAccess() {
 		return pModule;
 	}
@@ -571,7 +576,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//	"import" importedNamespace=ImportName;
+	//	'import' importedNamespace=ImportName;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}
@@ -581,7 +586,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ImportName:
-	//	ID ("." "*")?;
+	//	ID ('.' '*')?;
 	public ImportNameElements getImportNameAccess() {
 		return pImportName;
 	}
@@ -601,7 +606,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Definition:
-	//	"def" name=ID ("(" args+=DeclaredParameter ("," args+=DeclaredParameter)* ")")? ":" expr=Expression ";";
+	//	'def' name=ID ('(' args+=DeclaredParameter (',' args+=DeclaredParameter)* ')')?
+	//	':' expr=Expression ';';
 	public DefinitionElements getDefinitionAccess() {
 		return pDefinition;
 	}
@@ -631,7 +637,7 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Evaluation:
-	//	expression=Expression ";";
+	//	expression=Expression ';';
 	public EvaluationElements getEvaluationAccess() {
 		return pEvaluation;
 	}
@@ -650,8 +656,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionAccess().getRule();
 	}
 
-	//Addition returns Expression:
-	//	Multiplication (({Plus.left=current} "+" | {Minus.left=current} "-") right=Multiplication)*;
+	//Addition Expression:
+	//	Multiplication (({Plus.left=current} '+' | {Minus.left=current} '-') right=Multiplication)*
 	public AdditionElements getAdditionAccess() {
 		return pAddition;
 	}
@@ -660,8 +666,8 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getAdditionAccess().getRule();
 	}
 
-	//Multiplication returns Expression:
-	//	PrimaryExpression (({Multi.left=current} "*" | {Div.left=current} "/") right=PrimaryExpression)*;
+	//Multiplication Expression:
+	//	PrimaryExpression (({Multi.left=current} '*' | {Div.left=current} '/') right=PrimaryExpression)*
 	public MultiplicationElements getMultiplicationAccess() {
 		return pMultiplication;
 	}
@@ -670,9 +676,9 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 		return getMultiplicationAccess().getRule();
 	}
 
-	//PrimaryExpression returns Expression:
-	//	"(" Expression ")" | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ("(" args+=Expression
-	//	("," args+=Expression)* ")")?;
+	//PrimaryExpression Expression:
+	//	'(' Expression ')' | {NumberLiteral} value=NUMBER | {FunctionCall} func=[AbstractDefinition] ('(' args+=Expression
+	//	(',' args+=Expression)* ')')?
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return pPrimaryExpression;
 	}
@@ -682,44 +688,44 @@ public class ArithmeticsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal NUMBER returns ecore::EBigDecimal:
-	//	"0".."9"* ("." "0".."9"+)?;
+	//	'0'..'9'* ('.' '0'..'9'+)?;
 	public TerminalRule getNUMBERRule() {
 		return tNUMBER;
 	} 
 
 	//terminal INT returns ecore::EInt:
-	//	"this one has been deactivated";
+	//	'this one has been deactivated';
 	public TerminalRule getINTRule() {
 		return tINT;
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	'^'? ('a'..'z' | 'A'..'Z' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal STRING:
-	//	"\"" ("\\" . / * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\""))* "\"" | "\'" ("\\" .
-	//	/ * 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' * / | !("\\" | "\'"))* "\'";
+	//	'"' ('\\' . | !('\\' | '"'))* '"' |
+	//	"'" ('\\' . | !('\\' | "'"))* "'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/ *'->'* /';
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
-	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
+	//	'//' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 

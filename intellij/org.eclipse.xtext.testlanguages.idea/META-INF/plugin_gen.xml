@@ -45,6 +45,9 @@
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
       							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+      	<lang.documentationProvider language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"
+      							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
 		<facetType implementation="org.eclipse.xtext.testlanguages.backtracking.idea.facet.ExBeeLangTestLanguageFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.testlanguages.backtracking.idea.highlighting.ExBeeLangTestLanguageSemanticHighlightVisitor"/>

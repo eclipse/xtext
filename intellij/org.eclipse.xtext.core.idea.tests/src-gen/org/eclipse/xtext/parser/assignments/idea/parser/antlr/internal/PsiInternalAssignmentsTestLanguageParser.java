@@ -57,7 +57,7 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         
 
     public String[] getTokenNames() { return PsiInternalAssignmentsTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalAssignmentsTestLanguage.g"; }
 
 
 
@@ -81,19 +81,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:52:1: entryRuleModel : ruleModel EOF ;
     public final void entryRuleModel() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:52:15: ( ruleModel EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:53:2: ruleModel EOF
+            // PsiInternalAssignmentsTestLanguage.g:52:15: ( ruleModel EOF )
+            // PsiInternalAssignmentsTestLanguage.g:53:2: ruleModel EOF
             {
              markComposite(elementTypeProvider.getModelElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleModel();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -110,16 +110,16 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleModel"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
+    // PsiInternalAssignmentsTestLanguage.g:58:1: ruleModel : ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) ;
     public final void ruleModel() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_5=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:58:10: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:58:10: ( ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:59:2: ( (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) ) | (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -137,19 +137,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:61:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:60:3: (otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:61:4: otherlv_0= 'simple' ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_SimpleKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleModel82); 
+                    otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:68:4: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:68:4: ( ( (lv_single_1_0= ruleSingleValue ) ) | ( (lv_multi_2_0= ruleMultiValue ) ) | ( (lv_single_3_0= ruleSingleDatatype ) ) | ( (lv_multi_4_0= ruleMultiDatatype ) ) )
                     int alt1=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -189,18 +189,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     switch (alt1) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
+                            // PsiInternalAssignmentsTestLanguage.g:69:5: ( (lv_single_1_0= ruleSingleValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:71:7: lv_single_1_0= ruleSingleValue
+                            // PsiInternalAssignmentsTestLanguage.g:70:6: (lv_single_1_0= ruleSingleValue )
+                            // PsiInternalAssignmentsTestLanguage.g:71:7: lv_single_1_0= ruleSingleValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_SingleSingleValueParserRuleCall_0_1_0_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_ruleModel123);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleSingleValue();
 
                             state._fsp--;
@@ -218,18 +218,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
+                            // PsiInternalAssignmentsTestLanguage.g:81:5: ( (lv_multi_2_0= ruleMultiValue ) )
+                            // PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:83:7: lv_multi_2_0= ruleMultiValue
+                            // PsiInternalAssignmentsTestLanguage.g:82:6: (lv_multi_2_0= ruleMultiValue )
+                            // PsiInternalAssignmentsTestLanguage.g:83:7: lv_multi_2_0= ruleMultiValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_MultiMultiValueParserRuleCall_0_1_1_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_ruleModel185);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleMultiValue();
 
                             state._fsp--;
@@ -247,18 +247,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 3 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:93:5: ( (lv_single_3_0= ruleSingleDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:95:7: lv_single_3_0= ruleSingleDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:94:6: (lv_single_3_0= ruleSingleDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:95:7: lv_single_3_0= ruleSingleDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_SingleSingleDatatypeParserRuleCall_0_1_2_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_ruleModel247);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleSingleDatatype();
 
                             state._fsp--;
@@ -276,18 +276,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 4 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:105:5: ( (lv_multi_4_0= ruleMultiDatatype ) )
+                            // PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
                             {
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:107:7: lv_multi_4_0= ruleMultiDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:106:6: (lv_multi_4_0= ruleMultiDatatype )
+                            // PsiInternalAssignmentsTestLanguage.g:107:7: lv_multi_4_0= ruleMultiDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_MultiMultiDatatypeParserRuleCall_0_1_3_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_ruleModel309);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleMultiDatatype();
 
                             state._fsp--;
@@ -314,25 +314,25 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:120:4: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:119:3: (otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:120:4: otherlv_5= 'complex' ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getModel_ComplexKeyword_1_0ElementType());
                     			
-                    otherlv_5=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleModel363); 
+                    otherlv_5=(Token)match(input,12,FollowSets000.FOLLOW_3); 
 
                     				doneLeaf(otherlv_5);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:127:4: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:127:4: ( ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:128:5: ( (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:129:6: (lv_object_6_1= ruleSingleValue | lv_object_6_2= ruleMultiValue | lv_object_6_3= ruleSingleDatatype | lv_object_6_4= ruleMultiDatatype )
                     int alt2=4;
                     switch ( input.LA(1) ) {
                     case 13:
@@ -372,12 +372,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
                     switch (alt2) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:130:7: lv_object_6_1= ruleSingleValue
+                            // PsiInternalAssignmentsTestLanguage.g:130:7: lv_object_6_1= ruleSingleValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectSingleValueParserRuleCall_1_1_0_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_ruleModel404);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleSingleValue();
 
                             state._fsp--;
@@ -389,12 +389,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:138:7: lv_object_6_2= ruleMultiValue
+                            // PsiInternalAssignmentsTestLanguage.g:138:7: lv_object_6_2= ruleMultiValue
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectMultiValueParserRuleCall_1_1_0_1ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_ruleModel442);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleMultiValue();
 
                             state._fsp--;
@@ -406,12 +406,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 3 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:146:7: lv_object_6_3= ruleSingleDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:146:7: lv_object_6_3= ruleSingleDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectSingleDatatypeParserRuleCall_1_1_0_2ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_ruleModel480);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleSingleDatatype();
 
                             state._fsp--;
@@ -423,12 +423,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 4 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:154:7: lv_object_6_4= ruleMultiDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:154:7: lv_object_6_4= ruleMultiDatatype
                             {
 
                             							markComposite(elementTypeProvider.getModel_ObjectMultiDatatypeParserRuleCall_1_1_0_3ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_ruleModel518);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleMultiDatatype();
 
                             state._fsp--;
@@ -473,19 +473,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleSingleValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:169:1: entryRuleSingleValue : ruleSingleValue EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:169:1: entryRuleSingleValue : ruleSingleValue EOF ;
     public final void entryRuleSingleValue() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:169:21: ( ruleSingleValue EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:170:2: ruleSingleValue EOF
+            // PsiInternalAssignmentsTestLanguage.g:169:21: ( ruleSingleValue EOF )
+            // PsiInternalAssignmentsTestLanguage.g:170:2: ruleSingleValue EOF
             {
              markComposite(elementTypeProvider.getSingleValueElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSingleValue_in_entryRuleSingleValue564);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleSingleValue();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleValue567); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -502,7 +502,7 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleSingleValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:175:1: ruleSingleValue : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    // PsiInternalAssignmentsTestLanguage.g:175:1: ruleSingleValue : ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
     public final void ruleSingleValue() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_value_1_0=null;
@@ -513,10 +513,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         Token lv_value_5_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:175:16: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:175:16: ( ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:176:2: ( (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt5=3;
             switch ( input.LA(1) ) {
             case 13:
@@ -543,28 +543,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt5) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:178:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:177:3: (otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:178:4: otherlv_0= 'id' ( (lv_value_1_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_IdKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleSingleValue592); 
+                    otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_4); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:185:4: ( (lv_value_1_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:185:4: ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:187:6: lv_value_1_0= RULE_ID
+                    // PsiInternalAssignmentsTestLanguage.g:186:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:187:6: lv_value_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getSingleValue_ValueIDTerminalRuleCall_0_1_0ElementType());
                     					
-                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleValue624); 
+                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_1_0);
                     					
@@ -581,25 +581,25 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:199:4: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:198:3: (otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:199:4: otherlv_2= 'alternative' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_AlternativeKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSingleValue670); 
+                    otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:206:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:206:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:207:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:208:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -617,12 +617,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt4) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:209:7: lv_value_3_1= RULE_ID
+                            // PsiInternalAssignmentsTestLanguage.g:209:7: lv_value_3_1= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getSingleValue_ValueIDTerminalRuleCall_1_1_0_0ElementType());
                             						
-                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSingleValue711); 
+                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_3_1);
                             						
@@ -630,12 +630,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:217:7: lv_value_3_2= RULE_STRING
+                            // PsiInternalAssignmentsTestLanguage.g:217:7: lv_value_3_2= RULE_STRING
                             {
 
                             							markLeaf(elementTypeProvider.getSingleValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
                             						
-                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSingleValue749); 
+                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_3_2);
                             						
@@ -658,28 +658,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:230:4: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:229:3: (otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:230:4: otherlv_4= 'string' ( (lv_value_5_0= RULE_STRING ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleValue_StringKeyword_2_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleSingleValue803); 
+                    otherlv_4=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:237:4: ( (lv_value_5_0= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:237:4: ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:239:6: lv_value_5_0= RULE_STRING
+                    // PsiInternalAssignmentsTestLanguage.g:238:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:239:6: lv_value_5_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getSingleValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
                     					
-                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSingleValue835); 
+                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_5_0);
                     					
@@ -714,19 +714,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleMultiValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:253:1: entryRuleMultiValue : ruleMultiValue EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:253:1: entryRuleMultiValue : ruleMultiValue EOF ;
     public final void entryRuleMultiValue() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:253:20: ( ruleMultiValue EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:254:2: ruleMultiValue EOF
+            // PsiInternalAssignmentsTestLanguage.g:253:20: ( ruleMultiValue EOF )
+            // PsiInternalAssignmentsTestLanguage.g:254:2: ruleMultiValue EOF
             {
              markComposite(elementTypeProvider.getMultiValueElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMultiValue_in_entryRuleMultiValue873);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleMultiValue();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiValue876); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -743,7 +743,7 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleMultiValue"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:259:1: ruleMultiValue : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
+    // PsiInternalAssignmentsTestLanguage.g:259:1: ruleMultiValue : ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) ;
     public final void ruleMultiValue() throws RecognitionException {
         Token otherlv_0=null;
         Token lv_value_1_0=null;
@@ -754,10 +754,10 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
         Token lv_value_5_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:259:15: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:259:15: ( ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:260:2: ( (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) ) | (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) ) | (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) ) )
             int alt7=3;
             switch ( input.LA(1) ) {
             case 16:
@@ -784,28 +784,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:262:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:261:3: (otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:262:4: otherlv_0= 'ids' ( (lv_value_1_0= RULE_ID ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_IdsKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleMultiValue901); 
+                    otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_4); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:269:4: ( (lv_value_1_0= RULE_ID ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:269:4: ( (lv_value_1_0= RULE_ID ) )
+                    // PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:271:6: lv_value_1_0= RULE_ID
+                    // PsiInternalAssignmentsTestLanguage.g:270:5: (lv_value_1_0= RULE_ID )
+                    // PsiInternalAssignmentsTestLanguage.g:271:6: lv_value_1_0= RULE_ID
                     {
 
                     						markLeaf(elementTypeProvider.getMultiValue_ValueIDTerminalRuleCall_0_1_0ElementType());
                     					
-                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMultiValue933); 
+                    lv_value_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_1_0);
                     					
@@ -822,25 +822,25 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:283:4: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:282:3: (otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:283:4: otherlv_2= 'alternatives' ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_AlternativesKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleMultiValue979); 
+                    otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:290:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:290:4: ( ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:291:5: ( (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:292:6: (lv_value_3_1= RULE_ID | lv_value_3_2= RULE_STRING )
                     int alt6=2;
                     int LA6_0 = input.LA(1);
 
@@ -858,12 +858,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt6) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:293:7: lv_value_3_1= RULE_ID
+                            // PsiInternalAssignmentsTestLanguage.g:293:7: lv_value_3_1= RULE_ID
                             {
 
                             							markLeaf(elementTypeProvider.getMultiValue_ValueIDTerminalRuleCall_1_1_0_0ElementType());
                             						
-                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMultiValue1020); 
+                            lv_value_3_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_3_1);
                             						
@@ -871,12 +871,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:301:7: lv_value_3_2= RULE_STRING
+                            // PsiInternalAssignmentsTestLanguage.g:301:7: lv_value_3_2= RULE_STRING
                             {
 
                             							markLeaf(elementTypeProvider.getMultiValue_ValueSTRINGTerminalRuleCall_1_1_0_1ElementType());
                             						
-                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleMultiValue1058); 
+                            lv_value_3_2=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                             							doneLeaf(lv_value_3_2);
                             						
@@ -899,28 +899,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:314:4: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:313:3: (otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:314:4: otherlv_4= 'strings' ( (lv_value_5_0= RULE_STRING ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiValue_StringsKeyword_2_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleMultiValue1112); 
+                    otherlv_4=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:321:4: ( (lv_value_5_0= RULE_STRING ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:321:4: ( (lv_value_5_0= RULE_STRING ) )
+                    // PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:323:6: lv_value_5_0= RULE_STRING
+                    // PsiInternalAssignmentsTestLanguage.g:322:5: (lv_value_5_0= RULE_STRING )
+                    // PsiInternalAssignmentsTestLanguage.g:323:6: lv_value_5_0= RULE_STRING
                     {
 
                     						markLeaf(elementTypeProvider.getMultiValue_ValueSTRINGTerminalRuleCall_2_1_0ElementType());
                     					
-                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleMultiValue1144); 
+                    lv_value_5_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
                     						doneLeaf(lv_value_5_0);
                     					
@@ -955,19 +955,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleSingleDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:337:1: entryRuleSingleDatatype : ruleSingleDatatype EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:337:1: entryRuleSingleDatatype : ruleSingleDatatype EOF ;
     public final void entryRuleSingleDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:337:24: ( ruleSingleDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:338:2: ruleSingleDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:337:24: ( ruleSingleDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:338:2: ruleSingleDatatype EOF
             {
              markComposite(elementTypeProvider.getSingleDatatypeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSingleDatatype_in_entryRuleSingleDatatype1182);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleSingleDatatype();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSingleDatatype1185); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -984,17 +984,17 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleSingleDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:343:1: ruleSingleDatatype : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    // PsiInternalAssignmentsTestLanguage.g:343:1: ruleSingleDatatype : ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
     public final void ruleSingleDatatype() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:343:19: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:343:19: ( ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:344:2: ( (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt9=3;
             switch ( input.LA(1) ) {
             case 19:
@@ -1021,28 +1021,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt9) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:346:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:345:3: (otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:346:4: otherlv_0= 'datatypeid' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypeidKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleSingleDatatype1210); 
+                    otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_4); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:353:4: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:353:4: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:355:6: lv_value_1_0= ruleIdDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:354:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:355:6: lv_value_1_0= ruleIdDatatype
                     {
 
                     						markComposite(elementTypeProvider.getSingleDatatype_ValueIdDatatypeParserRuleCall_0_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleSingleDatatype1242);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleIdDatatype();
 
                     state._fsp--;
@@ -1063,25 +1063,25 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:367:4: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:366:3: (otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:367:4: otherlv_2= 'datatypealternative' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypealternativeKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleSingleDatatype1288); 
+                    otherlv_2=(Token)match(input,20,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:374:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:374:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:375:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:376:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1099,12 +1099,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:377:7: lv_value_3_1= ruleIdDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:377:7: lv_value_3_1= ruleIdDatatype
                             {
 
                             							markComposite(elementTypeProvider.getSingleDatatype_ValueIdDatatypeParserRuleCall_1_1_0_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleSingleDatatype1329);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleIdDatatype();
 
                             state._fsp--;
@@ -1116,12 +1116,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:385:7: lv_value_3_2= ruleStringDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:385:7: lv_value_3_2= ruleStringDatatype
                             {
 
                             							markComposite(elementTypeProvider.getSingleDatatype_ValueStringDatatypeParserRuleCall_1_1_0_1ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleSingleDatatype1367);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleStringDatatype();
 
                             state._fsp--;
@@ -1148,28 +1148,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:398:4: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:397:3: (otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:398:4: otherlv_4= 'datatypestring' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getSingleDatatype_DatatypestringKeyword_2_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleSingleDatatype1421); 
+                    otherlv_4=(Token)match(input,21,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:405:4: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:405:4: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:407:6: lv_value_5_0= ruleStringDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:406:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:407:6: lv_value_5_0= ruleStringDatatype
                     {
 
                     						markComposite(elementTypeProvider.getSingleDatatype_ValueStringDatatypeParserRuleCall_2_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleSingleDatatype1453);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleStringDatatype();
 
                     state._fsp--;
@@ -1208,19 +1208,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleMultiDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:421:1: entryRuleMultiDatatype : ruleMultiDatatype EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:421:1: entryRuleMultiDatatype : ruleMultiDatatype EOF ;
     public final void entryRuleMultiDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:421:23: ( ruleMultiDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:422:2: ruleMultiDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:421:23: ( ruleMultiDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:422:2: ruleMultiDatatype EOF
             {
              markComposite(elementTypeProvider.getMultiDatatypeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMultiDatatype_in_entryRuleMultiDatatype1491);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleMultiDatatype();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMultiDatatype1494); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1237,17 +1237,17 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleMultiDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:427:1: ruleMultiDatatype : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
+    // PsiInternalAssignmentsTestLanguage.g:427:1: ruleMultiDatatype : ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) ;
     public final void ruleMultiDatatype() throws RecognitionException {
         Token otherlv_0=null;
         Token otherlv_2=null;
         Token otherlv_4=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:427:18: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:427:18: ( ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
+            // PsiInternalAssignmentsTestLanguage.g:428:2: ( (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) ) | (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) ) | (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) ) )
             int alt11=3;
             switch ( input.LA(1) ) {
             case 22:
@@ -1274,28 +1274,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
             switch (alt11) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:430:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:429:3: (otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:430:4: otherlv_0= 'datatypeids' ( (lv_value_1_0= ruleIdDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypeidsKeyword_0_0ElementType());
                     			
-                    otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleMultiDatatype1519); 
+                    otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_4); 
 
                     				doneLeaf(otherlv_0);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:437:4: ( (lv_value_1_0= ruleIdDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:437:4: ( (lv_value_1_0= ruleIdDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:439:6: lv_value_1_0= ruleIdDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:438:5: (lv_value_1_0= ruleIdDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:439:6: lv_value_1_0= ruleIdDatatype
                     {
 
                     						markComposite(elementTypeProvider.getMultiDatatype_ValueIdDatatypeParserRuleCall_0_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1551);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleIdDatatype();
 
                     state._fsp--;
@@ -1316,25 +1316,25 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:451:4: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:450:3: (otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:451:4: otherlv_2= 'datatypealternatives' ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypealternativesKeyword_1_0ElementType());
                     			
-                    otherlv_2=(Token)match(input,23,FollowSets000.FOLLOW_23_in_ruleMultiDatatype1597); 
+                    otherlv_2=(Token)match(input,23,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_2);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:458:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:458:4: ( ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:459:5: ( (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:460:6: (lv_value_3_1= ruleIdDatatype | lv_value_3_2= ruleStringDatatype )
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1352,12 +1352,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:461:7: lv_value_3_1= ruleIdDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:461:7: lv_value_3_1= ruleIdDatatype
                             {
 
                             							markComposite(elementTypeProvider.getMultiDatatype_ValueIdDatatypeParserRuleCall_1_1_0_0ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1638);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleIdDatatype();
 
                             state._fsp--;
@@ -1369,12 +1369,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                             }
                             break;
                         case 2 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:469:7: lv_value_3_2= ruleStringDatatype
+                            // PsiInternalAssignmentsTestLanguage.g:469:7: lv_value_3_2= ruleStringDatatype
                             {
 
                             							markComposite(elementTypeProvider.getMultiDatatype_ValueStringDatatypeParserRuleCall_1_1_0_1ElementType());
                             						
-                            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1676);
+                            pushFollow(FollowSets000.FOLLOW_2);
                             ruleStringDatatype();
 
                             state._fsp--;
@@ -1401,28 +1401,28 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:482:4: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:481:3: (otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) ) )
+                    // PsiInternalAssignmentsTestLanguage.g:482:4: otherlv_4= 'datatypestrings' ( (lv_value_5_0= ruleStringDatatype ) )
                     {
 
                     				markLeaf(elementTypeProvider.getMultiDatatype_DatatypestringsKeyword_2_0ElementType());
                     			
-                    otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_24_in_ruleMultiDatatype1730); 
+                    otherlv_4=(Token)match(input,24,FollowSets000.FOLLOW_5); 
 
                     				doneLeaf(otherlv_4);
                     			
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:489:4: ( (lv_value_5_0= ruleStringDatatype ) )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:489:4: ( (lv_value_5_0= ruleStringDatatype ) )
+                    // PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:491:6: lv_value_5_0= ruleStringDatatype
+                    // PsiInternalAssignmentsTestLanguage.g:490:5: (lv_value_5_0= ruleStringDatatype )
+                    // PsiInternalAssignmentsTestLanguage.g:491:6: lv_value_5_0= ruleStringDatatype
                     {
 
                     						markComposite(elementTypeProvider.getMultiDatatype_ValueStringDatatypeParserRuleCall_2_1_0ElementType());
                     					
-                    pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1762);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     ruleStringDatatype();
 
                     state._fsp--;
@@ -1461,19 +1461,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleIdDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:505:1: entryRuleIdDatatype : ruleIdDatatype EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:505:1: entryRuleIdDatatype : ruleIdDatatype EOF ;
     public final void entryRuleIdDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:505:20: ( ruleIdDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:506:2: ruleIdDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:505:20: ( ruleIdDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:506:2: ruleIdDatatype EOF
             {
              markComposite(elementTypeProvider.getIdDatatypeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleIdDatatype_in_entryRuleIdDatatype1800);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleIdDatatype();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdDatatype1803); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1490,18 +1490,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleIdDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:511:1: ruleIdDatatype : this_ID_0= RULE_ID ;
+    // PsiInternalAssignmentsTestLanguage.g:511:1: ruleIdDatatype : this_ID_0= RULE_ID ;
     public final void ruleIdDatatype() throws RecognitionException {
         Token this_ID_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:511:15: (this_ID_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:512:2: this_ID_0= RULE_ID
+            // PsiInternalAssignmentsTestLanguage.g:511:15: (this_ID_0= RULE_ID )
+            // PsiInternalAssignmentsTestLanguage.g:512:2: this_ID_0= RULE_ID
             {
 
             		markLeaf(elementTypeProvider.getIdDatatype_IDTerminalRuleCallElementType());
             	
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleIdDatatype1817); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             		doneLeaf(this_ID_0);
             	
@@ -1521,19 +1521,19 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "entryRuleStringDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:522:1: entryRuleStringDatatype : ruleStringDatatype EOF ;
+    // PsiInternalAssignmentsTestLanguage.g:522:1: entryRuleStringDatatype : ruleStringDatatype EOF ;
     public final void entryRuleStringDatatype() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:522:24: ( ruleStringDatatype EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:523:2: ruleStringDatatype EOF
+            // PsiInternalAssignmentsTestLanguage.g:522:24: ( ruleStringDatatype EOF )
+            // PsiInternalAssignmentsTestLanguage.g:523:2: ruleStringDatatype EOF
             {
              markComposite(elementTypeProvider.getStringDatatypeElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleStringDatatype_in_entryRuleStringDatatype1833);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleStringDatatype();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringDatatype1836); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1550,18 +1550,18 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
 
     // $ANTLR start "ruleStringDatatype"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:528:1: ruleStringDatatype : this_STRING_0= RULE_STRING ;
+    // PsiInternalAssignmentsTestLanguage.g:528:1: ruleStringDatatype : this_STRING_0= RULE_STRING ;
     public final void ruleStringDatatype() throws RecognitionException {
         Token this_STRING_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:528:19: (this_STRING_0= RULE_STRING )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/assignments/idea/parser/antlr/internal/PsiInternalAssignmentsTestLanguage.g:529:2: this_STRING_0= RULE_STRING
+            // PsiInternalAssignmentsTestLanguage.g:528:19: (this_STRING_0= RULE_STRING )
+            // PsiInternalAssignmentsTestLanguage.g:529:2: this_STRING_0= RULE_STRING
             {
 
             		markLeaf(elementTypeProvider.getStringDatatype_STRINGTerminalRuleCallElementType());
             	
-            this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleStringDatatype1850); 
+            this_STRING_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             		doneLeaf(this_STRING_0);
             	
@@ -1586,60 +1586,12 @@ public class PsiInternalAssignmentsTestLanguageParser extends AbstractPsiAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel82 = new BitSet(new long[]{0x0000000001FFE000L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_ruleModel123 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_ruleModel185 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_ruleModel247 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_ruleModel309 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleModel363 = new BitSet(new long[]{0x0000000001FFE000L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_ruleModel404 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_ruleModel442 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_ruleModel480 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_ruleModel518 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleValue_in_entryRuleSingleValue564 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSingleValue567 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleSingleValue592 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleValue624 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleSingleValue670 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSingleValue711 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleValue749 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleSingleValue803 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleSingleValue835 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiValue_in_entryRuleMultiValue873 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiValue876 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleMultiValue901 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMultiValue933 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleMultiValue979 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMultiValue1020 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleMultiValue1058 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleMultiValue1112 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleMultiValue1144 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSingleDatatype_in_entryRuleSingleDatatype1182 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSingleDatatype1185 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleSingleDatatype1210 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleSingleDatatype1242 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_20_in_ruleSingleDatatype1288 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleSingleDatatype1329 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleSingleDatatype1367 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_21_in_ruleSingleDatatype1421 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleSingleDatatype1453 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMultiDatatype_in_entryRuleMultiDatatype1491 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMultiDatatype1494 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_ruleMultiDatatype1519 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1551 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_23_in_ruleMultiDatatype1597 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_ruleMultiDatatype1638 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1676 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_24_in_ruleMultiDatatype1730 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_ruleMultiDatatype1762 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdDatatype_in_entryRuleIdDatatype1800 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIdDatatype1803 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleIdDatatype1817 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringDatatype_in_entryRuleStringDatatype1833 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStringDatatype1836 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleStringDatatype1850 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000001FFE000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
     }
 
 

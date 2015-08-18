@@ -240,6 +240,154 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
   }
   
   @Test
+  public void testFragment_07() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.foo with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate metamodel \'foo.sample\'");
+    _builder.newLine();
+    _builder.append("EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID FragmentWithAction");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("fragment FragmentWithAction returns EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("{EntryRule.prev=current} name=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammarAsString = _builder.toString();
+    final Grammar grammar = this.getGrammar(grammarAsString);
+    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
+    final ParserRule rule = ((ParserRule) _findRuleForName);
+    this.validateRule(rule);
+    String _string = this.warnings.toString();
+    int _size = this.warnings.size();
+    Assert.assertEquals(_string, 0, _size);
+    AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
+    final ParserRule fragment = ((ParserRule) _findRuleForName_1);
+    this.validateRule(fragment);
+    String _string_1 = this.warnings.toString();
+    int _size_1 = this.warnings.size();
+    Assert.assertEquals(_string_1, 0, _size_1);
+  }
+  
+  @Test
+  public void testFragment_08() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.foo with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate metamodel \'foo.sample\'");
+    _builder.newLine();
+    _builder.append("EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID FragmentWithAction");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("fragment FragmentWithAction returns EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID {EntryRule.prev=current} name=ID");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammarAsString = _builder.toString();
+    final Grammar grammar = this.getGrammar(grammarAsString);
+    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
+    final ParserRule rule = ((ParserRule) _findRuleForName);
+    this.validateRule(rule);
+    String _string = this.warnings.toString();
+    int _size = this.warnings.size();
+    Assert.assertEquals(_string, 2, _size);
+    AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
+    final ParserRule fragment = ((ParserRule) _findRuleForName_1);
+    this.validateRule(fragment);
+    String _string_1 = this.warnings.toString();
+    int _size_1 = this.warnings.size();
+    Assert.assertEquals(_string_1, 0, _size_1);
+  }
+  
+  @Test
+  public void testFragment_09() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.foo with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate metamodel \'foo.sample\'");
+    _builder.newLine();
+    _builder.append("EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID FragmentWithAction");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("fragment FragmentWithAction returns EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID {EntryRule.prev=current}");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammarAsString = _builder.toString();
+    final Grammar grammar = this.getGrammar(grammarAsString);
+    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
+    final ParserRule rule = ((ParserRule) _findRuleForName);
+    this.validateRule(rule);
+    String _string = this.warnings.toString();
+    int _size = this.warnings.size();
+    Assert.assertEquals(_string, 2, _size);
+    AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
+    final ParserRule fragment = ((ParserRule) _findRuleForName_1);
+    this.validateRule(fragment);
+    String _string_1 = this.warnings.toString();
+    int _size_1 = this.warnings.size();
+    Assert.assertEquals(_string_1, 0, _size_1);
+  }
+  
+  @Test
+  public void testFragment_10() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar org.foo with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate metamodel \'foo.sample\'");
+    _builder.newLine();
+    _builder.append("EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("name=ID FragmentWithAction*");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    _builder.append("fragment FragmentWithAction returns EntryRule:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("({EntryRule.prev=current} name=ID)*");
+    _builder.newLine();
+    _builder.append(";");
+    _builder.newLine();
+    String grammarAsString = _builder.toString();
+    final Grammar grammar = this.getGrammar(grammarAsString);
+    AbstractRule _findRuleForName = GrammarUtil.findRuleForName(grammar, "EntryRule");
+    final ParserRule rule = ((ParserRule) _findRuleForName);
+    this.validateRule(rule);
+    String _string = this.warnings.toString();
+    int _size = this.warnings.size();
+    Assert.assertEquals(_string, 0, _size);
+    AbstractRule _findRuleForName_1 = GrammarUtil.findRuleForName(grammar, "FragmentWithAction");
+    final ParserRule fragment = ((ParserRule) _findRuleForName_1);
+    this.validateRule(fragment);
+    String _string_1 = this.warnings.toString();
+    int _size_1 = this.warnings.size();
+    Assert.assertEquals(_string_1, 0, _size_1);
+  }
+  
+  @Test
   public void testBug280011_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("grammar org.foo with org.eclipse.xtext.common.Terminals");

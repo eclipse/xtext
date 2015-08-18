@@ -54,15 +54,15 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g"; }
+    public String getGrammarFileName() { return "InternalExUnorderedGroupsTestLanguageLexer.g"; }
 
     // $ANTLR start "Serialization"
     public final void mSerialization() throws RecognitionException {
         try {
             int _type = Serialization;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:19:15: ( 'serialization' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:19:17: 'serialization'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:19:15: ( 'serialization' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:19:17: 'serialization'
             {
             match("serialization"); 
 
@@ -82,8 +82,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = Bug302585;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:21:11: ( 'bug302585' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:21:13: 'bug302585'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:21:11: ( 'bug302585' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:21:13: 'bug302585'
             {
             match("bug302585"); 
 
@@ -103,8 +103,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = Datatypes;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:23:11: ( 'datatypes' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:23:13: 'datatypes'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:23:11: ( 'datatypes' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:23:13: 'datatypes'
             {
             match("datatypes"); 
 
@@ -124,8 +124,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = Nested;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:25:8: ( 'nested' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:25:10: 'nested'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:25:8: ( 'nested' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:25:10: 'nested'
             {
             match("nested"); 
 
@@ -145,8 +145,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOneDigitZero;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:27:19: ( '10' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:27:21: '10'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:27:19: ( '10' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:27:21: '10'
             {
             match("10"); 
 
@@ -166,8 +166,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOneDigitOne;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:29:18: ( '11' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:29:20: '11'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:29:18: ( '11' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:29:20: '11'
             {
             match("11"); 
 
@@ -187,8 +187,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOneDigitTwo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:31:18: ( '12' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:31:20: '12'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:31:18: ( '12' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:31:20: '12'
             {
             match("12"); 
 
@@ -208,8 +208,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOneDigitThree;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:33:20: ( '13' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:33:22: '13'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:33:20: ( '13' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:33:22: '13'
             {
             match("13"); 
 
@@ -229,8 +229,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOneDigitFour;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:35:19: ( '14' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:35:21: '14'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:35:19: ( '14' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:35:21: '14'
             {
             match("14"); 
 
@@ -250,8 +250,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitOne;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:37:10: ( '1' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:37:12: '1'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:37:10: ( '1' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:37:12: '1'
             {
             match('1'); 
 
@@ -270,8 +270,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitTwo;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:39:10: ( '2' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:39:12: '2'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:39:10: ( '2' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:39:12: '2'
             {
             match('2'); 
 
@@ -290,8 +290,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitThree;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:41:12: ( '3' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:41:14: '3'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:41:12: ( '3' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:41:14: '3'
             {
             match('3'); 
 
@@ -310,8 +310,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitFour;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:43:11: ( '4' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:43:13: '4'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:43:11: ( '4' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:43:13: '4'
             {
             match('4'); 
 
@@ -330,8 +330,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitFive;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:45:11: ( '5' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:45:13: '5'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:45:11: ( '5' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:45:13: '5'
             {
             match('5'); 
 
@@ -350,8 +350,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitSix;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:47:10: ( '6' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:47:12: '6'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:47:10: ( '6' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:47:12: '6'
             {
             match('6'); 
 
@@ -370,8 +370,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitSeven;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:49:12: ( '7' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:49:14: '7'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:49:12: ( '7' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:49:14: '7'
             {
             match('7'); 
 
@@ -390,8 +390,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitEight;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:51:12: ( '8' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:51:14: '8'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:51:12: ( '8' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:51:14: '8'
             {
             match('8'); 
 
@@ -410,8 +410,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = DigitNine;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:53:11: ( '9' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:53:13: '9'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:53:11: ( '9' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:53:13: '9'
             {
             match('9'); 
 
@@ -430,8 +430,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = A;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:55:3: ( 'a' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:55:5: 'a'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:55:3: ( 'a' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:55:5: 'a'
             {
             match('a'); 
 
@@ -450,8 +450,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = B;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:57:3: ( 'b' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:57:5: 'b'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:57:3: ( 'b' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:57:5: 'b'
             {
             match('b'); 
 
@@ -470,8 +470,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = C;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:59:3: ( 'c' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:59:5: 'c'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:59:3: ( 'c' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:59:5: 'c'
             {
             match('c'); 
 
@@ -490,8 +490,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = D;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:61:3: ( 'd' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:61:5: 'd'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:61:3: ( 'd' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:61:5: 'd'
             {
             match('d'); 
 
@@ -510,10 +510,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:65:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:65:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExUnorderedGroupsTestLanguageLexer.g:65:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:65:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:65:11: ( '^' )?
+            // InternalExUnorderedGroupsTestLanguageLexer.g:65:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -522,7 +522,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:65:11: '^'
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:65:11: '^'
                     {
                     match('^'); 
 
@@ -540,7 +540,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:65:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalExUnorderedGroupsTestLanguageLexer.g:65:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -553,7 +553,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:
+            	    // InternalExUnorderedGroupsTestLanguageLexer.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -589,10 +589,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:67:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:67:12: ( '0' .. '9' )+
+            // InternalExUnorderedGroupsTestLanguageLexer.g:67:10: ( ( '0' .. '9' )+ )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:67:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:67:12: ( '0' .. '9' )+
+            // InternalExUnorderedGroupsTestLanguageLexer.g:67:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -606,7 +606,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:67:13: '0' .. '9'
+            	    // InternalExUnorderedGroupsTestLanguageLexer.g:67:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -638,10 +638,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:69:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:69:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:69:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -659,10 +659,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:69:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:69:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -678,7 +678,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:21: '\\\\' .
+                    	    // InternalExUnorderedGroupsTestLanguageLexer.g:69:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -686,7 +686,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalExUnorderedGroupsTestLanguageLexer.g:69:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -711,10 +711,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:69:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:69:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -730,7 +730,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:54: '\\\\' .
+                    	    // InternalExUnorderedGroupsTestLanguageLexer.g:69:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -738,7 +738,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:69:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalExUnorderedGroupsTestLanguageLexer.g:69:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -781,12 +781,12 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:71:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:71:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalExUnorderedGroupsTestLanguageLexer.g:71:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:71:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:71:24: ( options {greedy=false; } : . )*
+            // InternalExUnorderedGroupsTestLanguageLexer.g:71:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -811,7 +811,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:71:52: .
+            	    // InternalExUnorderedGroupsTestLanguageLexer.g:71:52: .
             	    {
             	    matchAny(); 
 
@@ -841,12 +841,12 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalExUnorderedGroupsTestLanguageLexer.g:73:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:73:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalExUnorderedGroupsTestLanguageLexer.g:73:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -859,7 +859,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalExUnorderedGroupsTestLanguageLexer.g:73:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -879,7 +879,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:40: ( ( '\\r' )? '\\n' )?
+            // InternalExUnorderedGroupsTestLanguageLexer.g:73:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -888,9 +888,9 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:41: ( '\\r' )? '\\n'
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:73:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:41: ( '\\r' )?
+                    // InternalExUnorderedGroupsTestLanguageLexer.g:73:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -899,7 +899,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:73:41: '\\r'
+                            // InternalExUnorderedGroupsTestLanguageLexer.g:73:41: '\\r'
                             {
                             match('\r'); 
 
@@ -931,10 +931,10 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:75:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:75:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExUnorderedGroupsTestLanguageLexer.g:75:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:75:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:75:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalExUnorderedGroupsTestLanguageLexer.g:75:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -948,7 +948,7 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:
+            	    // InternalExUnorderedGroupsTestLanguageLexer.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -988,8 +988,8 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:77:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:77:18: .
+            // InternalExUnorderedGroupsTestLanguageLexer.g:77:16: ( . )
+            // InternalExUnorderedGroupsTestLanguageLexer.g:77:18: .
             {
             matchAny(); 
 
@@ -1004,208 +1004,208 @@ public class InternalExUnorderedGroupsTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:8: ( Serialization | Bug302585 | Datatypes | Nested | DigitOneDigitZero | DigitOneDigitOne | DigitOneDigitTwo | DigitOneDigitThree | DigitOneDigitFour | DigitOne | DigitTwo | DigitThree | DigitFour | DigitFive | DigitSix | DigitSeven | DigitEight | DigitNine | A | B | C | D | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalExUnorderedGroupsTestLanguageLexer.g:1:8: ( Serialization | Bug302585 | Datatypes | Nested | DigitOneDigitZero | DigitOneDigitOne | DigitOneDigitTwo | DigitOneDigitThree | DigitOneDigitFour | DigitOne | DigitTwo | DigitThree | DigitFour | DigitFive | DigitSix | DigitSeven | DigitEight | DigitNine | A | B | C | D | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=29;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:10: Serialization
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:10: Serialization
                 {
                 mSerialization(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:24: Bug302585
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:24: Bug302585
                 {
                 mBug302585(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:34: Datatypes
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:34: Datatypes
                 {
                 mDatatypes(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:44: Nested
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:44: Nested
                 {
                 mNested(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:51: DigitOneDigitZero
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:51: DigitOneDigitZero
                 {
                 mDigitOneDigitZero(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:69: DigitOneDigitOne
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:69: DigitOneDigitOne
                 {
                 mDigitOneDigitOne(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:86: DigitOneDigitTwo
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:86: DigitOneDigitTwo
                 {
                 mDigitOneDigitTwo(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:103: DigitOneDigitThree
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:103: DigitOneDigitThree
                 {
                 mDigitOneDigitThree(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:122: DigitOneDigitFour
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:122: DigitOneDigitFour
                 {
                 mDigitOneDigitFour(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:140: DigitOne
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:140: DigitOne
                 {
                 mDigitOne(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:149: DigitTwo
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:149: DigitTwo
                 {
                 mDigitTwo(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:158: DigitThree
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:158: DigitThree
                 {
                 mDigitThree(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:169: DigitFour
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:169: DigitFour
                 {
                 mDigitFour(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:179: DigitFive
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:179: DigitFive
                 {
                 mDigitFive(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:189: DigitSix
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:189: DigitSix
                 {
                 mDigitSix(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:198: DigitSeven
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:198: DigitSeven
                 {
                 mDigitSeven(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:209: DigitEight
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:209: DigitEight
                 {
                 mDigitEight(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:220: DigitNine
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:220: DigitNine
                 {
                 mDigitNine(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:230: A
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:230: A
                 {
                 mA(); 
 
                 }
                 break;
             case 20 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:232: B
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:232: B
                 {
                 mB(); 
 
                 }
                 break;
             case 21 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:234: C
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:234: C
                 {
                 mC(); 
 
                 }
                 break;
             case 22 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:236: D
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:236: D
                 {
                 mD(); 
 
                 }
                 break;
             case 23 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:238: RULE_ID
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:238: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 24 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:246: RULE_INT
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:246: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 25 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:255: RULE_STRING
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:255: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 26 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:267: RULE_ML_COMMENT
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:267: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 27 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:283: RULE_SL_COMMENT
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:283: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 28 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:299: RULE_WS
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:299: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 29 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/unorderedGroups/parser/antlr/lexer/InternalExUnorderedGroupsTestLanguageLexer.g:1:307: RULE_ANY_OTHER
+                // InternalExUnorderedGroupsTestLanguageLexer.g:1:307: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

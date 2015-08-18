@@ -18,10 +18,10 @@ import org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.Import;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -73,8 +73,7 @@ public class ImportImpl extends MinimalEObjectImpl.Container implements Import
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public String getImportedNamespace()
+  public String getImportedNamespace()
   {
     return importedNamespace;
   }
@@ -84,8 +83,7 @@ public String getImportedNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public void setImportedNamespace(String newImportedNamespace)
+  public void setImportedNamespace(String newImportedNamespace)
   {
     String oldImportedNamespace = importedNamespace;
     importedNamespace = newImportedNamespace;

@@ -10470,8 +10470,8 @@ rule__PredicatedRuleCall__RuleAssignment_1
 (
 { before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); }
 (
-{ before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_1_0_1()); }
-	RULE_ID{ after(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_1_0_1()); }
+{ before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_1_0_1()); }
+	ruleRuleID{ after(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_1_0_1()); }
 )
 { after(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); }
 )

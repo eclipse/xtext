@@ -43,7 +43,7 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
         
 
     public String[] getTokenNames() { return PsiInternalMultiGenMMTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalMultiGenMMTestLanguage.g"; }
 
 
 
@@ -67,19 +67,19 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
 
     // $ANTLR start "entryRuleFoo"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:52:1: entryRuleFoo : ruleFoo EOF ;
+    // PsiInternalMultiGenMMTestLanguage.g:52:1: entryRuleFoo : ruleFoo EOF ;
     public final void entryRuleFoo() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:52:13: ( ruleFoo EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:53:2: ruleFoo EOF
+            // PsiInternalMultiGenMMTestLanguage.g:52:13: ( ruleFoo EOF )
+            // PsiInternalMultiGenMMTestLanguage.g:53:2: ruleFoo EOF
             {
              markComposite(elementTypeProvider.getFooElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFoo_in_entryRuleFoo54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleFoo();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFoo57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -96,27 +96,27 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
 
     // $ANTLR start "ruleFoo"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:58:1: ruleFoo : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
+    // PsiInternalMultiGenMMTestLanguage.g:58:1: ruleFoo : ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) ;
     public final void ruleFoo() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:58:8: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMultiGenMMTestLanguage.g:58:8: ( ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* ) )
+            // PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMultiGenMMTestLanguage.g:59:2: ( ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )* )
+            // PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) ) ( (lv_nameRefs_1_0= ruleNameRef ) )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMultiGenMMTestLanguage.g:60:3: ( (lv_name_0_0= RULE_ID ) )
+            // PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:62:5: lv_name_0_0= RULE_ID
+            // PsiInternalMultiGenMMTestLanguage.g:61:4: (lv_name_0_0= RULE_ID )
+            // PsiInternalMultiGenMMTestLanguage.g:62:5: lv_name_0_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getFoo_NameIDTerminalRuleCall_0_0ElementType());
             				
-            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFoo89); 
+            lv_name_0_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_3); 
 
             					doneLeaf(lv_name_0_0);
             				
@@ -126,7 +126,7 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:71:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
+            // PsiInternalMultiGenMMTestLanguage.g:71:3: ( (lv_nameRefs_1_0= ruleNameRef ) )*
             loop1:
             do {
                 int alt1=2;
@@ -139,15 +139,15 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
             	    {
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:73:5: lv_nameRefs_1_0= ruleNameRef
+            	    // PsiInternalMultiGenMMTestLanguage.g:72:4: (lv_nameRefs_1_0= ruleNameRef )
+            	    // PsiInternalMultiGenMMTestLanguage.g:73:5: lv_nameRefs_1_0= ruleNameRef
             	    {
 
             	    					markComposite(elementTypeProvider.getFoo_NameRefsNameRefParserRuleCall_1_0ElementType());
             	    				
-            	    pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_ruleFoo127);
+            	    pushFollow(FollowSets000.FOLLOW_3);
             	    ruleNameRef();
 
             	    state._fsp--;
@@ -186,19 +186,19 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
 
     // $ANTLR start "entryRuleNameRef"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:86:1: entryRuleNameRef : ruleNameRef EOF ;
+    // PsiInternalMultiGenMMTestLanguage.g:86:1: entryRuleNameRef : ruleNameRef EOF ;
     public final void entryRuleNameRef() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:86:17: ( ruleNameRef EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:87:2: ruleNameRef EOF
+            // PsiInternalMultiGenMMTestLanguage.g:86:17: ( ruleNameRef EOF )
+            // PsiInternalMultiGenMMTestLanguage.g:87:2: ruleNameRef EOF
             {
              markComposite(elementTypeProvider.getNameRefElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_entryRuleNameRef159);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleNameRef();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNameRef162); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -215,24 +215,24 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
 
     // $ANTLR start "ruleNameRef"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:92:1: ruleNameRef : ( (lv_name_0_0= RULE_STRING ) ) ;
+    // PsiInternalMultiGenMMTestLanguage.g:92:1: ruleNameRef : ( (lv_name_0_0= RULE_STRING ) ) ;
     public final void ruleNameRef() throws RecognitionException {
         Token lv_name_0_0=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:92:12: ( ( (lv_name_0_0= RULE_STRING ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalMultiGenMMTestLanguage.g:92:12: ( ( (lv_name_0_0= RULE_STRING ) ) )
+            // PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalMultiGenMMTestLanguage.g:93:2: ( (lv_name_0_0= RULE_STRING ) )
+            // PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/idea/parser/antlr/internal/PsiInternalMultiGenMMTestLanguage.g:95:4: lv_name_0_0= RULE_STRING
+            // PsiInternalMultiGenMMTestLanguage.g:94:3: (lv_name_0_0= RULE_STRING )
+            // PsiInternalMultiGenMMTestLanguage.g:95:4: lv_name_0_0= RULE_STRING
             {
 
             				markLeaf(elementTypeProvider.getNameRef_NameSTRINGTerminalRuleCall_0ElementType());
             			
-            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleNameRef187); 
+            lv_name_0_0=(Token)match(input,RULE_STRING,FollowSets000.FOLLOW_2); 
 
             				doneLeaf(lv_name_0_0);
             			
@@ -263,13 +263,9 @@ public class PsiInternalMultiGenMMTestLanguageParser extends AbstractPsiAntlrPar
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFoo57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleFoo89 = new BitSet(new long[]{0x0000000000000022L});
-        public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo127 = new BitSet(new long[]{0x0000000000000022L});
-        public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef159 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNameRef162 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleNameRef187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000022L});
     }
 
 

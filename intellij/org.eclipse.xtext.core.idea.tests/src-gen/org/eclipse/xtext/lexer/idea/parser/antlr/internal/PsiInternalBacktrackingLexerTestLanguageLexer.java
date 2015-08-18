@@ -35,15 +35,15 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalBacktrackingLexerTestLanguage.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:11:7: ( 'Abc' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:11:9: 'Abc'
+            // PsiInternalBacktrackingLexerTestLanguage.g:11:7: ( 'Abc' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:11:9: 'Abc'
             {
             match("Abc"); 
 
@@ -63,8 +63,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:12:7: ( 'Efg' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:12:9: 'Efg'
+            // PsiInternalBacktrackingLexerTestLanguage.g:12:7: ( 'Efg' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:12:9: 'Efg'
             {
             match("Efg"); 
 
@@ -84,8 +84,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:229:12: ( 'A' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:229:14: 'A'
+            // PsiInternalBacktrackingLexerTestLanguage.g:229:12: ( 'A' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:229:14: 'A'
             {
             match('A'); 
 
@@ -104,8 +104,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARB;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:231:12: ( 'b' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:231:14: 'b'
+            // PsiInternalBacktrackingLexerTestLanguage.g:231:12: ( 'b' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:231:14: 'b'
             {
             match('b'); 
 
@@ -124,8 +124,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:233:12: ( 'X' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:233:14: 'X'
+            // PsiInternalBacktrackingLexerTestLanguage.g:233:12: ( 'X' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:233:14: 'X'
             {
             match('X'); 
 
@@ -144,8 +144,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_YC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:235:9: ( RULE_CHARY RULE_CHARC )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:235:11: RULE_CHARY RULE_CHARC
+            // PsiInternalBacktrackingLexerTestLanguage.g:235:9: ( RULE_CHARY RULE_CHARC )
+            // PsiInternalBacktrackingLexerTestLanguage.g:235:11: RULE_CHARY RULE_CHARC
             {
             mRULE_CHARY(); 
             mRULE_CHARC(); 
@@ -165,8 +165,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARY;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:237:12: ( 'Y' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:237:14: 'Y'
+            // PsiInternalBacktrackingLexerTestLanguage.g:237:12: ( 'Y' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:237:14: 'Y'
             {
             match('Y'); 
 
@@ -185,8 +185,8 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHARC;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:239:12: ( 'c' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:239:14: 'c'
+            // PsiInternalBacktrackingLexerTestLanguage.g:239:12: ( 'c' )
+            // PsiInternalBacktrackingLexerTestLanguage.g:239:14: 'c'
             {
             match('c'); 
 
@@ -205,10 +205,10 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:241:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingLexerTestLanguage.g:241:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBacktrackingLexerTestLanguage.g:241:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -222,7 +222,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -262,12 +262,12 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:243:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalBacktrackingLexerTestLanguage.g:243:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalBacktrackingLexerTestLanguage.g:243:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop2:
             do {
                 int alt2=2;
@@ -280,7 +280,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalBacktrackingLexerTestLanguage.g:243:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -300,7 +300,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalBacktrackingLexerTestLanguage.g:243:40: ( ( '\\r' )? '\\n' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -309,9 +309,9 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )? '\\n'
+                    // PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )?
+                    // PsiInternalBacktrackingLexerTestLanguage.g:243:41: ( '\\r' )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -320,7 +320,7 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:243:41: '\\r'
+                            // PsiInternalBacktrackingLexerTestLanguage.g:243:41: '\\r'
                             {
                             match('\r'); 
 
@@ -348,75 +348,75 @@ public class PsiInternalBacktrackingLexerTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_SL_COMMENT"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_CHARC | RULE_WS | RULE_SL_COMMENT )
+        // PsiInternalBacktrackingLexerTestLanguage.g:1:8: ( T__12 | T__13 | RULE_CHARA | RULE_CHARB | RULE_CHARX | RULE_YC | RULE_CHARY | RULE_CHARC | RULE_WS | RULE_SL_COMMENT )
         int alt5=10;
         alt5 = dfa5.predict(input);
         switch (alt5) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:10: T__12
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:10: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:16: T__13
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:16: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:22: RULE_CHARA
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:22: RULE_CHARA
                 {
                 mRULE_CHARA(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:33: RULE_CHARB
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:33: RULE_CHARB
                 {
                 mRULE_CHARB(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:44: RULE_CHARX
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:44: RULE_CHARX
                 {
                 mRULE_CHARX(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:55: RULE_YC
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:55: RULE_YC
                 {
                 mRULE_YC(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:63: RULE_CHARY
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:63: RULE_CHARY
                 {
                 mRULE_CHARY(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:74: RULE_CHARC
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:74: RULE_CHARC
                 {
                 mRULE_CHARC(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:85: RULE_WS
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:85: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 10 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/lexer/idea/parser/antlr/internal/PsiInternalBacktrackingLexerTestLanguage.g:1:93: RULE_SL_COMMENT
+                // PsiInternalBacktrackingLexerTestLanguage.g:1:93: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 

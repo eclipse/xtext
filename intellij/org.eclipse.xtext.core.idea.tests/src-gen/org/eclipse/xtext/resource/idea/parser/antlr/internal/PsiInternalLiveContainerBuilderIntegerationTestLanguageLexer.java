@@ -32,17 +32,17 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalLiveContainerBuilderIntegerationTestLanguage.g"; }
 
     // $ANTLR start "RULE_ID"
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: ( '^' )?
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -51,7 +51,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: '^'
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:11: '^'
                     {
                     match('^'); 
 
@@ -69,7 +69,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:72:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -82,7 +82,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:
+            	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -118,10 +118,10 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:12: ( '0' .. '9' )+
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:10: ( ( '0' .. '9' )+ )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:12: ( '0' .. '9' )+
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -135,7 +135,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:13: '0' .. '9'
+            	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:74:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -167,10 +167,10 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -188,10 +188,10 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
             }
             switch (alt6) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -207,7 +207,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:21: '\\\\' .
+                    	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -215,7 +215,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -240,10 +240,10 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -259,7 +259,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:54: '\\\\' .
+                    	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -267,7 +267,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:76:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -310,12 +310,12 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:24: ( options {greedy=false; } : . )*
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -340,7 +340,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:52: .
+            	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:78:52: .
             	    {
             	    matchAny(); 
 
@@ -370,12 +370,12 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -388,7 +388,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -408,7 +408,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                 }
             } while (true);
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:40: ( ( '\\r' )? '\\n' )?
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -417,9 +417,9 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
             }
             switch (alt10) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: ( '\\r' )? '\\n'
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: ( '\\r' )? '\\n'
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: ( '\\r' )?
+                    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -428,7 +428,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: '\\r'
+                            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:80:41: '\\r'
                             {
                             match('\r'); 
 
@@ -460,10 +460,10 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:82:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -477,7 +477,7 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
 
                 switch (alt11) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:
+            	    // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -517,8 +517,8 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:84:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:84:18: .
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:84:16: ( . )
+            // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:84:18: .
             {
             matchAny(); 
 
@@ -533,54 +533,54 @@ public class PsiInternalLiveContainerBuilderIntegerationTestLanguageLexer extend
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:8: ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:8: ( RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=7;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:10: RULE_ID
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:10: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:18: RULE_INT
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:18: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:27: RULE_STRING
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:27: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:39: RULE_ML_COMMENT
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:39: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:55: RULE_SL_COMMENT
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:55: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:71: RULE_WS
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:71: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/resource/idea/parser/antlr/internal/PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:79: RULE_ANY_OTHER
+                // PsiInternalLiveContainerBuilderIntegerationTestLanguage.g:1:79: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

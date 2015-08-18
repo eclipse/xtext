@@ -112,6 +112,9 @@ public interface ISyntacticSequencerPDAProvider {
 					return input.getType().isStop();
 				}
 			});
+			if (this.stop == null) {
+				throw new IllegalStateException("Cannot find stop state");
+			}
 		}
 
 		@Override

@@ -39,15 +39,15 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEcoreReferenceTestLanguage.g"; }
 
     // $ANTLR start "T__11"
     public final void mT__11() throws RecognitionException {
         try {
             int _type = T__11;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:11:7: ( 'ExtendsNsURIEObject' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:11:9: 'ExtendsNsURIEObject'
+            // InternalEcoreReferenceTestLanguage.g:11:7: ( 'ExtendsNsURIEObject' )
+            // InternalEcoreReferenceTestLanguage.g:11:9: 'ExtendsNsURIEObject'
             {
             match("ExtendsNsURIEObject"); 
 
@@ -67,8 +67,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:12:7: ( 'EObject' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:12:9: 'EObject'
+            // InternalEcoreReferenceTestLanguage.g:12:7: ( 'EObject' )
+            // InternalEcoreReferenceTestLanguage.g:12:9: 'EObject'
             {
             match("EObject"); 
 
@@ -88,8 +88,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:13:7: ( 'ExtendsPluginEObject' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:13:9: 'ExtendsPluginEObject'
+            // InternalEcoreReferenceTestLanguage.g:13:7: ( 'ExtendsPluginEObject' )
+            // InternalEcoreReferenceTestLanguage.g:13:9: 'ExtendsPluginEObject'
             {
             match("ExtendsPluginEObject"); 
 
@@ -109,8 +109,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:14:7: ( 'ExtendsResourceEObject' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:14:9: 'ExtendsResourceEObject'
+            // InternalEcoreReferenceTestLanguage.g:14:7: ( 'ExtendsResourceEObject' )
+            // InternalEcoreReferenceTestLanguage.g:14:9: 'ExtendsResourceEObject'
             {
             match("ExtendsResourceEObject"); 
 
@@ -130,8 +130,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:15:7: ( 'MyEAttribute' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:15:9: 'MyEAttribute'
+            // InternalEcoreReferenceTestLanguage.g:15:7: ( 'MyEAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:15:9: 'MyEAttribute'
             {
             match("MyEAttribute"); 
 
@@ -151,8 +151,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:16:7: ( 'EAttribute' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:16:9: 'EAttribute'
+            // InternalEcoreReferenceTestLanguage.g:16:7: ( 'EAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:16:9: 'EAttribute'
             {
             match("EAttribute"); 
 
@@ -172,8 +172,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:17:7: ( 'object' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:17:9: 'object'
+            // InternalEcoreReferenceTestLanguage.g:17:7: ( 'object' )
+            // InternalEcoreReferenceTestLanguage.g:17:9: 'object'
             {
             match("object"); 
 
@@ -193,10 +193,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1076:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1076:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEcoreReferenceTestLanguage.g:1076:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalEcoreReferenceTestLanguage.g:1076:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1076:11: ( '^' )?
+            // InternalEcoreReferenceTestLanguage.g:1076:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -205,7 +205,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1076:11: '^'
+                    // InternalEcoreReferenceTestLanguage.g:1076:11: '^'
                     {
                     match('^'); 
 
@@ -223,7 +223,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1076:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalEcoreReferenceTestLanguage.g:1076:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -236,7 +236,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:
+            	    // InternalEcoreReferenceTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -272,10 +272,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1078:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1078:12: ( '0' .. '9' )+
+            // InternalEcoreReferenceTestLanguage.g:1078:10: ( ( '0' .. '9' )+ )
+            // InternalEcoreReferenceTestLanguage.g:1078:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1078:12: ( '0' .. '9' )+
+            // InternalEcoreReferenceTestLanguage.g:1078:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -289,7 +289,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1078:13: '0' .. '9'
+            	    // InternalEcoreReferenceTestLanguage.g:1078:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -321,10 +321,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEcoreReferenceTestLanguage.g:1080:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalEcoreReferenceTestLanguage.g:1080:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalEcoreReferenceTestLanguage.g:1080:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -342,10 +342,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalEcoreReferenceTestLanguage.g:1080:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalEcoreReferenceTestLanguage.g:1080:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -361,7 +361,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:21: '\\\\' .
+                    	    // InternalEcoreReferenceTestLanguage.g:1080:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -369,7 +369,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalEcoreReferenceTestLanguage.g:1080:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -394,10 +394,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalEcoreReferenceTestLanguage.g:1080:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalEcoreReferenceTestLanguage.g:1080:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -413,7 +413,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:54: '\\\\' .
+                    	    // InternalEcoreReferenceTestLanguage.g:1080:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -421,7 +421,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1080:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalEcoreReferenceTestLanguage.g:1080:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -464,12 +464,12 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1082:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1082:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalEcoreReferenceTestLanguage.g:1082:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalEcoreReferenceTestLanguage.g:1082:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1082:24: ( options {greedy=false; } : . )*
+            // InternalEcoreReferenceTestLanguage.g:1082:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -494,7 +494,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1082:52: .
+            	    // InternalEcoreReferenceTestLanguage.g:1082:52: .
             	    {
             	    matchAny(); 
 
@@ -524,12 +524,12 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalEcoreReferenceTestLanguage.g:1084:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalEcoreReferenceTestLanguage.g:1084:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalEcoreReferenceTestLanguage.g:1084:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -542,7 +542,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalEcoreReferenceTestLanguage.g:1084:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -562,7 +562,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:40: ( ( '\\r' )? '\\n' )?
+            // InternalEcoreReferenceTestLanguage.g:1084:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -571,9 +571,9 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:41: ( '\\r' )? '\\n'
+                    // InternalEcoreReferenceTestLanguage.g:1084:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:41: ( '\\r' )?
+                    // InternalEcoreReferenceTestLanguage.g:1084:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -582,7 +582,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1084:41: '\\r'
+                            // InternalEcoreReferenceTestLanguage.g:1084:41: '\\r'
                             {
                             match('\r'); 
 
@@ -614,10 +614,10 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1086:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcoreReferenceTestLanguage.g:1086:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalEcoreReferenceTestLanguage.g:1086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalEcoreReferenceTestLanguage.g:1086:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -631,7 +631,7 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:
+            	    // InternalEcoreReferenceTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -671,8 +671,8 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1088:16: ( . )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1088:18: .
+            // InternalEcoreReferenceTestLanguage.g:1088:16: ( . )
+            // InternalEcoreReferenceTestLanguage.g:1088:18: .
             {
             matchAny(); 
 
@@ -687,103 +687,103 @@ public class InternalEcoreReferenceTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalEcoreReferenceTestLanguage.g:1:8: ( T__11 | T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt12=14;
         alt12 = dfa12.predict(input);
         switch (alt12) {
             case 1 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:10: T__11
+                // InternalEcoreReferenceTestLanguage.g:1:10: T__11
                 {
                 mT__11(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:16: T__12
+                // InternalEcoreReferenceTestLanguage.g:1:16: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:22: T__13
+                // InternalEcoreReferenceTestLanguage.g:1:22: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:28: T__14
+                // InternalEcoreReferenceTestLanguage.g:1:28: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:34: T__15
+                // InternalEcoreReferenceTestLanguage.g:1:34: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:40: T__16
+                // InternalEcoreReferenceTestLanguage.g:1:40: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:46: T__17
+                // InternalEcoreReferenceTestLanguage.g:1:46: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:52: RULE_ID
+                // InternalEcoreReferenceTestLanguage.g:1:52: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:60: RULE_INT
+                // InternalEcoreReferenceTestLanguage.g:1:60: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:69: RULE_STRING
+                // InternalEcoreReferenceTestLanguage.g:1:69: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:81: RULE_ML_COMMENT
+                // InternalEcoreReferenceTestLanguage.g:1:81: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:97: RULE_SL_COMMENT
+                // InternalEcoreReferenceTestLanguage.g:1:97: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:113: RULE_WS
+                // InternalEcoreReferenceTestLanguage.g:1:113: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1:121: RULE_ANY_OTHER
+                // InternalEcoreReferenceTestLanguage.g:1:121: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

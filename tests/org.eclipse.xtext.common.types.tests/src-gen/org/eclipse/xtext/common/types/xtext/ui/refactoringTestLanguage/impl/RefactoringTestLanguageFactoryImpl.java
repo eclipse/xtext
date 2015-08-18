@@ -76,8 +76,7 @@ public class RefactoringTestLanguageFactoryImpl extends EFactoryImpl implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public Model createModel()
+  public Model createModel()
   {
     ModelImpl model = new ModelImpl();
     return model;
@@ -88,8 +87,7 @@ public Model createModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ReferenceHolder createReferenceHolder()
+  public ReferenceHolder createReferenceHolder()
   {
     ReferenceHolderImpl referenceHolder = new ReferenceHolderImpl();
     return referenceHolder;
@@ -100,8 +98,7 @@ public ReferenceHolder createReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public RefactoringTestLanguagePackage getRefactoringTestLanguagePackage()
+  public RefactoringTestLanguagePackage getRefactoringTestLanguagePackage()
   {
     return (RefactoringTestLanguagePackage)getEPackage();
   }

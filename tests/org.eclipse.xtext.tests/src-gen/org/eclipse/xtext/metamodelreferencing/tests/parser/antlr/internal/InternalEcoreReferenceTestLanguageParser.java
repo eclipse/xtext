@@ -53,7 +53,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
         
 
     public String[] getTokenNames() { return InternalEcoreReferenceTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalEcoreReferenceTestLanguage.g"; }
 
 
 
@@ -78,7 +78,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // InternalEcoreReferenceTestLanguage.g:67:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -86,17 +86,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
+            // InternalEcoreReferenceTestLanguage.g:68:2: (iv_ruleModel= ruleModel EOF )
+            // InternalEcoreReferenceTestLanguage.g:69:2: iv_ruleModel= ruleModel EOF
             {
              newCompositeNode(grammarAccess.getModelRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleModel=ruleModel();
 
             state._fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -114,7 +114,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleModel"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) ) ;
+    // InternalEcoreReferenceTestLanguage.g:76:1: ruleModel returns [EObject current=null] : ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -128,22 +128,22 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:79:28: ( ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:80:1: ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) )
+            // InternalEcoreReferenceTestLanguage.g:79:28: ( ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) ) )
+            // InternalEcoreReferenceTestLanguage.g:80:1: ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:80:1: ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:80:2: ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) )
+            // InternalEcoreReferenceTestLanguage.g:80:1: ( ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) ) )
+            // InternalEcoreReferenceTestLanguage.g:80:2: ( (lv_extends_0_0= ruleExtendsNsURIEObject ) ) ( (lv_extends_1_0= ruleExtendsPluginEObject ) ) ( (lv_extends_2_0= ruleExtendsResourceEObject ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:80:2: ( (lv_extends_0_0= ruleExtendsNsURIEObject ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:81:1: (lv_extends_0_0= ruleExtendsNsURIEObject )
+            // InternalEcoreReferenceTestLanguage.g:80:2: ( (lv_extends_0_0= ruleExtendsNsURIEObject ) )
+            // InternalEcoreReferenceTestLanguage.g:81:1: (lv_extends_0_0= ruleExtendsNsURIEObject )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:81:1: (lv_extends_0_0= ruleExtendsNsURIEObject )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:82:3: lv_extends_0_0= ruleExtendsNsURIEObject
+            // InternalEcoreReferenceTestLanguage.g:81:1: (lv_extends_0_0= ruleExtendsNsURIEObject )
+            // InternalEcoreReferenceTestLanguage.g:82:3: lv_extends_0_0= ruleExtendsNsURIEObject
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getExtendsExtendsNsURIEObjectParserRuleCall_0_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsNsURIEObject_in_ruleModel131);
+            pushFollow(FollowSets000.FOLLOW_3);
             lv_extends_0_0=ruleExtendsNsURIEObject();
 
             state._fsp--;
@@ -165,16 +165,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:98:2: ( (lv_extends_1_0= ruleExtendsPluginEObject ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:99:1: (lv_extends_1_0= ruleExtendsPluginEObject )
+            // InternalEcoreReferenceTestLanguage.g:98:2: ( (lv_extends_1_0= ruleExtendsPluginEObject ) )
+            // InternalEcoreReferenceTestLanguage.g:99:1: (lv_extends_1_0= ruleExtendsPluginEObject )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:99:1: (lv_extends_1_0= ruleExtendsPluginEObject )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:100:3: lv_extends_1_0= ruleExtendsPluginEObject
+            // InternalEcoreReferenceTestLanguage.g:99:1: (lv_extends_1_0= ruleExtendsPluginEObject )
+            // InternalEcoreReferenceTestLanguage.g:100:3: lv_extends_1_0= ruleExtendsPluginEObject
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getExtendsExtendsPluginEObjectParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsPluginEObject_in_ruleModel152);
+            pushFollow(FollowSets000.FOLLOW_4);
             lv_extends_1_0=ruleExtendsPluginEObject();
 
             state._fsp--;
@@ -196,16 +196,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:116:2: ( (lv_extends_2_0= ruleExtendsResourceEObject ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:117:1: (lv_extends_2_0= ruleExtendsResourceEObject )
+            // InternalEcoreReferenceTestLanguage.g:116:2: ( (lv_extends_2_0= ruleExtendsResourceEObject ) )
+            // InternalEcoreReferenceTestLanguage.g:117:1: (lv_extends_2_0= ruleExtendsResourceEObject )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:117:1: (lv_extends_2_0= ruleExtendsResourceEObject )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:118:3: lv_extends_2_0= ruleExtendsResourceEObject
+            // InternalEcoreReferenceTestLanguage.g:117:1: (lv_extends_2_0= ruleExtendsResourceEObject )
+            // InternalEcoreReferenceTestLanguage.g:118:3: lv_extends_2_0= ruleExtendsResourceEObject
             {
              
             	        newCompositeNode(grammarAccess.getModelAccess().getExtendsExtendsResourceEObjectParserRuleCall_2_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsResourceEObject_in_ruleModel173);
+            pushFollow(FollowSets000.FOLLOW_2);
             lv_extends_2_0=ruleExtendsResourceEObject();
 
             state._fsp--;
@@ -248,7 +248,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleExtendsNsURIEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:142:1: entryRuleExtendsNsURIEObject returns [EObject current=null] : iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF ;
+    // InternalEcoreReferenceTestLanguage.g:142:1: entryRuleExtendsNsURIEObject returns [EObject current=null] : iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF ;
     public final EObject entryRuleExtendsNsURIEObject() throws RecognitionException {
         EObject current = null;
 
@@ -256,17 +256,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:143:2: (iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:144:2: iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF
+            // InternalEcoreReferenceTestLanguage.g:143:2: (iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF )
+            // InternalEcoreReferenceTestLanguage.g:144:2: iv_ruleExtendsNsURIEObject= ruleExtendsNsURIEObject EOF
             {
              newCompositeNode(grammarAccess.getExtendsNsURIEObjectRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsNsURIEObject_in_entryRuleExtendsNsURIEObject209);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleExtendsNsURIEObject=ruleExtendsNsURIEObject();
 
             state._fsp--;
 
              current =iv_ruleExtendsNsURIEObject; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExtendsNsURIEObject219); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -284,7 +284,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleExtendsNsURIEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:151:1: ruleExtendsNsURIEObject returns [EObject current=null] : (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? ) ;
+    // InternalEcoreReferenceTestLanguage.g:151:1: ruleExtendsNsURIEObject returns [EObject current=null] : (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? ) ;
     public final EObject ruleExtendsNsURIEObject() throws RecognitionException {
         EObject current = null;
 
@@ -320,26 +320,26 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:154:28: ( (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:155:1: (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:154:28: ( (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? ) )
+            // InternalEcoreReferenceTestLanguage.g:155:1: (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:155:1: (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:155:3: otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:155:1: (otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:155:3: otherlv_0= 'ExtendsNsURIEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )?
             {
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleExtendsNsURIEObject256); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExtendsNsURIEObjectAccess().getExtendsNsURIEObjectKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:159:1: ( (lv_name_1_0= ruleValidID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:160:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:159:1: ( (lv_name_1_0= ruleValidID ) )
+            // InternalEcoreReferenceTestLanguage.g:160:1: (lv_name_1_0= ruleValidID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:160:1: (lv_name_1_0= ruleValidID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:161:3: lv_name_1_0= ruleValidID
+            // InternalEcoreReferenceTestLanguage.g:160:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:161:3: lv_name_1_0= ruleValidID
             {
              
             	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getNameValidIDParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleValidID_in_ruleExtendsNsURIEObject277);
+            pushFollow(FollowSets000.FOLLOW_6);
             lv_name_1_0=ruleValidID();
 
             state._fsp--;
@@ -361,7 +361,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:177:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
+            // InternalEcoreReferenceTestLanguage.g:177:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 12:
@@ -393,27 +393,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:177:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:177:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:177:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:177:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:177:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:177:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
                     {
-                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleExtendsNsURIEObject291); 
+                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectKeyword_2_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:181:1: ( (otherlv_3= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:182:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:181:1: ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:182:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:182:1: (otherlv_3= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:183:3: otherlv_3= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:182:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:183:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject311); 
+                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_3, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference1EObjectCrossReference_2_0_1_0()); 
                     	
@@ -430,27 +430,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:195:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:195:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:195:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:195:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:195:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:195:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
                     {
-                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleExtendsNsURIEObject331); 
+                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getExtendsNsURIEObjectAccess().getExtendsNsURIEObjectKeyword_2_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:199:1: ( (otherlv_5= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:200:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:199:1: ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:200:1: (otherlv_5= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:200:1: (otherlv_5= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:201:3: otherlv_5= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:200:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:201:3: otherlv_5= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject351); 
+                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_5, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0()); 
                     	
@@ -467,27 +467,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:213:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:213:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:213:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:213:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:213:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:213:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
                     {
-                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsNsURIEObject371); 
+                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getExtendsNsURIEObjectAccess().getExtendsPluginEObjectKeyword_2_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:217:1: ( (otherlv_7= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:218:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:217:1: ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:218:1: (otherlv_7= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:218:1: (otherlv_7= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:219:3: otherlv_7= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:218:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:219:3: otherlv_7= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject391); 
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_7, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0()); 
                     	
@@ -504,27 +504,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:231:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:231:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:231:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:231:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:231:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:231:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
                     {
-                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExtendsNsURIEObject411); 
+                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getExtendsNsURIEObjectAccess().getExtendsResourceEObjectKeyword_2_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:235:1: ( (otherlv_9= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:236:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:235:1: ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:236:1: (otherlv_9= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:236:1: (otherlv_9= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:237:3: otherlv_9= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:236:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:237:3: otherlv_9= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject431); 
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_9, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0()); 
                     	
@@ -543,7 +543,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:248:4: (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:248:4: (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) ) )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -560,24 +560,24 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:248:6: otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:248:6: otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (otherlv_14= RULE_ID ) ) ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_18_0= ruleEObject ) ) ( (lv_eObjectContainment_19_0= ruleEAttribute ) ) ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) )
                     {
-                    otherlv_10=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsNsURIEObject446); 
+                    otherlv_10=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getExtendsNsURIEObjectAccess().getExtendsPluginEObjectKeyword_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:252:1: ( (otherlv_11= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:253:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:252:1: ( (otherlv_11= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:253:1: (otherlv_11= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:253:1: (otherlv_11= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:254:3: otherlv_11= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:253:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:254:3: otherlv_11= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject466); 
+                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_11, grammarAccess.getExtendsNsURIEObjectAccess().getEAttributeReferenceMyEAttributeCrossReference_3_1_0()); 
                     	
@@ -587,18 +587,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:265:2: ( (otherlv_12= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:266:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:265:2: ( (otherlv_12= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:266:1: (otherlv_12= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:266:1: (otherlv_12= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:267:3: otherlv_12= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:266:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:267:3: otherlv_12= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject486); 
+                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_12, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference2ExtendsNsURIEObjectCrossReference_3_2_0()); 
                     	
@@ -608,18 +608,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:278:2: ( (otherlv_13= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:279:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:278:2: ( (otherlv_13= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:279:1: (otherlv_13= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:279:1: (otherlv_13= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:280:3: otherlv_13= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:279:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:280:3: otherlv_13= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject506); 
+                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_13, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference3ExtendsPluginEObjectCrossReference_3_3_0()); 
                     	
@@ -629,18 +629,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:291:2: ( (otherlv_14= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:292:1: (otherlv_14= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:291:2: ( (otherlv_14= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:292:1: (otherlv_14= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:292:1: (otherlv_14= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:293:3: otherlv_14= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:292:1: (otherlv_14= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:293:3: otherlv_14= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsNsURIEObjectRule());
                     	        }
                             
-                    otherlv_14=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject526); 
+                    otherlv_14=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                     		newLeafNode(otherlv_14, grammarAccess.getExtendsNsURIEObjectAccess().getEObjectReference4ExtendsResourceEObjectCrossReference_3_4_0()); 
                     	
@@ -650,7 +650,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:304:2: ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:304:2: ( (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject ) )?
                     int alt2=2;
                     int LA2_0 = input.LA(1);
 
@@ -659,15 +659,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt2) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:305:1: (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject )
+                            // InternalEcoreReferenceTestLanguage.g:305:1: (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:305:1: (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:306:3: lv_eObjectContainment_15_0= ruleExtendsNsURIEObject
+                            // InternalEcoreReferenceTestLanguage.g:305:1: (lv_eObjectContainment_15_0= ruleExtendsNsURIEObject )
+                            // InternalEcoreReferenceTestLanguage.g:306:3: lv_eObjectContainment_15_0= ruleExtendsNsURIEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentExtendsNsURIEObjectParserRuleCall_3_5_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsNsURIEObject547);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_15_0=ruleExtendsNsURIEObject();
 
                             state._fsp--;
@@ -692,7 +692,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:322:3: ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:322:3: ( (lv_eObjectContainment_16_0= ruleExtendsPluginEObject ) )?
                     int alt3=2;
                     int LA3_0 = input.LA(1);
 
@@ -701,15 +701,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt3) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:323:1: (lv_eObjectContainment_16_0= ruleExtendsPluginEObject )
+                            // InternalEcoreReferenceTestLanguage.g:323:1: (lv_eObjectContainment_16_0= ruleExtendsPluginEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:323:1: (lv_eObjectContainment_16_0= ruleExtendsPluginEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:324:3: lv_eObjectContainment_16_0= ruleExtendsPluginEObject
+                            // InternalEcoreReferenceTestLanguage.g:323:1: (lv_eObjectContainment_16_0= ruleExtendsPluginEObject )
+                            // InternalEcoreReferenceTestLanguage.g:324:3: lv_eObjectContainment_16_0= ruleExtendsPluginEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentExtendsPluginEObjectParserRuleCall_3_6_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsNsURIEObject569);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_16_0=ruleExtendsPluginEObject();
 
                             state._fsp--;
@@ -734,7 +734,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:340:3: ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:340:3: ( (lv_eObjectContainment_17_0= ruleExtendsResourceEObject ) )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -743,15 +743,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt4) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:341:1: (lv_eObjectContainment_17_0= ruleExtendsResourceEObject )
+                            // InternalEcoreReferenceTestLanguage.g:341:1: (lv_eObjectContainment_17_0= ruleExtendsResourceEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:341:1: (lv_eObjectContainment_17_0= ruleExtendsResourceEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:342:3: lv_eObjectContainment_17_0= ruleExtendsResourceEObject
+                            // InternalEcoreReferenceTestLanguage.g:341:1: (lv_eObjectContainment_17_0= ruleExtendsResourceEObject )
+                            // InternalEcoreReferenceTestLanguage.g:342:3: lv_eObjectContainment_17_0= ruleExtendsResourceEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentExtendsResourceEObjectParserRuleCall_3_7_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsNsURIEObject591);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_17_0=ruleExtendsResourceEObject();
 
                             state._fsp--;
@@ -776,16 +776,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:358:3: ( (lv_eObjectContainment_18_0= ruleEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:359:1: (lv_eObjectContainment_18_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:358:3: ( (lv_eObjectContainment_18_0= ruleEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:359:1: (lv_eObjectContainment_18_0= ruleEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:359:1: (lv_eObjectContainment_18_0= ruleEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:360:3: lv_eObjectContainment_18_0= ruleEObject
+                    // InternalEcoreReferenceTestLanguage.g:359:1: (lv_eObjectContainment_18_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:360:3: lv_eObjectContainment_18_0= ruleEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentEObjectParserRuleCall_3_8_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEObject_in_ruleExtendsNsURIEObject613);
+                    pushFollow(FollowSets000.FOLLOW_9);
                     lv_eObjectContainment_18_0=ruleEObject();
 
                     state._fsp--;
@@ -807,16 +807,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:376:2: ( (lv_eObjectContainment_19_0= ruleEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:377:1: (lv_eObjectContainment_19_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:376:2: ( (lv_eObjectContainment_19_0= ruleEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:377:1: (lv_eObjectContainment_19_0= ruleEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:377:1: (lv_eObjectContainment_19_0= ruleEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:378:3: lv_eObjectContainment_19_0= ruleEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:377:1: (lv_eObjectContainment_19_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:378:3: lv_eObjectContainment_19_0= ruleEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentEAttributeParserRuleCall_3_9_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEAttribute_in_ruleExtendsNsURIEObject634);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_eObjectContainment_19_0=ruleEAttribute();
 
                     state._fsp--;
@@ -838,16 +838,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:394:2: ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:395:1: (lv_eObjectContainment_20_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:394:2: ( (lv_eObjectContainment_20_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:395:1: (lv_eObjectContainment_20_0= ruleMyEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:395:1: (lv_eObjectContainment_20_0= ruleMyEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:396:3: lv_eObjectContainment_20_0= ruleMyEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:395:1: (lv_eObjectContainment_20_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:396:3: lv_eObjectContainment_20_0= ruleMyEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsNsURIEObjectAccess().getEObjectContainmentMyEAttributeParserRuleCall_3_10_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleMyEAttribute_in_ruleExtendsNsURIEObject655);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_eObjectContainment_20_0=ruleMyEAttribute();
 
                     state._fsp--;
@@ -896,7 +896,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleMyEAttribute"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:420:1: entryRuleMyEAttribute returns [EObject current=null] : iv_ruleMyEAttribute= ruleMyEAttribute EOF ;
+    // InternalEcoreReferenceTestLanguage.g:420:1: entryRuleMyEAttribute returns [EObject current=null] : iv_ruleMyEAttribute= ruleMyEAttribute EOF ;
     public final EObject entryRuleMyEAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -904,17 +904,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:421:2: (iv_ruleMyEAttribute= ruleMyEAttribute EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:422:2: iv_ruleMyEAttribute= ruleMyEAttribute EOF
+            // InternalEcoreReferenceTestLanguage.g:421:2: (iv_ruleMyEAttribute= ruleMyEAttribute EOF )
+            // InternalEcoreReferenceTestLanguage.g:422:2: iv_ruleMyEAttribute= ruleMyEAttribute EOF
             {
              newCompositeNode(grammarAccess.getMyEAttributeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMyEAttribute_in_entryRuleMyEAttribute693);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleMyEAttribute=ruleMyEAttribute();
 
             state._fsp--;
 
              current =iv_ruleMyEAttribute; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMyEAttribute703); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -932,7 +932,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleMyEAttribute"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:429:1: ruleMyEAttribute returns [EObject current=null] : ( () otherlv_1= 'MyEAttribute' ) ;
+    // InternalEcoreReferenceTestLanguage.g:429:1: ruleMyEAttribute returns [EObject current=null] : ( () otherlv_1= 'MyEAttribute' ) ;
     public final EObject ruleMyEAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -941,14 +941,14 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:432:28: ( ( () otherlv_1= 'MyEAttribute' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:433:1: ( () otherlv_1= 'MyEAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:432:28: ( ( () otherlv_1= 'MyEAttribute' ) )
+            // InternalEcoreReferenceTestLanguage.g:433:1: ( () otherlv_1= 'MyEAttribute' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:433:1: ( () otherlv_1= 'MyEAttribute' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:433:2: () otherlv_1= 'MyEAttribute'
+            // InternalEcoreReferenceTestLanguage.g:433:1: ( () otherlv_1= 'MyEAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:433:2: () otherlv_1= 'MyEAttribute'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:433:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:434:5: 
+            // InternalEcoreReferenceTestLanguage.g:433:2: ()
+            // InternalEcoreReferenceTestLanguage.g:434:5: 
             {
 
                     current = forceCreateModelElement(
@@ -958,7 +958,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleMyEAttribute749); 
+            otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMyEAttributeAccess().getMyEAttributeKeyword_1());
                 
@@ -983,7 +983,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEAttribute"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:451:1: entryRuleEAttribute returns [EObject current=null] : iv_ruleEAttribute= ruleEAttribute EOF ;
+    // InternalEcoreReferenceTestLanguage.g:451:1: entryRuleEAttribute returns [EObject current=null] : iv_ruleEAttribute= ruleEAttribute EOF ;
     public final EObject entryRuleEAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -991,17 +991,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:452:2: (iv_ruleEAttribute= ruleEAttribute EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:453:2: iv_ruleEAttribute= ruleEAttribute EOF
+            // InternalEcoreReferenceTestLanguage.g:452:2: (iv_ruleEAttribute= ruleEAttribute EOF )
+            // InternalEcoreReferenceTestLanguage.g:453:2: iv_ruleEAttribute= ruleEAttribute EOF
             {
              newCompositeNode(grammarAccess.getEAttributeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAttribute_in_entryRuleEAttribute785);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleEAttribute=ruleEAttribute();
 
             state._fsp--;
 
              current =iv_ruleEAttribute; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEAttribute795); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1019,7 +1019,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEAttribute"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:460:1: ruleEAttribute returns [EObject current=null] : ( () otherlv_1= 'EAttribute' ) ;
+    // InternalEcoreReferenceTestLanguage.g:460:1: ruleEAttribute returns [EObject current=null] : ( () otherlv_1= 'EAttribute' ) ;
     public final EObject ruleEAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1028,14 +1028,14 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:463:28: ( ( () otherlv_1= 'EAttribute' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:464:1: ( () otherlv_1= 'EAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:463:28: ( ( () otherlv_1= 'EAttribute' ) )
+            // InternalEcoreReferenceTestLanguage.g:464:1: ( () otherlv_1= 'EAttribute' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:464:1: ( () otherlv_1= 'EAttribute' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:464:2: () otherlv_1= 'EAttribute'
+            // InternalEcoreReferenceTestLanguage.g:464:1: ( () otherlv_1= 'EAttribute' )
+            // InternalEcoreReferenceTestLanguage.g:464:2: () otherlv_1= 'EAttribute'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:464:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:465:5: 
+            // InternalEcoreReferenceTestLanguage.g:464:2: ()
+            // InternalEcoreReferenceTestLanguage.g:465:5: 
             {
 
                     current = forceCreateModelElement(
@@ -1045,7 +1045,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleEAttribute841); 
+            otherlv_1=(Token)match(input,16,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getEAttributeAccess().getEAttributeKeyword_1());
                 
@@ -1070,7 +1070,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleExtendsPluginEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:482:1: entryRuleExtendsPluginEObject returns [EObject current=null] : iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF ;
+    // InternalEcoreReferenceTestLanguage.g:482:1: entryRuleExtendsPluginEObject returns [EObject current=null] : iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF ;
     public final EObject entryRuleExtendsPluginEObject() throws RecognitionException {
         EObject current = null;
 
@@ -1078,17 +1078,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:483:2: (iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:484:2: iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF
+            // InternalEcoreReferenceTestLanguage.g:483:2: (iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF )
+            // InternalEcoreReferenceTestLanguage.g:484:2: iv_ruleExtendsPluginEObject= ruleExtendsPluginEObject EOF
             {
              newCompositeNode(grammarAccess.getExtendsPluginEObjectRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsPluginEObject_in_entryRuleExtendsPluginEObject877);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleExtendsPluginEObject=ruleExtendsPluginEObject();
 
             state._fsp--;
 
              current =iv_ruleExtendsPluginEObject; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExtendsPluginEObject887); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1106,7 +1106,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleExtendsPluginEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:491:1: ruleExtendsPluginEObject returns [EObject current=null] : (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) ;
+    // InternalEcoreReferenceTestLanguage.g:491:1: ruleExtendsPluginEObject returns [EObject current=null] : (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) ;
     public final EObject ruleExtendsPluginEObject() throws RecognitionException {
         EObject current = null;
 
@@ -1141,26 +1141,26 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:494:28: ( (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:495:1: (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:494:28: ( (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) )
+            // InternalEcoreReferenceTestLanguage.g:495:1: (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:495:1: (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:495:3: otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:495:1: (otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:495:3: otherlv_0= 'ExtendsPluginEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
             {
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsPluginEObject924); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExtendsPluginEObjectAccess().getExtendsPluginEObjectKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:499:1: ( (lv_name_1_0= ruleValidID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:500:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:499:1: ( (lv_name_1_0= ruleValidID ) )
+            // InternalEcoreReferenceTestLanguage.g:500:1: (lv_name_1_0= ruleValidID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:500:1: (lv_name_1_0= ruleValidID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:501:3: lv_name_1_0= ruleValidID
+            // InternalEcoreReferenceTestLanguage.g:500:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:501:3: lv_name_1_0= ruleValidID
             {
              
             	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getNameValidIDParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleValidID_in_ruleExtendsPluginEObject945);
+            pushFollow(FollowSets000.FOLLOW_6);
             lv_name_1_0=ruleValidID();
 
             state._fsp--;
@@ -1182,7 +1182,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:517:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
+            // InternalEcoreReferenceTestLanguage.g:517:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
             int alt6=4;
             switch ( input.LA(1) ) {
             case 12:
@@ -1214,27 +1214,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:517:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:517:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:517:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:517:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:517:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:517:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
                     {
-                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleExtendsPluginEObject959); 
+                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getExtendsPluginEObjectAccess().getEObjectKeyword_2_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:521:1: ( (otherlv_3= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:522:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:521:1: ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:522:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:522:1: (otherlv_3= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:523:3: otherlv_3= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:522:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:523:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject979); 
+                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_3, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference1EObjectCrossReference_2_0_1_0()); 
                     	
@@ -1251,27 +1251,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:535:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:535:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:535:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:535:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:535:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:535:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
                     {
-                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleExtendsPluginEObject999); 
+                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getExtendsPluginEObjectAccess().getExtendsNsURIEObjectKeyword_2_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:539:1: ( (otherlv_5= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:540:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:539:1: ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:540:1: (otherlv_5= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:540:1: (otherlv_5= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:541:3: otherlv_5= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:540:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:541:3: otherlv_5= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1019); 
+                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_5, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0()); 
                     	
@@ -1288,27 +1288,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:553:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:553:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:553:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:553:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:553:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:553:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
                     {
-                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsPluginEObject1039); 
+                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getExtendsPluginEObjectAccess().getExtendsPluginEObjectKeyword_2_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:557:1: ( (otherlv_7= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:558:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:557:1: ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:558:1: (otherlv_7= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:558:1: (otherlv_7= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:559:3: otherlv_7= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:558:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:559:3: otherlv_7= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1059); 
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_7, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0()); 
                     	
@@ -1325,27 +1325,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:571:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:571:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:571:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:571:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:571:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:571:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
                     {
-                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExtendsPluginEObject1079); 
+                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getExtendsPluginEObjectAccess().getExtendsResourceEObjectKeyword_2_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:575:1: ( (otherlv_9= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:576:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:575:1: ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:576:1: (otherlv_9= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:576:1: (otherlv_9= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:577:3: otherlv_9= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:576:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:577:3: otherlv_9= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1099); 
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_7); 
 
                     		newLeafNode(otherlv_9, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0()); 
                     	
@@ -1364,7 +1364,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:588:4: (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:588:4: (otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1373,24 +1373,24 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:588:6: otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:588:6: otherlv_10= 'ExtendsPluginEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )? ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )? ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )? ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
                     {
-                    otherlv_10=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsPluginEObject1114); 
+                    otherlv_10=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getExtendsPluginEObjectAccess().getExtendsPluginEObjectKeyword_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:592:1: ( (otherlv_11= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:593:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:592:1: ( (otherlv_11= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:593:1: (otherlv_11= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:593:1: (otherlv_11= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:594:3: otherlv_11= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:593:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:594:3: otherlv_11= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1134); 
+                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_11, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0()); 
                     	
@@ -1400,18 +1400,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:605:2: ( (otherlv_12= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:606:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:605:2: ( (otherlv_12= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:606:1: (otherlv_12= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:606:1: (otherlv_12= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:607:3: otherlv_12= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:606:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:607:3: otherlv_12= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1154); 
+                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_12, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference3ExtendsPluginEObjectCrossReference_3_2_0()); 
                     	
@@ -1421,18 +1421,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:618:2: ( (otherlv_13= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:619:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:618:2: ( (otherlv_13= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:619:1: (otherlv_13= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:619:1: (otherlv_13= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:620:3: otherlv_13= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:619:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:620:3: otherlv_13= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsPluginEObjectRule());
                     	        }
                             
-                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1174); 
+                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_8); 
 
                     		newLeafNode(otherlv_13, grammarAccess.getExtendsPluginEObjectAccess().getEObjectReference4ExtendsResourceEObjectCrossReference_3_3_0()); 
                     	
@@ -1442,7 +1442,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:631:2: ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:631:2: ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )?
                     int alt7=2;
                     int LA7_0 = input.LA(1);
 
@@ -1451,15 +1451,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt7) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:632:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
+                            // InternalEcoreReferenceTestLanguage.g:632:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:632:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:633:3: lv_eObjectContainment_14_0= ruleExtendsNsURIEObject
+                            // InternalEcoreReferenceTestLanguage.g:632:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
+                            // InternalEcoreReferenceTestLanguage.g:633:3: lv_eObjectContainment_14_0= ruleExtendsNsURIEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentExtendsNsURIEObjectParserRuleCall_3_4_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsPluginEObject1195);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_14_0=ruleExtendsNsURIEObject();
 
                             state._fsp--;
@@ -1484,7 +1484,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:649:3: ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:649:3: ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -1493,15 +1493,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:650:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
+                            // InternalEcoreReferenceTestLanguage.g:650:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:650:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:651:3: lv_eObjectContainment_15_0= ruleExtendsPluginEObject
+                            // InternalEcoreReferenceTestLanguage.g:650:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
+                            // InternalEcoreReferenceTestLanguage.g:651:3: lv_eObjectContainment_15_0= ruleExtendsPluginEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentExtendsPluginEObjectParserRuleCall_3_5_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsPluginEObject1217);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_15_0=ruleExtendsPluginEObject();
 
                             state._fsp--;
@@ -1526,7 +1526,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:667:3: ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )?
+                    // InternalEcoreReferenceTestLanguage.g:667:3: ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1535,15 +1535,15 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:668:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
+                            // InternalEcoreReferenceTestLanguage.g:668:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
                             {
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:668:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
-                            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:669:3: lv_eObjectContainment_16_0= ruleExtendsResourceEObject
+                            // InternalEcoreReferenceTestLanguage.g:668:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
+                            // InternalEcoreReferenceTestLanguage.g:669:3: lv_eObjectContainment_16_0= ruleExtendsResourceEObject
                             {
                              
                             	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentExtendsResourceEObjectParserRuleCall_3_6_0()); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsPluginEObject1239);
+                            pushFollow(FollowSets000.FOLLOW_8);
                             lv_eObjectContainment_16_0=ruleExtendsResourceEObject();
 
                             state._fsp--;
@@ -1568,16 +1568,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:685:3: ( (lv_eObjectContainment_17_0= ruleEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:686:1: (lv_eObjectContainment_17_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:685:3: ( (lv_eObjectContainment_17_0= ruleEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:686:1: (lv_eObjectContainment_17_0= ruleEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:686:1: (lv_eObjectContainment_17_0= ruleEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:687:3: lv_eObjectContainment_17_0= ruleEObject
+                    // InternalEcoreReferenceTestLanguage.g:686:1: (lv_eObjectContainment_17_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:687:3: lv_eObjectContainment_17_0= ruleEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentEObjectParserRuleCall_3_7_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEObject_in_ruleExtendsPluginEObject1261);
+                    pushFollow(FollowSets000.FOLLOW_9);
                     lv_eObjectContainment_17_0=ruleEObject();
 
                     state._fsp--;
@@ -1599,16 +1599,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:703:2: ( (lv_eObjectContainment_18_0= ruleEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:704:1: (lv_eObjectContainment_18_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:703:2: ( (lv_eObjectContainment_18_0= ruleEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:704:1: (lv_eObjectContainment_18_0= ruleEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:704:1: (lv_eObjectContainment_18_0= ruleEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:705:3: lv_eObjectContainment_18_0= ruleEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:704:1: (lv_eObjectContainment_18_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:705:3: lv_eObjectContainment_18_0= ruleEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentEAttributeParserRuleCall_3_8_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEAttribute_in_ruleExtendsPluginEObject1282);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_eObjectContainment_18_0=ruleEAttribute();
 
                     state._fsp--;
@@ -1630,16 +1630,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:721:2: ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:722:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:721:2: ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:722:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:722:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:723:3: lv_eObjectContainment_19_0= ruleMyEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:722:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:723:3: lv_eObjectContainment_19_0= ruleMyEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsPluginEObjectAccess().getEObjectContainmentMyEAttributeParserRuleCall_3_9_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleMyEAttribute_in_ruleExtendsPluginEObject1303);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_eObjectContainment_19_0=ruleMyEAttribute();
 
                     state._fsp--;
@@ -1688,7 +1688,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleExtendsResourceEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:753:1: entryRuleExtendsResourceEObject returns [EObject current=null] : iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF ;
+    // InternalEcoreReferenceTestLanguage.g:753:1: entryRuleExtendsResourceEObject returns [EObject current=null] : iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF ;
     public final EObject entryRuleExtendsResourceEObject() throws RecognitionException {
         EObject current = null;
 
@@ -1696,17 +1696,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:754:2: (iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:755:2: iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF
+            // InternalEcoreReferenceTestLanguage.g:754:2: (iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF )
+            // InternalEcoreReferenceTestLanguage.g:755:2: iv_ruleExtendsResourceEObject= ruleExtendsResourceEObject EOF
             {
              newCompositeNode(grammarAccess.getExtendsResourceEObjectRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExtendsResourceEObject_in_entryRuleExtendsResourceEObject1347);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleExtendsResourceEObject=ruleExtendsResourceEObject();
 
             state._fsp--;
 
              current =iv_ruleExtendsResourceEObject; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExtendsResourceEObject1357); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -1724,7 +1724,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleExtendsResourceEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:762:1: ruleExtendsResourceEObject returns [EObject current=null] : (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) ;
+    // InternalEcoreReferenceTestLanguage.g:762:1: ruleExtendsResourceEObject returns [EObject current=null] : (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) ;
     public final EObject ruleExtendsResourceEObject() throws RecognitionException {
         EObject current = null;
 
@@ -1759,26 +1759,26 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:765:28: ( (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:766:1: (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:765:28: ( (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? ) )
+            // InternalEcoreReferenceTestLanguage.g:766:1: (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:766:1: (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:766:3: otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:766:1: (otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )? )
+            // InternalEcoreReferenceTestLanguage.g:766:3: otherlv_0= 'ExtendsResourceEObject' ( (lv_name_1_0= ruleValidID ) ) ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) ) (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
             {
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExtendsResourceEObject1394); 
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getExtendsResourceEObjectAccess().getExtendsResourceEObjectKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:770:1: ( (lv_name_1_0= ruleValidID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:771:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:770:1: ( (lv_name_1_0= ruleValidID ) )
+            // InternalEcoreReferenceTestLanguage.g:771:1: (lv_name_1_0= ruleValidID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:771:1: (lv_name_1_0= ruleValidID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:772:3: lv_name_1_0= ruleValidID
+            // InternalEcoreReferenceTestLanguage.g:771:1: (lv_name_1_0= ruleValidID )
+            // InternalEcoreReferenceTestLanguage.g:772:3: lv_name_1_0= ruleValidID
             {
              
             	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getNameValidIDParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleValidID_in_ruleExtendsResourceEObject1415);
+            pushFollow(FollowSets000.FOLLOW_6);
             lv_name_1_0=ruleValidID();
 
             state._fsp--;
@@ -1800,7 +1800,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:788:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
+            // InternalEcoreReferenceTestLanguage.g:788:2: ( (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) ) | (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) ) | (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) ) | (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) ) )
             int alt11=4;
             switch ( input.LA(1) ) {
             case 12:
@@ -1832,27 +1832,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:788:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:788:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:788:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:788:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:788:3: (otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:788:5: otherlv_2= 'EObject' ( (otherlv_3= RULE_ID ) )
                     {
-                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleExtendsResourceEObject1429); 
+                    otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_2, grammarAccess.getExtendsResourceEObjectAccess().getEObjectKeyword_2_0_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:792:1: ( (otherlv_3= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:793:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:792:1: ( (otherlv_3= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:793:1: (otherlv_3= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:793:1: (otherlv_3= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:794:3: otherlv_3= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:793:1: (otherlv_3= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:794:3: otherlv_3= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1449); 
+                    otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
                     		newLeafNode(otherlv_3, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference1EObjectCrossReference_2_0_1_0()); 
                     	
@@ -1869,27 +1869,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:806:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:806:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:806:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:806:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:806:6: (otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:806:8: otherlv_4= 'ExtendsNsURIEObject' ( (otherlv_5= RULE_ID ) )
                     {
-                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleExtendsResourceEObject1469); 
+                    otherlv_4=(Token)match(input,11,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getExtendsResourceEObjectAccess().getExtendsNsURIEObjectKeyword_2_1_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:810:1: ( (otherlv_5= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:811:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:810:1: ( (otherlv_5= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:811:1: (otherlv_5= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:811:1: (otherlv_5= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:812:3: otherlv_5= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:811:1: (otherlv_5= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:812:3: otherlv_5= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1489); 
+                    otherlv_5=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
                     		newLeafNode(otherlv_5, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference1ExtendsNsURIEObjectCrossReference_2_1_1_0()); 
                     	
@@ -1906,27 +1906,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:824:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:824:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:824:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:824:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:824:6: (otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:824:8: otherlv_6= 'ExtendsPluginEObject' ( (otherlv_7= RULE_ID ) )
                     {
-                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleExtendsResourceEObject1509); 
+                    otherlv_6=(Token)match(input,13,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_6, grammarAccess.getExtendsResourceEObjectAccess().getExtendsPluginEObjectKeyword_2_2_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:828:1: ( (otherlv_7= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:829:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:828:1: ( (otherlv_7= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:829:1: (otherlv_7= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:829:1: (otherlv_7= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:830:3: otherlv_7= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:829:1: (otherlv_7= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:830:3: otherlv_7= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1529); 
+                    otherlv_7=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
                     		newLeafNode(otherlv_7, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference1ExtendsPluginEObjectCrossReference_2_2_1_0()); 
                     	
@@ -1943,27 +1943,27 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:842:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:842:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:842:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:842:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:842:6: (otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) ) )
+                    // InternalEcoreReferenceTestLanguage.g:842:8: otherlv_8= 'ExtendsResourceEObject' ( (otherlv_9= RULE_ID ) )
                     {
-                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExtendsResourceEObject1549); 
+                    otherlv_8=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_8, grammarAccess.getExtendsResourceEObjectAccess().getExtendsResourceEObjectKeyword_2_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:846:1: ( (otherlv_9= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:847:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:846:1: ( (otherlv_9= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:847:1: (otherlv_9= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:847:1: (otherlv_9= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:848:3: otherlv_9= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:847:1: (otherlv_9= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:848:3: otherlv_9= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1569); 
+                    otherlv_9=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_11); 
 
                     		newLeafNode(otherlv_9, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference1ExtendsResourceEObjectCrossReference_2_3_1_0()); 
                     	
@@ -1982,7 +1982,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:859:4: (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
+            // InternalEcoreReferenceTestLanguage.g:859:4: (otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) ) )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1991,24 +1991,24 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:859:6: otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:859:6: otherlv_10= 'ExtendsResourceEObject' ( (otherlv_11= RULE_ID ) ) ( (otherlv_12= RULE_ID ) ) ( (otherlv_13= RULE_ID ) ) ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) ) ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) ) ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) ) ( (lv_eObjectContainment_17_0= ruleEObject ) ) ( (lv_eObjectContainment_18_0= ruleEAttribute ) ) ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
                     {
-                    otherlv_10=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleExtendsResourceEObject1584); 
+                    otherlv_10=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
                         	newLeafNode(otherlv_10, grammarAccess.getExtendsResourceEObjectAccess().getExtendsResourceEObjectKeyword_3_0());
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:863:1: ( (otherlv_11= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:864:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:863:1: ( (otherlv_11= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:864:1: (otherlv_11= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:864:1: (otherlv_11= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:865:3: otherlv_11= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:864:1: (otherlv_11= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:865:3: otherlv_11= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1604); 
+                    otherlv_11=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_11, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference2ExtendsNsURIEObjectCrossReference_3_1_0()); 
                     	
@@ -2018,18 +2018,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:876:2: ( (otherlv_12= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:877:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:876:2: ( (otherlv_12= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:877:1: (otherlv_12= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:877:1: (otherlv_12= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:878:3: otherlv_12= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:877:1: (otherlv_12= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:878:3: otherlv_12= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1624); 
+                    otherlv_12=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_5); 
 
                     		newLeafNode(otherlv_12, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference3ExtendsPluginEObjectCrossReference_3_2_0()); 
                     	
@@ -2039,18 +2039,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:889:2: ( (otherlv_13= RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:890:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:889:2: ( (otherlv_13= RULE_ID ) )
+                    // InternalEcoreReferenceTestLanguage.g:890:1: (otherlv_13= RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:890:1: (otherlv_13= RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:891:3: otherlv_13= RULE_ID
+                    // InternalEcoreReferenceTestLanguage.g:890:1: (otherlv_13= RULE_ID )
+                    // InternalEcoreReferenceTestLanguage.g:891:3: otherlv_13= RULE_ID
                     {
 
                     			if (current==null) {
                     	            current = createModelElement(grammarAccess.getExtendsResourceEObjectRule());
                     	        }
                             
-                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1644); 
+                    otherlv_13=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_12); 
 
                     		newLeafNode(otherlv_13, grammarAccess.getExtendsResourceEObjectAccess().getEObjectReference4ExtendsResourceEObjectCrossReference_3_3_0()); 
                     	
@@ -2060,16 +2060,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:902:2: ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:903:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
+                    // InternalEcoreReferenceTestLanguage.g:902:2: ( (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:903:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:903:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:904:3: lv_eObjectContainment_14_0= ruleExtendsNsURIEObject
+                    // InternalEcoreReferenceTestLanguage.g:903:1: (lv_eObjectContainment_14_0= ruleExtendsNsURIEObject )
+                    // InternalEcoreReferenceTestLanguage.g:904:3: lv_eObjectContainment_14_0= ruleExtendsNsURIEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentExtendsNsURIEObjectParserRuleCall_3_4_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsResourceEObject1665);
+                    pushFollow(FollowSets000.FOLLOW_3);
                     lv_eObjectContainment_14_0=ruleExtendsNsURIEObject();
 
                     state._fsp--;
@@ -2091,16 +2091,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:920:2: ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:921:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
+                    // InternalEcoreReferenceTestLanguage.g:920:2: ( (lv_eObjectContainment_15_0= ruleExtendsPluginEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:921:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:921:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:922:3: lv_eObjectContainment_15_0= ruleExtendsPluginEObject
+                    // InternalEcoreReferenceTestLanguage.g:921:1: (lv_eObjectContainment_15_0= ruleExtendsPluginEObject )
+                    // InternalEcoreReferenceTestLanguage.g:922:3: lv_eObjectContainment_15_0= ruleExtendsPluginEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentExtendsPluginEObjectParserRuleCall_3_5_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsResourceEObject1686);
+                    pushFollow(FollowSets000.FOLLOW_4);
                     lv_eObjectContainment_15_0=ruleExtendsPluginEObject();
 
                     state._fsp--;
@@ -2122,16 +2122,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:938:2: ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:939:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
+                    // InternalEcoreReferenceTestLanguage.g:938:2: ( (lv_eObjectContainment_16_0= ruleExtendsResourceEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:939:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:939:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:940:3: lv_eObjectContainment_16_0= ruleExtendsResourceEObject
+                    // InternalEcoreReferenceTestLanguage.g:939:1: (lv_eObjectContainment_16_0= ruleExtendsResourceEObject )
+                    // InternalEcoreReferenceTestLanguage.g:940:3: lv_eObjectContainment_16_0= ruleExtendsResourceEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentExtendsResourceEObjectParserRuleCall_3_6_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsResourceEObject1707);
+                    pushFollow(FollowSets000.FOLLOW_8);
                     lv_eObjectContainment_16_0=ruleExtendsResourceEObject();
 
                     state._fsp--;
@@ -2153,16 +2153,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:956:2: ( (lv_eObjectContainment_17_0= ruleEObject ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:957:1: (lv_eObjectContainment_17_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:956:2: ( (lv_eObjectContainment_17_0= ruleEObject ) )
+                    // InternalEcoreReferenceTestLanguage.g:957:1: (lv_eObjectContainment_17_0= ruleEObject )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:957:1: (lv_eObjectContainment_17_0= ruleEObject )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:958:3: lv_eObjectContainment_17_0= ruleEObject
+                    // InternalEcoreReferenceTestLanguage.g:957:1: (lv_eObjectContainment_17_0= ruleEObject )
+                    // InternalEcoreReferenceTestLanguage.g:958:3: lv_eObjectContainment_17_0= ruleEObject
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentEObjectParserRuleCall_3_7_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEObject_in_ruleExtendsResourceEObject1728);
+                    pushFollow(FollowSets000.FOLLOW_9);
                     lv_eObjectContainment_17_0=ruleEObject();
 
                     state._fsp--;
@@ -2184,16 +2184,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:974:2: ( (lv_eObjectContainment_18_0= ruleEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:975:1: (lv_eObjectContainment_18_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:974:2: ( (lv_eObjectContainment_18_0= ruleEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:975:1: (lv_eObjectContainment_18_0= ruleEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:975:1: (lv_eObjectContainment_18_0= ruleEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:976:3: lv_eObjectContainment_18_0= ruleEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:975:1: (lv_eObjectContainment_18_0= ruleEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:976:3: lv_eObjectContainment_18_0= ruleEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentEAttributeParserRuleCall_3_8_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEAttribute_in_ruleExtendsResourceEObject1749);
+                    pushFollow(FollowSets000.FOLLOW_10);
                     lv_eObjectContainment_18_0=ruleEAttribute();
 
                     state._fsp--;
@@ -2215,16 +2215,16 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
                     }
 
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:992:2: ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:993:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:992:2: ( (lv_eObjectContainment_19_0= ruleMyEAttribute ) )
+                    // InternalEcoreReferenceTestLanguage.g:993:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:993:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:994:3: lv_eObjectContainment_19_0= ruleMyEAttribute
+                    // InternalEcoreReferenceTestLanguage.g:993:1: (lv_eObjectContainment_19_0= ruleMyEAttribute )
+                    // InternalEcoreReferenceTestLanguage.g:994:3: lv_eObjectContainment_19_0= ruleMyEAttribute
                     {
                      
                     	        newCompositeNode(grammarAccess.getExtendsResourceEObjectAccess().getEObjectContainmentMyEAttributeParserRuleCall_3_9_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleMyEAttribute_in_ruleExtendsResourceEObject1770);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_eObjectContainment_19_0=ruleMyEAttribute();
 
                     state._fsp--;
@@ -2273,7 +2273,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1018:1: entryRuleEObject returns [EObject current=null] : iv_ruleEObject= ruleEObject EOF ;
+    // InternalEcoreReferenceTestLanguage.g:1018:1: entryRuleEObject returns [EObject current=null] : iv_ruleEObject= ruleEObject EOF ;
     public final EObject entryRuleEObject() throws RecognitionException {
         EObject current = null;
 
@@ -2281,17 +2281,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1019:2: (iv_ruleEObject= ruleEObject EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1020:2: iv_ruleEObject= ruleEObject EOF
+            // InternalEcoreReferenceTestLanguage.g:1019:2: (iv_ruleEObject= ruleEObject EOF )
+            // InternalEcoreReferenceTestLanguage.g:1020:2: iv_ruleEObject= ruleEObject EOF
             {
              newCompositeNode(grammarAccess.getEObjectRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEObject_in_entryRuleEObject1808);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleEObject=ruleEObject();
 
             state._fsp--;
 
              current =iv_ruleEObject; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEObject1818); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -2309,7 +2309,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleEObject"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1027:1: ruleEObject returns [EObject current=null] : ( () otherlv_1= 'object' ) ;
+    // InternalEcoreReferenceTestLanguage.g:1027:1: ruleEObject returns [EObject current=null] : ( () otherlv_1= 'object' ) ;
     public final EObject ruleEObject() throws RecognitionException {
         EObject current = null;
 
@@ -2318,14 +2318,14 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1030:28: ( ( () otherlv_1= 'object' ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1031:1: ( () otherlv_1= 'object' )
+            // InternalEcoreReferenceTestLanguage.g:1030:28: ( ( () otherlv_1= 'object' ) )
+            // InternalEcoreReferenceTestLanguage.g:1031:1: ( () otherlv_1= 'object' )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1031:1: ( () otherlv_1= 'object' )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1031:2: () otherlv_1= 'object'
+            // InternalEcoreReferenceTestLanguage.g:1031:1: ( () otherlv_1= 'object' )
+            // InternalEcoreReferenceTestLanguage.g:1031:2: () otherlv_1= 'object'
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1031:2: ()
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1032:5: 
+            // InternalEcoreReferenceTestLanguage.g:1031:2: ()
+            // InternalEcoreReferenceTestLanguage.g:1032:5: 
             {
 
                     current = forceCreateModelElement(
@@ -2335,7 +2335,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
             }
 
-            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleEObject1864); 
+            otherlv_1=(Token)match(input,17,FollowSets000.FOLLOW_2); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getEObjectAccess().getObjectKeyword_1());
                 
@@ -2360,7 +2360,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "entryRuleValidID"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1049:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
+    // InternalEcoreReferenceTestLanguage.g:1049:1: entryRuleValidID returns [String current=null] : iv_ruleValidID= ruleValidID EOF ;
     public final String entryRuleValidID() throws RecognitionException {
         String current = null;
 
@@ -2368,17 +2368,17 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1050:2: (iv_ruleValidID= ruleValidID EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1051:2: iv_ruleValidID= ruleValidID EOF
+            // InternalEcoreReferenceTestLanguage.g:1050:2: (iv_ruleValidID= ruleValidID EOF )
+            // InternalEcoreReferenceTestLanguage.g:1051:2: iv_ruleValidID= ruleValidID EOF
             {
              newCompositeNode(grammarAccess.getValidIDRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleValidID_in_entryRuleValidID1901);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleValidID=ruleValidID();
 
             state._fsp--;
 
              current =iv_ruleValidID.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleValidID1912); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -2396,7 +2396,7 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
 
     // $ANTLR start "ruleValidID"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1058:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    // InternalEcoreReferenceTestLanguage.g:1058:1: ruleValidID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
     public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2405,10 +2405,10 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1061:28: (this_ID_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalEcoreReferenceTestLanguage.g:1062:5: this_ID_0= RULE_ID
+            // InternalEcoreReferenceTestLanguage.g:1061:28: (this_ID_0= RULE_ID )
+            // InternalEcoreReferenceTestLanguage.g:1062:5: this_ID_0= RULE_ID
             {
-            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleValidID1951); 
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             		current.merge(this_ID_0);
                 
@@ -2438,90 +2438,18 @@ public class InternalEcoreReferenceTestLanguageParser extends AbstractInternalAn
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExtendsNsURIEObject_in_ruleModel131 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleExtendsPluginEObject_in_ruleModel152 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_ruleExtendsResourceEObject_in_ruleModel173 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExtendsNsURIEObject_in_entryRuleExtendsNsURIEObject209 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExtendsNsURIEObject219 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleExtendsNsURIEObject256 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleValidID_in_ruleExtendsNsURIEObject277 = new BitSet(new long[]{0x0000000000007800L});
-        public static final BitSet FOLLOW_12_in_ruleExtendsNsURIEObject291 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject311 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_11_in_ruleExtendsNsURIEObject331 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject351 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsNsURIEObject371 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject391 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_14_in_ruleExtendsNsURIEObject411 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject431 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsNsURIEObject446 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject466 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject486 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject506 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsNsURIEObject526 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsNsURIEObject547 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsNsURIEObject569 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsNsURIEObject591 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleEObject_in_ruleExtendsNsURIEObject613 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleEAttribute_in_ruleExtendsNsURIEObject634 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleMyEAttribute_in_ruleExtendsNsURIEObject655 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMyEAttribute_in_entryRuleMyEAttribute693 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMyEAttribute703 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_ruleMyEAttribute749 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAttribute_in_entryRuleEAttribute785 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEAttribute795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleEAttribute841 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExtendsPluginEObject_in_entryRuleExtendsPluginEObject877 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExtendsPluginEObject887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsPluginEObject924 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleValidID_in_ruleExtendsPluginEObject945 = new BitSet(new long[]{0x0000000000007800L});
-        public static final BitSet FOLLOW_12_in_ruleExtendsPluginEObject959 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject979 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_11_in_ruleExtendsPluginEObject999 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1019 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsPluginEObject1039 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1059 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_14_in_ruleExtendsPluginEObject1079 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1099 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsPluginEObject1114 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1134 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1154 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsPluginEObject1174 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsPluginEObject1195 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsPluginEObject1217 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsPluginEObject1239 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleEObject_in_ruleExtendsPluginEObject1261 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleEAttribute_in_ruleExtendsPluginEObject1282 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleMyEAttribute_in_ruleExtendsPluginEObject1303 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExtendsResourceEObject_in_entryRuleExtendsResourceEObject1347 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExtendsResourceEObject1357 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleExtendsResourceEObject1394 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleValidID_in_ruleExtendsResourceEObject1415 = new BitSet(new long[]{0x0000000000007800L});
-        public static final BitSet FOLLOW_12_in_ruleExtendsResourceEObject1429 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1449 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_11_in_ruleExtendsResourceEObject1469 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1489 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_13_in_ruleExtendsResourceEObject1509 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1529 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_14_in_ruleExtendsResourceEObject1549 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1569 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_14_in_ruleExtendsResourceEObject1584 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1604 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1624 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleExtendsResourceEObject1644 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_ruleExtendsNsURIEObject_in_ruleExtendsResourceEObject1665 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_ruleExtendsPluginEObject_in_ruleExtendsResourceEObject1686 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_ruleExtendsResourceEObject_in_ruleExtendsResourceEObject1707 = new BitSet(new long[]{0x0000000000026800L});
-        public static final BitSet FOLLOW_ruleEObject_in_ruleExtendsResourceEObject1728 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_ruleEAttribute_in_ruleExtendsResourceEObject1749 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_ruleMyEAttribute_in_ruleExtendsResourceEObject1770 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEObject_in_entryRuleEObject1808 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEObject1818 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleEObject1864 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID1901 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleValidID1912 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleValidID1951 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000007800L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000026800L});
+        public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000000800L});
     }
 
 

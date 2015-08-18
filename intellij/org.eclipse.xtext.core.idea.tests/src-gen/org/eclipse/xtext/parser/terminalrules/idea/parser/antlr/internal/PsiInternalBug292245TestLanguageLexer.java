@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PsiInternalBug292245TestLanguageLexer extends Lexer {
-    public static final int RULE_APOSTROPHE_CHAR=4;
-    public static final int T__10=10;
     public static final int RULE_CHAR=5;
+    public static final int RULE_APOSTROPHE_CHAR=4;
     public static final int RULE_WS=6;
     public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__8=8;
     public static final int T__7=7;
+    public static final int T__10=10;
 
     // delegates
     // delegators
@@ -32,15 +32,15 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalBug292245TestLanguage.g"; }
 
     // $ANTLR start "T__7"
     public final void mT__7() throws RecognitionException {
         try {
             int _type = T__7;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:11:6: ( 'FIX' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:11:8: 'FIX'
+            // PsiInternalBug292245TestLanguage.g:11:6: ( 'FIX' )
+            // PsiInternalBug292245TestLanguage.g:11:8: 'FIX'
             {
             match("FIX"); 
 
@@ -60,8 +60,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = T__8;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:12:6: ( 'ERROR' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:12:8: 'ERROR'
+            // PsiInternalBug292245TestLanguage.g:12:6: ( 'ERROR' )
+            // PsiInternalBug292245TestLanguage.g:12:8: 'ERROR'
             {
             match("ERROR"); 
 
@@ -81,8 +81,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = T__9;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:13:6: ( 'TICK' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:13:8: 'TICK'
+            // PsiInternalBug292245TestLanguage.g:13:6: ( 'TICK' )
+            // PsiInternalBug292245TestLanguage.g:13:8: 'TICK'
             {
             match("TICK"); 
 
@@ -102,8 +102,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = T__10;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:14:7: ( '^' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:14:9: '^'
+            // PsiInternalBug292245TestLanguage.g:14:7: ( '^' )
+            // PsiInternalBug292245TestLanguage.g:14:9: '^'
             {
             match('^'); 
 
@@ -122,8 +122,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_APOSTROPHE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:311:22: ( '\\'' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:311:24: '\\''
+            // PsiInternalBug292245TestLanguage.g:311:22: ( '\\'' )
+            // PsiInternalBug292245TestLanguage.g:311:24: '\\''
             {
             match('\''); 
 
@@ -142,8 +142,8 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_CHAR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:313:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:313:13: ( 'A' .. 'Z' | '0' .. '9' )
+            // PsiInternalBug292245TestLanguage.g:313:11: ( ( 'A' .. 'Z' | '0' .. '9' ) )
+            // PsiInternalBug292245TestLanguage.g:313:13: ( 'A' .. 'Z' | '0' .. '9' )
             {
             if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z') ) {
                 input.consume();
@@ -170,10 +170,10 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:315:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBug292245TestLanguage.g:315:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalBug292245TestLanguage.g:315:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt1=0;
             loop1:
             do {
@@ -187,7 +187,7 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:
+            	    // PsiInternalBug292245TestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -223,54 +223,54 @@ public class PsiInternalBug292245TestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_WS"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:8: ( T__7 | T__8 | T__9 | T__10 | RULE_APOSTROPHE_CHAR | RULE_CHAR | RULE_WS )
+        // PsiInternalBug292245TestLanguage.g:1:8: ( T__7 | T__8 | T__9 | T__10 | RULE_APOSTROPHE_CHAR | RULE_CHAR | RULE_WS )
         int alt2=7;
         alt2 = dfa2.predict(input);
         switch (alt2) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:10: T__7
+                // PsiInternalBug292245TestLanguage.g:1:10: T__7
                 {
                 mT__7(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:15: T__8
+                // PsiInternalBug292245TestLanguage.g:1:15: T__8
                 {
                 mT__8(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:20: T__9
+                // PsiInternalBug292245TestLanguage.g:1:20: T__9
                 {
                 mT__9(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:25: T__10
+                // PsiInternalBug292245TestLanguage.g:1:25: T__10
                 {
                 mT__10(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:31: RULE_APOSTROPHE_CHAR
+                // PsiInternalBug292245TestLanguage.g:1:31: RULE_APOSTROPHE_CHAR
                 {
                 mRULE_APOSTROPHE_CHAR(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:52: RULE_CHAR
+                // PsiInternalBug292245TestLanguage.g:1:52: RULE_CHAR
                 {
                 mRULE_CHAR(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/terminalrules/idea/parser/antlr/internal/PsiInternalBug292245TestLanguage.g:1:62: RULE_WS
+                // PsiInternalBug292245TestLanguage.g:1:62: RULE_WS
                 {
                 mRULE_WS(); 
 

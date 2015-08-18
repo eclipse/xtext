@@ -46,7 +46,7 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
         
 
     public String[] getTokenNames() { return PsiInternalEnumAndReferenceTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalEnumAndReferenceTestLanguage.g"; }
 
 
 
@@ -70,19 +70,19 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "entryRuleEntityWithEnumAndReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:52:1: entryRuleEntityWithEnumAndReference : ruleEntityWithEnumAndReference EOF ;
+    // PsiInternalEnumAndReferenceTestLanguage.g:52:1: entryRuleEntityWithEnumAndReference : ruleEntityWithEnumAndReference EOF ;
     public final void entryRuleEntityWithEnumAndReference() throws RecognitionException {
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:52:36: ( ruleEntityWithEnumAndReference EOF )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:53:2: ruleEntityWithEnumAndReference EOF
+            // PsiInternalEnumAndReferenceTestLanguage.g:52:36: ( ruleEntityWithEnumAndReference EOF )
+            // PsiInternalEnumAndReferenceTestLanguage.g:53:2: ruleEntityWithEnumAndReference EOF
             {
              markComposite(elementTypeProvider.getEntityWithEnumAndReferenceElementType()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference54);
+            pushFollow(FollowSets000.FOLLOW_1);
             ruleEntityWithEnumAndReference();
 
             state._fsp--;
 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference57); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -99,29 +99,29 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "ruleEntityWithEnumAndReference"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:58:1: ruleEntityWithEnumAndReference : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
+    // PsiInternalEnumAndReferenceTestLanguage.g:58:1: ruleEntityWithEnumAndReference : ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) ;
     public final void ruleEntityWithEnumAndReference() throws RecognitionException {
         Token lv_name_1_0=null;
         Token otherlv_2=null;
         Token otherlv_3=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:58:31: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:58:31: ( ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:59:2: ( ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) ) ( (lv_name_1_0= RULE_ID ) ) otherlv_2= 'reference' ( (otherlv_3= RULE_ID ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
+            // PsiInternalEnumAndReferenceTestLanguage.g:60:3: ( (lv_type_0_0= ruleKindOfKeyword ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:62:5: lv_type_0_0= ruleKindOfKeyword
+            // PsiInternalEnumAndReferenceTestLanguage.g:61:4: (lv_type_0_0= ruleKindOfKeyword )
+            // PsiInternalEnumAndReferenceTestLanguage.g:62:5: lv_type_0_0= ruleKindOfKeyword
             {
 
             					markComposite(elementTypeProvider.getEntityWithEnumAndReference_TypeKindOfKeywordEnumRuleCall_0_0ElementType());
             				
-            pushFollow(FollowSets000.FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference89);
+            pushFollow(FollowSets000.FOLLOW_3);
             ruleKindOfKeyword();
 
             state._fsp--;
@@ -135,16 +135,16 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
             }
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:71:3: ( (lv_name_1_0= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:71:3: ( (lv_name_1_0= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:73:5: lv_name_1_0= RULE_ID
+            // PsiInternalEnumAndReferenceTestLanguage.g:72:4: (lv_name_1_0= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:73:5: lv_name_1_0= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_NameIDTerminalRuleCall_1_0ElementType());
             				
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference127); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_4); 
 
             					doneLeaf(lv_name_1_0);
             				
@@ -157,20 +157,20 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
             			markLeaf(elementTypeProvider.getEntityWithEnumAndReference_ReferenceKeyword_2ElementType());
             		
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleEntityWithEnumAndReference152); 
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_2);
             		
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:89:3: ( (otherlv_3= RULE_ID ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:89:3: ( (otherlv_3= RULE_ID ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:91:5: otherlv_3= RULE_ID
+            // PsiInternalEnumAndReferenceTestLanguage.g:90:4: (otherlv_3= RULE_ID )
+            // PsiInternalEnumAndReferenceTestLanguage.g:91:5: otherlv_3= RULE_ID
             {
 
             					markLeaf(elementTypeProvider.getEntityWithEnumAndReference_RefEntityWithEnumAndReferenceCrossReference_3_0ElementType());
             				
-            otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179); 
+            otherlv_3=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             					doneLeaf(otherlv_3);
             				
@@ -199,16 +199,16 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
 
     // $ANTLR start "ruleKindOfKeyword"
-    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:104:1: ruleKindOfKeyword : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
+    // PsiInternalEnumAndReferenceTestLanguage.g:104:1: ruleKindOfKeyword : ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) ;
     public final void ruleKindOfKeyword() throws RecognitionException {
         Token enumLiteral_0=null;
         Token enumLiteral_1=null;
 
         try {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:104:18: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:104:18: ( ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
+            // PsiInternalEnumAndReferenceTestLanguage.g:105:2: ( (enumLiteral_0= 'kindOfKeyword' ) | (enumLiteral_1= 'anotherEnumLiteral' ) )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -226,15 +226,15 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
             }
             switch (alt1) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:107:4: enumLiteral_0= 'kindOfKeyword'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:106:3: (enumLiteral_0= 'kindOfKeyword' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:107:4: enumLiteral_0= 'kindOfKeyword'
                     {
 
                     				markLeaf(elementTypeProvider.getKindOfKeyword_KindOfKeywordEnumLiteralDeclaration_0ElementType());
                     			
-                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleKindOfKeyword223); 
+                    enumLiteral_0=(Token)match(input,12,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_0);
                     			
@@ -245,15 +245,15 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
                     {
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/enumrules/idea/parser/antlr/internal/PsiInternalEnumAndReferenceTestLanguage.g:117:4: enumLiteral_1= 'anotherEnumLiteral'
+                    // PsiInternalEnumAndReferenceTestLanguage.g:116:3: (enumLiteral_1= 'anotherEnumLiteral' )
+                    // PsiInternalEnumAndReferenceTestLanguage.g:117:4: enumLiteral_1= 'anotherEnumLiteral'
                     {
 
                     				markLeaf(elementTypeProvider.getKindOfKeyword_AnotherEnumLiteralEnumLiteralDeclaration_1ElementType());
                     			
-                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleKindOfKeyword256); 
+                    enumLiteral_1=(Token)match(input,13,FollowSets000.FOLLOW_2); 
 
                     				doneLeaf(enumLiteral_1);
                     			
@@ -287,14 +287,10 @@ public class PsiInternalEnumAndReferenceTestLanguageParser extends AbstractPsiAn
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference54 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference57 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference89 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference127 = new BitSet(new long[]{0x0000000000000800L});
-        public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference152 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_ruleKindOfKeyword223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleKindOfKeyword256 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000800L});
     }
 
 

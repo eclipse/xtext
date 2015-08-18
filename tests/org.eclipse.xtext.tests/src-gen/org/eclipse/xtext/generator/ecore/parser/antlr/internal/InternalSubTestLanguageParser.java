@@ -50,7 +50,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
         
 
     public String[] getTokenNames() { return InternalSubTestLanguageParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g"; }
+    public String getGrammarFileName() { return "InternalSubTestLanguage.g"; }
 
 
 
@@ -75,7 +75,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSubMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:67:1: entryRuleSubMain returns [EObject current=null] : iv_ruleSubMain= ruleSubMain EOF ;
+    // InternalSubTestLanguage.g:67:1: entryRuleSubMain returns [EObject current=null] : iv_ruleSubMain= ruleSubMain EOF ;
     public final EObject entryRuleSubMain() throws RecognitionException {
         EObject current = null;
 
@@ -83,17 +83,17 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:68:2: (iv_ruleSubMain= ruleSubMain EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:69:2: iv_ruleSubMain= ruleSubMain EOF
+            // InternalSubTestLanguage.g:68:2: (iv_ruleSubMain= ruleSubMain EOF )
+            // InternalSubTestLanguage.g:69:2: iv_ruleSubMain= ruleSubMain EOF
             {
              newCompositeNode(grammarAccess.getSubMainRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSubMain_in_entryRuleSubMain75);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSubMain=ruleSubMain();
 
             state._fsp--;
 
              current =iv_ruleSubMain; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSubMain85); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -111,7 +111,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSubMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:76:1: ruleSubMain returns [EObject current=null] : (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) ;
+    // InternalSubTestLanguage.g:76:1: ruleSubMain returns [EObject current=null] : (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) ;
     public final EObject ruleSubMain() throws RecognitionException {
         EObject current = null;
 
@@ -125,26 +125,26 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:79:28: ( (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:80:1: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
+            // InternalSubTestLanguage.g:79:28: ( (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? ) )
+            // InternalSubTestLanguage.g:80:1: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:80:1: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:80:3: otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )?
+            // InternalSubTestLanguage.g:80:1: (otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )? )
+            // InternalSubTestLanguage.g:80:3: otherlv_0= '{' ( (lv_superMains_1_0= ruleSuperMain ) ) otherlv_2= '}' ( (lv_another_3_0= ruleAnotherSuperMain ) )?
             {
-            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleSubMain122); 
+            otherlv_0=(Token)match(input,11,FollowSets000.FOLLOW_3); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSubMainAccess().getLeftCurlyBracketKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:84:1: ( (lv_superMains_1_0= ruleSuperMain ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:85:1: (lv_superMains_1_0= ruleSuperMain )
+            // InternalSubTestLanguage.g:84:1: ( (lv_superMains_1_0= ruleSuperMain ) )
+            // InternalSubTestLanguage.g:85:1: (lv_superMains_1_0= ruleSuperMain )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:85:1: (lv_superMains_1_0= ruleSuperMain )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:86:3: lv_superMains_1_0= ruleSuperMain
+            // InternalSubTestLanguage.g:85:1: (lv_superMains_1_0= ruleSuperMain )
+            // InternalSubTestLanguage.g:86:3: lv_superMains_1_0= ruleSuperMain
             {
              
             	        newCompositeNode(grammarAccess.getSubMainAccess().getSuperMainsSuperMainParserRuleCall_1_0()); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleSuperMain_in_ruleSubMain143);
+            pushFollow(FollowSets000.FOLLOW_4);
             lv_superMains_1_0=ruleSuperMain();
 
             state._fsp--;
@@ -166,11 +166,11 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleSubMain155); 
+            otherlv_2=(Token)match(input,12,FollowSets000.FOLLOW_5); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:106:1: ( (lv_another_3_0= ruleAnotherSuperMain ) )?
+            // InternalSubTestLanguage.g:106:1: ( (lv_another_3_0= ruleAnotherSuperMain ) )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -179,15 +179,15 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:107:1: (lv_another_3_0= ruleAnotherSuperMain )
+                    // InternalSubTestLanguage.g:107:1: (lv_another_3_0= ruleAnotherSuperMain )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:107:1: (lv_another_3_0= ruleAnotherSuperMain )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:108:3: lv_another_3_0= ruleAnotherSuperMain
+                    // InternalSubTestLanguage.g:107:1: (lv_another_3_0= ruleAnotherSuperMain )
+                    // InternalSubTestLanguage.g:108:3: lv_another_3_0= ruleAnotherSuperMain
                     {
                      
                     	        newCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0()); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleAnotherSuperMain_in_ruleSubMain176);
+                    pushFollow(FollowSets000.FOLLOW_2);
                     lv_another_3_0=ruleAnotherSuperMain();
 
                     state._fsp--;
@@ -233,7 +233,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAnotherSuperMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:132:1: entryRuleAnotherSuperMain returns [EObject current=null] : iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF ;
+    // InternalSubTestLanguage.g:132:1: entryRuleAnotherSuperMain returns [EObject current=null] : iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF ;
     public final EObject entryRuleAnotherSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -241,17 +241,17 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:133:2: (iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:134:2: iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF
+            // InternalSubTestLanguage.g:133:2: (iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF )
+            // InternalSubTestLanguage.g:134:2: iv_ruleAnotherSuperMain= ruleAnotherSuperMain EOF
             {
              newCompositeNode(grammarAccess.getAnotherSuperMainRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAnotherSuperMain_in_entryRuleAnotherSuperMain213);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleAnotherSuperMain=ruleAnotherSuperMain();
 
             state._fsp--;
 
              current =iv_ruleAnotherSuperMain; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAnotherSuperMain223); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -269,7 +269,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAnotherSuperMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:141:1: ruleAnotherSuperMain returns [EObject current=null] : (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalSubTestLanguage.g:141:1: ruleAnotherSuperMain returns [EObject current=null] : (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleAnotherSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -279,23 +279,23 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:144:28: ( (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:145:1: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSubTestLanguage.g:144:28: ( (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalSubTestLanguage.g:145:1: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:145:1: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:145:3: otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) )
+            // InternalSubTestLanguage.g:145:1: (otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSubTestLanguage.g:145:3: otherlv_0= 'ups' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleAnotherSuperMain260); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:149:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:150:1: (lv_name_1_0= RULE_ID )
+            // InternalSubTestLanguage.g:149:1: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSubTestLanguage.g:150:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:150:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:151:3: lv_name_1_0= RULE_ID
+            // InternalSubTestLanguage.g:150:1: (lv_name_1_0= RULE_ID )
+            // InternalSubTestLanguage.g:151:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAnotherSuperMain277); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -336,7 +336,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleSuperMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:175:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
+    // InternalSubTestLanguage.g:175:1: entryRuleSuperMain returns [EObject current=null] : iv_ruleSuperMain= ruleSuperMain EOF ;
     public final EObject entryRuleSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -344,17 +344,17 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:176:2: (iv_ruleSuperMain= ruleSuperMain EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:177:2: iv_ruleSuperMain= ruleSuperMain EOF
+            // InternalSubTestLanguage.g:176:2: (iv_ruleSuperMain= ruleSuperMain EOF )
+            // InternalSubTestLanguage.g:177:2: iv_ruleSuperMain= ruleSuperMain EOF
             {
              newCompositeNode(grammarAccess.getSuperMainRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSuperMain_in_entryRuleSuperMain318);
+            pushFollow(FollowSets000.FOLLOW_1);
             iv_ruleSuperMain=ruleSuperMain();
 
             state._fsp--;
 
              current =iv_ruleSuperMain; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSuperMain328); 
+            match(input,EOF,FollowSets000.FOLLOW_2); 
 
             }
 
@@ -372,7 +372,7 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleSuperMain"
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:184:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
+    // InternalSubTestLanguage.g:184:1: ruleSuperMain returns [EObject current=null] : (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) ;
     public final EObject ruleSuperMain() throws RecognitionException {
         EObject current = null;
 
@@ -382,23 +382,23 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:187:28: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:188:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSubTestLanguage.g:187:28: ( (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) ) )
+            // InternalSubTestLanguage.g:188:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:188:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:188:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
+            // InternalSubTestLanguage.g:188:1: (otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) ) )
+            // InternalSubTestLanguage.g:188:3: otherlv_0= 'super' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleSuperMain365); 
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_6); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSuperMainAccess().getSuperKeyword_0());
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:192:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:193:1: (lv_name_1_0= RULE_ID )
+            // InternalSubTestLanguage.g:192:1: ( (lv_name_1_0= RULE_ID ) )
+            // InternalSubTestLanguage.g:193:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:193:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/generator/ecore/parser/antlr/internal/InternalSubTestLanguage.g:194:3: lv_name_1_0= RULE_ID
+            // InternalSubTestLanguage.g:193:1: (lv_name_1_0= RULE_ID )
+            // InternalSubTestLanguage.g:194:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSuperMain382); 
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); 
 
             			newLeafNode(lv_name_1_0, grammarAccess.getSuperMainAccess().getNameIDTerminalRuleCall_1_0()); 
             		
@@ -444,20 +444,12 @@ public class InternalSubTestLanguageParser extends AbstractInternalAntlrParser {
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleSubMain_in_entryRuleSubMain75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSubMain85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleSubMain122 = new BitSet(new long[]{0x0000000000004000L});
-        public static final BitSet FOLLOW_ruleSuperMain_in_ruleSubMain143 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleSubMain155 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_ruleAnotherSuperMain_in_ruleSubMain176 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAnotherSuperMain_in_entryRuleAnotherSuperMain213 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAnotherSuperMain223 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleAnotherSuperMain260 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleAnotherSuperMain277 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSuperMain_in_entryRuleSuperMain318 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSuperMain328 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleSuperMain365 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSuperMain382 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000010L});
     }
 
 

@@ -95,7 +95,7 @@ ruleModule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -112,7 +112,7 @@ ruleModule returns [EObject current=null]
        			$current, 
        			"imports",
         		lv_imports_2_0, 
-        		"Import");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Import");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -130,7 +130,7 @@ ruleModule returns [EObject current=null]
        			$current, 
        			"statements",
         		lv_statements_3_0, 
-        		"Statement");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Statement");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -173,7 +173,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importedNamespace",
         		lv_importedNamespace_1_0, 
-        		"ImportName");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.ImportName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -297,7 +297,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -318,7 +318,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"args",
         		lv_args_3_0, 
-        		"DeclaredParameter");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.DeclaredParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -340,7 +340,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"args",
         		lv_args_5_0, 
-        		"DeclaredParameter");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.DeclaredParameter");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -366,7 +366,7 @@ ruleDefinition returns [EObject current=null]
        			$current, 
        			"expr",
         		lv_expr_8_0, 
-        		"Expression");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -410,7 +410,7 @@ ruleDeclaredParameter returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -450,7 +450,7 @@ ruleEvaluation returns [EObject current=null]
        			$current, 
        			"expression",
         		lv_expression_0_0, 
-        		"Expression");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -553,7 +553,7 @@ ruleAddition returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_5_0, 
-        		"Multiplication");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Multiplication");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -622,7 +622,7 @@ ruleMultiplication returns [EObject current=null]
        			$current, 
        			"right",
         		lv_right_5_0, 
-        		"PrimaryExpression");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.PrimaryExpression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -686,7 +686,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_4_0, 
-        		"NUMBER");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.NUMBER");
 	    }
 
 )
@@ -727,7 +727,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"args",
         		lv_args_8_0, 
-        		"Expression");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -749,7 +749,7 @@ rulePrimaryExpression returns [EObject current=null]
        			$current, 
        			"args",
         		lv_args_10_0, 
-        		"Expression");
+        		"org.eclipse.xtext.example.arithmetics.Arithmetics.Expression");
 	        afterParserOrEnumRuleCall();
 	    }
 

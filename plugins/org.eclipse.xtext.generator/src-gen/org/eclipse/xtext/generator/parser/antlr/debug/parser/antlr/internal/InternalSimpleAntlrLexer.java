@@ -58,15 +58,15 @@ public class InternalSimpleAntlrLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g"; }
+    public String getGrammarFileName() { return "InternalSimpleAntlr.g"; }
 
     // $ANTLR start "T__13"
     public final void mT__13() throws RecognitionException {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:11:7: ( 'grammar' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:11:9: 'grammar'
+            // InternalSimpleAntlr.g:11:7: ( 'grammar' )
+            // InternalSimpleAntlr.g:11:9: 'grammar'
             {
             match("grammar"); 
 
@@ -86,8 +86,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:12:7: ( ';' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:12:9: ';'
+            // InternalSimpleAntlr.g:12:7: ( ';' )
+            // InternalSimpleAntlr.g:12:9: ';'
             {
             match(';'); 
 
@@ -106,8 +106,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:13:7: ( 'options' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:13:9: 'options'
+            // InternalSimpleAntlr.g:13:7: ( 'options' )
+            // InternalSimpleAntlr.g:13:9: 'options'
             {
             match("options"); 
 
@@ -127,8 +127,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:14:7: ( '{' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:14:9: '{'
+            // InternalSimpleAntlr.g:14:7: ( '{' )
+            // InternalSimpleAntlr.g:14:9: '{'
             {
             match('{'); 
 
@@ -147,8 +147,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:15:7: ( '}' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:15:9: '}'
+            // InternalSimpleAntlr.g:15:7: ( '}' )
+            // InternalSimpleAntlr.g:15:9: '}'
             {
             match('}'); 
 
@@ -167,8 +167,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:16:7: ( '=' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:16:9: '='
+            // InternalSimpleAntlr.g:16:7: ( '=' )
+            // InternalSimpleAntlr.g:16:9: '='
             {
             match('='); 
 
@@ -187,8 +187,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:17:7: ( 'fragment' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:17:9: 'fragment'
+            // InternalSimpleAntlr.g:17:7: ( 'fragment' )
+            // InternalSimpleAntlr.g:17:9: 'fragment'
             {
             match("fragment"); 
 
@@ -208,8 +208,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:18:7: ( '[' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:18:9: '['
+            // InternalSimpleAntlr.g:18:7: ( '[' )
+            // InternalSimpleAntlr.g:18:9: '['
             {
             match('['); 
 
@@ -228,8 +228,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:19:7: ( ',' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:19:9: ','
+            // InternalSimpleAntlr.g:19:7: ( ',' )
+            // InternalSimpleAntlr.g:19:9: ','
             {
             match(','); 
 
@@ -248,8 +248,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:20:7: ( ']' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:20:9: ']'
+            // InternalSimpleAntlr.g:20:7: ( ']' )
+            // InternalSimpleAntlr.g:20:9: ']'
             {
             match(']'); 
 
@@ -268,8 +268,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:21:7: ( ':' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:21:9: ':'
+            // InternalSimpleAntlr.g:21:7: ( ':' )
+            // InternalSimpleAntlr.g:21:9: ':'
             {
             match(':'); 
 
@@ -288,8 +288,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:22:7: ( '|' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:22:9: '|'
+            // InternalSimpleAntlr.g:22:7: ( '|' )
+            // InternalSimpleAntlr.g:22:9: '|'
             {
             match('|'); 
 
@@ -308,8 +308,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:23:7: ( '+' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:23:9: '+'
+            // InternalSimpleAntlr.g:23:7: ( '+' )
+            // InternalSimpleAntlr.g:23:9: '+'
             {
             match('+'); 
 
@@ -328,8 +328,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:24:7: ( '*' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:24:9: '*'
+            // InternalSimpleAntlr.g:24:7: ( '*' )
+            // InternalSimpleAntlr.g:24:9: '*'
             {
             match('*'); 
 
@@ -348,8 +348,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:25:7: ( '?' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:25:9: '?'
+            // InternalSimpleAntlr.g:25:7: ( '?' )
+            // InternalSimpleAntlr.g:25:9: '?'
             {
             match('?'); 
 
@@ -368,8 +368,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:26:7: ( '~' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:26:9: '~'
+            // InternalSimpleAntlr.g:26:7: ( '~' )
+            // InternalSimpleAntlr.g:26:9: '~'
             {
             match('~'); 
 
@@ -388,8 +388,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:27:7: ( '..' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:27:9: '..'
+            // InternalSimpleAntlr.g:27:7: ( '..' )
+            // InternalSimpleAntlr.g:27:9: '..'
             {
             match(".."); 
 
@@ -409,8 +409,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:28:7: ( '=>' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:28:9: '=>'
+            // InternalSimpleAntlr.g:28:7: ( '=>' )
+            // InternalSimpleAntlr.g:28:9: '=>'
             {
             match("=>"); 
 
@@ -430,8 +430,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:29:7: ( '||' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:29:9: '||'
+            // InternalSimpleAntlr.g:29:7: ( '||' )
+            // InternalSimpleAntlr.g:29:9: '||'
             {
             match("||"); 
 
@@ -451,8 +451,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:30:7: ( '&&' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:30:9: '&&'
+            // InternalSimpleAntlr.g:30:7: ( '&&' )
+            // InternalSimpleAntlr.g:30:9: '&&'
             {
             match("&&"); 
 
@@ -472,8 +472,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:31:7: ( '!' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:31:9: '!'
+            // InternalSimpleAntlr.g:31:7: ( '!' )
+            // InternalSimpleAntlr.g:31:9: '!'
             {
             match('!'); 
 
@@ -492,8 +492,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:32:7: ( ')' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:32:9: ')'
+            // InternalSimpleAntlr.g:32:7: ( ')' )
+            // InternalSimpleAntlr.g:32:9: ')'
             {
             match(')'); 
 
@@ -512,8 +512,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:33:7: ( 'skip();' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:33:9: 'skip();'
+            // InternalSimpleAntlr.g:33:7: ( 'skip();' )
+            // InternalSimpleAntlr.g:33:9: 'skip();'
             {
             match("skip();"); 
 
@@ -533,8 +533,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:34:7: ( '.' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:34:9: '.'
+            // InternalSimpleAntlr.g:34:7: ( '.' )
+            // InternalSimpleAntlr.g:34:9: '.'
             {
             match('.'); 
 
@@ -553,8 +553,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_EMPTY_PAREN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1728:18: ( RULE_OPEN ')' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1728:20: RULE_OPEN ')'
+            // InternalSimpleAntlr.g:1728:18: ( RULE_OPEN ')' )
+            // InternalSimpleAntlr.g:1728:20: RULE_OPEN ')'
             {
             mRULE_OPEN(); 
             match(')'); 
@@ -574,11 +574,11 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1730:11: ( '(' ( RULE_WS )* )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1730:13: '(' ( RULE_WS )*
+            // InternalSimpleAntlr.g:1730:11: ( '(' ( RULE_WS )* )
+            // InternalSimpleAntlr.g:1730:13: '(' ( RULE_WS )*
             {
             match('('); 
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1730:17: ( RULE_WS )*
+            // InternalSimpleAntlr.g:1730:17: ( RULE_WS )*
             loop1:
             do {
                 int alt1=2;
@@ -591,7 +591,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1730:17: RULE_WS
+            	    // InternalSimpleAntlr.g:1730:17: RULE_WS
             	    {
             	    mRULE_WS(); 
 
@@ -619,10 +619,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1732:9: ( ( '$' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1732:11: ( '$' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSimpleAntlr.g:1732:9: ( ( '$' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalSimpleAntlr.g:1732:11: ( '$' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1732:11: ( '$' )?
+            // InternalSimpleAntlr.g:1732:11: ( '$' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -631,7 +631,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1732:11: '$'
+                    // InternalSimpleAntlr.g:1732:11: '$'
                     {
                     match('$'); 
 
@@ -649,7 +649,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1732:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalSimpleAntlr.g:1732:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -662,7 +662,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:
+            	    // InternalSimpleAntlr.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -698,10 +698,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1734:10: ( ( '0' .. '9' )+ )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1734:12: ( '0' .. '9' )+
+            // InternalSimpleAntlr.g:1734:10: ( ( '0' .. '9' )+ )
+            // InternalSimpleAntlr.g:1734:12: ( '0' .. '9' )+
             {
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1734:12: ( '0' .. '9' )+
+            // InternalSimpleAntlr.g:1734:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -715,7 +715,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1734:13: '0' .. '9'
+            	    // InternalSimpleAntlr.g:1734:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -747,10 +747,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSimpleAntlr.g:1736:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalSimpleAntlr.g:1736:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalSimpleAntlr.g:1736:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -768,10 +768,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalSimpleAntlr.g:1736:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalSimpleAntlr.g:1736:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -787,7 +787,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:21: '\\\\' .
+                    	    // InternalSimpleAntlr.g:1736:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -795,7 +795,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalSimpleAntlr.g:1736:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -820,10 +820,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalSimpleAntlr.g:1736:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalSimpleAntlr.g:1736:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -839,7 +839,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:54: '\\\\' .
+                    	    // InternalSimpleAntlr.g:1736:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -847,7 +847,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1736:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalSimpleAntlr.g:1736:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -890,12 +890,12 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1738:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1738:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalSimpleAntlr.g:1738:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalSimpleAntlr.g:1738:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1738:24: ( options {greedy=false; } : . )*
+            // InternalSimpleAntlr.g:1738:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -920,7 +920,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1738:52: .
+            	    // InternalSimpleAntlr.g:1738:52: .
             	    {
             	    matchAny(); 
 
@@ -950,12 +950,12 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalSimpleAntlr.g:1740:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalSimpleAntlr.g:1740:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalSimpleAntlr.g:1740:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -968,7 +968,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalSimpleAntlr.g:1740:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -988,7 +988,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:40: ( ( '\\r' )? '\\n' )?
+            // InternalSimpleAntlr.g:1740:40: ( ( '\\r' )? '\\n' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -997,9 +997,9 @@ public class InternalSimpleAntlrLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:41: ( '\\r' )? '\\n'
+                    // InternalSimpleAntlr.g:1740:41: ( '\\r' )? '\\n'
                     {
-                    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:41: ( '\\r' )?
+                    // InternalSimpleAntlr.g:1740:41: ( '\\r' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1008,7 +1008,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1740:41: '\\r'
+                            // InternalSimpleAntlr.g:1740:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1040,10 +1040,10 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1742:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1742:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSimpleAntlr.g:1742:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalSimpleAntlr.g:1742:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1742:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalSimpleAntlr.g:1742:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt12=0;
             loop12:
             do {
@@ -1057,7 +1057,7 @@ public class InternalSimpleAntlrLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:
+            	    // InternalSimpleAntlr.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -1097,8 +1097,8 @@ public class InternalSimpleAntlrLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1744:16: ( . )
-            // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1744:18: .
+            // InternalSimpleAntlr.g:1744:16: ( . )
+            // InternalSimpleAntlr.g:1744:18: .
             {
             matchAny(); 
 
@@ -1113,236 +1113,236 @@ public class InternalSimpleAntlrLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | RULE_EMPTY_PAREN | RULE_OPEN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalSimpleAntlr.g:1:8: ( T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | RULE_EMPTY_PAREN | RULE_OPEN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt13=33;
         alt13 = dfa13.predict(input);
         switch (alt13) {
             case 1 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:10: T__13
+                // InternalSimpleAntlr.g:1:10: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 2 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:16: T__14
+                // InternalSimpleAntlr.g:1:16: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 3 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:22: T__15
+                // InternalSimpleAntlr.g:1:22: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 4 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:28: T__16
+                // InternalSimpleAntlr.g:1:28: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 5 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:34: T__17
+                // InternalSimpleAntlr.g:1:34: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 6 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:40: T__18
+                // InternalSimpleAntlr.g:1:40: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 7 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:46: T__19
+                // InternalSimpleAntlr.g:1:46: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 8 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:52: T__20
+                // InternalSimpleAntlr.g:1:52: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 9 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:58: T__21
+                // InternalSimpleAntlr.g:1:58: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 10 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:64: T__22
+                // InternalSimpleAntlr.g:1:64: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 11 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:70: T__23
+                // InternalSimpleAntlr.g:1:70: T__23
                 {
                 mT__23(); 
 
                 }
                 break;
             case 12 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:76: T__24
+                // InternalSimpleAntlr.g:1:76: T__24
                 {
                 mT__24(); 
 
                 }
                 break;
             case 13 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:82: T__25
+                // InternalSimpleAntlr.g:1:82: T__25
                 {
                 mT__25(); 
 
                 }
                 break;
             case 14 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:88: T__26
+                // InternalSimpleAntlr.g:1:88: T__26
                 {
                 mT__26(); 
 
                 }
                 break;
             case 15 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:94: T__27
+                // InternalSimpleAntlr.g:1:94: T__27
                 {
                 mT__27(); 
 
                 }
                 break;
             case 16 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:100: T__28
+                // InternalSimpleAntlr.g:1:100: T__28
                 {
                 mT__28(); 
 
                 }
                 break;
             case 17 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:106: T__29
+                // InternalSimpleAntlr.g:1:106: T__29
                 {
                 mT__29(); 
 
                 }
                 break;
             case 18 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:112: T__30
+                // InternalSimpleAntlr.g:1:112: T__30
                 {
                 mT__30(); 
 
                 }
                 break;
             case 19 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:118: T__31
+                // InternalSimpleAntlr.g:1:118: T__31
                 {
                 mT__31(); 
 
                 }
                 break;
             case 20 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:124: T__32
+                // InternalSimpleAntlr.g:1:124: T__32
                 {
                 mT__32(); 
 
                 }
                 break;
             case 21 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:130: T__33
+                // InternalSimpleAntlr.g:1:130: T__33
                 {
                 mT__33(); 
 
                 }
                 break;
             case 22 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:136: T__34
+                // InternalSimpleAntlr.g:1:136: T__34
                 {
                 mT__34(); 
 
                 }
                 break;
             case 23 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:142: T__35
+                // InternalSimpleAntlr.g:1:142: T__35
                 {
                 mT__35(); 
 
                 }
                 break;
             case 24 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:148: T__36
+                // InternalSimpleAntlr.g:1:148: T__36
                 {
                 mT__36(); 
 
                 }
                 break;
             case 25 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:154: RULE_EMPTY_PAREN
+                // InternalSimpleAntlr.g:1:154: RULE_EMPTY_PAREN
                 {
                 mRULE_EMPTY_PAREN(); 
 
                 }
                 break;
             case 26 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:171: RULE_OPEN
+                // InternalSimpleAntlr.g:1:171: RULE_OPEN
                 {
                 mRULE_OPEN(); 
 
                 }
                 break;
             case 27 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:181: RULE_ID
+                // InternalSimpleAntlr.g:1:181: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 28 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:189: RULE_INT
+                // InternalSimpleAntlr.g:1:189: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 29 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:198: RULE_STRING
+                // InternalSimpleAntlr.g:1:198: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 30 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:210: RULE_ML_COMMENT
+                // InternalSimpleAntlr.g:1:210: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 31 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:226: RULE_SL_COMMENT
+                // InternalSimpleAntlr.g:1:226: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 32 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:242: RULE_WS
+                // InternalSimpleAntlr.g:1:242: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 33 :
-                // ../../plugins/org.eclipse.xtext.generator/src-gen/org/eclipse/xtext/generator/parser/antlr/debug/parser/antlr/internal/InternalSimpleAntlr.g:1:250: RULE_ANY_OTHER
+                // InternalSimpleAntlr.g:1:250: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

@@ -125,8 +125,7 @@ public class ContentAssistTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getModel()
+  public EClass getModel()
   {
     return modelEClass;
   }
@@ -136,8 +135,7 @@ public EClass getModel()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_Imports()
+  public EReference getModel_Imports()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -147,8 +145,7 @@ public EReference getModel_Imports()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_GenerateDirective()
+  public EReference getModel_GenerateDirective()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -158,8 +155,7 @@ public EReference getModel_GenerateDirective()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getModel_ReferenceHolder()
+  public EReference getModel_ReferenceHolder()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
@@ -169,8 +165,7 @@ public EReference getModel_ReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getReferenceHolder()
+  public EClass getReferenceHolder()
   {
     return referenceHolderEClass;
   }
@@ -180,8 +175,7 @@ public EClass getReferenceHolder()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceHolder_DefaultReference()
+  public EReference getReferenceHolder_DefaultReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(0);
   }
@@ -191,8 +185,7 @@ public EReference getReferenceHolder_DefaultReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceHolder_CustomizedReference()
+  public EReference getReferenceHolder_CustomizedReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(1);
   }
@@ -202,8 +195,7 @@ public EReference getReferenceHolder_CustomizedReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EReference getReferenceHolder_SubtypeReference()
+  public EReference getReferenceHolder_SubtypeReference()
   {
     return (EReference)referenceHolderEClass.getEStructuralFeatures().get(2);
   }
@@ -213,8 +205,7 @@ public EReference getReferenceHolder_SubtypeReference()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getGenerateDirective()
+  public EClass getGenerateDirective()
   {
     return generateDirectiveEClass;
   }
@@ -224,8 +215,7 @@ public EClass getGenerateDirective()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getGenerateDirective_TypeName()
+  public EAttribute getGenerateDirective_TypeName()
   {
     return (EAttribute)generateDirectiveEClass.getEStructuralFeatures().get(0);
   }
@@ -235,8 +225,7 @@ public EAttribute getGenerateDirective_TypeName()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EClass getImport()
+  public EClass getImport()
   {
     return importEClass;
   }
@@ -246,8 +235,7 @@ public EClass getImport()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public EAttribute getImport_ImportedNamespace()
+  public EAttribute getImport_ImportedNamespace()
   {
     return (EAttribute)importEClass.getEStructuralFeatures().get(0);
   }
@@ -257,8 +245,7 @@ public EAttribute getImport_ImportedNamespace()
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
+  public ContentAssistTestLanguageFactory getContentAssistTestLanguageFactory()
   {
     return (ContentAssistTestLanguageFactory)getEFactoryInstance();
   }

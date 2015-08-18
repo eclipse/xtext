@@ -34,19 +34,19 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g"; }
+    public String getGrammarFileName() { return "PsiInternalIndentationAwareTestLanguage.g"; }
 
     // $ANTLR start "RULE_SL_COMMENT"
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:130:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:130:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:130:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* )
+            // PsiInternalIndentationAwareTestLanguage.g:130:19: '//' (~ ( ( '\\n' | '\\r' ) ) )*
             {
             match("//"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:130:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // PsiInternalIndentationAwareTestLanguage.g:130:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -59,7 +59,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:130:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // PsiInternalIndentationAwareTestLanguage.g:130:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -95,8 +95,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:132:13: ( 'synthetic:INDENT' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:132:15: 'synthetic:INDENT'
+            // PsiInternalIndentationAwareTestLanguage.g:132:13: ( 'synthetic:INDENT' )
+            // PsiInternalIndentationAwareTestLanguage.g:132:15: 'synthetic:INDENT'
             {
             match("synthetic:INDENT"); 
 
@@ -116,8 +116,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_DEDENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:134:13: ( 'synthetic:DEDENT' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:134:15: 'synthetic:DEDENT'
+            // PsiInternalIndentationAwareTestLanguage.g:134:13: ( 'synthetic:DEDENT' )
+            // PsiInternalIndentationAwareTestLanguage.g:134:15: 'synthetic:DEDENT'
             {
             match("synthetic:DEDENT"); 
 
@@ -137,10 +137,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:136:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:136:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIndentationAwareTestLanguage.g:136:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // PsiInternalIndentationAwareTestLanguage.g:136:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:136:11: ( '^' )?
+            // PsiInternalIndentationAwareTestLanguage.g:136:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -149,7 +149,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:136:11: '^'
+                    // PsiInternalIndentationAwareTestLanguage.g:136:11: '^'
                     {
                     match('^'); 
 
@@ -167,7 +167,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:136:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // PsiInternalIndentationAwareTestLanguage.g:136:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -180,7 +180,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:
+            	    // PsiInternalIndentationAwareTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -216,10 +216,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:138:10: ( ( '0' .. '9' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:138:12: ( '0' .. '9' )+
+            // PsiInternalIndentationAwareTestLanguage.g:138:10: ( ( '0' .. '9' )+ )
+            // PsiInternalIndentationAwareTestLanguage.g:138:12: ( '0' .. '9' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:138:12: ( '0' .. '9' )+
+            // PsiInternalIndentationAwareTestLanguage.g:138:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -233,7 +233,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:138:13: '0' .. '9'
+            	    // PsiInternalIndentationAwareTestLanguage.g:138:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -265,10 +265,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIndentationAwareTestLanguage.g:140:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // PsiInternalIndentationAwareTestLanguage.g:140:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // PsiInternalIndentationAwareTestLanguage.g:140:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -286,10 +286,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // PsiInternalIndentationAwareTestLanguage.g:140:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // PsiInternalIndentationAwareTestLanguage.g:140:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -305,7 +305,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:21: '\\\\' .
+                    	    // PsiInternalIndentationAwareTestLanguage.g:140:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -313,7 +313,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // PsiInternalIndentationAwareTestLanguage.g:140:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -338,10 +338,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // PsiInternalIndentationAwareTestLanguage.g:140:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // PsiInternalIndentationAwareTestLanguage.g:140:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -357,7 +357,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:54: '\\\\' .
+                    	    // PsiInternalIndentationAwareTestLanguage.g:140:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -365,7 +365,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:140:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // PsiInternalIndentationAwareTestLanguage.g:140:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -408,12 +408,12 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:142:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:142:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // PsiInternalIndentationAwareTestLanguage.g:142:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // PsiInternalIndentationAwareTestLanguage.g:142:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:142:24: ( options {greedy=false; } : . )*
+            // PsiInternalIndentationAwareTestLanguage.g:142:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -438,7 +438,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:142:52: .
+            	    // PsiInternalIndentationAwareTestLanguage.g:142:52: .
             	    {
             	    matchAny(); 
 
@@ -468,10 +468,10 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:144:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:144:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIndentationAwareTestLanguage.g:144:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // PsiInternalIndentationAwareTestLanguage.g:144:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:144:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // PsiInternalIndentationAwareTestLanguage.g:144:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt9=0;
             loop9:
             do {
@@ -485,7 +485,7 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:
+            	    // PsiInternalIndentationAwareTestLanguage.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -525,8 +525,8 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:146:16: ( . )
-            // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:146:18: .
+            // PsiInternalIndentationAwareTestLanguage.g:146:16: ( . )
+            // PsiInternalIndentationAwareTestLanguage.g:146:18: .
             {
             matchAny(); 
 
@@ -541,68 +541,68 @@ public class PsiInternalIndentationAwareTestLanguageLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:8: ( RULE_SL_COMMENT | RULE_INDENT | RULE_DEDENT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // PsiInternalIndentationAwareTestLanguage.g:1:8: ( RULE_SL_COMMENT | RULE_INDENT | RULE_DEDENT | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt10=9;
         alt10 = dfa10.predict(input);
         switch (alt10) {
             case 1 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:10: RULE_SL_COMMENT
+                // PsiInternalIndentationAwareTestLanguage.g:1:10: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 2 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:26: RULE_INDENT
+                // PsiInternalIndentationAwareTestLanguage.g:1:26: RULE_INDENT
                 {
                 mRULE_INDENT(); 
 
                 }
                 break;
             case 3 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:38: RULE_DEDENT
+                // PsiInternalIndentationAwareTestLanguage.g:1:38: RULE_DEDENT
                 {
                 mRULE_DEDENT(); 
 
                 }
                 break;
             case 4 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:50: RULE_ID
+                // PsiInternalIndentationAwareTestLanguage.g:1:50: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 5 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:58: RULE_INT
+                // PsiInternalIndentationAwareTestLanguage.g:1:58: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 6 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:67: RULE_STRING
+                // PsiInternalIndentationAwareTestLanguage.g:1:67: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 7 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:79: RULE_ML_COMMENT
+                // PsiInternalIndentationAwareTestLanguage.g:1:79: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 8 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:95: RULE_WS
+                // PsiInternalIndentationAwareTestLanguage.g:1:95: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 9 :
-                // ../../intellij/org.eclipse.xtext.core.idea.tests/src-gen/org/eclipse/xtext/parser/indentation/idea/parser/antlr/internal/PsiInternalIndentationAwareTestLanguage.g:1:103: RULE_ANY_OTHER
+                // PsiInternalIndentationAwareTestLanguage.g:1:103: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
