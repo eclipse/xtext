@@ -18,6 +18,7 @@ import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.libraries.Library
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar
+import com.intellij.openapi.startup.StartupManager
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
@@ -37,7 +38,8 @@ import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
 import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
-import org.jetbrains.annotations.NotNull
+
+import static org.eclipse.xtend.core.idea.config.XtendLibraryManager.*
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -52,9 +54,20 @@ class XtendLibraryManager {
 		ensureXtendLibAvailable(rootModel, module, null)
 	}
 
-	def ensureXtendLibAvailable(@NotNull ModifiableRootModel rootModel, @NotNull Module module, PsiFile context) {
-		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(Data.name,
-			GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module));
+	def ensureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
+		val project = module.project
+		if (project.initialized) {
+			doEnsureXtendLibAvailable(rootModel, module, context)
+		} else {
+			StartupManager.getInstance(project).registerPostStartupActivity[
+				doEnsureXtendLibAvailable(rootModel, module, context)
+			]
+		}
+	}
+	
+	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
+		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
+		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(Data.name, scope)
 		if (psiClass == null) {
 			if (module.isMavenizedModule) {
 				module.addMavenDependency(context)
