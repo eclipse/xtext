@@ -92,7 +92,7 @@ public class XtHighlightingCalculator implements ISemanticHighlightingCalculator
 				provideHighlightingForRule(node, (TerminalRule) ele, acceptor);
 			else if (ele instanceof RuleCall) {
 				AbstractRule rule = ((RuleCall) ele).getRule();
-				if (rule instanceof TerminalRule)
+				if (rule instanceof TerminalRule && !rule.getName().equals("ANY_OTHER"))
 					provideHighlightingForRule(node, (TerminalRule) rule, acceptor);
 			} else if (ele instanceof CrossReference) {
 				AbstractElement rc = ((CrossReference) ele).getTerminal();
