@@ -16,7 +16,6 @@ import com.intellij.debugger.engine.DebugProcess
 import com.intellij.debugger.requests.ClassPrepareRequestor
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.psi.PsiDocumentManager
-import com.intellij.psi.util.PsiUtil
 import com.intellij.util.DocumentUtil
 import com.sun.jdi.AbsentInformationException
 import com.sun.jdi.Location
@@ -66,8 +65,11 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 			}
 			
 			val names = ApplicationManager.application.<Set<String>>runReadAction[ 
-				val trace = traceForVirtualFileProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(source.elementAt))
-				if (trace == null)
+				val sourceResource = VirtualFileInProject.forPsiElement(source.elementAt)
+				if (sourceResource === null)
+					throw NoDataException.INSTANCE;
+				val trace = traceForVirtualFileProvider.getTraceToTarget(sourceResource)
+				if (trace === null)
 					throw NoDataException.INSTANCE;
 				return trace.allAssociatedLocations.map[it.srcRelativeResourceURI.URI.lastSegment].toSet
 			]
@@ -144,8 +146,12 @@ class TraceBasedPositionManagerFactory extends PositionManagerFactory {
 				val psi = position.elementAt
 				val document = PsiDocumentManager.getInstance(psi.project).getDocument(psi.containingFile)
 				val range = DocumentUtil.getLineTextRange(document, position.line)
-				val traceToTarget = traceForVirtualFileProvider.getTraceToTarget(VirtualFileInProject.forPsiElement(psi))
-				if (traceToTarget == null) {
+				val sourceResource = VirtualFileInProject.forPsiElement(psi)
+				if (sourceResource === null) {
+					throw NoDataException.INSTANCE
+				}
+				val traceToTarget = traceForVirtualFileProvider.getTraceToTarget(sourceResource)
+				if (traceToTarget === null) {
 					throw NoDataException.INSTANCE
 				}
 				val result = newArrayList

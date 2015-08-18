@@ -96,12 +96,15 @@ public class ConfigurationProducerExtensions {
   
   private Iterable<PsiFile> getJavaFiles(@NotNull final PsiElement xtextElement) {
     final BaseXtextFile xtextFile = PsiTreeUtil.<BaseXtextFile>getParentOfType(xtextElement, BaseXtextFile.class, false);
-    boolean _equals = Objects.equal(xtextFile, null);
+    if ((xtextFile == null)) {
+      return CollectionLiterals.<PsiFile>emptySet();
+    }
+    final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(xtextFile);
+    boolean _equals = Objects.equal(fileInProject, null);
     if (_equals) {
       return CollectionLiterals.<PsiFile>emptySet();
     }
-    VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(xtextFile);
-    final IIdeaTrace trace = this.traceProvider.getTraceToTarget(_forPsiElement);
+    final IIdeaTrace trace = this.traceProvider.getTraceToTarget(fileInProject);
     if ((trace != null)) {
       final ArrayList<PsiFile> javaFiles = CollectionLiterals.<PsiFile>newArrayList();
       Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();

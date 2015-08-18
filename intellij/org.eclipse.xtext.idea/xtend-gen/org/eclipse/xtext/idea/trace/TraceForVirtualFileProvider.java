@@ -24,7 +24,6 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.intellij.psi.util.PsiUtilCore;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -122,18 +121,10 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   
   @Override
   public List<? extends PsiElement> getGeneratedElements(final PsiElement element) {
-    boolean _or = false;
-    if ((element == null)) {
-      _or = true;
-    } else {
-      VirtualFile _virtualFile = PsiUtilCore.getVirtualFile(element);
-      boolean _tripleEquals = (_virtualFile == null);
-      _or = _tripleEquals;
-    }
-    if (_or) {
+    final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);
+    if ((fileInProject == null)) {
       return CollectionLiterals.<PsiElement>emptyList();
     }
-    final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);
     final IIdeaTrace traceToTarget = this.getTraceToTarget(fileInProject);
     return this.getTracedElements(traceToTarget, element);
   }
@@ -211,6 +202,9 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   @Override
   public List<? extends PsiElement> getOriginalElements(final PsiElement element) {
     final VirtualFileInProject fileInProject = VirtualFileInProject.forPsiElement(element);
+    if ((fileInProject == null)) {
+      return CollectionLiterals.<PsiElement>emptyList();
+    }
     final VirtualFileBasedTrace traceToSource = this.getTraceToSource(fileInProject);
     return this.getTracedElements(traceToSource, element);
   }

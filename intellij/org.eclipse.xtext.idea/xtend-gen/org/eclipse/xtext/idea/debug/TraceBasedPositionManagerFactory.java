@@ -96,10 +96,12 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
         public Set<String> compute() {
           try {
             PsiElement _elementAt = source.getElementAt();
-            VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(_elementAt);
-            final IIdeaTrace trace = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_forPsiElement);
-            boolean _equals = Objects.equal(trace, null);
-            if (_equals) {
+            final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(_elementAt);
+            if ((sourceResource == null)) {
+              throw NoDataException.INSTANCE;
+            }
+            final IIdeaTrace trace = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(sourceResource);
+            if ((trace == null)) {
               throw NoDataException.INSTANCE;
             }
             Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
@@ -279,10 +281,12 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
             final Document document = _instance.getDocument(_containingFile);
             int _line = position.getLine();
             final TextRange range = DocumentUtil.getLineTextRange(document, _line);
-            VirtualFileInProject _forPsiElement = VirtualFileInProject.forPsiElement(psi);
-            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(_forPsiElement);
-            boolean _equals = Objects.equal(traceToTarget, null);
-            if (_equals) {
+            final VirtualFileInProject sourceResource = VirtualFileInProject.forPsiElement(psi);
+            if ((sourceResource == null)) {
+              throw NoDataException.INSTANCE;
+            }
+            final IIdeaTrace traceToTarget = TraceBasedPositionManager.this.traceForVirtualFileProvider.getTraceToTarget(sourceResource);
+            if ((traceToTarget == null)) {
               throw NoDataException.INSTANCE;
             }
             final ArrayList<Location> result = CollectionLiterals.<Location>newArrayList();
@@ -305,16 +309,16 @@ public class TraceBasedPositionManagerFactory extends PositionManagerFactory {
               URI _uRI = _srcRelativeResourceURI.getURI();
               String _lastSegment = _uRI.lastSegment();
               String _string = _lastSegment.toString();
-              boolean _equals_1 = Objects.equal(_sourceName, _string);
-              if (!_equals_1) {
+              boolean _equals = Objects.equal(_sourceName, _string);
+              if (!_equals) {
                 _and = false;
               } else {
                 ITextRegionWithLineInformation _textRegion_1 = location.getTextRegion();
                 int _lineNumber = _textRegion_1.getLineNumber();
                 ITextRegionWithLineInformation _textRegion_2 = location.getTextRegion();
                 int _endLineNumber = _textRegion_2.getEndLineNumber();
-                boolean _equals_2 = (_lineNumber == _endLineNumber);
-                _and = _equals_2;
+                boolean _equals_1 = (_lineNumber == _endLineNumber);
+                _and = _equals_1;
               }
               if (_and) {
                 ITextRegionWithLineInformation _textRegion_3 = location.getTextRegion();
