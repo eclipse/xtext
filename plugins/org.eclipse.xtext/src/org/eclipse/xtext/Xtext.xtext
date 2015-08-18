@@ -164,7 +164,7 @@ PredicatedKeyword returns Keyword:
 ;
 
 PredicatedRuleCall returns RuleCall:
-	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
+	(predicated?='=>' | firstSetPredicated?='->') rule=[AbstractRule|RuleID] ('<' arguments+=NamedArgument (',' arguments+=NamedArgument)* '>')?
 ;
 
 Assignment returns Assignment:
