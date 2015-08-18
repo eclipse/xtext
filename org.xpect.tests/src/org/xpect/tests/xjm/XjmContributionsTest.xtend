@@ -34,6 +34,10 @@ class XjmContributionsTest extends AbstractXjmTest {
 	@Test def void replace1() {
 		assertXjm(Replacement1)
 	}
+	
+	@Test def void replace2() {
+		assertXjm(Replacement2)
+	}
 }
 
 @XpectImport(Contribution1)
@@ -134,8 +138,21 @@ class Replacement1 {
 		suite org.xpect.tests.xjm.Replacement1 {
 		  test org.xpect.tests.xjm.Replacement1 {} // Imports: Contribution1, Contribution1Replacement
 		  contributionsFor @XpectSetupFactory {
-		    [INACTIVE] org.xpect.tests.xjm.Contribution1 InactiveBecause: ReplacedBy: org.xpect.tests.xjm.Contribution1Replacement ImportedBy:Replacement1
+		    [INACTIVE] org.xpect.tests.xjm.Contribution1 InactiveBecause: ReplacedBy: org.xpect.tests.xjm.Contribution1Replacement ImportedBy:Replacement1 Contribution1Replacement
 		    org.xpect.tests.xjm.Contribution1Replacement ImportedBy:Replacement1
+		  }
+		}
+	'''
+}
+
+@XpectImport(#[Contribution1Replacement])
+class Replacement2 {
+	override toString() '''
+		suite org.xpect.tests.xjm.Replacement2 {
+		  test org.xpect.tests.xjm.Replacement2 {} // Imports: Contribution1Replacement, Contribution1
+		  contributionsFor @XpectSetupFactory {
+		    [INACTIVE] org.xpect.tests.xjm.Contribution1 InactiveBecause: ReplacedBy: org.xpect.tests.xjm.Contribution1Replacement ImportedBy:Contribution1Replacement
+		    org.xpect.tests.xjm.Contribution1Replacement ImportedBy:Replacement2
 		  }
 		}
 	'''

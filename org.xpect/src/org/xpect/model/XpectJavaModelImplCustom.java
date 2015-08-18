@@ -86,6 +86,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		Set<JvmDeclaredType> imports = Sets.newLinkedHashSet();
 		for (JvmAnnotationTarget target : targets) {
 			imports.addAll(getAnnotationTypeValue(target, XpectImport.class));
+			imports.addAll(getAnnotationTypeValue(target, XpectReplace.class));
 			imports.addAll(getAnnotationTypeValue(target, XpectSetup.class));
 		}
 		XjmElement newOwner = contribution == null ? owner : contribution;
