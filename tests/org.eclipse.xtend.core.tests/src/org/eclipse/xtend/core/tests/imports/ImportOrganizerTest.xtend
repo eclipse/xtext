@@ -625,6 +625,28 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''', false)
 	}
 	
+	@Test def testInnerClasses_17() {
+		'''
+			class Test {
+				static String s
+				interface Bar {
+					class XYZ {
+						def foo() {s}
+					}
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Test {
+				static String s
+				interface Bar {
+					class XYZ {
+						def foo() {s}
+					}
+				}
+			}
+		''', false)
+	}
+	
 	/**https://bugs.eclipse.org/bugs/show_bug.cgi?id=448728 */
 	@Test def testBug448728() {
 		'''
@@ -2149,6 +2171,109 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			import java.io.Serializable
 
 			class Bar implements Serializable {
+			}
+		''')
+	} 
+	
+	@Test def testBug475238 () {
+		'''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							foo
+						}
+					}
+				}
+				def static foo() {}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							foo
+						}
+					}
+				}
+				def static foo() {}
+			}
+		''')
+	}
+	
+	@Test def testBug475238_1 () {
+		'''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							Foo.foo
+						}
+					}
+				}
+				def static foo() {}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							Foo.foo
+						}
+					}
+				}
+				def static foo() {}
+			}
+		''')
+	} 
+	@Test def testBug475238_2 () {
+		'''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							val i = Foo.foo return
+						}
+					}
+				}
+				static int foo
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							val i = Foo.foo return
+						}
+					}
+				}
+				static int foo
+			}
+		''')
+	} 
+	
+	@Test def testBug475238_3 () {
+		'''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							val i = foo return
+						}
+					}
+				}
+				static int foo
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def bar() {
+					new Runnable() {
+						override run() {
+							val i = foo return
+						}
+					}
+				}
+				static int foo
 			}
 		''')
 	} 
