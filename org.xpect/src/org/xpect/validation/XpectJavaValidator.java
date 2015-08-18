@@ -13,12 +13,16 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.validation.Check;
+import org.xpect.Component;
 import org.xpect.XpectConstants;
 import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
 import org.xpect.registry.ILanguageInfo;
+import org.xpect.setup.XpectSetupComponent;
+import org.xpect.util.JvmAnnotationUtil;
 import org.xpect.util.URIDelegationHandler;
 
 import com.google.inject.Inject;
@@ -54,6 +58,18 @@ public class XpectJavaValidator extends AbstractXpectJavaValidator {
 	protected void validateClassIsOnClasspath(Class<?> cls, Notifier ctx) {
 		if (typeReferences.findDeclaredType(cls, ctx) == null) {
 			error("The class " + cls.getName() + " is not on the classpath", XpectPackage.Literals.XPECT_TEST__DECLARED_SUITE);
+		}
+	}
+
+	@Check
+	public void checkComponent(Component component) {
+		JvmDeclaredType type = component.getComponentClass();
+		if (type == null || type.eIsProxy())
+			return;
+		XpectSetupComponent annotation = JvmAnnotationUtil.getJavaAnnotation(type, XpectSetupComponent.class);
+		if (annotation == null) {
+			String message = "The class " + type.getQualifiedName() + " must be annotated with @" + XpectSetupComponent.class.getSimpleName();
+			warning(message, XpectPackage.Literals.COMPONENT__COMPONENT_CLASS);
 		}
 	}
 

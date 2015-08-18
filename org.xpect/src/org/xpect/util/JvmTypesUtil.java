@@ -24,4 +24,12 @@ public class JvmTypesUtil {
 			collectAllSuperTypes(ref.getType(), visited);
 		return visited;
 	}
+
+	public static Set<JvmType> getSelfAndAllSuperTypes(JvmDeclaredType type) {
+		Set<JvmType> visited = Sets.newLinkedHashSet();
+		visited.add(type);
+		for (JvmTypeReference ref : ((JvmDeclaredType) type).getSuperTypes())
+			collectAllSuperTypes(ref.getType(), visited);
+		return visited;
+	}
 }

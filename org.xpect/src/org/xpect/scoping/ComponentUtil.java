@@ -32,21 +32,25 @@ public class ComponentUtil {
 		this.xjm = xjm;
 	}
 
-	private Set<JvmDeclaredType> addCompatibleContributions(Set<JvmDeclaredType> types) {
+	private Set<JvmDeclaredType> getCompatibleContributions(Set<JvmDeclaredType> types) {
 		Set<JvmDeclaredType> result = Sets.newHashSet();
+		Set<JvmDeclaredType> inactive = Sets.newHashSet();
 		Iterable<XjmContribution> contributions = xjm.getContributions(XpectSetupComponent.class);
-		CONT: for (XjmContribution contribution : contributions)
+		CONT: for (XjmContribution contribution : contributions) {
+			JvmDeclaredType jvmClass = contribution.getJvmClass();
 			if (contribution.isActive()) {
-				JvmDeclaredType jvmClass = contribution.getJvmClass();
-				Set<JvmType> superTypes = JvmTypesUtil.getAllSuperTypes(jvmClass);
+				Set<JvmType> superTypes = JvmTypesUtil.getSelfAndAllSuperTypes(jvmClass);
 				for (JvmType superType : superTypes)
 					if (superType instanceof JvmDeclaredType && types.contains(superType)) {
 						result.add(jvmClass);
 						continue CONT;
 					}
+			} else {
+				inactive.add(jvmClass);
 			}
+		}
 		for (JvmDeclaredType type : types)
-			if (!type.isAbstract() && type instanceof JvmGenericType && !((JvmGenericType) type).isInterface())
+			if (!type.isAbstract() && type instanceof JvmGenericType && !((JvmGenericType) type).isInterface() && !inactive.contains(type))
 				result.add(type);
 		return result;
 	}
@@ -80,7 +84,9 @@ public class ComponentUtil {
 				JvmDeclaredType jvmClass = contribution.getJvmClass();
 				collectAdders(jvmClass, ops);
 			}
-		return addCompatibleContributions(getFirstParameterTypes(ops));
+		Set<JvmDeclaredType> firstParameterTypes = getFirstParameterTypes(ops);
+		Set<JvmDeclaredType> compatibleContributions = getCompatibleContributions(firstParameterTypes);
+		return compatibleContributions;
 	}
 
 	public Set<JvmDeclaredType> getValidTypes(Assignment assignment) {
@@ -96,12 +102,12 @@ public class ComponentUtil {
 				JvmDeclaredType type = ((Component) container).getComponentClass();
 				if (type != null && !type.eIsProxy())
 					collectAdders(type, ops);
-				return addCompatibleContributions(getFirstParameterTypes(ops));
+				return getCompatibleContributions(getFirstParameterTypes(ops));
 			} else if (container instanceof XpectTest) {
 				return getValidRootTypes();
 			} else
 				return Collections.emptySet();
 		}
-		return addCompatibleContributions(getFirstParameterTypes(ops));
+		return getCompatibleContributions(getFirstParameterTypes(ops));
 	}
 }
