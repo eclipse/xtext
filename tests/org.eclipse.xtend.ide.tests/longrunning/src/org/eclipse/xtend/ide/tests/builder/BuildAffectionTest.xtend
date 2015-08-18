@@ -525,6 +525,39 @@ class BuildAffectionTest {
 	}
 	
 	@Test
+	def void testAffected_dependentProject_Java_WithExpression() {
+		val foo = createFile('Foo.java', '''
+			public class Foo {}
+		''')
+		createClientProjectFile('Client', '''
+			class Client extends Foo {
+				def void m(String s) {
+					s.length
+				}
+			}
+		''')
+		autoBuild
+		foo.changeContent('''
+			public class Foo {
+				protected int foo;
+			}
+		''')
+		assertBuildLogs('''
+			Building test.project
+			Build test.project in \d+ ms
+			Building test.client
+			Build test.client in \d+ ms
+			Building test.project
+			Build test.project in \d+ ms
+			Building test.client
+			indexing platform:/resource/test.client/src/Client.xtend
+			Build test.client in \d+ ms
+			Building test.client
+			Build test.client in \d+ ms
+		''')
+	}
+	
+	@Test
 	def void testAffected_annotationProcessorChanged_singleFile() {
 		val foo = createFile('Foo', '''
 			import org.eclipse.xtend.lib.macro.AbstractClassProcessor
