@@ -84,7 +84,9 @@
     </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//Alternatives"/>
     <genClasses ecoreClass="Xtext.ecore#//UnorderedGroup"/>
-    <genClasses ecoreClass="Xtext.ecore#//Group"/>
+    <genClasses ecoreClass="Xtext.ecore#//Group">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Group/guardCondition"/>
+    </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//CharacterRange">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/right"/>
@@ -96,14 +98,26 @@
     <genClasses ecoreClass="Xtext.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//Parameter/name"/>
     </genClasses>
-    <genClasses ecoreClass="Xtext.ecore#//ConditionalBranch">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ConditionalBranch/parameter"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//ConditionalBranch/filtered"/>
-    </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//NamedArgument">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/parameter"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//NamedArgument/literalValue"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//NamedArgument/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//NamedArgument/calledByName"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Condition"/>
+    <genClasses ecoreClass="Xtext.ecore#//Conjunction"/>
+    <genClasses ecoreClass="Xtext.ecore#//Negation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Negation/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Disjunction"/>
+    <genClasses ecoreClass="Xtext.ecore#//CompositeCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompositeCondition/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompositeCondition/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//ParameterReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//ParameterReference/parameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//LiteralCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtext.ecore#//LiteralCondition/true"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
