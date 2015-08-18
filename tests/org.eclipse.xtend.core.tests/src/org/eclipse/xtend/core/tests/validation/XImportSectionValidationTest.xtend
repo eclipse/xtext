@@ -880,5 +880,24 @@ class XImportSectionValidationTest extends AbstractXtendTestCase {
 		'''.toString.file
 		file.assertNoWarnings(XIMPORT_DECLARATION,IMPORT_UNUSED)
 	}
+	
+	@Test
+	def void checkKnownStaticImportNotMarkedAsUsed() {
+		val file = '''
+			import static C.*
+
+			class C {
+				static int foo
+				def m() {
+					new Runnable() {
+						override run() {
+							foo++ return
+						}
+					}
+				}
+			}
+		'''.toString.file
+		file.assertWarning(XIMPORT_DECLARATION,IMPORT_UNUSED,"C")
+	}
 
 }

@@ -328,6 +328,22 @@ class ImportsCollectorTests extends AbstractXtendTestCase {
 			}
 		'''.assertTypeImport('java.util.ArrayList').assertStaticImport.assertExtensionImport
 	}
+	
+	@Test
+	def void testAnonymousClass_02() {
+		'''
+			import java.util.ArrayList
+			class C {
+				static String foo
+				|val l = new ArrayList() {
+					override clear() {
+						val i = foo
+						super.clear()
+					}
+				}|
+			}
+		'''.assertTypeImport('java.util.ArrayList').assertStaticImport('C.foo').assertExtensionImport
+	}
 
 	@Test
 	def void testImplicitReciever_01() {
