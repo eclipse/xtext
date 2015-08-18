@@ -39,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.junit.ComparisonFailure;
 
 @SuppressWarnings("all")
@@ -923,20 +924,63 @@ public class IdeaIntegrationTest extends LightXtendTest {
     ChunkedResourceDescriptions _index_1 = this.getIndex();
     IResourceDescription _resourceDescription_1 = _index_1.getResourceDescription(before);
     TestCase.assertNotNull(_resourceDescription_1);
-    Application _application = ApplicationManager.getApplication();
-    final Runnable _function = new Runnable() {
+    XtextAutoBuilderComponent _builder_1 = this.getBuilder();
+    final Procedure0 _function = new Procedure0() {
       @Override
-      public void run() {
-        try {
-          VirtualFile _parent = vf.getParent();
-          VirtualFile _parent_1 = _parent.getParent();
-          vf.move(null, _parent_1);
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
-        }
+      public void apply() {
+        Application _application = ApplicationManager.getApplication();
+        final Runnable _function = new Runnable() {
+          @Override
+          public void run() {
+            try {
+              VirtualFile _parent = vf.getParent();
+              VirtualFile _parent_1 = _parent.getParent();
+              vf.move(null, _parent_1);
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
+            }
+          }
+        };
+        _application.runWriteAction(_function);
       }
     };
-    _application.runWriteAction(_function);
+    _builder_1.runOperation(_function);
+    ChunkedResourceDescriptions _index_2 = this.getIndex();
+    IResourceDescription _resourceDescription_2 = _index_2.getResourceDescription(after);
+    TestCase.assertNotNull(_resourceDescription_2);
+    ChunkedResourceDescriptions _index_3 = this.getIndex();
+    IResourceDescription _resourceDescription_3 = _index_3.getResourceDescription(before);
+    TestCase.assertNull(_resourceDescription_3);
+  }
+  
+  public void testRenameFile_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
+    final URI before = URI.createURI("temp:///src/mypackage/Foo.xtend");
+    final URI after = URI.createURI("temp:///src/mypackage/Bar.xtend");
+    ChunkedResourceDescriptions _index = this.getIndex();
+    IResourceDescription _resourceDescription = _index.getResourceDescription(after);
+    TestCase.assertNull(_resourceDescription);
+    ChunkedResourceDescriptions _index_1 = this.getIndex();
+    IResourceDescription _resourceDescription_1 = _index_1.getResourceDescription(before);
+    TestCase.assertNotNull(_resourceDescription_1);
+    XtextAutoBuilderComponent _builder_1 = this.getBuilder();
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        IdeaIntegrationTest.this.myFixture.renameElement(xtendFile, "Bar.xtend");
+      }
+    };
+    _builder_1.runOperation(_function);
     ChunkedResourceDescriptions _index_2 = this.getIndex();
     IResourceDescription _resourceDescription_2 = _index_2.getResourceDescription(after);
     TestCase.assertNotNull(_resourceDescription_2);
@@ -946,12 +990,16 @@ public class IdeaIntegrationTest extends LightXtendTest {
   }
   
   public ChunkedResourceDescriptions getIndex() {
-    Project _project = this.getProject();
-    final XtextAutoBuilderComponent builder = _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
     final XtextResourceSet rs = new XtextResourceSet();
-    builder.installCopyOfResourceDescriptions(rs);
+    XtextAutoBuilderComponent _builder = this.getBuilder();
+    _builder.installCopyOfResourceDescriptions(rs);
     final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
     return index;
+  }
+  
+  public XtextAutoBuilderComponent getBuilder() {
+    Project _project = this.getProject();
+    return _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {
