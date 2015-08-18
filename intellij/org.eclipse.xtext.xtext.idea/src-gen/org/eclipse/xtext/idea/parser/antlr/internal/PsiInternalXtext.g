@@ -1725,11 +1725,11 @@ rulePredicatedRuleCall:
 		(
 			(
 				{
-					markLeaf(elementTypeProvider.getPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType());
+					markComposite(elementTypeProvider.getPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType());
 				}
-				otherlv_2=RULE_ID
+				ruleRuleID
 				{
-					doneLeaf(otherlv_2);
+					doneComposite();
 				}
 			)
 		)

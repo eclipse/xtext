@@ -4976,158 +4976,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
         try {
             // InternalXtext.g:1770:1: ( ( ruleAssignment ) | ( ruleAbstractTerminal ) )
             int alt8=2;
-            switch ( input.LA(1) ) {
-            case 49:
-                {
-                switch ( input.LA(2) ) {
-                case RULE_ID:
-                    {
-                    int LA8_7 = input.LA(3);
-
-                    if ( ((LA8_7>=14 && LA8_7<=15)||LA8_7==18) ) {
-                        alt8=1;
-                    }
-                    else if ( (LA8_7==EOF||(LA8_7>=RULE_ID && LA8_7<=RULE_STRING)||(LA8_7>=11 && LA8_7<=13)||(LA8_7>=16 && LA8_7<=17)||(LA8_7>=22 && LA8_7<=23)||LA8_7==29||LA8_7==31||(LA8_7>=34 && LA8_7<=36)||LA8_7==43||LA8_7==49) ) {
-                        alt8=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 8, 7, input);
-
-                        throw nvae;
-                    }
-                    }
-                    break;
-                case RULE_STRING:
-                case 22:
-                    {
-                    alt8=2;
-                    }
-                    break;
-                case 16:
-                case 17:
-                    {
-                    alt8=1;
-                    }
-                    break;
-                default:
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 8, 1, input);
-
-                    throw nvae;
-                }
-
-                }
-                break;
-            case 43:
-                {
-                switch ( input.LA(2) ) {
-                case RULE_ID:
-                    {
-                    int LA8_7 = input.LA(3);
-
-                    if ( ((LA8_7>=14 && LA8_7<=15)||LA8_7==18) ) {
-                        alt8=1;
-                    }
-                    else if ( (LA8_7==EOF||(LA8_7>=RULE_ID && LA8_7<=RULE_STRING)||(LA8_7>=11 && LA8_7<=13)||(LA8_7>=16 && LA8_7<=17)||(LA8_7>=22 && LA8_7<=23)||LA8_7==29||LA8_7==31||(LA8_7>=34 && LA8_7<=36)||LA8_7==43||LA8_7==49) ) {
-                        alt8=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 8, 7, input);
-
-                        throw nvae;
-                    }
-                    }
-                    break;
-                case RULE_STRING:
-                case 22:
-                    {
-                    alt8=2;
-                    }
-                    break;
-                case 16:
-                case 17:
-                    {
-                    alt8=1;
-                    }
-                    break;
-                default:
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 8, 2, input);
-
-                    throw nvae;
-                }
-
-                }
-                break;
-            case RULE_ID:
-                {
-                int LA8_3 = input.LA(2);
-
-                if ( ((LA8_3>=14 && LA8_3<=15)||LA8_3==18) ) {
-                    alt8=1;
-                }
-                else if ( (LA8_3==EOF||(LA8_3>=RULE_ID && LA8_3<=RULE_STRING)||(LA8_3>=11 && LA8_3<=13)||(LA8_3>=16 && LA8_3<=17)||(LA8_3>=22 && LA8_3<=23)||LA8_3==29||LA8_3==31||(LA8_3>=33 && LA8_3<=36)||LA8_3==43||LA8_3==49) ) {
-                    alt8=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 8, 3, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 17:
-                {
-                int LA8_4 = input.LA(2);
-
-                if ( ((LA8_4>=14 && LA8_4<=15)||LA8_4==18) ) {
-                    alt8=1;
-                }
-                else if ( (LA8_4==EOF||(LA8_4>=RULE_ID && LA8_4<=RULE_STRING)||(LA8_4>=11 && LA8_4<=13)||(LA8_4>=16 && LA8_4<=17)||(LA8_4>=22 && LA8_4<=23)||LA8_4==29||LA8_4==31||(LA8_4>=33 && LA8_4<=36)||LA8_4==43||LA8_4==49) ) {
-                    alt8=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 8, 4, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 16:
-                {
-                int LA8_5 = input.LA(2);
-
-                if ( (LA8_5==EOF||(LA8_5>=RULE_ID && LA8_5<=RULE_STRING)||(LA8_5>=11 && LA8_5<=13)||(LA8_5>=16 && LA8_5<=17)||(LA8_5>=22 && LA8_5<=23)||LA8_5==29||LA8_5==31||(LA8_5>=33 && LA8_5<=36)||LA8_5==43||LA8_5==49) ) {
-                    alt8=2;
-                }
-                else if ( ((LA8_5>=14 && LA8_5<=15)||LA8_5==18) ) {
-                    alt8=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 8, 5, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_STRING:
-            case 22:
-                {
-                alt8=2;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 8, 0, input);
-
-                throw nvae;
-            }
-
+            alt8 = dfa8.predict(input);
             switch (alt8) {
                 case 1 :
                     // InternalXtext.g:1771:1: ( ruleAssignment )
@@ -5386,6 +5235,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case RULE_ID:
+                case 16:
+                case 17:
                     {
                     alt11=5;
                     }
@@ -5413,6 +5264,8 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case RULE_ID:
+                case 16:
+                case 17:
                     {
                     alt11=5;
                     }
@@ -18421,7 +18274,7 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
             // InternalXtext.g:6600:1: ( rule__PredicatedRuleCall__Group__0__Impl rule__PredicatedRuleCall__Group__1 )
             // InternalXtext.g:6601:2: rule__PredicatedRuleCall__Group__0__Impl rule__PredicatedRuleCall__Group__1
             {
-            pushFollow(FollowSets000.FOLLOW_20);
+            pushFollow(FollowSets000.FOLLOW_3);
             rule__PredicatedRuleCall__Group__0__Impl();
 
             state._fsp--;
@@ -28282,25 +28135,29 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PredicatedRuleCall__RuleAssignment_1"
-    // InternalXtext.g:10465:1: rule__PredicatedRuleCall__RuleAssignment_1 : ( ( RULE_ID ) ) ;
+    // InternalXtext.g:10465:1: rule__PredicatedRuleCall__RuleAssignment_1 : ( ( ruleRuleID ) ) ;
     public final void rule__PredicatedRuleCall__RuleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // InternalXtext.g:10469:1: ( ( ( RULE_ID ) ) )
-            // InternalXtext.g:10470:1: ( ( RULE_ID ) )
+            // InternalXtext.g:10469:1: ( ( ( ruleRuleID ) ) )
+            // InternalXtext.g:10470:1: ( ( ruleRuleID ) )
             {
-            // InternalXtext.g:10470:1: ( ( RULE_ID ) )
-            // InternalXtext.g:10471:1: ( RULE_ID )
+            // InternalXtext.g:10470:1: ( ( ruleRuleID ) )
+            // InternalXtext.g:10471:1: ( ruleRuleID )
             {
              before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); 
-            // InternalXtext.g:10472:1: ( RULE_ID )
-            // InternalXtext.g:10473:1: RULE_ID
+            // InternalXtext.g:10472:1: ( ruleRuleID )
+            // InternalXtext.g:10473:1: ruleRuleID
             {
-             before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_2); 
-             after(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_1_0_1()); 
+             before(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_1_0_1()); 
+            pushFollow(FollowSets000.FOLLOW_2);
+            ruleRuleID();
+
+            state._fsp--;
+
+             after(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleRuleIDParserRuleCall_1_0_1()); 
 
             }
 
@@ -29594,6 +29451,66 @@ public class InternalXtextParser extends AbstractInternalContentAssistParser {
     // Delegated rules
 
 
+    protected DFA8 dfa8 = new DFA8(this);
+    static final String DFA8_eotS =
+        "\13\uffff";
+    static final String DFA8_eofS =
+        "\3\uffff\3\6\1\uffff\3\6\1\uffff";
+    static final String DFA8_minS =
+        "\6\4\1\uffff\3\4\1\uffff";
+    static final String DFA8_maxS =
+        "\1\61\2\26\3\61\1\uffff\3\61\1\uffff";
+    static final String DFA8_acceptS =
+        "\6\uffff\1\2\3\uffff\1\1";
+    static final String DFA8_specialS =
+        "\13\uffff}>";
+    static final String[] DFA8_transitionS = {
+            "\1\3\1\6\12\uffff\1\5\1\4\4\uffff\1\6\24\uffff\1\2\5\uffff\1\1",
+            "\1\7\1\6\12\uffff\1\11\1\10\4\uffff\1\6",
+            "\1\7\1\6\12\uffff\1\11\1\10\4\uffff\1\6",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            "",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            "\2\6\5\uffff\3\6\2\12\2\6\1\12\3\uffff\2\6\5\uffff\1\6\1\uffff\1\6\1\uffff\4\6\6\uffff\1\6\5\uffff\1\6",
+            ""
+    };
+
+    static final short[] DFA8_eot = DFA.unpackEncodedString(DFA8_eotS);
+    static final short[] DFA8_eof = DFA.unpackEncodedString(DFA8_eofS);
+    static final char[] DFA8_min = DFA.unpackEncodedStringToUnsignedChars(DFA8_minS);
+    static final char[] DFA8_max = DFA.unpackEncodedStringToUnsignedChars(DFA8_maxS);
+    static final short[] DFA8_accept = DFA.unpackEncodedString(DFA8_acceptS);
+    static final short[] DFA8_special = DFA.unpackEncodedString(DFA8_specialS);
+    static final short[][] DFA8_transition;
+
+    static {
+        int numStates = DFA8_transitionS.length;
+        DFA8_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA8_transition[i] = DFA.unpackEncodedString(DFA8_transitionS[i]);
+        }
+    }
+
+    class DFA8 extends DFA {
+
+        public DFA8(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 8;
+            this.eot = DFA8_eot;
+            this.eof = DFA8_eof;
+            this.min = DFA8_min;
+            this.max = DFA8_max;
+            this.accept = DFA8_accept;
+            this.special = DFA8_special;
+            this.transition = DFA8_transition;
+        }
+        public String getDescription() {
+            return "1766:1: rule__AbstractTokenWithCardinality__Alternatives_0 : ( ( ruleAssignment ) | ( ruleAbstractTerminal ) );";
+        }
+    }
  
 
     

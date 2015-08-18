@@ -2831,158 +2831,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
             {
             // PsiInternalXtext.g:957:3: ( ruleAssignment | ruleAbstractTerminal )
             int alt33=2;
-            switch ( input.LA(1) ) {
-            case 41:
-                {
-                switch ( input.LA(2) ) {
-                case RULE_ID:
-                    {
-                    int LA33_7 = input.LA(3);
-
-                    if ( ((LA33_7>=34 && LA33_7<=35)||LA33_7==43) ) {
-                        alt33=1;
-                    }
-                    else if ( (LA33_7==EOF||(LA33_7>=RULE_STRING && LA33_7<=RULE_ID)||(LA33_7>=15 && LA33_7<=16)||LA33_7==22||(LA33_7>=25 && LA33_7<=26)||(LA33_7>=29 && LA33_7<=33)||(LA33_7>=38 && LA33_7<=39)||(LA33_7>=41 && LA33_7<=42)) ) {
-                        alt33=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 33, 7, input);
-
-                        throw nvae;
-                    }
-                    }
-                    break;
-                case 38:
-                case 39:
-                    {
-                    alt33=1;
-                    }
-                    break;
-                case RULE_STRING:
-                case 15:
-                    {
-                    alt33=2;
-                    }
-                    break;
-                default:
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 1, input);
-
-                    throw nvae;
-                }
-
-                }
-                break;
-            case 42:
-                {
-                switch ( input.LA(2) ) {
-                case RULE_STRING:
-                case 15:
-                    {
-                    alt33=2;
-                    }
-                    break;
-                case RULE_ID:
-                    {
-                    int LA33_7 = input.LA(3);
-
-                    if ( ((LA33_7>=34 && LA33_7<=35)||LA33_7==43) ) {
-                        alt33=1;
-                    }
-                    else if ( (LA33_7==EOF||(LA33_7>=RULE_STRING && LA33_7<=RULE_ID)||(LA33_7>=15 && LA33_7<=16)||LA33_7==22||(LA33_7>=25 && LA33_7<=26)||(LA33_7>=29 && LA33_7<=33)||(LA33_7>=38 && LA33_7<=39)||(LA33_7>=41 && LA33_7<=42)) ) {
-                        alt33=2;
-                    }
-                    else {
-                        NoViableAltException nvae =
-                            new NoViableAltException("", 33, 7, input);
-
-                        throw nvae;
-                    }
-                    }
-                    break;
-                case 38:
-                case 39:
-                    {
-                    alt33=1;
-                    }
-                    break;
-                default:
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 2, input);
-
-                    throw nvae;
-                }
-
-                }
-                break;
-            case RULE_ID:
-                {
-                int LA33_3 = input.LA(2);
-
-                if ( (LA33_3==EOF||(LA33_3>=RULE_STRING && LA33_3<=RULE_ID)||(LA33_3>=15 && LA33_3<=16)||LA33_3==22||(LA33_3>=25 && LA33_3<=26)||(LA33_3>=28 && LA33_3<=33)||(LA33_3>=38 && LA33_3<=39)||(LA33_3>=41 && LA33_3<=42)) ) {
-                    alt33=2;
-                }
-                else if ( ((LA33_3>=34 && LA33_3<=35)||LA33_3==43) ) {
-                    alt33=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 3, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 38:
-                {
-                int LA33_4 = input.LA(2);
-
-                if ( ((LA33_4>=34 && LA33_4<=35)||LA33_4==43) ) {
-                    alt33=1;
-                }
-                else if ( (LA33_4==EOF||(LA33_4>=RULE_STRING && LA33_4<=RULE_ID)||(LA33_4>=15 && LA33_4<=16)||LA33_4==22||(LA33_4>=25 && LA33_4<=26)||(LA33_4>=28 && LA33_4<=33)||(LA33_4>=38 && LA33_4<=39)||(LA33_4>=41 && LA33_4<=42)) ) {
-                    alt33=2;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 4, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 39:
-                {
-                int LA33_5 = input.LA(2);
-
-                if ( (LA33_5==EOF||(LA33_5>=RULE_STRING && LA33_5<=RULE_ID)||(LA33_5>=15 && LA33_5<=16)||LA33_5==22||(LA33_5>=25 && LA33_5<=26)||(LA33_5>=28 && LA33_5<=33)||(LA33_5>=38 && LA33_5<=39)||(LA33_5>=41 && LA33_5<=42)) ) {
-                    alt33=2;
-                }
-                else if ( ((LA33_5>=34 && LA33_5<=35)||LA33_5==43) ) {
-                    alt33=1;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("", 33, 5, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case RULE_STRING:
-            case 15:
-                {
-                alt33=2;
-                }
-                break;
-            default:
-                NoViableAltException nvae =
-                    new NoViableAltException("", 33, 0, input);
-
-                throw nvae;
-            }
-
+            alt33 = dfa33.predict(input);
             switch (alt33) {
                 case 1 :
                     // PsiInternalXtext.g:958:4: ruleAssignment
@@ -3408,6 +3257,8 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case RULE_ID:
+                case 38:
+                case 39:
                     {
                     alt38=5;
                     }
@@ -3435,6 +3286,8 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
                     }
                     break;
                 case RULE_ID:
+                case 38:
+                case 39:
                     {
                     alt38=5;
                     }
@@ -5302,21 +5155,20 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
 
     // $ANTLR start "rulePredicatedRuleCall"
-    // PsiInternalXtext.g:1698:1: rulePredicatedRuleCall : ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( (otherlv_2= RULE_ID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? ) ;
+    // PsiInternalXtext.g:1698:1: rulePredicatedRuleCall : ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( ( ruleRuleID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? ) ;
     public final void rulePredicatedRuleCall() throws RecognitionException {
         Token lv_predicated_0_0=null;
         Token lv_firstSetPredicated_1_0=null;
-        Token otherlv_2=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
         Token otherlv_7=null;
 
         try {
-            // PsiInternalXtext.g:1698:23: ( ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( (otherlv_2= RULE_ID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? ) )
-            // PsiInternalXtext.g:1699:2: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( (otherlv_2= RULE_ID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? )
+            // PsiInternalXtext.g:1698:23: ( ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( ( ruleRuleID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? ) )
+            // PsiInternalXtext.g:1699:2: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( ( ruleRuleID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? )
             {
-            // PsiInternalXtext.g:1699:2: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( (otherlv_2= RULE_ID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? )
-            // PsiInternalXtext.g:1700:3: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( (otherlv_2= RULE_ID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )?
+            // PsiInternalXtext.g:1699:2: ( ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( ( ruleRuleID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )? )
+            // PsiInternalXtext.g:1700:3: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) ) ( ( ruleRuleID ) ) (otherlv_3= '<' ( (lv_arguments_4_0= ruleNamedArgument ) ) (otherlv_5= ',' ( (lv_arguments_6_0= ruleNamedArgument ) ) )* otherlv_7= '>' )?
             {
             // PsiInternalXtext.g:1700:3: ( ( (lv_predicated_0_0= '=>' ) ) | ( (lv_firstSetPredicated_1_0= '->' ) ) )
             int alt50=2;
@@ -5347,7 +5199,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
                     						markLeaf(elementTypeProvider.getPredicatedRuleCall_PredicatedEqualsSignGreaterThanSignKeyword_0_0_0ElementType());
                     					
-                    lv_predicated_0_0=(Token)match(input,41,FollowSets000.FOLLOW_16); 
+                    lv_predicated_0_0=(Token)match(input,41,FollowSets000.FOLLOW_3); 
 
                     						doneLeaf(lv_predicated_0_0);
                     					
@@ -5372,7 +5224,7 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
                     						markLeaf(elementTypeProvider.getPredicatedRuleCall_FirstSetPredicatedHyphenMinusGreaterThanSignKeyword_0_1_0ElementType());
                     					
-                    lv_firstSetPredicated_1_0=(Token)match(input,42,FollowSets000.FOLLOW_16); 
+                    lv_firstSetPredicated_1_0=(Token)match(input,42,FollowSets000.FOLLOW_3); 
 
                     						doneLeaf(lv_firstSetPredicated_1_0);
                     					
@@ -5388,18 +5240,22 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
 
             }
 
-            // PsiInternalXtext.g:1725:3: ( (otherlv_2= RULE_ID ) )
-            // PsiInternalXtext.g:1726:4: (otherlv_2= RULE_ID )
+            // PsiInternalXtext.g:1725:3: ( ( ruleRuleID ) )
+            // PsiInternalXtext.g:1726:4: ( ruleRuleID )
             {
-            // PsiInternalXtext.g:1726:4: (otherlv_2= RULE_ID )
-            // PsiInternalXtext.g:1727:5: otherlv_2= RULE_ID
+            // PsiInternalXtext.g:1726:4: ( ruleRuleID )
+            // PsiInternalXtext.g:1727:5: ruleRuleID
             {
 
-            					markLeaf(elementTypeProvider.getPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType());
+            					markComposite(elementTypeProvider.getPredicatedRuleCall_RuleAbstractRuleCrossReference_1_0ElementType());
             				
-            otherlv_2=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_21); 
+            pushFollow(FollowSets000.FOLLOW_21);
+            ruleRuleID();
 
-            					doneLeaf(otherlv_2);
+            state._fsp--;
+
+
+            					doneComposite();
             				
 
             }
@@ -8716,6 +8572,66 @@ public class PsiInternalXtextParser extends AbstractPsiAntlrParser {
     // Delegated rules
 
 
+    protected DFA33 dfa33 = new DFA33(this);
+    static final String DFA33_eotS =
+        "\13\uffff";
+    static final String DFA33_eofS =
+        "\3\uffff\3\6\1\uffff\3\6\1\uffff";
+    static final String DFA33_minS =
+        "\6\4\1\uffff\3\4\1\uffff";
+    static final String DFA33_maxS =
+        "\1\52\2\47\3\53\1\uffff\3\53\1\uffff";
+    static final String DFA33_acceptS =
+        "\6\uffff\1\2\3\uffff\1\1";
+    static final String DFA33_specialS =
+        "\13\uffff}>";
+    static final String[] DFA33_transitionS = {
+            "\1\6\1\3\11\uffff\1\6\26\uffff\1\4\1\5\1\uffff\1\1\1\2",
+            "\1\6\1\7\11\uffff\1\6\26\uffff\1\10\1\11",
+            "\1\6\1\7\11\uffff\1\6\26\uffff\1\10\1\11",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            "",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            "\2\6\11\uffff\2\6\5\uffff\1\6\2\uffff\2\6\1\uffff\6\6\2\12\2\uffff\2\6\1\uffff\2\6\1\12",
+            ""
+    };
+
+    static final short[] DFA33_eot = DFA.unpackEncodedString(DFA33_eotS);
+    static final short[] DFA33_eof = DFA.unpackEncodedString(DFA33_eofS);
+    static final char[] DFA33_min = DFA.unpackEncodedStringToUnsignedChars(DFA33_minS);
+    static final char[] DFA33_max = DFA.unpackEncodedStringToUnsignedChars(DFA33_maxS);
+    static final short[] DFA33_accept = DFA.unpackEncodedString(DFA33_acceptS);
+    static final short[] DFA33_special = DFA.unpackEncodedString(DFA33_specialS);
+    static final short[][] DFA33_transition;
+
+    static {
+        int numStates = DFA33_transitionS.length;
+        DFA33_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA33_transition[i] = DFA.unpackEncodedString(DFA33_transitionS[i]);
+        }
+    }
+
+    class DFA33 extends DFA {
+
+        public DFA33(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 33;
+            this.eot = DFA33_eot;
+            this.eof = DFA33_eof;
+            this.min = DFA33_min;
+            this.max = DFA33_max;
+            this.accept = DFA33_accept;
+            this.special = DFA33_special;
+            this.transition = DFA33_transition;
+        }
+        public String getDescription() {
+            return "957:3: ( ruleAssignment | ruleAbstractTerminal )";
+        }
+    }
  
 
     

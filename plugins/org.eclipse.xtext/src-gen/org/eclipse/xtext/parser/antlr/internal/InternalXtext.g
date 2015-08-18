@@ -2226,10 +2226,12 @@ rulePredicatedRuleCall returns [EObject current=null]
 	            $current = createModelElement(grammarAccess.getPredicatedRuleCallRule());
 	        }
         }
-	otherlv_2=RULE_ID
-	{
-		newLeafNode(otherlv_2, grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); 
-	}
+		{ 
+	        newCompositeNode(grammarAccess.getPredicatedRuleCallAccess().getRuleAbstractRuleCrossReference_1_0()); 
+	    }
+		ruleRuleID		{ 
+	        afterParserOrEnumRuleCall();
+	    }
 
 )
 )(	otherlv_3='<' 
