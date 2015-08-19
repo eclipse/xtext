@@ -110,5 +110,167 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 			terminal RULE_ANY_OTHER:
 				.;'''.toString, serialized)
 	}
+	
+	@Test def void test_03() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule<A, B>: <A> name=ID | <!B> name=ID | name=STRING;
+			''')
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			norm0_Rule:
+				name=RULE_ID | name=RULE_STRING;
+			
+			norm1_Rule:
+				name=RULE_ID | name=RULE_ID | name=RULE_STRING;
+			
+			norm2_Rule:
+				name=RULE_STRING;
+			
+			norm3_Rule:
+				name=RULE_ID | name=RULE_STRING;
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
+	
+	@Test def void test_04() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule<A>: name=ID child=Rule<A>?;
+			''')
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			norm0_Rule:
+				name=RULE_ID child=norm0_Rule?;
+			
+			norm1_Rule:
+				name=RULE_ID child=norm1_Rule?;
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
+	
+	@Test def void test_05() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule<A>: name=ID (<A>child=Rule<A>|<!A>child=Rule<true>+)?;
+			''')
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			norm0_Rule:
+				name=RULE_ID child=norm1_Rule*;
+			
+			norm1_Rule:
+				name=RULE_ID child=norm1_Rule?;
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
+	
+	@Test def void test_06() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule<A>: name=ID (<A>child=Rule<!A>)?;
+			''')
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			norm0_Rule:
+				name=RULE_ID;
+			
+			norm1_Rule:
+				name=RULE_ID child=norm0_Rule?;
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
 
 }
