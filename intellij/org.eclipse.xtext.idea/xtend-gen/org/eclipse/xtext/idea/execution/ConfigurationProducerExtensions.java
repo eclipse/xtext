@@ -110,13 +110,16 @@ public class ConfigurationProducerExtensions {
       Iterable<? extends ILocationInVirtualFile> _allAssociatedLocations = trace.getAllAssociatedLocations();
       for (final ILocationInVirtualFile uri : _allAssociatedLocations) {
         {
-          Project _project = xtextFile.getProject();
-          PsiManager _instance = PsiManager.getInstance(_project);
-          VirtualFileInProject _platformResource = uri.getPlatformResource();
-          
-          VirtualFile _file = _platformResource.getFile();
-          final PsiFile javaPsiFile = _instance.findFile(_file);
-          javaFiles.add(javaPsiFile);
+          final VirtualFileInProject res = uri.getPlatformResource();
+          if ((res != null)) {
+            Project _project = xtextFile.getProject();
+            PsiManager _instance = PsiManager.getInstance(_project);
+            VirtualFile _file = res.getFile();
+            final PsiFile javaPsiFile = _instance.findFile(_file);
+            if ((javaPsiFile != null)) {
+              javaFiles.add(javaPsiFile);
+            }
+          }
         }
       }
       return javaFiles;
