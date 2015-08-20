@@ -18,8 +18,28 @@ import org.eclipse.xtext.GrammarUtil;
  */
 public class RuleFilter {
 
+	private boolean discardUnreachableRules;
+	
+	private boolean discardTerminalRules;
+	
 	public List<AbstractRule> getRules(Grammar grammar) {
 		return GrammarUtil.allRules(grammar);
+	}
+
+	public boolean isDiscardUnreachableRules() {
+		return discardUnreachableRules;
+	}
+	
+	public void setDiscardUnreachableRules(boolean discardUnreachableRules) {
+		this.discardUnreachableRules = discardUnreachableRules;
+	}
+
+	public boolean isDiscardTerminalRules() {
+		return discardTerminalRules;
+	}
+
+	public void setDiscardTerminalRules(boolean discardTerminalRules) {
+		this.discardTerminalRules = discardTerminalRules;
 	}
 	
 }

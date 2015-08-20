@@ -17,7 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	FragmentsTest.class,
-	FragmentEagerLinkingTest.class,
+	FragmentsEagerLinkingTest.class,
 	FragmentsExTest.class,
 	FragmentsPlainParsingTest.class,
 	FragmentExsPlainParsingTest.class,

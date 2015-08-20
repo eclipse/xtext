@@ -35,10 +35,15 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
   
   @Override
   public Grammar getModel(final String model) throws Exception {
+    return this.getModel(model, false);
+  }
+  
+  public Grammar getModel(final String model, final boolean dropUnreachable) throws Exception {
     EObject _model = super.getModel(model);
     Grammar grammar = ((Grammar) _model);
     RuleNames ruleNames = RuleNames.getRuleNames(grammar, false);
     RuleFilter filter = new RuleFilter();
+    filter.setDiscardUnreachableRules(dropUnreachable);
     Grammar result = FlattenedGrammarProvider.flatten(grammar, ruleNames, filter);
     XtextResource resource = this.<XtextResource>get(XtextResource.class);
     EList<EObject> _contents = resource.getContents();
@@ -442,6 +447,72 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("name=RULE_ID child=norm0_Rule?;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_ID:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\"^\"? (\"a\"..\"z\" | \"A\"..\"Z\" | \"_\") (\"a\"..\"z\" | \"A\"..\"Z\" | \"_\" | \"0\"..\"9\")*;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_INT:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\"0\"..\"9\"+;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_STRING:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\"\\\"\" (\"\\\\\" . | !(\"\\\\\" | \"\\\"\"))* \"\\\"\" | \"\\\'\" (\"\\\\\" . | !(\"\\\\\" | \"\\\'\"))* \"\\\'\";");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_ML_COMMENT:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\"/*\"->\"*/\";");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_SL_COMMENT:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\"//\" !(\"\\n\" | \"\\r\")* (\"\\r\"? \"\\n\")?;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_WS:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("\" \" | \"\\t\" | \"\\r\" | \"\\n\"+;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("terminal RULE_ANY_OTHER:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(".;");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, serialized);
+  }
+  
+  @Test
+  public void test_07() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar com.foo.bar with org.eclipse.xtext.common.Terminals");
+    _builder.newLine();
+    _builder.append("generate myPack \'http://myURI\'");
+    _builder.newLine();
+    _builder.append("Rule<A>: name=ID (<A>child=Rule<!A>)?;");
+    _builder.newLine();
+    Grammar flattened = this.getModel(_builder.toString(), true);
+    ISerializer _serializer = this.getSerializer();
+    String serialized = _serializer.serialize(flattened);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("norm0_Rule:");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("name=RULE_ID;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("terminal RULE_ID:");

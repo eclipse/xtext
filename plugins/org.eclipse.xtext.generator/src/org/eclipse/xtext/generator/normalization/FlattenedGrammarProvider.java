@@ -25,6 +25,7 @@ import org.eclipse.xtext.Conjunction;
 import org.eclipse.xtext.Disjunction;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.LiteralCondition;
 import org.eclipse.xtext.NamedArgument;
@@ -37,9 +38,11 @@ import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.UsedRulesFinder;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -90,6 +93,15 @@ public class FlattenedGrammarProvider {
 		markAsFragment(calledFrom);
 		setHiddenTokens(grammar, result, origToCopy);
 		
+		if(filter.isDiscardUnreachableRules()) {
+			Set<AbstractRule> usedRules = Sets.newHashSet();
+			if (!filter.isDiscardTerminalRules()) {
+				usedRules.addAll(GrammarUtil.allTerminalRules(result));
+			}
+			UsedRulesFinder finder = new UsedRulesFinder(usedRules);
+			finder.compute(result);
+			result.getRules().retainAll(usedRules);
+		}
 		return result;
 	}
 
