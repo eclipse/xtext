@@ -78,11 +78,6 @@ public abstract class AbstractTwoParametersTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.parser.parameters.services.TwoParametersTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.parameters.parseTreeConstruction.TwoParametersTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.parameters.serializer.TwoParametersTestLanguageSemanticSequencer.class;

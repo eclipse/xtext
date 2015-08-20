@@ -78,11 +78,6 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends org.ec
 		return org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction.MultiGenMMTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.metamodelreferencing.tests.serializer.MultiGenMMTestLanguageSemanticSequencer.class;

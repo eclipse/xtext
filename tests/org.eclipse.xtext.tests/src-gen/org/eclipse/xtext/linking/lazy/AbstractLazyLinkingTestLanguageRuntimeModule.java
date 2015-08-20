@@ -78,11 +78,6 @@ public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends org.e
 		return org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.linking.lazy.parseTreeConstruction.LazyLinkingTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.linking.lazy.serializer.LazyLinkingTestLanguageSemanticSequencer.class;

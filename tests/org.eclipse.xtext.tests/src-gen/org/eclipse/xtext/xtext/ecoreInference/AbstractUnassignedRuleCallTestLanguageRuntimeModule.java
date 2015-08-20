@@ -78,11 +78,6 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.xtext.ecoreInference.parseTreeConstruction.UnassignedRuleCallTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.xtext.ecoreInference.serializer.UnassignedRuleCallTestLanguageSemanticSequencer.class;

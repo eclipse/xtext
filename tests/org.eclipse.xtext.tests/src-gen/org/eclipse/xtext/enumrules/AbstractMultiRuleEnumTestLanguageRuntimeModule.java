@@ -78,11 +78,6 @@ public abstract class AbstractMultiRuleEnumTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.enumrules.services.MultiRuleEnumTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.enumrules.parseTreeConstruction.MultiRuleEnumTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.enumrules.serializer.MultiRuleEnumTestLanguageSemanticSequencer.class;

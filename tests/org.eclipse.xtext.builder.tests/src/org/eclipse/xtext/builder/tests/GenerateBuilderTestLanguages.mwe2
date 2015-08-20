@@ -41,8 +41,10 @@ Workflow {
 				jdkLevel = "JDK60"
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {}
+			fragment = serializer.SerializerFragment auto-inject {
+				srcGenOnly = true
+			}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = auto-inject {} 
 			}

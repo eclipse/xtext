@@ -78,11 +78,6 @@ public abstract class AbstractBug385636RuntimeModule extends org.eclipse.xtext.s
 		return org.eclipse.xtext.resource.services.Bug385636GrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.resource.parseTreeConstruction.Bug385636ParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.resource.serializer.Bug385636SemanticSequencer.class;
