@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Latest" buildRoot="./Latest/" packedStrategy="SKIP">
-  <validationSets description="Most recent TP" label="Latest">
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Mars" buildRoot="./Mars/" packedStrategy="SKIP">
+  <validationSets description="Mars 4.5 TP" label="Mars">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
-    <contributions label="Latest">
-      <repositories location="http://download.eclipse.org/eclipse/updates/4.6-I-builds/">
+    <contributions label="Mars">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.5/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
@@ -20,10 +20,6 @@
       </repositories>
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4/1.4.1.20140328-1905/">
         <bundles name="org.eclipse.m2e.core"/>
-      </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/">
-        <features name="org.eclipse.emf.feature.group" versionRange="2.12.0"/>
-        <features name="org.eclipse.emf.source.feature.group" versionRange="2.12.0"/>
       </repositories>
     </contributions>
   </validationSets>
