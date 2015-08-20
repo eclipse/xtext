@@ -163,8 +163,8 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 			class Foo {
 				def bar() {
 					newArrayList('jan','hein','claas','pit').map[
-						val toFirstUpper1 = toFirstUpper
-						toFirstUpper1
+						val toFirstUpper2 = toFirstUpper
+						toFirstUpper2
 					]
 				}
 			}
@@ -238,6 +238,140 @@ class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
 				def bar() {
 					val function = [String it | toFirstUpper]
 					newArrayList('jan','hein','claas','pit').map(function)
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testList() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					$#['']$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val strings = #['']
+					strings
+				}
+			}
+		''', true)
+	}
+
+	@Test
+	def void testSet() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					$#{''}$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val strings = #{''}
+					strings
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testMap() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					$#{''->''}$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val map = #{''->''}
+					map
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testArray_0() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					$null as String[]$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val strings = null as String[]
+					strings
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testArray_1() throws Exception {
+		'''
+			class Foo {
+				def bar() {
+					$null as int[]$
+				}
+			}
+		'''.assertAfterExtract('''
+			class Foo {
+				def bar() {
+					val is = null as int[]
+					is
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testArray_2() throws Exception {
+		'''
+			import java.util.List
+			
+			class Foo {
+				def bar() {
+					$null as List<String>[]$
+				}
+			}
+		'''.assertAfterExtract('''
+			import java.util.List
+			
+			class Foo {
+				def bar() {
+					val strings = null as List<String>[]
+					strings
+				}
+			}
+		''', true)
+	}
+	
+	@Test
+	def void testArray_3() throws Exception {
+		'''
+			import java.util.List
+			
+			class Foo {
+				def bar() {
+					$null as String[][]$
+				}
+			}
+		'''.assertAfterExtract('''
+			import java.util.List
+			
+			class Foo {
+				def bar() {
+					val strings = null as String[][]
+					strings
 				}
 			}
 		''', true)
