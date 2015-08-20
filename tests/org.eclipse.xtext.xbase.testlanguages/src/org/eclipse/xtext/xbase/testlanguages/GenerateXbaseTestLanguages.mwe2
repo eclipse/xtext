@@ -48,9 +48,6 @@ Workflow {
     		// generates Java API for the generated EPackages
     		fragment = ecore.EMFGeneratorFragment auto-inject {}
     
-    		// the old serialization component
-    		// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}    
-    
     		// serializer 2.0
     		fragment = serializer.SerializerFragment auto-inject {
     			generateStub = false

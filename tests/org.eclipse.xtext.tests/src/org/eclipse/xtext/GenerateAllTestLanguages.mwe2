@@ -431,7 +431,7 @@ Workflow {
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/ElementMatcherTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/impl/Bug305397.xtext"
@@ -439,7 +439,7 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
-			fragment = @TestLanguagesFragments {}
+			fragment = @TestLanguagesFragmentsParseTreeConstructor {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/PartialSerializationTestLanguage.xtext"
