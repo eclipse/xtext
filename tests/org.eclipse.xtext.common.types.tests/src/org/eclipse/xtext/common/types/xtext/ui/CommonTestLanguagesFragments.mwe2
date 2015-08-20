@@ -28,6 +28,9 @@ CompositeGeneratorFragment {
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}
+	fragment = serializer.SerializerFragment auto-inject {
+		srcGenOnly = true
+	}
 	fragment = scoping.ImportNamespacesScopingFragment {}
 	fragment = exporting.QualifiedNamesFragment {}
 	fragment = types.TypesGeneratorFragment {}
