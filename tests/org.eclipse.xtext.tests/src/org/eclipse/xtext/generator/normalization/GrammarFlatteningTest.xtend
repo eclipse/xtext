@@ -25,9 +25,14 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 	}
 
 	override Grammar getModel(String model) throws Exception {
+		return getModel(model, false)
+	}
+	
+	def Grammar getModel(String model, boolean dropUnreachable) throws Exception {
 		var Grammar grammar = super.getModel(model) as Grammar
 		var RuleNames ruleNames = RuleNames.getRuleNames(grammar, false)
 		var RuleFilter filter = new RuleFilter()
+		filter.discardUnreachableRules = dropUnreachable
 		var Grammar result = FlattenedGrammarProvider.flatten(grammar, ruleNames, filter)
 		var XtextResource resource = get(XtextResource)
 		resource.getContents().add(result)
@@ -250,6 +255,42 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 			
 			norm1_Rule:
 				name=RULE_ID child=norm0_Rule?;
+			
+			terminal RULE_ID:
+				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+			
+			terminal RULE_INT:
+				"0".."9"+;
+			
+			terminal RULE_STRING:
+				"\"" ("\\" . | !("\\" | "\""))* "\"" | "\'" ("\\" . | !("\\" | "\'"))* "\'";
+			
+			terminal RULE_ML_COMMENT:
+				"/*"->"*/";
+			
+			terminal RULE_SL_COMMENT:
+				"//" !("\n" | "\r")* ("\r"? "\n")?;
+			
+			terminal RULE_WS:
+				" " | "\t" | "\r" | "\n"+;
+			
+			terminal RULE_ANY_OTHER:
+				.;'''.toString, serialized)
+	}
+	
+	@Test def void test_07() throws Exception {
+		var Grammar flattened = getModel(
+			'''
+				grammar com.foo.bar with org.eclipse.xtext.common.Terminals
+				generate myPack 'http://myURI'
+				Rule<A>: name=ID (<A>child=Rule<!A>)?;
+			''', true)
+		var String serialized = getSerializer().serialize(flattened)
+		assertEquals('''
+			grammar com.foo.bar hidden(RULE_WS, RULE_ML_COMMENT, RULE_SL_COMMENT)
+			
+			norm0_Rule:
+				name=RULE_ID;
 			
 			terminal RULE_ID:
 				"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
