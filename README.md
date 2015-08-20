@@ -48,3 +48,5 @@ In a terminal:
  - Run xtext-build.ant script
    
    ```ant -f xtext-build.ant ```
+
+The resulting final Xtext p2 Repositories are available in ~/buckminster-builds/xtext/buildroot/buckminster.workspace/output/org.eclipse.xtext.build_*-eclipse.feature/zips/.

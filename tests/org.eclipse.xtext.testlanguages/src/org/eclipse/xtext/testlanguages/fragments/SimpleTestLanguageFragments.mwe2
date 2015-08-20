@@ -38,11 +38,10 @@ LanguageConfig {
 		emfRuntimeVersion = "2.9"
 	}
 
-	// the serialization component
-	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
-
 	// a custom ResourceFactory for use with EMF 
-	fragment = resourceFactory.ResourceFactoryFragment {
+	fragment = resourceFactory.ResourceFactoryFragment {}
+	fragment = serializer.SerializerFragment {
+		srcGenOnly = true
 	}
 
 	// The antlr parser generator fragment.

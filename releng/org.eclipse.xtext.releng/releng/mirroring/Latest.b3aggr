@@ -3,7 +3,7 @@
   <validationSets description="Most recent TP" label="Latest">
     <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
     <contributions label="Latest">
-      <repositories location="http://download.eclipse.org/eclipse/updates/4.5-I-builds/">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.6-I-builds/">
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
@@ -22,8 +22,8 @@
         <bundles name="org.eclipse.m2e.core"/>
       </repositories>
       <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly/">
-        <features name="org.eclipse.emf.feature.group" versionRange="2.11.0"/>
-        <features name="org.eclipse.emf.source.feature.group" versionRange="2.11.0"/>
+        <features name="org.eclipse.emf.feature.group" versionRange="2.12.0"/>
+        <features name="org.eclipse.emf.source.feature.group" versionRange="2.12.0"/>
       </repositories>
     </contributions>
   </validationSets>

@@ -78,11 +78,6 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parseTreeConstruction.LookaheadTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.LookaheadTestLanguageSemanticSequencer.class;

@@ -528,6 +528,41 @@ public class ImportsCollectorTests extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testAnonymousClass_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static String foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|val l = new ArrayList() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("override clear() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("val i = foo");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("super.clear()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}|");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    ImportsAcceptor.DefaultImportsAcceptor _assertTypeImport = this.assertTypeImport(_builder, "java.util.ArrayList");
+    ImportsAcceptor.DefaultImportsAcceptor _assertStaticImport = this.assertStaticImport(_assertTypeImport, "C.foo");
+    this.assertExtensionImport(_assertStaticImport);
+  }
+  
+  @Test
   public void testImplicitReciever_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

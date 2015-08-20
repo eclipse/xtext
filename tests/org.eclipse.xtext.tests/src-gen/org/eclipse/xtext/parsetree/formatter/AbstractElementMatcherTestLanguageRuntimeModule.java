@@ -83,19 +83,4 @@ public abstract class AbstractElementMatcherTestLanguageRuntimeModule extends or
 		return org.eclipse.xtext.parsetree.formatter.parseTreeConstruction.ElementMatcherTestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parsetree.formatter.serializer.ElementMatcherTestLanguageSemanticSequencer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parsetree.formatter.serializer.ElementMatcherTestLanguageSyntacticSequencer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
-	}
-
 }

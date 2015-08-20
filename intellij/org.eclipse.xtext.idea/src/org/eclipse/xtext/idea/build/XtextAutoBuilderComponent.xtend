@@ -37,6 +37,7 @@ import com.intellij.openapi.vfs.VirtualFileAdapter
 import com.intellij.openapi.vfs.VirtualFileEvent
 import com.intellij.openapi.vfs.VirtualFileManager
 import com.intellij.openapi.vfs.VirtualFileMoveEvent
+import com.intellij.openapi.vfs.VirtualFilePropertyEvent
 import com.intellij.psi.PsiJavaFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.impl.PsiModificationTrackerImpl
@@ -74,6 +75,7 @@ import org.eclipse.xtext.util.internal.Log
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
+import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 /**
@@ -138,6 +140,18 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}, project)
 		
 		VirtualFileManager.getInstance().addVirtualFileListener(new VirtualFileAdapter() {
+			override beforePropertyChange(VirtualFilePropertyEvent event) {
+				if (event.propertyName == VirtualFile.PROP_NAME) {
+					fileDeleted(event.file)
+				}
+			}
+			
+			override propertyChanged(VirtualFilePropertyEvent event) {
+				if (event.propertyName == VirtualFile.PROP_NAME) {
+					fileAdded(event.file)
+				}
+			}
+			
 			override void contentsChanged(VirtualFileEvent event) {
 				fileModified(event.getFile())
 			}
@@ -230,22 +244,21 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 	
 	def void fileModified(VirtualFile file) {
-		enqueue(file, MODIFIED)
+		enqueue(MODIFIED, file)
 	}
 
-	def void fileDeleted(VirtualFile file) {
-		if (file.isDirectory) {
-			for (child : file.children) {
-				fileDeleted(child)
-			}
-		} else {
-			enqueue(file, DELETED)
-		}
+	def void fileDeleted(VirtualFile root) {
+		val files = newArrayList
+		root.processFilesRecursively [ file |
+			if (!file.directory) files += file
+			true
+		]
+		enqueue(DELETED, files)
 	}
 
 	def void fileAdded(VirtualFile file) {
 		if (!file.isDirectory && file.length > 0) {
-			enqueue(file, ADDED)
+			enqueue(ADDED, file)
 		} else {
 			if (LOG.infoEnabled)
 				LOG.info("Ignoring new empty file "+file.path+". Waiting for content.")
@@ -257,18 +270,24 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	 */
 	public static boolean TEST_MODE = false
 
-	protected def enqueue(VirtualFile file, BuildEvent.Type type) {
-		if (isExcluded(file)) {
+	protected def void enqueue(BuildEvent.Type type, VirtualFile ... files) {
+		val filteredFiles = files.filter[!excluded]
+		if (filteredFiles.empty)
 			return;
-		}
+
+		enqueue(new BuildEvent(type, filteredFiles))
+	}
+
+	protected def void enqueue(BuildEvent buildEvent) {
 		if (!disposed && !isLoaded) {
 			queueAllResources
 		}
 		if (LOG.isInfoEnabled) {
-			LOG.info("Queuing "+type+" - "+file.URI+".")
+			for (uri : buildEvent.filesByURI.keySet)
+				LOG.info("Queuing " + buildEvent.type + " - " + uri + ".")
 		}
-		if (file != null && !disposed) {
-			queue.put(new BuildEvent(file, type))
+		if (!disposed) {
+			queue.put(buildEvent)
 			doRunBuild()
 		}
 	}
@@ -323,10 +342,35 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 	}
 	
+	boolean avoidBuildInTestMode = false
+	
+	/**
+	 * <p>
+	 * Should be used in the test mode only.
+	 * </p>
+	 * <p>
+	 * Collects all events produced by the operation and builds them at once.
+	 * </p>
+	 */
+	def void runOperation(()=>void operation) {
+		if (!TEST_MODE)
+			throw new IllegalStateException('Should be used only for testing')
+
+		avoidBuildInTestMode = true
+		try {
+			operation.apply
+		} finally {
+			avoidBuildInTestMode = false
+			doRunBuild
+		}
+	}
+	
 	protected def doRunBuild() {
 		if (TEST_MODE) {
-			(PsiManager.getInstance(getProject()).getModificationTracker() as PsiModificationTrackerImpl).incCounter();
-			build
+			if (!avoidBuildInTestMode) {
+				(PsiManager.getInstance(getProject()).getModificationTracker() as PsiModificationTrackerImpl).incCounter();
+				build
+			}
 		} else {
 			alarm.cancelAllRequests
 			cancelIndicators.forEach[canceled = true]
@@ -353,7 +397,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		for (root :  entries.map[sourceFolderFiles.toSet].flatten) {
 			root.visitFileTree[ file |
 				if (!file.isDirectory && file.exists) {
-					queue.put(new BuildEvent(file, BuildEvent.Type.ADDED))
+					queue.put(new BuildEvent(BuildEvent.Type.ADDED, file))
 				}
 			]
 		}
@@ -363,7 +407,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		val baseFile = project.baseDir
 		baseFile.visitFileTree[ file |
 			if (!file.isDirectory && file.exists) {
-				queue.put(new BuildEvent(file, BuildEvent.Type.ADDED))
+				queue.put(new BuildEvent(BuildEvent.Type.ADDED, file))
 			}
 		]
 	}
@@ -377,7 +421,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		handler.apply(file)
 	}
 	
-	private volatile boolean ignoreIncomingEvents = false
+	volatile boolean ignoreIncomingEvents = false
 	
 	protected def void build() {
 		if (disposed) {
@@ -506,33 +550,35 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			switch event.type {
 				case MODIFIED,
 				case ADDED: {
-					val uri = event.file.URI
-					val sourceUris = fileMappings?.getSource(uri)
-					if (sourceUris != null && !sourceUris.isEmpty) {
-						for (sourceUri : sourceUris) {
-							changedUris += sourceUri
-						}									
-					} else if (isJavaFile(event.file)) {
-						deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
-							return getJavaDeltas(event.file, module)
-						]
-					} else {
-						changedUris += uri
+					for (uri : event.URIs) {
+						val sourceUris = fileMappings?.getSource(uri)
+						if (sourceUris != null && !sourceUris.isEmpty) {
+							for (sourceUri : sourceUris) {
+								changedUris += sourceUri
+							}									
+						} else if (isJavaFile(event.getFile(uri))) {
+							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
+								return getJavaDeltas(event.getFile(uri), module)
+							]
+						} else {
+							changedUris += uri
+						}
 					}
 				}
 				case DELETED : {
-					val uri = event.file.URI
-					val sourceUris = fileMappings?.getSource(uri)
-					if (sourceUris != null && !sourceUris.isEmpty) {
-						for (sourceUri : sourceUris) {
-							changedUris += sourceUri
-						}									
-					} else if (isJavaFile(event.file)) {
-						deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
-							getJavaDeltas(event.file, module)
-						]
-					} else {
-						deletedUris += uri
+					for (uri : event.URIs) {
+						val sourceUris = fileMappings?.getSource(uri)
+						if (sourceUris != null && !sourceUris.isEmpty) {
+							for (sourceUri : sourceUris) {
+								changedUris += sourceUri
+							}									
+						} else if (isJavaFile(event.getFile(uri))) {
+							deltas += app.<Set<IResourceDescription.Delta>>runReadAction [
+								getJavaDeltas(event.getFile(uri), module)
+							]
+						} else {
+							deletedUris += uri
+						}
 					}
 				}
 			}
@@ -562,6 +608,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	protected def findModule(BuildEvent it, ProjectFileIndex fileIndex) {
+		val file = filesByURI.values.head
 		if (type == DELETED)
 			file.findModule(fileIndex)
 		else

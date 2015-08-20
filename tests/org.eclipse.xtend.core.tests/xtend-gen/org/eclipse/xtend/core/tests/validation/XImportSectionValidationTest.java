@@ -1724,4 +1724,47 @@ public class XImportSectionValidationTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
+  
+  @Test
+  public void checkKnownStaticImportNotMarkedAsUsed() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import static C.*");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("class C {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("static int foo");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def m() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("new Runnable() {");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("override run() {");
+      _builder.newLine();
+      _builder.append("\t\t\t\t");
+      _builder.append("foo++ return");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      final XtendFile file = this.file(_string);
+      this._validationTestHelper.assertWarning(file, XtypePackage.Literals.XIMPORT_DECLARATION, IssueCodes.IMPORT_UNUSED, "C");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
 }

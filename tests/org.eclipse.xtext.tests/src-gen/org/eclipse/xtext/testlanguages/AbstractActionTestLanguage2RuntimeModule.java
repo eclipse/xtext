@@ -78,11 +78,6 @@ public abstract class AbstractActionTestLanguage2RuntimeModule extends org.eclip
 		return org.eclipse.xtext.testlanguages.services.ActionTestLanguage2GrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parseTreeConstruction.ActionTestLanguage2ParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.testlanguages.serializer.ActionTestLanguage2SemanticSequencer.class;

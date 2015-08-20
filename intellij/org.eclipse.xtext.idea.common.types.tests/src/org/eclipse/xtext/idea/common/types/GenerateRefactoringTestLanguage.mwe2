@@ -45,9 +45,11 @@ Workflow {
 			uri = grammarURI
 			fragment = ecore.EcoreGeneratorFragment auto-inject {}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = fileExtensions
+			}
+			fragment = serializer.SerializerFragment auto-inject {
+				srcGenOnly = true
 			}
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}

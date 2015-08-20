@@ -74,8 +74,12 @@ class ConfigurationProducerExtensions {
 		if (trace !== null) {
 			val javaFiles = newArrayList
 			for (uri : trace.allAssociatedLocations) {
-				val javaPsiFile = PsiManager.getInstance(xtextFile.project).findFile(uri.platformResource.file)
-				javaFiles.add(javaPsiFile)
+				val res = uri.platformResource
+				if(res !== null) {
+					val javaPsiFile = PsiManager.getInstance(xtextFile.project).findFile(res.file)
+					if(javaPsiFile !== null)
+						javaFiles.add(javaPsiFile)
+				}
 			}
 			return javaFiles
 		}

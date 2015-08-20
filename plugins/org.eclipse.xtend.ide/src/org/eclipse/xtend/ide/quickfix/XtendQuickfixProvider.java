@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.ui.util.DisplayRunHelper.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
@@ -502,7 +504,16 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 				acceptor.accept(issue, label, label, "xtend_file.png", new IModification() {
 					@Override
 					public void apply(IModificationContext context) throws Exception {
-						iFile.move(pathToMoveTo, IResource.KEEP_HISTORY, null);
+						runAsyncInDisplayThread(new Runnable() {
+							@Override
+							public void run() {
+								try {
+									iFile.move(pathToMoveTo, IResource.KEEP_HISTORY, null);
+								} catch (CoreException e) {
+									logger.error(e);
+								}
+							}
+						});
 					}
 				});
 			}

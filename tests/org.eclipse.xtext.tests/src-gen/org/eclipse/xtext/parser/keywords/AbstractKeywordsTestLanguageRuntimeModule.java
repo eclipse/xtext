@@ -78,11 +78,6 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends org.ecli
 		return org.eclipse.xtext.parser.keywords.services.KeywordsTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.keywords.parseTreeConstruction.KeywordsTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.keywords.serializer.KeywordsTestLanguageSemanticSequencer.class;

@@ -12,6 +12,7 @@ import com.intellij.codeInsight.completion.AllClassesGetter;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.CompletionSorter;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
@@ -31,9 +32,12 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Consumer;
 import com.intellij.util.ProcessingContext;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -44,9 +48,12 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.idea.completion.XbaseLookupElementWeigher;
 import org.eclipse.xtext.xbase.idea.completion.XtypeCompletionContributor;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 @SuppressWarnings("all")
@@ -94,6 +101,9 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
   }
   
   @Inject
+  private XbaseGrammarAccess grammarAccess;
+  
+  @Inject
   private XbaseCompletionContributor.ImportAddingInsertHandler importAddingInsertHandler;
   
   public XbaseCompletionContributor(final AbstractXtextLanguage lang) {
@@ -103,6 +113,40 @@ public class XbaseCompletionContributor extends XtypeCompletionContributor {
     this.completeXConstructorCall_Constructor();
     this.completeXTypeLiteral_Type();
     this.completeJavaTypeWithinMultiLineComment();
+    this.completeJavaTypeWithinExpressionContext();
+  }
+  
+  @Override
+  protected CompletionSorter getCompletionSorter(final CompletionParameters parameters, final CompletionResultSet result) {
+    PrefixMatcher _prefixMatcher = result.getPrefixMatcher();
+    CompletionSorter _defaultSorter = CompletionSorter.defaultSorter(parameters, _prefixMatcher);
+    XbaseLookupElementWeigher _xbaseLookupElementWeigher = new XbaseLookupElementWeigher();
+    return _defaultSorter.weighBefore("liftShorter", _xbaseLookupElementWeigher);
+  }
+  
+  protected void completeJavaTypeWithinExpressionContext() {
+    Set<RuleCall> _expressionContextFollowElements = this.getExpressionContextFollowElements();
+    for (final RuleCall expressionContextFollowElement : _expressionContextFollowElements) {
+      final CompletionProvider<CompletionParameters> _function = new CompletionProvider<CompletionParameters>() {
+        @Override
+        protected void addCompletions(final CompletionParameters $0, final ProcessingContext $1, final CompletionResultSet $2) {
+          final Function1<JavaPsiClassReferenceElement, Boolean> _function = new Function1<JavaPsiClassReferenceElement, Boolean>() {
+            @Override
+            public Boolean apply(final JavaPsiClassReferenceElement it) {
+              return Boolean.valueOf(true);
+            }
+          };
+          XbaseCompletionContributor.this.completeJavaTypes($0, $2, true, _function);
+        }
+      };
+      this.extend(CompletionType.BASIC, expressionContextFollowElement, _function);
+    }
+  }
+  
+  protected Set<RuleCall> getExpressionContextFollowElements() {
+    XbaseGrammarAccess.XPrimaryExpressionElements _xPrimaryExpressionAccess = this.grammarAccess.getXPrimaryExpressionAccess();
+    RuleCall _xFeatureCallParserRuleCall_4 = _xPrimaryExpressionAccess.getXFeatureCallParserRuleCall_4();
+    return Collections.<RuleCall>unmodifiableSet(CollectionLiterals.<RuleCall>newHashSet(_xFeatureCallParserRuleCall_4));
   }
   
   protected void completeJavaTypeWithinMultiLineComment() {

@@ -528,7 +528,7 @@
               pattern=".*tests.*"/>
           <operand
               xsi:type="workingsets:ExclusionPredicate"
-              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.11"/>
+              excludedWorkingSet="//@projects[name='core']/@setupTasks.0/@workingSets.4 //@projects[name='core']/@setupTasks.0/@workingSets.7 //@projects[name='core']/@setupTasks.0/@workingSets.8 //@projects[name='core']/@setupTasks.0/@workingSets.6 //@projects[name='core']/@setupTasks.0/@workingSets.11 //@projects[name='core']/@setupTasks.0/@workingSets.9"/>
         </predicate>
       </workingSet>
       <workingSet

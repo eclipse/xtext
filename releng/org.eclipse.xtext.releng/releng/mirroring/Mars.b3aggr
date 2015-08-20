@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Aggregation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Mars" buildRoot="./Mars/" packedStrategy="SKIP">
+  <validationSets description="Mars 4.5 TP" label="Mars">
+    <contributions href="xpand-mwe-orbit.b3aggrcon#/"/>
+    <contributions label="Mars">
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.5/">
+        <bundles name="org.eclipse.pde.core"/>
+        <bundles name="org.eclipse.pde.ui"/>
+        <bundles name="org.eclipse.ui.cheatsheets"/>
+        <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
+        <bundles name="org.eclipse.jdt.annotation" versionRange="[1.0.0,2.0.0)"/>
+        <features name="org.eclipse.jdt.feature.group"/>
+        <features name="org.eclipse.platform.feature.group"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
+        <bundles name="org.junit4"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/tools/gef/updates/milestones">
+        <bundles name="org.eclipse.draw2d.feature.group"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/technology/m2e/releases/1.4/1.4.1.20140328-1905/">
+        <bundles name="org.eclipse.m2e.core"/>
+      </repositories>
+    </contributions>
+  </validationSets>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
+  <configurations operatingSystem="linux" windowSystem="gtk"/>
+  <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
+</aggregator:Aggregation>

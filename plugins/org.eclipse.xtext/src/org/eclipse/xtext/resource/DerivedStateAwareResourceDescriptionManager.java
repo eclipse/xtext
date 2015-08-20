@@ -70,7 +70,8 @@ public class DerivedStateAwareResourceDescriptionManager extends StorageAwareRes
 				}
 			}
 		} else {
-			log.error("Invalid configuration. DerivedStateAwareResourceDescriptionManager was registered, but resource was a " + resource.getClass().getName());
+			if (log.isDebugEnabled())
+				log.debug("Invalid configuration. DerivedStateAwareResourceDescriptionManager was registered, but resource was a " + resource.getClass().getName());
 			return super.internalGetResourceDescription(resource, strategy);
 		}
 	}

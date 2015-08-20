@@ -78,11 +78,6 @@ public abstract class AbstractLiveContainerBuilderIntegerationTestLanguageRuntim
 		return org.eclipse.xtext.resource.services.LiveContainerBuilderIntegerationTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.resource.parseTreeConstruction.LiveContainerBuilderIntegerationTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.resource.serializer.LiveContainerBuilderIntegerationTestLanguageSemanticSequencer.class;

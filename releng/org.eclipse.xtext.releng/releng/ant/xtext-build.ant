@@ -218,7 +218,7 @@
 		<echo message="build.properties: ${build.properties}" />
 		<run_buckminster commandsfile="${commands.file}" propertiesfile="${build.properties}" />
 		<echo message=" " />
-		<echo message="Updatesite output in: ${build.root}/buckminster.output/*.build_*-eclipse.feature/site.p2/" />
+		<echo message="Updatesite output in: ${build.root}/buckminster.workspace/output/org.eclipse.xtext.build_*-eclipse.feature/zips/" />
 	</target>
 
 	<target name="buckminster-swtbot-tests">

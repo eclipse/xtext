@@ -78,11 +78,6 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends org.e
 		return org.eclipse.xtext.grammarinheritance.services.InheritanceTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.grammarinheritance.serializer.InheritanceTestLanguageSemanticSequencer.class;

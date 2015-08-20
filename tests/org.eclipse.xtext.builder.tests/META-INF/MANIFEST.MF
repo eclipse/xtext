@@ -34,11 +34,11 @@ Export-Package: org.eclipse.xtext.builder.tests,
  org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.builderTestLanguage.impl,
  org.eclipse.xtext.builder.tests.builderTestLanguage.util,
- org.eclipse.xtext.builder.tests.parseTreeConstruction,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
  org.eclipse.xtext.builder.tests.services,
  org.eclipse.xtext.builder.tests.ui.contentassist,
  org.eclipse.xtext.builder.tests.ui.contentassist.antlr,
- org.eclipse.xtext.builder.tests.validation
+ org.eclipse.xtext.builder.tests.validation,
+ org.eclipse.xtext.builder.tests.serializer
 

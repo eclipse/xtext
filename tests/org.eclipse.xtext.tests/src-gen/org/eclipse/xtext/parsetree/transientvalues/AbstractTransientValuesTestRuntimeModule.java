@@ -78,11 +78,6 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends org.eclip
 		return org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parsetree.transientvalues.parseTreeConstruction.TransientValuesTestParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parsetree.transientvalues.serializer.TransientValuesTestSemanticSequencer.class;

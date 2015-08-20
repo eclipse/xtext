@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.imports;
 
 import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 
 import java.util.Collection;
@@ -120,7 +121,7 @@ public class TypeUsageCollector {
 
 	private List<JvmType> implicitExtensionImports;
 
-	private Set<JvmType> knownTypesForStaticImports;
+	private Set<JvmType> knownTypesForStaticImports = newHashSet();
 
 	private IEObjectDocumentationProviderExtension documentationProvider;
 	
@@ -229,8 +230,14 @@ public class TypeUsageCollector {
 								? (JvmDeclaredType) firstJvmElement
 								: ((JvmMember) firstJvmElement).getDeclaringType();
 						if(currentThisType != declaringType) {
+							JvmDeclaredType containerType = EcoreUtil2.getContainerOfType(declaringType.eContainer(), JvmDeclaredType.class);
+							if(containerType == null) {
+								knownTypesForStaticImports.clear();
+							} else {
+								addToKnownStaticImports(containerType);
+							}
 							currentThisType = declaringType;
-							knownTypesForStaticImports = null;
+							addToKnownStaticImports(currentThisType);
 						}
 						currentContext = (JvmMember) firstJvmElement;
 					}
@@ -238,6 +245,11 @@ public class TypeUsageCollector {
 				addJavaDocReferences(next);
 			}
 		}
+	}
+
+	private void addToKnownStaticImports(JvmDeclaredType type) {
+		knownTypesForStaticImports.add(type);
+		knownTypesForStaticImports.addAll(rawSuperTypes.collect(type));
 	}
 	
 	private boolean isOuterTypeLiteral(XAbstractFeatureCall featureCall) {
@@ -550,15 +562,7 @@ public class TypeUsageCollector {
 	}
 
 	protected boolean needsStaticImport(JvmDeclaredType declarator) {
-		if(currentThisType == declarator)
-			return false;
-		if (knownTypesForStaticImports == null && currentThisType != null) {
-			knownTypesForStaticImports = rawSuperTypes.collect(currentThisType);
-		}
-		if (knownTypesForStaticImports != null && knownTypesForStaticImports.contains(declarator))
-			return false;
-		else
-			return true;
+		return !knownTypesForStaticImports.contains(declarator);
 	}
 	
 }

@@ -78,11 +78,6 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.datatyperules.parseTreeConstruction.DatatypeRulesTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.parser.datatyperules.serializer.DatatypeRulesTestLanguageSemanticSequencer.class;
