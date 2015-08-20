@@ -42,7 +42,6 @@ import org.eclipse.xtext.xtext.UsedRulesFinder;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -192,34 +191,42 @@ public class FlattenedGrammarProvider {
 						List<AbstractElement> elements = ((CompoundElement) result).getElements();
 						if (elements.size() == 1) {
 							AbstractElement element = elements.get(0);
-							element.setCardinality(mergeCardinalities(element, (AbstractElement) result));
+							mergeCardinalities(element, (AbstractElement) result);
+							mergePredicates(element, (AbstractElement) result);
 							return element;
 						}
 					}
 					return result;					
 				}
-				private String mergeCardinalities(AbstractElement first, AbstractElement second) {
-					String firstCardinality = first.getCardinality();
+				private void mergePredicates(AbstractElement into, AbstractElement from) {
+					if (from.isPredicated()) {
+						into.setPredicated(true);
+						into.setFirstSetPredicated(false);
+					} else if (!into.isPredicated() && from.isFirstSetPredicated()) {
+						into.setFirstSetPredicated(true);
+					}
+				}
+				private void mergeCardinalities(AbstractElement into, AbstractElement from) {
+					String firstCardinality = into.getCardinality();
 					if (firstCardinality != null) {
-						String secondCardinality = second.getCardinality();
+						String secondCardinality = from.getCardinality();
 						if (secondCardinality != null) {
 							if ("*".equals(secondCardinality)) {
-								return "*";
+								into.setCardinality("*");
 							} else if ("*".equals(firstCardinality)) {
-								return "*";
+								into.setCardinality("*");
 							} else if ("+".equals(firstCardinality)) {
 								if ("?".equals(secondCardinality)) {
-									return "*";	
+									into.setCardinality("*");
 								}
 							} else if ("?".equals(firstCardinality)) {
 								if ("+".equals(secondCardinality)) {
-									return "*";
+									into.setCardinality("*");
 								}
 							}
 						}
-						return firstCardinality;
 					} else {
-						return second.getCardinality();
+						into.setCardinality(from.getCardinality());
 					}
 				}
 				private boolean evaluate(Condition condition) {
