@@ -331,10 +331,10 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("val toFirstUpper1 = toFirstUpper");
+    _builder_1.append("val toFirstUpper2 = toFirstUpper");
     _builder_1.newLine();
     _builder_1.append("\t\t\t");
-    _builder_1.append("toFirstUpper1");
+    _builder_1.append("toFirstUpper2");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("]");
@@ -482,6 +482,270 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map(function)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testList() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$#[\'\']$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val strings = #[\'\']");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("strings");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testSet() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$#{\'\'}$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val strings = #{\'\'}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("strings");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testMap() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$#{\'\'->\'\'}$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val map = #{\'\'->\'\'}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("map");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testArray_0() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$null as String[]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val strings = null as String[]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("strings");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testArray_1() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$null as int[]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val is = null as int[]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("is");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testArray_2() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$null as List<String>[]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val strings = null as List<String>[]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("strings");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertAfterExtract(_builder, _builder_1, true);
+  }
+  
+  @Test
+  public void testArray_3() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("$null as String[][]$");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("val strings = null as String[][]");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("strings");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
