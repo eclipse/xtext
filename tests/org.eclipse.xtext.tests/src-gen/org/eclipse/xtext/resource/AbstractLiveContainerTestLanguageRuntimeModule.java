@@ -78,11 +78,6 @@ public abstract class AbstractLiveContainerTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.resource.services.LiveContainerTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.resource.parseTreeConstruction.LiveContainerTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.resource.serializer.LiveContainerTestLanguageSemanticSequencer.class;

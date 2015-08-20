@@ -78,11 +78,6 @@ public abstract class AbstractSuperTestLanguageRuntimeModule extends org.eclipse
 		return org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.generator.ecore.parseTreeConstruction.SuperTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
 	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
 		return org.eclipse.xtext.generator.ecore.serializer.SuperTestLanguageSemanticSequencer.class;

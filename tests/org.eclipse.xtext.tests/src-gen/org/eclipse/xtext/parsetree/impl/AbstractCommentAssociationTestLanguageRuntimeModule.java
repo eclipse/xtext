@@ -83,19 +83,4 @@ public abstract class AbstractCommentAssociationTestLanguageRuntimeModule extend
 		return org.eclipse.xtext.parsetree.impl.parseTreeConstruction.CommentAssociationTestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.parsetree.impl.serializer.CommentAssociationTestLanguageSemanticSequencer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.parsetree.impl.serializer.CommentAssociationTestLanguageSyntacticSequencer.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
-	}
-
 }

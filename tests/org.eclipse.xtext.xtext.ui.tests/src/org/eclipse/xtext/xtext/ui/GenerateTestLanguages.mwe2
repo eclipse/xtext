@@ -42,7 +42,6 @@ Workflow {
 				emfRuntimeVersion = "2.9"
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 			fragment = resourceFactory.ResourceFactoryFragment {} 
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = {

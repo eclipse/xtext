@@ -43,11 +43,6 @@ public abstract class AbstractReferringTestLanguageRuntimeModule extends org.ecl
 		return org.eclipse.xtext.ui.tests.refactoring.services.ReferringTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.ui.tests.refactoring.parseTreeConstruction.ReferringTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.ui.tests.refactoring.parser.antlr.ReferringTestLanguageParser.class;
@@ -81,6 +76,21 @@ public abstract class AbstractReferringTestLanguageRuntimeModule extends org.ecl
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.ui.tests.refactoring.serializer.ReferringTestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
+		return org.eclipse.xtext.ui.tests.refactoring.serializer.ReferringTestLanguageSyntacticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment

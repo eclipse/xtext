@@ -43,11 +43,6 @@ public abstract class AbstractEcore2XtextTestRuntimeModule extends org.eclipse.x
 		return org.eclipse.xtext.xtext.ui.ecore2xtext.services.Ecore2XtextTestGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.xtext.ui.ecore2xtext.parseTreeConstruction.Ecore2XtextTestParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
 		return org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.Ecore2XtextTestParser.class;

@@ -43,11 +43,6 @@ public abstract class AbstractRefactoringTestLanguageRuntimeModule extends org.e
 		return org.eclipse.xtext.common.types.xtext.ui.services.RefactoringTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.common.types.xtext.ui.parseTreeConstruction.RefactoringTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.common.types.xtext.ui.scoping.RefactoringTestLanguageScopeProvider.class;

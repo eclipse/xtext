@@ -23,7 +23,6 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl,
  org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.util,
- org.eclipse.xtext.testlanguages.backtracking.parseTreeConstruction,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr,
  org.eclipse.xtext.testlanguages.backtracking.parser.antlr.internal,
  org.eclipse.xtext.testlanguages.backtracking.validation,
@@ -41,5 +40,6 @@ Export-Package: org.eclipse.xtext.testlanguages.backtracking,
  org.eclipse.xtext.testlanguages.noJdt.validation,
  org.eclipse.xtext.testlanguages.noJdt.scoping,
  org.eclipse.xtext.testlanguages.noJdt.generator,
- org.eclipse.xtext.testlanguages.noJdt.formatting
+ org.eclipse.xtext.testlanguages.noJdt.formatting,
+ org.eclipse.xtext.testlanguages.backtracking.serializer
 

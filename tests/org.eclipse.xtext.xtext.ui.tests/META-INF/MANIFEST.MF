@@ -28,7 +28,6 @@ Import-Package: org.apache.log4j;version="1.2.15",
 Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.Activator
 Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.services,
- org.eclipse.xtext.xtext.ui.ecore2xtext.parseTreeConstruction,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal,
  org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist.antlr,

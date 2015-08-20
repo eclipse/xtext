@@ -43,9 +43,19 @@ public abstract class AbstractSimpleBeeLangTestLanguageRuntimeModule extends org
 		return org.eclipse.xtext.testlanguages.backtracking.services.SimpleBeeLangTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.backtracking.parseTreeConstruction.SimpleBeeLangTestLanguageParsetreeConstructor.class;
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
+		return org.eclipse.xtext.testlanguages.backtracking.serializer.SimpleBeeLangTestLanguageSemanticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
+		return org.eclipse.xtext.testlanguages.backtracking.serializer.SimpleBeeLangTestLanguageSyntacticSequencer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
+	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
+		return org.eclipse.xtext.serializer.impl.Serializer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment

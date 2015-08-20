@@ -25,7 +25,6 @@ var emfRuntimeVersion = "2.9"
 CompositeGeneratorFragment {
 	fragment = ecore.EcoreGeneratorFragment auto-inject {}
 	fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-	fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
 	fragment = resourceFactory.ResourceFactoryFragment { 
 		fileExtensions = file.extensions
 	}
