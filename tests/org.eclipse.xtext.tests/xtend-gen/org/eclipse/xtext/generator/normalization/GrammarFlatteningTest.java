@@ -14,7 +14,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.generator.normalization.FlattenedGrammarProvider;
+import org.eclipse.xtext.generator.normalization.FlattenedGrammarAccess;
 import org.eclipse.xtext.generator.normalization.RuleFilter;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
@@ -44,7 +44,8 @@ public class GrammarFlatteningTest extends AbstractXtextTests {
     RuleNames ruleNames = RuleNames.getRuleNames(grammar, false);
     RuleFilter filter = new RuleFilter();
     filter.setDiscardUnreachableRules(dropUnreachable);
-    Grammar result = FlattenedGrammarProvider.flatten(grammar, ruleNames, filter);
+    FlattenedGrammarAccess _flattenedGrammarAccess = new FlattenedGrammarAccess(grammar, ruleNames, filter);
+    Grammar result = _flattenedGrammarAccess.getFlattenedGrammar();
     XtextResource resource = this.<XtextResource>get(XtextResource.class);
     EList<EObject> _contents = resource.getContents();
     _contents.add(result);
