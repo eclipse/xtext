@@ -25,7 +25,7 @@ Workflow {
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/parsetree/impl/CommentAssociationTestLanguage.xtext"
-			fragment = @org.eclipse.xtext.TestLanguagesFragments {}
+			fragment = @org.eclipse.xtext.TestLanguagesFragmentsParseTreeConstructor {}
 		}
 	}
 }
