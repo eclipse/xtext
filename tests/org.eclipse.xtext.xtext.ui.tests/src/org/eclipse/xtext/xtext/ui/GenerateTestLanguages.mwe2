@@ -42,7 +42,10 @@ Workflow {
 				emfRuntimeVersion = "2.9"
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
-			fragment = resourceFactory.ResourceFactoryFragment {} 
+			fragment = resourceFactory.ResourceFactoryFragment {}
+			fragment = generator.serializer.SerializerFragment {
+				srcGenOnly = true
+			}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
 				options = {
 					classSplitting = true
