@@ -19,9 +19,6 @@ LanguageConfig auto-inject {
 		emfRuntimeVersion = "2.9"
 	}
 
-	// the old serialization component
-	// fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}    
-
 	// serializer 2.0
 	fragment = serializer.SerializerFragment auto-inject {
 		generateStub = false
