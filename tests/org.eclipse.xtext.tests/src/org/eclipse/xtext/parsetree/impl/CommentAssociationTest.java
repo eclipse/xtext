@@ -23,6 +23,7 @@ import org.eclipse.xtext.parsetree.impl.commentAssociation.Model;
 import org.eclipse.xtext.parsetree.reconstr.ICommentAssociater;
 import org.eclipse.xtext.parsetree.reconstr.Serializer;
 import org.eclipse.xtext.resource.SaveOptions;
+import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.junit.Test;
 
@@ -102,11 +103,21 @@ public class CommentAssociationTest extends AbstractXtextTests {
 	}
 
 	@Test public void testSerializeReplacement() throws Exception {
-		String xBlock = "// comment pre x\n" 
-					+ "element /* comment inside x */ x // comment post x\n";
-		String yBlock = "// comment pre y\n" + "element /* comment inside y */ y // comment post y\n";
-		String zBlock = "// comment pre z\n" + "element z";
-		String textModel = xBlock + yBlock + zBlock;
+		String xBlock = 
+				"// comment pre x\n" + 
+				"element /* comment inside x */ x // comment post x\n" +
+				"";
+		String yBlock = 
+				"// comment pre y\n" + 
+				"element /* comment inside y */ y // comment post y\n" +
+				"";
+		String zBlock = 
+				"// comment pre z\n" + 
+				"element z";
+		String textModel = 
+				xBlock + 
+				yBlock + 
+				zBlock;
 //		System.out.println(textModel);
 
 		Model model = (Model) getModel(textModel);
@@ -151,7 +162,16 @@ public class CommentAssociationTest extends AbstractXtextTests {
 		model.getElements().add(y);
 		model.getElements().add(z);
 		String serialized = serialize(model);
-		assertEquals("element x // comment post x\nparent y element z", serialized);
+		assertEquals(commentsAtEndOfFileExpectation(), serialized);
+	}
+
+	protected String commentsAtEndOfFileExpectation() {
+		return "element x // comment post x\n parent y element z";
+	}
+	
+	@Override
+	protected ISerializer getSerializer() {
+		return get(Serializer.class);
 	}
 }
 

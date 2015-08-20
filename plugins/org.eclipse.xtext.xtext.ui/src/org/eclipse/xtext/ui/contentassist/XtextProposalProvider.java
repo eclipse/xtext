@@ -823,6 +823,11 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	@Override
 	public void completeRuleCall_Rule(EObject model, Assignment assignment, final ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		completeRuleCall(model, assignment, context, acceptor);
+	}
+
+	private void completeRuleCall(EObject model, Assignment assignment, final ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
 		final Assignment containingAssignment = GrammarUtil.containingAssignment(model);
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
@@ -847,6 +852,12 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				return true;
 			}
 		});
+	}
+	
+	@Override
+	public void completePredicatedRuleCall_Rule(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeRuleCall(model, assignment, context, acceptor);
 	}
 	
 	private static class EnclosingGrammarAwareDescription extends ForwardingEObjectDescription {
