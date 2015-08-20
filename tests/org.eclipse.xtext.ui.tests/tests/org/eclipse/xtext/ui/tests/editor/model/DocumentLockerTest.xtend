@@ -22,8 +22,6 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.concurrent.CancelableUnitOfWork
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
