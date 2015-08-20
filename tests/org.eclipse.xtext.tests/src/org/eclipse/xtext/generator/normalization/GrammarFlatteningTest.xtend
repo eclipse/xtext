@@ -33,7 +33,7 @@ class GrammarFlatteningTest extends AbstractXtextTests {
 		var RuleNames ruleNames = RuleNames.getRuleNames(grammar, false)
 		var RuleFilter filter = new RuleFilter()
 		filter.discardUnreachableRules = dropUnreachable
-		var Grammar result = FlattenedGrammarProvider.flatten(grammar, ruleNames, filter)
+		var Grammar result = new FlattenedGrammarAccess(grammar, ruleNames, filter).flattenedGrammar
 		var XtextResource resource = get(XtextResource)
 		resource.getContents().add(result)
 		resource.setURI(URI.createURI("synthetic://flattened.xtext"))
