@@ -43,7 +43,7 @@ Workflow {
 			}
 			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
 			fragment = resourceFactory.ResourceFactoryFragment {}
-			fragment = generator.serializer.SerializerFragment {
+			fragment = generator.serializer.SerializerFragment auto-inject {
 				srcGenOnly = true
 			}
 			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
