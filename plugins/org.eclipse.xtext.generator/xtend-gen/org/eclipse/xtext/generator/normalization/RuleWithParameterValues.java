@@ -8,6 +8,7 @@
 package org.eclipse.xtext.generator.normalization;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -38,6 +39,7 @@ public class RuleWithParameterValues {
       return this.element;
     }
     
+    @Override
     public boolean isAdapterForType(final Object object) {
       return object == RuleWithParameterValues.class;
     }
@@ -122,8 +124,20 @@ public class RuleWithParameterValues {
   
   public static RuleWithParameterValues findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {
-    	if (adapter instanceof org.eclipse.xtext.generator.normalization.RuleWithParameterValues.RuleWithParameterValuesAdapter) {
-    		return ((org.eclipse.xtext.generator.normalization.RuleWithParameterValues.RuleWithParameterValuesAdapter) adapter).get();
+    	if (adapter instanceof RuleWithParameterValues.RuleWithParameterValuesAdapter) {
+    		return ((RuleWithParameterValues.RuleWithParameterValuesAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public static RuleWithParameterValues removeFromEmfObject(final Notifier emfObject) {
+    List<Adapter> adapters = emfObject.eAdapters();
+    for(int i = 0, max = adapters.size(); i < max; i++) {
+    	Adapter adapter = adapters.get(i);
+    	if (adapter instanceof RuleWithParameterValues.RuleWithParameterValuesAdapter) {
+    		emfObject.eAdapters().remove(i);
+    		return ((RuleWithParameterValues.RuleWithParameterValuesAdapter) adapter).get();
     	}
     }
     return null;
@@ -133,7 +147,7 @@ public class RuleWithParameterValues {
     RuleWithParameterValues result = findInEmfObject(emfObject);
     if (result != null)
     	throw new IllegalStateException("The given EMF object already contains an adapter for RuleWithParameterValues");
-    org.eclipse.xtext.generator.normalization.RuleWithParameterValues.RuleWithParameterValuesAdapter adapter = new org.eclipse.xtext.generator.normalization.RuleWithParameterValues.RuleWithParameterValuesAdapter(this);
+    RuleWithParameterValues.RuleWithParameterValuesAdapter adapter = new RuleWithParameterValues.RuleWithParameterValuesAdapter(this);
     emfObject.eAdapters().add(adapter);
   }
 }

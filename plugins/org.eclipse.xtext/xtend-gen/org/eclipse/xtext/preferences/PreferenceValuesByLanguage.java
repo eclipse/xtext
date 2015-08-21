@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.preferences;
 
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -29,6 +30,7 @@ public class PreferenceValuesByLanguage {
       return this.element;
     }
     
+    @Override
     public boolean isAdapterForType(final Object object) {
       return object == PreferenceValuesByLanguage.class;
     }
@@ -46,8 +48,20 @@ public class PreferenceValuesByLanguage {
   
   public static PreferenceValuesByLanguage findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {
-    	if (adapter instanceof org.eclipse.xtext.preferences.PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) {
-    		return ((org.eclipse.xtext.preferences.PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) adapter).get();
+    	if (adapter instanceof PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) {
+    		return ((PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public static PreferenceValuesByLanguage removeFromEmfObject(final Notifier emfObject) {
+    List<Adapter> adapters = emfObject.eAdapters();
+    for(int i = 0, max = adapters.size(); i < max; i++) {
+    	Adapter adapter = adapters.get(i);
+    	if (adapter instanceof PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) {
+    		emfObject.eAdapters().remove(i);
+    		return ((PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter) adapter).get();
     	}
     }
     return null;
@@ -57,7 +71,7 @@ public class PreferenceValuesByLanguage {
     PreferenceValuesByLanguage result = findInEmfObject(emfObject);
     if (result != null)
     	throw new IllegalStateException("The given EMF object already contains an adapter for PreferenceValuesByLanguage");
-    org.eclipse.xtext.preferences.PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter adapter = new org.eclipse.xtext.preferences.PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter(this);
+    PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter adapter = new PreferenceValuesByLanguage.PreferenceValuesByLanguageAdapter(this);
     emfObject.eAdapters().add(adapter);
   }
 }

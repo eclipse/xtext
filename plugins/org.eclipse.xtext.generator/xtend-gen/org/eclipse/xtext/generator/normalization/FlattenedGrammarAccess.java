@@ -50,6 +50,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
+import org.eclipse.xtext.generator.normalization.OriginalElement;
 import org.eclipse.xtext.generator.normalization.RuleFilter;
 import org.eclipse.xtext.generator.normalization.RuleWithParameterValues;
 import org.eclipse.xtext.util.XtextSwitch;
@@ -80,6 +81,7 @@ public class FlattenedGrammarAccess {
       return this.element;
     }
     
+    @Override
     public boolean isAdapterForType(final Object object) {
       return object == FlattenedGrammarAccess.class;
     }
@@ -277,8 +279,15 @@ public class FlattenedGrammarAccess {
                 AbstractElement element = elements.get(0);
                 this.mergeCardinalities(element, ((AbstractElement)result));
                 this.mergePredicates(element, ((AbstractElement)result));
+                OriginalElement.removeFromEmfObject(element);
+                OriginalElement original = new OriginalElement(((AbstractElement) eObject));
+                original.attachToEmfObject(element);
                 return element;
               }
+            }
+            if ((eObject instanceof AbstractElement)) {
+              OriginalElement original_1 = new OriginalElement(((AbstractElement)eObject));
+              original_1.attachToEmfObject(result);
             }
             return result;
           }
@@ -538,8 +547,20 @@ public class FlattenedGrammarAccess {
   
   public static FlattenedGrammarAccess findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {
-    	if (adapter instanceof org.eclipse.xtext.generator.normalization.FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) {
-    		return ((org.eclipse.xtext.generator.normalization.FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) adapter).get();
+    	if (adapter instanceof FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) {
+    		return ((FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public static FlattenedGrammarAccess removeFromEmfObject(final Notifier emfObject) {
+    List<Adapter> adapters = emfObject.eAdapters();
+    for(int i = 0, max = adapters.size(); i < max; i++) {
+    	Adapter adapter = adapters.get(i);
+    	if (adapter instanceof FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) {
+    		emfObject.eAdapters().remove(i);
+    		return ((FlattenedGrammarAccess.FlattenedGrammarAccessAdapter) adapter).get();
     	}
     }
     return null;
@@ -549,7 +570,7 @@ public class FlattenedGrammarAccess {
     FlattenedGrammarAccess result = findInEmfObject(emfObject);
     if (result != null)
     	throw new IllegalStateException("The given EMF object already contains an adapter for FlattenedGrammarAccess");
-    org.eclipse.xtext.generator.normalization.FlattenedGrammarAccess.FlattenedGrammarAccessAdapter adapter = new org.eclipse.xtext.generator.normalization.FlattenedGrammarAccess.FlattenedGrammarAccessAdapter(this);
+    FlattenedGrammarAccess.FlattenedGrammarAccessAdapter adapter = new FlattenedGrammarAccess.FlattenedGrammarAccessAdapter(this);
     emfObject.eAdapters().add(adapter);
   }
   
