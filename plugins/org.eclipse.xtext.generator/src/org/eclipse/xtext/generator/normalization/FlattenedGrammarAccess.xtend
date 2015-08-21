@@ -150,7 +150,6 @@ class FlattenedGrammarAccess {
 							}
 
 						}
-
 					}
 					var result = super.copy(eObject)
 					if (result instanceof CompoundElement) {
@@ -159,9 +158,16 @@ class FlattenedGrammarAccess {
 							var element = elements.get(0)
 							element.mergeCardinalities(result)
 							element.mergePredicates(result)
+							OriginalElement.removeFromEmfObject(element)
+							var original = new OriginalElement(eObject as AbstractElement)
+							original.attachToEmfObject(element)
 							return element
 						}
 
+					}
+					if (eObject instanceof AbstractElement) {
+						var original = new OriginalElement(eObject)
+						original.attachToEmfObject(result)
 					}
 					return result
 				}
