@@ -12,11 +12,15 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
+ * contentType {String}
+ *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
  *     An element into which the dirty status class is written when the editor is marked dirty;
  *     it can be either a DOM element or an ID for a DOM element.
  * dirtyStatusClass = 'dirty' {String}
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
+ * document {Document}
+ *     The document; if not specified, the global document is used.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
  * enableFormattingAction = false {Boolean}
@@ -35,13 +39,21 @@
  *     Whether to load the editor content from the server.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
+ * resourceId {String}
+ *     The identifier of the resource displayed in the text editor; this option is sent to the server to
+ *     communicate required information on the respective resource.
+ * selectionUpdateDelay = 550 {Number}
+ *     The number of milliseconds to wait after a selection change before Xtext services are invoked.
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
- * selectionUpdateDelay = 550 {Number}
- *     The number of milliseconds to wait after a selection change before Xtext services are invoked.
+ * serverUrl {String}
+ *     The URL of the Xtext server.
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
+ * syntaxDefinition {String}
+ *     A path to a JS file defining an Ace syntax definition; if no path is given, it is built from
+ *     the 'xtextLang' option in the form 'xtext/mode-<xtextLang>'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String}
@@ -124,22 +136,12 @@ define([
 		return options;
 	}
 	
-	/**
-	 * Set the default options for Xtext editors.
-	 */
-	function _setDefaultOptions(options) {
-		if (!options.xtextLang && options.lang)
-			options.xtextLang = options.lang
-		if (!options.xtextLang && options.resourceId)
-			options.xtextLang = options.resourceId.split('.').pop();
-		if (!options.theme)
-			options.theme = 'ace/theme/eclipse';
-	}
-	
 	var exports = {};
 	
 	/**
-	 * Create an Xtext editor instance configured with the given options.
+	 * Create one or more Xtext editor instances configured with the given options.
+	 * The return value is either an Ace editor or an array of Ace editors, which can
+	 * be further configured using the Ace API.
 	 */
 	exports.createEditor = function(options) {
 		if (!options)
@@ -147,16 +149,25 @@ define([
 		if (!options.parent)
 			options.parent = 'xtext-editor';
 		
-		var parents;
-		if (typeof(options.parent) === 'string') {
-			var doc = options.document || document;
-			var element = doc.getElementById(options.parent);
-			if (element)
-				parents = [element];
-			else
-				parents = doc.getElementsByClassName(options.parent);
+		var parentsSpec;
+		if (jQuery.isArray(options.parent)) {
+			parentsSpec = options.parent;
 		} else {
-			parents = [options.parent];
+			parentsSpec = [options.parent];
+		}
+		var parents = [];
+		var doc = options.document || document;
+		for (var i = 0; i < parentsSpec.length; i++) {
+			var spec = parentsSpec[i];
+			if (typeof(spec) === 'string') {
+				var element = doc.getElementById(spec);
+				if (element)
+					parents.push(element);
+				else
+					parents.concat(doc.getElementsByClassName(options.parent));
+			} else {
+				parents.push(spec);
+			}
 		}
 		
 		var editors = [];
@@ -165,7 +176,6 @@ define([
 			editor.$blockScrolling = Infinity;
 			
 			var editorOptions = _mergeOptions(parents[i], options);
-			_setDefaultOptions(editorOptions);
 			exports.configureServices(editor, editorOptions);
 			editors[i] = editor;
 		}
@@ -181,12 +191,12 @@ define([
 	 * with createEditor(options).
 	 */
 	exports.configureServices = function(editor, options) {
-		if (!options.xtextLang && options.lang)
-			options.xtextLang = options.lang
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
 		if (options.theme)
-			editor.setTheme(options.theme)
+			editor.setTheme(options.theme);
+		else
+			editor.setTheme('ace/theme/eclipse');
 		
 		var editorContext = new EditorContext(editor);
 		editor.getEditorContext = function() {

@@ -161,8 +161,8 @@ define(['jquery'], function(jQuery) {
 				}
 				if (accepted || accepted === undefined) {
 					self.setState('finished');
-					if (editorContext.getEditor) {
-						var successListeners = editorContext.getEditor().xtextServiceSuccessListeners;
+					if (editorContext.xtextServices) {
+						var successListeners = editorContext.xtextServices.successListeners;
 						if (successListeners) {
 							for (var i = 0; i < successListeners.length; i++) {
 								var listener = successListeners[i];
@@ -214,8 +214,8 @@ define(['jquery'], function(jQuery) {
 		 * Report an error to the listeners.
 		 */
 		_reportError: function(editorContext, severity, message, requestData) {
-			if (editorContext.getEditor) {
-				var errorListeners = editorContext.getEditor().xtextServiceErrorListeners;
+			if (editorContext.xtextServices) {
+				var errorListeners = editorContext.xtextServices.errorListeners;
 				if (errorListeners) {
 					for (var i = 0; i < errorListeners.length; i++) {
 						var listener = errorListeners[i];
