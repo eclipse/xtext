@@ -8,17 +8,11 @@
 package org.eclipse.xtend.caliper.tests.clazz;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
-import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException;
-import org.eclipse.jdt.internal.compiler.env.IBinaryType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.access.binary.asm.JvmDeclaredTypeBuilder;
 import org.eclipse.xtext.common.types.access.reflect.ReflectURIHelper;
 import org.eclipse.xtext.common.types.access.reflect.ReflectionTypeFactory;
@@ -110,25 +104,6 @@ public class TypeFactoryBenchmark extends SimpleBenchmark {
 				};
 				JvmDeclaredType result = builder.buildType();
 				return result.getMembers().size();
-			}
-			
-		},
-		JdtCommonTypes {
-
-			@Override
-			int parse(byte[] bytes, Class<?> c) {
-				try {
-					ClassFileReader reader = new ClassFileReader(bytes, CharOperation.NO_CHAR, true);
-					JvmDeclaredType result = new ClassFileReaderTypeFactory(null, null) {
-						@Override
-						protected void createNestedTypes(IBinaryType classFile, JvmDeclaredType result, Map<String, JvmTypeParameter> typeParameters) {
-							// nothing to do
-						}
-					}.createType(reader, null);
-					return result.getMembers().size();
-				} catch (ClassFormatException e) {
-					throw new RuntimeException(e);
-				}
 			}
 			
 		},
