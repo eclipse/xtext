@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.emf.common.notify.impl.AdapterImpl
+import java.util.List
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,19 +28,36 @@ annotation EmfAdaptable {
 class EmfAdaptableProcessor extends AbstractClassProcessor {
 	
 	override doRegisterGlobals(ClassDeclaration annotatedClass, extension RegisterGlobalsContext context) {
-		context.registerClass(annotatedClass.getAdapterClassName)
+		context.registerClass(annotatedClass.adapterClassName)
 	}
 	
 	
 	override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+		val adapterClass = findClass(annotatedClass.adapterClassName)
 		annotatedClass.addMethod('findInEmfObject') [
 			addParameter('emfObject', Notifier.newTypeReference)
 			returnType = annotatedClass.newTypeReference
 			static = true
 			body = '''
 				for («Adapter» adapter : emfObject.eAdapters()) {
-					if (adapter instanceof «annotatedClass.adapterClassName») {
-						return ((«annotatedClass.adapterClassName») adapter).get();
+					if (adapter instanceof «adapterClass») {
+						return ((«adapterClass») adapter).get();
+					}
+				}
+				return null;
+			'''
+		]
+		annotatedClass.addMethod('removeFromEmfObject') [
+			addParameter('emfObject', Notifier.newTypeReference)
+			returnType = annotatedClass.newTypeReference
+			static = true
+			body = '''
+				«List»<«Adapter»> adapters = emfObject.eAdapters();
+				for(int i = 0, max = adapters.size(); i < max; i++) {
+					«Adapter» adapter = adapters.get(i);
+					if (adapter instanceof «adapterClass») {
+						emfObject.eAdapters().remove(i);
+						return ((«adapterClass») adapter).get();
 					}
 				}
 				return null;
@@ -52,11 +70,11 @@ class EmfAdaptableProcessor extends AbstractClassProcessor {
 				«annotatedClass.simpleName» result = findInEmfObject(emfObject);
 				if (result != null)
 					throw new IllegalStateException("The given EMF object already contains an adapter for «annotatedClass.simpleName»");
-				«annotatedClass.adapterClassName» adapter = new «annotatedClass.adapterClassName»(this);
+				«adapterClass» adapter = new «adapterClass»(this);
 				emfObject.eAdapters().add(adapter);
 			'''
 		]
-		val adapterClass = findClass(annotatedClass.adapterClassName)
+		
 		adapterClass.extendedClass = AdapterImpl.newTypeReference
 		adapterClass.addField('element') [
 			type = annotatedClass.newTypeReference
@@ -74,6 +92,7 @@ class EmfAdaptableProcessor extends AbstractClassProcessor {
 			'''
 		]
 		adapterClass.addMethod('isAdapterForType') [
+			addAnnotation(newAnnotationReference(Override))
 			addParameter("object", Object.newTypeReference)
 			returnType = primitiveBoolean
 			body = '''
