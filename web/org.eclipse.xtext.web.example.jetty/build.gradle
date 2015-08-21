@@ -13,11 +13,36 @@ dependencies {
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
 
+/* 
+ * The following download/unpack tasks are currently necessary 
+ * because Eclipse Orion does not provide easily consumable artifacts
+ */
+
+def orionDir = file('src/main/webapp/orion')
+def orionZip = file("$buildDir/orion/built-codeEdit.zip")
+
+task downloadOrion {
+	onlyIf {!orionZip.exists()}
+	doLast {
+		orionZip.parentFile.mkdirs()
+		ant.get(src: 'http://download.eclipse.org/orion/drops/S20150817-1226/built-codeEdit.zip', dest: orionZip)
+	}
+}
+
+task unpackOrion(type: Copy) {
+	onlyIf {!orionDir.exists()}
+	dependsOn(downloadOrion)
+	from(zipTree(orionZip))
+	into(orionDir)
+}
+
 task jettyRun(type:JavaExec) {
-	dependsOn(sourceSets.main.runtimeClasspath)
+	dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
 	classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 	main = "org.eclipse.xtext.web.example.jetty.ServerLauncher"
 	standardInput = System.in
 }
+
+tasks.eclipse.dependsOn(unpackOrion)
 
 uploadArchives.enabled = false

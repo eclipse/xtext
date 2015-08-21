@@ -12,22 +12,6 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
- * autoCompleteComments = true {Boolean}
- *     Whether comments shall be auto-completed.
- * autoPairAngleBrackets = true {Boolean}
- *     Whether <angle brackets> shall be auto-completed.
- * autoPairBraces = true {Boolean}
- *     Whether {braces} shall be auto-completed.
- * autoPairParentheses = true {Boolean}
- *     Whether (parentheses) shall be auto-completed.
- * autoPairQuotations = true {Boolean}
- *     Whether "quotations" shall be auto-completed.
- * autoPairSquareBrackets = true {Boolean}
- *     Whether [square brackets] shall be auto-completed.
- * computeSize = true {Boolean}
- *     Whether to enable automatic computation of the widget height.
- * contents = '' {String}
- *     The editor contents.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -36,7 +20,7 @@
  * dirtyStatusClass = 'dirty' {String}
  *     A CSS class name written into the dirtyElement when the editor is marked dirty.
  * document {Document}
- *     The document.
+ *     The document; if not specified, the global document is used.
  * enableContentAssistService = true {Boolean}
  *     Whether content assist should be enabled.
  * enableFormattingAction = false {Boolean}
@@ -55,22 +39,12 @@
  *     Whether the save action should be bound to the standard keystroke ctrl+s / cmd+s.
  * enableValidationService = true {Boolean}
  *     Whether validation should be enabled.
- * expandTab = false {Boolean}
- *     Whether the tab key inserts white spaces.
- * firstLineIndex = 1 {Number}
- *     The line index displayed for the first line of text.
- * fullSelection = true {Boolean}
- *     Whether or not the view is in full selection mode.
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server.
- * model {TextModel}
- *     The base text model.
  * mouseHoverDelay = 500 {Number}
  *     The number of milliseconds to wait after a mouse hover before the information tooltip is displayed.
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID or class name for a DOM element.
- * readonly = false {Boolean}
- *     Whether the view is read-only.
  * resourceId {String}
  *     The identifier of the resource displayed in the text editor; this option is sent to the server to
  *     communicate required information on the respective resource.
@@ -81,57 +55,21 @@
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
  * serverUrl {String}
  *     The URL of the Xtext server.
- * setFocus = false {Boolean}
- *     Whether to focus the editor after creation.
- * showAnnotationRuler = true {Boolean}
- *     Whether the annotation ruler is shown.
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
- * showFoldingRuler = true {Boolean}
- *     Whether the folding ruler is shown.
- * showLinesRuler = true {Boolean}
- *     Whether the lines ruler is shown.
- * showOverviewRuler = true {Boolean}
- *     Whether the overview ruler is shown.
- * showZoomRuler = false {Boolean}
- *     Whether the zoom ruler is shown.
- * singleMode = false {Boolean}
- *     Whether the editor is in single line mode.
- * smartIndentation = true {Boolean}
- *     Whether to enable smart indentation.
- * statusElement {String | DOMElement}
- *     An element into which the status message is written if no status reporter is given;
- *     it can be either a DOM element or an ID for a DOM element.
- * statusReporter {Function}
- *     A status reporter function.
  * syntaxDefinition {String}
- *     A path to a JS file defining an Orion syntax definition (see orion/editor/stylers/lib/syntax.js);
- *     if no path is given, it is built from the 'xtextLang' option in the form 'xtext/<xtextLang>-syntax'.
- * tabMode = true {Boolean}
- *     Whether the tab key is consumed by the view or is used for focus traversal.
- * tabSize = 4 {Number}
- *     The number of spaces in a tab.
+ *     A path to a JS file defining an Orion syntax definition; if no path is given, it is built from
+ *     the 'xtextLang' option in the form 'xtext/<xtextLang>-syntax'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
- * theme {String | TextTheme}
- *     The CSS file for the view theming or the actual theme.
- * themeClass {String}
- *     The CSS class for the view theming.
- * title = '' {String}
- *     The editor title.
- * wrappable = false {Boolean}
- *     Whether the view is wrappable.
- * wrapMode = false {Boolean}
- *     Whether the view wraps lines.
  * xtextLang {String}
  *     The language name (usually the file extension configured for the language).
  */
 define([
     'jquery',
-    'orion/editor/edit',
     'orion/Deferred',
+    'orion/codeEdit',
     'orion/keyBinding',
-    'orion/editor/textStyler',
     'orion/editor/annotations',
     'xtext/compatibility',
 	'xtext/OrionEditorContext',
@@ -145,7 +83,7 @@ define([
 	'xtext/services/HoverService',
 	'xtext/services/OccurrencesService',
 	'xtext/services/FormattingService'
-], function(jQuery, orionEdit, Deferred, mKeyBinding, mTextStyler, mAnnotations, compatibility, EditorContext,
+], function(jQuery, OrionDeferred, CodeEdit, mKeyBinding, mAnnotations, compatibility, EditorContext,
 		XtextService, LoadResourceService, SaveResourceService, UpdateService, ContentAssistService,
 		ValidationService, HighlightingService, HoverService, OccurrencesService, FormattingService) {
 	
@@ -195,163 +133,93 @@ define([
 	}
 	
 	
-	var _internals = {}
-	
-	/**
-	 * Set the default options for Xtext editors.
-	 */
-	function _setDefaultOptions(options) {
-		if (!options.xtextLang && options.lang)
-			options.xtextLang = options.lang
-		if (!options.xtextLang && options.resourceId)
-			options.xtextLang = options.resourceId.split('.').pop();
-		if (!options.statusReporter && options.statusElement) {
-			var statusElement = options.statusElement;
-			if (typeof(statusElement) === 'string') {
-				var doc = options.document || document;
-				statusElement = doc.getElementById(statusElement);
-			}
-			if (statusElement !== undefined) {
-				options.statusReporter = function(message, isError) {
-					statusElement.textContent = message;
-				};
-			}
-		}
-		options.noFocus = !options.setFocus;
-		options.noComputeSize = options.computeSize !== undefined && !options.computeSize;
-		if (options.autoCompleteComments === undefined)
-			options.autoCompleteComments = true;
-		if (options.autoPairAngleBrackets === undefined)
-			options.autoPairAngleBrackets = true;
-		if (options.autoPairBraces === undefined)
-			options.autoPairBraces = true;
-		if (options.autoPairParentheses === undefined)
-			options.autoPairParentheses = true;
-		if (options.autoPairQuotations === undefined)
-			options.autoPairQuotations = true;
-		if (options.autoPairSquareBrackets === undefined)
-			options.autoPairSquareBrackets = true;
-		if (options.smartIndentation === undefined)
-			options.smartIndentation = true;
-		if (options.hoverFactory === undefined) {
-			var hover = {
-				clearQuickFixes: function() {},
-				renderQuickFixes: function() {}
-			};
-			_internals.hoverDelegate = hover;
-			options.hoverFactory = {
-				createHover: function(editor) {
-					return hover;
-				}
-			};
-		}
-	}
-	
-	/**
-	 * On demand registers and returns the annotation type with the given name
-	 */
-	function _getHighlightAnnotationType(typeName, editorContext) {
-		var annotationType = mAnnotations.AnnotationType;
-		var type = annotationType.getType(typeName)
-		if(type)
-			return typeName;
-		var properties = {
-			title: typeName,
-			style: {styleClass: "annotation " + typeName},
-			html: "<div class='annotationHTML " + typeName + "'></div>", 
-			overviewStyle: {styleClass: "annotationOverview " + typeName}
-		};
-		properties.rangeStyle = {styleClass: "annotationRange " + typeName};
-		var newType = annotationType.registerType(typeName, properties);
-		editorContext._highlightAnnotationTypes.push(newType)
-		editorContext.getEditor().getAnnotationStyler().addAnnotationType(newType)
-		return newType;
-	}
-	
-	/**
-	 * Apply the hightlighting service result.
-	 */
-	function _appyHighlighting(result, editor, editorContext) {
-		var annotations = [];
-		for(var i = 0; i < result.regions.length; ++i) {
-			var region = result.regions[i];
-			region.styleClasses.forEach(function(styleClass) {
-				annotations.push({
-					description: '',
-					start: region.offset,
-					end: region.offset + region.length,
-					styleClass: styleClass
-				})
-			});
-			editor.showAnnotations(annotations, editorContext._highlightAnnotationTypes, null, 
-				function(annotation) {
-					return _getHighlightAnnotationType(annotation.styleClass, editorContext);
-				});
-		}
-	}
-	
 	var exports = {};
 	
 	/**
-	 * Create an Xtext editor instance configured with the given options.
-	 * 
-	 * Hint: Orion does not allow to configure the syntax file path (https://bugs.eclipse.org/bugs/show_bug.cgi?id=469249),
-	 *       so the options 'lang' and 'contentType' should be avoided with the current version. Use 'xtextLang' instead.
+	 * Create one or more Xtext editor instances configured with the given options.
+	 * The return value is a Deferred object that eventually resolves to either an Orion
+	 * editor viewer or an array of Orion editor viewers.
 	 */
 	exports.createEditor = function(options) {
 		if (!options)
 			options = {};
 		if (!options.parent)
 			options.parent = 'xtext-editor';
-		if (!options.className)
-			options.className = 'xtext-editor';
 		
-		var parents;
-		if (typeof(options.parent) === 'string') {
-			var doc = options.document || document;
-			var element = doc.getElementById(options.parent);
-			if (element)
-				parents = [element];
-			else
-				parents = doc.getElementsByClassName(options.parent);
+		var parentsSpec;
+		if (jQuery.isArray(options.parent)) {
+			parentsSpec = options.parent;
 		} else {
-			parents = [options.parent];
+			parentsSpec = [options.parent];
 		}
-		
-		if (parents.length == 1) {
-			var editorOptions = _mergeOptions(parents[0], options);
-			_setDefaultOptions(editorOptions);
-			
-			var editor = orionEdit(editorOptions);
-			
-			if (jQuery.isArray(editor))
-				editor = editor[0];
-			exports.configureServices(editor, editorOptions);
-			return editor;
-		} else {
-			_setDefaultOptions(options);
-			
-			var editors = orionEdit(options);
-			
-			if (!jQuery.isArray(editors))
-				editors = [editors];
-			for (var i = 0; i < editors.length; i++) {
-				var editorOptions = _mergeOptions(parents[i], options);
-				exports.configureServices(editors[i], editorOptions);
+		var parents = [];
+		var doc = options.document || document;
+		for (var i = 0; i < parentsSpec.length; i++) {
+			var spec = parentsSpec[i];
+			if (typeof(spec) === 'string') {
+				var element = doc.getElementById(spec);
+				if (element) {
+					parents.push(element);
+				} else {
+					var elements = doc.getElementsByClassName(options.parent);
+					for (var j = 0; j < elements.length; j++) {
+						parents.push(elements[j]);
+					}
+				}
+			} else {
+				parents.push(spec);
 			}
-			return editors;
 		}
+		
+		var editorViewers = [];
+		editorViewers.length = parents.length;
+		var finishedViewers = 0;
+		var codeEdit = new CodeEdit();
+		var deferred = jQuery.Deferred();
+		for (var i = 0; i < parents.length; i++) {
+			var editorOptions = _mergeOptions(parents[i], options);
+			var content = jQuery(parents[i]).text();
+			
+			codeEdit.create({parent: parents[i]}).then(function(editorViewer) {
+				try {
+					var services = exports.configureServices(editorViewer, editorOptions);
+				} catch (error) {
+					console.log('Error while building Xtext services: ' + error);
+					if (error.stack)
+						console.log(error.stack);
+					deferred.reject(error);
+					return;
+				}
+				editorViewer.setContents(content, services.contentType);
+				editorViewers[i] = editorViewer;
+				finishedViewers++;
+				if (finishedViewers == parents.length) {
+					if (finishedViewers == 1)
+						deferred.resolve(editorViewer);
+					else
+						deferred.resolve(editorViewers);
+				}
+			}, function(error) {
+				deferred.reject(error);
+			});
+			
+		}
+		return deferred.promise();
+	}
+	
+	function ServiceBuilder(editorViewer, xtextServices) {
+		this.viewer = editorViewer;
+		this.services = xtextServices;
 	}
 	
 	/**
 	 * Configure Xtext services for the given editor. The editor does not have to be created
 	 * with createEditor(options).
 	 */
-	exports.configureServices = function(editor, options) {
-		if (!options.xtextLang && options.lang)
-			options.xtextLang = options.lang
+	exports.configureServices = function(editorViewer, options) {
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
+		
 		if (options.dirtyElement) {
 			var doc = options.document || document;
 			var dirtyElement;
@@ -362,6 +230,7 @@ define([
 			var dirtyStatusClass = options.dirtyStatusClass;
 			if (!dirtyStatusClass)
 				dirtyStatusClass = 'dirty';
+			var editor = editorViewer.editor;
 			editor.addEventListener('DirtyChanged', function(event) {
 				if (editor.isDirty())
 					dirtyElement.addClass(dirtyStatusClass);
@@ -370,41 +239,24 @@ define([
 			});
 		}
 		
-		var textView = editor.getTextView();
-		textView._setLinksVisible(true);
-		var editorContext = new EditorContext(editor);
-		var editorContextProvider = {
-			getEditorContext: function() {
-				return editorContext;
-			},
-			getOptions: function() {
-				return options;
-			}
+		var xtextServices = {
+			options: options,
+			editorContext: new EditorContext(editorViewer.editor),
+			contentType: options.contentType,
+			_highlightAnnotationTypes: []
 		};
-		if (!editor.getEditorContext)
-			editor.getEditorContext = editorContextProvider.getEditorContext;
-		if (!editor.getOptions)
-			editor.getOptions = editorContextProvider.getOptions;
-		
-		//---- Persistence Services
+		if (!xtextServices.contentType && options.xtextLang)
+			xtextServices.contentType = 'xtext/' + options.xtextLang;
+		else if (!xtextServices.contentType)
+			xtextServices.contentType = 'xtext';
+		var serviceBuilder = new ServiceBuilder(editorViewer, xtextServices);
 		
 		if (!options.serverUrl)
 			options.serverUrl = 'http://' + location.host + '/xtext-service';
-		var loadResourceService = undefined, saveResourceService = undefined, revertResourceService = undefined;
 		if (options.resourceId) {
 			if (options.loadFromServer === undefined || options.loadFromServer) {
 				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
-				loadResourceService.loadResource(editorContext, options);
-				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
-				if (options.enableSaveAction) {
-					textView.setKeyBinding(new mKeyBinding.KeyStroke('s', true), 'saveXtextDocument');
-					textView.setAction('saveXtextDocument', function() {
-						saveResourceService.saveResource(editorContext, options);
-						return true;
-					}, {name: 'Save'});
-				}
-				revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
+				serviceBuilder.createPersistenceServices();
 			}
 		} else {
 			if (options.loadFromServer === undefined)
@@ -413,131 +265,236 @@ define([
 				options.resourceId = 'text.' + options.xtextLang;
 		}
 		
-		//---- Syntax Highlighting Service
+		serviceBuilder.createUpdateService();
+		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
+			serviceBuilder.createContentAssistService();
+		}
+		if (options.enableHoverService || options.enableHoverService === undefined) {
+			serviceBuilder.createHoverService();
+		}
+		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
+			serviceBuilder.createOccurrencesService();
+		}
+		if (options.enableFormattingService || options.enableFormattingService === undefined) {
+			serviceBuilder.createFormattingService();
+		}
+		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
+			serviceBuilder.createGeneratorService();
+		}
 		
-		if (options.xtextLang) {
-			var contentType = 'xtext/' + options.xtextLang;
+		//---- Syntax highlighting
+		
+		if (options.syntaxDefinition || options.xtextLang) {
 			var syntaxDefinition = options.syntaxDefinition;
-			if (!syntaxDefinition) {
-				syntaxDefinition = contentType + '-syntax';
-			}
-			require([syntaxDefinition], function(grammar) {
-				var annotationModel = editor.getAnnotationModel();
-				var stylerAdapter = new mTextStyler.createPatternBasedAdapter(grammar.grammars, grammar.id, contentType);
-				new mTextStyler.TextStyler(textView, annotationModel, stylerAdapter);
-			});
-		}
-		
-		//---- Highlighting Service
-		
-		var highlightingService;
-		if(options.enableHighlightingService || options.enableHighlightingService === undefined) {
-			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
-		}
-		
-		//---- Validation Service
-		
-		var validationService;
-		if (options.enableValidationService || options.enableValidationService === undefined) {
-			validationService = new ValidationService(options.serverUrl, options.resourceId);
-		}
-		
-		//---- Update Service
-		
-		function refreshDocument() {
-			if (highlightingService) {
-				highlightingService.setState(undefined);
-				highlightingService.computeHighlighting(editorContext, options).done(function(result) {
-					_appyHighlighting(result, editor, editorContext);
+			if (!syntaxDefinition)
+				syntaxDefinition = 'xtext/' + options.xtextLang + '-syntax';
+			if (typeof(syntaxDefinition) === 'string') {
+				require([syntaxDefinition], function(grammar) {
+					editorViewer.serviceRegistry.registerService('orion.edit.highlighter', {}, grammar);
 				});
-			}
-			if (validationService) {
-				validationService.setState(undefined);
-				validationService.computeProblems(editorContext, options).done(function(result) {
-					editor.showProblems(result.issues.map(function(entry) {
-						return {
-							description: entry.description,
-							start: entry.offset,
-							end: entry.offset + entry.length,
-							severity: entry.severity
-						};
-					}));
-				});
+			} else {
+				editorViewer.serviceRegistry.registerService('orion.edit.highlighter', {}, syntaxDefinition);
 			}
 		}
-		var updateService = undefined;
-		if (!options.sendFullText) {
-			updateService = new UpdateService(options.serverUrl, options.resourceId);
-			if (saveResourceService)
-				saveResourceService._updateService = updateService;
-			editorContext.addServerStateListener(refreshDocument);
-		}
-		var textUpdateDelay = options.textUpdateDelay;
-		if (!textUpdateDelay)
-			textUpdateDelay = 500;
-		function modelChangeListener(event) {
-			if (editorContext._modelChangeTimeout) {
-				clearTimeout(editorContext._modelChangeTimeout);
-			}
-			editorContext._modelChangeTimeout = setTimeout(function() {
-				if (options.sendFullText)
-					refreshDocument();
-				else
-					updateService.update(editorContext, options);
-			}, textUpdateDelay);
-		};
-		if (!options.resourceId || !options.loadFromServer) {
-			modelChangeListener(null);
-		}
-		textView.addEventListener('ModelChanged', modelChangeListener);
 		
-		//---- Content Assist Service
+		xtextServices.successListeners = [];
+		xtextServices.errorListeners = [function(requestType, severity, message, requestData) {
+			if (options.showErrorDialogs)
+				window.alert('Xtext service \'' + requestType + '\' failed: ' + message);
+			else
+				console.log('Xtext service \'' + requestType + '\' failed: ' + message);
+		}];
+		editorViewer.xtextServices = xtextServices;
+		xtextServices.editorContext.xtextServices = xtextServices;
+		return xtextServices;
+	}
+	
+	
+	/**
+	 * Builder class for the various Xtext services.
+	 */
+	ServiceBuilder.prototype = {
 		
-		var contentAssist = editor.getContentAssist();
-		if (contentAssist && (options.enableContentAssistService || options.enableContentAssistService === undefined)) {
-			contentAssist.setEditorContextProvider(editorContextProvider);
-			var contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, updateService);
-			contentAssist.setProviders([{
-				id: 'xtext.service',
-				provider: {
-					computeContentAssist: function(editorContext, params) {
-						var deferred = new Deferred();
-						contentAssistService.computeContentAssist(editorContext, params).done(function(entries) {
-							deferred.resolve(entries.map(function(entry) {
-								var p = {
-									proposal: entry.proposal,
-									prefix: entry.prefix,
-									overwrite: true,
-									name: (entry.label ? entry.label: entry.proposal),
-									description: entry.description,
-									style: entry.style,
-									additionalEdits: entry.textReplacements,
-									positions: entry.editPositions,
-								};
-								if (entry.escapePosition)
-									p.escapePosition = entry.escapePosition;
-								return p;
-							}));
-						}).fail(function() {
-							deferred.reject();
-						});
-						return deferred.promise;
-					}
+		/**
+		 * On-demand registers and returns the annotation type with the given name.
+		 */
+		_getHighlightAnnotationType: function(typeName) {
+			var type = mAnnotations.AnnotationType.getType(typeName);
+			if (type)
+				return typeName;
+			var properties = {
+				title: typeName,
+				style: {styleClass: "annotation " + typeName},
+				html: "<div class='annotationHTML " + typeName + "'></div>", 
+				overviewStyle: {styleClass: "annotationOverview " + typeName}
+			};
+			properties.rangeStyle = {styleClass: "annotationRange " + typeName};
+			var newType = mAnnotations.AnnotationType.registerType(typeName, properties);
+			this.services._highlightAnnotationTypes.push(newType);
+			this.viewer.editor.getAnnotationStyler().addAnnotationType(newType);
+			return newType;
+		},
+		
+		/**
+		 * Document refresh services: semantic highlighting and validation.
+		 */
+		getRefreshFunction: function() {
+			var editorViewer = this.viewer;
+			var services = this.services;
+			var self = this;
+			return function() {
+				var options = services.options;
+				
+				//---- Semantic highlighting service
+				
+				if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
+					if (!services.highlightingService)
+						services.highlightingService = new HighlightingService(options.serverUrl, options.resourceId);
+					services.highlightingService.setState(undefined);
+					services.highlightingService.computeHighlighting(services.editorContext, options).done(function(result) {
+						var annotations = [];
+						for (var i = 0; i < result.regions.length; ++i) {
+							var region = result.regions[i];
+							region.styleClasses.forEach(function(styleClass) {
+								annotations.push({
+									description: '',
+									start: region.offset,
+									end: region.offset + region.length,
+									styleClass: styleClass
+								});
+							});
+							editorViewer.editor.showAnnotations(annotations, services._highlightAnnotationTypes, null, 
+								function(annotation) {
+									return self._getHighlightAnnotationType(annotation.styleClass, editorViewer, services);
+								});
+						}
+					});
 				}
-			}]);
-		}
+				
+				//---- Validation service
+				
+				if (options.enableValidationService || options.enableValidationService === undefined) {
+					if (!services.validationService)
+						services.validationService = new ValidationService(options.serverUrl, options.resourceId);
+					services.validationService.setState(undefined);
+					services.validationService.computeProblems(services.editorContext, options).done(function(result) {
+						editorViewer.editor.showProblems(result.issues.map(function(entry) {
+							return {
+								description: entry.description,
+								start: entry.offset,
+								end: entry.offset + entry.length,
+								severity: entry.severity
+							};
+						}));
+					});
+				}
+			}
+		},
 		
-		//---- Hover Service
+		/**
+		 * Document update service.
+		 */
+		createUpdateService: function() {
+			var services = this.services;
+			var refreshDocument = this.getRefreshFunction(this.viewer, services);
+			var options = services.options;
+			if (!options.sendFullText) {
+				services.updateService = new UpdateService(options.serverUrl, options.resourceId);
+				if (services.saveResourceService)
+					services.saveResourceService._updateService = services.updateService;
+				services.editorContext.addServerStateListener(refreshDocument);
+			}
+			var textUpdateDelay = options.textUpdateDelay;
+			if (!textUpdateDelay)
+				textUpdateDelay = 500;
+			function modelChangeListener(event) {
+				if (services._modelChangeTimeout) {
+					clearTimeout(services._modelChangeTimeout);
+				}
+				services._modelChangeTimeout = setTimeout(function() {
+					if (options.sendFullText)
+						refreshDocument();
+					else
+						services.updateService.update(services.editorContext, options);
+				}, textUpdateDelay);
+			}
+//			if (!options.resourceId || !options.loadFromServer)
+//				modelChangeListener(null);
+			this.viewer.serviceRegistry.registerService('orion.edit.model',
+					{onModelChanged: modelChangeListener}, {contentType: [services.contentType]});
+		},
 		
-		if (_internals.hoverDelegate && (options.enableHoverService || options.enableHoverService === undefined)) {
-			var hoverService = new HoverService(options.serverUrl, options.resourceId, updateService);
-			_internals.hoverDelegate.computeHoverInfo = function(params) {
-				var deferred = new Deferred();
+		/**
+		 * Persistence services: load, save, and revert.
+		 */
+		createPersistenceServices: function() {
+			var services = this.services;
+			var options = services.options;
+			services.loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
+			services.loadResourceService.loadResource(services.editorContext, options);
+			services.saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
+			if (options.enableSaveAction) {
+				var textView = this.viewer.editor.getTextView();
+				textView.setKeyBinding(new mKeyBinding.KeyStroke('s', true), 'saveXtextDocument');
+				textView.setAction('saveXtextDocument', function() {
+					services.saveResourceService.saveResource(services.editorContext, options);
+					return true;
+				}, {name: 'Save'});
+			}
+			services.revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
+		},
+		
+		/**
+		 * Content assist service.
+		 */
+		createContentAssistService: function() {
+			var services = this.services;
+			var options = services.options;
+			services.contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, services.updateService);
+			function computeContentAssist(orionContext, params) {
 				for (var p in options) {
 					if (options.hasOwnProperty(p))
 						params[p] = options[p];
 				}
-				hoverService.computeHoverInfo(editorContext, params).done(function(entry) {
+				var deferred = new OrionDeferred();
+				services.contentAssistService.computeContentAssist(services.editorContext, params).done(function(entries) {
+					deferred.resolve(entries.map(function(entry) {
+						return {
+							proposal: entry.proposal,
+							prefix: entry.prefix,
+							overwrite: true,
+							name: (entry.label ? entry.label: entry.proposal),
+							description: entry.description,
+							style: entry.style,
+							additionalEdits: entry.textReplacements,
+							positions: entry.editPositions,
+							escapePosition: entry.escapePosition
+						};
+					}));
+				}).fail(function() {
+					deferred.reject();
+				});
+				return deferred.promise;
+			}
+			this.viewer.serviceRegistry.registerService('orion.edit.contentAssist',
+					{computeContentAssist: computeContentAssist},
+					{name: 'Xtext content assist service', contentType: [services.contentType]});
+		},
+		
+		/**
+		 * Hover service.
+		 */
+		createHoverService: function() {
+			var services = this.services;
+			var options = services.options;
+			services.hoverService = new HoverService(options.serverUrl, options.resourceId, services.updateService);
+			function computeHoverInfo(orionContext, params) {
+				var deferred = new OrionDeferred();
+				for (var p in options) {
+					if (options.hasOwnProperty(p))
+						params[p] = options[p];
+				}
+				services.hoverService.computeHoverInfo(services.editorContext, params).done(function(entry) {
 					deferred.resolve({ 
 						content: entry.content,
 						title: entry.title,
@@ -546,120 +503,96 @@ define([
 				}).fail(function() {
 					deferred.resolve(null);
 				});
-				return [ deferred.promise ];
+				return deferred.promise;
 			}
-			delete _internals.hoverDelegate;
-		}
+			this.viewer.serviceRegistry.registerService('orion.edit.hover',
+					{computeHoverInfo: computeHoverInfo},
+					{name: 'Xtext hover service', contentType: [services.contentType]});
+		},
 		
-		//---- Occurrences Service
-		
-		var occurrencesService;
-		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
-			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, updateService);
-			var selectionUpdateDelay = options.selectionUpdateDelay;
-			if (!selectionUpdateDelay)
-				selectionUpdateDelay = 550;
-			textView.addEventListener('Selection', function() {
-				if (editorContext._selectionChangeTimeout) {
-					clearTimeout(editorContext._selectionChangeTimeout);
+		/**
+		 * Occurrences service.
+		 */
+		createOccurrencesService: function() {
+			var services = this.services;
+	//		textView._setLinksVisible(true);
+			var options = services.options;
+			services.occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, services.updateService);
+	//		var selectionUpdateDelay = options.selectionUpdateDelay;
+	//		if (!selectionUpdateDelay)
+	//			selectionUpdateDelay = 550;
+			function computeOccurrences(orionContext, params) {
+				var deferred = new OrionDeferred();
+				for (var p in options) {
+					if (options.hasOwnProperty(p))
+						params[p] = options[p];
 				}
-				editorContext._selectionChangeTimeout = setTimeout(function() {
-					var params = _copy(options);
-					params.offset = textView.getCaretOffset();
-					occurrencesService.getOccurrences(editorContext, params).done(function(occurrencesResult) {
-						var readAnnotations = occurrencesResult.readRegions.map(function(region) {
-							return {
-								start: region.offset,
-								end: region.offset + region.length,
-								readAccess: true
-							};
-						});
-						var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
-							return {
-								start: region.offset,
-								end: region.offset + region.length,
-								readAccess: false
-							};
-						});
-						editor.showOccurrences(readAnnotations.concat(writeAnnotations));
-					}).fail(function() {
-						editor.showOccurrences({});
+				services.occurrencesService.getOccurrences(services.editorContext, params).done(function(occurrencesResult) {
+					var readAnnotations = occurrencesResult.readRegions.map(function(region) {
+						return {
+							start: region.offset,
+							end: region.offset + region.length,
+							readAccess: true
+						};
 					});
-				}, selectionUpdateDelay);
-			});
-		}
+					var writeAnnotations = occurrencesResult.writeRegions.map(function(region) {
+						return {
+							start: region.offset,
+							end: region.offset + region.length,
+							readAccess: false
+						};
+					});
+					deferred.resolve(readAnnotations.concat(writeAnnotations));
+				}).fail(function() {
+					deferred.resolve({});
+				});
+				return deferred.promise;
+			}
+			this.viewer.serviceRegistry.registerService('orion.edit.occurrences',
+					{computeOccurrences: computeOccurrences}, {contentType: [services.contentType]});
+		},
 		
-		//---- Formatting Service
-		
-		var formattingService;
-		if (options.enableFormattingService || options.enableFormattingService === undefined) {
-			formattingService = new FormattingService(options.serverUrl, options.resourceId, updateService);
+		/**
+		 * Formatting service.
+		 */
+		createFormattingService: function() {
+			var services = this.services;
+			var options = services.options;
+			services.formattingService = new FormattingService(options.serverUrl, options.resourceId, services.updateService);
 			if (options.enableFormattingAction) {
-				textView.setKeyBinding(new mKeyBinding.KeyStroke('f', true, true), 'formatXtextDocument');
-				textView.setAction('formatXtextDocument', function() {
-					formattingService.format(editorContext, options);
-					return true;
-				}, {name: 'Format'});
-			}
-		}
-		
-		//---- Generator Service
-		
-		var generatorService;
-		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
-			generatorService = new XtextService();
-			generatorService.initialize(options.serverUrl, options.resourceId, 'generate', updateService);
-		}
-		
-		editor.invokeXtextService = function(service, invokeOptions) {
-			var optionsCopy = _copy(options);
-			for (var p in invokeOptions) {
-				if (invokeOptions.hasOwnProperty(p)) {
-					optionsCopy[p] = invokeOptions[p];
+				function execute(orionContext, params) {
+					var deferred = new OrionDeferred();
+					for (var p in options) {
+						if (options.hasOwnProperty(p))
+							params[p] = options[p];
+					}
+					services.formattingService.format(services.editorContext, params).done(function(result) {
+						deferred.resolve();
+					}).fail(function() {
+						deferred.reject();
+					});
+					return deferred.promise;
 				}
+				this.viewer.serviceRegistry.registerService('orion.edit.command', {execute: execute}, {
+					name: 'Xtext formatting service',
+					id: 'xtext.formatter',
+					key: ['f', true, true],
+					contentType: [services.contentType]
+				});
 			}
-			if (service === 'load' && loadResourceService)
-				return loadResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === 'save' && saveResourceService)
-				return saveResourceService.saveResource(editorContext, optionsCopy);
-			else if (service === 'revert' && revertResourceService)
-				return revertResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === 'validate' && validationService)
-				return validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === 'occurrences' && occurrencesService)
-				return occurrencesService.getOccurrences(editorContext, optionsCopy);
-			else if (service === 'format' && formattingService)
-				return formattingService.format(editorContext, options);
-			else if (service === 'generate' && generatorService)
-				return generatorService.invoke(editorContext, options);
-			else
-				throw new Error('Service \'' + service + '\' is not available.');
+		},
+		
+		/**
+		 * Generator service.
+		 */
+		createGeneratorService: function() {
+			var services = this.services;
+			var options = services.options;
+			services.generatorService = new XtextService();
+			services.generatorService.initialize(options.serverUrl, options.resourceId, 'generate', services.updateService);
 		}
-		editor.xtextServiceSuccessListeners = [];
-		editor.xtextServiceErrorListeners = [function(requestType, severity, message, requestData) {
-			if (options.showErrorDialogs)
-				window.alert('Xtext service \'' + requestType + '\' failed: ' + message);
-			else
-				console.log('Xtext service \'' + requestType + '\' failed: ' + message);
-		}];
-	}
-	
-	/**
-	 * Invoke an Xtext service.
-	 * 
-	 * @param editor
-	 *     The editor for which the service shall be invoked.
-	 * @param service
-	 *     A service type identifier, e.g. 'save'.
-	 * @param invokeOptions
-	 *     Additional options to pass to the service (optional).
-	 */
-	exports.invokeService = function(editor, service, invokeOptions) {
-		if (editor.invokeXtextService)
-			return editor.invokeXtextService(service, invokeOptions);
-		else
-			throw new Error('The editor has not been configured with Xtext.');
-	}
+		
+	};
 	
 	return exports;
 });
