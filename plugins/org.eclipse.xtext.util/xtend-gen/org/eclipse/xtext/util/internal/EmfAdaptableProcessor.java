@@ -7,12 +7,14 @@
  */
 package org.eclipse.xtext.util.internal;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext;
 import org.eclipse.xtend.lib.macro.TransformationContext;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
@@ -33,6 +35,8 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
   
   @Override
   public void doTransform(final MutableClassDeclaration annotatedClass, @Extension final TransformationContext context) {
+    String _adapterClassName = this.getAdapterClassName(annotatedClass);
+    final MutableClassDeclaration adapterClass = context.findClass(_adapterClassName);
     final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
       @Override
       public void apply(final MutableMethodDeclaration it) {
@@ -50,14 +54,12 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("if (adapter instanceof ");
-            String _adapterClassName = EmfAdaptableProcessor.this.getAdapterClassName(annotatedClass);
-            _builder.append(_adapterClassName, "\t");
+            _builder.append(adapterClass, "\t");
             _builder.append(") {");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("return ((");
-            String _adapterClassName_1 = EmfAdaptableProcessor.this.getAdapterClassName(annotatedClass);
-            _builder.append(_adapterClassName_1, "\t\t");
+            _builder.append(adapterClass, "\t\t");
             _builder.append(") adapter).get();");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
@@ -74,6 +76,54 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
     };
     annotatedClass.addMethod("findInEmfObject", _function);
     final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
+      @Override
+      public void apply(final MutableMethodDeclaration it) {
+        TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
+        it.addParameter("emfObject", _newTypeReference);
+        TypeReference _newTypeReference_1 = context.newTypeReference(annotatedClass);
+        it.setReturnType(_newTypeReference_1);
+        it.setStatic(true);
+        StringConcatenationClient _client = new StringConcatenationClient() {
+          @Override
+          protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+            _builder.append(List.class, "");
+            _builder.append("<");
+            _builder.append(Adapter.class, "");
+            _builder.append("> adapters = emfObject.eAdapters();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("for(int i = 0, max = adapters.size(); i < max; i++) {");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append(Adapter.class, "\t");
+            _builder.append(" adapter = adapters.get(i);");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("if (adapter instanceof ");
+            _builder.append(adapterClass, "\t");
+            _builder.append(") {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("emfObject.eAdapters().remove(i);");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("return ((");
+            _builder.append(adapterClass, "\t\t");
+            _builder.append(") adapter).get();");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("return null;");
+            _builder.newLine();
+          }
+        };
+        it.setBody(_client);
+      }
+    };
+    annotatedClass.addMethod("removeFromEmfObject", _function_1);
+    final Procedure1<MutableMethodDeclaration> _function_2 = new Procedure1<MutableMethodDeclaration>() {
       @Override
       public void apply(final MutableMethodDeclaration it) {
         TypeReference _newTypeReference = context.newTypeReference(Notifier.class);
@@ -95,11 +145,9 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
             _builder.append(_simpleName_1, "\t");
             _builder.append("\");");
             _builder.newLineIfNotEmpty();
-            String _adapterClassName = EmfAdaptableProcessor.this.getAdapterClassName(annotatedClass);
-            _builder.append(_adapterClassName, "");
+            _builder.append(adapterClass, "");
             _builder.append(" adapter = new ");
-            String _adapterClassName_1 = EmfAdaptableProcessor.this.getAdapterClassName(annotatedClass);
-            _builder.append(_adapterClassName_1, "");
+            _builder.append(adapterClass, "");
             _builder.append("(this);");
             _builder.newLineIfNotEmpty();
             _builder.append("emfObject.eAdapters().add(adapter);");
@@ -109,20 +157,18 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    annotatedClass.addMethod("attachToEmfObject", _function_1);
-    String _adapterClassName = this.getAdapterClassName(annotatedClass);
-    final MutableClassDeclaration adapterClass = context.findClass(_adapterClassName);
+    annotatedClass.addMethod("attachToEmfObject", _function_2);
     TypeReference _newTypeReference = context.newTypeReference(AdapterImpl.class);
     adapterClass.setExtendedClass(_newTypeReference);
-    final Procedure1<MutableFieldDeclaration> _function_2 = new Procedure1<MutableFieldDeclaration>() {
+    final Procedure1<MutableFieldDeclaration> _function_3 = new Procedure1<MutableFieldDeclaration>() {
       @Override
       public void apply(final MutableFieldDeclaration it) {
         TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
         it.setType(_newTypeReference);
       }
     };
-    adapterClass.addField("element", _function_2);
-    final Procedure1<MutableConstructorDeclaration> _function_3 = new Procedure1<MutableConstructorDeclaration>() {
+    adapterClass.addField("element", _function_3);
+    final Procedure1<MutableConstructorDeclaration> _function_4 = new Procedure1<MutableConstructorDeclaration>() {
       @Override
       public void apply(final MutableConstructorDeclaration it) {
         TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
@@ -137,8 +183,8 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    adapterClass.addConstructor(_function_3);
-    final Procedure1<MutableMethodDeclaration> _function_4 = new Procedure1<MutableMethodDeclaration>() {
+    adapterClass.addConstructor(_function_4);
+    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
       @Override
       public void apply(final MutableMethodDeclaration it) {
         TypeReference _newTypeReference = context.newTypeReference(annotatedClass);
@@ -153,10 +199,12 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    adapterClass.addMethod("get", _function_4);
-    final Procedure1<MutableMethodDeclaration> _function_5 = new Procedure1<MutableMethodDeclaration>() {
+    adapterClass.addMethod("get", _function_5);
+    final Procedure1<MutableMethodDeclaration> _function_6 = new Procedure1<MutableMethodDeclaration>() {
       @Override
       public void apply(final MutableMethodDeclaration it) {
+        AnnotationReference _newAnnotationReference = context.newAnnotationReference(Override.class);
+        it.addAnnotation(_newAnnotationReference);
         TypeReference _newTypeReference = context.newTypeReference(Object.class);
         it.addParameter("object", _newTypeReference);
         TypeReference _primitiveBoolean = context.getPrimitiveBoolean();
@@ -173,7 +221,7 @@ public class EmfAdaptableProcessor extends AbstractClassProcessor {
         it.setBody(_client);
       }
     };
-    adapterClass.addMethod("isAdapterForType", _function_5);
+    adapterClass.addMethod("isAdapterForType", _function_6);
   }
   
   public String getAdapterClassName(final ClassDeclaration declaration) {

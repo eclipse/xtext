@@ -37,6 +37,7 @@ public class ProjectDescription {
       return this.element;
     }
     
+    @Override
     public boolean isAdapterForType(final Object object) {
       return object == ProjectDescription.class;
     }
@@ -56,8 +57,20 @@ public class ProjectDescription {
   
   public static ProjectDescription findInEmfObject(final Notifier emfObject) {
     for (Adapter adapter : emfObject.eAdapters()) {
-    	if (adapter instanceof org.eclipse.xtext.resource.impl.ProjectDescription.ProjectDescriptionAdapter) {
-    		return ((org.eclipse.xtext.resource.impl.ProjectDescription.ProjectDescriptionAdapter) adapter).get();
+    	if (adapter instanceof ProjectDescription.ProjectDescriptionAdapter) {
+    		return ((ProjectDescription.ProjectDescriptionAdapter) adapter).get();
+    	}
+    }
+    return null;
+  }
+  
+  public static ProjectDescription removeFromEmfObject(final Notifier emfObject) {
+    List<Adapter> adapters = emfObject.eAdapters();
+    for(int i = 0, max = adapters.size(); i < max; i++) {
+    	Adapter adapter = adapters.get(i);
+    	if (adapter instanceof ProjectDescription.ProjectDescriptionAdapter) {
+    		emfObject.eAdapters().remove(i);
+    		return ((ProjectDescription.ProjectDescriptionAdapter) adapter).get();
     	}
     }
     return null;
@@ -67,7 +80,7 @@ public class ProjectDescription {
     ProjectDescription result = findInEmfObject(emfObject);
     if (result != null)
     	throw new IllegalStateException("The given EMF object already contains an adapter for ProjectDescription");
-    org.eclipse.xtext.resource.impl.ProjectDescription.ProjectDescriptionAdapter adapter = new org.eclipse.xtext.resource.impl.ProjectDescription.ProjectDescriptionAdapter(this);
+    ProjectDescription.ProjectDescriptionAdapter adapter = new ProjectDescription.ProjectDescriptionAdapter(this);
     emfObject.eAdapters().add(adapter);
   }
   

@@ -190,6 +190,20 @@ public class RuleNames {
 		return antlrNameToRule.inverse().get(rule);
 	}
 	
+	public String getAntlrRuleName(AbstractRule rule, int paramConfig) {
+		String result = antlrNameToRule.inverse().get(rule);
+		int idx;
+		if (result.startsWith("super")) {
+			idx = 5;
+		} else if (result.startsWith("rule")) {
+			idx = 4;
+		} else {
+			throw new IllegalArgumentException(result);
+		}
+		result = "norm" + paramConfig + "_" + result.substring(idx);
+		return result;
+	}
+	
 	public AbstractRule getRuleByAntlrName(String name) {
 		return antlrNameToRule.get(name);
 	}

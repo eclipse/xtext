@@ -576,7 +576,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private String normalizeEntryRuleName(String entryRuleName) {
 		String antlrEntryRuleName;
-		if (!entryRuleName.startsWith("entryRule")) {
+		if (!entryRuleName.startsWith("entryRule") && !entryRuleName.startsWith("entryNorm")) {
 			if (!entryRuleName.startsWith("rule")) {
 				antlrEntryRuleName = "entryRule" + entryRuleName;
 			} else {

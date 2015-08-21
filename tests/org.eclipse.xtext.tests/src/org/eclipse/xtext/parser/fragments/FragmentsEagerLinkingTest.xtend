@@ -16,5 +16,5 @@ import org.junit.runner.RunWith
  */
 @RunWith(XtextRunner)
 @InjectWith(FragmentsEagerLinkingInjectorProvider)
-class FragmentEagerLinkingTest extends AbstractFragmentsTest {
+class FragmentsEagerLinkingTest extends AbstractFragmentsTest {
 }

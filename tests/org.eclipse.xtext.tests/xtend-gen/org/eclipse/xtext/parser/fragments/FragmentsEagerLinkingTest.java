@@ -19,5 +19,5 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(FragmentsEagerLinkingInjectorProvider.class)
 @SuppressWarnings("all")
-public class FragmentEagerLinkingTest extends AbstractFragmentsTest {
+public class FragmentsEagerLinkingTest extends AbstractFragmentsTest {
 }

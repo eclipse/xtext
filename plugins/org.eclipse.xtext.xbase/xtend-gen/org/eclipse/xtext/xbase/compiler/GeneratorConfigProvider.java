@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -46,6 +47,7 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
         return this.element;
       }
       
+      @Override
       public boolean isAdapterForType(final Object object) {
         return object == GeneratorConfigProvider.GeneratorConfigAdapter.class;
       }
@@ -56,8 +58,20 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
     
     public static GeneratorConfigProvider.GeneratorConfigAdapter findInEmfObject(final Notifier emfObject) {
       for (Adapter adapter : emfObject.eAdapters()) {
-      	if (adapter instanceof org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) {
-      		return ((org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) adapter).get();
+      	if (adapter instanceof GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) {
+      		return ((GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) adapter).get();
+      	}
+      }
+      return null;
+    }
+    
+    public static GeneratorConfigProvider.GeneratorConfigAdapter removeFromEmfObject(final Notifier emfObject) {
+      List<Adapter> adapters = emfObject.eAdapters();
+      for(int i = 0, max = adapters.size(); i < max; i++) {
+      	Adapter adapter = adapters.get(i);
+      	if (adapter instanceof GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) {
+      		emfObject.eAdapters().remove(i);
+      		return ((GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter) adapter).get();
       	}
       }
       return null;
@@ -67,7 +81,7 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
       GeneratorConfigAdapter result = findInEmfObject(emfObject);
       if (result != null)
       	throw new IllegalStateException("The given EMF object already contains an adapter for GeneratorConfigAdapter");
-      org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter adapter = new org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter(this);
+      GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter adapter = new GeneratorConfigProvider.GeneratorConfigAdapter.GeneratorConfigAdapterAdapter(this);
       emfObject.eAdapters().add(adapter);
     }
     

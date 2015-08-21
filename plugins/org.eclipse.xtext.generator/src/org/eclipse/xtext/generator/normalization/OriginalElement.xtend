@@ -5,22 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.fragments;
+package org.eclipse.xtext.generator.normalization
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
+import org.eclipse.xtext.util.internal.EmfAdaptable
+import org.eclipse.xtend.lib.annotations.Data
+import org.eclipse.xtext.AbstractElement
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(Suite.class)
-@SuiteClasses({
-	FragmentsTest.class,
-	FragmentsEagerLinkingTest.class,
-	FragmentsExTest.class,
-	FragmentsPlainParsingTest.class,
-	FragmentExsPlainParsingTest.class,
-})
-public class FragmentsSuite {
+@EmfAdaptable
+@Data
+class OriginalElement {
+	val AbstractElement original
 }
