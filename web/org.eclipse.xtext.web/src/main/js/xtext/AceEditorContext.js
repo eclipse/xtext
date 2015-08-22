@@ -23,10 +23,6 @@ define([], function() {
 
 	AceEditorContext.prototype = {
 		
-		getEditor: function() {
-			return this._editor;
-		},
-		
 		getServerState: function() {
 			return this._serverState;
 		},

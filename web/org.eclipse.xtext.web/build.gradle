@@ -31,16 +31,6 @@ task testJs(type: NodeTask) {
 }
 check.dependsOn(testJs)
 
-def requireJsPlugins = file("$buildDir/tmp/js/requirejs-plugins")
-task downloadRequireJsPlugins {
-	onlyIf {!requireJsPlugins.exists()}
-	doLast {
-		requireJsPlugins.mkdirs()
-		ant.get(src: 'https://raw.github.com/requirejs/i18n/latest/i18n.js', dest: requireJsPlugins.path + "/i18n.js")
-		ant.get(src: 'https://raw.github.com/requirejs/text/latest/text.js', dest: requireJsPlugins.path + "/text.js")
-	}
-}
-
 def optResources = file("$buildDir/opt-resources/META-INF/resources/xtext/${project.version}")
 sourceSets.main.resources.srcDir "$buildDir/opt-resources"
 
@@ -80,14 +70,12 @@ class OptimizationTask extends com.moowork.gradle.node.task.NodeTask {
 	def framework = Framework.toLowerCase()
 	
     task "optimize${Framework}Js" (type: OptimizationTask) {
-		dependsOn(downloadRequireJsPlugins)
 		buildProfile = file("src/main/js/requirejs-${framework}-config.js")
 		output = file(optResources.path + "/xtext-${framework}.js")
 		optimize = 'none'
 	}
 	
 	task "optimize${Framework}JsMin" (type: OptimizationTask) {
-		dependsOn(downloadRequireJsPlugins)
 		buildProfile = file("src/main/js/requirejs-${framework}-config.js")
 		output = file(optResources.path + "/xtext-${framework}.min.js")
 		optimize = 'uglify'

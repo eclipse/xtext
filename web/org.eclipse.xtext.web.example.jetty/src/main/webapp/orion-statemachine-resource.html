@@ -19,10 +19,10 @@
 			require(["xtext/xtext-orion"], function(xtext) {
 				xtext.createEditor().done(function(editorViewer) {
 					$("#save-button").click(function() {
-						xtext.invokeService(editor, "save"); //TODO
+						editorViewer.xtextServices.saveResource();
 					});
 					$("#revert-button").click(function() {
-						xtext.invokeService(editor, "revert"); //TODO
+						editorViewer.xtextServices.revertResource();
 					});
 					$("#generate-button").click(function() {
 						window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');

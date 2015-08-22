@@ -20,8 +20,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 	
 	UpdateService.prototype = new XtextService();
-	// Don't use the generic invoke function
-	delete UpdateService.prototype.invoke;
 
 	/**
 	 * Compute a delta between two versions of a text. If a difference is found, the result
@@ -76,14 +74,14 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		this._completionCallbacks.push(callback);
 	}
 
-	UpdateService.prototype.update = function(editorContext, params, deferred) {
+	UpdateService.prototype.invoke = function(editorContext, params, deferred) {
 		if (deferred === undefined) {
 			deferred = jQuery.Deferred();
 		}
 		var knownServerState = editorContext.getServerState();
 		if (knownServerState.updateInProgress) {
 			var self = this;
-			this.addCompletionCallback(function() { self.update(editorContext, params, deferred) });
+			this.addCompletionCallback(function() { self.invoke(editorContext, params, deferred) });
 			return deferred.promise();
 		}
 		
@@ -116,7 +114,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 						delete knownServerState.updateInProgress;
 						delete knownServerState.text;
 						delete knownServerState.stateId;
-						self.update(editorContext, params, deferred);
+						self.invoke(editorContext, params, deferred);
 					} else {
 						deferred.reject(result.conflict);
 					}
@@ -135,7 +133,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 					delete knownServerState.updateInProgress;
 					delete knownServerState.text;
 					delete knownServerState.stateId;
-					self.update(editorContext, params, deferred);
+					self.invoke(editorContext, params, deferred);
 					return true;
 				}
 				deferred.reject(errorThrown);
