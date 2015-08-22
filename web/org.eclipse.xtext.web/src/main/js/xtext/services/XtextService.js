@@ -94,7 +94,7 @@ define(['jquery'], function(jQuery) {
 								var knownServerState = editorContext.getServerState();
 								delete knownServerState.stateId;
 								delete knownServerState.text;
-								self._updateService.update(editorContext, params);
+								self._updateService.invoke(editorContext, params);
 							} else {
 								self.invoke(editorContext, params, deferred);
 							}
@@ -128,7 +128,7 @@ define(['jquery'], function(jQuery) {
 						});
 						delete knownServerState.stateId;
 						delete knownServerState.text;
-						self._updateService.update(editorContext, params);
+						self._updateService.invoke(editorContext, params);
 						return true;
 					}
 				}

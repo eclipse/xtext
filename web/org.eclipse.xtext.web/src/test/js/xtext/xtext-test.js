@@ -10,20 +10,9 @@ define([
 	'jquery',
 	'assert',
     'xtext/compatibility',
+    'xtext/ServiceBuilder',
 	'xtext/MockEditorContext',
-	'xtext/services/XtextService',
-	'xtext/services/LoadResourceService',
-	'xtext/services/SaveResourceService',
-	'xtext/services/UpdateService',
-	'xtext/services/ContentAssistService',
-	'xtext/services/HighlightingService',
-	'xtext/services/ValidationService',
-	'xtext/services/HoverService',
-	'xtext/services/OccurrencesService',
-	'xtext/services/FormattingService'
-], function(mjQuery, assert, compatibility, EditorContext, XtextService, LoadResourceService,
-		SaveResourceService, UpdateService, ContentAssistService, HighlightingService,
-		ValidationService, HoverService, OccurrencesService, FormattingService) {
+], function(mjQuery, assert, compatibility, ServiceBuilder, EditorContext) {
 	
 	function _copy(obj) {
 		var copy = {};
@@ -61,8 +50,8 @@ define([
 			return this;
 		},
 		
-		invokeService: function(service, invokeOptions) {
-			var result = this._editorContext.invokeXtextService(service, invokeOptions);
+		invokeService: function(serviceType) {
+			var result = this._editorContext.xtextServices.invoke(serviceType);
 			if (result !== undefined)
 				this._lastResult = result;
 			return this;
@@ -136,13 +125,13 @@ define([
 			options = {};
 		var editorContext = exports.createEditor(options);
 		var tester = new Tester(editorContext, options.doneCallback);
-		editorContext.xtextServiceSuccessListeners.push(function(requestType, result) {
+		editorContext.xtextServices.successListeners.push(function(requestType, result) {
 			tester._lastSuccess = {
 				requestType: requestType,
 				result: result
 			};
 		});
-		editorContext.xtextServiceErrorListeners.push(function(requestType, severity, message, requestData) {
+		editorContext.xtextServices.errorListeners.push(function(requestType, severity, message, requestData) {
 			tester._lastError = {
 				requestType: requestType,
 				severity: severity,
@@ -158,150 +147,129 @@ define([
 		if (!options)
 			options = {};
 		var editorContext = new EditorContext();
-		exports.configureServices(editorContext, options);
+		exports.createServices(editorContext, options);
 		return editorContext;
 	}
 	
-	exports.configureServices = function(editorContext, options) {
-		if (!options.xtextLang && options.resourceId)
-			options.xtextLang = options.resourceId.split('.').pop();
-		
-		editorContext.getOptions = function() {
-			return options;
+	function TestServiceBuilder(xtextServices) {
+		ServiceBuilder.call(this, xtextServices);
+	}
+	TestServiceBuilder.prototype = new ServiceBuilder();
+
+	exports.createServices = function(editorContext, options) {
+		options.serverUrl = 'test://xtext-service';
+		var xtextServices = {
+			options: options,
+			editorContext: editorContext,
+			serviceTypes: {}
 		};
-		
-		//---- Persistence Services
-		
-		if (!options.serverUrl)
-			options.serverUrl = 'test://xtext-service';
-		var loadResourceService, saveResourceService, revertResourceService;
-		if (options.resourceId) {
-			if (options.loadFromServer === undefined || options.loadFromServer) {
-				options.loadFromServer = true;
-				loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
-				loadResourceService.loadResource(editorContext, options);
-				saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
-				revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
-			}
-		} else {
-			if (options.loadFromServer === undefined)
-				options.loadFromServer = false;
-			if (options.xtextLang)
-				options.resourceId = 'text.' + options.xtextLang;
+		var serviceBuilder = new TestServiceBuilder(xtextServices);
+		serviceBuilder.createServices();
+		xtextServices.serviceTypes.generate = function() {
+			return xtextServices.generate();
 		}
-		
-		//---- Highlighting Service
-		
-		var highlightingService;
-		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
-			highlightingService = new HighlightingService(options.serverUrl, options.resourceId)
-		}
-		
-		//---- Validation Service
-		
-		var validationService;
-		if (options.enableValidationService || options.enableValidationService === undefined) {
-			validationService = new ValidationService(options.serverUrl, options.resourceId);
-		}
-		
-		//---- Update Service
-		
-		function refreshDocument() {
-			if (highlightingService) {
-				highlightingService.setState(undefined);
-				highlightingService.computeHighlighting(editorContext, options);
-			}
-			if (validationService) {
-				validationService.setState(undefined);
-				validationService.computeProblems(editorContext, options);
-			}
-		}
-		var updateService;
-		if (!options.sendFullText) {
-			updateService = new UpdateService(options.serverUrl, options.resourceId);
-			if (saveResourceService)
-				saveResourceService._updateService = updateService;
-			editorContext.addServerStateListener(refreshDocument);
-		}
-		editorContext.addModelChangeListener(function(event) {
-			if (options.sendFullText)
-				refreshDocument();
-			else
-				updateService.update(editorContext, options);
-		});
-		
-		//---- Content Assist Service
-		
-		var contentAssistService;
-		if (options.enableContentAssistService || options.enableContentAssistService === undefined) {
-			contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, updateService);
-		}
-		
-		//---- Hover Service
-		
-		var hoverService;
-		if (options.enableHoverService || options.enableHoverService === undefined) {
-			hoverService = new HoverService(options.serverUrl, options.resourceId, updateService);
-		}
-		
-		//---- Occurrences Service
-		
-		var occurrencesService;
-		if (options.enableOccurrencesService || options.enableOccurrencesService === undefined) {
-			occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, updateService);
-		}
-		
-		//---- Formatting Service
-		
-		var formattingService;
-		if (options.enableFormattingService || options.enableFormattingService === undefined) {
-			formattingService = new FormattingService(options.serverUrl, options.resourceId, updateService);
-		}
-		
-		//---- Generator Service
-		
-		var generatorService;
-		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
-			generatorService = new XtextService();
-			generatorService.initialize(options.serverUrl, options.resourceId, 'generate', updateService);
-		}
-		
-		editorContext.invokeXtextService = function(service, invokeOptions) {
-			var optionsCopy = _copy(options);
-			for (var p in invokeOptions) {
-				if (invokeOptions.hasOwnProperty(p)) {
-					optionsCopy[p] = invokeOptions[p];
-				}
-			}
-			if (service === 'load' && loadResourceService)
-				return loadResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === 'save' && saveResourceService)
-				return saveResourceService.saveResource(editorContext, optionsCopy);
-			else if (service === 'revert' && revertResourceService)
-				return revertResourceService.loadResource(editorContext, optionsCopy);
-			else if (service === 'update' && updateService)
-				return updateService.update(editorContext, optionsCopy);
-			else if (service === 'highlight' && highlightingService)
-				return highlightingService.computeHighlighting(editorContext, optionsCopy);
-			else if (service === 'validate' && validationService)
-				return validationService.computeProblems(editorContext, optionsCopy);
-			else if (service === 'assist' && contentAssistService) {
-				optionsCopy.offset = editorContext.getCaretOffset();
-				optionsCopy.selection = editorContext.getSelection();
-				return contentAssistService.computeContentAssist(editorContext, optionsCopy);
-			} else if (service === 'hover' && hoverService)
-				return hoverService.computeHoverInfo(editorContext, options);
-			else if (service === 'occurrences' && occurrencesService)
-				return occurrencesService.getOccurrences(editorContext, optionsCopy);
-			else if (service === 'format' && formattingService)
-				return formattingService.format(editorContext, options);
-			else if (service === 'generate' && generatorService)
-				return generatorService.invoke(editorContext, options);
+		xtextServices.invoke = function(serviceType) {
+			var invokeFunction = xtextServices.serviceTypes[serviceType];
+			if (invokeFunction)
+				return invokeFunction();
 			else
 				throw new Error('Service \'' + service + '\' is not available.');
 		};
-		editorContext.xtextServiceSuccessListeners = [];
-		editorContext.xtextServiceErrorListeners = [];
+		xtextServices.errorListeners = [];
+		editorContext.xtextServices = xtextServices;
+		return xtextServices;
+	}
+	
+	/**
+	 * Document update service.
+	 */
+	TestServiceBuilder.prototype.setupUpdateService = function(refreshDocument) {
+		var services = this.services;
+		services.editorContext.addModelChangeListener(function(event) {
+			if (services.options.sendFullText)
+				refreshDocument();
+			else
+				services.update();
+		});
+		services.serviceTypes.update = function() {
+			return services.update();
+		}
+		services.serviceTypes.validate = function() {
+			return services.validate();
+		}
+		services.serviceTypes.highlight = function() {
+			return services.computeHighlighting();
+		}
+	}
+	
+	/**
+	 * Persistence services: load, save, and revert.
+	 */
+	TestServiceBuilder.prototype.setupPersistenceServices = function() {
+		var services = this.services;
+		services.serviceTypes.load = function() {
+			return services.loadResource();
+		}
+		services.serviceTypes.save = function() {
+			return services.saveResource();
+		}
+		services.serviceTypes.revert = function() {
+			return services.revertResource();
+		}
+	}
+	
+	/**
+	 * Content assist service.
+	 */
+	TestServiceBuilder.prototype.setupContentAssistService = function() {
+		var services = this.services;
+		services.serviceTypes.assist = function() {
+			return services.getContentAssist();
+		}
+	}
+	
+	/**
+	 * Semantic highlighting service.
+	 */
+	TestServiceBuilder.prototype.doHighlighting = function() {
+		this.services.computeHighlighting();
+	}
+			
+	/**
+	 * Validation service.
+	 */
+	TestServiceBuilder.prototype.doValidation = function() {
+		this.services.validate();
+	}
+	
+	/**
+	 * Hover service.
+	 */
+	TestServiceBuilder.prototype.setupHoverService = function() {
+		var services = this.services;
+		services.serviceTypes.hover = function() {
+			return services.getHoverInfo();
+		}
+	}
+	
+	/**
+	 * Occurrences service.
+	 */
+	TestServiceBuilder.prototype.setupOccurrencesService = function() {
+		var services = this.services;
+		services.serviceTypes.occurrences = function() {
+			return services.getOccurrences();
+		}
+	}
+	
+	/**
+	 * Formatting service.
+	 */
+	TestServiceBuilder.prototype.setupFormattingService = function() {
+		var services = this.services;
+		services.serviceTypes.format = function() {
+			return services.format();
+		}
 	}
 	
 	return exports;

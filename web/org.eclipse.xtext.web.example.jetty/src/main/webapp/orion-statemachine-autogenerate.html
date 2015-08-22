@@ -19,12 +19,12 @@
 			require(['xtext/xtext-orion'], function(xtext) {
 				xtext.createEditor().done(function(editorViewer) {
 					$('#save-button').click(function() {
-						xtext.invokeService(editor, 'save'); //TODO
+						editorViewer.xtextServices.saveResource();
 					});
 					$('#revert-button').click(function() {
-						xtext.invokeService(editor, 'revert');  //TODO
+						editorViewer.xtextServices.revertResource();
 					});
-					editor.xtextServiceSuccessListeners.push(function(requestType, result) { //TODO
+					editorViewer.xtextServices.successListeners.push(function(requestType, result) {
 						if (requestType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
 							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example.statemachine"></iframe>');
 						}

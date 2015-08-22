@@ -11,9 +11,13 @@
 	name: "xtext/xtext-orion",
 	paths: {
 		"jquery": "empty:",
-		"text": "../../../build/tmp/js/requirejs-plugins/text",
-		"i18n": "../../../build/tmp/js/requirejs-plugins/i18n"
+		"orion/Deferred": "empty:",
+		"orion/codeEdit": "empty:",
+		"orion/keyBinding": "empty:",
+		"orion/editor/annotations": "empty:"
 	},
-	include: [ "orion/editor/stylers/lib/syntax" ],
-	exclude: [ "jquery", "text" ]
+	exclude: [
+		"jquery", "orion/Deferred", "orion/codeEdit", "orion/keyBinding",
+		"orion/editor/annotations"
+	]
 })

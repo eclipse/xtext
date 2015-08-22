@@ -17,10 +17,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	}
 
 	ContentAssistService.prototype = new XtextService();
-	// Don't use the generic invoke function
-	delete ContentAssistService.prototype.invoke;
 	
-	ContentAssistService.prototype.computeContentAssist = function(editorContext, params, deferred) {
+	ContentAssistService.prototype.invoke = function(editorContext, params, deferred) {
 		if (deferred === undefined) {
 			deferred = jQuery.Deferred();
 		}
@@ -49,7 +47,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 				if (knownServerState.text === undefined || knownServerState.updateInProgress) {
 					var self = this;
 					this._updateService.addCompletionCallback(function() {
-						self.computeContentAssist(editorContext, params, deferred);
+						self.invoke(editorContext, params, deferred);
 					});
 					return deferred.promise();
 				}
@@ -77,9 +75,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 							delete knownServerState.text;
 							delete knownServerState.stateId;
 							self._updateService.addCompletionCallback(function() {
-								self.computeContentAssist(editorContext, params, deferred);
+								self.invoke(editorContext, params, deferred);
 							});
-							self._updateService.update(editorContext, params);
+							self._updateService.invoke(editorContext, params);
 						} else {
 							var paramsCopy = {};
 							for (var p in params) {
@@ -87,7 +85,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 									paramsCopy[p] = params[p];
 							}
 							paramsCopy.sendFullText = true;
-							self.computeContentAssist(editorContext, paramsCopy, deferred);
+							self.invoke(editorContext, paramsCopy, deferred);
 						}
 					} else {
 						deferred.reject(result.conflict);
@@ -110,9 +108,9 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 					delete knownServerState.text;
 					delete knownServerState.stateId;
 					self._updateService.addCompletionCallback(function() {
-						self.computeContentAssist(editorContext, params, deferred);
+						self.invoke(editorContext, params, deferred);
 					});
-					self._updateService.update(editorContext, params);
+					self._updateService.invoke(editorContext, params);
 					return true;
 				}
 				deferred.reject(errorThrown);
@@ -128,6 +126,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		}
 		return result;
 	};
-	
+
 	return ContentAssistService;
 });

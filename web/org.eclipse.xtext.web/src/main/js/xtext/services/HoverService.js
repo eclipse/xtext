@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 
 	HoverService.prototype = new XtextService();
-	HoverService.prototype.computeHoverInfo = HoverService.prototype.invoke;
 
 	HoverService.prototype._initServerData = function(serverData, editorContext, params) {
 		if (params.offset)
