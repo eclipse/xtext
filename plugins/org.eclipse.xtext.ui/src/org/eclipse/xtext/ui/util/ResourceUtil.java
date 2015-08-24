@@ -13,8 +13,11 @@ import java.net.URISyntaxException;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.archive.ArchiveURLConnection;
 import org.eclipse.emf.common.util.URI;
@@ -30,6 +33,20 @@ import com.google.common.base.Preconditions;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class ResourceUtil {
+	
+	/**
+	 * @throws CoreException 
+	 * @since 2.9
+	 */
+	public static void sync(IResource resource, int depth, IProgressMonitor progressMonitor) throws CoreException {
+		if (canSync(resource)) {
+			resource.refreshLocal(depth, progressMonitor);
+		}
+	}
+
+	private static boolean canSync(IResource resource) {
+		return resource.getType() != IResource.PROJECT && resource.getType() != IResource.ROOT;
+	}
 
 	/**
 	 * @return the handle to the member container of the given project or the project itself

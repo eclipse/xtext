@@ -145,7 +145,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 					public boolean isCanceled() {
 						boolean shouldCancelBuild = shouldCancelBuild(kind);
 						if (shouldCancelBuild)
-							buildLogger.log("interupted");
+							buildLogger.log("interrupted");
 						return shouldCancelBuild || super.isCanceled();
 					}
 				};
