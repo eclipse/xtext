@@ -37,10 +37,14 @@ public class CrossReferenceDescription implements ICrossReferenceDescription {
 
 	@Override
 	public ITextRegion getTextRegion() {
-		if (index == null) {
-			return locationInFileProvider.getSignificantTextRegion(context, reference, -1);	
-		}
-		return locationInFileProvider.getSignificantTextRegion(context, reference, index);
+    	try {
+			if (index == null) {
+				return locationInFileProvider.getSignificantTextRegion(context, reference, -1);	
+			}
+			return locationInFileProvider.getSignificantTextRegion(context, reference, index);
+    	} catch (OperationCanceledError e) {
+    		throw e.getWrapped();
+    	}
 	}
 
     @Override
