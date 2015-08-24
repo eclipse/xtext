@@ -7,14 +7,15 @@ Bundle-Version: 2.9.0.qualifier
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.util;
-  uses:="org.eclipse.emf.ecore,
-   com.google.common.base,
-   com.google.inject,
-   org.eclipse.emf.common.notify,
-   org.eclipse.emf.ecore.resource,
+  uses:="org.eclipse.emf.ecore.resource,
    org.apache.log4j,
+   org.eclipse.emf.common.util,
+   com.google.common.base,
+   org.eclipse.emf.common.notify,
    org.eclipse.xtext.util.concurrent,
-   org.eclipse.emf.ecore.util",
+   org.eclipse.emf.ecore.util,
+   org.eclipse.emf.ecore,
+   com.google.inject",
  org.eclipse.xtext.util.concurrent;uses:="org.eclipse.xtext.util",
  org.eclipse.xtext.util.formallang;x-internal:=true,
  org.eclipse.xtext.util.internal;x-friends:="org.eclipse.xtext.xtext.generator,org.eclipse.xtend.ide"
