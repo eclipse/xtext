@@ -44,11 +44,9 @@ import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -88,19 +86,8 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
       }
       TextRange _xblockexpression = null;
       {
-        ITextRegion _xtrycatchfinallyexpression = null;
-        try {
-          ICrossReferenceDescription _crossReferenceDescription = this.getCrossReferenceDescription();
-          _xtrycatchfinallyexpression = _crossReferenceDescription.getTextRegion();
-        } catch (final Throwable _t) {
-          if (_t instanceof OperationCanceledError) {
-            final OperationCanceledError e = (OperationCanceledError)_t;
-            throw e.getWrapped();
-          } else {
-            throw Exceptions.sneakyThrow(_t);
-          }
-        }
-        final ITextRegion textRegion = _xtrycatchfinallyexpression;
+        ICrossReferenceDescription _crossReferenceDescription = this.getCrossReferenceDescription();
+        final ITextRegion textRegion = _crossReferenceDescription.getTextRegion();
         int _offset = textRegion.getOffset();
         TextRange _textRange = this.myElement.getTextRange();
         int _startOffset = _textRange.getStartOffset();

@@ -27,7 +27,6 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.nodemodel.util.NodeModelUtils.*
-import org.eclipse.xtext.service.OperationCanceledError
 
 class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements XtextPsiReference {
 	
@@ -52,11 +51,7 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 	}
 
 	override create {
-		val textRegion = try {
-			crossReferenceDescription.textRegion
-		} catch (OperationCanceledError e) {
-			throw e.wrapped
-		}
+		val textRegion = crossReferenceDescription.textRegion
 		var startOffset = textRegion.offset - myElement.textRange.startOffset
 		if (startOffset < 0) {
 			rangeInElement

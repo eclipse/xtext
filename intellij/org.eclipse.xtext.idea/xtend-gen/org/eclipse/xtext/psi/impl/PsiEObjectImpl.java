@@ -7,13 +7,16 @@
  */
 package org.eclipse.xtext.psi.impl;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.icons.AllIcons;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
@@ -27,6 +30,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.idea.lang.IXtextLanguage;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.psi.PsiEObject;
+import org.eclipse.xtext.psi.XtextPsiReference;
 import org.eclipse.xtext.psi.impl.BaseXtextFile;
 import org.eclipse.xtext.psi.tree.IGrammarAwareElementType;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -152,8 +156,23 @@ public class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>
   
   @Override
   public int getTextOffset() {
-    ITextRegion _significantTextRegion = this.getSignificantTextRegion();
-    return _significantTextRegion.getOffset();
+    final PsiReference reference = this.getReference();
+    if ((reference instanceof XtextPsiReference)) {
+      final int textOffset = super.getTextOffset();
+      final TextRange rangeToHighlightInElement = ((XtextPsiReference)reference).getRangeToHighlightInElement();
+      boolean _notEquals = (!Objects.equal(rangeToHighlightInElement, null));
+      if (_notEquals) {
+        int _startOffset = rangeToHighlightInElement.getStartOffset();
+        return (textOffset + _startOffset);
+      }
+      return textOffset;
+    }
+    final ITextRegion textRegion = this.getSignificantTextRegion();
+    boolean _notEquals_1 = (!Objects.equal(textRegion, null));
+    if (_notEquals_1) {
+      return textRegion.getOffset();
+    }
+    return super.getTextOffset();
   }
   
   protected ITextRegion getSignificantTextRegion() {

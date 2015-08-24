@@ -28,6 +28,7 @@ import org.eclipse.xtext.psi.tree.IGrammarAwareElementType
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.service.OperationCanceledError
 import com.intellij.psi.PsiElement
+import org.eclipse.xtext.psi.XtextPsiReference
 
 class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>> extends StubBasedPsiElementBase<T> implements PsiEObject {
 
@@ -117,7 +118,22 @@ class PsiEObjectImpl<PsiT extends PsiElement, T extends StubElement<PsiT>> exten
 	}
 
 	override getTextOffset() {
-		significantTextRegion.offset
+		val reference = reference
+		if (reference instanceof XtextPsiReference) {
+			val textOffset = super.textOffset
+			
+			val rangeToHighlightInElement = reference.rangeToHighlightInElement
+			if (rangeToHighlightInElement != null)
+				return textOffset + rangeToHighlightInElement.startOffset
+				
+			return textOffset
+		}
+
+		val textRegion = significantTextRegion
+		if (textRegion != null)
+			return textRegion.offset
+			 
+		return super.textOffset
 	}
 
 	def protected getSignificantTextRegion() {
