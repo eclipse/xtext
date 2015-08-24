@@ -66,13 +66,13 @@
  *     The language name (usually the file extension configured for the language).
  */
 define([
-    'jquery',
-    'orion/Deferred',
-    'orion/codeEdit',
-    'orion/keyBinding',
-    'orion/editor/annotations',
-    'xtext/compatibility',
-    'xtext/ServiceBuilder',
+	'jquery',
+	'orion/Deferred',
+	'orion/codeEdit',
+	'orion/keyBinding',
+	'orion/editor/annotations',
+	'xtext/compatibility',
+	'xtext/ServiceBuilder',
 	'xtext/OrionEditorContext'
 ], function(jQuery, OrionDeferred, CodeEdit, mKeyBinding, mAnnotations, compatibility,
 		ServiceBuilder, EditorContext) {
@@ -166,15 +166,26 @@ define([
 		var xtextServices = {
 			options: options,
 			editorContext: new EditorContext(editorViewer.editor),
-			contentType: options.contentType,
 			_highlightAnnotationTypes: []
 		};
-		if (!services.contentType && options.xtextLang)
-			services.contentType = 'xtext/' + options.xtextLang;
-		else if (!services.contentType)
-			services.contentType = 'xtext';
+		var contentType = options.contentType;
+		if (!contentType && options.xtextLang)
+			contentType = 'xtext/' + options.xtextLang;
+		else if (!contentType)
+			contentType = 'xtext';
+		var cto = {
+			id: contentType,
+			name: 'Xtext Language',
+			'extends': 'text/plain'
+		};
+		editorViewer.serviceRegistry.registerService('orion.core.contenttype', {}, {contentTypes: [cto]});
+		editorViewer.contentTypeRegistry.getContentTypesMap()[contentType] = cto;
+		xtextServices.contentType = contentType;
+		
 		var serviceBuilder = new OrionServiceBuilder(editorViewer, xtextServices);
 		serviceBuilder.createServices();
+		if (options.xtextLang)
+			cto.extension = [options.xtextLang];
 		editorViewer.xtextServices = xtextServices;
 		return xtextServices;
 	}
