@@ -12,16 +12,16 @@ import java.util.Set;
 import org.eclipse.jface.text.TypedRegion;
 import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.junit4.AbstractXtextTests;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal;
 import org.junit.Test;
 
 import com.google.common.collect.Sets;
@@ -41,7 +41,7 @@ public class SemanticHighlightingTest extends AbstractXtextTests implements IHig
 		with(new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),new XtextUiModule(Activator.getDefault()), new SharedStateModule()));
+				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),new XtextUIModuleInternal(Activator.getDefault()), new SharedStateModule()));
 			}
 		});
 		expectedRegions = Sets.newLinkedHashSet();

@@ -152,7 +152,7 @@ public class XtextGrammarQuickfixProviderTest extends AbstractXtextTests {
 	}
 
 	public Injector createInjector() {
-		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(), new org.eclipse.xtext.ui.XtextUiModule(
+		return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(), new org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal(
 				Activator.getDefault()), new SharedStateModule()));
 	}
 
