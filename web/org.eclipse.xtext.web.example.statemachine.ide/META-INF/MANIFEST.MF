@@ -7,7 +7,7 @@ Bundle-SymbolicName: org.eclipse.xtext.web.example.statemachine.ide; singleton:=
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.web.example.statemachine,
  org.eclipse.xtext.ide;visibility:=reexport,
- org.eclipse.xtext.xbase.lib;bundle-version="2.9.0"
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtext.web.example.statemachine.ide,
