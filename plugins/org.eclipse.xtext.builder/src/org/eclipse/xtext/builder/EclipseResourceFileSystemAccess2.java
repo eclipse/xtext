@@ -50,6 +50,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 
+import static org.eclipse.xtext.ui.util.ResourceUtil.*;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay - https://bugs.eclipse.org/bugs/show_bug.cgi?id=386135
@@ -204,47 +206,18 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			return;
 
 		IFile file = getFile(fileName, outputName);
-		if (file != null) {
-			IFile traceFile = getTraceFile(file);
-			try {
-				String encoding = getEncoding(file);
-				CharSequence postProcessedContent = postProcess(fileName, outputName, contents, encoding);
-				String contentsAsString = postProcessedContent.toString();
-				if (file.exists()) {
-					if (outputConfig.isOverrideExistingResources()) {
-						StringInputStream newContent = getInputStream(contentsAsString, encoding);
-						if (hasContentsChanged(file, newContent)) {
-							// reset to offset zero allows to reuse internal byte[]
-							// no need to convert the string twice
-							newContent.reset();
-							file.setContents(newContent, true, outputConfig.isKeepLocalHistory(), monitor);
-						} else {
-							file.touch(getMonitor());
-						}
-						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
-							setDerived(file, outputConfig.isSetDerivedProperty());
-						}
-						if (traceFile != null)
-							updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
-						if (callBack != null)
-							callBack.afterFileUpdate(file);
-					}
-				} else {
-					ensureParentExists(file);
-					file.create(getInputStream(contentsAsString, encoding), true, monitor);
-					if (outputConfig.isSetDerivedProperty()) {
-						setDerived(file, true);
-					}
-					if (traceFile != null)
-						updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
-					if (callBack != null)
-						callBack.afterFileCreation(file);
-				}
-			} catch (CoreException e) {
-				throw new RuntimeIOException(e);
-			} catch (IOException e) {
-				throw new RuntimeIOException(e);
-			}
+		if (file == null)
+			return;
+		
+		IFile traceFile = getTraceFile(file);
+		try {
+			String encoding = getEncoding(file);
+			CharSequence postProcessedContent = postProcess(fileName, outputName, contents, encoding);
+			String contentsAsString = postProcessedContent.toString();
+			StringInputStream newContent = getInputStream(contentsAsString, encoding);
+			generateFile(file, newContent, traceFile, postProcessedContent, outputConfig);
+		} catch (CoreException e) {
+			throw new RuntimeIOException(e);
 		}
 	}
 
@@ -260,8 +233,18 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		if (!ensureOutputConfigurationDirectoryExists(outputConfig))
 			return;
 
+		IFile file = getFile(fileName, outputName);
+		generateFile(file, content, null, null, outputConfig);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected void generateFile(IFile file, InputStream content, IFile traceFile, CharSequence traceContent, OutputConfiguration outputConfig) {
+		if (file == null) 
+			return;
+		
 		try {
-			IFile file = getFile(fileName, outputName);
 			if (file.exists()) {
 				if (outputConfig.isOverrideExistingResources()) {
 					if (hasContentsChanged(file, content)) {
@@ -272,8 +255,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 					} else {
 						file.touch(getMonitor());
 					}
-					if (file.isDerived() != outputConfig.isSetDerivedProperty())
+					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
 						setDerived(file, outputConfig.isSetDerivedProperty());
+					}
+					if (traceFile != null)
+						updateTraceInformation(traceFile, traceContent, outputConfig.isSetDerivedProperty());
 					if (callBack != null)
 						callBack.afterFileUpdate(file);
 				}
@@ -283,6 +269,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 				if (outputConfig.isSetDerivedProperty()) {
 					setDerived(file, true);
 				}
+				if (traceFile != null)
+					updateTraceInformation(traceFile, traceContent, outputConfig.isSetDerivedProperty());
 				if (callBack != null)
 					callBack.afterFileCreation(file);
 			}
@@ -448,7 +436,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			// avoid copying the byte array
 			InputStream input = new ByteArrayInputStream(data.internalBuffer(), 0, data.internalLength());
 			if (traceFile.exists()) {
-				traceFile.setContents(input, false, false, monitor);
+				traceFile.setContents(input, true, false, monitor);
 			} else {
 				traceFile.create(input, true, monitor);
 			}
@@ -456,7 +444,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 			return;
 		}
 		if (traceFile.exists()) {
-			traceFile.delete(IResource.NONE, monitor);
+			traceFile.delete(IResource.FORCE, monitor);
 		}
 	}
 
@@ -524,13 +512,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		return null;
 	}
 
-	private void syncIfNecessary(IFile result) {
+	private void syncIfNecessary(IResource result) {
 		syncIfNecessary(result, monitor);
 	}
 
-	private void syncIfNecessary(IFile result, IProgressMonitor progressMonitor) {
+	private void syncIfNecessary(IResource result, IProgressMonitor progressMonitor) {
 		try {
-			result.refreshLocal(IResource.DEPTH_ZERO, progressMonitor);
+			sync(result, IResource.DEPTH_ZERO, progressMonitor);
 		} catch (CoreException c) {
 			// ignore
 		}
@@ -564,9 +552,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		IFileCallback callBack = getCallBack();
 		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists() && !isTraceFile(file)) {
 			IFile traceFile = getTraceFile(file);
-			file.delete(outputConfig.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
+			file.delete(true, outputConfig.isKeepLocalHistory(), monitor);
 			if (traceFile != null && traceFile.exists()) {
-				traceFile.delete(IResource.NONE, monitor);
+				traceFile.delete(IResource.FORCE, monitor);
 			}
 		}
 	}
