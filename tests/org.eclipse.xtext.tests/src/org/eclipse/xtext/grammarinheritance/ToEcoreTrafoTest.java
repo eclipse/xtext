@@ -56,11 +56,12 @@ public class ToEcoreTrafoTest extends AbstractXtextTests {
 		assertEquals(0, list.size());
 	}
 
+	// TODO Review test expectation change - see Bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=475692
 	@Test public void testConcreteLanguageToMetamodel() throws Exception {
 		XtextResource r = getResource("classpath:/" + ConcreteTestLanguage.class.getName().replace('.', '/') + ".xtext");
 		Grammar element = (Grammar) r.getContents().get(0);
 		List<TerminalRule> lexerRules = GrammarUtil.allTerminalRules(element);
-		assertEquals(8, lexerRules.size());
+		assertEquals("Number of lexer-rules in Grammar", 9, lexerRules.size());
 		List<EPackage> list = Xtext2EcoreTransformer.doGetGeneratedPackages(element);
 		EPackage metaModel = list.get(0);
 		assertNotNull(metaModel);
