@@ -9,6 +9,7 @@ dependencies {
 	compile group: 'org.webjars', name: 'requirejs-text', version: '2.0.10-3'
 	compile group: 'org.webjars', name: 'jquery', version: '2.1.4'
 	compile group: 'org.webjars', name: 'ace', version: '1.1.9'
+	compile group: 'org.webjars', name: 'codemirror', version: '5.5'
 	providedCompile group: 'org.eclipse.jetty', name: 'jetty-annotations', version: '9.2.+'
 	providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 }
