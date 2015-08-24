@@ -3,7 +3,7 @@
   <actions/>
   <description>&lt;img src=&quot;http://wiki.eclipse.org/images/d/db/Xtext_logo.png&quot; width=&quot;200&quot; height=&quot;60&quot;/&gt;&lt;br&gt;&#xd;
 &lt;b&gt;Baut xtext Antlr Feature.&lt;/b&gt;&lt;br&gt;&#xd;
-SCM Abfrage täglich: H 1,7,13,19 * * * &lt;br&gt;&#xd;
+SCM Abfrage t&amp;auml;lich: H 1,7,13,19 * * * &lt;br&gt;&#xd;
 &lt;br&gt;&#xd;
 Speichert Buildartefakte unter: antlr.downloads bzw. antlr.p2.repository&lt;br&gt;&#xd;
 wenn FTPUpload auf yes gesetzt ist, werden Updatesite und der/die Zip/-s auf ftp.itemis.de Server hoch geladen.&lt;br&gt;&#xd;
@@ -18,7 +18,7 @@ Archiviert werden antlr.downloads bzw. antlr.p2.repository Ordner.&#xd;
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.9.1">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
       <projectUrl>https://github.com/svenefftinge/org.xtext.antlr.generator/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <hudson.model.ParametersDefinitionProperty>
@@ -46,13 +46,13 @@ Archiviert werden antlr.downloads bzw. antlr.p2.repository Ordner.&#xd;
         </hudson.model.StringParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
       <useJobPriority>true</useJobPriority>
       <priority>-2147483647</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
   </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.5">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -178,7 +178,7 @@ ftpProperties=$WORKSPACE/../../../ftp.properties</properties>
     </hudson.tasks.ArtifactArchiver>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>60</timeoutMinutes>
       </strategy>

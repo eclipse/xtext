@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>This job was generated</description>
   <logRotator class="hudson.tasks.LogRotator">
     <daysToKeep>-1</daysToKeep>
     <numToKeep>14</numToKeep>
@@ -10,6 +10,10 @@
   </logRotator>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
+      <useJobPriority>false</useJobPriority>
+      <priority>3</priority>
+    </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
     <hudson.model.ParametersDefinitionProperty>
       <parameterDefinitions>
         <hudson.model.ChoiceParameterDefinition>
@@ -24,7 +28,7 @@
         </hudson.model.ChoiceParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
@@ -63,18 +67,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>rm -f ${WORKSPACE}/*.b3aggr ${WORKSPACE}/*.b3aggrcon
-
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Helios.b3aggr --action ${B3_ACTION}
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Indigo.b3aggr --action ${B3_ACTION}
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Juno.b3aggr --action ${B3_ACTION}
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Kepler.b3aggr --action ${B3_ACTION}
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Luna.b3aggr --action ${B3_ACTION}
-/opt/jenkins/tools/b3-headless/b3 aggregate --buildModel ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/Latest.b3aggr --action ${B3_ACTION}
-
-rm -rf Latest Luna Kepler Juno Indigo Helios Galileo 
-
-mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mirroring/* .</command>
+      <command/>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
@@ -86,7 +79,7 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
       <defaultExcludes>true</defaultExcludes>
     </hudson.tasks.ArtifactArchiver>
     <hudson.tasks.Fingerprinter>
-      <targets>Helios/final/*,Indigo/final/*,Juno/final/*,Kepler/final/*,Luna/final/*,Latest/final/*</targets>
+      <targets/>
     </hudson.tasks.Fingerprinter>
     <hudson.plugins.parameterizedtrigger.BuildTrigger plugin="parameterized-trigger@2.25">
       <configs>
@@ -96,7 +89,7 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
               <combineQueuedCommits>false</combineQueuedCommits>
             </hudson.plugins.git.GitRevisionBuildParameters>
           </configs>
-          <projects/>
+          <projects>xtext-slow-tests-master-oldest,xtend-slow-tests-master-oldest,generator-tests-master-oldest,xtext-slow-tests-master-latest,xtend-slow-tests-master-latest,generator-tests-master-latest</projects>
           <condition>SUCCESS</condition>
           <triggerWithNoParameters>false</triggerWithNoParameters>
         </hudson.plugins.parameterizedtrigger.BuildTriggerConfig>
@@ -105,12 +98,12 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
     <hudson.tasks.test.AggregatedTestResultPublisher plugin="junit@1.1">
       <includeFailedBuilds>false</includeFailedBuilds>
     </hudson.tasks.test.AggregatedTestResultPublisher>
-    <hudson.tasks.Mailer plugin="mailer@1.11">
+    <hudson.tasks.Mailer plugin="mailer@1.15">
       <recipients>alle-ki@itemis.de</recipients>
       <dontNotifyEveryUnstableBuild>true</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>true</sendToIndividuals>
     </hudson.tasks.Mailer>
-		<hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>org.eclipse.xtext.git/**</pattern>
@@ -130,7 +123,7 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>150</timeoutMinutes>
       </strategy>
@@ -138,5 +131,5 @@ mv ${WORKSPACE}/org.eclipse.xtext.git/releng/org.eclipse.xtext.releng/releng/mir
         <hudson.plugins.build__timeout.operations.FailOperation/>
       </operationList>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    </buildWrappers>
+  </buildWrappers>
 </project>

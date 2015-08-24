@@ -14,7 +14,7 @@
       <useJobPriority>true</useJobPriority>
       <priority>8</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
@@ -102,7 +102,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
     </hudson.tasks.Ant>
   </builders>
   <publishers>
-    <hudson.plugins.findbugs.FindBugsPublisher plugin="findbugs@4.57">
+    <hudson.plugins.findbugs.FindBugsPublisher plugin="findbugs@4.61">
       <healthy></healthy>
       <unHealthy></unHealthy>
       <thresholdLimit>low</thresholdLimit>
@@ -112,7 +112,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
       <usePreviousBuildAsReference>false</usePreviousBuildAsReference>
       <useStableBuildAsReference>false</useStableBuildAsReference>
       <useDeltaValues>false</useDeltaValues>
-      <thresholds plugin="analysis-core@1.70">
+      <thresholds plugin="analysis-core@1.72">
         <unstableTotalAll>7</unstableTotalAll>
         <unstableTotalHigh></unstableTotalHigh>
         <unstableTotalNormal></unstableTotalNormal>
@@ -148,7 +148,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
     <com.cloudbees.jenkins.GitHubCommitNotifier plugin="github@1.11">
       <resultOnFailure>FAILURE</resultOnFailure>
     </com.cloudbees.jenkins.GitHubCommitNotifier>
-   <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>jars/**</pattern>
@@ -168,7 +168,7 @@ jarsLocation=${WORKSPACE}/jars/</properties>
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>60</timeoutMinutes>
       </strategy>

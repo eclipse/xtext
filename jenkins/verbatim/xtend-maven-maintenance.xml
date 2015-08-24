@@ -13,7 +13,7 @@ mvn clean deploy to https://oss.sonatype.org/content/repositories/snapshots/</de
   <properties>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
       <useJobPriority>true</useJobPriority>
-      <priority>-1</priority>
+      <priority>2</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
   </properties>

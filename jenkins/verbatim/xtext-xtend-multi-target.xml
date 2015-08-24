@@ -17,7 +17,7 @@
       <useJobPriority>true</useJobPriority>
       <priority>8</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
-    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
+    <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.25"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
     <configVersion>2</configVersion>
@@ -65,6 +65,7 @@
         <string>Juno</string>
         <string>Kepler</string>
         <string>Luna</string>
+        <string>Mars</string>
         <string>Latest</string>
       </values>
     </hudson.matrix.TextAxis>
@@ -161,7 +162,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine
       <testDataPublishers/>
       <healthScaleFactor>1.0</healthScaleFactor>
     </hudson.tasks.junit.JUnitResultArchiver>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.25">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
       <deleteDirs>false</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
       <cleanWhenSuccess>true</cleanWhenSuccess>
@@ -175,7 +176,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.14">
+    <hudson.plugins.build__timeout.BuildTimeoutWrapper plugin="build-timeout@1.15">
       <strategy class="hudson.plugins.build_timeout.impl.AbsoluteTimeOutStrategy">
         <timeoutMinutes>800</timeoutMinutes>
       </strategy>
@@ -183,7 +184,7 @@ junit --launch &quot;org.eclipse.xtend.ide.tests/xtend.ide.tests.fast-quarantine
         <hudson.plugins.build__timeout.operations.AbortOperation/>
       </operationList>
     </hudson.plugins.build__timeout.BuildTimeoutWrapper>
-    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.17">
+    <hudson.plugins.xvnc.Xvnc plugin="xvnc@1.21">
       <takeScreenshot>false</takeScreenshot>
       <useXauthority>true</useXauthority>
     </hudson.plugins.xvnc.Xvnc>

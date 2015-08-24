@@ -13,7 +13,7 @@
     <hudson.plugins.disk__usage.DiskUsageProperty plugin="disk-usage@0.24"/>
     <jenkins.advancedqueue.AdvancedQueueSorterJobProperty plugin="PrioritySorter@2.9">
       <useJobPriority>true</useJobPriority>
-      <priority>-2147483647</priority>
+      <priority>9</priority>
     </jenkins.advancedqueue.AdvancedQueueSorterJobProperty>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.5">

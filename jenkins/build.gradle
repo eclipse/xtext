@@ -36,16 +36,6 @@ ext.branches = [
 				jdk: jdks['1.7']
 			],
 		]
-	],
-	[
-		name: 'jk/idea_autobuild',
-		displayName: 'idea_autobuild',
-		platforms: [
-			latest: [
-				target: 'Latest',
-				jdk: jdks['1.7']
-			],
-		]
 	]
 ]
 
