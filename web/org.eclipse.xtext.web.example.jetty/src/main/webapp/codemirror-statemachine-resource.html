@@ -3,20 +3,25 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
-	<title>Xtext-Web Domainmodel Example</title>
-	<link rel="stylesheet" type="text/css" href="xtext/xtext-ace.css" />
+	<title>Xtext-Web State Machine Example</title>
+	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/lib/codemirror.css" />
+	<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/addon/hint/show-hint.css" />
+	<link rel="stylesheet" type="text/css" href="xtext/xtext-codemirror.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 	<script type="text/javascript">
 		require.config({
 			paths: {
-				"jquery": "webjars/jquery/2.1.4/jquery.min",
-				"ace/ext/language_tools": "webjars/ace/1.1.9/src/ext-language_tools"
-			}
+				"jquery": "webjars/jquery/2.1.4/jquery.min"
+			},
+			packages: [{
+				name: "codemirror",
+				location: "webjars/codemirror/5.5",
+				main: "lib/codemirror"
+			}]
 		});
-		require(["webjars/ace/1.1.9/src/ace"], function() {
-			require(["xtext/xtext-ace"], function(xtext) {
-				var editor = xtext.createEditor();
+		require(["xtext/xtext-codemirror"], function(xtext) {
+			var editor = xtext.createEditor();
 				$("#save-button").click(function() {
 					editor.xtextServices.saveResource();
 				});
@@ -26,7 +31,6 @@
 				$("#generate-button").click(function() {
 					window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
 				});
-			});
 		});
 	</script>
 </head>

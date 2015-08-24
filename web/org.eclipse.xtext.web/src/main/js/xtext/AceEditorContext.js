@@ -17,8 +17,6 @@ define([], function() {
 		this._serverStateListeners = [];
 		this._clean = true;
 		this._dirtyStateListeners = [];
-		this._annotations = [];
-		this._occurrenceMarkers = [];
 	};
 
 	AceEditorContext.prototype = {
