@@ -438,7 +438,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				if (monitor.isCanceled()) {
 					throw new OperationCanceledException();
 				}
-				container.refreshLocal(IResource.DEPTH_INFINITE, child);
+				sync(container, IResource.DEPTH_INFINITE, child);
 			}
 		}
 	}
@@ -458,12 +458,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (!container.exists()) {
 				return;
 			}
-			if (config.isCanClearOutputDirectory()) {
+			if (canClean(container, config)) {
 				for (IResource resource : container.members()) {
 					if (!config.isKeepLocalHistory()) {
-						resource.delete(IResource.NONE, monitor);
+						resource.delete(IResource.FORCE, monitor);
 					} else if (access == null) {
-						resource.delete(IResource.KEEP_HISTORY, monitor);
+						resource.delete(IResource.FORCE | IResource.KEEP_HISTORY, monitor);
 					} else {
 						delete(resource, config, access, monitor);
 					}
@@ -477,12 +477,23 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 					if (access != null) {
 						access.deleteFile(iFile, config.getName(), monitor);
 					} else {
-						iFile.delete(config.isKeepLocalHistory() ? IResource.KEEP_HISTORY : IResource.NONE, monitor);
+						iFile.delete(true, config.isKeepLocalHistory(), monitor);
 					}
 				}
 			}
 		}
 
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected boolean canClean(IContainer container, OutputConfiguration config) {
+		if (container.getType() == IResource.PROJECT)
+			return false;
+		if (container.getType() == IResource.ROOT)
+			return false;
+		return config.isCanClearOutputDirectory();
 	}
 
 	private void delete(IResource resource, OutputConfiguration config, EclipseResourceFileSystemAccess2 access,
@@ -495,12 +506,12 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			for (IResource child : container.members()) {
 				delete(child, config, access, monitor);
 			}
-			container.delete(IResource.KEEP_HISTORY, monitor);
+			container.delete(IResource.FORCE | IResource.KEEP_HISTORY, monitor);
 		} else if (resource instanceof IFile) {
 			IFile file = (IFile) resource;
 			access.deleteFile(file, config.getName(), monitor);
 		} else {
-			resource.delete(IResource.KEEP_HISTORY, monitor);
+			resource.delete(IResource.FORCE | IResource.KEEP_HISTORY, monitor);
 		}
 	}
 
