@@ -32,12 +32,7 @@ Require-Bundle: org.eclipse.xtext.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtext.ui;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.ui.contentassist;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.ui.contentassist.antlr;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.ui.contentassist.antlr.internal;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.ui.labeling;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.xtext.ecoreInference;x-friends:="org.eclipse.xtext.xtext.ui.tests",
+Export-Package: org.eclipse.xtext.xtext.ecoreInference;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.launcher;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui.editor.autoedit;x-friends:="org.eclipse.xtext.xtext.ui.tests",
