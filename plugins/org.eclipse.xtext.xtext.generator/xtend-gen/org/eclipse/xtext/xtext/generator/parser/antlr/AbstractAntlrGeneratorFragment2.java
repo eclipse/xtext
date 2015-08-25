@@ -215,7 +215,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     CharSequence _postProcess = this.newLineNormalizer.postProcess(_uRI, content);
     String _string = _postProcess.toString();
     content = _string;
-    String _replaceAll = content.replaceAll("\"\\+\\n\\s+\"", "");
+    String _replaceAll = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
     content = _replaceAll;
     fsa.generateFile(textFile, content);
   }
