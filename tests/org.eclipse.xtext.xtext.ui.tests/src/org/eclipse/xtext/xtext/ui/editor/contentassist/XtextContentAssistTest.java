@@ -22,7 +22,6 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.ui.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.XtextProjectHelper;
-import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
@@ -30,6 +29,7 @@ import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.ui.internal.XtextUIModuleInternal;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),new XtextUiModule(Activator.getDefault()) {
+				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(),new XtextUIModuleInternal(Activator.getDefault()) {
 					@Override
 					public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
 						binder.bind(ILabelProvider.class).annotatedWith(ContentProposalLabelProvider.class).to(DefaultEObjectLabelProvider.class);
