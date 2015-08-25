@@ -188,21 +188,21 @@ public class XtextAntlrUiGeneratorFragment extends AbstractAntlrGeneratorFragmen
 	}
 
 	public static String getParserClassName(Grammar g, Naming naming) {
-		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 
 	public static String getInternalLexerClassName(Grammar g, Naming naming) {
-		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g)
 				+ "Lexer";
 	}
 
 	public static String getInternalParserClassName(Grammar g, Naming naming) {
-		return  naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g)
+		return  naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g)
 				+ "Parser";
 	}
 
 	public static String getGrammarFileName(Grammar g, Naming naming) {
-		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g);
 	}
 	
 	public static Collection<Alternatives> getAllAlternatives(Grammar g) {

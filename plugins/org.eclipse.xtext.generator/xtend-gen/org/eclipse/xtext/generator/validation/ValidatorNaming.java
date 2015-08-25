@@ -36,8 +36,8 @@ public class ValidatorNaming {
     String _basePackageRuntime = this._naming.basePackageRuntime(g);
     _builder.append(_basePackageRuntime, "");
     _builder.append(".validation.");
-    String _name = GrammarUtil.getName(g);
-    _builder.append(_name, "");
+    String _simpleName = GrammarUtil.getSimpleName(g);
+    _builder.append(_simpleName, "");
     _builder.append("Validator");
     return _builder.toString();
   }
@@ -47,8 +47,8 @@ public class ValidatorNaming {
     String _basePackageRuntime = this._naming.basePackageRuntime(this.grammar);
     _builder.append(_basePackageRuntime, "");
     _builder.append(".validation.Abstract");
-    String _name = GrammarUtil.getName(this.grammar);
-    _builder.append(_name, "");
+    String _simpleName = GrammarUtil.getSimpleName(this.grammar);
+    _builder.append(_simpleName, "");
     _builder.append("Validator");
     return _builder.toString();
   }

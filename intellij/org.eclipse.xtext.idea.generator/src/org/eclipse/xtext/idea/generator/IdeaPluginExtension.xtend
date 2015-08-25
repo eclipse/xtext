@@ -18,7 +18,7 @@ class IdeaPluginExtension {
 	}
 	
 	def getSimpleName(Grammar grammar) {
-		GrammarUtil::getName(grammar);
+		GrammarUtil.getSimpleName(grammar);
 	}
 	
 	def getPackageName(Grammar grammar) {

@@ -112,7 +112,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment implements
 	}
 
 	public static String getJvmModelInferrerName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getName(grammar) + "JvmModelInferrer";
+		return naming.basePackageRuntime(grammar) + ".jvmmodel." + GrammarUtil.getSimpleName(grammar) + "JvmModelInferrer";
 	}
 
 	@Override

@@ -79,7 +79,7 @@ public final class PackratParserGenUtil {
 	 */
 	public static String getConsumerClassName(AbstractRule rule) {
 		Grammar grammar = GrammarUtil.getGrammar(rule);
-		return (grammar != null ? GrammarUtil.getName(grammar) : "")
+		return (grammar != null ? GrammarUtil.getSimpleName(grammar) : "")
 				+ (rule.getName() == null ? "Consumer" : Strings.toFirstUpper(rule.getName()) + "Consumer");
 	}
 
@@ -89,7 +89,7 @@ public final class PackratParserGenUtil {
 	 * @return Parser name
 	 */
 	public static String getGeneratedParser(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.packrat." + getName(g) + "PackratParser";
+		return naming.basePackageRuntime(g) + ".parser.packrat." + getSimpleName(g) + "PackratParser";
 	}
 
 	/**
