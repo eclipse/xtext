@@ -1,0 +1,1158 @@
+package org.eclipse.xtext.xtext.wizard;
+
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xtext.wizard.BuildSystem;
+import org.eclipse.xtext.xtext.wizard.ExternalDependency;
+import org.eclipse.xtext.xtext.wizard.GeneratedFile;
+import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
+import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.Outlet;
+import org.eclipse.xtext.xtext.wizard.ParentProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.PlainTextFile;
+import org.eclipse.xtext.xtext.wizard.PomFile;
+import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.RuntimeTestProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.SourceLayout;
+import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+
+@SuppressWarnings("all")
+public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+  private final RuntimeTestProjectDescriptor testProject;
+  
+  public RuntimeProjectDescriptor(final WizardConfiguration config) {
+    super(config);
+    RuntimeTestProjectDescriptor _runtimeTestProjectDescriptor = new RuntimeTestProjectDescriptor(this);
+    this.testProject = _runtimeTestProjectDescriptor;
+  }
+  
+  @Override
+  public String getNameQualifier() {
+    return "";
+  }
+  
+  @Override
+  public TestProjectDescriptor getTestProject() {
+    return this.testProject;
+  }
+  
+  @Override
+  public Set<String> getSourceFolders() {
+    final Function1<Outlet, String> _function = new Function1<Outlet, String>() {
+      @Override
+      public String apply(final Outlet it) {
+        return RuntimeProjectDescriptor.this.sourceFolder(it);
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableSet(CollectionLiterals.<Outlet>newHashSet(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
+    return IterableExtensions.<String>toSet(_map);
+  }
+  
+  @Override
+  public Set<ExternalDependency> getExternalDependencies() {
+    HashSet<ExternalDependency> _xblockexpression = null;
+    {
+      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+      Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
+      Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
+      ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext");
+      deps.add(_createXtextDependency);
+      ExternalDependency _createXtextDependency_1 = ExternalDependency.createXtextDependency("org.eclipse.xtext.xbase");
+      deps.add(_createXtextDependency_1);
+      ExternalDependency _externalDependency = new ExternalDependency();
+      final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
+        @Override
+        public void apply(final ExternalDependency it) {
+          final Procedure1<ExternalDependency.P2Coordinates> _function = new Procedure1<ExternalDependency.P2Coordinates>() {
+            @Override
+            public void apply(final ExternalDependency.P2Coordinates it) {
+              it.setBundleId("org.eclipse.equinox.common");
+              it.setVersion("3.5.0");
+            }
+          };
+          it.p2(_function);
+        }
+      };
+      ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
+      deps.add(_doubleArrow);
+      _xblockexpression = deps;
+    }
+    return _xblockexpression;
+  }
+  
+  @Override
+  public Set<String> getDevelopmentBundles() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("org.eclipse.xtext.xbase", "org.eclipse.xtext.generator", "org.eclipse.xtext.xtext.generator", "org.apache.commons.logging", "org.eclipse.emf.codegen.ecore", "org.eclipse.emf.mwe.utils", "org.eclipse.emf.mwe2.launch", "org.eclipse.xtext.common.types", "org.objectweb.asm", "org.apache.log4j"));
+  }
+  
+  @Override
+  public Set<String> getBinIncludes() {
+    HashSet<String> _xblockexpression = null;
+    {
+      final HashSet<String> includes = CollectionLiterals.<String>newHashSet();
+      Set<String> _binIncludes = super.getBinIncludes();
+      Iterables.<String>addAll(includes, _binIncludes);
+      includes.add("plugin.xml");
+      _xblockexpression = includes;
+    }
+    return _xblockexpression;
+  }
+  
+  @Override
+  public Iterable<? extends GeneratedFile> getFiles() {
+    ArrayList<GeneratedFile> _xblockexpression = null;
+    {
+      final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
+      Iterable<? extends GeneratedFile> _files = super.getFiles();
+      Iterables.<GeneratedFile>addAll(files, _files);
+      String _grammarFilePath = this.getGrammarFilePath();
+      CharSequence _grammar = this.grammar();
+      PlainTextFile _file = this.file(Outlet.MAIN_RESOURCES, _grammarFilePath, _grammar);
+      files.add(_file);
+      String _workflowFilePath = this.getWorkflowFilePath();
+      CharSequence _workflow = this.workflow();
+      PlainTextFile _file_1 = this.file(Outlet.MAIN_RESOURCES, _workflowFilePath, _workflow);
+      files.add(_file_1);
+      _xblockexpression = files;
+    }
+    return _xblockexpression;
+  }
+  
+  public String getGrammarFilePath() {
+    StringConcatenation _builder = new StringConcatenation();
+    WizardConfiguration _config = this.getConfig();
+    LanguageDescriptor _language = _config.getLanguage();
+    String _basePackagePath = _language.getBasePackagePath();
+    _builder.append(_basePackagePath, "");
+    _builder.append("/");
+    WizardConfiguration _config_1 = this.getConfig();
+    LanguageDescriptor _language_1 = _config_1.getLanguage();
+    String _simpleName = _language_1.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(".xtext");
+    return _builder.toString();
+  }
+  
+  private CharSequence grammar() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("grammar ");
+    WizardConfiguration _config = this.getConfig();
+    LanguageDescriptor _language = _config.getLanguage();
+    String _name = _language.getName();
+    _builder.append(_name, "");
+    _builder.append(" with org.eclipse.xtext.common.Terminals");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("generate ");
+    WizardConfiguration _config_1 = this.getConfig();
+    LanguageDescriptor _language_1 = _config_1.getLanguage();
+    String _simpleName = _language_1.getSimpleName();
+    String _firstLower = StringExtensions.toFirstLower(_simpleName);
+    _builder.append(_firstLower, "");
+    _builder.append(" \"");
+    WizardConfiguration _config_2 = this.getConfig();
+    LanguageDescriptor _language_2 = _config_2.getLanguage();
+    String _nsURI = _language_2.getNsURI();
+    _builder.append(_nsURI, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("Model:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("greetings+=Greeting*;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("Greeting:");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("\'Hello\' name=ID \'!\';");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public String getWorkflowFilePath() {
+    StringConcatenation _builder = new StringConcatenation();
+    WizardConfiguration _config = this.getConfig();
+    LanguageDescriptor _language = _config.getLanguage();
+    String _basePackagePath = _language.getBasePackagePath();
+    _builder.append(_basePackagePath, "");
+    _builder.append("/Generate");
+    WizardConfiguration _config_1 = this.getConfig();
+    LanguageDescriptor _language_1 = _config_1.getLanguage();
+    String _simpleName = _language_1.getSimpleName();
+    _builder.append(_simpleName, "");
+    _builder.append(".mwe2");
+    return _builder.toString();
+  }
+  
+  private CharSequence workflow() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("module ");
+    WizardConfiguration _config = this.getConfig();
+    LanguageDescriptor _language = _config.getLanguage();
+    String _basePackagePath = _language.getBasePackagePath();
+    String _plus = (_basePackagePath + "/Generate");
+    WizardConfiguration _config_1 = this.getConfig();
+    LanguageDescriptor _language_1 = _config_1.getLanguage();
+    String _simpleName = _language_1.getSimpleName();
+    String _plus_1 = (_plus + _simpleName);
+    String _replaceAll = _plus_1.replaceAll("/", ".");
+    _builder.append(_replaceAll, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("import org.eclipse.emf.mwe.utils.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xtext.generator.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.generator.*");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.ui.generator.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("var projectName = \"");
+    String _name = this.getName();
+    _builder.append(_name, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("var projectPath = \"../${projectName}\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("var fileExtensions = \"");
+    WizardConfiguration _config_2 = this.getConfig();
+    LanguageDescriptor _language_2 = _config_2.getLanguage();
+    LanguageDescriptor.FileExtensions _fileExtensions = _language_2.getFileExtensions();
+    _builder.append(_fileExtensions, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("var grammarURI = \"platform:/resource/${projectName}/");
+    String _sourceFolder = this.sourceFolder(Outlet.MAIN_RESOURCES);
+    _builder.append(_sourceFolder, "");
+    _builder.append("/");
+    String _grammarFilePath = this.getGrammarFilePath();
+    _builder.append(_grammarFilePath, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("var encoding = \"");
+    WizardConfiguration _config_3 = this.getConfig();
+    Charset _encoding = _config_3.getEncoding();
+    _builder.append(_encoding, "");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("var lineDelimiter = \"\\n\"");
+    _builder.newLine();
+    _builder.append("var fileHeader = \"/*\\n * generated by Xtext \\${version}\\n */\"");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("Workflow {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("bean = StandaloneSetup {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("scanClassPath = true");
+    _builder.newLine();
+    {
+      WizardConfiguration _config_4 = this.getConfig();
+      Iterable<ProjectDescriptor> _enabledProjects = _config_4.getEnabledProjects();
+      final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
+        @Override
+        public Boolean apply(final ProjectDescriptor it) {
+          WizardConfiguration _config = it.getConfig();
+          ParentProjectDescriptor _parentProject = _config.getParentProject();
+          return Boolean.valueOf((!Objects.equal(it, _parentProject)));
+        }
+      };
+      Iterable<ProjectDescriptor> _filter = IterableExtensions.<ProjectDescriptor>filter(_enabledProjects, _function);
+      for(final ProjectDescriptor p : _filter) {
+        _builder.append("\t\t");
+        _builder.append("projectMapping = { projectName = \'");
+        String _name_1 = p.getName();
+        _builder.append(_name_1, "\t\t");
+        _builder.append("\' path = \'${projectPath}/../");
+        String _name_2 = p.getName();
+        _builder.append(_name_2, "\t\t");
+        _builder.append("\' }");
+        _builder.newLineIfNotEmpty();
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("// The following two lines can be removed, if Xbase is not used.");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("registerGeneratedEPackage = \"org.eclipse.xtext.xbase.XbasePackage\"");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("registerGenModelFile = \"platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    {
+      WizardConfiguration _config_5 = this.getConfig();
+      Iterable<ProjectDescriptor> _enabledProjects_1 = _config_5.getEnabledProjects();
+      for(final ProjectDescriptor p_1 : _enabledProjects_1) {
+        _builder.append("\t");
+        _builder.append("component = DirectoryCleaner {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("\t");
+        _builder.append("directory = \"${projectPath}");
+        String _nameQualifier = p_1.getNameQualifier();
+        _builder.append(_nameQualifier, "\t\t");
+        _builder.append("/");
+        String _sourceFolder_1 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_1, "\t\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("component = DirectoryCleaner {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("directory = \"${projectPath}/model/generated\"");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("component = XtextGenerator auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("configuration = {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("project = WizardConfig {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("runtimeRoot = projectPath");
+    _builder.newLine();
+    {
+      WizardConfiguration _config_6 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_6.getUiProject();
+      boolean _isEnabled = _uiProject.isEnabled();
+      if (_isEnabled) {
+        _builder.append("\t\t\t\t");
+        _builder.append("eclipseEditor = true");
+        _builder.newLine();
+      }
+    }
+    {
+      WizardConfiguration _config_7 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject = _config_7.getIntellijProject();
+      boolean _isEnabled_1 = _intellijProject.isEnabled();
+      if (_isEnabled_1) {
+        _builder.append("\t\t\t\t");
+        _builder.append("ideaEditor = true");
+        _builder.newLine();
+      }
+    }
+    {
+      WizardConfiguration _config_8 = this.getConfig();
+      WebProjectDescriptor _webProject = _config_8.getWebProject();
+      boolean _isEnabled_2 = _webProject.isEnabled();
+      if (_isEnabled_2) {
+        _builder.append("\t\t\t\t");
+        _builder.append("webSupport = true");
+        _builder.newLine();
+      }
+    }
+    {
+      WizardConfiguration _config_9 = this.getConfig();
+      IdeProjectDescriptor _ideProject = _config_9.getIdeProject();
+      boolean _isEnabled_3 = _ideProject.isEnabled();
+      if (_isEnabled_3) {
+        _builder.append("\t\t\t\t");
+        _builder.append("genericIdeSupport = true");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _isEnabled_4 = this.testProject.isEnabled();
+      if (_isEnabled_4) {
+        _builder.append("\t\t\t\t");
+        _builder.append("testingSupport = true");
+        _builder.newLine();
+      }
+    }
+    {
+      WizardConfiguration _config_10 = this.getConfig();
+      SourceLayout _sourceLayout = _config_10.getSourceLayout();
+      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.MAVEN);
+      if (_equals) {
+        _builder.append("\t\t\t\t");
+        _builder.append("mavenLayout = true");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("code = auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("preferXtendStubs = true");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("language = auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("uri = grammarURI");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// Java API to access grammar elements (required by several other fragments)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// generates Java API for the generated EPackages");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter { ");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = ecore.EMFGeneratorFragment auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("javaModelDirectory = \"/${projectName}/");
+    String _sourceFolder_2 = this.sourceFolder(Outlet.MAIN_SRC_GEN);
+    _builder.append(_sourceFolder_2, "\t\t\t\t\t");
+    _builder.append("\"");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("updateBuildProperties = ");
+    WizardConfiguration _config_11 = this.getConfig();
+    BuildSystem _buildSystem = _config_11.getBuildSystem();
+    boolean _needsEclipseMetadata = _buildSystem.needsEclipseMetadata();
+    _builder.append(_needsEclipseMetadata, "\t\t\t\t\t");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = serializer.SerializerFragment auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("generateStub = false");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// a custom ResourceFactory for use with EMF");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = resourceFactory.ResourceFactoryFragment auto-inject {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// The antlr parser generator fragment.");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// Xtend-based API for validation");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = validation.ValidatorFragment auto-inject {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("//    composedCheck = \"org.eclipse.xtext.validation.NamesAreUniqueValidator\"");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// scoping and exporting API");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = scoping.ImportNamespacesScopingFragment auto-inject {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = exporting.QualifiedNamesFragment auto-inject {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// generator API");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = generator.GeneratorFragment2 {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// formatter API");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = formatting.Formatter2Fragment2 {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    {
+      boolean _isEnabled_5 = this.testProject.isEnabled();
+      if (_isEnabled_5) {
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = junit.Junit4Fragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    {
+      WizardConfiguration _config_12 = this.getConfig();
+      UiProjectDescriptor _uiProject_1 = _config_12.getUiProject();
+      boolean _isEnabled_6 = _uiProject_1.isEnabled();
+      if (_isEnabled_6) {
+        _builder.append("\t\t\t");
+        _builder.append("fragment = builder.BuilderIntegrationFragment2 auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// labeling API");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = labeling.LabelProviderFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// outline API");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = outline.OutlineTreeProviderFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = outline.QuickOutlineFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// quickfix API");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = quickfix.QuickfixProviderFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// content assist API");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = contentAssist.ContentAssistFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// provides a preference page for template proposals");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = templates.CodetemplatesGeneratorFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// rename refactoring");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = refactoring.RefactorElementNameFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("// provides a compare view");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = compare.CompareFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    {
+      boolean _or = false;
+      WizardConfiguration _config_13 = this.getConfig();
+      UiProjectDescriptor _uiProject_2 = _config_13.getUiProject();
+      boolean _isEnabled_7 = _uiProject_2.isEnabled();
+      if (_isEnabled_7) {
+        _or = true;
+      } else {
+        WizardConfiguration _config_14 = this.getConfig();
+        IdeProjectDescriptor _ideProject_1 = _config_14.getIdeProject();
+        boolean _isEnabled_8 = _ideProject_1.isEnabled();
+        _or = _isEnabled_8;
+      }
+      if (_or) {
+        _builder.append("\t\t\t");
+        _builder.append("// generates a more lightweight Antlr parser and lexer tailored for content assist");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = adapter.FragmentAdapter {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.append("// provides the necessary bindings for java types integration");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = adapter.FragmentAdapter {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("fragment = types.TypesGeneratorFragment auto-inject {}");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// generates the required bindings only if the grammar inherits from Xbase");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = xbase.XbaseGeneratorFragment2 auto-inject {}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// generates the required bindings only if the grammar inherits from Xtype");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("fragment = xbase.XtypeGeneratorFragment2 auto-inject {}");
+    _builder.newLine();
+    _builder.newLine();
+    {
+      WizardConfiguration _config_15 = this.getConfig();
+      IntellijProjectDescriptor _intellijProject_1 = _config_15.getIntellijProject();
+      boolean _isEnabled_9 = _intellijProject_1.isEnabled();
+      if (_isEnabled_9) {
+        _builder.append("\t\t\t");
+        _builder.append("fragment = idea.IdeaPluginGenerator auto-inject {}");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder;
+  }
+  
+  @Override
+  public GradleBuildFile buildGradle() {
+    GradleBuildFile _buildGradle = super.buildGradle();
+    final Procedure1<GradleBuildFile> _function = new Procedure1<GradleBuildFile>() {
+      @Override
+      public void apply(final GradleBuildFile it) {
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("configurations {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("mwe2 {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("extendsFrom compile");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("dependencies {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("mwe2 \'org.eclipse.xtext:org.eclipse.xtext.xtext:");
+        WizardConfiguration _config = RuntimeProjectDescriptor.this.getConfig();
+        String _xtextVersion = _config.getXtextVersion();
+        _builder.append(_xtextVersion, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("mwe2 \'org.eclipse.xtext:org.eclipse.xtext.xtext.generator:");
+        WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
+        String _xtextVersion_1 = _config_1.getXtextVersion();
+        _builder.append(_xtextVersion_1, "\t");
+        _builder.append("\'");
+        _builder.newLineIfNotEmpty();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("task generateXtextLanguage(type: JavaExec) {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("main = \'org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher\'");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("classpath = configurations.mwe2");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("inputs.file \"");
+        String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder, "\t");
+        _builder.append("/");
+        String _workflowFilePath = RuntimeProjectDescriptor.this.getWorkflowFilePath();
+        _builder.append(_workflowFilePath, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("inputs.file \"");
+        String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder_1, "\t");
+        _builder.append("/");
+        String _grammarFilePath = RuntimeProjectDescriptor.this.getGrammarFilePath();
+        _builder.append(_grammarFilePath, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("outputs.dir \"");
+        String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_2, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("args += \"");
+        String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder_3, "\t");
+        _builder.append("/");
+        String _workflowFilePath_1 = RuntimeProjectDescriptor.this.getWorkflowFilePath();
+        _builder.append(_workflowFilePath_1, "\t");
+        _builder.append("\"");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("args += \"-p\"");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("args += \"runtimeProject=/${projectDir}\"");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("compileXtend.dependsOn(generateXtextLanguage)");
+        _builder.newLine();
+        _builder.append("clean.dependsOn(cleanGenerateXtextLanguage)");
+        _builder.newLine();
+        it.setAdditionalContent(_builder.toString());
+      }
+    };
+    return ObjectExtensions.<GradleBuildFile>operator_doubleArrow(_buildGradle, _function);
+  }
+  
+  @Override
+  public PomFile pom() {
+    PomFile _pom = super.pom();
+    final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
+      @Override
+      public void apply(final PomFile it) {
+        String _xifexpression = null;
+        WizardConfiguration _config = RuntimeProjectDescriptor.this.getConfig();
+        BuildSystem _buildSystem = _config.getBuildSystem();
+        boolean _equals = Objects.equal(_buildSystem, BuildSystem.TYCHO);
+        if (_equals) {
+          _xifexpression = "eclipse-plugin";
+        } else {
+          _xifexpression = "jar";
+        }
+        it.setPackaging(_xifexpression);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("<build>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("<plugins>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<plugin>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<groupId>org.codehaus.mojo</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<artifactId>exec-maven-plugin</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<version>1.2.1</version>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<executions>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<execution>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<id>mwe2Launcher</id>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<phase>generate-sources</phase>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<goals>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t");
+        _builder.append("<goal>java</goal>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("</goals>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("</execution>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("</executions>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<configuration>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<mainClass>org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher</mainClass>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<arguments>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<argument>/${project.basedir}/");
+        String _sourceFolder = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_RESOURCES);
+        _builder.append(_sourceFolder, "\t\t\t\t\t");
+        _builder.append("/");
+        String _workflowFilePath = RuntimeProjectDescriptor.this.getWorkflowFilePath();
+        _builder.append(_workflowFilePath, "\t\t\t\t\t");
+        _builder.append("</argument>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<argument>-p</argument>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<argument>runtimeProject=/${project.basedir}</argument>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("</arguments>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<includePluginDependencies>true</includePluginDependencies>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("</configuration>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<dependencies>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<dependency>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<groupId>org.eclipse.xtext</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<artifactId>org.eclipse.xtext.xtext</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<version>${xtextVersion}</version>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("</dependency>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<dependency>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<groupId>org.eclipse.xtext</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<artifactId>org.eclipse.xtext.xbase</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<version>${xtextVersion}</version>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("</dependency>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("</dependencies>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</plugin>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<plugin>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<groupId>org.eclipse.xtend</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<artifactId>xtend-maven-plugin</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</plugin>");
+        _builder.newLine();
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("<plugin>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<groupId>org.apache.maven.plugins</groupId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<artifactId>maven-clean-plugin</artifactId>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<version>2.5</version>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("<configuration>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t");
+        _builder.append("<filesets combine.children=\"append\">");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<fileset>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t");
+        _builder.append("<directory>${basedir}/");
+        String _sourceFolder_1 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+        _builder.append(_sourceFolder_1, "\t\t\t\t\t\t");
+        _builder.append("/</directory>");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("</fileset>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("<fileset>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t\t");
+        _builder.append("<directory>${basedir}/model/generated/</directory>");
+        _builder.newLine();
+        _builder.append("\t\t\t\t\t");
+        _builder.append("</fileset>");
+        _builder.newLine();
+        {
+          WizardConfiguration _config_1 = RuntimeProjectDescriptor.this.getConfig();
+          IdeProjectDescriptor _ideProject = _config_1.getIdeProject();
+          boolean _isEnabled = _ideProject.isEnabled();
+          if (_isEnabled) {
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<fileset>");
+            _builder.newLine();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("\t");
+            _builder.append("<directory>${basedir}/../${project.artifactId}.ide/");
+            String _sourceFolder_2 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_2, "\t\t\t\t\t\t");
+            _builder.append("/</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("</fileset>");
+            _builder.newLine();
+          }
+        }
+        {
+          WizardConfiguration _config_2 = RuntimeProjectDescriptor.this.getConfig();
+          UiProjectDescriptor _uiProject = _config_2.getUiProject();
+          boolean _isEnabled_1 = _uiProject.isEnabled();
+          if (_isEnabled_1) {
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<fileset>");
+            _builder.newLine();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("\t");
+            _builder.append("<directory>${basedir}/../${project.artifactId}.ui/");
+            String _sourceFolder_3 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_3, "\t\t\t\t\t\t");
+            _builder.append("/</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("</fileset>");
+            _builder.newLine();
+          }
+        }
+        {
+          WizardConfiguration _config_3 = RuntimeProjectDescriptor.this.getConfig();
+          WebProjectDescriptor _webProject = _config_3.getWebProject();
+          boolean _isEnabled_2 = _webProject.isEnabled();
+          if (_isEnabled_2) {
+            _builder.append("\t\t\t\t\t");
+            _builder.append("<fileset>");
+            _builder.newLine();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("\t");
+            _builder.append("<directory>${basedir}/../${project.artifactId}.web/");
+            String _sourceFolder_4 = RuntimeProjectDescriptor.this.sourceFolder(Outlet.MAIN_SRC_GEN);
+            _builder.append(_sourceFolder_4, "\t\t\t\t\t\t");
+            _builder.append("/</directory>");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t\t\t\t");
+            _builder.append("</fileset>");
+            _builder.newLine();
+          }
+        }
+        _builder.append("\t\t\t\t");
+        _builder.append("</filesets>");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("</configuration>");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("</plugin>");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("</plugins>");
+        _builder.newLine();
+        _builder.append("</build>");
+        _builder.newLine();
+        it.setBuildSection(_builder.toString());
+      }
+    };
+    return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+}
