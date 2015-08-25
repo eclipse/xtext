@@ -549,7 +549,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             app.runWriteAction(runnable);
           }
         };
-        app.invokeLater(_function_1);
+        ModalityState _defaultModalityState = app.getDefaultModalityState();
+        app.invokeLater(_function_1, _defaultModalityState);
       }
     }
   }
@@ -888,8 +889,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                 }
               }
             };
-            ModalityState _any = ModalityState.any();
-            app.invokeAndWait(_function_3, _any);
+            ModalityState _defaultModalityState = app.getDefaultModalityState();
+            app.invokeAndWait(_function_3, _defaultModalityState);
             String _name_2 = module.getName();
             IndexState _indexState = result.getIndexState();
             ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
