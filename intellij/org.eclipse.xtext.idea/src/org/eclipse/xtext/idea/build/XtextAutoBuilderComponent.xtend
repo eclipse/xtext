@@ -16,7 +16,6 @@ import com.intellij.facet.ProjectWideFacetAdapter
 import com.intellij.facet.ProjectWideFacetListenersRegistry
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.application.ModalityState
 import com.intellij.openapi.components.AbstractProjectComponent
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.editor.event.DocumentAdapter
@@ -73,7 +72,6 @@ import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
-import static org.eclipse.xtext.idea.build.XtextAutoBuilderComponent.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
@@ -334,11 +332,10 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						ignoreIncomingEvents = false
 					}
 			]
-			if (app.isDispatchThread) {
+			if (app.dispatchThread)
 				app.runWriteAction(runnable)
-			} else {
-				app.invokeLater[app.runWriteAction(runnable)]
-			}
+			else
+				app.invokeLater([app.runWriteAction(runnable)], app.defaultModalityState)
 		}
 	}
 	
@@ -495,7 +492,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						} finally {
 							ignoreIncomingEvents = false
 						}
-					], ModalityState.any)
+					], app.defaultModalityState)
 					chunkedResourceDescriptions.setContainer(module.name, result.indexState.resourceDescriptions)
 					module2GeneratedMapping.put(module, result.indexState.fileMappings)
 					deltas.addAll(result.affectedResources)

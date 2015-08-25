@@ -15,7 +15,9 @@ import com.intellij.facet.FacetTypeId;
 import com.intellij.facet.ModifiableFacetModel;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -953,7 +955,7 @@ public class IdeaIntegrationTest extends LightXtendTest {
     TestCase.assertNull(_resourceDescription_3);
   }
   
-  public void testRenameFile_01() {
+  public void testRenameFile() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package mypackage");
     _builder.newLine();
@@ -987,6 +989,42 @@ public class IdeaIntegrationTest extends LightXtendTest {
     ChunkedResourceDescriptions _index_3 = this.getIndex();
     IResourceDescription _resourceDescription_3 = _index_3.getResourceDescription(before);
     TestCase.assertNull(_resourceDescription_3);
+  }
+  
+  public void testRenameReference() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package mypackage");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("mypackage/Foo.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package mypackage");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar extends Foo {}");
+    _builder_1.newLine();
+    final String model = _builder_1.toString();
+    final PsiFile xtendFile = this.myFixture.addFileToProject("mypackage/Bar.xtend", model);
+    VirtualFile _virtualFile = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile);
+    final int referenceOffset = model.indexOf("Foo");
+    VirtualFile _virtualFile_1 = xtendFile.getVirtualFile();
+    this.myFixture.openFileInEditor(_virtualFile_1);
+    Editor _editor = this.myFixture.getEditor();
+    CaretModel _caretModel = _editor.getCaretModel();
+    _caretModel.moveToOffset(referenceOffset);
+    XtextAutoBuilderComponent _builder_2 = this.getBuilder();
+    final Procedure0 _function = new Procedure0() {
+      @Override
+      public void apply() {
+        IdeaIntegrationTest.this.myFixture.renameElementAtCaret("Zonk");
+      }
+    };
+    _builder_2.runOperation(_function);
+    VirtualFile _virtualFile_2 = xtendFile.getVirtualFile();
+    this.myFixture.testHighlighting(true, true, true, _virtualFile_2);
   }
   
   public ChunkedResourceDescriptions getIndex() {

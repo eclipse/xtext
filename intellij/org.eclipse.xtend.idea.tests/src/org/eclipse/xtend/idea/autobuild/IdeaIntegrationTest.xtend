@@ -503,7 +503,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		assertNull(index.getResourceDescription(before))
 	}
 	
-	def void testRenameFile_01() {
+	def void testRenameFile() {
 		val xtendFile = myFixture.addFileToProject('mypackage/Foo.xtend', '''
 			package mypackage
 			
@@ -522,6 +522,30 @@ class IdeaIntegrationTest extends LightXtendTest {
 		]
 		assertNotNull(index.getResourceDescription(after))
 		assertNull(index.getResourceDescription(before))
+	}
+	
+	def void testRenameReference() {
+		myFixture.addFileToProject('mypackage/Foo.xtend', '''
+			package mypackage
+			
+			class Foo {}
+		''')
+		
+		val model = '''
+			package mypackage
+			
+			class Bar extends Foo {}
+		''' 
+		val xtendFile = myFixture.addFileToProject('mypackage/Bar.xtend', model)
+		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
+		
+		val referenceOffset = model.indexOf('Foo')
+		myFixture.openFileInEditor(xtendFile.virtualFile)
+		myFixture.editor.caretModel.moveToOffset(referenceOffset)
+		builder.runOperation [
+			myFixture.renameElementAtCaret('Zonk')	
+		]
+		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
 	
 	def getIndex() {

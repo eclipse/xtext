@@ -14,6 +14,8 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Computable;
@@ -167,6 +169,14 @@ public class IdeaResourceSetProvider {
       boolean _equals = Objects.equal(virtualFile, null);
       if (_equals) {
         throw new FileNotFoundException(("Couldn\'t find virtual file for " + uri));
+      }
+      FileDocumentManager _instance = FileDocumentManager.getInstance();
+      final Document cachedDocument = _instance.getCachedDocument(virtualFile);
+      boolean _notEquals = (!Objects.equal(cachedDocument, null));
+      if (_notEquals) {
+        String _text = cachedDocument.getText();
+        byte[] _bytes = _text.getBytes();
+        return new ByteArrayInputStream(_bytes);
       }
       Application _application = ApplicationManager.getApplication();
       final Computable<InputStream> _function = new Computable<InputStream>() {
