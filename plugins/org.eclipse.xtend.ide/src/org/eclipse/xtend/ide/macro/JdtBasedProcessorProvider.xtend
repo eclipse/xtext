@@ -85,12 +85,16 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	protected def createClassLoaderForJavaProject(IJavaProject projectToUse) {
 		val urls = newLinkedHashSet()
 		try {
-			collectClasspathURLs(projectToUse, urls, false, newHashSet)
+			collectClasspathURLs(projectToUse, urls, isOutputFolderIncluded(), newHashSet)
 		} catch(JavaModelException e) {
 			if (!e.isDoesNotExist)
 				LOG.error(e.message, e)
 		}
 		return new URLClassLoader(urls, getParentClassLoader())
+	}
+
+	protected def isOutputFolderIncluded() {
+		false;
 	}
 
 	protected def void collectClasspathURLs(IJavaProject projectToUse, LinkedHashSet<URL> result,
