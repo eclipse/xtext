@@ -17,6 +17,7 @@ import org.eclipse.xtext.generator.parser.antlr.AbstractAntlrXtendGeneratorFragm
 import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
 import org.eclipse.xtend.lib.annotations.Accessors
 
+@Deprecated
 class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragment {
 	
 	String encoding

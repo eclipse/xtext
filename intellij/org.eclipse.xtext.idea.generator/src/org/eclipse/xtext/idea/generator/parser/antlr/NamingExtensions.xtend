@@ -20,10 +20,10 @@ class NamingExtensions {
 	extension Naming
 	
 	def String getGrammarFileName(Grammar it, String prefix) 
-		'''«parserPackage».«prefix»Internal«getName(it)»'''
+		'''«parserPackage».«prefix»Internal«getSimpleName(it)»'''
 		
 	def String getInternalParserClassName(Grammar it)
-		'''«parserPackage».Internal«getName(it)»Parser'''
+		'''«parserPackage».Internal«getSimpleName(it)»Parser'''
 		
 	def String getParserPackage(Grammar it)
 		'''«basePackageRuntime».idea.parser.antlr.internal'''

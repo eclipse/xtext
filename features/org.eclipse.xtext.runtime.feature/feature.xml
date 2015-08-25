@@ -108,13 +108,21 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
          version="0.0.0"
          unpack="false"/>
 
+
+    <plugin
+          id="org.eclipse.xtext.wizard"
+          download-size="0"
+          install-size="0"
+          version="0.0.0"
+          unpack="false"/>
+
    <plugin
          id="org.eclipse.xtext.builder.standalone"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-         
+
    <plugin
          id="org.eclipse.xtext.java"
          download-size="0"
