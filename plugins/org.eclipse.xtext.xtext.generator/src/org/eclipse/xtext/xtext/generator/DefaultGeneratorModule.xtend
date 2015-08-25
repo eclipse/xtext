@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Binder
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.resource.XtextResourceSet
@@ -17,34 +16,22 @@ import org.eclipse.xtext.service.AbstractGenericModule
 
 class DefaultGeneratorModule extends AbstractGenericModule {
 	
-	@Accessors(PUBLIC_SETTER)
-	XtextProjectConfig project
+	@Accessors
+	XtextProjectConfig project = new WizardConfig
 	
-	@Accessors(PUBLIC_SETTER)
-	CodeConfig code
+	@Accessors
+	CodeConfig code = new CodeConfig
 	
-	def XtextProjectConfig getProject() {
-		if (project === null)
-			project = new WizardConfig
-		return project
-	}
-	
-	def CodeConfig getCode() {
-		if (code === null)
-			code = new CodeConfig
-		return code
-	}
-	
-	protected def void checkConfiguration(XtextGenerator generator, Issues issues) {
-		getProject.checkConfiguration(generator, issues)
+	protected def void checkConfiguration(Issues issues) {
+		project.checkConfiguration(issues)
 	}
 	
 	def void configureXtextProjectConfig(Binder binder) {
-		binder.bind(IXtextProjectConfig).toInstance(getProject)
+		binder.bind(IXtextProjectConfig).toInstance(project)
 	}
 	
 	def void configureCodeConfig(Binder binder) {
-		binder.bind(CodeConfig).toInstance(getCode)
+		binder.bind(CodeConfig).toInstance(code)
 	}
 	
 	def void configureResourceSet(Binder binder) {
@@ -53,7 +40,7 @@ class DefaultGeneratorModule extends AbstractGenericModule {
 	
 	def void configureIEncodingProvider(Binder binder) {
 		binder.bind(IEncodingProvider).toInstance(new IEncodingProvider.Runtime => [
-			defaultEncoding = getCode.encoding
+			defaultEncoding = code.encoding
 		])
 	}
 	

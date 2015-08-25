@@ -247,7 +247,7 @@ public class RuleNames {
 	}
 	
 	private String getInheritedUniqueName(AbstractRule rule, Set<String> usedNames) {
-		String grammarName = GrammarUtil.getName(GrammarUtil.getGrammar(rule));
+		String grammarName = GrammarUtil.getSimpleName(GrammarUtil.getGrammar(rule));
 		String candidate = grammarName + rule.getName();
 		int i = 1;
 		while(usedNames.contains(candidate)) {

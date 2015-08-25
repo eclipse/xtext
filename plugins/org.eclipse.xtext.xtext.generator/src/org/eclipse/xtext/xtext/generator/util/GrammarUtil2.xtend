@@ -8,8 +8,9 @@
 package org.eclipse.xtext.xtext.generator.util
 
 import org.eclipse.xtext.Grammar
+import org.eclipse.xtext.GrammarUtil
 
-class GrammarUtil2 {
+class GrammarUtil2 extends GrammarUtil {
 	
 	static def boolean inherits(Grammar grammar, String languageID) {
 		if (grammar.name == languageID)

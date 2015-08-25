@@ -174,18 +174,8 @@ class GuiceModuleAccess {
 			return new BindValue(null, null, false, statements)
 		}
 	
-		def BindingFactory addTypeToInstance(TypeReference type, String expression) {
-			add(key(type), expr(expression))
-			return this
-		}
-	
 		def BindingFactory addTypeToInstance(TypeReference type, StringConcatenationClient expression) {
 			add(key(type), expr(expression))
-			return this
-		}
-		
-		def BindingFactory addTypeToProviderInstance(TypeReference type, String expression) {
-			add(key(type), providerExpr(expression))
 			return this
 		}
 		
@@ -194,13 +184,8 @@ class GuiceModuleAccess {
 			return this
 		}
 		
-		def BindingFactory addConfiguredBinding(String name, String... statements) {
-			add(key(name), statements(statements))
-			return this
-		}
-		
-		def BindingFactory addConfiguredBinding(String name, StringConcatenationClient... statements) {
-			add(key(name), statements(statements))
+		def BindingFactory addConfiguredBinding(String name, StringConcatenationClient statement) {
+			add(key(name), statements(#[statement]))
 			return this
 		}
 	

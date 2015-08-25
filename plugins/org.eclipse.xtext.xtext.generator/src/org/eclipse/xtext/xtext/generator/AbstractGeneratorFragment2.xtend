@@ -8,13 +8,17 @@
 package org.eclipse.xtext.xtext.generator
 
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2
-import org.eclipse.emf.mwe.core.issues.Issues
 import com.google.inject.Injector
+import com.google.inject.Inject
+import org.eclipse.xtext.Grammar
+import org.eclipse.xtend.lib.annotations.Accessors
 
 abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
 	
-	override checkConfiguration(XtextGenerator generator, Issues issues) {
-		// Override this method to check the configured properties of this fragment
+	@Accessors(PROTECTED_GETTER) @Inject LanguageConfig2 language
+	@Accessors(PROTECTED_GETTER) @Inject Grammar grammar
+	
+	override checkConfiguration(Issues issues) {
 	}
 	
 	override initialize(Injector injector) {

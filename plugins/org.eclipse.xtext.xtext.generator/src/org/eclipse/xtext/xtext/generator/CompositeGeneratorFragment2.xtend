@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
 import java.util.List
-import org.eclipse.emf.mwe.core.issues.Issues
 
 /**
  * A composite generator fragment delegates to its contained fragments.
@@ -24,9 +23,9 @@ class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
 		this.fragments.add(fragment)
 	}
 	
-	override checkConfiguration(XtextGenerator generator, Issues issues) {
+	override checkConfiguration(Issues issues) {
 		for (fragment : fragments) {
-			fragment.checkConfiguration(generator, issues)
+			fragment.checkConfiguration(issues)
 		}
 	}
 	
@@ -37,9 +36,9 @@ class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
 		}
 	}
 	
-	override generate(LanguageConfig2 language) {
+	override generate() {
 		for (fragment : fragments) {
-			fragment.generate(language)
+			fragment.generate()
 		}
 	}
 	
