@@ -169,7 +169,7 @@ public class GrammarAccessUtil {
 	}
 
 	public static String getGrammarAccessFQName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".services." +GrammarUtil.getName(grammar) + "GrammarAccess";
+		return naming.basePackageRuntime(grammar) + ".services." +GrammarUtil.getSimpleName(grammar) + "GrammarAccess";
 	}
 	
 	/**

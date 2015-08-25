@@ -69,7 +69,7 @@ public class ParseTreeConstructorUtil {
 	}
 
 	public static String getParseTreeConstructorName(Grammar g, Naming n) {
-		return getPackage(g, n) + "." + GrammarUtil.getName(g) + "ParsetreeConstructor";
+		return getPackage(g, n) + "." + GrammarUtil.getSimpleName(g) + "ParsetreeConstructor";
 	}
 
 	private static List<CrossReference> getCrossReferencesWithSameEReference(CrossReference cr) {

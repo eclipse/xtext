@@ -130,23 +130,23 @@ public class XtextAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	}
 
 	public static String getAntlrTokenFileProviderClassName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getName(grammar)	+ "AntlrTokenFileProvider";
+		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getSimpleName(grammar)	+ "AntlrTokenFileProvider";
 	}
 
 	public static String getLexerClassName(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g)	+ "Lexer";
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g)	+ "Lexer";
 	}
 
 	public static String getParserClassName(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 
 	public static String getInternalParserClassName(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 
 	public static String getGrammarFileName(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g);
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g);
 	}
 
 }

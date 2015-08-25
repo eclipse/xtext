@@ -38,7 +38,7 @@ public class FormatterFragment extends AbstractStubGeneratorFragment {
 	}
 
 	public static String getFormatterName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".formatting." + GrammarUtil.getName(grammar) + "Formatter";
+		return naming.basePackageRuntime(grammar) + ".formatting." + GrammarUtil.getSimpleName(grammar) + "Formatter";
 	}
 
 	@Override

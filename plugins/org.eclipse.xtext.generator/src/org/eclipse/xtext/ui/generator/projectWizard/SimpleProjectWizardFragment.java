@@ -73,7 +73,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.xtext.ui.wizard.IProjectCreator",
-						getNaming().basePackageUi(grammar)+".wizard." + GrammarUtil.getName(grammar) + "ProjectCreator")
+						getNaming().basePackageUi(grammar)+".wizard." + GrammarUtil.getSimpleName(grammar) + "ProjectCreator")
 			.getBindings();
 	}
 
@@ -95,7 +95,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 	 */
 	public String getFileExtension(Grammar g) {
 		if (modelFileExtension == null) {
-			modelFileExtension = GrammarUtil.getName(g).toLowerCase();
+			modelFileExtension = GrammarUtil.getSimpleName(g).toLowerCase();
 			if (LOG.isInfoEnabled())
 				LOG.info("No explicit 'fileExtension' configured. Using '" + modelFileExtension + "'.");
 		}
@@ -145,7 +145,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	public static String getNewProjectTemplateName(Grammar grammar, Naming n) {
 		return n.basePackageUi(grammar).replace(".", "::") + "::wizard::"
-				+ GrammarUtil.getName(grammar) + "NewProject";
+				+ GrammarUtil.getSimpleName(grammar) + "NewProject";
 	}
 
 	public void setPluginProject(boolean pluginProject) {

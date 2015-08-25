@@ -36,7 +36,7 @@ public class JavaBasedContentAssistFragment extends AbstractInheritingGeneratorF
 	}
 
 	private String getProposalProviderClassName(Grammar grammar) {
-		return getNaming().basePackageUi(grammar)+ ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider";
+		return getNaming().basePackageUi(grammar)+ ".contentassist." + GrammarUtil.getSimpleName(grammar) + "ProposalProvider";
 	}
 
 	@Override

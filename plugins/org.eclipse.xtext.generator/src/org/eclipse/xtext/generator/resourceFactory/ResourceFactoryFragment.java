@@ -40,7 +40,7 @@ public class ResourceFactoryFragment extends AbstractGeneratorFragment {
 	private List<String> getFileExtensions(Grammar grammar) {
 		if (!fileExtensions.isEmpty())
 			return fileExtensions;
-		return Collections.singletonList(GrammarUtil.getName(grammar).toLowerCase());
+		return Collections.singletonList(GrammarUtil.getSimpleName(grammar).toLowerCase());
 	}
 
 }

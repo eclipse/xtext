@@ -57,7 +57,7 @@ public class AntlrFragmentHelper implements NamingAware {
 	}
 
 	public String getAntlrTokenFileProviderClassName(Grammar grammar) {
-		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getName(grammar)	+ "AntlrTokenFileProvider";
+		return naming.basePackageRuntime(grammar) + ".parser.antlr." + GrammarUtil.getSimpleName(grammar)	+ "AntlrTokenFileProvider";
 	}
 
 	public String getLexerClassName(Grammar g) {
@@ -65,14 +65,14 @@ public class AntlrFragmentHelper implements NamingAware {
 	}
 
 	public String getParserClassName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 	
 	/**
 	 * @since 2.8
 	 */
 	public String getTokenSourceClassName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getName(g) + "TokenSource";
+		return naming.basePackageRuntime(g) + ".parser.antlr." + GrammarUtil.getSimpleName(g) + "TokenSource";
 	}
 
 	public String getInternalParserClassName(Grammar g) {
@@ -80,22 +80,22 @@ public class AntlrFragmentHelper implements NamingAware {
 	}
 
 	public String getLexerGrammarFileName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
+		return naming.basePackageRuntime(g) + ".parser.antlr.lexer.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
 	}
 
 	public String getParserGrammarFileName(Grammar g) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 
 	public String getContentAssistParserClassName(Grammar g) {
-		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr." + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 	
 	/**
 	 * @since 2.8
 	 */
 	public String getContentAssistTokenSourceClassName(Grammar g) {
-		return naming.basePackageIde(g) + ".parser.antlr." + GrammarUtil.getName(g) + "TokenSource";
+		return naming.basePackageIde(g) + ".parser.antlr." + GrammarUtil.getSimpleName(g) + "TokenSource";
 	}
 
 	public String getInternalContentAssistLexerClassName(Grammar g) {
@@ -118,11 +118,11 @@ public class AntlrFragmentHelper implements NamingAware {
 	}
 
 	public String getContentAssistLexerGrammarFileName(Grammar g) {
-		return naming.basePackageIde(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getName(g) + "Lexer";
+		return naming.basePackageIde(g) + ".contentassist.antlr.lexer.Internal" + GrammarUtil.getSimpleName(g) + "Lexer";
 	}
 
 	public String getContentAssistParserGrammarFileName(Grammar g) {
-		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getName(g) + "Parser";
+		return naming.basePackageIde(g) + ".contentassist.antlr.internal.Internal" + GrammarUtil.getSimpleName(g) + "Parser";
 	}
 
 	public Collection<? extends AbstractElement> getAllAlternatives(Grammar g) {

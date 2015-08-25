@@ -27,11 +27,11 @@ class ValidatorNaming {
 	@Inject extension Naming
 	
 	def getValidatorName(Grammar g) {
-		'''«g.basePackageRuntime».validation.«getName(g)»Validator'''.toString
+		'''«g.basePackageRuntime».validation.«getSimpleName(g)»Validator'''.toString
 	}
 
 	def getAbstractValidatorName() {
-		'''«grammar.basePackageRuntime».validation.Abstract«getName(grammar)»Validator'''.toString
+		'''«grammar.basePackageRuntime».validation.Abstract«getSimpleName(grammar)»Validator'''.toString
 	}
 	
 	def getValidatorSuperClassName(boolean isInheritImplementation) {
