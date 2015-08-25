@@ -447,4 +447,3 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.parser.parameters.parametersTestLanguage.util,
  org.eclipse.xtext.parser.parameters.serializer,
  org.eclipse.xtext.parser.parameters.parser.antlr.lexer
-
