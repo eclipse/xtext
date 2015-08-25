@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator;
 
-import org.eclipse.xtext.generator.IFileSystemAccess2;
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.IGuiceAwareGeneratorComponent;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
@@ -19,57 +19,85 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess;
  */
 public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	
-	IFileSystemAccess2 getRuntimeSrc();
-	IFileSystemAccess2 getRuntimeSrcGen();
+	IXtextGeneratorFileSystemAccess getRuntimeRoot();
+	IXtextGeneratorFileSystemAccess getRuntimeMetaInf();
+	IXtextGeneratorFileSystemAccess getRuntimeSrc();
+	IXtextGeneratorFileSystemAccess getRuntimeSrcGen();
+	IXtextGeneratorFileSystemAccess getRuntimeWebApp();
 	ManifestAccess getRuntimeManifest();
 	PluginXmlAccess getRuntimePluginXml();
 	
-	IFileSystemAccess2 getRuntimeTestSrc();
-	IFileSystemAccess2 getRuntimeTestSrcGen();
+	IXtextGeneratorFileSystemAccess getRuntimeTestRoot();
+	IXtextGeneratorFileSystemAccess getRuntimeTestMetaInf();
+	IXtextGeneratorFileSystemAccess getRuntimeTestSrc();
+	IXtextGeneratorFileSystemAccess getRuntimeTestSrcGen();
+	IXtextGeneratorFileSystemAccess getRuntimeTestWebApp();
 	ManifestAccess getRuntimeTestManifest();
 	PluginXmlAccess getRuntimeTestPluginXml();
 	
-	IFileSystemAccess2 getGenericIdeSrc();
-	IFileSystemAccess2 getGenericIdeSrcGen();
+	IXtextGeneratorFileSystemAccess getGenericIdeRoot();
+	IXtextGeneratorFileSystemAccess getGenericIdeMetaInf();
+	IXtextGeneratorFileSystemAccess getGenericIdeSrc();
+	IXtextGeneratorFileSystemAccess getGenericIdeSrcGen();
+	IXtextGeneratorFileSystemAccess getGenericIdeWebApp();
 	ManifestAccess getGenericIdeManifest();
 	PluginXmlAccess getGenericIdePluginXml();
 	
-	IFileSystemAccess2 getGenericIdeTestSrc();
-	IFileSystemAccess2 getGenericIdeTestSrcGen();
+	IXtextGeneratorFileSystemAccess getGenericIdeTestRoot();
+	IXtextGeneratorFileSystemAccess getGenericIdeTestMetaInf();
+	IXtextGeneratorFileSystemAccess getGenericIdeTestSrc();
+	IXtextGeneratorFileSystemAccess getGenericIdeTestSrcGen();
+	IXtextGeneratorFileSystemAccess getGenericIdeTestWebApp();
 	ManifestAccess getGenericIdeTestManifest();
 	PluginXmlAccess getGenericIdeTestPluginXml();
 	
-	IFileSystemAccess2 getEclipsePluginSrc();
-	IFileSystemAccess2 getEclipsePluginSrcGen();
+	IXtextGeneratorFileSystemAccess getEclipsePluginRoot();
+	IXtextGeneratorFileSystemAccess getEclipsePluginMetaInf();
+	IXtextGeneratorFileSystemAccess getEclipsePluginSrc();
+	IXtextGeneratorFileSystemAccess getEclipsePluginSrcGen();
+	IXtextGeneratorFileSystemAccess getEclipsePluginWebApp();
 	ManifestAccess getEclipsePluginManifest();
 	PluginXmlAccess getEclipsePluginPluginXml();
 	
-	IFileSystemAccess2 getEclipsePluginTestSrc();
-	IFileSystemAccess2 getEclipsePluginTestSrcGen();
+	IXtextGeneratorFileSystemAccess getEclipsePluginTestRoot();
+	IXtextGeneratorFileSystemAccess getEclipsePluginTestMetaInf();
+	IXtextGeneratorFileSystemAccess getEclipsePluginTestSrc();
+	IXtextGeneratorFileSystemAccess getEclipsePluginTestSrcGen();
+	IXtextGeneratorFileSystemAccess getEclipsePluginTestWebApp();
 	ManifestAccess getEclipsePluginTestManifest();
 	PluginXmlAccess getEclipsePluginTestPluginXml();
 	
-	IFileSystemAccess2 getIdeaPluginSrc();
-	IFileSystemAccess2 getIdeaPluginSrcGen();
+	IXtextGeneratorFileSystemAccess getIdeaPluginRoot();
+	IXtextGeneratorFileSystemAccess getIdeaPluginMetaInf();
+	IXtextGeneratorFileSystemAccess getIdeaPluginSrc();
+	IXtextGeneratorFileSystemAccess getIdeaPluginSrcGen();
+	IXtextGeneratorFileSystemAccess getIdeaPluginWebApp();
 	ManifestAccess getIdeaPluginManifest();
 	PluginXmlAccess getIdeaPluginPluginXml();
 	
-	IFileSystemAccess2 getIdeaPluginTestSrc();
-	IFileSystemAccess2 getIdeaPluginTestSrcGen();
+	IXtextGeneratorFileSystemAccess getIdeaPluginTestRoot();
+	IXtextGeneratorFileSystemAccess getIdeaPluginTestMetaInf();
+	IXtextGeneratorFileSystemAccess getIdeaPluginTestSrc();
+	IXtextGeneratorFileSystemAccess getIdeaPluginTestSrcGen();
+	IXtextGeneratorFileSystemAccess getIdeaPluginTestWebApp();
 	ManifestAccess getIdeaPluginTestManifest();
 	PluginXmlAccess getIdeaPluginTestPluginXml();
 	
-	IFileSystemAccess2 getWebSrc();
-	IFileSystemAccess2 getWebSrcGen();
+	IXtextGeneratorFileSystemAccess getWebRoot();
+	IXtextGeneratorFileSystemAccess getWebMetaInf();
+	IXtextGeneratorFileSystemAccess getWebSrc();
+	IXtextGeneratorFileSystemAccess getWebSrcGen();
+	IXtextGeneratorFileSystemAccess getWebWebApp();
 	ManifestAccess getWebManifest();
 	PluginXmlAccess getWebPluginXml();
 	
-	IFileSystemAccess2 getWebTestSrc();
-	IFileSystemAccess2 getWebTestSrcGen();
+	IXtextGeneratorFileSystemAccess getWebTestRoot();
+	IXtextGeneratorFileSystemAccess getWebTestMetaInf();
+	IXtextGeneratorFileSystemAccess getWebTestSrc();
+	IXtextGeneratorFileSystemAccess getWebTestSrcGen();
+	IXtextGeneratorFileSystemAccess getWebTestWebApp();
 	ManifestAccess getWebTestManifest();
 	PluginXmlAccess getWebTestPluginXml();
 	
-	IFileSystemAccess2 getOrionJsGen();
-	IFileSystemAccess2 getAceJsGen();
 	
 }

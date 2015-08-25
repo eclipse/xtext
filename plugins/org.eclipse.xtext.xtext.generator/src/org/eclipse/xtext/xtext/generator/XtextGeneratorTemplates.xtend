@@ -37,7 +37,6 @@ import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.SuppressWarningsAnnotation
 
-import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 @Singleton
@@ -62,8 +61,9 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeSetup(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeSetup)
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeSetup)
 		
 		javaFile.typeComment = '''
 			/**
@@ -83,8 +83,9 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeGenSetup(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeGenSetup)
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeGenSetup)
 		for (type : langConfig.runtimeGenSetup.imports) {
 			javaFile.importType(type)
 		}
@@ -96,7 +97,7 @@ class XtextGeneratorTemplates {
 				@Override
 				public «Injector» createInjectorAndDoEMFRegistration() {
 					«FOR usedGrammar : langConfig.grammar.usedGrammars»
-						«usedGrammar.naming.runtimeSetup».doSetup();
+						«usedGrammar.runtimeSetup».doSetup();
 					«ENDFOR»
 					«IF langConfig.grammar.usedGrammars.isEmpty»
 						// register default ePackages
@@ -173,8 +174,9 @@ class XtextGeneratorTemplates {
 	'''
 	
 	def JavaFileAccess createRuntimeModule(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(runtimeModule)
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -189,9 +191,10 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(runtimeGenModule)
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -231,8 +234,9 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginModule(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginModule)
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, eclipsePluginModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the Eclipse IDE.
@@ -249,9 +253,10 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
-		val it = langConfig.naming
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginGenModule)
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, eclipsePluginGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -268,6 +273,48 @@ class XtextGeneratorTemplates {
 				}
 				
 				«FOR binding : langConfig.eclipsePluginGenModule.bindings»
+					«binding.createBindingMethod»
+					
+				«ENDFOR»
+			}
+		'''
+		javaFile.markedAsGenerated = true
+		return javaFile
+	}
+	
+	def JavaFileAccess createIdeaModule(LanguageConfig2 langConfig) {
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, ideaModule)
+		javaFile.typeComment = '''
+			/**
+			 * Use this class to register components to be used within the IntelliJ IDEA.
+			 */
+		'''
+		javaFile.javaContent = '''
+			public class «ideaModule.simpleName» extends «ideaGenModule» {
+			}
+		'''
+		return javaFile
+	}
+	
+	def JavaFileAccess createIdeaGenModule(LanguageConfig2 langConfig) {
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val superClass = langConfig.ideaGenModule.superClass ?: ideaDefaultModule
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, ideaGenModule)
+		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		
+		javaFile.typeComment = '''
+			/**
+			 * Manual modifications go to {@link «ideaModule.simpleName»}.
+			 */
+		'''
+		javaFile.annotations += new SuppressWarningsAnnotation
+		javaFile.javaContent = '''
+			public abstract class «ideaGenModule.simpleName» extends «superClass» {
+				
+				«FOR binding : langConfig.ideaGenModule.bindings»
 					«binding.createBindingMethod»
 					
 				«ENDFOR»
@@ -307,7 +354,10 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig, LanguageConfig2 activatorLanguage) {
-		val javaFile = fileAccessFactory.createJavaFile(langConfig.naming.eclipsePluginExecutableExtensionFactory)
+		val grammar = langConfig.grammar
+		val activatorGrammar = activatorLanguage.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(langConfig, grammar.eclipsePluginExecutableExtensionFactory)
 		
 		javaFile.typeComment = '''
 			/**
@@ -316,16 +366,16 @@ class XtextGeneratorTemplates {
 			 */
 		'''
 		javaFile.javaContent = '''
-			public class «langConfig.naming.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
+			public class «grammar.eclipsePluginExecutableExtensionFactory.simpleName» extends «'org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory'.typeRef» {
 			
 				@Override
 				protected «'org.osgi.framework.Bundle'.typeRef» getBundle() {
-					return «activatorLanguage.naming.eclipsePluginActivator».getInstance().getBundle();
+					return «activatorGrammar.eclipsePluginActivator».getInstance().getBundle();
 				}
 				
 				@Override
 				protected «Injector» getInjector() {
-					return «activatorLanguage.naming.eclipsePluginActivator».getInstance().getInjector(«activatorLanguage.naming.eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
+					return «activatorGrammar.eclipsePluginActivator».getInstance().getInjector(«activatorGrammar.eclipsePluginActivator».«langConfig.grammar.name.toUpperCase.replaceAll('\\.', '_')»);
 				}
 				
 			}
@@ -335,8 +385,8 @@ class XtextGeneratorTemplates {
 	}
 	
 	def JavaFileAccess createEclipsePluginActivator(List<LanguageConfig2> langConfigs) {
-		val activator = langConfigs.head.naming.eclipsePluginActivator
-		val javaFile = fileAccessFactory.createJavaFile(activator)
+		val activator = langConfigs.head.naming.getEclipsePluginActivator(langConfigs.head.grammar)
+		val javaFile = fileAccessFactory.createJavaFile(langConfigs.head, activator)
 		
 		javaFile.typeComment = '''
 			/**
@@ -401,7 +451,7 @@ class XtextGeneratorTemplates {
 				protected Module getRuntimeModule(String grammar) {
 					«FOR lang : langConfigs»
 						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
-							return new «lang.naming.runtimeModule»();
+							return new «lang.naming.getRuntimeModule(lang.grammar)»();
 						}
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);
@@ -410,7 +460,7 @@ class XtextGeneratorTemplates {
 				protected «Module» getUiModule(String grammar) {
 					«FOR lang : langConfigs»
 						if («lang.grammar.name.toUpperCase.replaceAll('\\.', '_')».equals(grammar)) {
-							return new «lang.naming.eclipsePluginModule»(this);
+							return new «lang.naming.getEclipsePluginModule(lang.grammar)»(this);
 						}
 					«ENDFOR»
 					throw new IllegalArgumentException(grammar);

@@ -37,6 +37,7 @@ import org.eclipse.xtext.idea.generator.parser.antlr.XtextIDEAGeneratorExtension
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment.*
 
+@Deprecated
 class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 	
 	private static String META_INF_PLUGIN = "META_INF_PLUGIN"

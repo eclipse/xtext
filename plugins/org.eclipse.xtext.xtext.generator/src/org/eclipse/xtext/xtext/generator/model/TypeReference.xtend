@@ -20,12 +20,12 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 @EqualsHashCode
 class TypeReference {
 	
-	static def TypeReference typeRef(String name, String... arguments) {
-		new TypeReference(name, arguments.map[new TypeReference(it)])
+	static def TypeReference typeRef(String name, TypeReference... arguments) {
+		new TypeReference(name, arguments)
 	}
 	
-	static def TypeReference typeRef(Class<?> clazz, Class<?>... arguments) {
-		new TypeReference(clazz, arguments.map[new TypeReference(it)])
+	static def TypeReference typeRef(Class<?> clazz, TypeReference... arguments) {
+		new TypeReference(clazz, arguments)
 	}
 	
 	static def TypeReference typeRef(EClass clazz, ResourceSet resourceSet, EClass... arguments) {
