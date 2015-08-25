@@ -11,6 +11,7 @@ import com.google.inject.Inject
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.module.Module
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -30,7 +31,6 @@ import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 
-import static org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.*
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 @Singleton @Log
@@ -115,6 +115,11 @@ class IdeaResourceSetProvider {
 			val virtualFile = getVirtualFile(uri)
 			if (virtualFile == null) {
 				throw new FileNotFoundException("Couldn't find virtual file for "+uri)
+			}
+			
+			val cachedDocument = FileDocumentManager.instance.getCachedDocument(virtualFile)
+			if (cachedDocument != null) {
+				return new ByteArrayInputStream(cachedDocument.text.bytes)
 			}
 			
 			return ApplicationManager.application.<InputStream>runReadAction[
