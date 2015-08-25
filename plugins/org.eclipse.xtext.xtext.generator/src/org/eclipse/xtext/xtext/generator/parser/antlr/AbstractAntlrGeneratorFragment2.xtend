@@ -142,7 +142,7 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 		// line delimiter when it splits a very long String (encoded DFA) into a
 		// string concatenation
 		// Here we join these lines again.
-		content = content.replaceAll("\"\\+\\n\\s+\"", "")
+		content = content.replaceAll("\"\\+(\\r)?\\n\\s+\"", "")
 		fsa.generateFile(textFile, content)
 	}
 
