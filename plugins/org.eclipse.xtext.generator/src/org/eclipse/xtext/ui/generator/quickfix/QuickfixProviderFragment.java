@@ -32,7 +32,7 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	private boolean isInheritImplementation = true;
 	
 	public static String getQuickfixProviderName(Grammar g, Naming n) {
-		return n.basePackageUi(g) + ".quickfix." + GrammarUtil.getName(g) + "QuickfixProvider";
+		return n.basePackageUi(g) + ".quickfix." + GrammarUtil.getSimpleName(g) + "QuickfixProvider";
 	}
 
 	/**

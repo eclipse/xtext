@@ -103,6 +103,6 @@ public class DebugAntlrGeneratorFragment extends AbstractAntlrGeneratorFragment 
 	}
 
 	public String getGrammarFileName(Grammar g, Naming naming) {
-		return naming.basePackageRuntime(g) + ".parser.antlr.internal.DebugInternal" + GrammarUtil.getName(g);
+		return naming.basePackageRuntime(g) + ".parser.antlr.internal.DebugInternal" + GrammarUtil.getSimpleName(g);
 	}
 }

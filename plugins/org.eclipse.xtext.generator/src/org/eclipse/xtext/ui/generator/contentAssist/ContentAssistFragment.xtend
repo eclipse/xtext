@@ -38,11 +38,11 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	@Accessors boolean generateStub = true;
 	
 	def String getProposalProviderName(Grammar grammar) {
-		return grammar.basePackageUi + ".contentassist." + getName(grammar) + "ProposalProvider"
+		return grammar.basePackageUi + ".contentassist." + getSimpleName(grammar) + "ProposalProvider"
 	}
 	
 	def String getGenProposalProviderName() {
-		return grammar.basePackageUi + ".contentassist.Abstract" + getName(grammar) + "ProposalProvider"
+		return grammar.basePackageUi + ".contentassist.Abstract" + getSimpleName(grammar) + "ProposalProvider"
 	}
 	
 	override getGuiceBindingsUi(Grammar grammar) {

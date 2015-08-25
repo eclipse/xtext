@@ -40,11 +40,11 @@ public class LabelProviderFragment extends AbstractStubGeneratorFragment {
 	}
 
 	public static String getDescriptionLabelProviderQualifiedName(Grammar grammar, Naming n) {
-		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getName(grammar) + "DescriptionLabelProvider";
+		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getSimpleName(grammar) + "DescriptionLabelProvider";
 	}
 
 	public static String getEObjectLabelProviderQualifiedName(Grammar grammar, Naming n) {
-		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getName(grammar) + "LabelProvider";
+		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getSimpleName(grammar) + "LabelProvider";
 	}
 
 	@Override

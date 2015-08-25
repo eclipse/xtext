@@ -89,11 +89,11 @@ public class CodetemplatesGeneratorFragment extends AbstractGeneratorFragment {
 	}
 	
 	public static String getPartialContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageIde(grammar) + ".contentassist.antlr.Partial" + GrammarUtil.getName(grammar) + "ContentAssistParser";
+		return naming.basePackageIde(grammar) + ".contentassist.antlr.Partial" + GrammarUtil.getSimpleName(grammar) + "ContentAssistParser";
 	}
 	
 	public static String getContentAssistParser(Grammar grammar, Naming naming) {
-		return naming.basePackageIde(grammar) + ".contentassist.antlr." + GrammarUtil.getName(grammar) + "Parser";
+		return naming.basePackageIde(grammar) + ".contentassist.antlr." + GrammarUtil.getSimpleName(grammar) + "Parser";
 	}
 	
 }
