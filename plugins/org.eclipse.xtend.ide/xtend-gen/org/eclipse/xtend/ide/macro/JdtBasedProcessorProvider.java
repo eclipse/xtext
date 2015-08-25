@@ -134,8 +134,9 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
   protected URLClassLoader createClassLoaderForJavaProject(final IJavaProject projectToUse) {
     final LinkedHashSet<URL> urls = CollectionLiterals.<URL>newLinkedHashSet();
     try {
+      boolean _isOutputFolderIncluded = this.isOutputFolderIncluded();
       HashSet<IJavaProject> _newHashSet = CollectionLiterals.<IJavaProject>newHashSet();
-      this.collectClasspathURLs(projectToUse, urls, false, _newHashSet);
+      this.collectClasspathURLs(projectToUse, urls, _isOutputFolderIncluded, _newHashSet);
     } catch (final Throwable _t) {
       if (_t instanceof JavaModelException) {
         final JavaModelException e = (JavaModelException)_t;
@@ -151,6 +152,10 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     }
     ClassLoader _parentClassLoader = this.getParentClassLoader();
     return new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _parentClassLoader);
+  }
+  
+  protected boolean isOutputFolderIncluded() {
+    return false;
   }
   
   protected void collectClasspathURLs(final IJavaProject projectToUse, final LinkedHashSet<URL> result, final boolean includeOutputFolder, final Set<IJavaProject> visited) throws JavaModelException {
