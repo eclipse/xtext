@@ -7,36 +7,15 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.inject.Singleton;
-import java.util.Map;
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
-@Singleton
 @SuppressWarnings("all")
 public class XtextGeneratorNaming {
-  private final static Map<String, XtextGeneratorNaming> registry = CollectionLiterals.<String, XtextGeneratorNaming>newHashMap();
-  
-  public static XtextGeneratorNaming naming(final Grammar g) {
-    synchronized (XtextGeneratorNaming.registry) {
-      String _name = g.getName();
-      boolean _containsKey = XtextGeneratorNaming.registry.containsKey(_name);
-      if (_containsKey) {
-        String _name_1 = g.getName();
-        return XtextGeneratorNaming.registry.get(_name_1);
-      }
-    }
-    final XtextGeneratorNaming naming = new XtextGeneratorNaming();
-    naming.setGrammar(g);
-    return naming;
-  }
-  
-  private Grammar grammar;
-  
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String eclipsePluginActivator;
   
@@ -49,133 +28,190 @@ public class XtextGeneratorNaming {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String genericIdeBasePackage;
   
-  protected void setGrammar(final Grammar grammar) {
-    this.grammar = grammar;
-    synchronized (XtextGeneratorNaming.registry) {
-      String _name = grammar.getName();
-      XtextGeneratorNaming.registry.put(_name, this);
-    }
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String ideaBasePackage;
+  
+  private Grammar myGrammar;
+  
+  Grammar setGrammar(final Grammar grammar) {
+    return this.myGrammar = grammar;
   }
   
-  public String getRuntimeBasePackage() {
-    if ((this.runtimeBasePackage == null)) {
-      String _namespace = GrammarUtil.getNamespace(this.grammar);
-      this.runtimeBasePackage = _namespace;
+  public String getRuntimeBasePackage(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.runtimeBasePackage == null);
+    }
+    if (_or) {
+      return GrammarUtil.getNamespace(grammar);
     }
     return this.runtimeBasePackage;
   }
   
-  public TypeReference getRuntimeModule() {
-    String _runtimeBasePackage = this.getRuntimeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "RuntimeModule");
+  public TypeReference getRuntimeModule(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "RuntimeModule");
     return new TypeReference(_runtimeBasePackage, _plus);
   }
   
-  public TypeReference getRuntimeGenModule() {
-    String _runtimeBasePackage = this.getRuntimeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = ("Abstract" + _name);
+  public TypeReference getRuntimeGenModule(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
     String _plus_1 = (_plus + "RuntimeModule");
     return new TypeReference(_runtimeBasePackage, _plus_1);
   }
   
-  public TypeReference getRuntimeDefaultModule() {
+  public TypeReference getRuntimeDefaultModule(final Grammar grammar) {
     return new TypeReference("org.eclipse.xtext.service.DefaultRuntimeModule");
   }
   
-  public TypeReference getRuntimeSetup() {
-    String _runtimeBasePackage = this.getRuntimeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "StandaloneSetup");
+  public TypeReference getRuntimeSetup(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "StandaloneSetup");
     return new TypeReference(_runtimeBasePackage, _plus);
   }
   
-  public TypeReference getRuntimeGenSetup() {
-    String _runtimeBasePackage = this.getRuntimeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "StandaloneSetupGenerated");
+  public TypeReference getRuntimeGenSetup(final Grammar grammar) {
+    String _runtimeBasePackage = this.getRuntimeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "StandaloneSetupGenerated");
     return new TypeReference(_runtimeBasePackage, _plus);
   }
   
-  public TypeReference getGrammarAccess() {
-    String _runtimeBasePackage = this.getRuntimeBasePackage();
-    String _plus = (_runtimeBasePackage + ".services.");
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus_1 = (_plus + _name);
-    String _plus_2 = (_plus_1 + "GrammarAccess");
-    return new TypeReference(_plus_2);
-  }
-  
-  public String getEclipsePluginBasePackage() {
-    if ((this.eclipsePluginBasePackage == null)) {
-      String _namespace = GrammarUtil.getNamespace(this.grammar);
-      String _plus = (_namespace + ".ui");
-      this.eclipsePluginBasePackage = _plus;
+  public String getEclipsePluginBasePackage(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.eclipsePluginBasePackage == null);
+    }
+    if (_or) {
+      String _namespace = GrammarUtil.getNamespace(grammar);
+      return (_namespace + ".ui");
     }
     return this.eclipsePluginBasePackage;
   }
   
-  public TypeReference getEclipsePluginModule() {
-    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "UiModule");
+  public TypeReference getEclipsePluginModule(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "UiModule");
     return new TypeReference(_eclipsePluginBasePackage, _plus);
   }
   
-  public TypeReference getEclipsePluginGenModule() {
-    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = ("Abstract" + _name);
+  public TypeReference getEclipsePluginGenModule(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
     String _plus_1 = (_plus + "UiModule");
     return new TypeReference(_eclipsePluginBasePackage, _plus_1);
   }
   
-  public TypeReference getEclipsePluginDefaultModule() {
+  public TypeReference getEclipsePluginDefaultModule(final Grammar grammar) {
     return new TypeReference("org.eclipse.xtext.ui.DefaultUiModule");
   }
   
-  public TypeReference getEclipsePluginExecutableExtensionFactory() {
-    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "ExecutableExtensionFactory");
+  public TypeReference getEclipsePluginExecutableExtensionFactory(final Grammar grammar) {
+    String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "ExecutableExtensionFactory");
     return new TypeReference(_eclipsePluginBasePackage, _plus);
   }
   
-  public TypeReference getEclipsePluginActivator() {
-    if ((this.eclipsePluginActivator == null)) {
-      String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage();
-      String _plus = (_eclipsePluginBasePackage + ".internal.");
-      String _name = GrammarUtil.getName(this.grammar);
-      String _plus_1 = (_plus + _name);
-      String _plus_2 = (_plus_1 + "Activator");
-      this.eclipsePluginActivator = _plus_2;
+  public TypeReference getEclipsePluginActivator(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.eclipsePluginActivator == null);
+    }
+    if (_or) {
+      String _eclipsePluginBasePackage = this.getEclipsePluginBasePackage(grammar);
+      String _plus = (_eclipsePluginBasePackage + ".internal");
+      String _simpleName = GrammarUtil.getSimpleName(grammar);
+      String _plus_1 = (_simpleName + "Activator");
+      return new TypeReference(_plus, _plus_1);
     }
     return new TypeReference(this.eclipsePluginActivator);
   }
   
-  public String getGenericIdeBasePackage() {
-    if ((this.genericIdeBasePackage == null)) {
-      String _namespace = GrammarUtil.getNamespace(this.grammar);
-      String _plus = (_namespace + ".ide");
-      this.genericIdeBasePackage = _plus;
+  public String getGenericIdeBasePackage(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.genericIdeBasePackage == null);
+    }
+    if (_or) {
+      String _namespace = GrammarUtil.getNamespace(grammar);
+      return (_namespace + ".ide");
     }
     return this.genericIdeBasePackage;
   }
   
-  public TypeReference getGenericIdeModule() {
-    String _genericIdeBasePackage = this.getGenericIdeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = (_name + "IdeModule");
+  public TypeReference getGenericIdeModule(final Grammar grammar) {
+    String _genericIdeBasePackage = this.getGenericIdeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "IdeModule");
     return new TypeReference(_genericIdeBasePackage, _plus);
   }
   
-  public TypeReference getGenericIdeGenModule() {
-    String _genericIdeBasePackage = this.getGenericIdeBasePackage();
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus = ("Abstract" + _name);
+  public TypeReference getGenericIdeGenModule(final Grammar grammar) {
+    String _genericIdeBasePackage = this.getGenericIdeBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
     String _plus_1 = (_plus + "IdeModule");
     return new TypeReference(_genericIdeBasePackage, _plus_1);
+  }
+  
+  public String getIdeaBasePackage(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.ideaBasePackage == null);
+    }
+    if (_or) {
+      String _namespace = GrammarUtil.getNamespace(grammar);
+      return (_namespace + ".idea");
+    }
+    return this.ideaBasePackage;
+  }
+  
+  public TypeReference getIdeaModule(final Grammar grammar) {
+    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "IdeaModule");
+    return new TypeReference(_ideaBasePackage, _plus);
+  }
+  
+  public TypeReference getIdeaDefaultModule(final Grammar grammar) {
+    return new TypeReference("org.eclipse.xtext.idea.DefaultIdeaModule");
+  }
+  
+  public TypeReference getIdeaGenModule(final Grammar grammar) {
+    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
+    String _plus_1 = (_plus + "IdeaModule");
+    return new TypeReference(_ideaBasePackage, _plus_1);
+  }
+  
+  public TypeReference getIdeaStandaloneSetup(final Grammar grammar) {
+    String _ideaBasePackage = this.getIdeaBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "StandaloneSetupIdea");
+    return new TypeReference(_ideaBasePackage, _plus);
   }
   
   public void setEclipsePluginActivator(final String eclipsePluginActivator) {
@@ -192,5 +228,9 @@ public class XtextGeneratorNaming {
   
   public void setGenericIdeBasePackage(final String genericIdeBasePackage) {
     this.genericIdeBasePackage = genericIdeBasePackage;
+  }
+  
+  public void setIdeaBasePackage(final String ideaBasePackage) {
+    this.ideaBasePackage = ideaBasePackage;
   }
 }

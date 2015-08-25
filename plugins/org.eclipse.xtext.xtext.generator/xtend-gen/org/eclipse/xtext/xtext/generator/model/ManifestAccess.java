@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class ManifestAccess {
-  private String path = "META-INF/MANIFEST.MF";
+  private String path = "MANIFEST.MF";
   
   private String bundleName;
   

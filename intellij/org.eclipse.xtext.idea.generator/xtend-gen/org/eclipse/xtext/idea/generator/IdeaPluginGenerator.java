@@ -64,6 +64,7 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+@Deprecated
 @SuppressWarnings("all")
 public class IdeaPluginGenerator extends Xtend2GeneratorFragment {
   private static String META_INF_PLUGIN = "META_INF_PLUGIN";

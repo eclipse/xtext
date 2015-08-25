@@ -10,26 +10,28 @@ package org.eclipse.xtext.xtext.generator.xbase;
 import com.google.inject.Inject;
 import java.util.Set;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
-import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
 public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
-  public static boolean inheritsXtype(final Grammar grammar) {
-    return GrammarUtil2.inherits(grammar, "org.eclipse.xtext.xbase.Xtype");
-  }
-  
   @Inject
   private IXtextProjectConfig projectConfig;
   
+  @Inject
+  @Extension
+  private XbaseUsageDetector _xbaseUsageDetector;
+  
   @Override
-  public void generate(final LanguageConfig2 language) {
+  public void generate() {
     boolean _and = false;
-    Grammar _grammar = language.getGrammar();
-    boolean _inheritsXtype = XtypeGeneratorFragment2.inheritsXtype(_grammar);
+    LanguageConfig2 _language = this.getLanguage();
+    Grammar _grammar = _language.getGrammar();
+    boolean _inheritsXtype = this._xbaseUsageDetector.inheritsXtype(_grammar);
     if (!_inheritsXtype) {
       _and = false;
     } else {

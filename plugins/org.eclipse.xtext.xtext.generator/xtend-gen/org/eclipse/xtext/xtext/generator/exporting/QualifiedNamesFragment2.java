@@ -17,12 +17,13 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference;
 @SuppressWarnings("all")
 public class QualifiedNamesFragment2 extends AbstractGeneratorFragment2 {
   @Override
-  public void generate(final LanguageConfig2 language) {
+  public void generate() {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IQualifiedNameProvider.class);
     TypeReference _typeRef_1 = TypeReference.typeRef(DefaultDeclarativeQualifiedNameProvider.class);
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
-    GuiceModuleAccess _runtimeGenModule = language.getRuntimeGenModule();
+    LanguageConfig2 _language = this.getLanguage();
+    GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
     GuiceModuleAccess.BindingFactory _bindingFactory_1 = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher");
@@ -31,7 +32,8 @@ public class QualifiedNamesFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator");
     TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator");
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_4, _typeRef_5);
-    GuiceModuleAccess _eclipsePluginGenModule = language.getEclipsePluginGenModule();
+    LanguageConfig2 _language_1 = this.getLanguage();
+    GuiceModuleAccess _eclipsePluginGenModule = _language_1.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
   }
 }

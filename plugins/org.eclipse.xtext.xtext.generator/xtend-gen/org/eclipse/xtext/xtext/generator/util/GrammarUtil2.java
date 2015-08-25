@@ -10,11 +10,12 @@ package org.eclipse.xtext.xtext.generator.util;
 import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class GrammarUtil2 {
+public class GrammarUtil2 extends GrammarUtil {
   public static boolean inherits(final Grammar grammar, final String languageID) {
     String _name = grammar.getName();
     boolean _equals = Objects.equal(_name, languageID);

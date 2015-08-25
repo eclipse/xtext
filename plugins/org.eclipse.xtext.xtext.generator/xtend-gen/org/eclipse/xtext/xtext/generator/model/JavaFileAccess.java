@@ -94,7 +94,6 @@ public class JavaFileAccess extends TextFileAccess {
   private ResourceSet resourceSet;
   
   protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig, final IEncodingProvider encodingProvider) {
-    super(encodingProvider);
     List<String> _simpleNames = typeRef.getSimpleNames();
     int _length = ((Object[])Conversions.unwrapArray(_simpleNames, Object.class)).length;
     boolean _greaterThan = (_length > 1);

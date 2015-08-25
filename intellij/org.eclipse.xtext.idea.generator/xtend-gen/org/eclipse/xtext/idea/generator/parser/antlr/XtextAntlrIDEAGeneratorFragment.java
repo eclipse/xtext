@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
+@Deprecated
 @SuppressWarnings("all")
 public class XtextAntlrIDEAGeneratorFragment extends AbstractAntlrXtendGeneratorFragment {
   private String encoding;
