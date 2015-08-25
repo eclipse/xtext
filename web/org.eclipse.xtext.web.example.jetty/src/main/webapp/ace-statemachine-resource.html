@@ -16,7 +16,7 @@
 		});
 		require(["webjars/ace/1.1.9/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
-				var editor = xtext.createEditor();
+				var editor = xtext.createEditor({syntaxDefinition: "xtext/ace-mode-statemachine"});
 				$("#save-button").click(function() {
 					editor.xtextServices.saveResource();
 				});

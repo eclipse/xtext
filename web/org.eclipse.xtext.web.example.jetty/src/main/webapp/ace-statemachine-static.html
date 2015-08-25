@@ -16,7 +16,7 @@
 		});
 		require(["webjars/ace/1.1.9/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
-				xtext.createEditor();
+				xtext.createEditor({syntaxDefinition: "xtext/ace-mode-statemachine"});
 			});
 		});
 	</script>
