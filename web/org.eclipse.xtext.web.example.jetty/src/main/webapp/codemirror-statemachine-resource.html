@@ -20,17 +20,17 @@
 				main: "lib/codemirror"
 			}]
 		});
-		require(["xtext/xtext-codemirror"], function(xtext) {
+		require(["xtext/cm-mode-statemachine", "xtext/xtext-codemirror"], function(mode, xtext) {
 			var editor = xtext.createEditor();
-				$("#save-button").click(function() {
-					editor.xtextServices.saveResource();
-				});
-				$("#revert-button").click(function() {
-					editor.xtextServices.revertResource();
-				});
-				$("#generate-button").click(function() {
-					window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
-				});
+			$("#save-button").click(function() {
+				editor.xtextServices.saveResource();
+			});
+			$("#revert-button").click(function() {
+				editor.xtextServices.revertResource();
+			});
+			$("#generate-button").click(function() {
+				window.open('http://' + location.host + '/xtext-service/generate?resource=example.statemachine');
+			});
 		});
 	</script>
 </head>

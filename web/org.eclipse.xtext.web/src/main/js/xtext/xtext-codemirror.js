@@ -40,6 +40,9 @@
  *     Whether validation should be enabled.
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server.
+ * mode {String}
+ *     The name of the syntax highlighting mode to use; the mode has to be registered externally
+ *     (see CodeMirror documentation).
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
  * resourceId {String}
@@ -54,9 +57,6 @@
  *     The URL of the Xtext server.
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
- * syntaxDefinition {String}
- *     A path to a JS file defining a CodeMirror syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext/mode-<xtextLang>'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * xtextLang {String}
@@ -154,9 +154,13 @@ define([
 	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
-//	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
-//		TODO
-//	}
+	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
+		var options = this.services.options;
+		// If the mode option is set, syntax highlighting has already been configured by CM
+		if (!options.mode && options.xtextLang) {
+			this.editor.setOption('mode', options.xtextLang);
+		}
+	}
 		
 	/**
 	 * Document update service.

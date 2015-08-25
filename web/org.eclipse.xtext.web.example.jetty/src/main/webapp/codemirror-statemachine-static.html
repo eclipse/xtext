@@ -20,7 +20,7 @@
 				main: "lib/codemirror"
 			}]
 		});
-		require(["xtext/xtext-codemirror"], function(xtext) {
+		require(["xtext/cm-mode-statemachine", "xtext/xtext-codemirror"], function(mode, xtext) {
 			xtext.createEditor();
 		});
 	</script>
