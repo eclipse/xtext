@@ -7,15 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
-import org.eclipse.emf.mwe.core.issues.Issues
-
 /**
  * A fragment that contributes to the {@link XtextGenerator}.
  */
 interface IGeneratorFragment2 extends IGuiceAwareGeneratorComponent {
 	
-	def void checkConfiguration(XtextGenerator generator, Issues issues)
+	def void checkConfiguration(Issues issues)
 	
-	def void generate(LanguageConfig2 language)
+	def void generate()
 	
 }

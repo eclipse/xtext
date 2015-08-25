@@ -26,15 +26,14 @@ import org.eclipse.xtext.formatting2.IFormatter2
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
+import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
-import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
@@ -44,13 +43,14 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
-	@Inject extension FileSystemAccess.Extensions
+	@Inject extension XtextGeneratorNaming
+	@Inject extension GrammarAccessExtensions
 	
 	protected def TypeReference getFormatter2Stub(Grammar grammar) {
-		new TypeReference(grammar.naming.runtimeBasePackage + '.formatting2.' + GrammarUtil.getName(grammar) + 'Formatter')
+		new TypeReference(grammar.runtimeBasePackage + '.formatting2.' + GrammarUtil.getSimpleName(grammar) + 'Formatter')
 	}
 	
-	override generate(LanguageConfig2 language) {
+	override generate() {
 		val StringConcatenationClient statement =
 			'''binder.bind(«IPreferenceValuesProvider».class).annotatedWith(«FormatterPreferences».class).to(«FormatterPreferenceValuesProvider».class);'''
 		new GuiceModuleAccess.BindingFactory()
@@ -62,12 +62,11 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 					'org.eclipse.xtext.ui.editor.formatting2.ContentFormatterFactory'.typeRef)
 			.contributeTo(language.eclipsePluginGenModule)
 		
-		if (!projectConfig.runtimeSrc.containsXtendFile(language.grammar.formatter2Stub))
-			doGenerateStubFile(language)
+		doGenerateStubFile
 	}
 
-	protected def doGenerateStubFile(LanguageConfig2 language) {
-		val xtendFile = fileAccessFactory.with(language).createXtendFile(language.grammar.formatter2Stub)
+	protected def doGenerateStubFile() {
+		val xtendFile = fileAccessFactory.createXtendFile(language, grammar.formatter2Stub)
 		
 		val type2ref = LinkedHashMultimap.<EClass, EReference>create
 		getLocallyAssignedContainmentReferences(language.grammar, type2ref)
@@ -75,29 +74,28 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 		getInheritedContainmentReferences(language.grammar, inheritedTypes, newHashSet)
 		
 		xtendFile.javaContent = '''
-			class «language.grammar.formatter2Stub.simpleName» extends «language.stubSuperClass» {
+			class «grammar.formatter2Stub.simpleName» extends «stubSuperClass» {
 				
-				@«Inject» extension «language.naming.grammarAccess»
+				@«Inject» extension «grammar.grammarAccess»
 				«FOR type : type2ref.keySet»
 
-					«type.generateFormatMethod(language, type2ref.get(type), inheritedTypes.containsKey(type))»
+					«type.generateFormatMethod(type2ref.get(type), inheritedTypes.containsKey(type))»
 				«ENDFOR»	
 			}
 		'''
 		xtendFile.writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def StringConcatenationClient generateFormatMethod(EClass clazz, LanguageConfig2 language,
-			Collection<EReference> containmentRefs, boolean isOverriding) '''
+	protected def StringConcatenationClient generateFormatMethod(EClass clazz, Collection<EReference> containmentRefs, boolean isOverriding) '''
 		«IF isOverriding»override«ELSE»def«ENDIF» dispatch void format(«clazz» «clazz.toName», extension «IFormattableDocument» document) {
 			// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 			«FOR ref:containmentRefs»
 				«IF ref.isMany»
-					for («ref.EReferenceType» «ref.name» : «clazz.toName».«ref.getGetAccessor(language)»()) {
+					for («ref.EReferenceType» «ref.name» : «clazz.toName».«ref.getGetAccessor()»()) {
 						format(«ref.name», document);
 					}
 				«ELSE»
-					format(«clazz.toName».«ref.getGetAccessor(language)»(), document);
+					format(«clazz.toName».«ref.getGetAccessor()»(), document);
 				«ENDIF»
 			«ENDFOR»
 		}
@@ -138,7 +136,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 		}
 	}
 
-	protected def TypeReference getStubSuperClass(LanguageConfig2 language) {
+	protected def TypeReference getStubSuperClass() {
 		val superGrammar = language.grammar.nonTerminalsSuperGrammar
 		if (superGrammar != null)
 			return superGrammar.formatter2Stub
@@ -150,7 +148,7 @@ class Formatter2Fragment2 extends AbstractGeneratorFragment2 {
 		clazz.name.toLowerCase
 	}
 	
-	protected def String getGetAccessor(EStructuralFeature feature, LanguageConfig2 language) {
+	protected def String getGetAccessor(EStructuralFeature feature) {
 		GenModelUtil2.getGenFeature(feature, language.resourceSet).getAccessor
 	}
 	

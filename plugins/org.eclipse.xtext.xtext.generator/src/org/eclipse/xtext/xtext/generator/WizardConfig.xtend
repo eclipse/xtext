@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
-import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe2.runtime.Mandatory
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
@@ -17,13 +16,11 @@ import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 @Accessors
 class WizardConfig extends XtextProjectConfig {
 	
-	String runtimeBase
-	
 	boolean eclipseEditor = true
 	
 	boolean ideaEditor = false
 	
-	boolean orionEditor = false
+	boolean webSupport = false
 	
 	boolean genericIdeSupport = false
 	
@@ -32,88 +29,116 @@ class WizardConfig extends XtextProjectConfig {
 	boolean mavenLayout = false
 	
 	@Mandatory
-	def void setRuntimeBase(String runtimeBase) {
-		this.runtimeBase = runtimeBase
+	override setRuntimeRoot(String path) {
+		super.setRuntimeRoot(path)
 	}
 	
-	override checkConfiguration(XtextGenerator generator, Issues issues) {
-		super.checkConfiguration(generator, issues)
+	override checkConfiguration(Issues issues) {
+		super.checkConfiguration(issues)
+		val runtimeBase = runtimeRoot?.path
 		if (runtimeBase.nullOrEmpty)
-			issues.addError(generator, 'The property \'runtimeBase\' must be set.', this)
+			issues.addError('The property \'runtimeBase\' must be set.', this)
 		if (!Character.isJavaIdentifierPart(runtimeBase.charAt(runtimeBase.length - 1)))
-			issues.addError(generator, 'The runtime base path must end with a valid package name.', this)
-		if ((ideaEditor || orionEditor) && !genericIdeSupport)
-			issues.addError(generator, 'Generic IDE support must be enabled when the IDEA or Orion editors are enabled.', this)
+			issues.addError('The runtime base path must end with a valid package name.', this)
+		if ((ideaEditor || webSupport) && !genericIdeSupport)
+			issues.addError('Generic IDE support must be enabled when the IDEA or Orion editors are enabled.', this)
 	}
 	
 	override initialize(Injector injector) {
 		var src = 'src'
 		var srcGen = 'src-gen'
-		var srcWeb = 'web'
+		var srcWeb = 'WebRoot'
+		var metaInf = 'META-INF'
 		if (mavenLayout) {
 			src = 'src/main/java'
+			metaInf = 'src/main/resources/META-INF'
 			srcGen = 'src/main/xtext-gen'
 			srcWeb = 'src/main/webapp'
 		}
 		
+		if (runtimeMetaInf === null)
+			runtimeMetaInf = runtimeRoot.path + '/' + metaInf
 		if (runtimeSrc === null)
-			runtimeSrc = runtimeBase + '/' + src
+			runtimeSrc = runtimeRoot.path  + '/' + src
 		if (runtimeSrcGen === null)
-			runtimeSrcGen = runtimeBase + '/' + srcGen
+			runtimeSrcGen = runtimeRoot.path  + '/' + srcGen
 		if (runtimeManifest === null)
-			runtimeManifest = new ManifestAccess => [path = runtimeBase + '/META-INF/MANIFEST.MF']
+			runtimeManifest = new ManifestAccess
 		if (runtimePluginXml === null)
-			runtimePluginXml = new PluginXmlAccess => [path = runtimeBase + '/plugin.xml']
+			runtimePluginXml = new PluginXmlAccess
+			
+		if (testingSupport) {
+			if (runtimeTestRoot === null)
+				runtimeTestRoot = runtimeRoot.path + ".tests"
+			if (runtimeTestMetaInf == null)
+				runtimeTestMetaInf = runtimeTestRoot.path + '/' + metaInf
+			if (runtimeTestSrc === null)
+				runtimeTestSrc = runtimeTestRoot.path + '/' + src
+			if (runtimeTestSrcGen === null)
+				runtimeTestSrcGen = runtimeTestRoot.path + '/' + srcGen
+			if (runtimeTestManifest === null)
+				runtimeTestManifest = new ManifestAccess
+		}
 		
 		if (eclipseEditor) {
+			if (eclipsePluginRoot === null)
+				eclipsePluginRoot = runtimeRoot.path + '.ui'
+			if (eclipsePluginMetaInf === null)
+				eclipsePluginMetaInf = eclipsePluginRoot.path + '/' + metaInf
 			if (eclipsePluginSrc === null)
-				eclipsePluginSrc = runtimeBase + '.ui/' + src
+				eclipsePluginSrc = eclipsePluginRoot.path + '/' + src
 			if (eclipsePluginSrcGen === null)
-				eclipsePluginSrcGen = runtimeBase + '.ui/' + srcGen
+				eclipsePluginSrcGen = eclipsePluginRoot.path + '/' + srcGen
 			if (eclipsePluginManifest === null)
-				eclipsePluginManifest = new ManifestAccess => [path = runtimeBase + '.ui/META-INF/MANIFEST.MF']
+				eclipsePluginManifest = new ManifestAccess
 			if (eclipsePluginPluginXml === null)
-				eclipsePluginPluginXml = new PluginXmlAccess => [path = runtimeBase + '.ui/plugin.xml']
+				eclipsePluginPluginXml = new PluginXmlAccess
+				
+			if (testingSupport) {
+				if (eclipsePluginTestRoot === null)
+					eclipsePluginTestRoot = runtimeRoot.path + '.tests'
+				if (eclipsePluginTestMetaInf === null)
+					eclipsePluginTestMetaInf = eclipsePluginTestRoot.path + '/' + metaInf
+				if (eclipsePluginTestSrc === null)
+					eclipsePluginTestSrc = eclipsePluginTestRoot.path + '/' + src
+				if (eclipsePluginTestSrcGen === null)
+					eclipsePluginTestSrcGen = eclipsePluginTestRoot.path + '/' + srcGen
+				if (eclipsePluginTestManifest === null)
+					eclipsePluginTestManifest = new ManifestAccess
+			}
 		}
 		
 		if (ideaEditor) {
+			if (ideaPluginRoot === null)
+				ideaPluginRoot = runtimeRoot.path + '.idea'
 			if (ideaPluginSrc === null)
-				ideaPluginSrc = runtimeBase + '.idea/' + src
+				ideaPluginSrc = ideaPluginRoot.path + '/' + src
 			if (ideaPluginSrcGen === null)
-				ideaPluginSrcGen = runtimeBase + '.idea/' + srcGen
+				ideaPluginSrcGen = ideaPluginRoot.path  + '/' + srcGen
 		}
 		
-		if (orionEditor) {
+		if (webSupport) {
+			if (webRoot === null)
+				webRoot = runtimeRoot.path + '.web'
 			if (webSrc === null)
-				webSrc = runtimeBase + '.web/' + src
+				webSrc = webRoot.path + '/' + src
 			if (webSrcGen === null)
-				webSrcGen = runtimeBase + '.web/' + srcGen
-			if (orionJsGen === null)
-				orionJsGen = runtimeBase + '.web/' + srcWeb + '/xtext/generated'
+				webSrcGen = webRoot.path + '/' + srcGen
+			if (webWebApp === null)
+				webWebApp = webRoot.path + '/' + srcWeb
 		}
 		
 		if (genericIdeSupport) {
+			if (genericIdeRoot === null)
+				genericIdeRoot = runtimeRoot.path + '.ide'
+			if (genericIdeMetaInf === null)
+				genericIdeMetaInf = genericIdeRoot.path + '/' + metaInf
 			if (genericIdeSrc === null)
-				genericIdeSrc = runtimeBase + '.ide/' + src
+				genericIdeSrc = genericIdeRoot.path + '/' + src
 			if (genericIdeSrcGen === null)
-				genericIdeSrcGen = runtimeBase + '.ide/' + srcGen
+				genericIdeSrcGen = genericIdeRoot.path + '/' + srcGen
 			if (genericIdeManifest === null)
-				genericIdeManifest = new ManifestAccess => [path = runtimeBase + '.ide/META-INF/MANIFEST.MF']
-		}
-		
-		if (testingSupport) {
-			if (runtimeTestSrc === null)
-				runtimeTestSrc = runtimeBase + '.tests/' + src
-			if (runtimeTestSrcGen === null)
-				runtimeTestSrcGen = runtimeBase + '.tests/' + srcGen
-			if (runtimeTestManifest === null)
-				runtimeTestManifest = new ManifestAccess => [path = runtimeBase + '.tests/META-INF/MANIFEST.MF']
-			if (eclipsePluginTestSrc === null)
-				eclipsePluginTestSrc = runtimeBase + '.tests/' + src
-			if (eclipsePluginTestSrcGen === null)
-				eclipsePluginTestSrcGen = runtimeBase + '.tests/' + srcGen
-			if (eclipsePluginTestManifest === null)
-				eclipsePluginTestManifest = new ManifestAccess => [path = runtimeBase + '.tests/META-INF/MANIFEST.MF']
+				genericIdeManifest = new ManifestAccess
 		}
 		
 		super.initialize(injector)

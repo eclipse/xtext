@@ -39,9 +39,11 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsData
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
-import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
+import org.eclipse.xtext.RuleNames
+import com.google.inject.Module
 
 @Log
 class LanguageConfig2 extends CompositeGeneratorFragment2 {
@@ -53,29 +55,39 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	Grammar grammar
 	
 	@Accessors(PUBLIC_GETTER)
+	RuleNames ruleNames
+	
+	@Accessors(PUBLIC_GETTER)
 	List<String> fileExtensions
 	
 	@Accessors
 	ResourceSet resourceSet
 	
+	@Accessors Module guiceModule = [] 
+	
 	@Accessors
-	XtextGeneratorNaming naming
+	XtextGeneratorNaming naming = new XtextGeneratorNaming
 	
 	@Accessors
 	val List<String> loadedResources = newArrayList
 	
 	@Accessors
-	val StandaloneSetupAccess runtimeGenSetup = new StandaloneSetupAccess
+	val runtimeGenSetup = new StandaloneSetupAccess
 	
 	@Accessors
-	val GuiceModuleAccess runtimeGenModule = new GuiceModuleAccess
+	val runtimeGenModule = new GuiceModuleAccess
 	
 	@Accessors
-	val GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess
+	val eclipsePluginGenModule = new GuiceModuleAccess
+	
+	@Accessors
+	val ideaGenModule = new GuiceModuleAccess
 	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig
+	
+	@Inject extension XbaseUsageDetector
 	
 	@Mandatory
 	def void setUri(String uri) {
@@ -88,7 +100,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	
 	def List<String> getFileExtensions() {
 		if (fileExtensions === null || fileExtensions.empty) {
-			val lowerCase = GrammarUtil.getName(grammar).toLowerCase
+			val lowerCase = GrammarUtil.getSimpleName(grammar).toLowerCase
 			LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
 			return Collections.singletonList(lowerCase)
 		}
@@ -100,8 +112,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	}
 	
 	override initialize(Injector injector) {
-		super.initialize(injector)
-		
+		injector.injectMembers(this)
 		if (resourceSet === null)
 			resourceSet = resourceSetProvider.get()
 		for (String loadedResource : loadedResources) {
@@ -152,6 +163,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 				}
 			}
 			resourceSet.getResource(loadedResourceUri, true)
+			
 		}
 		if (!resourceSet.resources.isEmpty) {
 			installIndex()
@@ -176,11 +188,9 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		val grammar = resource.getContents().get(0) as Grammar
 		validateGrammar(grammar)
 		this.grammar = grammar
-		
-		if (naming === null) {
-			naming = new XtextGeneratorNaming
-		}
-		naming.grammar = grammar
+		this.ruleNames = RuleNames.getRuleNames(grammar, true)
+		this.naming.grammar = grammar
+		super.initialize(injector)
 	}
 	
 	private def void installIndex() {
@@ -253,12 +263,13 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		throw new IllegalStateException(msg)
 	}
 	
-	override generate(LanguageConfig2 language) {
-		addImplicitContributions(language)
-		super.generate(language)
+	override generate() {
+		addImplicitContributions()
+		super.generate()
 	}
 	
-	protected def void addImplicitContributions(LanguageConfig2 language) {
+	protected def void addImplicitContributions() {
+		//TODO add content of implicituifragment.xpt here and move this logic somewhere else
 		if (projectConfig.runtimeManifest !== null) {
 			projectConfig.runtimeManifest.requiredBundles.addAll(#[
 				'org.eclipse.xtext', 'org.eclipse.xtext.util'
@@ -274,7 +285,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		val StringConcatenationClient expression = '''«'org.eclipse.xtext.ui.shared.Access'.typeRef».getJavaProjectsState()'''
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 			.addTypeToProviderInstance(IAllContainersState.typeRef, expression)
-		if (XbaseGeneratorFragment2.inheritsXbase(language.grammar)) {
+		if (inheritsXbase(grammar)) {
 			bindingFactory.addTypeToType('org.eclipse.xtext.ui.editor.XtextEditor'.typeRef,
 					'org.eclipse.xtext.xbase.ui.editor.XbaseEditor'.typeRef)
 				.addTypeToType('org.eclipse.xtext.ui.editor.model.XtextDocumentProvider'.typeRef,

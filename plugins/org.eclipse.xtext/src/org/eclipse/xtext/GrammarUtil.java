@@ -66,13 +66,25 @@ public class GrammarUtil {
 	public static String getLanguageId(Grammar g) {
 		return g.getName();
 	}
-
-	public static String getName(Grammar g) {
+	
+	/**
+	 * @since 2.9
+	 */
+	public static String getSimpleName(Grammar g) {
 		String fullName = g.getName();
 		if (Strings.isEmpty(fullName))
 			return null;
 		int nameIndex = fullName.lastIndexOf('.');
 		return fullName.substring(nameIndex + 1);
+		
+	}
+
+	/**
+	 * @deprecated replaced by {@link #getSimpleName(Grammar)} for more clarity
+	 */
+	@Deprecated
+	public static String getName(Grammar g) {
+		return getSimpleName(g);
 	}
 
 	public static String getNamespace(Grammar g) {

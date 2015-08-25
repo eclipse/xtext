@@ -22,24 +22,32 @@ import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.Assignment
+import org.eclipse.xtext.CompoundElement
 import org.eclipse.xtext.CrossReference
 import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
+import org.eclipse.xtext.Group
 import org.eclipse.xtext.Keyword
+import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TypeRef
+import org.eclipse.xtext.UnorderedGroup
 import org.eclipse.xtext.XtextRuntimeModule
 import org.eclipse.xtext.formatting.ILineSeparatorInformation
 import org.eclipse.xtext.resource.SaveOptions
 import org.eclipse.xtext.serializer.ISerializer
 import org.eclipse.xtext.xtext.generator.CodeConfig
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.TypeReference
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
 
 import static extension java.lang.Character.*
+import static extension org.eclipse.xtext.EcoreUtil2.*
 import static extension org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
+import static extension org.eclipse.xtext.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 
 /**
  * This API can be used by other templates to generate code
@@ -54,11 +62,13 @@ class GrammarAccessExtensions {
 	
 	@Inject CodeConfig codeConfig
 	
+	@Inject extension XtextGeneratorNaming
+	
 	/**
 	 * Returns a reference to the GrammarAccess implementation for a grammar.
 	 */
 	def TypeReference getGrammarAccess(Grammar grammar) {
-		new TypeReference(grammar.naming.runtimeBasePackage + '.services.' + GrammarUtil.getName(grammar) + 'GrammarAccess')
+		new TypeReference(grammar.runtimeBasePackage + '.services.' + GrammarUtil.getSimpleName(grammar) + 'GrammarAccess')
 	}
 	
 	/**
@@ -359,6 +369,144 @@ class GrammarAccessExtensions {
 		}
 		s = prefix + s.trim.replaceAll('(\\r?\\n)', '$1' + prefix).replaceAll('/\\*', '/ *').replaceAll('\\*/', '* /')
 		return s
+	}
+	
+	dispatch def grammarElementIdentifier(EObject it) {
+		"Unsupported : grammarElementIdentifier for: " + toString
+	}
+
+	dispatch def grammarElementIdentifier(AbstractRule it) {
+		gaRuleIdentifier
+	}
+
+	dispatch def String grammarElementIdentifier(AbstractElement it) {
+		containingRule.grammarElementIdentifier + '_' +  gaElementIdentifier
+	}
+
+	dispatch def grammarElementAccess(EObject it) {
+		"Unsupported : grammarElementAccess for: " + toString
+	}
+
+	dispatch def grammarElementAccess(AbstractRule it) {
+		gaRuleAccessor
+	}
+
+	dispatch def grammarElementAccess(AbstractElement it) {
+		gaRuleElementAccessor
+	}
+
+	def List<String> initialHiddenTokens(Grammar it) {
+		if (definesHiddenTokens) {
+			return hiddenTokens.map[ruleName].toList
+		}
+		if (usedGrammars.size == 1) {
+			return initialHiddenTokens(usedGrammars.head)
+		}
+		emptyList
+	}
+
+	def ruleName(AbstractRule rule) {
+		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
+		return result;
+	}
+
+	def entryRuleName(ParserRule rule) {
+		val result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
+		return 'entry' + result.toFirstUpper;
+	}
+
+	def isCalled(AbstractRule rule, Grammar grammar) {
+		val allRules = grammar.allRules
+		allRules.indexOf(rule) == 0 || allRules.map [
+			GrammarUtil.containedRuleCalls(it)
+		].flatten.exists[ruleCall | ruleCall.rule == rule]
+	}
+
+	def definesUnorderedGroups(ParserRule it, AntlrOptions options) {
+		options.backtrack && !eAllContentsAsList.typeSelect(UnorderedGroup).empty
+	}
+
+	dispatch def mustBeParenthesized(AbstractElement it) { true }
+
+	dispatch def mustBeParenthesized(Keyword it) { predicated() || firstSetPredicated || cardinality != null }
+
+	dispatch def mustBeParenthesized(RuleCall it) { predicated() || firstSetPredicated || cardinality != null }
+	
+	dispatch def boolean predicated(AbstractElement it) {
+		predicated
+	}
+	
+	dispatch def boolean predicated(Assignment it) {
+		predicated || terminal.predicated()
+	}
+	
+	dispatch def boolean predicated(RuleCall it) {
+		predicated || {
+			val group  = rule.alternatives
+			if (group instanceof Group) {
+				group.elements.head.predicated()
+			} else {
+				false
+			}
+		}
+	}
+
+	def AbstractElement predicatedElement(AbstractElement it) {
+		return AntlrGrammarGenUtil.getPredicatedElement(it)
+	}
+
+	def localVar(Assignment it, AbstractElement terminal) {
+		'lv_' + feature + '_' + containingParserRule.contentsAsList.indexOf(it) + '_' +
+			eAllContentsAsList.indexOf(terminal)
+	}
+
+	dispatch def localVar(RuleCall it) {
+		'this_' + rule.name + '_' + containingParserRule.contentsAsList.indexOf(it)
+	}
+
+	dispatch def localVar(AbstractElement it) {
+		val rule = containingParserRule
+		val index = rule.contentsAsList.indexOf(it)
+		'otherlv_' + index
+	}
+
+	dispatch def localVar(EnumLiteralDeclaration it) {
+		'enumLiteral_' + containingEnumRule.alternatives.contentsAsList.indexOf(it)
+	}
+
+	dispatch def List<AbstractElement> contentsAsList(ParserRule it) {
+		alternatives.contentsAsList
+	}
+
+	dispatch def List<AbstractElement> contentsAsList(AbstractElement it) {
+		newArrayList(it)
+	}
+
+	dispatch def List<AbstractElement> contentsAsList(CompoundElement it) {
+		elements.map[contentsAsList].flatten.toList
+	}
+
+	dispatch def List<AbstractElement> contentsAsList(UnorderedGroup it) {
+		val result = <AbstractElement>newArrayList(it)
+		result += elements.map[contentsAsList].flatten.toList
+		result
+	}
+
+	def setOrAdd(Action it) {
+		if(operator == '+=') 'add' else 'set'
+	}
+
+	def setOrAdd(Assignment it) {
+		if(operator == '+=') 'add' else 'set'
+	}
+
+	def toStringLiteral(AbstractElement it) {
+		switch it {
+			RuleCall case rule != null: '''"«rule.name»"'''
+			Keyword: '''"«value.toStringInAntlrAction»"'''
+			default:
+				"null"
+		}
 	}
 
 	private def ISerializer getSerializer() {
