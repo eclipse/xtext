@@ -73,8 +73,8 @@ public class JFlexGeneratorFragment extends AbstractGeneratorFragment {
 			encoding = getEncoding(ctx, Generator.SRC_GEN_IDE);
 		}
 		XpandFacade.create(ctx).evaluate2(template, grammar, getParameters(grammar));
-		String fileName = "Internal" + GrammarUtil.getName(grammar)	+ "Flexer.flex";
-		String javaFileName = directory + "/" + "Internal" + GrammarUtil.getName(grammar) + "Flexer.java";
+		String fileName = "Internal" + GrammarUtil.getSimpleName(grammar)	+ "Flexer.flex";
+		String javaFileName = directory + "/" + "Internal" + GrammarUtil.getSimpleName(grammar) + "Flexer.java";
 		main.runJFlex(new String[] {
 				"-d",
 				directory,
