@@ -31,26 +31,12 @@ import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 @EqualsHashCode
 @SuppressWarnings("all")
 public class TypeReference {
-  public static TypeReference typeRef(final String name, final String... arguments) {
-    final Function1<String, TypeReference> _function = new Function1<String, TypeReference>() {
-      @Override
-      public TypeReference apply(final String it) {
-        return new TypeReference(it);
-      }
-    };
-    List<TypeReference> _map = ListExtensions.<String, TypeReference>map(((List<String>)Conversions.doWrapArray(arguments)), _function);
-    return new TypeReference(name, _map);
+  public static TypeReference typeRef(final String name, final TypeReference... arguments) {
+    return new TypeReference(name, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
-  public static TypeReference typeRef(final Class<?> clazz, final Class<?>... arguments) {
-    final Function1<Class<?>, TypeReference> _function = new Function1<Class<?>, TypeReference>() {
-      @Override
-      public TypeReference apply(final Class<?> it) {
-        return new TypeReference(it);
-      }
-    };
-    List<TypeReference> _map = ListExtensions.<Class<?>, TypeReference>map(((List<Class<?>>)Conversions.doWrapArray(arguments)), _function);
-    return new TypeReference(clazz, _map);
+  public static TypeReference typeRef(final Class<?> clazz, final TypeReference... arguments) {
+    return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
   public static TypeReference typeRef(final EClass clazz, final ResourceSet resourceSet, final EClass... arguments) {

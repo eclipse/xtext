@@ -155,7 +155,7 @@ public class GeneratorFragment extends AbstractGeneratorFragment implements IStu
 	}
 
 	public static String getGeneratorName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".generator." + GrammarUtil.getName(grammar) + "Generator";
+		return naming.basePackageRuntime(grammar) + ".generator." + GrammarUtil.getSimpleName(grammar) + "Generator";
 	}
 
 	@Override

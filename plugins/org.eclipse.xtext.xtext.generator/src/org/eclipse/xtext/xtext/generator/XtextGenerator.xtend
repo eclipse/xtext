@@ -10,26 +10,22 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
-import java.io.OutputStream
 import java.util.HashMap
 import java.util.List
 import org.eclipse.emf.mwe.core.WorkflowContext
-import org.eclipse.emf.mwe.core.issues.Issues
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.XtextStandaloneSetup
 import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.internal.Log
-import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
+import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
@@ -39,11 +35,13 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
  * 
  * <p><b>NOTE: This is a reimplementation of org.eclipse.xtext.generator.Generator</b></p>
  */
+ //TODO make Generator independent of mwe and add a thin wrapper (GeneratorComponent)
+ //TODO only implement mwe2.IWorkflowComponent, get rid of "Issues", just logging/exceptions?
 @Log
-class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGeneratorComponent {
+class XtextGenerator extends AbstractWorkflowComponent2 {
 
 	@Accessors
-	DefaultGeneratorModule configuration
+	DefaultGeneratorModule configuration = new DefaultGeneratorModule
 	
 	@Accessors
 	val List<LanguageConfig2> languageConfigs = newArrayList
@@ -53,8 +51,6 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject XtextGeneratorTemplates templates
-	
-	@Inject extension FileSystemAccess.Extensions
 	
 	new() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration()
@@ -67,18 +63,17 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 		this.languageConfigs.add(language)
 	}
 	
-	override protected checkConfigurationInternal(Issues issues) {
-		createInjector()
-		if (configuration !== null) {
-			configuration.checkConfiguration(this, issues)
-		}
+	override protected checkConfigurationInternal(org.eclipse.emf.mwe.core.issues.Issues issues) {
+		initialize
+		val generatorIssues = new MweIssues(this, issues)
+		configuration.checkConfiguration(generatorIssues)
 		val uris = new HashMap<String, Grammar>
 		for (language : languageConfigs) {
-			language.checkConfiguration(this, issues)
-			for (generatedMetamodel : EcoreUtil2.typeSelect(language.grammar.metamodelDeclarations, GeneratedMetamodel)) {
+			language.checkConfiguration(generatorIssues)
+			for (generatedMetamodel : language.grammar.metamodelDeclarations.filter(GeneratedMetamodel)) {
 				val nsURI = generatedMetamodel.EPackage.nsURI
 				if (uris.containsKey(nsURI)) {
-					issues.addError(this, "Duplicate generated grammar with nsURI '" + nsURI + "' in "
+					generatorIssues.addError("Duplicate generated grammar with nsURI '" + nsURI + "' in "
 							+ uris.get(nsURI).name + " and " + language.grammar.name)
 				} else {
 					uris.put(nsURI, language.grammar)
@@ -87,57 +82,55 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 		}
 	}
 	
-	protected def Injector createInjector() {
+	def void initialize() {
 		if (injector === null) {
 			LOG.info('Initializing Xtext generator')
-			if (configuration === null)
-				configuration = new DefaultGeneratorModule
-			injector = Guice.createInjector(configuration)
-			initialize(injector)
+			injector = createInjector
+			injector.injectMembers(this)
+			projectConfig.initialize(injector)
+			injector.getInstance(CodeConfig) => [initialize(injector)]
+			for (language : languageConfigs) {
+				val languageInjector = injector.createLanguageInjector(language)
+				language.initialize(languageInjector)
+			}
 		}
-		return injector
 	}
 	
-	override initialize(Injector injector) {
-		injector.injectMembers(this)
-		projectConfig.initialize(injector)
-		for (language : languageConfigs) {
-			language.initialize(injector)
-		}
-		injector.getInstance(CodeConfig) => [ codeConfig |
-			codeConfig.initialize(injector)
-		]
+	protected def Injector createInjector() {
+		Guice.createInjector(configuration)
 	}
 	
-	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
-		createInjector()
+	protected def Injector createLanguageInjector(Injector parent, LanguageConfig2 language) {
+		parent.createChildInjector(new LanguageModule(language))
+	}
+	
+	protected override invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, org.eclipse.emf.mwe.core.issues.Issues issues) {
+		initialize
 		for (language : languageConfigs) {
 			LOG.info('Generating ' + language.grammar.name)
-			language.generate(language)
-			language.generateRuntimeSetup()
-			language.generateModules()
-			language.generateExecutableExtensionFactory()
+			language.generate
+			language.generateRuntimeSetup
+			language.generateModules
+			language.generateExecutableExtensionFactory
 		}
 		LOG.info('Generating common infrastructure')
-		generatePluginXmls()
-		generateManifests()
-		generateActivator()
+		generatePluginXmls
+		generateManifests
+		generateActivator
 	}
 	
 	protected def generateRuntimeSetup(LanguageConfig2 language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
-		if (!projectConfig.runtimeSrc.containsJavaFile(language.naming.runtimeSetup))
-			templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
+		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
 	}
 	
 	protected def generateModules(LanguageConfig2 language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
-		if (!projectConfig.runtimeSrc.containsJavaFile(language.naming.runtimeModule))
-			templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
-		if (projectConfig.eclipsePluginSrcGen !== null)
-			templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
-		if (projectConfig.eclipsePluginSrc !== null && !projectConfig.eclipsePluginSrc.containsJavaFile(language.naming.eclipsePluginModule))
-			templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
+		templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
+		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
+		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
+		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPluginSrcGen)
+		templates.createIdeaModule(language).writeTo(projectConfig.ideaPluginSrc)
 	}
 	
 	protected def generateExecutableExtensionFactory(LanguageConfig2 language) {
@@ -146,47 +139,48 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generateManifests() {
-		val manifests = #{
-			projectConfig.runtimeManifest,
-			projectConfig.runtimeTestManifest,
-			projectConfig.genericIdeManifest,
-			projectConfig.genericIdeTestManifest,
-			projectConfig.eclipsePluginManifest,
-			projectConfig.eclipsePluginTestManifest,
-			projectConfig.ideaPluginManifest,
-			projectConfig.ideaPluginTestManifest,
-			projectConfig.webManifest,
-			projectConfig.webTestManifest
-		}
-		manifests.filterNull.sortBy[path].forEach[ manifest |
+		val manifests = #[
+			projectConfig.runtimeManifest -> projectConfig.runtimeMetaInf,
+			projectConfig.runtimeTestManifest -> projectConfig.runtimeTestMetaInf,
+			projectConfig.genericIdeManifest -> projectConfig.genericIdeMetaInf,
+			projectConfig.genericIdeTestManifest -> projectConfig.genericIdeTestMetaInf,
+			projectConfig.eclipsePluginManifest -> projectConfig.eclipsePluginMetaInf,
+			projectConfig.eclipsePluginTestManifest -> projectConfig.eclipsePluginTestMetaInf,
+			projectConfig.ideaPluginManifest -> projectConfig.ideaPluginMetaInf,
+			projectConfig.ideaPluginTestManifest -> projectConfig.ideaPluginTestMetaInf,
+			projectConfig.webManifest -> projectConfig.webMetaInf,
+			projectConfig.webTestManifest -> projectConfig.webTestMetaInf
+		]
+		manifests.filter[key != null && value != null].forEach[ 
+			val manifest = key
+			val metaInf = value
 			if (manifest.bundleName === null) {
-				val segments = manifest.path.split('/')
+				/*TODO add explicit project names to XtextProjectConfig
 				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
-					manifest.bundleName = segments.get(segments.length - 3)
+					manifest.bundleName = segments.get(segments.length - 3)*/
 			}
 			var TypeReference activator
 			if (manifest === projectConfig.eclipsePluginManifest) {
-				activator = languageConfigs.head?.naming?.eclipsePluginActivator
+				val firstLanguage = languageConfigs.head
+				activator = firstLanguage?.naming?.getEclipsePluginActivator(firstLanguage.grammar)
 			}
-			val file = new File(manifest.path)
-			if (file.exists) {
+			if (metaInf.isFile(manifest.path)) {
 				if (manifest.merge) {
-					mergeManifest(manifest, file, activator)
+					mergeManifest(manifest, metaInf, activator)
 				} else if (manifest.path.endsWith('.MF')) {
 					manifest.path = manifest.path + '_gen'
-					templates.createManifest(manifest, activator).writeToFile()
+					templates.createManifest(manifest, activator).writeTo(metaInf)
 				}
 			} else {
-				templates.createManifest(manifest, activator).writeToFile()
+				templates.createManifest(manifest, activator).writeTo(metaInf)
 			}
 		]
 	}
 
-	protected def mergeManifest(ManifestAccess manifest, File file, TypeReference activator) throws IOException {
+	protected def mergeManifest(ManifestAccess manifest, IXtextGeneratorFileSystemAccess metaInf, TypeReference activator) throws IOException {
 		var InputStream in
-		var OutputStream out
 		try {
-			in = new FileInputStream(file)
+			in = metaInf.readBinaryFile(manifest.path)
 			val merge = new MergeableManifest(in, manifest.bundleName)
 			merge.addExportedPackages(manifest.exportedPackages)
 			merge.addRequiredBundles(manifest.requiredBundles)
@@ -195,14 +189,13 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 				merge.mainAttributes.put(MergeableManifest.BUNDLE_ACTIVATOR, activator.name)
 			}
 			if (merge.isModified) {
-				out = new FileOutputStream(file)
+				val out = new ByteArrayOutputStream
 				merge.write(out)
+				metaInf.generateFile(manifest.path, new ByteArrayInputStream(out.toByteArray))
 			}
 		} finally {
 			if (in !== null)
 				in.close()
-			if (out != null)
-				out.close()
 		}
 	}
 	
@@ -212,26 +205,28 @@ class XtextGenerator extends AbstractWorkflowComponent2 implements IGuiceAwareGe
 	}
 	
 	protected def generatePluginXmls() {
-		val pluginXmls = #{
-			projectConfig.runtimePluginXml,
-			projectConfig.runtimeTestPluginXml,
-			projectConfig.genericIdePluginXml,
-			projectConfig.genericIdeTestPluginXml,
-			projectConfig.eclipsePluginPluginXml,
-			projectConfig.eclipsePluginTestPluginXml,
-			projectConfig.ideaPluginPluginXml,
-			projectConfig.ideaPluginTestPluginXml,
-			projectConfig.webPluginXml,
-			projectConfig.webTestPluginXml
-		}
-		pluginXmls.filterNull.sortBy[path].forEach[ pluginXml |
-			if (new File(pluginXml.path).exists) {
+		val pluginXmls = #[
+			projectConfig.runtimePluginXml -> projectConfig.runtimeRoot,
+			projectConfig.runtimeTestPluginXml -> projectConfig.runtimeTestRoot,
+			projectConfig.genericIdePluginXml -> projectConfig.genericIdeRoot,
+			projectConfig.genericIdeTestPluginXml -> projectConfig.genericIdeTestRoot,
+			projectConfig.eclipsePluginPluginXml -> projectConfig.eclipsePluginRoot,
+			projectConfig.eclipsePluginTestPluginXml -> projectConfig.eclipsePluginTestRoot,
+			projectConfig.ideaPluginPluginXml -> projectConfig.ideaPluginRoot,
+			projectConfig.ideaPluginTestPluginXml -> projectConfig.ideaPluginTestRoot,
+			projectConfig.webPluginXml -> projectConfig.webRoot,
+			projectConfig.webTestPluginXml -> projectConfig.webTestRoot
+		]
+		pluginXmls.filter[key !== null && value !== null].forEach[
+			val pluginXml = key
+			val root = value
+			if (root.isFile(pluginXml.path)) {
 				if (pluginXml.path.endsWith('.xml')) {
 					pluginXml.path = pluginXml.path + '_gen'
-					templates.createPluginXml(pluginXml).writeToFile()
+					templates.createPluginXml(pluginXml).writeTo(root)
 				}
 			} else {
-				templates.createPluginXml(pluginXml).writeToFile()
+				templates.createPluginXml(pluginXml).writeTo(root)
 			}
 		]
 	}

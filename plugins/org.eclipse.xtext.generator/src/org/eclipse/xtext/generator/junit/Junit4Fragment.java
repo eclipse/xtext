@@ -39,11 +39,11 @@ public class Junit4Fragment extends AbstractGeneratorFragment {
 	}
 
 	public static String getQualifiedInjectorProviderName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getName(grammar) + "InjectorProvider";
+		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getSimpleName(grammar) + "InjectorProvider";
 	}
 
 	public static String getQualifiedUiInjectorProviderName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getName(grammar) + "UiInjectorProvider";
+		return naming.basePackageRuntime(grammar) + "." + GrammarUtil.getSimpleName(grammar) + "UiInjectorProvider";
 	}
 
 	@Override

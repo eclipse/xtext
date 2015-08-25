@@ -98,14 +98,14 @@ public class SuperCallScope implements IScope {
 							}
 						}
 					}
-					if (firstSegment.equals(GrammarUtil.getName(grammar))) {
+					if (firstSegment.equals(GrammarUtil.getSimpleName(grammar))) {
 						AbstractRule rule = GrammarUtil.findRuleForName(grammar, grammar.getName() + "." + ruleName);
 						if (rule != null) {
 							return EObjectDescription.create(qn, rule);
 						}
 					}
 					for(Grammar usedGrammar: GrammarUtil.allUsedGrammars(grammar)) {
-						if (firstSegment.equals(GrammarUtil.getName(usedGrammar))) {
+						if (firstSegment.equals(GrammarUtil.getSimpleName(usedGrammar))) {
 							AbstractRule rule = GrammarUtil.findRuleForName(usedGrammar, usedGrammar.getName() + "." + ruleName);
 							if (rule != null) {
 								return EObjectDescription.create(qn, rule);
@@ -143,12 +143,12 @@ public class SuperCallScope implements IScope {
 			AbstractRule rule = (AbstractRule) object;
 			if (GrammarUtil.getGrammar(rule) == grammar) {
 				return Lists.newArrayList(
-						EObjectDescription.create(GrammarUtil.getName(grammar) + "." + rule.getName(), rule),
+						EObjectDescription.create(GrammarUtil.getSimpleName(grammar) + "." + rule.getName(), rule),
 						EObjectDescription.create(grammar.getName() + "." + rule.getName(), rule));
 			}
 			List<IEObjectDescription> result = Lists.newArrayList(
 					EObjectDescription.create(SUPER + "." + rule.getName(), rule),
-					EObjectDescription.create(GrammarUtil.getName(grammar) + "." + rule.getName(), rule),
+					EObjectDescription.create(GrammarUtil.getSimpleName(grammar) + "." + rule.getName(), rule),
 					EObjectDescription.create(grammar.getName() + "." + rule.getName(), rule));
 			AbstractRule contextRule = GrammarUtil.containingRule(context);
 			if (contextRule != null && contextRule.getName().equals(rule.getName())) {
@@ -165,7 +165,7 @@ public class SuperCallScope implements IScope {
 		Grammar grammar = contextRule != null ? GrammarUtil.getGrammar(contextRule) : GrammarUtil.getGrammar(context);
 		Map<QualifiedName, IEObjectDescription> result = Maps.newLinkedHashMap();
 		if (grammar != null) {
-			String shortName = GrammarUtil.getName(grammar) + ".";
+			String shortName = GrammarUtil.getSimpleName(grammar) + ".";
 			String longName = grammar.getName() + ".";
 			for(AbstractRule rule: grammar.getRules()) {
 				putIfAbsent(EObjectDescription.create(shortName + rule.getName(), rule), result);
@@ -173,7 +173,7 @@ public class SuperCallScope implements IScope {
 			}
 			boolean waitingForSuper = contextRule != null;
 			for(Grammar usedGrammar: GrammarUtil.allUsedGrammars(grammar)) {
-				shortName = GrammarUtil.getName(usedGrammar) + ".";
+				shortName = GrammarUtil.getSimpleName(usedGrammar) + ".";
 				longName = usedGrammar.getName() + ".";
 				for(AbstractRule rule: usedGrammar.getRules()) {
 					if (waitingForSuper) {

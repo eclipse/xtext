@@ -33,7 +33,7 @@ import org.eclipse.xtext.util.Strings;
 public abstract class AbstractScopingFragment extends AbstractInheritingGeneratorFragment implements IStubGenerating, IStubGenerating.XtendOption {
 
 	public static String getScopeProviderName(Grammar grammar, Naming naming) {
-		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
+		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getSimpleName(grammar) + "ScopeProvider";
 	}
 	
 	private boolean isGenerateStub = true;

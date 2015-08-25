@@ -8,38 +8,35 @@
 package org.eclipse.xtext.xtext.generator.generator
 
 import com.google.inject.Inject
+import com.google.inject.Injector
+import com.google.inject.Provider
 import com.google.inject.name.Names
+import java.util.List
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.emf.mwe.core.issues.Issues
+import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
-import org.eclipse.xtext.xtext.generator.XtextGenerator
+import org.eclipse.xtext.xtext.generator.Issues
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
-import org.eclipse.xtext.xtext.generator.model.FileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
-import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
-import static extension org.eclipse.xtext.xtext.generator.XtextGeneratorNaming.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import com.google.inject.Injector
-import com.google.inject.Provider
-import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
-import org.eclipse.emf.common.util.URI
-import java.util.List
-import org.eclipse.xtext.validation.Issue
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.util.CancelIndicator
 
 class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
@@ -49,10 +46,8 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
-	@Inject extension FileSystemAccess.Extensions
-	
-	@Accessors(PUBLIC_SETTER)
-	boolean generateStub = true
+	@Inject extension XtextGeneratorNaming
+	@Inject extension XbaseUsageDetector
 	
 	@Accessors(PUBLIC_SETTER)
 	boolean generateMwe = false
@@ -63,67 +58,69 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendMain = false
 	
-	def boolean isGenerateStub(Grammar grammar) {
-		!XbaseGeneratorFragment2.inheritsXbase(grammar) && generateStub
+	@Accessors(PUBLIC_SETTER)
+	boolean generateStubs = true
+	
+	def boolean isGenerateStub() {
+		!grammar.inheritsXbase && generateStubs
 	}
 	
-	def boolean isGenerateJavaMain(Grammar grammar) {
-		!XbaseGeneratorFragment2.inheritsXbase(grammar) && generateJavaMain
+	def boolean isGenerateJavaMain() {
+		!grammar.inheritsXbase && generateJavaMain
 	}
 	
-	def boolean isGenerateXtendMain(Grammar grammar) {
-		!XbaseGeneratorFragment2.inheritsXbase(grammar) && generateXtendMain
+	def boolean isGenerateXtendMain() {
+		!grammar.inheritsXbase && generateXtendMain
 	}
 	
-	def boolean isGenerateMwe(Grammar grammar) {
-		!XbaseGeneratorFragment2.inheritsXbase(grammar) && generateMwe
+	def boolean isGenerateMwe() {
+		!grammar.inheritsXbase && generateMwe
 	}
 	
 	protected def TypeReference getGeneratorStub(Grammar grammar) {
-		new TypeReference(grammar.naming.runtimeBasePackage + '.generator.' + GrammarUtil.getName(grammar) + 'Generator')
+		new TypeReference(grammar.runtimeBasePackage + '.generator.' + GrammarUtil.getSimpleName(grammar) + 'Generator')
 	}
 	
 	protected def TypeReference getJavaMain(Grammar grammar) {
 		new TypeReference(grammar.generatorStub.packageName + '.Main')
 	}
 	
-	override checkConfiguration(XtextGenerator generator, Issues issues) {
+	override checkConfiguration(Issues issues) {
 		if (generateJavaMain && generateXtendMain) {
-			issues.addWarning(generator,
+			issues.addWarning(
 				"Options 'generateJavaMain' and 'generateXtendMain' are mutually exclusive. Generating Xtend only.", this)
 			generateJavaMain = false
 		}
 	}
 	
-	override generate(LanguageConfig2 language) {
-		if (language.grammar.isGenerateStub) {
+	override generate() {
+		if (isGenerateStub) {
 			new GuiceModuleAccess.BindingFactory()
 				.addTypeToType(IGenerator.typeRef, language.grammar.generatorStub)
 				.contributeTo(language.runtimeGenModule)
 			if (projectConfig.runtimeManifest !== null)
 				projectConfig.runtimeManifest.requiredBundles += 'org.eclipse.xtext.xbase.lib'
-			if (!projectConfig.runtimeSrc.containsXtendFile(language.grammar.generatorStub))
-				doGenerateStubFile(language)
+			doGenerateStubFile
 		}
-		if (language.grammar.isGenerateStub || language.grammar.isGenerateJavaMain) {
+		if (isGenerateStub || isGenerateJavaMain) {
 			projectConfig.runtimeManifest.exportedPackages += language.grammar.generatorStub.packageName
 		}
 		
-		if (language.grammar.isGenerateJavaMain && !projectConfig.runtimeSrc.containsJavaFile(language.grammar.javaMain))
-			doGenerateJavaMain(language)
-		if (language.grammar.isGenerateXtendMain && !projectConfig.runtimeSrc.containsXtendFile(language.grammar.javaMain))
-			doGenerateXtendMain(language)
-		if (language.grammar.isGenerateMwe && !projectConfig.runtimeSrc.isFile(language.grammar.generatorStub.path + 'MWE.mwe2'))
-			doGenerateMweFile(language)
+		if (isGenerateJavaMain)
+			doGenerateJavaMain
+		if (isGenerateXtendMain)
+			doGenerateXtendMain
+		if (isGenerateMwe)
+			doGenerateMweFile
 		
-		contributeEclipsePluginGuiceBindings(language)
+		contributeEclipsePluginGuiceBindings
 		if (projectConfig.eclipsePluginManifest !== null)
 			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.builder'
 		if (projectConfig.eclipsePluginPluginXml !== null)
-			contributeEclipsePluginExtensions(language)
+			contributeEclipsePluginExtensions
 	}
 	
-	protected def contributeEclipsePluginGuiceBindings(LanguageConfig2 language) {
+	protected def contributeEclipsePluginGuiceBindings() {
 		val StringConcatenationClient expression = '''«'org.eclipse.core.resources.ResourcesPlugin'.typeRef».getWorkspace().getRoot()'''
 		val StringConcatenationClient statement =
 			'''binder.bind(«'org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer'.typeRef».class).annotatedWith(«Names».named("builderPreferenceInitializer")).to(«'org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer'.typeRef».class);'''
@@ -135,8 +132,8 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			.contributeTo(language.eclipsePluginGenModule)
 	}
 
-	protected def doGenerateStubFile(LanguageConfig2 language) {
-		val xtendFile = fileAccessFactory.with(language).createXtendFile(language.grammar.generatorStub)
+	protected def doGenerateStubFile() {
+		val xtendFile = fileAccessFactory.createXtendFile(language, grammar.generatorStub)
 		xtendFile.typeComment = '''
 			/**
 			 * Generates code from your model files on save.
@@ -160,8 +157,8 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 		xtendFile.writeTo(projectConfig.runtimeSrc)
 	}
 
-	protected def doGenerateJavaMain(LanguageConfig2 language) {
-		val javaFile = fileAccessFactory.with(language).createJavaFile(language.grammar.javaMain)
+	protected def doGenerateJavaMain() {
+		val javaFile = fileAccessFactory.createJavaFile(language, grammar.javaMain)
 		javaFile.javaContent = '''
 			public class Main {
 			
@@ -170,7 +167,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 						System.err.println("Aborting: no path to EMF resource provided!");
 						return;
 					}
-					«Injector» injector = new «language.naming.runtimeSetup»().createInjectorAndDoEMFRegistration();
+					«Injector» injector = new «grammar.runtimeSetup»().createInjectorAndDoEMFRegistration();
 					Main main = injector.getInstance(Main.class);
 					main.runGenerator(args[0]);
 				}
@@ -212,8 +209,8 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 		javaFile.writeTo(projectConfig.runtimeSrc)
 	}
 
-	protected def doGenerateXtendMain(LanguageConfig2 language) {
-		val xtendFile = fileAccessFactory.with(language).createXtendFile(language.grammar.javaMain)
+	protected def doGenerateXtendMain() {
+		val xtendFile = fileAccessFactory.createXtendFile(language, grammar.javaMain)
 		xtendFile.javaContent = '''
 			class Main {
 			
@@ -222,7 +219,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 						System::err.println('Aborting: no path to EMF resource provided!')
 						return
 					}
-					val injector = new «language.naming.runtimeSetup»().createInjectorAndDoEMFRegistration
+					val injector = new «grammar.runtimeSetup»().createInjectorAndDoEMFRegistration
 					val main = injector.getInstance(Main)
 					main.runGenerator(args.get(0))
 				}
@@ -257,15 +254,15 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 		xtendFile.writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def doGenerateMweFile(LanguageConfig2 language) {
-		val mweFile = fileAccessFactory.with(language).createTextFile()
+	protected def doGenerateMweFile() {
+		val mweFile = fileAccessFactory.createTextFile()
 		mweFile.path = language.grammar.generatorStub.path + 'MWE.mwe2'
 		mweFile.content = '''
 			«codeConfig.fileHeader»
 			module «language.grammar.generatorStub.name»MWE
 			
 			import org.eclipse.emf.mwe.utils.*
-			import «language.naming.runtimeSetup.packageName».*
+			import «grammar.runtimeSetup.packageName».*
 			
 			var targetDir
 			var modelPath
@@ -280,14 +277,14 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 					path = modelPath
 			
 					// this class will be generated by the xtext generator 
-					register = «language.naming.runtimeSetup.simpleName» {}
+					register = «grammar.runtimeSetup.simpleName» {}
 					loadResource = {
 						slot = "model"
 					}
 				}
 			
 				component = org.eclipse.xtext.generator.GeneratorComponent {
-					register = «language.naming.runtimeSetup.simpleName» {}
+					register = «grammar.runtimeSetup.simpleName» {}
 					slot = 'model'
 					outlet = {
 						path = targetDir
@@ -298,31 +295,31 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 		mweFile.writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def contributeEclipsePluginExtensions(LanguageConfig2 language) {
+	protected def contributeEclipsePluginExtensions() {
 		val name = language.grammar.name
 		projectConfig.eclipsePluginPluginXml.entries += '''
 			<extension point="org.eclipse.xtext.builder.participant">
 				<participant
-					class="«language.naming.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.IXtextBuilderParticipant"
 					fileExtensions="«language.fileExtensions.join(',')»">
 				</participant>
 			</extension>
 			<extension point="org.eclipse.ui.preferencePages">
 				<page
 					category="«name»"
-					class="«language.naming.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
 					id="«name».compiler.preferencePage"
 					name="Compiler">
-					<keywordReference id="«GrammarUtil.getNamespace(language.grammar) + ".ui.keyword_" + GrammarUtil.getName(language.grammar)»"/>
+					<keywordReference id="«GrammarUtil.getNamespace(language.grammar) + ".ui.keyword_" + GrammarUtil.getSimpleName(language.grammar)»"/>
 				</page>
 			</extension>
 			<extension point="org.eclipse.ui.propertyPages">
 				<page
 					category="«name»"
-					class="«language.naming.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
 					id="«name».compiler.propertyPage"
 					name="Compiler">
-					<keywordReference id="«GrammarUtil.getNamespace(language.grammar) + ".ui.keyword_" + GrammarUtil.getName(language.grammar)»"/>
+					<keywordReference id="«GrammarUtil.getNamespace(language.grammar) + ".ui.keyword_" + GrammarUtil.getSimpleName(language.grammar)»"/>
 					<enabledWhen>
 						<adapt type="org.eclipse.core.resources.IProject"/>
 					</enabledWhen>
@@ -343,7 +340,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 			</extension>
 			<extension point="org.eclipse.ui.handlers">
 				<handler
-					class="«language.naming.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+					class="«grammar.eclipsePluginExecutableExtensionFactory»:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
 					commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
 					<activeWhen>
 						<reference definitionId="«name».Editor.opened" />

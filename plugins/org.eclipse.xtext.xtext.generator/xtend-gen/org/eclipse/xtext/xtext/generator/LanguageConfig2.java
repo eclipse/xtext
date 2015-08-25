@@ -10,8 +10,10 @@ package org.eclipse.xtext.xtext.generator;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
+import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.google.inject.Provider;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup;
 import org.eclipse.xtext.nodemodel.INode;
@@ -54,6 +57,7 @@ import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
@@ -63,7 +67,7 @@ import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
-import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @Log
 @SuppressWarnings("all")
@@ -75,13 +79,23 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   private Grammar grammar;
   
   @Accessors(AccessorType.PUBLIC_GETTER)
+  private RuleNames ruleNames;
+  
+  @Accessors(AccessorType.PUBLIC_GETTER)
   private List<String> fileExtensions;
   
   @Accessors
   private ResourceSet resourceSet;
   
   @Accessors
-  private XtextGeneratorNaming naming;
+  private Module guiceModule = new Module() {
+    @Override
+    public void configure(final Binder it) {
+    }
+  };
+  
+  @Accessors
+  private XtextGeneratorNaming naming = new XtextGeneratorNaming();
   
   @Accessors
   private final List<String> loadedResources = CollectionLiterals.<String>newArrayList();
@@ -95,11 +109,18 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Accessors
   private final GuiceModuleAccess eclipsePluginGenModule = new GuiceModuleAccess();
   
+  @Accessors
+  private final GuiceModuleAccess ideaGenModule = new GuiceModuleAccess();
+  
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
   @Inject
   private IXtextProjectConfig projectConfig;
+  
+  @Inject
+  @Extension
+  private XbaseUsageDetector _xbaseUsageDetector;
   
   @Mandatory
   public void setUri(final String uri) {
@@ -122,8 +143,8 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
       _or = _isEmpty;
     }
     if (_or) {
-      String _name = GrammarUtil.getName(this.grammar);
-      final String lowerCase = _name.toLowerCase();
+      String _simpleName = GrammarUtil.getSimpleName(this.grammar);
+      final String lowerCase = _simpleName.toLowerCase();
       LanguageConfig2.LOG.info((("No explicit fileExtensions configured. Using \'*." + lowerCase) + "\'."));
       return Collections.<String>singletonList(lowerCase);
     }
@@ -136,7 +157,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   
   @Override
   public void initialize(final Injector injector) {
-    super.initialize(injector);
+    injector.injectMembers(this);
     if ((this.resourceSet == null)) {
       ResourceSet _get = this.resourceSetProvider.get();
       this.resourceSet = _get;
@@ -291,11 +312,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     final Grammar grammar = ((Grammar) _get_1);
     this.validateGrammar(grammar);
     this.grammar = grammar;
-    if ((this.naming == null)) {
-      XtextGeneratorNaming _xtextGeneratorNaming = new XtextGeneratorNaming();
-      this.naming = _xtextGeneratorNaming;
-    }
+    RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
+    this.ruleNames = _ruleNames;
     this.naming.setGrammar(grammar);
+    super.initialize(injector);
   }
   
   private void installIndex() {
@@ -408,12 +428,12 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   }
   
   @Override
-  public void generate(final LanguageConfig2 language) {
-    this.addImplicitContributions(language);
-    super.generate(language);
+  public void generate() {
+    this.addImplicitContributions();
+    super.generate();
   }
   
-  protected void addImplicitContributions(final LanguageConfig2 language) {
+  protected void addImplicitContributions() {
     ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
     boolean _tripleNotEquals = (_runtimeManifest != null);
     if (_tripleNotEquals) {
@@ -445,7 +465,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef(IAllContainersState.class);
     final GuiceModuleAccess.BindingFactory bindingFactory = _bindingFactory.addTypeToProviderInstance(_typeRef, expression);
-    boolean _inheritsXbase = XbaseGeneratorFragment2.inheritsXbase(language.grammar);
+    boolean _inheritsXbase = this._xbaseUsageDetector.inheritsXbase(this.grammar);
     if (_inheritsXbase) {
       TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.ui.editor.XtextEditor");
       TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.editor.XbaseEditor");
@@ -473,12 +493,26 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   }
   
   @Pure
+  public RuleNames getRuleNames() {
+    return this.ruleNames;
+  }
+  
+  @Pure
   public ResourceSet getResourceSet() {
     return this.resourceSet;
   }
   
   public void setResourceSet(final ResourceSet resourceSet) {
     this.resourceSet = resourceSet;
+  }
+  
+  @Pure
+  public Module getGuiceModule() {
+    return this.guiceModule;
+  }
+  
+  public void setGuiceModule(final Module guiceModule) {
+    this.guiceModule = guiceModule;
   }
   
   @Pure
@@ -508,5 +542,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
   @Pure
   public GuiceModuleAccess getEclipsePluginGenModule() {
     return this.eclipsePluginGenModule;
+  }
+  
+  @Pure
+  public GuiceModuleAccess getIdeaGenModule() {
+    return this.ideaGenModule;
   }
 }

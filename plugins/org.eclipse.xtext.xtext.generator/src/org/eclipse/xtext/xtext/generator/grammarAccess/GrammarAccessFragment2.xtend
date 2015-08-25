@@ -40,14 +40,13 @@ import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
+import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 import org.eclipse.xtext.xtext.generator.model.annotations.SingletonClassAnnotation
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.RuleNames
 
 @Log
 class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
@@ -60,30 +59,30 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	@Inject FileAccessFactory fileAccessFactory
 	
 	@Inject extension GrammarAccessExtensions
+	@Inject extension XtextGeneratorNaming
 	
-	override generate(LanguageConfig2 language) {
-		RuleNames.ensureAdapterInstalled(language.grammar);
+	override generate() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 		if (language.grammar.name != 'org.eclipse.xtext.common.Terminals') {
-			bindingFactory.addTypeToInstance(ClassLoader.typeRef, 'getClass().getClassLoader()')
+			bindingFactory.addTypeToInstance(ClassLoader.typeRef, '''getClass().getClassLoader()''')
 		}
 		bindingFactory.addTypeToType(IGrammarAccess.typeRef, language.grammar.grammarAccess)
 			.contributeTo(language.runtimeGenModule)
 		if (projectConfig.runtimeManifest !== null) {
 			projectConfig.runtimeManifest.exportedPackages.addAll(#[
-				language.naming.runtimeBasePackage, language.naming.runtimeBasePackage + ".services"
+				grammar.runtimeBasePackage, grammar.runtimeBasePackage + ".services"
 			])
 		}
 		
-		doGenerateGrammarAccess(language)
-		writeGrammar(language)
+		doGenerateGrammarAccess
+		writeGrammar
 	}
 	
 	def protected String getQualifiedName(AbstractRule rule) {
 		return GrammarUtil.getGrammar(rule).name + '.' + rule.name
 	}
 	
-	protected def void writeGrammar(LanguageConfig2 language) {
+	protected def void writeGrammar() {
 		val isSaving = Wrapper.wrap(false)
 		val ResourceSet cloneInto = new ResourceSetImpl
 		// Substitute the resource factory for ecore-files
@@ -177,8 +176,8 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 		resource.contents.add(pack)
 	}
 	
-	protected def doGenerateGrammarAccess(LanguageConfig2 language) {
-		val javaFile = fileAccessFactory.with(language).createJavaFile(language.grammar.grammarAccess)
+	protected def doGenerateGrammarAccess() {
+		val javaFile = fileAccessFactory.createJavaFile(language, grammar.grammarAccess)
 		javaFile.annotations += new SingletonClassAnnotation
 		javaFile.javaContent = '''
 			public class «language.grammar.grammarAccess.simpleName» extends «AbstractGrammarElementFinder» {
@@ -310,12 +309,12 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def dispatch StringConcatenationClient getter(ParserRule it, Grammar original) '''
 		«grammarFragmentToString('//')»
-		«IF grammar === original»
+		«IF it.grammar === original»
 			public «gaRuleAccessorClassName» «gaElementsAccessor» {
 				return «gaRuleAccessorLocalVarName»;
 			}
 		«ELSE»	
-			public «grammar.grammarAccess».«gaBaseRuleAccessorClassName» «gaElementsAccessor» {
+			public «it.grammar.grammarAccess».«gaBaseRuleAccessorClassName» «gaElementsAccessor» {
 				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseElementsAccessor»;
 			}
 		«ENDIF»
@@ -327,12 +326,12 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	
 	protected def dispatch StringConcatenationClient getter(EnumRule it, Grammar original) '''
 		«grammarFragmentToString('//')»
-		«IF grammar === original»
+		«IF it.grammar === original»
 			public «gaRuleAccessorClassName» «gaElementsAccessor» {
 				return «gaRuleAccessorLocalVarName»;
 			}
 		«ELSE»	
-			public «grammar.grammarAccess».«gaRuleAccessorClassName» «gaElementsAccessor» {
+			public «it.grammar.grammarAccess».«gaRuleAccessorClassName» «gaElementsAccessor» {
 				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaElementsAccessor»;
 			}
 		«ENDIF»
@@ -345,7 +344,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	protected def dispatch StringConcatenationClient getter(TerminalRule it, Grammar original) '''
 		«grammarFragmentToString('//')»
 		public «TerminalRule» «gaRuleAccessor» {
-			«IF grammar === original»
+			«IF it.grammar === original»
 				return «gaRuleAccessorLocalVarName»;
 			«ELSE»
 				return «usedGrammar(original).gaGrammarAccessLocalVarName».«gaBaseRuleAccessor»;
@@ -354,7 +353,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	'''
 	
 	protected def String gaGrammarAccessLocalVarName(Grammar g) {
-		'ga' + GrammarUtil.getName(g)
+		'ga' + GrammarUtil.getSimpleName(g)
 	}
 	
 	protected def String gaElementAccessorLocalVarName(AbstractElement ele) {

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Wizard
+Bundle-SymbolicName: org.eclipse.xtext.xtext.wizard
+Bundle-Version: 2.9.0.qualifier
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.xtext.wizard.cli;x-internal:=true,
+ org.eclipse.xtext.xtext.wizard;x-internal:=true
+Require-Bundle: org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib;resolution:=optional,
+ org.eclipse.xtext.util

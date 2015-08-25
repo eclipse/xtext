@@ -120,27 +120,27 @@ public class Naming {
 	}
 
 	public String guiceModuleRtGenerated(Grammar g) {
-		return basePackageRuntime(g) + ".Abstract" + getName(g) + "RuntimeModule";
+		return basePackageRuntime(g) + ".Abstract" + getSimpleName(g) + "RuntimeModule";
 	}
 
 	public String guiceModuleRt(Grammar g) {
-		return basePackageRuntime(g) + "." + getName(g) + "RuntimeModule";
+		return basePackageRuntime(g) + "." + getSimpleName(g) + "RuntimeModule";
 	}
 
 	public String guiceModuleUiGenerated(Grammar g) {
-		return basePackageUi(g) + ".Abstract" + getName(g) + "UiModule";
+		return basePackageUi(g) + ".Abstract" + getSimpleName(g) + "UiModule";
 	}
 
 	public String guiceModuleUi(Grammar g) {
-		return basePackageUi(g) + "." + getName(g) + "UiModule";
+		return basePackageUi(g) + "." + getSimpleName(g) + "UiModule";
 	}
 
 	public String setup(Grammar g) {
-		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetup";
+		return basePackageRuntime(g)+"."+getSimpleName(g) + "StandaloneSetup";
 	}
 
 	public String setupImpl(Grammar g) {
-		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetupGenerated";
+		return basePackageRuntime(g)+"."+getSimpleName(g) + "StandaloneSetupGenerated";
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class Naming {
 	}
 
 	public String executableExtensionFactory(Grammar g) {
-		return basePackageUi(g)+"."+getName(g)+"ExecutableExtensionFactory";
+		return basePackageUi(g)+"."+getSimpleName(g)+"ExecutableExtensionFactory";
 	}
 
 	public String asPath(String s) {

@@ -285,7 +285,7 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 			@Override
 			public String normalizeLineDelimiters(CharSequence content) {
 				String result = super.normalizeLineDelimiters(content);
-				result = result.replaceAll("\"\\+\\n\\s+\"", "");
+				result = result.replaceAll("\"\\+(\\r)?\\n\\s+\"", "");
 				return result;
 			}
 		}.normalizeLineDelimiters(content);

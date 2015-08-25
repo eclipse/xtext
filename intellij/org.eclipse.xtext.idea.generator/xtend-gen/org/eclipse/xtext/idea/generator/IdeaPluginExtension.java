@@ -29,7 +29,7 @@ public class IdeaPluginExtension {
   }
   
   public String getSimpleName(final Grammar grammar) {
-    return GrammarUtil.getName(grammar);
+    return GrammarUtil.getSimpleName(grammar);
   }
   
   public String getPackageName(final Grammar grammar) {

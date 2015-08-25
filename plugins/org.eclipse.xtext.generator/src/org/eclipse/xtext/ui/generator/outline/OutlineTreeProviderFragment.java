@@ -43,7 +43,7 @@ public class OutlineTreeProviderFragment extends AbstractStubGeneratorFragment {
 	}
 
 	public static String getQualifiedName(Grammar grammar, Naming n) {
-		return n.basePackageUi(grammar) + ".outline." + GrammarUtil.getName(grammar) + "OutlineTreeProvider";
+		return n.basePackageUi(grammar) + ".outline." + GrammarUtil.getSimpleName(grammar) + "OutlineTreeProvider";
 	}
 
 	@Override

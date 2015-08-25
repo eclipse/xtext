@@ -344,24 +344,10 @@ public class GuiceModuleAccess {
       return new GuiceModuleAccess.BindValue(null, null, false, (List<Object>)Conversions.doWrapArray(statements));
     }
     
-    public GuiceModuleAccess.BindingFactory addTypeToInstance(final TypeReference type, final String expression) {
-      GuiceModuleAccess.BindKey _key = this.key(type);
-      GuiceModuleAccess.BindValue _expr = this.expr(expression);
-      this.add(_key, _expr);
-      return this;
-    }
-    
     public GuiceModuleAccess.BindingFactory addTypeToInstance(final TypeReference type, final StringConcatenationClient expression) {
       GuiceModuleAccess.BindKey _key = this.key(type);
       GuiceModuleAccess.BindValue _expr = this.expr(expression);
       this.add(_key, _expr);
-      return this;
-    }
-    
-    public GuiceModuleAccess.BindingFactory addTypeToProviderInstance(final TypeReference type, final String expression) {
-      GuiceModuleAccess.BindKey _key = this.key(type);
-      GuiceModuleAccess.BindValue _providerExpr = this.providerExpr(expression);
-      this.add(_key, _providerExpr);
       return this;
     }
     
@@ -372,16 +358,9 @@ public class GuiceModuleAccess {
       return this;
     }
     
-    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final String name, final String... statements) {
+    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final String name, final StringConcatenationClient statement) {
       GuiceModuleAccess.BindKey _key = this.key(name);
-      GuiceModuleAccess.BindValue _statements = this.statements(statements);
-      this.add(_key, _statements);
-      return this;
-    }
-    
-    public GuiceModuleAccess.BindingFactory addConfiguredBinding(final String name, final StringConcatenationClient... statements) {
-      GuiceModuleAccess.BindKey _key = this.key(name);
-      GuiceModuleAccess.BindValue _statements = this.statements(statements);
+      GuiceModuleAccess.BindValue _statements = this.statements(new Object[] { statement });
       this.add(_key, _statements);
       return this;
     }

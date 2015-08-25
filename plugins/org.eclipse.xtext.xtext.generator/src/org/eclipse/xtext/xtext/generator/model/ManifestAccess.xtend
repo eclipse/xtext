@@ -13,7 +13,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class ManifestAccess {
 	
-	String path = 'META-INF/MANIFEST.MF'
+	String path = 'MANIFEST.MF'
 	
 	String bundleName
 	

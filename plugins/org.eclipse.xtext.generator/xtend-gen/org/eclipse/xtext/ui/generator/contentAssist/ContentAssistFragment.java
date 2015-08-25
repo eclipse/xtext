@@ -55,16 +55,16 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   public String getProposalProviderName(final Grammar grammar) {
     String _basePackageUi = this._naming.basePackageUi(grammar);
     String _plus = (_basePackageUi + ".contentassist.");
-    String _name = GrammarUtil.getName(grammar);
-    String _plus_1 = (_plus + _name);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ProposalProvider");
   }
   
   public String getGenProposalProviderName() {
     String _basePackageUi = this._naming.basePackageUi(this.grammar);
     String _plus = (_basePackageUi + ".contentassist.Abstract");
-    String _name = GrammarUtil.getName(this.grammar);
-    String _plus_1 = (_plus + _name);
+    String _simpleName = GrammarUtil.getSimpleName(this.grammar);
+    String _plus_1 = (_plus + _simpleName);
     return (_plus_1 + "ProposalProvider");
   }
   

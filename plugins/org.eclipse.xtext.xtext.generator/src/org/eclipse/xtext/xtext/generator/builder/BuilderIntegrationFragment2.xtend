@@ -19,7 +19,6 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
@@ -28,9 +27,9 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Inject IXtextProjectConfig projectConfig
 	
-	override generate(LanguageConfig2 language) {
-		addRuntimeGuiceBindings(language)
-		addEclipsePluginGuiceBindings(language)
+	override generate() {
+		addRuntimeGuiceBindings
+		addEclipsePluginGuiceBindings
 		
 		if (projectConfig.eclipsePluginManifest !== null) {
 			projectConfig.eclipsePluginManifest.requiredBundles.addAll(#[
@@ -39,7 +38,7 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	protected def addRuntimeGuiceBindings(LanguageConfig2 language) {
+	protected def addRuntimeGuiceBindings() {
 		val StringConcatenationClient statement1 =
 			'''binder.bind(«IResourceDescriptions».class).to(«ResourceSetBasedResourceDescriptions».class);'''
 		val StringConcatenationClient statement2 =
@@ -54,7 +53,7 @@ class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
 			.contributeTo(language.runtimeGenModule)
 	}
 
-	protected def addEclipsePluginGuiceBindings(LanguageConfig2 language) {
+	protected def addEclipsePluginGuiceBindings() {
 		val StringConcatenationClient statement1 =
 			'''binder.bind(«IResourceDescriptions».class).annotatedWith(«Names».named(«ResourceDescriptionsProvider».NAMED_BUILDER_SCOPE)).to(«'org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware'.typeRef».class);'''
 		val StringConcatenationClient statement2 =

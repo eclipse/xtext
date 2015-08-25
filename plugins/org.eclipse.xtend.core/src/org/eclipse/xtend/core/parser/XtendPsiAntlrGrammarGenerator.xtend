@@ -8,15 +8,13 @@
 package org.eclipse.xtend.core.parser
 
 import com.google.inject.Inject
-import com.google.inject.Singleton
 import org.eclipse.xtext.Grammar
-import org.eclipse.xtext.generator.parser.antlr.AntlrOptions
-import org.eclipse.xtext.idea.generator.parser.antlr.PsiAntlrGrammarGenerator
+import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-@Singleton
 class XtendPsiAntlrGrammarGenerator extends PsiAntlrGrammarGenerator {
 
 	@Inject

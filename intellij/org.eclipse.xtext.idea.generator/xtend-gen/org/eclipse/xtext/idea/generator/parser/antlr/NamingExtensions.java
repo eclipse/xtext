@@ -29,8 +29,8 @@ public class NamingExtensions {
     _builder.append(".");
     _builder.append(prefix, "");
     _builder.append("Internal");
-    String _name = GrammarUtil.getName(it);
-    _builder.append(_name, "");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
     return _builder.toString();
   }
   
@@ -39,8 +39,8 @@ public class NamingExtensions {
     String _parserPackage = this.getParserPackage(it);
     _builder.append(_parserPackage, "");
     _builder.append(".Internal");
-    String _name = GrammarUtil.getName(it);
-    _builder.append(_name, "");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder.append(_simpleName, "");
     _builder.append("Parser");
     return _builder.toString();
   }

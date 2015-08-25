@@ -10,13 +10,14 @@ module org.eclipse.xtext.web.example.statemachine.GenerateStatemachine
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
-import org.eclipse.xtext.web.generator.*
+import org.eclipse.xtext.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.web.example.statemachine"
+var runtimeProject = "../${projectName}"
 
 var grammarURI = "classpath:/org/eclipse/xtext/web/example/statemachine/Statemachine.xtext"
 var fileExtensions = "statemachine"
-var projectName = "org.eclipse.xtext.web.example.statemachine"
-var runtimeProject = "../${projectName}"
-var javaScriptPath = "../org.eclipse.xtext.web.example.jetty/src/main/webapp/xtext"
+
 var generateXtendStub = true
 var encoding = "UTF-8"
 var fileHeader = "/*******************************************************************************
@@ -45,57 +46,79 @@ Workflow {
 		directory = "${runtimeProject}.ide/src-gen"
 	}
 	
-	component = Generator auto-inject {
-		pathRtProject = runtimeProject
-		projectNameRt = projectName
-		pathIdeProject = "${runtimeProject}.ide"
-		projectNameIde = "${projectName}.ide"
-		fileHeader = fileHeader
+	component = XtextGenerator auto-inject {
+		configuration = {
+			project = WizardConfig {
+				runtimeRoot = runtimeProject
+				genericIdeSupport = true
+				eclipseEditor = false
+				webSupport = true
+				webWebApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp/"
+			}
+			code = auto-inject {}
+		}
 		language = auto-inject {
 			uri = grammarURI
 
 			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment auto-inject {}
+			fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
 
 			// generates Java API for the generated EPackages
-			fragment = ecore.EMFGeneratorFragment auto-inject {}
+			fragment = adapter.FragmentAdapter {
+				fragment = ecore.EMFGeneratorFragment auto-inject {
+					javaModelDirectory = "/${projectName}/src-gen"
+				}
+			}
 
-			fragment = serializer.SerializerFragment auto-inject {
-				generateStub = false
+			fragment = adapter.FragmentAdapter {
+				fragment = serializer.SerializerFragment auto-inject {
+					generateStub = false
+				}
 			}
 
 			// a custom ResourceFactory for use with EMF
-			fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+			fragment = adapter.FragmentAdapter {
+				fragment = resourceFactory.ResourceFactoryFragment auto-inject {}
+			}
 
 			// The antlr parser generator fragment.
-			fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.antlr.XtextAntlrGeneratorFragment auto-inject {
+				}
 			}
 
 			// Xtend-based API for validation
-			fragment = validation.ValidatorFragment auto-inject {
-			//    composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
-			    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+			fragment = adapter.FragmentAdapter {
+				fragment = validation.ValidatorFragment auto-inject {
+				    composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+				}
 			}
 
 			// scoping and exporting API
-			fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
-			fragment = exporting.QualifiedNamesFragment auto-inject {}
+			fragment = adapter.FragmentAdapter {
+				fragment = scoping.ImportNamespacesScopingFragment auto-inject {}
+			}
+			fragment = adapter.FragmentAdapter {
+				fragment = exporting.QualifiedNamesFragment auto-inject {}
+			}
 
 			// generator API
-			fragment = generator.GeneratorFragment auto-inject {}
+			fragment = generator.GeneratorFragment2 auto-inject {}
 
 			// formatter API
-			fragment = formatting2.Formatter2Fragment auto-inject {}
+			fragment = formatting.Formatter2Fragment2 auto-inject {}
 			
 			// a light-weight parser used for content assist
-			fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+			fragment = adapter.FragmentAdapter {
+				fragment = parser.antlr.XtextAntlrUiGeneratorFragment auto-inject {}
+			}
 			
 			// JavaScript-based syntax highlighting
-			fragment = AceHighlightingFragment auto-inject {
-				javaScriptPath = javaScriptPath
+			fragment = web.AceHighlightingFragment auto-inject {
+				javaScriptPath = 'xtext'
 			}
-			fragment = OrionHighlightingFragment auto-inject {
-				javaScriptPath = javaScriptPath
+			fragment = web.OrionHighlightingFragment auto-inject {
+				javaScriptPath = 'xtext'
 			}
 		}
 	}

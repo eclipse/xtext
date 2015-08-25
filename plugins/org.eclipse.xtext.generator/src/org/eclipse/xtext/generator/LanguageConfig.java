@@ -166,7 +166,7 @@ public class LanguageConfig extends CompositeGeneratorFragment {
 
 	public List<String> getFileExtensions(Grammar g) {
 		if (fileExtensions.isEmpty()) {
-			String lowerCase = GrammarUtil.getName(g).toLowerCase();
+			String lowerCase = GrammarUtil.getSimpleName(g).toLowerCase();
 			if (LOG.isInfoEnabled())
 				LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.");
 			return fileExtensions = Collections.singletonList(lowerCase);

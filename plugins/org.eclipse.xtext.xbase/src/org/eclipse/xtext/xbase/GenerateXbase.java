@@ -22,12 +22,11 @@ import org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.WizardConfig;
 import org.eclipse.xtext.xtext.generator.XtextGenerator;
-import org.eclipse.xtext.xtext.generator.XtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.builder.BuilderIntegrationFragment2;
 import org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2;
-import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseGeneratorFragment2;
 
 /**
@@ -54,9 +53,6 @@ final class GenerateXbase {
 			" * http://www.eclipse.org/legal/epl-v10.html\n" +
 			" *******************************************************************************/";
 		
-		final String ideaProjectName = projectName + ".idea";
-		final String ideaProjectPath = "../../intellij/" + ideaProjectName;
-
 		new StandaloneSetup() {{
 			// the maven archetype contains a template file called .project
 			setIgnoreBrokenProjectFiles(true);
@@ -94,17 +90,9 @@ final class GenerateXbase {
 		
 		final XtextGenerator generator = new XtextGenerator() {{
 			setConfiguration(new DefaultGeneratorModule() {{
-				setProject(new XtextProjectConfig() {{
-					setRuntimeSrc(runtimeProject + "/src");
-					setRuntimeSrcGen(runtimeProject + "/src-gen");
-					ManifestAccess runtimeManifest = new ManifestAccess();
-					runtimeManifest.setPath(runtimeProject + "/META-INF/MANIFEST.MF");
-					setRuntimeManifest(runtimeManifest);
-					setEclipsePluginSrc(uiProject + "/src");
-					setEclipsePluginSrcGen(uiProject + "/src-gen");
-					ManifestAccess uiManifest = new ManifestAccess();
-					uiManifest.setPath(uiProject + "/META-INF/MANIFEST.MF");
-					setEclipsePluginManifest(uiManifest);
+				setProject(new WizardConfig() {{
+					setRuntimeRoot(runtimeProject);
+					setEclipseEditor(true);
 				}});
 				setCode(new CodeConfig() {{
 					setEncoding("ISO-8859-1");
@@ -232,10 +220,6 @@ final class GenerateXbase {
 		
 		new DirectoryCleaner() {{
 			setDirectory(runtimeProject + "/src-gen");
-		}}.invoke(null);
-		
-		new DirectoryCleaner() {{
-			setDirectory(ideaProjectPath + "/src-gen");
 		}}.invoke(null);
 		
 		generator.invoke(null);

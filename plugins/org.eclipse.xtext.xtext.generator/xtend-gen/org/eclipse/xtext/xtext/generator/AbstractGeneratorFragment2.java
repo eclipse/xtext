@@ -7,19 +7,42 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
+import com.google.inject.Inject;
 import com.google.inject.Injector;
-import org.eclipse.emf.mwe.core.issues.Issues;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.XtextGenerator;
+import org.eclipse.xtext.xtext.generator.Issues;
+import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 
 @SuppressWarnings("all")
 public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private LanguageConfig2 language;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private Grammar grammar;
+  
   @Override
-  public void checkConfiguration(final XtextGenerator generator, final Issues issues) {
+  public void checkConfiguration(final Issues issues) {
   }
   
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
+  }
+  
+  @Pure
+  protected LanguageConfig2 getLanguage() {
+    return this.language;
+  }
+  
+  @Pure
+  protected Grammar getGrammar() {
+    return this.grammar;
   }
 }

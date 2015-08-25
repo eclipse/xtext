@@ -8,21 +8,19 @@
 package org.eclipse.xtend.core.parser;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import java.util.HashSet;
 import java.util.List;
 import org.eclipse.xtend.core.parser.TokenNames;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.generator.parser.antlr.AntlrOptions;
-import org.eclipse.xtext.idea.generator.parser.antlr.PsiAntlrGrammarGenerator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 
 /**
  * @author kosyakov - Initial contribution and API
  */
-@Singleton
 @SuppressWarnings("all")
 public class XtendPsiAntlrGrammarGenerator extends PsiAntlrGrammarGenerator {
   @Inject

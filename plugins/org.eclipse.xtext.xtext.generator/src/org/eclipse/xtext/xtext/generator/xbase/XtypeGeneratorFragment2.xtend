@@ -8,22 +8,14 @@
 package org.eclipse.xtext.xtext.generator.xbase
 
 import com.google.inject.Inject
-import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
-
-import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
 
 class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
-	static def boolean inheritsXtype(Grammar grammar) {
-		grammar.inherits('org.eclipse.xtext.xbase.Xtype')
-	}
-	
 	@Inject IXtextProjectConfig projectConfig
-	
-	override generate(LanguageConfig2 language) {
+	@Inject extension XbaseUsageDetector
+	override generate() {
 		if (language.grammar.inheritsXtype && projectConfig.eclipsePluginManifest !== null)
 			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.xbase.ui'
 	}

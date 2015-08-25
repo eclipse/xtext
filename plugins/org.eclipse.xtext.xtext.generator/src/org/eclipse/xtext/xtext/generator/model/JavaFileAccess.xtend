@@ -47,7 +47,6 @@ class JavaFileAccess extends TextFileAccess {
 	ResourceSet resourceSet
 	
 	protected new(TypeReference typeRef, CodeConfig codeConfig, IEncodingProvider encodingProvider) {
-		super(encodingProvider)
 		if (typeRef.simpleNames.length > 1)
 			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
 		this.javaType = typeRef

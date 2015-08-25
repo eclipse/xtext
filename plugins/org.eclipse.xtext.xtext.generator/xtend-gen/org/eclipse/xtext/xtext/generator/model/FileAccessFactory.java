@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -26,38 +25,21 @@ public class FileAccessFactory {
   @Inject
   private IEncodingProvider encodingProvider;
   
-  @Inject
-  private Provider<ResourceSet> resourceSetProvider;
-  
   public TextFileAccess createTextFile() {
-    return new TextFileAccess(this.encodingProvider);
+    return new TextFileAccess();
   }
   
-  public JavaFileAccess createJavaFile(final TypeReference typeRef) {
+  public JavaFileAccess createJavaFile(final LanguageConfig2 language, final TypeReference typeRef) {
     final JavaFileAccess file = new JavaFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _get = this.resourceSetProvider.get();
-    file.setResourceSet(_get);
+    ResourceSet _resourceSet = language.getResourceSet();
+    file.setResourceSet(_resourceSet);
     return file;
   }
   
-  public XtendFileAccess createXtendFile(final TypeReference typeRef) {
+  public XtendFileAccess createXtendFile(final LanguageConfig2 language, final TypeReference typeRef) {
     final XtendFileAccess file = new XtendFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _get = this.resourceSetProvider.get();
-    file.setResourceSet(_get);
+    ResourceSet _resourceSet = language.getResourceSet();
+    file.setResourceSet(_resourceSet);
     return file;
-  }
-  
-  public FileAccessFactory with(final LanguageConfig2 language) {
-    final FileAccessFactory result = new FileAccessFactory();
-    result.codeConfig = this.codeConfig;
-    result.encodingProvider = this.encodingProvider;
-    final Provider<ResourceSet> _function = new Provider<ResourceSet>() {
-      @Override
-      public ResourceSet get() {
-        return language.getResourceSet();
-      }
-    };
-    result.resourceSetProvider = _function;
-    return result;
   }
 }
