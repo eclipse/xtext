@@ -93,23 +93,15 @@ Workflow {
 	component = parser.JFlexLoader : jFlexMain {}
 
 	component = XtextGenerator auto-inject {
-		configuration = {
-			project = {
-				runtimeSrc = "${projectPath}/src"
-				runtimeSrcGen = "${projectPath}/src-gen"
-				runtimeManifest = {
-					path = "${projectPath}/META-INF/MANIFEST.MF"
-				}
-				eclipsePluginSrc = "${uiProjectPath}/src"
-				eclipsePluginSrcGen = "${uiProjectPath}/src-gen"
-				eclipsePluginManifest = {
-					path = "${uiProjectPath}/META-INF/MANIFEST.MF"
-				}
-				genericIdeSrc = "${ideProjectPath}/src"
-				genericIdeSrcGen = "${ideProjectPath}/src-gen"
-				genericIdeManifest = {
-					path = "${ideProjectPath}/META-INF/MANIFEST.MF"
-				}
+		configuration =  {
+			project = WizardConfig {
+				runtimeRoot = projectPath
+				eclipseEditor = true
+				eclipsePluginRoot = uiProjectPath
+				genericIdeSupport = true
+				genericIdeRoot = ideProjectPath
+				ideaEditor = true
+				ideaPluginRoot = ideaProjectPath
 			}
 			code = {
 				encoding = "ISO-8859-1"
@@ -121,6 +113,7 @@ Workflow {
 			resourceSet = resourceSet
 			uri = grammarURI
 			fileExtensions = file.extensions
+			guiceModule = parser.XtendLanguageGeneratorModule {}
 			naming = {
 				eclipsePluginBasePackage = uiProjectName
 				genericIdeBasePackage = ideProjectName
@@ -217,15 +210,8 @@ Workflow {
 					additionalRulePath = "/org/eclipse/xtend/core/parser/antlr/internal/rules.incl"
 				}
 			}
-	        fragment = adapter.FragmentAdapter {
-				fragment = parser.XtendAntlrIDEAGeneratorFragment auto-inject {}
-			}
-    		fragment = adapter.FragmentAdapter {
-				fragment = org.eclipse.xtext.idea.generator.IdeaPluginGenerator auto-inject {
-	    			runtimeProjectName = projectName
-	    			runtimeProjectPath = projectPath
-		        }
-	        }
+			fragment = org.eclipse.xtext.xtext.generator.idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+			fragment = org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator auto-inject {}
 		}
 	}
 }
