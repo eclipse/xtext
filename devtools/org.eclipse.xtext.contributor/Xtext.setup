@@ -328,6 +328,23 @@
           name="org.eclipse.pde.java8patch.feature.group"
           optional="true"/>
       <repositoryList
+          name="Neon">
+        <repository
+            url="${xtext.nightly.composite}"/>
+        <repository
+            url="${antlr-gen.update.site}"/>
+        <repository
+            url="http://download.eclipse.org/tools/gef/updates/milestones"/>
+        <repository
+            url="http://download.eclipse.org/technology/m2e/releases/1.1/"/>
+        <repository
+            url="http://download.eclipse.org/technology/swtbot/releases/latest/"/>
+        <repository
+            url="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit/"/>
+        <repository
+            url="${emf.update.site}"/>
+      </repositoryList>
+      <repositoryList
           name="Mars">
         <repository
             url="${xtext.nightly.composite}"/>
