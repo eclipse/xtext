@@ -110,7 +110,7 @@ http://www.eclipse.org/legal/epl-v10.html Description here.
 
 
     <plugin
-          id="org.eclipse.xtext.wizard"
+          id="org.eclipse.xtext.xtext.wizard"
           download-size="0"
           install-size="0"
           version="0.0.0"
