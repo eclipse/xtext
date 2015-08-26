@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.annotations.validation;
 
-import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
-import org.eclipse.xtext.generator.validation.ValidatorFragment;
 
 /**
- * Allows to use the {@link ValidatorFragment} instead of the {@link JavaValidatorFragment} for Xbase languages.
+ * Allows to use the  org.eclipse.xtext.generator.validation.ValidatorFragment instead of the org.eclipse.xtext.generator.validation.JavaValidatorFragment for Xbase languages.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
