@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import org.eclipse.xtext.generator.validation.JavaValidatorFragment;
-import org.eclipse.xtext.generator.validation.ValidatorFragment;
 
 /**
- * Needed because the Xtend-based {@link ValidatorFragment} looks for a class with this name, 
- * while the {@link JavaValidatorFragment} looks for {@link XbaseJavaValidator}. We have to support
+ * Needed because the Xtend-based org.eclipse.xtext.generator.validation.ValidatorFragment looks for a class with this name, 
+ * while the org.eclipse.xtext.generator.validation.JavaValidatorFragment looks for org.eclipse.xtext.generator.validation.ValidatorFragment. We have to support
  * both types of workflows.
  * 
  * @author Jan Koehnlein - Initial contribution and API

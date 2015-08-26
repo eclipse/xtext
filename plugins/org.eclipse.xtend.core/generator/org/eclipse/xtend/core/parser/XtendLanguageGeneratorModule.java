@@ -7,16 +7,14 @@
  */
 package org.eclipse.xtend.core.parser;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.binder.AnnotatedBindingBuilder;
-import org.eclipse.xtend.core.parser.XtendPsiAntlrGrammarGenerator;
 import org.eclipse.xtext.xtext.generator.idea.parser.antlr.PsiAntlrGrammarGenerator;
 
-@SuppressWarnings("all")
+import com.google.inject.AbstractModule;
+
 public class XtendLanguageGeneratorModule extends AbstractModule {
-  @Override
-  protected void configure() {
-    AnnotatedBindingBuilder<PsiAntlrGrammarGenerator> _bind = this.<PsiAntlrGrammarGenerator>bind(PsiAntlrGrammarGenerator.class);
-    _bind.to(XtendPsiAntlrGrammarGenerator.class);
-  }
+
+	@Override
+	protected void configure() {
+		bind(PsiAntlrGrammarGenerator.class).to(XtendPsiAntlrGrammarGenerator.class);
+	}
 }

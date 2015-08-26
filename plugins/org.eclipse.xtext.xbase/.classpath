@@ -11,6 +11,10 @@
 	</classpathentry>
 	<classpathentry kind="src" path="xtend-gen"/>
 	<classpathentry kind="src" path="generator"/>
-	<classpathentry kind="src" path="deprecated"/>
+	<classpathentry kind="src" path="deprecated">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
