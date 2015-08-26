@@ -46,8 +46,9 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 				<meta http-equiv="Content-Language" content="en-us">
 				<title>Example Web Editor</title>
+				<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css"/>
 				<link rel="stylesheet" type="text/css" href="xtext/«projectInfo.xtextVersion»/xtext-orion.css"/>
-				<link rel="stylesheet" type="text/css" href="style.css" />
+				<link rel="stylesheet" type="text/css" href="style.css"/>
 				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
 				<script type="text/javascript">
 					require.config({
@@ -57,8 +58,10 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 							"xtext/xtext-orion": "xtext/«projectInfo.xtextVersion»/xtext-orion"
 						}
 					});
-					require(["xtext/xtext-orion"], function(xtext) {
-						xtext.createEditor({syntaxDefinition: "xtext/generated/«projectInfo.fileExtension»-syntax"});
+					require(["orion/code_edit/built-codeEdit-amd"], function() {
+						require(["xtext/xtext-orion"], function(xtext) {
+							xtext.createEditor({syntaxDefinition: "xtext/generated/«projectInfo.fileExtension»-syntax"});
+						});
 					});
 				</script>
 			</head>
@@ -135,15 +138,6 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				border: 1px solid #aaa;
 			}
 			
-			.contentassist .proposal-default {
-				color: #888;
-			}
-			
-			.contentassist .proposal-name {
-				color: #000;
-				padding-right: 12px;
-			}
-			
 			/************* Examples for custom icons *************/
 			
 			/* For all elements of type Greeting or its subtypes */ 
@@ -185,12 +179,32 @@ class WebProjectContributor extends DefaultProjectFactoryContributor {
 				providedCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.+'
 			}
 			
+			def orionDir = file('src/main/webapp/orion')
+			def orionZip = file("$buildDir/orion/built-codeEdit.zip")
+			
+			task downloadOrion {
+				onlyIf {!orionZip.exists()}
+				doLast {
+					orionZip.parentFile.mkdirs()
+					ant.get(src: 'http://download.eclipse.org/orion/drops/S20150817-1226/built-codeEdit.zip', dest: orionZip)
+				}
+			}
+			
+			task unpackOrion(type: Copy) {
+				onlyIf {!orionDir.exists()}
+				dependsOn(downloadOrion)
+				from(zipTree(orionZip))
+				into(orionDir)
+			}
+			
 			task jettyRun(type:JavaExec) {
-				dependsOn(sourceSets.main.runtimeClasspath)
+				dependsOn(sourceSets.main.runtimeClasspath, unpackOrion)
 				classpath = sourceSets.main.runtimeClasspath.filter{it.exists()}
 				main = "«projectInfo.basePackage».«WEB».ServerLauncher"
 				standardInput = System.in
 			}
+			
+			tasks.eclipse.dependsOn(unpackOrion)
 			
 			allprojects {
 				repositories {
