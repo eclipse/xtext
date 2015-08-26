@@ -26,6 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.idea.resource.ProjectDescriptionProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ProjectDescription;
+import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -175,8 +177,8 @@ public class IdeaResourceSetProvider {
       boolean _notEquals = (!Objects.equal(cachedDocument, null));
       if (_notEquals) {
         String _text = cachedDocument.getText();
-        byte[] _bytes = _text.getBytes();
-        return new ByteArrayInputStream(_bytes);
+        Charset _charset = virtualFile.getCharset();
+        return new LazyStringInputStream(_text, _charset);
       }
       Application _application = ApplicationManager.getApplication();
       final Computable<InputStream> _function = new Computable<InputStream>() {
