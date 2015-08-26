@@ -393,7 +393,7 @@ public class JdtBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
 			
 			parser.setProject(javaProject);
 			
-			Map<Object, Object> options = javaProject.getOptions(true);
+			Map<String, String> options = javaProject.getOptions(true);
 			
 			options.put(JavaCore.COMPILER_DOC_COMMENT_SUPPORT, JavaCore.DISABLED);
 			parser.setCompilerOptions(options);

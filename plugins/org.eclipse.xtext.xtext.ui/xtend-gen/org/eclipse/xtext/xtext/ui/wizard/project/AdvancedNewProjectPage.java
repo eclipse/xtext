@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.wizard.project.Messages;
+import org.eclipse.xtext.xtext.wizard.BuildSystem;
+import org.eclipse.xtext.xtext.wizard.SourceLayout;
 
 @SuppressWarnings("all")
 public class AdvancedNewProjectPage extends WizardPage {
@@ -36,7 +38,7 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   private Combo buildSystem;
   
-  private Combo projectLayout;
+  private Combo sourceLayout;
   
   public AdvancedNewProjectPage(final String pageName) {
     super(pageName);
@@ -111,8 +113,8 @@ public class AdvancedNewProjectPage extends WizardPage {
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
-                it.setEnabled(false);
-                it.setItems(new String[] { "None", "Maven", "Gradle" });
+                it.setEnabled(true);
+                it.setItems(new String[] { "Eclipse", "Maven", "Tycho", "Gradle" });
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
@@ -123,16 +125,16 @@ public class AdvancedNewProjectPage extends WizardPage {
         final Procedure1<Group> _function_2 = new Procedure1<Group>() {
           @Override
           public void apply(final Group it) {
-            it.setText("Project Layout");
+            it.setText("Source Layout");
             final Procedure1<Combo> _function = new Procedure1<Combo>() {
               @Override
               public void apply(final Combo it) {
-                it.setEnabled(false);
-                it.setItems(new String[] { "Eclipse", "Maven/Gradle" });
+                it.setEnabled(true);
+                it.setItems(new String[] { "Plain", "Maven/Gradle" });
               }
             };
             Combo _DropDown = AdvancedNewProjectPage.this.DropDown(it, _function);
-            AdvancedNewProjectPage.this.projectLayout = _DropDown;
+            AdvancedNewProjectPage.this.sourceLayout = _DropDown;
           }
         };
         AdvancedNewProjectPage.this.Group(it, _function_2);
@@ -200,7 +202,7 @@ public class AdvancedNewProjectPage extends WizardPage {
     this.createIdeProject.setSelection(false);
     this.createTestProject.setSelection(false);
     this.buildSystem.select(0);
-    this.projectLayout.select(0);
+    this.sourceLayout.select(0);
   }
   
   public boolean isCreateUiProject() {
@@ -221,6 +223,18 @@ public class AdvancedNewProjectPage extends WizardPage {
   
   public boolean isCreateWebProject() {
     return this.createWebProject.getSelection();
+  }
+  
+  public BuildSystem getBuildSystem() {
+    BuildSystem[] _values = BuildSystem.values();
+    int _selectionIndex = this.buildSystem.getSelectionIndex();
+    return _values[_selectionIndex];
+  }
+  
+  public SourceLayout getSourceLayout() {
+    SourceLayout[] _values = SourceLayout.values();
+    int _selectionIndex = this.sourceLayout.getSelectionIndex();
+    return _values[_selectionIndex];
   }
   
   private void require(final Button project, final Button requirement) {

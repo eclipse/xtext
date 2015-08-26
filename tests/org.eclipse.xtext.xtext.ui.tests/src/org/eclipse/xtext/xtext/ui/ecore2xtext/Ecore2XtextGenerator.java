@@ -9,13 +9,11 @@ package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -28,11 +26,10 @@ import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.util.IProjectFactoryContributor.IFileCreator;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextDslProjectContributor;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
+import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 
+import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
 /**
@@ -50,7 +47,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 
 	private String languageName;
 
-	private Ecore2XtextProjectInfo xtextProjectInfo;
+	private XtextProjectInfo xtextProjectInfo;
 
 	public Ecore2XtextGenerator() {
 		resourceSet = new XtextResourceSet();
@@ -82,27 +79,19 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 	@Override
 	protected void invokeInternal(final WorkflowContext ctx, ProgressMonitor monitor, final Issues issues) {
 		createXtextProjectInfo(issues);
-		Ecore2XtextDslProjectContributor contributor = new Ecore2XtextDslProjectContributor(xtextProjectInfo);
-		contributor.createGrammarFile(new IFileCreator() {
-
-			@Override
-			public IFile writeToFile(CharSequence chars, String fileName) {
-				try {
-					Files.write(chars, new File(genPath, fileName), Charset.defaultCharset());
-				} catch (IOException e) {
-					String message = "Can't create grammar file";
-					log.error(message, e);
-					issues.addError(Ecore2XtextGenerator.this, message, this, e, null);
-				}
-				return null;
-			}
-		});
-
+		CharSequence grammar = xtextProjectInfo.getRuntimeProject().grammar();
+		try {
+			Files.write(grammar, new File(genPath, xtextProjectInfo.getRuntimeProject().getGrammarFilePath()), Charsets.ISO_8859_1);
+		} catch (IOException e) {
+			String message = "Can't create grammar file";
+			log.error(message, e);
+			issues.addError(Ecore2XtextGenerator.this, message, this, e, null);
+		}
 	}
 
 	private void createXtextProjectInfo(Issues issues) {
 		if (xtextProjectInfo == null) {
-			xtextProjectInfo = new Ecore2XtextProjectInfo();
+			xtextProjectInfo = new XtextProjectInfo();
 			List<EPackageInfo> ePackageInfos = new ArrayList<EPackageInfo>();
 			EClass rootElementClass = null;
 			for (Iterator<Notifier> i = resourceSet.getAllContents(); i.hasNext();) {
@@ -121,7 +110,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 			if (ePackageInfos.isEmpty()) {
 				issues.addError("No EPackages found");
 			} else {
-				xtextProjectInfo.setDefaultEPackageInfo(ePackageInfos.get(0));
+				xtextProjectInfo.getEcore2Xtext().setDefaultEPackageInfo(ePackageInfos.get(0));
 			}
 			if (rootElementClass == null) {
 				issues.addError("No rootElement EClass " + rootElementClassName + " found");
@@ -129,9 +118,9 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 			if (languageName == null) {
 				issues.addError("languageName must be set");
 			}
-			xtextProjectInfo.setLanguageName(languageName);
-			xtextProjectInfo.setEPackageInfos(ePackageInfos);
-			xtextProjectInfo.setRootElementClass(rootElementClass);
+			xtextProjectInfo.getLanguage().setName(languageName);
+			xtextProjectInfo.getEcore2Xtext().getEPackageInfos().addAll(ePackageInfos);
+			xtextProjectInfo.getEcore2Xtext().setRootElementClass(rootElementClass);
 		}
 	}
 

@@ -10,24 +10,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
+import org.eclipse.xtext.xtext.wizard.BuildSystem;
+import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
+import org.eclipse.xtext.xtext.wizard.LanguageDescriptor.FileExtensions;
 
 import com.google.inject.Inject;
 
 /**
  * A project wizard to create Xtext projects.
- * 
- * @author KD - Initial contribution and API
- * @author Sven Efftinge
- * @author Michael Clay
  */
 public class NewXtextProjectWizard extends XtextNewProjectWizard {
 
@@ -56,40 +55,38 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
-		projectInfo.setCreateUiProject(advancedPage.isCreateUiProject());
-		projectInfo.setCreateTestProject(advancedPage.isCreateTestProject());
-		projectInfo.setCreateIdeProject(advancedPage.isCreateIdeProject());
-		projectInfo.setCreateIntellijProject(advancedPage.isCreateIntellijProject());
-		projectInfo.setCreateWebProject(advancedPage.isCreateWebProject());
-		projectInfo.setFileExtension(mainPage.getFileExtensions());
-		projectInfo.setLanguageName(mainPage.getLanguageName());
-		projectInfo.setProjectName(mainPage.getProjectName());
+		LanguageDescriptor language = projectInfo.getLanguage();
+		language.setFileExtensions(FileExtensions.fromString(mainPage.getFileExtensions()));
+		language.setName(mainPage.getLanguageName());
+		projectInfo.setBaseName(mainPage.getProjectName());
 		projectInfo.setWorkingSets(Arrays.asList(mainPage.getSelectedWorkingSets()));
-		projectInfo.setProjectsRootLocation(mainPage.getLocationPath());
-		projectInfo.setWorkbench(getWorkbench());
-		projectInfo.setCreateEclipseRuntimeLaunchConfig(!existsEclipseRuntimeLaunchConfig());
-		String encoding = null;
+		projectInfo.setRootLocation(mainPage.getLocationPath().toString());
+		Charset encoding = null;
 		try {
-			encoding = ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset();
+			encoding = Charset.forName(ResourcesPlugin.getWorkspace().getRoot().getDefaultCharset());
 		}
 		catch (final CoreException e) {
-			encoding = System.getProperty("file.encoding");
+			encoding = Charset.defaultCharset();
 		}
 		projectInfo.setEncoding(encoding);
-		return projectInfo;
-	}
-
-	private boolean existsEclipseRuntimeLaunchConfig() {
-		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-		for (IProject p : projects) {
-			try {
-				if (p.isAccessible() && p.getFile(".launch/Launch Runtime Eclipse.launch").exists())
-					return true;
-			} catch (Exception e) {
-				// ignore
-			}
+		projectInfo.setWorkbench(getWorkbench());
+		BuildSystem buildSystem = advancedPage.getBuildSystem();
+		projectInfo.setBuildSystem(buildSystem);
+		projectInfo.setSourceLayout(advancedPage.getSourceLayout());
+		
+		projectInfo.getRuntimeProject().setEnabled(true);
+		projectInfo.getUiProject().setEnabled(advancedPage.isCreateUiProject());
+		projectInfo.getRuntimeProject().getTestProject().setEnabled(advancedPage.isCreateTestProject());
+		projectInfo.getIdeProject().setEnabled(advancedPage.isCreateIdeProject());
+		projectInfo.getIntellijProject().setEnabled(advancedPage.isCreateIntellijProject());
+		projectInfo.getWebProject().setEnabled(advancedPage.isCreateWebProject());
+		if (buildSystem.isMavenBuild() || buildSystem.isGradleBuild()) {
+			projectInfo.getParentProject().setEnabled(true);
 		}
-		return false;
+		if (buildSystem.isPluginBuild() && buildSystem.isMavenBuild()) {
+			projectInfo.getTargetPlatformProject().setEnabled(true);
+		}
+		return projectInfo;
 	}
 
 	protected XtextProjectInfo createProjectInfo() {

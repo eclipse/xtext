@@ -66,15 +66,22 @@ public abstract class ProjectDescriptor {
   }
   
   public Set<String> getSourceFolders() {
-    return CollectionLiterals.<String>emptySet();
+    final Function1<Outlet, String> _function = new Function1<Outlet, String>() {
+      @Override
+      public String apply(final Outlet it) {
+        return ProjectDescriptor.this.sourceFolder(it);
+      }
+    };
+    Iterable<String> _map = IterableExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableSet(CollectionLiterals.<Outlet>newHashSet(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
+    return IterableExtensions.<String>toSet(_map);
   }
   
   public Iterable<? extends GeneratedFile> getFiles() {
     List<GeneratedFile> _xblockexpression = null;
     {
       final List<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-      boolean _needsEclipseMetadata = this.needsEclipseMetadata();
-      if (_needsEclipseMetadata) {
+      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+      if (_isEclipsePluginProject) {
         CharSequence _manifest = this.manifest();
         PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
         files.add(_file);
@@ -83,14 +90,14 @@ public abstract class ProjectDescriptor {
         files.add(_file_1);
       }
       BuildSystem _buildSystem = this.config.getBuildSystem();
-      boolean _needsBuildGradle = _buildSystem.needsBuildGradle();
-      if (_needsBuildGradle) {
+      boolean _isGradleBuild = _buildSystem.isGradleBuild();
+      if (_isGradleBuild) {
         GradleBuildFile _buildGradle = this.buildGradle();
         files.add(_buildGradle);
       }
       BuildSystem _buildSystem_1 = this.config.getBuildSystem();
-      boolean _needsPom = _buildSystem_1.needsPom();
-      if (_needsPom) {
+      boolean _isMavenBuild = _buildSystem_1.isMavenBuild();
+      if (_isMavenBuild) {
         PomFile _pom = this.pom();
         files.add(_pom);
       }
@@ -99,10 +106,7 @@ public abstract class ProjectDescriptor {
     return _xblockexpression;
   }
   
-  public boolean needsEclipseMetadata() {
-    BuildSystem _buildSystem = this.config.getBuildSystem();
-    return _buildSystem.needsEclipseMetadata();
-  }
+  public abstract boolean isEclipsePluginProject();
   
   public CharSequence buildProperties() {
     StringConcatenation _builder = new StringConcatenation();

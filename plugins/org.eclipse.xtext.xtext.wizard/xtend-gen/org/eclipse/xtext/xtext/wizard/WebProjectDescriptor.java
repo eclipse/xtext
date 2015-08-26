@@ -50,6 +50,11 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
+  public boolean isEclipsePluginProject() {
+    return false;
+  }
+  
+  @Override
   public Iterable<? extends GeneratedFile> getFiles() {
     ArrayList<GeneratedFile> _xblockexpression = null;
     {
@@ -127,7 +132,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
       };
       ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function);
       deps.add(_doubleArrow);
-      ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency("org.slf4j:slf4j-log4j12:1.7.12\'");
+      ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency("org.slf4j:slf4j-log4j12:1.7.12");
       final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
         @Override
         public void apply(final ExternalDependency it) {

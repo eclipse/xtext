@@ -28,9 +28,9 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
+import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
+import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator;
 import org.junit.Test;
 
 import com.google.common.base.Function;
@@ -73,7 +73,7 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		for (String nsURI : ePackageURIs) {
 			System.out.print(nsURI);
 			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
-			Ecore2XtextProjectInfo xtextProjectInfo = new Ecore2XtextProjectInfo();
+			XtextProjectInfo xtextProjectInfo = new XtextProjectInfo();
 			Set<EPackage> ePackages = new HashSet<EPackage>();
 			if (!addImportedEPackages(ePackage, ePackages)) {
 				System.out.println("...skipping");
@@ -85,9 +85,9 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 								return new EPackageInfo(from, URI.createURI(from.getNsURI()), null, null, null);
 							}
 						}));
-				xtextProjectInfo.setEPackageInfos(ePackageInfos);
+				xtextProjectInfo.getEcore2Xtext().getEPackageInfos().addAll(ePackageInfos);
 				String languageName = "org.eclipse.xtext.xtext.ui.tests." + ePackage.getName();
-				xtextProjectInfo.setLanguageName(languageName);
+				xtextProjectInfo.getLanguage().setName(languageName);
 
 				String grammarFileName = languageName.replaceAll("\\.", "/") + ".xtext";
 				String xtextGrammar = createGrammar(xtextProjectInfo).toString();
@@ -103,7 +103,7 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		}
 	}
 
-	private CharSequence createGrammar(Ecore2XtextProjectInfo xtextProjectInfo) {
+	private CharSequence createGrammar(XtextProjectInfo xtextProjectInfo) {
 		return new Ecore2XtextGrammarCreator().grammar(xtextProjectInfo);
 	}
 

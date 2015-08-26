@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
+package org.eclipse.xtext.xtext.wizard.ecore2xtext;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -27,8 +28,8 @@ public class UniqueNameUtil {
 
 	private static Map<ENamedElement, String> element2uniqueImplName = new HashMap<ENamedElement, String>();
 
-	private static final List<String> RESERVED_RULES = Arrays.asList(new String[] { "ml_comment", "id", "ws", "int",
-			"string", "any_other", "sl_comment" });
+	private static final List<String> RESERVED_RULES = Arrays
+			.asList(new String[] { "ml_comment", "id", "ws", "int", "string", "any_other", "sl_comment" });
 
 	private static final List<String> RESERVED_KEYWORDS = Arrays.asList(new String[] { "returns", "generate",
 			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current", "fragment", "EOF" });
@@ -54,13 +55,14 @@ public class UniqueNameUtil {
 		}
 		String uniqueName = originalName;
 		for (int i = 0; RESERVED_KEYWORDS.contains(uniqueName) || RESERVED_RULES.contains(uniqueName.toLowerCase())
-				|| element2uniqueName.containsValue(uniqueName) || element2uniqueImplName.containsValue(uniqueName); ++i) {
+				|| element2uniqueName.containsValue(uniqueName)
+				|| element2uniqueImplName.containsValue(uniqueName); ++i) {
 			uniqueName = originalName + i;
 		}
 		uniqueNameMap.put(element, uniqueName);
 		return uniqueName;
 	}
-	
+
 	public static void clearUniqueNames(EPackageInfo defaultPackageInfo) {
 		element2uniqueName.clear();
 		element2uniqueImplName.clear();

@@ -22,6 +22,12 @@ class ExternalDependency {
 		]
 	}
 	
+	static def createBundleDependency(String bundleId) {
+		new ExternalDependency => [
+			p2.bundleId = bundleId
+		]
+	}
+	
 	val maven = new MavenCoordinates
 	val p2 = new P2Coordinates
 
