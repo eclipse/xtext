@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 
 	FormattingService.prototype = new XtextService();
-	FormattingService.prototype.format = FormattingService.prototype.invoke;
 
 	FormattingService.prototype._initServerData = function(serverData, editorContext, params) {
 		var selection = params.selection ? params.selection : editorContext.getSelection();

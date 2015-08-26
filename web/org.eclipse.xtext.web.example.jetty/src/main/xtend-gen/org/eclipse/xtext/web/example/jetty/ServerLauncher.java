@@ -60,7 +60,8 @@ public class ServerLauncher {
             WebInfConfiguration _webInfConfiguration = new WebInfConfiguration();
             MetaInfConfiguration _metaInfConfiguration = new MetaInfConfiguration();
             it.setConfigurations(new Configuration[] { _annotationConfiguration, _webXmlConfiguration, _webInfConfiguration, _metaInfConfiguration });
-            it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*");
+            it.setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, 
+              ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*|.*codemirror.*");
           }
         };
         WebAppContext _doubleArrow_2 = ObjectExtensions.<WebAppContext>operator_doubleArrow(_webAppContext, _function_2);

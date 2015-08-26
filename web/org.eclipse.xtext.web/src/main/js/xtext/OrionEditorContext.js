@@ -15,14 +15,9 @@ define(function() {
 		this._editor = editor;
 		this._serverState = {};
 		this._serverStateListeners = [];
-		this._highlightAnnotationTypes = [];
 	};
 
 	OrionEditorContext.prototype = {
-		
-		getEditor: function() {
-			return this._editor;
-		},
 		
 		getServerState: function() {
 			return this._serverState;

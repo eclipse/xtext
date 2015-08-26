@@ -40,7 +40,8 @@ class ServerLauncher {
 						new WebInfConfiguration,
 						new MetaInfConfiguration
 					]
-					setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN, ".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*")
+					setAttribute(WebInfConfiguration.CONTAINER_JAR_PATTERN,
+						".*org\\.eclipse\\.xtext\\.web.*|.*requirejs.*|.*jquery.*|.*ace.*|.*codemirror.*")
 				]
 			]
 		]
