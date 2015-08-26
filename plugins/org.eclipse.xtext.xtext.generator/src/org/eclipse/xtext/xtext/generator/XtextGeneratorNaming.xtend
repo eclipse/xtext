@@ -13,6 +13,7 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 import static org.eclipse.xtext.GrammarUtil.*
 
+// TODO discuss API (remove setters?)
 class XtextGeneratorNaming {
 	
 	@Accessors(PUBLIC_SETTER)

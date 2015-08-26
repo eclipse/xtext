@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator
 
+import com.google.common.collect.Maps
 import com.google.inject.Guice
 import com.google.inject.Inject
 import com.google.inject.Injector
@@ -16,6 +17,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.util.HashMap
 import java.util.List
+import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.mwe.core.WorkflowContext
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor
@@ -27,6 +29,7 @@ import org.eclipse.xtext.util.MergeableManifest
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess
+import org.eclipse.xtext.xtext.generator.model.PluginXmlAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 
 /**
@@ -119,12 +122,12 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		generateActivator
 	}
 	
-	protected def generateRuntimeSetup(LanguageConfig2 language) {
+	protected def generateRuntimeSetup(ILanguageConfig language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def generateModules(LanguageConfig2 language) {
+	protected def generateModules(ILanguageConfig language) {
 		templates.createRuntimeGenModule(language).writeTo(projectConfig.runtimeSrcGen)
 		templates.createRuntimeModule(language).writeTo(projectConfig.runtimeSrc)
 		templates.createEclipsePluginGenModule(language).writeTo(projectConfig.eclipsePluginSrcGen)
@@ -133,13 +136,13 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createIdeaModule(language).writeTo(projectConfig.ideaPluginSrc)
 	}
 	
-	protected def generateExecutableExtensionFactory(LanguageConfig2 language) {
+	protected def generateExecutableExtensionFactory(ILanguageConfig language) {
 		if (projectConfig.eclipsePluginSrcGen !== null)
 			templates.createEclipsePluginExecutableExtensionFactory(language, languageConfigs.head).writeTo(projectConfig.eclipsePluginSrcGen)
 	}
 	
 	protected def generateManifests() {
-		val manifests = #[
+		val manifests = newLinkedList(
 			projectConfig.runtimeManifest -> projectConfig.runtimeMetaInf,
 			projectConfig.runtimeTestManifest -> projectConfig.runtimeTestMetaInf,
 			projectConfig.genericIdeManifest -> projectConfig.genericIdeMetaInf,
@@ -150,10 +153,30 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			projectConfig.ideaPluginTestManifest -> projectConfig.ideaPluginTestMetaInf,
 			projectConfig.webManifest -> projectConfig.webMetaInf,
 			projectConfig.webTestManifest -> projectConfig.webTestMetaInf
-		]
-		manifests.filter[key != null && value != null].forEach[ 
-			val manifest = key
-			val metaInf = value
+		)
+		// Filter null values and merge duplicate entries
+		val uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(manifests.size)
+		val manifestIter = manifests.listIterator
+		while (manifestIter.hasNext) {
+			val entry = manifestIter.next
+			val manifest = entry.key
+			val metaInf = entry.value
+			if (manifest === null || metaInf === null) {
+				manifestIter.remove()
+			} else {
+				val uri = metaInf.getURI(manifest.path)
+				if (uri2Manifest.containsKey(uri)) {
+					uri2Manifest.get(uri).merge(manifest)
+					manifestIter.remove()
+				} else {
+					uri2Manifest.put(uri, manifest)
+				}
+			}
+		}
+		
+		for (entry : manifests) {
+			val manifest = entry.key
+			val metaInf = entry.value
 			if (manifest.bundleName === null) {
 				/*TODO add explicit project names to XtextProjectConfig
 				if (segments.length >= 3 && segments.get(segments.length - 2) == 'META-INF')
@@ -174,7 +197,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 			} else {
 				templates.createManifest(manifest, activator).writeTo(metaInf)
 			}
-		]
+		}
 	}
 
 	protected def mergeManifest(ManifestAccess manifest, IXtextGeneratorFileSystemAccess metaInf, TypeReference activator) throws IOException {
@@ -205,30 +228,46 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 	}
 	
 	protected def generatePluginXmls() {
-		val pluginXmls = #[
+		val pluginXmls = newLinkedList(
 			projectConfig.runtimePluginXml -> projectConfig.runtimeRoot,
 			projectConfig.runtimeTestPluginXml -> projectConfig.runtimeTestRoot,
 			projectConfig.genericIdePluginXml -> projectConfig.genericIdeRoot,
 			projectConfig.genericIdeTestPluginXml -> projectConfig.genericIdeTestRoot,
 			projectConfig.eclipsePluginPluginXml -> projectConfig.eclipsePluginRoot,
-			projectConfig.eclipsePluginTestPluginXml -> projectConfig.eclipsePluginTestRoot,
-			projectConfig.ideaPluginPluginXml -> projectConfig.ideaPluginRoot,
-			projectConfig.ideaPluginTestPluginXml -> projectConfig.ideaPluginTestRoot,
-			projectConfig.webPluginXml -> projectConfig.webRoot,
-			projectConfig.webTestPluginXml -> projectConfig.webTestRoot
-		]
-		pluginXmls.filter[key !== null && value !== null].forEach[
-			val pluginXml = key
-			val root = value
+			projectConfig.eclipsePluginTestPluginXml -> projectConfig.eclipsePluginTestRoot
+		)
+		// Filter null values and merge duplicate entries
+		val uri2PluginXml = Maps.<URI, PluginXmlAccess>newHashMapWithExpectedSize(pluginXmls.size)
+		val pluginXmlIter = pluginXmls.listIterator
+		while (pluginXmlIter.hasNext) {
+			val entry = pluginXmlIter.next
+			val pluginXml = entry.key
+			val root = entry.value
+			if (pluginXml === null || root === null) {
+				pluginXmlIter.remove()
+			} else {
+				val uri = root.getURI(pluginXml.path)
+				if (uri2PluginXml.containsKey(uri)) {
+					uri2PluginXml.get(uri).merge(pluginXml)
+					pluginXmlIter.remove()
+				} else {
+					uri2PluginXml.put(uri, pluginXml)
+				}
+			}
+		}
+		
+		for (entry : pluginXmls) {
+			val pluginXml = entry.key
+			val root = entry.value
 			if (root.isFile(pluginXml.path)) {
 				if (pluginXml.path.endsWith('.xml')) {
 					pluginXml.path = pluginXml.path + '_gen'
-					templates.createPluginXml(pluginXml).writeTo(root)
+					templates.createPluginXml(pluginXml)?.writeTo(root)
 				}
 			} else {
-				templates.createPluginXml(pluginXml).writeTo(root)
+				templates.createPluginXml(pluginXml)?.writeTo(root)
 			}
-		]
+		}
 	}
 	
 }

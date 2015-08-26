@@ -10,10 +10,12 @@ package org.eclipse.xtext.xtext.generator
 import com.google.inject.Injector
 import java.io.IOException
 import java.io.InputStream
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.List
 import java.util.jar.Manifest
+import org.eclipse.emf.common.EMFPlugin
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
@@ -43,7 +45,8 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	@Accessors(PUBLIC_GETTER)
 	val List<IClassAnnotation> classAnnotations = newArrayList
 	
-	@Accessors boolean preferXtendStubs = true
+	@Accessors
+	boolean preferXtendStubs = true
 	
 	/**
 	 * Configure a template for file headers. The template can contain variables:
@@ -111,10 +114,10 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	private def getVersion() {
 		var InputStream is
 		try {
-			val url = class.classLoader.getResource('META-INF/MANIFEST.MF')
-			is = url.openStream
+			val url = new URL(Plugin.INSTANCE.baseURL + 'META-INF/MANIFEST.MF')
+			is = url.openStream()
 			val manifest = new Manifest(is)
-			return manifest.mainAttributes.getValue('Bundle-Version')
+			return manifest.getMainAttributes().getValue('Bundle-Version')
 		} catch (Exception e) {
 			return null;
 		} finally {
@@ -122,6 +125,18 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 				try { is.close() }
 				catch (IOException e) {}
 			}
+		}
+	}
+
+	/**
+	 * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
+	 */
+	private static class Plugin extends EMFPlugin {
+		public static final Plugin INSTANCE = new Plugin
+		private new() {
+			super(#[]);
+		}
+		override getPluginResourceLocator() {
 		}
 	}
 

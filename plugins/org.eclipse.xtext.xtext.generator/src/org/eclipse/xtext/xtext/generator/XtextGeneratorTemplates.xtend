@@ -45,6 +45,9 @@ class XtextGeneratorTemplates {
 	@Inject FileAccessFactory fileAccessFactory
 	
 	def TextFileAccess createPluginXml(PluginXmlAccess pluginXml) {
+		if (pluginXml.entries.empty)
+			return null
+		
 		val file = fileAccessFactory.createTextFile()
 		file.path = pluginXml.path
 		file.content = '''
@@ -60,10 +63,10 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createRuntimeSetup(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeSetup(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeSetup)
+		val javaFile = fileAccessFactory.createJavaFile(runtimeSetup)
 		
 		javaFile.typeComment = '''
 			/**
@@ -82,10 +85,10 @@ class XtextGeneratorTemplates {
 		 return javaFile
 	}
 	
-	def JavaFileAccess createRuntimeGenSetup(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeGenSetup(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeGenSetup)
+		val javaFile = fileAccessFactory.createJavaFile(runtimeGenSetup)
 		for (type : langConfig.runtimeGenSetup.imports) {
 			javaFile.importType(type)
 		}
@@ -173,10 +176,10 @@ class XtextGeneratorTemplates {
 		«ENDIF»
 	'''
 	
-	def JavaFileAccess createRuntimeModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeModule)
+		val javaFile = fileAccessFactory.createJavaFile(runtimeModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used at runtime / without the Equinox extension registry.
@@ -190,11 +193,11 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createRuntimeGenModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createRuntimeGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.runtimeGenModule.superClass ?: runtimeDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, runtimeGenModule)
+		val javaFile = fileAccessFactory.createJavaFile(runtimeGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -233,10 +236,10 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createEclipsePluginModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createEclipsePluginModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, eclipsePluginModule)
+		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the Eclipse IDE.
@@ -252,11 +255,11 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createEclipsePluginGenModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createEclipsePluginGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.eclipsePluginGenModule.superClass ?: eclipsePluginDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, eclipsePluginGenModule)
+		val javaFile = fileAccessFactory.createJavaFile(eclipsePluginGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -282,10 +285,10 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createIdeaModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createIdeaModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, ideaModule)
+		val javaFile = fileAccessFactory.createJavaFile(ideaModule)
 		javaFile.typeComment = '''
 			/**
 			 * Use this class to register components to be used within the IntelliJ IDEA.
@@ -298,11 +301,11 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createIdeaGenModule(LanguageConfig2 langConfig) {
+	def JavaFileAccess createIdeaGenModule(ILanguageConfig langConfig) {
 		val it = langConfig.grammar
 		val extension naming = langConfig.naming
 		val superClass = langConfig.ideaGenModule.superClass ?: ideaDefaultModule
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, ideaGenModule)
+		val javaFile = fileAccessFactory.createJavaFile(ideaGenModule)
 		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
 		
 		javaFile.typeComment = '''
@@ -353,11 +356,11 @@ class XtextGeneratorTemplates {
 		return file
 	}
 	
-	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(LanguageConfig2 langConfig, LanguageConfig2 activatorLanguage) {
+	def JavaFileAccess createEclipsePluginExecutableExtensionFactory(ILanguageConfig langConfig, ILanguageConfig activatorLanguage) {
 		val grammar = langConfig.grammar
 		val activatorGrammar = activatorLanguage.grammar
 		val extension naming = langConfig.naming
-		val javaFile = fileAccessFactory.createJavaFile(langConfig, grammar.eclipsePluginExecutableExtensionFactory)
+		val javaFile = fileAccessFactory.createJavaFile(grammar.eclipsePluginExecutableExtensionFactory)
 		
 		javaFile.typeComment = '''
 			/**
@@ -384,9 +387,9 @@ class XtextGeneratorTemplates {
 		return javaFile
 	}
 	
-	def JavaFileAccess createEclipsePluginActivator(List<LanguageConfig2> langConfigs) {
+	def JavaFileAccess createEclipsePluginActivator(List<? extends ILanguageConfig> langConfigs) {
 		val activator = langConfigs.head.naming.getEclipsePluginActivator(langConfigs.head.grammar)
-		val javaFile = fileAccessFactory.createJavaFile(langConfigs.head, activator)
+		val javaFile = fileAccessFactory.createJavaFile(activator)
 		
 		javaFile.typeComment = '''
 			/**

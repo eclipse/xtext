@@ -9,12 +9,14 @@ package org.eclipse.xtext.xtext.generator
 
 import com.google.inject.Injector
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 /**
  * A composite generator fragment delegates to its contained fragments.
  */
 class CompositeGeneratorFragment2 implements IGeneratorFragment2 {
 	
+	@Accessors(PROTECTED_GETTER)
 	val List<IGeneratorFragment2> fragments = newArrayList
 	
 	def void addFragment(IGeneratorFragment2 fragment) {

@@ -37,11 +37,11 @@ class WizardConfig extends XtextProjectConfig {
 		super.checkConfiguration(issues)
 		val runtimeBase = runtimeRoot?.path
 		if (runtimeBase.nullOrEmpty)
-			issues.addError('The property \'runtimeBase\' must be set.', this)
+			issues.addError('The property \'runtimeRoot\' must be set.', this)
 		if (!Character.isJavaIdentifierPart(runtimeBase.charAt(runtimeBase.length - 1)))
-			issues.addError('The runtime base path must end with a valid package name.', this)
+			issues.addError('The runtime root path must end with a valid package name.', this)
 		if ((ideaEditor || webSupport) && !genericIdeSupport)
-			issues.addError('Generic IDE support must be enabled when the IDEA or Orion editors are enabled.', this)
+			issues.addError('Generic IDE support must be enabled when the IDEA or web editors are enabled.', this)
 	}
 	
 	override initialize(Injector injector) {
@@ -124,8 +124,8 @@ class WizardConfig extends XtextProjectConfig {
 				webSrc = webRoot.path + '/' + src
 			if (webSrcGen === null)
 				webSrcGen = webRoot.path + '/' + srcGen
-			if (webWebApp === null)
-				webWebApp = webRoot.path + '/' + srcWeb
+			if (webApp === null)
+				webApp = webRoot.path + '/' + srcWeb
 		}
 		
 		if (genericIdeSupport) {

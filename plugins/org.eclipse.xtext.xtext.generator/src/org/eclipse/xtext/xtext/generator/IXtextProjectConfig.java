@@ -23,7 +23,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getRuntimeMetaInf();
 	IXtextGeneratorFileSystemAccess getRuntimeSrc();
 	IXtextGeneratorFileSystemAccess getRuntimeSrcGen();
-	IXtextGeneratorFileSystemAccess getRuntimeWebApp();
 	ManifestAccess getRuntimeManifest();
 	PluginXmlAccess getRuntimePluginXml();
 	
@@ -31,7 +30,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getRuntimeTestMetaInf();
 	IXtextGeneratorFileSystemAccess getRuntimeTestSrc();
 	IXtextGeneratorFileSystemAccess getRuntimeTestSrcGen();
-	IXtextGeneratorFileSystemAccess getRuntimeTestWebApp();
 	ManifestAccess getRuntimeTestManifest();
 	PluginXmlAccess getRuntimeTestPluginXml();
 	
@@ -39,7 +37,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getGenericIdeMetaInf();
 	IXtextGeneratorFileSystemAccess getGenericIdeSrc();
 	IXtextGeneratorFileSystemAccess getGenericIdeSrcGen();
-	IXtextGeneratorFileSystemAccess getGenericIdeWebApp();
 	ManifestAccess getGenericIdeManifest();
 	PluginXmlAccess getGenericIdePluginXml();
 	
@@ -47,7 +44,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getGenericIdeTestMetaInf();
 	IXtextGeneratorFileSystemAccess getGenericIdeTestSrc();
 	IXtextGeneratorFileSystemAccess getGenericIdeTestSrcGen();
-	IXtextGeneratorFileSystemAccess getGenericIdeTestWebApp();
 	ManifestAccess getGenericIdeTestManifest();
 	PluginXmlAccess getGenericIdeTestPluginXml();
 	
@@ -55,7 +51,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getEclipsePluginMetaInf();
 	IXtextGeneratorFileSystemAccess getEclipsePluginSrc();
 	IXtextGeneratorFileSystemAccess getEclipsePluginSrcGen();
-	IXtextGeneratorFileSystemAccess getEclipsePluginWebApp();
 	ManifestAccess getEclipsePluginManifest();
 	PluginXmlAccess getEclipsePluginPluginXml();
 	
@@ -63,7 +58,6 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getEclipsePluginTestMetaInf();
 	IXtextGeneratorFileSystemAccess getEclipsePluginTestSrc();
 	IXtextGeneratorFileSystemAccess getEclipsePluginTestSrcGen();
-	IXtextGeneratorFileSystemAccess getEclipsePluginTestWebApp();
 	ManifestAccess getEclipsePluginTestManifest();
 	PluginXmlAccess getEclipsePluginTestPluginXml();
 	
@@ -71,33 +65,26 @@ public interface IXtextProjectConfig extends IGuiceAwareGeneratorComponent {
 	IXtextGeneratorFileSystemAccess getIdeaPluginMetaInf();
 	IXtextGeneratorFileSystemAccess getIdeaPluginSrc();
 	IXtextGeneratorFileSystemAccess getIdeaPluginSrcGen();
-	IXtextGeneratorFileSystemAccess getIdeaPluginWebApp();
 	ManifestAccess getIdeaPluginManifest();
-	PluginXmlAccess getIdeaPluginPluginXml();
 	
 	IXtextGeneratorFileSystemAccess getIdeaPluginTestRoot();
 	IXtextGeneratorFileSystemAccess getIdeaPluginTestMetaInf();
 	IXtextGeneratorFileSystemAccess getIdeaPluginTestSrc();
 	IXtextGeneratorFileSystemAccess getIdeaPluginTestSrcGen();
-	IXtextGeneratorFileSystemAccess getIdeaPluginTestWebApp();
 	ManifestAccess getIdeaPluginTestManifest();
-	PluginXmlAccess getIdeaPluginTestPluginXml();
 	
 	IXtextGeneratorFileSystemAccess getWebRoot();
 	IXtextGeneratorFileSystemAccess getWebMetaInf();
 	IXtextGeneratorFileSystemAccess getWebSrc();
 	IXtextGeneratorFileSystemAccess getWebSrcGen();
-	IXtextGeneratorFileSystemAccess getWebWebApp();
 	ManifestAccess getWebManifest();
-	PluginXmlAccess getWebPluginXml();
 	
 	IXtextGeneratorFileSystemAccess getWebTestRoot();
 	IXtextGeneratorFileSystemAccess getWebTestMetaInf();
 	IXtextGeneratorFileSystemAccess getWebTestSrc();
 	IXtextGeneratorFileSystemAccess getWebTestSrcGen();
-	IXtextGeneratorFileSystemAccess getWebTestWebApp();
 	ManifestAccess getWebTestManifest();
-	PluginXmlAccess getWebTestPluginXml();
 	
+	IXtextGeneratorFileSystemAccess getWebApp();
 	
 }
