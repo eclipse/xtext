@@ -13,10 +13,14 @@ class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
 		deps += createXtextDependency("org.eclipse.xtext.xbase.junit") => [maven.scope = Scope.TESTCOMPILE]
 		deps
 	}
+	
+	override isEclipsePluginProject() {
+		config.buildSystem.isPluginBuild
+	}
 
 	override pom() {
 		super.pom => [
-			packaging = if(config.buildSystem == BuildSystem.TYCHO) "eclipse-test-plugin" else "jar"
+			packaging = if(isEclipsePluginProject) "eclipse-test-plugin" else "jar"
 			buildSection = '''
 				<build>
 					<plugins>

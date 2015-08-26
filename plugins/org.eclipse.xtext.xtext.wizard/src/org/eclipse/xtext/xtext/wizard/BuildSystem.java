@@ -16,15 +16,15 @@ public enum BuildSystem {
 		this.needsBuildGradle = needsBuildGradle;
 	}
 
-	public boolean needsEclipseMetadata() {
+	public boolean isPluginBuild() {
 		return needsEclipseMetadata;
 	}
 	
-	public boolean needsPom() {
+	public boolean isMavenBuild() {
 		return needsPom;
 	}
 	
-	public boolean needsBuildGradle() {
+	public boolean isGradleBuild() {
 		return needsBuildGradle;
 	}
 }

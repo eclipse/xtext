@@ -15,8 +15,8 @@ class UiProjectDescriptor extends ProjectDescriptor {
 		".ui"
 	}
 	
-	override getSourceFolders() {
-		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
+	override isEclipsePluginProject() {
+		true
 	}
 	
 	override getExternalDependencies() {
@@ -64,7 +64,7 @@ class UiProjectDescriptor extends ProjectDescriptor {
 					</plugins>
 				</build>
 			'''
-			packaging = if (config.buildSystem == BuildSystem.TYCHO) "eclipse-plugin" else "jar"
+			packaging = "eclipse-plugin"
 		]
 	}
 }

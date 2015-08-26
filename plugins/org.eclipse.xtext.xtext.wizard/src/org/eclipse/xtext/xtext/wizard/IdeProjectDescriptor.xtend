@@ -15,16 +15,16 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 		#{config.runtimeProject}
 	}
 	
+	override isEclipsePluginProject() {
+		config.buildSystem.isPluginBuild
+	}
+	
 	override getExternalDependencies() {
 		val deps = newHashSet
 		deps += super.externalDependencies
 		deps += createXtextDependency("org.eclipse.xtext.ide")
 		deps += createXtextDependency("org.eclipse.xtext.xbase.ide")
 		deps
-	}
-	
-	override getSourceFolders() {
-		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
 	}
 	
 	override pom() {
@@ -39,7 +39,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 					</plugins>
 				</build>
 			'''
-			packaging = if (config.buildSystem == BuildSystem.TYCHO) "eclipse-plugin" else "jar"
+			packaging = if (isEclipsePluginProject) "eclipse-plugin" else "jar"
 		]
 	}
 
