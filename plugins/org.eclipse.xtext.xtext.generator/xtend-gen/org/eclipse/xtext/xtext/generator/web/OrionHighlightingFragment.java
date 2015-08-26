@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator.web;
 
 import com.google.common.base.Objects;
-import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,9 +22,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.util.GrammarUtil2;
 
@@ -43,17 +42,17 @@ public class OrionHighlightingFragment extends AbstractGeneratorFragment2 {
   
   private Grammar grammar;
   
-  @Inject
-  private IXtextProjectConfig config;
-  
   @Accessors
   private String moduleName;
   
   @Accessors
   private String keywordsFilter = "\\w*";
   
+  /**
+   * The default container for JS files is the webapp outlet.
+   */
   @Accessors
-  private String javaScriptPath = "xtext/generated";
+  private String javaScriptPath = "";
   
   public boolean addEnablePattern(final String pattern) {
     return this.enabledPatterns.add(pattern);
@@ -80,28 +79,30 @@ public class OrionHighlightingFragment extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();
     String _head = IterableExtensions.<String>head(_fileExtensions);
     this.langId = _head;
-    LanguageConfig2 _language_1 = this.getLanguage();
+    ILanguageConfig _language_1 = this.getLanguage();
     Grammar _grammar = _language_1.getGrammar();
     this.grammar = _grammar;
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(this.moduleName);
     if (_isNullOrEmpty) {
-      this.moduleName = (("xtext/" + this.langId) + "-syntax");
+      this.moduleName = (("xtext/generated/" + this.langId) + "-syntax");
     }
     final Set<String> keywords = GrammarUtil.getAllKeywords(this.grammar);
     CharSequence _generateJavaScript = this.generateJavaScript(keywords);
-    this.writeToFile(_generateJavaScript, (((this.javaScriptPath + "/") + this.langId) + "-syntax.js"));
+    this.writeToFile(_generateJavaScript, (((this.javaScriptPath + "/") + this.moduleName) + ".js"));
   }
   
   protected void writeToFile(final CharSequence content, final String fileName) {
-    IXtextGeneratorFileSystemAccess _webWebApp = this.config.getWebWebApp();
-    boolean _notEquals = (!Objects.equal(_webWebApp, null));
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    boolean _notEquals = (!Objects.equal(_webApp, null));
     if (_notEquals) {
-      IXtextGeneratorFileSystemAccess _webWebApp_1 = this.config.getWebWebApp();
-      _webWebApp_1.generateFile(fileName, content);
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
+      _webApp_1.generateFile(fileName, content);
     }
   }
   

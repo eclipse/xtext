@@ -28,7 +28,6 @@ import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
@@ -39,8 +38,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 class GeneratorFragment2 extends AbstractGeneratorFragment2 {
-	
-	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject CodeConfig codeConfig
 	
@@ -133,7 +130,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	protected def doGenerateStubFile() {
-		val xtendFile = fileAccessFactory.createXtendFile(language, grammar.generatorStub)
+		val xtendFile = fileAccessFactory.createXtendFile(grammar.generatorStub)
 		xtendFile.typeComment = '''
 			/**
 			 * Generates code from your model files on save.
@@ -158,7 +155,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	protected def doGenerateJavaMain() {
-		val javaFile = fileAccessFactory.createJavaFile(language, grammar.javaMain)
+		val javaFile = fileAccessFactory.createJavaFile(grammar.javaMain)
 		javaFile.javaContent = '''
 			public class Main {
 			
@@ -210,7 +207,7 @@ class GeneratorFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	protected def doGenerateXtendMain() {
-		val xtendFile = fileAccessFactory.createXtendFile(language, grammar.javaMain)
+		val xtendFile = fileAccessFactory.createXtendFile(grammar.javaMain)
 		xtendFile.javaContent = '''
 			class Main {
 			

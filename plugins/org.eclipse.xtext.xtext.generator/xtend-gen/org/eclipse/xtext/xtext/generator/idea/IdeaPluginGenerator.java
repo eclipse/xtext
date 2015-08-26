@@ -60,8 +60,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessExtensions;
 import org.eclipse.xtext.xtext.generator.idea.IdeaPluginClassNames;
@@ -98,9 +98,6 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   private GrammarAccessExtensions _grammarAccessExtensions;
   
   @Inject
-  private IXtextProjectConfig projectConfig;
-  
-  @Inject
   private FileAccessFactory fileAccessFactory;
   
   private Set<String> libraries = CollectionLiterals.<String>newHashSet();
@@ -114,10 +111,10 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   
   @Override
   public void generate() {
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     List<String> _fileExtensions = _language.getFileExtensions();
     final String fileExtension = IterableExtensions.<String>head(_fileExtensions);
-    LanguageConfig2 _language_1 = this.getLanguage();
+    ILanguageConfig _language_1 = this.getLanguage();
     final Grammar grammar = _language_1.getGrammar();
     final GuiceModuleAccess.BindingFactory bindFactory = new GuiceModuleAccess.BindingFactory();
     TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider");
@@ -217,7 +214,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider");
       bindFactory.addTypeToType(_typeRef_18, _typeRef_19);
     }
-    LanguageConfig2 _language_2 = this.getLanguage();
+    ILanguageConfig _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();
     bindFactory.contributeTo(_ideaGenModule);
     JavaFileAccess _compileStandaloneSetup = this.compileStandaloneSetup(grammar);
@@ -229,7 +226,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     final Procedure1<JavaFileAccess> _function = new Procedure1<JavaFileAccess>() {
       @Override
       public void apply(final JavaFileAccess it) {
-        IXtextGeneratorFileSystemAccess _ideaPluginSrc = IdeaPluginGenerator.this.projectConfig.getIdeaPluginSrc();
+        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
+        IXtextGeneratorFileSystemAccess _ideaPluginSrc = _projectConfig.getIdeaPluginSrc();
         it.writeTo(_ideaPluginSrc);
       }
     };
@@ -256,7 +254,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     final Procedure1<TextFileAccess> _function_1 = new Procedure1<TextFileAccess>() {
       @Override
       public void apply(final TextFileAccess it) {
-        IXtextGeneratorFileSystemAccess _ideaPluginSrcGen = IdeaPluginGenerator.this.projectConfig.getIdeaPluginSrcGen();
+        IXtextProjectConfig _projectConfig = IdeaPluginGenerator.this.getProjectConfig();
+        IXtextGeneratorFileSystemAccess _ideaPluginSrcGen = _projectConfig.getIdeaPluginSrcGen();
         it.writeTo(_ideaPluginSrcGen);
       }
     };
@@ -270,9 +269,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileExtensionFactory(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _extensionFactory = this._ideaPluginClassNames.getExtensionFactory(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _extensionFactory);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_extensionFactory);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -342,9 +340,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileCodeBlockModificationListener(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _codeBlockModificationListener = this._ideaPluginClassNames.getCodeBlockModificationListener(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _codeBlockModificationListener);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_codeBlockModificationListener);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -409,9 +406,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileElementDescriptionProvider(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _elementDescriptionProvider = this._ideaPluginClassNames.getElementDescriptionProvider(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _elementDescriptionProvider);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_elementDescriptionProvider);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -453,9 +449,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compilePomDeclarationSearcher(final Grammar it) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _pomDeclarationSearcher = this._ideaPluginClassNames.getPomDeclarationSearcher(it);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _pomDeclarationSearcher);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_pomDeclarationSearcher);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -498,9 +493,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compilePsiParser(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _psiParser = this._ideaPluginClassNames.getPsiParser(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _psiParser);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_psiParser);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -639,9 +633,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileAntlrTokenFileProvider(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _antlrTokenFileProvider = this._ideaPluginClassNames.getAntlrTokenFileProvider(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _antlrTokenFileProvider);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_antlrTokenFileProvider);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1014,9 +1007,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileFileImpl(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _fileImpl = this._ideaPluginClassNames.getFileImpl(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _fileImpl);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_fileImpl);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1081,9 +1073,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileFileTypeFactory(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _fileTypeFactory = this._ideaPluginClassNames.getFileTypeFactory(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _fileTypeFactory);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_fileTypeFactory);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1135,9 +1126,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileAbstractFileType(final Grammar grammar, final String fileExtension) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _abstractFileType = this._ideaPluginClassNames.getAbstractFileType(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _abstractFileType);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_abstractFileType);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1257,9 +1247,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public XtendFileAccess compileFileType(final Grammar grammar) {
     XtendFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _fileType = this._ideaPluginClassNames.getFileType(grammar);
-      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_language, _fileType);
+      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_fileType);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1310,9 +1299,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileLanguage(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _ideaLanguage = this._ideaPluginClassNames.getIdeaLanguage(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _ideaLanguage);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_ideaLanguage);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1366,9 +1354,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   }
   
   public JavaFileAccess compileStandaloneSetup(final Grammar grammar) {
-    LanguageConfig2 _language = this.getLanguage();
     TypeReference _ideaStandaloneSetup = this._xtextGeneratorNaming.getIdeaStandaloneSetup(grammar);
-    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _ideaStandaloneSetup);
+    final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_ideaStandaloneSetup);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1428,9 +1415,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public XtendFileAccess compileIdeaSetup(final Grammar grammar) {
     XtendFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _ideaSetup = this._ideaPluginClassNames.getIdeaSetup(grammar);
-      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_language, _ideaSetup);
+      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_ideaSetup);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -1474,9 +1460,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileElementTypeProvider(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _elementTypeProvider = this._ideaPluginClassNames.getElementTypeProvider(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _elementTypeProvider);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_elementTypeProvider);
       TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.idea.lang.IElementTypeProvider");
       file.importType(_typeRef);
       TypeReference _typeRef_1 = TypeReference.typeRef("org.eclipse.xtext.psi.stubs.XtextFileElementType");
@@ -1741,9 +1726,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileTokenTypeProvider(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _tokenTypeProvider = this._ideaPluginClassNames.getTokenTypeProvider(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _tokenTypeProvider);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_tokenTypeProvider);
       final TypeReference tokenSet = TypeReference.typeRef("com.intellij.psi.tree.TokenSet");
       final TypeReference iElementType = TypeReference.typeRef("com.intellij.psi.tree.IElementType");
       final TypeReference indexedElementType = TypeReference.typeRef("org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType");
@@ -2053,9 +2037,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileSyntaxHighlighterFactory(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _syntaxHighlighterFactory = this._ideaPluginClassNames.getSyntaxHighlighterFactory(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _syntaxHighlighterFactory);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_syntaxHighlighterFactory);
       final TypeReference syntaxHighlighter = TypeReference.typeRef("com.intellij.openapi.fileTypes.SyntaxHighlighter");
       final TypeReference lazySyntaxHighlighter = TypeReference.typeRef("com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory");
       StringConcatenationClient _client = new StringConcatenationClient() {
@@ -2108,9 +2091,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileSemanticHighlightVisitor(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _semanticHighlightVisitor = this._ideaPluginClassNames.getSemanticHighlightVisitor(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _semanticHighlightVisitor);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_semanticHighlightVisitor);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -2153,9 +2135,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     {
       final Iterable<CrossReference> crossReferences = this.getCrossReferences(grammar);
       final LinkedHashMultimap<String, String> namedGrammarElement = this.getNamedGrammarElements(grammar);
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _parserDefinition = this._ideaPluginClassNames.getParserDefinition(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _parserDefinition);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_parserDefinition);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -2423,9 +2404,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileAbstractCompletionContributor(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _abstractCompletionContributor = this._ideaPluginClassNames.getAbstractCompletionContributor(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _abstractCompletionContributor);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_abstractCompletionContributor);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -2467,9 +2447,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileCompletionContributor(final Grammar grammar) {
     XtendFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
-      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_language, _completionContributor);
+      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_completionContributor);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -2543,9 +2522,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileFacetConfiguration(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _facetConfiguration);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_facetConfiguration);
       TypeReference _typeRef = TypeReference.typeRef("com.intellij.openapi.components.PersistentStateComponent");
       file.importType(_typeRef);
       TypeReference _typeRef_1 = TypeReference.typeRef("com.intellij.openapi.components.State");
@@ -2617,9 +2595,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileFacetType(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _facetType = this._ideaPluginClassNames.getFacetType(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _facetType);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_facetType);
       TypeReference _facetConfiguration = this._ideaPluginClassNames.getFacetConfiguration(grammar);
       TypeReference _typeRef = TypeReference.typeRef("com.intellij.facet.Facet", _facetConfiguration);
       final TypeReference faceTypeId = TypeReference.typeRef("com.intellij.facet.FacetTypeId", _typeRef);
@@ -2685,9 +2662,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileBaseColorSettingsPage(final Grammar grammar) {
     JavaFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _baseColorSettingsPage = this._ideaPluginClassNames.baseColorSettingsPage(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_language, _baseColorSettingsPage);
+      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_baseColorSettingsPage);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -2746,9 +2722,8 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
   public JavaFileAccess compileColorSettingsPage(final Grammar grammar) {
     XtendFileAccess _xblockexpression = null;
     {
-      LanguageConfig2 _language = this.getLanguage();
       TypeReference _colorSettingsPage = this._ideaPluginClassNames.colorSettingsPage(grammar);
-      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_language, _colorSettingsPage);
+      final XtendFileAccess file = this.fileAccessFactory.createXtendFile(_colorSettingsPage);
       StringConcatenationClient _client = new StringConcatenationClient() {
         @Override
         protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {

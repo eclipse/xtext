@@ -15,7 +15,6 @@ import java.io.File
 /**
  * A utility class for generating XtextProjectConfig. Not intended to be used outside of this project.
  */
- //TODO only generate outlets that make sense (e.g. idea&web have no plugin.xml)
 class ProjectConfigGenerator {
 	
 	static val INTERFACE_NAME = 'org.eclipse.xtext.xtext.generator.IXtextProjectConfig'
@@ -45,6 +44,10 @@ class ProjectConfigGenerator {
 		}
 	}
 	
+	private def hasPluginXml(String project) {
+		!project.startsWith('ideaPlugin') && !project.startsWith('web')
+	}
+	
 	def generateInterface() '''
 		/*******************************************************************************
 		 * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
@@ -72,11 +75,13 @@ class ProjectConfigGenerator {
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»MetaInf();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»Src();
 				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»SrcGen();
-				IXtextGeneratorFileSystemAccess get«p.toFirstUpper»WebApp();
 				ManifestAccess get«p.toFirstUpper»Manifest();
-				PluginXmlAccess get«p.toFirstUpper»PluginXml();
+				«IF p.hasPluginXml»
+					PluginXmlAccess get«p.toFirstUpper»PluginXml();
+				«ENDIF»
 				
 			«ENDFOR»
+			IXtextGeneratorFileSystemAccess getWebApp();
 			
 		}
 	'''
@@ -92,7 +97,6 @@ class ProjectConfigGenerator {
 		package «IMPL_NAME.substring(0, IMPL_NAME.lastIndexOf('.'))»;
 		
 		import com.google.inject.Injector;
-		import org.eclipse.xtext.util.Strings;
 		import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 		import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 		import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -110,10 +114,12 @@ class ProjectConfigGenerator {
 				private IXtextGeneratorFileSystemAccess «p»MetaInf;
 				private IXtextGeneratorFileSystemAccess «p»Src;
 				private IXtextGeneratorFileSystemAccess «p»SrcGen;
-				private IXtextGeneratorFileSystemAccess «p»WebApp;
 				private ManifestAccess «p»Manifest;
-				private PluginXmlAccess «p»PluginXml;
+				«IF p.hasPluginXml»
+					private PluginXmlAccess «p»PluginXml;
+				«ENDIF»
 			«ENDFOR»
+			private IXtextGeneratorFileSystemAccess webApp;
 			
 			public void checkConfiguration(Issues issues) {
 				if («PROJECTS.head»Src == null) {
@@ -123,12 +129,14 @@ class ProjectConfigGenerator {
 					issues.addError("The property '«PROJECTS.head»SrcGen' must be set.", this);
 				}
 				«FOR p : PROJECTS»
-					if («p»Manifest != null && Strings.isEmpty(«p»Manifest.getPath())) {
-						issues.addError("The property 'path' must be set.", «p»Manifest);
+					if («p»Manifest != null && «p»MetaInf == null) {
+						issues.addError("The property '«p»MetaInf' must be set when '«p»Manifest' is set.");
 					}
-					if («p»PluginXml != null && Strings.isEmpty(«p»PluginXml.getPath())) {
-						issues.addError("The property 'path' must be set.", «p»PluginXml);
-					}
+					«IF p.hasPluginXml»
+						if («p»PluginXml != null && «p»Root == null) {
+							issues.addError("The property '«p»Root' must be set when '«p»PluginXml' is set.");
+						}
+					«ENDIF»
 				«ENDFOR»
 			}
 			
@@ -150,10 +158,11 @@ class ProjectConfigGenerator {
 					if («p»SrcGen != null) {
 						«p»SrcGen.initialize(injector);
 					}
-					if («p»WebApp != null) {
-						«p»WebApp.initialize(injector);
-					}
 				«ENDFOR»
+				
+				if (webApp != null) {
+					webApp.initialize(injector);
+				}
 			}
 			
 			«FOR p : PROJECTS»
@@ -194,15 +203,6 @@ class ProjectConfigGenerator {
 				}
 				
 				@Override
-				public IXtextGeneratorFileSystemAccess get«p.toFirstUpper»WebApp() {
-					return «p»WebApp;
-				}
-				
-				public void set«p.toFirstUpper»WebApp(String path) {
-					this.«p»WebApp = new XtextGeneratorFileSystemAccess(path, true);
-				}
-
-				@Override
 				public ManifestAccess get«p.toFirstUpper»Manifest() {
 					return «p»Manifest;
 				}
@@ -211,16 +211,26 @@ class ProjectConfigGenerator {
 					this.«p»Manifest = manifest;
 				}
 				
-				@Override
-				public PluginXmlAccess get«p.toFirstUpper»PluginXml() {
-					return «p»PluginXml;
-				}
-				
-				public void set«p.toFirstUpper»PluginXml(PluginXmlAccess pluginXml) {
-					this.«p»PluginXml = pluginXml;
-				}
-				
+				«IF p.hasPluginXml»
+					@Override
+					public PluginXmlAccess get«p.toFirstUpper»PluginXml() {
+						return «p»PluginXml;
+					}
+					
+					public void set«p.toFirstUpper»PluginXml(PluginXmlAccess pluginXml) {
+						this.«p»PluginXml = pluginXml;
+					}
+					
+				«ENDIF»
 			«ENDFOR»
+			@Override
+			public IXtextGeneratorFileSystemAccess getWebApp() {
+				return webApp;
+			}
+			
+			public void setWebApp(String path) {
+				this.webApp = new XtextGeneratorFileSystemAccess(path, true);
+			}
 		}
 	'''
 	

@@ -15,6 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.eclipse.emf.codegen.util.CodeGenUtil;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,7 +23,6 @@ import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -56,8 +56,14 @@ public class JavaFileAccess extends TextFileAccess {
           _xifexpression_1 = this.access.importType(_typeReference);
         } else {
           String _xifexpression_2 = null;
-          if ((object instanceof EClass)) {
-            TypeReference _typeReference_1 = new TypeReference(((EClass)object), this.access.resourceSet);
+          boolean _and = false;
+          if (!(object instanceof EClass)) {
+            _and = false;
+          } else {
+            _and = (this.access.resourceSet != null);
+          }
+          if (_and) {
+            TypeReference _typeReference_1 = new TypeReference(((EClass) object), this.access.resourceSet);
             _xifexpression_2 = this.access.importType(_typeReference_1);
           } else {
             _xifexpression_2 = object.toString();
@@ -70,6 +76,14 @@ public class JavaFileAccess extends TextFileAccess {
     }
   }
   
+  /**
+   * A list of keywords in the Java language. Use this to avoid illegal variable names.
+   */
+  public final static Set<String> JAVA_KEYWORDS = Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet("abstract", "continue", "for", "new", "switch", "assert", "default", "goto", "package", "synchronized", "boolean", "do", "if", "private", "this", "break", "double", "implements", "protected", "throw", "byte", "else", "import", "public", "throws", "case", "enum", "instanceof", "return", "transient", "catch", "extends", "int", "short", "try", "char", "final", "interface", "static", "void", "class", "finally", "long", "strictfp", "volatile", "const", "float", "native", "super", "while"));
+  
+  /**
+   * Set this value for the 'importNestedTypeThreshold' property to disable importing of nested types
+   */
   public final static int DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE;
   
   private final Map<String, String> imports = CollectionLiterals.<String, String>newHashMap();
@@ -93,7 +107,7 @@ public class JavaFileAccess extends TextFileAccess {
   @Accessors(AccessorType.PROTECTED_SETTER)
   private ResourceSet resourceSet;
   
-  protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig, final IEncodingProvider encodingProvider) {
+  protected JavaFileAccess(final TypeReference typeRef, final CodeConfig codeConfig) {
     List<String> _simpleNames = typeRef.getSimpleNames();
     int _length = ((Object[])Conversions.unwrapArray(_simpleNames, Object.class)).length;
     boolean _greaterThan = (_length > 1);

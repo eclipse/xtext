@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Binder;
@@ -9,6 +16,7 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 
@@ -18,7 +26,7 @@ public class LanguageModule extends AbstractGenericModule {
   private final LanguageConfig2 language;
   
   public void configureLanguage(final Binder binder) {
-    AnnotatedBindingBuilder<LanguageConfig2> _bind = binder.<LanguageConfig2>bind(LanguageConfig2.class);
+    AnnotatedBindingBuilder<ILanguageConfig> _bind = binder.<ILanguageConfig>bind(ILanguageConfig.class);
     _bind.toInstance(this.language);
   }
   

@@ -73,6 +73,20 @@ public class ProjectConfigGenerator {
     }
   }
   
+  private boolean hasPluginXml(final String project) {
+    boolean _and = false;
+    boolean _startsWith = project.startsWith("ideaPlugin");
+    boolean _not = (!_startsWith);
+    if (!_not) {
+      _and = false;
+    } else {
+      boolean _startsWith_1 = project.startsWith("web");
+      boolean _not_1 = (!_startsWith_1);
+      _and = _not_1;
+    }
+    return _and;
+  }
+  
   public CharSequence generateInterface() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/*******************************************************************************");
@@ -164,27 +178,29 @@ public class ProjectConfigGenerator {
         _builder.append("SrcGen();");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("IXtextGeneratorFileSystemAccess get");
+        _builder.append("ManifestAccess get");
         String _firstUpper_4 = StringExtensions.toFirstUpper(p);
         _builder.append(_firstUpper_4, "\t");
-        _builder.append("WebApp();");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("ManifestAccess get");
-        String _firstUpper_5 = StringExtensions.toFirstUpper(p);
-        _builder.append(_firstUpper_5, "\t");
         _builder.append("Manifest();");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("PluginXmlAccess get");
-        String _firstUpper_6 = StringExtensions.toFirstUpper(p);
-        _builder.append(_firstUpper_6, "\t");
-        _builder.append("PluginXml();");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _hasPluginXml = this.hasPluginXml(p);
+          if (_hasPluginXml) {
+            _builder.append("\t");
+            _builder.append("PluginXmlAccess get");
+            String _firstUpper_5 = StringExtensions.toFirstUpper(p);
+            _builder.append(_firstUpper_5, "\t");
+            _builder.append("PluginXml();");
+            _builder.newLineIfNotEmpty();
+          }
+        }
         _builder.append("\t");
         _builder.newLine();
       }
     }
+    _builder.append("\t");
+    _builder.append("IXtextGeneratorFileSystemAccess getWebApp();");
+    _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
@@ -222,8 +238,6 @@ public class ProjectConfigGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import com.google.inject.Injector;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.util.Strings;");
     _builder.newLine();
     _builder.append("import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;");
     _builder.newLine();
@@ -288,22 +302,25 @@ public class ProjectConfigGenerator {
         _builder.append("SrcGen;");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
-        _builder.append("private IXtextGeneratorFileSystemAccess ");
-        _builder.append(p, "\t");
-        _builder.append("WebApp;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
         _builder.append("private ManifestAccess ");
         _builder.append(p, "\t");
         _builder.append("Manifest;");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("private PluginXmlAccess ");
-        _builder.append(p, "\t");
-        _builder.append("PluginXml;");
-        _builder.newLineIfNotEmpty();
+        {
+          boolean _hasPluginXml = this.hasPluginXml(p);
+          if (_hasPluginXml) {
+            _builder.append("\t");
+            _builder.append("private PluginXmlAccess ");
+            _builder.append(p, "\t");
+            _builder.append("PluginXml;");
+            _builder.newLineIfNotEmpty();
+          }
+        }
       }
     }
+    _builder.append("\t");
+    _builder.append("private IXtextGeneratorFileSystemAccess webApp;");
+    _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
@@ -344,35 +361,44 @@ public class ProjectConfigGenerator {
         _builder.append("\t\t");
         _builder.append("if (");
         _builder.append(p_1, "\t\t");
-        _builder.append("Manifest != null && Strings.isEmpty(");
+        _builder.append("Manifest != null && ");
         _builder.append(p_1, "\t\t");
-        _builder.append("Manifest.getPath())) {");
+        _builder.append("MetaInf == null) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t");
-        _builder.append("issues.addError(\"The property \'path\' must be set.\", ");
+        _builder.append("issues.addError(\"The property \'");
         _builder.append(p_1, "\t\t\t");
-        _builder.append("Manifest);");
+        _builder.append("MetaInf\' must be set when \'");
+        _builder.append(p_1, "\t\t\t");
+        _builder.append("Manifest\' is set.\");");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("if (");
-        _builder.append(p_1, "\t\t");
-        _builder.append("PluginXml != null && Strings.isEmpty(");
-        _builder.append(p_1, "\t\t");
-        _builder.append("PluginXml.getPath())) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append("issues.addError(\"The property \'path\' must be set.\", ");
-        _builder.append(p_1, "\t\t\t");
-        _builder.append("PluginXml);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          boolean _hasPluginXml_1 = this.hasPluginXml(p_1);
+          if (_hasPluginXml_1) {
+            _builder.append("\t\t");
+            _builder.append("if (");
+            _builder.append(p_1, "\t\t");
+            _builder.append("PluginXml != null && ");
+            _builder.append(p_1, "\t\t");
+            _builder.append("Root == null) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("issues.addError(\"The property \'");
+            _builder.append(p_1, "\t\t\t");
+            _builder.append("Root\' must be set when \'");
+            _builder.append(p_1, "\t\t\t");
+            _builder.append("PluginXml\' is set.\");");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
       }
     }
     _builder.append("\t");
@@ -450,21 +476,19 @@ public class ProjectConfigGenerator {
         _builder.append("\t\t");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("if (");
-        _builder.append(p_2, "\t\t");
-        _builder.append("WebApp != null) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("\t");
-        _builder.append(p_2, "\t\t\t");
-        _builder.append("WebApp.initialize(injector);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
       }
     }
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (webApp != null) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("webApp.initialize(injector);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -624,45 +648,9 @@ public class ProjectConfigGenerator {
         _builder.append("@Override");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append("public IXtextGeneratorFileSystemAccess get");
+        _builder.append("public ManifestAccess get");
         String _firstUpper_8 = StringExtensions.toFirstUpper(p_3);
         _builder.append(_firstUpper_8, "\t");
-        _builder.append("WebApp() {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("return ");
-        _builder.append(p_3, "\t\t");
-        _builder.append("WebApp;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public void set");
-        String _firstUpper_9 = StringExtensions.toFirstUpper(p_3);
-        _builder.append(_firstUpper_9, "\t");
-        _builder.append("WebApp(String path) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("this.");
-        _builder.append(p_3, "\t\t");
-        _builder.append("WebApp = new XtextGeneratorFileSystemAccess(path, true);");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public ManifestAccess get");
-        String _firstUpper_10 = StringExtensions.toFirstUpper(p_3);
-        _builder.append(_firstUpper_10, "\t");
         _builder.append("Manifest() {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -678,8 +666,8 @@ public class ProjectConfigGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("public void set");
-        String _firstUpper_11 = StringExtensions.toFirstUpper(p_3);
-        _builder.append(_firstUpper_11, "\t");
+        String _firstUpper_9 = StringExtensions.toFirstUpper(p_3);
+        _builder.append(_firstUpper_9, "\t");
         _builder.append("Manifest(ManifestAccess manifest) {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -693,45 +681,73 @@ public class ProjectConfigGenerator {
         _builder.newLine();
         _builder.append("\t");
         _builder.newLine();
-        _builder.append("\t");
-        _builder.append("@Override");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public PluginXmlAccess get");
-        String _firstUpper_12 = StringExtensions.toFirstUpper(p_3);
-        _builder.append(_firstUpper_12, "\t");
-        _builder.append("PluginXml() {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("return ");
-        _builder.append(p_3, "\t\t");
-        _builder.append("PluginXml;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.append("public void set");
-        String _firstUpper_13 = StringExtensions.toFirstUpper(p_3);
-        _builder.append(_firstUpper_13, "\t");
-        _builder.append("PluginXml(PluginXmlAccess pluginXml) {");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("\t");
-        _builder.append("this.");
-        _builder.append(p_3, "\t\t");
-        _builder.append("PluginXml = pluginXml;");
-        _builder.newLineIfNotEmpty();
-        _builder.append("\t");
-        _builder.append("}");
-        _builder.newLine();
-        _builder.append("\t");
-        _builder.newLine();
+        {
+          boolean _hasPluginXml_2 = this.hasPluginXml(p_3);
+          if (_hasPluginXml_2) {
+            _builder.append("\t");
+            _builder.append("@Override");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("public PluginXmlAccess get");
+            String _firstUpper_10 = StringExtensions.toFirstUpper(p_3);
+            _builder.append(_firstUpper_10, "\t");
+            _builder.append("PluginXml() {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("return ");
+            _builder.append(p_3, "\t\t");
+            _builder.append("PluginXml;");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("public void set");
+            String _firstUpper_11 = StringExtensions.toFirstUpper(p_3);
+            _builder.append(_firstUpper_11, "\t");
+            _builder.append("PluginXml(PluginXmlAccess pluginXml) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            _builder.append("this.");
+            _builder.append(p_3, "\t\t");
+            _builder.append("PluginXml = pluginXml;");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.newLine();
+          }
+        }
       }
     }
+    _builder.append("\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public IXtextGeneratorFileSystemAccess getWebApp() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return webApp;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void setWebApp(String path) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.webApp = new XtextGeneratorFileSystemAccess(path, true);");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     return _builder;

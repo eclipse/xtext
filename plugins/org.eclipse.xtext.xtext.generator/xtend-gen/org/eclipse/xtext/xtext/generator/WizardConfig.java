@@ -51,7 +51,7 @@ public class WizardConfig extends XtextProjectConfig {
     final String runtimeBase = _path;
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(runtimeBase);
     if (_isNullOrEmpty) {
-      issues.addError("The property \'runtimeBase\' must be set.", this);
+      issues.addError("The property \'runtimeRoot\' must be set.", this);
     }
     int _length = runtimeBase.length();
     int _minus = (_length - 1);
@@ -59,10 +59,10 @@ public class WizardConfig extends XtextProjectConfig {
     boolean _isJavaIdentifierPart = Character.isJavaIdentifierPart(_charAt);
     boolean _not = (!_isJavaIdentifierPart);
     if (_not) {
-      issues.addError("The runtime base path must end with a valid package name.", this);
+      issues.addError("The runtime root path must end with a valid package name.", this);
     }
     if (((this.ideaEditor || this.webSupport) && (!this.genericIdeSupport))) {
-      issues.addError("Generic IDE support must be enabled when the IDEA or Orion editors are enabled.", this);
+      issues.addError("Generic IDE support must be enabled when the IDEA or web editors are enabled.", this);
     }
   }
   
@@ -307,14 +307,14 @@ public class WizardConfig extends XtextProjectConfig {
         String _plus_36 = (_plus_35 + srcGen);
         this.setWebSrcGen(_plus_36);
       }
-      IXtextGeneratorFileSystemAccess _webWebApp = this.getWebWebApp();
-      boolean _tripleEquals_26 = (_webWebApp == null);
+      IXtextGeneratorFileSystemAccess _webApp = this.getWebApp();
+      boolean _tripleEquals_26 = (_webApp == null);
       if (_tripleEquals_26) {
         IXtextGeneratorFileSystemAccess _webRoot_3 = this.getWebRoot();
         String _path_21 = _webRoot_3.getPath();
         String _plus_37 = (_path_21 + "/");
         String _plus_38 = (_plus_37 + srcWeb);
-        this.setWebWebApp(_plus_38);
+        this.setWebApp(_plus_38);
       }
     }
     if (this.genericIdeSupport) {

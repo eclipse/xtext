@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.util.Strings;
@@ -32,6 +34,22 @@ import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation;
  */
 @SuppressWarnings("all")
 public class CodeConfig implements IGuiceAwareGeneratorComponent {
+  /**
+   * Only needed to determine the Manifest file and its version of this plugin in standalone mode.
+   */
+  private static class Plugin extends EMFPlugin {
+    public final static CodeConfig.Plugin INSTANCE = new CodeConfig.Plugin();
+    
+    private Plugin() {
+      super(new ResourceLocator[] {});
+    }
+    
+    @Override
+    public ResourceLocator getPluginResourceLocator() {
+      return null;
+    }
+  }
+  
   private final static String FILE_HEADER_VAR_TIME = "${time}";
   
   private final static String FILE_HEADER_VAR_DATE = "${date}";
@@ -141,9 +159,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   private String getVersion() {
     InputStream is = null;
     try {
-      Class<? extends CodeConfig> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
-      final URL url = _classLoader.getResource("META-INF/MANIFEST.MF");
+      URL _baseURL = CodeConfig.Plugin.INSTANCE.getBaseURL();
+      String _plus = (_baseURL + "META-INF/MANIFEST.MF");
+      final URL url = new URL(_plus);
       InputStream _openStream = url.openStream();
       is = _openStream;
       final Manifest manifest = new Manifest(is);

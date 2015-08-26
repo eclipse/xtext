@@ -17,12 +17,26 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtend2.lib.StringConcatenationClient
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
 import org.eclipse.xtext.xtext.generator.model.annotations.IClassAnnotation
 
 class JavaFileAccess extends TextFileAccess {
 	
+	/**
+	 * A list of keywords in the Java language. Use this to avoid illegal variable names.
+	 */
+	public static val JAVA_KEYWORDS = #{
+		'abstract', 'continue', 'for', 'new', 'switch', 'assert', 'default', 'goto', 'package',
+		'synchronized', 'boolean', 'do', 'if', 'private', 'this', 'break', 'double', 'implements',
+		'protected', 'throw', 'byte', 'else', 'import', 'public', 'throws', 'case', 'enum',
+		'instanceof', 'return', 'transient', 'catch', 'extends', 'int', 'short', 'try', 'char',
+		'final', 'interface', 'static', 'void', 'class', 'finally', 'long', 'strictfp', 'volatile',
+		'const', 'float', 'native', 'super', 'while'
+	}
+	
+	/**
+	 * Set this value for the 'importNestedTypeThreshold' property to disable importing of nested types
+	 */
 	public static val DONT_IMPORT_NESTED_TYPES = Integer.MAX_VALUE
 	
 	val Map<String, String> imports = newHashMap
@@ -46,7 +60,7 @@ class JavaFileAccess extends TextFileAccess {
 	@Accessors(PROTECTED_SETTER)
 	ResourceSet resourceSet
 	
-	protected new(TypeReference typeRef, CodeConfig codeConfig, IEncodingProvider encodingProvider) {
+	protected new(TypeReference typeRef, CodeConfig codeConfig) {
 		if (typeRef.simpleNames.length > 1)
 			throw new IllegalArgumentException('Nested type cannot be serialized: ' + typeRef)
 		this.javaType = typeRef
@@ -134,8 +148,8 @@ class JavaFileAccess extends TextFileAccess {
 				access.importType(object)
 			else if (object instanceof Class<?>)
 				access.importType(new TypeReference(object))
-			else if (object instanceof EClass)
-				access.importType(new TypeReference(object, access.resourceSet))
+			else if (object instanceof EClass && access.resourceSet !== null)
+				access.importType(new TypeReference(object as EClass, access.resourceSet))
 			else
 				object.toString
 		}

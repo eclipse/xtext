@@ -44,15 +44,15 @@ public class InternalStatemachineLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g"; }
+    public String getGrammarFileName() { return "InternalStatemachine.g"; }
 
     // $ANTLR start "T__12"
     public final void mT__12() throws RecognitionException {
         try {
             int _type = T__12;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:11:7: ( 'signal' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:11:9: 'signal'
+            // InternalStatemachine.g:11:7: ( 'signal' )
+            // InternalStatemachine.g:11:9: 'signal'
             {
             match("signal"); 
 
@@ -72,8 +72,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:12:7: ( 'input' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:12:9: 'input'
+            // InternalStatemachine.g:12:7: ( 'input' )
+            // InternalStatemachine.g:12:9: 'input'
             {
             match("input"); 
 
@@ -93,8 +93,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:13:7: ( 'output' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:13:9: 'output'
+            // InternalStatemachine.g:13:7: ( 'output' )
+            // InternalStatemachine.g:13:9: 'output'
             {
             match("output"); 
 
@@ -114,8 +114,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:14:7: ( 'state' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:14:9: 'state'
+            // InternalStatemachine.g:14:7: ( 'state' )
+            // InternalStatemachine.g:14:9: 'state'
             {
             match("state"); 
 
@@ -135,8 +135,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:15:7: ( 'end' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:15:9: 'end'
+            // InternalStatemachine.g:15:7: ( 'end' )
+            // InternalStatemachine.g:15:9: 'end'
             {
             match("end"); 
 
@@ -156,8 +156,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:16:7: ( 'if' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:16:9: 'if'
+            // InternalStatemachine.g:16:7: ( 'if' )
+            // InternalStatemachine.g:16:9: 'if'
             {
             match("if"); 
 
@@ -177,8 +177,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:17:7: ( 'goto' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:17:9: 'goto'
+            // InternalStatemachine.g:17:7: ( 'goto' )
+            // InternalStatemachine.g:17:9: 'goto'
             {
             match("goto"); 
 
@@ -198,8 +198,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:18:7: ( 'and' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:18:9: 'and'
+            // InternalStatemachine.g:18:7: ( 'and' )
+            // InternalStatemachine.g:18:9: 'and'
             {
             match("and"); 
 
@@ -219,8 +219,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:19:7: ( '==' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:19:9: '=='
+            // InternalStatemachine.g:19:7: ( '==' )
+            // InternalStatemachine.g:19:9: '=='
             {
             match("=="); 
 
@@ -240,8 +240,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:20:7: ( 'set' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:20:9: 'set'
+            // InternalStatemachine.g:20:7: ( 'set' )
+            // InternalStatemachine.g:20:9: 'set'
             {
             match("set"); 
 
@@ -261,8 +261,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:21:7: ( '=' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:21:9: '='
+            // InternalStatemachine.g:21:7: ( '=' )
+            // InternalStatemachine.g:21:9: '='
             {
             match('='); 
 
@@ -281,10 +281,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_BOOLEAN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1512:14: ( ( 'true' | 'false' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1512:16: ( 'true' | 'false' )
+            // InternalStatemachine.g:1512:14: ( ( 'true' | 'false' ) )
+            // InternalStatemachine.g:1512:16: ( 'true' | 'false' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1512:16: ( 'true' | 'false' )
+            // InternalStatemachine.g:1512:16: ( 'true' | 'false' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -302,7 +302,7 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1512:17: 'true'
+                    // InternalStatemachine.g:1512:17: 'true'
                     {
                     match("true"); 
 
@@ -310,7 +310,7 @@ public class InternalStatemachineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1512:24: 'false'
+                    // InternalStatemachine.g:1512:24: 'false'
                     {
                     match("false"); 
 
@@ -336,10 +336,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1514:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1514:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalStatemachine.g:1514:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalStatemachine.g:1514:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1514:11: ( '^' )?
+            // InternalStatemachine.g:1514:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -348,7 +348,7 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1514:11: '^'
+                    // InternalStatemachine.g:1514:11: '^'
                     {
                     match('^'); 
 
@@ -366,7 +366,7 @@ public class InternalStatemachineLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1514:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalStatemachine.g:1514:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -379,7 +379,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:
+            	    // InternalStatemachine.g:
             	    {
             	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -415,10 +415,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1516:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1516:12: ( '0' .. '9' )+
+            // InternalStatemachine.g:1516:10: ( ( '0' .. '9' )+ )
+            // InternalStatemachine.g:1516:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1516:12: ( '0' .. '9' )+
+            // InternalStatemachine.g:1516:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -432,7 +432,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1516:13: '0' .. '9'
+            	    // InternalStatemachine.g:1516:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -464,10 +464,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalStatemachine.g:1518:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalStatemachine.g:1518:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalStatemachine.g:1518:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -485,10 +485,10 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalStatemachine.g:1518:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalStatemachine.g:1518:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -504,7 +504,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:21: '\\\\' .
+                    	    // InternalStatemachine.g:1518:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -512,7 +512,7 @@ public class InternalStatemachineLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalStatemachine.g:1518:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -537,10 +537,10 @@ public class InternalStatemachineLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalStatemachine.g:1518:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalStatemachine.g:1518:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -556,7 +556,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:54: '\\\\' .
+                    	    // InternalStatemachine.g:1518:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -564,7 +564,7 @@ public class InternalStatemachineLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1518:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalStatemachine.g:1518:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -607,12 +607,12 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1520:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1520:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalStatemachine.g:1520:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalStatemachine.g:1520:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1520:24: ( options {greedy=false; } : . )*
+            // InternalStatemachine.g:1520:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -637,7 +637,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1520:52: .
+            	    // InternalStatemachine.g:1520:52: .
             	    {
             	    matchAny(); 
 
@@ -667,12 +667,12 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalStatemachine.g:1522:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalStatemachine.g:1522:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalStatemachine.g:1522:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -685,7 +685,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalStatemachine.g:1522:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -705,7 +705,7 @@ public class InternalStatemachineLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:40: ( ( '\\r' )? '\\n' )?
+            // InternalStatemachine.g:1522:40: ( ( '\\r' )? '\\n' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -714,9 +714,9 @@ public class InternalStatemachineLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:41: ( '\\r' )? '\\n'
+                    // InternalStatemachine.g:1522:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:41: ( '\\r' )?
+                    // InternalStatemachine.g:1522:41: ( '\\r' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -725,7 +725,7 @@ public class InternalStatemachineLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1522:41: '\\r'
+                            // InternalStatemachine.g:1522:41: '\\r'
                             {
                             match('\r'); 
 
@@ -757,10 +757,10 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1524:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1524:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalStatemachine.g:1524:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalStatemachine.g:1524:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1524:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalStatemachine.g:1524:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt12=0;
             loop12:
             do {
@@ -774,7 +774,7 @@ public class InternalStatemachineLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:
+            	    // InternalStatemachine.g:
             	    {
             	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
             	        input.consume();
@@ -814,8 +814,8 @@ public class InternalStatemachineLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1526:16: ( . )
-            // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1526:18: .
+            // InternalStatemachine.g:1526:16: ( . )
+            // InternalStatemachine.g:1526:18: .
             {
             matchAny(); 
 
@@ -830,138 +830,138 @@ public class InternalStatemachineLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | RULE_BOOLEAN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        // InternalStatemachine.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | RULE_BOOLEAN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
         int alt13=19;
         alt13 = dfa13.predict(input);
         switch (alt13) {
             case 1 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:10: T__12
+                // InternalStatemachine.g:1:10: T__12
                 {
                 mT__12(); 
 
                 }
                 break;
             case 2 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:16: T__13
+                // InternalStatemachine.g:1:16: T__13
                 {
                 mT__13(); 
 
                 }
                 break;
             case 3 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:22: T__14
+                // InternalStatemachine.g:1:22: T__14
                 {
                 mT__14(); 
 
                 }
                 break;
             case 4 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:28: T__15
+                // InternalStatemachine.g:1:28: T__15
                 {
                 mT__15(); 
 
                 }
                 break;
             case 5 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:34: T__16
+                // InternalStatemachine.g:1:34: T__16
                 {
                 mT__16(); 
 
                 }
                 break;
             case 6 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:40: T__17
+                // InternalStatemachine.g:1:40: T__17
                 {
                 mT__17(); 
 
                 }
                 break;
             case 7 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:46: T__18
+                // InternalStatemachine.g:1:46: T__18
                 {
                 mT__18(); 
 
                 }
                 break;
             case 8 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:52: T__19
+                // InternalStatemachine.g:1:52: T__19
                 {
                 mT__19(); 
 
                 }
                 break;
             case 9 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:58: T__20
+                // InternalStatemachine.g:1:58: T__20
                 {
                 mT__20(); 
 
                 }
                 break;
             case 10 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:64: T__21
+                // InternalStatemachine.g:1:64: T__21
                 {
                 mT__21(); 
 
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:70: T__22
+                // InternalStatemachine.g:1:70: T__22
                 {
                 mT__22(); 
 
                 }
                 break;
             case 12 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:76: RULE_BOOLEAN
+                // InternalStatemachine.g:1:76: RULE_BOOLEAN
                 {
                 mRULE_BOOLEAN(); 
 
                 }
                 break;
             case 13 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:89: RULE_ID
+                // InternalStatemachine.g:1:89: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
             case 14 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:97: RULE_INT
+                // InternalStatemachine.g:1:97: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
             case 15 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:106: RULE_STRING
+                // InternalStatemachine.g:1:106: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
             case 16 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:118: RULE_ML_COMMENT
+                // InternalStatemachine.g:1:118: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 17 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:134: RULE_SL_COMMENT
+                // InternalStatemachine.g:1:134: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 18 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:150: RULE_WS
+                // InternalStatemachine.g:1:150: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
             case 19 :
-                // ../org.eclipse.xtext.web.example.statemachine.ide/src-gen/org/eclipse/xtext/web/example/statemachine/ide/contentassist/antlr/internal/InternalStatemachine.g:1:158: RULE_ANY_OTHER
+                // InternalStatemachine.g:1:158: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

@@ -8,10 +8,7 @@
 package org.eclipse.xtext.xtext.generator.model;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.JavaFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TextFileAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
@@ -22,24 +19,15 @@ public class FileAccessFactory {
   @Inject
   private CodeConfig codeConfig;
   
-  @Inject
-  private IEncodingProvider encodingProvider;
-  
   public TextFileAccess createTextFile() {
     return new TextFileAccess();
   }
   
-  public JavaFileAccess createJavaFile(final LanguageConfig2 language, final TypeReference typeRef) {
-    final JavaFileAccess file = new JavaFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _resourceSet = language.getResourceSet();
-    file.setResourceSet(_resourceSet);
-    return file;
+  public JavaFileAccess createJavaFile(final TypeReference typeRef) {
+    return new JavaFileAccess(typeRef, this.codeConfig);
   }
   
-  public XtendFileAccess createXtendFile(final LanguageConfig2 language, final TypeReference typeRef) {
-    final XtendFileAccess file = new XtendFileAccess(typeRef, this.codeConfig, this.encodingProvider);
-    ResourceSet _resourceSet = language.getResourceSet();
-    file.setResourceSet(_resourceSet);
-    return file;
+  public XtendFileAccess createXtendFile(final TypeReference typeRef) {
+    return new XtendFileAccess(typeRef, this.codeConfig);
   }
 }

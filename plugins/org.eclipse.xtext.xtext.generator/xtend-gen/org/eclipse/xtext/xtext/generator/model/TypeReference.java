@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2;
 
 @Accessors
@@ -39,15 +40,17 @@ public class TypeReference {
     return new TypeReference(clazz, (List<TypeReference>)Conversions.doWrapArray(arguments));
   }
   
-  public static TypeReference typeRef(final EClass clazz, final ResourceSet resourceSet, final EClass... arguments) {
+  public static TypeReference typeRef(final EClass clazz, final ILanguageConfig language, final EClass... arguments) {
+    ResourceSet _resourceSet = language.getResourceSet();
     final Function1<EClass, TypeReference> _function = new Function1<EClass, TypeReference>() {
       @Override
       public TypeReference apply(final EClass it) {
-        return new TypeReference(it, resourceSet);
+        ResourceSet _resourceSet = language.getResourceSet();
+        return new TypeReference(it, _resourceSet);
       }
     };
     List<TypeReference> _map = ListExtensions.<EClass, TypeReference>map(((List<EClass>)Conversions.doWrapArray(arguments)), _function);
-    return new TypeReference(clazz, resourceSet, _map);
+    return new TypeReference(clazz, _resourceSet, _map);
   }
   
   private final static Pattern PACKAGE_MATCHER = Pattern.compile("[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*");

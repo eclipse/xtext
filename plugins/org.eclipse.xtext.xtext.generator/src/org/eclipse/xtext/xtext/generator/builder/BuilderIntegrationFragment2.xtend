@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.generator.builder
 
-import com.google.inject.Inject
 import com.google.inject.name.Names
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.resource.IContainer
@@ -18,14 +17,11 @@ import org.eclipse.xtext.resource.containers.StateBasedContainerManager
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 
 class BuilderIntegrationFragment2 extends AbstractGeneratorFragment2 {
-	
-	@Inject IXtextProjectConfig projectConfig
 	
 	override generate() {
 		addRuntimeGuiceBindings

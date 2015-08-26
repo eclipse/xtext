@@ -39,7 +39,6 @@ import org.eclipse.xtext.service.GrammarProvider
 import org.eclipse.xtext.util.Wrapper
 import org.eclipse.xtext.util.internal.Log
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -53,8 +52,6 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	
 	@Accessors
 	String xmlVersion
-	
-	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
@@ -177,7 +174,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	}
 	
 	protected def doGenerateGrammarAccess() {
-		val javaFile = fileAccessFactory.createJavaFile(language, grammar.grammarAccess)
+		val javaFile = fileAccessFactory.createJavaFile(grammar.grammarAccess)
 		javaFile.annotations += new SingletonClassAnnotation
 		javaFile.javaContent = '''
 			public class «language.grammar.grammarAccess.simpleName» extends «AbstractGrammarElementFinder» {
@@ -253,7 +250,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 		public class «gaRuleAccessorClassName» extends «AbstractParserRuleElementFinder» {
 			private final «ParserRule» rule = («ParserRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 			«FOR e : containedAbstractElements»
-				private final «e.eClass» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
+				private final «e.eClass.typeRef(language)» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
 			«ENDFOR»
 			
 			«grammarFragmentToString('//')»
@@ -261,7 +258,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 			«FOR e : containedAbstractElements»
 				
 				«e.grammarFragmentToString('//')»
-				public «e.eClass» «e.gaElementAccessMethodName»() { return «e.gaElementAccessorLocalVarName»; }
+				public «e.eClass.typeRef(language)» «e.gaElementAccessMethodName»() { return «e.gaElementAccessorLocalVarName»; }
 			«ENDFOR»
 		}
 	'''
@@ -270,7 +267,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 		public class «gaRuleAccessorClassName» extends «AbstractEnumRuleElementFinder» {
 			private final «EnumRule» rule = («EnumRule») «GrammarUtil».findRuleForName(getGrammar(), "«qualifiedName»");
 			«FOR e : containedAbstractElements»
-				private final «e.eClass» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
+				private final «e.eClass.typeRef(language)» «e.gaElementAccessorLocalVarName» = «e.loadElementStatement»;
 			«ENDFOR»
 			
 			«grammarFragmentToString('//')»
@@ -278,7 +275,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 			«FOR e : containedAbstractElements»
 				
 				«e.grammarFragmentToString('//')»
-				public «e.eClass» «e.gaElementAccessMethodName»() { return «e.gaElementAccessorLocalVarName»; }
+				public «e.eClass.typeRef(language)» «e.gaElementAccessMethodName»() { return «e.gaElementAccessorLocalVarName»; }
 			«ENDFOR»
 		}
 	'''
@@ -369,7 +366,7 @@ class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
 	}
 
 	protected def StringConcatenationClient loadElementStatement(AbstractElement ele) {
-		'''(«ele.eClass»)«ele.loadElementParentStatement».eContents().get(«ele.eContainer.eContents.indexOf(ele)»)'''
+		'''(«ele.eClass.typeRef(language)»)«ele.loadElementParentStatement».eContents().get(«ele.eContainer.eContents.indexOf(ele)»)'''
 	}
 	
 	protected def String loadElementParentStatement(AbstractElement ele) {

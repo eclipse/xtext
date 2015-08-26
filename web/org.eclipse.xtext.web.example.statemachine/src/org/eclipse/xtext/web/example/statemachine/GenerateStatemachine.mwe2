@@ -53,7 +53,7 @@ Workflow {
 				genericIdeSupport = true
 				eclipseEditor = false
 				webSupport = true
-				webWebApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp/"
+				webApp = "../org.eclipse.xtext.web.example.jetty/src/main/webapp/"
 			}
 			code = auto-inject {}
 		}
@@ -115,10 +115,10 @@ Workflow {
 			
 			// JavaScript-based syntax highlighting
 			fragment = web.AceHighlightingFragment auto-inject {
-				javaScriptPath = 'xtext'
+				moduleName = 'xtext/ace-mode-statemachine'
 			}
 			fragment = web.OrionHighlightingFragment auto-inject {
-				javaScriptPath = 'xtext'
+				moduleName = 'xtext/statemachine-syntax'
 			}
 		}
 	}

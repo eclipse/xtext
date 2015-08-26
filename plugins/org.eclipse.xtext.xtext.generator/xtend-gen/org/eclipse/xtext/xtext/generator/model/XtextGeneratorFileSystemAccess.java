@@ -13,22 +13,14 @@ import java.util.Map;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 
 @SuppressWarnings("all")
 public class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess implements IXtextGeneratorFileSystemAccess {
-  public XtextGeneratorFileSystemAccess(final String path, final boolean overWrite) {
+  public XtextGeneratorFileSystemAccess(final String path, final boolean overwrite) {
     this.setOutputPath(path);
     OutputConfiguration _defaultOutput = this.getDefaultOutput();
-    final Procedure1<OutputConfiguration> _function = new Procedure1<OutputConfiguration>() {
-      @Override
-      public void apply(final OutputConfiguration it) {
-        it.setOverrideExistingResources(overWrite);
-      }
-    };
-    ObjectExtensions.<OutputConfiguration>operator_doubleArrow(_defaultOutput, _function);
+    _defaultOutput.setOverrideExistingResources(overwrite);
   }
   
   private OutputConfiguration getDefaultOutput() {

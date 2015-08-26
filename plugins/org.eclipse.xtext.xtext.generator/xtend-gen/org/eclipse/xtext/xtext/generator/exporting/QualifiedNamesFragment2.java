@@ -10,7 +10,7 @@ package org.eclipse.xtext.xtext.generator.exporting;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
 import org.eclipse.xtext.xtext.generator.model.TypeReference;
 
@@ -22,7 +22,7 @@ public class QualifiedNamesFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef = TypeReference.typeRef(IQualifiedNameProvider.class);
     TypeReference _typeRef_1 = TypeReference.typeRef(DefaultDeclarativeQualifiedNameProvider.class);
     GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _typeRef_1);
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _runtimeGenModule = _language.getRuntimeGenModule();
     _addTypeToType.contributeTo(_runtimeGenModule);
     GuiceModuleAccess.BindingFactory _bindingFactory_1 = new GuiceModuleAccess.BindingFactory();
@@ -32,7 +32,7 @@ public class QualifiedNamesFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef_4 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator");
     TypeReference _typeRef_5 = TypeReference.typeRef("org.eclipse.xtext.ui.refactoring.impl.DefaultDependentElementsCalculator");
     GuiceModuleAccess.BindingFactory _addTypeToType_2 = _addTypeToType_1.addTypeToType(_typeRef_4, _typeRef_5);
-    LanguageConfig2 _language_1 = this.getLanguage();
+    ILanguageConfig _language_1 = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language_1.getEclipsePluginGenModule();
     _addTypeToType_2.contributeTo(_eclipsePluginGenModule);
   }

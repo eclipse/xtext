@@ -9,12 +9,11 @@ package org.eclipse.xtext.xtext.generator.xbase
 
 import com.google.inject.Inject
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 
 class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
-	@Inject IXtextProjectConfig projectConfig
 	@Inject extension XbaseUsageDetector
+	
 	override generate() {
 		if (language.grammar.inheritsXtype && projectConfig.eclipsePluginManifest !== null)
 			projectConfig.eclipsePluginManifest.requiredBundles += 'org.eclipse.xtext.xbase.ui'

@@ -100,7 +100,7 @@ ruleStatemachine returns [EObject current=null]
        			$current, 
        			"signals",
         		lv_signals_1_0, 
-        		"Signal");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Signal");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -118,7 +118,7 @@ ruleStatemachine returns [EObject current=null]
        			$current, 
        			"states",
         		lv_states_2_0, 
-        		"State");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.State");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -181,7 +181,7 @@ ruleSignal returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_3_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -286,7 +286,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -303,7 +303,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"commands",
         		lv_commands_2_0, 
-        		"Command");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Command");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -321,7 +321,7 @@ ruleState returns [EObject current=null]
        			$current, 
        			"transitions",
         		lv_transitions_3_0, 
-        		"Transition");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Transition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -368,7 +368,7 @@ ruleTransition returns [EObject current=null]
        			$current, 
        			"condition",
         		lv_condition_1_0, 
-        		"Condition");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Condition");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -424,7 +424,7 @@ ruleCondition returns [EObject current=null]
        			$current, 
        			"events",
         		lv_events_0_0, 
-        		"Event");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Event");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -446,7 +446,7 @@ ruleCondition returns [EObject current=null]
        			$current, 
        			"events",
         		lv_events_2_0, 
-        		"Event");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.Event");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -503,7 +503,7 @@ ruleEvent returns [EObject current=null]
        			$current, 
        			"value",
         		lv_value_2_0, 
-        		"BOOLEAN");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.BOOLEAN");
 	    }
 
 )
@@ -563,7 +563,7 @@ ruleCommand returns [EObject current=null]
        			$current, 
        			"newValue",
         		lv_newValue_3_0, 
-        		"BOOLEAN");
+        		"org.eclipse.xtext.web.example.statemachine.Statemachine.BOOLEAN");
 	    }
 
 )

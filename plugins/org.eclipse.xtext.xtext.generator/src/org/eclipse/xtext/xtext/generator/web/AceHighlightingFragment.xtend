@@ -9,17 +9,15 @@ package org.eclipse.xtext.xtext.generator.web
 
 import com.google.common.collect.LinkedHashMultimap
 import com.google.common.collect.Multimap
-import com.google.inject.Inject
 import java.util.Collection
 import java.util.HashSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
+import org.eclipse.xtext.xtext.generator.Issues
 
 import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.xtext.generator.util.GrammarUtil2.*
-import org.eclipse.xtext.xtext.generator.Issues
 
 class AceHighlightingFragment extends AbstractGeneratorFragment2 {
 	
@@ -32,15 +30,15 @@ class AceHighlightingFragment extends AbstractGeneratorFragment2 {
 	String langId
 	Grammar grammar
 	
-	@Inject IXtextProjectConfig config
-	
 	@Accessors
 	String moduleName
 	
 	@Accessors
 	String keywordsFilter = '\\w*'
 	
-	@Accessors String javaScriptPath = 'xtext/generated'
+	/** The default container for JS files is the webapp outlet. */
+	@Accessors
+	String javaScriptPath = ''
 	
 	def addEnablePattern(String pattern) {
 		enabledPatterns += pattern
@@ -61,14 +59,14 @@ class AceHighlightingFragment extends AbstractGeneratorFragment2 {
 		langId = language.fileExtensions.head
 		grammar = language.grammar
 		if (moduleName.nullOrEmpty)
-			moduleName = 'xtext/mode-' + langId
+			moduleName = 'xtext/generated/mode-' + langId
 		val keywords = grammar.allKeywords
-		generateJavaScript(keywords).writeToFile(javaScriptPath+ '/mode-' + langId + '.js')
+		generateJavaScript(keywords).writeToFile(javaScriptPath + '/' + moduleName + '.js')
 	}
 	
 	protected def writeToFile(CharSequence content, String fileName) {
-		if (config.webWebApp != null) {
-			config.webWebApp.generateFile(fileName, content)
+		if (projectConfig.webApp != null) {
+			projectConfig.webApp.generateFile(fileName, content)
 		}
 	}
 	

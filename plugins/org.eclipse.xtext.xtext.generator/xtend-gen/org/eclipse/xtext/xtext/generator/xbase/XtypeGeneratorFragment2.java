@@ -12,16 +12,13 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
 public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
-  @Inject
-  private IXtextProjectConfig projectConfig;
-  
   @Inject
   @Extension
   private XbaseUsageDetector _xbaseUsageDetector;
@@ -29,18 +26,20 @@ public class XtypeGeneratorFragment2 extends AbstractGeneratorFragment2 {
   @Override
   public void generate() {
     boolean _and = false;
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     boolean _inheritsXtype = this._xbaseUsageDetector.inheritsXtype(_grammar);
     if (!_inheritsXtype) {
       _and = false;
     } else {
-      ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      ManifestAccess _eclipsePluginManifest = _projectConfig.getEclipsePluginManifest();
       boolean _tripleNotEquals = (_eclipsePluginManifest != null);
       _and = _tripleNotEquals;
     }
     if (_and) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_1.getEclipsePluginManifest();
       Set<String> _requiredBundles = _eclipsePluginManifest_1.getRequiredBundles();
       _requiredBundles.add("org.eclipse.xtext.xbase.ui");
     }

@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -16,13 +16,15 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.jar.Attributes;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.issues.Issues;
@@ -37,7 +39,6 @@ import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
 import org.eclipse.xtext.xtext.generator.DefaultGeneratorModule;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.LanguageModule;
@@ -183,7 +185,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     this.generateActivator();
   }
   
-  protected void generateRuntimeSetup(final LanguageConfig2 language) {
+  protected void generateRuntimeSetup(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenSetup.writeTo(_runtimeSrcGen);
@@ -192,7 +194,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     _createRuntimeSetup.writeTo(_runtimeSrc);
   }
   
-  protected void generateModules(final LanguageConfig2 language) {
+  protected void generateModules(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenModule = this.templates.createRuntimeGenModule(language);
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenModule.writeTo(_runtimeSrcGen);
@@ -213,7 +215,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     _createIdeaModule.writeTo(_ideaPluginSrc);
   }
   
-  protected void generateExecutableExtensionFactory(final LanguageConfig2 language) {
+  protected void generateExecutableExtensionFactory(final ILanguageConfig language) {
     IXtextGeneratorFileSystemAccess _eclipsePluginSrcGen = this.projectConfig.getEclipsePluginSrcGen();
     boolean _tripleNotEquals = (_eclipsePluginSrcGen != null);
     if (_tripleNotEquals) {
@@ -225,69 +227,75 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
   }
   
   protected void generateManifests() {
-    ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
-    IXtextGeneratorFileSystemAccess _runtimeMetaInf = this.projectConfig.getRuntimeMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_runtimeManifest, _runtimeMetaInf);
-    ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
-    IXtextGeneratorFileSystemAccess _runtimeTestMetaInf = this.projectConfig.getRuntimeTestMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_1 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_runtimeTestManifest, _runtimeTestMetaInf);
-    ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
-    IXtextGeneratorFileSystemAccess _genericIdeMetaInf = this.projectConfig.getGenericIdeMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_2 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_genericIdeManifest, _genericIdeMetaInf);
-    ManifestAccess _genericIdeTestManifest = this.projectConfig.getGenericIdeTestManifest();
-    IXtextGeneratorFileSystemAccess _genericIdeTestMetaInf = this.projectConfig.getGenericIdeTestMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_3 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_genericIdeTestManifest, _genericIdeTestMetaInf);
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
-    IXtextGeneratorFileSystemAccess _eclipsePluginMetaInf = this.projectConfig.getEclipsePluginMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_4 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_eclipsePluginManifest, _eclipsePluginMetaInf);
-    ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
-    IXtextGeneratorFileSystemAccess _eclipsePluginTestMetaInf = this.projectConfig.getEclipsePluginTestMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_5 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_eclipsePluginTestManifest, _eclipsePluginTestMetaInf);
-    ManifestAccess _ideaPluginManifest = this.projectConfig.getIdeaPluginManifest();
-    IXtextGeneratorFileSystemAccess _ideaPluginMetaInf = this.projectConfig.getIdeaPluginMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_6 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginManifest, _ideaPluginMetaInf);
-    ManifestAccess _ideaPluginTestManifest = this.projectConfig.getIdeaPluginTestManifest();
-    IXtextGeneratorFileSystemAccess _ideaPluginTestMetaInf = this.projectConfig.getIdeaPluginTestMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_7 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginTestManifest, _ideaPluginTestMetaInf);
-    ManifestAccess _webManifest = this.projectConfig.getWebManifest();
-    IXtextGeneratorFileSystemAccess _webMetaInf = this.projectConfig.getWebMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_8 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_webManifest, _webMetaInf);
-    ManifestAccess _webTestManifest = this.projectConfig.getWebTestManifest();
-    IXtextGeneratorFileSystemAccess _webTestMetaInf = this.projectConfig.getWebTestMetaInf();
-    Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_9 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_webTestManifest, _webTestMetaInf);
-    final List<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>> manifests = Collections.<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>unmodifiableList(CollectionLiterals.<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9));
-    final Function1<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>, Boolean> _function = new Function1<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>, Boolean>() {
-      @Override
-      public Boolean apply(final Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> it) {
-        boolean _and = false;
-        ManifestAccess _key = it.getKey();
-        boolean _notEquals = (!Objects.equal(_key, null));
-        if (!_notEquals) {
-          _and = false;
-        } else {
-          IXtextGeneratorFileSystemAccess _value = it.getValue();
-          boolean _notEquals_1 = (!Objects.equal(_value, null));
-          _and = _notEquals_1;
+    try {
+      ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
+      IXtextGeneratorFileSystemAccess _runtimeMetaInf = this.projectConfig.getRuntimeMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_runtimeManifest, _runtimeMetaInf);
+      ManifestAccess _runtimeTestManifest = this.projectConfig.getRuntimeTestManifest();
+      IXtextGeneratorFileSystemAccess _runtimeTestMetaInf = this.projectConfig.getRuntimeTestMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_1 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_runtimeTestManifest, _runtimeTestMetaInf);
+      ManifestAccess _genericIdeManifest = this.projectConfig.getGenericIdeManifest();
+      IXtextGeneratorFileSystemAccess _genericIdeMetaInf = this.projectConfig.getGenericIdeMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_2 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_genericIdeManifest, _genericIdeMetaInf);
+      ManifestAccess _genericIdeTestManifest = this.projectConfig.getGenericIdeTestManifest();
+      IXtextGeneratorFileSystemAccess _genericIdeTestMetaInf = this.projectConfig.getGenericIdeTestMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_3 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_genericIdeTestManifest, _genericIdeTestMetaInf);
+      ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+      IXtextGeneratorFileSystemAccess _eclipsePluginMetaInf = this.projectConfig.getEclipsePluginMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_4 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_eclipsePluginManifest, _eclipsePluginMetaInf);
+      ManifestAccess _eclipsePluginTestManifest = this.projectConfig.getEclipsePluginTestManifest();
+      IXtextGeneratorFileSystemAccess _eclipsePluginTestMetaInf = this.projectConfig.getEclipsePluginTestMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_5 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_eclipsePluginTestManifest, _eclipsePluginTestMetaInf);
+      ManifestAccess _ideaPluginManifest = this.projectConfig.getIdeaPluginManifest();
+      IXtextGeneratorFileSystemAccess _ideaPluginMetaInf = this.projectConfig.getIdeaPluginMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_6 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginManifest, _ideaPluginMetaInf);
+      ManifestAccess _ideaPluginTestManifest = this.projectConfig.getIdeaPluginTestManifest();
+      IXtextGeneratorFileSystemAccess _ideaPluginTestMetaInf = this.projectConfig.getIdeaPluginTestMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_7 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginTestManifest, _ideaPluginTestMetaInf);
+      ManifestAccess _webManifest = this.projectConfig.getWebManifest();
+      IXtextGeneratorFileSystemAccess _webMetaInf = this.projectConfig.getWebMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_8 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_webManifest, _webMetaInf);
+      ManifestAccess _webTestManifest = this.projectConfig.getWebTestManifest();
+      IXtextGeneratorFileSystemAccess _webTestMetaInf = this.projectConfig.getWebTestMetaInf();
+      Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> _mappedTo_9 = Pair.<ManifestAccess, IXtextGeneratorFileSystemAccess>of(_webTestManifest, _webTestMetaInf);
+      final LinkedList<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>> manifests = CollectionLiterals.<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>newLinkedList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9);
+      int _size = manifests.size();
+      final HashMap<URI, ManifestAccess> uri2Manifest = Maps.<URI, ManifestAccess>newHashMapWithExpectedSize(_size);
+      final ListIterator<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>> manifestIter = manifests.listIterator();
+      while (manifestIter.hasNext()) {
+        {
+          final Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> entry = manifestIter.next();
+          final ManifestAccess manifest = entry.getKey();
+          final IXtextGeneratorFileSystemAccess metaInf = entry.getValue();
+          if (((manifest == null) || (metaInf == null))) {
+            manifestIter.remove();
+          } else {
+            String _path = manifest.getPath();
+            final URI uri = metaInf.getURI(_path);
+            boolean _containsKey = uri2Manifest.containsKey(uri);
+            if (_containsKey) {
+              ManifestAccess _get = uri2Manifest.get(uri);
+              _get.merge(manifest);
+              manifestIter.remove();
+            } else {
+              uri2Manifest.put(uri, manifest);
+            }
+          }
         }
-        return Boolean.valueOf(_and);
       }
-    };
-    Iterable<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>> _filter = IterableExtensions.<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>filter(manifests, _function);
-    final Procedure1<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>> _function_1 = new Procedure1<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>() {
-      @Override
-      public void apply(final Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> it) {
-        try {
-          final ManifestAccess manifest = it.getKey();
-          final IXtextGeneratorFileSystemAccess metaInf = it.getValue();
+      for (final Pair<ManifestAccess, IXtextGeneratorFileSystemAccess> entry : manifests) {
+        {
+          final ManifestAccess manifest = entry.getKey();
+          final IXtextGeneratorFileSystemAccess metaInf = entry.getValue();
           String _bundleName = manifest.getBundleName();
           boolean _tripleEquals = (_bundleName == null);
           if (_tripleEquals) {
           }
           TypeReference activator = null;
-          ManifestAccess _eclipsePluginManifest = XtextGenerator.this.projectConfig.getEclipsePluginManifest();
-          boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest);
+          ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+          boolean _tripleEquals_1 = (manifest == _eclipsePluginManifest_1);
           if (_tripleEquals_1) {
-            final LanguageConfig2 firstLanguage = IterableExtensions.<LanguageConfig2>head(XtextGenerator.this.languageConfigs);
+            final LanguageConfig2 firstLanguage = IterableExtensions.<LanguageConfig2>head(this.languageConfigs);
             XtextGeneratorNaming _naming = null;
             if (firstLanguage!=null) {
               _naming=firstLanguage.getNaming();
@@ -304,7 +312,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
           if (_isFile) {
             boolean _isMerge = manifest.isMerge();
             if (_isMerge) {
-              XtextGenerator.this.mergeManifest(manifest, metaInf, activator);
+              this.mergeManifest(manifest, metaInf, activator);
             } else {
               String _path_1 = manifest.getPath();
               boolean _endsWith = _path_1.endsWith(".MF");
@@ -312,20 +320,19 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
                 String _path_2 = manifest.getPath();
                 String _plus = (_path_2 + "_gen");
                 manifest.setPath(_plus);
-                TextFileAccess _createManifest = XtextGenerator.this.templates.createManifest(manifest, activator);
+                TextFileAccess _createManifest = this.templates.createManifest(manifest, activator);
                 _createManifest.writeTo(metaInf);
               }
             }
           } else {
-            TextFileAccess _createManifest_1 = XtextGenerator.this.templates.createManifest(manifest, activator);
+            TextFileAccess _createManifest_1 = this.templates.createManifest(manifest, activator);
             _createManifest_1.writeTo(metaInf);
           }
-        } catch (Throwable _e) {
-          throw Exceptions.sneakyThrow(_e);
         }
       }
-    };
-    IterableExtensions.<Pair<ManifestAccess, IXtextGeneratorFileSystemAccess>>forEach(_filter, _function_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected void mergeManifest(final ManifestAccess manifest, final IXtextGeneratorFileSystemAccess metaInf, final TypeReference activator) throws IOException {
@@ -409,41 +416,35 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     PluginXmlAccess _eclipsePluginTestPluginXml = this.projectConfig.getEclipsePluginTestPluginXml();
     IXtextGeneratorFileSystemAccess _eclipsePluginTestRoot = this.projectConfig.getEclipsePluginTestRoot();
     Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> _mappedTo_5 = Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_eclipsePluginTestPluginXml, _eclipsePluginTestRoot);
-    PluginXmlAccess _ideaPluginPluginXml = this.projectConfig.getIdeaPluginPluginXml();
-    IXtextGeneratorFileSystemAccess _ideaPluginRoot = this.projectConfig.getIdeaPluginRoot();
-    Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> _mappedTo_6 = Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginPluginXml, _ideaPluginRoot);
-    PluginXmlAccess _ideaPluginTestPluginXml = this.projectConfig.getIdeaPluginTestPluginXml();
-    IXtextGeneratorFileSystemAccess _ideaPluginTestRoot = this.projectConfig.getIdeaPluginTestRoot();
-    Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> _mappedTo_7 = Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_ideaPluginTestPluginXml, _ideaPluginTestRoot);
-    PluginXmlAccess _webPluginXml = this.projectConfig.getWebPluginXml();
-    IXtextGeneratorFileSystemAccess _webRoot = this.projectConfig.getWebRoot();
-    Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> _mappedTo_8 = Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_webPluginXml, _webRoot);
-    PluginXmlAccess _webTestPluginXml = this.projectConfig.getWebTestPluginXml();
-    IXtextGeneratorFileSystemAccess _webTestRoot = this.projectConfig.getWebTestRoot();
-    Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> _mappedTo_9 = Pair.<PluginXmlAccess, IXtextGeneratorFileSystemAccess>of(_webTestPluginXml, _webTestRoot);
-    final List<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> pluginXmls = Collections.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>unmodifiableList(CollectionLiterals.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5, _mappedTo_6, _mappedTo_7, _mappedTo_8, _mappedTo_9));
-    final Function1<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>, Boolean> _function = new Function1<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>, Boolean>() {
-      @Override
-      public Boolean apply(final Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> it) {
-        boolean _and = false;
-        PluginXmlAccess _key = it.getKey();
-        boolean _tripleNotEquals = (_key != null);
-        if (!_tripleNotEquals) {
-          _and = false;
+    final LinkedList<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> pluginXmls = CollectionLiterals.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>newLinkedList(_mappedTo, _mappedTo_1, _mappedTo_2, _mappedTo_3, _mappedTo_4, _mappedTo_5);
+    int _size = pluginXmls.size();
+    final HashMap<URI, PluginXmlAccess> uri2PluginXml = Maps.<URI, PluginXmlAccess>newHashMapWithExpectedSize(_size);
+    final ListIterator<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> pluginXmlIter = pluginXmls.listIterator();
+    while (pluginXmlIter.hasNext()) {
+      {
+        final Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> entry = pluginXmlIter.next();
+        final PluginXmlAccess pluginXml = entry.getKey();
+        final IXtextGeneratorFileSystemAccess root = entry.getValue();
+        if (((pluginXml == null) || (root == null))) {
+          pluginXmlIter.remove();
         } else {
-          IXtextGeneratorFileSystemAccess _value = it.getValue();
-          boolean _tripleNotEquals_1 = (_value != null);
-          _and = _tripleNotEquals_1;
+          String _path = pluginXml.getPath();
+          final URI uri = root.getURI(_path);
+          boolean _containsKey = uri2PluginXml.containsKey(uri);
+          if (_containsKey) {
+            PluginXmlAccess _get = uri2PluginXml.get(uri);
+            _get.merge(pluginXml);
+            pluginXmlIter.remove();
+          } else {
+            uri2PluginXml.put(uri, pluginXml);
+          }
         }
-        return Boolean.valueOf(_and);
       }
-    };
-    Iterable<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _filter = IterableExtensions.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>filter(pluginXmls, _function);
-    final Procedure1<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>> _function_1 = new Procedure1<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>() {
-      @Override
-      public void apply(final Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> it) {
-        final PluginXmlAccess pluginXml = it.getKey();
-        final IXtextGeneratorFileSystemAccess root = it.getValue();
+    }
+    for (final Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess> entry : pluginXmls) {
+      {
+        final PluginXmlAccess pluginXml = entry.getKey();
+        final IXtextGeneratorFileSystemAccess root = entry.getValue();
         String _path = pluginXml.getPath();
         boolean _isFile = root.isFile(_path);
         if (_isFile) {
@@ -453,16 +454,19 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
             String _path_2 = pluginXml.getPath();
             String _plus = (_path_2 + "_gen");
             pluginXml.setPath(_plus);
-            TextFileAccess _createPluginXml = XtextGenerator.this.templates.createPluginXml(pluginXml);
-            _createPluginXml.writeTo(root);
+            TextFileAccess _createPluginXml = this.templates.createPluginXml(pluginXml);
+            if (_createPluginXml!=null) {
+              _createPluginXml.writeTo(root);
+            }
           }
         } else {
-          TextFileAccess _createPluginXml_1 = XtextGenerator.this.templates.createPluginXml(pluginXml);
-          _createPluginXml_1.writeTo(root);
+          TextFileAccess _createPluginXml_1 = this.templates.createPluginXml(pluginXml);
+          if (_createPluginXml_1!=null) {
+            _createPluginXml_1.writeTo(root);
+          }
         }
       }
-    };
-    IterableExtensions.<Pair<PluginXmlAccess, IXtextGeneratorFileSystemAccess>>forEach(_filter, _function_1);
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(XtextGenerator.class);

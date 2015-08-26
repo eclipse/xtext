@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
+import org.eclipse.xtext.xtext.generator.ILanguageConfig
 import org.eclipse.xtext.xtext.generator.util.GenModelUtil2
 
 @Accessors
@@ -28,8 +29,8 @@ class TypeReference {
 		new TypeReference(clazz, arguments)
 	}
 	
-	static def TypeReference typeRef(EClass clazz, ResourceSet resourceSet, EClass... arguments) {
-		new TypeReference(clazz, resourceSet, arguments.map[new TypeReference(it, resourceSet)])
+	static def TypeReference typeRef(EClass clazz, ILanguageConfig language, EClass... arguments) {
+		new TypeReference(clazz, language.resourceSet, arguments.map[new TypeReference(it, language.resourceSet)])
 	}
 	
 	static val PACKAGE_MATCHER = Pattern.compile('[a-z][a-zA-Z0-9_]*(\\.[a-z][a-zA-Z0-9_]*)*')

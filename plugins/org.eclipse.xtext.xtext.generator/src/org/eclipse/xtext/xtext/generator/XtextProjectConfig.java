@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xtext.generator;
 
 import com.google.inject.Injector;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.XtextGeneratorFileSystemAccess;
 import org.eclipse.xtext.xtext.generator.model.ManifestAccess;
@@ -25,72 +24,59 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	private IXtextGeneratorFileSystemAccess runtimeMetaInf;
 	private IXtextGeneratorFileSystemAccess runtimeSrc;
 	private IXtextGeneratorFileSystemAccess runtimeSrcGen;
-	private IXtextGeneratorFileSystemAccess runtimeWebApp;
 	private ManifestAccess runtimeManifest;
 	private PluginXmlAccess runtimePluginXml;
 	private IXtextGeneratorFileSystemAccess runtimeTestRoot;
 	private IXtextGeneratorFileSystemAccess runtimeTestMetaInf;
 	private IXtextGeneratorFileSystemAccess runtimeTestSrc;
 	private IXtextGeneratorFileSystemAccess runtimeTestSrcGen;
-	private IXtextGeneratorFileSystemAccess runtimeTestWebApp;
 	private ManifestAccess runtimeTestManifest;
 	private PluginXmlAccess runtimeTestPluginXml;
 	private IXtextGeneratorFileSystemAccess genericIdeRoot;
 	private IXtextGeneratorFileSystemAccess genericIdeMetaInf;
 	private IXtextGeneratorFileSystemAccess genericIdeSrc;
 	private IXtextGeneratorFileSystemAccess genericIdeSrcGen;
-	private IXtextGeneratorFileSystemAccess genericIdeWebApp;
 	private ManifestAccess genericIdeManifest;
 	private PluginXmlAccess genericIdePluginXml;
 	private IXtextGeneratorFileSystemAccess genericIdeTestRoot;
 	private IXtextGeneratorFileSystemAccess genericIdeTestMetaInf;
 	private IXtextGeneratorFileSystemAccess genericIdeTestSrc;
 	private IXtextGeneratorFileSystemAccess genericIdeTestSrcGen;
-	private IXtextGeneratorFileSystemAccess genericIdeTestWebApp;
 	private ManifestAccess genericIdeTestManifest;
 	private PluginXmlAccess genericIdeTestPluginXml;
 	private IXtextGeneratorFileSystemAccess eclipsePluginRoot;
 	private IXtextGeneratorFileSystemAccess eclipsePluginMetaInf;
 	private IXtextGeneratorFileSystemAccess eclipsePluginSrc;
 	private IXtextGeneratorFileSystemAccess eclipsePluginSrcGen;
-	private IXtextGeneratorFileSystemAccess eclipsePluginWebApp;
 	private ManifestAccess eclipsePluginManifest;
 	private PluginXmlAccess eclipsePluginPluginXml;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestRoot;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestMetaInf;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestSrc;
 	private IXtextGeneratorFileSystemAccess eclipsePluginTestSrcGen;
-	private IXtextGeneratorFileSystemAccess eclipsePluginTestWebApp;
 	private ManifestAccess eclipsePluginTestManifest;
 	private PluginXmlAccess eclipsePluginTestPluginXml;
 	private IXtextGeneratorFileSystemAccess ideaPluginRoot;
 	private IXtextGeneratorFileSystemAccess ideaPluginMetaInf;
 	private IXtextGeneratorFileSystemAccess ideaPluginSrc;
 	private IXtextGeneratorFileSystemAccess ideaPluginSrcGen;
-	private IXtextGeneratorFileSystemAccess ideaPluginWebApp;
 	private ManifestAccess ideaPluginManifest;
-	private PluginXmlAccess ideaPluginPluginXml;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestRoot;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestMetaInf;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestSrc;
 	private IXtextGeneratorFileSystemAccess ideaPluginTestSrcGen;
-	private IXtextGeneratorFileSystemAccess ideaPluginTestWebApp;
 	private ManifestAccess ideaPluginTestManifest;
-	private PluginXmlAccess ideaPluginTestPluginXml;
 	private IXtextGeneratorFileSystemAccess webRoot;
 	private IXtextGeneratorFileSystemAccess webMetaInf;
 	private IXtextGeneratorFileSystemAccess webSrc;
 	private IXtextGeneratorFileSystemAccess webSrcGen;
-	private IXtextGeneratorFileSystemAccess webWebApp;
 	private ManifestAccess webManifest;
-	private PluginXmlAccess webPluginXml;
 	private IXtextGeneratorFileSystemAccess webTestRoot;
 	private IXtextGeneratorFileSystemAccess webTestMetaInf;
 	private IXtextGeneratorFileSystemAccess webTestSrc;
 	private IXtextGeneratorFileSystemAccess webTestSrcGen;
-	private IXtextGeneratorFileSystemAccess webTestWebApp;
 	private ManifestAccess webTestManifest;
-	private PluginXmlAccess webTestPluginXml;
+	private IXtextGeneratorFileSystemAccess webApp;
 	
 	public void checkConfiguration(Issues issues) {
 		if (runtimeSrc == null) {
@@ -99,65 +85,53 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (runtimeSrcGen == null) {
 			issues.addError("The property 'runtimeSrcGen' must be set.", this);
 		}
-		if (runtimeManifest != null && Strings.isEmpty(runtimeManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", runtimeManifest);
+		if (runtimeManifest != null && runtimeMetaInf == null) {
+			issues.addError("The property 'runtimeMetaInf' must be set when 'runtimeManifest' is set.");
 		}
-		if (runtimePluginXml != null && Strings.isEmpty(runtimePluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", runtimePluginXml);
+		if (runtimePluginXml != null && runtimeRoot == null) {
+			issues.addError("The property 'runtimeRoot' must be set when 'runtimePluginXml' is set.");
 		}
-		if (runtimeTestManifest != null && Strings.isEmpty(runtimeTestManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", runtimeTestManifest);
+		if (runtimeTestManifest != null && runtimeTestMetaInf == null) {
+			issues.addError("The property 'runtimeTestMetaInf' must be set when 'runtimeTestManifest' is set.");
 		}
-		if (runtimeTestPluginXml != null && Strings.isEmpty(runtimeTestPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", runtimeTestPluginXml);
+		if (runtimeTestPluginXml != null && runtimeTestRoot == null) {
+			issues.addError("The property 'runtimeTestRoot' must be set when 'runtimeTestPluginXml' is set.");
 		}
-		if (genericIdeManifest != null && Strings.isEmpty(genericIdeManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", genericIdeManifest);
+		if (genericIdeManifest != null && genericIdeMetaInf == null) {
+			issues.addError("The property 'genericIdeMetaInf' must be set when 'genericIdeManifest' is set.");
 		}
-		if (genericIdePluginXml != null && Strings.isEmpty(genericIdePluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", genericIdePluginXml);
+		if (genericIdePluginXml != null && genericIdeRoot == null) {
+			issues.addError("The property 'genericIdeRoot' must be set when 'genericIdePluginXml' is set.");
 		}
-		if (genericIdeTestManifest != null && Strings.isEmpty(genericIdeTestManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", genericIdeTestManifest);
+		if (genericIdeTestManifest != null && genericIdeTestMetaInf == null) {
+			issues.addError("The property 'genericIdeTestMetaInf' must be set when 'genericIdeTestManifest' is set.");
 		}
-		if (genericIdeTestPluginXml != null && Strings.isEmpty(genericIdeTestPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", genericIdeTestPluginXml);
+		if (genericIdeTestPluginXml != null && genericIdeTestRoot == null) {
+			issues.addError("The property 'genericIdeTestRoot' must be set when 'genericIdeTestPluginXml' is set.");
 		}
-		if (eclipsePluginManifest != null && Strings.isEmpty(eclipsePluginManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", eclipsePluginManifest);
+		if (eclipsePluginManifest != null && eclipsePluginMetaInf == null) {
+			issues.addError("The property 'eclipsePluginMetaInf' must be set when 'eclipsePluginManifest' is set.");
 		}
-		if (eclipsePluginPluginXml != null && Strings.isEmpty(eclipsePluginPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", eclipsePluginPluginXml);
+		if (eclipsePluginPluginXml != null && eclipsePluginRoot == null) {
+			issues.addError("The property 'eclipsePluginRoot' must be set when 'eclipsePluginPluginXml' is set.");
 		}
-		if (eclipsePluginTestManifest != null && Strings.isEmpty(eclipsePluginTestManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", eclipsePluginTestManifest);
+		if (eclipsePluginTestManifest != null && eclipsePluginTestMetaInf == null) {
+			issues.addError("The property 'eclipsePluginTestMetaInf' must be set when 'eclipsePluginTestManifest' is set.");
 		}
-		if (eclipsePluginTestPluginXml != null && Strings.isEmpty(eclipsePluginTestPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", eclipsePluginTestPluginXml);
+		if (eclipsePluginTestPluginXml != null && eclipsePluginTestRoot == null) {
+			issues.addError("The property 'eclipsePluginTestRoot' must be set when 'eclipsePluginTestPluginXml' is set.");
 		}
-		if (ideaPluginManifest != null && Strings.isEmpty(ideaPluginManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", ideaPluginManifest);
+		if (ideaPluginManifest != null && ideaPluginMetaInf == null) {
+			issues.addError("The property 'ideaPluginMetaInf' must be set when 'ideaPluginManifest' is set.");
 		}
-		if (ideaPluginPluginXml != null && Strings.isEmpty(ideaPluginPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", ideaPluginPluginXml);
+		if (ideaPluginTestManifest != null && ideaPluginTestMetaInf == null) {
+			issues.addError("The property 'ideaPluginTestMetaInf' must be set when 'ideaPluginTestManifest' is set.");
 		}
-		if (ideaPluginTestManifest != null && Strings.isEmpty(ideaPluginTestManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", ideaPluginTestManifest);
+		if (webManifest != null && webMetaInf == null) {
+			issues.addError("The property 'webMetaInf' must be set when 'webManifest' is set.");
 		}
-		if (ideaPluginTestPluginXml != null && Strings.isEmpty(ideaPluginTestPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", ideaPluginTestPluginXml);
-		}
-		if (webManifest != null && Strings.isEmpty(webManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", webManifest);
-		}
-		if (webPluginXml != null && Strings.isEmpty(webPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", webPluginXml);
-		}
-		if (webTestManifest != null && Strings.isEmpty(webTestManifest.getPath())) {
-			issues.addError("The property 'path' must be set.", webTestManifest);
-		}
-		if (webTestPluginXml != null && Strings.isEmpty(webTestPluginXml.getPath())) {
-			issues.addError("The property 'path' must be set.", webTestPluginXml);
+		if (webTestManifest != null && webTestMetaInf == null) {
+			issues.addError("The property 'webTestMetaInf' must be set when 'webTestManifest' is set.");
 		}
 	}
 	
@@ -178,9 +152,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (runtimeSrcGen != null) {
 			runtimeSrcGen.initialize(injector);
 		}
-		if (runtimeWebApp != null) {
-			runtimeWebApp.initialize(injector);
-		}
 		
 		// Initialize runtimeTest configuration
 		if (runtimeTestRoot != null) {
@@ -194,9 +165,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		}
 		if (runtimeTestSrcGen != null) {
 			runtimeTestSrcGen.initialize(injector);
-		}
-		if (runtimeTestWebApp != null) {
-			runtimeTestWebApp.initialize(injector);
 		}
 		
 		// Initialize genericIde configuration
@@ -212,9 +180,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (genericIdeSrcGen != null) {
 			genericIdeSrcGen.initialize(injector);
 		}
-		if (genericIdeWebApp != null) {
-			genericIdeWebApp.initialize(injector);
-		}
 		
 		// Initialize genericIdeTest configuration
 		if (genericIdeTestRoot != null) {
@@ -228,9 +193,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		}
 		if (genericIdeTestSrcGen != null) {
 			genericIdeTestSrcGen.initialize(injector);
-		}
-		if (genericIdeTestWebApp != null) {
-			genericIdeTestWebApp.initialize(injector);
 		}
 		
 		// Initialize eclipsePlugin configuration
@@ -246,9 +208,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (eclipsePluginSrcGen != null) {
 			eclipsePluginSrcGen.initialize(injector);
 		}
-		if (eclipsePluginWebApp != null) {
-			eclipsePluginWebApp.initialize(injector);
-		}
 		
 		// Initialize eclipsePluginTest configuration
 		if (eclipsePluginTestRoot != null) {
@@ -262,9 +221,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		}
 		if (eclipsePluginTestSrcGen != null) {
 			eclipsePluginTestSrcGen.initialize(injector);
-		}
-		if (eclipsePluginTestWebApp != null) {
-			eclipsePluginTestWebApp.initialize(injector);
 		}
 		
 		// Initialize ideaPlugin configuration
@@ -280,9 +236,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (ideaPluginSrcGen != null) {
 			ideaPluginSrcGen.initialize(injector);
 		}
-		if (ideaPluginWebApp != null) {
-			ideaPluginWebApp.initialize(injector);
-		}
 		
 		// Initialize ideaPluginTest configuration
 		if (ideaPluginTestRoot != null) {
@@ -296,9 +249,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		}
 		if (ideaPluginTestSrcGen != null) {
 			ideaPluginTestSrcGen.initialize(injector);
-		}
-		if (ideaPluginTestWebApp != null) {
-			ideaPluginTestWebApp.initialize(injector);
 		}
 		
 		// Initialize web configuration
@@ -314,9 +264,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (webSrcGen != null) {
 			webSrcGen.initialize(injector);
 		}
-		if (webWebApp != null) {
-			webWebApp.initialize(injector);
-		}
 		
 		// Initialize webTest configuration
 		if (webTestRoot != null) {
@@ -331,8 +278,9 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		if (webTestSrcGen != null) {
 			webTestSrcGen.initialize(injector);
 		}
-		if (webTestWebApp != null) {
-			webTestWebApp.initialize(injector);
+		
+		if (webApp != null) {
+			webApp.initialize(injector);
 		}
 	}
 	
@@ -372,15 +320,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.runtimeSrcGen = new XtextGeneratorFileSystemAccess(path, true);
 	}
 	
-	@Override
-	public IXtextGeneratorFileSystemAccess getRuntimeWebApp() {
-		return runtimeWebApp;
-	}
-	
-	public void setRuntimeWebApp(String path) {
-		this.runtimeWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
 	@Override
 	public ManifestAccess getRuntimeManifest() {
 		return runtimeManifest;
@@ -436,15 +375,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getRuntimeTestWebApp() {
-		return runtimeTestWebApp;
-	}
-	
-	public void setRuntimeTestWebApp(String path) {
-		this.runtimeTestWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getRuntimeTestManifest() {
 		return runtimeTestManifest;
 	}
@@ -498,15 +428,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.genericIdeSrcGen = new XtextGeneratorFileSystemAccess(path, true);
 	}
 	
-	@Override
-	public IXtextGeneratorFileSystemAccess getGenericIdeWebApp() {
-		return genericIdeWebApp;
-	}
-	
-	public void setGenericIdeWebApp(String path) {
-		this.genericIdeWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
 	@Override
 	public ManifestAccess getGenericIdeManifest() {
 		return genericIdeManifest;
@@ -562,15 +483,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getGenericIdeTestWebApp() {
-		return genericIdeTestWebApp;
-	}
-	
-	public void setGenericIdeTestWebApp(String path) {
-		this.genericIdeTestWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getGenericIdeTestManifest() {
 		return genericIdeTestManifest;
 	}
@@ -624,15 +536,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 		this.eclipsePluginSrcGen = new XtextGeneratorFileSystemAccess(path, true);
 	}
 	
-	@Override
-	public IXtextGeneratorFileSystemAccess getEclipsePluginWebApp() {
-		return eclipsePluginWebApp;
-	}
-	
-	public void setEclipsePluginWebApp(String path) {
-		this.eclipsePluginWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
 	@Override
 	public ManifestAccess getEclipsePluginManifest() {
 		return eclipsePluginManifest;
@@ -688,15 +591,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getEclipsePluginTestWebApp() {
-		return eclipsePluginTestWebApp;
-	}
-	
-	public void setEclipsePluginTestWebApp(String path) {
-		this.eclipsePluginTestWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getEclipsePluginTestManifest() {
 		return eclipsePluginTestManifest;
 	}
@@ -751,30 +645,12 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getIdeaPluginWebApp() {
-		return ideaPluginWebApp;
-	}
-	
-	public void setIdeaPluginWebApp(String path) {
-		this.ideaPluginWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getIdeaPluginManifest() {
 		return ideaPluginManifest;
 	}
 	
 	public void setIdeaPluginManifest(ManifestAccess manifest) {
 		this.ideaPluginManifest = manifest;
-	}
-	
-	@Override
-	public PluginXmlAccess getIdeaPluginPluginXml() {
-		return ideaPluginPluginXml;
-	}
-	
-	public void setIdeaPluginPluginXml(PluginXmlAccess pluginXml) {
-		this.ideaPluginPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -814,30 +690,12 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getIdeaPluginTestWebApp() {
-		return ideaPluginTestWebApp;
-	}
-	
-	public void setIdeaPluginTestWebApp(String path) {
-		this.ideaPluginTestWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getIdeaPluginTestManifest() {
 		return ideaPluginTestManifest;
 	}
 	
 	public void setIdeaPluginTestManifest(ManifestAccess manifest) {
 		this.ideaPluginTestManifest = manifest;
-	}
-	
-	@Override
-	public PluginXmlAccess getIdeaPluginTestPluginXml() {
-		return ideaPluginTestPluginXml;
-	}
-	
-	public void setIdeaPluginTestPluginXml(PluginXmlAccess pluginXml) {
-		this.ideaPluginTestPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -877,30 +735,12 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getWebWebApp() {
-		return webWebApp;
-	}
-	
-	public void setWebWebApp(String path) {
-		this.webWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getWebManifest() {
 		return webManifest;
 	}
 	
 	public void setWebManifest(ManifestAccess manifest) {
 		this.webManifest = manifest;
-	}
-	
-	@Override
-	public PluginXmlAccess getWebPluginXml() {
-		return webPluginXml;
-	}
-	
-	public void setWebPluginXml(PluginXmlAccess pluginXml) {
-		this.webPluginXml = pluginXml;
 	}
 	
 	@Override
@@ -940,15 +780,6 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public IXtextGeneratorFileSystemAccess getWebTestWebApp() {
-		return webTestWebApp;
-	}
-	
-	public void setWebTestWebApp(String path) {
-		this.webTestWebApp = new XtextGeneratorFileSystemAccess(path, true);
-	}
-
-	@Override
 	public ManifestAccess getWebTestManifest() {
 		return webTestManifest;
 	}
@@ -958,12 +789,11 @@ public class XtextProjectConfig implements IXtextProjectConfig {
 	}
 	
 	@Override
-	public PluginXmlAccess getWebTestPluginXml() {
-		return webTestPluginXml;
+	public IXtextGeneratorFileSystemAccess getWebApp() {
+		return webApp;
 	}
 	
-	public void setWebTestPluginXml(PluginXmlAccess pluginXml) {
-		this.webTestPluginXml = pluginXml;
+	public void setWebApp(String path) {
+		this.webApp = new XtextGeneratorFileSystemAccess(path, true);
 	}
-	
 }

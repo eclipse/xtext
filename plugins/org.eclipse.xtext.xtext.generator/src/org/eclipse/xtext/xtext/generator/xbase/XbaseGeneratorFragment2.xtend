@@ -19,8 +19,7 @@ import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
+import org.eclipse.xtext.xtext.generator.ILanguageConfig
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
@@ -29,16 +28,22 @@ import org.eclipse.xtext.xtext.generator.model.TypeReference
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
 import static extension org.eclipse.xtext.xtext.generator.util.GenModelUtil2.*
 
-@Accessors(PUBLIC_SETTER)
 class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 
+	@Accessors(PUBLIC_SETTER)
 	boolean generateXtendInferrer = true
-	boolean useInferredJvmModel = true
-	boolean jdtTypeHierarchy = true
-	boolean jdtCallHierarchy = true
-	boolean skipExportedPackage = false
 	
-	@Inject IXtextProjectConfig projectConfig
+	@Accessors(PUBLIC_SETTER)
+	boolean useInferredJvmModel = true
+	
+	@Accessors(PUBLIC_SETTER)
+	boolean jdtTypeHierarchy = true
+	
+	@Accessors(PUBLIC_SETTER)
+	boolean jdtCallHierarchy = true
+	
+	@Accessors(PUBLIC_SETTER)
+	boolean skipExportedPackage = false
 	
 	@Inject FileAccessFactory fileAccessFactory
 	
@@ -50,7 +55,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		new TypeReference(grammar.runtimeBasePackage + '.jvmmodel.' + GrammarUtil.getSimpleName(grammar) + 'JvmModelInferrer')
 	}
 	
-	protected def TypeReference getImportScopeProvider(LanguageConfig2 langConfig) {
+	protected def TypeReference getImportScopeProvider(ILanguageConfig langConfig) {
 		if (langConfig.grammar.usesXImportSection)
 			'org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider'.typeRef
 		else
@@ -61,12 +66,12 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		if (!grammar.inheritsXbase)
 			return;
 		
-		contributeRuntimeGuiceBindings(language)
-		contributeEclipsePluginGuiceBindings(language)
+		contributeRuntimeGuiceBindings()
+		contributeEclipsePluginGuiceBindings()
 		if (projectConfig.eclipsePluginPluginXml !== null)
-			contributeEclipsePluginExtensions(language)
+			contributeEclipsePluginExtensions()
 		if (generateXtendInferrer)
-			doGenerateXtendInferrer(language)
+			doGenerateXtendInferrer()
 		
 		if (projectConfig.runtimeManifest !== null) {
 			projectConfig.runtimeManifest.requiredBundles.addAll(#[
@@ -83,7 +88,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	protected def contributeRuntimeGuiceBindings(LanguageConfig2 language) {
+	protected def contributeRuntimeGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 				// overrides binding from org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
 				.addTypeToType(IQualifiedNameProvider.typeRef,
@@ -127,7 +132,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			language.runtimeGenModule.superClass = 'org.eclipse.xtext.xbase.DefaultXbaseRuntimeModule'.typeRef
 	}
 	
-	protected def contributeEclipsePluginGuiceBindings(LanguageConfig2 language) {
+	protected def contributeEclipsePluginGuiceBindings() {
 		val bindingFactory = new GuiceModuleAccess.BindingFactory()
 		if (useInferredJvmModel) {
 			val StringConcatenationClient statement = '''
@@ -197,8 +202,8 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule'.typeRef
 	}
 	
-	protected def doGenerateXtendInferrer(LanguageConfig2 language) {
-		val xtendFile = fileAccessFactory.createXtendFile(language, jvmModelInferrer)
+	protected def doGenerateXtendInferrer() {
+		val xtendFile = fileAccessFactory.createXtendFile(jvmModelInferrer)
 		
 		xtendFile.typeComment = '''
 			/**
@@ -261,7 +266,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 		xtendFile.writeTo(projectConfig.runtimeSrc)
 	}
 	
-	protected def contributeEclipsePluginExtensions(LanguageConfig2 language) {
+	protected def contributeEclipsePluginExtensions() {
 		val name = language.grammar.name
 		if (jdtTypeHierarchy) {
 			projectConfig.eclipsePluginPluginXml.entries += '''

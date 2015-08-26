@@ -7,18 +7,51 @@
  *******************************************************************************/
 package org.eclipse.xtext.web.example.statemachine;
 
-import java.util.Properties;
-
-import org.eclipse.xtext.Constants;
-
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.name.Names;
+import java.util.Properties;
+import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider;
+import org.eclipse.xtext.formatting2.FormatterPreferences;
+import org.eclipse.xtext.formatting2.IFormatter2;
+import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.parser.ITokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider;
+import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.serializer.ISerializer;
+import org.eclipse.xtext.serializer.impl.Serializer;
+import org.eclipse.xtext.serializer.sequencer.ISemanticSequencer;
+import org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer;
+import org.eclipse.xtext.service.DefaultRuntimeModule;
+import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.web.example.statemachine.formatting2.StatemachineFormatter;
+import org.eclipse.xtext.web.example.statemachine.generator.StatemachineGenerator;
+import org.eclipse.xtext.web.example.statemachine.parser.antlr.StatemachineAntlrTokenFileProvider;
+import org.eclipse.xtext.web.example.statemachine.parser.antlr.StatemachineParser;
+import org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer;
+import org.eclipse.xtext.web.example.statemachine.scoping.StatemachineScopeProvider;
+import org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSemanticSequencer;
+import org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSyntacticSequencer;
+import org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess;
+import org.eclipse.xtext.web.example.statemachine.validation.StatemachineValidator;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.web.example.statemachine.StatemachineRuntimeModule}
+ * Manual modifications go to {@link StatemachineRuntimeModule}.
  */
 @SuppressWarnings("all")
-public abstract class AbstractStatemachineRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
+public abstract class AbstractStatemachineRuntimeModule extends DefaultRuntimeModule {
 
 	protected Properties properties = null;
 
@@ -37,109 +70,110 @@ public abstract class AbstractStatemachineRuntimeModule extends org.eclipse.xtex
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("statemachine");
 	}
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public java.lang.ClassLoader bindClassLoaderToInstance() {
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();
 	}
-
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.web.example.statemachine.services.StatemachineGrammarAccess.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.grammarAccess.GrammarAccessFragment2
+	public Class<? extends IGrammarAccess> bindIGrammarAccess() {
+		return StatemachineGrammarAccess.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISemanticSequencer> bindISemanticSequencer() {
-		return org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSemanticSequencer.class;
+	public Class<? extends ISemanticSequencer> bindISemanticSequencer() {
+		return StatemachineSemanticSequencer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.sequencer.ISyntacticSequencer> bindISyntacticSequencer() {
-		return org.eclipse.xtext.web.example.statemachine.serializer.StatemachineSyntacticSequencer.class;
+	public Class<? extends ISyntacticSequencer> bindISyntacticSequencer() {
+		return StatemachineSyntacticSequencer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.serializer.SerializerFragment
-	public Class<? extends org.eclipse.xtext.serializer.ISerializer> bindISerializer() {
-		return org.eclipse.xtext.serializer.impl.Serializer.class;
+	public Class<? extends ISerializer> bindISerializer() {
+		return Serializer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.IParser> bindIParser() {
-		return org.eclipse.xtext.web.example.statemachine.parser.antlr.StatemachineParser.class;
+	public Class<? extends IParser> bindIParser() {
+		return StatemachineParser.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.ITokenToStringConverter> bindITokenToStringConverter() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter.class;
+	public Class<? extends ITokenToStringConverter> bindITokenToStringConverter() {
+		return AntlrTokenToStringConverter.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.web.example.statemachine.parser.antlr.StatemachineAntlrTokenFileProvider.class;
+	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return StatemachineAntlrTokenFileProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer.class;
+	public Class<? extends Lexer> bindLexer() {
+		return InternalStatemachineLexer.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer> provideInternalStatemachineLexer() {
+	public Provider<InternalStatemachineLexer> provideInternalStatemachineLexer() {
 		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
+	public void configureRuntimeLexer(Binder binder) {
 		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.web.example.statemachine.parser.antlr.internal.InternalStatemachineLexer.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
-	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
-		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	public Class<? extends ITokenDefProvider> bindITokenDefProvider() {
+		return AntlrTokenDefProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.validation.ValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.web.example.statemachine.validation.StatemachineValidator> bindStatemachineValidator() {
-		return org.eclipse.xtext.web.example.statemachine.validation.StatemachineValidator.class;
+	@SingletonBinding(eager=true)
+	public Class<? extends StatemachineValidator> bindStatemachineValidator() {
+		return StatemachineValidator.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
-		return org.eclipse.xtext.web.example.statemachine.scoping.StatemachineScopeProvider.class;
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return StatemachineScopeProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
+	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.class);
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return DefaultGlobalScopeProvider.class;
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment
-	public void configureIgnoreCaseLinking(com.google.inject.Binder binder) {
+	public void configureIgnoreCaseLinking(Binder binder) {
 		binder.bindConstant().annotatedWith(org.eclipse.xtext.scoping.IgnoreCaseLinking.class).to(false);
 	}
-
+	
 	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
-	public Class<? extends org.eclipse.xtext.naming.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider.class;
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return DefaultDeclarativeQualifiedNameProvider.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
-		return org.eclipse.xtext.web.example.statemachine.generator.StatemachineGenerator.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.generator.GeneratorFragment2
+	public Class<? extends IGenerator> bindIGenerator() {
+		return StatemachineGenerator.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
-	public Class<? extends org.eclipse.xtext.formatting2.IFormatter2> bindIFormatter2() {
-		return org.eclipse.xtext.web.example.statemachine.formatting2.StatemachineFormatter.class;
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public Class<? extends IFormatter2> bindIFormatter2() {
+		return StatemachineFormatter.class;
 	}
-
-	// contributed by org.eclipse.xtext.generator.formatting2.Formatter2Fragment
-	public void configureFormatterPreferences(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.preferences.IPreferenceValuesProvider.class).annotatedWith(org.eclipse.xtext.formatting2.FormatterPreferences.class).to(org.eclipse.xtext.formatting2.FormatterPreferenceValuesProvider.class);
+	
+	// contributed by org.eclipse.xtext.xtext.generator.formatting.Formatter2Fragment2
+	public void configureFormatterPreferences(Binder binder) {
+		binder.bind(IPreferenceValuesProvider.class).annotatedWith(FormatterPreferences.class).to(FormatterPreferenceValuesProvider.class);
 	}
-
+	
 }

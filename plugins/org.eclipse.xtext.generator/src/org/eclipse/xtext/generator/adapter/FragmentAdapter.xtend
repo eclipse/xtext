@@ -34,7 +34,6 @@ import org.eclipse.xtext.generator.NewlineNormalizer
 import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.IXtextProjectConfig
 import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.LanguageConfig2
 import org.eclipse.xtext.xtext.generator.MweIssues
@@ -48,8 +47,6 @@ import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
  * @since 2.9
  */
 class FragmentAdapter extends AbstractGeneratorFragment2 {
-	
-	@Inject IXtextProjectConfig projectConfig
 	
 	@Inject CodeConfig codeConfig
 	
@@ -78,7 +75,7 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	
 	override checkConfiguration(Issues issues) {
 		if (naming === null)
-			naming = createNaming(language)
+			naming = createNaming()
 		if (fragment === null)
 			issues.addError('The property \'fragment\' must be set.', this)
 		else
@@ -87,17 +84,17 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 	
 	override generate() {
 		if (naming === null)
-			naming = createNaming(language)
+			naming = createNaming()
 		val ctx = createExecutionContext()
-		val config1 = createLanguageConfig(language)
+		val config1 = createLanguageConfig()
 		if (fragment instanceof IGeneratorFragmentExtension2) {
 			fragment.generate(config1, ctx)
 		} else {
 			fragment.generate(config1.grammar, ctx)
 		}
-		generateStandaloneSetup(config1, language, ctx)
-		generateGuiceModuleRt(config1, language, ctx)
-		generateGuiceModuleUi(config1, language, ctx)
+		generateStandaloneSetup(config1, ctx)
+		generateGuiceModuleRt(config1, ctx)
+		generateGuiceModuleUi(config1, ctx)
 		generatePluginXmlRt(config1, ctx)
 		generateManifestRt(config1, ctx)
 		generatePluginXmlUi(config1, ctx)
@@ -106,9 +103,10 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		generateManifestTests(config1, ctx)
 	}
 	
-	private def void generateStandaloneSetup(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
+	private def void generateStandaloneSetup(LanguageConfig config1, XpandExecutionContext ctx) {
 		ctx.output.openFile(null, StringConcatOutputImpl.STRING_OUTLET)
 		try {
+			val config2 = language
 			if (fragment instanceof IGeneratorFragmentExtension2) {
 				fragment.addToStandaloneSetup(config1, ctx)
 			} else {
@@ -123,7 +121,8 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	private def generateGuiceModuleRt(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
+	private def generateGuiceModuleRt(LanguageConfig config1, XpandExecutionContext ctx) {
+		val config2 = language
 		val bindings = fragment.getGuiceBindingsRt(config1.grammar)
 		if (bindings !== null)
 			config2.runtimeGenModule.addAll(bindings.map[translateBinding])
@@ -134,7 +133,8 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	private def generateGuiceModuleUi(LanguageConfig config1, LanguageConfig2 config2, XpandExecutionContext ctx) {
+	private def generateGuiceModuleUi(LanguageConfig config1, XpandExecutionContext ctx) {
+		val config2 = language
 		val bindings = fragment.getGuiceBindingsUi(config1.grammar)
 		if (bindings !== null)
 			config2.eclipsePluginGenModule.addAll(bindings.map[translateBinding])
@@ -261,9 +261,10 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		}
 	}
 	
-	protected def Naming createNaming(LanguageConfig2 config2) {
+	protected def Naming createNaming() {
+		val config2 = language
 		val result = new Naming => [
-			projectNameRt = projectConfig.runtimeRoot.path.lastSegment
+			projectNameRt = projectConfig.runtimeRoot?.path.lastSegment
 			projectNameIde = projectConfig.genericIdeRoot?.path.lastSegment
 			projectNameUi = projectConfig.eclipsePluginRoot?.path.lastSegment
 			ideBasePackage = config2.grammar.genericIdeBasePackage
@@ -283,7 +284,8 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		return result
 	}
 	
-	protected def LanguageConfig createLanguageConfig(LanguageConfig2 config2) {
+	protected def LanguageConfig createLanguageConfig() {
+		val config2 = language as LanguageConfig2
 		val config = new LanguageConfig
 		for (resource : config2.loadedResources) {
 			config.addLoadedResource(resource)
@@ -299,17 +301,17 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		val encoding = encodingProvider.getEncoding(null)
 		val output = new StringConcatOutputImpl
 
-		if (projectConfig.runtimeManifest !== null)
+		if (projectConfig.runtimeRoot !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_RT, false, projectConfig.runtimeRoot.path))
 		if (projectConfig.runtimeSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC, false, projectConfig.runtimeSrc.path))
 		if (projectConfig.runtimeSrcGen !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.runtimeManifest !== null)
+		if (projectConfig.runtimeRoot !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.MODEL, false, projectConfig.runtimeRoot.path + "/model"))
-		if (projectConfig.eclipsePluginManifest !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.eclipsePluginRoot?.path))
-		else if (projectConfig.runtimeManifest !== null)
+		if (projectConfig.eclipsePluginRoot !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.eclipsePluginRoot.path))
+		else if (projectConfig.runtimeRoot !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_UI, false, projectConfig.runtimeRoot.path))
 		if (projectConfig.eclipsePluginSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_UI, false, projectConfig.eclipsePluginSrc.path))
@@ -319,12 +321,12 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.eclipsePluginSrcGen.path))
 		else if (projectConfig.runtimeSrcGen !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_UI, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.genericIdeManifest !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.genericIdeRoot?.path))
-		else if (projectConfig.eclipsePluginManifest !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.eclipsePluginRoot?.path))
-		else if (projectConfig.runtimeManifest !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.runtimeRoot?.path))
+		if (projectConfig.genericIdeRoot !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.genericIdeRoot.path))
+		else if (projectConfig.eclipsePluginRoot !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.eclipsePluginRoot.path))
+		else if (projectConfig.runtimeRoot !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_IDE, false, projectConfig.runtimeRoot.path))
 		if (projectConfig.genericIdeSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_IDE, false, projectConfig.genericIdeSrc.path))
 		else if (projectConfig.eclipsePluginSrc !== null)
@@ -337,9 +339,9 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.eclipsePluginSrcGen.path))
 		else if (projectConfig.runtimeSrcGen !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_GEN_IDE, true, projectConfig.runtimeSrcGen.path))
-		if (projectConfig.runtimeTestManifest !== null)
-			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeRoot.path))
-		else if (projectConfig.runtimeManifest !== null)
+		if (projectConfig.runtimeTestRoot !== null)
+			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeTestRoot.path))
+		else if (projectConfig.runtimeRoot !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.PLUGIN_TEST, false, projectConfig.runtimeRoot.path))
 		if (projectConfig.runtimeTestSrc !== null)
 			output.addOutlet(createOutlet(false, encoding, Generator.SRC_TEST, false, projectConfig.runtimeTestSrc.path))
@@ -353,8 +355,8 @@ class FragmentAdapter extends AbstractGeneratorFragment2 {
 		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME, naming))
 
 		var execCtx = new XpandExecutionContextImpl(output, null, globalVars, null, null)
-		execCtx.getResourceManager().setFileEncoding('ISO-8859-1')
-		execCtx.registerMetaModel(new JavaBeansMetaModel())
+		execCtx.resourceManager.setFileEncoding('ISO-8859-1')
+		execCtx.registerMetaModel(new JavaBeansMetaModel)
 		execCtx = execCtx.cloneWithVariable(new Variable('modelPluginID', naming.projectNameRt)) as XpandExecutionContextImpl
 		return execCtx
 	}

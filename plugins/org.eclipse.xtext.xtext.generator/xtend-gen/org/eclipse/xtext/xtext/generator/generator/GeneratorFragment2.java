@@ -33,9 +33,9 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -50,9 +50,6 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @SuppressWarnings("all")
 public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
-  @Inject
-  private IXtextProjectConfig projectConfig;
-  
   @Inject
   private CodeConfig codeConfig;
   
@@ -168,17 +165,19 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     if (_isGenerateStub) {
       GuiceModuleAccess.BindingFactory _bindingFactory = new GuiceModuleAccess.BindingFactory();
       TypeReference _typeRef = TypeReference.typeRef(IGenerator.class);
-      LanguageConfig2 _language = this.getLanguage();
+      ILanguageConfig _language = this.getLanguage();
       Grammar _grammar = _language.getGrammar();
       TypeReference _generatorStub = this.getGeneratorStub(_grammar);
       GuiceModuleAccess.BindingFactory _addTypeToType = _bindingFactory.addTypeToType(_typeRef, _generatorStub);
-      LanguageConfig2 _language_1 = this.getLanguage();
+      ILanguageConfig _language_1 = this.getLanguage();
       GuiceModuleAccess _runtimeGenModule = _language_1.getRuntimeGenModule();
       _addTypeToType.contributeTo(_runtimeGenModule);
-      ManifestAccess _runtimeManifest = this.projectConfig.getRuntimeManifest();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      ManifestAccess _runtimeManifest = _projectConfig.getRuntimeManifest();
       boolean _tripleNotEquals = (_runtimeManifest != null);
       if (_tripleNotEquals) {
-        ManifestAccess _runtimeManifest_1 = this.projectConfig.getRuntimeManifest();
+        IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+        ManifestAccess _runtimeManifest_1 = _projectConfig_1.getRuntimeManifest();
         Set<String> _requiredBundles = _runtimeManifest_1.getRequiredBundles();
         _requiredBundles.add("org.eclipse.xtext.xbase.lib");
       }
@@ -193,9 +192,10 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       _or = _isGenerateJavaMain;
     }
     if (_or) {
-      ManifestAccess _runtimeManifest_2 = this.projectConfig.getRuntimeManifest();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      ManifestAccess _runtimeManifest_2 = _projectConfig_2.getRuntimeManifest();
       Set<String> _exportedPackages = _runtimeManifest_2.getExportedPackages();
-      LanguageConfig2 _language_2 = this.getLanguage();
+      ILanguageConfig _language_2 = this.getLanguage();
       Grammar _grammar_1 = _language_2.getGrammar();
       TypeReference _generatorStub_1 = this.getGeneratorStub(_grammar_1);
       String _packageName = _generatorStub_1.getPackageName();
@@ -214,14 +214,17 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       this.doGenerateMweFile();
     }
     this.contributeEclipsePluginGuiceBindings();
-    ManifestAccess _eclipsePluginManifest = this.projectConfig.getEclipsePluginManifest();
+    IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+    ManifestAccess _eclipsePluginManifest = _projectConfig_3.getEclipsePluginManifest();
     boolean _tripleNotEquals_1 = (_eclipsePluginManifest != null);
     if (_tripleNotEquals_1) {
-      ManifestAccess _eclipsePluginManifest_1 = this.projectConfig.getEclipsePluginManifest();
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      ManifestAccess _eclipsePluginManifest_1 = _projectConfig_4.getEclipsePluginManifest();
       Set<String> _requiredBundles_1 = _eclipsePluginManifest_1.getRequiredBundles();
       _requiredBundles_1.add("org.eclipse.xtext.builder");
     }
-    PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
+    IXtextProjectConfig _projectConfig_5 = this.getProjectConfig();
+    PluginXmlAccess _eclipsePluginPluginXml = _projectConfig_5.getEclipsePluginPluginXml();
     boolean _tripleNotEquals_2 = (_eclipsePluginPluginXml != null);
     if (_tripleNotEquals_2) {
       this.contributeEclipsePluginExtensions();
@@ -260,16 +263,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     TypeReference _typeRef_2 = TypeReference.typeRef("org.eclipse.core.resources.IWorkspaceRoot");
     GuiceModuleAccess.BindingFactory _addTypeToInstance = _addTypeToType.addTypeToInstance(_typeRef_2, expression);
     GuiceModuleAccess.BindingFactory _addConfiguredBinding = _addTypeToInstance.addConfiguredBinding("BuilderPreferenceStoreInitializer", statement);
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     GuiceModuleAccess _eclipsePluginGenModule = _language.getEclipsePluginGenModule();
     _addConfiguredBinding.contributeTo(_eclipsePluginGenModule);
   }
   
   protected void doGenerateStubFile() {
-    LanguageConfig2 _language = this.getLanguage();
     Grammar _grammar = this.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_language, _generatorStub);
+    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_generatorStub);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("/**");
     _builder.newLine();
@@ -290,7 +292,7 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
         _builder.append("class ");
-        LanguageConfig2 _language = GeneratorFragment2.this.getLanguage();
+        ILanguageConfig _language = GeneratorFragment2.this.getLanguage();
         Grammar _grammar = _language.getGrammar();
         TypeReference _generatorStub = GeneratorFragment2.this.getGeneratorStub(_grammar);
         String _simpleName = _generatorStub.getSimpleName();
@@ -326,15 +328,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     xtendFile.setJavaContent(_client);
-    IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
     xtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateJavaMain() {
-    LanguageConfig2 _language = this.getLanguage();
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_language, _javaMain);
+    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -489,15 +491,15 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     javaFile.setJavaContent(_client);
-    IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
     javaFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateXtendMain() {
-    LanguageConfig2 _language = this.getLanguage();
     Grammar _grammar = this.getGrammar();
     TypeReference _javaMain = this.getJavaMain(_grammar);
-    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_language, _javaMain);
+    final XtendFileAccess xtendFile = this.fileAccessFactory.createXtendFile(_javaMain);
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
       protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
@@ -628,13 +630,14 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       }
     };
     xtendFile.setJavaContent(_client);
-    IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
     xtendFile.writeTo(_runtimeSrc);
   }
   
   protected void doGenerateMweFile() {
     final TextFileAccess mweFile = this.fileAccessFactory.createTextFile();
-    LanguageConfig2 _language = this.getLanguage();
+    ILanguageConfig _language = this.getLanguage();
     Grammar _grammar = _language.getGrammar();
     TypeReference _generatorStub = this.getGeneratorStub(_grammar);
     String _path = _generatorStub.getPath();
@@ -645,7 +648,7 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     _builder.append(_fileHeader, "");
     _builder.newLineIfNotEmpty();
     _builder.append("module ");
-    LanguageConfig2 _language_1 = this.getLanguage();
+    ILanguageConfig _language_1 = this.getLanguage();
     Grammar _grammar_1 = _language_1.getGrammar();
     TypeReference _generatorStub_1 = this.getGeneratorStub(_grammar_1);
     String _name = _generatorStub_1.getName();
@@ -741,17 +744,19 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
     _builder.append("}");
     _builder.newLine();
     mweFile.setContent(_builder);
-    IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _runtimeSrc = _projectConfig.getRuntimeSrc();
     mweFile.writeTo(_runtimeSrc);
   }
   
   protected boolean contributeEclipsePluginExtensions() {
     boolean _xblockexpression = false;
     {
-      LanguageConfig2 _language = this.getLanguage();
+      ILanguageConfig _language = this.getLanguage();
       Grammar _grammar = _language.getGrammar();
       final String name = _grammar.getName();
-      PluginXmlAccess _eclipsePluginPluginXml = this.projectConfig.getEclipsePluginPluginXml();
+      IXtextProjectConfig _projectConfig = this.getProjectConfig();
+      PluginXmlAccess _eclipsePluginPluginXml = _projectConfig.getEclipsePluginPluginXml();
       List<CharSequence> _entries = _eclipsePluginPluginXml.getEntries();
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("<extension point=\"org.eclipse.xtext.builder.participant\">");
@@ -768,7 +773,7 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("fileExtensions=\"");
-      LanguageConfig2 _language_1 = this.getLanguage();
+      ILanguageConfig _language_1 = this.getLanguage();
       List<String> _fileExtensions = _language_1.getFileExtensions();
       String _join = IterableExtensions.join(_fileExtensions, ",");
       _builder.append(_join, "\t\t");
@@ -806,11 +811,11 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("<keywordReference id=\"");
-      LanguageConfig2 _language_2 = this.getLanguage();
+      ILanguageConfig _language_2 = this.getLanguage();
       Grammar _grammar_3 = _language_2.getGrammar();
       String _namespace = GrammarUtil.getNamespace(_grammar_3);
       String _plus = (_namespace + ".ui.keyword_");
-      LanguageConfig2 _language_3 = this.getLanguage();
+      ILanguageConfig _language_3 = this.getLanguage();
       Grammar _grammar_4 = _language_3.getGrammar();
       String _simpleName = GrammarUtil.getSimpleName(_grammar_4);
       String _plus_1 = (_plus + _simpleName);
@@ -849,11 +854,11 @@ public class GeneratorFragment2 extends AbstractGeneratorFragment2 {
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("<keywordReference id=\"");
-      LanguageConfig2 _language_4 = this.getLanguage();
+      ILanguageConfig _language_4 = this.getLanguage();
       Grammar _grammar_6 = _language_4.getGrammar();
       String _namespace_1 = GrammarUtil.getNamespace(_grammar_6);
       String _plus_2 = (_namespace_1 + ".ui.keyword_");
-      LanguageConfig2 _language_5 = this.getLanguage();
+      ILanguageConfig _language_5 = this.getLanguage();
       Grammar _grammar_7 = _language_5.getGrammar();
       String _simpleName_1 = GrammarUtil.getSimpleName(_grammar_7);
       String _plus_3 = (_plus_2 + _simpleName_1);

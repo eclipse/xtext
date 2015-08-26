@@ -11,6 +11,7 @@ import com.google.common.base.Joiner
 import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.google.inject.Injector
+import com.google.inject.Module
 import com.google.inject.Provider
 import java.util.Collections
 import java.util.HashMap
@@ -29,6 +30,7 @@ import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.ReferencedMetamodel
+import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.XtextPackage
 import org.eclipse.xtext.ecore.EcoreSupportStandaloneSetup
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -42,11 +44,9 @@ import org.eclipse.xtext.xtext.generator.model.StandaloneSetupAccess
 import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector
 
 import static extension org.eclipse.xtext.xtext.generator.model.TypeReference.*
-import org.eclipse.xtext.RuleNames
-import com.google.inject.Module
 
 @Log
-class LanguageConfig2 extends CompositeGeneratorFragment2 {
+class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
 	
 	@Accessors(PUBLIC_GETTER)
 	String uri
@@ -63,7 +63,8 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 	@Accessors
 	ResourceSet resourceSet
 	
-	@Accessors Module guiceModule = [] 
+	@Accessors
+	Module guiceModule = [] 
 	
 	@Accessors
 	XtextGeneratorNaming naming = new XtextGeneratorNaming
@@ -98,7 +99,7 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 		this.fileExtensions = fileExtensions.trim.split('\\s*,\\s*').toList
 	}
 	
-	def List<String> getFileExtensions() {
+	override getFileExtensions() {
 		if (fileExtensions === null || fileExtensions.empty) {
 			val lowerCase = GrammarUtil.getSimpleName(grammar).toLowerCase
 			LOG.info("No explicit fileExtensions configured. Using '*." + lowerCase + "'.")
@@ -185,12 +186,14 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 {
 			throw new IllegalStateException("Problem parsing '" + uri + "':\n" + Joiner.on('\n').join(resource.getErrors()))
 		}
 
-		val grammar = resource.getContents().get(0) as Grammar
+		val grammar = resource.contents.get(0) as Grammar
 		validateGrammar(grammar)
 		this.grammar = grammar
 		this.ruleNames = RuleNames.getRuleNames(grammar, true)
 		this.naming.grammar = grammar
-		super.initialize(injector)
+		for (fragment : fragments) {
+			fragment.initialize(injector)
+		}
 	}
 	
 	private def void installIndex() {

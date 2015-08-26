@@ -12,11 +12,9 @@ import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 
 class XtextGeneratorFileSystemAccess extends JavaIoFileSystemAccess implements IXtextGeneratorFileSystemAccess {
 
-	new(String path, boolean overWrite) {
+	new(String path, boolean overwrite) {
 		outputPath = path
-		defaultOutput => [
-			overrideExistingResources = overWrite
-		]
+		defaultOutput.overrideExistingResources = overwrite
 	}
 
 	private def getDefaultOutput() {

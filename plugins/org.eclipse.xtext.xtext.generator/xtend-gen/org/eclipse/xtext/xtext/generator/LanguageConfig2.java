@@ -61,6 +61,8 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.CompositeGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
 import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming;
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess;
@@ -71,7 +73,7 @@ import org.eclipse.xtext.xtext.generator.xbase.XbaseUsageDetector;
 
 @Log
 @SuppressWarnings("all")
-public class LanguageConfig2 extends CompositeGeneratorFragment2 {
+public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageConfig {
   @Accessors(AccessorType.PUBLIC_GETTER)
   private String uri;
   
@@ -134,6 +136,7 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     this.fileExtensions = _list;
   }
   
+  @Override
   public List<String> getFileExtensions() {
     boolean _or = false;
     if ((this.fileExtensions == null)) {
@@ -315,7 +318,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 {
     RuleNames _ruleNames = RuleNames.getRuleNames(grammar, true);
     this.ruleNames = _ruleNames;
     this.naming.setGrammar(grammar);
-    super.initialize(injector);
+    List<IGeneratorFragment2> _fragments = this.getFragments();
+    for (final IGeneratorFragment2 fragment : _fragments) {
+      fragment.initialize(injector);
+    }
   }
   
   private void installIndex() {

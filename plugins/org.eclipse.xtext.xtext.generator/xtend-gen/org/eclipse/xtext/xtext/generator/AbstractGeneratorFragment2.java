@@ -14,14 +14,19 @@ import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.generator.IGeneratorFragment2;
+import org.eclipse.xtext.xtext.generator.ILanguageConfig;
+import org.eclipse.xtext.xtext.generator.IXtextProjectConfig;
 import org.eclipse.xtext.xtext.generator.Issues;
-import org.eclipse.xtext.xtext.generator.LanguageConfig2;
 
 @SuppressWarnings("all")
 public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 {
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
-  private LanguageConfig2 language;
+  private IXtextProjectConfig projectConfig;
+  
+  @Accessors(AccessorType.PROTECTED_GETTER)
+  @Inject
+  private ILanguageConfig language;
   
   @Accessors(AccessorType.PROTECTED_GETTER)
   @Inject
@@ -37,7 +42,12 @@ public abstract class AbstractGeneratorFragment2 implements IGeneratorFragment2 
   }
   
   @Pure
-  protected LanguageConfig2 getLanguage() {
+  protected IXtextProjectConfig getProjectConfig() {
+    return this.projectConfig;
+  }
+  
+  @Pure
+  protected ILanguageConfig getLanguage() {
     return this.language;
   }
   

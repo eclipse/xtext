@@ -8,30 +8,22 @@
 package org.eclipse.xtext.xtext.generator.model
 
 import com.google.inject.Inject
-import org.eclipse.xtext.parser.IEncodingProvider
 import org.eclipse.xtext.xtext.generator.CodeConfig
-import org.eclipse.xtext.xtext.generator.LanguageConfig2
 
 class FileAccessFactory {
 	
 	@Inject CodeConfig codeConfig
 	
-	@Inject IEncodingProvider encodingProvider
-
 	def TextFileAccess createTextFile() {
 		new TextFileAccess()
 	}
 	
-	def JavaFileAccess createJavaFile(LanguageConfig2 language, TypeReference typeRef) {
-		val file = new JavaFileAccess(typeRef, codeConfig, encodingProvider)
-		file.resourceSet = language.resourceSet
-		return file
+	def JavaFileAccess createJavaFile(TypeReference typeRef) {
+		new JavaFileAccess(typeRef, codeConfig)
 	}
 	
-	def XtendFileAccess createXtendFile(LanguageConfig2 language, TypeReference typeRef) {
-		val file = new XtendFileAccess(typeRef, codeConfig, encodingProvider)
-		file.resourceSet = language.resourceSet
-		return file
+	def XtendFileAccess createXtendFile(TypeReference typeRef) {
+		new XtendFileAccess(typeRef, codeConfig)
 	}
 	
 }
