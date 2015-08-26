@@ -559,6 +559,7 @@ class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements ITypeFa
 		createJvmConstructor => [
 			enhanceExecutable(psiMethod, fqn)
 			createAnnotationValues(psiMethod)
+			associate[psiMethod]
 		]
 	}
 
