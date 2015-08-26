@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.util.internal.Log
 
 import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import org.eclipse.xtext.util.LazyStringInputStream
 
 @Singleton @Log
 class IdeaResourceSetProvider {
@@ -116,12 +117,12 @@ class IdeaResourceSetProvider {
 			if (virtualFile == null) {
 				throw new FileNotFoundException("Couldn't find virtual file for "+uri)
 			}
-			
+
 			val cachedDocument = FileDocumentManager.instance.getCachedDocument(virtualFile)
 			if (cachedDocument != null) {
-				return new ByteArrayInputStream(cachedDocument.text.bytes)
+				return new LazyStringInputStream(cachedDocument.text, virtualFile.charset)
 			}
-			
+
 			return ApplicationManager.application.<InputStream>runReadAction[
 				return new ByteArrayInputStream(virtualFile.contentsToByteArray)
 			]
