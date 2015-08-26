@@ -10,7 +10,8 @@
  * Use `createEditor(options)` to create an Xtext editor. You can specify options either
  * through the function parameter or through `data-editor-x` attributes, where x is an
  * option name with camelCase converted to hyphen-separated.
- * The following options are available:
+ * In addition to the options supported by CodeMirror (https://codemirror.net/doc/manual.html#config),
+ * the following options are available:
  *
  * contentType {String}
  *     The content type included in requests to the Xtext server.
@@ -29,6 +30,8 @@
  *     Whether text formatting should be enabled.
  * enableGeneratorService = true {Boolean}
  *     Whether code generation should be enabled (must be triggered through JavaScript code).
+ * enableHighlightingService = true {Boolean}
+ *     Whether semantic highlighting (computed on the server) should be enabled.
  * enableOccurrencesService = true {Boolean}
  *     Whether marking occurrences should be enabled.
  * enableSaveAction = false {Boolean}
@@ -37,6 +40,9 @@
  *     Whether validation should be enabled.
  * loadFromServer = true {Boolean}
  *     Whether to load the editor content from the server.
+ * mode {String}
+ *     The name of the syntax highlighting mode to use; the mode has to be registered externally
+ *     (see CodeMirror documentation).
  * parent {String | DOMElement}
  *     The parent element for the view; it can be either a DOM element or an ID for a DOM element.
  * resourceId {String}
@@ -51,31 +57,26 @@
  *     The URL of the Xtext server.
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
- * syntaxDefinition {String}
- *     A path to a JS file defining an Ace syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext/mode-<xtextLang>'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
- * theme {String}
- *     The path name of the Ace theme for the editor.
  * xtextLang {String}
  *     The language name (usually the file extension configured for the language).
  */
 define([
     'jquery',
-    'ace/ace',
-    'ace/ext/language_tools',
+    'codemirror',
+    'codemirror/addon/hint/show-hint',
     'xtext/compatibility',
     'xtext/ServiceBuilder',
-	'xtext/AceEditorContext'
-], function(jQuery, ace, languageTools, compatibility, ServiceBuilder, EditorContext) {
+	'xtext/CodeMirrorEditorContext',
+	'codemirror/mode/javascript/javascript'
+], function(jQuery, CodeMirror, ShowHint, compatibility, ServiceBuilder, EditorContext) {
 	
 	var exports = {};
 	
 	/**
 	 * Create one or more Xtext editor instances configured with the given options.
-	 * The return value is either an Ace editor or an array of Ace editors, which can
-	 * be further configured using the Ace API.
+	 * The return value is either a CodeMirror editor or an array of CodeMirror editors.
 	 */
 	exports.createEditor = function(options) {
 		if (!options)
@@ -106,15 +107,14 @@ define([
 		
 		var editors = [];
 		for (var i = 0; i < parents.length; i++) {
-			var editor = ace.edit(parents[i]);
-			editor.$blockScrolling = Infinity;
-			
 			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
+			if (!editorOptions.value)
+				editorOptions.value = jQuery(parents[i]).text();
+			var editor = CodeMirror(function(element) {
+				jQuery(parents[i]).empty().append(element);
+			}, editorOptions);
+			
 			exports.createServices(editor, editorOptions);
-			if (editorOptions.theme)
-				editor.setTheme(editorOptions.theme);
-			else
-				editor.setTheme('ace/theme/eclipse');
 			editors[i] = editor;
 		}
 		
@@ -124,24 +124,28 @@ define([
 			return editors;
 	}
 	
-	function AceServiceBuilder(editor, xtextServices) {
+	function CodeMirrorServiceBuilder(editor, xtextServices) {
 		this.editor = editor;
-		xtextServices.editorContext._annotations = [];
+		xtextServices.editorContext._highlightingMarkers = [];
+		xtextServices.editorContext._validationMarkers = [];
 		xtextServices.editorContext._occurrenceMarkers = [];
 		ServiceBuilder.call(this, xtextServices);
 	}
-	AceServiceBuilder.prototype = new ServiceBuilder();
+	CodeMirrorServiceBuilder.prototype = new ServiceBuilder();
 		
 	/**
 	 * Configure Xtext services for the given editor. The editor does not have to be created
 	 * with createEditor(options).
 	 */
 	exports.createServices = function(editor, options) {
+		if (options.enableValidationService || options.enableValidationService === undefined) {
+			editor.setOption('gutters', ['annotations-gutter']);
+		}
 		var xtextServices = {
 			options: options,
 			editorContext: new EditorContext(editor)
 		};
-		var serviceBuilder = new AceServiceBuilder(editor, xtextServices);
+		var serviceBuilder = new CodeMirrorServiceBuilder(editor, xtextServices);
 		serviceBuilder.createServices();
 		editor.xtextServices = xtextServices;
 		return xtextServices;
@@ -150,27 +154,18 @@ define([
 	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
-	AceServiceBuilder.prototype.setupSyntaxHighlighting = function() {
+	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var options = this.services.options;
-		var session = this.editor.getSession();
-		if (options.syntaxDefinition || options.xtextLang) {
-			var syntaxDefinition = options.syntaxDefinition;
-			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext/mode-' + options.xtextLang;
-			if (typeof(syntaxDefinition) === 'string') {
-				require([syntaxDefinition], function(mode) {
-					session.setMode(new mode.Mode);
-				});
-			} else if (syntaxDefinition.Mode) {
-				session.setMode(new syntaxDefinition.Mode);
-			}
+		// If the mode option is set, syntax highlighting has already been configured by CM
+		if (!options.mode && options.xtextLang) {
+			this.editor.setOption('mode', options.xtextLang);
 		}
 	}
 		
 	/**
 	 * Document update service.
 	 */
-	AceServiceBuilder.prototype.setupUpdateService = function(refreshDocument) {
+	CodeMirrorServiceBuilder.prototype.setupUpdateService = function(refreshDocument) {
 		var services = this.services;
 		var editorContext = services.editorContext;
 		var textUpdateDelay = services.options.textUpdateDelay;
@@ -191,139 +186,162 @@ define([
 		}
 		if (!services.options.resourceId || !services.options.loadFromServer)
 			modelChangeListener({_xtext_init: true});
-		this.editor.on('change', modelChangeListener);
+		this.editor.on('changes', modelChangeListener);
 	}
 	
 	/**
 	 * Persistence services: load, save, and revert.
 	 */
-	AceServiceBuilder.prototype.setupPersistenceServices = function() {
+	CodeMirrorServiceBuilder.prototype.setupPersistenceServices = function() {
 		var services = this.services;
-		if (services.options.enableSaveAction && this.editor.commands) {
-			this.editor.commands.addCommand({
-				name: 'save',
-				bindKey: {win: 'Ctrl-S', mac: 'Command-S'},
-				exec: function(editor) {
-					services.saveResource();
-				}
-			});
+		if (services.options.enableSaveAction) {
+			var userAgent = navigator.userAgent.toLowerCase();
+			var saveFunction = function(editor) {
+				services.saveResource();
+			};
+			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Cmd-S': saveFunction}: {'Ctrl-S': saveFunction});
 		}
 	}
 		
 	/**
 	 * Content assist service.
 	 */
-	AceServiceBuilder.prototype.setupContentAssistService = function() {
+	CodeMirrorServiceBuilder.prototype.setupContentAssistService = function() {
 		var services = this.services;
 		var editorContext = services.editorContext;
-		var completer = {
-			getCompletions: function(editor, session, pos, prefix, callback) {
-				var params = ServiceBuilder.copy(services.options);
-				var document = session.getDocument();
-				params.offset = document.positionToIndex(pos);
-				var range = editor.getSelectionRange();
-				params.selection = {
-					start: document.positionToIndex(range.start),
-					end: document.positionToIndex(range.end)
-				};
-				services.contentAssistService.invoke(editorContext, params).done(function(entries) {
-					callback(null, entries.map(function(entry) {
-		    			return {
-		    				value: entry.proposal,
-		    				caption: (entry.label ? entry.label: entry.proposal),
-		    				meta: entry.description
-		    			};
-					}));
+		this.editor.addKeyMap({'Ctrl-Space': function(editor) {
+			var params = ServiceBuilder.copy(services.options);
+			var cursor = editor.getCursor();
+			params.offset = editor.indexFromPos(cursor);
+			services.contentAssistService.invoke(editorContext, params).done(function(entries) {
+				editor.showHint({hint: function(editor, options) {
+					return {
+						list: entries.map(function(entry) {
+							var displayText;
+							if (entry.label)
+								displayText = entry.label;
+							else
+								displayText = entry.proposal;
+							if (entry.description)
+								displayText += ' (' + entry.description + ')';
+			    			return {
+			    				text: entry.proposal,
+			    				displayText: displayText,
+			    				from: {
+			    					line: cursor.line,
+			    					ch: cursor.ch - entry.prefix.length
+			    				}
+			    			};
+						}),
+						to: cursor
+					};
+				}});
+			});
+		}});
+	}
+		
+	/**
+	 * Semantic highlighting service.
+	 */
+	CodeMirrorServiceBuilder.prototype.doHighlighting = function() {
+		var services = this.services;
+		var editorContext = services.editorContext;
+		var editor = this.editor;
+		services.computeHighlighting().always(function() {
+			editor.clearGutter('annotations-gutter');
+			var highlightingMarkers = editorContext._highlightingMarkers;
+			if (highlightingMarkers) {
+				for (var i = 0; i < highlightingMarkers.length; i++) {
+					highlightingMarkers[i].clear();
+				}
+			}
+			editorContext._highlightingMarkers = [];
+		}).done(function(result) {
+			for (var i = 0; i < result.regions.length; ++i) {
+				var region = result.regions[i];
+				var from = editor.posFromIndex(region.offset);
+				var to = editor.posFromIndex(region.offset + region.length);
+				region.styleClasses.forEach(function(styleClass) {
+					var marker =  editor.markText(from, to, {className: styleClass});
+					editorContext._highlightingMarkers.push(marker);
 				});
 			}
-		}
-		languageTools.setCompleters([completer]);
-		this.editor.setOptions({ enableBasicAutocompletion: true });
-	}
-	
-	/**
-	 * Add a problem marker to an editor session.
-	 */
-	AceServiceBuilder.prototype._addMarker = function(session, startOffset, endOffset, clazz, type) {
-		var document = session.getDocument();
-		var start = document.indexToPosition(startOffset);
-		var end = document.indexToPosition(endOffset);
-		var mRange = require('ace/range');
-		var range = new mRange.Range(start.row, start.column, end.row, end.column);
-		return session.addMarker(range, 'xtext-marker_' + clazz, 'text');
+		});
 	}
 	
 	/**
 	 * Validation service.
 	 */
-	AceServiceBuilder.prototype.doValidation = function() {
+	CodeMirrorServiceBuilder.prototype.doValidation = function() {
 		var services = this.services;
 		var editorContext = services.editorContext;
-		var session = this.editor.getSession();
-		var self = this;
+		var editor = this.editor;
 		services.validate().always(function() {
-			var annotations = editorContext._annotations;
-			if (annotations) {
-				for (var i = 0; i < annotations.length; i++) {
-					var annotation = annotations[i];
-					session.removeMarker(annotation.markerId);
+			editor.clearGutter('annotations-gutter');
+			var validationMarkers = editorContext._validationMarkers;
+			if (validationMarkers) {
+				for (var i = 0; i < validationMarkers.length; i++) {
+					validationMarkers[i].clear();
 				}
 			}
-			editorContext._annotations = [];
+			editorContext._validationMarkers = [];
 		}).done(function(result) {
 			for (var i = 0; i < result.issues.length; i++) {
 				var entry = result.issues[i];
-				var marker = self._addMarker(session, entry.offset, entry.offset + entry.length, entry.severity);
-				var start = session.getDocument().indexToPosition(entry.offset);
-				editorContext._annotations.push({
-					row: start.row,
-					column: start.column,
-					text: entry.description,
-					type: entry.severity,
-					markerId: marker
+				var element = jQuery('<div class="xtext-annotation_' + entry.severity
+						+ '" title="' + entry.description + '"></div>').get(0);
+				editor.setGutterMarker(entry.line - 1, 'annotations-gutter', element);
+				var from = editor.posFromIndex(entry.offset);
+				var to = editor.posFromIndex(entry.offset + entry.length);
+				var marker =  editor.markText(from, to, {
+					className: 'xtext-marker_' + entry.severity,
+					title: entry.description
 				});
+				editorContext._validationMarkers.push(marker);
 			}
-			session.setAnnotations(editorContext._annotations);
 		});
 	}
 		
 	/**
 	 * Occurrences service.
 	 */
-	AceServiceBuilder.prototype.setupOccurrencesService = function() {
+	CodeMirrorServiceBuilder.prototype.setupOccurrencesService = function() {
 		var services = this.services;
 		var editorContext = services.editorContext;
 		var selectionUpdateDelay = services.options.selectionUpdateDelay;
 		if (!selectionUpdateDelay)
 			selectionUpdateDelay = 550;
 		var editor = this.editor;
-		var session = editor.getSession();
 		var self = this;
-		editor.getSelection().on('changeCursor', function() {
+		editor.on('cursorActivity', function() {
 			if (editorContext._selectionChangeTimeout) {
 				clearTimeout(editorContext._selectionChangeTimeout);
 			}
 			editorContext._selectionChangeTimeout = setTimeout(function() {
 				var params = ServiceBuilder.copy(services.options);
-				params.offset = session.getDocument().positionToIndex(editor.getSelection().getCursor());
+				var cursor = editor.getCursor();
+				params.offset = editor.indexFromPos(cursor);
 				services.occurrencesService.invoke(editorContext, params).always(function() {
 					var occurrenceMarkers = editorContext._occurrenceMarkers;
 					if (occurrenceMarkers) {
 						for (var i = 0; i < occurrenceMarkers.length; i++)  {
-							var marker = occurrenceMarkers[i];
-							session.removeMarker(marker);
+							occurrenceMarkers[i].clear();
 						}
 					}
 					editorContext._occurrenceMarkers = [];
 				}).done(function(occurrencesResult) {
 					for (var i = 0; i < occurrencesResult.readRegions.length; i++) {
 						var region = occurrencesResult.readRegions[i];
-						var marker = self._addMarker(session, region.offset, region.offset + region.length, 'read');
+						var from = editor.posFromIndex(region.offset);
+						var to = editor.posFromIndex(region.offset + region.length);
+						var marker =  editor.markText(from, to, {className: 'xtext-marker_read'});
 						editorContext._occurrenceMarkers.push(marker);
 					}
 					for (var i = 0; i < occurrencesResult.writeRegions.length; i++) {
 						var region = occurrencesResult.writeRegions[i];
-						var marker = self._addMarker(session, region.offset, region.offset + region.length, 'write');
+						var from = editor.posFromIndex(region.offset);
+						var to = editor.posFromIndex(region.offset + region.length);
+						var marker =  editor.markText(from, to, {className: 'xtext-marker_write'});
 						editorContext._occurrenceMarkers.push(marker);
 					}
 				});
@@ -334,20 +352,18 @@ define([
 	/**
 	 * Formatting service.
 	 */
-	AceServiceBuilder.prototype.setupFormattingService = function() {
+	CodeMirrorServiceBuilder.prototype.setupFormattingService = function() {
 		var services = this.services;
-		if (services.options.enableFormattingAction && this.editor.commands) {
-			this.editor.commands.addCommand({
-				name: 'format',
-				bindKey: {win: 'Ctrl-Shift-F', mac: 'Command-Shift-F'},
-				exec: function(editor) {
-					services.format();
-				}
-			});
+		if (services.options.enableFormattingAction) {
+			var userAgent = navigator.userAgent.toLowerCase();
+			var formatFunction = function(editor) {
+				services.format();
+			};
+			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction});
 		}
 	}
 	
-	AceServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
+	CodeMirrorServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
 		var editorContext = this.services.editorContext;
 		editorContext.addDirtyStateListener(function(clean) {
 			if (clean)

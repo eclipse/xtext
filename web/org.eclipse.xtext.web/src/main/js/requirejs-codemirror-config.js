@@ -8,17 +8,11 @@
 
 ({
 	baseUrl: ".",
-	name: "xtext/xtext-orion",
+	name: "xtext/xtext-codemirror",
 	paths: {
 		"jquery": "empty:",
-		"orion/Deferred": "empty:",
-		"orion/codeEdit": "empty:",
-		"orion/keyBinding": "empty:",
-		"orion/editor/annotations": "empty:",
-		"embeddedEditor/helper/bootstrap": "empty:"
+		"codemirror": "empty:",
+		"codemirror/addon/hint/show-hint": "empty:"
 	},
-	exclude: [
-		"jquery", "orion/Deferred", "orion/codeEdit", "orion/keyBinding",
-		"orion/editor/annotations", "embeddedEditor/helper/bootstrap"
-	]
+	exclude: [ "jquery", "codemirror", "codemirror/addon/hint/show-hint" ]
 })

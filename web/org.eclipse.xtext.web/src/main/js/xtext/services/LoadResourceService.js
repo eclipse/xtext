@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 
 	LoadResourceService.prototype = new XtextService();
-	LoadResourceService.prototype.loadResource = LoadResourceService.prototype.invoke;
 	
 	LoadResourceService.prototype._initServerData = function(serverData, editorContext, params) {
 		return {

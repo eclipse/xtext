@@ -34,10 +34,6 @@ define(function() {
 
 	MockEditorContext.prototype = {
 			
-		getEditor: function() {
-			return this;
-		},
-		
 		getServerState: function() {
 			return this._serverState;
 		},

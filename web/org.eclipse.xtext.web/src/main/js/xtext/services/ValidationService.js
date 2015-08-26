@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 	
 	ValidationService.prototype = new XtextService();
-	ValidationService.prototype.computeProblems = ValidationService.prototype.invoke;
 	
 	ValidationService.prototype._checkPreconditions = function(editorContext, params) {
 		return this._state === undefined;

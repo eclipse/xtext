@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 
 	OccurrencesService.prototype = new XtextService();
-	OccurrencesService.prototype.getOccurrences = OccurrencesService.prototype.invoke;
 
 	OccurrencesService.prototype._initServerData = function(serverData, editorContext, params) {
 		if (params.offset)

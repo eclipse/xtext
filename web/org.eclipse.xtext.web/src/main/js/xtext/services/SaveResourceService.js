@@ -16,7 +16,6 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 
 	SaveResourceService.prototype = new XtextService();
-	SaveResourceService.prototype.saveResource = SaveResourceService.prototype.invoke;
 
 	SaveResourceService.prototype._initServerData = function(serverData, editorContext, params) {
 		return {

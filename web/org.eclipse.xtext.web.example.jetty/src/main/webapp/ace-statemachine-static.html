@@ -16,7 +16,7 @@
 		});
 		require(["webjars/ace/1.1.9/src/ace"], function() {
 			require(["xtext/xtext-ace"], function(xtext) {
-				xtext.createEditor();
+				xtext.createEditor({syntaxDefinition: "xtext/ace-mode-statemachine"});
 			});
 		});
 	</script>
@@ -26,7 +26,6 @@
 <div class="container">
 	<div id="xtext-editor"
 	    data-editor-xtext-lang="statemachine"
-	    data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-formatting-action="true"
 	><pre>
