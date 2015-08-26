@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.core.JavaModelManager;
-import org.eclipse.jdt.internal.corext.util.Strings;
 import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.junit.Test;
@@ -101,7 +100,8 @@ public class InternalBuilderTest {
 
 	private void dumpDiskIndex() {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
-		System.out.println("Disk index " + Strings.concatenate(jdtMetadata.list(), ","));
+		String[] files = jdtMetadata.list();
+		System.out.println("Disk index: " + files.length + " files.");
 	}
 
 	private void clearJdtIndex() throws FileNotFoundException {
