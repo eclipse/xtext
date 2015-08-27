@@ -1260,6 +1260,13 @@ public class PsiBasedTypeFactory extends AbstractDeclaredTypeFactory implements 
       public void apply(final JvmConstructor it) {
         PsiBasedTypeFactory.this.enhanceExecutable(it, psiMethod, fqn);
         PsiBasedTypeFactory.this.createAnnotationValues(it, psiMethod);
+        final PsiElementProvider _function = new PsiElementProvider() {
+          @Override
+          public PsiElement get() {
+            return psiMethod;
+          }
+        };
+        PsiBasedTypeFactory.this.psiModelAssociator.associate(it, _function);
       }
     };
     return ObjectExtensions.<JvmConstructor>operator_doubleArrow(_createJvmConstructor, _function);
