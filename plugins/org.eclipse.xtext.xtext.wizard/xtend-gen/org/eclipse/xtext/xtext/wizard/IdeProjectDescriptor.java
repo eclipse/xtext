@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.HashSet;
@@ -8,13 +7,10 @@ import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.Outlet;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
@@ -36,6 +32,13 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
+  public boolean isEclipsePluginProject() {
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _buildSystem = _config.getBuildSystem();
+    return _buildSystem.isPluginBuild();
+  }
+  
+  @Override
   public Set<ExternalDependency> getExternalDependencies() {
     HashSet<ExternalDependency> _xblockexpression = null;
     {
@@ -49,18 +52,6 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
       _xblockexpression = deps;
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public Set<String> getSourceFolders() {
-    final Function1<Outlet, String> _function = new Function1<Outlet, String>() {
-      @Override
-      public String apply(final Outlet it) {
-        return IdeProjectDescriptor.this.sourceFolder(it);
-      }
-    };
-    Iterable<String> _map = IterableExtensions.<Outlet, String>map(Collections.<Outlet>unmodifiableSet(CollectionLiterals.<Outlet>newHashSet(Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN)), _function);
-    return IterableExtensions.<String>toSet(_map);
   }
   
   @Override
@@ -94,10 +85,8 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         it.setBuildSection(_builder.toString());
         String _xifexpression = null;
-        WizardConfiguration _config = IdeProjectDescriptor.this.getConfig();
-        BuildSystem _buildSystem = _config.getBuildSystem();
-        boolean _equals = Objects.equal(_buildSystem, BuildSystem.TYCHO);
-        if (_equals) {
+        boolean _isEclipsePluginProject = IdeProjectDescriptor.this.isEclipsePluginProject();
+        if (_isEclipsePluginProject) {
           _xifexpression = "eclipse-plugin";
         } else {
           _xifexpression = "jar";

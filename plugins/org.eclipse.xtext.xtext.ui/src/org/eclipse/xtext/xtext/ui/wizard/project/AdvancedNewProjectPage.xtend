@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.Button
 import org.eclipse.swt.widgets.Combo
 import org.eclipse.swt.widgets.Composite
 import org.eclipse.swt.widgets.Group
+import org.eclipse.xtext.xtext.wizard.BuildSystem
+import org.eclipse.xtext.xtext.wizard.SourceLayout
 
 class AdvancedNewProjectPage extends WizardPage {
 
@@ -26,7 +28,7 @@ class AdvancedNewProjectPage extends WizardPage {
 	Button createIdeProject
 	Button createTestProject
 	Combo buildSystem
-	Combo projectLayout
+	Combo sourceLayout
 
 	new(String pageName) {
 		super(pageName)
@@ -62,15 +64,15 @@ class AdvancedNewProjectPage extends WizardPage {
 			Group [
 				text = "Build System"
 				buildSystem = DropDown[
-					enabled = false
-					items = #["None", "Maven", "Gradle"]
+					enabled = true
+					items = #["Eclipse", "Maven", "Tycho", "Gradle"]
 				]
 			]
 			Group [
-				text = "Project Layout"
-				projectLayout = DropDown[
-					enabled = false
-					items = #["Eclipse", "Maven/Gradle"]
+				text = "Source Layout"
+				sourceLayout = DropDown[
+					enabled = true
+					items = #["Plain", "Maven/Gradle"]
 				]
 			]
 		]
@@ -112,7 +114,7 @@ class AdvancedNewProjectPage extends WizardPage {
 		createIdeProject.selection = false
 		createTestProject.selection = false
 		buildSystem.select(0)
-		projectLayout.select(0)
+		sourceLayout.select(0)
 	}
 
 	def boolean isCreateUiProject() {
@@ -133,6 +135,14 @@ class AdvancedNewProjectPage extends WizardPage {
 
 	def boolean isCreateWebProject() {
 		createWebProject.selection
+	}
+	
+	def BuildSystem getBuildSystem() {
+		BuildSystem.values.get(buildSystem.selectionIndex)
+	}
+	
+	def SourceLayout getSourceLayout() {
+		SourceLayout.values.get(sourceLayout.selectionIndex)
 	}
 
 	def private require(Button project, Button requirement) {

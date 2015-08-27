@@ -17,6 +17,10 @@ class WebProjectDescriptor extends ProjectDescriptor {
 		return config.language.basePackagePath + '/' + "web"
 	}
 	
+	override isEclipsePluginProject() {
+		false
+	}
+	
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
@@ -38,7 +42,7 @@ class WebProjectDescriptor extends ProjectDescriptor {
 		deps += createMavenDependency("org.webjars:requirejs-text:2.0.10-3")
 		deps += createMavenDependency("org.webjars:jquery:2.1.4")
 		deps += createMavenDependency("org.eclipse.jetty:jetty-annotations:9.2.11.v20150529") => [maven.scope = Scope.PROVIDED]
-		deps += createMavenDependency("org.slf4j:slf4j-log4j12:1.7.12'") => [maven.scope = Scope.PROVIDED]
+		deps += createMavenDependency("org.slf4j:slf4j-log4j12:1.7.12") => [maven.scope = Scope.PROVIDED]
 		deps
 	}
 	

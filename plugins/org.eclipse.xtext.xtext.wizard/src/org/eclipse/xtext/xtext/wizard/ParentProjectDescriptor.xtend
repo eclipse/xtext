@@ -17,14 +17,14 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 		}
 	}
 
-	override needsEclipseMetadata() {
+	override isEclipsePluginProject() {
 		false
 	}
 
 	override getFiles() {
 		val files = newArrayList
 		files += super.files
-		if (config.buildSystem.needsBuildGradle) {
+		if (config.buildSystem.isGradleBuild) {
 			files += file(Outlet.ROOT, 'settings.gradle', settingsGradle)
 			if (config.sourceLayout == SourceLayout.PLAIN) {
 				files += file(Outlet.ROOT, 'gradle/plain-layout.gradle', plainLayout)
@@ -41,7 +41,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						jcenter()
 					}
 					dependencies {
-						classpath 'org.xtend:xtend-gradle-plugin:0.4.7'
+						classpath 'org.xtend:xtend-gradle-plugin:0.4.8'
 					}
 				}
 				subprojects {

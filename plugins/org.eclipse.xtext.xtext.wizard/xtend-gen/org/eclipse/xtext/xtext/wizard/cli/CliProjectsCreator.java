@@ -17,7 +17,7 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 public class CliProjectsCreator implements ProjectsCreator {
   @Override
   public void createProjects(final WizardConfiguration config) {
-    Iterable<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
+    Set<ProjectDescriptor> _enabledProjects = config.getEnabledProjects();
     final Procedure1<ProjectDescriptor> _function = new Procedure1<ProjectDescriptor>() {
       @Override
       public void apply(final ProjectDescriptor it) {

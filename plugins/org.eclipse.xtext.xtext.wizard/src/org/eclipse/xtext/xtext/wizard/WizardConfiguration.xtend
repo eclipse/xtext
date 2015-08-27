@@ -2,12 +2,15 @@ package org.eclipse.xtext.xtext.wizard
 
 import java.nio.charset.Charset
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.google.common.collect.ImmutableSet
+import java.util.Set
 
 @Accessors
 class WizardConfiguration {
 	String rootLocation
 	String baseName
 	String xtextVersion = '2.8.4'
+	Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
 	BuildSystem buildSystem = BuildSystem.ECLIPSE
@@ -24,7 +27,7 @@ class WizardConfiguration {
 	val parentProject = new ParentProjectDescriptor(this)
 	val targetPlatformProject = new TargetPlatformProject(this)
 
-	def getEnabledProjects() {
+	def Set<ProjectDescriptor> getEnabledProjects() {
 		val productionProjects = #[
 			runtimeProject,
 			ideProject,
@@ -39,6 +42,6 @@ class WizardConfiguration {
 			.filter(TestedProjectDescriptor)
 			.map[testProject]
 			.filter[enabled && separate]
-		productionProjects + testProjects
+		ImmutableSet.copyOf(productionProjects + testProjects)
 	}
 }

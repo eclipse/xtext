@@ -1,14 +1,17 @@
 package org.eclipse.xtext.xtext.wizard;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.util.Collections;
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.wizard.BuildSystem;
+import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.IntellijProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.LanguageDescriptor;
@@ -31,6 +34,8 @@ public class WizardConfiguration {
   private String baseName;
   
   private String xtextVersion = "2.8.4";
+  
+  private Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
   
   private Charset encoding = Charset.defaultCharset();
   
@@ -56,8 +61,8 @@ public class WizardConfiguration {
   
   private final TargetPlatformProject targetPlatformProject = new TargetPlatformProject(this);
   
-  public Iterable<ProjectDescriptor> getEnabledProjects() {
-    Iterable<ProjectDescriptor> _xblockexpression = null;
+  public Set<ProjectDescriptor> getEnabledProjects() {
+    ImmutableSet<ProjectDescriptor> _xblockexpression = null;
     {
       final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
         @Override
@@ -89,7 +94,8 @@ public class WizardConfiguration {
         }
       };
       final Iterable<TestProjectDescriptor> testProjects = IterableExtensions.<TestProjectDescriptor>filter(_map, _function_2);
-      _xblockexpression = Iterables.<ProjectDescriptor>concat(productionProjects, testProjects);
+      Iterable<ProjectDescriptor> _plus = Iterables.<ProjectDescriptor>concat(productionProjects, testProjects);
+      _xblockexpression = ImmutableSet.<ProjectDescriptor>copyOf(_plus);
     }
     return _xblockexpression;
   }
@@ -119,6 +125,15 @@ public class WizardConfiguration {
   
   public void setXtextVersion(final String xtextVersion) {
     this.xtextVersion = xtextVersion;
+  }
+  
+  @Pure
+  public Ecore2XtextConfiguration getEcore2Xtext() {
+    return this.ecore2Xtext;
+  }
+  
+  public void setEcore2Xtext(final Ecore2XtextConfiguration ecore2Xtext) {
+    this.ecore2Xtext = ecore2Xtext;
   }
   
   @Pure

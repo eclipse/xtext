@@ -24,6 +24,11 @@ public class TargetPlatformProject extends ProjectDescriptor {
   }
   
   @Override
+  public boolean isEclipsePluginProject() {
+    return false;
+  }
+  
+  @Override
   public Iterable<? extends GeneratedFile> getFiles() {
     ArrayList<GeneratedFile> _xblockexpression = null;
     {

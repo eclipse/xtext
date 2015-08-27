@@ -13,7 +13,9 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
+import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
+import org.eclipse.xtext.xtext.wizard.Ecore2XtextConfiguration;
 
 import com.google.inject.Inject;
 
@@ -31,7 +33,7 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	 * Constructs a new wizard
 	 */
 	@Inject
-	public NewXtextProjectFromEcoreWizard(Ecore2XtextProjectCreator creator, IJdtHelper jdtHelper) {
+	public NewXtextProjectFromEcoreWizard(XtextProjectCreator creator, IJdtHelper jdtHelper) {
 		super(creator);
 		this.jdtHelper = jdtHelper;
 		setWindowTitle(Messages.NewXtextProjectFromEcoreWizard_WindowTitle);
@@ -46,16 +48,12 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 
 	@Override
 	protected IProjectInfo getProjectInfo() {
-		Ecore2XtextProjectInfo projectInfo = (Ecore2XtextProjectInfo) super.getProjectInfo();
-		projectInfo.setEPackageInfos(ePackageSelectionPage.getEPackageInfos());
-		projectInfo.setRootElementClass(ePackageSelectionPage.getRootElementClass());
-		projectInfo.setDefaultEPackageInfo(ePackageSelectionPage.getDefaultEPackageInfo());
+		XtextProjectInfo projectInfo = (XtextProjectInfo) super.getProjectInfo();
+		Ecore2XtextConfiguration ecore2Xtext = projectInfo.getEcore2Xtext();
+		ecore2Xtext.getEPackageInfos().addAll(ePackageSelectionPage.getEPackageInfos());
+		ecore2Xtext.setRootElementClass(ePackageSelectionPage.getRootElementClass());
+		ecore2Xtext.setDefaultEPackageInfo(ePackageSelectionPage.getDefaultEPackageInfo());
 		return projectInfo;
-	}
-
-	@Override
-	protected XtextProjectInfo createProjectInfo() {
-		return new Ecore2XtextProjectInfo();
 	}
 
 }

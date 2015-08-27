@@ -8,6 +8,10 @@ class TargetPlatformProject extends ProjectDescriptor {
 	override getNameQualifier() {
 		".target"
 	}
+	
+	override isEclipsePluginProject() {
+		false
+	}
 
 	override getFiles() {
 		val files = newArrayList

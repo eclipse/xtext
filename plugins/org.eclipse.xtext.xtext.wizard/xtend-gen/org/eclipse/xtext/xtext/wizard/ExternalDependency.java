@@ -139,6 +139,17 @@ public class ExternalDependency {
     return ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
   }
   
+  public static ExternalDependency createBundleDependency(final String bundleId) {
+    ExternalDependency _externalDependency = new ExternalDependency();
+    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
+      @Override
+      public void apply(final ExternalDependency it) {
+        it.p2.bundleId = bundleId;
+      }
+    };
+    return ObjectExtensions.<ExternalDependency>operator_doubleArrow(_externalDependency, _function);
+  }
+  
   private final ExternalDependency.MavenCoordinates maven = new ExternalDependency.MavenCoordinates();
   
   private final ExternalDependency.P2Coordinates p2 = new ExternalDependency.P2Coordinates();

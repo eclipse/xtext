@@ -31,27 +31,25 @@ abstract class ProjectDescriptor {
 	}
 
 	def Set<String> getSourceFolders() {
-		emptySet
+		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
 	}
 
 	def Iterable<? extends GeneratedFile> getFiles() {
 		val List<GeneratedFile> files = newArrayList
-		if (needsEclipseMetadata) {
+		if (eclipsePluginProject) {
 			files += file(Outlet.META_INF, "MANIFEST.MF", manifest)
 			files += file(Outlet.ROOT, "build.properties", buildProperties)
 		}
-		if (config.buildSystem.needsBuildGradle) {
+		if (config.buildSystem.isGradleBuild) {
 			files += buildGradle
 		}
-		if (config.buildSystem.needsPom) {
+		if (config.buildSystem.isMavenBuild) {
 			files += pom
 		}
 		files
 	}
 	
-	def needsEclipseMetadata() {
-		config.buildSystem.needsEclipseMetadata
-	}
+	def boolean isEclipsePluginProject()
 	
 	def CharSequence buildProperties() '''
 		«buildPropertiesEntry("source..", sourceFolders.map[it + "/"])»

@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -55,7 +56,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   }
   
   @Override
-  public boolean needsEclipseMetadata() {
+  public boolean isEclipsePluginProject() {
     return false;
   }
   
@@ -68,8 +69,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       Iterables.<GeneratedFile>addAll(files, _files);
       WizardConfiguration _config = this.getConfig();
       BuildSystem _buildSystem = _config.getBuildSystem();
-      boolean _needsBuildGradle = _buildSystem.needsBuildGradle();
-      if (_needsBuildGradle) {
+      boolean _isGradleBuild = _buildSystem.isGradleBuild();
+      if (_isGradleBuild) {
         CharSequence _settingsGradle = this.settingsGradle();
         PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
         files.add(_file);
@@ -109,7 +110,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("dependencies {");
         _builder.newLine();
         _builder.append("\t\t");
-        _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.7\'");
+        _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.8\'");
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
@@ -171,7 +172,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
     StringConcatenation _builder = new StringConcatenation();
     {
       WizardConfiguration _config = this.getConfig();
-      Iterable<ProjectDescriptor> _enabledProjects = _config.getEnabledProjects();
+      Set<ProjectDescriptor> _enabledProjects = _config.getEnabledProjects();
       final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
         @Override
         public Boolean apply(final ProjectDescriptor it) {
@@ -294,7 +295,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         {
           WizardConfiguration _config_3 = ParentProjectDescriptor.this.getConfig();
-          Iterable<ProjectDescriptor> _enabledProjects = _config_3.getEnabledProjects();
+          Set<ProjectDescriptor> _enabledProjects = _config_3.getEnabledProjects();
           final Function1<ProjectDescriptor, Boolean> _function = new Function1<ProjectDescriptor, Boolean>() {
             @Override
             public Boolean apply(final ProjectDescriptor it) {

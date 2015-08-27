@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xtext.wizard;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.HashSet;
 import java.util.Set;
@@ -53,16 +52,21 @@ public class RuntimeTestProjectDescriptor extends TestProjectDescriptor {
   }
   
   @Override
+  public boolean isEclipsePluginProject() {
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _buildSystem = _config.getBuildSystem();
+    return _buildSystem.isPluginBuild();
+  }
+  
+  @Override
   public PomFile pom() {
     PomFile _pom = super.pom();
     final Procedure1<PomFile> _function = new Procedure1<PomFile>() {
       @Override
       public void apply(final PomFile it) {
         String _xifexpression = null;
-        WizardConfiguration _config = RuntimeTestProjectDescriptor.this.getConfig();
-        BuildSystem _buildSystem = _config.getBuildSystem();
-        boolean _equals = Objects.equal(_buildSystem, BuildSystem.TYCHO);
-        if (_equals) {
+        boolean _isEclipsePluginProject = RuntimeTestProjectDescriptor.this.isEclipsePluginProject();
+        if (_isEclipsePluginProject) {
           _xifexpression = "eclipse-test-plugin";
         } else {
           _xifexpression = "jar";

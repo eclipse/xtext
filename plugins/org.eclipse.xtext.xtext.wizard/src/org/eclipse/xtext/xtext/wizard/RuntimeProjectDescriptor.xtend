@@ -1,6 +1,9 @@
 package org.eclipse.xtext.xtext.wizard
 import static org.eclipse.xtext.xtext.wizard.ExternalDependency.*
+import org.eclipse.xtext.xtext.wizard.ecore2xtext.Ecore2XtextGrammarCreator
+
 class RuntimeProjectDescriptor extends TestedProjectDescriptor {
+	val grammarCreator = new Ecore2XtextGrammarCreator
 	val RuntimeTestProjectDescriptor testProject
 	
 	new(WizardConfiguration config) {
@@ -8,17 +11,16 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		testProject = new RuntimeTestProjectDescriptor(this)
 	}
 	
-	
 	override getNameQualifier() {
 		""
 	}
 	
-	override getTestProject() {
-		testProject
+	override isEclipsePluginProject() {
+		config.buildSystem.isPluginBuild
 	}
 	
-	override getSourceFolders() {
-		#{Outlet.MAIN_JAVA, Outlet.MAIN_RESOURCES, Outlet.MAIN_SRC_GEN, Outlet.MAIN_XTEND_GEN}.map[sourceFolder].toSet
+	override getTestProject() {
+		testProject
 	}
 	
 	override getExternalDependencies() {
@@ -32,6 +34,12 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				version = "3.5.0"
 			]
 		]
+		for (ePackage: config.ecore2Xtext.EPackageInfos) {
+			deps += createBundleDependency(ePackage.bundleID)
+			if (ePackage.genmodelURI.fileExtension == "xcore") {
+				deps += createBundleDependency("org.eclipse.emf.ecore.xcore")
+			}
+		}
 		deps
 	}
 	
@@ -70,25 +78,30 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 
-	private def grammar() {
-		'''
-			grammar «config.language.name» with org.eclipse.xtext.common.Terminals
-			
-			generate «config.language.simpleName.toFirstLower» "«config.language.nsURI»"
-			
-			Model:
-				greetings+=Greeting*;
-				
-			Greeting:
-				'Hello' name=ID '!';
-		'''
+	def grammar() {
+		if (fromExistingEcoreModels)
+			grammarCreator.grammar(config)
+		else
+			defaultGrammar
 	}
+	
+	private def defaultGrammar() '''
+		grammar «config.language.name» with org.eclipse.xtext.common.Terminals
+		
+		generate «config.language.simpleName.toFirstLower» "«config.language.nsURI»"
+		
+		Model:
+			greetings+=Greeting*;
+			
+		Greeting:
+			'Hello' name=ID '!';
+	'''
 	
 	def String getWorkflowFilePath() {
 		'''«config.language.basePackagePath»/Generate«config.language.simpleName».mwe2'''
 	}
 	
-	def private workflow() {
+	def workflow() {
 		''' 
 			module «(config.language.basePackagePath+"/Generate"+config.language.simpleName).replaceAll("/", ".")»
 			
@@ -113,9 +126,18 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					«FOR p : config.enabledProjects.filter[it != config.parentProject]»
 						projectMapping = { projectName = '«p.name»' path = '${projectPath}/../«p.name»' }
 					«ENDFOR»
-					// The following two lines can be removed, if Xbase is not used.
-					registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
-					registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+					«IF fromExistingEcoreModels»
+						«FOR ePackageInfo : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[EPackageJavaFQN].filterNull»
+							registerGeneratedEPackage = "«ePackageInfo»"
+						«ENDFOR»
+						«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension != "xcore"].map[genmodelURI.toString].toSet»
+							registerGenModelFile = "«genmodelURI»"
+						«ENDFOR»
+					«ELSE»
+						// The following two lines can be removed, if Xbase is not used.
+						registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
+						registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+					«ENDIF»
 				}
 				
 				«FOR p : config.enabledProjects»
@@ -157,15 +179,24 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 					}
 					language = auto-inject {
 						uri = grammarURI
+						«FOR genmodelURI : config.ecore2Xtext.EPackageInfos.filter[genmodelURI.fileExtension == "xcore"].map[genmodelURI.toString].toSet»
+							loadedResource = "«genmodelURI»"
+						«ENDFOR»
 			
 						// Java API to access grammar elements (required by several other fragments)
 						fragment = grammarAccess.GrammarAccessFragment2 auto-inject {}
-			
+						
+						«IF fromExistingEcoreModels»
+							fragment = adapter.FragmentAdapter { 
+								fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment auto-inject {}
+							}
+						«ENDIF»
+				
 						// generates Java API for the generated EPackages
 						fragment = adapter.FragmentAdapter { 
 							fragment = ecore.EMFGeneratorFragment auto-inject {
 								javaModelDirectory = "/${projectName}/«Outlet.MAIN_SRC_GEN.sourceFolder»"
-								updateBuildProperties = «config.buildSystem.needsEclipseMetadata»
+								updateBuildProperties = «config.buildSystem.isPluginBuild»
 							}
 						}
 			
@@ -204,7 +235,13 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						fragment = generator.GeneratorFragment2 {}
 			
 						// formatter API
-						fragment = formatting.Formatter2Fragment2 {}
+						«IF fromExistingEcoreModels»
+						fragment = adapter.FragmentAdapter {
+							fragment = ecore2xtext.FormatterFragment auto-inject {}
+						}
+						«ELSE»
+							fragment = formatting.Formatter2Fragment2 {}
+						«ENDIF»
 						
 						«IF testProject.enabled»
 							fragment = adapter.FragmentAdapter {
@@ -279,6 +316,10 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		'''
 	}
 	
+	private def isFromExistingEcoreModels() {
+		!config.ecore2Xtext.EPackageInfos.isEmpty
+	}
+	
 	override buildGradle() {
 		super.buildGradle => [
 			additionalContent = '''
@@ -289,8 +330,8 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				}
 
 				dependencies {
-					mwe2 'org.eclipse.xtext:org.eclipse.xtext.xtext:«config.xtextVersion»'
-					mwe2 'org.eclipse.xtext:org.eclipse.xtext.xtext.generator:«config.xtextVersion»'
+					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext:${xtextVersion}"
+					mwe2 "org.eclipse.xtext:org.eclipse.xtext.xtext.generator:${xtextVersion}"
 				}
 				
 				task generateXtextLanguage(type: JavaExec) {
@@ -306,13 +347,14 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 				
 				compileXtend.dependsOn(generateXtextLanguage)
 				clean.dependsOn(cleanGenerateXtextLanguage)
+				eclipse.classpath.plusConfigurations += [configurations.mwe2]
 			'''
 		]
 	}
 		
 	override pom() {
 		super.pom => [
-			packaging = if (config.buildSystem == BuildSystem.TYCHO) "eclipse-plugin" else "jar"
+			packaging = if (isEclipsePluginProject) "eclipse-plugin" else "jar"
 			buildSection = '''
 				<build>
 					<plugins>

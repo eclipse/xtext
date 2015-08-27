@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.IJdtHelper;
+import org.eclipse.xtext.xtext.wizard.EPackageInfo;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
