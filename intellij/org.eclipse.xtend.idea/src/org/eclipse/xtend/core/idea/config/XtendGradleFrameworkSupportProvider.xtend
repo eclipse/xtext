@@ -22,7 +22,7 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
  */
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
-	val static XTEND_GRADLE_PLUGIN_VERSION = '0.4.7'
+@Inject GradleBuildFileUtility gradleUtility
 	@Inject Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
 
 	new() {
@@ -35,13 +35,19 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 
 	override addSupport(Module module, ModifiableRootModel rootModel, ModifiableModelsProvider modifiableModelsProvider,
 		BuildScriptDataBuilder script) {
+		// TODO extract this to use in XtendSupportConfigurable
+		val snapshot = XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
 		script.addOther('''
 			buildscript {
-			    repositories {
-			        mavenCentral()
-			    }
+				«IF snapshot»
+				repositories {
+					maven {
+						url 'http://oss.sonatype.org/content/repositories/snapshots'
+					}
+				}
+			    «ENDIF»
 			    dependencies {
-			        classpath 'org.xtend:xtend-gradle-plugin:«XTEND_GRADLE_PLUGIN_VERSION»'
+			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginId»'
 			    }
 			}
 		''')
@@ -49,7 +55,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("mavenCentral()").
 			addDependencyNotation('''compile '«XtendLibraryManager.xtendLibMavenId.key»' ''')
 
-		if (XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")) {
+		if (snapshot) {
 			script.addRepositoriesDefinition('''
 			maven {
 				url 'http://oss.sonatype.org/content/repositories/snapshots'
