@@ -23,8 +23,6 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder
 
-import static org.eclipse.xtend.core.idea.config.XtendLibraryDescription.*
-
 import static extension com.intellij.openapi.vfs.VfsUtil.*
 import static extension com.intellij.util.PathUtil.*
 
