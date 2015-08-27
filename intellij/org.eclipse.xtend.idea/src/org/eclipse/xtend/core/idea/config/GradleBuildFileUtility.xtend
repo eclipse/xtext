@@ -14,10 +14,10 @@ import com.intellij.openapi.module.Module
 import com.intellij.openapi.util.io.FileUtil
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
-import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
 import com.intellij.psi.util.PsiTreeUtil
+import org.jetbrains.plugins.gradle.service.project.wizard.GradleModuleBuilder
 import org.jetbrains.plugins.gradle.util.GradleConstants
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
@@ -34,17 +34,17 @@ class GradleBuildFileUtility {
 	public val xtendGradlePluginId = '0.4.7'
 
 	def boolean isGradleedModule(Module module) {
-		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module)
+		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
+			GradleModuleBuilder.getBuildScriptData(module) !== null
 	}
 
-	def setupGradleBuild(Module module) {
-		val buildFile = locateBuildFile(module)
+	def void setupGradleBuild(Module module, GroovyFile buildFile) {
 		if (buildFile === null) {
 			return
 		}
-		val buildScriptDeps = buildFile.createOrGetBlock("buildscript")
 		val android = module.isAndroidGradleModule
-		buildScriptDeps.addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginId»' ''')
+		buildFile.createOrGetMethodCall("buildscript").
+			addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginId»' ''')
 
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
@@ -66,47 +66,41 @@ class GradleBuildFileUtility {
 		return null
 	}
 
-	def void addDependency(PsiElement parentElement, String dependencyEntry) {
-		parentElement.dependencies().createStatementIfNotExists(dependencyEntry)
+	def void addDependency(GrStatementOwner parentElement, String dependencyEntry) {
+		parentElement.createOrGetMethodCall("dependencies").createStatementIfNotExists(dependencyEntry)
 	}
 
-	def private createStatementIfNotExists(GrStatementOwner statementOwner, String statement) {
-		if (statementOwner.statements.findFirst[statement == text] !== null) {
+	def private void createStatementIfNotExists(GrStatementOwner statementOwner, String statement) {
+		if (statementOwner.statements.findFirst[statement.trim == text] !== null) {
 			return
 		}
 		var factory = GroovyPsiElementFactory.getInstance(statementOwner.project)
-		statementOwner.addStatementBefore(factory.createStatementFromText(statement), null)
+		val entry = factory.createStatementFromText(statement)
+		statementOwner.addStatementBefore(entry, null)
 	}
 
-	def GrClosableBlock dependencies(PsiElement parent) {
-		parent.createOrGetBlock("dependencies")
-	}
-
-	def private GrClosableBlock createOrGetBlock(PsiElement element, String blockName) {
-		var closableBlocks = PsiTreeUtil.getChildrenOfTypeAsList(element, GrMethodCall)
-		var block = closableBlocks.findFirst [
+	def private GrClosableBlock createOrGetMethodCall(GrStatementOwner element, String methodName) {
+		var methodCalls = PsiTreeUtil.getChildrenOfTypeAsList(element, GrMethodCall)
+		var methodCall = methodCalls.findFirst [
 			var expression = getInvokedExpression()
-			expression !== null && blockName.equals(expression.getText())
+			expression !== null && methodName.equals(expression.getText())
 		]
-		if (block === null) {
+		if (methodCall === null) {
 			var factory = GroovyPsiElementFactory.getInstance(element.project)
-			block = factory.createStatementFromText(
-			'''
-			«blockName» {
-			}''') as GrMethodCall
-			element.add(block)
+			methodCall = element.addStatementBefore(factory.createStatementFromText('''«methodName»{}'''),
+				null) as GrMethodCall
 		}
-		return block.firstClosureArgument
+		return methodCall.firstClosureArgument
 	}
 
-	def GrClosableBlock firstClosureArgument(GrCall call) {
+	def private GrClosableBlock firstClosureArgument(GrCall call) {
 		call.getClosureArguments().head
 	}
 
 	def isAndroidGradleModule(Module module) {
-		//TODO find a smarter way to detect
+		// TODO find a smarter way to detect
 		val mnr = FacetManager.getInstance(module)
-		val foo = mnr.allFacets.<Facet<?>>filter["Android-Gradle" == name]
+		val foo = mnr.allFacets.<Facet<?>>filter["android-gradle" == it.typeId.toString]
 		return foo.size > 0
 	}
 }

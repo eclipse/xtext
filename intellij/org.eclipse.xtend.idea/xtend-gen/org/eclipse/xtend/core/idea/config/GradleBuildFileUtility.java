@@ -10,13 +10,13 @@ package org.eclipse.xtend.core.idea.config;
 import com.google.common.base.Objects;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetTypeId;
 import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -26,6 +26,8 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder;
+import org.jetbrains.plugins.gradle.service.project.wizard.GradleModuleBuilder;
 import org.jetbrains.plugins.gradle.util.GradleConstants;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory;
@@ -44,16 +46,24 @@ public class GradleBuildFileUtility {
   public final String xtendGradlePluginId = "0.4.7";
   
   public boolean isGradleedModule(final Module module) {
-    return ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
+    boolean _or = false;
+    boolean _isExternalSystemAwareModule = ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module);
+    if (_isExternalSystemAwareModule) {
+      _or = true;
+    } else {
+      BuildScriptDataBuilder _buildScriptData = GradleModuleBuilder.getBuildScriptData(module);
+      boolean _tripleNotEquals = (_buildScriptData != null);
+      _or = _tripleNotEquals;
+    }
+    return _or;
   }
   
-  public void setupGradleBuild(final Module module) {
-    final GroovyFile buildFile = this.locateBuildFile(module);
+  public void setupGradleBuild(final Module module, final GroovyFile buildFile) {
     if ((buildFile == null)) {
       return;
     }
-    final GrClosableBlock buildScriptDeps = this.createOrGetBlock(buildFile, "buildscript");
     final boolean android = this.isAndroidGradleModule(module);
+    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildFile, "buildscript");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("classpath \'org.xtend:xtend");
     String _xifexpression = null;
@@ -64,7 +74,7 @@ public class GradleBuildFileUtility {
     _builder.append("-gradle-plugin:");
     _builder.append(this.xtendGradlePluginId, "");
     _builder.append("\' ");
-    this.addDependency(buildScriptDeps, _builder.toString());
+    this.addDependency(_createOrGetMethodCall, _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("apply plugin: \'org.xtend.xtend");
     String _xifexpression_1 = null;
@@ -105,9 +115,9 @@ public class GradleBuildFileUtility {
     return null;
   }
   
-  public void addDependency(final PsiElement parentElement, final String dependencyEntry) {
-    GrClosableBlock _dependencies = this.dependencies(parentElement);
-    this.createStatementIfNotExists(_dependencies, dependencyEntry);
+  public void addDependency(final GrStatementOwner parentElement, final String dependencyEntry) {
+    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(parentElement, "dependencies");
+    this.createStatementIfNotExists(_createOrGetMethodCall, dependencyEntry);
   }
   
   private void createStatementIfNotExists(final GrStatementOwner statementOwner, final String statement) {
@@ -115,8 +125,9 @@ public class GradleBuildFileUtility {
     final Function1<GrStatement, Boolean> _function = new Function1<GrStatement, Boolean>() {
       @Override
       public Boolean apply(final GrStatement it) {
+        String _trim = statement.trim();
         String _text = it.getText();
-        return Boolean.valueOf(Objects.equal(statement, _text));
+        return Boolean.valueOf(Objects.equal(_trim, _text));
       }
     };
     GrStatement _findFirst = IterableExtensions.<GrStatement>findFirst(((Iterable<GrStatement>)Conversions.doWrapArray(_statements)), _function);
@@ -126,16 +137,12 @@ public class GradleBuildFileUtility {
     }
     Project _project = statementOwner.getProject();
     GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
-    GrStatement _createStatementFromText = factory.createStatementFromText(statement);
-    statementOwner.addStatementBefore(_createStatementFromText, null);
+    final GrStatement entry = factory.createStatementFromText(statement);
+    statementOwner.addStatementBefore(entry, null);
   }
   
-  public GrClosableBlock dependencies(final PsiElement parent) {
-    return this.createOrGetBlock(parent, "dependencies");
-  }
-  
-  private GrClosableBlock createOrGetBlock(final PsiElement element, final String blockName) {
-    List<GrMethodCall> closableBlocks = PsiTreeUtil.<GrMethodCall>getChildrenOfTypeAsList(element, GrMethodCall.class);
+  private GrClosableBlock createOrGetMethodCall(final GrStatementOwner element, final String methodName) {
+    List<GrMethodCall> methodCalls = PsiTreeUtil.<GrMethodCall>getChildrenOfTypeAsList(element, GrMethodCall.class);
     final Function1<GrMethodCall, Boolean> _function = new Function1<GrMethodCall, Boolean>() {
       @Override
       public Boolean apply(final GrMethodCall it) {
@@ -147,7 +154,7 @@ public class GradleBuildFileUtility {
             _and = false;
           } else {
             String _text = expression.getText();
-            boolean _equals = blockName.equals(_text);
+            boolean _equals = methodName.equals(_text);
             _and = _equals;
           }
           _xblockexpression = _and;
@@ -155,23 +162,22 @@ public class GradleBuildFileUtility {
         return Boolean.valueOf(_xblockexpression);
       }
     };
-    GrMethodCall block = IterableExtensions.<GrMethodCall>findFirst(closableBlocks, _function);
-    if ((block == null)) {
+    GrMethodCall methodCall = IterableExtensions.<GrMethodCall>findFirst(methodCalls, _function);
+    if ((methodCall == null)) {
       Project _project = element.getProject();
       GroovyPsiElementFactory factory = GroovyPsiElementFactory.getInstance(_project);
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append(blockName, "");
-      _builder.append(" {");
-      _builder.newLineIfNotEmpty();
-      _builder.append("}");
+      _builder.append(methodName, "");
+      _builder.append("{}");
       GrStatement _createStatementFromText = factory.createStatementFromText(_builder);
-      block = ((GrMethodCall) _createStatementFromText);
-      element.add(block);
+      GrStatement _addStatementBefore = element.addStatementBefore(_createStatementFromText, 
+        null);
+      methodCall = ((GrMethodCall) _addStatementBefore);
     }
-    return this.firstClosureArgument(block);
+    return this.firstClosureArgument(methodCall);
   }
   
-  public GrClosableBlock firstClosureArgument(final GrCall call) {
+  private GrClosableBlock firstClosureArgument(final GrCall call) {
     GrClosableBlock[] _closureArguments = call.getClosureArguments();
     return IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments)));
   }
@@ -182,8 +188,9 @@ public class GradleBuildFileUtility {
     final Function1<Facet<?>, Boolean> _function = new Function1<Facet<?>, Boolean>() {
       @Override
       public Boolean apply(final Facet<?> it) {
-        String _name = it.getName();
-        return Boolean.valueOf(Objects.equal("Android-Gradle", _name));
+        FacetTypeId _typeId = it.getTypeId();
+        String _string = _typeId.toString();
+        return Boolean.valueOf(Objects.equal("android-gradle", _string));
       }
     };
     final Iterable<Facet<?>> foo = IterableExtensions.<Facet<?>>filter(((Iterable<Facet<?>>)Conversions.doWrapArray(_allFacets)), _function);

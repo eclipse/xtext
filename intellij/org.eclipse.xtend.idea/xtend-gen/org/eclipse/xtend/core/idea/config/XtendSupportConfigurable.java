@@ -64,11 +64,45 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider) {
+    final XtendFacetConfiguration conf = this.createOrGetXtendFacetConf(module);
+    this.setupOutputConfiguration(module, conf, rootModel);
+    XbaseGeneratorConfigurationState _state = conf.getState();
+    this.setupOutputFolder(_state, rootModel);
+    this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
+  }
+  
+  public void setupOutputConfiguration(final Module module, final XtendFacetConfiguration conf, final ModifiableRootModel rootModel) {
+    final GroovyFile buildFile = this._gradleBuildFileUtility.locateBuildFile(module);
+    boolean _and = false;
+    boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
+    if (!_isGradleedModule) {
+      _and = false;
+    } else {
+      _and = (buildFile != null);
+    }
+    if (_and) {
+      Project _project = module.getProject();
+      List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(buildFile);
+      new WriteCommandAction.Simple(_project, "Gradle: Xtend Configuration", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
+        @Override
+        protected void run() throws Throwable {
+          XtendSupportConfigurable.this._gradleBuildFileUtility.setupGradleBuild(module, buildFile);
+        }
+      }.execute();
+      XbaseGeneratorConfigurationState _state = conf.getState();
+      this.presetGradleOutputDirectories(_state, module);
+    } else {
+      XbaseGeneratorConfigurationState _state_1 = conf.getState();
+      this.presetPlainJavaOutputDirectories(_state_1, rootModel);
+    }
+  }
+  
+  public XtendFacetConfiguration createOrGetXtendFacetConf(final Module module) {
     FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
     String _iD = XtendLanguage.INSTANCE.getID();
     final FacetType facetType = _instance.findFacetType(_iD);
     if ((facetType == null)) {
-      return;
+      return null;
     }
     final FacetManager mnr = FacetManager.getInstance(module);
     Facet _elvis = null;
@@ -85,27 +119,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     }
     Facet facet = _elvis;
     FacetConfiguration _configuration = facet.getConfiguration();
-    final XtendFacetConfiguration conf = ((XtendFacetConfiguration) _configuration);
-    boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
-    if (_isGradleedModule) {
-      Project _project = module.getProject();
-      GroovyFile _locateBuildFile = this._gradleBuildFileUtility.locateBuildFile(module);
-      List<PsiFile> _newImmutableList = CollectionLiterals.<PsiFile>newImmutableList(_locateBuildFile);
-      new WriteCommandAction.Simple(_project, "Gradle: Add Xtend Configuration", ((PsiFile[])Conversions.unwrapArray(_newImmutableList, PsiFile.class))) {
-        @Override
-        protected void run() throws Throwable {
-          XtendSupportConfigurable.this._gradleBuildFileUtility.setupGradleBuild(module);
-        }
-      }.execute();
-      XbaseGeneratorConfigurationState _state = conf.getState();
-      this.presetGradleOutputDirectories(_state, module);
-    } else {
-      XbaseGeneratorConfigurationState _state_1 = conf.getState();
-      this.presetPlainJavaOutputDirectories(_state_1, rootModel);
-    }
-    XbaseGeneratorConfigurationState _state_2 = conf.getState();
-    this.setupOutputFolder(_state_2, rootModel);
-    this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
+    return ((XtendFacetConfiguration) _configuration);
   }
   
   public void presetGradleOutputDirectories(final XbaseGeneratorConfigurationState state, final Module module) {
@@ -154,9 +168,18 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   
   public void presetPlainJavaOutputDirectories(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {
     ContentEntry[] _contentEntries = rootModel.getContentEntries();
-    final ContentEntry entry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+    final Function1<ContentEntry, Boolean> _function = new Function1<ContentEntry, Boolean>() {
+      @Override
+      public Boolean apply(final ContentEntry it) {
+        String _url = it.getUrl();
+        boolean _contains = _url.contains("xtend-gen");
+        return Boolean.valueOf((!_contains));
+      }
+    };
+    Iterable<ContentEntry> _filter = IterableExtensions.<ContentEntry>filter(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function);
+    final ContentEntry entry = IterableExtensions.<ContentEntry>head(_filter);
     SourceFolder[] _sourceFolders = entry.getSourceFolders();
-    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+    final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
         boolean _and = false;
@@ -175,11 +198,11 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
         return Boolean.valueOf(_and);
       }
     };
-    Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
-    final SourceFolder mainSrc = IterableExtensions.<SourceFolder>head(_filter);
+    Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function_1);
+    final SourceFolder mainSrc = IterableExtensions.<SourceFolder>head(_filter_1);
     VirtualFile xtendGenMain = this.createOrGetInParentDir(mainSrc, "xtend-gen");
     SourceFolder[] _sourceFolders_1 = entry.getSourceFolders();
-    final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
+    final Function1<SourceFolder, Boolean> _function_2 = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
         boolean _and = false;
@@ -197,15 +220,15 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
         return Boolean.valueOf(_and);
       }
     };
-    Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_1);
-    final SourceFolder testSrc = IterableExtensions.<SourceFolder>head(_filter_1);
+    Iterable<SourceFolder> _filter_2 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_2);
+    final SourceFolder testSrc = IterableExtensions.<SourceFolder>head(_filter_2);
     VirtualFile xtendGenTest = this.createOrGetInParentDir(testSrc, "xtend-gen");
     boolean _notEquals = (!Objects.equal(xtendGenMain, null));
     if (_notEquals) {
       Module _module = rootModel.getModule();
       VirtualFile _moduleFile = _module.getModuleFile();
       VirtualFile _parent = _moduleFile.getParent();
-      String _relativePath = VfsUtil.getRelativePath(_parent, xtendGenMain);
+      String _relativePath = VfsUtil.getRelativePath(xtendGenMain, _parent);
       state.setOutputDirectory(_relativePath);
     }
     boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
@@ -213,12 +236,12 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
       Module _module_1 = rootModel.getModule();
       VirtualFile _moduleFile_1 = _module_1.getModuleFile();
       VirtualFile _parent_1 = _moduleFile_1.getParent();
-      String _relativePath_1 = VfsUtil.getRelativePath(_parent_1, xtendGenTest);
+      String _relativePath_1 = VfsUtil.getRelativePath(xtendGenTest, _parent_1);
       state.setTestOutputDirectory(_relativePath_1);
     }
   }
   
-  public VirtualFile createOrGetInParentDir(final VirtualFile sibling, final String relativePath) {
+  private VirtualFile createOrGetInParentDir(final VirtualFile sibling, final String relativePath) {
     try {
       VirtualFile _xblockexpression = null;
       {
@@ -238,7 +261,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     }
   }
   
-  public VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String relativePath) {
+  private VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String relativePath) {
     VirtualFile _xblockexpression = null;
     {
       VirtualFile _file = null;

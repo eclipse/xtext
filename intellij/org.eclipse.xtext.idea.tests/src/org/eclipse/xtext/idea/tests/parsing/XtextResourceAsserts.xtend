@@ -9,6 +9,9 @@ package org.eclipse.xtext.idea.tests.parsing
 
 import com.google.inject.Inject
 import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiErrorElement
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.idea.resource.PsiToEcoreAdapter
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
@@ -17,9 +20,6 @@ import org.eclipse.xtext.resource.XtextResource
 import org.junit.Assert
 
 import static extension org.eclipse.xtext.util.EmfFormatter.*
-import com.intellij.psi.PsiErrorElement
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtext.EcoreUtil2
 
 class XtextResourceAsserts extends Assert {
 

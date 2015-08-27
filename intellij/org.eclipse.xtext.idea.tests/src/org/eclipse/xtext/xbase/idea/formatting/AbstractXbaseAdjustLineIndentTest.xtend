@@ -8,10 +8,10 @@
 package org.eclipse.xtext.xbase.idea.formatting
 
 import com.intellij.openapi.command.WriteCommandAction
+import com.intellij.openapi.fileTypes.LanguageFileType
 import com.intellij.psi.PsiFile
 import com.intellij.psi.codeStyle.CodeStyleManager
 import org.eclipse.xtext.idea.tests.LightToolingTest
-import com.intellij.openapi.fileTypes.LanguageFileType
 
 /**
  * @author kosyakov - Initial contribution and API

@@ -22,7 +22,7 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
  */
 class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
 
-@Inject GradleBuildFileUtility gradleUtility
+	@Inject GradleBuildFileUtility gradleUtility
 	@Inject Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider
 
 	new() {
@@ -39,20 +39,21 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 		val snapshot = XtendLibraryManager.xtendLibMavenId.version?.endsWith("-SNAPSHOT")
 		script.addOther('''
 			buildscript {
-				«IF snapshot»
 				repositories {
-					maven {
-						url 'http://oss.sonatype.org/content/repositories/snapshots'
-					}
+					«IF snapshot»
+						maven {
+							url 'http://oss.sonatype.org/content/repositories/snapshots'
+						}
+				    «ENDIF»
+				    jcenter()
 				}
-			    «ENDIF»
 			    dependencies {
 			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginId»'
 			    }
 			}
 		''')
 		script.addPluginDefinition("apply plugin: 'java'").addPluginDefinition("apply plugin: 'org.xtend.xtend'").
-			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("mavenCentral()").
+			addPropertyDefinition("sourceCompatibility = 1.5").addRepositoriesDefinition("jcenter()").
 			addDependencyNotation('''compile '«XtendLibraryManager.xtendLibMavenId.key»' ''')
 
 		if (snapshot) {
@@ -61,7 +62,10 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				url 'http://oss.sonatype.org/content/repositories/snapshots'
 			}''')
 		}
-		xtendSupportConfigurableProvider.get.addSupport(module, rootModel, modifiableModelsProvider)
+		val xtendSupport = xtendSupportConfigurableProvider.get
+		val conf = xtendSupport.createOrGetXtendFacetConf(module)
+		xtendSupport.presetGradleOutputDirectories(conf.state,module)
+		xtendSupport.setupOutputFolder(conf.state,rootModel)
 	}
 
 }

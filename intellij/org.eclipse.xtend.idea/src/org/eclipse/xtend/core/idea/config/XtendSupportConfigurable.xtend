@@ -40,28 +40,37 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		ModifiableRootModel rootModel,
 		ModifiableModelsProvider modifiableModelsProvider
 	) {
+		val conf = module.createOrGetXtendFacetConf
+		setupOutputConfiguration(module, conf, rootModel)
+		setupOutputFolder(conf.state, rootModel)
+		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
+	}
 
-		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
-		if (facetType === null) {
-			return
-		}
-		val mnr = FacetManager.getInstance(module)
-		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) ?:
-			FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
-		val conf = facet.configuration as XtendFacetConfiguration
-		if (module.isGradleedModule) {
-			new WriteCommandAction.Simple(module.project, "Gradle: Add Xtend Configuration",
-				newImmutableList(module.locateBuildFile())) {
+	def setupOutputConfiguration(Module module, XtendFacetConfiguration conf, ModifiableRootModel rootModel) {
+		val buildFile =  module.locateBuildFile()
+		if (module.isGradleedModule && buildFile !==null) {
+			new WriteCommandAction.Simple(module.project, "Gradle: Xtend Configuration",
+				newImmutableList(buildFile)) {
 				override protected run() throws Throwable {
-					module.setupGradleBuild()
+					module.setupGradleBuild(buildFile)
 				}
 			}.execute
 			conf.state.presetGradleOutputDirectories(module)
 		} else {
 			conf.state.presetPlainJavaOutputDirectories(rootModel)
 		}
-		setupOutputFolder(conf.state, rootModel)
-		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
+	}
+
+	def XtendFacetConfiguration createOrGetXtendFacetConf(Module module) {
+		val facetType = FacetTypeRegistry.getInstance().findFacetType(XtendLanguage.INSTANCE.ID)
+		if (facetType === null) {
+			return null
+		}
+		val mnr = FacetManager.getInstance(module)
+		var facet = mnr.findFacet(facetType.id, facetType.defaultFacetName) ?:
+			FacetManager.getInstance(module).addFacet(facetType, facetType.defaultFacetName, null)
+		return facet.configuration as XtendFacetConfiguration
+
 	}
 
 	def presetGradleOutputDirectories(XbaseGeneratorConfigurationState state, Module module) {
@@ -91,26 +100,26 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	}
 
 	def presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
-		val entry = rootModel.contentEntries.head
+		val entry = rootModel.contentEntries.filter[!it.url.contains('xtend-gen')].head
 		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
 		var VirtualFile xtendGenMain = mainSrc.createOrGetInParentDir('xtend-gen')
 		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
 		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir('xtend-gen')
 		if (xtendGenMain != null)
-			state.outputDirectory = VfsUtil.getRelativePath(rootModel.module.moduleFile.parent, xtendGenMain)
+			state.outputDirectory = VfsUtil.getRelativePath(xtendGenMain, rootModel.module.moduleFile.parent)
 		if (xtendGenTest != null)
-			state.testOutputDirectory = VfsUtil.getRelativePath(rootModel.module.moduleFile.parent, xtendGenTest)
+			state.testOutputDirectory = VfsUtil.getRelativePath(xtendGenTest, rootModel.module.moduleFile.parent)
 	}
 
-	def VirtualFile createOrGetInParentDir(VirtualFile sibling, String relativePath) {
-		//TODO unmark parent ExcludedFolders e.g. 'build'
+	def private VirtualFile createOrGetInParentDir(VirtualFile sibling, String relativePath) {
+		// TODO unmark parent ExcludedFolders e.g. 'build'
 		val parent = sibling?.parent
 		if (parent === null)
 			return null
 		VfsUtil.createDirectoryIfMissing(parent, relativePath)
 	}
 
-	def VirtualFile createOrGetInParentDir(SourceFolder sibling, String relativePath) {
+	def private VirtualFile createOrGetInParentDir(SourceFolder sibling, String relativePath) {
 		val file = sibling?.file
 		if (file === null)
 			return null
