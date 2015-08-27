@@ -19,6 +19,7 @@
 		<findUsagesHandlerFactory implementation="org.eclipse.xtext.idea.findusages.GeneratedSourceAwareUsagesHandlerFactory"
 			id="generatedSources" order="first"/>
 		<generatedSourcesFilter	implementation="org.eclipse.xtext.idea.trace.TraceBasedGeneratedSourcesFilter"/>
+		<exceptionFilter implementation="org.eclipse.xtext.idea.execution.TraceBasedExceptionFilterFactory" order="first"/>
    	</extensions>
 
 	<project-components>
