@@ -21,4 +21,19 @@ class AntlrOptions {
 	boolean classSplitting = false
 	int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS
 	int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS
+	boolean optimizeCodeQuality = true
+	String keptBitSetsPattern
+	String keptBitSetName
+	
+	def void setFieldsPerClass(String fieldsPerClass) {
+		this.fieldsPerClass = Integer.parseInt(fieldsPerClass)
+	}
+	
+	def void setMethodsPerClass(String methodsPerClass) {
+		this.methodsPerClass = Integer.parseInt(methodsPerClass) 
+	}
+	
+	def void setKAsString(String k) {
+		this.k = Integer.parseInt(k)
+	}
 }

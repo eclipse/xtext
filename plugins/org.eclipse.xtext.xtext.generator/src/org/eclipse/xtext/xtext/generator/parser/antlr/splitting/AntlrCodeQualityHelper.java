@@ -12,89 +12,50 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.xtext.generator.model.IXtextGeneratorFileSystemAccess;
+import org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 public class AntlrCodeQualityHelper {
-
-	private String keepBitsets;
-	private String keptName;
-	private boolean enabled = true;
-	
-	/**
-	 * Optionally set a pattern for bitset names that should not be replaced by a simple variant.
-	 */
-	public void setKeepBitsets(String keepBitsets) {
-		this.keepBitsets = keepBitsets;
-	}
-	
-	/**
-	 * Optionally set a replacement string for the kept bitset names.
-	 */
-	public void setKeptName(String keptName) {
-		this.keptName = keptName;
-	}
-	
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 	
 	/**
 	 * Remove all unnecessary comments from the java code that was produced by Antlr
 	 */
-	public void stripUnnecessaryComments(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		String content = fsa.readTextFile(javaFile).toString();
-		content = stripUnnecessaryComments(content);
-		fsa.generateFile(javaFile, content);
-	}
-
-	protected String stripUnnecessaryComments(String fileContent) {
-		fileContent = fileContent.replaceAll(
+	public String stripUnnecessaryComments(String javaFileContent, AntlrOptions options) {
+		if (!options.isOptimizeCodeQuality())
+			return javaFileContent;
+		javaFileContent = javaFileContent.replaceAll(
 				"(?m)^(\\s+)// .*/(\\w+\\.g:.*)$",
 				"$1// $2");
-		fileContent = fileContent.replaceAll(
+		javaFileContent = javaFileContent.replaceAll(
 				"(public String getGrammarFileName\\(\\) \\{ return \").*/(\\w+\\.g)(\"; \\})",
 				"$1$2$3");
-		return fileContent;
-	}
-
-	/**
-	 * Remove all unnecessary comments from the lexer and the parser
-	 */
-	public void stripUnnecessaryComments(IXtextGeneratorFileSystemAccess fsa, String lexer, String parser) {
-		if (!enabled) {
-			return;
-		}
-		stripUnnecessaryComments(fsa, lexer);
-		stripUnnecessaryComments(fsa, parser);
+		return javaFileContent;
 	}
 
 	// public static final BitSet FOLLOW_Symbol_in_synpred90_InternalMyDslParser17129 = new BitSet(new
 	// long[]{0x0000000000000002L});
 	// ...........................1- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 2-
 	// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	private static final Pattern bitsetPattern = Pattern.compile(
-			"^\\s+public static final BitSet (FOLLOW_\\w+) = (.*);$", Pattern.MULTILINE);
+	private static final Pattern bitsetPattern = Pattern.compile("^\\s+public static final BitSet (FOLLOW_\\w+) = (.*);$", Pattern.MULTILINE);
 
 	
 	/**
 	 * Remove duplicate bitset declarations to reduce the size of the static initializer but keep the bitsets
 	 * that match the given pattern with a normalized name.
 	 */
-	public void removeDuplicateBitsets(IXtextGeneratorFileSystemAccess fsa, String javaFile) {
-		if (!enabled) {
-			return;
+	public String removeDuplicateBitsets(String javaFileContent, AntlrOptions options) {
+		if (!options.isOptimizeCodeQuality()) {
+			return javaFileContent;
 		}
 		Pattern bitsetsToKeep = null;
 		Set<String> doNotReplace = Sets.newHashSet();
-		if (keepBitsets != null) {
-			bitsetsToKeep = Pattern.compile(keepBitsets);
+		if (options.getKeptBitSetsPattern() != null) {
+			bitsetsToKeep = Pattern.compile(options.getKeptBitSetsPattern());
 		}
-		String content = fsa.readTextFile(javaFile).toString();
-		StringBuilder newContent = new StringBuilder(content.length());
-		Matcher matcher = bitsetPattern.matcher(content);
+		StringBuilder newContent = new StringBuilder(javaFileContent.length());
+		Matcher matcher = bitsetPattern.matcher(javaFileContent);
 		int offset = 0;
 		Map<String, String> bitsets = Maps.newHashMap();
 		Map<String, String> namesToReplace = Maps.newHashMap();
@@ -105,7 +66,7 @@ public class AntlrCodeQualityHelper {
 			String existing = putIfAbsent(bitsets, bitset, synthesizedFieldName);
 			if (existing == null) {
 				existing = synthesizedFieldName;
-				newContent.append(content, offset, matcher.start(1));
+				newContent.append(javaFileContent, offset, matcher.start(1));
 				newContent.append(synthesizedFieldName);
 				newContent.append(" = ");
 				newContent.append(bitset);
@@ -114,8 +75,8 @@ public class AntlrCodeQualityHelper {
 			if (bitsetsToKeep != null) {
 				Matcher keepMatcher = bitsetsToKeep.matcher(originalFieldName);
 				if (keepMatcher.matches()) {
-					newContent.append(content, offset, matcher.start(1));
-					String simpleName = keptName != null ? keepMatcher.replaceFirst(keptName) : originalFieldName;
+					newContent.append(javaFileContent, offset, matcher.start(1));
+					String simpleName = options.getKeptBitSetName() != null ? keepMatcher.replaceFirst(options.getKeptBitSetName()) : originalFieldName;
 					newContent.append(simpleName);
 					doNotReplace.add(simpleName);
 					newContent.append(" = ");
@@ -124,12 +85,12 @@ public class AntlrCodeQualityHelper {
 			}
 			offset = matcher.end(2);
 		}
-		newContent.append(content, offset, content.length());
-		content = newContent.toString();
-		newContent = new StringBuilder(content.length());
+		newContent.append(javaFileContent, offset, javaFileContent.length());
+		javaFileContent = newContent.toString();
+		newContent = new StringBuilder(javaFileContent.length());
 		String rawFollowPattern = "\\bFOLLOW_\\w+\\b";
 		Pattern followPattern = Pattern.compile(rawFollowPattern);
-		Matcher followMatcher = followPattern.matcher(content);
+		Matcher followMatcher = followPattern.matcher(javaFileContent);
 		doNotReplace.addAll(bitsets.values());
 		offset = 0;
 		while (followMatcher.find(offset)) {
@@ -140,12 +101,12 @@ public class AntlrCodeQualityHelper {
 					throw new IllegalStateException(replaceMe);
 				replaceBy = replaceMe;
 			}
-			newContent.append(content, offset, followMatcher.start());
+			newContent.append(javaFileContent, offset, followMatcher.start());
 			newContent.append(replaceBy);
 			offset = followMatcher.end();
 		}
-		newContent.append(content, offset, content.length());
-		fsa.generateFile(javaFile, newContent);
+		newContent.append(javaFileContent, offset, javaFileContent.length());
+		return newContent.toString();
 	}
 	
 	private <K, V> V putIfAbsent(Map<K, V> map, K key, V value) {
