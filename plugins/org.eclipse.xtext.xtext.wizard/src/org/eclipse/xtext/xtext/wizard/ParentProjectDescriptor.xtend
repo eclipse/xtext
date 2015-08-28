@@ -48,9 +48,11 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 					ext.xtextVersion = "«config.xtextVersion»"
 					repositories {
 						jcenter()
-						maven {
-							url "https://oss.sonatype.org/content/repositories/snapshots/"
-						}
+						«IF config.xtextVersion.isSnapshot»
+							maven {
+								url "https://oss.sonatype.org/content/repositories/snapshots/"
+							}
+						«ENDIF»
 					}
 					apply plugin: 'java'
 					apply plugin: 'org.xtend.xtend'
@@ -180,6 +182,16 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 						</plugins>
 					</pluginManagement>
 				</build>
+				«IF config.xtextVersion.isSnapshot»
+					<repositories>
+						<repository>
+							<id>sonatype-snapshots</id>
+							<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+							<releases><enabled>false</enabled></releases>
+							<snapshots><enabled>true</enabled></snapshots>
+						</repository>
+					</repositories>
+				«ENDIF»
 			'''
 		]
 	}
