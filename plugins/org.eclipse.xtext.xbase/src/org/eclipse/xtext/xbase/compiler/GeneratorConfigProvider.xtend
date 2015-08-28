@@ -36,9 +36,9 @@ class GeneratorConfigProvider implements IGeneratorConfigProvider {
 
 	@Override override GeneratorConfig get(EObject context) {
 		val resourceSet = context?.eResource?.resourceSet
-		if (resourceSet != null) {
-			val adapter = GeneratorConfigAdapter.findInEmfObject(context?.eResource?.resourceSet)
-			if (adapter != null && adapter.language2GeneratorConfig.containsKey(languageId)) {
+		if (resourceSet !== null) {
+			val adapter = GeneratorConfigAdapter.findInEmfObject(resourceSet)
+			if (adapter !== null && adapter.language2GeneratorConfig.containsKey(languageId)) {
 				return adapter.language2GeneratorConfig.get(languageId)
 			}
 		}
