@@ -101,7 +101,7 @@ public class InternalBuilderTest {
 	private void dumpDiskIndex() {
 		File jdtMetadata = JavaCore.getPlugin().getStateLocation().toFile();
 		String[] files = jdtMetadata.list();
-		System.out.println("Disk index: " + files.length + " files.");
+		System.out.println("Disk index: " + (files == null ? '0' : files.length) + " files.");
 	}
 
 	private void clearJdtIndex() throws FileNotFoundException {
