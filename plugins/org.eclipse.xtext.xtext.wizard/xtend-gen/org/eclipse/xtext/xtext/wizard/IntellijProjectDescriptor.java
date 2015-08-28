@@ -13,6 +13,7 @@ import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -60,9 +61,20 @@ public class IntellijProjectDescriptor extends ProjectDescriptor {
         _builder_1.append("\t");
         _builder_1.append("pluginRepositories {");
         _builder_1.newLine();
-        _builder_1.append("\t\t");
-        _builder_1.append("url \"http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml\"");
-        _builder_1.newLine();
+        {
+          WizardConfiguration _config = IntellijProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion = _config.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion.isSnapshot();
+          if (_isSnapshot) {
+            _builder_1.append("\t\t");
+            _builder_1.append("url \"https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml\"");
+            _builder_1.newLine();
+          } else {
+            _builder_1.append("\t\t");
+            _builder_1.append("url \"http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml\"");
+            _builder_1.newLine();
+          }
+        }
         _builder_1.append("\t");
         _builder_1.append("}");
         _builder_1.newLine();

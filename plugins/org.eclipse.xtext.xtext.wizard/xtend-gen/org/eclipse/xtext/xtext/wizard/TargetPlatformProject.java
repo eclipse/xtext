@@ -14,6 +14,7 @@ import org.eclipse.xtext.xtext.wizard.PlainTextFile;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -92,12 +93,22 @@ public class TargetPlatformProject extends ProjectDescriptor {
     _builder.newLine();
     _builder.append("<unit id=\"org.eclipse.xtext.sdk.feature.group\" version=\"0.0.0\"/>");
     _builder.newLine();
-    _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
-    WizardConfiguration _config = this.getConfig();
-    String _xtextVersion = _config.getXtextVersion();
-    _builder.append(_xtextVersion, "");
-    _builder.append("/\"/>");
-    _builder.newLineIfNotEmpty();
+    {
+      WizardConfiguration _config = this.getConfig();
+      XtextVersion _xtextVersion = _config.getXtextVersion();
+      boolean _isSnapshot = _xtextVersion.isSnapshot();
+      if (_isSnapshot) {
+        _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/\"/>");
+        _builder.newLine();
+      } else {
+        _builder.append("<repository location=\"http://download.eclipse.org/modeling/tmf/xtext/updates/releases/");
+        WizardConfiguration _config_1 = this.getConfig();
+        XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
+        _builder.append(_xtextVersion_1, "");
+        _builder.append("/\"/>");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("</location>");
     _builder.newLine();
     _builder.append("</locations>");
