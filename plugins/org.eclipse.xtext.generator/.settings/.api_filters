@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.9.0"/>
+                <message_argument value="2.8.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="version will be generated during buckminster build" id="927989779">
             <message_arguments>
                 <message_argument value="2.9.0"/>
@@ -8,10 +14,338 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardRemover"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsRuntimeModule">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsRuntimeModule"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetupGenerated">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetupGenerated"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.formatting.SimpleExpressionsFormatter">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.formatting.SimpleExpressionsFormatter"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.parseTreeConstruction.SimpleExpressionsParsetreeConstructor">
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parseTreeConstruction.SimpleExpressionsParsetreeConstructor"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsAntlrTokenFileProvider">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsAntlrTokenFileProvider"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsParser">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsParser"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsLexer">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsLexer"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsParser">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsParser"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ExpressionImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ExpressionImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.OrExpressionImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.OrExpressionImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsFactoryImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsFactoryImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsAdapterFactory">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsAdapterFactory"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator"/>
+                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.generator.parser.antlr.splitting.validation.SimpleExpressionsJavaValidator">
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.SimpleExpressionsJavaValidator"/>
                 <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
             </message_arguments>
         </filter>
@@ -392,238 +726,6 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/AbstractSimpleExpressionsRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule"/>
-                <message_argument value="bindIParseTreeConstructor()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/SimpleExpressionsAntlrTokenFileProvider.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsAntlrTokenFileProvider">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsAntlrTokenFileProvider"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/SimpleExpressionsParser.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsParser">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.SimpleExpressionsParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressionsLexer.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsLexer">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsLexer"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/parser/antlr/internal/InternalSimpleExpressionsParser.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsParser">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.parser.antlr.internal.InternalSimpleExpressionsParser"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/services/SimpleExpressionsGrammarAccess.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.services.SimpleExpressionsGrammarAccess"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/AndExpression.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.AndExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/Comparison.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Comparison"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/Expression.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.Expression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/IfCondition.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/MethodCall.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.MethodCall"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/NotExpression.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NotExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/NumberLiteral.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.NumberLiteral"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/OrExpression.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.OrExpression"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/SimpleExpressionsFactory.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/SimpleExpressionsPackage.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.SimpleExpressionsPackage"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/AndExpressionImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.AndExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/ComparisonImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ComparisonImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/ExpressionImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ExpressionImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.ExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/IfConditionImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.IfConditionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/MethodCallImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.MethodCallImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/NotExpressionImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NotExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/NumberLiteralImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.NumberLiteralImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/OrExpressionImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.OrExpressionImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.OrExpressionImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/SimpleExpressionsFactoryImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsFactoryImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsFactoryImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/impl/SimpleExpressionsPackageImpl.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl.SimpleExpressionsPackageImpl"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/util/SimpleExpressionsAdapterFactory.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsAdapterFactory">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsAdapterFactory"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/util/SimpleExpressionsSwitch.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/validation/AbstractSimpleExpressionsJavaValidator.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.AbstractSimpleExpressionsJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
     <resource path="src/org/eclipse/xtext/generator/parser/antlr/debug/SimpleAntlrRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.debug.SimpleAntlrRuntimeModule">
         <filter id="305365105">
             <message_arguments>
@@ -662,122 +764,6 @@
                 <message_argument value="SyntheticTerminalDetector"/>
                 <message_argument value="SyntheticTerminalAwareFragmentHelper"/>
                 <message_argument value="createDetector()"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/ConditionSimplifier.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier">
-        <filter id="576720909">
-            <message_arguments>
-                <message_argument value="SimpleExpressionsSwitch&lt;T&gt;"/>
-                <message_argument value="ConditionSimplifier"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseAndExpression(AndExpression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseExpression(Expression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseNotExpression(NotExpression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseOrExpression(OrExpression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643842064">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="simplifyRecursive(Expression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="AndExpression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseAndExpression(AndExpression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="areSemanticallyEqual(Expression, Expression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseExpression(Expression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="Expression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="simplifyRecursive(Expression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="IfCondition"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="simplify(IfCondition)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="NotExpression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseNotExpression(NotExpression)"/>
-            </message_arguments>
-        </filter>
-        <filter id="643846161">
-            <message_arguments>
-                <message_argument value="OrExpression"/>
-                <message_argument value="ConditionSimplifier"/>
-                <message_argument value="caseOrExpression(OrExpression)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/UnorderedGroupsSplitter.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter">
-        <filter id="338792546">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter"/>
-                <message_argument value="addPreAndPostfix(String, int, String)"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/formatting/SimpleExpressionsFormatter.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.formatting.SimpleExpressionsFormatter">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.formatting.SimpleExpressionsFormatter"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
-            </message_arguments>
-        </filter>
-    </resource>
-    <resource path="src/org/eclipse/xtext/generator/parser/antlr/splitting/validation/SimpleExpressionsJavaValidator.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.validation.SimpleExpressionsJavaValidator">
-        <filter id="305365105">
-            <message_arguments>
-                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.validation.SimpleExpressionsJavaValidator"/>
-                <message_argument value="org.eclipse.xtext.generator_2.9.0"/>
             </message_arguments>
         </filter>
     </resource>

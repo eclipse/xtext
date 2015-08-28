@@ -8,12 +8,12 @@
 package org.eclipse.xtext.generator.parser.splitting;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.generator.parser.antlr.splitting.ConditionSimplifier;
-import org.eclipse.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup;
-import org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.ConditionSimplifier;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SimpleExpressionsStandaloneSetup;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.simpleExpressions.IfCondition;
 import org.junit.Test;
 
 

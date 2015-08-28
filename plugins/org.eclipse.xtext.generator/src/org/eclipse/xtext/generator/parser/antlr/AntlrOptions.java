@@ -8,87 +8,136 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser.antlr;
 
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
-import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
-
-/**
- * @author Sven Efftinge - Initial contribution and API
- */
 public class AntlrOptions {
-	private boolean backtrack = false;
-	private boolean backtrackLexer = false;
-	private boolean memoize = false;
-	private int k = -1;
-	private boolean ignoreCase = false;
-	private boolean classSplitting = false;
-	private int fieldsPerClass = AntlrParserSplitter.FIELDS_PER_CLASS;
-	private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
+
+	org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions delegate = new org.eclipse.xtext.xtext.generator.parser.antlr.AntlrOptions();
 
 	public boolean isBacktrack() {
-		return backtrack;
+		return delegate.isBacktrack();
 	}
+
 	public void setBacktrack(boolean backtrack) {
-		this.backtrack = backtrack;
+		delegate.setBacktrack(backtrack);
 	}
+
 	public boolean isMemoize() {
-		return memoize;
+		return delegate.isMemoize();
 	}
+
 	public void setMemoize(boolean memoize) {
-		this.memoize = memoize;
+		delegate.setMemoize(memoize);
 	}
+
 	public int getK() {
-		return k;
+		return delegate.getK();
 	}
+
 	public void setK(int k) {
-		this.k = k;
+		delegate.setK(k);
 	}
+
 	/**
 	 * @since 2.1
 	 */
 	public void setKAsString(String k) {
-		this.k = Integer.parseInt(k);
+		delegate.setKAsString(k);
 	}
+
 	public void setBacktrackLexer(boolean backtrackLexer) {
-		this.backtrackLexer = backtrackLexer;
+		delegate.setBacktrackLexer(backtrackLexer);
 	}
+
 	public boolean isBacktrackLexer() {
-		return backtrackLexer;
+		return delegate.isBacktrackLexer();
 	}
+
 	public void setIgnoreCase(boolean ignoreCase) {
-		this.ignoreCase = ignoreCase;
+		delegate.setIgnoreCase(ignoreCase);
 	}
+
 	public boolean isIgnoreCase() {
-		return ignoreCase;
+		return delegate.isIgnoreCase();
 	}
+
 	public boolean isClassSplitting() {
-		return classSplitting;
+		return delegate.isClassSplitting();
 	}
+
 	public void setClassSplitting(boolean value) {
-		this.classSplitting = value;
+		delegate.setClassSplitting(value);
 	}
+
 	/**
 	 * @since 2.1
 	 */
 	public int getFieldsPerClass() {
-		return fieldsPerClass;
+		return delegate.getFieldsPerClass();
 	}
+
 	/**
 	 * @since 2.1
 	 */
 	public void setFieldsPerClass(String fieldsPerClass) {
-		this.fieldsPerClass = Integer.parseInt(fieldsPerClass);
+		delegate.setFieldsPerClass(fieldsPerClass);
 	}
+
 	/**
 	 * @since 2.1
 	 */
 	public int getMethodsPerClass() {
-		return methodsPerClass;
+		return delegate.getMethodsPerClass();
 	}
+
 	/**
 	 * @since 2.1
 	 */
 	public void setMethodsPerClass(String methodsPerClass) {
-		this.methodsPerClass = Integer.parseInt(methodsPerClass);
+		delegate.setMethodsPerClass(methodsPerClass);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public boolean isOptimizeCodeQuality() {
+		return delegate.isOptimizeCodeQuality();
+	}
+
+	/**
+	 * @since 2.9
+	 * Whether to strip unnecessary comments and remove duplicate bitsets
+	 */
+	public void setOptimizeCodeQuality(boolean optimizeCodeQuality) {
+		delegate.setOptimizeCodeQuality(optimizeCodeQuality);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public String getKeptBitSetsPattern() {
+		return delegate.getKeptBitSetsPattern();
+	}
+
+	/**
+	 * @since 2.9
+	 * When removing bitsets, the ones matching this pattern will be kept
+	 */
+	public void setKeptBitSetsPattern(String keptBitSetsPattern) {
+		delegate.setKeptBitSetsPattern(keptBitSetsPattern);
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public String getKeptBitSetName() {
+		return delegate.getKeptBitSetName();
+	}
+
+	/**
+	 * @since 2.9
+	 * Allows to rename bitsets kept by {@link #setKeptBitSetsPattern(String)}
+	 */
+	public void setKeptBitSetName(String keptBitSetName) {
+		delegate.setKeptBitSetName(keptBitSetName);
 	}
 
 }
