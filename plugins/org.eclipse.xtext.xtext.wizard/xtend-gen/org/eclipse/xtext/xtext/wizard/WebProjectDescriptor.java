@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.Scope;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -167,7 +168,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     _builder.append("\t");
     _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
     WizardConfiguration _config = this.getConfig();
-    String _xtextVersion = _config.getXtextVersion();
+    XtextVersion _xtextVersion = _config.getXtextVersion();
     _builder.append(_xtextVersion, "\t");
     _builder.append("/xtext-orion.css\"/>");
     _builder.newLineIfNotEmpty();
@@ -195,7 +196,7 @@ public class WebProjectDescriptor extends ProjectDescriptor {
     _builder.append("\t\t\t\t");
     _builder.append("\"xtext/xtext-orion\": \"xtext/");
     WizardConfiguration _config_1 = this.getConfig();
-    String _xtextVersion_1 = _config_1.getXtextVersion();
+    XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
     _builder.append(_xtextVersion_1, "\t\t\t\t");
     _builder.append("/xtext-orion\"");
     _builder.newLineIfNotEmpty();

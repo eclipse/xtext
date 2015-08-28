@@ -25,6 +25,7 @@ import org.eclipse.xtext.xtext.wizard.TestProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.TestedProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WebProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @Accessors
 @SuppressWarnings("all")
@@ -33,7 +34,7 @@ public class WizardConfiguration {
   
   private String baseName;
   
-  private String xtextVersion = "2.8.4";
+  private XtextVersion xtextVersion = new XtextVersion("2.9.0-SNAPSHOT");
   
   private Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration();
   
@@ -119,11 +120,11 @@ public class WizardConfiguration {
   }
   
   @Pure
-  public String getXtextVersion() {
+  public XtextVersion getXtextVersion() {
     return this.xtextVersion;
   }
   
-  public void setXtextVersion(final String xtextVersion) {
+  public void setXtextVersion(final XtextVersion xtextVersion) {
     this.xtextVersion = xtextVersion;
   }
   

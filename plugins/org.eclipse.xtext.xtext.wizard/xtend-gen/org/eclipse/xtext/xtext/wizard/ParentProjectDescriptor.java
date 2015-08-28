@@ -23,6 +23,7 @@ import org.eclipse.xtext.xtext.wizard.ProjectLayout;
 import org.eclipse.xtext.xtext.wizard.SourceLayout;
 import org.eclipse.xtext.xtext.wizard.TargetPlatformProject;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
+import org.eclipse.xtext.xtext.wizard.XtextVersion;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -122,7 +123,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("ext.xtextVersion = \"");
         WizardConfiguration _config = ParentProjectDescriptor.this.getConfig();
-        String _xtextVersion = _config.getXtextVersion();
+        XtextVersion _xtextVersion = _config.getXtextVersion();
         _builder.append(_xtextVersion, "\t");
         _builder.append("\"");
         _builder.newLineIfNotEmpty();
@@ -132,15 +133,23 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t\t");
         _builder.append("jcenter()");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("maven {");
-        _builder.newLine();
-        _builder.append("\t\t\t");
-        _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
-        _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append("}");
-        _builder.newLine();
+        {
+          WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_1 = _config_1.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion_1.isSnapshot();
+          if (_isSnapshot) {
+            _builder.append("\t\t");
+            _builder.append("maven {");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("\t");
+            _builder.append("url \"https://oss.sonatype.org/content/repositories/snapshots/\"");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
         _builder.append("\t");
         _builder.append("}");
         _builder.newLine();
@@ -151,8 +160,8 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("apply plugin: \'org.xtend.xtend\'");
         _builder.newLine();
         {
-          WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
-          SourceLayout _sourceLayout = _config_1.getSourceLayout();
+          WizardConfiguration _config_2 = ParentProjectDescriptor.this.getConfig();
+          SourceLayout _sourceLayout = _config_2.getSourceLayout();
           boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
           if (_equals) {
             _builder.append("\t");
@@ -272,7 +281,7 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.append("\t");
         _builder.append("<xtextVersion>");
         WizardConfiguration _config_1 = ParentProjectDescriptor.this.getConfig();
-        String _xtextVersion = _config_1.getXtextVersion();
+        XtextVersion _xtextVersion = _config_1.getXtextVersion();
         _builder.append(_xtextVersion, "\t");
         _builder.append("</xtextVersion>");
         _builder.newLineIfNotEmpty();
@@ -598,6 +607,35 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
         _builder.newLine();
         _builder.append("</build>");
         _builder.newLine();
+        {
+          WizardConfiguration _config_8 = ParentProjectDescriptor.this.getConfig();
+          XtextVersion _xtextVersion_1 = _config_8.getXtextVersion();
+          boolean _isSnapshot = _xtextVersion_1.isSnapshot();
+          if (_isSnapshot) {
+            _builder.append("<repositories>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("<repository>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("<id>sonatype-snapshots</id>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("<url>https://oss.sonatype.org/content/repositories/snapshots</url>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("<releases><enabled>false</enabled></releases>");
+            _builder.newLine();
+            _builder.append("\t\t");
+            _builder.append("<snapshots><enabled>true</enabled></snapshots>");
+            _builder.newLine();
+            _builder.append("\t");
+            _builder.append("</repository>");
+            _builder.newLine();
+            _builder.append("</repositories>");
+            _builder.newLine();
+          }
+        }
         it.setBuildSection(_builder.toString());
       }
     };

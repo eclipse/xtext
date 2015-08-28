@@ -42,7 +42,11 @@ class TargetPlatformProject extends ProjectDescriptor {
 		</location>
 		<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 		<unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-		<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
+		«IF config.xtextVersion.isSnapshot»
+			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/nightly/"/>
+		«ELSE»
+			<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/«config.xtextVersion»/"/>
+		«ENDIF»
 		</location>
 		</locations>
 		</target>

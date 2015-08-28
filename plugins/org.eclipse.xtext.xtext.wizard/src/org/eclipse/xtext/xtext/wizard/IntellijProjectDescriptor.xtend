@@ -28,7 +28,11 @@ class IntellijProjectDescriptor extends ProjectDescriptor {
 				ideaDevelopment {
 					ideaVersion = '141.814.3'
 					pluginRepositories {
-						url "http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml"
+						«IF config.xtextVersion.isSnapshot»
+							url "https://hudson.eclipse.org/xtext/job/xtext-intellij/lastSuccessfulBuild/artifact/git-repo/intellij/build/ideaRepository/updatePlugins.xml"
+						«ELSE»
+							url "http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml"
+						«ENDIF»
 					}
 					pluginDependencies {
 						id 'org.eclipse.xtext.idea' version xtextVersion

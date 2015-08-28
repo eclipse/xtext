@@ -9,7 +9,7 @@ import java.util.Set
 class WizardConfiguration {
 	String rootLocation
 	String baseName
-	String xtextVersion = '2.8.4'
+	XtextVersion xtextVersion = new XtextVersion('2.9.0-SNAPSHOT')
 	Ecore2XtextConfiguration ecore2Xtext = new Ecore2XtextConfiguration
 
 	Charset encoding = Charset.defaultCharset
