@@ -24,15 +24,15 @@ import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.NewlineNormalizer;
 import org.eclipse.xtext.generator.parser.antlr.postProcessing.SuppressWarningsProcessor;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
-import org.eclipse.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
-import org.eclipse.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
-import org.eclipse.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
-import org.eclipse.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
-import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrCodeQualityHelper;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrLexerSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.AntlrParserSplitter;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.BacktrackingGuardForUnorderedGroupsRemover;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.PartialClassExtractor;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixup;
+import org.eclipse.xtext.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -89,22 +89,6 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 		}
 		String[] result = params.toArray(new String[params.size()]);
 		return result;
-	}
-	
-	private AntlrCodeQualityHelper codeQualityHelper = new AntlrCodeQualityHelper();
-	
-	/**
-	 * @since 2.9
-	 */
-	public void setCodeQualityHelper(AntlrCodeQualityHelper codeQualityHelper) {
-		this.codeQualityHelper = codeQualityHelper;
-	}
-	
-	/**
-	 * @since 2.9
-	 */
-	public AntlrCodeQualityHelper getCodeQualityHelper() {
-		return codeQualityHelper;
 	}
 	
 	/**
@@ -339,13 +323,10 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	 * @since 2.7
 	 */
 	protected void splitParserAndLexerIfEnabled(String absoluteLexerGrammarFileName,
-			String absoluteParserGrammarFileName, Charset encoding) {
+			String absoluteParserGrammarFileName, final Charset encoding) {
 		String lexerJavaFile = absoluteLexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix());
 		String parserJavaFile = absoluteParserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix());
-		if (codeQualityHelper != null) {
-			codeQualityHelper.stripUnnecessaryComments(lexerJavaFile, parserJavaFile, encoding);
-			codeQualityHelper.removeDuplicateBitsets(parserJavaFile, encoding);
-		}
+		improveCodeQuality(lexerJavaFile, parserJavaFile, encoding);
 		if (getOptions().isClassSplitting()) {
 			try {
 				splitLexerClassFile(lexerJavaFile, encoding);
@@ -354,6 +335,22 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 				throw new RuntimeException(e);
 			}
 		}
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	protected void improveCodeQuality(String lexerJavaFile, String parserJavaFile, final Charset encoding) {
+		AntlrCodeQualityHelper codeQualityHelper = new AntlrCodeQualityHelper();
+		String lexerContent = readFileIntoString(lexerJavaFile, encoding);
+		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, getOptions().delegate);
+		writeStringIntoFile(lexerJavaFile, lexerContent, encoding);
+		
+		String parserContent = readFileIntoString(parserJavaFile, encoding);
+		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, getOptions().delegate);
+		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, getOptions().delegate);
+		writeStringIntoFile(parserJavaFile, parserContent, encoding);
+		
 	}
 
 	/**

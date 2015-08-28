@@ -272,16 +272,28 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     final String lexerJavaFile = lexerGrammarFileName.replaceAll("\\.g$", _lexerFileNameSuffix);
     String _parserFileNameSuffix = this.getParserFileNameSuffix();
     final String parserJavaFile = parserGrammarFileName.replaceAll("\\.g$", _parserFileNameSuffix);
-    if ((this.codeQualityHelper != null)) {
-      this.codeQualityHelper.stripUnnecessaryComments(fsa, lexerJavaFile, parserJavaFile);
-      this.codeQualityHelper.removeDuplicateBitsets(fsa, parserJavaFile);
-    }
+    this.improveCodeQuality(fsa, lexerJavaFile, parserJavaFile);
     AntlrOptions _options = this.getOptions();
     boolean _isClassSplitting = _options.isClassSplitting();
     if (_isClassSplitting) {
       this.splitLexerClassFile(fsa, lexerJavaFile);
       this.splitParserClassFile(fsa, parserJavaFile);
     }
+  }
+  
+  protected void improveCodeQuality(final IXtextGeneratorFileSystemAccess fsa, final String lexerJavaFile, final String parserJavaFile) {
+    CharSequence _readTextFile = fsa.readTextFile(lexerJavaFile);
+    String lexerContent = _readTextFile.toString();
+    String _stripUnnecessaryComments = this.codeQualityHelper.stripUnnecessaryComments(lexerContent, this.options);
+    lexerContent = _stripUnnecessaryComments;
+    fsa.generateFile(lexerJavaFile, lexerContent);
+    CharSequence _readTextFile_1 = fsa.readTextFile(parserJavaFile);
+    String parserContent = _readTextFile_1.toString();
+    String _stripUnnecessaryComments_1 = this.codeQualityHelper.stripUnnecessaryComments(parserContent, this.options);
+    parserContent = _stripUnnecessaryComments_1;
+    String _removeDuplicateBitsets = this.codeQualityHelper.removeDuplicateBitsets(parserContent, this.options);
+    parserContent = _removeDuplicateBitsets;
+    fsa.generateFile(parserJavaFile, parserContent);
   }
   
   protected void splitParserAndLexerIfEnabled(final IXtextGeneratorFileSystemAccess fsa, final String grammarFileName) {

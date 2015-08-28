@@ -183,14 +183,22 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, String lexerGrammarFileName, String parserGrammarFileName) {
 		val lexerJavaFile = lexerGrammarFileName.replaceAll("\\.g$", getLexerFileNameSuffix())
 		val parserJavaFile = parserGrammarFileName.replaceAll("\\.g$", getParserFileNameSuffix())
-		if (codeQualityHelper !== null) {
-			codeQualityHelper.stripUnnecessaryComments(fsa, lexerJavaFile, parserJavaFile)
-			codeQualityHelper.removeDuplicateBitsets(fsa, parserJavaFile)
-		}
+		improveCodeQuality(fsa, lexerJavaFile, parserJavaFile)
 		if (getOptions().isClassSplitting()) {
 			splitLexerClassFile(fsa, lexerJavaFile)
 			splitParserClassFile(fsa, parserJavaFile)
 		}
+	}
+	
+	def protected improveCodeQuality(IXtextGeneratorFileSystemAccess fsa, String lexerJavaFile, String parserJavaFile) {
+		var lexerContent = fsa.readTextFile(lexerJavaFile).toString
+		lexerContent = codeQualityHelper.stripUnnecessaryComments(lexerContent, options)
+		fsa.generateFile(lexerJavaFile, lexerContent)
+		
+		var parserContent = fsa.readTextFile(parserJavaFile).toString
+		parserContent = codeQualityHelper.stripUnnecessaryComments(parserContent, options)
+		parserContent = codeQualityHelper.removeDuplicateBitsets(parserContent, options)
+		fsa.generateFile(parserJavaFile, parserContent)
 	}
 
 	def protected void splitParserAndLexerIfEnabled(IXtextGeneratorFileSystemAccess fsa, String grammarFileName) {

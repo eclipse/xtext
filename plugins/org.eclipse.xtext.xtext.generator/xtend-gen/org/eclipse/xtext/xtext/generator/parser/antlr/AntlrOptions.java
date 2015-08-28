@@ -31,6 +31,27 @@ public class AntlrOptions {
   
   private int methodsPerClass = PartialClassExtractor.METHODS_PER_CLASS;
   
+  private boolean optimizeCodeQuality = true;
+  
+  private String keptBitSetsPattern;
+  
+  private String keptBitSetName;
+  
+  public void setFieldsPerClass(final String fieldsPerClass) {
+    int _parseInt = Integer.parseInt(fieldsPerClass);
+    this.fieldsPerClass = _parseInt;
+  }
+  
+  public void setMethodsPerClass(final String methodsPerClass) {
+    int _parseInt = Integer.parseInt(methodsPerClass);
+    this.methodsPerClass = _parseInt;
+  }
+  
+  public void setKAsString(final String k) {
+    int _parseInt = Integer.parseInt(k);
+    this.k = _parseInt;
+  }
+  
   @Pure
   public boolean isBacktrack() {
     return this.backtrack;
@@ -101,5 +122,32 @@ public class AntlrOptions {
   
   public void setMethodsPerClass(final int methodsPerClass) {
     this.methodsPerClass = methodsPerClass;
+  }
+  
+  @Pure
+  public boolean isOptimizeCodeQuality() {
+    return this.optimizeCodeQuality;
+  }
+  
+  public void setOptimizeCodeQuality(final boolean optimizeCodeQuality) {
+    this.optimizeCodeQuality = optimizeCodeQuality;
+  }
+  
+  @Pure
+  public String getKeptBitSetsPattern() {
+    return this.keptBitSetsPattern;
+  }
+  
+  public void setKeptBitSetsPattern(final String keptBitSetsPattern) {
+    this.keptBitSetsPattern = keptBitSetsPattern;
+  }
+  
+  @Pure
+  public String getKeptBitSetName() {
+    return this.keptBitSetName;
+  }
+  
+  public void setKeptBitSetName(final String keptBitSetName) {
+    this.keptBitSetName = keptBitSetName;
   }
 }
