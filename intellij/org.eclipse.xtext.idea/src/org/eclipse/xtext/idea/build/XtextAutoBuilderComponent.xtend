@@ -445,8 +445,9 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		val cancelIndicator = new MutableCancelIndicator
 		cancelIndicators.add(cancelIndicator)
 		val moduleManager = ModuleManager.getInstance(getProject)
-		val buildProgressReporter = buildProgressReporterProvider.get 
+		val buildProgressReporter = buildProgressReporterProvider.get
 		buildProgressReporter.project = project
+		buildProgressReporter.events = allEvents
 		try {
 			val fileIndex = ProjectFileIndex.SERVICE.getInstance(project)
 			val moduleGraph = app.<Graph<Module>>runReadAction[moduleManager.moduleGraph]

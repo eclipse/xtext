@@ -772,6 +772,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     final ModuleManager moduleManager = ModuleManager.getInstance(_project);
     final BuildProgressReporter buildProgressReporter = this.buildProgressReporterProvider.get();
     buildProgressReporter.setProject(this.project);
+    buildProgressReporter.setEvents(allEvents);
     try {
       final ProjectFileIndex fileIndex = ProjectFileIndex.SERVICE.getInstance(this.project);
       final Computable<Graph<Module>> _function = new Computable<Graph<Module>>() {
