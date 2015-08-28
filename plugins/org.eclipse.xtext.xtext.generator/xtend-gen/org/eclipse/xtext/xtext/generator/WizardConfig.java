@@ -52,6 +52,7 @@ public class WizardConfig extends XtextProjectConfig {
     boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(runtimeBase);
     if (_isNullOrEmpty) {
       issues.addError("The property \'runtimeRoot\' must be set.", this);
+      return;
     }
     int _length = runtimeBase.length();
     int _minus = (_length - 1);

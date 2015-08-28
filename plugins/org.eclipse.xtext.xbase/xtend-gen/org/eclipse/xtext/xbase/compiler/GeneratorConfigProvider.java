@@ -7,7 +7,6 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import java.util.List;
@@ -125,20 +124,10 @@ public class GeneratorConfigProvider implements IGeneratorConfigProvider {
       _resourceSet=_eResource.getResourceSet();
     }
     final ResourceSet resourceSet = _resourceSet;
-    boolean _notEquals = (!Objects.equal(resourceSet, null));
-    if (_notEquals) {
-      Resource _eResource_1 = null;
-      if (context!=null) {
-        _eResource_1=context.eResource();
-      }
-      ResourceSet _resourceSet_1 = null;
-      if (_eResource_1!=null) {
-        _resourceSet_1=_eResource_1.getResourceSet();
-      }
-      final GeneratorConfigProvider.GeneratorConfigAdapter adapter = GeneratorConfigProvider.GeneratorConfigAdapter.findInEmfObject(_resourceSet_1);
+    if ((resourceSet != null)) {
+      final GeneratorConfigProvider.GeneratorConfigAdapter adapter = GeneratorConfigProvider.GeneratorConfigAdapter.findInEmfObject(resourceSet);
       boolean _and = false;
-      boolean _notEquals_1 = (!Objects.equal(adapter, null));
-      if (!_notEquals_1) {
+      if (!(adapter != null)) {
         _and = false;
       } else {
         boolean _containsKey = adapter.language2GeneratorConfig.containsKey(this.languageId);

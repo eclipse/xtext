@@ -36,8 +36,10 @@ class WizardConfig extends XtextProjectConfig {
 	override checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues)
 		val runtimeBase = runtimeRoot?.path
-		if (runtimeBase.nullOrEmpty)
+		if (runtimeBase.nullOrEmpty) {
 			issues.addError('The property \'runtimeRoot\' must be set.', this)
+			return
+		}
 		if (!Character.isJavaIdentifierPart(runtimeBase.charAt(runtimeBase.length - 1)))
 			issues.addError('The runtime root path must end with a valid package name.', this)
 		if ((ideaEditor || webSupport) && !genericIdeSupport)
