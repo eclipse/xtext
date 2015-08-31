@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.build;
 
 import com.google.common.base.Objects;
+import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.compiler.CompilerMessageImpl;
 import com.intellij.compiler.ProblemsView;
 import com.intellij.openapi.application.Application;
@@ -17,14 +18,21 @@ import com.intellij.openapi.compiler.CompilerMessageCategory;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.problems.WolfTheProblemSolver;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.AccessorType;
+import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.build.BuildRequest;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.idea.build.AffectedScope;
+import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
@@ -36,17 +44,18 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   
   private final AffectedScope affectedScope = new AffectedScope();
   
+  @Accessors(AccessorType.PUBLIC_SETTER)
   private Project project;
   
-  public void setProject(final Project project) {
-    this.project = project;
-  }
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private List<BuildEvent> events;
   
   protected ProblemsView getProblemsView() {
     return ProblemsView.SERVICE.getInstance(this.project);
   }
   
   public void clearProgress() {
+    this.rehighlight();
     boolean _or = false;
     boolean _isUnitTestMode = this.isUnitTestMode();
     if (_isUnitTestMode) {
@@ -62,6 +71,57 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     _problemsView.clearProgress();
     ProblemsView _problemsView_1 = this.getProblemsView();
     _problemsView_1.clearOldMessages(this.affectedScope, this.sessionId);
+  }
+  
+  protected void rehighlight() {
+    HashSet<URI> _affectedFiles = this.affectedScope.getAffectedFiles();
+    final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
+      @Override
+      public Boolean apply(final URI it) {
+        return Boolean.valueOf(BuildProgressReporter.this.shouldRehighlight(it));
+      }
+    };
+    final Iterable<URI> filesToRehighlight = IterableExtensions.<URI>filter(_affectedFiles, _function);
+    boolean _isEmpty = IterableExtensions.isEmpty(filesToRehighlight);
+    if (_isEmpty) {
+      return;
+    }
+    final WolfTheProblemSolver wolfTheProblemSolver = WolfTheProblemSolver.getInstance(this.project);
+    for (final URI fileToRehighlight : filesToRehighlight) {
+      VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(fileToRehighlight);
+      wolfTheProblemSolver.queue(_virtualFile);
+    }
+    DaemonCodeAnalyzer _instance = DaemonCodeAnalyzer.getInstance(this.project);
+    _instance.restart();
+  }
+  
+  protected boolean shouldRehighlight(final URI fileURI) {
+    final Function1<BuildEvent, Boolean> _function = new Function1<BuildEvent, Boolean>() {
+      @Override
+      public Boolean apply(final BuildEvent it) {
+        boolean _or = false;
+        BuildEvent.Type _type = it.getType();
+        boolean _equals = Objects.equal(_type, BuildEvent.Type.MODIFIED);
+        if (_equals) {
+          _or = true;
+        } else {
+          BuildEvent.Type _type_1 = it.getType();
+          boolean _equals_1 = Objects.equal(_type_1, BuildEvent.Type.DELETED);
+          _or = _equals_1;
+        }
+        return Boolean.valueOf(_or);
+      }
+    };
+    Iterable<BuildEvent> _filter = IterableExtensions.<BuildEvent>filter(this.events, _function);
+    final Function1<BuildEvent, Boolean> _function_1 = new Function1<BuildEvent, Boolean>() {
+      @Override
+      public Boolean apply(final BuildEvent it) {
+        Set<URI> _uRIs = it.getURIs();
+        return Boolean.valueOf(_uRIs.contains(fileURI));
+      }
+    };
+    boolean _exists = IterableExtensions.<BuildEvent>exists(_filter, _function_1);
+    return (_exists == false);
   }
   
   public void markAsAffected(final URI uri) {
@@ -147,5 +207,13 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
       _switchResult = CompilerMessageCategory.INFORMATION;
     }
     return _switchResult;
+  }
+  
+  public void setProject(final Project project) {
+    this.project = project;
+  }
+  
+  public void setEvents(final List<BuildEvent> events) {
+    this.events = events;
   }
 }
