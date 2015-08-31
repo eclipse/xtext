@@ -54,7 +54,7 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
         
 
     public String[] getTokenNames() { return InternalSDomainParser.tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g"; }
+    public String getGrammarFileName() { return "InternalSDomain.g"; }
 
 
      
@@ -78,20 +78,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleFile"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:60:1: entryRuleFile : ruleFile EOF ;
+    // InternalSDomain.g:60:1: entryRuleFile : ruleFile EOF ;
     public final void entryRuleFile() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:61:1: ( ruleFile EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:62:1: ruleFile EOF
+            // InternalSDomain.g:61:1: ( ruleFile EOF )
+            // InternalSDomain.g:62:1: ruleFile EOF
             {
              before(grammarAccess.getFileRule()); 
-            pushFollow(FOLLOW_ruleFile_in_entryRuleFile61);
+            pushFollow(FOLLOW_1);
             ruleFile();
 
             state._fsp--;
 
              after(grammarAccess.getFileRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFile68); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -108,20 +108,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleFile"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:69:1: ruleFile : ( ( rule__File__ElementsAssignment )* ) ;
+    // InternalSDomain.g:69:1: ruleFile : ( ( rule__File__ElementsAssignment )* ) ;
     public final void ruleFile() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:73:2: ( ( ( rule__File__ElementsAssignment )* ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:74:1: ( ( rule__File__ElementsAssignment )* )
+            // InternalSDomain.g:73:2: ( ( ( rule__File__ElementsAssignment )* ) )
+            // InternalSDomain.g:74:1: ( ( rule__File__ElementsAssignment )* )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:74:1: ( ( rule__File__ElementsAssignment )* )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:75:1: ( rule__File__ElementsAssignment )*
+            // InternalSDomain.g:74:1: ( ( rule__File__ElementsAssignment )* )
+            // InternalSDomain.g:75:1: ( rule__File__ElementsAssignment )*
             {
              before(grammarAccess.getFileAccess().getElementsAssignment()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:76:1: ( rule__File__ElementsAssignment )*
+            // InternalSDomain.g:76:1: ( rule__File__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -134,9 +134,9 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:76:2: rule__File__ElementsAssignment
+            	    // InternalSDomain.g:76:2: rule__File__ElementsAssignment
             	    {
-            	    pushFollow(FOLLOW_rule__File__ElementsAssignment_in_ruleFile94);
+            	    pushFollow(FOLLOW_3);
             	    rule__File__ElementsAssignment();
 
             	    state._fsp--;
@@ -173,20 +173,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleImport"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:88:1: entryRuleImport : ruleImport EOF ;
+    // InternalSDomain.g:88:1: entryRuleImport : ruleImport EOF ;
     public final void entryRuleImport() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:89:1: ( ruleImport EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:90:1: ruleImport EOF
+            // InternalSDomain.g:89:1: ( ruleImport EOF )
+            // InternalSDomain.g:90:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport122);
+            pushFollow(FOLLOW_1);
             ruleImport();
 
             state._fsp--;
 
              after(grammarAccess.getImportRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport129); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -203,23 +203,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleImport"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:97:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
+    // InternalSDomain.g:97:1: ruleImport : ( ( rule__Import__Group__0 ) ) ;
     public final void ruleImport() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:101:2: ( ( ( rule__Import__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:102:1: ( ( rule__Import__Group__0 ) )
+            // InternalSDomain.g:101:2: ( ( ( rule__Import__Group__0 ) ) )
+            // InternalSDomain.g:102:1: ( ( rule__Import__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:102:1: ( ( rule__Import__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:103:1: ( rule__Import__Group__0 )
+            // InternalSDomain.g:102:1: ( ( rule__Import__Group__0 ) )
+            // InternalSDomain.g:103:1: ( rule__Import__Group__0 )
             {
              before(grammarAccess.getImportAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:104:1: ( rule__Import__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:104:2: rule__Import__Group__0
+            // InternalSDomain.g:104:1: ( rule__Import__Group__0 )
+            // InternalSDomain.g:104:2: rule__Import__Group__0
             {
-            pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport155);
+            pushFollow(FOLLOW_2);
             rule__Import__Group__0();
 
             state._fsp--;
@@ -250,20 +250,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:116:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
+    // InternalSDomain.g:116:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
     public final void entryRuleQualifiedNameWithWildCard() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:117:1: ( ruleQualifiedNameWithWildCard EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:118:1: ruleQualifiedNameWithWildCard EOF
+            // InternalSDomain.g:117:1: ( ruleQualifiedNameWithWildCard EOF )
+            // InternalSDomain.g:118:1: ruleQualifiedNameWithWildCard EOF
             {
              before(grammarAccess.getQualifiedNameWithWildCardRule()); 
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard182);
+            pushFollow(FOLLOW_1);
             ruleQualifiedNameWithWildCard();
 
             state._fsp--;
 
              after(grammarAccess.getQualifiedNameWithWildCardRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard189); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -280,23 +280,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:125:1: ruleQualifiedNameWithWildCard : ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) ;
+    // InternalSDomain.g:125:1: ruleQualifiedNameWithWildCard : ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) ;
     public final void ruleQualifiedNameWithWildCard() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:129:2: ( ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:130:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
+            // InternalSDomain.g:129:2: ( ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) )
+            // InternalSDomain.g:130:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:130:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:131:1: ( rule__QualifiedNameWithWildCard__Group__0 )
+            // InternalSDomain.g:130:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
+            // InternalSDomain.g:131:1: ( rule__QualifiedNameWithWildCard__Group__0 )
             {
              before(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:132:1: ( rule__QualifiedNameWithWildCard__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:132:2: rule__QualifiedNameWithWildCard__Group__0
+            // InternalSDomain.g:132:1: ( rule__QualifiedNameWithWildCard__Group__0 )
+            // InternalSDomain.g:132:2: rule__QualifiedNameWithWildCard__Group__0
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard215);
+            pushFollow(FOLLOW_2);
             rule__QualifiedNameWithWildCard__Group__0();
 
             state._fsp--;
@@ -327,20 +327,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleQualifiedName"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:144:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
+    // InternalSDomain.g:144:1: entryRuleQualifiedName : ruleQualifiedName EOF ;
     public final void entryRuleQualifiedName() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:145:1: ( ruleQualifiedName EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:146:1: ruleQualifiedName EOF
+            // InternalSDomain.g:145:1: ( ruleQualifiedName EOF )
+            // InternalSDomain.g:146:1: ruleQualifiedName EOF
             {
              before(grammarAccess.getQualifiedNameRule()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName242);
+            pushFollow(FOLLOW_1);
             ruleQualifiedName();
 
             state._fsp--;
 
              after(grammarAccess.getQualifiedNameRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedName249); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -357,23 +357,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleQualifiedName"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:153:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
+    // InternalSDomain.g:153:1: ruleQualifiedName : ( ( rule__QualifiedName__Group__0 ) ) ;
     public final void ruleQualifiedName() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:157:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:158:1: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalSDomain.g:157:2: ( ( ( rule__QualifiedName__Group__0 ) ) )
+            // InternalSDomain.g:158:1: ( ( rule__QualifiedName__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:158:1: ( ( rule__QualifiedName__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:159:1: ( rule__QualifiedName__Group__0 )
+            // InternalSDomain.g:158:1: ( ( rule__QualifiedName__Group__0 ) )
+            // InternalSDomain.g:159:1: ( rule__QualifiedName__Group__0 )
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:160:1: ( rule__QualifiedName__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:160:2: rule__QualifiedName__Group__0
+            // InternalSDomain.g:160:1: ( rule__QualifiedName__Group__0 )
+            // InternalSDomain.g:160:2: rule__QualifiedName__Group__0
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0_in_ruleQualifiedName275);
+            pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__0();
 
             state._fsp--;
@@ -404,20 +404,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleNamespace"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:172:1: entryRuleNamespace : ruleNamespace EOF ;
+    // InternalSDomain.g:172:1: entryRuleNamespace : ruleNamespace EOF ;
     public final void entryRuleNamespace() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:173:1: ( ruleNamespace EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:174:1: ruleNamespace EOF
+            // InternalSDomain.g:173:1: ( ruleNamespace EOF )
+            // InternalSDomain.g:174:1: ruleNamespace EOF
             {
              before(grammarAccess.getNamespaceRule()); 
-            pushFollow(FOLLOW_ruleNamespace_in_entryRuleNamespace302);
+            pushFollow(FOLLOW_1);
             ruleNamespace();
 
             state._fsp--;
 
              after(grammarAccess.getNamespaceRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNamespace309); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -434,23 +434,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleNamespace"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:181:1: ruleNamespace : ( ( rule__Namespace__Group__0 ) ) ;
+    // InternalSDomain.g:181:1: ruleNamespace : ( ( rule__Namespace__Group__0 ) ) ;
     public final void ruleNamespace() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:185:2: ( ( ( rule__Namespace__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:186:1: ( ( rule__Namespace__Group__0 ) )
+            // InternalSDomain.g:185:2: ( ( ( rule__Namespace__Group__0 ) ) )
+            // InternalSDomain.g:186:1: ( ( rule__Namespace__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:186:1: ( ( rule__Namespace__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:187:1: ( rule__Namespace__Group__0 )
+            // InternalSDomain.g:186:1: ( ( rule__Namespace__Group__0 ) )
+            // InternalSDomain.g:187:1: ( rule__Namespace__Group__0 )
             {
              before(grammarAccess.getNamespaceAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:188:1: ( rule__Namespace__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:188:2: rule__Namespace__Group__0
+            // InternalSDomain.g:188:1: ( rule__Namespace__Group__0 )
+            // InternalSDomain.g:188:2: rule__Namespace__Group__0
             {
-            pushFollow(FOLLOW_rule__Namespace__Group__0_in_ruleNamespace335);
+            pushFollow(FOLLOW_2);
             rule__Namespace__Group__0();
 
             state._fsp--;
@@ -481,20 +481,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleElement"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:200:1: entryRuleElement : ruleElement EOF ;
+    // InternalSDomain.g:200:1: entryRuleElement : ruleElement EOF ;
     public final void entryRuleElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:201:1: ( ruleElement EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:202:1: ruleElement EOF
+            // InternalSDomain.g:201:1: ( ruleElement EOF )
+            // InternalSDomain.g:202:1: ruleElement EOF
             {
              before(grammarAccess.getElementRule()); 
-            pushFollow(FOLLOW_ruleElement_in_entryRuleElement362);
+            pushFollow(FOLLOW_1);
             ruleElement();
 
             state._fsp--;
 
              after(grammarAccess.getElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleElement369); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -511,23 +511,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleElement"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:209:1: ruleElement : ( ( rule__Element__Alternatives ) ) ;
+    // InternalSDomain.g:209:1: ruleElement : ( ( rule__Element__Alternatives ) ) ;
     public final void ruleElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:213:2: ( ( ( rule__Element__Alternatives ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:214:1: ( ( rule__Element__Alternatives ) )
+            // InternalSDomain.g:213:2: ( ( ( rule__Element__Alternatives ) ) )
+            // InternalSDomain.g:214:1: ( ( rule__Element__Alternatives ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:214:1: ( ( rule__Element__Alternatives ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:215:1: ( rule__Element__Alternatives )
+            // InternalSDomain.g:214:1: ( ( rule__Element__Alternatives ) )
+            // InternalSDomain.g:215:1: ( rule__Element__Alternatives )
             {
              before(grammarAccess.getElementAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:216:1: ( rule__Element__Alternatives )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:216:2: rule__Element__Alternatives
+            // InternalSDomain.g:216:1: ( rule__Element__Alternatives )
+            // InternalSDomain.g:216:2: rule__Element__Alternatives
             {
-            pushFollow(FOLLOW_rule__Element__Alternatives_in_ruleElement395);
+            pushFollow(FOLLOW_2);
             rule__Element__Alternatives();
 
             state._fsp--;
@@ -558,20 +558,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleType"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:228:1: entryRuleType : ruleType EOF ;
+    // InternalSDomain.g:228:1: entryRuleType : ruleType EOF ;
     public final void entryRuleType() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:229:1: ( ruleType EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:230:1: ruleType EOF
+            // InternalSDomain.g:229:1: ( ruleType EOF )
+            // InternalSDomain.g:230:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
-            pushFollow(FOLLOW_ruleType_in_entryRuleType422);
+            pushFollow(FOLLOW_1);
             ruleType();
 
             state._fsp--;
 
              after(grammarAccess.getTypeRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleType429); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -588,23 +588,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleType"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:237:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
+    // InternalSDomain.g:237:1: ruleType : ( ( rule__Type__Alternatives ) ) ;
     public final void ruleType() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:241:2: ( ( ( rule__Type__Alternatives ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:242:1: ( ( rule__Type__Alternatives ) )
+            // InternalSDomain.g:241:2: ( ( ( rule__Type__Alternatives ) ) )
+            // InternalSDomain.g:242:1: ( ( rule__Type__Alternatives ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:242:1: ( ( rule__Type__Alternatives ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:243:1: ( rule__Type__Alternatives )
+            // InternalSDomain.g:242:1: ( ( rule__Type__Alternatives ) )
+            // InternalSDomain.g:243:1: ( rule__Type__Alternatives )
             {
              before(grammarAccess.getTypeAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:244:1: ( rule__Type__Alternatives )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:244:2: rule__Type__Alternatives
+            // InternalSDomain.g:244:1: ( rule__Type__Alternatives )
+            // InternalSDomain.g:244:2: rule__Type__Alternatives
             {
-            pushFollow(FOLLOW_rule__Type__Alternatives_in_ruleType455);
+            pushFollow(FOLLOW_2);
             rule__Type__Alternatives();
 
             state._fsp--;
@@ -635,20 +635,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleEntity"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:256:1: entryRuleEntity : ruleEntity EOF ;
+    // InternalSDomain.g:256:1: entryRuleEntity : ruleEntity EOF ;
     public final void entryRuleEntity() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:257:1: ( ruleEntity EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:258:1: ruleEntity EOF
+            // InternalSDomain.g:257:1: ( ruleEntity EOF )
+            // InternalSDomain.g:258:1: ruleEntity EOF
             {
              before(grammarAccess.getEntityRule()); 
-            pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity482);
+            pushFollow(FOLLOW_1);
             ruleEntity();
 
             state._fsp--;
 
              after(grammarAccess.getEntityRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntity489); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -665,23 +665,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleEntity"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:265:1: ruleEntity : ( ( rule__Entity__Group__0 ) ) ;
+    // InternalSDomain.g:265:1: ruleEntity : ( ( rule__Entity__Group__0 ) ) ;
     public final void ruleEntity() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:269:2: ( ( ( rule__Entity__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:270:1: ( ( rule__Entity__Group__0 ) )
+            // InternalSDomain.g:269:2: ( ( ( rule__Entity__Group__0 ) ) )
+            // InternalSDomain.g:270:1: ( ( rule__Entity__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:270:1: ( ( rule__Entity__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:271:1: ( rule__Entity__Group__0 )
+            // InternalSDomain.g:270:1: ( ( rule__Entity__Group__0 ) )
+            // InternalSDomain.g:271:1: ( rule__Entity__Group__0 )
             {
              before(grammarAccess.getEntityAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:272:1: ( rule__Entity__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:272:2: rule__Entity__Group__0
+            // InternalSDomain.g:272:1: ( rule__Entity__Group__0 )
+            // InternalSDomain.g:272:2: rule__Entity__Group__0
             {
-            pushFollow(FOLLOW_rule__Entity__Group__0_in_ruleEntity515);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__0();
 
             state._fsp--;
@@ -712,20 +712,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleDatatype"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:284:1: entryRuleDatatype : ruleDatatype EOF ;
+    // InternalSDomain.g:284:1: entryRuleDatatype : ruleDatatype EOF ;
     public final void entryRuleDatatype() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:285:1: ( ruleDatatype EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:286:1: ruleDatatype EOF
+            // InternalSDomain.g:285:1: ( ruleDatatype EOF )
+            // InternalSDomain.g:286:1: ruleDatatype EOF
             {
              before(grammarAccess.getDatatypeRule()); 
-            pushFollow(FOLLOW_ruleDatatype_in_entryRuleDatatype542);
+            pushFollow(FOLLOW_1);
             ruleDatatype();
 
             state._fsp--;
 
              after(grammarAccess.getDatatypeRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDatatype549); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -742,23 +742,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleDatatype"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:293:1: ruleDatatype : ( ( rule__Datatype__Group__0 ) ) ;
+    // InternalSDomain.g:293:1: ruleDatatype : ( ( rule__Datatype__Group__0 ) ) ;
     public final void ruleDatatype() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:297:2: ( ( ( rule__Datatype__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:298:1: ( ( rule__Datatype__Group__0 ) )
+            // InternalSDomain.g:297:2: ( ( ( rule__Datatype__Group__0 ) ) )
+            // InternalSDomain.g:298:1: ( ( rule__Datatype__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:298:1: ( ( rule__Datatype__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:299:1: ( rule__Datatype__Group__0 )
+            // InternalSDomain.g:298:1: ( ( rule__Datatype__Group__0 ) )
+            // InternalSDomain.g:299:1: ( rule__Datatype__Group__0 )
             {
              before(grammarAccess.getDatatypeAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:300:1: ( rule__Datatype__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:300:2: rule__Datatype__Group__0
+            // InternalSDomain.g:300:1: ( rule__Datatype__Group__0 )
+            // InternalSDomain.g:300:2: rule__Datatype__Group__0
             {
-            pushFollow(FOLLOW_rule__Datatype__Group__0_in_ruleDatatype575);
+            pushFollow(FOLLOW_2);
             rule__Datatype__Group__0();
 
             state._fsp--;
@@ -789,20 +789,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "entryRuleProperty"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:312:1: entryRuleProperty : ruleProperty EOF ;
+    // InternalSDomain.g:312:1: entryRuleProperty : ruleProperty EOF ;
     public final void entryRuleProperty() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:313:1: ( ruleProperty EOF )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:314:1: ruleProperty EOF
+            // InternalSDomain.g:313:1: ( ruleProperty EOF )
+            // InternalSDomain.g:314:1: ruleProperty EOF
             {
              before(grammarAccess.getPropertyRule()); 
-            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty602);
+            pushFollow(FOLLOW_1);
             ruleProperty();
 
             state._fsp--;
 
              after(grammarAccess.getPropertyRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty609); 
+            match(input,EOF,FOLLOW_2); 
 
             }
 
@@ -819,23 +819,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "ruleProperty"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:321:1: ruleProperty : ( ( rule__Property__Group__0 ) ) ;
+    // InternalSDomain.g:321:1: ruleProperty : ( ( rule__Property__Group__0 ) ) ;
     public final void ruleProperty() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:325:2: ( ( ( rule__Property__Group__0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:326:1: ( ( rule__Property__Group__0 ) )
+            // InternalSDomain.g:325:2: ( ( ( rule__Property__Group__0 ) ) )
+            // InternalSDomain.g:326:1: ( ( rule__Property__Group__0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:326:1: ( ( rule__Property__Group__0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:327:1: ( rule__Property__Group__0 )
+            // InternalSDomain.g:326:1: ( ( rule__Property__Group__0 ) )
+            // InternalSDomain.g:327:1: ( rule__Property__Group__0 )
             {
              before(grammarAccess.getPropertyAccess().getGroup()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:328:1: ( rule__Property__Group__0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:328:2: rule__Property__Group__0
+            // InternalSDomain.g:328:1: ( rule__Property__Group__0 )
+            // InternalSDomain.g:328:2: rule__Property__Group__0
             {
-            pushFollow(FOLLOW_rule__Property__Group__0_in_ruleProperty635);
+            pushFollow(FOLLOW_2);
             rule__Property__Group__0();
 
             state._fsp--;
@@ -866,13 +866,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Element__Alternatives"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:340:1: rule__Element__Alternatives : ( ( ruleNamespace ) | ( ruleType ) | ( ruleImport ) );
+    // InternalSDomain.g:340:1: rule__Element__Alternatives : ( ( ruleNamespace ) | ( ruleType ) | ( ruleImport ) );
     public final void rule__Element__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:344:1: ( ( ruleNamespace ) | ( ruleType ) | ( ruleImport ) )
+            // InternalSDomain.g:344:1: ( ( ruleNamespace ) | ( ruleType ) | ( ruleImport ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -900,13 +900,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:345:1: ( ruleNamespace )
+                    // InternalSDomain.g:345:1: ( ruleNamespace )
                     {
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:345:1: ( ruleNamespace )
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:346:1: ruleNamespace
+                    // InternalSDomain.g:345:1: ( ruleNamespace )
+                    // InternalSDomain.g:346:1: ruleNamespace
                     {
                      before(grammarAccess.getElementAccess().getNamespaceParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleNamespace_in_rule__Element__Alternatives671);
+                    pushFollow(FOLLOW_2);
                     ruleNamespace();
 
                     state._fsp--;
@@ -919,13 +919,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:351:6: ( ruleType )
+                    // InternalSDomain.g:351:6: ( ruleType )
                     {
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:351:6: ( ruleType )
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:352:1: ruleType
+                    // InternalSDomain.g:351:6: ( ruleType )
+                    // InternalSDomain.g:352:1: ruleType
                     {
                      before(grammarAccess.getElementAccess().getTypeParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleType_in_rule__Element__Alternatives688);
+                    pushFollow(FOLLOW_2);
                     ruleType();
 
                     state._fsp--;
@@ -938,13 +938,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:357:6: ( ruleImport )
+                    // InternalSDomain.g:357:6: ( ruleImport )
                     {
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:357:6: ( ruleImport )
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:358:1: ruleImport
+                    // InternalSDomain.g:357:6: ( ruleImport )
+                    // InternalSDomain.g:358:1: ruleImport
                     {
                      before(grammarAccess.getElementAccess().getImportParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleImport_in_rule__Element__Alternatives705);
+                    pushFollow(FOLLOW_2);
                     ruleImport();
 
                     state._fsp--;
@@ -974,13 +974,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Type__Alternatives"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:368:1: rule__Type__Alternatives : ( ( ruleEntity ) | ( ruleDatatype ) );
+    // InternalSDomain.g:368:1: rule__Type__Alternatives : ( ( ruleEntity ) | ( ruleDatatype ) );
     public final void rule__Type__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:372:1: ( ( ruleEntity ) | ( ruleDatatype ) )
+            // InternalSDomain.g:372:1: ( ( ruleEntity ) | ( ruleDatatype ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -998,13 +998,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:373:1: ( ruleEntity )
+                    // InternalSDomain.g:373:1: ( ruleEntity )
                     {
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:373:1: ( ruleEntity )
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:374:1: ruleEntity
+                    // InternalSDomain.g:373:1: ( ruleEntity )
+                    // InternalSDomain.g:374:1: ruleEntity
                     {
                      before(grammarAccess.getTypeAccess().getEntityParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleEntity_in_rule__Type__Alternatives737);
+                    pushFollow(FOLLOW_2);
                     ruleEntity();
 
                     state._fsp--;
@@ -1017,13 +1017,13 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:379:6: ( ruleDatatype )
+                    // InternalSDomain.g:379:6: ( ruleDatatype )
                     {
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:379:6: ( ruleDatatype )
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:380:1: ruleDatatype
+                    // InternalSDomain.g:379:6: ( ruleDatatype )
+                    // InternalSDomain.g:380:1: ruleDatatype
                     {
                      before(grammarAccess.getTypeAccess().getDatatypeParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleDatatype_in_rule__Type__Alternatives754);
+                    pushFollow(FOLLOW_2);
                     ruleDatatype();
 
                     state._fsp--;
@@ -1053,21 +1053,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:392:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
+    // InternalSDomain.g:392:1: rule__Import__Group__0 : rule__Import__Group__0__Impl rule__Import__Group__1 ;
     public final void rule__Import__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:396:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:397:2: rule__Import__Group__0__Impl rule__Import__Group__1
+            // InternalSDomain.g:396:1: ( rule__Import__Group__0__Impl rule__Import__Group__1 )
+            // InternalSDomain.g:397:2: rule__Import__Group__0__Impl rule__Import__Group__1
             {
-            pushFollow(FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__0784);
+            pushFollow(FOLLOW_4);
             rule__Import__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0787);
+            pushFollow(FOLLOW_2);
             rule__Import__Group__1();
 
             state._fsp--;
@@ -1091,20 +1091,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:404:1: rule__Import__Group__0__Impl : ( 'import' ) ;
+    // InternalSDomain.g:404:1: rule__Import__Group__0__Impl : ( 'import' ) ;
     public final void rule__Import__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:408:1: ( ( 'import' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:409:1: ( 'import' )
+            // InternalSDomain.g:408:1: ( ( 'import' ) )
+            // InternalSDomain.g:409:1: ( 'import' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:409:1: ( 'import' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:410:1: 'import'
+            // InternalSDomain.g:409:1: ( 'import' )
+            // InternalSDomain.g:410:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
-            match(input,11,FOLLOW_11_in_rule__Import__Group__0__Impl815); 
+            match(input,11,FOLLOW_2); 
              after(grammarAccess.getImportAccess().getImportKeyword_0()); 
 
             }
@@ -1128,16 +1128,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:423:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
+    // InternalSDomain.g:423:1: rule__Import__Group__1 : rule__Import__Group__1__Impl ;
     public final void rule__Import__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:427:1: ( rule__Import__Group__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:428:2: rule__Import__Group__1__Impl
+            // InternalSDomain.g:427:1: ( rule__Import__Group__1__Impl )
+            // InternalSDomain.g:428:2: rule__Import__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__1846);
+            pushFollow(FOLLOW_2);
             rule__Import__Group__1__Impl();
 
             state._fsp--;
@@ -1161,23 +1161,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:434:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
+    // InternalSDomain.g:434:1: rule__Import__Group__1__Impl : ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) ;
     public final void rule__Import__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:438:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:439:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // InternalSDomain.g:438:1: ( ( ( rule__Import__ImportedNamespaceAssignment_1 ) ) )
+            // InternalSDomain.g:439:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:439:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:440:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // InternalSDomain.g:439:1: ( ( rule__Import__ImportedNamespaceAssignment_1 ) )
+            // InternalSDomain.g:440:1: ( rule__Import__ImportedNamespaceAssignment_1 )
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:441:1: ( rule__Import__ImportedNamespaceAssignment_1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:441:2: rule__Import__ImportedNamespaceAssignment_1
+            // InternalSDomain.g:441:1: ( rule__Import__ImportedNamespaceAssignment_1 )
+            // InternalSDomain.g:441:2: rule__Import__ImportedNamespaceAssignment_1
             {
-            pushFollow(FOLLOW_rule__Import__ImportedNamespaceAssignment_1_in_rule__Import__Group__1__Impl873);
+            pushFollow(FOLLOW_2);
             rule__Import__ImportedNamespaceAssignment_1();
 
             state._fsp--;
@@ -1208,21 +1208,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:455:1: rule__QualifiedNameWithWildCard__Group__0 : rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 ;
+    // InternalSDomain.g:455:1: rule__QualifiedNameWithWildCard__Group__0 : rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 ;
     public final void rule__QualifiedNameWithWildCard__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:459:1: ( rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:460:2: rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1
+            // InternalSDomain.g:459:1: ( rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 )
+            // InternalSDomain.g:460:2: rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__0907);
+            pushFollow(FOLLOW_5);
             rule__QualifiedNameWithWildCard__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__0910);
+            pushFollow(FOLLOW_2);
             rule__QualifiedNameWithWildCard__Group__1();
 
             state._fsp--;
@@ -1246,20 +1246,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:467:1: rule__QualifiedNameWithWildCard__Group__0__Impl : ( ruleQualifiedName ) ;
+    // InternalSDomain.g:467:1: rule__QualifiedNameWithWildCard__Group__0__Impl : ( ruleQualifiedName ) ;
     public final void rule__QualifiedNameWithWildCard__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:471:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:472:1: ( ruleQualifiedName )
+            // InternalSDomain.g:471:1: ( ( ruleQualifiedName ) )
+            // InternalSDomain.g:472:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:472:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:473:1: ruleQualifiedName
+            // InternalSDomain.g:472:1: ( ruleQualifiedName )
+            // InternalSDomain.g:473:1: ruleQualifiedName
             {
              before(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl937);
+            pushFollow(FOLLOW_2);
             ruleQualifiedName();
 
             state._fsp--;
@@ -1287,16 +1287,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:484:1: rule__QualifiedNameWithWildCard__Group__1 : rule__QualifiedNameWithWildCard__Group__1__Impl ;
+    // InternalSDomain.g:484:1: rule__QualifiedNameWithWildCard__Group__1 : rule__QualifiedNameWithWildCard__Group__1__Impl ;
     public final void rule__QualifiedNameWithWildCard__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:488:1: ( rule__QualifiedNameWithWildCard__Group__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:489:2: rule__QualifiedNameWithWildCard__Group__1__Impl
+            // InternalSDomain.g:488:1: ( rule__QualifiedNameWithWildCard__Group__1__Impl )
+            // InternalSDomain.g:489:2: rule__QualifiedNameWithWildCard__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__1966);
+            pushFollow(FOLLOW_2);
             rule__QualifiedNameWithWildCard__Group__1__Impl();
 
             state._fsp--;
@@ -1320,20 +1320,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:495:1: rule__QualifiedNameWithWildCard__Group__1__Impl : ( ( '.*' )? ) ;
+    // InternalSDomain.g:495:1: rule__QualifiedNameWithWildCard__Group__1__Impl : ( ( '.*' )? ) ;
     public final void rule__QualifiedNameWithWildCard__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:499:1: ( ( ( '.*' )? ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:500:1: ( ( '.*' )? )
+            // InternalSDomain.g:499:1: ( ( ( '.*' )? ) )
+            // InternalSDomain.g:500:1: ( ( '.*' )? )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:500:1: ( ( '.*' )? )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:501:1: ( '.*' )?
+            // InternalSDomain.g:500:1: ( ( '.*' )? )
+            // InternalSDomain.g:501:1: ( '.*' )?
             {
              before(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopAsteriskKeyword_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:502:1: ( '.*' )?
+            // InternalSDomain.g:502:1: ( '.*' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1342,9 +1342,9 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:503:2: '.*'
+                    // InternalSDomain.g:503:2: '.*'
                     {
-                    match(input,12,FOLLOW_12_in_rule__QualifiedNameWithWildCard__Group__1__Impl995); 
+                    match(input,12,FOLLOW_2); 
 
                     }
                     break;
@@ -1374,21 +1374,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:518:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
+    // InternalSDomain.g:518:1: rule__QualifiedName__Group__0 : rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 ;
     public final void rule__QualifiedName__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:522:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:523:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
+            // InternalSDomain.g:522:1: ( rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1 )
+            // InternalSDomain.g:523:2: rule__QualifiedName__Group__0__Impl rule__QualifiedName__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__01032);
+            pushFollow(FOLLOW_6);
             rule__QualifiedName__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__01035);
+            pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1();
 
             state._fsp--;
@@ -1412,20 +1412,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:530:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
+    // InternalSDomain.g:530:1: rule__QualifiedName__Group__0__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:534:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:535:1: ( RULE_ID )
+            // InternalSDomain.g:534:1: ( ( RULE_ID ) )
+            // InternalSDomain.g:535:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:535:1: ( RULE_ID )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:536:1: RULE_ID
+            // InternalSDomain.g:535:1: ( RULE_ID )
+            // InternalSDomain.g:536:1: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl1062); 
+            match(input,RULE_ID,FOLLOW_2); 
              after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0()); 
 
             }
@@ -1449,16 +1449,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:547:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
+    // InternalSDomain.g:547:1: rule__QualifiedName__Group__1 : rule__QualifiedName__Group__1__Impl ;
     public final void rule__QualifiedName__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:551:1: ( rule__QualifiedName__Group__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:552:2: rule__QualifiedName__Group__1__Impl
+            // InternalSDomain.g:551:1: ( rule__QualifiedName__Group__1__Impl )
+            // InternalSDomain.g:552:2: rule__QualifiedName__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__11091);
+            pushFollow(FOLLOW_2);
             rule__QualifiedName__Group__1__Impl();
 
             state._fsp--;
@@ -1482,20 +1482,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:558:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
+    // InternalSDomain.g:558:1: rule__QualifiedName__Group__1__Impl : ( ( rule__QualifiedName__Group_1__0 )* ) ;
     public final void rule__QualifiedName__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:562:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:563:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalSDomain.g:562:1: ( ( ( rule__QualifiedName__Group_1__0 )* ) )
+            // InternalSDomain.g:563:1: ( ( rule__QualifiedName__Group_1__0 )* )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:563:1: ( ( rule__QualifiedName__Group_1__0 )* )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:564:1: ( rule__QualifiedName__Group_1__0 )*
+            // InternalSDomain.g:563:1: ( ( rule__QualifiedName__Group_1__0 )* )
+            // InternalSDomain.g:564:1: ( rule__QualifiedName__Group_1__0 )*
             {
              before(grammarAccess.getQualifiedNameAccess().getGroup_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:565:1: ( rule__QualifiedName__Group_1__0 )*
+            // InternalSDomain.g:565:1: ( rule__QualifiedName__Group_1__0 )*
             loop5:
             do {
                 int alt5=2;
@@ -1508,9 +1508,9 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:565:2: rule__QualifiedName__Group_1__0
+            	    // InternalSDomain.g:565:2: rule__QualifiedName__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl1118);
+            	    pushFollow(FOLLOW_7);
             	    rule__QualifiedName__Group_1__0();
 
             	    state._fsp--;
@@ -1547,21 +1547,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:579:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
+    // InternalSDomain.g:579:1: rule__QualifiedName__Group_1__0 : rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 ;
     public final void rule__QualifiedName__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:583:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:584:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
+            // InternalSDomain.g:583:1: ( rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1 )
+            // InternalSDomain.g:584:2: rule__QualifiedName__Group_1__0__Impl rule__QualifiedName__Group_1__1
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__01153);
+            pushFollow(FOLLOW_4);
             rule__QualifiedName__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__01156);
+            pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1();
 
             state._fsp--;
@@ -1585,20 +1585,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:591:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
+    // InternalSDomain.g:591:1: rule__QualifiedName__Group_1__0__Impl : ( '.' ) ;
     public final void rule__QualifiedName__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:595:1: ( ( '.' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:596:1: ( '.' )
+            // InternalSDomain.g:595:1: ( ( '.' ) )
+            // InternalSDomain.g:596:1: ( '.' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:596:1: ( '.' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:597:1: '.'
+            // InternalSDomain.g:596:1: ( '.' )
+            // InternalSDomain.g:597:1: '.'
             {
              before(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
-            match(input,13,FOLLOW_13_in_rule__QualifiedName__Group_1__0__Impl1184); 
+            match(input,13,FOLLOW_2); 
              after(grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0()); 
 
             }
@@ -1622,16 +1622,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:610:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
+    // InternalSDomain.g:610:1: rule__QualifiedName__Group_1__1 : rule__QualifiedName__Group_1__1__Impl ;
     public final void rule__QualifiedName__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:614:1: ( rule__QualifiedName__Group_1__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:615:2: rule__QualifiedName__Group_1__1__Impl
+            // InternalSDomain.g:614:1: ( rule__QualifiedName__Group_1__1__Impl )
+            // InternalSDomain.g:615:2: rule__QualifiedName__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__11215);
+            pushFollow(FOLLOW_2);
             rule__QualifiedName__Group_1__1__Impl();
 
             state._fsp--;
@@ -1655,20 +1655,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QualifiedName__Group_1__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:621:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
+    // InternalSDomain.g:621:1: rule__QualifiedName__Group_1__1__Impl : ( RULE_ID ) ;
     public final void rule__QualifiedName__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:625:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:626:1: ( RULE_ID )
+            // InternalSDomain.g:625:1: ( ( RULE_ID ) )
+            // InternalSDomain.g:626:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:626:1: ( RULE_ID )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:627:1: RULE_ID
+            // InternalSDomain.g:626:1: ( RULE_ID )
+            // InternalSDomain.g:627:1: RULE_ID
             {
              before(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl1242); 
+            match(input,RULE_ID,FOLLOW_2); 
              after(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_1_1()); 
 
             }
@@ -1692,21 +1692,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:642:1: rule__Namespace__Group__0 : rule__Namespace__Group__0__Impl rule__Namespace__Group__1 ;
+    // InternalSDomain.g:642:1: rule__Namespace__Group__0 : rule__Namespace__Group__0__Impl rule__Namespace__Group__1 ;
     public final void rule__Namespace__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:646:1: ( rule__Namespace__Group__0__Impl rule__Namespace__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:647:2: rule__Namespace__Group__0__Impl rule__Namespace__Group__1
+            // InternalSDomain.g:646:1: ( rule__Namespace__Group__0__Impl rule__Namespace__Group__1 )
+            // InternalSDomain.g:647:2: rule__Namespace__Group__0__Impl rule__Namespace__Group__1
             {
-            pushFollow(FOLLOW_rule__Namespace__Group__0__Impl_in_rule__Namespace__Group__01275);
+            pushFollow(FOLLOW_8);
             rule__Namespace__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Namespace__Group__1_in_rule__Namespace__Group__01278);
+            pushFollow(FOLLOW_2);
             rule__Namespace__Group__1();
 
             state._fsp--;
@@ -1730,23 +1730,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:654:1: rule__Namespace__Group__0__Impl : ( ( rule__Namespace__NameAssignment_0 ) ) ;
+    // InternalSDomain.g:654:1: rule__Namespace__Group__0__Impl : ( ( rule__Namespace__NameAssignment_0 ) ) ;
     public final void rule__Namespace__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:658:1: ( ( ( rule__Namespace__NameAssignment_0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:659:1: ( ( rule__Namespace__NameAssignment_0 ) )
+            // InternalSDomain.g:658:1: ( ( ( rule__Namespace__NameAssignment_0 ) ) )
+            // InternalSDomain.g:659:1: ( ( rule__Namespace__NameAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:659:1: ( ( rule__Namespace__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:660:1: ( rule__Namespace__NameAssignment_0 )
+            // InternalSDomain.g:659:1: ( ( rule__Namespace__NameAssignment_0 ) )
+            // InternalSDomain.g:660:1: ( rule__Namespace__NameAssignment_0 )
             {
              before(grammarAccess.getNamespaceAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:661:1: ( rule__Namespace__NameAssignment_0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:661:2: rule__Namespace__NameAssignment_0
+            // InternalSDomain.g:661:1: ( rule__Namespace__NameAssignment_0 )
+            // InternalSDomain.g:661:2: rule__Namespace__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__Namespace__NameAssignment_0_in_rule__Namespace__Group__0__Impl1305);
+            pushFollow(FOLLOW_2);
             rule__Namespace__NameAssignment_0();
 
             state._fsp--;
@@ -1777,21 +1777,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:671:1: rule__Namespace__Group__1 : rule__Namespace__Group__1__Impl rule__Namespace__Group__2 ;
+    // InternalSDomain.g:671:1: rule__Namespace__Group__1 : rule__Namespace__Group__1__Impl rule__Namespace__Group__2 ;
     public final void rule__Namespace__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:675:1: ( rule__Namespace__Group__1__Impl rule__Namespace__Group__2 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:676:2: rule__Namespace__Group__1__Impl rule__Namespace__Group__2
+            // InternalSDomain.g:675:1: ( rule__Namespace__Group__1__Impl rule__Namespace__Group__2 )
+            // InternalSDomain.g:676:2: rule__Namespace__Group__1__Impl rule__Namespace__Group__2
             {
-            pushFollow(FOLLOW_rule__Namespace__Group__1__Impl_in_rule__Namespace__Group__11335);
+            pushFollow(FOLLOW_9);
             rule__Namespace__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Namespace__Group__2_in_rule__Namespace__Group__11338);
+            pushFollow(FOLLOW_2);
             rule__Namespace__Group__2();
 
             state._fsp--;
@@ -1815,20 +1815,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:683:1: rule__Namespace__Group__1__Impl : ( '{' ) ;
+    // InternalSDomain.g:683:1: rule__Namespace__Group__1__Impl : ( '{' ) ;
     public final void rule__Namespace__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:687:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:688:1: ( '{' )
+            // InternalSDomain.g:687:1: ( ( '{' ) )
+            // InternalSDomain.g:688:1: ( '{' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:688:1: ( '{' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:689:1: '{'
+            // InternalSDomain.g:688:1: ( '{' )
+            // InternalSDomain.g:689:1: '{'
             {
              before(grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_1()); 
-            match(input,14,FOLLOW_14_in_rule__Namespace__Group__1__Impl1366); 
+            match(input,14,FOLLOW_2); 
              after(grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_1()); 
 
             }
@@ -1852,21 +1852,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__2"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:702:1: rule__Namespace__Group__2 : rule__Namespace__Group__2__Impl rule__Namespace__Group__3 ;
+    // InternalSDomain.g:702:1: rule__Namespace__Group__2 : rule__Namespace__Group__2__Impl rule__Namespace__Group__3 ;
     public final void rule__Namespace__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:706:1: ( rule__Namespace__Group__2__Impl rule__Namespace__Group__3 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:707:2: rule__Namespace__Group__2__Impl rule__Namespace__Group__3
+            // InternalSDomain.g:706:1: ( rule__Namespace__Group__2__Impl rule__Namespace__Group__3 )
+            // InternalSDomain.g:707:2: rule__Namespace__Group__2__Impl rule__Namespace__Group__3
             {
-            pushFollow(FOLLOW_rule__Namespace__Group__2__Impl_in_rule__Namespace__Group__21397);
+            pushFollow(FOLLOW_9);
             rule__Namespace__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Namespace__Group__3_in_rule__Namespace__Group__21400);
+            pushFollow(FOLLOW_2);
             rule__Namespace__Group__3();
 
             state._fsp--;
@@ -1890,20 +1890,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__2__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:714:1: rule__Namespace__Group__2__Impl : ( ( rule__Namespace__ElementsAssignment_2 )* ) ;
+    // InternalSDomain.g:714:1: rule__Namespace__Group__2__Impl : ( ( rule__Namespace__ElementsAssignment_2 )* ) ;
     public final void rule__Namespace__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:718:1: ( ( ( rule__Namespace__ElementsAssignment_2 )* ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:719:1: ( ( rule__Namespace__ElementsAssignment_2 )* )
+            // InternalSDomain.g:718:1: ( ( ( rule__Namespace__ElementsAssignment_2 )* ) )
+            // InternalSDomain.g:719:1: ( ( rule__Namespace__ElementsAssignment_2 )* )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:719:1: ( ( rule__Namespace__ElementsAssignment_2 )* )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:720:1: ( rule__Namespace__ElementsAssignment_2 )*
+            // InternalSDomain.g:719:1: ( ( rule__Namespace__ElementsAssignment_2 )* )
+            // InternalSDomain.g:720:1: ( rule__Namespace__ElementsAssignment_2 )*
             {
              before(grammarAccess.getNamespaceAccess().getElementsAssignment_2()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:721:1: ( rule__Namespace__ElementsAssignment_2 )*
+            // InternalSDomain.g:721:1: ( rule__Namespace__ElementsAssignment_2 )*
             loop6:
             do {
                 int alt6=2;
@@ -1916,9 +1916,9 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:721:2: rule__Namespace__ElementsAssignment_2
+            	    // InternalSDomain.g:721:2: rule__Namespace__ElementsAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Namespace__ElementsAssignment_2_in_rule__Namespace__Group__2__Impl1427);
+            	    pushFollow(FOLLOW_3);
             	    rule__Namespace__ElementsAssignment_2();
 
             	    state._fsp--;
@@ -1955,16 +1955,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__3"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:731:1: rule__Namespace__Group__3 : rule__Namespace__Group__3__Impl ;
+    // InternalSDomain.g:731:1: rule__Namespace__Group__3 : rule__Namespace__Group__3__Impl ;
     public final void rule__Namespace__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:735:1: ( rule__Namespace__Group__3__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:736:2: rule__Namespace__Group__3__Impl
+            // InternalSDomain.g:735:1: ( rule__Namespace__Group__3__Impl )
+            // InternalSDomain.g:736:2: rule__Namespace__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Namespace__Group__3__Impl_in_rule__Namespace__Group__31458);
+            pushFollow(FOLLOW_2);
             rule__Namespace__Group__3__Impl();
 
             state._fsp--;
@@ -1988,20 +1988,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__Group__3__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:742:1: rule__Namespace__Group__3__Impl : ( '}' ) ;
+    // InternalSDomain.g:742:1: rule__Namespace__Group__3__Impl : ( '}' ) ;
     public final void rule__Namespace__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:746:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:747:1: ( '}' )
+            // InternalSDomain.g:746:1: ( ( '}' ) )
+            // InternalSDomain.g:747:1: ( '}' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:747:1: ( '}' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:748:1: '}'
+            // InternalSDomain.g:747:1: ( '}' )
+            // InternalSDomain.g:748:1: '}'
             {
              before(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_3()); 
-            match(input,15,FOLLOW_15_in_rule__Namespace__Group__3__Impl1486); 
+            match(input,15,FOLLOW_2); 
              after(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_3()); 
 
             }
@@ -2025,21 +2025,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:769:1: rule__Entity__Group__0 : rule__Entity__Group__0__Impl rule__Entity__Group__1 ;
+    // InternalSDomain.g:769:1: rule__Entity__Group__0 : rule__Entity__Group__0__Impl rule__Entity__Group__1 ;
     public final void rule__Entity__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:773:1: ( rule__Entity__Group__0__Impl rule__Entity__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:774:2: rule__Entity__Group__0__Impl rule__Entity__Group__1
+            // InternalSDomain.g:773:1: ( rule__Entity__Group__0__Impl rule__Entity__Group__1 )
+            // InternalSDomain.g:774:2: rule__Entity__Group__0__Impl rule__Entity__Group__1
             {
-            pushFollow(FOLLOW_rule__Entity__Group__0__Impl_in_rule__Entity__Group__01525);
+            pushFollow(FOLLOW_4);
             rule__Entity__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__01528);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__1();
 
             state._fsp--;
@@ -2063,20 +2063,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:781:1: rule__Entity__Group__0__Impl : ( 'entity' ) ;
+    // InternalSDomain.g:781:1: rule__Entity__Group__0__Impl : ( 'entity' ) ;
     public final void rule__Entity__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:785:1: ( ( 'entity' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:786:1: ( 'entity' )
+            // InternalSDomain.g:785:1: ( ( 'entity' ) )
+            // InternalSDomain.g:786:1: ( 'entity' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:786:1: ( 'entity' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:787:1: 'entity'
+            // InternalSDomain.g:786:1: ( 'entity' )
+            // InternalSDomain.g:787:1: 'entity'
             {
              before(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
-            match(input,16,FOLLOW_16_in_rule__Entity__Group__0__Impl1556); 
+            match(input,16,FOLLOW_2); 
              after(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
 
             }
@@ -2100,21 +2100,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:800:1: rule__Entity__Group__1 : rule__Entity__Group__1__Impl rule__Entity__Group__2 ;
+    // InternalSDomain.g:800:1: rule__Entity__Group__1 : rule__Entity__Group__1__Impl rule__Entity__Group__2 ;
     public final void rule__Entity__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:804:1: ( rule__Entity__Group__1__Impl rule__Entity__Group__2 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:805:2: rule__Entity__Group__1__Impl rule__Entity__Group__2
+            // InternalSDomain.g:804:1: ( rule__Entity__Group__1__Impl rule__Entity__Group__2 )
+            // InternalSDomain.g:805:2: rule__Entity__Group__1__Impl rule__Entity__Group__2
             {
-            pushFollow(FOLLOW_rule__Entity__Group__1__Impl_in_rule__Entity__Group__11587);
+            pushFollow(FOLLOW_8);
             rule__Entity__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__11590);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__2();
 
             state._fsp--;
@@ -2138,23 +2138,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:812:1: rule__Entity__Group__1__Impl : ( ( rule__Entity__NameAssignment_1 ) ) ;
+    // InternalSDomain.g:812:1: rule__Entity__Group__1__Impl : ( ( rule__Entity__NameAssignment_1 ) ) ;
     public final void rule__Entity__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:816:1: ( ( ( rule__Entity__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:817:1: ( ( rule__Entity__NameAssignment_1 ) )
+            // InternalSDomain.g:816:1: ( ( ( rule__Entity__NameAssignment_1 ) ) )
+            // InternalSDomain.g:817:1: ( ( rule__Entity__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:817:1: ( ( rule__Entity__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:818:1: ( rule__Entity__NameAssignment_1 )
+            // InternalSDomain.g:817:1: ( ( rule__Entity__NameAssignment_1 ) )
+            // InternalSDomain.g:818:1: ( rule__Entity__NameAssignment_1 )
             {
              before(grammarAccess.getEntityAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:819:1: ( rule__Entity__NameAssignment_1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:819:2: rule__Entity__NameAssignment_1
+            // InternalSDomain.g:819:1: ( rule__Entity__NameAssignment_1 )
+            // InternalSDomain.g:819:2: rule__Entity__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1__Impl1617);
+            pushFollow(FOLLOW_2);
             rule__Entity__NameAssignment_1();
 
             state._fsp--;
@@ -2185,21 +2185,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__2"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:829:1: rule__Entity__Group__2 : rule__Entity__Group__2__Impl rule__Entity__Group__3 ;
+    // InternalSDomain.g:829:1: rule__Entity__Group__2 : rule__Entity__Group__2__Impl rule__Entity__Group__3 ;
     public final void rule__Entity__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:833:1: ( rule__Entity__Group__2__Impl rule__Entity__Group__3 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:834:2: rule__Entity__Group__2__Impl rule__Entity__Group__3
+            // InternalSDomain.g:833:1: ( rule__Entity__Group__2__Impl rule__Entity__Group__3 )
+            // InternalSDomain.g:834:2: rule__Entity__Group__2__Impl rule__Entity__Group__3
             {
-            pushFollow(FOLLOW_rule__Entity__Group__2__Impl_in_rule__Entity__Group__21647);
+            pushFollow(FOLLOW_10);
             rule__Entity__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21650);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__3();
 
             state._fsp--;
@@ -2223,20 +2223,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__2__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:841:1: rule__Entity__Group__2__Impl : ( '{' ) ;
+    // InternalSDomain.g:841:1: rule__Entity__Group__2__Impl : ( '{' ) ;
     public final void rule__Entity__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:845:1: ( ( '{' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:846:1: ( '{' )
+            // InternalSDomain.g:845:1: ( ( '{' ) )
+            // InternalSDomain.g:846:1: ( '{' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:846:1: ( '{' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:847:1: '{'
+            // InternalSDomain.g:846:1: ( '{' )
+            // InternalSDomain.g:847:1: '{'
             {
              before(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,14,FOLLOW_14_in_rule__Entity__Group__2__Impl1678); 
+            match(input,14,FOLLOW_2); 
              after(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_2()); 
 
             }
@@ -2260,21 +2260,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__3"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:860:1: rule__Entity__Group__3 : rule__Entity__Group__3__Impl rule__Entity__Group__4 ;
+    // InternalSDomain.g:860:1: rule__Entity__Group__3 : rule__Entity__Group__3__Impl rule__Entity__Group__4 ;
     public final void rule__Entity__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:864:1: ( rule__Entity__Group__3__Impl rule__Entity__Group__4 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:865:2: rule__Entity__Group__3__Impl rule__Entity__Group__4
+            // InternalSDomain.g:864:1: ( rule__Entity__Group__3__Impl rule__Entity__Group__4 )
+            // InternalSDomain.g:865:2: rule__Entity__Group__3__Impl rule__Entity__Group__4
             {
-            pushFollow(FOLLOW_rule__Entity__Group__3__Impl_in_rule__Entity__Group__31709);
+            pushFollow(FOLLOW_10);
             rule__Entity__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31712);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__4();
 
             state._fsp--;
@@ -2298,20 +2298,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__3__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:872:1: rule__Entity__Group__3__Impl : ( ( rule__Entity__PropertiesAssignment_3 )* ) ;
+    // InternalSDomain.g:872:1: rule__Entity__Group__3__Impl : ( ( rule__Entity__PropertiesAssignment_3 )* ) ;
     public final void rule__Entity__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:876:1: ( ( ( rule__Entity__PropertiesAssignment_3 )* ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:877:1: ( ( rule__Entity__PropertiesAssignment_3 )* )
+            // InternalSDomain.g:876:1: ( ( ( rule__Entity__PropertiesAssignment_3 )* ) )
+            // InternalSDomain.g:877:1: ( ( rule__Entity__PropertiesAssignment_3 )* )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:877:1: ( ( rule__Entity__PropertiesAssignment_3 )* )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:878:1: ( rule__Entity__PropertiesAssignment_3 )*
+            // InternalSDomain.g:877:1: ( ( rule__Entity__PropertiesAssignment_3 )* )
+            // InternalSDomain.g:878:1: ( rule__Entity__PropertiesAssignment_3 )*
             {
              before(grammarAccess.getEntityAccess().getPropertiesAssignment_3()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:879:1: ( rule__Entity__PropertiesAssignment_3 )*
+            // InternalSDomain.g:879:1: ( rule__Entity__PropertiesAssignment_3 )*
             loop7:
             do {
                 int alt7=2;
@@ -2324,9 +2324,9 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:879:2: rule__Entity__PropertiesAssignment_3
+            	    // InternalSDomain.g:879:2: rule__Entity__PropertiesAssignment_3
             	    {
-            	    pushFollow(FOLLOW_rule__Entity__PropertiesAssignment_3_in_rule__Entity__Group__3__Impl1739);
+            	    pushFollow(FOLLOW_11);
             	    rule__Entity__PropertiesAssignment_3();
 
             	    state._fsp--;
@@ -2363,16 +2363,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__4"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:889:1: rule__Entity__Group__4 : rule__Entity__Group__4__Impl ;
+    // InternalSDomain.g:889:1: rule__Entity__Group__4 : rule__Entity__Group__4__Impl ;
     public final void rule__Entity__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:893:1: ( rule__Entity__Group__4__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:894:2: rule__Entity__Group__4__Impl
+            // InternalSDomain.g:893:1: ( rule__Entity__Group__4__Impl )
+            // InternalSDomain.g:894:2: rule__Entity__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__Entity__Group__4__Impl_in_rule__Entity__Group__41770);
+            pushFollow(FOLLOW_2);
             rule__Entity__Group__4__Impl();
 
             state._fsp--;
@@ -2396,20 +2396,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__Group__4__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:900:1: rule__Entity__Group__4__Impl : ( '}' ) ;
+    // InternalSDomain.g:900:1: rule__Entity__Group__4__Impl : ( '}' ) ;
     public final void rule__Entity__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:904:1: ( ( '}' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:905:1: ( '}' )
+            // InternalSDomain.g:904:1: ( ( '}' ) )
+            // InternalSDomain.g:905:1: ( '}' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:905:1: ( '}' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:906:1: '}'
+            // InternalSDomain.g:905:1: ( '}' )
+            // InternalSDomain.g:906:1: '}'
             {
              before(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_4()); 
-            match(input,15,FOLLOW_15_in_rule__Entity__Group__4__Impl1798); 
+            match(input,15,FOLLOW_2); 
              after(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_4()); 
 
             }
@@ -2433,21 +2433,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Datatype__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:929:1: rule__Datatype__Group__0 : rule__Datatype__Group__0__Impl rule__Datatype__Group__1 ;
+    // InternalSDomain.g:929:1: rule__Datatype__Group__0 : rule__Datatype__Group__0__Impl rule__Datatype__Group__1 ;
     public final void rule__Datatype__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:933:1: ( rule__Datatype__Group__0__Impl rule__Datatype__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:934:2: rule__Datatype__Group__0__Impl rule__Datatype__Group__1
+            // InternalSDomain.g:933:1: ( rule__Datatype__Group__0__Impl rule__Datatype__Group__1 )
+            // InternalSDomain.g:934:2: rule__Datatype__Group__0__Impl rule__Datatype__Group__1
             {
-            pushFollow(FOLLOW_rule__Datatype__Group__0__Impl_in_rule__Datatype__Group__01839);
+            pushFollow(FOLLOW_4);
             rule__Datatype__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Datatype__Group__1_in_rule__Datatype__Group__01842);
+            pushFollow(FOLLOW_2);
             rule__Datatype__Group__1();
 
             state._fsp--;
@@ -2471,20 +2471,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Datatype__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:941:1: rule__Datatype__Group__0__Impl : ( 'datatype' ) ;
+    // InternalSDomain.g:941:1: rule__Datatype__Group__0__Impl : ( 'datatype' ) ;
     public final void rule__Datatype__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:945:1: ( ( 'datatype' ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:946:1: ( 'datatype' )
+            // InternalSDomain.g:945:1: ( ( 'datatype' ) )
+            // InternalSDomain.g:946:1: ( 'datatype' )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:946:1: ( 'datatype' )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:947:1: 'datatype'
+            // InternalSDomain.g:946:1: ( 'datatype' )
+            // InternalSDomain.g:947:1: 'datatype'
             {
              before(grammarAccess.getDatatypeAccess().getDatatypeKeyword_0()); 
-            match(input,17,FOLLOW_17_in_rule__Datatype__Group__0__Impl1870); 
+            match(input,17,FOLLOW_2); 
              after(grammarAccess.getDatatypeAccess().getDatatypeKeyword_0()); 
 
             }
@@ -2508,16 +2508,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Datatype__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:960:1: rule__Datatype__Group__1 : rule__Datatype__Group__1__Impl ;
+    // InternalSDomain.g:960:1: rule__Datatype__Group__1 : rule__Datatype__Group__1__Impl ;
     public final void rule__Datatype__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:964:1: ( rule__Datatype__Group__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:965:2: rule__Datatype__Group__1__Impl
+            // InternalSDomain.g:964:1: ( rule__Datatype__Group__1__Impl )
+            // InternalSDomain.g:965:2: rule__Datatype__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Datatype__Group__1__Impl_in_rule__Datatype__Group__11901);
+            pushFollow(FOLLOW_2);
             rule__Datatype__Group__1__Impl();
 
             state._fsp--;
@@ -2541,23 +2541,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Datatype__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:971:1: rule__Datatype__Group__1__Impl : ( ( rule__Datatype__NameAssignment_1 ) ) ;
+    // InternalSDomain.g:971:1: rule__Datatype__Group__1__Impl : ( ( rule__Datatype__NameAssignment_1 ) ) ;
     public final void rule__Datatype__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:975:1: ( ( ( rule__Datatype__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:976:1: ( ( rule__Datatype__NameAssignment_1 ) )
+            // InternalSDomain.g:975:1: ( ( ( rule__Datatype__NameAssignment_1 ) ) )
+            // InternalSDomain.g:976:1: ( ( rule__Datatype__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:976:1: ( ( rule__Datatype__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:977:1: ( rule__Datatype__NameAssignment_1 )
+            // InternalSDomain.g:976:1: ( ( rule__Datatype__NameAssignment_1 ) )
+            // InternalSDomain.g:977:1: ( rule__Datatype__NameAssignment_1 )
             {
              before(grammarAccess.getDatatypeAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:978:1: ( rule__Datatype__NameAssignment_1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:978:2: rule__Datatype__NameAssignment_1
+            // InternalSDomain.g:978:1: ( rule__Datatype__NameAssignment_1 )
+            // InternalSDomain.g:978:2: rule__Datatype__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Datatype__NameAssignment_1_in_rule__Datatype__Group__1__Impl1928);
+            pushFollow(FOLLOW_2);
             rule__Datatype__NameAssignment_1();
 
             state._fsp--;
@@ -2588,21 +2588,21 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__Group__0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:992:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
+    // InternalSDomain.g:992:1: rule__Property__Group__0 : rule__Property__Group__0__Impl rule__Property__Group__1 ;
     public final void rule__Property__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:996:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:997:2: rule__Property__Group__0__Impl rule__Property__Group__1
+            // InternalSDomain.g:996:1: ( rule__Property__Group__0__Impl rule__Property__Group__1 )
+            // InternalSDomain.g:997:2: rule__Property__Group__0__Impl rule__Property__Group__1
             {
-            pushFollow(FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__01962);
+            pushFollow(FOLLOW_4);
             rule__Property__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Property__Group__1_in_rule__Property__Group__01965);
+            pushFollow(FOLLOW_2);
             rule__Property__Group__1();
 
             state._fsp--;
@@ -2626,23 +2626,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__Group__0__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1004:1: rule__Property__Group__0__Impl : ( ( rule__Property__TypeAssignment_0 ) ) ;
+    // InternalSDomain.g:1004:1: rule__Property__Group__0__Impl : ( ( rule__Property__TypeAssignment_0 ) ) ;
     public final void rule__Property__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1008:1: ( ( ( rule__Property__TypeAssignment_0 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1009:1: ( ( rule__Property__TypeAssignment_0 ) )
+            // InternalSDomain.g:1008:1: ( ( ( rule__Property__TypeAssignment_0 ) ) )
+            // InternalSDomain.g:1009:1: ( ( rule__Property__TypeAssignment_0 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1009:1: ( ( rule__Property__TypeAssignment_0 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1010:1: ( rule__Property__TypeAssignment_0 )
+            // InternalSDomain.g:1009:1: ( ( rule__Property__TypeAssignment_0 ) )
+            // InternalSDomain.g:1010:1: ( rule__Property__TypeAssignment_0 )
             {
              before(grammarAccess.getPropertyAccess().getTypeAssignment_0()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1011:1: ( rule__Property__TypeAssignment_0 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1011:2: rule__Property__TypeAssignment_0
+            // InternalSDomain.g:1011:1: ( rule__Property__TypeAssignment_0 )
+            // InternalSDomain.g:1011:2: rule__Property__TypeAssignment_0
             {
-            pushFollow(FOLLOW_rule__Property__TypeAssignment_0_in_rule__Property__Group__0__Impl1992);
+            pushFollow(FOLLOW_2);
             rule__Property__TypeAssignment_0();
 
             state._fsp--;
@@ -2673,16 +2673,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__Group__1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1021:1: rule__Property__Group__1 : rule__Property__Group__1__Impl ;
+    // InternalSDomain.g:1021:1: rule__Property__Group__1 : rule__Property__Group__1__Impl ;
     public final void rule__Property__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1025:1: ( rule__Property__Group__1__Impl )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1026:2: rule__Property__Group__1__Impl
+            // InternalSDomain.g:1025:1: ( rule__Property__Group__1__Impl )
+            // InternalSDomain.g:1026:2: rule__Property__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__12022);
+            pushFollow(FOLLOW_2);
             rule__Property__Group__1__Impl();
 
             state._fsp--;
@@ -2706,23 +2706,23 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__Group__1__Impl"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1032:1: rule__Property__Group__1__Impl : ( ( rule__Property__NameAssignment_1 ) ) ;
+    // InternalSDomain.g:1032:1: rule__Property__Group__1__Impl : ( ( rule__Property__NameAssignment_1 ) ) ;
     public final void rule__Property__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1036:1: ( ( ( rule__Property__NameAssignment_1 ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1037:1: ( ( rule__Property__NameAssignment_1 ) )
+            // InternalSDomain.g:1036:1: ( ( ( rule__Property__NameAssignment_1 ) ) )
+            // InternalSDomain.g:1037:1: ( ( rule__Property__NameAssignment_1 ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1037:1: ( ( rule__Property__NameAssignment_1 ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1038:1: ( rule__Property__NameAssignment_1 )
+            // InternalSDomain.g:1037:1: ( ( rule__Property__NameAssignment_1 ) )
+            // InternalSDomain.g:1038:1: ( rule__Property__NameAssignment_1 )
             {
              before(grammarAccess.getPropertyAccess().getNameAssignment_1()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1039:1: ( rule__Property__NameAssignment_1 )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1039:2: rule__Property__NameAssignment_1
+            // InternalSDomain.g:1039:1: ( rule__Property__NameAssignment_1 )
+            // InternalSDomain.g:1039:2: rule__Property__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Property__NameAssignment_1_in_rule__Property__Group__1__Impl2049);
+            pushFollow(FOLLOW_2);
             rule__Property__NameAssignment_1();
 
             state._fsp--;
@@ -2753,20 +2753,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__File__ElementsAssignment"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1054:1: rule__File__ElementsAssignment : ( ruleElement ) ;
+    // InternalSDomain.g:1054:1: rule__File__ElementsAssignment : ( ruleElement ) ;
     public final void rule__File__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1058:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1059:1: ( ruleElement )
+            // InternalSDomain.g:1058:1: ( ( ruleElement ) )
+            // InternalSDomain.g:1059:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1059:1: ( ruleElement )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1060:1: ruleElement
+            // InternalSDomain.g:1059:1: ( ruleElement )
+            // InternalSDomain.g:1060:1: ruleElement
             {
              before(grammarAccess.getFileAccess().getElementsElementParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleElement_in_rule__File__ElementsAssignment2088);
+            pushFollow(FOLLOW_2);
             ruleElement();
 
             state._fsp--;
@@ -2794,20 +2794,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Import__ImportedNamespaceAssignment_1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1069:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleQualifiedNameWithWildCard ) ;
+    // InternalSDomain.g:1069:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleQualifiedNameWithWildCard ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1073:1: ( ( ruleQualifiedNameWithWildCard ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1074:1: ( ruleQualifiedNameWithWildCard )
+            // InternalSDomain.g:1073:1: ( ( ruleQualifiedNameWithWildCard ) )
+            // InternalSDomain.g:1074:1: ( ruleQualifiedNameWithWildCard )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1074:1: ( ruleQualifiedNameWithWildCard )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1075:1: ruleQualifiedNameWithWildCard
+            // InternalSDomain.g:1074:1: ( ruleQualifiedNameWithWildCard )
+            // InternalSDomain.g:1075:1: ruleQualifiedNameWithWildCard
             {
              before(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_12119);
+            pushFollow(FOLLOW_2);
             ruleQualifiedNameWithWildCard();
 
             state._fsp--;
@@ -2835,20 +2835,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__NameAssignment_0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1084:1: rule__Namespace__NameAssignment_0 : ( ruleQualifiedName ) ;
+    // InternalSDomain.g:1084:1: rule__Namespace__NameAssignment_0 : ( ruleQualifiedName ) ;
     public final void rule__Namespace__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1088:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1089:1: ( ruleQualifiedName )
+            // InternalSDomain.g:1088:1: ( ( ruleQualifiedName ) )
+            // InternalSDomain.g:1089:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1089:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1090:1: ruleQualifiedName
+            // InternalSDomain.g:1089:1: ( ruleQualifiedName )
+            // InternalSDomain.g:1090:1: ruleQualifiedName
             {
              before(grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Namespace__NameAssignment_02150);
+            pushFollow(FOLLOW_2);
             ruleQualifiedName();
 
             state._fsp--;
@@ -2876,20 +2876,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Namespace__ElementsAssignment_2"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1099:1: rule__Namespace__ElementsAssignment_2 : ( ruleElement ) ;
+    // InternalSDomain.g:1099:1: rule__Namespace__ElementsAssignment_2 : ( ruleElement ) ;
     public final void rule__Namespace__ElementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1103:1: ( ( ruleElement ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1104:1: ( ruleElement )
+            // InternalSDomain.g:1103:1: ( ( ruleElement ) )
+            // InternalSDomain.g:1104:1: ( ruleElement )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1104:1: ( ruleElement )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1105:1: ruleElement
+            // InternalSDomain.g:1104:1: ( ruleElement )
+            // InternalSDomain.g:1105:1: ruleElement
             {
              before(grammarAccess.getNamespaceAccess().getElementsElementParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleElement_in_rule__Namespace__ElementsAssignment_22181);
+            pushFollow(FOLLOW_2);
             ruleElement();
 
             state._fsp--;
@@ -2917,20 +2917,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__NameAssignment_1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1114:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalSDomain.g:1114:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Entity__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1118:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1119:1: ( RULE_ID )
+            // InternalSDomain.g:1118:1: ( ( RULE_ID ) )
+            // InternalSDomain.g:1119:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1119:1: ( RULE_ID )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1120:1: RULE_ID
+            // InternalSDomain.g:1119:1: ( RULE_ID )
+            // InternalSDomain.g:1120:1: RULE_ID
             {
              before(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_12212); 
+            match(input,RULE_ID,FOLLOW_2); 
              after(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -2954,20 +2954,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Entity__PropertiesAssignment_3"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1129:1: rule__Entity__PropertiesAssignment_3 : ( ruleProperty ) ;
+    // InternalSDomain.g:1129:1: rule__Entity__PropertiesAssignment_3 : ( ruleProperty ) ;
     public final void rule__Entity__PropertiesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1133:1: ( ( ruleProperty ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1134:1: ( ruleProperty )
+            // InternalSDomain.g:1133:1: ( ( ruleProperty ) )
+            // InternalSDomain.g:1134:1: ( ruleProperty )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1134:1: ( ruleProperty )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1135:1: ruleProperty
+            // InternalSDomain.g:1134:1: ( ruleProperty )
+            // InternalSDomain.g:1135:1: ruleProperty
             {
              before(grammarAccess.getEntityAccess().getPropertiesPropertyParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_32243);
+            pushFollow(FOLLOW_2);
             ruleProperty();
 
             state._fsp--;
@@ -2995,20 +2995,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Datatype__NameAssignment_1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1144:1: rule__Datatype__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalSDomain.g:1144:1: rule__Datatype__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Datatype__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1148:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1149:1: ( RULE_ID )
+            // InternalSDomain.g:1148:1: ( ( RULE_ID ) )
+            // InternalSDomain.g:1149:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1149:1: ( RULE_ID )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1150:1: RULE_ID
+            // InternalSDomain.g:1149:1: ( RULE_ID )
+            // InternalSDomain.g:1150:1: RULE_ID
             {
              before(grammarAccess.getDatatypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Datatype__NameAssignment_12274); 
+            match(input,RULE_ID,FOLLOW_2); 
              after(grammarAccess.getDatatypeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3032,24 +3032,24 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__TypeAssignment_0"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1159:1: rule__Property__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
+    // InternalSDomain.g:1159:1: rule__Property__TypeAssignment_0 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Property__TypeAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1163:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1164:1: ( ( ruleQualifiedName ) )
+            // InternalSDomain.g:1163:1: ( ( ( ruleQualifiedName ) ) )
+            // InternalSDomain.g:1164:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1164:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1165:1: ( ruleQualifiedName )
+            // InternalSDomain.g:1164:1: ( ( ruleQualifiedName ) )
+            // InternalSDomain.g:1165:1: ( ruleQualifiedName )
             {
              before(grammarAccess.getPropertyAccess().getTypeTypeCrossReference_0_0()); 
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1166:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1167:1: ruleQualifiedName
+            // InternalSDomain.g:1166:1: ( ruleQualifiedName )
+            // InternalSDomain.g:1167:1: ruleQualifiedName
             {
              before(grammarAccess.getPropertyAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1()); 
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__Property__TypeAssignment_02309);
+            pushFollow(FOLLOW_2);
             ruleQualifiedName();
 
             state._fsp--;
@@ -3081,20 +3081,20 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Property__NameAssignment_1"
-    // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1178:1: rule__Property__NameAssignment_1 : ( RULE_ID ) ;
+    // InternalSDomain.g:1178:1: rule__Property__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Property__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1182:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1183:1: ( RULE_ID )
+            // InternalSDomain.g:1182:1: ( ( RULE_ID ) )
+            // InternalSDomain.g:1183:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1183:1: ( RULE_ID )
-            // ../org.eclipse.xtext.idea.sdomain.ui/src-gen/org/eclipse/xtext/idea/sdomain/ui/contentassist/antlr/internal/InternalSDomain.g:1184:1: RULE_ID
+            // InternalSDomain.g:1183:1: ( RULE_ID )
+            // InternalSDomain.g:1184:1: RULE_ID
             {
              before(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Property__NameAssignment_12344); 
+            match(input,RULE_ID,FOLLOW_2); 
              after(grammarAccess.getPropertyAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -3121,104 +3121,16 @@ public class InternalSDomainParser extends AbstractInternalContentAssistParser {
 
  
 
-    public static final BitSet FOLLOW_ruleFile_in_entryRuleFile61 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFile68 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__File__ElementsAssignment_in_ruleFile94 = new BitSet(new long[]{0x0000000000030812L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport122 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard182 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName242 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0_in_ruleQualifiedName275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNamespace_in_entryRuleNamespace302 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNamespace309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__0_in_ruleNamespace335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_entryRuleElement362 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleElement369 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Element__Alternatives_in_ruleElement395 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_entryRuleType422 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleType429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_entryRuleEntity482 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntity489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__0_in_ruleEntity515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDatatype_in_entryRuleDatatype542 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDatatype549 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Datatype__Group__0_in_ruleDatatype575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty602 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProperty609 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__0_in_ruleProperty635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNamespace_in_rule__Element__Alternatives671 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_rule__Element__Alternatives688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_rule__Element__Alternatives705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_rule__Type__Alternatives737 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDatatype_in_rule__Type__Alternatives754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__0__Impl_in_rule__Import__Group__0784 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__Import__Group__0__Impl815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__1__Impl_in_rule__Import__Group__1846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__ImportedNamespaceAssignment_1_in_rule__Import__Group__1__Impl873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__0907 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__0910 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__1966 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__QualifiedNameWithWildCard__Group__1__Impl995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__0__Impl_in_rule__QualifiedName__Group__01032 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1_in_rule__QualifiedName__Group__01035 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group__0__Impl1062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group__1__Impl_in_rule__QualifiedName__Group__11091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0_in_rule__QualifiedName__Group__1__Impl1118 = new BitSet(new long[]{0x0000000000002002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__0__Impl_in_rule__QualifiedName__Group_1__01153 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__01156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__QualifiedName__Group_1__0__Impl1184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1__Impl_in_rule__QualifiedName__Group_1__11215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__1__Impl1242 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__0__Impl_in_rule__Namespace__Group__01275 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__1_in_rule__Namespace__Group__01278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__NameAssignment_0_in_rule__Namespace__Group__0__Impl1305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__1__Impl_in_rule__Namespace__Group__11335 = new BitSet(new long[]{0x0000000000038810L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__2_in_rule__Namespace__Group__11338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Namespace__Group__1__Impl1366 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__2__Impl_in_rule__Namespace__Group__21397 = new BitSet(new long[]{0x0000000000038810L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__3_in_rule__Namespace__Group__21400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Namespace__ElementsAssignment_2_in_rule__Namespace__Group__2__Impl1427 = new BitSet(new long[]{0x0000000000030812L});
-    public static final BitSet FOLLOW_rule__Namespace__Group__3__Impl_in_rule__Namespace__Group__31458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Namespace__Group__3__Impl1486 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__0__Impl_in_rule__Entity__Group__01525 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__01528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Entity__Group__0__Impl1556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__1__Impl_in_rule__Entity__Group__11587 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__11590 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1__Impl1617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__2__Impl_in_rule__Entity__Group__21647 = new BitSet(new long[]{0x0000000000008010L});
-    public static final BitSet FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Entity__Group__2__Impl1678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__3__Impl_in_rule__Entity__Group__31709 = new BitSet(new long[]{0x0000000000008010L});
-    public static final BitSet FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__PropertiesAssignment_3_in_rule__Entity__Group__3__Impl1739 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_rule__Entity__Group__4__Impl_in_rule__Entity__Group__41770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Entity__Group__4__Impl1798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Datatype__Group__0__Impl_in_rule__Datatype__Group__01839 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Datatype__Group__1_in_rule__Datatype__Group__01842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Datatype__Group__0__Impl1870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Datatype__Group__1__Impl_in_rule__Datatype__Group__11901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Datatype__NameAssignment_1_in_rule__Datatype__Group__1__Impl1928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__0__Impl_in_rule__Property__Group__01962 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Property__Group__1_in_rule__Property__Group__01965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__TypeAssignment_0_in_rule__Property__Group__0__Impl1992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Group__1__Impl_in_rule__Property__Group__12022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__NameAssignment_1_in_rule__Property__Group__1__Impl2049 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_rule__File__ElementsAssignment2088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_12119 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Namespace__NameAssignment_02150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleElement_in_rule__Namespace__ElementsAssignment_22181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_12212 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_32243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Datatype__NameAssignment_12274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Property__TypeAssignment_02309 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Property__NameAssignment_12344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000030812L});
+    public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000002002L});
+    public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000038810L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000008010L});
+    public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000000012L});
 
 }

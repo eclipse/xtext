@@ -309,6 +309,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 	private final Subrule2Elements pSubrule2;
 	private final Subrule3Elements pSubrule3;
 	private final CallExtendedParserRuleElements pCallExtendedParserRule;
+	private final TerminalRule tID;
 	
 	private final Grammar grammar;
 
@@ -329,6 +330,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		this.pSubrule2 = new Subrule2Elements();
 		this.pSubrule3 = new Subrule3Elements();
 		this.pCallExtendedParserRule = new CallExtendedParserRuleElements();
+		this.tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -462,8 +464,14 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 		return getCallExtendedParserRuleAccess().getRule();
 	}
 
+	//terminal ID:
+	//	super;
+	public TerminalRule getIDRule() {
+		return tID;
+	} 
+
 	//InheritedParserRule mm::AType:
-	//	'element' name=ID
+	//	'element' name=super::ID
 	public AbstractTestLanguageGrammarAccess.InheritedParserRuleElements getInheritedParserRuleAccess() {
 		return gaAbstractTestLanguage.getInheritedParserRuleAccess();
 	}
@@ -500,7 +508,7 @@ public class ConcreteTestLanguageGrammarAccess extends AbstractGrammarElementFin
 
 	//terminal ID:
 	//	'^'? ('a'..'z' | 'A'..'Z' | 'ö' | 'ä' | 'ü' | '_') ('a'..'z' | 'A'..'Z' | '_' | '0'..'9')*;
-	public TerminalRule getIDRule() {
+	public TerminalRule getAbstractTestLanguageIDRule() {
 		return gaAbstractTestLanguage.getIDRule();
 	} 
 

@@ -1,72 +1,138 @@
+/*******************************************************************************
+ * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.idea;
 
-public class AbstractXtendIdeaModule extends org.eclipse.xtext.idea.DefaultIdeaModule {
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.PsiParser;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
+import org.eclipse.xtend.core.idea.facet.XtendFacetType;
+import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
+import org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition;
+import org.eclipse.xtend.core.idea.lang.parser.XtendPsiParser;
+import org.eclipse.xtend.core.idea.lang.parser.XtendTokenTypeProvider;
+import org.eclipse.xtend.core.idea.lang.parser.antlr.XtendAntlrTokenFileProvider;
+import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendLexer;
+import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
+import org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider;
+import org.eclipse.xtext.idea.DefaultIdeaModule;
+import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations;
+import org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider;
+import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.formatting.BlockFactory;
+import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
+import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
+import org.eclipse.xtext.idea.lang.IElementTypeProvider;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
+import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.parser.antlr.LexerBindings;
+import org.eclipse.xtext.psi.IPsiModelAssociations;
+import org.eclipse.xtext.service.LanguageSpecific;
+import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider;
+import org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory;
+import org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider;
+import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
+import org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker;
+import org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider;
+
+/**
+ * Manual modifications go to {@link XtendIdeaModule}.
+ */
+@SuppressWarnings("all")
+public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtend.core.idea.lang.parser.antlr.XtendAntlrTokenFileProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendLexer.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendLexer.class);
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lang.PsiParser> bindPsiParser() {
-		return org.eclipse.xtend.core.idea.lang.parser.XtendPsiParser.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.parser.TokenTypeProvider> bindTokenTypeProvider() {
-		return org.eclipse.xtend.core.idea.lang.parser.XtendTokenTypeProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends com.intellij.lang.ParserDefinition> bindParserDefinition() {
-		return org.eclipse.xtend.core.idea.lang.parser.XtendParserDefinition.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	@org.eclipse.xtext.service.SingletonBinding
-	public Class<? extends org.eclipse.xtext.idea.lang.IElementTypeProvider> bindIElementTypeProvider() {
-		return org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.facet.AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
-		return org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public com.intellij.facet.FacetTypeId bindFacetTypeIdToInstance() {
-		return org.eclipse.xtend.core.idea.facet.XtendFacetType.TYPEID;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
-		return org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
-		return org.eclipse.xtext.xbase.typesystem.internal.OptimizingFeatureScopeTrackerProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public void configureLanguageSpecificPsiModelAssociations(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.psi.IPsiModelAssociations.class).annotatedWith(org.eclipse.xtext.service.LanguageSpecific.class).to(org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations.class);
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration> bindIHighlightingConfiguration() {
-		return org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.formatting.BlockFactory> bindBlockFactory() {
-		return org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.idea.formatting.ChildAttributesProvider> bindChildAttributesProvider() {
-		return org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider.class;
-	}
-	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
-	public Class<? extends org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider> bindIBracePairProvider() {
-		return org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider.class;
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
+		return XtendAntlrTokenFileProvider.class;
 	}
 	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends Lexer> bindLexer() {
+		return PsiInternalXtendLexer.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public void configureRuntimeLexer(Binder binder) {
+		binder.bind(Lexer.class)
+			.annotatedWith(Names.named(LexerBindings.RUNTIME))
+			.to(PsiInternalXtendLexer.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends PsiParser> bindPsiParser() {
+		return XtendPsiParser.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends TokenTypeProvider> bindTokenTypeProvider() {
+		return XtendTokenTypeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends ParserDefinition> bindParserDefinition() {
+		return XtendParserDefinition.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	@SingletonBinding
+	public Class<? extends IElementTypeProvider> bindIElementTypeProvider() {
+		return XtendElementTypeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends AbstractFacetConfiguration> bindAbstractFacetConfiguration() {
+		return XtendFacetConfiguration.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public FacetTypeId bindFacetTypeIdToInstance() {
+		return XtendFacetType.TYPEID;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends AbstractTypeScopeProvider> bindAbstractTypeScopeProvider() {
+		return StubBasedTypeScopeProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IFeatureScopeTracker.Provider> bindIFeatureScopeTracker$Provider() {
+		return OptimizingFeatureScopeTrackerProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public void configureLanguageSpecificPsiModelAssociations(Binder binder) {
+		binder.bind(IPsiModelAssociations.class)
+			.annotatedWith(LanguageSpecific.class)
+			.to(DerivedMemberAwarePsiModelAssociations.class);
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return XbaseHighlightingConfiguration.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends BlockFactory> bindBlockFactory() {
+		return XbaseBlockFactory.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends ChildAttributesProvider> bindChildAttributesProvider() {
+		return XbaseChildAttributesProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
+		return XbaseBracePairProvider.class;
+	}
 	
 }

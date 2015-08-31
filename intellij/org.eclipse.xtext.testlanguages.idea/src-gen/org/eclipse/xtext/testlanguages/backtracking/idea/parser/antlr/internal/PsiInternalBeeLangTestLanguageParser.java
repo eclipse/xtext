@@ -225,8 +225,8 @@ abstract class PsiInternalBeeLangTestLanguageParser1 extends AbstractPsiAntlrPar
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__52=52;
     public static final int T__15=15;
+    public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -690,11 +690,11 @@ abstract class PsiInternalBeeLangTestLanguageParser1 extends AbstractPsiAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred11_PsiInternalBeeLangTestLanguage() {
+    public final boolean synpred21_PsiInternalBeeLangTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred11_PsiInternalBeeLangTestLanguage_fragment(); // can never throw exception
+            synpred21_PsiInternalBeeLangTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -704,11 +704,11 @@ abstract class PsiInternalBeeLangTestLanguageParser1 extends AbstractPsiAntlrPar
         state.failed=false;
         return success;
     }
-    public final boolean synpred21_PsiInternalBeeLangTestLanguage() {
+    public final boolean synpred11_PsiInternalBeeLangTestLanguage() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred21_PsiInternalBeeLangTestLanguage_fragment(); // can never throw exception
+            synpred11_PsiInternalBeeLangTestLanguage_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

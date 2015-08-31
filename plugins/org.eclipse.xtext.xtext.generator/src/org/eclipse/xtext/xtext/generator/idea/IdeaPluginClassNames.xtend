@@ -54,10 +54,6 @@ class IdeaPluginClassNames {
 		new TypeReference(ideaBasePackage + '.lang.psi', simpleName + 'CodeBlockModificationListener')
 	}
 
-	def TypeReference getElementDescriptionProvider(Grammar it) {
-		new TypeReference(ideaBasePackage + '.lang.psi', simpleName + 'ElementDescriptionProvider')
-	}
-
 	def TypeReference getPsiParser(Grammar it) {
 		new TypeReference(ideaBasePackage + '.lang.parser', simpleName + 'PsiParser')
 	}

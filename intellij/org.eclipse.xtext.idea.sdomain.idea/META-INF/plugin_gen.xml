@@ -41,7 +41,6 @@
       							factoryClass="org.eclipse.xtext.idea.sdomain.idea.SDomainExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtext.idea.sdomain.SDomain" implementationClass="org.eclipse.xtext.idea.sdomain.idea.completion.SDomainCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.sdomain.idea.lang.psi.SDomainElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.sdomain.idea.lang.pom.SDomainPomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.sdomain.SDomain"

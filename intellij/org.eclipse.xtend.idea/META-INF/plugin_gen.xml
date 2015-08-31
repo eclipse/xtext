@@ -39,7 +39,6 @@
       							factoryClass="org.eclipse.xtend.core.idea.XtendExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtend.core.Xtend" implementationClass="org.eclipse.xtend.core.idea.completion.XtendCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtend.core.idea.lang.psi.XtendElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtend.core.idea.lang.pom.XtendPomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtend.core.Xtend"
