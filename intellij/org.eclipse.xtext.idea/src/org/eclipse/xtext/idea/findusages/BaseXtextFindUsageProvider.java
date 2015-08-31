@@ -42,11 +42,20 @@ public class BaseXtextFindUsageProvider implements FindUsagesProvider {
 	@NotNull
 	public String getType(@NotNull PsiElement element) {
 		if (element instanceof PsiEObject) {
-			EObject eObject = ((PsiEObject) element).getEObject();
-			if (eObject != null)
-					return eObject.eClass().getName();
+			return getType((PsiEObject) element);
 		}
 		return "";
+	}
+	
+	protected String getType(PsiEObject element) {
+		EObject object = element.getEObject();
+		if (object == null)
+			return "";
+		return getType(object);
+	}
+	
+	protected String getType(EObject object) {
+		return object.eClass().getName();
 	}
 
 	@Override
