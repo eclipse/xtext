@@ -134,7 +134,6 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 			grammar.compileSemanticHighlightVisitor,
 			grammar.compileExtensionFactory,
 			grammar.compileCodeBlockModificationListener,
-			grammar.compileElementDescriptionProvider,
 			grammar.compilePsiParser,
 			grammar.compileAntlrTokenFileProvider,
 			grammar.compilePomDeclarationSearcher,
@@ -192,18 +191,6 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					}
 				«ENDIF»
 			
-			}
-		'''
-		file
-	}
-	
-	def compileElementDescriptionProvider(Grammar grammar) {
-		val file = fileAccessFactory.createJavaFile(grammar.elementDescriptionProvider)
-		file.javaContent = '''
-			public class «grammar.elementDescriptionProvider.simpleName» extends «"org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider".typeRef» {
-				public «grammar.elementDescriptionProvider.simpleName»() {
-					super(«grammar.ideaLanguage».INSTANCE);
-				}
 			}
 		'''
 		file
@@ -328,7 +315,6 @@ class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
 					«grammar.compileExtension('lang.braceMatcher', 'com.intellij.lang.PairedBraceMatcher'.typeRef)»
 					«grammar.compileExtension('annotator', 'org.eclipse.xtext.idea.annotation.IssueAnnotator'.typeRef)»
 					<completion.contributor language="«grammar.languageID»" implementationClass="«grammar.completionContributor»"/>
-					<elementDescriptionProvider implementation="«grammar.elementDescriptionProvider»" order="first"/>
 					<pom.declarationSearcher implementation="«grammar.pomDeclarationSearcher»"/>
 
 					«grammar.compileExtension('lang.psiStructureViewFactory', 'com.intellij.lang.PsiStructureViewFactory'.typeRef)»
