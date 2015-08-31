@@ -83,8 +83,8 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		assertEquals(JavaUI.ID_CU_EDITOR, barEditor.getEditorSite().getId());
 
 		IType foo = javaProject.findType("outlinetest.Foo");
-		IEditorPart fooJavaEditor = globalURIEditorOpener.open(null, bar, true);
-		assertEquals(JavaUI.ID_CU_EDITOR, fooJavaEditor.getEditorSite().getId());
+		IEditorPart fooJavaEditor = globalURIEditorOpener.open(null, foo, true);
+		assertEquals("org.eclipse.xtend.core.Xtend", fooJavaEditor.getEditorSite().getId());
 
 		IResource resource = foo.getResource();
 		assertTrue(resource instanceof IFile);
