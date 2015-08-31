@@ -12,21 +12,16 @@ import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.PluginId
-import com.intellij.openapi.externalSystem.util.ExternalSystemApiUtil
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.libraries.Library
 import com.intellij.openapi.roots.libraries.LibraryTablesRegistrar
 import com.intellij.openapi.startup.StartupManager
-import com.intellij.openapi.util.io.FileUtil
-import com.intellij.openapi.vfs.LocalFileSystem
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.JavaPsiFacade
 import com.intellij.psi.PsiFile
-import com.intellij.psi.PsiManager
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.xml.DomUtil
 import org.eclipse.xtend.lib.annotations.Data
 import org.jetbrains.idea.maven.dom.MavenDomUtil
@@ -34,19 +29,13 @@ import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel
 import org.jetbrains.idea.maven.model.MavenId
 import org.jetbrains.idea.maven.project.MavenProject
 import org.jetbrains.idea.maven.project.MavenProjectsManager
-import org.jetbrains.plugins.gradle.util.GradleConstants
-import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrCall
-import org.jetbrains.plugins.groovy.lang.psi.api.statements.expressions.GrMethodCall
-
-import static org.eclipse.xtend.core.idea.config.XtendLibraryManager.*
 
 /**
  * @author dhuebner - Initial contribution and API
  */
 class XtendLibraryManager {
 	protected static final Logger LOG = Logger.getInstance(XtendLibraryManager.name)
-
+	@Inject extension GradleBuildFileUtility gradleUtils
 	@Inject XtendLibraryDescription xtendLibDescr
 	static MavenId XTEND_LIB_MAVEN_ID
 
@@ -59,12 +48,12 @@ class XtendLibraryManager {
 		if (project.initialized) {
 			doEnsureXtendLibAvailable(rootModel, module, context)
 		} else {
-			StartupManager.getInstance(project).registerPostStartupActivity[
+			StartupManager.getInstance(project).registerPostStartupActivity [
 				doEnsureXtendLibAvailable(rootModel, module, context)
 			]
 		}
 	}
-	
+
 	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
 		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
 		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(Data.name, scope)
@@ -88,32 +77,9 @@ class XtendLibraryManager {
 
 		new WriteCommandAction.Simple(module.project, "Gradle: Add Xtend Runtime Library",
 			newImmutableList(buildFile)) {
-
 			override protected run() throws Throwable {
-				var factory = GroovyPsiElementFactory.getInstance(module.project)
-				var closableBlocks = PsiTreeUtil.getChildrenOfTypeAsList(buildFile, GrMethodCall)
-				
-				var GrCall dependenciesBlock = closableBlocks.findFirst [
-					var expression = getInvokedExpression()
-					return expression !== null && "dependencies".equals(expression.getText())
-				]
-
 				val scope = if(context?.isTestScope) "testCompile" else "compile"
-
-				if (dependenciesBlock === null) {
-					dependenciesBlock = factory.createStatementFromText(
-					'''
-					dependencies {
-						«scope» '«xtendLibMavenId.key»'
-					}''') as GrCall
-					buildFile.add(dependenciesBlock)
-				} else {
-					var closableBlock = dependenciesBlock.getClosureArguments().head
-					if (closableBlock !== null) {
-						closableBlock.addStatementBefore(
-							factory.createStatementFromText('''«scope» '«xtendLibMavenId.key»' '''), null)
-					}
-				}
+				gradleUtils.addDependency(buildFile, '''«scope» '«xtendLibMavenId.key»' ''')
 			}
 
 		}.execute
@@ -129,27 +95,6 @@ class XtendLibraryManager {
 			XTEND_LIB_MAVEN_ID = new MavenId("org.eclipse.xtend", "org.eclipse.xtend.lib", "2.8.4")
 		}
 		return XTEND_LIB_MAVEN_ID
-	}
-
-	def PsiFile locateBuildFile(Module module) {
-		val modulePath = ExternalSystemApiUtil.getExternalProjectPath(module)
-		if (modulePath !== null) {
-			var buildScriptPath = FileUtil.findFileInProvidedPath(modulePath, GradleConstants.DEFAULT_SCRIPT_NAME)
-			if (!buildScriptPath.isNullOrEmpty) {
-				var VirtualFile virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(buildScriptPath)
-				if (virtualFile !== null) {
-					val PsiFile psiFile = PsiManager.getInstance(module.project).findFile(virtualFile)
-					if (psiFile !== null && psiFile.valid) {
-						return psiFile
-					}
-				}
-			}
-		}
-		return null
-	}
-
-	def boolean isGradleedModule(Module module) {
-		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module)
 	}
 
 	def void addJavaRuntimeLibrary(Module module, ModifiableRootModel rootModel) {
