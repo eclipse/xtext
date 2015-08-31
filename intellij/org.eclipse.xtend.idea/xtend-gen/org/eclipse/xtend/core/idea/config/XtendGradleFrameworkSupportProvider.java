@@ -13,11 +13,14 @@ import com.intellij.framework.FrameworkTypeEx;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableModelsProvider;
 import com.intellij.openapi.roots.ModifiableRootModel;
+import org.eclipse.xtend.core.idea.config.GradleBuildFileUtility;
 import org.eclipse.xtend.core.idea.config.XtendFrameworkType;
 import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
 import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.plugins.gradle.frameworkSupport.BuildScriptDataBuilder;
 import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvider;
@@ -27,7 +30,8 @@ import org.jetbrains.plugins.gradle.frameworkSupport.GradleFrameworkSupportProvi
  */
 @SuppressWarnings("all")
 public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider {
-  private final static String XTEND_GRADLE_PLUGIN_VERSION = "0.4.7";
+  @Inject
+  private GradleBuildFileUtility gradleUtility;
   
   @Inject
   private Provider<XtendSupportConfigurable> xtendSupportConfigurableProvider;
@@ -43,16 +47,37 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
   
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider, final BuildScriptDataBuilder script) {
+    MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
+    String _version = _xtendLibMavenId.getVersion();
+    boolean _endsWith = false;
+    if (_version!=null) {
+      _endsWith=_version.endsWith("-SNAPSHOT");
+    }
+    final boolean snapshot = _endsWith;
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("buildscript {");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("repositories {");
     _builder.newLine();
-    _builder.append("        ");
-    _builder.append("mavenCentral()");
+    {
+      if (snapshot) {
+        _builder.append("\t\t");
+        _builder.append("maven {");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("\t");
+        _builder.append("url \'http://oss.sonatype.org/content/repositories/snapshots\'");
+        _builder.newLine();
+        _builder.append("\t\t");
+        _builder.append("}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t    ");
+    _builder.append("jcenter()");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
     _builder.append("    ");
@@ -60,7 +85,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     _builder.newLine();
     _builder.append("        ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(XtendGradleFrameworkSupportProvider.XTEND_GRADLE_PLUGIN_VERSION, "        ");
+    _builder.append(this.gradleUtility.xtendGradlePluginId, "        ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -72,21 +97,15 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     BuildScriptDataBuilder _addPluginDefinition = script.addPluginDefinition("apply plugin: \'java\'");
     BuildScriptDataBuilder _addPluginDefinition_1 = _addPluginDefinition.addPluginDefinition("apply plugin: \'org.xtend.xtend\'");
     BuildScriptDataBuilder _addPropertyDefinition = _addPluginDefinition_1.addPropertyDefinition("sourceCompatibility = 1.5");
-    BuildScriptDataBuilder _addRepositoriesDefinition = _addPropertyDefinition.addRepositoriesDefinition("mavenCentral()");
+    BuildScriptDataBuilder _addRepositoriesDefinition = _addPropertyDefinition.addRepositoriesDefinition("jcenter()");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("compile \'");
-    MavenId _xtendLibMavenId = XtendLibraryManager.xtendLibMavenId();
-    String _key = _xtendLibMavenId.getKey();
+    MavenId _xtendLibMavenId_1 = XtendLibraryManager.xtendLibMavenId();
+    String _key = _xtendLibMavenId_1.getKey();
     _builder_1.append(_key, "");
     _builder_1.append("\' ");
     _addRepositoriesDefinition.addDependencyNotation(_builder_1.toString());
-    MavenId _xtendLibMavenId_1 = XtendLibraryManager.xtendLibMavenId();
-    String _version = _xtendLibMavenId_1.getVersion();
-    boolean _endsWith = false;
-    if (_version!=null) {
-      _endsWith=_version.endsWith("-SNAPSHOT");
-    }
-    if (_endsWith) {
+    if (snapshot) {
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("maven {");
       _builder_2.newLine();
@@ -96,7 +115,11 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
       _builder_2.append("}");
       script.addRepositoriesDefinition(_builder_2.toString());
     }
-    XtendSupportConfigurable _get = this.xtendSupportConfigurableProvider.get();
-    _get.addSupport(module, rootModel, modifiableModelsProvider);
+    final XtendSupportConfigurable xtendSupport = this.xtendSupportConfigurableProvider.get();
+    final XtendFacetConfiguration conf = xtendSupport.createOrGetXtendFacetConf(module);
+    XbaseGeneratorConfigurationState _state = conf.getState();
+    xtendSupport.presetGradleOutputDirectories(_state, module);
+    XbaseGeneratorConfigurationState _state_1 = conf.getState();
+    xtendSupport.setupOutputFolder(_state_1, rootModel);
   }
 }

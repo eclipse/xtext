@@ -40,14 +40,12 @@ import java.io.File
 import java.lang.reflect.InvocationTargetException
 import java.util.ArrayList
 import java.util.List
+import junit.framework.AssertionFailedError
 import junit.framework.TestCase
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtext.idea.tests.AbstractIdeaTestCase
 import org.jetbrains.annotations.NotNull
-
-import static junit.framework.TestCase.*
-import junit.framework.AssertionFailedError
 
 abstract class AbstractDebuggerTestCase extends AbstractIdeaTestCase {
 

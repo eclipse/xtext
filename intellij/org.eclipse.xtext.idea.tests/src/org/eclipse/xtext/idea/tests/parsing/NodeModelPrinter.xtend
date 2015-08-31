@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.tests.parsing
 
+import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Action
 import org.eclipse.xtext.CrossReference
+import org.eclipse.xtext.EnumLiteralDeclaration
 import org.eclipse.xtext.Keyword
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.nodemodel.ICompositeNode
 import org.eclipse.xtext.nodemodel.INode
-import org.eclipse.xtext.EnumLiteralDeclaration
-import org.eclipse.xtend.lib.annotations.Accessors
 
 class NodeModelPrinter {
 	
