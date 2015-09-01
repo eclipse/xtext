@@ -6,11 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
+
 import com.google.inject.Inject
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.Test
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import org.junit.Test
 
 class EqualsHashCodeCompilerTest extends AbstractXtendCompilerTest {
 	@Inject

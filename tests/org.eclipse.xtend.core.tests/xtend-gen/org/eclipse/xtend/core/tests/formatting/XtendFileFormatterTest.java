@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class XtendFileFormatter extends AbstractXtendFormatterTest {
+public class XtendFileFormatterTest extends AbstractXtendFormatterTest {
   @Test
   public void formatClass11() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {

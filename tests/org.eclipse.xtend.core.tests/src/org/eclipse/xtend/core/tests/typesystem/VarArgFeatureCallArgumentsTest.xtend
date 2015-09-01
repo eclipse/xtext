@@ -11,12 +11,12 @@ import com.google.inject.Inject
 import java.util.NoSuchElementException
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XBooleanLiteral
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.typesystem.arguments.VarArgFeatureCallArguments
 import org.junit.Test
-import org.eclipse.xtext.xbase.XBooleanLiteral
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

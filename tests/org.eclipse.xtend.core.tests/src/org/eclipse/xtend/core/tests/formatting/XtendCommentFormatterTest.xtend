@@ -1,8 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
-import org.junit.Test
 import org.junit.Ignore
+import org.junit.Test
 
 class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatMLCommentBeforePackage() {

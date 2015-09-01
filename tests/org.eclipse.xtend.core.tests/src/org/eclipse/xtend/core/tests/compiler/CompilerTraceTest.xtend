@@ -3,11 +3,14 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import java.util.List
 import java.util.regex.Pattern
+import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtext.generator.IFilePostProcessor
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.generator.trace.SourceRelativeURI
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.util.TextRegionWithLineInformation
@@ -15,9 +18,6 @@ import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.generator.IFilePostProcessor
-import org.eclipse.xtext.generator.trace.SourceRelativeURI
-import org.eclipse.emf.common.util.URI
 
 /**
  * @author Sebastian Zarnekow

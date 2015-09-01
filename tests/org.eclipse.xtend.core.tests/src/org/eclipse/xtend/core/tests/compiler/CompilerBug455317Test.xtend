@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Test
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -106,9 +106,9 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
 		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir('xtend-gen')
 		if (xtendGenMain != null)
-			state.outputDirectory = VfsUtil.getRelativePath(xtendGenMain, rootModel.module.moduleFile.parent)
+			state.outputDirectory = xtendGenMain.canonicalPath
 		if (xtendGenTest != null)
-			state.testOutputDirectory = VfsUtil.getRelativePath(xtendGenTest, rootModel.module.moduleFile.parent)
+			state.testOutputDirectory = xtendGenTest.canonicalPath
 	}
 
 	def private VirtualFile createOrGetInParentDir(VirtualFile sibling, String relativePath) {

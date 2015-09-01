@@ -8,10 +8,10 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.junit.Test
 import org.eclipse.xtend.core.xtend.XtendPackage
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage
+import org.junit.Test
 
 /**
  * @author Stefan Oehme - Initial contribution and API

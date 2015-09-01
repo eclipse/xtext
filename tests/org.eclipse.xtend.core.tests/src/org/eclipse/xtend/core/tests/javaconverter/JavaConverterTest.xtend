@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.javaconverter
 
+import com.google.common.base.Splitter
 import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import com.google.inject.Provider
@@ -29,7 +30,6 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
-import com.google.common.base.Splitter
 
 class JavaConverterTest extends AbstractXtendTestCase {
 	@Inject Provider<JavaConverter> javaConverterProvider
@@ -237,9 +237,25 @@ class JavaConverterTest extends AbstractXtendTestCase {
 				}
 			}
 		''')
-
 	}
-
+	@Test def void testBasicForStatementCase_04() throws Exception {
+		assertEquals(
+		'''
+		class JavaToConvert {
+			def void visit() {
+				for (val int a=1, val int b=2; true; ) {
+				}
+			}
+		}'''.toString, toXtendCode('''
+			public class JavaToConvert {
+				public void visit() {
+					for (final int a = 1, b = 2; true; ) {
+					}
+				}
+			}
+		'''))
+	}
+	
 	@Test def void testExtendedForStatementCase_01() throws Exception {
 
 		toValidXtendClass('''
@@ -445,7 +461,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 				return;// rt SL comment
 				
 			}
-			
 		}'''
 		assertEquals(expected, xtendCode)
 	}
@@ -458,8 +473,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		}''')
 		val expected = '''
 		class TestComment {
-			package String field="d"
-			// last SL comment
+			package String field="d"// last SL comment
 			
 		}'''
 		assertEquals(expected, xtendCode)
@@ -507,8 +521,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			 * orphaned javadoc 
 			 */
 			
-		}
-		'''.toString, xtendCode)
+		}'''.toString, xtendCode)
 	}
 
 	@Test def void testCastCase() throws Exception {
@@ -816,7 +829,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		int[] ar=newIntArrayOfSize(1)
 		def void arDim() {
 			var int[] ar2=newIntArrayOfSize(2) 
-			
 		}'''.toString, toXtendClassBodyDeclr(xtendCode))
 	}
 
@@ -1115,7 +1127,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		package class Clazz {
 			//Single Line comment
 			package String str
-			
 		}'''.toString, clazz)
 	}
 
@@ -1148,7 +1159,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				case 2:{
 					return "2" 
 				}
-				
 				default :{
 					return "0" 
 				}
@@ -1256,7 +1266,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 					val List<String> values/* FIXME empty initializer for final variable is not supported */ val List<String> values2=null val List<String> values3/* FIXME empty initializer for final variable is not supported */ 
 					values=new ArrayList<String>() 
 				}
-				
 			}'''.toString
 		)
 		assertEquals(2, Iterables.size(conversionResult.getProblems()))
@@ -1283,7 +1292,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			if ((1.bitwiseOr(2)) > 0) {
 				return;
 			}
-			
 		}'''.toString, body)
 
 	}
@@ -1322,7 +1330,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertEquals('''
 		def void checkTryCatch() {
 			try {
-				
 			} catch (Exception e) {
 				throw e
 			} finally {
@@ -1349,14 +1356,13 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		var statement = toXtendStatement(javaBody)
 		assertEquals('''
 		try {
-			
 		} catch (Exception e) {
 			throw new Exception()
 		} catch (Error e) {
 			throw new Exception()
 		}
+		
 		try {
-			
 		} finally {
 			throw new Exception()
 		}'''.toString, statement)
@@ -1379,10 +1385,12 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertEquals('''
 		var int i=0 
 		do {
-			System.out.println(i) i++ 
+			System.out.println(i) 
+			i++ 
 		} while (i < 0)
 		while (i < 10) {
-			System.out.print(i) i++ 
+			System.out.print(i) 
+			i++ 
 		}'''.toString, toXtendStatement(javaBody))
 
 	}
@@ -1400,7 +1408,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			synchronized (this) {
 				this.count+=value 
 			}
-			
 		}'''.toString, toXtendClassBodyDeclr(javaBody))
 
 	}
@@ -1464,7 +1471,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 						return 3 
 					}
 				}
-				
 			}'''
 		assertEquals(expected, xtendCode)
 	}
@@ -1483,7 +1489,6 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				override String toString() {
 					return "bar" 
 				}
-				
 			}'''
 		assertEquals(expected, xtendCode)
 	}
@@ -1550,4 +1555,5 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			println(text)
 		}
 	}
+	
 }

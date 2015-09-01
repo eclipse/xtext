@@ -225,19 +225,13 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     VirtualFile xtendGenTest = this.createOrGetInParentDir(testSrc, "xtend-gen");
     boolean _notEquals = (!Objects.equal(xtendGenMain, null));
     if (_notEquals) {
-      Module _module = rootModel.getModule();
-      VirtualFile _moduleFile = _module.getModuleFile();
-      VirtualFile _parent = _moduleFile.getParent();
-      String _relativePath = VfsUtil.getRelativePath(xtendGenMain, _parent);
-      state.setOutputDirectory(_relativePath);
+      String _canonicalPath = xtendGenMain.getCanonicalPath();
+      state.setOutputDirectory(_canonicalPath);
     }
     boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
     if (_notEquals_1) {
-      Module _module_1 = rootModel.getModule();
-      VirtualFile _moduleFile_1 = _module_1.getModuleFile();
-      VirtualFile _parent_1 = _moduleFile_1.getParent();
-      String _relativePath_1 = VfsUtil.getRelativePath(xtendGenTest, _parent_1);
-      state.setTestOutputDirectory(_relativePath_1);
+      String _canonicalPath_1 = xtendGenTest.getCanonicalPath();
+      state.setTestOutputDirectory(_canonicalPath_1);
     }
   }
   

@@ -9,11 +9,11 @@ package org.eclipse.xtend.core.tests.compiler.batch
 
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
+import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
 import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtend.lib.macro.CodeGenerationContext
 
 @Active(_TESTDATA_InternalClassProcessor)
 annotation _TESTDATA_InternalClassAnnotation {

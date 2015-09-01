@@ -8,11 +8,11 @@
 package org.eclipse.xtend.core.tests.imports
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.TypeUsageCollector
 import org.junit.Test
-import org.eclipse.xtext.resource.XtextResource
-import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

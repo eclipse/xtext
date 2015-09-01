@@ -10,15 +10,11 @@ package org.eclipse.xtend.core.javaconverter;
 import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.Block;
-import org.eclipse.jdt.core.dom.Statement;
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory;
 import org.eclipse.xtend.core.javaconverter.JavaASTFlattener;
 import org.eclipse.xtend.lib.annotations.AccessorType;
@@ -81,9 +77,8 @@ public class JavaConverter {
       final ASTParserFactory.ASTParserWrapper parser = this.astParserFactory.createJavaParser(cu);
       final ASTNode root = parser.createAST();
       String _source = cu.getSource();
-      Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
       String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(_source, _singleton, _targetLevel);
+      return this.executeAstFlattener(_source, root, _targetLevel, false);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -152,13 +147,11 @@ public class JavaConverter {
     parser.setKind(ASTParser.K_STATEMENTS);
     final ASTNode root = parser.createAST();
     if ((root instanceof Block)) {
-      List<Statement> statements = ((Block)root).statements();
       String _targetLevel = parser.getTargetLevel();
-      return this.executeAstFlattener(javaSrc, statements, _targetLevel);
+      return this.executeAstFlattener(javaSrc, root, _targetLevel, true);
     }
-    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
     String _targetLevel_1 = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, _singleton, _targetLevel_1);
+    return this.executeAstFlattener(javaSrc, root, _targetLevel_1, false);
   }
   
   /**
@@ -171,9 +164,8 @@ public class JavaConverter {
     parser.setSource(_charArray);
     parser.setKind(ASTParser.K_EXPRESSION);
     final ASTNode root = parser.createAST();
-    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(root);
     String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(javaSrc, _singleton, _targetLevel);
+    return this.executeAstFlattener(javaSrc, root, _targetLevel, false);
   }
   
   /**
@@ -201,7 +193,7 @@ public class JavaConverter {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class MISSING { ");
       _builder.append(javaSrc, "");
-      _builder.append("}");
+      _builder.append(" }");
       javaSrcBuilder.append(_builder);
     } else {
       parser.setUnitName(unitName);
@@ -212,21 +204,28 @@ public class JavaConverter {
     char[] _charArray = preparedJavaSrc.toCharArray();
     parser.setSource(_charArray);
     final ASTNode result = parser.createAST();
-    Set<ASTNode> _singleton = Collections.<ASTNode>singleton(result);
     String _targetLevel = parser.getTargetLevel();
-    return this.executeAstFlattener(preparedJavaSrc, _singleton, _targetLevel);
+    return this.executeAstFlattener(preparedJavaSrc, result, _targetLevel, false);
   }
   
   /**
    * @param  preparedJavaSource used to collect javadoc and comments
    */
-  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final Collection<? extends ASTNode> parseResult, final String targetLevel) {
+  private JavaConverter.ConversionResult executeAstFlattener(final String preparedJavaSource, final ASTNode parseResult, final String targetLevel, final boolean synteticBlock) {
     final JavaASTFlattener astFlattener = this.astFlattenerProvider.get();
     astFlattener.setTargetlevel(targetLevel);
     astFlattener.useFallBackStrategy(this.fallbackConversionStartegy);
     astFlattener.setJavaSources(preparedJavaSource);
-    for (final ASTNode node : parseResult) {
-      node.accept(astFlattener);
+    boolean _and = false;
+    if (!synteticBlock) {
+      _and = false;
+    } else {
+      _and = (parseResult instanceof Block);
+    }
+    if (_and) {
+      astFlattener.acceptSyntaticBlock(((Block) parseResult));
+    } else {
+      parseResult.accept(astFlattener);
     }
     return JavaConverter.ConversionResult.create(astFlattener);
   }

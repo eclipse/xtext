@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
+import com.google.common.io.Files
 import com.google.inject.Inject
+import java.io.File
+import java.nio.charset.Charset
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
 import org.eclipse.xtend.lib.macro.Active
 import org.eclipse.xtend.lib.macro.CodeGenerationContext
@@ -18,9 +21,6 @@ import org.eclipse.xtext.junit4.TemporaryFolder
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.junit.Rule
 import org.junit.Test
-import java.io.File
-import com.google.common.io.Files
-import java.nio.charset.Charset
 
 /**
  * @author svenefftinge - Initial contribution and API
