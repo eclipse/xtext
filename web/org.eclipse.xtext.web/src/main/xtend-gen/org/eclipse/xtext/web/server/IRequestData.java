@@ -15,9 +15,9 @@ import java.util.Set;
 @SuppressWarnings("all")
 public interface IRequestData {
   /**
-   * Key for the request type parameter, which determines the actual service to be invoked.
+   * Key for the service type parameter, which determines the actual service to be invoked.
    */
-  public final static String REQUEST_TYPE = "requestType";
+  public final static String SERVICE_TYPE = "serviceType";
   
   /**
    * The available keys that can be used as arguments to {@link #getParameter(String)}.

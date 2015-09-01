@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for formatting text.
 	 */
-	function FormattingService(serverUrl, resourceId, updateService) {
-		this.initialize(serverUrl, resourceId, 'format', updateService);
+	function FormattingService(serviceUrl, resourceId, updateService) {
+		this.initialize(serviceUrl, 'format', resourceId, updateService);
 	};
 
 	FormattingService.prototype = new XtextService();

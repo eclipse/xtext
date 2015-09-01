@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for saving resources.
 	 */
-	function SaveResourceService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'save');
+	function SaveResourceService(serviceUrl, resourceId) {
+		this.initialize(serviceUrl, 'save', resourceId);
 	};
 
 	SaveResourceService.prototype = new XtextService();

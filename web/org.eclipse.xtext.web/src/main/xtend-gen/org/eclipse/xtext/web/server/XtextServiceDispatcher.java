@@ -89,7 +89,7 @@ public class XtextServiceDispatcher {
   @ToString
   public static class ServiceDescriptor {
     /**
-     * The service type according to the 'requestType' parameter.
+     * The service type according to the 'serviceType' parameter.
      */
     private String type;
     
@@ -231,9 +231,9 @@ public class XtextServiceDispatcher {
    * Get the service descriptor for the given request.
    */
   public XtextServiceDispatcher.ServiceDescriptor getService(final IRequestData request, final ISessionStore sessionStore) throws InvalidRequestException {
-    final String requestType = request.getParameter(IRequestData.REQUEST_TYPE);
-    if ((requestType == null)) {
-      throw new InvalidRequestException.InvalidParametersException("The parameter \'requestType\' is required.");
+    final String serviceType = request.getParameter(IRequestData.SERVICE_TYPE);
+    if ((serviceType == null)) {
+      throw new InvalidRequestException.InvalidParametersException("The parameter \'serviceType\' is required.");
     }
     boolean _isTraceEnabled = XtextServiceDispatcher.LOG.isTraceEnabled();
     if (_isTraceEnabled) {
@@ -269,26 +269,26 @@ public class XtextServiceDispatcher {
       };
       String _join = IterableExtensions.<String>join(_sort, ": ", ", ", "", _function);
       final String stringParams = _join.replaceAll("(\\n|\\f|\\r)+", " ");
-      XtextServiceDispatcher.LOG.trace((("xtext-service/" + requestType) + stringParams));
+      XtextServiceDispatcher.LOG.trace((("xtext-service/" + serviceType) + stringParams));
     }
     try {
-      XtextServiceDispatcher.ServiceDescriptor _createServiceDescriptor = this.createServiceDescriptor(requestType, request, sessionStore);
+      XtextServiceDispatcher.ServiceDescriptor _createServiceDescriptor = this.createServiceDescriptor(serviceType, request, sessionStore);
       final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_1 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
         @Override
         public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-          it.type = requestType;
+          it.type = serviceType;
         }
       };
       return ObjectExtensions.<XtextServiceDispatcher.ServiceDescriptor>operator_doubleArrow(_createServiceDescriptor, _function_1);
     } catch (final Throwable _t) {
       if (_t instanceof InvalidRequestException.InvalidDocumentStateException) {
         final InvalidRequestException.InvalidDocumentStateException ire = (InvalidRequestException.InvalidDocumentStateException)_t;
-        XtextServiceDispatcher.LOG.trace((("Invalid document state (" + requestType) + ")"));
+        XtextServiceDispatcher.LOG.trace((("Invalid document state (" + serviceType) + ")"));
         XtextServiceDispatcher.ServiceDescriptor _serviceDescriptor = new XtextServiceDispatcher.ServiceDescriptor();
         final Procedure1<XtextServiceDispatcher.ServiceDescriptor> _function_2 = new Procedure1<XtextServiceDispatcher.ServiceDescriptor>() {
           @Override
           public void apply(final XtextServiceDispatcher.ServiceDescriptor it) {
-            it.type = requestType;
+            it.type = serviceType;
             final Function0<IServiceResult> _function = new Function0<IServiceResult>() {
               @Override
               public IServiceResult apply() {
@@ -307,80 +307,80 @@ public class XtextServiceDispatcher {
   }
   
   /**
-   * Do the actual dispatching by delegating to a service descriptor creation method depending on the request type.
+   * Do the actual dispatching by delegating to a service descriptor creation method depending on the service type.
    * Override this method if you want to add more services to the dispatcher.
    */
-  protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String requestType, final IRequestData request, final ISessionStore sessionStore) {
+  protected XtextServiceDispatcher.ServiceDescriptor createServiceDescriptor(final String serviceType, final IRequestData request, final ISessionStore sessionStore) {
     XtextServiceDispatcher.ServiceDescriptor _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(requestType, "load")) {
+      if (Objects.equal(serviceType, "load")) {
         _matched=true;
         _switchResult = this.getLoadResourceService(false, request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "revert")) {
+      if (Objects.equal(serviceType, "revert")) {
         _matched=true;
         _switchResult = this.getLoadResourceService(true, request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "save")) {
+      if (Objects.equal(serviceType, "save")) {
         _matched=true;
         _switchResult = this.getSaveResourceService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "update")) {
+      if (Objects.equal(serviceType, "update")) {
         _matched=true;
         _switchResult = this.getUpdateDocumentService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "assist")) {
+      if (Objects.equal(serviceType, "assist")) {
         _matched=true;
         _switchResult = this.getContentAssistService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "validate")) {
+      if (Objects.equal(serviceType, "validate")) {
         _matched=true;
         _switchResult = this.getValidationService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "hover")) {
+      if (Objects.equal(serviceType, "hover")) {
         _matched=true;
         _switchResult = this.getHoverService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "highlight")) {
+      if (Objects.equal(serviceType, "highlight")) {
         _matched=true;
         _switchResult = this.getHighlightingService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "occurrences")) {
+      if (Objects.equal(serviceType, "occurrences")) {
         _matched=true;
         _switchResult = this.getOccurrencesService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "format")) {
+      if (Objects.equal(serviceType, "format")) {
         _matched=true;
         _switchResult = this.getFormattingService(request, sessionStore);
       }
     }
     if (!_matched) {
-      if (Objects.equal(requestType, "generate")) {
+      if (Objects.equal(serviceType, "generate")) {
         _matched=true;
         _switchResult = this.getGeneratorService(request, sessionStore);
       }
     }
     if (!_matched) {
-      throw new InvalidRequestException.InvalidParametersException((("The request type \'" + requestType) + "\' is not supported."));
+      throw new InvalidRequestException.InvalidParametersException((("The service type \'" + serviceType) + "\' is not supported."));
     }
     return _switchResult;
   }

@@ -12,8 +12,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	 * Service class for content assist proposals. The proposals are returned as promise of
 	 * a Deferred object.
 	 */
-	function ContentAssistService(serverUrl, resourceId, updateService) {
-		this.initialize(serverUrl, resourceId, 'assist', updateService);
+	function ContentAssistService(serviceUrl, resourceId, updateService) {
+		this.initialize(serviceUrl, 'assist', resourceId, updateService);
 	}
 
 	ContentAssistService.prototype = new XtextService();

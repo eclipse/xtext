@@ -36,23 +36,28 @@ define([
 		var options = services.options;
 		var editorContext = services.editorContext;
 		editorContext.xtextServices = services;
-		if (!options.serverUrl)
-			options.serverUrl = 'http://' + location.host + '/xtext-service';
+		if (!options.serviceUrl) {
+			if (!options.baseUrl)
+				options.baseUrl = '/';
+			else if (options.baseUrl.charAt(0) != '/')
+				options.baseUrl = '/' + options.baseUrl;
+			options.serviceUrl = location.protocol + '//' + location.host + options.baseUrl + 'xtext-service';
+		}
 		if (options.resourceId) {
 			if (!options.xtextLang)
 				options.xtextLang = options.resourceId.split('.').pop();
 			if (options.loadFromServer === undefined)
 				options.loadFromServer = true;
 			if (options.loadFromServer && this.setupPersistenceServices) {
-				services.loadResourceService = new LoadResourceService(options.serverUrl, options.resourceId, false);
+				services.loadResourceService = new LoadResourceService(options.serviceUrl, options.resourceId, false);
 				services.loadResource = function() {
 					return services.loadResourceService.invoke(editorContext, options);
 				}
-				services.saveResourceService = new SaveResourceService(options.serverUrl, options.resourceId);
+				services.saveResourceService = new SaveResourceService(options.serviceUrl, options.resourceId);
 				services.saveResource = function() {
 					return services.saveResourceService.invoke(editorContext, options);
 				}
-				services.revertResourceService = new LoadResourceService(options.serverUrl, options.resourceId, true);
+				services.revertResourceService = new LoadResourceService(options.serviceUrl, options.resourceId, true);
 				services.revertResource = function() {
 					return services.revertResourceService.invoke(editorContext, options);
 				}
@@ -71,13 +76,13 @@ define([
 			this.setupSyntaxHighlighting();
 		}
 		if (options.enableHighlightingService || options.enableHighlightingService === undefined) {
-			services.highlightingService = new HighlightingService(options.serverUrl, options.resourceId);
+			services.highlightingService = new HighlightingService(options.serviceUrl, options.resourceId);
 			services.computeHighlighting = function() {
 				return services.highlightingService.invoke(editorContext, options);
 			}
 		}
 		if (options.enableValidationService || options.enableValidationService === undefined) {
-			services.validationService = new ValidationService(options.serverUrl, options.resourceId);
+			services.validationService = new ValidationService(options.serviceUrl, options.resourceId);
 			services.validate = function() {
 				return services.validationService.invoke(editorContext, options);
 			}
@@ -94,7 +99,7 @@ define([
 				}
 			}
 			if (!options.sendFullText) {
-				services.updateService = new UpdateService(options.serverUrl, options.resourceId);
+				services.updateService = new UpdateService(options.serviceUrl, options.resourceId);
 				services.update = function() {
 					return services.updateService.invoke(editorContext, options);
 				}
@@ -106,7 +111,7 @@ define([
 		}
 		if ((options.enableContentAssistService || options.enableContentAssistService === undefined)
 				&& this.setupContentAssistService) {
-			services.contentAssistService = new ContentAssistService(options.serverUrl, options.resourceId, services.updateService);
+			services.contentAssistService = new ContentAssistService(options.serviceUrl, options.resourceId, services.updateService);
 			services.getContentAssist = function() {
 				return services.contentAssistService.invoke(editorContext, options);
 			}
@@ -114,7 +119,7 @@ define([
 		}
 		if ((options.enableHoverService || options.enableHoverService === undefined)
 				&& this.setupHoverService) {
-			services.hoverService = new HoverService(options.serverUrl, options.resourceId, services.updateService);
+			services.hoverService = new HoverService(options.serviceUrl, options.resourceId, services.updateService);
 			services.getHoverInfo = function() {
 				return services.hoverService.invoke(editorContext, options);
 			}
@@ -122,7 +127,7 @@ define([
 		}
 		if ((options.enableOccurrencesService || options.enableOccurrencesService === undefined)
 				&& this.setupOccurrencesService) {
-			services.occurrencesService = new OccurrencesService(options.serverUrl, options.resourceId, services.updateService);
+			services.occurrencesService = new OccurrencesService(options.serviceUrl, options.resourceId, services.updateService);
 			services.getOccurrences = function() {
 				return services.occurrencesService.invoke(editorContext, options);
 			}
@@ -130,7 +135,7 @@ define([
 		}
 		if ((options.enableFormattingService || options.enableFormattingService === undefined)
 				&& this.setupFormattingService) {
-			services.formattingService = new FormattingService(options.serverUrl, options.resourceId, services.updateService);
+			services.formattingService = new FormattingService(options.serviceUrl, options.resourceId, services.updateService);
 			services.format = function() {
 				return services.formattingService.invoke(editorContext, options);
 			}
@@ -138,7 +143,7 @@ define([
 		}
 		if (options.enableGeneratorService || options.enableGeneratorService === undefined) {
 			services.generatorService = new XtextService();
-			services.generatorService.initialize(options.serverUrl, options.resourceId, 'generate', services.updateService);
+			services.generatorService.initialize(options.serviceUrl, 'generate', options.resourceId, services.updateService);
 			services.generate = function() {
 				return services.generatorService.invoke(editorContext, options);
 			}
@@ -158,11 +163,11 @@ define([
 		}
 		
 		services.successListeners = [];
-		services.errorListeners = [function(requestType, severity, message, requestData) {
+		services.errorListeners = [function(serviceType, severity, message, requestData) {
 			if (options.showErrorDialogs)
-				window.alert('Xtext service \'' + requestType + '\' failed: ' + message);
+				window.alert('Xtext service \'' + serviceType + '\' failed: ' + message);
 			else
-				console.log('Xtext service \'' + requestType + '\' failed: ' + message);
+				console.log('Xtext service \'' + serviceType + '\' failed: ' + message);
 		}];
 	}
 	

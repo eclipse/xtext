@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for validation.
 	 */
-	function ValidationService(serverUrl, resourceId) {
-		this.initialize(serverUrl, resourceId, 'validate');
+	function ValidationService(serviceUrl, resourceId) {
+		this.initialize(serviceUrl, 'validate', resourceId);
 	};
 	
 	ValidationService.prototype = new XtextService();

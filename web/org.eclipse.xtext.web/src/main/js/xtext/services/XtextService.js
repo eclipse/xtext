@@ -16,16 +16,15 @@ define(['jquery'], function(jQuery) {
 	XtextService.prototype = {
 		
 		/**
-		 * Initialize the request metadata this service class.
+		 * Initialize the request metadata for this service class.
 		 */
-		initialize: function(serverUrl, resourceId, requestType, updateService) {
-			this._requestType = requestType;
-			if (resourceId === undefined) {
-				this._requestUrl = serverUrl + '/' + requestType;
-			} else {
-				this._requestUrl = serverUrl + '/' + requestType + '?resource=' + encodeURIComponent(resourceId);
-			}
-			this._updateService = updateService;
+		initialize: function(serviceUrl, serviceType, resourceId, updateService) {
+			this._requestUrl = serviceUrl + '/' + serviceType;
+			this._serviceType = serviceType;
+			if (resourceId)
+				this._encodedResourceId = encodeURIComponent(resourceId);
+			if (updateService)
+				this._updateService = updateService;
 		},
 		
 		setState: function(state) {
@@ -167,7 +166,7 @@ define(['jquery'], function(jQuery) {
 							for (var i = 0; i < successListeners.length; i++) {
 								var listener = successListeners[i];
 								if (jQuery.isFunction(listener)) {
-									listener(self._requestType, result);
+									listener(self._serviceType, result);
 								}
 							}
 						}
@@ -187,10 +186,15 @@ define(['jquery'], function(jQuery) {
 				}
 			};
 			
-			if (self._resourceId && settings.data)
-				settings.data.resource = self._resourceId;
 			settings.async = true;
-			jQuery.ajax(this._requestUrl, settings);
+			var requestUrl = self._requestUrl;
+			if (!settings.data.resource && self._encodedResourceId) {
+				if (requestUrl.indexOf('?') >= 0)
+					requestUrl += '&resource=' + self._encodedResourceId;
+				else
+					requestUrl += '?resource=' + self._encodedResourceId;
+			}
+			jQuery.ajax(requestUrl, settings);
 		},
 		
 		/**
@@ -220,7 +224,7 @@ define(['jquery'], function(jQuery) {
 					for (var i = 0; i < errorListeners.length; i++) {
 						var listener = errorListeners[i];
 						if (jQuery.isFunction(listener)) {
-							listener(this._requestType, severity, message, requestData);
+							listener(this._serviceType, severity, message, requestData);
 						}
 					}
 				}
