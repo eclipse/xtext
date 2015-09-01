@@ -1226,10 +1226,19 @@ You may also need to initialize 'import'-ed ecore models that are not generated 
   class MyLanguageStandaloneSetup extends MyLanguageStandaloneSetupGenerated {
 
     def static void doSetup() {
-      MyPackageImpl.init
+      MyModelPackage.eINSTANCE.name // NOT MyPackageImpl.init, as that won't initialize MyModelPackage statics
       new MyLanguageStandaloneSetup().createInjectorAndDoEMFRegistration
     }
 
+  }
+```
+
+Alternatively, if you are seeing strange problems like NoClassDefFoundError for *Package$Literals which happen only in function of the order of execution of your tests, then using a static initializtion block in your *InjectorProvider (if the extra Ecore model is an example only relevant for tests) or your *StandaloneSetup (if it's "production" and required e.g. in a standalone generator as well) then the following this pattern is safer:
+
+```java
+  static {
+      if (!EPackage.Registry.INSTANCE.containsKey(TestmodelPackage.eNS_URI))
+          EPackage.Registry.INSTANCE.put(TestmodelPackage.eNS_URI, TestmodelPackage.eINSTANCE);
   }
 ```
 
