@@ -9,14 +9,10 @@ package org.eclipse.xtend.core.javaconverter
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import java.util.Collection
-import java.util.Collections
-import java.util.List
 import org.eclipse.jdt.core.ICompilationUnit
 import org.eclipse.jdt.core.dom.ASTNode
 import org.eclipse.jdt.core.dom.ASTParser
 import org.eclipse.jdt.core.dom.Block
-import org.eclipse.jdt.core.dom.Statement
 import org.eclipse.xtend.core.javaconverter.ASTParserFactory.ASTParserWrapper
 import org.eclipse.xtend.lib.annotations.AccessorType
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -37,7 +33,7 @@ class JavaConverter {
 	def ConversionResult toXtend(ICompilationUnit cu) {
 		val parser = astParserFactory.createJavaParser(cu)
 		val root = parser.createAST()
-		return executeAstFlattener(cu.source, Collections.singleton(root), parser.targetLevel)
+		return executeAstFlattener(cu.source, root, parser.targetLevel, false)
 	}
 
 	/**
@@ -87,10 +83,9 @@ class JavaConverter {
 		parser.kind = ASTParser.K_STATEMENTS
 		val root = parser.createAST()
 		if (root instanceof Block) {
-			var List<Statement> statements = root.statements()
-			return executeAstFlattener(javaSrc, statements, parser.targetLevel)
+			return executeAstFlattener(javaSrc, root, parser.targetLevel, true)
 		}
-		return executeAstFlattener(javaSrc, Collections.singleton(root), parser.targetLevel)
+		return executeAstFlattener(javaSrc, root, parser.targetLevel, false)
 	}
 
 	/**
@@ -102,7 +97,7 @@ class JavaConverter {
 		parser.source = javaSrc.toCharArray
 		parser.kind = ASTParser.K_EXPRESSION
 		val root = parser.createAST()
-		return executeAstFlattener(javaSrc, Collections.singleton(root), parser.targetLevel)
+		return executeAstFlattener(javaSrc, root, parser.targetLevel, false)
 	}
 
 	/**
@@ -120,7 +115,7 @@ class JavaConverter {
 		}
 		if (unitName == null) {
 			parser.unitName = "MISSING"
-			javaSrcBuilder.append('''class MISSING { «javaSrc»}''')
+			javaSrcBuilder.append('''class MISSING { «javaSrc» }''')
 		} else {
 			parser.unitName = unitName
 			javaSrcBuilder.append(javaSrc)
@@ -129,20 +124,22 @@ class JavaConverter {
 		val preparedJavaSrc = javaSrcBuilder.toString
 		parser.source = preparedJavaSrc.toCharArray
 		val result = parser.createAST()
-		return executeAstFlattener(preparedJavaSrc, Collections.singleton(result), parser.targetLevel)
+		return executeAstFlattener(preparedJavaSrc, result, parser.targetLevel, false)
 	}
 
 	/**
 	 * @param  preparedJavaSource used to collect javadoc and comments
 	 */
-	private def executeAstFlattener(String preparedJavaSource, Collection<? extends ASTNode> parseResult,
-		String targetLevel) {
+	private def executeAstFlattener(String preparedJavaSource, ASTNode parseResult, String targetLevel,
+		boolean synteticBlock) {
 		val astFlattener = astFlattenerProvider.get
 		astFlattener.targetlevel = targetLevel
 		astFlattener.useFallBackStrategy = fallbackConversionStartegy
 		astFlattener.setJavaSources(preparedJavaSource)
-		for (ASTNode node : parseResult) {
-			node.accept(astFlattener)
+		if (synteticBlock && parseResult instanceof Block) {
+			astFlattener.acceptSyntaticBlock(parseResult as Block)
+		} else {
+			parseResult.accept(astFlattener)
 		}
 		return ConversionResult.create(astFlattener)
 	}

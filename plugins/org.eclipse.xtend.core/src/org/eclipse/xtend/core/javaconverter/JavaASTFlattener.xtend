@@ -156,8 +156,19 @@ class JavaASTFlattener extends ASTVisitor {
 		this.problems
 	}
 
+	def acceptSyntaticBlock(Block node) {
+		val childrenCount = node.statements.size
+		if (childrenCount > 0) {
+			node.statements.forEach [ ASTNode child, counter |
+				child.accept(this)
+				appendLineWrapToBuffer
+			]
+		}
+	}
+
 	def private decreaseIndent() {
-		this.indentation--
+		if (indentation > 0)
+			this.indentation--
 	}
 
 	def private increaseIndent() {
@@ -201,7 +212,7 @@ class JavaASTFlattener extends ASTVisitor {
 	def operator_multiply(String string, int i) {
 		var retVal = ""
 		var counter = 0
-		while (i != counter) {
+		while (counter < i) {
 			counter++
 			retVal = retVal + string
 		}
@@ -354,7 +365,7 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override visit(TypeDeclaration it) {
 		if (isDummyType(it)) {
-			bodyDeclarations.visitAll
+			bodyDeclarations.visitAll(nl())
 			return false;
 		}
 		if (isNotSupportedInnerType(it)) {
@@ -394,7 +405,6 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendToBuffer("{")
 		increaseIndent
-		appendLineWrapToBuffer
 		var BodyDeclaration prev
 		for (BodyDeclaration body : bodyDeclarations() as Iterable<BodyDeclaration>) {
 			if (prev instanceof EnumConstantDeclaration) {
@@ -404,6 +414,7 @@ class JavaASTFlattener extends ASTVisitor {
 					appendToBuffer("; ")
 				}
 			}
+			appendLineWrapToBuffer
 			body.accept(this)
 			prev = body
 		}
@@ -504,7 +515,6 @@ class JavaASTFlattener extends ASTVisitor {
 			appendExtraDimensions(frag.getExtraDimensions())
 			appendSpaceToBuffer
 			frag.accept(this)
-			appendLineWrapToBuffer
 		]
 		return false
 	}
@@ -517,9 +527,9 @@ class JavaASTFlattener extends ASTVisitor {
 			type.accept(this)
 			appendSpaceToBuffer
 			frag.accept(this)
-			appendSpaceToBuffer
 			if (counter < fragments.size - 1) {
 				appendToBuffer(",")
+				appendSpaceToBuffer
 			}
 		]
 
@@ -579,7 +589,6 @@ class JavaASTFlattener extends ASTVisitor {
 			frag.accept(this)
 			appendSpaceToBuffer
 		]
-		appendLineWrapToBuffer
 		return false
 	}
 
@@ -600,13 +609,13 @@ class JavaASTFlattener extends ASTVisitor {
 		if (iterable.empty)
 			return
 		else
-			visitAll(iterable, "")
+			visitAll(iterable, null)
 	}
 
 	def visitAll(Iterable<? extends ASTNode> iterable, String separator) {
-		iterable.forEach [ ASTNode it, counter |
-			accept(this)
-			if (counter < iterable.size - 1) {
+		iterable.forEach [ ASTNode node, counter |
+			node.accept(this)
+			if (separator != null && counter < iterable.size - 1) {
 				appendToBuffer(separator)
 			}
 		]
@@ -765,13 +774,21 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(Block node) {
 		appendToBuffer("{")
 		increaseIndent
-		appendLineWrapToBuffer
-		node.statements.visitAll
+		if(!node.statements.empty) {
+			node.statements.forEach [ ASTNode child, counter |
+				appendLineWrapToBuffer
+				child.accept(this)
+			]
+		} 
+		// collect orphaned comments
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
 			cu.unAssignedComments.filter [
 				startPosition < node.startPosition + node.length
 			].forEach [
+				if(!(it instanceof LineComment)) {
+					appendLineWrapToBuffer
+				}
 				accept(this)
 				assignedComments.add(it)
 			]
@@ -779,19 +796,7 @@ class JavaASTFlattener extends ASTVisitor {
 		decreaseIndent
 		appendLineWrapToBuffer
 		appendToBuffer("}")
-		var shouldWrap = true
-		val parent = node.parent
-		if (parent instanceof IfStatement) {
-			shouldWrap = parent.elseStatement === null
-		} else if (parent instanceof TryStatement) {
-			shouldWrap = parent.catchClauses.empty && parent.^finally === null
-		} else if (parent instanceof DoStatement) {
-			shouldWrap = false
-		} else if (parent instanceof CatchClause) {
-			shouldWrap = false
-		}
-		if (shouldWrap)
-			appendLineWrapToBuffer
+
 		return false
 	}
 
@@ -828,7 +833,6 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override visit(ForStatement it) {
-		appendLineWrapToBuffer
 		appendToBuffer("for (")
 		initializers.visitAll
 		appendToBuffer("; ")
@@ -1466,11 +1470,11 @@ class JavaASTFlattener extends ASTVisitor {
 			node.getComponentType().accept(this)
 			appendToBuffer("[]")
 		} else {
-			//Java8 and higher
+			// Java8 and higher
 			node.genericChildProperty("elementType")?.accept(this)
 			var dimensions = node.genericChildListProperty("dimensions")
 			if (!dimensions.nullOrEmpty) {
-				dimensions.forEach[dim|
+				dimensions.forEach [ dim |
 					dim.genericChildListProperty("annotations")?.visitAll
 					appendToBuffer("[]")
 				]
@@ -1549,7 +1553,6 @@ class JavaASTFlattener extends ASTVisitor {
 		appendToBuffer(" while (")
 		node.getExpression().accept(this)
 		appendToBuffer(")")
-		appendLineWrapToBuffer
 		return false
 	}
 

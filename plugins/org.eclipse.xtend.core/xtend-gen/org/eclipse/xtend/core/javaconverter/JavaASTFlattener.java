@@ -181,8 +181,28 @@ public class JavaASTFlattener extends ASTVisitor {
     return this.problems;
   }
   
+  public void acceptSyntaticBlock(final Block node) {
+    List _statements = node.statements();
+    final int childrenCount = _statements.size();
+    if ((childrenCount > 0)) {
+      List _statements_1 = node.statements();
+      final Procedure2<ASTNode, Integer> _function = new Procedure2<ASTNode, Integer>() {
+        @Override
+        public void apply(final ASTNode child, final Integer counter) {
+          child.accept(JavaASTFlattener.this);
+          JavaASTFlattener.this.appendLineWrapToBuffer();
+        }
+      };
+      IterableExtensions.<ASTNode>forEach(_statements_1, _function);
+    }
+  }
+  
   private int decreaseIndent() {
-    return this.indentation--;
+    int _xifexpression = (int) 0;
+    if ((this.indentation > 0)) {
+      _xifexpression = this.indentation--;
+    }
+    return _xifexpression;
   }
   
   private int increaseIndent() {
@@ -277,7 +297,7 @@ public class JavaASTFlattener extends ASTVisitor {
     {
       String retVal = "";
       int counter = 0;
-      while ((i != counter)) {
+      while ((counter < i)) {
         {
           counter++;
           retVal = (retVal + string);
@@ -570,7 +590,8 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _isDummyType = this._aSTFlattenerUtils.isDummyType(it);
     if (_isDummyType) {
       List _bodyDeclarations = it.bodyDeclarations();
-      this.visitAll(_bodyDeclarations);
+      String _nl = this.nl();
+      this.visitAll(_bodyDeclarations, _nl);
       return false;
     }
     boolean _isNotSupportedInnerType = this._aSTFlattenerUtils.isNotSupportedInnerType(it);
@@ -633,7 +654,6 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     this.appendToBuffer("{");
     this.increaseIndent();
-    this.appendLineWrapToBuffer();
     BodyDeclaration prev = null;
     List _bodyDeclarations_1 = it.bodyDeclarations();
     for (final BodyDeclaration body : ((Iterable<BodyDeclaration>) _bodyDeclarations_1)) {
@@ -645,6 +665,7 @@ public class JavaASTFlattener extends ASTVisitor {
             this.appendToBuffer("; ");
           }
         }
+        this.appendLineWrapToBuffer();
         body.accept(this);
         prev = body;
       }
@@ -859,7 +880,6 @@ public class JavaASTFlattener extends ASTVisitor {
         JavaASTFlattener.this.appendExtraDimensions(_extraDimensions);
         JavaASTFlattener.this.appendSpaceToBuffer();
         frag.accept(JavaASTFlattener.this);
-        JavaASTFlattener.this.appendLineWrapToBuffer();
       }
     };
     IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
@@ -882,13 +902,13 @@ public class JavaASTFlattener extends ASTVisitor {
         _type.accept(JavaASTFlattener.this);
         JavaASTFlattener.this.appendSpaceToBuffer();
         frag.accept(JavaASTFlattener.this);
-        JavaASTFlattener.this.appendSpaceToBuffer();
         List _fragments = it.fragments();
         int _size = _fragments.size();
         int _minus = (_size - 1);
         boolean _lessThan = ((counter).intValue() < _minus);
         if (_lessThan) {
           JavaASTFlattener.this.appendToBuffer(",");
+          JavaASTFlattener.this.appendSpaceToBuffer();
         }
       }
     };
@@ -991,7 +1011,6 @@ public class JavaASTFlattener extends ASTVisitor {
       }
     };
     IterableExtensions.<VariableDeclarationFragment>forEach(_fragments, _function);
-    this.appendLineWrapToBuffer();
     return false;
   }
   
@@ -1017,19 +1036,26 @@ public class JavaASTFlattener extends ASTVisitor {
     if (_isEmpty) {
       return;
     } else {
-      this.visitAll(iterable, "");
+      this.visitAll(iterable, null);
     }
   }
   
   public void visitAll(final Iterable<? extends ASTNode> iterable, final String separator) {
     final Procedure2<ASTNode, Integer> _function = new Procedure2<ASTNode, Integer>() {
       @Override
-      public void apply(final ASTNode it, final Integer counter) {
-        it.accept(JavaASTFlattener.this);
-        int _size = IterableExtensions.size(iterable);
-        int _minus = (_size - 1);
-        boolean _lessThan = ((counter).intValue() < _minus);
-        if (_lessThan) {
+      public void apply(final ASTNode node, final Integer counter) {
+        node.accept(JavaASTFlattener.this);
+        boolean _and = false;
+        boolean _notEquals = (!Objects.equal(separator, null));
+        if (!_notEquals) {
+          _and = false;
+        } else {
+          int _size = IterableExtensions.size(iterable);
+          int _minus = (_size - 1);
+          boolean _lessThan = ((counter).intValue() < _minus);
+          _and = _lessThan;
+        }
+        if (_and) {
           JavaASTFlattener.this.appendToBuffer(separator);
         }
       }
@@ -1332,15 +1358,26 @@ public class JavaASTFlattener extends ASTVisitor {
   public boolean visit(final Block node) {
     this.appendToBuffer("{");
     this.increaseIndent();
-    this.appendLineWrapToBuffer();
     List _statements = node.statements();
-    this.visitAll(_statements);
+    boolean _isEmpty = _statements.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      List _statements_1 = node.statements();
+      final Procedure2<ASTNode, Integer> _function = new Procedure2<ASTNode, Integer>() {
+        @Override
+        public void apply(final ASTNode child, final Integer counter) {
+          JavaASTFlattener.this.appendLineWrapToBuffer();
+          child.accept(JavaASTFlattener.this);
+        }
+      };
+      IterableExtensions.<ASTNode>forEach(_statements_1, _function);
+    }
     ASTNode _root = node.getRoot();
     if ((_root instanceof CompilationUnit)) {
       ASTNode _root_1 = node.getRoot();
       final CompilationUnit cu = ((CompilationUnit) _root_1);
       Iterable<Comment> _unAssignedComments = this.unAssignedComments(cu);
-      final Function1<Comment, Boolean> _function = new Function1<Comment, Boolean>() {
+      final Function1<Comment, Boolean> _function_1 = new Function1<Comment, Boolean>() {
         @Override
         public Boolean apply(final Comment it) {
           int _startPosition = it.getStartPosition();
@@ -1350,51 +1387,22 @@ public class JavaASTFlattener extends ASTVisitor {
           return Boolean.valueOf((_startPosition < _plus));
         }
       };
-      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function);
-      final Procedure1<Comment> _function_1 = new Procedure1<Comment>() {
+      Iterable<Comment> _filter = IterableExtensions.<Comment>filter(_unAssignedComments, _function_1);
+      final Procedure1<Comment> _function_2 = new Procedure1<Comment>() {
         @Override
         public void apply(final Comment it) {
+          if ((!(it instanceof LineComment))) {
+            JavaASTFlattener.this.appendLineWrapToBuffer();
+          }
           it.accept(JavaASTFlattener.this);
           JavaASTFlattener.this.assignedComments.add(it);
         }
       };
-      IterableExtensions.<Comment>forEach(_filter, _function_1);
+      IterableExtensions.<Comment>forEach(_filter, _function_2);
     }
     this.decreaseIndent();
     this.appendLineWrapToBuffer();
     this.appendToBuffer("}");
-    boolean shouldWrap = true;
-    final ASTNode parent = node.getParent();
-    if ((parent instanceof IfStatement)) {
-      Statement _elseStatement = ((IfStatement)parent).getElseStatement();
-      boolean _tripleEquals = (_elseStatement == null);
-      shouldWrap = _tripleEquals;
-    } else {
-      if ((parent instanceof TryStatement)) {
-        boolean _and = false;
-        List _catchClauses = ((TryStatement)parent).catchClauses();
-        boolean _isEmpty = _catchClauses.isEmpty();
-        if (!_isEmpty) {
-          _and = false;
-        } else {
-          Block _finally = ((TryStatement)parent).getFinally();
-          boolean _tripleEquals_1 = (_finally == null);
-          _and = _tripleEquals_1;
-        }
-        shouldWrap = _and;
-      } else {
-        if ((parent instanceof DoStatement)) {
-          shouldWrap = false;
-        } else {
-          if ((parent instanceof CatchClause)) {
-            shouldWrap = false;
-          }
-        }
-      }
-    }
-    if (shouldWrap) {
-      this.appendLineWrapToBuffer();
-    }
     return false;
   }
   
@@ -1454,7 +1462,6 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final ForStatement it) {
-    this.appendLineWrapToBuffer();
     this.appendToBuffer("for (");
     List _initializers = it.initializers();
     this.visitAll(_initializers);
@@ -2674,7 +2681,6 @@ public class JavaASTFlattener extends ASTVisitor {
     Expression _expression = node.getExpression();
     _expression.accept(this);
     this.appendToBuffer(")");
-    this.appendLineWrapToBuffer();
     return false;
   }
   
