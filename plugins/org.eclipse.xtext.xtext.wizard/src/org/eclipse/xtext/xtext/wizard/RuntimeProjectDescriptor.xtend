@@ -16,7 +16,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 	}
 	
 	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild
+		config.buildSystem.isPluginBuild || config.uiProject.enabled
 	}
 	
 	override getTestProject() {
@@ -70,7 +70,7 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 		files += super.files
 		files += file(Outlet.MAIN_RESOURCES, grammarFilePath, grammar)
 		files += file(Outlet.MAIN_RESOURCES, workflowFilePath, workflow)
-		files
+		return files
 	}
 	
 	def String getGrammarFilePath() {

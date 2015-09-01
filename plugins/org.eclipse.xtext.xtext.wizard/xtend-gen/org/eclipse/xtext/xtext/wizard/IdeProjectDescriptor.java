@@ -14,6 +14,7 @@ import org.eclipse.xtext.xtext.wizard.ExternalDependency;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.RuntimeProjectDescriptor;
+import org.eclipse.xtext.xtext.wizard.UiProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 
 @FinalFieldsConstructor
@@ -33,9 +34,19 @@ public class IdeProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public boolean isEclipsePluginProject() {
+    boolean _or = false;
     WizardConfiguration _config = this.getConfig();
     BuildSystem _buildSystem = _config.getBuildSystem();
-    return _buildSystem.isPluginBuild();
+    boolean _isPluginBuild = _buildSystem.isPluginBuild();
+    if (_isPluginBuild) {
+      _or = true;
+    } else {
+      WizardConfiguration _config_1 = this.getConfig();
+      UiProjectDescriptor _uiProject = _config_1.getUiProject();
+      boolean _isEnabled = _uiProject.isEnabled();
+      _or = _isEnabled;
+    }
+    return _or;
   }
   
   @Override

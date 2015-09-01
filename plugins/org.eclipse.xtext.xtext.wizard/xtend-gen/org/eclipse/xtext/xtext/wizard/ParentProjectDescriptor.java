@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -63,30 +64,26 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Iterable<? extends GeneratedFile> getFiles() {
-    ArrayList<GeneratedFile> _xblockexpression = null;
-    {
-      final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-      Iterable<? extends GeneratedFile> _files = super.getFiles();
-      Iterables.<GeneratedFile>addAll(files, _files);
-      WizardConfiguration _config = this.getConfig();
-      BuildSystem _buildSystem = _config.getBuildSystem();
-      boolean _isGradleBuild = _buildSystem.isGradleBuild();
-      if (_isGradleBuild) {
-        CharSequence _settingsGradle = this.settingsGradle();
-        PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
-        files.add(_file);
-        WizardConfiguration _config_1 = this.getConfig();
-        SourceLayout _sourceLayout = _config_1.getSourceLayout();
-        boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
-        if (_equals) {
-          CharSequence _plainLayout = this.plainLayout();
-          PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/plain-layout.gradle", _plainLayout);
-          files.add(_file_1);
-        }
+    final ArrayList<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
+    Iterable<? extends GeneratedFile> _files = super.getFiles();
+    Iterables.<GeneratedFile>addAll(files, _files);
+    WizardConfiguration _config = this.getConfig();
+    BuildSystem _buildSystem = _config.getBuildSystem();
+    boolean _isGradleBuild = _buildSystem.isGradleBuild();
+    if (_isGradleBuild) {
+      CharSequence _settingsGradle = this.settingsGradle();
+      PlainTextFile _file = this.file(Outlet.ROOT, "settings.gradle", _settingsGradle);
+      files.add(_file);
+      WizardConfiguration _config_1 = this.getConfig();
+      SourceLayout _sourceLayout = _config_1.getSourceLayout();
+      boolean _equals = Objects.equal(_sourceLayout, SourceLayout.PLAIN);
+      if (_equals) {
+        CharSequence _plainLayout = this.plainLayout();
+        PlainTextFile _file_1 = this.file(Outlet.ROOT, "gradle/plain-layout.gradle", _plainLayout);
+        files.add(_file_1);
       }
-      _xblockexpression = files;
     }
-    return _xblockexpression;
+    return files;
   }
   
   @Override
@@ -640,6 +637,11 @@ public class ParentProjectDescriptor extends ProjectDescriptor {
       }
     };
     return ObjectExtensions.<PomFile>operator_doubleArrow(_pom, _function);
+  }
+  
+  @Override
+  public Set<String> getSourceFolders() {
+    return Collections.<String>unmodifiableSet(CollectionLiterals.<String>newHashSet());
   }
   
   public ParentProjectDescriptor(final WizardConfiguration config) {
