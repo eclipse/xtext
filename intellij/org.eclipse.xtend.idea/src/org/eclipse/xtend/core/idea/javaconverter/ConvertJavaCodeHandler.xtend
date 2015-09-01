@@ -15,6 +15,7 @@ import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.progress.ProgressIndicator
 import com.intellij.openapi.progress.ProgressManager
@@ -26,6 +27,8 @@ import com.intellij.psi.PsiDirectory
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiJavaFile
+import com.intellij.psi.codeStyle.CodeStyleManager
+import com.intellij.psi.util.PsiUtil
 import com.intellij.refactoring.RefactoringActionHandler
 import com.intellij.util.SequentialModalProgressTask
 import com.intellij.util.SequentialTask
@@ -37,8 +40,6 @@ import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler.ConvertJ
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.javaconverter.JavaConverter
 import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult
-import com.intellij.psi.codeStyle.CodeStyleManager
-import com.intellij.psi.util.PsiUtil
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -139,10 +140,16 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 							if (jvf.parent.findChild(xtendFileName) === null) {
 								val xtendFile = jvf.parent.createChildData(this, xtendFileName)
 								xtendFile.binaryContent = result.xtendCode.bytes
-								val formatter = CodeStyleManager.getInstance(resultEntry.key.project)
-								val xtendPsiFile = PsiUtil.getPsiFile(resultEntry.key.project, xtendFile)
+								val project = resultEntry.key.project
+								val formatter = CodeStyleManager.getInstance(project)
+								val xtendPsiFile = PsiUtil.getPsiFile(project, xtendFile)
 								formatter.reformat(xtendPsiFile)
 								jvf.delete(this)
+								if (runnables.size === 1) {
+									ApplicationManager.getApplication().invokeLater [
+										FileEditorManager.getInstance(project).openFile(xtendFile, true)
+									]
+								}
 							}
 						}
 					}
