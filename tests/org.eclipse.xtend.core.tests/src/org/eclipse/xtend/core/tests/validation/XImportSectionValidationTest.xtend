@@ -17,12 +17,12 @@ import org.eclipse.xtext.diagnostics.Diagnostic
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.validation.Issue
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage.Literals.*
-import org.eclipse.xtext.xbase.annotations.validation.UnresolvedFeatureCallTypeAwareMessageProvider
 
 /**
  * @author Anton Kosyakov - Initial contribution and API

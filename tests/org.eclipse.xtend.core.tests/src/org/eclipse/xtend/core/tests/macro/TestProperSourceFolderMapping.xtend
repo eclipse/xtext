@@ -8,11 +8,11 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.lib.macro.AbstractClassProcessor
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-import org.eclipse.xtend.lib.macro.CodeGenerationContext
 import org.eclipse.xtend.lib.macro.Active
-import org.junit.Test
+import org.eclipse.xtend.lib.macro.CodeGenerationContext
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.junit.Assert
+import org.junit.Test
 
 /**
  * @author Sven Efftinge - Initial contribution and API

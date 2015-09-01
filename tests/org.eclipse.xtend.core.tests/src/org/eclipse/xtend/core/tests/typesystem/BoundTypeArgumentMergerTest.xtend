@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger

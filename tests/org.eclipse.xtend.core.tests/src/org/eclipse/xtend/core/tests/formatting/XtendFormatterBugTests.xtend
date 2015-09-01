@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.junit.Test
-import org.junit.Ignore
 import org.eclipse.xtext.formatting2.FormatterPreferenceKeys
+import org.junit.Ignore
+import org.junit.Test
 
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 

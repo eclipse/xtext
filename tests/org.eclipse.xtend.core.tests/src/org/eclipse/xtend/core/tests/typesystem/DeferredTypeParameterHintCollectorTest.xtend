@@ -9,9 +9,11 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.common.collect.ListMultimap
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.util.List
 import java.util.Map
 import java.util.Set
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.util.Triple
@@ -23,6 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgumen
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector
@@ -32,9 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import com.google.inject.Provider
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.xbase.typesystem.references.StandardTypeReferenceOwner
 
 /**
  * @author Sebastian Zarnekow

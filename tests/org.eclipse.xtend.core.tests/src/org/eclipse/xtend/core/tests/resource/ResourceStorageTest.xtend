@@ -10,8 +10,11 @@ package org.eclipse.xtend.core.tests.resource
 import com.google.inject.Inject
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.junit4.util.InMemoryURIConverter
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -19,13 +22,10 @@ import org.eclipse.xtext.resource.persistence.IResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.ResourceStorageFacade
 import org.eclipse.xtext.resource.persistence.StorageAwareResource
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
-import org.junit.Test
-import org.eclipse.xtext.common.types.JvmField
-import java.io.IOException
-import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.eclipse.xtext.xbase.resource.BatchLinkableResourceStorageWritable
-import java.io.OutputStream
+import org.junit.Test
 
 /**
  * @author Sven Efftinge - Initial contribution and API

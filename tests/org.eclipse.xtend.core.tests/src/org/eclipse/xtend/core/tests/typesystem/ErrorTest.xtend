@@ -16,22 +16,22 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.common.types.JvmOperation
+import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xbase.XAssignment
 import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.xtext.xbase.XIfExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.junit.typesystem.NoJRESmokeTester
+import org.eclipse.xtext.xbase.junit.typesystem.Oven
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.eclipse.xtext.xbase.XIfExpression
-import org.eclipse.xtext.xbase.XCastedExpression
-import org.eclipse.xtext.xbase.junit.typesystem.Oven
-import org.eclipse.xtext.xbase.junit.typesystem.NoJRESmokeTester
-import org.eclipse.xtext.resource.XtextResource
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

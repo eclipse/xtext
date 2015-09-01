@@ -20,22 +20,22 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtext.validation.ComposedChecks
 import org.junit.Assert
 import org.junit.Test
 
 import static org.eclipse.xtend.core.tests.macro.MutableAssert.*
-import org.eclipse.xtend.lib.macro.declaration.TypeReference
-import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.Visibility
-import org.eclipse.xtext.validation.ComposedChecks
 
 /**
  * @author Anton Kosyakov - Initial contribution and API
