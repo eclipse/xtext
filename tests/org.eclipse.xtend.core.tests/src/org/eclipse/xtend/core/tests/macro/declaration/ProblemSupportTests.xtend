@@ -2,12 +2,12 @@ package org.eclipse.xtend.core.tests.macro.declaration
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.junit.Test
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
-import org.eclipse.xtend.core.macro.ActiveAnnotationContexts
+import org.junit.Test
 
 class ProblemSupportTests extends AbstractXtendTestCase {
 	

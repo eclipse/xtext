@@ -56,11 +56,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import testdata.OverloadedMethods;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+
+import testdata.OverloadedMethods;
 
 /**
  * @author Sven Efftinge

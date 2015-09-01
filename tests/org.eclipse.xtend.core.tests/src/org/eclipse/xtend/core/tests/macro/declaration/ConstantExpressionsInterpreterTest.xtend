@@ -17,10 +17,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.interpreter.ConstantExpressionEvaluationException
-import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 import org.junit.Test
 import test.Constants1
-import org.eclipse.xtext.xbase.resource.BatchLinkableResource
 
 /**
  * @author Sven Efftinge

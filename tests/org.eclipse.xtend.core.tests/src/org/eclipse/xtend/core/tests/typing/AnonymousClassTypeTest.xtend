@@ -10,11 +10,11 @@ package org.eclipse.xtend.core.tests.typing
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.AnonymousClass
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.eclipse.xtend.core.xtend.AnonymousClass
 
 /**
  * @author Jan Koehnlein - Initial contribution and API

@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
-import org.junit.Test
-import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 import org.junit.Ignore
+import org.junit.Test
+
+import static org.eclipse.xtend.core.formatting2.XtendFormatterPreferenceKeys.*
 
 class XtendOnelinersFormatterTest extends AbstractXtendFormatterTest {
 	

@@ -11,10 +11,10 @@ import com.google.inject.Inject
 import java.util.Set
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.xbase.imports.ImportsAcceptor.DefaultImportsAcceptor
 import org.eclipse.xtext.xbase.imports.ImportsCollector
 import org.junit.Test
-import org.eclipse.xtext.util.TextRegion
 
 /**
  * @author Dennis Huebner - Initial contribution and API

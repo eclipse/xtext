@@ -1,9 +1,9 @@
 package org.eclipse.xtend.core.tests.formatting
 
+import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting2.XbaseFormatterPreferenceKeys.*
-import org.junit.Ignore
 
 class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatPublic() {

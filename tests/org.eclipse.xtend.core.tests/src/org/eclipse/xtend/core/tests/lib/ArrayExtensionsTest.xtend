@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.lib
 
+import java.util.Arrays
 import org.junit.Test
 
 import static org.junit.Assert.*
-import java.util.Arrays
 
 /**
  * @author Sven Efftinge - Initial contribution and API
