@@ -12,6 +12,8 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
+ * baseUrl = "/" {String}
+ *     The path segment where the Xtext service is found; see serviceUrl option.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -47,8 +49,9 @@
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
- * serverUrl {String}
- *     The URL of the Xtext server.
+ * serviceUrl {String}
+ *     The URL of the Xtext servlet; if no value is given, it is constructed using the baseUrl option in the form
+ *     {location.protocol}//{location.host}{baseUrl}xtext-service
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}

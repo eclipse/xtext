@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for hover information.
 	 */
-	function HoverService(serverUrl, resourceId, updateService) {
-		this.initialize(serverUrl, resourceId, 'hover', updateService);
+	function HoverService(serviceUrl, resourceId, updateService) {
+		this.initialize(serviceUrl, 'hover', resourceId, updateService);
 	};
 
 	HoverService.prototype = new XtextService();

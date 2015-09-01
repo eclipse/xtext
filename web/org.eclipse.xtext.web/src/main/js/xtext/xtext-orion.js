@@ -12,6 +12,8 @@
  * option name with camelCase converted to hyphen-separated.
  * The following options are available:
  *
+ * baseUrl = "/" {String}
+ *     The path segment where the Xtext service is found; see serviceUrl option.
  * contentType {String}
  *     The content type included in requests to the Xtext server.
  * dirtyElement {String | DOMElement}
@@ -53,8 +55,9 @@
  * sendFullText = false {Boolean}
  *     Whether the full text shall be sent to the server with each request; use this if you want
  *     the server to run in stateless mode. If the option is inactive, the server state is updated regularly.
- * serverUrl {String}
- *     The URL of the Xtext server.
+ * serviceUrl {String}
+ *     The URL of the Xtext servlet; if no value is given, it is constructed using the baseUrl option in the form
+ *     {location.protocol}//{location.host}{baseUrl}xtext-service
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
@@ -68,14 +71,13 @@
 define([
 	'jquery',
 	'orion/Deferred',
-	'embeddedEditor/helper/bootstrap',
 	'orion/codeEdit',
 	'orion/keyBinding',
 	'orion/editor/annotations',
 	'xtext/compatibility',
 	'xtext/ServiceBuilder',
 	'xtext/OrionEditorContext'
-], function(jQuery, OrionDeferred, Bootstrap, CodeEdit, mKeyBinding, mAnnotations, compatibility,
+], function(jQuery, OrionDeferred, CodeEdit, mKeyBinding, mAnnotations, compatibility,
 		ServiceBuilder, EditorContext) {
 	
 	var exports = {};
@@ -117,59 +119,38 @@ define([
 		}
 		
 		var deferred = jQuery.Deferred();
-		Bootstrap.startup().then(function(core) {
+		var editorViewers = [];
+		editorViewers.length = parents.length;
+		var finishedViewers = 0;
+		var codeEdit = new CodeEdit();
+		for (var i = 0; i < parents.length; i++) {
+			var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
+			var content = jQuery(parents[i]).text();
 			
-			var editorViewers = [];
-			editorViewers.length = parents.length;
-			var finishedViewers = 0;
-			var codeEdit = new CodeEdit();
-			for (var i = 0; i < parents.length; i++) {
-				var editorOptions = ServiceBuilder.mergeOptions(parents[i], options);
-				var content = jQuery(parents[i]).text();
-				if (!editorOptions.xtextLang && editorOptions.resourceId)
-					editorOptions.xtextLang = editorOptions.resourceId.split('.').pop();
-				var contentType = editorOptions.contentType;
-				if (!contentType && editorOptions.xtextLang)
-					contentType = 'xtext/' + editorOptions.xtextLang;
-				else if (!contentType)
-					contentType = 'xtext';
-				core.serviceRegistry.registerService('orion.core.contenttype', {}, {
-					contentTypes: [{
-						id: contentType,
-						extension: [editorOptions.xtextLang],
-						name: 'Xtext Language',
-						'extends': 'text/plain'
-					}]
-				});
-				
-				codeEdit.create({
-					parent: parents[i],
-					contentType: contentType,
-					contents: content
-				}).then(function(editorViewer) {
-					try {
-						exports.createServices(editorViewer, editorOptions, contentType);
-					} catch (error) {
-						console.log('Error while building Xtext services: ' + error);
-						if (error.stack)
-							console.log(error.stack);
-						deferred.reject(error);
-						return;
-					}
-					editorViewers[i] = editorViewer;
-					finishedViewers++;
-					if (finishedViewers == parents.length) {
-						if (finishedViewers == 1)
-							deferred.resolve(editorViewer);
-						else
-							deferred.resolve(editorViewers);
-					}
-				}, function(error) {
+			codeEdit.create({parent: parents[i]}).then(function(editorViewer) {
+				try {
+					var xtextServices = exports.createServices(editorViewer, editorOptions);
+					editorViewer.setContents(content, xtextServices.contentType);
+				} catch (error) {
+					console.log('Error while building Xtext services: ' + error);
+					if (error.stack)
+						console.log(error.stack);
 					deferred.reject(error);
-				});
-				
-			}
-		});
+					return;
+				}
+				editorViewers[i] = editorViewer;
+				finishedViewers++;
+				if (finishedViewers == parents.length) {
+					if (finishedViewers == 1)
+						deferred.resolve(editorViewer);
+					else
+						deferred.resolve(editorViewers);
+				}
+			}, function(error) {
+				deferred.reject(error);
+			});
+			
+		}
 		return deferred.promise();
 	}
 	
@@ -183,7 +164,23 @@ define([
 	 * Configure Xtext services for the given editor. The editor does not have to be created
 	 * with createEditor(options).
 	 */
-	exports.createServices = function(editorViewer, options, contentType) {
+	exports.createServices = function(editorViewer, options) {
+		if (!options.xtextLang && options.resourceId)
+			options.xtextLang = options.resourceId.split('.').pop();
+		var contentType = options.contentType;
+		if (!contentType && options.xtextLang)
+			contentType = 'xtext/' + options.xtextLang;
+		else if (!contentType)
+			contentType = 'xtext';
+		editorViewer.serviceRegistry.registerService('orion.core.contenttype', {}, {
+			contentTypes: [{
+				id: contentType,
+				extension: [options.xtextLang],
+				name: 'Xtext Language',
+				'extends': 'text/plain'
+			}]
+		});
+		
 		var xtextServices = {
 			options: options,
 			editorContext: new EditorContext(editorViewer.editor),

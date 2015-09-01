@@ -11,8 +11,8 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	/**
 	 * Service class for loading resources. The resulting text is passed to the editor context.
 	 */
-	function LoadResourceService(serverUrl, resourceId, revert) {
-		this.initialize(serverUrl, resourceId, revert ? 'revert' : 'load');
+	function LoadResourceService(serviceUrl, resourceId, revert) {
+		this.initialize(serviceUrl, revert ? 'revert' : 'load', resourceId);
 	};
 
 	LoadResourceService.prototype = new XtextService();

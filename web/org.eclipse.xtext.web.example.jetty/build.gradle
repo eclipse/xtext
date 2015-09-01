@@ -21,12 +21,14 @@ dependencies {
 
 def orionDir = file('src/main/webapp/orion')
 def orionZip = file("$buildDir/orion/built-codeEdit.zip")
+def orionUrl = 'http://download.eclipse.org/orion/drops/I2222/built-codeEdit.zip'
 
 task downloadOrion {
 	onlyIf {!orionZip.exists()}
 	doLast {
 		orionZip.parentFile.mkdirs()
-		ant.get(src: 'http://download.eclipse.org/orion/drops/S20150817-1226/built-codeEdit.zip', dest: orionZip)
+		println "Downloading $orionUrl"
+		ant.get(src: orionUrl, dest: orionZip)
 	}
 }
 
