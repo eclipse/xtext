@@ -80,7 +80,7 @@ public class GeneratorTest extends AbstractWebServerTest {
   @Test
   public void testGenerateText() {
     final File file = this.createFile("state foo end state bar end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "generate");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
@@ -127,7 +127,7 @@ public class GeneratorTest extends AbstractWebServerTest {
       GeneratorTest.generatorInstance.invocationCount = 0;
     }
     final File file = this.createFile("state foo end state bar end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "generate");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "generate");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor generate = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));

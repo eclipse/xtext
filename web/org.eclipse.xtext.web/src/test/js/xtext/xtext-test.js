@@ -91,14 +91,14 @@ define([
 		checkSuccess: function(checker) {
 			var lastSuccess = this._lastSuccess;
 			assert(lastSuccess);
-			checker(lastSuccess.requestType, lastSuccess.result);
+			checker(lastSuccess.serviceType, lastSuccess.result);
 			return this;
 		},
 		
 		checkError: function(checker) {
 			var lastError = this._lastError;
 			assert(lastError);
-			checker(lastError.requestType, lastError.severity, lastError.message, lastError.requestData);
+			checker(lastError.serviceType, lastError.severity, lastError.message, lastError.requestData);
 			return this;
 		},
 		
@@ -125,15 +125,15 @@ define([
 			options = {};
 		var editorContext = exports.createEditor(options);
 		var tester = new Tester(editorContext, options.doneCallback);
-		editorContext.xtextServices.successListeners.push(function(requestType, result) {
+		editorContext.xtextServices.successListeners.push(function(serviceType, result) {
 			tester._lastSuccess = {
-				requestType: requestType,
+				serviceType: serviceType,
 				result: result
 			};
 		});
-		editorContext.xtextServices.errorListeners.push(function(requestType, severity, message, requestData) {
+		editorContext.xtextServices.errorListeners.push(function(serviceType, severity, message, requestData) {
 			tester._lastError = {
-				requestType: requestType,
+				serviceType: serviceType,
 				severity: severity,
 				message: message,
 				requestData: requestData
@@ -157,7 +157,7 @@ define([
 	TestServiceBuilder.prototype = new ServiceBuilder();
 
 	exports.createServices = function(editorContext, options) {
-		options.serverUrl = 'test://xtext-service';
+		options.serviceUrl = 'test://xtext-service';
 		var xtextServices = {
 			options: options,
 			editorContext: editorContext,

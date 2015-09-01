@@ -45,7 +45,7 @@ public class Formatting1Test extends AbstractWebServerTest {
   @Test
   public void testFormatFile() {
     final File file = this.createFile("/* bla */ output signal x state foo set x = true end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "format");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "format");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     final XtextServiceDispatcher.ServiceDescriptor format = this.getService(Collections.<String, String>unmodifiableMap(CollectionLiterals.<String, String>newHashMap(_mappedTo, _mappedTo_1)));
@@ -77,7 +77,7 @@ public class Formatting1Test extends AbstractWebServerTest {
   @Test
   public void testFormatSelection() {
     final File file = this.createFile("/* bla */ output signal x state foo set x = true end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "format");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "format");
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("selectionStart", "26");
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("selectionEnd", "52");
     String _name = file.getName();

@@ -11,6 +11,7 @@ import com.google.inject.Guice
 import java.io.File
 import java.io.FileWriter
 import java.util.HashMap
+import java.util.List
 import java.util.Map
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -37,7 +38,7 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 		}
 	}
 	
-	ExecutorService executorService
+	val List<ExecutorService> executorServices = newArrayList
 	
 	TestResourceBaseProvider resourceBaseProvider
 	
@@ -49,12 +50,11 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 	
 	override void setUp() {
 		super.setUp()
-		executorService = Executors.newCachedThreadPool
 		resourceBaseProvider = new TestResourceBaseProvider
 		with(new EntitiesStandaloneSetup {
 			override createInjector() {
 				val ideModule = new DefaultXbaseIdeModule
-				val webModule = new EntitiesWebModule(executorService)
+				val webModule = new EntitiesWebModule[Executors.newCachedThreadPool => [executorServices += it]]
 				webModule.resourceBaseProvider = resourceBaseProvider
 				return Guice.createInjector(Modules2.mixin(runtimeModule, ideModule, webModule))
 			}
@@ -63,7 +63,8 @@ class AbstractXbaseWebTest extends AbstractXtextTests {
 	}
 	
 	override tearDown() {
-		executorService.shutdown()
+		executorServices.forEach[shutdown()]
+		executorServices.clear()
 		super.tearDown()
 	}
 	

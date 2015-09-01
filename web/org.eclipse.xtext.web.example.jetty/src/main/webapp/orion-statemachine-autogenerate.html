@@ -24,8 +24,8 @@
 					$('#revert-button').click(function() {
 						editorViewer.xtextServices.revertResource();
 					});
-					editorViewer.xtextServices.successListeners.push(function(requestType, result) {
-						if (requestType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
+					editorViewer.xtextServices.successListeners.push(function(serviceType, result) {
+						if (serviceType == 'validate' && result.issues.every(function(issue) {issue.severity != 'error'})) {
 							$('#generator-result').html('<iframe src="http://' + location.host + '/xtext-service/generate?resource=example.statemachine"></iframe>');
 						}
 					});

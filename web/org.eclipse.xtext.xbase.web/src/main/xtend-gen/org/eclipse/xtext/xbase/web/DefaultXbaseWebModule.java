@@ -7,8 +7,20 @@
  */
 package org.eclipse.xtext.xbase.web;
 
+import com.google.inject.Provider;
+import java.util.concurrent.ExecutorService;
 import org.eclipse.xtext.web.server.DefaultWebModule;
 
+/**
+ * Default Guice bindings for the web integration of Xbase languages.
+ */
 @SuppressWarnings("all")
 public class DefaultXbaseWebModule extends DefaultWebModule {
+  public DefaultXbaseWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
+    super(executorService, executorServiceWithDocumentLock);
+  }
+  
+  public DefaultXbaseWebModule(final Provider<ExecutorService> executorServiceProvider) {
+    super(executorServiceProvider);
+  }
 }

@@ -26,7 +26,7 @@ public class HoverTest extends AbstractWebServerTest {
     {
       final String content = resourceContent.toString();
       final int offset = content.indexOf("#");
-      Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "hover");
+      Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "hover");
       String _replace = content.replace("#", "");
       Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _replace);
       String _string = Integer.valueOf(offset).toString();

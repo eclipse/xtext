@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
@@ -15,7 +16,6 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer;
@@ -28,16 +28,16 @@ import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 
 @Accessors
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class EntitiesWebModule extends DefaultXbaseWebModule {
-  private final ExecutorService executorService;
-  
   private IResourceBaseProvider resourceBaseProvider;
   
-  public void configureExecutorService(final Binder binder) {
-    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
-    _bind.toInstance(this.executorService);
+  public EntitiesWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
+    super(executorService, executorServiceWithDocumentLock);
+  }
+  
+  public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider) {
+    super(executorServiceProvider);
   }
   
   public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
@@ -60,16 +60,6 @@ public class EntitiesWebModule extends DefaultXbaseWebModule {
       AnnotatedBindingBuilder<IResourceBaseProvider> _bind = binder.<IResourceBaseProvider>bind(IResourceBaseProvider.class);
       _bind.toInstance(this.resourceBaseProvider);
     }
-  }
-  
-  public EntitiesWebModule(final ExecutorService executorService) {
-    super();
-    this.executorService = executorService;
-  }
-  
-  @Pure
-  public ExecutorService getExecutorService() {
-    return this.executorService;
   }
   
   @Pure

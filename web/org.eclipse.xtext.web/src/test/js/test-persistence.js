@@ -172,8 +172,8 @@ suite('Persistence', function() {
 					})
 					.respond({conflict: 'invalidStateId'});
 			}
-			tester.checkError(function(requestType, severity, message, requestData) {
-					assert.equal('save', requestType);
+			tester.checkError(function(serviceType, severity, message, requestData) {
+					assert.equal('save', serviceType);
 					assert.equal('warning', severity);
 				}).done();
 		});

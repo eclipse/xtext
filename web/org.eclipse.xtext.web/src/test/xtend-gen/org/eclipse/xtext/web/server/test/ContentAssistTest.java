@@ -40,7 +40,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "assist");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "assist");
     String _string = resourceContent.toString();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _string);
     String _string_1 = Integer.valueOf(offset).toString();
@@ -332,7 +332,7 @@ public class ContentAssistTest extends AbstractWebServerTest {
   @Test
   public void testIncorrectStateId() {
     final File file = this.createFile("state foo end");
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "assist");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "assist");
     String _name = file.getName();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("resource", _name);
     Pair<String, String> _mappedTo_2 = Pair.<String, String>of("caretOffset", "3");

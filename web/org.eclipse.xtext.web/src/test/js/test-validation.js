@@ -77,8 +77,8 @@ suite('Validation', function() {
 					})
 					.respond({conflict: 'invalidStateId'});
 			}
-			tester.checkError(function(requestType, severity, message, requestData) {
-					assert.equal('validate', requestType);
+			tester.checkError(function(serviceType, severity, message, requestData) {
+					assert.equal('validate', serviceType);
 					assert.equal('warning', severity);
 				}).done();
 		});

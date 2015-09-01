@@ -8,6 +8,7 @@
 package org.eclipse.xtext.web.example.jetty;
 
 import com.google.inject.Binder;
+import com.google.inject.Provider;
 import com.google.inject.binder.AnnotatedBindingBuilder;
 import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.ScopedBindingBuilder;
@@ -15,7 +16,6 @@ import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.xtend.lib.annotations.Accessors;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.ide.LexerIdeBindings;
 import org.eclipse.xtext.ide.editor.contentassist.IdeContentProposalProvider;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser;
@@ -34,16 +34,16 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class StatemachineWebModule extends DefaultWebModule {
-  private final ExecutorService executorService;
-  
   private IResourceBaseProvider resourceBaseProvider;
   
-  public void configureExecutorService(final Binder binder) {
-    AnnotatedBindingBuilder<ExecutorService> _bind = binder.<ExecutorService>bind(ExecutorService.class);
-    _bind.toInstance(this.executorService);
+  public StatemachineWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
+    super(executorService, executorServiceWithDocumentLock);
+  }
+  
+  public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider) {
+    super(executorServiceProvider);
   }
   
   public ScopedBindingBuilder configureContentAssistLexer(final Binder binder) {
@@ -78,16 +78,6 @@ public class StatemachineWebModule extends DefaultWebModule {
   
   public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
     return StatemachineSemanticHighlightingCalculator.class;
-  }
-  
-  public StatemachineWebModule(final ExecutorService executorService) {
-    super();
-    this.executorService = executorService;
-  }
-  
-  @Pure
-  public ExecutorService getExecutorService() {
-    return this.executorService;
   }
   
   @Pure

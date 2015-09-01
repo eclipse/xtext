@@ -27,7 +27,7 @@ class Formatting1Test extends AbstractWebServerTest {
 	
 	@Test def testFormatFile() {
 		val file = createFile('/* bla */ output signal x state foo set x = true end')
-		val format = getService(#{'requestType' -> 'format', 'resource' -> file.name})
+		val format = getService(#{'serviceType' -> 'format', 'resource' -> file.name})
 		assertTrue(format.hasSideEffects)
 		assertFalse(format.hasTextInput)
 		val result = format.service.apply() as FormattingResult
@@ -43,7 +43,7 @@ class Formatting1Test extends AbstractWebServerTest {
 	@Test def testFormatSelection() {
 		val file = createFile('/* bla */ output signal x state foo set x = true end')
 		val format = getService(#{
-				'requestType' -> 'format',
+				'serviceType' -> 'format',
 				'selectionStart' -> '26',
 				'selectionEnd' -> '52',
 				'resource' -> file.name

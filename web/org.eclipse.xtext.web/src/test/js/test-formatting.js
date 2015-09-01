@@ -143,8 +143,8 @@ suite('Formatting', function() {
 					})
 					.respond({conflict: 'invalidStateId'});
 			}
-			tester.checkError(function(requestType, severity, message, requestData) {
-					assert.equal('format', requestType);
+			tester.checkError(function(serviceType, severity, message, requestData) {
+					assert.equal('format', serviceType);
 					assert.equal('warning', severity);
 				}).done();
 		});

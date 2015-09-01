@@ -36,7 +36,7 @@ public class ContentAssistTest extends AbstractXbaseWebTest {
   }
   
   protected void assertContentAssistResult(final CharSequence resourceContent, final int offset, final CharSequence expectedResult) {
-    Pair<String, String> _mappedTo = Pair.<String, String>of("requestType", "assist");
+    Pair<String, String> _mappedTo = Pair.<String, String>of("serviceType", "assist");
     String _string = resourceContent.toString();
     Pair<String, String> _mappedTo_1 = Pair.<String, String>of("fullText", _string);
     String _string_1 = Integer.valueOf(offset).toString();
