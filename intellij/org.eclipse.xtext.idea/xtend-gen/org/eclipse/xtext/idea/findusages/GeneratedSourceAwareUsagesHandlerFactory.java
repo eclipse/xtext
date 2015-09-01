@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -89,43 +88,57 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
   
   @Override
   public FindUsagesHandler createFindUsagesHandler(final PsiElement element, final boolean forHighlightUsages) {
-    FindUsagesHandlerFactory _delegateFindFactory = this.delegateFindFactory(element);
-    final FindUsagesHandler primaryHandler = _delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages);
+    final FindUsagesHandler primaryHandler = this.delegateFindUsagesHandler(element, forHighlightUsages);
+    boolean _isNullHandler = this.isNullHandler(primaryHandler);
+    if (_isNullHandler) {
+      return null;
+    }
+    final Iterable<FindUsagesHandler> secondaryHandlers = this.getSecondaryHandlers(element, forHighlightUsages);
+    boolean _isEmpty = IterableExtensions.isEmpty(secondaryHandlers);
+    if (_isEmpty) {
+      return primaryHandler;
+    }
+    final GeneratedSourceAwareFindUsagesHandler handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler);
+    for (final FindUsagesHandler secondaryHandler : secondaryHandlers) {
+      handler.addSecondaryHandler(secondaryHandler);
+    }
+    return handler;
+  }
+  
+  protected Iterable<FindUsagesHandler> getSecondaryHandlers(final PsiElement element, final boolean forHighlightUsages) {
+    Iterable<FindUsagesHandler> _xblockexpression = null;
+    {
+      final List<? extends PsiElement> secondaryElements = this.getSecondaryElements(element, forHighlightUsages);
+      final Function1<PsiElement, FindUsagesHandler> _function = new Function1<PsiElement, FindUsagesHandler>() {
+        @Override
+        public FindUsagesHandler apply(final PsiElement it) {
+          return GeneratedSourceAwareUsagesHandlerFactory.this.delegateFindUsagesHandler(it, forHighlightUsages);
+        }
+      };
+      List<FindUsagesHandler> _map = ListExtensions.map(secondaryElements, _function);
+      final Function1<FindUsagesHandler, Boolean> _function_1 = new Function1<FindUsagesHandler, Boolean>() {
+        @Override
+        public Boolean apply(final FindUsagesHandler it) {
+          boolean _isNullHandler = GeneratedSourceAwareUsagesHandlerFactory.this.isNullHandler(it);
+          return Boolean.valueOf((!_isNullHandler));
+        }
+      };
+      _xblockexpression = IterableExtensions.<FindUsagesHandler>filter(_map, _function_1);
+    }
+    return _xblockexpression;
+  }
+  
+  protected List<? extends PsiElement> getSecondaryElements(final PsiElement element, final boolean forHighlightUsages) {
     final List<? extends PsiElement> generatedElements = this.getGeneratedElements(element);
     boolean _isEmpty = generatedElements.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      final GeneratedSourceAwareFindUsagesHandler handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler);
-      this.addSecondaryHandlers(handler, generatedElements, forHighlightUsages);
-      return handler;
+      return generatedElements;
     }
     if (forHighlightUsages) {
-      return primaryHandler;
+      return CollectionLiterals.emptyList();
     }
-    final List<? extends PsiElement> originalElements = this.getOriginalElements(element);
-    boolean _isEmpty_1 = originalElements.isEmpty();
-    if (_isEmpty_1) {
-      return primaryHandler;
-    }
-    final GeneratedSourceAwareFindUsagesHandler handler_1 = new GeneratedSourceAwareFindUsagesHandler(primaryHandler);
-    this.addSecondaryHandlers(handler_1, originalElements, forHighlightUsages);
-    return handler_1;
-  }
-  
-  protected void addSecondaryHandlers(final GeneratedSourceAwareFindUsagesHandler result, final List<? extends PsiElement> elements, final boolean forHighlightUsages) {
-    final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
-      @Override
-      public void apply(final PsiElement it) {
-        final FindUsagesHandlerFactory delegateFactory = GeneratedSourceAwareUsagesHandlerFactory.this.delegateFindFactory(it);
-        if ((delegateFactory != null)) {
-          final FindUsagesHandler delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages);
-          if (((delegateHandler != null) && (delegateHandler != FindUsagesHandler.NULL_HANDLER))) {
-            result.addSecondaryHandler(delegateHandler);
-          }
-        }
-      }
-    };
-    IterableExtensions.forEach(elements, _function);
+    return this.getOriginalElements(element);
   }
   
   protected List<? extends PsiElement> getOriginalElements(final PsiElement element) {
@@ -175,6 +188,19 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       }
     }
     return result;
+  }
+  
+  protected boolean isNullHandler(final FindUsagesHandler handler) {
+    return ((handler == null) || (handler == FindUsagesHandler.NULL_HANDLER));
+  }
+  
+  protected FindUsagesHandler delegateFindUsagesHandler(final PsiElement element, final boolean forHighlightUsages) {
+    FindUsagesHandlerFactory _delegateFindFactory = this.delegateFindFactory(element);
+    FindUsagesHandler _createFindUsagesHandler = null;
+    if (_delegateFindFactory!=null) {
+      _createFindUsagesHandler=_delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages);
+    }
+    return _createFindUsagesHandler;
   }
   
   protected FindUsagesHandlerFactory delegateFindFactory(final PsiElement element) {
