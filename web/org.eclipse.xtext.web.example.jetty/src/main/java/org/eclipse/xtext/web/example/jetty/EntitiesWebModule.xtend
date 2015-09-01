@@ -8,10 +8,10 @@
 package org.eclipse.xtext.web.example.jetty
 
 import com.google.inject.Binder
+import com.google.inject.Provider
 import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.ide.LexerIdeBindings
 import org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser
 import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer
@@ -23,15 +23,16 @@ import org.eclipse.xtext.web.server.persistence.IServerResourceHandler
 import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule
 
 @Accessors
-@FinalFieldsConstructor
 class EntitiesWebModule extends DefaultXbaseWebModule {
-	
-	val ExecutorService executorService
 	
 	IResourceBaseProvider resourceBaseProvider
 	
-	def configureExecutorService(Binder binder) {
-		binder.bind(ExecutorService).toInstance(executorService)
+	new(ExecutorService executorService, ExecutorService executorServiceWithDocumentLock) {
+		super(executorService, executorServiceWithDocumentLock)
+	}
+	
+	new(Provider<ExecutorService> executorServiceProvider) {
+		super(executorServiceProvider)
 	}
 	
 	def configureContentAssistLexer(Binder binder) {

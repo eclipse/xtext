@@ -20,7 +20,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	LoadResourceService.prototype._initServerData = function(serverData, editorContext, params) {
 		return {
 			suppressContent: true,
-			httpMethod: this._requestType == 'revert' ? 'POST' : 'GET'
+			httpMethod: this._serviceType == 'revert' ? 'POST' : 'GET'
 		};
 	};
 	

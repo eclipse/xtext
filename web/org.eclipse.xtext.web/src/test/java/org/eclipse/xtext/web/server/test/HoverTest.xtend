@@ -15,7 +15,7 @@ class HoverTest extends AbstractWebServerTest {
 		val content = resourceContent.toString
 		val offset = content.indexOf('#')
 		val hover = getService(#{
-				'requestType' -> 'hover',
+				'serviceType' -> 'hover',
 				'fullText' -> content.replace('#', ''),
 				'caretOffset' -> offset.toString
 			})
