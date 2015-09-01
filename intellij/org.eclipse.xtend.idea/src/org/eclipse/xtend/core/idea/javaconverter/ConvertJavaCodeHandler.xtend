@@ -37,6 +37,8 @@ import org.eclipse.xtend.core.idea.javaconverter.ConvertJavaCodeHandler.ConvertJ
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.javaconverter.JavaConverter
 import org.eclipse.xtend.core.javaconverter.JavaConverter.ConversionResult
+import com.intellij.psi.codeStyle.CodeStyleManager
+import com.intellij.psi.util.PsiUtil
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -137,6 +139,9 @@ class ConvertJavaCodeHandler implements RefactoringActionHandler {
 							if (jvf.parent.findChild(xtendFileName) === null) {
 								val xtendFile = jvf.parent.createChildData(this, xtendFileName)
 								xtendFile.binaryContent = result.xtendCode.bytes
+								val formatter = CodeStyleManager.getInstance(resultEntry.key.project)
+								val xtendPsiFile = PsiUtil.getPsiFile(resultEntry.key.project, xtendFile)
+								formatter.reformat(xtendPsiFile)
 								jvf.delete(this)
 							}
 						}
