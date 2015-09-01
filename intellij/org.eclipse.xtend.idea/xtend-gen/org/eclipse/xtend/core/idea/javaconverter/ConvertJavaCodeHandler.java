@@ -30,6 +30,8 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.codeStyle.CodeStyleManager;
+import com.intellij.psi.util.PsiUtil;
 import com.intellij.refactoring.RefactoringActionHandler;
 import com.intellij.util.SequentialModalProgressTask;
 import com.intellij.util.SequentialTask;
@@ -95,6 +97,13 @@ public class ConvertJavaCodeHandler implements RefactoringActionHandler {
                     String _xtendCode_1 = result.getXtendCode();
                     byte[] _bytes = _xtendCode_1.getBytes();
                     xtendFile.setBinaryContent(_bytes);
+                    PsiFile _key_1 = resultEntry.getKey();
+                    Project _project = _key_1.getProject();
+                    final CodeStyleManager formatter = CodeStyleManager.getInstance(_project);
+                    PsiFile _key_2 = resultEntry.getKey();
+                    Project _project_1 = _key_2.getProject();
+                    final PsiFile xtendPsiFile = PsiUtil.getPsiFile(_project_1, xtendFile);
+                    formatter.reformat(xtendPsiFile);
                     jvf.delete(this);
                   }
                 }
