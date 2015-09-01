@@ -28,7 +28,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 		return function(result) {
 			editorContext.setText(result.fullText);
 			editorContext.clearUndoStack();
-			editorContext.markClean(!result.dirty);
+			editorContext.setDirty(result.dirty);
 			var listeners = editorContext.updateServerState(result.fullText, result.stateId);
 			for (var i = 0; i < listeners.length; i++) {
 				listeners[i]();

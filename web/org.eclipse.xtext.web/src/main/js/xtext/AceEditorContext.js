@@ -15,7 +15,7 @@ define([], function() {
 		this._editor = editor;
 		this._serverState = {};
 		this._serverStateListeners = [];
-		this._clean = true;
+		this._dirty = false;
 		this._dirtyStateListeners = [];
 	};
 
@@ -68,16 +68,16 @@ define([], function() {
 		},
 		
 		isDirty: function() {
-			return !this._clean;
+			return this._dirty;
 		},
 		
-		markClean: function(clean) {
-			if (clean != this._clean) {
+		setDirty: function(dirty) {
+			if (dirty != this._dirty) {
 				for (var i = 0; i < this._dirtyStateListeners.length; i++) {
-					this._dirtyStateListeners[i](clean);
+					this._dirtyStateListeners[i](dirty);
 				}
 			}
-			this._clean = clean;
+			this._dirty = dirty;
 		},
 		
 		addDirtyStateListener: function(listener) {

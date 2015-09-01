@@ -45,8 +45,8 @@ define([
 			return this;
 		},
 		
-		markClean: function(clean) {
-			this._editorContext.markClean(clean);
+		setDirty: function(dirty) {
+			this._editorContext.setDirty(dirty);
 			return this;
 		},
 		
@@ -185,7 +185,10 @@ define([
 	 */
 	TestServiceBuilder.prototype.setupUpdateService = function(refreshDocument) {
 		var services = this.services;
+		var editorContext = services.editorContext;
 		services.editorContext.addModelChangeListener(function(event) {
+			if (!event._xtext_init)
+				editorContext.setDirty(true);
 			if (services.options.sendFullText)
 				refreshDocument();
 			else

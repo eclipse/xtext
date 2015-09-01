@@ -149,7 +149,7 @@ define([
 			}
 		}
 		
-		if (options.dirtyElement && this.setupDirtyListener) {
+		if (options.dirtyElement) {
 			var doc = options.document || document;
 			var dirtyElement;
 			if (typeof(options.dirtyElement) === 'string')
@@ -159,7 +159,12 @@ define([
 			var dirtyStatusClass = options.dirtyStatusClass;
 			if (!dirtyStatusClass)
 				dirtyStatusClass = 'dirty';
-			this.setupDirtyListener(dirtyElement, dirtyStatusClass);
+			editorContext.addDirtyStateListener(function(dirty) {
+				if (dirty)
+					dirtyElement.addClass(dirtyStatusClass);
+				else
+					dirtyElement.removeClass(dirtyStatusClass);
+			});
 		}
 		
 		services.successListeners = [];

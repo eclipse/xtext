@@ -176,10 +176,9 @@ define([
 			textUpdateDelay = 500;
 		function modelChangeListener(event) {
 			if (!event._xtext_init)
-				editorContext.markClean(false);
-			if (editorContext._modelChangeTimeout){
+				editorContext.setDirty(true);
+			if (editorContext._modelChangeTimeout)
 				clearTimeout(editorContext._modelChangeTimeout);
-			}
 			editorContext._modelChangeTimeout = setTimeout(function() {
 				if (services.options.sendFullText)
 					refreshDocument();
@@ -364,16 +363,6 @@ define([
 			};
 			this.editor.addKeyMap(/mac os/.test(userAgent) ? {'Shift-Cmd-F': formatFunction}: {'Shift-Ctrl-S': formatFunction});
 		}
-	}
-	
-	CodeMirrorServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
-		var editorContext = this.services.editorContext;
-		editorContext.addDirtyStateListener(function(clean) {
-			if (clean)
-				dirtyElement.removeClass(dirtyStatusClass);
-			else
-				dirtyElement.addClass(dirtyStatusClass);
-		});
 	}
 	
 	return exports;
