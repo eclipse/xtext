@@ -8,9 +8,9 @@
 package org.eclipse.xtend.core.tests.xtend.impl
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
-import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtend.core.xtend.XtendField
+import org.eclipse.xtext.common.types.JvmVisibility
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

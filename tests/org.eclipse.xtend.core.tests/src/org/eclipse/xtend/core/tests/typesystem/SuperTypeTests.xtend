@@ -13,10 +13,9 @@ import java.util.Collection
 import java.util.Collections
 import java.util.List
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.junit.Test
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow

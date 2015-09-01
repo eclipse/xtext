@@ -14,7 +14,6 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.util.Triple
 import org.eclipse.xtext.util.Tuples
-import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource

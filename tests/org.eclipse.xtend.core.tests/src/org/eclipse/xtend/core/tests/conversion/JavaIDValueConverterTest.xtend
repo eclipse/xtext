@@ -11,8 +11,8 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.conversion.XtendValueConverterService
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.conversion.ValueConverterException
-import org.junit.Test
 import org.eclipse.xtext.conversion.ValueConverterWithValueException
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

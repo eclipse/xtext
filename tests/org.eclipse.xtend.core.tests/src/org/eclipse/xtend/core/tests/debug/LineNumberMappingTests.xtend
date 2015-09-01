@@ -7,7 +7,7 @@ import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 import org.eclipse.xtext.generator.trace.LineMappingProvider
-import org.eclipse.xtext.generator.trace.LineMappingProvider$LineMapping
+import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping
 import org.junit.Test
 
 class LineNumberMappingTests extends AbstractXtendTestCase {

@@ -7,10 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.lib
 
+import org.eclipse.xtend.lib.macro.file.Path
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.macro.file.Path
 
 /**
  * @author Sven Efftinge - Initial contribution and API

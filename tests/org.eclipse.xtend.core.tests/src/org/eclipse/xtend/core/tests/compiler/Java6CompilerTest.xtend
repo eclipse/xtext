@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
-import org.junit.Test
-import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtend.core.tests.Java6RuntimeInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
+import org.junit.Test
 
 /**
  * @author Miro Spoenemann - Initial contribution and API
