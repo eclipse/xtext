@@ -35,7 +35,6 @@ import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -1025,19 +1024,6 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_2.runOperation(_function);
     VirtualFile _virtualFile_2 = xtendFile.getVirtualFile();
     this.myFixture.testHighlighting(true, true, true, _virtualFile_2);
-  }
-  
-  public ChunkedResourceDescriptions getIndex() {
-    final XtextResourceSet rs = new XtextResourceSet();
-    XtextAutoBuilderComponent _builder = this.getBuilder();
-    _builder.installCopyOfResourceDescriptions(rs);
-    final ChunkedResourceDescriptions index = ChunkedResourceDescriptions.findInEmfObject(rs);
-    return index;
-  }
-  
-  public XtextAutoBuilderComponent getBuilder() {
-    Project _project = this.getProject();
-    return _project.<XtextAutoBuilderComponent>getComponent(XtextAutoBuilderComponent.class);
   }
   
   public void assertFileContents(final String path, final CharSequence sequence) {

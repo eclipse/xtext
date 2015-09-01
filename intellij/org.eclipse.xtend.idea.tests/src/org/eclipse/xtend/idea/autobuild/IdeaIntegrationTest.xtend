@@ -18,8 +18,6 @@ import org.eclipse.xtend.core.idea.facet.XtendFacetType
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.idea.LightXtendTest
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
-import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions
 import org.junit.ComparisonFailure
 
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
@@ -546,17 +544,6 @@ class IdeaIntegrationTest extends LightXtendTest {
 			myFixture.renameElementAtCaret('Zonk')	
 		]
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
-	}
-	
-	def getIndex() {
-		val rs = new XtextResourceSet()
-		builder.installCopyOfResourceDescriptions(rs)
-		val index = ChunkedResourceDescriptions.findInEmfObject(rs)
-		return index
-	}
-	
-	def getBuilder() {
-		project.getComponent(XtextAutoBuilderComponent)
 	}
 	
 	def void assertFileContents(String path, CharSequence sequence) {

@@ -32,7 +32,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
@@ -86,6 +85,47 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       _or = _exists_1;
     }
     return _or;
+  }
+  
+  @Override
+  public FindUsagesHandler createFindUsagesHandler(final PsiElement element, final boolean forHighlightUsages) {
+    FindUsagesHandlerFactory _delegateFindFactory = this.delegateFindFactory(element);
+    final FindUsagesHandler primaryHandler = _delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages);
+    final List<? extends PsiElement> generatedElements = this.getGeneratedElements(element);
+    boolean _isEmpty = generatedElements.isEmpty();
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      final GeneratedSourceAwareFindUsagesHandler handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler);
+      this.addSecondaryHandlers(handler, generatedElements, forHighlightUsages);
+      return handler;
+    }
+    if (forHighlightUsages) {
+      return primaryHandler;
+    }
+    final List<? extends PsiElement> originalElements = this.getOriginalElements(element);
+    boolean _isEmpty_1 = originalElements.isEmpty();
+    if (_isEmpty_1) {
+      return primaryHandler;
+    }
+    final GeneratedSourceAwareFindUsagesHandler handler_1 = new GeneratedSourceAwareFindUsagesHandler(primaryHandler);
+    this.addSecondaryHandlers(handler_1, originalElements, forHighlightUsages);
+    return handler_1;
+  }
+  
+  protected void addSecondaryHandlers(final GeneratedSourceAwareFindUsagesHandler result, final List<? extends PsiElement> elements, final boolean forHighlightUsages) {
+    final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
+      @Override
+      public void apply(final PsiElement it) {
+        final FindUsagesHandlerFactory delegateFactory = GeneratedSourceAwareUsagesHandlerFactory.this.delegateFindFactory(it);
+        if ((delegateFactory != null)) {
+          final FindUsagesHandler delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages);
+          if (((delegateHandler != null) && (delegateHandler != FindUsagesHandler.NULL_HANDLER))) {
+            result.addSecondaryHandler(delegateHandler);
+          }
+        }
+      }
+    };
+    IterableExtensions.forEach(elements, _function);
   }
   
   protected List<? extends PsiElement> getOriginalElements(final PsiElement element) {
@@ -164,74 +204,5 @@ public class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerF
       }
     }
     return null;
-  }
-  
-  @Override
-  public FindUsagesHandler createFindUsagesHandler(final PsiElement element, final boolean forHighlightUsages) {
-    FindUsagesHandlerFactory _delegateFindFactory = this.delegateFindFactory(element);
-    final FindUsagesHandler primaryDelegate = _delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages);
-    if (forHighlightUsages) {
-      final List<? extends PsiElement> generatedElements = this.getGeneratedElements(element);
-      FindUsagesHandler _xifexpression = null;
-      boolean _isEmpty = generatedElements.isEmpty();
-      if (_isEmpty) {
-        _xifexpression = primaryDelegate;
-      } else {
-        GeneratedSourceAwareFindUsagesHandler _generatedSourceAwareFindUsagesHandler = new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true);
-        final Procedure1<GeneratedSourceAwareFindUsagesHandler> _function = new Procedure1<GeneratedSourceAwareFindUsagesHandler>() {
-          @Override
-          public void apply(final GeneratedSourceAwareFindUsagesHandler it) {
-            GeneratedSourceAwareUsagesHandlerFactory.this.addDelegates(it, generatedElements, forHighlightUsages);
-          }
-        };
-        _xifexpression = ObjectExtensions.<GeneratedSourceAwareFindUsagesHandler>operator_doubleArrow(_generatedSourceAwareFindUsagesHandler, _function);
-      }
-      return _xifexpression;
-    }
-    final List<? extends PsiElement> originalElements = this.getOriginalElements(element);
-    boolean _isEmpty_1 = originalElements.isEmpty();
-    if (_isEmpty_1) {
-      final List<? extends PsiElement> generatedElements_1 = this.getGeneratedElements(element);
-      FindUsagesHandler _xifexpression_1 = null;
-      boolean _isEmpty_2 = generatedElements_1.isEmpty();
-      if (_isEmpty_2) {
-        _xifexpression_1 = primaryDelegate;
-      } else {
-        GeneratedSourceAwareFindUsagesHandler _generatedSourceAwareFindUsagesHandler_1 = new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true);
-        final Procedure1<GeneratedSourceAwareFindUsagesHandler> _function_1 = new Procedure1<GeneratedSourceAwareFindUsagesHandler>() {
-          @Override
-          public void apply(final GeneratedSourceAwareFindUsagesHandler it) {
-            GeneratedSourceAwareUsagesHandlerFactory.this.addDelegates(it, generatedElements_1, forHighlightUsages);
-          }
-        };
-        _xifexpression_1 = ObjectExtensions.<GeneratedSourceAwareFindUsagesHandler>operator_doubleArrow(_generatedSourceAwareFindUsagesHandler_1, _function_1);
-      }
-      return _xifexpression_1;
-    } else {
-      GeneratedSourceAwareFindUsagesHandler _generatedSourceAwareFindUsagesHandler_2 = new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true);
-      final Procedure1<GeneratedSourceAwareFindUsagesHandler> _function_2 = new Procedure1<GeneratedSourceAwareFindUsagesHandler>() {
-        @Override
-        public void apply(final GeneratedSourceAwareFindUsagesHandler it) {
-          GeneratedSourceAwareUsagesHandlerFactory.this.addDelegates(it, originalElements, forHighlightUsages);
-        }
-      };
-      return ObjectExtensions.<GeneratedSourceAwareFindUsagesHandler>operator_doubleArrow(_generatedSourceAwareFindUsagesHandler_2, _function_2);
-    }
-  }
-  
-  public void addDelegates(final GeneratedSourceAwareFindUsagesHandler result, final List<? extends PsiElement> elements, final boolean forHighlightUsages) {
-    final Procedure1<PsiElement> _function = new Procedure1<PsiElement>() {
-      @Override
-      public void apply(final PsiElement it) {
-        final FindUsagesHandlerFactory delegateFactory = GeneratedSourceAwareUsagesHandlerFactory.this.delegateFindFactory(it);
-        if ((delegateFactory != null)) {
-          final FindUsagesHandler delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages);
-          if (((delegateHandler != null) && (delegateHandler != FindUsagesHandler.NULL_HANDLER))) {
-            result.addDelegate(delegateHandler);
-          }
-        }
-      }
-    };
-    IterableExtensions.forEach(elements, _function);
   }
 }

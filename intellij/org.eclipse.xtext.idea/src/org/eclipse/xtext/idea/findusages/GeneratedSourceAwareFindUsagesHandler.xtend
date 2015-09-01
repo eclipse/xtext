@@ -12,75 +12,61 @@ import com.intellij.find.findUsages.FindUsagesOptions
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.psi.PsiElement
 import com.intellij.psi.search.GlobalSearchScope
-import com.intellij.psi.search.SearchScope
 import com.intellij.usageView.UsageInfo
 import com.intellij.util.Processor
-import java.util.List
+import java.util.Collection
+import java.util.Map
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
-	
-	val List<FindUsagesHandler> delegates = newArrayList
-	val boolean includeAll
-	
-	new(FindUsagesHandler primaryDelegate, boolean includeAll) {
-		super(primaryDelegate.psiElement)
-		this.includeAll = includeAll
-		addDelegate(primaryDelegate)
+
+	val FindUsagesHandler primaryHandler
+	Collection<PsiElement> primaryElements = newArrayList
+	Collection<PsiElement> secondaryElements = newArrayList
+	val Map<PsiElement, FindUsagesHandler> secondaryHandlers = newLinkedHashMap
+
+	new(FindUsagesHandler primaryHandler) {
+		super(primaryHandler.psiElement)
+		this.primaryHandler = primaryHandler
 	}
-	
-	def void addDelegate(FindUsagesHandler next) {
-		delegates += next
+
+	def void addSecondaryHandler(FindUsagesHandler secondaryHandler) {
+		secondaryHandlers.put(secondaryHandler.psiElement, secondaryHandler)
 	}
-	
-	override findReferencesToHighlight(PsiElement target, SearchScope searchScope) {
-		primaryDelegate.findReferencesToHighlight(target, searchScope)
-	}
-	
-	protected def getPrimaryDelegate() {
-		delegates.head
-	}
-	
-	override getFindUsagesDialog(boolean isSingleFile, boolean toShowInNewTab, boolean mustOpenInNewTab) {
-		primaryDelegate.getFindUsagesDialog(isSingleFile, toShowInNewTab, mustOpenInNewTab)
-	}
-	
-	override getFindUsagesOptions() {
-		primaryDelegate.findUsagesOptions
-	}
-	
-	override getFindUsagesOptions(DataContext dataContext) {
-		primaryDelegate.getFindUsagesOptions(dataContext)
-	}
-	
+
 	override getPrimaryElements() {
-		return delegates.map[primaryElements.toList].flatten
+		primaryElements = primaryHandler.primaryElements.toList
+		primaryElements
 	}
-	
+
 	override getSecondaryElements() {
-		return delegates.map[secondaryElements.toList].flatten
+		secondaryElements = primaryHandler.secondaryElements.toList
+		secondaryElements + secondaryHandlers.keySet
 	}
-	
+
+	override getFindUsagesDialog(boolean isSingleFile, boolean toShowInNewTab, boolean mustOpenInNewTab) {
+		primaryHandler.getFindUsagesDialog(isSingleFile, toShowInNewTab, mustOpenInNewTab)
+	}
+
+	override getFindUsagesOptions(DataContext dataContext) {
+		primaryHandler.getFindUsagesOptions(dataContext)
+	}
+
 	override processElementUsages(PsiElement element, Processor<UsageInfo> processor, FindUsagesOptions options) {
-		getRelevantDelegates().findFirst[ handles(element) ]?.processElementUsages(element, processor, options)
+		element.findUsagesHandler?.processElementUsages(element, processor, options)
 	}
-	
-	def getRelevantDelegates() {
-		if (includeAll) {
-			delegates
-		} else {
-			delegates.subList(0, 1)
-		}
-	}
-	
-	def protected handles(FindUsagesHandler handler, PsiElement element) {
-		handler.primaryElements.contains(element) || handler.secondaryElements.contains(element)
-	}
-	
+
 	override processUsagesInText(PsiElement element, Processor<UsageInfo> processor, GlobalSearchScope searchScope) {
-		getRelevantDelegates().findFirst[ handles(element) ]?.processUsagesInText(element, processor, searchScope)
+		element.findUsagesHandler?.processUsagesInText(element, processor, searchScope)
 	}
-	
+
+	protected def getFindUsagesHandler(PsiElement element) {
+		if (primaryElements.contains(element) || secondaryElements.contains(element))
+			return primaryHandler
+
+		return secondaryHandlers.get(element)
+	}
+
 }
