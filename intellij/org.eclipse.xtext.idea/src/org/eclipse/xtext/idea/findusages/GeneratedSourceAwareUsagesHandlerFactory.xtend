@@ -8,20 +8,20 @@
 package org.eclipse.xtext.idea.findusages
 
 import com.google.inject.Inject
-import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.Extensions
 import com.intellij.openapi.progress.ProcessCanceledException
 import com.intellij.openapi.project.IndexNotReadyException
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiNameIdentifierOwner
+import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.util.PsiTreeUtil
+import java.util.Collections
 import java.util.List
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
-import com.intellij.psi.PsiNameIdentifierOwner
-import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.PsiNamedElement
-import java.util.Collections
+import com.intellij.find.findUsages.FindUsagesHandler
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -45,6 +45,43 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 			] || element.originalElements.exists [
 				delegateFindFactory !== null
 			]
+	}
+	
+	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
+		val primaryHandler = element.delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages)
+		
+		val generatedElements = element.generatedElements
+		if (!generatedElements.empty) {
+			val handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler)
+			handler.addSecondaryHandlers(generatedElements, forHighlightUsages)
+			return handler
+		}
+
+		// highlighting is only done with the real element under the cursor or with its derived elements
+		// not vice versa
+		if (forHighlightUsages)
+			return primaryHandler
+		
+		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
+		// primary element but only search for references to this element
+		val originalElements = element.originalElements
+		if (originalElements.empty)
+			return primaryHandler
+			
+		val handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler)
+		handler.addSecondaryHandlers(originalElements, forHighlightUsages)
+		return handler
+	}
+	
+	protected def void addSecondaryHandlers(GeneratedSourceAwareFindUsagesHandler result, List<? extends PsiElement> elements, boolean forHighlightUsages) {
+		elements.forEach [
+			val delegateFactory = delegateFindFactory
+			if (delegateFactory !== null) {
+				val delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages)
+				if (delegateHandler !== null && delegateHandler !== FindUsagesHandler.NULL_HANDLER)
+					result.addSecondaryHandler(delegateHandler)
+			}
+		]
 	}
 	
 	protected def List<? extends PsiElement> getOriginalElements(PsiElement element) {
@@ -91,48 +128,6 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 			}
 		}
 		return null
-	}
-	
-	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
-		// highlighting is only done with the real element under the cursor or with its derived elements
-		// not vice versa
-		val primaryDelegate = delegateFindFactory(element).createFindUsagesHandler(element, forHighlightUsages)
-		if (forHighlightUsages) {
-			val generatedElements = getGeneratedElements(element)
-			return if (generatedElements.isEmpty)
-					primaryDelegate
-				else new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-					addDelegates(generatedElements, forHighlightUsages)
-				]
-				
-		}
-		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
-		// primary element but only search for references to this element
-		val originalElements = element.originalElements
-		if (originalElements.isEmpty) {
-			val generatedElements = element.generatedElements
-			return if (generatedElements.isEmpty)
-					primaryDelegate	
-				else
-					new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-						addDelegates(generatedElements, forHighlightUsages)
-					]
-		} else {
-			return new GeneratedSourceAwareFindUsagesHandler(primaryDelegate, true) => [
-				addDelegates(originalElements, forHighlightUsages)
-			]
-		}
-	}
-	
-	def addDelegates(GeneratedSourceAwareFindUsagesHandler result, List<? extends PsiElement> elements, boolean forHighlightUsages) {
-		elements.forEach [
-			val delegateFactory = delegateFindFactory
-			if (delegateFactory !== null) {
-				val delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages)
-				if (delegateHandler !== null && delegateHandler !== FindUsagesHandler.NULL_HANDLER)
-					result.addDelegate(delegateHandler)
-			}
-		]
 	}
 	
 }
