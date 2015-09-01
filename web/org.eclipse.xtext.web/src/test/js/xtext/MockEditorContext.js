@@ -24,6 +24,7 @@ define(function() {
 			end: 0
 		};
 		this._dirty = false;
+		this._dirtyStateListeners = [];
 		this._serverState = {
 			stateId: '0',
 			text: ''
@@ -79,8 +80,17 @@ define(function() {
 			return this._dirty;
 		},
 		
-		markClean: function(clean) {
-			this._dirty = !clean;
+		setDirty: function(dirty) {
+			if (dirty != this._dirty) {
+				for (var i = 0; i < this._dirtyStateListeners.length; i++) {
+					this._dirtyStateListeners[i](dirty);
+				}
+			}
+			this._dirty = dirty;
+		},
+		
+		addDirtyStateListener: function(listener) {
+			this._dirtyStateListeners.push(listener);
 		},
 		
 		clearUndoStack: function() {

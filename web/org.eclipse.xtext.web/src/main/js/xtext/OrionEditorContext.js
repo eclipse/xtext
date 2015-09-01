@@ -11,10 +11,14 @@ define(function() {
 	 * An editor context mediates between the Xtext services and the Orion
 	 * editor framework.
 	 */
-	function OrionEditorContext(editor) {
-		this._editor = editor;
+	function OrionEditorContext(editorViewer, contentType) {
+		this._editorViewer = editorViewer;
+		this._editor = editorViewer.editor;
+		this._contentType = contentType;
 		this._serverState = {};
 		this._serverStateListeners = [];
+		this._dirty = false;
+		this._dirtyStateListeners = [];
 	};
 
 	OrionEditorContext.prototype = {
@@ -51,15 +55,20 @@ define(function() {
 		},
 		
 		isDirty: function() {
-			return this._editor.isDirty();
+			return this._dirty;
 		},
 		
-		markClean: function(clean) {
-			if (clean === undefined || clean) {
-				this._editor.markClean();
-			} else {
-				this._editor.setDirty(true);
+		setDirty: function(dirty) {
+			if (dirty != this._dirty) {
+				for (var i = 0; i < this._dirtyStateListeners.length; i++) {
+					this._dirtyStateListeners[i](dirty);
+				}
 			}
+			this._dirty = dirty;
+		},
+		
+		addDirtyStateListener: function(listener) {
+			this._dirtyStateListeners.push(listener);
 		},
 		
 		clearUndoStack: function() {
@@ -74,26 +83,8 @@ define(function() {
 			this._editor.getTextView().setSelection(selection.start, selection.end);
 		},
 		
-		setText: function(text, start, end) {
-			var textView = this._editor.getTextView();
-			var caretOffset = textView.getCaretOffset();
-			if (caretOffset > 0) {
-				var model = textView.getModel();
-				var line = model.getLineAtOffset(caretOffset)
-				var lineStart = model.getLineStart(line);
-				var offsetInLine = caretOffset - lineStart;
-				model.setText(text, start, end);
-				lineStart = model.getLineStart(line);
-				var lineEnd = model.getLineEnd(line);
-				if (lineStart < 0 || lineEnd < 0)
-					textView.setCaretOffset(model.getText().length);
-				else if (lineStart + offsetInLine > lineEnd)
-					textView.setCaretOffset(lineEnd);
-				else
-					textView.setCaretOffset(lineStart + offsetInLine);
-			} else {
-				this._editor.setText(text, start, end);
-			}
+		setText: function(text) {
+			this._editorViewer.setContents(text, this._contentType);
 		}
 		
 	};

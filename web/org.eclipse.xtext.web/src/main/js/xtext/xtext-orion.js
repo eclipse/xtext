@@ -128,24 +128,18 @@ define([
 			var content = jQuery(parents[i]).text();
 			
 			codeEdit.create({parent: parents[i]}).then(function(editorViewer) {
-				try {
-					var xtextServices = exports.createServices(editorViewer, editorOptions);
-					editorViewer.setContents(content, xtextServices.contentType);
-				} catch (error) {
-					console.log('Error while building Xtext services: ' + error);
-					if (error.stack)
-						console.log(error.stack);
-					deferred.reject(error);
-					return;
-				}
-				editorViewers[i] = editorViewer;
-				finishedViewers++;
-				if (finishedViewers == parents.length) {
-					if (finishedViewers == 1)
-						deferred.resolve(editorViewer);
-					else
-						deferred.resolve(editorViewers);
-				}
+				exports.createServices(editorViewer, editorOptions).done(function(xtextServices) {
+					if (!xtextServices.options.loadFromServer)
+						editorViewer.setContents(content, xtextServices.contentType);
+					editorViewers[i] = editorViewer;
+					finishedViewers++;
+					if (finishedViewers == parents.length) {
+						if (finishedViewers == 1)
+							deferred.resolve(editorViewer);
+						else
+							deferred.resolve(editorViewers);
+					}
+				});
 			}, function(error) {
 				deferred.reject(error);
 			});
@@ -165,6 +159,7 @@ define([
 	 * with createEditor(options).
 	 */
 	exports.createServices = function(editorViewer, options) {
+		var deferred = jQuery.Deferred();
 		if (!options.xtextLang && options.resourceId)
 			options.xtextLang = options.resourceId.split('.').pop();
 		var contentType = options.contentType;
@@ -183,33 +178,37 @@ define([
 		
 		var xtextServices = {
 			options: options,
-			editorContext: new EditorContext(editorViewer.editor),
+			editorContext: new EditorContext(editorViewer, contentType),
 			contentType: contentType,
 			_highlightAnnotationTypes: []
 		};
 		var serviceBuilder = new OrionServiceBuilder(editorViewer, xtextServices);
-		serviceBuilder.createServices();
+		
+		if (typeof(options.syntaxDefinition) === 'string' || options.xtextLang) {
+			var syntaxDefinition = options.syntaxDefinition;
+			if (!syntaxDefinition)
+				syntaxDefinition = 'xtext/' + options.xtextLang + '-syntax';
+			require([syntaxDefinition], function(grammar) {
+				options.syntaxDefinition = grammar;
+				serviceBuilder.createServices();
+				deferred.resolve(xtextServices);
+			});
+		} else {
+			serviceBuilder.createServices();
+			deferred.resolve(xtextServices);
+		}
+
 		editorViewer.xtextServices = xtextServices;
-		return xtextServices;
+		return deferred.promise();
 	}
 	
 	/**
 	 * Syntax highlighting (without semantic highlighting).
 	 */
 	OrionServiceBuilder.prototype.setupSyntaxHighlighting = function() {
-		var options = this.services.options;
-		var self = this;
-		if (options.syntaxDefinition || options.xtextLang) {
-			var syntaxDefinition = options.syntaxDefinition;
-			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext/' + options.xtextLang + '-syntax';
-			if (typeof(syntaxDefinition) === 'string') {
-				require([syntaxDefinition], function(grammar) {
-					self.viewer.serviceRegistry.registerService('orion.edit.highlighter', {}, grammar);
-				});
-			} else if (syntaxDefinition.patterns) {
-				self.viewer.serviceRegistry.registerService('orion.edit.highlighter', {}, syntaxDefinition);
-			}
+		var syntaxDefinition = this.services.options.syntaxDefinition;
+		if (syntaxDefinition) {
+			this.viewer.serviceRegistry.registerService('orion.edit.highlighter', {}, syntaxDefinition);
 		}
 	}
 	
@@ -223,9 +222,13 @@ define([
 		if (!textUpdateDelay)
 			textUpdateDelay = 500;
 		function modelChangeListener(event) {
-			if (editorContext._modelChangeTimeout) {
+			// The first event is triggered by editorViewer.setContents(..)
+			if (editorContext._xtext_init)
+				editorContext._xtext_init = false;
+			else
+				editorContext.setDirty(true);
+			if (editorContext._modelChangeTimeout)
 				clearTimeout(editorContext._modelChangeTimeout);
-			}
 			editorContext._modelChangeTimeout = setTimeout(function() {
 				if (services.options.sendFullText)
 					refreshDocument();
@@ -233,8 +236,7 @@ define([
 					services.update();
 			}, textUpdateDelay);
 		}
-//			if (!options.resourceId || !options.loadFromServer)
-//				modelChangeListener(null);
+		editorContext._xtext_init = true;
 		this.viewer.serviceRegistry.registerService('orion.edit.model',
 				{onModelChanged: modelChangeListener}, {contentType: [services.contentType]});
 	}
@@ -370,9 +372,8 @@ define([
 			}
 			services.hoverService.invoke(services.editorContext, params).done(function(entry) {
 				deferred.resolve({ 
-					content: entry.content,
-					title: entry.title,
-					type: 'html' 
+					content: entry.title + entry.content,
+					type: 'html'
 				});
 			}).fail(function() {
 				deferred.resolve(null);
@@ -452,16 +453,6 @@ define([
 				contentType: [services.contentType]
 			});
 		}
-	}
-	
-	OrionServiceBuilder.prototype.setupDirtyListener = function(dirtyElement, dirtyStatusClass) {
-		var editor = this.viewer.editor;
-		editor.addEventListener('DirtyChanged', function(event) {
-			if (editor.isDirty())
-				dirtyElement.addClass(dirtyStatusClass);
-			else
-				dirtyElement.removeClass(dirtyStatusClass);
-		});
 	}
 	
 	return exports;

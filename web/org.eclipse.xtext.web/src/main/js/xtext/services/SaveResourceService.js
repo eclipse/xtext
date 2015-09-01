@@ -24,7 +24,7 @@ define(['xtext/services/XtextService', 'jquery'], function(XtextService, jQuery)
 	};
 	
 	SaveResourceService.prototype._processResult = function(result, editorContext) {
-		editorContext.markClean(true);
+		editorContext.setDirty(false);
 	};
 	
 	return SaveResourceService;
