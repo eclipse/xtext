@@ -48,10 +48,6 @@ class UiProjectDescriptor extends ProjectDescriptor {
 		includes
 	}
 	
-	override buildGradle() {
-		throw new UnsupportedOperationException("UI projects cannot be built with Gradle yet")
-	}
-	
 	override pom() {
 		super.pom => [
 			buildSection = '''
