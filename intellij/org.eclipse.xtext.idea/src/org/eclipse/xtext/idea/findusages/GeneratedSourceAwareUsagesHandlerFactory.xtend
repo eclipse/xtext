@@ -8,6 +8,7 @@
 package org.eclipse.xtext.idea.findusages
 
 import com.google.inject.Inject
+import com.intellij.find.findUsages.FindUsagesHandler
 import com.intellij.find.findUsages.FindUsagesHandlerFactory
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.extensions.Extensions
@@ -21,7 +22,6 @@ import java.util.Collections
 import java.util.List
 import org.eclipse.xtext.idea.shared.IdeaSharedInjectorProvider
 import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
-import com.intellij.find.findUsages.FindUsagesHandler
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,40 +48,42 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
-		val primaryHandler = element.delegateFindFactory.createFindUsagesHandler(element, forHighlightUsages)
+		val primaryHandler = element.delegateFindUsagesHandler(forHighlightUsages)
+		if (primaryHandler.nullHandler)
+			return null
 		
-		val generatedElements = element.generatedElements
-		if (!generatedElements.empty) {
-			val handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler)
-			handler.addSecondaryHandlers(generatedElements, forHighlightUsages)
-			return handler
-		}
-
-		// highlighting is only done with the real element under the cursor or with its derived elements
-		// not vice versa
-		if (forHighlightUsages)
-			return primaryHandler
+		val secondaryHandlers = element.getSecondaryHandlers(forHighlightUsages)
+		if (secondaryHandlers.empty)
+			return primaryHandler 
 		
-		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
-		// primary element but only search for references to this element
-		val originalElements = element.originalElements
-		if (originalElements.empty)
-			return primaryHandler
-			
 		val handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler)
-		handler.addSecondaryHandlers(originalElements, forHighlightUsages)
+		for (secondaryHandler : secondaryHandlers)
+			handler.addSecondaryHandler(secondaryHandler)
 		return handler
 	}
 	
-	protected def void addSecondaryHandlers(GeneratedSourceAwareFindUsagesHandler result, List<? extends PsiElement> elements, boolean forHighlightUsages) {
-		elements.forEach [
-			val delegateFactory = delegateFindFactory
-			if (delegateFactory !== null) {
-				val delegateHandler = delegateFactory.createFindUsagesHandler(it, forHighlightUsages)
-				if (delegateHandler !== null && delegateHandler !== FindUsagesHandler.NULL_HANDLER)
-					result.addSecondaryHandler(delegateHandler)
-			}
+	protected def getSecondaryHandlers(PsiElement element, boolean forHighlightUsages) {
+		val secondaryElements = element.getSecondaryElements(forHighlightUsages)
+		secondaryElements.map[
+			delegateFindUsagesHandler(forHighlightUsages)
+		].filter[
+			!nullHandler
 		]
+	}
+	
+	protected def getSecondaryElements(PsiElement element, boolean forHighlightUsages) {
+		val generatedElements = element.generatedElements
+		if (!generatedElements.empty)
+			return generatedElements
+			
+		// highlighting is only done with the real element under the cursor or with its derived elements
+		// not vice versa
+		if (forHighlightUsages)
+			return emptyList
+			
+		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
+		// primary element but only search for references to this element
+		return element.originalElements
 	}
 	
 	protected def List<? extends PsiElement> getOriginalElements(PsiElement element) {
@@ -108,6 +110,14 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 			}	
 		}
 		return result
+	}
+	
+	protected def isNullHandler(FindUsagesHandler handler) {
+		handler === null || handler === FindUsagesHandler.NULL_HANDLER
+	}
+	
+	protected def delegateFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
+		element.delegateFindFactory?.createFindUsagesHandler(element, forHighlightUsages)
 	}
 	
 	protected def delegateFindFactory(PsiElement element) {
