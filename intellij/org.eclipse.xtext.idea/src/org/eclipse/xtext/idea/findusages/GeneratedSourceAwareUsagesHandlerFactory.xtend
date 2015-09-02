@@ -25,8 +25,7 @@ import org.eclipse.xtext.idea.trace.ITraceForVirtualFileProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
- * TODO decorate all find usage requests and use a custom Processor<UsageInfo> in the FindUsagesHandler to redirect navigation requests
+ * @author Anton Kosyakov - Refactoring and testing
  */
 class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory {
 	
@@ -39,50 +38,49 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 	}
 	
 	override canFindUsages(PsiElement element) {
-		return delegateFindFactory(element) !== null || 
-			element.generatedElements.exists [
-				delegateFindFactory !== null
-			] || element.originalElements.exists [
-				delegateFindFactory !== null
-			]
+		var delegates = Extensions.getExtensions(FindUsagesHandlerFactory.EP_NAME, element.project);
+		for(delegate: delegates) {
+			if (delegate !== this) {
+				try {
+					if (delegate.canFindUsages(element)) {
+						return true
+					}
+				} catch (IndexNotReadyException e) {
+					throw e;
+				} catch (ProcessCanceledException e) {
+					throw e;
+				} catch (Exception e) {
+					LOG.error(e);
+				}
+			}
+		}
+		return false
 	}
 	
 	override createFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
-		val primaryHandler = element.delegateFindUsagesHandler(forHighlightUsages)
+		if (forHighlightUsages)
+			return null
+
+		val primaryHandler = element.delegateFindUsagesHandler
 		if (primaryHandler.nullHandler)
 			return null
 		
-		val secondaryHandlers = element.getSecondaryHandlers(forHighlightUsages)
+		val secondaryHandlers = element.secondaryHandlers
 		if (secondaryHandlers.empty)
-			return primaryHandler 
-		
-		val handler = new GeneratedSourceAwareFindUsagesHandler(primaryHandler)
-		for (secondaryHandler : secondaryHandlers)
-			handler.addSecondaryHandler(secondaryHandler)
-		return handler
+			return primaryHandler
+
+		return new GeneratedSourceAwareFindUsagesHandler(primaryHandler, secondaryHandlers)
 	}
 	
-	protected def getSecondaryHandlers(PsiElement element, boolean forHighlightUsages) {
-		val secondaryElements = element.getSecondaryElements(forHighlightUsages)
-		secondaryElements.map[
-			delegateFindUsagesHandler(forHighlightUsages)
-		].filter[
-			!nullHandler
-		]
+	protected def getSecondaryHandlers(PsiElement element) {
+		element.secondaryElements.map[delegateFindUsagesHandler].filter[!nullHandler]
 	}
 	
-	protected def getSecondaryElements(PsiElement element, boolean forHighlightUsages) {
+	protected def getSecondaryElements(PsiElement element) {
 		val generatedElements = element.generatedElements
 		if (!generatedElements.empty)
 			return generatedElements
-			
-		// highlighting is only done with the real element under the cursor or with its derived elements
-		// not vice versa
-		if (forHighlightUsages)
-			return emptyList
-			
-		// check if this is a generated artifact - use the original element as the primary and search for the primary element and visualize the 
-		// primary element but only search for references to this element
+		
 		return element.originalElements
 	}
 	
@@ -116,17 +114,15 @@ class GeneratedSourceAwareUsagesHandlerFactory extends FindUsagesHandlerFactory 
 		handler === null || handler === FindUsagesHandler.NULL_HANDLER
 	}
 	
-	protected def delegateFindUsagesHandler(PsiElement element, boolean forHighlightUsages) {
-		element.delegateFindFactory?.createFindUsagesHandler(element, forHighlightUsages)
-	}
-	
-	protected def delegateFindFactory(PsiElement element) {
+	protected def delegateFindUsagesHandler(PsiElement element) {
 		var delegates = Extensions.getExtensions(FindUsagesHandlerFactory.EP_NAME, element.project);
 		for(delegate: delegates) {
 			if (delegate !== this) {
 				try {
 					if (delegate.canFindUsages(element)) {
-						return delegate;
+						val handler = delegate.createFindUsagesHandler(element, false)
+						if (handler !== null)
+							return handler;
 					}
 				} catch (IndexNotReadyException e) {
 					throw e;
