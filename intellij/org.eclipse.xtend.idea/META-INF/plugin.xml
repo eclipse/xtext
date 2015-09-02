@@ -23,6 +23,11 @@
 	     		text="Convert to Xtend" description="Convert Java file to Xtend">
 	        <add-to-group group-id="RefactoringMenu"/>
 	     </action>
+	     <action id="Xtend.CodeConvertToXtend" class="org.eclipse.xtend.core.idea.actions.ConvertJavaCodeAction"
+	     		text="Convert Java File to Xtend File" description="Convert Java File to Xtend File">
+	     	<keyboard-shortcut first-keystroke="alt shift control X"  keymap="$default"/>
+            <add-to-group group-id="CodeMenu"/>
+	     </action>
      </actions>
      
     <extensions defaultExtensionNs="org.eclipse.xtext.idea">
