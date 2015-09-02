@@ -46,8 +46,10 @@ class Java8ConverterTest extends JavaConverterTest {
 				default :{
 					
 				}
-			}try (var FileInputStream in=new FileInputStream("java7.txt") ){
-				System.out.println(in.read()) throw new IllegalAccessException()
+			}
+			try (var FileInputStream in=new FileInputStream("java7.txt")){
+				System.out.println(in.read()) 
+				throw new IllegalAccessException()
 			} catch (IOException ) {
 				e.printStackTrace() 
 			} catch (IllegalAccessException ) {
@@ -115,8 +117,8 @@ class Java8ConverterTest extends JavaConverterTest {
 		assertEquals(
 		'''
 		def void javaLambda() {
-			EventQueue.invokeLater([System.out.println("invoked later")]) var Callable<Runnable> callable=[[System.out.println("callable says hello")]] 
-			
+			EventQueue.invokeLater([System.out.println("invoked later")]) 
+			var Callable<Runnable> callable=[[System.out.println("callable says hello")]] 
 		}
 		def static package Runnable getRunnable(String s) {
 			return [System.out.println(s)] 
