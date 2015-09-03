@@ -142,5 +142,9 @@ class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> implements
 		ProgressIndicatorProvider.checkCanceled
 		object.psiElement
 	}
+	
+	override toString() {
+		class.simpleName
+	}
 
 }

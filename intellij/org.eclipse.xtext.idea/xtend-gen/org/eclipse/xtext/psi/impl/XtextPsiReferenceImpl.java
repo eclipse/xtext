@@ -277,4 +277,10 @@ public class XtextPsiReferenceImpl extends PsiReferenceBase<XtextPsiElement> imp
     }
     return _xblockexpression;
   }
+  
+  @Override
+  public String toString() {
+    Class<? extends XtextPsiReferenceImpl> _class = this.getClass();
+    return _class.getSimpleName();
+  }
 }
