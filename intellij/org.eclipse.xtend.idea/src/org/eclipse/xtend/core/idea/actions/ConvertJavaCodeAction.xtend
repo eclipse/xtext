@@ -29,7 +29,7 @@ class ConvertJavaCodeAction extends BaseRefactoringAction {
 
 	override protected isEnabledOnElements(PsiElement[] elements) {
 		elements.map[if(it instanceof PsiFileSystemItem) it else it.containingFile].exists [
-			it instanceof PsiJavaFile || !processChildren[!(it instanceof PsiJavaFile)]
+			it instanceof PsiJavaFile || !it.processChildren[!(it instanceof PsiJavaFile)]
 		]
 	}
 

@@ -603,7 +603,8 @@ public class IdeaIntegrationTest extends LightXtendTest {
         VFileDeleteEvent _vFileDeleteEvent = new VFileDeleteEvent(IdeaIntegrationTest.this, _parent, true);
         _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
         File _parentFile = f.getParentFile();
-        _parentFile.delete();
+        boolean _delete = _parentFile.delete();
+        TestCase.assertTrue(_delete);
         return;
       }
     };

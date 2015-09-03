@@ -246,7 +246,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	def void fileDeleted(VirtualFile root) {
-		if(root.findModule(ProjectFileIndex.SERVICE.getInstance(project)) === null) {
+		if (root.findModule(ProjectFileIndex.SERVICE.getInstance(project)) === null) {
 			return
 		}
 		val files = newArrayList
