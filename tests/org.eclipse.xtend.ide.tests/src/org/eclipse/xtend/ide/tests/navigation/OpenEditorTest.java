@@ -67,7 +67,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		super.setUp();
 		workbenchTestHelper.createFile("outlinetest/Bar.java", "package outlinetest; public class Bar { public int bar; }");
 		workbenchTestHelper.createFile("outlinetest/Foo.xtend", "package outlinetest class Foo extends Bar { public int foo }");
-		IResourcesSetupUtil.waitForBuild();
+		IResourcesSetupUtil.fullBuild();
 		javaProject = JavaCore.create(workbenchTestHelper.getProject());
 	}
 
@@ -84,7 +84,15 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 
 		IType foo = javaProject.findType("outlinetest.Foo");
 		IEditorPart fooJavaEditor = globalURIEditorOpener.open(null, foo, true);
-		assertEquals("org.eclipse.xtend.core.Xtend", fooJavaEditor.getEditorSite().getId());
+		String expectedEditor = JavaUI.ID_CU_EDITOR;
+		try {
+			// if we are running in post 3.8 we have an Xtend editor
+			getClass().getClassLoader().loadClass("org.eclipse.xtext.common.types.shared.jdt38.OriginalEditorSelector");
+			expectedEditor = "org.eclipse.xtend.core.Xtend";
+		} catch (ClassNotFoundException e) {
+			
+		}
+		assertEquals(expectedEditor, fooJavaEditor.getEditorSite().getId());
 
 		IResource resource = foo.getResource();
 		assertTrue(resource instanceof IFile);
