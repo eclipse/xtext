@@ -9,6 +9,7 @@ package org.eclipse.xtend.idea.autobuild;
 
 import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
+import com.google.common.io.Files;
 import com.intellij.facet.Facet;
 import com.intellij.facet.FacetManager;
 import com.intellij.facet.FacetTypeId;
@@ -19,12 +20,18 @@ import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.newvfs.events.VFileDeleteEvent;
+import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
+import com.intellij.openapi.vfs.newvfs.persistent.PersistentFS;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Collections;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
@@ -36,6 +43,7 @@ import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -568,6 +576,40 @@ public class IdeaIntegrationTest extends LightXtendTest {
     _builder_3.append("}");
     _builder_3.newLine();
     this.assertFileContents("xtend-gen/otherPackage/Foo.java", _builder_3);
+  }
+  
+  /**
+   * https://bugs.eclipse.org/bugs/show_bug.cgi?id=476412
+   */
+  public void testDeleteNonProjectFolderFromDisk() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package otherPackage");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.myFixture.addFileToProject("otherPackage/Foo.xtend", _builder.toString());
+    final File tmpDir = Files.createTempDir();
+    final File f = new File(tmpDir, "dirToDelete");
+    f.mkdirs();
+    final VirtualFile vFile = VfsUtil.findFileByIoFile(f, false);
+    Application _application = ApplicationManager.getApplication();
+    final Runnable _function = new Runnable() {
+      @Override
+      public void run() {
+        PersistentFS _instance = PersistentFS.getInstance();
+        VirtualFile _parent = vFile.getParent();
+        VFileDeleteEvent _vFileDeleteEvent = new VFileDeleteEvent(IdeaIntegrationTest.this, _parent, true);
+        _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
+        File _parentFile = f.getParentFile();
+        _parentFile.delete();
+        return;
+      }
+    };
+    _application.runWriteAction(_function);
+    boolean _exists = vFile.exists();
+    TestCase.assertFalse(_exists);
   }
   
   public void testAffectedUpdated() {

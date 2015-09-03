@@ -246,9 +246,12 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	}
 
 	def void fileDeleted(VirtualFile root) {
+		if(root.findModule(ProjectFileIndex.SERVICE.getInstance(project)) === null) {
+			return
+		}
 		val files = newArrayList
 		root.processFilesRecursively [ file |
-			if (!file.directory) files += file
+			if(!file.directory) files += file
 			true
 		]
 		enqueue(DELETED, files)

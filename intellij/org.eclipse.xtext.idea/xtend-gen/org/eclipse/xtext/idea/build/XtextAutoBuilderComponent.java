@@ -363,6 +363,12 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public void fileDeleted(final VirtualFile root) {
+    ProjectFileIndex _instance = ProjectFileIndex.SERVICE.getInstance(this.project);
+    Module _findModule = this.findModule(root, _instance);
+    boolean _tripleEquals = (_findModule == null);
+    if (_tripleEquals) {
+      return;
+    }
     final ArrayList<VirtualFile> files = CollectionLiterals.<VirtualFile>newArrayList();
     final Processor<VirtualFile> _function = new Processor<VirtualFile>() {
       @Override
