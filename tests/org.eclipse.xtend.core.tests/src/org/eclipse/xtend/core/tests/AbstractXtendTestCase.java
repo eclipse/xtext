@@ -64,13 +64,19 @@ public abstract class AbstractXtendTestCase extends Assert {
 	protected XtendFile file(String string) throws Exception {
 		return file(string, false);
 	}
-
+	
 	protected XtendFile file(String string, boolean validate) throws Exception {
+		return file(string, validate, true);
+	}
+
+	protected XtendFile file(String string, boolean validate, boolean sytaxValidate) throws Exception {
 		XtextResourceSet set = getResourceSet();
 		String fileName = getFileName(string);
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(string), null);
-		assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		if (sytaxValidate) {
+			assertEquals(resource.getErrors().toString(), 0, resource.getErrors().size());
+		}
 		if (validate) {
 			List<Issue> issues = Lists.newArrayList(Iterables.filter(((XtextResource) resource).getResourceServiceProvider().getResourceValidator()
 					.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl), new Predicate<Issue>() {
