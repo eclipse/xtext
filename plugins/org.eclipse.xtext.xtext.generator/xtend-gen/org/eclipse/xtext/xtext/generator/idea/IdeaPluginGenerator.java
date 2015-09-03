@@ -245,7 +245,6 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
     JavaFileAccess _compileSemanticHighlightVisitor = this.compileSemanticHighlightVisitor(grammar);
     JavaFileAccess _compileExtensionFactory = this.compileExtensionFactory(grammar);
     JavaFileAccess _compileCodeBlockModificationListener = this.compileCodeBlockModificationListener(grammar);
-    JavaFileAccess _compileElementDescriptionProvider = this.compileElementDescriptionProvider(grammar);
     JavaFileAccess _compilePsiParser = this.compilePsiParser(grammar);
     JavaFileAccess _compileAntlrTokenFileProvider = this.compileAntlrTokenFileProvider(grammar);
     JavaFileAccess _compilePomDeclarationSearcher = this.compilePomDeclarationSearcher(grammar);
@@ -259,7 +258,7 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
         it.writeTo(_ideaPluginSrcGen);
       }
     };
-    IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compileElementDescriptionProvider, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
+    IterableExtensions.forEach(Collections.<TextFileAccess>unmodifiableList(CollectionLiterals.<TextFileAccess>newArrayList(_compileServicesISetup, _compileAbstractCompletionContributor, _compileLanguage, _compileAbstractFileType, _compileFileTypeFactory, _compileFileImpl, _compileTokenTypeProvider, _compileElementTypeProvider, _compileParserDefinition, _compileSyntaxHighlighterFactory, _compileSemanticHighlightVisitor, _compileExtensionFactory, _compileCodeBlockModificationListener, _compilePsiParser, _compileAntlrTokenFileProvider, _compilePomDeclarationSearcher, _compileFacetType, _compileBaseColorSettingsPage)), _function_1);
   }
   
   public String iml() {
@@ -392,49 +391,6 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
               _builder.newLine();
             }
           }
-          _builder.newLine();
-          _builder.append("}");
-          _builder.newLine();
-        }
-      };
-      file.setJavaContent(_client);
-      _xblockexpression = file;
-    }
-    return _xblockexpression;
-  }
-  
-  public JavaFileAccess compileElementDescriptionProvider(final Grammar grammar) {
-    JavaFileAccess _xblockexpression = null;
-    {
-      TypeReference _elementDescriptionProvider = this._ideaPluginClassNames.getElementDescriptionProvider(grammar);
-      final JavaFileAccess file = this.fileAccessFactory.createJavaFile(_elementDescriptionProvider);
-      StringConcatenationClient _client = new StringConcatenationClient() {
-        @Override
-        protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
-          _builder.append("public class ");
-          TypeReference _elementDescriptionProvider = IdeaPluginGenerator.this._ideaPluginClassNames.getElementDescriptionProvider(grammar);
-          String _simpleName = _elementDescriptionProvider.getSimpleName();
-          _builder.append(_simpleName, "");
-          _builder.append(" extends ");
-          TypeReference _typeRef = TypeReference.typeRef("org.eclipse.xtext.psi.BaseXtextElementDescriptionProvider");
-          _builder.append(_typeRef, "");
-          _builder.append(" {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("public ");
-          TypeReference _elementDescriptionProvider_1 = IdeaPluginGenerator.this._ideaPluginClassNames.getElementDescriptionProvider(grammar);
-          String _simpleName_1 = _elementDescriptionProvider_1.getSimpleName();
-          _builder.append(_simpleName_1, "\t");
-          _builder.append("() {");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t\t");
-          _builder.append("super(");
-          TypeReference _ideaLanguage = IdeaPluginGenerator.this._ideaPluginClassNames.getIdeaLanguage(grammar);
-          _builder.append(_ideaLanguage, "\t\t");
-          _builder.append(".INSTANCE);");
-          _builder.newLineIfNotEmpty();
-          _builder.append("\t");
-          _builder.append("}");
           _builder.newLine();
           _builder.append("}");
           _builder.newLine();
@@ -917,12 +873,6 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _completionContributor = this._ideaPluginClassNames.getCompletionContributor(grammar);
       _builder.append(_completionContributor, "\t\t");
       _builder.append("\"/>");
-      _builder.newLineIfNotEmpty();
-      _builder.append("\t\t");
-      _builder.append("<elementDescriptionProvider implementation=\"");
-      TypeReference _elementDescriptionProvider = this._ideaPluginClassNames.getElementDescriptionProvider(grammar);
-      _builder.append(_elementDescriptionProvider, "\t\t");
-      _builder.append("\" order=\"first\"/>");
       _builder.newLineIfNotEmpty();
       _builder.append("\t\t");
       _builder.append("<pom.declarationSearcher implementation=\"");

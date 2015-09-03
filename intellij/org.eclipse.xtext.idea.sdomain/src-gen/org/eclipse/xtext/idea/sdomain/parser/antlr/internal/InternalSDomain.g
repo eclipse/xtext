@@ -90,7 +90,7 @@ ruleFile returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_0_0, 
-        		"Element");
+        		"org.eclipse.xtext.idea.sdomain.SDomain.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -133,7 +133,7 @@ ruleImport returns [EObject current=null]
        			$current, 
        			"importedNamespace",
         		lv_importedNamespace_1_0, 
-        		"QualifiedNameWithWildCard");
+        		"org.eclipse.xtext.idea.sdomain.SDomain.QualifiedNameWithWildCard");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -251,7 +251,7 @@ ruleNamespace returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_0_0, 
-        		"QualifiedName");
+        		"org.eclipse.xtext.idea.sdomain.SDomain.QualifiedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -273,7 +273,7 @@ ruleNamespace returns [EObject current=null]
        			$current, 
        			"elements",
         		lv_elements_2_0, 
-        		"Element");
+        		"org.eclipse.xtext.idea.sdomain.SDomain.Element");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -411,7 +411,7 @@ ruleEntity returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -432,7 +432,7 @@ ruleEntity returns [EObject current=null]
        			$current, 
        			"properties",
         		lv_properties_3_0, 
-        		"Property");
+        		"org.eclipse.xtext.idea.sdomain.SDomain.Property");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -480,7 +480,7 @@ ruleDatatype returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )
@@ -534,7 +534,7 @@ ruleProperty returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"ID");
+        		"org.eclipse.xtext.common.Terminals.ID");
 	    }
 
 )

@@ -41,7 +41,6 @@
       							factoryClass="org.eclipse.xtext.idea.common.types.idea.RefactoringTestLanguageExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage" implementationClass="org.eclipse.xtext.idea.common.types.idea.completion.RefactoringTestLanguageCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.common.types.idea.lang.psi.RefactoringTestLanguageElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.common.types.idea.lang.pom.RefactoringTestLanguagePomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.common.types.RefactoringTestLanguage"

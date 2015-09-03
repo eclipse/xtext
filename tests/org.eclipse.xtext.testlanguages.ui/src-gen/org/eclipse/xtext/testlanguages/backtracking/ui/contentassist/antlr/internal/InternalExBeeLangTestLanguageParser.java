@@ -1135,8 +1135,8 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
     public static final int Asterisk=53;
     public static final int Requires=10;
     public static final int RequiresMin=5;
-    public static final int RequiresMax=4;
     public static final int As=46;
+    public static final int RequiresMax=4;
     public static final int Cached=14;
     public static final int This=21;
     public static final int Greedy=15;
@@ -1342,11 +1342,11 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         state.failed=false;
         return success;
     }
-    public final boolean synpred95_InternalExBeeLangTestLanguageParser() {
+    public final boolean synpred47_InternalExBeeLangTestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred95_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
+            synpred47_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -1356,11 +1356,11 @@ abstract class InternalExBeeLangTestLanguageParser1 extends AbstractInternalCont
         state.failed=false;
         return success;
     }
-    public final boolean synpred47_InternalExBeeLangTestLanguageParser() {
+    public final boolean synpred95_InternalExBeeLangTestLanguageParser() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred47_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
+            synpred95_InternalExBeeLangTestLanguageParser_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

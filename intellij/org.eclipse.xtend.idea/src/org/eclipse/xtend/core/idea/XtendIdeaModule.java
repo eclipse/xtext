@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.idea;
 
 import org.eclipse.xtend.core.idea.editorActions.XtendAutoEditBlockProvider;
 import org.eclipse.xtend.core.idea.editorActions.XtendTokenSetProvider;
+import org.eclipse.xtend.core.idea.findUsages.XtendFindUsageProvider;
 import org.eclipse.xtend.core.idea.formatting.XtendBlockFactory;
 import org.eclipse.xtend.core.idea.formatting.XtendChildAttributesProvider;
 import org.eclipse.xtend.core.idea.highlighting.XtendHighlightingConfiguration;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.AbstractAntlrTokenToAttribute
 import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
+import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -159,6 +161,11 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	
 	public Class<? extends ASTParserFactory> bindASTParserFactory() {
 		return IdeaASTParserFactory.class;
+	}
+	
+	@SingletonBinding
+	public Class<? extends BaseXtextFindUsageProvider> bindBaseXtextFindUsageProvider() {
+		return XtendFindUsageProvider.class;
 	}
 	
 }

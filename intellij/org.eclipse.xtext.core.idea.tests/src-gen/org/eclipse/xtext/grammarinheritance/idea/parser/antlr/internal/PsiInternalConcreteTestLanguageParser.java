@@ -18,27 +18,28 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_REAL", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'model'", "':'", "'overriddenelement'", "'overridden other element'", "'-'", "'subrule1'", "'subrule3'", "'element'", "'overridemodel'", "'extendedmodel'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_REAL", "RULE_ID", "RULE_INT", "RULE_STRING", "SUPER_ID", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'model'", "':'", "'overriddenelement'", "'overridden other element'", "'-'", "'subrule1'", "'subrule3'", "'element'", "'overridemodel'", "'extendedmodel'"
     };
     public static final int RULE_ID=5;
-    public static final int RULE_ANY_OTHER=11;
+    public static final int SUPER_ID=8;
+    public static final int T__22=22;
+    public static final int RULE_ANY_OTHER=12;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_SL_COMMENT=9;
+    public static final int RULE_SL_COMMENT=10;
     public static final int EOF=-1;
-    public static final int RULE_ML_COMMENT=8;
+    public static final int RULE_ML_COMMENT=9;
     public static final int T__19=19;
     public static final int RULE_STRING=7;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
-    public static final int T__12=12;
     public static final int T__14=14;
     public static final int T__13=13;
     public static final int RULE_INT=6;
     public static final int RULE_REAL=4;
-    public static final int RULE_WS=10;
+    public static final int RULE_WS=11;
 
     // delegates
     // delegators
@@ -116,22 +117,22 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
             // PsiInternalConcreteTestLanguage.g:59:2: ( ruleConcreteParserRule | ruleCallOverridenParserRule | ruleCallExtendedParserRule | ruleOverridableParserRule2 )
             int alt1=4;
             switch ( input.LA(1) ) {
-            case 12:
+            case 13:
                 {
                 alt1=1;
                 }
                 break;
-            case 20:
+            case 21:
                 {
                 alt1=2;
                 }
                 break;
-            case 21:
+            case 22:
                 {
                 alt1=3;
                 }
                 break;
-            case 15:
+            case 16:
                 {
                 alt1=4;
                 }
@@ -276,7 +277,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getConcreteParserRule_ModelKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_3); 
+            otherlv_0=(Token)match(input,13,FollowSets000.FOLLOW_3); 
 
             			doneLeaf(otherlv_0);
             		
@@ -302,7 +303,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getConcreteParserRule_ColonKeyword_2ElementType());
             		
-            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_5); 
+            otherlv_2=(Token)match(input,14,FollowSets000.FOLLOW_5); 
 
             			doneLeaf(otherlv_2);
             		
@@ -312,7 +313,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==19) ) {
+                if ( (LA2_0==20) ) {
                     alt2=1;
                 }
 
@@ -410,7 +411,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getOverridableParserRule_OverriddenelementKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -572,7 +573,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getOverridableParserRule2_OverriddenOtherElementKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,15,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,16,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -598,7 +599,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getOverridableParserRule2_HyphenMinusKeyword_2ElementType());
             		
-            otherlv_2=(Token)match(input,16,FollowSets000.FOLLOW_8); 
+            otherlv_2=(Token)match(input,17,FollowSets000.FOLLOW_8); 
 
             			doneLeaf(otherlv_2);
             		
@@ -679,10 +680,10 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
             int alt3=3;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==17) ) {
+            if ( (LA3_0==18) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==18) ) {
+            else if ( (LA3_0==19) ) {
                 int LA3_2 = input.LA(2);
 
                 if ( (LA3_2==RULE_ID) ) {
@@ -830,7 +831,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getSubrule1_Subrule1Keyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,17,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -936,7 +937,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getSubrule2_Subrule3Keyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -1042,7 +1043,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getSubrule3_Subrule3Keyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,18,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -1221,7 +1222,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getInheritedParserRule_ElementKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,19,FollowSets000.FOLLOW_6); 
+            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_6); 
 
             			doneLeaf(otherlv_0);
             		
@@ -1306,7 +1307,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getAbstractCallOverridenParserRule_OverridemodelKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,20,FollowSets000.FOLLOW_10); 
+            otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_10); 
 
             			doneLeaf(otherlv_0);
             		
@@ -1316,7 +1317,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
                 int alt4=2;
                 int LA4_0 = input.LA(1);
 
-                if ( (LA4_0==14) ) {
+                if ( (LA4_0==15) ) {
                     alt4=1;
                 }
 
@@ -1413,7 +1414,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
 
             			markLeaf(elementTypeProvider.getAbstractCallExtendedParserRule_ExtendedmodelKeyword_0ElementType());
             		
-            otherlv_0=(Token)match(input,21,FollowSets000.FOLLOW_11); 
+            otherlv_0=(Token)match(input,22,FollowSets000.FOLLOW_11); 
 
             			doneLeaf(otherlv_0);
             		
@@ -1423,7 +1424,7 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
                 int alt5=2;
                 int LA5_0 = input.LA(1);
 
-                if ( ((LA5_0>=17 && LA5_0<=18)) ) {
+                if ( ((LA5_0>=18 && LA5_0<=19)) ) {
                     alt5=1;
                 }
 
@@ -1485,14 +1486,14 @@ public class PsiInternalConcreteTestLanguageParser extends AbstractPsiAntlrParse
         public static final BitSet FOLLOW_1 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_2 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_3 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x0000000000100002L});
         public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0000000000020000L});
         public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000040L});
         public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0000000000000080L});
-        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000060002L});
+        public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x0000000000008002L});
+        public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x00000000000C0002L});
     }
 
 

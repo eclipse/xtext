@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.findusages;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.psi.PsiNamedEObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +41,21 @@ public class BaseXtextFindUsageProvider implements FindUsagesProvider {
 	@Override
 	@NotNull
 	public String getType(@NotNull PsiElement element) {
+		if (element instanceof PsiEObject) {
+			return getType((PsiEObject) element);
+		}
 		return "";
+	}
+	
+	protected String getType(PsiEObject element) {
+		EObject object = element.getEObject();
+		if (object == null)
+			return "";
+		return getType(object);
+	}
+	
+	protected String getType(EObject object) {
+		return object.eClass().getName();
 	}
 
 	@Override
