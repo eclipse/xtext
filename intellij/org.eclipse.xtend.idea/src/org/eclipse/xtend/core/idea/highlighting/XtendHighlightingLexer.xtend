@@ -16,8 +16,6 @@ import org.eclipse.xtend.ide.common.highlighting.XtendHighlightingStyles
 import org.eclipse.xtext.idea.parser.AntlrDelegatingIdeaLexer
 import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
 
-import static org.eclipse.xtend.core.idea.highlighting.XtendHighlightingLexer.*
-
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -130,6 +128,7 @@ class XtendHighlightingLexer extends LexerBase {
 
 	override start(CharSequence buffer, int startOffset, int endOffset, int initialState) {
 		delegate.start(buffer, startOffset, endOffset, initialState)
+		_currentRichTextToken = null
 	}
 
 	override getBufferEnd() {
