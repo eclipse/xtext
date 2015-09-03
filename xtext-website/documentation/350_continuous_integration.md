@@ -221,7 +221,7 @@ Now that we can build our language we need to be able to integrate our language 
     </languages>
   </configuration>
   <dependencies>
-    <!-- add a dependency to the language core bundle, this will only be needed during geneeration and will not pollute your project's classpath. -->
+    <!-- add a dependency to the language core bundle, this will only be needed during generation and will not pollute your project's classpath. -->
     <dependency>
       <groupId>my.mavenized.herolanguage</groupId>
       <artifactId>my.mavenized.herolanguage</artifactId>
