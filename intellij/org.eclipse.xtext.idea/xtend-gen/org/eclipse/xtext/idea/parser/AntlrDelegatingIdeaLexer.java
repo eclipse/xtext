@@ -44,6 +44,7 @@ public class AntlrDelegatingIdeaLexer extends LexerBase {
     final CharSequence text = buffer.subSequence(startOffset, endOffset);
     TokenSource _createTokenSource = this.tokenSourceProvider.createTokenSource(text);
     this.tokenSource = _createTokenSource;
+    this.token = null;
   }
   
   @Override
