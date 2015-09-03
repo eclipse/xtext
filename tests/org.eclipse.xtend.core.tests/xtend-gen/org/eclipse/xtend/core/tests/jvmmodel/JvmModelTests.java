@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.jvmmodel;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -9,8 +10,10 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
@@ -704,6 +707,208 @@ public class JvmModelTests extends AbstractXtendTestCase {
       Assert.assertEquals("Nested3", _simpleName_3);
       boolean _isStatic_3 = nested3.isStatic();
       Assert.assertTrue(_isStatic_3);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_01() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo< {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmTypeParameter> _typeParameters = clazz.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = clazz.getTypeParameters();
+      boolean _isEmpty = _typeParameters_1.isEmpty();
+      Assert.assertTrue(_plus, _isEmpty);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_02() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo<T> {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmTypeParameter> _typeParameters = clazz.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = clazz.getTypeParameters();
+      int _size = _typeParameters_1.size();
+      Assert.assertEquals(_plus, 1, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_03() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new <() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmMember> _members = clazz.getMembers();
+      Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
+      final JvmConstructor member = IterableExtensions.<JvmConstructor>head(_filter);
+      EList<JvmTypeParameter> _typeParameters = member.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = member.getTypeParameters();
+      boolean _isEmpty = _typeParameters_1.isEmpty();
+      Assert.assertTrue(_plus, _isEmpty);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_04() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("new <T>() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmMember> _members = clazz.getMembers();
+      Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
+      final JvmConstructor member = IterableExtensions.<JvmConstructor>head(_filter);
+      EList<JvmTypeParameter> _typeParameters = member.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = member.getTypeParameters();
+      int _size = _typeParameters_1.size();
+      Assert.assertEquals(_plus, 1, _size);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_05() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def < foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmMember> _members = clazz.getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      final JvmOperation member = IterableExtensions.<JvmOperation>head(_filter);
+      Assert.assertNull(member);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_06() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <> foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmMember> _members = clazz.getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      final JvmOperation member = IterableExtensions.<JvmOperation>head(_filter);
+      EList<JvmTypeParameter> _typeParameters = member.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = member.getTypeParameters();
+      boolean _isEmpty = _typeParameters_1.isEmpty();
+      Assert.assertTrue(_plus, _isEmpty);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testJvmTypeParameter_07() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def <T> String foo() {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      String _string = _builder.toString();
+      XtendFile _file = this.file(_string, false, false);
+      EList<XtendTypeDeclaration> _xtendTypes = _file.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final JvmGenericType clazz = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
+      EList<JvmMember> _members = clazz.getMembers();
+      Iterable<JvmOperation> _filter = Iterables.<JvmOperation>filter(_members, JvmOperation.class);
+      final JvmOperation member = IterableExtensions.<JvmOperation>head(_filter);
+      EList<JvmTypeParameter> _typeParameters = member.getTypeParameters();
+      String _plus = ("" + _typeParameters);
+      EList<JvmTypeParameter> _typeParameters_1 = member.getTypeParameters();
+      int _size = _typeParameters_1.size();
+      Assert.assertEquals(_plus, 1, _size);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
