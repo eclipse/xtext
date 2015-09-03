@@ -89,6 +89,7 @@ class IdeaTraceTest extends LightXtendTest {
 	
 	@Ignore
 	def void _testTraceToTargetForPsiFile() {
+		//TODO https://bugs.eclipse.org/bugs/show_bug.cgi?id=474145
 		val psiFile = myFixture.addFileToProject('com/acme/MyClass.xtend', '''
 			package com.acme
 			class MyClass {
