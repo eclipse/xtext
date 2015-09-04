@@ -17,6 +17,7 @@ import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
 import com.intellij.openapi.roots.SourceFolder
 import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
@@ -42,15 +43,14 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	) {
 		val conf = module.createOrGetXtendFacetConf
 		setupOutputConfiguration(module, conf, rootModel)
-		setupOutputFolder(conf.state, rootModel)
+		createOutputFolders(conf.state, rootModel)
 		xtendLibManager.ensureXtendLibAvailable(rootModel, module)
 	}
 
 	def setupOutputConfiguration(Module module, XtendFacetConfiguration conf, ModifiableRootModel rootModel) {
-		val buildFile =  module.locateBuildFile()
-		if (module.isGradleedModule && buildFile !==null) {
-			new WriteCommandAction.Simple(module.project, "Gradle: Xtend Configuration",
-				newImmutableList(buildFile)) {
+		val buildFile = module.locateBuildFile()
+		if (module.isGradleedModule && buildFile !== null) {
+			new WriteCommandAction.Simple(module.project, "Gradle: Xtend Configuration", newImmutableList(buildFile)) {
 				override protected run() throws Throwable {
 					module.setupGradleBuild(buildFile)
 				}
@@ -83,47 +83,44 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 		}
 	}
 
-	def setupOutputFolder(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
-		val moduleFile = rootModel.module.moduleFile
-		var VirtualFile xtendGenMain = createOrGetInParentDir(moduleFile, state.outputDirectory)
-		val entry = rootModel.contentEntries.head
-		if (xtendGenMain != null) {
-			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
-			entry.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
-		}
-		var VirtualFile xtendGenTest = createOrGetInParentDir(moduleFile, state.testOutputDirectory)
-		if (xtendGenTest != null) {
-			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
-			entry.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
-		}
-
-	}
-
 	def presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
 		val entry = rootModel.contentEntries.filter[!it.url.contains('xtend-gen')].head
 		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
-		var VirtualFile xtendGenMain = mainSrc.createOrGetInParentDir('xtend-gen')
 		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
-		var VirtualFile xtendGenTest = testSrc.createOrGetInParentDir('xtend-gen')
-		if (xtendGenMain != null)
-			state.outputDirectory = xtendGenMain.canonicalPath
-		if (xtendGenTest != null)
-			state.testOutputDirectory = xtendGenTest.canonicalPath
+		if (mainSrc != null) {
+			state.outputDirectory = siblingPath(mainSrc, 'xtend-gen')
+		}
+		if (testSrc != null) {
+			state.testOutputDirectory = siblingPath(testSrc, 'xtend-gen')
+		}
 	}
 
-	def private VirtualFile createOrGetInParentDir(VirtualFile sibling, String relativePath) {
-		// TODO unmark parent ExcludedFolders e.g. 'build'
-		val parent = sibling?.parent
-		if (parent === null)
-			return null
-		VfsUtil.createDirectoryIfMissing(parent, relativePath)
+	def createOutputFolders(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
+		val moduleRoot = rootModel.contentEntries.head
+		var VirtualFile xtendGenMain = createOrGetDir(moduleRoot.file, state.outputDirectory)
+		if (xtendGenMain != null) {
+			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
+			moduleRoot.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
+		}
+		var VirtualFile xtendGenTest = createOrGetDir(moduleRoot.file, state.testOutputDirectory)
+		if (xtendGenTest != null) {
+			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
+			moduleRoot.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
+		}
+
 	}
 
-	def private VirtualFile createOrGetInParentDir(SourceFolder sibling, String relativePath) {
-		val file = sibling?.file
-		if (file === null)
-			return null
-		createOrGetInParentDir(file, relativePath)
+	def private VirtualFile createOrGetDir(VirtualFile parent, String path) {
+		if (VfsUtilCore.isUnder(path, #[parent.url])) {
+			VfsUtil.createDirectoryIfMissing(parent, path)
+		} else {
+			VfsUtil.createDirectoryIfMissing(path)
+		}
+	}
+
+	def private String siblingPath(SourceFolder sibling, String path) {
+		val parentUrl = VfsUtil.getParentDir(sibling.url)
+		return parentUrl + VfsUtil.VFS_SEPARATOR_CHAR + path
 	}
 
 	override createComponent() {

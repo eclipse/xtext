@@ -31,7 +31,7 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner
  */
 class GradleBuildFileUtility {
 
-	public val xtendGradlePluginId = '0.4.7'
+	public val xtendGradlePluginVersion = '0.4.7'
 
 	def boolean isGradleedModule(Module module) {
 		ExternalSystemApiUtil.isExternalSystemAwareModule(GradleConstants.SYSTEM_ID, module) ||
@@ -44,7 +44,7 @@ class GradleBuildFileUtility {
 		}
 		val android = module.isAndroidGradleModule
 		buildFile.createOrGetMethodCall("buildscript").
-			addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginId»' ''')
+			addDependency('''classpath 'org.xtend:xtend«if(android)'-android'»-gradle-plugin:«xtendGradlePluginVersion»' ''')
 
 		createStatementIfNotExists(buildFile, '''apply plugin: 'org.xtend.xtend«if(android)'-android'»' ''')
 	}
