@@ -335,6 +335,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		val vFile = VfsUtil.findFileByIoFile(f, false)
 		ApplicationManager.application.runWriteAction [
 			PersistentFS.getInstance().processEvents(#[new VFileDeleteEvent(this, vFile.parent, true)])
+			assertTrue(org.eclipse.xtext.util.Files.sweepFolder(f.parentFile))
 			assertTrue(f.parentFile.delete)
 			return
 		]
