@@ -87,10 +87,10 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		String expectedEditor = JavaUI.ID_CU_EDITOR;
 		try {
 			// if we are running in post 3.8 we have an Xtend editor
-			getClass().getClassLoader().loadClass("org.eclipse.xtext.common.types.shared.jdt38.OriginalEditorSelector");
-			expectedEditor = "org.eclipse.xtend.core.Xtend";
+			if (Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride") != null)
+				expectedEditor = "org.eclipse.xtend.core.Xtend";
 		} catch (ClassNotFoundException e) {
-			
+			// ignore
 		}
 		assertEquals(expectedEditor, fooJavaEditor.getEditorSite().getId());
 
@@ -103,7 +103,7 @@ public class OpenEditorTest extends AbstractXtendUITestCase {
 		IEditorPart fooXtendEditor = globalURIEditorOpener.open(URI.createURI(source), foo, true);
 		assertEquals("org.eclipse.xtend.core.Xtend", fooXtendEditor.getEditorSite().getId());
 	}
-
+	
 	@Test public void testOpenFromOutline() throws Exception {
 		XtextEditor bazXtendEditor = workbenchTestHelper.openEditor("outlinetest/Baz.xtend",
 				"package outlinetest class Baz extends Foo { int baz }");
