@@ -84,7 +84,7 @@ class JavaIoFileSystemTest {
 		
 		path.contents = "Hello Foo"
 		val mod = path.lastModification
-		assertEquals("Hello Foo",path.contents)
+		assertEquals("Hello Foo", path.contents)
 		
 		assertEquals(mod, path.lastModification)
 		Thread.sleep(1000)
