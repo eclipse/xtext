@@ -117,6 +117,9 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Accessors
   private final GuiceModuleAccess ideaGenModule = new GuiceModuleAccess();
   
+  @Accessors
+  private final GuiceModuleAccess webGenModule = new GuiceModuleAccess();
+  
   @Inject
   private Provider<ResourceSet> resourceSetProvider;
   
@@ -1307,5 +1310,10 @@ public class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILan
   @Pure
   public GuiceModuleAccess getIdeaGenModule() {
     return this.ideaGenModule;
+  }
+  
+  @Pure
+  public GuiceModuleAccess getWebGenModule() {
+    return this.webGenModule;
   }
 }

@@ -77,6 +77,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Accessors
   private boolean preferXtendStubs = true;
   
+  @Accessors(AccessorType.PUBLIC_GETTER)
+  private String xtextVersion;
+  
   /**
    * Configure a template for file headers. The template can contain variables:
    * <ul>
@@ -101,6 +104,8 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   @Override
   public void initialize(final Injector injector) {
     injector.injectMembers(this);
+    String _readVersionFromManifest = this.readVersionFromManifest();
+    this.xtextVersion = _readVersionFromManifest;
     if ((this.lineDelimiter == null)) {
       this.lineDelimiter = "\n";
     }
@@ -142,10 +147,9 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
       }
       boolean _contains_4 = fileHeader.contains(CodeConfig.FILE_HEADER_VAR_VERSION);
       if (_contains_4) {
-        final String version = this.getVersion();
-        boolean _notEquals_2 = (!Objects.equal(version, null));
+        boolean _notEquals_2 = (!Objects.equal(this.xtextVersion, null));
         if (_notEquals_2) {
-          String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, version);
+          String _replace_4 = fileHeader.replace(CodeConfig.FILE_HEADER_VAR_VERSION, this.xtextVersion);
           fileHeader = _replace_4;
         }
       }
@@ -156,7 +160,7 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   /**
    * Read the exact version from the Manifest of the plugin.
    */
-  private String getVersion() {
+  private String readVersionFromManifest() {
     InputStream is = null;
     try {
       URL _baseURL = CodeConfig.Plugin.INSTANCE.getBaseURL();
@@ -261,5 +265,10 @@ public class CodeConfig implements IGuiceAwareGeneratorComponent {
   
   public void setPreferXtendStubs(final boolean preferXtendStubs) {
     this.preferXtendStubs = preferXtendStubs;
+  }
+  
+  @Pure
+  public String getXtextVersion() {
+    return this.xtextVersion;
   }
 }

@@ -14,7 +14,6 @@ import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import java.util.concurrent.ExecutorService;
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider;
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.web.server.generator.IContentTypeProvider;
  * passed executor services. If a provider for executor services is given, it must provide a
  * new instance for each invocation.
  */
-@FinalFieldsConstructor
 @SuppressWarnings("all")
 public class DefaultWebModule extends AbstractGenericModule {
   private final ExecutorService executorService;
@@ -53,11 +51,5 @@ public class DefaultWebModule extends AbstractGenericModule {
     Named _named = Names.named("withDocumentLock");
     LinkedBindingBuilder<ExecutorService> _annotatedWith = _bind.annotatedWith(_named);
     _annotatedWith.toInstance(this.executorServiceWithDocumentLock);
-  }
-  
-  public DefaultWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
-    super();
-    this.executorService = executorService;
-    this.executorServiceWithDocumentLock = executorServiceWithDocumentLock;
   }
 }

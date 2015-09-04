@@ -206,8 +206,8 @@ public class AntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenera
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
-    TypeReference _internalParserClassName = this._grammarNaming.getInternalParserClassName(it);
-    String _simpleName_1 = _internalParserClassName.getSimpleName();
+    TypeReference _internalParserClass = this._grammarNaming.getInternalParserClass(it);
+    String _simpleName_1 = _internalParserClass.getSimpleName();
     _builder.append(_simpleName_1, "    ");
     _builder.append("(TokenStream input, ");
     TypeReference _grammarAccess_1 = this._grammarAccessExtensions.getGrammarAccess(it);

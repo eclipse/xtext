@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class GrammarUtil2 extends GrammarUtil {
+  public final static String TERMINALS = "org.eclipse.xtext.common.Terminals";
+  
   public static boolean inherits(final Grammar grammar, final String languageID) {
     String _name = grammar.getName();
     boolean _equals = Objects.equal(_name, languageID);
@@ -38,7 +40,7 @@ public class GrammarUtil2 extends GrammarUtil {
       @Override
       public Boolean apply(final Grammar it) {
         String _name = it.getName();
-        return Boolean.valueOf((!Objects.equal(_name, "org.eclipse.xtext.common.Terminals")));
+        return Boolean.valueOf((!Objects.equal(_name, GrammarUtil2.TERMINALS)));
       }
     };
     return IterableExtensions.<Grammar>findFirst(_usedGrammars, _function);

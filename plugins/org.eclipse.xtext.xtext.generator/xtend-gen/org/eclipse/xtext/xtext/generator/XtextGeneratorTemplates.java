@@ -17,11 +17,13 @@ import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.name.Names;
+import com.google.inject.util.Modules;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -798,6 +800,8 @@ public class XtextGeneratorTemplates {
         _builder.append(" {");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.append("public ");
         TypeReference _eclipsePluginModule_1 = naming.getEclipsePluginModule(it);
         String _simpleName_1 = _eclipsePluginModule_1.getSimpleName();
@@ -812,6 +816,8 @@ public class XtextGeneratorTemplates {
         _builder.newLine();
         _builder.append("\t");
         _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
@@ -1007,6 +1013,249 @@ public class XtextGeneratorTemplates {
     };
     javaFile.setJavaContent(_client);
     javaFile.setMarkedAsGenerated(true);
+    return javaFile;
+  }
+  
+  public JavaFileAccess createWebModule(final ILanguageConfig langConfig) {
+    final Grammar it = langConfig.getGrammar();
+    @Extension
+    final XtextGeneratorNaming naming = langConfig.getNaming();
+    TypeReference _webModule = naming.getWebModule(it);
+    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_webModule);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Use this class to register components to be used within the web application.");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    javaFile.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        TypeReference _webModule = naming.getWebModule(it);
+        String _simpleName = _webModule.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        TypeReference _webGenModule = naming.getWebGenModule(it);
+        _builder.append(_webGenModule, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        TypeReference _webModule_1 = naming.getWebModule(it);
+        String _simpleName_1 = _webModule_1.getSimpleName();
+        _builder.append(_simpleName_1, "\t");
+        _builder.append("(");
+        _builder.append(Provider.class, "\t");
+        _builder.append("<");
+        _builder.append(ExecutorService.class, "\t");
+        _builder.append("> executorServiceProvider) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("super(executorServiceProvider);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setJavaContent(_client);
+    return javaFile;
+  }
+  
+  public JavaFileAccess createWebGenModule(final ILanguageConfig langConfig) {
+    final Grammar it = langConfig.getGrammar();
+    @Extension
+    final XtextGeneratorNaming naming = langConfig.getNaming();
+    TypeReference _elvis = null;
+    GuiceModuleAccess _webGenModule = langConfig.getWebGenModule();
+    TypeReference _superClass = _webGenModule.getSuperClass();
+    if (_superClass != null) {
+      _elvis = _superClass;
+    } else {
+      TypeReference _webDefaultModule = naming.getWebDefaultModule(it);
+      _elvis = _webDefaultModule;
+    }
+    final TypeReference superClass = _elvis;
+    TypeReference _webGenModule_1 = naming.getWebGenModule(it);
+    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_webGenModule_1);
+    javaFile.setImportNestedTypeThreshold(JavaFileAccess.DONT_IMPORT_NESTED_TYPES);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Manual modifications go to {@link ");
+    TypeReference _webModule = naming.getWebModule(it);
+    String _simpleName = _webModule.getSimpleName();
+    _builder.append(_simpleName, " ");
+    _builder.append("}.");
+    _builder.newLineIfNotEmpty();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    javaFile.setTypeComment(_builder);
+    List<IClassAnnotation> _annotations = javaFile.getAnnotations();
+    SuppressWarningsAnnotation _suppressWarningsAnnotation = new SuppressWarningsAnnotation();
+    _annotations.add(_suppressWarningsAnnotation);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public abstract class ");
+        TypeReference _webGenModule = naming.getWebGenModule(it);
+        String _simpleName = _webGenModule.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        _builder.append(superClass, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        TypeReference _webGenModule_1 = naming.getWebGenModule(it);
+        String _simpleName_1 = _webGenModule_1.getSimpleName();
+        _builder.append(_simpleName_1, "\t");
+        _builder.append("(");
+        _builder.append(Provider.class, "\t");
+        _builder.append("<");
+        _builder.append(ExecutorService.class, "\t");
+        _builder.append("> executorServiceProvider) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("super(executorServiceProvider);");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        {
+          GuiceModuleAccess _webGenModule_2 = langConfig.getWebGenModule();
+          Set<GuiceModuleAccess.Binding> _bindings = _webGenModule_2.getBindings();
+          for(final GuiceModuleAccess.Binding binding : _bindings) {
+            _builder.append("\t");
+            StringConcatenationClient _createBindingMethod = XtextGeneratorTemplates.this.createBindingMethod(binding);
+            _builder.append(_createBindingMethod, "\t");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.newLine();
+          }
+        }
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setJavaContent(_client);
+    javaFile.setMarkedAsGenerated(true);
+    return javaFile;
+  }
+  
+  public JavaFileAccess createWebSetup(final ILanguageConfig langConfig) {
+    final Grammar it = langConfig.getGrammar();
+    @Extension
+    final XtextGeneratorNaming naming = langConfig.getNaming();
+    TypeReference _webSetup = naming.getWebSetup(it);
+    final JavaFileAccess javaFile = this.fileAccessFactory.createJavaFile(_webSetup);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* Initialization support for running Xtext languages in web applications.");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    javaFile.setTypeComment(_builder);
+    StringConcatenationClient _client = new StringConcatenationClient() {
+      @Override
+      protected void appendTo(StringConcatenationClient.TargetStringConcatenation _builder) {
+        _builder.append("public class ");
+        TypeReference _webSetup = naming.getWebSetup(it);
+        String _simpleName = _webSetup.getSimpleName();
+        _builder.append(_simpleName, "");
+        _builder.append(" extends ");
+        TypeReference _runtimeSetup = naming.getRuntimeSetup(it);
+        _builder.append(_runtimeSetup, "");
+        _builder.append(" {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private final ");
+        _builder.append(Provider.class, "\t");
+        _builder.append("<");
+        _builder.append(ExecutorService.class, "\t");
+        _builder.append("> executorServiceProvider;");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        TypeReference _webSetup_1 = naming.getWebSetup(it);
+        String _simpleName_1 = _webSetup_1.getSimpleName();
+        _builder.append(_simpleName_1, "\t");
+        _builder.append("(");
+        _builder.append(Provider.class, "\t");
+        _builder.append("<");
+        _builder.append(ExecutorService.class, "\t");
+        _builder.append("> executorServiceProvider) {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("this.executorServiceProvider = executorServiceProvider;");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("@Override");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("public ");
+        _builder.append(Injector.class, "\t");
+        _builder.append(" createInjector() {");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append(Module.class, "\t\t");
+        _builder.append(" runtimeModule = new ");
+        TypeReference _runtimeModule = naming.getRuntimeModule(it);
+        _builder.append(_runtimeModule, "\t\t");
+        _builder.append("();");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append(Module.class, "\t\t");
+        _builder.append(" webModule = new ");
+        TypeReference _webModule = naming.getWebModule(it);
+        _builder.append(_webModule, "\t\t");
+        _builder.append("(executorServiceProvider);");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t\t");
+        _builder.append("return ");
+        _builder.append(Guice.class, "\t\t");
+        _builder.append(".createInjector(");
+        _builder.append(Modules.class, "\t\t");
+        _builder.append(".override(runtimeModule).with(webModule));");
+        _builder.newLineIfNotEmpty();
+        _builder.append("\t");
+        _builder.append("}");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+      }
+    };
+    javaFile.setJavaContent(_client);
     return javaFile;
   }
   

@@ -938,10 +938,39 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
       boolean _isEnabled_9 = _intellijProject_1.isEnabled();
       if (_isEnabled_9) {
         _builder.append("\t\t\t");
+        _builder.append("// Intellij IDEA integration");
+        _builder.newLine();
+        _builder.append("\t\t\t");
         _builder.append("fragment = idea.IdeaPluginGenerator auto-inject {}");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}");
+        _builder.newLine();
+      }
+    }
+    _builder.append("\t\t\t");
+    _builder.newLine();
+    {
+      WizardConfiguration _config_19 = this.getConfig();
+      WebProjectDescriptor _webProject_1 = _config_19.getWebProject();
+      boolean _isEnabled_10 = _webProject_1.isEnabled();
+      if (_isEnabled_10) {
+        _builder.append("\t\t\t");
+        _builder.append("// web integration");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("fragment = web.WebIntegrationFragment auto-inject {");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("framework = \"Ace\"");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("generateExample = true");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("}");
         _builder.newLine();
       }
     }

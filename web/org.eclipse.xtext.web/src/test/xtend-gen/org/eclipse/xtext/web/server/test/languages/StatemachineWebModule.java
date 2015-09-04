@@ -38,10 +38,6 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class StatemachineWebModule extends DefaultWebModule {
   private IResourceBaseProvider resourceBaseProvider;
   
-  public StatemachineWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
-    super(executorService, executorServiceWithDocumentLock);
-  }
-  
   public StatemachineWebModule(final Provider<ExecutorService> executorServiceProvider) {
     super(executorServiceProvider);
   }

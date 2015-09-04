@@ -27,7 +27,7 @@ import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 /**
  * This implementation is outdated and will be removed before the Xtext 2.9.0 release.
  * 
- * @deprecated Use org.eclipse.xtext.xtext.generator.web.JsHighlightingFragment
+ * @deprecated Use org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
  */
 @Deprecated
 class AceHighlightingFragment extends Xtend2GeneratorFragment {

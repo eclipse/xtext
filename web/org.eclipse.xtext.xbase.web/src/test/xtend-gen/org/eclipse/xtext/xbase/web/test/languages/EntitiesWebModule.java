@@ -32,10 +32,6 @@ import org.eclipse.xtext.xbase.web.DefaultXbaseWebModule;
 public class EntitiesWebModule extends DefaultXbaseWebModule {
   private IResourceBaseProvider resourceBaseProvider;
   
-  public EntitiesWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
-    super(executorService, executorServiceWithDocumentLock);
-  }
-  
   public EntitiesWebModule(final Provider<ExecutorService> executorServiceProvider) {
     super(executorServiceProvider);
   }

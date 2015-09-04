@@ -31,6 +31,9 @@ public class XtextGeneratorNaming {
   @Accessors(AccessorType.PUBLIC_SETTER)
   private String ideaBasePackage;
   
+  @Accessors(AccessorType.PUBLIC_SETTER)
+  private String webBasePackage;
+  
   private Grammar myGrammar;
   
   Grammar setGrammar(final Grammar grammar) {
@@ -214,6 +217,47 @@ public class XtextGeneratorNaming {
     return new TypeReference(_ideaBasePackage, _plus);
   }
   
+  public String getWebBasePackage(final Grammar grammar) {
+    boolean _or = false;
+    boolean _notEquals = (!Objects.equal(grammar, this.myGrammar));
+    if (_notEquals) {
+      _or = true;
+    } else {
+      _or = (this.webBasePackage == null);
+    }
+    if (_or) {
+      String _namespace = GrammarUtil.getNamespace(grammar);
+      return (_namespace + ".web");
+    }
+    return this.webBasePackage;
+  }
+  
+  public TypeReference getWebModule(final Grammar grammar) {
+    String _webBasePackage = this.getWebBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "WebModule");
+    return new TypeReference(_webBasePackage, _plus);
+  }
+  
+  public TypeReference getWebDefaultModule(final Grammar grammar) {
+    return new TypeReference("org.eclipse.xtext.web.server.DefaultWebModule");
+  }
+  
+  public TypeReference getWebGenModule(final Grammar grammar) {
+    String _webBasePackage = this.getWebBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = ("Abstract" + _simpleName);
+    String _plus_1 = (_plus + "WebModule");
+    return new TypeReference(_webBasePackage, _plus_1);
+  }
+  
+  public TypeReference getWebSetup(final Grammar grammar) {
+    String _webBasePackage = this.getWebBasePackage(grammar);
+    String _simpleName = GrammarUtil.getSimpleName(grammar);
+    String _plus = (_simpleName + "WebSetup");
+    return new TypeReference(_webBasePackage, _plus);
+  }
+  
   public void setEclipsePluginActivator(final String eclipsePluginActivator) {
     this.eclipsePluginActivator = eclipsePluginActivator;
   }
@@ -232,5 +276,9 @@ public class XtextGeneratorNaming {
   
   public void setIdeaBasePackage(final String ideaBasePackage) {
     this.ideaBasePackage = ideaBasePackage;
+  }
+  
+  public void setWebBasePackage(final String webBasePackage) {
+    this.webBasePackage = webBasePackage;
   }
 }

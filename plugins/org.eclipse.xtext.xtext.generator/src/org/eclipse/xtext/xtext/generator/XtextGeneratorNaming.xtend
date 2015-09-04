@@ -31,6 +31,9 @@ class XtextGeneratorNaming {
 	@Accessors(PUBLIC_SETTER)
 	String ideaBasePackage
 	
+	@Accessors(PUBLIC_SETTER)
+	String webBasePackage
+	
 	Grammar myGrammar
 	
 	package def setGrammar(Grammar grammar) {
@@ -127,4 +130,27 @@ class XtextGeneratorNaming {
 	def getIdeaStandaloneSetup(Grammar grammar) {
 		new TypeReference(grammar.ideaBasePackage, getSimpleName(grammar) + "StandaloneSetupIdea")
 	}
+	
+	def getWebBasePackage(Grammar grammar) {
+		if (grammar != myGrammar || webBasePackage === null)
+			return getNamespace(grammar) + ".web"
+		return webBasePackage
+	}
+	
+	def getWebModule(Grammar grammar) {
+		new TypeReference(grammar.webBasePackage, getSimpleName(grammar) + 'WebModule')
+	}
+	
+	def getWebDefaultModule(Grammar grammar) {
+		new TypeReference('org.eclipse.xtext.web.server.DefaultWebModule')
+	}
+	
+	def getWebGenModule(Grammar grammar) {
+		new TypeReference(grammar.webBasePackage, 'Abstract' + getSimpleName(grammar) + 'WebModule')
+	}
+	
+	def getWebSetup(Grammar grammar) {
+		new TypeReference(grammar.webBasePackage, getSimpleName(grammar) + 'WebSetup')
+	}
+	
 }

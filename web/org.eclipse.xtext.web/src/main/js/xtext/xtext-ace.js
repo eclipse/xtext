@@ -56,7 +56,7 @@
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
  *     A path to a JS file defining an Ace syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext/mode-<xtextLang>'.
+ *     the 'xtextLang' option in the form 'xtext-resources/mode-<xtextLang>'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String}
@@ -159,7 +159,7 @@ define([
 		if (options.syntaxDefinition || options.xtextLang) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext/mode-' + options.xtextLang;
+				syntaxDefinition = 'xtext-resources/mode-' + options.xtextLang;
 			if (typeof(syntaxDefinition) === 'string') {
 				require([syntaxDefinition], function(mode) {
 					session.setMode(new mode.Mode);
