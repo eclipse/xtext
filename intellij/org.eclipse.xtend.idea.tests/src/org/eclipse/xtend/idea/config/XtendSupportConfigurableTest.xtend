@@ -28,10 +28,8 @@ import com.intellij.testFramework.PsiTestCase
 import com.intellij.testFramework.PsiTestUtil
 import java.util.ArrayList
 import java.util.List
-import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable
 import org.eclipse.xtend.core.idea.facet.XtendFacetType
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
-import org.jetbrains.jps.model.java.JavaSourceRootType
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -60,20 +58,19 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 
 	def testPlainJavaOutputConfiguration_02() {
 		val module = createModule("module1")
-		myModule = module
 		val moduleRoot = VfsUtil.createDirectoryIfMissing(module.project.baseDir, module.name)
-		addSourceContentToRoots(module, moduleRoot)
-
 		val srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java")
 		val testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java")
+		PsiTestUtil.addContentRoot(module, moduleRoot)
+		PsiTestUtil.addSourceRoot(module, srcDirVf)
+		PsiTestUtil.addSourceRoot(module, testDirVf, true)
 
 		val manager = ModuleRootManager.getInstance(module)
 
-		val helper = new XtendSupportConfigurable
-		helper.addAsSourceFolder(manager.modifiableModel, srcDirVf, JavaSourceRootType.SOURCE)
-		helper.addAsSourceFolder(manager.modifiableModel, testDirVf, JavaSourceRootType.TEST_SOURCE)
+		val srcFolders = manager.getSourceRoots(true)
+		assertEquals(2, srcFolders.size)
 		addSupport(module)
-		val facet = FacetManager.getInstance(myModule).getFacetsByType(XtendFacetType.TYPEID).head
+		val facet = FacetManager.getInstance(module).getFacetsByType(XtendFacetType.TYPEID).head
 		assertNotNull(facet)
 
 		val xtendConfig = facet.configuration.state
@@ -81,15 +78,15 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 
 		assertTrue(xtendConfig.outputDirectory.endsWith("module1/src/main/xtend-gen"))
 		assertTrue(xtendConfig.testOutputDirectory.endsWith("module1/src/test/xtend-gen"))
-
-		assertEquals(1, manager.contentEntries.head.sourceFolders.filter [
-			val urlToCheck = (it.file.path).replace("file://", '')
-			(xtendConfig.outputDirectory) == urlToCheck && !testSource
+		val sourceRoots = ModuleRootManager.getInstance(module).getSourceRoots(true)
+		assertEquals(1, sourceRoots.filter [
+			val urlToCheck = (path).replace("file://", '')
+			(xtendConfig.outputDirectory) == urlToCheck
 		].size)
 
-		assertEquals(1, manager.contentEntries.head.sourceFolders.filter [
-			val urlToCheck = (it.file.path).replace("file://", '')
-			(xtendConfig.testOutputDirectory) == urlToCheck && testSource
+		assertEquals(1, sourceRoots.filter [
+			val urlToCheck = (path).replace("file://", '')
+			(xtendConfig.testOutputDirectory) == urlToCheck
 		].size)
 	}
 
@@ -122,8 +119,8 @@ class XtendSupportConfigurableTest extends PsiTestCase {
 					}
 				} finally {
 					model.commit()
+					Disposer.dispose(configurable)
 				}
-				Disposer.dispose(configurable)
 			}
 		}.execute().throwException()
 	}
