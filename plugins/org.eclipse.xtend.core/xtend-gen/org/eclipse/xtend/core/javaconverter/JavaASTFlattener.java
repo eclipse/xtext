@@ -518,42 +518,49 @@ public class JavaASTFlattener extends ASTVisitor {
     List _modifiers_1 = it.modifiers();
     boolean _isStatic = this._aSTFlattenerUtils.isStatic(_modifiers_1);
     if (_isStatic) {
+      boolean _and = false;
       ASTNode _parent = it.getParent();
-      FieldDeclaration[] _fields = ((TypeDeclaration) _parent).getFields();
-      final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final FieldDeclaration it) {
-          boolean _and = false;
-          List _modifiers = it.modifiers();
-          boolean _isStatic = JavaASTFlattener.this._aSTFlattenerUtils.isStatic(_modifiers);
-          if (!_isStatic) {
-            _and = false;
-          } else {
-            List _modifiers_1 = it.modifiers();
-            boolean _isFinal = JavaASTFlattener.this._aSTFlattenerUtils.isFinal(_modifiers_1);
-            _and = _isFinal;
-          }
-          return Boolean.valueOf(_and);
-        }
-      };
-      Iterable<FieldDeclaration> _filter = IterableExtensions.<FieldDeclaration>filter(((Iterable<FieldDeclaration>)Conversions.doWrapArray(_fields)), _function);
-      final Function1<FieldDeclaration, Boolean> _function_1 = new Function1<FieldDeclaration, Boolean>() {
-        @Override
-        public Boolean apply(final FieldDeclaration f) {
-          List _fragments = f.fragments();
-          final Function1<VariableDeclarationFragment, Boolean> _function = new Function1<VariableDeclarationFragment, Boolean>() {
-            @Override
-            public Boolean apply(final VariableDeclarationFragment fragment) {
-              Block _body = it.getBody();
-              Boolean _isAssignedInBody = JavaASTFlattener.this._aSTFlattenerUtils.isAssignedInBody(_body, fragment);
-              return Boolean.valueOf((!(_isAssignedInBody).booleanValue()));
+      if (!(_parent instanceof TypeDeclaration)) {
+        _and = false;
+      } else {
+        ASTNode _parent_1 = it.getParent();
+        FieldDeclaration[] _fields = ((TypeDeclaration) _parent_1).getFields();
+        final Function1<FieldDeclaration, Boolean> _function = new Function1<FieldDeclaration, Boolean>() {
+          @Override
+          public Boolean apply(final FieldDeclaration it) {
+            boolean _and = false;
+            List _modifiers = it.modifiers();
+            boolean _isStatic = JavaASTFlattener.this._aSTFlattenerUtils.isStatic(_modifiers);
+            if (!_isStatic) {
+              _and = false;
+            } else {
+              List _modifiers_1 = it.modifiers();
+              boolean _isFinal = JavaASTFlattener.this._aSTFlattenerUtils.isFinal(_modifiers_1);
+              _and = _isFinal;
             }
-          };
-          return Boolean.valueOf(IterableExtensions.<VariableDeclarationFragment>forall(_fragments, _function));
-        }
-      };
-      boolean _forall = IterableExtensions.<FieldDeclaration>forall(_filter, _function_1);
-      if (_forall) {
+            return Boolean.valueOf(_and);
+          }
+        };
+        Iterable<FieldDeclaration> _filter = IterableExtensions.<FieldDeclaration>filter(((Iterable<FieldDeclaration>)Conversions.doWrapArray(_fields)), _function);
+        final Function1<FieldDeclaration, Boolean> _function_1 = new Function1<FieldDeclaration, Boolean>() {
+          @Override
+          public Boolean apply(final FieldDeclaration f) {
+            List _fragments = f.fragments();
+            final Function1<VariableDeclarationFragment, Boolean> _function = new Function1<VariableDeclarationFragment, Boolean>() {
+              @Override
+              public Boolean apply(final VariableDeclarationFragment fragment) {
+                Block _body = it.getBody();
+                Boolean _isAssignedInBody = JavaASTFlattener.this._aSTFlattenerUtils.isAssignedInBody(_body, fragment);
+                return Boolean.valueOf((!(_isAssignedInBody).booleanValue()));
+              }
+            };
+            return Boolean.valueOf(IterableExtensions.<VariableDeclarationFragment>forall(_fragments, _function));
+          }
+        };
+        boolean _forall = IterableExtensions.<FieldDeclaration>forall(_filter, _function_1);
+        _and = _forall;
+      }
+      if (_and) {
         this.appendToBuffer(" final Void static_initializer = {");
         this.appendLineWrapToBuffer();
         Block _body = it.getBody();
@@ -568,12 +575,12 @@ public class JavaASTFlattener extends ASTVisitor {
         this.appendToBuffer("*/}");
       }
     } else {
-      ASTNode _parent_1 = it.getParent();
-      if ((_parent_1 instanceof AnonymousClassDeclaration)) {
+      ASTNode _parent_2 = it.getParent();
+      if ((_parent_2 instanceof AnonymousClassDeclaration)) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Initializer is not supported in ");
-        ASTNode _parent_2 = it.getParent();
-        int _nodeType = _parent_2.getNodeType();
+        ASTNode _parent_3 = it.getParent();
+        int _nodeType = _parent_3.getNodeType();
         Class _nodeClassForType = ASTNode.nodeClassForType(_nodeType);
         String _simpleName = _nodeClassForType.getSimpleName();
         _builder.append(_simpleName, "");

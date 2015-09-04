@@ -340,7 +340,7 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifiers(modifiers())
 		if (modifiers().static) {
-			if ((it.parent as TypeDeclaration).fields.filter[modifiers().static && modifiers().final].forall [ f |
+			if (it.parent instanceof TypeDeclaration && (it.parent as TypeDeclaration).fields.filter[modifiers().static && modifiers().final].forall [ f |
 				f.fragments.forall[VariableDeclarationFragment fragment|!getBody().isAssignedInBody(fragment)]
 			]) {
 				appendToBuffer(" final Void static_initializer = {")

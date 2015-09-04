@@ -8,10 +8,15 @@
 package org.eclipse.xtend.idea.autobuild
 
 import com.google.common.io.CharStreams
+import com.google.common.io.Files
 import com.intellij.facet.Facet
 import com.intellij.facet.FacetManager
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.openapi.vfs.newvfs.events.VFileDeleteEvent
+import com.intellij.openapi.vfs.newvfs.persistent.PersistentFS
 import com.intellij.psi.PsiDocumentManager
+import java.io.File
 import java.io.InputStreamReader
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.idea.facet.XtendFacetType
@@ -25,7 +30,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 /**
  */
 class IdeaIntegrationTest extends LightXtendTest {
-	
+
 	def void testManualDeletionOfGeneratedSourcesTriggersRebuild() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -41,7 +46,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(regenerated.exists)
 	}
-	
+
 	def void testNoChangeDoesntTouch() {
 		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -64,7 +69,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		val regenerated = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertEquals(stamp, regenerated.modificationStamp)
 	}
-	
+
 	def void testRemoveAndAddFacet() {
 		val source = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -76,7 +81,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		ApplicationManager.application.runWriteAction [|
 			val mnr = FacetManager.getInstance(myModule)
 			val model = mnr.createModifiableModel
-			val facet = mnr.allFacets.findFirst[Facet<?> it | it.typeId == XtendFacetType.TYPEID]
+			val facet = mnr.allFacets.findFirst[Facet<?> it|it.typeId == XtendFacetType.TYPEID]
 			model.removeFacet(facet)
 			model.commit
 			return;
@@ -86,16 +91,18 @@ class IdeaIntegrationTest extends LightXtendTest {
 		assertTrue(autoBuilder.indexState.allResourceDescriptions.empty)
 		file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertNull(file)
-		
+
 		// add facet again
 		addFacetToModule(myModule, XtendLanguage.INSTANCE.ID)
-		
+
 		assertEquals(source.virtualFile.URI, autoBuilder.indexState.allResourceDescriptions.head.URI)
-		assertTrue(autoBuilder.getGeneratedSources(source.virtualFile.URI).exists[toString.endsWith("xtend-gen/otherPackage/Foo.java")])
+		assertTrue(autoBuilder.getGeneratedSources(source.virtualFile.URI).exists [
+			toString.endsWith("xtend-gen/otherPackage/Foo.java")
+		])
 		file = myFixture.findFileInTempDir('xtend-gen/otherPackage/Foo.java')
 		assertTrue(file.exists)
 	}
-	
+
 	def void testJavaDeletionTriggersError() {
 		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -121,7 +128,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			}
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
-		ApplicationManager.application.runWriteAction[
+		ApplicationManager.application.runWriteAction [
 			val javaFile = myFixture.findFileInTempDir('myPackage/Bar.java')
 			javaFile.delete(null)
 		]
@@ -132,7 +139,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			// expected		
 		}
 	}
-	
+
 	def void testJavaChangeTriggersError() {
 		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -165,7 +172,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
-	
+
 	def void testCyclicResolution() {
 		myFixture.addClass('''
 			package mypackage;
@@ -241,7 +248,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
-	
+
 	def void testCyclicResolution4() {
 		myFixture.addClass('''
 			package mypackage;
@@ -266,7 +273,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		''')
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
-	
+
 	def void testDeleteGeneratedFolder() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -286,7 +293,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				}
 			}
 		''')
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			import java.util.List;
@@ -302,7 +309,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			dir.delete(null)
 		]
 		// the auto builder immediately recreates the deleted content
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			import java.util.List;
@@ -314,7 +321,27 @@ class IdeaIntegrationTest extends LightXtendTest {
 			}
 		''')
 	}
-	
+
+	/* https://bugs.eclipse.org/bugs/show_bug.cgi?id=476412 */
+	def void testDeleteNonProjectFolderFromDisk() {
+		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
+			package otherPackage
+			class Foo {
+			}
+		''')
+		val tmpDir = Files.createTempDir
+		val File f = new File(tmpDir, "dirToDelete")
+		f.mkdirs
+		val vFile = VfsUtil.findFileByIoFile(f, false)
+		ApplicationManager.application.runWriteAction [
+			PersistentFS.getInstance().processEvents(#[new VFileDeleteEvent(this, vFile.parent, true)])
+			assertTrue(org.eclipse.xtext.util.Files.sweepFolder(f.parentFile))
+			assertTrue(f.parentFile.delete)
+			return
+		]
+		assertFalse(vFile.exists)
+	}
+
 	def void testAffectedUpdated() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -325,7 +352,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				val list = OtherClass.getIt("foo")
 			}
 		''')
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			@SuppressWarnings("all")
@@ -343,7 +370,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 				}
 			}
 		''')
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			import java.util.List;
@@ -355,7 +382,6 @@ class IdeaIntegrationTest extends LightXtendTest {
 			}
 		''')
 		// add an overload
-		
 		myFixture.saveText(myFixture.findFileInTempDir("otherPackage/OtherClass.java"), '''
 			package otherPackage;
 			
@@ -368,18 +394,18 @@ class IdeaIntegrationTest extends LightXtendTest {
 				}
 			}
 		''')
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			import otherPackage.OtherClass;
-
+			
 			@SuppressWarnings("all")
 			public class Foo {
 			  private final String[] list = OtherClass.getIt("foo");
 			}
 		''')
 	}
-	
+
 	def void testTraceFilesGeneratedAndDeleted() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -398,7 +424,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/OtherClass.java").exists)
 		assertTrue(myFixture.findFileInTempDir("xtend-gen/otherPackage/.OtherClass.java._trace").exists)
 	}
-	
+
 	def void testActiveAnnotation() {
 		myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -412,7 +438,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			
 			}
 		''')
-		assertFileContents("xtend-gen/otherPackage/Foo.java",'''
+		assertFileContents("xtend-gen/otherPackage/Foo.java", '''
 			package otherPackage;
 			
 			import org.eclipse.xtend.lib.Data;
@@ -470,7 +496,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 			}
 		''')
 	}
-	
+
 	def void testMoveFile() {
 		val xtendFile = myFixture.addFileToProject('otherPackage/Foo.xtend', '''
 			package otherPackage
@@ -485,13 +511,13 @@ class IdeaIntegrationTest extends LightXtendTest {
 			
 			}
 		''')
-		
+
 		val vf = xtendFile.virtualFile
 		val before = URI.createURI("temp:///src/otherPackage/Foo.xtend")
 		val after = URI.createURI("temp:///src/Foo.xtend")
 		assertNull(index.getResourceDescription(after))
 		assertNotNull(index.getResourceDescription(before))
-		
+
 		builder.runOperation [
 			ApplicationManager.application.runWriteAction [
 				vf.move(null, vf.parent.parent)
@@ -500,7 +526,7 @@ class IdeaIntegrationTest extends LightXtendTest {
 		assertNotNull(index.getResourceDescription(after))
 		assertNull(index.getResourceDescription(before))
 	}
-	
+
 	def void testRenameFile() {
 		val xtendFile = myFixture.addFileToProject('mypackage/Foo.xtend', '''
 			package mypackage
@@ -509,45 +535,45 @@ class IdeaIntegrationTest extends LightXtendTest {
 				
 			}
 		''')
-		
+
 		val before = URI.createURI("temp:///src/mypackage/Foo.xtend")
 		val after = URI.createURI("temp:///src/mypackage/Bar.xtend")
 		assertNull(index.getResourceDescription(after))
 		assertNotNull(index.getResourceDescription(before))
-		
+
 		builder.runOperation [
 			myFixture.renameElement(xtendFile, 'Bar.xtend')
 		]
 		assertNotNull(index.getResourceDescription(after))
 		assertNull(index.getResourceDescription(before))
 	}
-	
+
 	def void testRenameReference() {
 		myFixture.addFileToProject('mypackage/Foo.xtend', '''
 			package mypackage
 			
 			class Foo {}
 		''')
-		
+
 		val model = '''
 			package mypackage
 			
 			class Bar extends Foo {}
-		''' 
+		'''
 		val xtendFile = myFixture.addFileToProject('mypackage/Bar.xtend', model)
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
-		
+
 		val referenceOffset = model.indexOf('Foo')
 		myFixture.openFileInEditor(xtendFile.virtualFile)
 		myFixture.editor.caretModel.moveToOffset(referenceOffset)
 		builder.runOperation [
-			myFixture.renameElementAtCaret('Zonk')	
+			myFixture.renameElementAtCaret('Zonk')
 		]
 		myFixture.testHighlighting(true, true, true, xtendFile.virtualFile)
 	}
-	
+
 	def void assertFileContents(String path, CharSequence sequence) {
 		val file = myFixture.findFileInTempDir(path)
 		assertEquals(sequence.toString, CharStreams.toString(new InputStreamReader(file.inputStream, file.charset)))
-	}	
+	}
 }
