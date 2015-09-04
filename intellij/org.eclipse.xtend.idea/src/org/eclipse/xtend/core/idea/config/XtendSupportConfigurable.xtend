@@ -15,9 +15,10 @@ import com.intellij.openapi.command.WriteCommandAction
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.roots.ModifiableModelsProvider
 import com.intellij.openapi.roots.ModifiableRootModel
+import com.intellij.openapi.roots.ModuleRootManager
+import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.SourceFolder
 import com.intellij.openapi.vfs.VfsUtil
-import com.intellij.openapi.vfs.VfsUtilCore
 import com.intellij.openapi.vfs.VirtualFile
 import javax.inject.Provider
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration
@@ -57,7 +58,7 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 			}.execute
 			conf.state.presetGradleOutputDirectories(module)
 		} else {
-			conf.state.presetPlainJavaOutputDirectories(rootModel)
+			conf.state.presetPlainJavaOutputDirectories(module)
 		}
 	}
 
@@ -74,53 +75,82 @@ class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurable {
 	}
 
 	def presetGradleOutputDirectories(XbaseGeneratorConfigurationState state, Module module) {
+		val parentPath = ModuleRootManager.getInstance(module).contentRoots.head.path
 		if (module.isAndroidGradleModule()) {
-			state.outputDirectory = "build/generated/source/xtend/debug"
-			state.testOutputDirectory = "build/generated/source/xtend/androidTest/debug"
+			state.outputDirectory = '''«parentPath»/build/generated/source/xtend/debug'''
+			state.testOutputDirectory = '''«parentPath»/build/generated/source/xtend/androidTest/debug'''
 		} else {
-			state.outputDirectory = "build/xtend-gen/main"
-			state.testOutputDirectory = "build/xtend-gen/test"
+			state.outputDirectory = '''«parentPath»/build/xtend-gen/main'''
+			state.testOutputDirectory = '''«parentPath»/build/xtend-gen/test'''
 		}
 	}
 
-	def presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
-		val entry = rootModel.contentEntries.filter[!it.url.contains('xtend-gen')].head
-		val mainSrc = entry.sourceFolders.filter[!testSource && file?.exists].head
-		val testSrc = entry.sourceFolders.filter[testSource && file?.exists].head
+	def void presetPlainJavaOutputDirectories(XbaseGeneratorConfigurationState state, Module module) {
+		val moduleManager = ModuleRootManager.getInstance(module)
+
+		val mainSrc = moduleManager.findSourceFolder[!testSource && file?.exists]
+		val testSrc = moduleManager.findSourceFolder[testSource && file?.exists]
+
 		if (mainSrc != null) {
 			state.outputDirectory = siblingPath(mainSrc, 'xtend-gen')
+		} else {
+			val contentRoot = moduleManager.findBestContentRoot
+			state.outputDirectory = contentRoot.path + VfsUtil.VFS_SEPARATOR_CHAR + 'xtend-gen'
+
 		}
 		if (testSrc != null) {
 			state.testOutputDirectory = siblingPath(testSrc, 'xtend-gen')
-		}
-	}
-
-	def createOutputFolders(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
-		val moduleRoot = rootModel.contentEntries.head
-		var VirtualFile xtendGenMain = createOrGetDir(moduleRoot.file, state.outputDirectory)
-		if (xtendGenMain != null) {
-			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
-			moduleRoot.addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties)
-		}
-		var VirtualFile xtendGenTest = createOrGetDir(moduleRoot.file, state.testOutputDirectory)
-		if (xtendGenTest != null) {
-			val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
-			moduleRoot.addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties)
-		}
-
-	}
-
-	def private VirtualFile createOrGetDir(VirtualFile parent, String path) {
-		if (VfsUtilCore.isUnder(path, #[parent.url])) {
-			VfsUtil.createDirectoryIfMissing(parent, path)
 		} else {
-			VfsUtil.createDirectoryIfMissing(path)
+			state.testOutputDirectory = state.outputDirectory
 		}
 	}
 
-	def private String siblingPath(SourceFolder sibling, String path) {
-		val parentUrl = VfsUtil.getParentDir(sibling.url)
-		return parentUrl + VfsUtil.VFS_SEPARATOR_CHAR + path
+	def void createOutputFolders(XbaseGeneratorConfigurationState state, ModifiableRootModel rootModel) {
+		var xtendGenMain = VfsUtil.createDirectoryIfMissing(state.outputDirectory)
+		if (xtendGenMain != null) {
+			rootModel.addAsSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE)
+		}
+		var xtendGenTest = VfsUtil.createDirectoryIfMissing(state.testOutputDirectory)
+		if (xtendGenTest != null) {
+			rootModel.addAsSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE)
+		}
+	}
+
+	def private VirtualFile findBestContentRoot(ModuleRootManager moduleManager) {
+		val module = moduleManager.module
+		var contentRoot = module.project.baseDir
+		if (module.moduleFile !== null) {
+			val moduleFileRoot = ProjectRootManager.getInstance(module.project).fileIndex.getContentRootForFile(
+				module.moduleFile)
+			if (moduleFileRoot !== null) {
+				return contentRoot
+			}
+		}
+		if (!moduleManager.contentRoots.empty) {
+			contentRoot = moduleManager.contentRoots.head
+		}
+		return contentRoot
+	}
+
+	def private VirtualFile findSourceFolder(ModuleRootManager manager, (SourceFolder)=>Boolean fun) {
+		val contnentRoot = manager.contentEntries.findFirst [
+			sourceFolders.findFirst[fun.apply(it)] !== null
+		]
+		if (contnentRoot !== null) {
+			return contnentRoot.sourceFolders.findFirst(fun).file
+		}
+	}
+
+	def void addAsSourceFolder(ModifiableRootModel rootModel, VirtualFile xtendGenMain, JavaSourceRootType type) {
+		val projectFileIndex = ProjectRootManager.getInstance(rootModel.module.project).getFileIndex()
+		val properties = JpsJavaExtensionService.getInstance().createSourceRootProperties("", true);
+		val contentRootFile = projectFileIndex.getContentRootForFile(xtendGenMain)
+		val contentRoot = rootModel.contentEntries.findFirst[it.file == contentRootFile]
+		contentRoot?.addSourceFolder(xtendGenMain, type, properties)
+	}
+
+	def private String siblingPath(VirtualFile sibling, String path) {
+		return sibling.parent.path + VfsUtil.VFS_SEPARATOR_CHAR + path
 	}
 
 	override createComponent() {
