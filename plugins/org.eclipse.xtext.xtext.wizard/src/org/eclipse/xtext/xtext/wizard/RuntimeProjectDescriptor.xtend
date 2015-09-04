@@ -306,9 +306,18 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 						// generates the required bindings only if the grammar inherits from Xtype
 						fragment = xbase.XtypeGeneratorFragment2 auto-inject {}
 
-						«IF config.getIntellijProject.enabled»
+						«IF config.intellijProject.enabled»
+							// Intellij IDEA integration
 							fragment = idea.IdeaPluginGenerator auto-inject {}
 							fragment = idea.parser.antlr.XtextAntlrIDEAGeneratorFragment auto-inject {}
+						«ENDIF»
+						
+						«IF config.webProject.enabled»
+							// web integration
+							fragment = web.WebIntegrationFragment auto-inject {
+								framework = "Ace"
+								generateExample = true
+							}
 						«ENDIF»
 					}
 				}

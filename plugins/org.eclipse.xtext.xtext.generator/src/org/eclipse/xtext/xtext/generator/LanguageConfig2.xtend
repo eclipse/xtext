@@ -84,6 +84,9 @@ class LanguageConfig2 extends CompositeGeneratorFragment2 implements ILanguageCo
 	@Accessors
 	val ideaGenModule = new GuiceModuleAccess
 	
+	@Accessors
+	val webGenModule = new GuiceModuleAccess
+	
 	@Inject Provider<ResourceSet> resourceSetProvider
 	
 	@Inject IXtextProjectConfig projectConfig

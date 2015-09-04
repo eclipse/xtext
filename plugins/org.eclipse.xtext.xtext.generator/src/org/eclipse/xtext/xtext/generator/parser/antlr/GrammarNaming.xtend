@@ -21,14 +21,22 @@ class GrammarNaming {
 	@Inject
 	extension XtextGeneratorNaming
 
+	def String getParserPackage(Grammar it) '''«runtimeBasePackage».idea.parser.antlr.internal'''
+
 	def TypeReference getGrammarClass(Grammar it, String prefix) {
 		new TypeReference(parserPackage, '''«prefix»Internal«simpleName»''')
 	}
 
-	def TypeReference getInternalParserClassName(Grammar it) {
+	def TypeReference getInternalParserClass(Grammar it) {
 		new TypeReference(parserPackage, '''Internal«simpleName»Parser''')
 	}
 
-	def String getParserPackage(Grammar it) '''«runtimeBasePackage».idea.parser.antlr.internal'''
+	def TypeReference getContentAssistParserClass(Grammar it) {
+		new TypeReference('''«genericIdeBasePackage».contentassist.antlr''', '''«simpleName»Parser''')
+	}
+	
+	def TypeReference getInternalContentAssistLexerClass(Grammar it) {
+		new TypeReference('''«genericIdeBasePackage».contentassist.antlr.internal''', '''Internal«simpleName»Lexer''')
+	}
 
 }

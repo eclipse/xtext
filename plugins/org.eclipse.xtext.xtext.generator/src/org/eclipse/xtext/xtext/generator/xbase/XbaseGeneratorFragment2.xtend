@@ -200,6 +200,7 @@ class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.annotations.ui.DefaultXbaseWithAnnotationsUiModule'.typeRef
 		else
 			language.eclipsePluginGenModule.superClass = 'org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule'.typeRef
+		language.webGenModule.superClass = 'org.eclipse.xtext.xbase.web.DefaultXbaseWebModule'.typeRef
 	}
 	
 	protected def doGenerateXtendInferrer() {

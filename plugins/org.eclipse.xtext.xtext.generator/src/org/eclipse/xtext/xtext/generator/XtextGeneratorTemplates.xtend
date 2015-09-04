@@ -16,10 +16,12 @@ import com.google.inject.Module
 import com.google.inject.Provider
 import com.google.inject.Singleton
 import com.google.inject.name.Names
+import com.google.inject.util.Modules
 import java.util.Collections
 import java.util.List
 import java.util.Map
 import java.util.Properties
+import java.util.concurrent.ExecutorService
 import org.apache.log4j.Logger
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Constants
@@ -247,9 +249,11 @@ class XtextGeneratorTemplates {
 		'''
 		javaFile.javaContent = '''
 			public class «eclipsePluginModule.simpleName» extends «eclipsePluginGenModule» {
+				
 				public «eclipsePluginModule.simpleName»(«'org.eclipse.ui.plugin.AbstractUIPlugin'.typeRef» plugin) {
 					super(plugin);
 				}
+				
 			}
 		'''
 		return javaFile
@@ -325,6 +329,88 @@ class XtextGeneratorTemplates {
 		'''
 		javaFile.markedAsGenerated = true
 		return javaFile
+	}
+	
+	def JavaFileAccess createWebModule(ILanguageConfig langConfig) {
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(webModule)
+		javaFile.typeComment = '''
+			/**
+			 * Use this class to register components to be used within the web application.
+			 */
+		'''
+		javaFile.javaContent = '''
+			public class «webModule.simpleName» extends «webGenModule» {
+				
+				public «webModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+					super(executorServiceProvider);
+				}
+				
+			}
+		'''
+		return javaFile
+	}
+	
+	def JavaFileAccess createWebGenModule(ILanguageConfig langConfig) {
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val superClass = langConfig.webGenModule.superClass ?: webDefaultModule
+		val javaFile = fileAccessFactory.createJavaFile(webGenModule)
+		javaFile.importNestedTypeThreshold = JavaFileAccess.DONT_IMPORT_NESTED_TYPES
+		
+		javaFile.typeComment = '''
+			/**
+			 * Manual modifications go to {@link «webModule.simpleName»}.
+			 */
+		'''
+		javaFile.annotations += new SuppressWarningsAnnotation
+		javaFile.javaContent = '''
+			public abstract class «webGenModule.simpleName» extends «superClass» {
+			
+				public «webGenModule.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+					super(executorServiceProvider);
+				}
+				
+				«FOR binding : langConfig.webGenModule.bindings»
+					«binding.createBindingMethod»
+					
+				«ENDFOR»
+			}
+		'''
+		javaFile.markedAsGenerated = true
+		return javaFile
+	}
+	
+	def JavaFileAccess createWebSetup(ILanguageConfig langConfig) {
+		val it = langConfig.grammar
+		val extension naming = langConfig.naming
+		val javaFile = fileAccessFactory.createJavaFile(webSetup)
+		
+		javaFile.typeComment = '''
+			/**
+			 * Initialization support for running Xtext languages in web applications.
+			 */
+		 '''
+		 javaFile.javaContent = '''
+			public class «webSetup.simpleName» extends «runtimeSetup» {
+				
+				private final «Provider»<«ExecutorService»> executorServiceProvider;
+				
+				public «webSetup.simpleName»(«Provider»<«ExecutorService»> executorServiceProvider) {
+					this.executorServiceProvider = executorServiceProvider;
+				}
+				
+				@Override
+				public «Injector» createInjector() {
+					«Module» runtimeModule = new «runtimeModule»();
+					«Module» webModule = new «webModule»(executorServiceProvider);
+					return «Guice».createInjector(«Modules».override(runtimeModule).with(webModule));
+				}
+				
+			}
+		 '''
+		 return javaFile
 	}
 	
 	def TextFileAccess createManifest(ManifestAccess manifest, TypeReference activator) {
