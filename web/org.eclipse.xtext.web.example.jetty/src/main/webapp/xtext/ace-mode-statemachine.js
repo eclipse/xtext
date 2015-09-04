@@ -22,7 +22,7 @@ define("xtext/ace-mode-statemachine", ["ace/lib/oop", "ace/mode/text", "ace/mode
 		this.HighlightRules = HighlightRules;
 	};
 	oop.inherits(Mode, mText.Mode);
-	Mode.prototype.$id = "xtext/mode/statemachine";
+	Mode.prototype.$id = "xtext/statemachine";
 	Mode.prototype.getCompletions = function(state, session, pos, prefix) {
 		return [];
 	}

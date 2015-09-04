@@ -1,11 +1,6 @@
-define("xtext/entities-syntax", ["orion/editor/stylers/lib/syntax"], function(mLib) {
-	var keywords = [
-		"as", "case", "catch", "default", "do", "else", "entity", "extends", "extension", "false", "finally", "for", "if", "import", "instanceof", "new", "null", "op", "package", "return", "static", "super", "switch", "synchronized", "throw", "true", "try", "typeof", "val", "var", "while"
-	];
-
-	var grammars = [];
-	grammars.push.apply(grammars, mLib.grammars);
-	grammars.push({
+define("xtext/entities-syntax", function() {
+	var keywords = "as|case|catch|default|do|else|entity|extends|extension|false|finally|for|if|import|instanceof|new|null|op|package|return|static|super|switch|synchronized|throw|true|try|typeof|val|var|while";
+	return {
 		id: "xtext.entities",
 		contentTypes: ["xtext/entities"],
 		patterns: [
@@ -21,16 +16,7 @@ define("xtext/entities-syntax", ["orion/editor/stylers/lib/syntax"], function(mL
 			{include: "orion.lib#bracket_close"},
 			{include: "orion.lib#parenthesis_open"},
 			{include: "orion.lib#parenthesis_close"},
-			{
-				match: "\\b(?:" + keywords.join("|") + ")\\b",
-				name: "keyword.operator.entities"
-			}
+			{match: "\\b(?:" + keywords + ")\\b", name: "keyword.entities"}
 		]
-	});
-
-	return {
-		id: "xtext.entities",
-		grammars: grammars,
-		keywords: keywords
 	};
 });
