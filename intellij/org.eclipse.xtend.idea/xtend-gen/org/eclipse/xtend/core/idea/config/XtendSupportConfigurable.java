@@ -25,8 +25,10 @@ import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.SourceFolder;
 import com.intellij.openapi.roots.ui.configuration.libraries.CustomLibraryDescription;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Provider;
 import javax.swing.JComponent;
@@ -67,7 +69,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     final XtendFacetConfiguration conf = this.createOrGetXtendFacetConf(module);
     this.setupOutputConfiguration(module, conf, rootModel);
     XbaseGeneratorConfigurationState _state = conf.getState();
-    this.setupOutputFolder(_state, rootModel);
+    this.createOutputFolders(_state, rootModel);
     this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
   }
   
@@ -133,39 +135,6 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     }
   }
   
-  public SourceFolder setupOutputFolder(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {
-    SourceFolder _xblockexpression = null;
-    {
-      Module _module = rootModel.getModule();
-      final VirtualFile moduleFile = _module.getModuleFile();
-      String _outputDirectory = state.getOutputDirectory();
-      VirtualFile xtendGenMain = this.createOrGetInParentDir(moduleFile, _outputDirectory);
-      ContentEntry[] _contentEntries = rootModel.getContentEntries();
-      final ContentEntry entry = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
-      boolean _notEquals = (!Objects.equal(xtendGenMain, null));
-      if (_notEquals) {
-        JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
-        final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
-        entry.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties);
-      }
-      String _testOutputDirectory = state.getTestOutputDirectory();
-      VirtualFile xtendGenTest = this.createOrGetInParentDir(moduleFile, _testOutputDirectory);
-      SourceFolder _xifexpression = null;
-      boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
-      if (_notEquals_1) {
-        SourceFolder _xblockexpression_1 = null;
-        {
-          JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
-          final JavaSourceRootProperties properties_1 = _instance_1.createSourceRootProperties("", true);
-          _xblockexpression_1 = entry.<JavaSourceRootProperties>addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties_1);
-        }
-        _xifexpression = _xblockexpression_1;
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
-  }
-  
   public void presetPlainJavaOutputDirectories(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {
     ContentEntry[] _contentEntries = rootModel.getContentEntries();
     final Function1<ContentEntry, Boolean> _function = new Function1<ContentEntry, Boolean>() {
@@ -200,7 +169,6 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     };
     Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function_1);
     final SourceFolder mainSrc = IterableExtensions.<SourceFolder>head(_filter_1);
-    VirtualFile xtendGenMain = this.createOrGetInParentDir(mainSrc, "xtend-gen");
     SourceFolder[] _sourceFolders_1 = entry.getSourceFolders();
     final Function1<SourceFolder, Boolean> _function_2 = new Function1<SourceFolder, Boolean>() {
       @Override
@@ -222,53 +190,71 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     };
     Iterable<SourceFolder> _filter_2 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_2);
     final SourceFolder testSrc = IterableExtensions.<SourceFolder>head(_filter_2);
-    VirtualFile xtendGenTest = this.createOrGetInParentDir(testSrc, "xtend-gen");
-    boolean _notEquals = (!Objects.equal(xtendGenMain, null));
+    boolean _notEquals = (!Objects.equal(mainSrc, null));
     if (_notEquals) {
-      String _canonicalPath = xtendGenMain.getCanonicalPath();
-      state.setOutputDirectory(_canonicalPath);
+      String _siblingPath = this.siblingPath(mainSrc, "xtend-gen");
+      state.setOutputDirectory(_siblingPath);
     }
-    boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
+    boolean _notEquals_1 = (!Objects.equal(testSrc, null));
     if (_notEquals_1) {
-      String _canonicalPath_1 = xtendGenTest.getCanonicalPath();
-      state.setTestOutputDirectory(_canonicalPath_1);
+      String _siblingPath_1 = this.siblingPath(testSrc, "xtend-gen");
+      state.setTestOutputDirectory(_siblingPath_1);
     }
   }
   
-  private VirtualFile createOrGetInParentDir(final VirtualFile sibling, final String relativePath) {
-    try {
-      VirtualFile _xblockexpression = null;
-      {
-        VirtualFile _parent = null;
-        if (sibling!=null) {
-          _parent=sibling.getParent();
-        }
-        final VirtualFile parent = _parent;
-        if ((parent == null)) {
-          return null;
-        }
-        _xblockexpression = VfsUtil.createDirectoryIfMissing(parent, relativePath);
+  public SourceFolder createOutputFolders(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {
+    SourceFolder _xblockexpression = null;
+    {
+      ContentEntry[] _contentEntries = rootModel.getContentEntries();
+      final ContentEntry moduleRoot = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
+      VirtualFile _file = moduleRoot.getFile();
+      String _outputDirectory = state.getOutputDirectory();
+      VirtualFile xtendGenMain = this.createOrGetDir(_file, _outputDirectory);
+      boolean _notEquals = (!Objects.equal(xtendGenMain, null));
+      if (_notEquals) {
+        JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
+        final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
+        moduleRoot.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, JavaSourceRootType.SOURCE, properties);
       }
-      return _xblockexpression;
+      VirtualFile _file_1 = moduleRoot.getFile();
+      String _testOutputDirectory = state.getTestOutputDirectory();
+      VirtualFile xtendGenTest = this.createOrGetDir(_file_1, _testOutputDirectory);
+      SourceFolder _xifexpression = null;
+      boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
+      if (_notEquals_1) {
+        SourceFolder _xblockexpression_1 = null;
+        {
+          JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
+          final JavaSourceRootProperties properties_1 = _instance_1.createSourceRootProperties("", true);
+          _xblockexpression_1 = moduleRoot.<JavaSourceRootProperties>addSourceFolder(xtendGenTest, JavaSourceRootType.TEST_SOURCE, properties_1);
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  private VirtualFile createOrGetDir(final VirtualFile parent, final String path) {
+    try {
+      VirtualFile _xifexpression = null;
+      String _url = parent.getUrl();
+      boolean _isUnder = VfsUtilCore.isUnder(path, Collections.<String>unmodifiableList(CollectionLiterals.<String>newArrayList(_url)));
+      if (_isUnder) {
+        _xifexpression = VfsUtil.createDirectoryIfMissing(parent, path);
+      } else {
+        _xifexpression = VfsUtil.createDirectoryIfMissing(path);
+      }
+      return _xifexpression;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  private VirtualFile createOrGetInParentDir(final SourceFolder sibling, final String relativePath) {
-    VirtualFile _xblockexpression = null;
-    {
-      VirtualFile _file = null;
-      if (sibling!=null) {
-        _file=sibling.getFile();
-      }
-      final VirtualFile file = _file;
-      if ((file == null)) {
-        return null;
-      }
-      _xblockexpression = this.createOrGetInParentDir(file, relativePath);
-    }
-    return _xblockexpression;
+  private String siblingPath(final SourceFolder sibling, final String path) {
+    String _url = sibling.getUrl();
+    final String parentUrl = VfsUtil.getParentDir(_url);
+    return ((parentUrl + Character.valueOf(VfsUtil.VFS_SEPARATOR_CHAR)) + path);
   }
   
   @Override
