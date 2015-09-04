@@ -74,8 +74,11 @@ public class XbaseBreakpointDetailPaneFactory extends BreakpointDetailPaneFactor
 						if (input instanceof IJavaStratumLineBreakpoint) {
 							IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) input;
 							URI uri = URI.createURI((String) stratumBreakpoint.getMarker().getAttribute(StratumBreakpointAdapterFactory.ORG_ECLIPSE_XTEXT_XBASE_SOURCE_URI));
-							JavaBreakPointProvider javaBreakPointProvider = registry.getResourceServiceProvider(uri).get(JavaBreakPointProvider.class);
-							input = javaBreakPointProvider.getBreakpointWithJavaLocation(stratumBreakpoint);
+							IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri);
+							if (resourceServiceProvider != null) {
+								JavaBreakPointProvider javaBreakPointProvider = resourceServiceProvider.get(JavaBreakPointProvider.class);
+								input = javaBreakPointProvider.getBreakpointWithJavaLocation(stratumBreakpoint);
+							}
 						}
 						editor.setInput(input);
 					} catch (CoreException e) {
