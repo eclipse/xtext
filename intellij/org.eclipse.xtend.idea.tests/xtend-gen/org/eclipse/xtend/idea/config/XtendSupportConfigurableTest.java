@@ -39,7 +39,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import junit.framework.TestCase;
-import org.eclipse.xtend.core.idea.config.XtendSupportConfigurable;
 import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.facet.XtendFacetType;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
@@ -48,7 +47,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.jetbrains.jps.model.java.JavaSourceRootType;
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -109,22 +107,21 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
   public void testPlainJavaOutputConfiguration_02() {
     try {
       final Module module = this.createModule("module1");
-      this.myModule = module;
       Project _project = module.getProject();
       VirtualFile _baseDir = _project.getBaseDir();
       String _name = module.getName();
       final VirtualFile moduleRoot = VfsUtil.createDirectoryIfMissing(_baseDir, _name);
-      this.addSourceContentToRoots(module, moduleRoot);
       final VirtualFile srcDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/main/java");
       final VirtualFile testDirVf = VfsUtil.createDirectoryIfMissing(moduleRoot, "src/test/java");
+      PsiTestUtil.addContentRoot(module, moduleRoot);
+      PsiTestUtil.addSourceRoot(module, srcDirVf);
+      PsiTestUtil.addSourceRoot(module, testDirVf, true);
       final ModuleRootManager manager = ModuleRootManager.getInstance(module);
-      final XtendSupportConfigurable helper = new XtendSupportConfigurable();
-      ModifiableRootModel _modifiableModel = manager.getModifiableModel();
-      helper.addAsSourceFolder(_modifiableModel, srcDirVf, JavaSourceRootType.SOURCE);
-      ModifiableRootModel _modifiableModel_1 = manager.getModifiableModel();
-      helper.addAsSourceFolder(_modifiableModel_1, testDirVf, JavaSourceRootType.TEST_SOURCE);
+      final VirtualFile[] srcFolders = manager.getSourceRoots(true);
+      int _size = ((List<VirtualFile>)Conversions.doWrapArray(srcFolders)).size();
+      TestCase.assertEquals(2, _size);
       this.addSupport(module);
-      FacetManager _instance = FacetManager.getInstance(this.myModule);
+      FacetManager _instance = FacetManager.getInstance(module);
       Collection<Facet<XtendFacetConfiguration>> _facetsByType = _instance.<Facet<XtendFacetConfiguration>>getFacetsByType(XtendFacetType.TYPEID);
       final Facet<XtendFacetConfiguration> facet = IterableExtensions.<Facet<XtendFacetConfiguration>>head(_facetsByType);
       TestCase.assertNotNull(facet);
@@ -140,63 +137,40 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
       String _testOutputDirectory_1 = xtendConfig.getTestOutputDirectory();
       boolean _endsWith_1 = _testOutputDirectory_1.endsWith("module1/src/test/xtend-gen");
       TestCase.assertTrue(_endsWith_1);
-      ContentEntry[] _contentEntries = manager.getContentEntries();
-      ContentEntry _head = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
-      SourceFolder[] _sourceFolders = _head.getSourceFolders();
-      final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
+      ModuleRootManager _instance_1 = ModuleRootManager.getInstance(module);
+      final VirtualFile[] sourceRoots = _instance_1.getSourceRoots(true);
+      final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
         @Override
-        public Boolean apply(final SourceFolder it) {
+        public Boolean apply(final VirtualFile it) {
           boolean _xblockexpression = false;
           {
-            VirtualFile _file = it.getFile();
-            String _path = _file.getPath();
+            String _path = it.getPath();
             final String urlToCheck = _path.replace("file://", "");
-            boolean _and = false;
             String _outputDirectory = xtendConfig.getOutputDirectory();
-            boolean _equals = Objects.equal(_outputDirectory, urlToCheck);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isTestSource = it.isTestSource();
-              boolean _not = (!_isTestSource);
-              _and = _not;
-            }
-            _xblockexpression = _and;
+            _xblockexpression = Objects.equal(_outputDirectory, urlToCheck);
           }
           return Boolean.valueOf(_xblockexpression);
         }
       };
-      Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders)), _function);
-      int _size = IterableExtensions.size(_filter);
-      TestCase.assertEquals(1, _size);
-      ContentEntry[] _contentEntries_1 = manager.getContentEntries();
-      ContentEntry _head_1 = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries_1)));
-      SourceFolder[] _sourceFolders_1 = _head_1.getSourceFolders();
-      final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
+      Iterable<VirtualFile> _filter = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function);
+      int _size_1 = IterableExtensions.size(_filter);
+      TestCase.assertEquals(1, _size_1);
+      final Function1<VirtualFile, Boolean> _function_1 = new Function1<VirtualFile, Boolean>() {
         @Override
-        public Boolean apply(final SourceFolder it) {
+        public Boolean apply(final VirtualFile it) {
           boolean _xblockexpression = false;
           {
-            VirtualFile _file = it.getFile();
-            String _path = _file.getPath();
+            String _path = it.getPath();
             final String urlToCheck = _path.replace("file://", "");
-            boolean _and = false;
             String _testOutputDirectory = xtendConfig.getTestOutputDirectory();
-            boolean _equals = Objects.equal(_testOutputDirectory, urlToCheck);
-            if (!_equals) {
-              _and = false;
-            } else {
-              boolean _isTestSource = it.isTestSource();
-              _and = _isTestSource;
-            }
-            _xblockexpression = _and;
+            _xblockexpression = Objects.equal(_testOutputDirectory, urlToCheck);
           }
           return Boolean.valueOf(_xblockexpression);
         }
       };
-      Iterable<SourceFolder> _filter_1 = IterableExtensions.<SourceFolder>filter(((Iterable<SourceFolder>)Conversions.doWrapArray(_sourceFolders_1)), _function_1);
-      int _size_1 = IterableExtensions.size(_filter_1);
-      TestCase.assertEquals(1, _size_1);
+      Iterable<VirtualFile> _filter_1 = IterableExtensions.<VirtualFile>filter(((Iterable<VirtualFile>)Conversions.doWrapArray(sourceRoots)), _function_1);
+      int _size_2 = IterableExtensions.size(_filter_1);
+      TestCase.assertEquals(1, _size_2);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -234,8 +208,8 @@ public class XtendSupportConfigurableTest extends PsiTestCase {
           }
         } finally {
           model.commit();
+          Disposer.dispose(configurable);
         }
-        Disposer.dispose(configurable);
       }
     }.execute();
     _execute.throwException();
