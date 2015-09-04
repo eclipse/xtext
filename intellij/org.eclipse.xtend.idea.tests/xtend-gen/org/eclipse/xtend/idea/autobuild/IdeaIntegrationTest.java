@@ -598,14 +598,21 @@ public class IdeaIntegrationTest extends LightXtendTest {
     final Runnable _function = new Runnable() {
       @Override
       public void run() {
-        PersistentFS _instance = PersistentFS.getInstance();
-        VirtualFile _parent = vFile.getParent();
-        VFileDeleteEvent _vFileDeleteEvent = new VFileDeleteEvent(IdeaIntegrationTest.this, _parent, true);
-        _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
-        File _parentFile = f.getParentFile();
-        boolean _delete = _parentFile.delete();
-        TestCase.assertTrue(_delete);
-        return;
+        try {
+          PersistentFS _instance = PersistentFS.getInstance();
+          VirtualFile _parent = vFile.getParent();
+          VFileDeleteEvent _vFileDeleteEvent = new VFileDeleteEvent(IdeaIntegrationTest.this, _parent, true);
+          _instance.processEvents(Collections.<VFileEvent>unmodifiableList(CollectionLiterals.<VFileEvent>newArrayList(_vFileDeleteEvent)));
+          File _parentFile = f.getParentFile();
+          boolean _sweepFolder = org.eclipse.xtext.util.Files.sweepFolder(_parentFile);
+          TestCase.assertTrue(_sweepFolder);
+          File _parentFile_1 = f.getParentFile();
+          boolean _delete = _parentFile_1.delete();
+          TestCase.assertTrue(_delete);
+          return;
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
       }
     };
     _application.runWriteAction(_function);
