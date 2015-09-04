@@ -17,7 +17,7 @@
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(['xtext/xtext-orion'], function(xtext) {
-				xtext.createEditor().done(function(editorViewer) {
+				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax"}).done(function(editorViewer) {
 					$('#save-button').click(function() {
 						editorViewer.xtextServices.saveResource();
 					});

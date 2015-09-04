@@ -17,7 +17,7 @@
 		});
 		require(["orion/code_edit/built-codeEdit-amd"], function() {
 			require(["xtext/xtext-orion"], function(xtext) {
-				xtext.createEditor();
+				xtext.createEditor({syntaxDefinition: "xtext/statemachine-syntax"});
 			});
 		});
 	</script>
