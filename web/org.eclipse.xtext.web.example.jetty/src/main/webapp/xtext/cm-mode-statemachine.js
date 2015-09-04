@@ -1,7 +1,7 @@
 define("xtext/cm-mode-statemachine", ["codemirror", "codemirror/addon/mode/simple"], function(CodeMirror, SimpleMode) {
 	var keywords = "and|end|goto|if|input|output|set|signal|state";
-	CodeMirror.defineSimpleMode("statemachine", {
-		"start": [
+	CodeMirror.defineSimpleMode("xtext/statemachine", {
+		start: [
 			{token: "comment", regex: "\\/\\/.*$"},
 			{token: "comment", regex: "\\/\\*", next : "comment"},
 			{token: "string", regex: '["](?:(?:\\\\.)|(?:[^"\\\\]))*?["]'},
@@ -9,7 +9,7 @@ define("xtext/cm-mode-statemachine", ["codemirror", "codemirror/addon/mode/simpl
 			{token: "constant.numeric", regex: "[+-]?\\d+(?:(?:\\.\\d*)?(?:[eE][+-]?\\d+)?)?\\b"},
 			{token: "keyword", regex: "\\b(?:" + keywords + ")\\b"}
 		],
-		"comment": [
+		comment: [
 			{token: "comment", regex: ".*?\\*\\/", next : "start"},
 			{token: "comment", regex: ".+"}
 		],

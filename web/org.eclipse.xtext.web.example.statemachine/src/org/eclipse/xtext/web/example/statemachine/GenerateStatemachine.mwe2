@@ -114,11 +114,17 @@ Workflow {
 			}
 			
 			// JavaScript-based syntax highlighting
-			fragment = web.AceHighlightingFragment auto-inject {
-				moduleName = 'xtext/ace-mode-statemachine'
+			fragment = web.JsHighlightingFragment auto-inject {
+				framework = "Orion"
+				moduleName = "xtext/statemachine-syntax"
 			}
-			fragment = web.OrionHighlightingFragment auto-inject {
-				moduleName = 'xtext/statemachine-syntax'
+			fragment = web.JsHighlightingFragment auto-inject {
+				framework = "Ace"
+				moduleName = "xtext/ace-mode-statemachine"
+			}
+			fragment = web.JsHighlightingFragment auto-inject {
+				framework = "CodeMirror"
+				moduleName = "xtext/cm-mode-statemachine"
 			}
 		}
 	}

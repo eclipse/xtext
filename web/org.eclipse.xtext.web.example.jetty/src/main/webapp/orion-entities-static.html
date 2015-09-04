@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="Content-Language" content="en-us">
 	<title>Xtext-Web Entities Example</title>
+	<link rel="stylesheet" type="text/css" href="orion/code_edit/built-codeEdit.css" />
 	<link rel="stylesheet" type="text/css" href="xtext/xtext-orion.css" />
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="webjars/requirejs/2.1.17/require.min.js"></script>
@@ -14,8 +15,10 @@
 				"jquery": "webjars/jquery/2.1.4/jquery.min"
 			}
 		});
-		require(["xtext/xtext-orion"], function(xtext) {
-			xtext.createEditor();
+		require(["orion/code_edit/built-codeEdit-amd"], function() {
+			require(["xtext/xtext-orion"], function(xtext) {
+				xtext.createEditor();
+			});
 		});
 	</script>
 </head>
@@ -24,7 +27,6 @@
 <div class="container">
 	<div class="xtext-editor"
 	    data-editor-xtext-lang="entities"
-	    data-editor-status-element="status"
 		data-editor-dirty-element="dirty-indicator"
 		data-editor-enable-formatting-action="true"
 	><pre>
