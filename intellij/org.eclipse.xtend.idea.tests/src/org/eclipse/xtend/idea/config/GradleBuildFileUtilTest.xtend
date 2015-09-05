@@ -35,7 +35,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		assertEquals('''
 		buildscript {
 		    dependencies {
-		        classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginId»'
+		        classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
 		    }
 		}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
@@ -54,7 +54,7 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript{dependencies{
-		    classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginId»'
+		    classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
 		}}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
 
