@@ -48,7 +48,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 				    jcenter()
 				}
 			    dependencies {
-			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginId»'
+			        classpath 'org.xtend:xtend-gradle-plugin:«gradleUtility.xtendGradlePluginVersion»'
 			    }
 			}
 		''')
@@ -65,7 +65,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 		val xtendSupport = xtendSupportConfigurableProvider.get
 		val conf = xtendSupport.createOrGetXtendFacetConf(module)
 		xtendSupport.presetGradleOutputDirectories(conf.state,module)
-		xtendSupport.setupOutputFolder(conf.state,rootModel)
+		xtendSupport.createOutputFolders(conf.state,rootModel)
 	}
 
 }

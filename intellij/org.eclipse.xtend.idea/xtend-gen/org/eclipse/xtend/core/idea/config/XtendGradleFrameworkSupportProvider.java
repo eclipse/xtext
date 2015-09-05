@@ -85,7 +85,7 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     _builder.newLine();
     _builder.append("        ");
     _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(this.gradleUtility.xtendGradlePluginId, "        ");
+    _builder.append(this.gradleUtility.xtendGradlePluginVersion, "        ");
     _builder.append("\'");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -120,6 +120,6 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     XbaseGeneratorConfigurationState _state = conf.getState();
     xtendSupport.presetGradleOutputDirectories(_state, module);
     XbaseGeneratorConfigurationState _state_1 = conf.getState();
-    xtendSupport.setupOutputFolder(_state_1, rootModel);
+    xtendSupport.createOutputFolders(_state_1, rootModel);
   }
 }
