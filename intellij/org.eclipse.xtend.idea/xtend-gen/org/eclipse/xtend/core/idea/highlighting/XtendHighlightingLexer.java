@@ -202,6 +202,7 @@ public class XtendHighlightingLexer extends LexerBase {
   @Override
   public void start(final CharSequence buffer, final int startOffset, final int endOffset, final int initialState) {
     this.delegate.start(buffer, startOffset, endOffset, initialState);
+    this._currentRichTextToken = null;
   }
   
   @Override

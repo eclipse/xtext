@@ -73,11 +73,15 @@ ruleAbstractCallExtendedParserRule :
 	'extendedmodel' ruleExtendableParserRule*
 ;
 
+RULE_ID :
+	SUPER_ID
+;
+
 RULE_REAL :
 	RULE_INT '.' RULE_INT
 ;
 
-RULE_ID :
+SUPER_ID :
 	'^'? (
 		'a' .. 'z' |
 		'A' .. 'Z' |

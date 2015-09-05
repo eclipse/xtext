@@ -41,7 +41,6 @@
       							factoryClass="org.eclipse.xtext.idea.example.entities.idea.EntitiesExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtext.idea.example.entities.Entities" implementationClass="org.eclipse.xtext.idea.example.entities.idea.completion.EntitiesCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.idea.example.entities.idea.lang.psi.EntitiesElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.idea.example.entities.idea.lang.pom.EntitiesPomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.idea.example.entities.Entities"

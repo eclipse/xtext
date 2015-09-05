@@ -80,10 +80,6 @@ class IdeaPluginClassNames {
 		basePackageName+'.lang.psi.'+it.name.toSimpleName+'CodeBlockModificationListener'
 	}
 	
-	def String getElementDescriptionProviderName(Grammar it) {
-		basePackageName+'.lang.psi.'+it.name.toSimpleName+'ElementDescriptionProvider'
-	}
-	
 	def String getPsiParserName(Grammar it) {
 		basePackageName+'.lang.parser.'+it.name.toSimpleName+'PsiParser'
 	}

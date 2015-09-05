@@ -29,6 +29,7 @@ import org.jetbrains.idea.maven.dom.model.MavenDomProjectModel
 import org.jetbrains.idea.maven.model.MavenId
 import org.jetbrains.idea.maven.project.MavenProject
 import org.jetbrains.idea.maven.project.MavenProjectsManager
+import com.intellij.openapi.project.DumbService
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -46,7 +47,9 @@ class XtendLibraryManager {
 	def ensureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
 		val project = module.project
 		if (project.initialized) {
-			doEnsureXtendLibAvailable(rootModel, module, context)
+			DumbService.getInstance(project).runWhenSmart [
+				doEnsureXtendLibAvailable(rootModel, module, context)
+			]
 		} else {
 			StartupManager.getInstance(project).registerPostStartupActivity [
 				doEnsureXtendLibAvailable(rootModel, module, context)

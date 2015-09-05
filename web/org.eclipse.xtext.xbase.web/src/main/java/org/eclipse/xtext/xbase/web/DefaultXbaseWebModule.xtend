@@ -16,10 +16,6 @@ import org.eclipse.xtext.web.server.DefaultWebModule
  */
 class DefaultXbaseWebModule extends DefaultWebModule {
 	
-	new(ExecutorService executorService, ExecutorService executorServiceWithDocumentLock) {
-		super(executorService, executorServiceWithDocumentLock)
-	}
-	
 	new(Provider<ExecutorService> executorServiceProvider) {
 		super(executorServiceProvider)
 	}

@@ -220,7 +220,7 @@ ruleOverridableParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -302,7 +302,7 @@ ruleOverridableParserRule2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -417,7 +417,7 @@ ruleSubrule1 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -435,7 +435,7 @@ ruleSubrule1 returns [EObject current=null]
        			$current, 
        			"sub1",
         		lv_sub1_2_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -478,7 +478,7 @@ ruleSubrule2 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -539,7 +539,7 @@ ruleSubrule3 returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -639,7 +639,7 @@ ruleInheritedParserRule returns [EObject current=null]
        			$current, 
        			"name",
         		lv_name_1_0, 
-        		"org.eclipse.xtext.grammarinheritance.AbstractTestLanguage.ID");
+        		"org.eclipse.xtext.grammarinheritance.ConcreteTestLanguage.ID");
 	    }
 
 )
@@ -736,9 +736,11 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 
 
 
+RULE_ID : SUPER_ID;
+
 RULE_REAL : RULE_INT '.' RULE_INT;
 
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u00F6'|'\u00E4'|'\u00FC'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+SUPER_ID : '^'? ('a'..'z'|'A'..'Z'|'\u00F6'|'\u00E4'|'\u00FC'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 RULE_INT : ('0'..'9')+;
 

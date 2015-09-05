@@ -46,7 +46,7 @@ abstract class ProjectDescriptor {
 		if (config.buildSystem.isMavenBuild) {
 			files += pom
 		}
-		files
+		return files
 	}
 	
 	def boolean isEclipsePluginProject()

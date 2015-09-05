@@ -200,7 +200,6 @@ public class OutputConfiguration {
 	}
 
 	/**
-	 * @since 2.6
 	 * @param sourceFolder
 	 *            the project relative source folder, e.g. "src" or "src/main/java"
 	 * @return the project relative output directory

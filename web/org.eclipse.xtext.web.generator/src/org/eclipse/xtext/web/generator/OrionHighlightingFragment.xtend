@@ -23,6 +23,12 @@ import org.eclipse.xtext.generator.LanguageConfig
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
+/**
+ * This implementation is outdated and will be removed before the Xtext 2.9.0 release.
+ * 
+ * @deprecated Use org.eclipse.xtext.xtext.generator.web.WebIntegrationFragment
+ */
+@Deprecated
 class OrionHighlightingFragment extends Xtend2GeneratorFragment {
 	
 	static val TERMINALS = 'org.eclipse.xtext.common.Terminals'

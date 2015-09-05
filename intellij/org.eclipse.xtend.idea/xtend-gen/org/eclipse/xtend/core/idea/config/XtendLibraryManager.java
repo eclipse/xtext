@@ -16,6 +16,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.LibraryOrderEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -81,16 +82,23 @@ public class XtendLibraryManager {
     final Project project = module.getProject();
     boolean _isInitialized = project.isInitialized();
     if (_isInitialized) {
-      this.doEnsureXtendLibAvailable(rootModel, module, context);
-    } else {
-      StartupManager _instance = StartupManager.getInstance(project);
+      DumbService _instance = DumbService.getInstance(project);
       final Runnable _function = new Runnable() {
         @Override
         public void run() {
           XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, module, context);
         }
       };
-      _instance.registerPostStartupActivity(_function);
+      _instance.runWhenSmart(_function);
+    } else {
+      StartupManager _instance_1 = StartupManager.getInstance(project);
+      final Runnable _function_1 = new Runnable() {
+        @Override
+        public void run() {
+          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, module, context);
+        }
+      };
+      _instance_1.registerPostStartupActivity(_function_1);
     }
   }
   

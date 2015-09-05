@@ -33,10 +33,6 @@ class StatemachineWebModule extends DefaultWebModule {
 	
 	IResourceBaseProvider resourceBaseProvider
 	
-	new(ExecutorService executorService, ExecutorService executorServiceWithDocumentLock) {
-		super(executorService, executorServiceWithDocumentLock)
-	}
-	
 	new(Provider<ExecutorService> executorServiceProvider) {
 		super(executorServiceProvider)
 	}

@@ -23,6 +23,14 @@ public class GrammarNaming {
   @Extension
   private XtextGeneratorNaming _xtextGeneratorNaming;
   
+  public String getParserPackage(final Grammar it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
+    _builder.append(_runtimeBasePackage, "");
+    _builder.append(".idea.parser.antlr.internal");
+    return _builder.toString();
+  }
+  
   public TypeReference getGrammarClass(final Grammar it, final String prefix) {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
@@ -33,7 +41,7 @@ public class GrammarNaming {
     return new TypeReference(_parserPackage, _builder.toString());
   }
   
-  public TypeReference getInternalParserClassName(final Grammar it) {
+  public TypeReference getInternalParserClass(final Grammar it) {
     String _parserPackage = this.getParserPackage(it);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Internal");
@@ -43,11 +51,28 @@ public class GrammarNaming {
     return new TypeReference(_parserPackage, _builder.toString());
   }
   
-  public String getParserPackage(final Grammar it) {
+  public TypeReference getContentAssistParserClass(final Grammar it) {
     StringConcatenation _builder = new StringConcatenation();
-    String _runtimeBasePackage = this._xtextGeneratorNaming.getRuntimeBasePackage(it);
-    _builder.append(_runtimeBasePackage, "");
-    _builder.append(".idea.parser.antlr.internal");
-    return _builder.toString();
+    String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(it);
+    _builder.append(_genericIdeBasePackage, "");
+    _builder.append(".contentassist.antlr");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder_1.append(_simpleName, "");
+    _builder_1.append("Parser");
+    return new TypeReference(_builder.toString(), _builder_1.toString());
+  }
+  
+  public TypeReference getInternalContentAssistLexerClass(final Grammar it) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _genericIdeBasePackage = this._xtextGeneratorNaming.getGenericIdeBasePackage(it);
+    _builder.append(_genericIdeBasePackage, "");
+    _builder.append(".contentassist.antlr.internal");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("Internal");
+    String _simpleName = GrammarUtil.getSimpleName(it);
+    _builder_1.append(_simpleName, "");
+    _builder_1.append("Lexer");
+    return new TypeReference(_builder.toString(), _builder_1.toString());
   }
 }

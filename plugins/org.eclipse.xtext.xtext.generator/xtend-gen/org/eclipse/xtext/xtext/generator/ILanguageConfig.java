@@ -30,5 +30,7 @@ public interface ILanguageConfig {
   
   public abstract GuiceModuleAccess getIdeaGenModule();
   
+  public abstract GuiceModuleAccess getWebGenModule();
+  
   public abstract ResourceSet getResourceSet();
 }

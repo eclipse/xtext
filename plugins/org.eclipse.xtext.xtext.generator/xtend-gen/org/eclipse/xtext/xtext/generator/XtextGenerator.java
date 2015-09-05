@@ -174,7 +174,7 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
         String _plus = ("Generating " + _name);
         XtextGenerator.LOG.info(_plus);
         language.generate();
-        this.generateRuntimeSetup(language);
+        this.generateSetups(language);
         this.generateModules(language);
         this.generateExecutableExtensionFactory(language);
       }
@@ -185,13 +185,16 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     this.generateActivator();
   }
   
-  protected void generateRuntimeSetup(final ILanguageConfig language) {
+  protected void generateSetups(final ILanguageConfig language) {
     JavaFileAccess _createRuntimeGenSetup = this.templates.createRuntimeGenSetup(language);
     IXtextGeneratorFileSystemAccess _runtimeSrcGen = this.projectConfig.getRuntimeSrcGen();
     _createRuntimeGenSetup.writeTo(_runtimeSrcGen);
     JavaFileAccess _createRuntimeSetup = this.templates.createRuntimeSetup(language);
     IXtextGeneratorFileSystemAccess _runtimeSrc = this.projectConfig.getRuntimeSrc();
     _createRuntimeSetup.writeTo(_runtimeSrc);
+    JavaFileAccess _createWebSetup = this.templates.createWebSetup(language);
+    IXtextGeneratorFileSystemAccess _webSrc = this.projectConfig.getWebSrc();
+    _createWebSetup.writeTo(_webSrc);
   }
   
   protected void generateModules(final ILanguageConfig language) {
@@ -213,6 +216,12 @@ public class XtextGenerator extends AbstractWorkflowComponent2 {
     JavaFileAccess _createIdeaModule = this.templates.createIdeaModule(language);
     IXtextGeneratorFileSystemAccess _ideaPluginSrc = this.projectConfig.getIdeaPluginSrc();
     _createIdeaModule.writeTo(_ideaPluginSrc);
+    JavaFileAccess _createWebGenModule = this.templates.createWebGenModule(language);
+    IXtextGeneratorFileSystemAccess _webSrcGen = this.projectConfig.getWebSrcGen();
+    _createWebGenModule.writeTo(_webSrcGen);
+    JavaFileAccess _createWebModule = this.templates.createWebModule(language);
+    IXtextGeneratorFileSystemAccess _webSrc = this.projectConfig.getWebSrc();
+    _createWebModule.writeTo(_webSrc);
   }
   
   protected void generateExecutableExtensionFactory(final ILanguageConfig language) {

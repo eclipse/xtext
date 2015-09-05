@@ -161,7 +161,7 @@ define([
 		var options = this.services.options;
 		// If the mode option is set, syntax highlighting has already been configured by CM
 		if (!options.mode && options.xtextLang) {
-			this.editor.setOption('mode', options.xtextLang);
+			this.editor.setOption('mode', 'xtext/' + options.xtextLang);
 		}
 	}
 		

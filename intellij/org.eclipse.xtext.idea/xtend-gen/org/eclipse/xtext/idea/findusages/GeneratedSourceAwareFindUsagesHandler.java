@@ -12,8 +12,11 @@ import com.intellij.find.findUsages.AbstractFindUsagesDialog;
 import com.intellij.find.findUsages.FindUsagesHandler;
 import com.intellij.find.findUsages.FindUsagesOptions;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.SearchScope;
 import com.intellij.usageView.UsageInfo;
 import com.intellij.util.Processor;
 import java.util.Collection;
@@ -22,29 +25,39 @@ import java.util.Map;
 import java.util.Set;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Anton Kosyakov - Refactoring and testing
  */
 @SuppressWarnings("all")
 public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
+  private final static Logger LOG = Logger.getInstance("#org.eclipse.xtext.idea.findusages.GeneratedSourceAwareFindUsagesHandler");
+  
   private final FindUsagesHandler primaryHandler;
+  
+  private final Map<PsiElement, FindUsagesHandler> secondaryHandlers;
   
   private Collection<PsiElement> primaryElements = CollectionLiterals.<PsiElement>newArrayList();
   
   private Collection<PsiElement> secondaryElements = CollectionLiterals.<PsiElement>newArrayList();
   
-  private final Map<PsiElement, FindUsagesHandler> secondaryHandlers = CollectionLiterals.<PsiElement, FindUsagesHandler>newLinkedHashMap();
-  
-  public GeneratedSourceAwareFindUsagesHandler(final FindUsagesHandler primaryHandler) {
+  public GeneratedSourceAwareFindUsagesHandler(final FindUsagesHandler primaryHandler, final Iterable<FindUsagesHandler> secondaryHandlers) {
     super(primaryHandler.getPsiElement());
     this.primaryHandler = primaryHandler;
-  }
-  
-  public void addSecondaryHandler(final FindUsagesHandler secondaryHandler) {
-    PsiElement _psiElement = secondaryHandler.getPsiElement();
-    this.secondaryHandlers.put(_psiElement, secondaryHandler);
+    boolean _isEmpty = IterableExtensions.isEmpty(secondaryHandlers);
+    boolean _not = (!_isEmpty);
+    GeneratedSourceAwareFindUsagesHandler.LOG.assertTrue(_not);
+    final Function1<FindUsagesHandler, PsiElement> _function = new Function1<FindUsagesHandler, PsiElement>() {
+      @Override
+      public PsiElement apply(final FindUsagesHandler it) {
+        return it.getPsiElement();
+      }
+    };
+    Map<PsiElement, FindUsagesHandler> _map = IterableExtensions.<PsiElement, FindUsagesHandler>toMap(secondaryHandlers, _function);
+    this.secondaryHandlers = _map;
   }
   
   @Override
@@ -115,5 +128,10 @@ public class GeneratedSourceAwareFindUsagesHandler extends FindUsagesHandler {
       return this.primaryHandler;
     }
     return this.secondaryHandlers.get(element);
+  }
+  
+  @Override
+  public Collection<PsiReference> findReferencesToHighlight(final PsiElement target, final SearchScope searchScope) {
+    throw new UnsupportedOperationException("GeneratedSourceAwareFindUsagesHandler should not be used to find references to highlight.");
   }
 }

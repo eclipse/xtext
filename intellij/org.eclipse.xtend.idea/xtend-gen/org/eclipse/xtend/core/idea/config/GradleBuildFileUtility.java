@@ -43,7 +43,7 @@ import org.jetbrains.plugins.groovy.lang.psi.api.util.GrStatementOwner;
  */
 @SuppressWarnings("all")
 public class GradleBuildFileUtility {
-  public final String xtendGradlePluginId = "0.4.7";
+  public final String xtendGradlePluginVersion = "0.4.7";
   
   public boolean isGradleedModule(final Module module) {
     boolean _or = false;
@@ -72,7 +72,7 @@ public class GradleBuildFileUtility {
     }
     _builder.append(_xifexpression, "");
     _builder.append("-gradle-plugin:");
-    _builder.append(this.xtendGradlePluginId, "");
+    _builder.append(this.xtendGradlePluginVersion, "");
     _builder.append("\' ");
     this.addDependency(_createOrGetMethodCall, _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();

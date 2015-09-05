@@ -59,15 +59,28 @@ class IntentionsTest extends LightXtendTest {
 	}
 	
 	def testSuperConstructors_01() {
+		myFixture.addClass('''
+			package mypackage;
+			
+			import java.io.FileNotFoundException;
+			import java.io.File;
+			import java.io.FileDescriptor;
+			
+			public class MyClass {
+				public MyClass(String s) throws FileNotFoundException {}
+				public MyClass(File file) throws FileNotFoundException {}
+				public MyClass(FileDescriptor fileDescriptor) {}
+			}
+		''')
 		assertIntentionApplication(XtendIntentionsProvider.InsertSuperConstructorsIntentionAction.TEXT,'''
-			class F<caret>oo extends java.io.FileInputStream {
+			class F<caret>oo extends mypackage.MyClass {
 			}
 		''','''
 			import java.io.FileNotFoundException
 			import java.io.File
 			import java.io.FileDescriptor
 			
-			class Foo extends java.io.FileInputStream {
+			class Foo extends mypackage.MyClass {
 			
 				new (String s) throws FileNotFoundException {
 					super(s)

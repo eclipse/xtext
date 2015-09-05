@@ -89,14 +89,6 @@ public class IdeaPluginClassNames {
     return new TypeReference(_plus, _plus_1);
   }
   
-  public TypeReference getElementDescriptionProvider(final Grammar it) {
-    String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
-    String _plus = (_ideaBasePackage + ".lang.psi");
-    String _simpleName = GrammarUtil.getSimpleName(it);
-    String _plus_1 = (_simpleName + "ElementDescriptionProvider");
-    return new TypeReference(_plus, _plus_1);
-  }
-  
   public TypeReference getPsiParser(final Grammar it) {
     String _ideaBasePackage = this._xtextGeneratorNaming.getIdeaBasePackage(it);
     String _plus = (_ideaBasePackage + ".lang.parser");

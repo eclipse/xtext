@@ -340,6 +340,10 @@ public class XbaseGeneratorFragment2 extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_35 = TypeReference.typeRef("org.eclipse.xtext.xbase.ui.DefaultXbaseUiModule");
       _eclipsePluginGenModule_2.setSuperClass(_typeRef_35);
     }
+    ILanguageConfig _language_5 = this.getLanguage();
+    GuiceModuleAccess _webGenModule = _language_5.getWebGenModule();
+    TypeReference _typeRef_36 = TypeReference.typeRef("org.eclipse.xtext.xbase.web.DefaultXbaseWebModule");
+    _webGenModule.setSuperClass(_typeRef_36);
   }
   
   protected void doGenerateXtendInferrer() {

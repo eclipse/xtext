@@ -11,7 +11,6 @@ import com.google.inject.Binder
 import com.google.inject.Provider
 import com.google.inject.name.Names
 import java.util.concurrent.ExecutorService
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.service.AbstractGenericModule
 import org.eclipse.xtext.web.server.generator.DefaultContentTypeProvider
 import org.eclipse.xtext.web.server.generator.IContentTypeProvider
@@ -22,7 +21,6 @@ import org.eclipse.xtext.web.server.generator.IContentTypeProvider
  * passed executor services. If a provider for executor services is given, it must provide a
  * new instance for each invocation.
  */
-@FinalFieldsConstructor
 class DefaultWebModule extends AbstractGenericModule {
 	
 	val ExecutorService executorService

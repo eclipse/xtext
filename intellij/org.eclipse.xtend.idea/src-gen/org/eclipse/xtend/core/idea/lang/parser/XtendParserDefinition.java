@@ -1,10 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.idea.lang.parser;
-
-import org.eclipse.xtext.psi.impl.PsiEObjectReference;
-import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
-import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
-import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
-import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 import com.google.inject.Inject;
 import com.intellij.lang.ASTNode;
@@ -12,6 +13,11 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
+import org.eclipse.xtend.core.idea.lang.XtendElementTypeProvider;
+import org.eclipse.xtend.core.idea.lang.psi.impl.XtendFileImpl;
+import org.eclipse.xtext.idea.parser.AbstractXtextParserDefinition;
+import org.eclipse.xtext.psi.impl.PsiEObjectReference;
+import org.eclipse.xtext.psi.impl.PsiNamedEObjectImpl;
 
 public class XtendParserDefinition extends AbstractXtextParserDefinition {
 

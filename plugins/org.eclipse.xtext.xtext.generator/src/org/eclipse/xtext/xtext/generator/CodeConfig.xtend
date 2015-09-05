@@ -48,6 +48,9 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	@Accessors
 	boolean preferXtendStubs = true
 	
+	@Accessors(PUBLIC_GETTER)
+	String xtextVersion
+	
 	/**
 	 * Configure a template for file headers. The template can contain variables:
 	 * <ul>
@@ -72,6 +75,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	override initialize(Injector injector) {
 		injector.injectMembers(this)
 		
+		xtextVersion = readVersionFromManifest()
 		if (lineDelimiter === null)
 			lineDelimiter = '\n'
 		
@@ -99,9 +103,8 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 				}
 			}
 			if (fileHeader.contains(FILE_HEADER_VAR_VERSION)) {
-				val version = getVersion()
-				if (version != null) {
-					fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, version)
+				if (xtextVersion != null) {
+					fileHeader = fileHeader.replace(FILE_HEADER_VAR_VERSION, xtextVersion)
 				}
 			}
 		}
@@ -111,7 +114,7 @@ class CodeConfig implements IGuiceAwareGeneratorComponent {
 	/**
 	 * Read the exact version from the Manifest of the plugin.
 	 */
-	private def getVersion() {
+	private def readVersionFromManifest() {
 		var InputStream is
 		try {
 			val url = new URL(Plugin.INSTANCE.baseURL + 'META-INF/MANIFEST.MF')

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.util.URI;
@@ -34,6 +35,8 @@ import com.google.inject.Inject;
  * @author Holger Schill
  */
 public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
+	
+	private final static Logger LOG = Logger.getLogger(EmfResourceReferenceUpdater.class);
 
 	@Inject
 	private EmfResourceChangeUtil changeUtil;
@@ -51,10 +54,14 @@ public class EmfResourceReferenceUpdater extends AbstractReferenceUpdater {
 				if (referringResource != refactoredElement.eResource()) {
 					if (refactoredElement instanceof EClassifier) { 
 						for (IReferenceDescription reference : resource2references.get(referringResourceURI)) {
-							EObject referringEReference = referringResource.getEObject(
-									reference.getSourceEObjectUri().fragment()).eContainer();
-							if (referringEReference != null && referringEReference instanceof EReference)
-								((EReference) referringEReference).setEType((EClassifier) refactoredElement);
+							EObject source = referringResource.getEObject(reference.getSourceEObjectUri().fragment());
+							if (source == null) {
+								LOG.error("Couldn't find source element "+ reference.getSourceEObjectUri() + " in " + referringResource.getURI());
+							} else {
+								EObject referringEReference = source.eContainer();
+								if (referringEReference != null && referringEReference instanceof EReference)
+									((EReference) referringEReference).setEType((EClassifier) refactoredElement);
+							}
 						}
 					}
 					changeUtil.addSaveAsUpdate(referringResource, updateAcceptor);

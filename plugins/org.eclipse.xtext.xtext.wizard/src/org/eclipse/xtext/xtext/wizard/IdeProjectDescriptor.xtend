@@ -16,7 +16,7 @@ class IdeProjectDescriptor extends ProjectDescriptor {
 	}
 	
 	override isEclipsePluginProject() {
-		config.buildSystem.isPluginBuild
+		config.buildSystem.isPluginBuild || config.uiProject.enabled
 	}
 	
 	override getExternalDependencies() {

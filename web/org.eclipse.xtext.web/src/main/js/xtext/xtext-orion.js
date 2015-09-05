@@ -62,7 +62,7 @@
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
  *     A path to a JS file defining an Orion syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext/<xtextLang>-syntax'.
+ *     the 'xtextLang' option in the form 'xtext-resources/<xtextLang>-syntax'.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * xtextLang {String}
@@ -187,7 +187,7 @@ define([
 		if (typeof(options.syntaxDefinition) === 'string' || options.xtextLang) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
-				syntaxDefinition = 'xtext/' + options.xtextLang + '-syntax';
+				syntaxDefinition = 'xtext-resources/' + options.xtextLang + '-syntax';
 			require([syntaxDefinition], function(grammar) {
 				options.syntaxDefinition = grammar;
 				serviceBuilder.createServices();

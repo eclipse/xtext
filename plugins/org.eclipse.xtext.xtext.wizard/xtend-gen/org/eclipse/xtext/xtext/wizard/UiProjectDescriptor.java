@@ -12,7 +12,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.wizard.ExternalDependency;
-import org.eclipse.xtext.xtext.wizard.GradleBuildFile;
 import org.eclipse.xtext.xtext.wizard.IdeProjectDescriptor;
 import org.eclipse.xtext.xtext.wizard.PomFile;
 import org.eclipse.xtext.xtext.wizard.ProjectDescriptor;
@@ -115,11 +114,6 @@ public class UiProjectDescriptor extends ProjectDescriptor {
       _xblockexpression = includes;
     }
     return _xblockexpression;
-  }
-  
-  @Override
-  public GradleBuildFile buildGradle() {
-    throw new UnsupportedOperationException("UI projects cannot be built with Gradle yet");
   }
   
   @Override

@@ -39,7 +39,6 @@
       							factoryClass="org.eclipse.xtext.testlanguages.backtracking.idea.ExBeeLangTestLanguageExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage" implementationClass="org.eclipse.xtext.testlanguages.backtracking.idea.completion.ExBeeLangTestLanguageCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.psi.ExBeeLangTestLanguageElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.testlanguages.backtracking.idea.lang.pom.ExBeeLangTestLanguagePomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage"

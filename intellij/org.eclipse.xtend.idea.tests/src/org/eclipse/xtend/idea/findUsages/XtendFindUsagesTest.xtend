@@ -13,10 +13,12 @@ import com.intellij.find.impl.FindManagerImpl
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.search.LocalSearchScope
 import com.intellij.usageView.UsageInfo
 import com.intellij.util.CommonProcessors
 import org.eclipse.xtend.idea.LightXtendTest
 
+import static extension com.intellij.codeInsight.highlighting.HighlightUsagesHandler.*
 import static extension com.intellij.psi.util.PsiTreeUtil.*
 
 /**
@@ -24,7 +26,7 @@ import static extension com.intellij.psi.util.PsiTreeUtil.*
  */
 class XtendFindUsagesTest extends LightXtendTest {
 
-	def void testGeneratedElements_01() {
+	def void testFindUsagesWihtSourceElement_01() {
 		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
 			
@@ -42,7 +44,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testGeneratedElements_02() {
+	def void testFindUsagesWihtSourceElement_02() {
 		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
 			
@@ -80,10 +82,10 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testGeneratedElements_03() {
+	def void testFindUsagesWihtSourceElement_03() {
 		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
-
+			
 			import org.eclipse.xtend.lib.annotations.Accessors
 			
 			@Accessors class MyClass {
@@ -93,7 +95,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 					y
 				}
 			}
-		''') 
+		''')
 
 		file.getNamedElementAt('int x').testFindUsages('''
 			primaryElements {
@@ -117,10 +119,10 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testGeneratedElements_04() {
+	def void testFindUsagesWihtSourceElement_04() {
 		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
-
+			
 			import org.eclipse.xtend.lib.annotations.Accessors
 			
 			@Accessors class MyClass {
@@ -130,7 +132,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 					y
 				}
 			}
-		''') 
+		''')
 
 		file.getNamedElementAt('int y').testFindUsages('''
 			primaryElements {
@@ -168,7 +170,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testOriginalElements_01() {
+	def void testFindUsagesWihtGeneratedElement_01() {
 		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
 			
@@ -187,7 +189,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testOriginalElements_02() {
+	def void testFindUsagesWihtGeneratedElement_02() {
 		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
 			
@@ -226,10 +228,10 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testOriginalElements_03() {
+	def void testFindUsagesWihtGeneratedElement_03() {
 		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
-
+			
 			import org.eclipse.xtend.lib.annotations.Accessors
 			
 			@Accessors class MyClass {
@@ -239,7 +241,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 					y
 				}
 			}
-		''') 
+		''')
 
 		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
 		generatedSource.getNamedElementAt('int x').testFindUsages('''
@@ -257,10 +259,10 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
-	def void testOriginalElements_04() {
+	def void testFindUsagesWihtGeneratedElement_04() {
 		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
 			package mypackage
-
+			
 			import org.eclipse.xtend.lib.annotations.Accessors
 			
 			@Accessors class MyClass {
@@ -270,7 +272,7 @@ class XtendFindUsagesTest extends LightXtendTest {
 					y
 				}
 			}
-		''') 
+		''')
 
 		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
 		generatedSource.getNamedElementAt('int y').testFindUsages('''
@@ -301,13 +303,280 @@ class XtendFindUsagesTest extends LightXtendTest {
 		''')
 	}
 
+	def void testHighlightUsagesWithSourceElement_01() {
+		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+			}
+		''')
+
+		file.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithSourceElement_02() {
+		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfX() {
+					x
+				}
+			}
+		''')
+
+		file.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(125,126)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithSourceElement_03() {
+		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfGetX() {
+					getX
+				}
+			}
+		''')
+
+		file.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(128,132)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithSourceElement_04() {
+		val file = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfX() {
+					x
+				}
+				def usageOfGetX() {
+					getX
+				}
+			}
+		''')
+
+		file.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(125,126)
+					}
+				}
+				XtextPsiReferenceImpl {
+					element : org.eclipse.xtext.psi.impl.PsiEObjectReference(XFeatureCall_FeatureJvmIdentifiableElementCrossReference_2_0_ELEMENT_TYPE)
+					rangesToHighlight {
+						(153,157)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithGeneratedElement_01() {
+		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+			}
+		''')
+
+		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
+		generatedSource.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(239,240)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(292,293)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithGeneratedElement_02() {
+		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfX() {
+					x
+				}
+			}
+		''')
+
+		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
+		generatedSource.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(235,236)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(291,292)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(344,345)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithGeneratedElement_03() {
+		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfGetX() {
+					getX
+				}
+			}
+		''')
+
+		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
+		generatedSource.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(299,300)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(352,353)
+					}
+				}
+			}
+		''')
+	}
+
+	def void testHighlightUsagesWithGeneratedElement_04() {
+		val sourceFile = myFixture.addFileToProject('mypackage/MyClass.xtend', '''
+			package mypackage
+			
+			import org.eclipse.xtend.lib.annotations.Accessors
+			
+			@Accessors class MyClass {
+				int x
+				def usageOfX() {
+					x
+				}
+				def usageOfGetX() {
+					getX
+				}
+			}
+		''')
+
+		val generatedSource = sourceFile.getGeneratedSources[extension == 'java'].head
+		generatedSource.getNamedElementAt('int x').testHighlightUsages('''
+			references {
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(235,236)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(351,352)
+					}
+				}
+				PsiReferenceExpression:this.x {
+					element : PsiReferenceExpression:this.x
+					rangesToHighlight {
+						(404,405)
+					}
+				}
+			}
+		''')
+	}
+
 	protected def getNamedElementAt(PsiFile file, String substring) {
 		val offset = file.text.indexOf(substring)
 		file.findElementAt(offset).getParentOfType(PsiNamedElement, false)
 	}
 
 	protected def void testHighlightUsages(PsiElement element, String expectation) {
-		assertEquals(expectation, element.highlightUsagesHandler.printUsages)
+		assertEquals(expectation, element.highlightUsagesHandler.printHighlightUsages(element))
+	}
+
+	protected def String printHighlightUsages(FindUsagesHandler findUsagesHandler, PsiElement element) {
+		val scope = new LocalSearchScope(element.containingFile)
+		val references = findUsagesHandler.findReferencesToHighlight(element, scope)
+		'''
+			references {
+				«FOR reference : references»
+					«reference» {
+						element : «reference.element»
+						rangesToHighlight {
+							«FOR rangeToHighlight : reference.rangesToHighlight»
+								«rangeToHighlight»
+							«ENDFOR»
+						}
+					}
+				«ENDFOR»
+			}
+		'''
 	}
 
 	protected def void testFindUsages(PsiElement element, String expectation) {

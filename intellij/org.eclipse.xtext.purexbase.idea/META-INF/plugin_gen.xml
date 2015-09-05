@@ -41,12 +41,14 @@
       							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
       							implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"/>
       	<completion.contributor language="org.eclipse.xtext.purexbase.PureXbase" implementationClass="org.eclipse.xtext.purexbase.idea.completion.PureXbaseCompletionContributor"/>
-      	<elementDescriptionProvider implementation="org.eclipse.xtext.purexbase.idea.lang.psi.PureXbaseElementDescriptionProvider" order="first"/>
       	<pom.declarationSearcher implementation="org.eclipse.xtext.purexbase.idea.lang.pom.PureXbasePomDeclarationSearcher"/>
 
       	<lang.psiStructureViewFactory language="org.eclipse.xtext.purexbase.PureXbase"
       							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
       							implementationClass="com.intellij.lang.PsiStructureViewFactory"/>
+      	<lang.documentationProvider language="org.eclipse.xtext.purexbase.PureXbase"
+      							factoryClass="org.eclipse.xtext.purexbase.idea.PureXbaseExtensionFactory"
+      							implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"/>
 		<facetType implementation="org.eclipse.xtext.purexbase.idea.facet.PureXbaseFacetType"/>
 		<colorSettingsPage implementation="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseColorSettingsPage"/>
 		<highlightVisitor implementation="org.eclipse.xtext.purexbase.idea.highlighting.PureXbaseSemanticHighlightVisitor"/>

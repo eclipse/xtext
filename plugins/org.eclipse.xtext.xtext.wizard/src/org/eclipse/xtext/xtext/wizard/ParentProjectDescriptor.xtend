@@ -30,7 +30,7 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 				files += file(Outlet.ROOT, 'gradle/plain-layout.gradle', plainLayout)
 			}
 		}
-		files
+		return files
 	}
 
 	override buildGradle() {
@@ -195,4 +195,9 @@ class ParentProjectDescriptor extends ProjectDescriptor {
 			'''
 		]
 	}
+	
+	override getSourceFolders() {
+		#{}
+	}
+	
 }

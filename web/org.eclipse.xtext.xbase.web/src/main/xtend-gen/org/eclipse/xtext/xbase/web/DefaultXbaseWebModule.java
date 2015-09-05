@@ -16,10 +16,6 @@ import org.eclipse.xtext.web.server.DefaultWebModule;
  */
 @SuppressWarnings("all")
 public class DefaultXbaseWebModule extends DefaultWebModule {
-  public DefaultXbaseWebModule(final ExecutorService executorService, final ExecutorService executorServiceWithDocumentLock) {
-    super(executorService, executorServiceWithDocumentLock);
-  }
-  
   public DefaultXbaseWebModule(final Provider<ExecutorService> executorServiceProvider) {
     super(executorServiceProvider);
   }

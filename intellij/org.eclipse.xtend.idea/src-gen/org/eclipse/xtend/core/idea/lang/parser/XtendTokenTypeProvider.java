@@ -1,14 +1,20 @@
+/*******************************************************************************
+ * Copyright (c) 2010-2015 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.idea.lang.parser;
-
-import static org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser.*;
-
-import org.eclipse.xtext.idea.parser.TokenTypeProvider;
-import org.eclipse.xtend.core.idea.lang.XtendLanguage;
-import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
 
 import com.google.inject.Singleton;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.antlr.runtime.Token;
+import org.eclipse.xtend.core.idea.lang.XtendLanguage;
+import org.eclipse.xtend.core.idea.parser.antlr.internal.PsiInternalXtendParser;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider;
+import org.eclipse.xtext.idea.parser.TokenTypeProvider.IndexedElementType;
 
 @Singleton public class XtendTokenTypeProvider implements TokenTypeProvider {
 
@@ -22,14 +28,14 @@ import com.intellij.psi.tree.TokenSet;
 		}
 	}
 
-	private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[RULE_WS]);
-	private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[RULE_SL_COMMENT], tokenTypes[RULE_ML_COMMENT]);
-	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[RULE_STRING]);
+	private static final TokenSet WHITESPACE_TOKENS = TokenSet.create(tokenTypes[PsiInternalXtendParser.RULE_WS]);
+	private static final TokenSet COMMENT_TOKENS = TokenSet.create(tokenTypes[PsiInternalXtendParser.RULE_SL_COMMENT], tokenTypes[PsiInternalXtendParser.RULE_ML_COMMENT]);
+	private static final TokenSet STRING_TOKENS = TokenSet.create(tokenTypes[PsiInternalXtendParser.RULE_STRING]);
 
 	@Override
     public int getAntlrType(IElementType iElementType) {
         return (iElementType instanceof IndexedElementType) ? ((IndexedElementType) iElementType).getLocalIndex()
-        				: org.antlr.runtime.Token.INVALID_TOKEN_TYPE;
+        				: Token.INVALID_TOKEN_TYPE;
     }
     
     @Override

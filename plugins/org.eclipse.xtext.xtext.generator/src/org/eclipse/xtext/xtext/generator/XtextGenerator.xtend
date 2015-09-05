@@ -112,7 +112,7 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		for (language : languageConfigs) {
 			LOG.info('Generating ' + language.grammar.name)
 			language.generate
-			language.generateRuntimeSetup
+			language.generateSetups
 			language.generateModules
 			language.generateExecutableExtensionFactory
 		}
@@ -122,9 +122,10 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		generateActivator
 	}
 	
-	protected def generateRuntimeSetup(ILanguageConfig language) {
+	protected def generateSetups(ILanguageConfig language) {
 		templates.createRuntimeGenSetup(language).writeTo(projectConfig.runtimeSrcGen)
 		templates.createRuntimeSetup(language).writeTo(projectConfig.runtimeSrc)
+		templates.createWebSetup(language).writeTo(projectConfig.webSrc)
 	}
 	
 	protected def generateModules(ILanguageConfig language) {
@@ -134,6 +135,8 @@ class XtextGenerator extends AbstractWorkflowComponent2 {
 		templates.createEclipsePluginModule(language).writeTo(projectConfig.eclipsePluginSrc)
 		templates.createIdeaGenModule(language).writeTo(projectConfig.ideaPluginSrcGen)
 		templates.createIdeaModule(language).writeTo(projectConfig.ideaPluginSrc)
+		templates.createWebGenModule(language).writeTo(projectConfig.webSrcGen)
+		templates.createWebModule(language).writeTo(projectConfig.webSrc)
 	}
 	
 	protected def generateExecutableExtensionFactory(ILanguageConfig language) {

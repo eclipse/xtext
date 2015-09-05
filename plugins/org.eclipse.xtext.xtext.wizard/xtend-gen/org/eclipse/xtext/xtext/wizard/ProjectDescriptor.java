@@ -77,33 +77,29 @@ public abstract class ProjectDescriptor {
   }
   
   public Iterable<? extends GeneratedFile> getFiles() {
-    List<GeneratedFile> _xblockexpression = null;
-    {
-      final List<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
-      boolean _isEclipsePluginProject = this.isEclipsePluginProject();
-      if (_isEclipsePluginProject) {
-        CharSequence _manifest = this.manifest();
-        PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
-        files.add(_file);
-        CharSequence _buildProperties = this.buildProperties();
-        PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
-        files.add(_file_1);
-      }
-      BuildSystem _buildSystem = this.config.getBuildSystem();
-      boolean _isGradleBuild = _buildSystem.isGradleBuild();
-      if (_isGradleBuild) {
-        GradleBuildFile _buildGradle = this.buildGradle();
-        files.add(_buildGradle);
-      }
-      BuildSystem _buildSystem_1 = this.config.getBuildSystem();
-      boolean _isMavenBuild = _buildSystem_1.isMavenBuild();
-      if (_isMavenBuild) {
-        PomFile _pom = this.pom();
-        files.add(_pom);
-      }
-      _xblockexpression = files;
+    final List<GeneratedFile> files = CollectionLiterals.<GeneratedFile>newArrayList();
+    boolean _isEclipsePluginProject = this.isEclipsePluginProject();
+    if (_isEclipsePluginProject) {
+      CharSequence _manifest = this.manifest();
+      PlainTextFile _file = this.file(Outlet.META_INF, "MANIFEST.MF", _manifest);
+      files.add(_file);
+      CharSequence _buildProperties = this.buildProperties();
+      PlainTextFile _file_1 = this.file(Outlet.ROOT, "build.properties", _buildProperties);
+      files.add(_file_1);
     }
-    return _xblockexpression;
+    BuildSystem _buildSystem = this.config.getBuildSystem();
+    boolean _isGradleBuild = _buildSystem.isGradleBuild();
+    if (_isGradleBuild) {
+      GradleBuildFile _buildGradle = this.buildGradle();
+      files.add(_buildGradle);
+    }
+    BuildSystem _buildSystem_1 = this.config.getBuildSystem();
+    boolean _isMavenBuild = _buildSystem_1.isMavenBuild();
+    if (_isMavenBuild) {
+      PomFile _pom = this.pom();
+      files.add(_pom);
+    }
+    return files;
   }
   
   public abstract boolean isEclipsePluginProject();

@@ -22,7 +22,7 @@ branches.each { branch ->
 			(!intellijSuites.contains(it.suite) || (it.branch == 'master' && it.platformName == 'latest'))
 		}
 		.each {
-			if(java8Suites.contains(it.suite) || (it.platformName == 'latest' && it.branch == 'master')) {
+			if(java8Suites.contains(it.suite)) {
 				it.jdk = jdks['1.8']
 			}
 			if(intellijSuites.contains(it.suite)) {
