@@ -18,6 +18,10 @@ ruleName(AbstractRule this) :
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getRuleName(org.eclipse.xtext.AbstractRule)
 ;
 
+originalElement(EObject this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(org.eclipse.emf.ecore.EObject)
+;
+
 parameterList(ParserRule this, boolean debug) : 
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterList(org.eclipse.xtext.ParserRule, java.lang.Boolean)
 ;
@@ -54,7 +58,13 @@ predicatedElement(AbstractElement this):
   JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getPredicatedElement(org.eclipse.xtext.AbstractElement)
 ;
 
-entryRuleName(ParserRule this) : 'entry' + this.ruleName().toFirstUpper();
+entryRuleName(ParserRule this) :
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getEntryRuleName(org.eclipse.xtext.ParserRule)
+;
+
+isValidEntryRule(ParserRule this) :
+  JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.isValidEntryRule(org.eclipse.xtext.ParserRule)
+;
 
 setOrAdd(Action this) : if operator=='+=' then 'add' else 'set';
 
@@ -67,9 +77,9 @@ isCalled(Grammar grammar, AbstractRule this) :
 		x.allContents().flatten().typeSelect(RuleCall).select(call|call.rule!=null).rule.contains(this);
 
 localVar(Assignment this, AbstractElement terminal) : 
-	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + this.allContents().indexOf(terminal);
+	'lv_'+feature + '_' + containingParserRule().contentsAsList().indexOf(this) + '_' + allContents().indexOf(terminal);
 	
-localVar(RuleCall this) : 'this_'+rule.name + '_' + containingParserRule().contentsAsList().indexOf(this);
+localVar(RuleCall this) : 'this_'+originalElement(this.rule).name + '_' + containingParserRule().contentsAsList().indexOf(this);
 localVar(AbstractElement this) : 'otherlv_' + containingParserRule().contentsAsList().indexOf(this);
 localVar(EnumLiteralDeclaration this) : 'enumLiteral_' + containingEnumRule().alternatives.contentsAsList().indexOf(this);
 
