@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtend.lib,
  org.eclipse.ui.workbench;resolution:=optional,
  org.eclipse.xtext.idea.generator,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.xtext.generator
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/simple.jar,
  .

@@ -65,7 +65,7 @@ abstract class AbstractParametersParsingTest extends AbstractXtextTests {
 		val instance = '#4 keyword'.modelWithErrors
 		assertEquals(null, instance.scenario.first)
 		assertEquals(1, instance.eResource.errors.size)
-		assertEquals("no viable alternative at input 'keyword'", instance.eResource.errors.head.message)
+		assertEquals("mismatched input 'keyword' expecting RULE_ID", instance.eResource.errors.head.message)
 	}
 	
 	@Test
@@ -168,8 +168,8 @@ abstract class AbstractParametersParsingTest extends AbstractXtextTests {
 	@Test
 	def void testScenario10_keyword() {
 		val instance = '#10 keyword'.modelWithErrors
-		assertNull('keyword', instance.scenario.second)
-		assertEquals("no viable alternative at input 'keyword'", instance.eResource.errors.head.message)
+		assertEquals('keyword', instance.scenario.second)
+		assertEquals("mismatched input '<EOF>' expecting 'keyword'", instance.eResource.errors.head.message)
 	}
 	
 	@Test

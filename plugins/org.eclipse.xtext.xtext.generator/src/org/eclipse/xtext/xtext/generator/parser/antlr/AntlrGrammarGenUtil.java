@@ -33,25 +33,82 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
+import org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 public class AntlrGrammarGenUtil {
 	
 	/**
 	 * Returns the effective rule name for the generated Antlr grammar.
 	 * Inherited rules may be prefixed by {@code super[0..9]*}. Otherwise the
 	 * prefix {@code rule or RULE_} is used.
+	 * @since 2.9
 	 */
 	public static String getRuleName(AbstractRule rule) {
-		String result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
-		return result;
+		return rule.getName();
 	}
 	
+	/**
+	 * @since 2.9
+	 */
+	public static String getEntryRuleName(ParserRule rule) {
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues.getParamValues().isEmpty()) {
+			AbstractRule original = parameterValues.getOriginal();
+			RuleNames ruleNames = RuleNames.getRuleNames(original);
+			return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(original));
+		}
+		return null;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static boolean isValidEntryRule(ParserRule rule) {
+		if (rule.isFragment()) {
+			return false;
+		}
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues.getParamValues().isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static EObject getOriginalElement(EObject obj) {
+		if (obj instanceof AbstractRule) {
+			AbstractRule result = RuleWithParameterValues.tryGetOriginalRule((AbstractRule) obj);
+			if (result != null)
+				return result;
+			return obj;
+		}
+		if (obj instanceof Grammar) {
+			OriginalGrammar originalGrammar = OriginalGrammar.findInEmfObject(obj);
+			return originalGrammar.getOriginal();
+		}
+		if (obj instanceof AbstractElement) {
+			OriginalElement original = OriginalElement.findInEmfObject(obj);
+			return original.getOriginal();
+		}
+		throw new IllegalArgumentException(String.valueOf(obj));
+	}
+	
+	/**
+	 * @since 2.9
+	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
-		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule(rule);
+		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule((ParserRule) getOriginalElement(rule));
 		if ((skipCurrent || !currentAsParam) && rule.getParameters().isEmpty()) {
 			return "";
 		}
@@ -75,10 +132,13 @@ public class AntlrGrammarGenUtil {
 		return result.toString();
 	}
 	
+	/**
+	 * @since 2.9
+	 */
 	public static String getArgumentList(final RuleCall ruleCall, final Boolean skipCurrent) {
 		final List<NamedArgument> arguments = ruleCall.getArguments();
 		AbstractRule abstractRule = ruleCall.getRule();
-		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule(abstractRule);
+		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule((ParserRule) getOriginalElement(abstractRule));
 		if (arguments.isEmpty()) {
 			if (needsCurrent) {
 				return "[$current]";
@@ -106,6 +166,9 @@ public class AntlrGrammarGenUtil {
 		return result.toString();
 	}
 	
+	/**
+	 * @since 2.9
+	 */
 	public static String conditionToAntlr(Condition condition, final boolean includeRuleName) {
 		final StringBuilder result = new StringBuilder();
 		new XtextSwitch<StringBuilder>() {
@@ -156,6 +219,9 @@ public class AntlrGrammarGenUtil {
 		return result.toString();
 	}
 	
+	/**
+	 * @since 2.9
+	 */
 	public static String getDefaultArgumentList(ParserRule rule) {
 		String result = IterableExtensions.join(rule.getParameters(), "[", ", ", "]", new Functions.Function1<Parameter, String>() {
 			@Override
@@ -166,6 +232,9 @@ public class AntlrGrammarGenUtil {
 		return result;
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	public static String guardConditionToAntlr(Group group) {
 		Condition condition = group.getGuardCondition();
 		if (condition == null) {
@@ -174,6 +243,9 @@ public class AntlrGrammarGenUtil {
 		return "{" + conditionToAntlr(condition, false) + "}?=>";
 	}
 
+	/**
+	 * @since 2.9
+	 */
 	public static AbstractElement getPredicatedElement(AbstractElement element) {
 		if (element.isPredicated()) {
 			return element;
@@ -218,8 +290,11 @@ public class AntlrGrammarGenUtil {
 		return element;
 	}
 	
+	/**
+	 * @since 2.9
+	 */
 	public static String getQualifiedNameAsString(RuleCall ruleCall) {
-		AbstractRule rule = ruleCall.getRule();
+		AbstractRule rule = ((RuleCall) getOriginalElement(ruleCall)).getRule();
 		String result = RuleNames.getRuleNames(rule).getQualifiedName(rule);
 		return '"' + result + '"';
 	}
@@ -231,6 +306,7 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * Returns the first-set of the given abstractElement. That is, all keywords
 	 * with distinct values and all rule calls to distinct terminals.
+	 * @since 2.9
 	 */
 	public static List<AbstractElement> getFirstSet(AbstractElement element) {
 		return FirstSetComputer.getFirstSet(element);
@@ -261,8 +337,4 @@ public class AntlrGrammarGenUtil {
 		return sb.toString();
 	}
 
-	public static String getClasspathURI(Grammar grammar, EObject object) {
-		String fragment = EcoreUtil.getURI(object).fragment();
-		return "classpath:/" + grammar.getName().replace('.', '/') + ".xmi#" + fragment;
-	}
 }

@@ -73,8 +73,8 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 	def protected abstract void doGenerate()
 
 	def protected void checkGrammar() {
-		if(!hasProductionRules(getGrammar())) throw new IllegalArgumentException(
-			"You may not generate an ANTLR parser for a grammar without production rules.")
+		if(!hasProductionRules(getGrammar()))
+			throw new IllegalArgumentException("You may not generate an ANTLR parser for a grammar without production rules.")
 	}
 
 	def protected boolean hasProductionRules(Grammar grammar) {
@@ -199,10 +199,9 @@ abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorFragment
 
 	def protected boolean containsUnorderedGroup(Grammar grammar) {
 		for (ParserRule rule : GrammarUtil::allParserRules(grammar)) {
-			if (Iterators::filter(rule.eAllContents(), typeof(UnorderedGroup)).hasNext()) {
+			if (Iterators::filter(rule.eAllContents(), UnorderedGroup).hasNext()) {
 				return true
 			}
-
 		}
 		return false
 	}
