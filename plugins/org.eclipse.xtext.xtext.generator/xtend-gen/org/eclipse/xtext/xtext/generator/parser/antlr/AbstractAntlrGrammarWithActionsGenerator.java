@@ -132,7 +132,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
               _builder.appendImmediate(", ", "");
             }
             _builder.append("grammarAccess.");
-            String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(group);
+            EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(group);
+            String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
             _builder.append(_gaRuleElementAccessor, "");
             _builder.newLineIfNotEmpty();
           }
@@ -259,7 +260,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+        String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -286,7 +288,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_1));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
             Integer _key = element.getKey();
@@ -298,7 +301,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_2 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_2));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
             Integer _key_1 = element.getKey();
@@ -327,7 +331,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_3 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_3));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
@@ -349,7 +354,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_4 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_4));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
           } else {
@@ -367,7 +373,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+        EObject _originalElement_5 = AntlrGrammarGenUtil.getOriginalElement(it);
+        String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_5));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -424,7 +431,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().enter(grammarAccess.");
-        String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+        String _gaRuleElementAccessor = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement));
         _builder.append(_gaRuleElementAccessor, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();
@@ -451,7 +459,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t");
             _builder.append("{getUnorderedGroupHelper().canSelect(grammarAccess.");
-            String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_1 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_1));
             _builder.append(_gaRuleElementAccessor_1, "\t");
             _builder.append(", ");
             Integer _key = element.getKey();
@@ -463,7 +472,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().select(grammarAccess.");
-            String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_2 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_2 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_2));
             _builder.append(_gaRuleElementAccessor_2, "\t\t\t");
             _builder.append(", ");
             Integer _key_1 = element.getKey();
@@ -492,7 +502,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLine();
             _builder.append("\t\t\t");
             _builder.append("getUnorderedGroupHelper().returnFromSelection(grammarAccess.");
-            String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_3 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_3 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_3));
             _builder.append(_gaRuleElementAccessor_3, "\t\t\t");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
@@ -514,7 +525,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("{getUnorderedGroupHelper().canLeave(grammarAccess.");
-            String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+            EObject _originalElement_4 = AntlrGrammarGenUtil.getOriginalElement(it);
+            String _gaRuleElementAccessor_4 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_4));
             _builder.append(_gaRuleElementAccessor_4, "\t\t");
             _builder.append(")}?");
           } else {
@@ -532,7 +544,8 @@ public abstract class AbstractAntlrGrammarWithActionsGenerator extends AbstractA
         _builder.newLine();
         _builder.append("\t  ");
         _builder.append("getUnorderedGroupHelper().leave(grammarAccess.");
-        String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(it);
+        EObject _originalElement_5 = AntlrGrammarGenUtil.getOriginalElement(it);
+        String _gaRuleElementAccessor_5 = this._grammarAccessExtensions.gaRuleElementAccessor(((AbstractElement) _originalElement_5));
         _builder.append(_gaRuleElementAccessor_5, "\t  ");
         _builder.append(");");
         _builder.newLineIfNotEmpty();

@@ -236,7 +236,7 @@ RULE_YC : RULE_CHARY RULE_CHARC;
 
 RULE_CHARY : 'Y';
 
-RULE_CHARC : 'c';
+fragment RULE_CHARC : 'c';
 
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 

@@ -6,5 +6,5 @@ org.eclipse.xtext.parser.parameters.idea.lang.psi.impl.ParametersTestLanguageFil
     org.eclipse.xtext.psi.impl.PsiEObjectImpl(ParserRuleParameters_ScenarioScenario2ParserRuleCall_1_3_1_0_ELEMENT_TYPE)(2,10)
       org.eclipse.xtext.psi.impl.PsiEObjectImpl(Scenario2_FirstIdOrKeywordParserRuleCall_0_ELEMENT_TYPE)(2,10)
         PsiWhiteSpace(' ')(2,3)
-        PsiErrorElement:no viable alternative at input 'keyword'(3,10)
+        PsiErrorElement:mismatched input 'keyword' expecting RULE_ID(3,10)
           PsiElement('keyword')('keyword')(3,10)

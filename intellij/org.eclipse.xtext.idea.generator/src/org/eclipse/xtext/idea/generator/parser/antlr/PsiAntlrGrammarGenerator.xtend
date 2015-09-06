@@ -96,7 +96,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		
 			@Override
 			protected String getFirstRuleName() {
-				return "«allParserRules.head.name»";
+				return "«(allParserRules.head.originalElement as AbstractRule).name»";
 			}
 		
 		}
@@ -107,7 +107,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 	}
 	
 	override protected compileRule(ParserRule it, Grammar grammar, AntlrOptions options) '''
-		«IF !it.fragment»
+		«IF isValidEntryRule»
 			//Entry rule «entryRuleName»
 			«entryRuleName»«compileEntryInit(options)»:
 				{ «markComposite» }
@@ -322,14 +322,14 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		}
 	}
 	
-	def protected markLeaf(EObject it) '''markLeaf(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
+	def protected markLeaf(EObject it) '''markLeaf(elementTypeProvider.get«originalElement.grammarElementIdentifier»ElementType());'''
 	
 	def protected doneLeaf(EObject it, String token) '''doneLeaf(«token»);'''
 	
-	def protected markComposite(EObject it) '''markComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
+	def protected markComposite(EObject it) '''markComposite(elementTypeProvider.get«originalElement.grammarElementIdentifier»ElementType());'''
 	
 	def protected doneComposite(EObject it) '''doneComposite();'''
 	
-	def protected precedeComposite(EObject it) '''precedeComposite(elementTypeProvider.get«grammarElementIdentifier»ElementType());'''
+	def protected precedeComposite(EObject it) '''precedeComposite(elementTypeProvider.get«originalElement.grammarElementIdentifier»ElementType());'''
 	
 }

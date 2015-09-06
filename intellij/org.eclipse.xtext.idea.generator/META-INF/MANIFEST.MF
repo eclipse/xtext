@@ -8,6 +8,7 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.generator;visibility:=reexport,
- org.eclipse.xtend.lib
+ org.eclipse.xtend.lib,
+ org.eclipse.xtext.xtext.generator
 Export-Package: org.eclipse.xtext.idea.generator,
  org.eclipse.xtext.idea.generator.parser.antlr

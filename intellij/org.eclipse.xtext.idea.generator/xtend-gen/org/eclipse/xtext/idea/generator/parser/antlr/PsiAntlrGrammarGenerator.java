@@ -245,7 +245,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
     _builder.append("return \"");
     List<ParserRule> _allParserRules = GrammarUtil.allParserRules(it);
     ParserRule _head = IterableExtensions.<ParserRule>head(_allParserRules);
-    String _name = _head.getName();
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(_head);
+    String _name = ((AbstractRule) _originalElement).getName();
     _builder.append(_name, "\t\t");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
@@ -267,9 +268,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected String compileRule(final ParserRule it, final Grammar grammar, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     {
-      boolean _isFragment = it.isFragment();
-      boolean _not = (!_isFragment);
-      if (_not) {
+      boolean _isValidEntryRule = AntlrGrammarGenUtil.isValidEntryRule(it);
+      if (_isValidEntryRule) {
         _builder.append("//Entry rule ");
         String _entryRuleName = this._grammarAccessExtensions.entryRuleName(it);
         _builder.append(_entryRuleName, "");
@@ -872,7 +872,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence markLeaf(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("markLeaf(elementTypeProvider.get");
-    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
     return _builder;
@@ -889,7 +890,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence markComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("markComposite(elementTypeProvider.get");
-    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
     return _builder;
@@ -904,7 +906,8 @@ public class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGen
   protected CharSequence precedeComposite(final EObject it) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("precedeComposite(elementTypeProvider.get");
-    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(it);
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
+    String _grammarElementIdentifier = this._grammarAccessExtensions.grammarElementIdentifier(_originalElement);
     _builder.append(_grammarElementIdentifier, "");
     _builder.append("ElementType());");
     return _builder;

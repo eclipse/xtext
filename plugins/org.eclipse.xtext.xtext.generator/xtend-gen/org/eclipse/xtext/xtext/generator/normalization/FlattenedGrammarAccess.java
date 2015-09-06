@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.normalization;
+package org.eclipse.xtext.xtext.generator.normalization;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.HashMultimap;
@@ -50,9 +50,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.generator.normalization.OriginalElement;
-import org.eclipse.xtext.generator.normalization.RuleFilter;
-import org.eclipse.xtext.generator.normalization.RuleWithParameterValues;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -63,6 +60,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
+import org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -90,7 +91,8 @@ public class FlattenedGrammarAccess {
   @Accessors
   private final Grammar flattenedGrammar;
   
-  public FlattenedGrammarAccess(final Grammar grammar, final RuleNames names, final RuleFilter filter) {
+  public FlattenedGrammarAccess(final RuleNames names, final RuleFilter filter) {
+    final Grammar grammar = names.getContextGrammar();
     Grammar flattenedGrammar = this.<Grammar>copy(grammar);
     String _name = grammar.getName();
     flattenedGrammar.setName(_name);
@@ -100,8 +102,8 @@ public class FlattenedGrammarAccess {
     EList<AbstractRule> _rules_1 = flattenedGrammar.getRules();
     Iterables.<AbstractRule>addAll(_rules_1, copies);
     Multimap<TerminalRule, AbstractRule> calledFrom = this.copyRuleBodies(copies, origToCopy);
-    this.markAsFragment(calledFrom);
     this.setHiddenTokens(flattenedGrammar, grammar, origToCopy);
+    this.markAsFragment(calledFrom);
     boolean _isDiscardUnreachableRules = filter.isDiscardUnreachableRules();
     if (_isDiscardUnreachableRules) {
       Set<AbstractRule> usedRules = CollectionLiterals.<AbstractRule>newHashSet();
@@ -117,6 +119,8 @@ public class FlattenedGrammarAccess {
       _rules_2.retainAll(usedRules);
     }
     this.flattenedGrammar = flattenedGrammar;
+    OriginalGrammar _originalGrammar = new OriginalGrammar(grammar);
+    _originalGrammar.attachToEmfObject(flattenedGrammar);
   }
   
   private void setHiddenTokens(final Grammar copy, final Grammar orig, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {
@@ -164,13 +168,23 @@ public class FlattenedGrammarAccess {
       }
     };
     Iterable<TerminalRule> _filter_1 = IterableExtensions.<TerminalRule>filter(_filter, _function_1);
-    final Procedure1<TerminalRule> _function_2 = new Procedure1<TerminalRule>() {
+    final Function1<TerminalRule, Boolean> _function_2 = new Function1<TerminalRule, Boolean>() {
+      @Override
+      public Boolean apply(final TerminalRule it) {
+        EObject _eContainer = it.eContainer();
+        EList<AbstractRule> _hiddenTokens = ((Grammar) _eContainer).getHiddenTokens();
+        boolean _contains = _hiddenTokens.contains(it);
+        return Boolean.valueOf((!_contains));
+      }
+    };
+    Iterable<TerminalRule> _filter_2 = IterableExtensions.<TerminalRule>filter(_filter_1, _function_2);
+    final Procedure1<TerminalRule> _function_3 = new Procedure1<TerminalRule>() {
       @Override
       public void apply(final TerminalRule it) {
         it.setFragment(true);
       }
     };
-    IterableExtensions.<TerminalRule>forEach(_filter_1, _function_2);
+    IterableExtensions.<TerminalRule>forEach(_filter_2, _function_3);
   }
   
   private Multimap<TerminalRule, AbstractRule> copyRuleBodies(final List<AbstractRule> copies, final Map<RuleWithParameterValues, AbstractRule> origToCopy) {
@@ -276,18 +290,33 @@ public class FlattenedGrammarAccess {
               int _size = elements.size();
               boolean _tripleEquals = (_size == 1);
               if (_tripleEquals) {
-                AbstractElement element = elements.get(0);
-                this.mergeCardinalities(element, ((AbstractElement)result));
-                this.mergePredicates(element, ((AbstractElement)result));
-                OriginalElement.removeFromEmfObject(element);
-                OriginalElement original = new OriginalElement(((AbstractElement) eObject));
-                original.attachToEmfObject(element);
-                return element;
+                boolean _and = false;
+                boolean _isFirstSetPredicated = ((CompoundElement)result).isFirstSetPredicated();
+                boolean _not_1 = (!_isFirstSetPredicated);
+                if (!_not_1) {
+                  _and = false;
+                } else {
+                  boolean _isPredicated = ((CompoundElement)result).isPredicated();
+                  boolean _not_2 = (!_isPredicated);
+                  _and = _not_2;
+                }
+                if (_and) {
+                  AbstractElement element = elements.get(0);
+                  this.mergeCardinalities(element, ((AbstractElement)result));
+                  this.mergePredicates(element, ((AbstractElement)result));
+                  return element;
+                } else {
+                  AbstractElement element_1 = elements.get(0);
+                  this.mergeCardinalities(((AbstractElement)result), element_1);
+                  this.mergePredicates(((AbstractElement)result), element_1);
+                  element_1.setFirstSetPredicated(false);
+                  element_1.setPredicated(false);
+                }
               }
             }
             if ((eObject instanceof AbstractElement)) {
-              OriginalElement original_1 = new OriginalElement(((AbstractElement)eObject));
-              original_1.attachToEmfObject(result);
+              OriginalElement original = new OriginalElement(((AbstractElement)eObject));
+              original.attachToEmfObject(result);
             }
             return result;
           }
@@ -437,10 +466,13 @@ public class FlattenedGrammarAccess {
             castedCopy.setDefinesHiddenTokens(true);
             EList<AbstractRule> _hiddenTokens = ((ParserRule)orig).getHiddenTokens();
             for (final AbstractRule rule : _hiddenTokens) {
-              EList<AbstractRule> _hiddenTokens_1 = castedCopy.getHiddenTokens();
-              RuleWithParameterValues _ruleWithParameterValues = new RuleWithParameterValues(rule);
-              AbstractRule _get = origToCopy.get(_ruleWithParameterValues);
-              _hiddenTokens_1.add(_get);
+              {
+                RuleWithParameterValues _ruleWithParameterValues = new RuleWithParameterValues(rule);
+                final AbstractRule copiedTerminalRule = origToCopy.get(_ruleWithParameterValues);
+                EList<AbstractRule> _hiddenTokens_1 = castedCopy.getHiddenTokens();
+                _hiddenTokens_1.add(copiedTerminalRule);
+                calledFrom.put(((TerminalRule) copiedTerminalRule), castedCopy);
+              }
             }
           }
         }

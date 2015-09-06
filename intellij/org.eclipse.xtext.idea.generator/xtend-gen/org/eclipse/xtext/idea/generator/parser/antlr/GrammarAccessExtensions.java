@@ -41,7 +41,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -109,16 +108,23 @@ public class GrammarAccessExtensions {
   }
   
   public String ruleName(final AbstractRule rule) {
-    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
-    final String result = _ruleNames.getAntlrRuleName(rule);
-    return result;
+    final RuleNames ruleNames = RuleNames.tryGetRuleNames(rule);
+    String _elvis = null;
+    String _antlrRuleName = null;
+    if (ruleNames!=null) {
+      _antlrRuleName=ruleNames.getAntlrRuleName(rule);
+    }
+    if (_antlrRuleName != null) {
+      _elvis = _antlrRuleName;
+    } else {
+      String _ruleName = AntlrGrammarGenUtil.getRuleName(rule);
+      _elvis = _ruleName;
+    }
+    return _elvis;
   }
   
   public String entryRuleName(final ParserRule rule) {
-    RuleNames _ruleNames = RuleNames.getRuleNames(rule);
-    final String result = _ruleNames.getAntlrRuleName(rule);
-    String _firstUpper = StringExtensions.toFirstUpper(result);
-    return ("entry" + _firstUpper);
+    return AntlrGrammarGenUtil.getEntryRuleName(rule);
   }
   
   public boolean isCalled(final AbstractRule rule, final Grammar grammar) {
@@ -275,7 +281,8 @@ public class GrammarAccessExtensions {
   
   protected String _localVar(final RuleCall it) {
     AbstractRule _rule = it.getRule();
-    String _name = _rule.getName();
+    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(_rule);
+    String _name = ((AbstractRule) _originalElement).getName();
     String _plus = ("this_" + _name);
     String _plus_1 = (_plus + "_");
     ParserRule _containingParserRule = GrammarUtil.containingParserRule(it);

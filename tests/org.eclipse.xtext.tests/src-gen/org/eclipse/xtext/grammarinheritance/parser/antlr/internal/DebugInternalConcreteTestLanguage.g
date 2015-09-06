@@ -81,7 +81,7 @@ RULE_REAL :
 	RULE_INT '.' RULE_INT
 ;
 
-SUPER_ID :
+fragment SUPER_ID :
 	'^'? (
 		'a' .. 'z' |
 		'A' .. 'Z' |

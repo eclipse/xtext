@@ -5,83 +5,106 @@ grammar DebugInternalParametersTestLanguage ;
 
 // Rule ParserRuleParameters
 ruleParserRuleParameters :
-	'#1' ruleScenario1 [ true ] |
-	'#2' ruleScenario1 [ false ] |
-	'#3' ruleScenario2 [ true ] |
-	'#4' ruleScenario2 [ false ] |
+	'#1' norm1_Scenario1 |
+	'#2' ruleScenario1 |
+	'#3' norm1_Scenario2 |
+	'#4' ruleScenario2 |
 	( (
-	'#5' ruleScenario2 [ true ]
+	'#5' norm1_Scenario2
 	) => (
-		'#5' ruleScenario2 [ true ]
+		'#5' norm1_Scenario2
 	) ) |
 	( (
-	'#6' ruleScenario2 [ false ]
+	'#6' ruleScenario2
 	) => (
-		'#6' ruleScenario2 [ false ]
+		'#6' ruleScenario2
 	) ) |
-	'#7' ruleScenario3 [ true ] |
-	'#8' ruleScenario3 [ false ] |
+	'#7' norm1_Scenario3 |
+	'#8' ruleScenario3 |
 	'#9' (
 		( (
-		ruleIdOrKeyword [ true ]
-		) => ruleScenario4 [ true ] ) |
-		ruleScenario2 [ true ] 'keyword'?
+		norm1_IdOrKeyword
+		) => norm1_Scenario4 ) |
+		norm1_Scenario2 'keyword'?
 	) |
 	'#10' (
 		( (
-		ruleIdOrKeyword [ true ]
-		) => ruleScenario4 [ true ] ) |
-		ruleScenario2 [ false ] 'keyword'?
+		norm1_IdOrKeyword
+		) => norm1_Scenario4 ) |
+		ruleScenario2 'keyword'?
 	) |
 	'#11' (
 		( (
-		ruleIdOrKeyword [ false ]
-		) => ruleScenario4 [ false ] ) |
-		ruleScenario2 [ true ] 'keyword'?
+		ruleIdOrKeyword
+		) => ruleScenario4 ) |
+		norm1_Scenario2 'keyword'?
 	) |
 	'#12' (
 		( (
-		ruleIdOrKeyword [ false ]
-		) => ruleScenario4 [ false ] ) |
-		ruleScenario2 [ false ] 'keyword'?
+		ruleIdOrKeyword
+		) => ruleScenario4 ) |
+		ruleScenario2 'keyword'?
 	)
 ;
 
 // Rule Scenario1
-ruleScenario1 [ boolean p_Param ] :
-	{ p_Param } ? => (
-		RULE_ID
-	) |
-	{ ! p_Param } ? => (
-		RULE_ID
-	)
+ruleScenario1 :
+	RULE_ID
+;
+
+// Rule Scenario1
+norm1_Scenario1 :
+	RULE_ID
 ;
 
 // Rule Scenario2
-ruleScenario2 [ boolean p_AllowKeyword ] :
-	ruleIdOrKeyword [ $ruleScenario2.p_AllowKeyword ]
+ruleScenario2 :
+	ruleIdOrKeyword
+;
+
+// Rule Scenario2
+norm1_Scenario2 :
+	norm1_IdOrKeyword
 ;
 
 // Rule Scenario3
-ruleScenario3 [ boolean p_AllowKeyword ] :
+ruleScenario3 :
 	( (
-	ruleIdOrKeyword [ $ruleScenario3.p_AllowKeyword ]
-	) => ruleIdOrKeyword [ $ruleScenario3.p_AllowKeyword ] ) |
+	ruleIdOrKeyword
+	) => ruleIdOrKeyword ) |
+	'keyword'
+;
+
+// Rule Scenario3
+norm1_Scenario3 :
+	( (
+	norm1_IdOrKeyword
+	) => norm1_IdOrKeyword ) |
 	'keyword'
 ;
 
 // Rule Scenario4
-ruleScenario4 [ boolean p_AllowKeyword ] :
+ruleScenario4 :
 	( (
-	ruleIdOrKeyword [ $ruleScenario4.p_AllowKeyword ]
-	) => ruleIdOrKeyword [ $ruleScenario4.p_AllowKeyword ] ) 'keyword'
+	ruleIdOrKeyword
+	) => ruleIdOrKeyword ) 'keyword'
+;
+
+// Rule Scenario4
+norm1_Scenario4 :
+	( (
+	norm1_IdOrKeyword
+	) => norm1_IdOrKeyword ) 'keyword'
 ;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword [ boolean p_Keyword ] :
-	{ p_Keyword } ? => (
-		'keyword'
-	) |
+ruleIdOrKeyword :
+	RULE_ID
+;
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword :
+	'keyword' |
 	RULE_ID
 ;
 

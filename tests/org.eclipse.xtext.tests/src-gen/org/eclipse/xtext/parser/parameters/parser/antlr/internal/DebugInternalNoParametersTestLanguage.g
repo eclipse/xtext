@@ -109,10 +109,13 @@ ruleIdOrKeyword_False :
 ;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword [ boolean p_Keyword ] :
-	{ p_Keyword } ? => (
-		'keyword'
-	) |
+ruleIdOrKeyword :
+	RULE_ID
+;
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword :
+	'keyword' |
 	RULE_ID
 ;
 

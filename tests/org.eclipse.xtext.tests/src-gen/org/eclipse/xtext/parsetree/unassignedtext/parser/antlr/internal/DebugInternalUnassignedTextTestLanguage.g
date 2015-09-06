@@ -92,7 +92,7 @@ RULE_MULTI :
 	) RULE_MULTI2 '0' .. '9' '0' .. '9'+
 ;
 
-RULE_MULTI2 :
+fragment RULE_MULTI2 :
 	'j'
 ;
 

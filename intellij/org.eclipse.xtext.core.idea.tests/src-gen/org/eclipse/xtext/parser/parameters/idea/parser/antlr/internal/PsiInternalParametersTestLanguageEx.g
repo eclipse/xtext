@@ -94,7 +94,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario1ParserRuleCall_1_0_1_0ElementType());
 						}
-						lv_scenario_2_0=ruleScenario1[true]
+						lv_scenario_2_0=norm1_Scenario1
 						{
 							doneComposite();
 						}
@@ -115,7 +115,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario1ParserRuleCall_1_1_1_0ElementType());
 						}
-						lv_scenario_4_0=ruleScenario1[false]
+						lv_scenario_4_0=ruleScenario1
 						{
 							doneComposite();
 						}
@@ -136,7 +136,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_2_1_0ElementType());
 						}
-						lv_scenario_6_0=ruleScenario2[true]
+						lv_scenario_6_0=norm1_Scenario2
 						{
 							doneComposite();
 						}
@@ -157,7 +157,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_3_1_0ElementType());
 						}
-						lv_scenario_8_0=ruleScenario2[false]
+						lv_scenario_8_0=ruleScenario2
 						{
 							doneComposite();
 						}
@@ -170,7 +170,7 @@ ruleParserRuleParameters:
 					'#5'
 					(
 						(
-							ruleScenario2[true]
+							norm1_Scenario2
 						)
 					)
 				)
@@ -188,7 +188,7 @@ ruleParserRuleParameters:
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_4_0_1_0ElementType());
 							}
-							lv_scenario_10_0=ruleScenario2[true]
+							lv_scenario_10_0=norm1_Scenario2
 							{
 								doneComposite();
 							}
@@ -202,7 +202,7 @@ ruleParserRuleParameters:
 					'#6'
 					(
 						(
-							ruleScenario2[false]
+							ruleScenario2
 						)
 					)
 				)
@@ -220,7 +220,7 @@ ruleParserRuleParameters:
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_5_0_1_0ElementType());
 							}
-							lv_scenario_12_0=ruleScenario2[false]
+							lv_scenario_12_0=ruleScenario2
 							{
 								doneComposite();
 							}
@@ -242,7 +242,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario3ParserRuleCall_1_6_1_0ElementType());
 						}
-						lv_scenario_14_0=ruleScenario3[true]
+						lv_scenario_14_0=norm1_Scenario3
 						{
 							doneComposite();
 						}
@@ -263,7 +263,7 @@ ruleParserRuleParameters:
 						{
 							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario3ParserRuleCall_1_7_1_0ElementType());
 						}
-						lv_scenario_16_0=ruleScenario3[false]
+						lv_scenario_16_0=ruleScenario3
 						{
 							doneComposite();
 						}
@@ -282,14 +282,14 @@ ruleParserRuleParameters:
 				(
 					(
 						((
-							ruleIdOrKeyword[true]
+							norm1_IdOrKeyword
 						)
 						)=>
 						(
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_8_1_0_0ElementType());
 							}
-							lv_scenario_18_0=ruleScenario4[true]
+							lv_scenario_18_0=norm1_Scenario4
 							{
 								doneComposite();
 							}
@@ -302,7 +302,7 @@ ruleParserRuleParameters:
 								{
 									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_8_1_1_0_0ElementType());
 								}
-								lv_scenario_19_0=ruleScenario2[true]
+								lv_scenario_19_0=norm1_Scenario2
 								{
 									doneComposite();
 								}
@@ -332,14 +332,14 @@ ruleParserRuleParameters:
 				(
 					(
 						((
-							ruleIdOrKeyword[true]
+							norm1_IdOrKeyword
 						)
 						)=>
 						(
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_9_1_0_0ElementType());
 							}
-							lv_scenario_22_0=ruleScenario4[true]
+							lv_scenario_22_0=norm1_Scenario4
 							{
 								doneComposite();
 							}
@@ -352,7 +352,7 @@ ruleParserRuleParameters:
 								{
 									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_9_1_1_0_0ElementType());
 								}
-								lv_scenario_23_0=ruleScenario2[false]
+								lv_scenario_23_0=ruleScenario2
 								{
 									doneComposite();
 								}
@@ -382,14 +382,14 @@ ruleParserRuleParameters:
 				(
 					(
 						((
-							ruleIdOrKeyword[false]
+							ruleIdOrKeyword
 						)
 						)=>
 						(
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_10_1_0_0ElementType());
 							}
-							lv_scenario_26_0=ruleScenario4[false]
+							lv_scenario_26_0=ruleScenario4
 							{
 								doneComposite();
 							}
@@ -402,7 +402,7 @@ ruleParserRuleParameters:
 								{
 									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_10_1_1_0_0ElementType());
 								}
-								lv_scenario_27_0=ruleScenario2[true]
+								lv_scenario_27_0=norm1_Scenario2
 								{
 									doneComposite();
 								}
@@ -432,14 +432,14 @@ ruleParserRuleParameters:
 				(
 					(
 						((
-							ruleIdOrKeyword[false]
+							ruleIdOrKeyword
 						)
 						)=>
 						(
 							{
 								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_11_1_0_0ElementType());
 							}
-							lv_scenario_30_0=ruleScenario4[false]
+							lv_scenario_30_0=ruleScenario4
 							{
 								doneComposite();
 							}
@@ -452,7 +452,7 @@ ruleParserRuleParameters:
 								{
 									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_11_1_1_0_0ElementType());
 								}
-								lv_scenario_31_0=ruleScenario2[false]
+								lv_scenario_31_0=ruleScenario2
 								{
 									doneComposite();
 								}
@@ -477,41 +477,36 @@ ruleParserRuleParameters:
 //Entry rule entryRuleScenario1
 entryRuleScenario1:
 	{ markComposite(elementTypeProvider.getScenario1ElementType()); }
-	ruleScenario1[false]
+	ruleScenario1
 	EOF;
 
 // Rule Scenario1
-ruleScenario1[boolean p_Param] 
-:
+ruleScenario1:
 	(
 		(
-			{p_Param}?=>((
-				(
-					{
-						markLeaf(elementTypeProvider.getScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
-					}
-					lv_first_0_0=RULE_ID
-					{
-						doneLeaf(lv_first_0_0);
-					}
-				)
-			)
-			)
+			{
+				markLeaf(elementTypeProvider.getScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
+			}
+			lv_second_0_0=RULE_ID
+			{
+				doneLeaf(lv_second_0_0);
+			}
 		)
-		    |
+	)
+;
+
+
+// Rule Scenario1
+norm1_Scenario1:
+	(
 		(
-			{!p_Param}?=>((
-				(
-					{
-						markLeaf(elementTypeProvider.getScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
-					}
-					lv_second_1_0=RULE_ID
-					{
-						doneLeaf(lv_second_1_0);
-					}
-				)
-			)
-			)
+			{
+				markLeaf(elementTypeProvider.getScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
+			}
+			lv_first_0_0=RULE_ID
+			{
+				doneLeaf(lv_first_0_0);
+			}
 		)
 	)
 ;
@@ -519,18 +514,33 @@ ruleScenario1[boolean p_Param]
 //Entry rule entryRuleScenario2
 entryRuleScenario2:
 	{ markComposite(elementTypeProvider.getScenario2ElementType()); }
-	ruleScenario2[false]
+	ruleScenario2
 	EOF;
 
 // Rule Scenario2
-ruleScenario2[boolean p_AllowKeyword] 
-:
+ruleScenario2:
 	(
 		(
 			{
 				markComposite(elementTypeProvider.getScenario2_FirstIdOrKeywordParserRuleCall_0ElementType());
 			}
-			lv_first_0_0=ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword]
+			lv_first_0_0=ruleIdOrKeyword
+			{
+				doneComposite();
+			}
+		)
+	)
+;
+
+
+// Rule Scenario2
+norm1_Scenario2:
+	(
+		(
+			{
+				markComposite(elementTypeProvider.getScenario2_FirstIdOrKeywordParserRuleCall_0ElementType());
+			}
+			lv_first_0_0=norm1_IdOrKeyword
 			{
 				doneComposite();
 			}
@@ -541,23 +551,56 @@ ruleScenario2[boolean p_AllowKeyword]
 //Entry rule entryRuleScenario3
 entryRuleScenario3:
 	{ markComposite(elementTypeProvider.getScenario3ElementType()); }
-	ruleScenario3[false]
+	ruleScenario3
 	EOF;
 
 // Rule Scenario3
-ruleScenario3[boolean p_AllowKeyword] 
-:
+ruleScenario3:
 	(
 		(
 			((
-				ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
+				ruleIdOrKeyword
 			)
 			)=>
 			(
 				{
 					markComposite(elementTypeProvider.getScenario3_FirstIdOrKeywordParserRuleCall_0_0ElementType());
 				}
-				lv_first_0_0=ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
+				lv_first_0_0=ruleIdOrKeyword
+				{
+					doneComposite();
+				}
+			)
+		)
+		    |
+		(
+			(
+				{
+					markLeaf(elementTypeProvider.getScenario3_SecondKeywordKeyword_1_0ElementType());
+				}
+				lv_second_1_0='keyword'
+				{
+					doneLeaf(lv_second_1_0);
+				}
+			)
+		)
+	)
+;
+
+
+// Rule Scenario3
+norm1_Scenario3:
+	(
+		(
+			((
+				norm1_IdOrKeyword
+			)
+			)=>
+			(
+				{
+					markComposite(elementTypeProvider.getScenario3_FirstIdOrKeywordParserRuleCall_0_0ElementType());
+				}
+				lv_first_0_0=norm1_IdOrKeyword
 				{
 					doneComposite();
 				}
@@ -581,23 +624,51 @@ ruleScenario3[boolean p_AllowKeyword]
 //Entry rule entryRuleScenario4
 entryRuleScenario4:
 	{ markComposite(elementTypeProvider.getScenario4ElementType()); }
-	ruleScenario4[false]
+	ruleScenario4
 	EOF;
 
 // Rule Scenario4
-ruleScenario4[boolean p_AllowKeyword] 
-:
+ruleScenario4:
 	(
 		(
 			((
-				ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
+				ruleIdOrKeyword
 			)
 			)=>
 			(
 				{
 					markComposite(elementTypeProvider.getScenario4_SecondIdOrKeywordParserRuleCall_0_0ElementType());
 				}
-				lv_second_0_0=ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
+				lv_second_0_0=ruleIdOrKeyword
+				{
+					doneComposite();
+				}
+			)
+		)
+		{
+			markLeaf(elementTypeProvider.getScenario4_KeywordKeyword_1ElementType());
+		}
+		otherlv_1='keyword'
+		{
+			doneLeaf(otherlv_1);
+		}
+	)
+;
+
+
+// Rule Scenario4
+norm1_Scenario4:
+	(
+		(
+			((
+				norm1_IdOrKeyword
+			)
+			)=>
+			(
+				{
+					markComposite(elementTypeProvider.getScenario4_SecondIdOrKeywordParserRuleCall_0_0ElementType());
+				}
+				lv_second_0_0=norm1_IdOrKeyword
 				{
 					doneComposite();
 				}
@@ -616,23 +687,31 @@ ruleScenario4[boolean p_AllowKeyword]
 //Entry rule entryRuleIdOrKeyword
 entryRuleIdOrKeyword:
 	{ markComposite(elementTypeProvider.getIdOrKeywordElementType()); }
-	ruleIdOrKeyword[false]
+	ruleIdOrKeyword
 	EOF;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword[boolean p_Keyword] 
-:
+ruleIdOrKeyword:
+	{
+		markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());
+	}
+	this_ID_0=RULE_ID
+	{
+		doneLeaf(this_ID_0);
+	}
+;
+
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword:
 	(
-		(
-			{p_Keyword}?=>({
-				markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
-			}
-			kw='keyword'
-			{
-				doneLeaf(kw);
-			}
-			)
-		)
+		{
+			markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
+		}
+		kw='keyword'
+		{
+			doneLeaf(kw);
+		}
 		    |
 		{
 			markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());

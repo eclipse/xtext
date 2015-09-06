@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.normalization;
+package org.eclipse.xtext.xtext.generator.normalization;
 
 import java.util.Collections;
 import java.util.List;
@@ -63,6 +63,15 @@ public class RuleWithParameterValues {
   public static AbstractRule getOriginalRule(final AbstractRule copy) {
     RuleWithParameterValues _findInEmfObject = RuleWithParameterValues.findInEmfObject(copy);
     return _findInEmfObject.getOriginal();
+  }
+  
+  public static AbstractRule tryGetOriginalRule(final AbstractRule copy) {
+    RuleWithParameterValues _findInEmfObject = RuleWithParameterValues.findInEmfObject(copy);
+    AbstractRule _original = null;
+    if (_findInEmfObject!=null) {
+      _original=_findInEmfObject.getOriginal();
+    }
+    return _original;
   }
   
   public static Set<Parameter> getParamValues(final AbstractRule copy) {

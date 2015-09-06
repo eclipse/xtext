@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.normalization
+package org.eclipse.xtext.xtext.generator.normalization
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.ImmutableSet
@@ -44,7 +44,7 @@ import org.eclipse.xtext.util.XtextSwitch
 import org.eclipse.xtext.util.internal.EmfAdaptable
 import org.eclipse.xtext.xtext.UsedRulesFinder
 
-import static extension org.eclipse.xtext.generator.normalization.RuleWithParameterValues.*
+import static extension org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues.*
 
 /** 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,15 +55,16 @@ class FlattenedGrammarAccess {
 	@Accessors
 	val Grammar flattenedGrammar
 
-	new(Grammar grammar, RuleNames names, RuleFilter filter) {
+	new(RuleNames names, RuleFilter filter) {
+		val grammar = names.contextGrammar
 		var flattenedGrammar = copy(grammar)
 		flattenedGrammar.name = grammar.name
 		var origToCopy = Maps.newLinkedHashMap()
 		val copies = copyRuleStubs(names, origToCopy, filter.getRules(grammar))
 		flattenedGrammar.rules += copies
 		var calledFrom = copyRuleBodies(copies, origToCopy)
-		markAsFragment(calledFrom)
 		flattenedGrammar.setHiddenTokens(grammar, origToCopy)
+		markAsFragment(calledFrom)
 		if (filter.isDiscardUnreachableRules()) {
 			var Set<AbstractRule> usedRules = newHashSet()
 			if (!filter.isDiscardTerminalRules()) {
@@ -74,6 +75,7 @@ class FlattenedGrammarAccess {
 			flattenedGrammar.rules.retainAll(usedRules)
 		}
 		this.flattenedGrammar = flattenedGrammar
+		new OriginalGrammar(grammar).attachToEmfObject(flattenedGrammar)
 	}
 
 	def private void setHiddenTokens(
@@ -97,6 +99,8 @@ class FlattenedGrammarAccess {
 			!isFragment
 		].filter[
 			allAreTerminalRules(calledFrom.get(it))
+		].filter[
+			!(it.eContainer as Grammar).hiddenTokens.contains(it)
 		].forEach[
 			fragment=true
 		]
@@ -155,15 +159,19 @@ class FlattenedGrammarAccess {
 					if (result instanceof CompoundElement) {
 						var List<AbstractElement> elements = result.getElements()
 						if (elements.size() === 1) {
-							var element = elements.get(0)
-							element.mergeCardinalities(result)
-							element.mergePredicates(result)
-							OriginalElement.removeFromEmfObject(element)
-							var original = new OriginalElement(eObject as AbstractElement)
-							original.attachToEmfObject(element)
-							return element
+							if (!result.isFirstSetPredicated && !result.isPredicated) {
+								var element = elements.get(0)
+								element.mergeCardinalities(result)
+								element.mergePredicates(result)
+								return element
+							} else {
+								var element = elements.get(0)
+								result.mergeCardinalities(element)
+								result.mergePredicates(element)
+								element.firstSetPredicated = false
+								element.predicated = false
+							}
 						}
-
 					}
 					if (eObject instanceof AbstractElement) {
 						var original = new OriginalElement(eObject)
@@ -226,7 +234,9 @@ class FlattenedGrammarAccess {
 				if (orig.isDefinesHiddenTokens) {
 					castedCopy.definesHiddenTokens = true
 					for (AbstractRule rule : orig.hiddenTokens) {
-						castedCopy.hiddenTokens += origToCopy.get(new RuleWithParameterValues(rule))
+						val copiedTerminalRule = origToCopy.get(new RuleWithParameterValues(rule))
+						castedCopy.hiddenTokens += copiedTerminalRule
+						calledFrom.put(copiedTerminalRule as TerminalRule, castedCopy)
 					}
 				}
 			}

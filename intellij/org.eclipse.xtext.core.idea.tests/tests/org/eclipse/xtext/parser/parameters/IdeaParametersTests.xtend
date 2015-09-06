@@ -52,7 +52,6 @@ class IdeaParametersTest extends AbstractLanguageParsingTestCase {
 		override protected doGetResource(InputStream in, URI uri) throws Exception {
 			modelChecker.checkResource(CharStreams.toString(new InputStreamReader(in)), false)
 		}
-		
 	}
 	
 }

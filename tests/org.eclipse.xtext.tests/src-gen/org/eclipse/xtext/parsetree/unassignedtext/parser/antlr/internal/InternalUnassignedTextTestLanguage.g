@@ -465,7 +465,7 @@ RULE_PLURAL : ('item'|'items');
 
 RULE_MULTI : 'a' 'b'? 'c'+ 'd'* ('e'|'f') (('g'|'h')|'i'+) RULE_MULTI2 '0'..'9' ('0'..'9')+;
 
-RULE_MULTI2 : 'j';
+fragment RULE_MULTI2 : 'j';
 
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 

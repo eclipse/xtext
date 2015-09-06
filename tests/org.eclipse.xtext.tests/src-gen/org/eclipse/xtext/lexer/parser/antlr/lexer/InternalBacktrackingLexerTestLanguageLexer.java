@@ -22,15 +22,14 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public static final int EOF=-1;
     public static final int RULE_SL_COMMENT=13;
     public static final int FRAGMENT_RULE_YC=19;
-    public static final int FRAGMENT_RULE_CHARC=21;
     public static final int FRAGMENT_RULE_CHARB=17;
     public static final int FRAGMENT_Efg=15;
-    public static final int SYNTHETIC_ALL_KEYWORDS=24;
+    public static final int SYNTHETIC_ALL_KEYWORDS=23;
     public static final int RULE_CHARX=8;
-    public static final int FRAGMENT_RULE_SL_COMMENT=23;
+    public static final int FRAGMENT_RULE_SL_COMMENT=22;
     public static final int Efg=5;
     public static final int RULE_YC=9;
-    public static final int FRAGMENT_RULE_WS=22;
+    public static final int FRAGMENT_RULE_WS=21;
     public static final int RULE_CHARA=6;
     public static final int RULE_WS=12;
     public static final int RULE_CHARB=7;
@@ -45,7 +44,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     public InternalBacktrackingLexerTestLanguageLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
-        state.ruleMemo = new HashMap[39+1];
+        state.ruleMemo = new HashMap[37+1];
  
     }
     public String getGrammarFileName() { return "InternalBacktrackingLexerTestLanguageLexer.g"; }
@@ -57,8 +56,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             int _type = SYNTHETIC_ALL_KEYWORDS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
             if ( state.backtracking>0 && alreadyParsedRule(input, 1) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:35:24: ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
-            int alt1=10;
+            // InternalBacktrackingLexerTestLanguageLexer.g:35:24: ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT )
+            int alt1=9;
             alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
@@ -132,17 +131,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // InternalBacktrackingLexerTestLanguageLexer.g:43:2: ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC
-                    {
-                    mFRAGMENT_RULE_CHARC(); if (state.failed) return ;
-                    if ( state.backtracking==0 ) {
-                      _type = RULE_CHARC; 
-                    }
-
-                    }
-                    break;
-                case 9 :
-                    // InternalBacktrackingLexerTestLanguageLexer.g:44:2: ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS
+                    // InternalBacktrackingLexerTestLanguageLexer.g:43:2: ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS
                     {
                     mFRAGMENT_RULE_WS(); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
@@ -151,8 +140,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                     }
                     break;
-                case 10 :
-                    // InternalBacktrackingLexerTestLanguageLexer.g:45:2: ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT
+                case 9 :
+                    // InternalBacktrackingLexerTestLanguageLexer.g:44:2: ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT
                     {
                     mFRAGMENT_RULE_SL_COMMENT(); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
@@ -177,8 +166,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_Abc_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 2) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:47:23: ( 'Abc' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:47:25: 'Abc'
+            // InternalBacktrackingLexerTestLanguageLexer.g:46:23: ( 'Abc' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:46:25: 'Abc'
             {
             match("Abc"); if (state.failed) return ;
 
@@ -197,8 +186,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_Efg_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 3) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:49:23: ( 'Efg' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:49:25: 'Efg'
+            // InternalBacktrackingLexerTestLanguageLexer.g:48:23: ( 'Efg' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:48:25: 'Efg'
             {
             match("Efg"); if (state.failed) return ;
 
@@ -217,8 +206,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_CHARA_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 4) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:54:21: ( FRAGMENT_RULE_CHARA )
-            // InternalBacktrackingLexerTestLanguageLexer.g:54:23: FRAGMENT_RULE_CHARA
+            // InternalBacktrackingLexerTestLanguageLexer.g:53:21: ( FRAGMENT_RULE_CHARA )
+            // InternalBacktrackingLexerTestLanguageLexer.g:53:23: FRAGMENT_RULE_CHARA
             {
             mFRAGMENT_RULE_CHARA(); if (state.failed) return ;
 
@@ -236,8 +225,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_RULE_CHARA_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 5) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:55:30: ( 'A' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:55:32: 'A'
+            // InternalBacktrackingLexerTestLanguageLexer.g:54:30: ( 'A' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:54:32: 'A'
             {
             match('A'); if (state.failed) return ;
 
@@ -255,8 +244,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_CHARB_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 6) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:57:21: ( FRAGMENT_RULE_CHARB )
-            // InternalBacktrackingLexerTestLanguageLexer.g:57:23: FRAGMENT_RULE_CHARB
+            // InternalBacktrackingLexerTestLanguageLexer.g:56:21: ( FRAGMENT_RULE_CHARB )
+            // InternalBacktrackingLexerTestLanguageLexer.g:56:23: FRAGMENT_RULE_CHARB
             {
             mFRAGMENT_RULE_CHARB(); if (state.failed) return ;
 
@@ -274,8 +263,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_RULE_CHARB_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 7) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:58:30: ( 'b' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:58:32: 'b'
+            // InternalBacktrackingLexerTestLanguageLexer.g:57:30: ( 'b' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:57:32: 'b'
             {
             match('b'); if (state.failed) return ;
 
@@ -293,8 +282,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_CHARX_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 8) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:60:21: ( FRAGMENT_RULE_CHARX )
-            // InternalBacktrackingLexerTestLanguageLexer.g:60:23: FRAGMENT_RULE_CHARX
+            // InternalBacktrackingLexerTestLanguageLexer.g:59:21: ( FRAGMENT_RULE_CHARX )
+            // InternalBacktrackingLexerTestLanguageLexer.g:59:23: FRAGMENT_RULE_CHARX
             {
             mFRAGMENT_RULE_CHARX(); if (state.failed) return ;
 
@@ -312,8 +301,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_RULE_CHARX_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 9) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:61:30: ( 'X' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:61:32: 'X'
+            // InternalBacktrackingLexerTestLanguageLexer.g:60:30: ( 'X' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:60:32: 'X'
             {
             match('X'); if (state.failed) return ;
 
@@ -331,8 +320,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_YC_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 10) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:63:18: ( FRAGMENT_RULE_YC )
-            // InternalBacktrackingLexerTestLanguageLexer.g:63:20: FRAGMENT_RULE_YC
+            // InternalBacktrackingLexerTestLanguageLexer.g:62:18: ( FRAGMENT_RULE_YC )
+            // InternalBacktrackingLexerTestLanguageLexer.g:62:20: FRAGMENT_RULE_YC
             {
             mFRAGMENT_RULE_YC(); if (state.failed) return ;
 
@@ -350,8 +339,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_RULE_YC_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 11) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:64:27: ( RULE_CHARY RULE_CHARC )
-            // InternalBacktrackingLexerTestLanguageLexer.g:64:29: RULE_CHARY RULE_CHARC
+            // InternalBacktrackingLexerTestLanguageLexer.g:63:27: ( RULE_CHARY RULE_CHARC )
+            // InternalBacktrackingLexerTestLanguageLexer.g:63:29: RULE_CHARY RULE_CHARC
             {
             mRULE_CHARY(); if (state.failed) return ;
             mRULE_CHARC(); if (state.failed) return ;
@@ -370,8 +359,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_CHARY_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 12) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:66:21: ( FRAGMENT_RULE_CHARY )
-            // InternalBacktrackingLexerTestLanguageLexer.g:66:23: FRAGMENT_RULE_CHARY
+            // InternalBacktrackingLexerTestLanguageLexer.g:65:21: ( FRAGMENT_RULE_CHARY )
+            // InternalBacktrackingLexerTestLanguageLexer.g:65:23: FRAGMENT_RULE_CHARY
             {
             mFRAGMENT_RULE_CHARY(); if (state.failed) return ;
 
@@ -389,8 +378,8 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int FRAGMENT_RULE_CHARY_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 13) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:67:30: ( 'Y' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:67:32: 'Y'
+            // InternalBacktrackingLexerTestLanguageLexer.g:66:30: ( 'Y' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:66:32: 'Y'
             {
             match('Y'); if (state.failed) return ;
 
@@ -408,10 +397,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
         int RULE_CHARC_StartIndex = input.index();
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 14) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:69:21: ( FRAGMENT_RULE_CHARC )
-            // InternalBacktrackingLexerTestLanguageLexer.g:69:23: FRAGMENT_RULE_CHARC
+            // InternalBacktrackingLexerTestLanguageLexer.g:68:21: ( 'c' )
+            // InternalBacktrackingLexerTestLanguageLexer.g:68:23: 'c'
             {
-            mFRAGMENT_RULE_CHARC(); if (state.failed) return ;
+            match('c'); if (state.failed) return ;
 
             }
 
@@ -422,32 +411,13 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     }
     // $ANTLR end "RULE_CHARC"
 
-    // $ANTLR start "FRAGMENT_RULE_CHARC"
-    public final void mFRAGMENT_RULE_CHARC() throws RecognitionException {
-        int FRAGMENT_RULE_CHARC_StartIndex = input.index();
-        try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:70:30: ( 'c' )
-            // InternalBacktrackingLexerTestLanguageLexer.g:70:32: 'c'
-            {
-            match('c'); if (state.failed) return ;
-
-            }
-
-        }
-        finally {
-            if ( state.backtracking>0 ) { memoize(input, 15, FRAGMENT_RULE_CHARC_StartIndex); }
-        }
-    }
-    // $ANTLR end "FRAGMENT_RULE_CHARC"
-
     // $ANTLR start "RULE_WS"
     public final void mRULE_WS() throws RecognitionException {
         int RULE_WS_StartIndex = input.index();
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:72:18: ( FRAGMENT_RULE_WS )
-            // InternalBacktrackingLexerTestLanguageLexer.g:72:20: FRAGMENT_RULE_WS
+            if ( state.backtracking>0 && alreadyParsedRule(input, 15) ) { return ; }
+            // InternalBacktrackingLexerTestLanguageLexer.g:70:18: ( FRAGMENT_RULE_WS )
+            // InternalBacktrackingLexerTestLanguageLexer.g:70:20: FRAGMENT_RULE_WS
             {
             mFRAGMENT_RULE_WS(); if (state.failed) return ;
 
@@ -455,7 +425,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 16, RULE_WS_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 15, RULE_WS_StartIndex); }
         }
     }
     // $ANTLR end "RULE_WS"
@@ -464,11 +434,11 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_WS() throws RecognitionException {
         int FRAGMENT_RULE_WS_StartIndex = input.index();
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:73:27: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalBacktrackingLexerTestLanguageLexer.g:73:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            if ( state.backtracking>0 && alreadyParsedRule(input, 16) ) { return ; }
+            // InternalBacktrackingLexerTestLanguageLexer.g:71:27: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalBacktrackingLexerTestLanguageLexer.g:71:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalBacktrackingLexerTestLanguageLexer.g:73:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalBacktrackingLexerTestLanguageLexer.g:71:29: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt2=0;
             loop2:
             do {
@@ -513,7 +483,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 17, FRAGMENT_RULE_WS_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 16, FRAGMENT_RULE_WS_StartIndex); }
         }
     }
     // $ANTLR end "FRAGMENT_RULE_WS"
@@ -522,9 +492,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         int RULE_SL_COMMENT_StartIndex = input.index();
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:75:26: ( FRAGMENT_RULE_SL_COMMENT )
-            // InternalBacktrackingLexerTestLanguageLexer.g:75:28: FRAGMENT_RULE_SL_COMMENT
+            if ( state.backtracking>0 && alreadyParsedRule(input, 17) ) { return ; }
+            // InternalBacktrackingLexerTestLanguageLexer.g:73:26: ( FRAGMENT_RULE_SL_COMMENT )
+            // InternalBacktrackingLexerTestLanguageLexer.g:73:28: FRAGMENT_RULE_SL_COMMENT
             {
             mFRAGMENT_RULE_SL_COMMENT(); if (state.failed) return ;
 
@@ -532,7 +502,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 18, RULE_SL_COMMENT_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 17, RULE_SL_COMMENT_StartIndex); }
         }
     }
     // $ANTLR end "RULE_SL_COMMENT"
@@ -541,13 +511,13 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
     public final void mFRAGMENT_RULE_SL_COMMENT() throws RecognitionException {
         int FRAGMENT_RULE_SL_COMMENT_StartIndex = input.index();
         try {
-            if ( state.backtracking>0 && alreadyParsedRule(input, 19) ) { return ; }
-            // InternalBacktrackingLexerTestLanguageLexer.g:76:35: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalBacktrackingLexerTestLanguageLexer.g:76:37: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            if ( state.backtracking>0 && alreadyParsedRule(input, 18) ) { return ; }
+            // InternalBacktrackingLexerTestLanguageLexer.g:74:35: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalBacktrackingLexerTestLanguageLexer.g:74:37: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); if (state.failed) return ;
 
-            // InternalBacktrackingLexerTestLanguageLexer.g:76:42: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalBacktrackingLexerTestLanguageLexer.g:74:42: (~ ( ( '\\n' | '\\r' ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -581,7 +551,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalBacktrackingLexerTestLanguageLexer.g:76:58: ( ( '\\r' )? '\\n' )?
+            // InternalBacktrackingLexerTestLanguageLexer.g:74:58: ( ( '\\r' )? '\\n' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -590,9 +560,9 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalBacktrackingLexerTestLanguageLexer.g:76:59: ( '\\r' )? '\\n'
+                    // InternalBacktrackingLexerTestLanguageLexer.g:74:59: ( '\\r' )? '\\n'
                     {
-                    // InternalBacktrackingLexerTestLanguageLexer.g:76:59: ( '\\r' )?
+                    // InternalBacktrackingLexerTestLanguageLexer.g:74:59: ( '\\r' )?
                     int alt4=2;
                     int LA4_0 = input.LA(1);
 
@@ -622,7 +592,7 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
         }
         finally {
-            if ( state.backtracking>0 ) { memoize(input, 19, FRAGMENT_RULE_SL_COMMENT_StartIndex); }
+            if ( state.backtracking>0 ) { memoize(input, 18, FRAGMENT_RULE_SL_COMMENT_StartIndex); }
         }
     }
     // $ANTLR end "FRAGMENT_RULE_SL_COMMENT"
@@ -717,10 +687,10 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred8_InternalBacktrackingLexerTestLanguageLexer
     public final void synpred8_InternalBacktrackingLexerTestLanguageLexer_fragment() throws RecognitionException {   
-        // InternalBacktrackingLexerTestLanguageLexer.g:43:2: ( FRAGMENT_RULE_CHARC )
-        // InternalBacktrackingLexerTestLanguageLexer.g:43:3: FRAGMENT_RULE_CHARC
+        // InternalBacktrackingLexerTestLanguageLexer.g:43:2: ( FRAGMENT_RULE_WS )
+        // InternalBacktrackingLexerTestLanguageLexer.g:43:3: FRAGMENT_RULE_WS
         {
-        mFRAGMENT_RULE_CHARC(); if (state.failed) return ;
+        mFRAGMENT_RULE_WS(); if (state.failed) return ;
 
         }
     }
@@ -728,40 +698,15 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     // $ANTLR start synpred9_InternalBacktrackingLexerTestLanguageLexer
     public final void synpred9_InternalBacktrackingLexerTestLanguageLexer_fragment() throws RecognitionException {   
-        // InternalBacktrackingLexerTestLanguageLexer.g:44:2: ( FRAGMENT_RULE_WS )
-        // InternalBacktrackingLexerTestLanguageLexer.g:44:3: FRAGMENT_RULE_WS
-        {
-        mFRAGMENT_RULE_WS(); if (state.failed) return ;
-
-        }
-    }
-    // $ANTLR end synpred9_InternalBacktrackingLexerTestLanguageLexer
-
-    // $ANTLR start synpred10_InternalBacktrackingLexerTestLanguageLexer
-    public final void synpred10_InternalBacktrackingLexerTestLanguageLexer_fragment() throws RecognitionException {   
-        // InternalBacktrackingLexerTestLanguageLexer.g:45:2: ( FRAGMENT_RULE_SL_COMMENT )
-        // InternalBacktrackingLexerTestLanguageLexer.g:45:3: FRAGMENT_RULE_SL_COMMENT
+        // InternalBacktrackingLexerTestLanguageLexer.g:44:2: ( FRAGMENT_RULE_SL_COMMENT )
+        // InternalBacktrackingLexerTestLanguageLexer.g:44:3: FRAGMENT_RULE_SL_COMMENT
         {
         mFRAGMENT_RULE_SL_COMMENT(); if (state.failed) return ;
 
         }
     }
-    // $ANTLR end synpred10_InternalBacktrackingLexerTestLanguageLexer
+    // $ANTLR end synpred9_InternalBacktrackingLexerTestLanguageLexer
 
-    public final boolean synpred10_InternalBacktrackingLexerTestLanguageLexer() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred10_InternalBacktrackingLexerTestLanguageLexer_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
     public final boolean synpred2_InternalBacktrackingLexerTestLanguageLexer() {
         state.backtracking++;
         int start = input.mark();
@@ -892,25 +837,24 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
     protected DFA1 dfa1 = new DFA1(this);
     static final String DFA1_eotS =
-        "\1\uffff\1\12\3\uffff\1\13\7\uffff";
+        "\1\uffff\1\11\3\uffff\1\12\6\uffff";
     static final String DFA1_eofS =
-        "\15\uffff";
+        "\14\uffff";
     static final String DFA1_minS =
-        "\1\11\1\142\3\uffff\1\143\7\uffff";
+        "\1\11\1\142\3\uffff\1\143\6\uffff";
     static final String DFA1_maxS =
-        "\1\143\1\142\3\uffff\1\143\7\uffff";
+        "\2\142\3\uffff\1\143\6\uffff";
     static final String DFA1_acceptS =
-        "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\12\1\1\1\3\1\7\1\6";
+        "\2\uffff\1\2\1\4\1\5\1\uffff\1\10\1\11\1\1\1\3\1\7\1\6";
     static final String DFA1_specialS =
-        "\1\0\1\2\3\uffff\1\1\7\uffff}>";
+        "\1\2\1\1\3\uffff\1\0\6\uffff}>";
     static final String[] DFA1_transitionS = {
-            "\2\7\2\uffff\1\7\22\uffff\1\7\16\uffff\1\10\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3\1\6",
-            "\1\11",
+            "\2\6\2\uffff\1\6\22\uffff\1\6\16\uffff\1\7\21\uffff\1\1\3\uffff\1\2\22\uffff\1\4\1\5\10\uffff\1\3",
+            "\1\10",
             "",
             "",
             "",
-            "\1\14",
-            "",
+            "\1\13",
             "",
             "",
             "",
@@ -949,13 +893,43 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
             this.transition = DFA1_transition;
         }
         public String getDescription() {
-            return "35:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_CHARC )=> FRAGMENT_RULE_CHARC | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );";
+            return "35:1: SYNTHETIC_ALL_KEYWORDS : ( ( FRAGMENT_Abc )=> FRAGMENT_Abc | ( FRAGMENT_Efg )=> FRAGMENT_Efg | ( FRAGMENT_RULE_CHARA )=> FRAGMENT_RULE_CHARA | ( FRAGMENT_RULE_CHARB )=> FRAGMENT_RULE_CHARB | ( FRAGMENT_RULE_CHARX )=> FRAGMENT_RULE_CHARX | ( FRAGMENT_RULE_YC )=> FRAGMENT_RULE_YC | ( FRAGMENT_RULE_CHARY )=> FRAGMENT_RULE_CHARY | ( FRAGMENT_RULE_WS )=> FRAGMENT_RULE_WS | ( FRAGMENT_RULE_SL_COMMENT )=> FRAGMENT_RULE_SL_COMMENT );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
+                        int LA1_5 = input.LA(1);
+
+                         
+                        int index1_5 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (LA1_5=='c') && (synpred6_InternalBacktrackingLexerTestLanguageLexer())) {s = 11;}
+
+                        else s = 10;
+
+                         
+                        input.seek(index1_5);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 1 : 
+                        int LA1_1 = input.LA(1);
+
+                         
+                        int index1_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (LA1_1=='b') && (synpred1_InternalBacktrackingLexerTestLanguageLexer())) {s = 8;}
+
+                        else s = 9;
+
+                         
+                        input.seek(index1_1);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA1_0 = input.LA(1);
 
                          
@@ -972,44 +946,12 @@ public class InternalBacktrackingLexerTestLanguageLexer extends Lexer {
 
                         else if ( (LA1_0=='Y') ) {s = 5;}
 
-                        else if ( (LA1_0=='c') && (synpred8_InternalBacktrackingLexerTestLanguageLexer())) {s = 6;}
+                        else if ( ((LA1_0>='\t' && LA1_0<='\n')||LA1_0=='\r'||LA1_0==' ') && (synpred8_InternalBacktrackingLexerTestLanguageLexer())) {s = 6;}
 
-                        else if ( ((LA1_0>='\t' && LA1_0<='\n')||LA1_0=='\r'||LA1_0==' ') && (synpred9_InternalBacktrackingLexerTestLanguageLexer())) {s = 7;}
-
-                        else if ( (LA1_0=='/') && (synpred10_InternalBacktrackingLexerTestLanguageLexer())) {s = 8;}
+                        else if ( (LA1_0=='/') && (synpred9_InternalBacktrackingLexerTestLanguageLexer())) {s = 7;}
 
                          
                         input.seek(index1_0);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA1_5 = input.LA(1);
-
-                         
-                        int index1_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (LA1_5=='c') && (synpred6_InternalBacktrackingLexerTestLanguageLexer())) {s = 12;}
-
-                        else s = 11;
-
-                         
-                        input.seek(index1_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA1_1 = input.LA(1);
-
-                         
-                        int index1_1 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (LA1_1=='b') && (synpred1_InternalBacktrackingLexerTestLanguageLexer())) {s = 9;}
-
-                        else s = 10;
-
-                         
-                        input.seek(index1_1);
                         if ( s>=0 ) return s;
                         break;
             }

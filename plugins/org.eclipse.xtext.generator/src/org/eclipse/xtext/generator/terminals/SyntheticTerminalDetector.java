@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.terminals;
 
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil;
 
 /**
  * Helper to identify synthetic terminal rules.
@@ -29,7 +31,7 @@ public class SyntheticTerminalDetector {
 	public boolean isSyntheticTerminalRule(TerminalRule rule) {
 		if (rule.getAlternatives() instanceof Keyword) {
 			String value = ((Keyword) rule.getAlternatives()).getValue();
-			return ("synthetic:" + rule.getName()).equals(value);
+			return ("synthetic:" + ((AbstractRule) AntlrGrammarGenUtil.getOriginalElement(rule)).getName()).equals(value);
 		}
 		return false;
 	}

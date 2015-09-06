@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.generator.normalization
+package org.eclipse.xtext.xtext.generator.normalization
 
 import java.util.Collections
 import java.util.Set
@@ -33,6 +33,10 @@ class RuleWithParameterValues {
 	
 	def static AbstractRule getOriginalRule(AbstractRule copy) {
 		return findInEmfObject(copy).getOriginal()
+	}
+	
+	def static AbstractRule tryGetOriginalRule(AbstractRule copy) {
+		return findInEmfObject(copy)?.getOriginal()
 	}
 
 	def static Set<Parameter> getParamValues(AbstractRule copy) {

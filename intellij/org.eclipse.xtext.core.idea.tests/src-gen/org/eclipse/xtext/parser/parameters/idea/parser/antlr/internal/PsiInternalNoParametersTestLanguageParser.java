@@ -2282,17 +2282,17 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "entryRuleIdOrKeyword"
-    // PsiInternalNoParametersTestLanguage.g:735:1: entryRuleIdOrKeyword : ruleIdOrKeyword[false] EOF ;
+    // PsiInternalNoParametersTestLanguage.g:735:1: entryRuleIdOrKeyword : ruleIdOrKeyword EOF ;
     public final void entryRuleIdOrKeyword() throws RecognitionException {
         try {
-            // PsiInternalNoParametersTestLanguage.g:735:21: ( ruleIdOrKeyword[false] EOF )
-            // PsiInternalNoParametersTestLanguage.g:736:2: ruleIdOrKeyword[false] EOF
+            // PsiInternalNoParametersTestLanguage.g:735:21: ( ruleIdOrKeyword EOF )
+            // PsiInternalNoParametersTestLanguage.g:736:2: ruleIdOrKeyword EOF
             {
             if ( state.backtracking==0 ) {
                markComposite(elementTypeProvider.getIdOrKeywordElementType()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            ruleIdOrKeyword(false);
+            ruleIdOrKeyword();
 
             state._fsp--;
             if (state.failed) return ;
@@ -2313,20 +2313,55 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
 
 
     // $ANTLR start "ruleIdOrKeyword"
-    // PsiInternalNoParametersTestLanguage.g:741:1: ruleIdOrKeyword[boolean p_Keyword] : ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) ;
-    public final void ruleIdOrKeyword(boolean p_Keyword) throws RecognitionException {
+    // PsiInternalNoParametersTestLanguage.g:741:1: ruleIdOrKeyword : this_ID_0= RULE_ID ;
+    public final void ruleIdOrKeyword() throws RecognitionException {
+        Token this_ID_0=null;
+
+        try {
+            // PsiInternalNoParametersTestLanguage.g:741:16: (this_ID_0= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:742:2: this_ID_0= RULE_ID
+            {
+            if ( state.backtracking==0 ) {
+
+              		markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());
+              	
+            }
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return ;
+            if ( state.backtracking==0 ) {
+
+              		doneLeaf(this_ID_0);
+              	
+            }
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end "ruleIdOrKeyword"
+
+
+    // $ANTLR start "norm1_IdOrKeyword"
+    // PsiInternalNoParametersTestLanguage.g:753:1: norm1_IdOrKeyword : (kw= 'keyword' | this_ID_1= RULE_ID ) ;
+    public final void norm1_IdOrKeyword() throws RecognitionException {
         Token kw=null;
         Token this_ID_1=null;
 
         try {
-            // PsiInternalNoParametersTestLanguage.g:742:1: ( ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) )
-            // PsiInternalNoParametersTestLanguage.g:743:2: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:753:18: ( (kw= 'keyword' | this_ID_1= RULE_ID ) )
+            // PsiInternalNoParametersTestLanguage.g:754:2: (kw= 'keyword' | this_ID_1= RULE_ID )
             {
-            // PsiInternalNoParametersTestLanguage.g:743:2: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // PsiInternalNoParametersTestLanguage.g:754:2: (kw= 'keyword' | this_ID_1= RULE_ID )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( LA13_0 == 20 && p_Keyword ) {
+            if ( (LA13_0==20) ) {
                 alt13=1;
             }
             else if ( (LA13_0==RULE_ID) ) {
@@ -2341,40 +2376,24 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
             }
             switch (alt13) {
                 case 1 :
-                    // PsiInternalNoParametersTestLanguage.g:744:3: ({...}? => (kw= 'keyword' ) )
-                    {
-                    // PsiInternalNoParametersTestLanguage.g:744:3: ({...}? => (kw= 'keyword' ) )
-                    // PsiInternalNoParametersTestLanguage.g:745:4: {...}? => (kw= 'keyword' )
-                    {
-                    if ( ! p_Keyword ) {
-                        if (state.backtracking>0) {state.failed=true; return ;}
-                        throw new FailedPredicateException(input, "ruleIdOrKeyword", "p_Keyword");
-                    }
-                    // PsiInternalNoParametersTestLanguage.g:745:18: (kw= 'keyword' )
-                    // PsiInternalNoParametersTestLanguage.g:745:19: kw= 'keyword'
+                    // PsiInternalNoParametersTestLanguage.g:755:3: kw= 'keyword'
                     {
                     if ( state.backtracking==0 ) {
 
-                      				markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
-                      			
+                      			markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
+                      		
                     }
                     kw=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return ;
                     if ( state.backtracking==0 ) {
 
-                      				doneLeaf(kw);
-                      			
+                      			doneLeaf(kw);
+                      		
                     }
-
-                    }
-
-
-                    }
-
 
                     }
                     break;
                 case 2 :
-                    // PsiInternalNoParametersTestLanguage.g:755:3: this_ID_1= RULE_ID
+                    // PsiInternalNoParametersTestLanguage.g:763:3: this_ID_1= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2405,7 +2424,7 @@ public class PsiInternalNoParametersTestLanguageParser extends AbstractPsiAntlrP
         }
         return ;
     }
-    // $ANTLR end "ruleIdOrKeyword"
+    // $ANTLR end "norm1_IdOrKeyword"
 
     // $ANTLR start synpred1_PsiInternalNoParametersTestLanguage
     public final void synpred1_PsiInternalNoParametersTestLanguage_fragment() throws RecognitionException {   

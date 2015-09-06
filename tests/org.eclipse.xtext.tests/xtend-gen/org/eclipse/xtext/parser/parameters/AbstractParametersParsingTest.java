@@ -110,7 +110,7 @@ public abstract class AbstractParametersParsingTest extends AbstractXtextTests {
       EList<Resource.Diagnostic> _errors_1 = _eResource_1.getErrors();
       Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors_1);
       String _message = _head.getMessage();
-      Assert.assertEquals("no viable alternative at input \'keyword\'", _message);
+      Assert.assertEquals("mismatched input \'keyword\' expecting RULE_ID", _message);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -318,12 +318,12 @@ public abstract class AbstractParametersParsingTest extends AbstractXtextTests {
       final ParserRuleParameters instance = this.getModelWithErrors("#10 keyword");
       Scenario _scenario = instance.getScenario();
       String _second = _scenario.getSecond();
-      Assert.assertNull("keyword", _second);
+      Assert.assertEquals("keyword", _second);
       Resource _eResource = instance.eResource();
       EList<Resource.Diagnostic> _errors = _eResource.getErrors();
       Resource.Diagnostic _head = IterableExtensions.<Resource.Diagnostic>head(_errors);
       String _message = _head.getMessage();
-      Assert.assertEquals("no viable alternative at input \'keyword\'", _message);
+      Assert.assertEquals("mismatched input \'<EOF>\' expecting \'keyword\'", _message);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

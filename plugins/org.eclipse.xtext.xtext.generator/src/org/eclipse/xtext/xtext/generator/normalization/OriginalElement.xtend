@@ -5,11 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.generator.normalization
+package org.eclipse.xtext.xtext.generator.normalization
 
 import org.eclipse.xtext.util.internal.EmfAdaptable
 import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtext.AbstractElement
+import org.eclipse.xtext.Grammar
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,4 +19,13 @@ import org.eclipse.xtext.AbstractElement
 @Data
 class OriginalElement {
 	val AbstractElement original
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@EmfAdaptable
+@Data
+class OriginalGrammar {
+	val Grammar original
 }

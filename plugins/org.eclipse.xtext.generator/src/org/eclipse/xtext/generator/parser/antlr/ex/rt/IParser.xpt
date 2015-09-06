@@ -60,7 +60,7 @@ import «gaFQName()»;
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "«allParserRules().first().name»";
+		return "«originalElement(allParserRules().first()).name»";
 	}
 	
 	public «gaSimpleName()» getGrammarAccess() {

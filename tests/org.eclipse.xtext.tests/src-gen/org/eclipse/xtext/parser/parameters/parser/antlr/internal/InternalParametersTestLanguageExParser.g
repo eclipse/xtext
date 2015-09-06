@@ -117,7 +117,7 @@ ruleParserRuleParameters returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario1ParserRuleCall_1_0_1_0()); 
 	    }
-		lv_scenario_2_0=ruleScenario1[true]		{
+		lv_scenario_2_0=norm1_Scenario1		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -141,7 +141,7 @@ ruleParserRuleParameters returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario1ParserRuleCall_1_1_1_0()); 
 	    }
-		lv_scenario_4_0=ruleScenario1[false]		{
+		lv_scenario_4_0=ruleScenario1		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -165,7 +165,7 @@ ruleParserRuleParameters returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_2_1_0()); 
 	    }
-		lv_scenario_6_0=ruleScenario2[true]		{
+		lv_scenario_6_0=norm1_Scenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -189,7 +189,7 @@ ruleParserRuleParameters returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_3_1_0()); 
 	    }
-		lv_scenario_8_0=ruleScenario2[false]		{
+		lv_scenario_8_0=ruleScenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -207,7 +207,7 @@ ruleParserRuleParameters returns [EObject current=null]
 NumberSignDigitFive
 (
 (
-ruleScenario2[true]
+norm1_Scenario2
 )
 )))=>(
 	otherlv_9=NumberSignDigitFive
@@ -219,7 +219,7 @@ ruleScenario2[true]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_4_0_1_0()); 
 	    }
-		lv_scenario_10_0=ruleScenario2[true]		{
+		lv_scenario_10_0=norm1_Scenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -237,7 +237,7 @@ ruleScenario2[true]
 NumberSignDigitSix
 (
 (
-ruleScenario2[false]
+ruleScenario2
 )
 )))=>(
 	otherlv_11=NumberSignDigitSix
@@ -249,7 +249,7 @@ ruleScenario2[false]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_5_0_1_0()); 
 	    }
-		lv_scenario_12_0=ruleScenario2[false]		{
+		lv_scenario_12_0=ruleScenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -273,7 +273,7 @@ ruleScenario2[false]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario3ParserRuleCall_1_6_1_0()); 
 	    }
-		lv_scenario_14_0=ruleScenario3[true]		{
+		lv_scenario_14_0=norm1_Scenario3		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -297,7 +297,7 @@ ruleScenario2[false]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario3ParserRuleCall_1_7_1_0()); 
 	    }
-		lv_scenario_16_0=ruleScenario3[false]		{
+		lv_scenario_16_0=ruleScenario3		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -318,14 +318,14 @@ ruleScenario2[false]
     }
 (((
 (
-ruleIdOrKeyword[true]
+norm1_IdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_8_1_0_0()); 
 	    }
-		lv_scenario_18_0=ruleScenario4[true]		{
+		lv_scenario_18_0=norm1_Scenario4		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -344,7 +344,7 @@ ruleIdOrKeyword[true]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_8_1_1_0_0()); 
 	    }
-		lv_scenario_19_0=ruleScenario2[true]		{
+		lv_scenario_19_0=norm1_Scenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -370,14 +370,14 @@ ruleIdOrKeyword[true]
     }
 (((
 (
-ruleIdOrKeyword[true]
+norm1_IdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_9_1_0_0()); 
 	    }
-		lv_scenario_22_0=ruleScenario4[true]		{
+		lv_scenario_22_0=norm1_Scenario4		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -396,7 +396,7 @@ ruleIdOrKeyword[true]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_9_1_1_0_0()); 
 	    }
-		lv_scenario_23_0=ruleScenario2[false]		{
+		lv_scenario_23_0=ruleScenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -422,14 +422,14 @@ ruleIdOrKeyword[true]
     }
 (((
 (
-ruleIdOrKeyword[false]
+ruleIdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_10_1_0_0()); 
 	    }
-		lv_scenario_26_0=ruleScenario4[false]		{
+		lv_scenario_26_0=ruleScenario4		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -448,7 +448,7 @@ ruleIdOrKeyword[false]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_10_1_1_0_0()); 
 	    }
-		lv_scenario_27_0=ruleScenario2[true]		{
+		lv_scenario_27_0=norm1_Scenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -474,14 +474,14 @@ ruleIdOrKeyword[false]
     }
 (((
 (
-ruleIdOrKeyword[false]
+ruleIdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario4ParserRuleCall_1_11_1_0_0()); 
 	    }
-		lv_scenario_30_0=ruleScenario4[false]		{
+		lv_scenario_30_0=ruleScenario4		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -500,7 +500,7 @@ ruleIdOrKeyword[false]
 		{ 
 	        newCompositeNode(grammarAccess.getParserRuleParametersAccess().getScenarioScenario2ParserRuleCall_1_11_1_1_0_0()); 
 	    }
-		lv_scenario_31_0=ruleScenario2[false]		{
+		lv_scenario_31_0=ruleScenario2		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getParserRuleParametersRule());
 	        }
@@ -529,17 +529,48 @@ ruleIdOrKeyword[false]
 entryRuleScenario1 returns [EObject current=null]
 	:
 	{ newCompositeNode(grammarAccess.getScenario1Rule()); }
-	 iv_ruleScenario1=ruleScenario1[false] 
+	 iv_ruleScenario1=ruleScenario1 
 	 { $current=$iv_ruleScenario1.current; } 
 	 EOF 
 ;
 
 // Rule Scenario1
-ruleScenario1 [boolean p_Param] returns [EObject current=null] 
+ruleScenario1 returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(({p_Param}?=>((
+(
+(
+		lv_second_0_0=RULE_ID
+		{
+			newLeafNode(lv_second_0_0, grammarAccess.getScenario1Access().getSecondIDTerminalRuleCall_1_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getScenario1Rule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"second",
+        		lv_second_0_0, 
+        		"org.eclipse.xtext.common.Terminals.ID");
+	    }
+
+)
+)
+;
+
+
+
+
+
+
+// Rule Scenario1
+norm1_Scenario1 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
 (
 		lv_first_0_0=RULE_ID
 		{
@@ -557,28 +588,7 @@ ruleScenario1 [boolean p_Param] returns [EObject current=null]
 	    }
 
 )
-))
 )
-    |({!p_Param}?=>((
-(
-		lv_second_1_0=RULE_ID
-		{
-			newLeafNode(lv_second_1_0, grammarAccess.getScenario1Access().getSecondIDTerminalRuleCall_1_0_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getScenario1Rule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"second",
-        		lv_second_1_0, 
-        		"org.eclipse.xtext.common.Terminals.ID");
-	    }
-
-)
-))
-))
 ;
 
 
@@ -589,13 +599,13 @@ ruleScenario1 [boolean p_Param] returns [EObject current=null]
 entryRuleScenario2 returns [EObject current=null]
 	:
 	{ newCompositeNode(grammarAccess.getScenario2Rule()); }
-	 iv_ruleScenario2=ruleScenario2[false] 
+	 iv_ruleScenario2=ruleScenario2 
 	 { $current=$iv_ruleScenario2.current; } 
 	 EOF 
 ;
 
 // Rule Scenario2
-ruleScenario2 [boolean p_AllowKeyword] returns [EObject current=null] 
+ruleScenario2 returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -604,7 +614,38 @@ ruleScenario2 [boolean p_AllowKeyword] returns [EObject current=null]
 		{ 
 	        newCompositeNode(grammarAccess.getScenario2Access().getFirstIdOrKeywordParserRuleCall_0()); 
 	    }
-		lv_first_0_0=ruleIdOrKeyword[$ruleScenario2.p_AllowKeyword]		{
+		lv_first_0_0=ruleIdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario2Rule());
+	        }
+       		set(
+       			$current, 
+       			"first",
+        		lv_first_0_0, 
+        		"org.eclipse.xtext.parser.parameters.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+;
+
+
+
+
+
+
+// Rule Scenario2
+norm1_Scenario2 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario2Access().getFirstIdOrKeywordParserRuleCall_0()); 
+	    }
+		lv_first_0_0=norm1_IdOrKeyword		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getScenario2Rule());
 	        }
@@ -628,26 +669,78 @@ ruleScenario2 [boolean p_AllowKeyword] returns [EObject current=null]
 entryRuleScenario3 returns [EObject current=null]
 	:
 	{ newCompositeNode(grammarAccess.getScenario3Rule()); }
-	 iv_ruleScenario3=ruleScenario3[false] 
+	 iv_ruleScenario3=ruleScenario3 
 	 { $current=$iv_ruleScenario3.current; } 
 	 EOF 
 ;
 
 // Rule Scenario3
-ruleScenario3 [boolean p_AllowKeyword] returns [EObject current=null] 
+ruleScenario3 returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (((
 (
-ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
+ruleIdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getScenario3Access().getFirstIdOrKeywordParserRuleCall_0_0()); 
 	    }
-		lv_first_0_0=ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]		{
+		lv_first_0_0=ruleIdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario3Rule());
+	        }
+       		set(
+       			$current, 
+       			"first",
+        		lv_first_0_0, 
+        		"org.eclipse.xtext.parser.parameters.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+    |(
+(
+		lv_second_1_0=
+	Keyword
+    {
+        newLeafNode(lv_second_1_0, grammarAccess.getScenario3Access().getSecondKeywordKeyword_1_0());
+    }
+
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getScenario3Rule());
+	        }
+       		setWithLastConsumed($current, "second", lv_second_1_0, "keyword");
+	    }
+
+)
+))
+;
+
+
+
+
+
+
+// Rule Scenario3
+norm1_Scenario3 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+(
+norm1_IdOrKeyword
+)
+)=>
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario3Access().getFirstIdOrKeywordParserRuleCall_0_0()); 
+	    }
+		lv_first_0_0=norm1_IdOrKeyword		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getScenario3Rule());
 	        }
@@ -688,26 +781,66 @@ ruleIdOrKeyword[$ruleScenario3.p_AllowKeyword]
 entryRuleScenario4 returns [EObject current=null]
 	:
 	{ newCompositeNode(grammarAccess.getScenario4Rule()); }
-	 iv_ruleScenario4=ruleScenario4[false] 
+	 iv_ruleScenario4=ruleScenario4 
 	 { $current=$iv_ruleScenario4.current; } 
 	 EOF 
 ;
 
 // Rule Scenario4
-ruleScenario4 [boolean p_AllowKeyword] returns [EObject current=null] 
+ruleScenario4 returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
 (((
 (
-ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
+ruleIdOrKeyword
 )
 )=>
 (
 		{ 
 	        newCompositeNode(grammarAccess.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0()); 
 	    }
-		lv_second_0_0=ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]		{
+		lv_second_0_0=ruleIdOrKeyword		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getScenario4Rule());
+	        }
+       		set(
+       			$current, 
+       			"second",
+        		lv_second_0_0, 
+        		"org.eclipse.xtext.parser.parameters.ParametersTestLanguage.IdOrKeyword");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)
+	otherlv_1=Keyword
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getScenario4Access().getKeywordKeyword_1());
+    }
+)
+;
+
+
+
+
+
+
+// Rule Scenario4
+norm1_Scenario4 returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(((
+(
+norm1_IdOrKeyword
+)
+)=>
+(
+		{ 
+	        newCompositeNode(grammarAccess.getScenario4Access().getSecondIdOrKeywordParserRuleCall_0_0()); 
+	    }
+		lv_second_0_0=norm1_IdOrKeyword		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getScenario4Rule());
 	        }
@@ -736,25 +869,45 @@ ruleIdOrKeyword[$ruleScenario4.p_AllowKeyword]
 entryRuleIdOrKeyword returns [String current=null] 
 :
 	{ newCompositeNode(grammarAccess.getIdOrKeywordRule()); } 
-	 iv_ruleIdOrKeyword=ruleIdOrKeyword[false] 
+	 iv_ruleIdOrKeyword=ruleIdOrKeyword 
 	 { $current=$iv_ruleIdOrKeyword.current.getText(); }  
 	 EOF 
 ;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword [boolean p_Keyword] returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+ruleIdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
     }
     @after { leaveRule();
     }:
-(({p_Keyword}?=>(
+    this_ID_0=RULE_ID    {
+		$current.merge(this_ID_0);
+    }
+
+    { 
+    newLeafNode(this_ID_0, grammarAccess.getIdOrKeywordAccess().getIDTerminalRuleCall_1()); 
+    }
+
+    ;
+
+
+
+
+
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule();
+    }:
+(
 	kw=Keyword 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getIdOrKeywordAccess().getKeywordKeyword_0_0()); 
     }
-)
-)
+
     |    this_ID_1=RULE_ID    {
 		$current.merge(this_ID_1);
     }
