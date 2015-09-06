@@ -32,6 +32,9 @@ import static extension org.eclipse.xtext.GrammarUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.*
 import static extension org.eclipse.xtext.generator.parser.antlr.TerminalRuleToLexerBody.*
 import org.eclipse.xtext.EnumLiteralDeclaration
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter
+import org.eclipse.xtext.RuleNames
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess
 
 @Singleton
 class DefaultAntlrGrammarGenerator {
@@ -52,7 +55,10 @@ class DefaultAntlrGrammarGenerator {
 	protected extension XtextIDEAGeneratorExtensions
 
 	def generate(Grammar it, AntlrOptions options, Xtend2ExecutionContext ctx) {
-		ctx.writeFile(ctx.srcGenOutlet.name, grammarFileName.asPath + '.g', compile(options))
+		val RuleFilter filter = new RuleFilter();
+		val RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
+		val Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+		ctx.writeFile(ctx.srcGenOutlet.name, grammarFileName.asPath + '.g', flattened.compile(options))
 	}
 	
 	protected def getGrammarFileName(Grammar it) {
@@ -145,9 +151,9 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def String compileEBNF(AbstractRule it, AntlrOptions options) '''
-		// Rule «name»
+		// Rule «(originalElement as AbstractRule).name»
 		«ruleName»«compileInit(options)»:
-			«IF it instanceof ParserRule && datatypeRule»
+			«IF it instanceof ParserRule && (originalElement as AbstractRule).datatypeRule»
 				«dataTypeEbnf(alternatives, true)»
 			«ELSE»
 				«ebnf(alternatives, options, true)»
@@ -253,7 +259,7 @@ class DefaultAntlrGrammarGenerator {
 	protected dispatch def String crossrefEbnf(RuleCall it, CrossReference ref, boolean supportActions) {
 		val rule = rule
 		if (rule instanceof ParserRule) {
-			if (!rule.datatypeRule) {
+			if (!(rule.originalElement as AbstractRule).datatypeRule) {
 				throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule")
 			}
 		}
