@@ -247,10 +247,6 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testIfElseCase_02();
   }
   
-  public void testIfElseCase_03() throws Exception {
-    delegate.testIfElseCase_03();
-  }
-  
   public void testInnerClassCase() throws Exception {
     delegate.testInnerClassCase();
   }
@@ -337,6 +333,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
   
   public void testReturnVoidCase() throws Exception {
     delegate.testReturnVoidCase();
+  }
+  
+  public void testReturnVoidCase_01() throws Exception {
+    delegate.testReturnVoidCase_01();
   }
   
   public void testRichStringCase() throws Exception {

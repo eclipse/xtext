@@ -1776,9 +1776,17 @@ public class JavaASTFlattener extends ASTVisitor {
       _expression_1.accept(this);
       this.appendSpaceToBuffer();
     } else {
-      ASTNode _parent = node.getParent();
-      boolean _not = (!(_parent instanceof SwitchStatement));
-      if (_not) {
+      final ASTNode parent = node.getParent();
+      boolean _and = false;
+      if (!(parent instanceof IfStatement)) {
+        _and = false;
+      } else {
+        Statement _elseStatement = ((IfStatement) parent).getElseStatement();
+        boolean _tripleNotEquals = (_elseStatement != null);
+        _and = _tripleNotEquals;
+      }
+      final boolean isIfElse = _and;
+      if (((!isIfElse) && (!(parent instanceof SwitchStatement)))) {
         this.appendToBuffer(";");
       }
     }

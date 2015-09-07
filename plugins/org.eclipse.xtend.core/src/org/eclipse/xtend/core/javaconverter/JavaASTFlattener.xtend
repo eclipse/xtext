@@ -340,7 +340,9 @@ class JavaASTFlattener extends ASTVisitor {
 		}
 		appendModifiers(modifiers())
 		if (modifiers().static) {
-			if (it.parent instanceof TypeDeclaration && (it.parent as TypeDeclaration).fields.filter[modifiers().static && modifiers().final].forall [ f |
+			if (it.parent instanceof TypeDeclaration && (it.parent as TypeDeclaration).fields.filter [
+				modifiers().static && modifiers().final
+			].forall [ f |
 				f.fragments.forall[VariableDeclarationFragment fragment|!getBody().isAssignedInBody(fragment)]
 			]) {
 				appendToBuffer(" final Void static_initializer = {")
@@ -562,7 +564,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def private appendExtraDimensions(int extraDimensions) {
-			appendToBuffer("[]" * extraDimensions)
+		appendToBuffer("[]" * extraDimensions)
 	}
 
 	override visit(VariableDeclarationStatement it) {
@@ -772,19 +774,19 @@ class JavaASTFlattener extends ASTVisitor {
 	override visit(Block node) {
 		appendToBuffer("{")
 		increaseIndent
-		if(!node.statements.empty) {
+		if (!node.statements.empty) {
 			node.statements.forEach [ ASTNode child, counter |
 				appendLineWrapToBuffer
 				child.accept(this)
 			]
-		} 
+		}
 		// collect orphaned comments
 		if (node.root instanceof CompilationUnit) {
 			val cu = node.root as CompilationUnit
 			cu.unAssignedComments.filter [
 				startPosition < node.startPosition + node.length
 			].forEach [
-				if(!(it instanceof LineComment)) {
+				if (!(it instanceof LineComment)) {
 					appendLineWrapToBuffer
 				}
 				accept(this)
@@ -1008,8 +1010,12 @@ class JavaASTFlattener extends ASTVisitor {
 			appendSpaceToBuffer
 			node.getExpression().accept(this)
 			appendSpaceToBuffer
-		} else if (!(node.parent instanceof SwitchStatement)) {
-			appendToBuffer(';')
+		} else {
+			val parent = node.parent
+			val boolean isIfElse = (parent instanceof IfStatement && (parent as IfStatement).elseStatement !== null)
+			if (!isIfElse && !(parent instanceof SwitchStatement)) {
+				appendToBuffer(';')
+			}
 		}
 		return false
 	}

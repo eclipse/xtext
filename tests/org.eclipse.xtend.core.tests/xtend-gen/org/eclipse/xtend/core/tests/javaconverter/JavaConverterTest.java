@@ -1042,26 +1042,6 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testIfElseCase_03() throws Exception {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("if (true) return; else System.out.println()");
-    String _string = _builder.toString();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("if(true) ");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("return;");
-    _builder_1.newLine();
-    _builder_1.append("  ");
-    _builder_1.append("else");
-    _builder_1.newLine();
-    _builder_1.append("    ");
-    _builder_1.append("System.out.println();");
-    String _xtendStatement = this.toXtendStatement(_builder_1);
-    Assert.assertEquals(_string, _xtendStatement);
-  }
-  
-  @Test
   public void testStaticImportCase() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
       "import static java.awt.AWTEvent.*; public class Test { long o= ACTION_EVENT_MASK;}");
@@ -1893,6 +1873,36 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testReturnVoidCase_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("def void foo() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (true) return else System.out.println() ");
+    _builder.newLine();
+    _builder.append("}");
+    String _string = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("if(true) ");
+    _builder_1.newLine();
+    _builder_1.append("\t    ");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t  ");
+    _builder_1.append("else");
+    _builder_1.newLine();
+    _builder_1.append("\t    ");
+    _builder_1.append("System.out.println();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr(_builder_1);
+    Assert.assertEquals(_string, _xtendClassBodyDeclr);
   }
   
   @Test
