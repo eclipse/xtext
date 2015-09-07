@@ -44,11 +44,11 @@ class HoverTest extends AbstractWebServerTest {
 			state #foo
 		''' .hover
 			.assertContent('''
-				<div class="hover">
+				<div class="xtext-hover">
 				</div>
 			''')
 			.assertTitle('''
-				<div class="hover">
+				<div class="xtext-hover">
 					<div class="State-icon default-icon">
 						<div class="element-name">
 							foo
@@ -67,12 +67,12 @@ class HoverTest extends AbstractWebServerTest {
 			state #foo
 		''' .hover
 			.assertContent('''
-				<div class="hover">
+				<div class="xtext-hover">
 					This is foo!
 				</div>
 			''')
 			.assertTitle('''
-				<div class="hover">
+				<div class="xtext-hover">
 					<div class="State-icon default-icon">
 						<div class="element-name">
 							foo
@@ -99,7 +99,7 @@ class HoverTest extends AbstractWebServerTest {
 			input signal #foo
 		''' .hover
 			.assertTitle('''
-				<div class="hover">
+				<div class="xtext-hover">
 					<div class="InputSignal-icon Signal-icon default-icon">
 						<div class="element-name">
 							foo
@@ -115,7 +115,7 @@ class HoverTest extends AbstractWebServerTest {
 			output signal #foo
 		''' .hover
 			.assertTitle('''
-				<div class="hover">
+				<div class="xtext-hover">
 					<div class="OutputSignal-icon Signal-icon default-icon">
 						<div class="output-icon">
 							<div class="element-name">

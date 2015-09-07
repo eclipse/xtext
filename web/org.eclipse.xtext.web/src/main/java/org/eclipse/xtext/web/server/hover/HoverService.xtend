@@ -41,9 +41,9 @@ class HoverService {
 			val nameLabel = element?.nameLabel?.surroundWithDiv('element-name')
 			if (nameLabel != null) {
 				cancelIndicator.checkCanceled
-				val titleHtml = element.imageDescription.addIconDivs(nameLabel).surroundWithDiv('hover')
+				val titleHtml = element.imageDescription.addIconDivs(nameLabel).surroundWithDiv('xtext-hover')
 				cancelIndicator.checkCanceled
-				val bodyHtml = (element.documentation ?: '').surroundWithDiv('hover')
+				val bodyHtml = (element.documentation ?: '').surroundWithDiv('xtext-hover')
 				return new HoverResult(stateId, titleHtml, bodyHtml)
 			} else {
 				return new HoverResult(stateId)

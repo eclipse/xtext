@@ -24,6 +24,16 @@ import org.eclipse.xtext.xtext.wizard.WizardConfiguration;
 @FinalFieldsConstructor
 @SuppressWarnings("all")
 public class WebProjectDescriptor extends ProjectDescriptor {
+  private final static String REQUIREJS_VERSION = "2.1.17";
+  
+  private final static String JQUERY_VERSION = "2.1.4";
+  
+  private final static String JETTY_VERSION = "9.2.11.v20150529";
+  
+  private final static String SLF4J_VERSION = "1.7.12";
+  
+  private final static String ACE_VERSION = "1.1.9";
+  
   @Override
   public Set<? extends ProjectDescriptor> getUpstreamProjects() {
     WizardConfiguration _config = this.getConfig();
@@ -50,56 +60,52 @@ public class WebProjectDescriptor extends ProjectDescriptor {
   
   @Override
   public Set<ExternalDependency> getExternalDependencies() {
-    HashSet<ExternalDependency> _xblockexpression = null;
-    {
-      final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
-      Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
-      Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
-      ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");
-      deps.add(_createXtextDependency);
-      ExternalDependency _createMavenDependency = ExternalDependency.createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}");
-      deps.add(_createMavenDependency);
-      ExternalDependency _createMavenDependency_1 = ExternalDependency.createMavenDependency("org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}");
-      deps.add(_createMavenDependency_1);
-      ExternalDependency _createMavenDependency_2 = ExternalDependency.createMavenDependency("org.webjars:requirejs:2.1.17");
-      deps.add(_createMavenDependency_2);
-      ExternalDependency _createMavenDependency_3 = ExternalDependency.createMavenDependency("org.webjars:requirejs-text:2.0.10-3");
-      deps.add(_createMavenDependency_3);
-      ExternalDependency _createMavenDependency_4 = ExternalDependency.createMavenDependency("org.webjars:jquery:2.1.4");
-      deps.add(_createMavenDependency_4);
-      ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency("org.eclipse.jetty:jetty-annotations:9.2.11.v20150529");
-      final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setScope(Scope.PROVIDED);
-        }
-      };
-      ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function);
-      deps.add(_doubleArrow);
-      ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency("org.slf4j:slf4j-api:1.7.12@jar");
-      final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setScope(Scope.PROVIDED);
-        }
-      };
-      ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_1);
-      deps.add(_doubleArrow_1);
-      ExternalDependency _createMavenDependency_7 = ExternalDependency.createMavenDependency("org.slf4j:slf4j-log4j12:1.7.12@jar");
-      final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
-        @Override
-        public void apply(final ExternalDependency it) {
-          ExternalDependency.MavenCoordinates _maven = it.getMaven();
-          _maven.setScope(Scope.PROVIDED);
-        }
-      };
-      ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_7, _function_2);
-      deps.add(_doubleArrow_2);
-      _xblockexpression = deps;
-    }
-    return _xblockexpression;
+    final HashSet<ExternalDependency> deps = CollectionLiterals.<ExternalDependency>newHashSet();
+    Set<ExternalDependency> _externalDependencies = super.getExternalDependencies();
+    Iterables.<ExternalDependency>addAll(deps, _externalDependencies);
+    ExternalDependency _createXtextDependency = ExternalDependency.createXtextDependency("org.eclipse.xtext.web.servlet");
+    deps.add(_createXtextDependency);
+    ExternalDependency _createMavenDependency = ExternalDependency.createMavenDependency("org.eclipse.xtend:org.eclipse.xtend.lib:${xtextVersion}");
+    deps.add(_createMavenDependency);
+    ExternalDependency _createMavenDependency_1 = ExternalDependency.createMavenDependency("org.eclipse.xtext:org.eclipse.xtext.web.servlet:${xtextVersion}");
+    deps.add(_createMavenDependency_1);
+    ExternalDependency _createMavenDependency_2 = ExternalDependency.createMavenDependency(("org.webjars:requirejs:" + WebProjectDescriptor.REQUIREJS_VERSION));
+    deps.add(_createMavenDependency_2);
+    ExternalDependency _createMavenDependency_3 = ExternalDependency.createMavenDependency(("org.webjars:jquery:" + WebProjectDescriptor.JQUERY_VERSION));
+    deps.add(_createMavenDependency_3);
+    ExternalDependency _createMavenDependency_4 = ExternalDependency.createMavenDependency(("org.webjars:ace:" + WebProjectDescriptor.ACE_VERSION));
+    deps.add(_createMavenDependency_4);
+    ExternalDependency _createMavenDependency_5 = ExternalDependency.createMavenDependency(("org.eclipse.jetty:jetty-annotations:" + WebProjectDescriptor.JETTY_VERSION));
+    final Procedure1<ExternalDependency> _function = new Procedure1<ExternalDependency>() {
+      @Override
+      public void apply(final ExternalDependency it) {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.PROVIDED);
+      }
+    };
+    ExternalDependency _doubleArrow = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_5, _function);
+    deps.add(_doubleArrow);
+    ExternalDependency _createMavenDependency_6 = ExternalDependency.createMavenDependency((("org.slf4j:slf4j-api:" + WebProjectDescriptor.SLF4J_VERSION) + "@jar"));
+    final Procedure1<ExternalDependency> _function_1 = new Procedure1<ExternalDependency>() {
+      @Override
+      public void apply(final ExternalDependency it) {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.PROVIDED);
+      }
+    };
+    ExternalDependency _doubleArrow_1 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_6, _function_1);
+    deps.add(_doubleArrow_1);
+    ExternalDependency _createMavenDependency_7 = ExternalDependency.createMavenDependency((("org.slf4j:slf4j-log4j12:" + WebProjectDescriptor.SLF4J_VERSION) + "@jar"));
+    final Procedure1<ExternalDependency> _function_2 = new Procedure1<ExternalDependency>() {
+      @Override
+      public void apply(final ExternalDependency it) {
+        ExternalDependency.MavenCoordinates _maven = it.getMaven();
+        _maven.setScope(Scope.PROVIDED);
+      }
+    };
+    ExternalDependency _doubleArrow_2 = ObjectExtensions.<ExternalDependency>operator_doubleArrow(_createMavenDependency_7, _function_2);
+    deps.add(_doubleArrow_2);
+    return deps;
   }
   
   @Override

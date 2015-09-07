@@ -19,7 +19,6 @@ import java.util.List
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import org.eclipse.emf.mwe2.runtime.Mandatory
-import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend2.lib.StringConcatenationClient
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
@@ -49,6 +48,12 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		ORION, ACE, CODEMIRROR
 	}
 	
+	static val REQUIREJS_VERSION = '2.1.17'
+	static val REQUIREJS_TEXT_VERSION = '2.0.10-3'
+	static val JQUERY_VERSION = '2.1.4'
+	static val ACE_VERSION = '1.1.9'
+	static val CODEMIRROR_VERSION = '5.5'
+	
 	@Inject FileAccessFactory fileAccessFactory
 	@Inject CodeConfig codeConfig
 	@Inject extension XtextGeneratorNaming
@@ -59,16 +64,14 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	val suppressedPatterns = new HashSet<String>
 	
 	Framework framework
+	boolean generateJsHighlighting = true
 	String highlightingModuleName
 	String highlightingPath
 	String keywordsFilter = '\\w*'
-	
-	@Accessors
+	boolean generateServlet = false
 	boolean useServlet3Api = true
-	@Accessors
-	boolean generateJsHighlighting = true
-	@Accessors
-	boolean generateExample = false
+	boolean generateJettyLauncher = false
+	boolean generateHtmlExample = false
 	
 	/**
 	 * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
@@ -76,6 +79,13 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	@Mandatory
 	def void setFramework(String frameworkName) {
 		this.framework = Framework.valueOf(frameworkName.toUpperCase)
+	}
+	
+	/**
+	 * Whether JavaScript-based syntax highlighting should be generated. The default is {@code true}.
+	 */
+	def void setGenerateJsHighlighting(boolean generateJsHighlighting) {
+		this.generateJsHighlighting = generateJsHighlighting
 	}
 	
 	/**
@@ -94,6 +104,45 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	}
 	
 	/**
+	 * Regular expression for filtering those language keywords that should be highlighted. The default
+	 * is {@code \w*}, i.e. keywords consisting only of letters and digits.
+	 */
+	def void setKeywordsFilter(String keywordsFilter) {
+		this.keywordsFilter = keywordsFilter
+	}
+	
+	/**
+	 * Whether a servlet for DSL-specific services should be generated. The default is {@code false}.
+	 */
+	def void setGenerateServlet(boolean generateServlet) {
+		this.generateServlet = generateServlet
+	}
+	
+	/**
+	 * Whether the Servlet 3 API ({@code WebServlet} annotation) should be used for the generated servlet.
+	 * The default is {@code true}.
+	 */
+	def void setUseServlet3Api(boolean useServlet3Api) {
+		this.useServlet3Api = useServlet3Api
+	}
+	
+	/**
+	 * Whether a Java main-class for launching a local Jetty server should be generated. The default
+	 * is {@code false}.
+	 */
+	def void setGenerateJettyLauncher(boolean generateJettyLauncher) {
+		this.generateJettyLauncher = generateJettyLauncher
+	}
+	
+	/**
+	 * Whether an example {@code index.html} file for testing the web-based editor should be generated.
+	 * The default is {@code false}.
+	 */
+	def void setGenerateHtmlExample(boolean generateHtmlExample) {
+		this.generateHtmlExample = generateHtmlExample
+	}
+	
+	/**
 	 * Enable a default pattern for syntax highlighting. See the documentation of the chosen
 	 * framework for details.
 	 */
@@ -109,14 +158,6 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		suppressedPatterns += pattern
 	}
 	
-	/**
-	 * Regular expression for filtering those language keywords that should be highlighted. The default
-	 * is {@code \w*}, i.e. keywords consisting only of letters and digits.
-	 */
-	def void setKeywordsFilter(String keywordsFilter) {
-		this.keywordsFilter = keywordsFilter
-	}
-	
 	protected def TypeReference getServerLauncherClass(Grammar grammar) {
 		new TypeReference(grammar.webBasePackage + '.' + 'ServerLauncher')
 	}
@@ -127,10 +168,16 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 	
 	override checkConfiguration(Issues issues) {
 		super.checkConfiguration(issues)
-		if (generateJsHighlighting && projectConfig.webApp === null)
-			issues.addWarning('The webapp outlet is not defined in the project configuration; JS syntax highlighting is disabled.')
 		if (framework === null)
 			issues.addError('The property \'framework\' is required.')
+		if (generateJsHighlighting && projectConfig.webApp === null)
+			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.')
+		if (generateServlet && projectConfig.webSrc === null)
+			issues.addWarning('The \'webSrc\' outlet is not defined in the project configuration; the generated servlet is disabled.')
+		if (generateJettyLauncher && projectConfig.webSrc === null)
+			issues.addWarning('The \'webSrc\' outlet is not defined in the project configuration; the Jetty launcher is disabled.')
+		if (generateHtmlExample && projectConfig.webApp === null)
+			issues.addWarning('The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.')
 		for (pattern : enabledPatterns.filter[suppressedPatterns.contains(it)]) {
 			issues.addError('The pattern \'' + pattern + '\' cannot be enabled and suppressed.')
 		}
@@ -152,17 +199,18 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			generateJavaScript(langId).writeTo(projectConfig.webApp)
 		}
 		
-		if (generateExample) {
-			if (projectConfig.webSrc !== null) {
-				generateServlet()
-				generateServerLauncher()
-			}
-			if (projectConfig.webApp !== null) {
-				generateIndexDoc()
-				generateStyleSheet()
-			}
+		if (generateServlet && projectConfig.webSrc !== null) {
+			generateServlet()
+		}
+		if (generateJettyLauncher && projectConfig.webSrc !== null) {
+			generateServerLauncher()
+		}
+		if (generateHtmlExample && projectConfig.webApp !== null) {
+			generateIndexDoc()
+			generateStyleSheet()
 		}
 		
+		// TODO move this configuration to an IDE module?
 		val StringConcatenationClient lexerStatement =
 			'''binder.bind(«'org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer'.typeRef».class).annotatedWith(«Names».named(«'org.eclipse.xtext.ide.LexerIdeBindings'.typeRef».CONTENT_ASSIST)).to(«grammar.internalContentAssistLexerClass».class);'''
 		new GuiceModuleAccess.BindingFactory()
@@ -388,53 +436,53 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				«ELSEIF framework == Framework.ACE»
 					<link rel="stylesheet" type="text/css" href="xtext/«codeConfig.xtextVersion»/xtext-ace.css"/>
 				«ELSEIF framework == Framework.CODEMIRROR»
-					<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/lib/codemirror.css"/>
-					<link rel="stylesheet" type="text/css" href="webjars/codemirror/5.5/addon/hint/show-hint.css"/>
+					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«CODEMIRROR_VERSION»/lib/codemirror.css"/>
+					<link rel="stylesheet" type="text/css" href="webjars/codemirror/«CODEMIRROR_VERSION»/addon/hint/show-hint.css"/>
 					<link rel="stylesheet" type="text/css" href="xtext/«codeConfig.xtextVersion»/xtext-codemirror.css"/>
 				«ENDIF»
 				<link rel="stylesheet" type="text/css" href="style.css"/>
-				<script src="webjars/requirejs/2.1.17/require.min.js"></script>
+				<script src="webjars/requirejs/«REQUIREJS_VERSION»/require.min.js"></script>
 				<script type="text/javascript">
 					«IF framework == Framework.ORION»
 						require.config({
 							paths: {
-								"text": "webjars/requirejs-text/2.0.10-3/text",
-								"jquery": "webjars/jquery/2.1.4/jquery.min",
+								"text": "webjars/requirejs-text/«REQUIREJS_TEXT_VERSION»/text",
+								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
 								"xtext/xtext-orion": "xtext/«codeConfig.xtextVersion»/xtext-orion"
 							}
 						});
 						require(["orion/code_edit/built-codeEdit-amd"], function() {
 							require(["xtext/xtext-orion"], function(xtext) {
-								xtext.createEditor(«IF generateJsHighlighting»{syntaxDefinition: "«highlightingModuleName»"}«ENDIF»);
+								xtext.createEditor({syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"});
 							});
 						});
 					«ELSEIF framework == Framework.ACE»
 						require.config({
 							paths: {
-								"jquery": "webjars/jquery/2.1.4/jquery.min",
-								"ace/ext/language_tools": "webjars/ace/1.1.9/src/ext-language_tools",
+								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
+								"ace/ext/language_tools": "webjars/ace/«ACE_VERSION»/src/ext-language_tools",
 								"xtext/xtext-ace": "xtext/«codeConfig.xtextVersion»/xtext-ace"
 							}
 						});
-						require(["webjars/ace/1.1.9/src/ace"], function() {
+						require(["webjars/ace/«ACE_VERSION»/src/ace"], function() {
 							require(["xtext/xtext-ace"], function(xtext) {
-								xtext.createEditor(«IF generateJsHighlighting»{syntaxDefinition: "«highlightingModuleName»"}«ENDIF»);
+								xtext.createEditor({syntaxDefinition: "«if (generateJsHighlighting) highlightingModuleName else 'none'»"});
 							});
 						});
 					«ELSEIF framework == Framework.CODEMIRROR»
 						require.config({
 							paths: {
-								"jquery": "webjars/jquery/2.1.4/jquery.min",
+								"jquery": "webjars/jquery/«JQUERY_VERSION»/jquery.min",
 								"xtext/xtext-codemirror": "xtext/«codeConfig.xtextVersion»/xtext-codemirror"
 							},
 							packages: [{
 								name: "codemirror",
-								location: "webjars/codemirror/5.5",
+								location: "webjars/codemirror/«CODEMIRROR_VERSION»",
 								main: "lib/codemirror"
 							}]
 						});
 						require([«IF generateJsHighlighting»"«highlightingModuleName»", «ENDIF»"xtext/xtext-codemirror"], function(«IF generateJsHighlighting»mode, «ENDIF»xtext) {
-							xtext.createEditor();
+							xtext.createEditor(«IF !generateJsHighlighting»{syntaxDefinition: "none"}«ENDIF»);
 						});
 					«ENDIF»
 				</script>
@@ -530,7 +578,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 				
 				/* Only in hovers */ 
 				/*
-					.hover .Greeting-icon {
+					.xtext-hover .Greeting-icon {
 				  		background-image: url('images/Greeting.gif');
 				  	}
 				 */

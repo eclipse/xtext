@@ -62,7 +62,8 @@
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
  *     A path to a JS file defining an Orion syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext-resources/<xtextLang>-syntax'.
+ *     the 'xtextLang' option in the form 'xtext-resources/{xtextLang}-syntax'. Set this option to 'none' to
+ *     disable syntax highlighting.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * xtextLang {String}
@@ -184,7 +185,7 @@ define([
 		};
 		var serviceBuilder = new OrionServiceBuilder(editorViewer, xtextServices);
 		
-		if (typeof(options.syntaxDefinition) === 'string' || options.xtextLang) {
+		if (options.syntaxDefinition != 'none' && (typeof(options.syntaxDefinition) === 'string' || options.xtextLang)) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
 				syntaxDefinition = 'xtext-resources/' + options.xtextLang + '-syntax';
@@ -207,7 +208,7 @@ define([
 	 */
 	OrionServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var syntaxDefinition = this.services.options.syntaxDefinition;
-		if (syntaxDefinition) {
+		if (syntaxDefinition != 'none') {
 			this.viewer.serviceRegistry.registerService('orion.edit.highlighter', {}, syntaxDefinition);
 		}
 	}

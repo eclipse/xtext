@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.eclipse.emf.mwe2.runtime.Mandatory;
-import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtend2.lib.StringConcatenationClient;
 import org.eclipse.xtext.Grammar;
@@ -32,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtext.generator.AbstractGeneratorFragment2;
 import org.eclipse.xtext.xtext.generator.CodeConfig;
@@ -65,6 +63,16 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     CODEMIRROR;
   }
   
+  private final static String REQUIREJS_VERSION = "2.1.17";
+  
+  private final static String REQUIREJS_TEXT_VERSION = "2.0.10-3";
+  
+  private final static String JQUERY_VERSION = "2.1.4";
+  
+  private final static String ACE_VERSION = "1.1.9";
+  
+  private final static String CODEMIRROR_VERSION = "5.5";
+  
   @Inject
   private FileAccessFactory fileAccessFactory;
   
@@ -89,20 +97,21 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   
   private WebIntegrationFragment.Framework framework;
   
+  private boolean generateJsHighlighting = true;
+  
   private String highlightingModuleName;
   
   private String highlightingPath;
   
   private String keywordsFilter = "\\w*";
   
-  @Accessors
+  private boolean generateServlet = false;
+  
   private boolean useServlet3Api = true;
   
-  @Accessors
-  private boolean generateJsHighlighting = true;
+  private boolean generateJettyLauncher = false;
   
-  @Accessors
-  private boolean generateExample = false;
+  private boolean generateHtmlExample = false;
   
   /**
    * Choose one of the supported frameworks: {@code "Orion"}, {@code "Ace"}, or {@code "CodeMirror"}
@@ -112,6 +121,13 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     String _upperCase = frameworkName.toUpperCase();
     WebIntegrationFragment.Framework _valueOf = WebIntegrationFragment.Framework.valueOf(_upperCase);
     this.framework = _valueOf;
+  }
+  
+  /**
+   * Whether JavaScript-based syntax highlighting should be generated. The default is {@code true}.
+   */
+  public void setGenerateJsHighlighting(final boolean generateJsHighlighting) {
+    this.generateJsHighlighting = generateJsHighlighting;
   }
   
   /**
@@ -130,6 +146,45 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   }
   
   /**
+   * Regular expression for filtering those language keywords that should be highlighted. The default
+   * is {@code \w*}, i.e. keywords consisting only of letters and digits.
+   */
+  public void setKeywordsFilter(final String keywordsFilter) {
+    this.keywordsFilter = keywordsFilter;
+  }
+  
+  /**
+   * Whether a servlet for DSL-specific services should be generated. The default is {@code false}.
+   */
+  public void setGenerateServlet(final boolean generateServlet) {
+    this.generateServlet = generateServlet;
+  }
+  
+  /**
+   * Whether the Servlet 3 API ({@code WebServlet} annotation) should be used for the generated servlet.
+   * The default is {@code true}.
+   */
+  public void setUseServlet3Api(final boolean useServlet3Api) {
+    this.useServlet3Api = useServlet3Api;
+  }
+  
+  /**
+   * Whether a Java main-class for launching a local Jetty server should be generated. The default
+   * is {@code false}.
+   */
+  public void setGenerateJettyLauncher(final boolean generateJettyLauncher) {
+    this.generateJettyLauncher = generateJettyLauncher;
+  }
+  
+  /**
+   * Whether an example {@code index.html} file for testing the web-based editor should be generated.
+   * The default is {@code false}.
+   */
+  public void setGenerateHtmlExample(final boolean generateHtmlExample) {
+    this.generateHtmlExample = generateHtmlExample;
+  }
+  
+  /**
    * Enable a default pattern for syntax highlighting. See the documentation of the chosen
    * framework for details.
    */
@@ -143,14 +198,6 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
    */
   public void addSuppressPattern(final String pattern) {
     this.suppressedPatterns.add(pattern);
-  }
-  
-  /**
-   * Regular expression for filtering those language keywords that should be highlighted. The default
-   * is {@code \w*}, i.e. keywords consisting only of letters and digits.
-   */
-  public void setKeywordsFilter(final String keywordsFilter) {
-    this.keywordsFilter = keywordsFilter;
   }
   
   protected TypeReference getServerLauncherClass(final Grammar grammar) {
@@ -172,6 +219,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
   @Override
   public void checkConfiguration(final Issues issues) {
     super.checkConfiguration(issues);
+    if ((this.framework == null)) {
+      issues.addError("The property \'framework\' is required.");
+    }
     boolean _and = false;
     if (!this.generateJsHighlighting) {
       _and = false;
@@ -182,10 +232,43 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       _and = _tripleEquals;
     }
     if (_and) {
-      issues.addWarning("The webapp outlet is not defined in the project configuration; JS syntax highlighting is disabled.");
+      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; JS syntax highlighting is disabled.");
     }
-    if ((this.framework == null)) {
-      issues.addError("The property \'framework\' is required.");
+    boolean _and_1 = false;
+    if (!this.generateServlet) {
+      _and_1 = false;
+    } else {
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webSrc = _projectConfig_1.getWebSrc();
+      boolean _tripleEquals_1 = (_webSrc == null);
+      _and_1 = _tripleEquals_1;
+    }
+    if (_and_1) {
+      issues.addWarning("The \'webSrc\' outlet is not defined in the project configuration; the generated servlet is disabled.");
+    }
+    boolean _and_2 = false;
+    if (!this.generateJettyLauncher) {
+      _and_2 = false;
+    } else {
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webSrc_1 = _projectConfig_2.getWebSrc();
+      boolean _tripleEquals_2 = (_webSrc_1 == null);
+      _and_2 = _tripleEquals_2;
+    }
+    if (_and_2) {
+      issues.addWarning("The \'webSrc\' outlet is not defined in the project configuration; the Jetty launcher is disabled.");
+    }
+    boolean _and_3 = false;
+    if (!this.generateHtmlExample) {
+      _and_3 = false;
+    } else {
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_3.getWebApp();
+      boolean _tripleEquals_3 = (_webApp_1 == null);
+      _and_3 = _tripleEquals_3;
+    }
+    if (_and_3) {
+      issues.addWarning("The \'webApp\' outlet is not defined in the project configuration; the example HTML page is disabled.");
     }
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
       @Override
@@ -250,21 +333,42 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
       _generateJavaScript.writeTo(_webApp_1);
     }
-    if (this.generateExample) {
+    boolean _and_1 = false;
+    if (!this.generateServlet) {
+      _and_1 = false;
+    } else {
       IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
       IXtextGeneratorFileSystemAccess _webSrc = _projectConfig_2.getWebSrc();
       boolean _tripleNotEquals_1 = (_webSrc != null);
-      if (_tripleNotEquals_1) {
-        this.generateServlet();
-        this.generateServerLauncher();
-      }
+      _and_1 = _tripleNotEquals_1;
+    }
+    if (_and_1) {
+      this.generateServlet();
+    }
+    boolean _and_2 = false;
+    if (!this.generateJettyLauncher) {
+      _and_2 = false;
+    } else {
       IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _webApp_2 = _projectConfig_3.getWebApp();
-      boolean _tripleNotEquals_2 = (_webApp_2 != null);
-      if (_tripleNotEquals_2) {
-        this.generateIndexDoc();
-        this.generateStyleSheet();
-      }
+      IXtextGeneratorFileSystemAccess _webSrc_1 = _projectConfig_3.getWebSrc();
+      boolean _tripleNotEquals_2 = (_webSrc_1 != null);
+      _and_2 = _tripleNotEquals_2;
+    }
+    if (_and_2) {
+      this.generateServerLauncher();
+    }
+    boolean _and_3 = false;
+    if (!this.generateHtmlExample) {
+      _and_3 = false;
+    } else {
+      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webApp_2 = _projectConfig_4.getWebApp();
+      boolean _tripleNotEquals_3 = (_webApp_2 != null);
+      _and_3 = _tripleNotEquals_3;
+    }
+    if (_and_3) {
+      this.generateIndexDoc();
+      this.generateStyleSheet();
     }
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -1210,11 +1314,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           boolean _equals_2 = Objects.equal(this.framework, WebIntegrationFragment.Framework.CODEMIRROR);
           if (_equals_2) {
             _builder.append("\t");
-            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/5.5/lib/codemirror.css\"/>");
-            _builder.newLine();
+            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
+            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+            _builder.append("/lib/codemirror.css\"/>");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/5.5/addon/hint/show-hint.css\"/>");
-            _builder.newLine();
+            _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"webjars/codemirror/");
+            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t");
+            _builder.append("/addon/hint/show-hint.css\"/>");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"xtext/");
             String _xtextVersion_2 = this.codeConfig.getXtextVersion();
@@ -1229,8 +1337,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     _builder.append("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<script src=\"webjars/requirejs/2.1.17/require.min.js\"></script>");
-    _builder.newLine();
+    _builder.append("<script src=\"webjars/requirejs/");
+    _builder.append(WebIntegrationFragment.REQUIREJS_VERSION, "\t");
+    _builder.append("/require.min.js\"></script>");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("<script type=\"text/javascript\">");
     _builder.newLine();
@@ -1246,12 +1356,16 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t\t");
-        _builder.append("\"text\": \"webjars/requirejs-text/2.0.10-3/text\",");
-        _builder.newLine();
+        _builder.append("\"text\": \"webjars/requirejs-text/");
+        _builder.append(WebIntegrationFragment.REQUIREJS_TEXT_VERSION, "\t\t\t\t");
+        _builder.append("/text\",");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t\t");
-        _builder.append("\"jquery\": \"webjars/jquery/2.1.4/jquery.min\",");
-        _builder.newLine();
+        _builder.append("\"jquery\": \"webjars/jquery/");
+        _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+        _builder.append("/jquery.min\",");
+        _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t\t");
         _builder.append("\"xtext/xtext-orion\": \"xtext/");
@@ -1275,15 +1389,15 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.newLine();
         _builder.append("\t\t");
         _builder.append("\t\t");
-        _builder.append("xtext.createEditor(");
-        {
-          if (this.generateJsHighlighting) {
-            _builder.append("{syntaxDefinition: \"");
-            _builder.append(this.highlightingModuleName, "\t\t\t\t");
-            _builder.append("\"}");
-          }
+        _builder.append("xtext.createEditor({syntaxDefinition: \"");
+        String _xifexpression = null;
+        if (this.generateJsHighlighting) {
+          _xifexpression = this.highlightingModuleName;
+        } else {
+          _xifexpression = "none";
         }
-        _builder.append(");");
+        _builder.append(_xifexpression, "\t\t\t\t");
+        _builder.append("\"});");
         _builder.newLineIfNotEmpty();
         _builder.append("\t\t");
         _builder.append("\t");
@@ -1304,12 +1418,16 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t");
-          _builder.append("\"jquery\": \"webjars/jquery/2.1.4/jquery.min\",");
-          _builder.newLine();
+          _builder.append("\"jquery\": \"webjars/jquery/");
+          _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+          _builder.append("/jquery.min\",");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t\t");
-          _builder.append("\"ace/ext/language_tools\": \"webjars/ace/1.1.9/src/ext-language_tools\",");
-          _builder.newLine();
+          _builder.append("\"ace/ext/language_tools\": \"webjars/ace/");
+          _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t\t\t");
+          _builder.append("/src/ext-language_tools\",");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t\t");
           _builder.append("\"xtext/xtext-ace\": \"xtext/");
@@ -1325,23 +1443,25 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           _builder.append("});");
           _builder.newLine();
           _builder.append("\t\t");
-          _builder.append("require([\"webjars/ace/1.1.9/src/ace\"], function() {");
-          _builder.newLine();
+          _builder.append("require([\"webjars/ace/");
+          _builder.append(WebIntegrationFragment.ACE_VERSION, "\t\t");
+          _builder.append("/src/ace\"], function() {");
+          _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t");
           _builder.append("require([\"xtext/xtext-ace\"], function(xtext) {");
           _builder.newLine();
           _builder.append("\t\t");
           _builder.append("\t\t");
-          _builder.append("xtext.createEditor(");
-          {
-            if (this.generateJsHighlighting) {
-              _builder.append("{syntaxDefinition: \"");
-              _builder.append(this.highlightingModuleName, "\t\t\t\t");
-              _builder.append("\"}");
-            }
+          _builder.append("xtext.createEditor({syntaxDefinition: \"");
+          String _xifexpression_1 = null;
+          if (this.generateJsHighlighting) {
+            _xifexpression_1 = this.highlightingModuleName;
+          } else {
+            _xifexpression_1 = "none";
           }
-          _builder.append(");");
+          _builder.append(_xifexpression_1, "\t\t\t\t");
+          _builder.append("\"});");
           _builder.newLineIfNotEmpty();
           _builder.append("\t\t");
           _builder.append("\t");
@@ -1362,8 +1482,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t\t");
-            _builder.append("\"jquery\": \"webjars/jquery/2.1.4/jquery.min\",");
-            _builder.newLine();
+            _builder.append("\"jquery\": \"webjars/jquery/");
+            _builder.append(WebIntegrationFragment.JQUERY_VERSION, "\t\t\t\t");
+            _builder.append("/jquery.min\",");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("\"xtext/xtext-codemirror\": \"xtext/");
@@ -1385,8 +1507,10 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLine();
             _builder.append("\t\t");
             _builder.append("\t\t");
-            _builder.append("location: \"webjars/codemirror/5.5\",");
-            _builder.newLine();
+            _builder.append("location: \"webjars/codemirror/");
+            _builder.append(WebIntegrationFragment.CODEMIRROR_VERSION, "\t\t\t\t");
+            _builder.append("\",");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t\t");
             _builder.append("main: \"lib/codemirror\"");
@@ -1417,8 +1541,14 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("\t");
-            _builder.append("xtext.createEditor();");
-            _builder.newLine();
+            _builder.append("xtext.createEditor(");
+            {
+              if ((!this.generateJsHighlighting)) {
+                _builder.append("{syntaxDefinition: \"none\"}");
+              }
+            }
+            _builder.append(");");
+            _builder.newLineIfNotEmpty();
             _builder.append("\t\t");
             _builder.append("});");
             _builder.newLine();
@@ -1649,7 +1779,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
         _builder.append("/*");
         _builder.newLine();
         _builder.append("\t");
-        _builder.append(".hover .Greeting-icon {");
+        _builder.append(".xtext-hover .Greeting-icon {");
         _builder.newLine();
         _builder.append("  \t\t");
         _builder.append("background-image: url(\'images/Greeting.gif\');");
@@ -1929,32 +2059,5 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     IXtextProjectConfig _projectConfig = this.getProjectConfig();
     IXtextGeneratorFileSystemAccess _webSrc = _projectConfig.getWebSrc();
     xtendFile.writeTo(_webSrc);
-  }
-  
-  @Pure
-  public boolean isUseServlet3Api() {
-    return this.useServlet3Api;
-  }
-  
-  public void setUseServlet3Api(final boolean useServlet3Api) {
-    this.useServlet3Api = useServlet3Api;
-  }
-  
-  @Pure
-  public boolean isGenerateJsHighlighting() {
-    return this.generateJsHighlighting;
-  }
-  
-  public void setGenerateJsHighlighting(final boolean generateJsHighlighting) {
-    this.generateJsHighlighting = generateJsHighlighting;
-  }
-  
-  @Pure
-  public boolean isGenerateExample() {
-    return this.generateExample;
-  }
-  
-  public void setGenerateExample(final boolean generateExample) {
-    this.generateExample = generateExample;
   }
 }

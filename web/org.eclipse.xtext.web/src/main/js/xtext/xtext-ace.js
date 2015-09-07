@@ -56,7 +56,8 @@
  *     Whether errors should be displayed in popup dialogs.
  * syntaxDefinition {String}
  *     A path to a JS file defining an Ace syntax definition; if no path is given, it is built from
- *     the 'xtextLang' option in the form 'xtext-resources/mode-<xtextLang>'.
+ *     the 'xtextLang' option in the form 'xtext-resources/mode-{xtextLang}'. Set this option to 'none' to
+ *     disable syntax highlighting.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * theme {String}
@@ -156,7 +157,7 @@ define([
 	AceServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var options = this.services.options;
 		var session = this.editor.getSession();
-		if (options.syntaxDefinition || options.xtextLang) {
+		if (options.syntaxDefinition != 'none' && (options.syntaxDefinition || options.xtextLang)) {
 			var syntaxDefinition = options.syntaxDefinition;
 			if (!syntaxDefinition)
 				syntaxDefinition = 'xtext-resources/mode-' + options.xtextLang;
