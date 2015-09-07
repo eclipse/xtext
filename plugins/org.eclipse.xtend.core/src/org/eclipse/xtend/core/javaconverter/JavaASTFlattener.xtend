@@ -709,12 +709,12 @@ class JavaASTFlattener extends ASTVisitor {
 			appendModifiers(modifiers())
 		}
 		type.accept(this)
+		appendExtraDimensions(getExtraDimensions())
 		if (isVarargs()) {
 			appendToBuffer("...")
 		}
 		appendSpaceToBuffer
 		name.accept(this)
-		appendExtraDimensions(getExtraDimensions())
 		if (getInitializer() != null) {
 			appendToBuffer("=")
 			getInitializer.accept(this)

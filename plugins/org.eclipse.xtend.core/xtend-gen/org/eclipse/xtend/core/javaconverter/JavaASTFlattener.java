@@ -1260,6 +1260,8 @@ public class JavaASTFlattener extends ASTVisitor {
     }
     Type _type = it.getType();
     _type.accept(this);
+    int _extraDimensions = it.getExtraDimensions();
+    this.appendExtraDimensions(_extraDimensions);
     boolean _isVarargs = it.isVarargs();
     if (_isVarargs) {
       this.appendToBuffer("...");
@@ -1267,8 +1269,6 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendSpaceToBuffer();
     SimpleName _name = it.getName();
     _name.accept(this);
-    int _extraDimensions = it.getExtraDimensions();
-    this.appendExtraDimensions(_extraDimensions);
     Expression _initializer = it.getInitializer();
     boolean _notEquals = (!Objects.equal(_initializer, null));
     if (_notEquals) {
