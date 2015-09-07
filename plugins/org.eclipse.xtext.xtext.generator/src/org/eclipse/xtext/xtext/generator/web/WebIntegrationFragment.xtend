@@ -28,7 +28,6 @@ import org.eclipse.xtext.xtext.generator.Issues
 import org.eclipse.xtext.xtext.generator.XtextGeneratorNaming
 import org.eclipse.xtext.xtext.generator.model.FileAccessFactory
 import org.eclipse.xtext.xtext.generator.model.GuiceModuleAccess
-import org.eclipse.xtext.xtext.generator.model.TextFileAccess
 import org.eclipse.xtext.xtext.generator.model.TypeReference
 import org.eclipse.xtext.xtext.generator.model.annotations.WebServletAnnotation
 import org.eclipse.xtext.xtext.generator.parser.antlr.GrammarNaming
@@ -196,7 +195,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			if (highlightingPath.nullOrEmpty)
 				highlightingPath = highlightingModuleName + '.js'
 			
-			generateJavaScript(langId).writeTo(projectConfig.webApp)
+			generateJavaScript(langId)
 		}
 		
 		if (generateServlet && projectConfig.webSrc !== null) {
@@ -220,7 +219,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			.contributeTo(language.webGenModule)
 	}
 	
-	protected def TextFileAccess generateJavaScript(String langId) {
+	protected def void generateJavaScript(String langId) {
 		val keywords = grammar.allKeywords
 		val filteredKeywords = keywords.filter[matches(keywordsFilter)].map[convertToJavaString].toList
 		val jsFile = fileAccessFactory.createTextFile()
@@ -296,7 +295,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			}
 			
 		}
-		return jsFile
+		jsFile.writeTo(projectConfig.webApp)
 	}
 	
 	protected def Collection<String> createOrionPatterns(String langId, Collection<String> keywords,
@@ -419,7 +418,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		return patterns
 	}
 	
-	protected def generateIndexDoc() {
+	protected def void generateIndexDoc() {
 		val indexFile = fileAccessFactory.createTextFile
 		indexFile.path = 'index.html'
 		
@@ -501,10 +500,10 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 			</body>
 			</html>
 		'''
-		return indexFile
+		indexFile.writeTo(projectConfig.webApp)
 	}
 	
-	protected def generateStyleSheet() {
+	protected def void generateStyleSheet() {
 		val styleFile = fileAccessFactory.createTextFile
 		styleFile.path = 'style.css'
 		
@@ -587,7 +586,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		styleFile.writeTo(projectConfig.webApp)
 	}
 	
-	protected def generateServerLauncher() {
+	protected def void generateServerLauncher() {
 		val xtendFile = fileAccessFactory.createXtendFile(grammar.serverLauncherClass)
 		xtendFile.typeComment = '''
 			/**
@@ -632,7 +631,7 @@ class WebIntegrationFragment extends AbstractGeneratorFragment2 {
 		xtendFile.writeTo(projectConfig.webSrc)
 	}
 	
-	protected def generateServlet() {
+	protected def void generateServlet() {
 		val xtendFile = fileAccessFactory.createXtendFile(grammar.servletClass)
 		if (useServlet3Api) {
 			xtendFile.annotations += new WebServletAnnotation => [
