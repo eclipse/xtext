@@ -43,6 +43,8 @@ import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.jdt.core.dom.PrefixExpression
+import org.eclipse.jdt.core.dom.PostfixExpression
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -283,11 +285,25 @@ class ASTFlattenerUtils {
 		return matchesFound.head
 	}
 
-	def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
+	def private Iterable<Expression> findAssigmentsInBlock(Block scope, (Expression)=>Boolean constraint) {
 		val assigments = newHashSet()
 		if (scope != null) {
 			scope.accept(new ASTVisitor() {
 				override visit(Assignment node) {
+					if (constraint.apply(node)) {
+						assigments.add(node)
+					}
+					return true
+				}
+
+				override visit(PrefixExpression node) {
+					if (constraint.apply(node)) {
+						assigments.add(node)
+					}
+					return true
+				}
+
+				override visit(PostfixExpression node) {
 					if (constraint.apply(node)) {
 						assigments.add(node)
 					}
@@ -301,11 +317,19 @@ class ASTFlattenerUtils {
 	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
 		return !scope.findAssigmentsInBlock(
 		[
-			if (leftHandSide instanceof Name) {
-				val simpleName = (leftHandSide as Name)
-				val binding = simpleName.resolveBinding()
+			var Expression name = null
+			switch it {
+				Assignment:
+					name = leftHandSide
+				PrefixExpression:
+					name = operand
+				PostfixExpression:
+					name = operand
+			}
+			if (name instanceof Name) {
+				val binding = name.resolveBinding()
 				if (binding instanceof IVariableBinding) {
-					return binding.field && fieldDeclFragment.name.identifier.equals(simpleName.toSimpleName)
+					return binding.field && fieldDeclFragment.name.identifier.equals(name.toSimpleName)
 				}
 			}
 			return false
@@ -315,8 +339,17 @@ class ASTFlattenerUtils {
 	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
 		return !scope.findAssigmentsInBlock(
 		[
-			if (leftHandSide instanceof SimpleName) {
-				return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
+			var Expression simpleName = null
+			switch it {
+				Assignment:
+					simpleName = leftHandSide
+				PrefixExpression:
+					simpleName = operand
+				PostfixExpression:
+					simpleName = operand
+			}
+			if (simpleName instanceof SimpleName) {
+				return simpleName != null && nameToLookFor.identifier.equals(simpleName.identifier)
 			}
 			return false
 		]).empty
