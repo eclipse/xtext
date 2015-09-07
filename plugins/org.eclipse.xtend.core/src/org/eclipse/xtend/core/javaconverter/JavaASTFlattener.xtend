@@ -959,6 +959,11 @@ class JavaASTFlattener extends ASTVisitor {
 					appendToBuffer('''.bitwise«if(operator == InfixExpression.Operator.AND) "And" else "Or"»(''')
 					rightSide.accept(this)
 					appendToBuffer(")")
+				} else {
+					appendSpaceToBuffer
+					appendToBuffer(operator.toString() * 2)
+					appendSpaceToBuffer
+					rightSide.accept(this)
 				}
 			}
 			case InfixExpression.Operator.EQUALS: {

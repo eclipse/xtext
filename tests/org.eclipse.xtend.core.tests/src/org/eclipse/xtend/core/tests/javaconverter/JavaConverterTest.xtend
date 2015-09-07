@@ -1068,6 +1068,28 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			    System.out.println();
 		}'''.toXtendClassBodyDeclr)
 	}
+	
+	@Test def void testReturnCase_01() throws Exception {
+		val java = '''
+		class Foo {
+			public String foo() {
+				if(true) 
+				    return "s";
+				  else
+				    return "d";
+			}
+		}'''
+		assertEquals('''
+		package class Foo {
+			def String foo() {
+				if (true) return "s"  else return "d" 
+			}
+		}'''.toString, 
+		java.toXtendCode
+		)
+		
+		assertNotNull(java.toValidXtendClass)
+	}
 	@Test def void testAnonymousClassCase() throws Exception {
 
 		var result = j2x.toXtend("Clazz", '''
@@ -1333,6 +1355,29 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 			}
 		}'''.toString, body)
 
+	}
+	@Test def void testBooleanBitwiseOperatorsCase() throws Exception {
+		val java = '''
+		boolean foo = true & false;
+		public void doBitwiseOperation() {
+			if (true | false) {
+				return;
+			}
+			if (true ^ false) {
+				return;
+			}
+		}'''
+		var body = toXtendClassBodyDeclr(java)
+		assertEquals('''
+		package boolean foo=true && false
+		def void doBitwiseOperation() {
+			if (true || false) {
+				return;
+			}
+			if (true.xor(false)) {
+				return;
+			}
+		}'''.toString, body)
 	}
 
 	@Test def void testBitwiseComplementCase() throws Exception {
