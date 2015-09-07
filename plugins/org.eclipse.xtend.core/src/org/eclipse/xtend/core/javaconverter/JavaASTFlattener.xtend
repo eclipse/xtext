@@ -562,9 +562,7 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	def private appendExtraDimensions(int extraDimensions) {
-		for (var i = 0; i < extraDimensions; i++) {
-			appendToBuffer("[]")
-		}
+			appendToBuffer("[]" * extraDimensions)
 	}
 
 	override visit(VariableDeclarationStatement it) {
