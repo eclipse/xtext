@@ -8,10 +8,10 @@
 package org.eclipse.xtext.idea.filesystem;
 
 import com.google.common.base.Objects;
+import com.intellij.ide.projectView.impl.ProjectRootsUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.roots.SourceFolder;
@@ -22,9 +22,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.idea.extensions.RootModelExtensions;
 import org.eclipse.xtext.idea.filesystem.IdeaSourceFolder;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.ISourceFolder;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -35,8 +34,10 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 public class IdeaModuleConfig implements IProjectConfig {
   private final Module module;
   
+  private final VirtualFile contentRoot;
+  
   @Override
-  public ISourceFolder findSourceFolderContaining(final URI member) {
+  public IdeaSourceFolder findSourceFolderContaining(final URI member) {
     VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = member.toString();
     final VirtualFile file = _instance.findFileByUrl(_string);
@@ -52,17 +53,18 @@ public class IdeaModuleConfig implements IProjectConfig {
     if (_equals_1) {
       return null;
     }
-    Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
-    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
-      @Override
-      public Boolean apply(final SourceFolder folder) {
-        VirtualFile _file = folder.getFile();
-        return Boolean.valueOf(Objects.equal(_file, sourceRoot));
-      }
-    };
-    final SourceFolder sourceFolder = IterableExtensions.<SourceFolder>findFirst(_existingSourceFolders, _function);
+    final SourceFolder sourceFolder = ProjectRootsUtil.findSourceFolder(this.module, sourceRoot);
+    boolean _or = false;
     boolean _equals_2 = Objects.equal(sourceFolder, null);
     if (_equals_2) {
+      _or = true;
+    } else {
+      ContentEntry _contentEntry = sourceFolder.getContentEntry();
+      VirtualFile _file = _contentEntry.getFile();
+      boolean _notEquals = (!Objects.equal(_file, this.contentRoot));
+      _or = _notEquals;
+    }
+    if (_or) {
       return null;
     }
     return new IdeaSourceFolder(sourceFolder);
@@ -75,42 +77,36 @@ public class IdeaModuleConfig implements IProjectConfig {
   
   @Override
   public URI getPath() {
-    URI _xblockexpression = null;
-    {
-      ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
-      ContentEntry[] _contentEntries = _instance.getContentEntries();
-      final ContentEntry contentRoot = IterableExtensions.<ContentEntry>head(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)));
-      VirtualFile _file = contentRoot.getFile();
-      String _url = _file.getUrl();
-      final URI path = URI.createURI(_url);
-      URI _xifexpression = null;
-      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
-      if (_hasTrailingPathSeparator) {
-        _xifexpression = path;
-      } else {
-        _xifexpression = path.appendSegment("");
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+    String _url = this.contentRoot.getUrl();
+    URI _createURI = URI.createURI(_url);
+    return UriUtil.toFolderURI(_createURI);
   }
   
   @Override
-  public Set<? extends ISourceFolder> getSourceFolders() {
+  public Set<? extends IdeaSourceFolder> getSourceFolders() {
     Iterable<SourceFolder> _existingSourceFolders = RootModelExtensions.getExistingSourceFolders(this.module);
-    final Function1<SourceFolder, IdeaSourceFolder> _function = new Function1<SourceFolder, IdeaSourceFolder>() {
+    final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
-      public IdeaSourceFolder apply(final SourceFolder it) {
-        return new IdeaSourceFolder(it);
+      public Boolean apply(final SourceFolder it) {
+        VirtualFile _file = it.getFile();
+        return Boolean.valueOf(Objects.equal(_file, IdeaModuleConfig.this.contentRoot));
       }
     };
-    Iterable<IdeaSourceFolder> _map = IterableExtensions.<SourceFolder, IdeaSourceFolder>map(_existingSourceFolders, _function);
+    Iterable<SourceFolder> _filter = IterableExtensions.<SourceFolder>filter(_existingSourceFolders, _function);
+    final Function1<SourceFolder, IdeaSourceFolder> _function_1 = new Function1<SourceFolder, IdeaSourceFolder>() {
+      @Override
+      public IdeaSourceFolder apply(final SourceFolder sourceFolder) {
+        return new IdeaSourceFolder(sourceFolder);
+      }
+    };
+    Iterable<IdeaSourceFolder> _map = IterableExtensions.<SourceFolder, IdeaSourceFolder>map(_filter, _function_1);
     return IterableExtensions.<IdeaSourceFolder>toSet(_map);
   }
   
-  public IdeaModuleConfig(final Module module) {
+  public IdeaModuleConfig(final Module module, final VirtualFile contentRoot) {
     super();
     this.module = module;
+    this.contentRoot = contentRoot;
   }
   
   @Override
@@ -119,6 +115,7 @@ public class IdeaModuleConfig implements IProjectConfig {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((this.module== null) ? 0 : this.module.hashCode());
+    result = prime * result + ((this.contentRoot== null) ? 0 : this.contentRoot.hashCode());
     return result;
   }
   
@@ -137,6 +134,11 @@ public class IdeaModuleConfig implements IProjectConfig {
         return false;
     } else if (!this.module.equals(other.module))
       return false;
+    if (this.contentRoot == null) {
+      if (other.contentRoot != null)
+        return false;
+    } else if (!this.contentRoot.equals(other.contentRoot))
+      return false;
     return true;
   }
   
@@ -145,11 +147,17 @@ public class IdeaModuleConfig implements IProjectConfig {
   public String toString() {
     ToStringBuilder b = new ToStringBuilder(this);
     b.add("module", this.module);
+    b.add("contentRoot", this.contentRoot);
     return b.toString();
   }
   
   @Pure
   public Module getModule() {
     return this.module;
+  }
+  
+  @Pure
+  public VirtualFile getContentRoot() {
+    return this.contentRoot;
   }
 }

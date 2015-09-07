@@ -14,7 +14,9 @@ import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ProjectRootManager
 import com.intellij.openapi.roots.SourceFolder
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.vfs.VirtualFileManager
+import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
 import org.eclipse.xtend.lib.annotations.Data
@@ -24,72 +26,102 @@ import org.eclipse.xtext.workspace.ISourceFolder
 import org.eclipse.xtext.workspace.IWorkspaceConfig
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider
 
+import static extension com.intellij.ide.projectView.impl.ProjectRootsUtil.*
 import static extension org.eclipse.xtext.idea.extensions.RootModelExtensions.*
+import static extension org.eclipse.xtext.util.UriUtil.*
+import com.intellij.openapi.diagnostic.Logger
 
 class IdeaWorkspaceConfigProvider implements IWorkspaceConfigProvider {
 
-	override getWorkspaceConfig(ResourceSet context) {
+	override IdeaWorkspaceConfig getWorkspaceConfig(ResourceSet context) {
 		if (context instanceof XtextResourceSet) {
 			val uriContext = context.classpathURIContext
-			if (uriContext instanceof Module) {
-				val project = uriContext.project
-				return new IdeaWorkspaceConfig(project)
-			}
+			if (uriContext instanceof Module)
+				return uriContext.workspaceConfig
 		}
 		throw new IllegalArgumentException("Could not determine the project")
+	}
+	
+	def IdeaWorkspaceConfig getWorkspaceConfig(Module module) {
+		module.project.workspaceConfig
+	}
+	
+	def IdeaWorkspaceConfig getWorkspaceConfig(Project project) {
+		new IdeaWorkspaceConfig(project)
 	}
 
 }
 
 @Data
 class IdeaWorkspaceConfig implements IWorkspaceConfig {
+	
+	static val LOGGER = Logger.getInstance(IdeaWorkspaceConfig)
 
 	val Project project
-
-	override findProjectByName(String name) {
-		val module = ApplicationManager.application.<Module>runReadAction[
-			ModuleManager.getInstance(project).findModuleByName(name)
-		]
-		if (module == null)
-			return null
-		if (!module.isUsable) 
-			return null
-		return new IdeaModuleConfig(module)
+	
+	override getProjects() {
+		ApplicationManager.application.<Module[]>runReadAction[
+			ModuleManager.getInstance(project).modules
+		].map[toIdeaModuleConfig].toSet
 	}
 
-	override findProjectContaining(URI member) {
+	override IdeaModuleConfig findProjectByName(String name) {
+		ApplicationManager.application.<Module>runReadAction[
+			ModuleManager.getInstance(project).findModuleByName(name)	
+		].toIdeaModuleConfig
+	}
+	
+	protected def toIdeaModuleConfig(Module module) {
+		if (module == null) return null
+
+		val contentRoot = module.defaultContentRoot
+		if (contentRoot == null) return null
+
+		return new IdeaModuleConfig(module, contentRoot)
+	}
+
+	override IdeaModuleConfig findProjectContaining(URI member) {
 		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
-		if (file == null)
-			return null
-		val module = ProjectRootManager.getInstance(project).fileIndex.getModuleForFile(file)
-		if (module == null)
-			return null
-		if (!module.isUsable) 
-			return null
-		return new IdeaModuleConfig(module)
+		if (file == null) return null
+			
+		val fileIndex = ProjectRootManager.getInstance(project).fileIndex
+		val module = fileIndex.getModuleForFile(file)
+		if (module == null) return null
+		
+		val contentRoot = fileIndex.getContentRootForFile(file)
+		if (contentRoot == null) return null
+		
+		val defaultContentRoot = module.defaultContentRoot
+		if (contentRoot != defaultContentRoot)
+			LOGGER.error('''The file («member») should belong to the first content root («defaultContentRoot») but belongs to «contentRoot».''')
+			
+		return new IdeaModuleConfig(module, contentRoot)
 	}
-
-
-	private def isUsable(Module module) {
-		!ModuleRootManager.getInstance(module).contentEntries.isEmpty
+	
+	protected def getDefaultContentRoot(Module module) {
+		ModuleRootManager.getInstance(module).contentRoots.head
 	}
+	
 }
 
 @Data
 class IdeaModuleConfig implements IProjectConfig {
 
 	val Module module
+	
+	val VirtualFile contentRoot
 
-	override findSourceFolderContaining(URI member) {
+	override IdeaSourceFolder findSourceFolderContaining(URI member) {
 		val file = VirtualFileManager.instance.findFileByUrl(member.toString)
 		if (file == null)
 			return null
+
 		val sourceRoot = ProjectRootManager.getInstance(module.project).fileIndex.getSourceRootForFile(file)
-		if (sourceRoot == null)
-			return null
-		val sourceFolder = module.existingSourceFolders.findFirst[folder|folder.file == sourceRoot]
-		if (sourceFolder == null)
-			return null
+		if (sourceRoot == null) return null
+		
+		val sourceFolder = module.findSourceFolder(sourceRoot)
+		if (sourceFolder == null || sourceFolder.contentEntry.file != contentRoot) return null
+
 		return new IdeaSourceFolder(sourceFolder)
 	}
 
@@ -98,17 +130,13 @@ class IdeaModuleConfig implements IProjectConfig {
 	}
 
 	override getPath() {
-		val contentRoot = ModuleRootManager.getInstance(module).contentEntries.head
-		val path = URI.createURI(contentRoot.file.url)
-		if (path.hasTrailingPathSeparator) 
-			path
-		else 
-			path.appendSegment("")
-		
+		URI.createURI(contentRoot.url).toFolderURI
 	}
 
-	override getSourceFolders() {
-		module.existingSourceFolders.map[new IdeaSourceFolder(it)].toSet
+	override Set<? extends IdeaSourceFolder> getSourceFolders() {
+		module.existingSourceFolders.filter[
+			file == contentRoot
+		].map[sourceFolder|new IdeaSourceFolder(sourceFolder)].toSet
 	}
 
 }
@@ -122,10 +150,6 @@ class IdeaSourceFolder implements ISourceFolder {
 	}
 
 	override getPath() {
-		val path = URI.createURI(folder.file.url)
-		if (path.hasTrailingPathSeparator) 
-			path
-		else 
-			path.appendSegment("")
+		URI.createURI(folder.file.url).toFolderURI
 	}
 }

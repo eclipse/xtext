@@ -42,6 +42,7 @@ import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
@@ -333,7 +334,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   @Override
   public IIdeaTrace getTraceToTarget(final VirtualFileInProject sourceResource) {
     AbsoluteURI _absoluteLocation = this.getAbsoluteLocation(sourceResource);
-    IProjectConfig _projectConfig = this.getProjectConfig(sourceResource);
+    IdeaModuleConfig _projectConfig = this.getProjectConfig(sourceResource);
     return this.getTraceToTarget(sourceResource, _absoluteLocation, _projectConfig);
   }
   
@@ -356,7 +357,7 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
   }
   
   @Override
-  protected IProjectConfig getProjectConfig(final VirtualFileInProject sourceFile) {
+  protected IdeaModuleConfig getProjectConfig(final VirtualFileInProject sourceFile) {
     Project _project = sourceFile.getProject();
     IdeaWorkspaceConfig _ideaWorkspaceConfig = new IdeaWorkspaceConfig(_project);
     VirtualFile _file = sourceFile.getFile();
@@ -376,7 +377,10 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     if ((result != null)) {
       IResourceServiceProvider _serviceProvider = this.getServiceProvider(absoluteSourceResource);
       final IdeaOutputConfigurationProvider outputConfigurationProvider = _serviceProvider.<IdeaOutputConfigurationProvider>get(IdeaOutputConfigurationProvider.class);
+      IResourceServiceProvider _serviceProvider_1 = this.getServiceProvider(absoluteSourceResource);
+      final IdeaWorkspaceConfigProvider workspaceConfigProvider = _serviceProvider_1.<IdeaWorkspaceConfigProvider>get(IdeaWorkspaceConfigProvider.class);
       result.setOutputConfigurationProvider(outputConfigurationProvider);
+      result.setWorkspaceConfigProvider(workspaceConfigProvider);
     }
     return result;
   }
@@ -392,12 +396,8 @@ public class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<Vir
     if (_notEquals) {
       result.setJarRoot(jarRoot);
     } else {
-      IProjectConfig _projectConfig = this.getProjectConfig(file);
-      Module _module = null;
-      if (((IdeaModuleConfig) _projectConfig)!=null) {
-        _module=((IdeaModuleConfig) _projectConfig).getModule();
-      }
-      result.setModule(_module);
+      IdeaModuleConfig _projectConfig = this.getProjectConfig(file);
+      result.setLocalProjectConfig(_projectConfig);
     }
     return result;
   }

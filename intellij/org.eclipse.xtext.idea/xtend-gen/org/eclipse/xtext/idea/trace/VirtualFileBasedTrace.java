@@ -21,6 +21,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.lib.annotations.AccessorType;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbsoluteURI;
@@ -29,6 +30,8 @@ import org.eclipse.xtext.generator.trace.SourceRelativeURI;
 import org.eclipse.xtext.generator.trace.internal.AbstractTrace;
 import org.eclipse.xtext.idea.build.IdeaOutputConfigurationProvider;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
+import org.eclipse.xtext.idea.filesystem.IdeaSourceFolder;
+import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
 import org.eclipse.xtext.idea.trace.IIdeaTrace;
 import org.eclipse.xtext.idea.trace.ILocationInVirtualFile;
@@ -37,7 +40,6 @@ import org.eclipse.xtext.idea.trace.VirtualFileInProject;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.workspace.IProjectConfig;
-import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -50,7 +52,10 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   
   private IdeaOutputConfigurationProvider outputConfigurationProvider;
   
-  private Module module;
+  private IdeaWorkspaceConfigProvider workspaceConfigProvider;
+  
+  @Accessors({ AccessorType.PROTECTED_SETTER, AccessorType.PUBLIC_GETTER })
+  private IdeaModuleConfig localProjectConfig;
   
   @Accessors
   private VirtualFile jarRoot;
@@ -61,7 +66,7 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   public Module getLocalProject() {
-    return this.module;
+    return this.localProjectConfig.getModule();
   }
   
   @Override
@@ -73,12 +78,12 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
     this.localVirtualFile = localVirtualFile;
   }
   
-  protected void setModule(final Module module) {
-    this.module = module;
-  }
-  
   protected void setOutputConfigurationProvider(final IdeaOutputConfigurationProvider outputConfigurationProvider) {
     this.outputConfigurationProvider = outputConfigurationProvider;
+  }
+  
+  protected void setWorkspaceConfigProvider(final IdeaWorkspaceConfigProvider workspaceConfigProvider) {
+    this.workspaceConfigProvider = workspaceConfigProvider;
   }
   
   protected AbsoluteURI getURIForVirtualFile(final VirtualFile virtualFile) {
@@ -123,30 +128,28 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
       if (!_isTraceToTarget) {
         _and = false;
       } else {
-        boolean _notEquals_1 = (!Objects.equal(this.module, null));
+        Module _localProject = this.getLocalProject();
+        boolean _notEquals_1 = (!Objects.equal(_localProject, null));
         _and = _notEquals_1;
       }
       if (_and) {
-        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(this.module);
-        IdeaModuleConfig _localProjectConfig = this.getLocalProjectConfig();
-        final Set<? extends ISourceFolder> sourceFolders = _localProjectConfig.getSourceFolders();
-        ModuleRootManager _instance = ModuleRootManager.getInstance(this.module);
-        VirtualFile[] _contentRoots = _instance.getContentRoots();
-        for (final VirtualFile contentRoot : _contentRoots) {
-          for (final ISourceFolder sourceFolder : sourceFolders) {
-            {
-              OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
-              String _name = sourceFolder.getName();
-              String _outputDirectory = _head.getOutputDirectory(_name);
-              final VirtualFile outputFolder = contentRoot.findFileByRelativePath(_outputDirectory);
-              if ((outputFolder != null)) {
-                URI _uRI = path.getURI();
-                String _string_1 = _uRI.toString();
-                final VirtualFile file = outputFolder.findFileByRelativePath(_string_1);
-                if ((file != null)) {
-                  URI _uRI_1 = VirtualFileURIUtil.getURI(file);
-                  return new AbsoluteURI(_uRI_1);
-                }
+        Module _localProject_1 = this.getLocalProject();
+        final Set<OutputConfiguration> outputConfigurations = this.outputConfigurationProvider.getOutputConfigurations(_localProject_1);
+        final Set<? extends IdeaSourceFolder> sourceFolders = this.localProjectConfig.getSourceFolders();
+        for (final IdeaSourceFolder sourceFolder : sourceFolders) {
+          {
+            VirtualFile _contentRoot = this.localProjectConfig.getContentRoot();
+            OutputConfiguration _head = IterableExtensions.<OutputConfiguration>head(outputConfigurations);
+            String _name = sourceFolder.getName();
+            String _outputDirectory = _head.getOutputDirectory(_name);
+            final VirtualFile outputFolder = _contentRoot.findFileByRelativePath(_outputDirectory);
+            if ((outputFolder != null)) {
+              URI _uRI = path.getURI();
+              String _string_1 = _uRI.toString();
+              final VirtualFile file = outputFolder.findFileByRelativePath(_string_1);
+              if ((file != null)) {
+                URI _uRI_1 = VirtualFileURIUtil.getURI(file);
+                return new AbsoluteURI(_uRI_1);
               }
             }
           }
@@ -256,15 +259,18 @@ public class VirtualFileBasedTrace extends AbstractTrace implements IIdeaTrace {
   }
   
   @Override
-  public IdeaModuleConfig getLocalProjectConfig() {
-    Module _localProject = this.getLocalProject();
-    return new IdeaModuleConfig(_localProject);
-  }
-  
-  @Override
   public Iterable<? extends ILocationInVirtualFile> getAllAssociatedLocations() {
     Iterable<? extends ILocationInResource> _allAssociatedLocations = super.getAllAssociatedLocations();
     return ((Iterable<? extends ILocationInVirtualFile>) _allAssociatedLocations);
+  }
+  
+  @Pure
+  public IdeaModuleConfig getLocalProjectConfig() {
+    return this.localProjectConfig;
+  }
+  
+  protected void setLocalProjectConfig(final IdeaModuleConfig localProjectConfig) {
+    this.localProjectConfig = localProjectConfig;
   }
   
   @Pure

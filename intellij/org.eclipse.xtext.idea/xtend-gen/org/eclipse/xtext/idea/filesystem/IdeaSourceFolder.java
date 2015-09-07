@@ -12,6 +12,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
 import org.eclipse.xtext.idea.extensions.RootModelExtensions;
+import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.ISourceFolder;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
@@ -28,21 +29,10 @@ public class IdeaSourceFolder implements ISourceFolder {
   
   @Override
   public URI getPath() {
-    URI _xblockexpression = null;
-    {
-      VirtualFile _file = this.folder.getFile();
-      String _url = _file.getUrl();
-      final URI path = URI.createURI(_url);
-      URI _xifexpression = null;
-      boolean _hasTrailingPathSeparator = path.hasTrailingPathSeparator();
-      if (_hasTrailingPathSeparator) {
-        _xifexpression = path;
-      } else {
-        _xifexpression = path.appendSegment("");
-      }
-      _xblockexpression = _xifexpression;
-    }
-    return _xblockexpression;
+    VirtualFile _file = this.folder.getFile();
+    String _url = _file.getUrl();
+    URI _createURI = URI.createURI(_url);
+    return UriUtil.toFolderURI(_createURI);
   }
   
   public IdeaSourceFolder(final SourceFolder folder) {

@@ -28,71 +28,80 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent
 import org.eclipse.xtext.idea.common.types.StubTypeProviderFactory
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor
 import org.eclipse.xtext.resource.XtextResourceSet
+import org.eclipse.xtext.util.LazyStringInputStream
 import org.eclipse.xtext.util.internal.Log
 
-import static org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
-import org.eclipse.xtext.util.LazyStringInputStream
+import static org.eclipse.emf.ecore.resource.URIConverter.*
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 
 @Singleton @Log
 class IdeaResourceSetProvider {
-	
+
 	@Inject
 	Provider<XtextResourceSet> resourceSetProvider
-	
+
 	@Inject StubTypeProviderFactory stubTypeProviderFactory
-	
+
 	@Inject ProjectDescriptionProvider projectDescriptionProvider
-	
+
 	def get(Module module) {
 		val resourceSet = resourceSetProvider.get
 		resourceSet.classpathURIContext = module
-		resourceSet.URIConverter.URIHandlers.clear 
+		resourceSet.URIConverter.URIHandlers.clear
 		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler())
-		
+
 		val desc = projectDescriptionProvider.getProjectDescription(module)
 		desc.attachToEmfObject(resourceSet)
-		
+
 		val builder = module.project.getComponent(XtextAutoBuilderComponent)
 		builder.installCopyOfResourceDescriptions(resourceSet)
-		
+
 		stubTypeProviderFactory.createTypeProvider(resourceSet)
 		return resourceSet
 	}
-	
+
 	public static class VirtualFileBasedUriHandler implements URIHandler {
-		
+
+		@Accessors
+		public static class ContentDescriptor {
+			byte[] content
+			long timeStamp
+		}
+
 		public static def VirtualFileBasedUriHandler find(Notifier notifier) {
 			EcoreUtil2.getResourceSet(notifier).URIConverter.URIHandlers.filter(VirtualFileBasedUriHandler).head
-		} 
-		
-		@Accessors Map<URI, byte[]> writtenContents = newHashMap()
-		@Accessors Set<URI> deleted = newHashSet()
-		
+		}
+
+		@Accessors Map<URI, ContentDescriptor> writtenContents = newHashMap
+		@Accessors Set<URI> deleted = newHashSet
+
 		override canHandle(URI uri) {
 			return true
 		}
-		
+
 		def flushToDisk() {
 			if (LOG.isDebugEnabled) {
-				LOG.debug("writing : "+writtenContents.keySet.join(', '))
-				LOG.debug("deleting: "+deleted.join(', '))
+				LOG.debug("writing : " + writtenContents.keySet.join(', '))
+				LOG.debug("deleting: " + deleted.join(', '))
 			}
 			val localWritten = writtenContents
-			writtenContents = newHashMap()
+			writtenContents = newHashMap
 			val localDeleted = deleted
-			deleted = newHashSet()
+			deleted = newHashSet
 			if (localDeleted.empty && localWritten.empty) {
 				return;
 			}
-			ApplicationManager.application.runWriteAction[
-				val timeStamp = System.currentTimeMillis
+			ApplicationManager.application.runWriteAction [
 				for (uri : localWritten.keySet) {
 					var file = getOrCreateVirtualFile(uri)
-					val newContent = localWritten.get(uri)
+					val contentDescriptor = localWritten.get(uri)
+					val newContent = contentDescriptor.content
 					val oldContent = file.contentsToByteArray
 					if (!Arrays.equals(newContent, oldContent))
-						file.setBinaryContent(newContent, -1, timeStamp, requestor)
+						file.setBinaryContent(newContent, -1, contentDescriptor.timeStamp, requestor)
 				}
 				for (uri : localDeleted) {
 					val file = getVirtualFile(uri)
@@ -101,21 +110,21 @@ class IdeaResourceSetProvider {
 				}
 			]
 		}
-		
-		override contentDescription(URI uri, Map<?,?> options) throws IOException {
+
+		override contentDescription(URI uri, Map<?, ?> options) throws IOException {
 			emptyMap
 		}
-		
+
 		override createInputStream(URI uri, Map<?, ?> options) throws IOException {
 			if (deleted.contains(uri)) {
-				throw new IOException("resource "+uri+" is deleted.")
+				throw new IOException("resource " + uri + " is deleted.")
 			}
 			if (writtenContents.containsKey(uri)) {
-				return new ByteArrayInputStream(writtenContents.get(uri))
+				return new ByteArrayInputStream(writtenContents.get(uri).content)
 			}
 			val virtualFile = getVirtualFile(uri)
 			if (virtualFile == null) {
-				throw new FileNotFoundException("Couldn't find virtual file for "+uri)
+				throw new FileNotFoundException("Couldn't find virtual file for " + uri)
 			}
 
 			val cachedDocument = FileDocumentManager.instance.getCachedDocument(virtualFile)
@@ -123,31 +132,35 @@ class IdeaResourceSetProvider {
 				return new LazyStringInputStream(cachedDocument.text, virtualFile.charset)
 			}
 
-			return ApplicationManager.application.<InputStream>runReadAction[
+			return ApplicationManager.application.<InputStream>runReadAction [
 				return new ByteArrayInputStream(virtualFile.contentsToByteArray)
 			]
 		}
-		
+
 		override createOutputStream(URI uri, Map<?, ?> options) throws IOException {
 			return new ByteArrayOutputStream() {
 				override close() throws IOException {
 					super.close()
 					val bytes = toByteArray
 					deleted.remove(uri)
-					writtenContents.put(uri, bytes)
+
+					val contentDescriptor = new ContentDescriptor
+					contentDescriptor.content = bytes
+					contentDescriptor.timeStamp = System.currentTimeMillis
+					writtenContents.put(uri, contentDescriptor)
 				}
 			}
 		}
-		
+
 		override delete(URI uri, Map<?, ?> options) throws IOException {
 			writtenContents.remove(uri)
 			deleted.add(uri)
 		}
-	
+
 		def getRequestor() {
 			null
 		}
-		
+
 		override exists(URI uri, Map<?, ?> options) {
 			if (deleted.contains(uri)) {
 				return false
@@ -155,15 +168,81 @@ class IdeaResourceSetProvider {
 			if (writtenContents.containsKey(uri)) {
 				return true
 			}
+			if (uri.folderDescriptor != null) {
+				return true
+			}
 			return getVirtualFile(uri)?.exists
 		}
-		
+
 		override getAttributes(URI uri, Map<?, ?> options) {
-			emptyMap
+			if (deleted.contains(uri))
+				return emptyMap
+
+			val requestedAttributes = options.get(OPTION_REQUESTED_ATTRIBUTES) as Set<String>
+			if (requestedAttributes == null || requestedAttributes.empty)
+				return emptyMap
+
+			val fileDescriptor = writtenContents.get(uri)
+			if (fileDescriptor != null) {
+				val attributes = newHashMap
+				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
+					attributes.put(ATTRIBUTE_DIRECTORY, false)
+				if (requestedAttributes.contains(ATTRIBUTE_TIME_STAMP))
+					attributes.put(ATTRIBUTE_TIME_STAMP, fileDescriptor.timeStamp)
+				return attributes
+			}
+
+			val folderDescriptor = uri.folderDescriptor
+			if (folderDescriptor != null) {
+				val attributes = newHashMap
+				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
+					attributes.put(ATTRIBUTE_DIRECTORY, true)
+				if (requestedAttributes.contains(ATTRIBUTE_TIME_STAMP))
+					attributes.put(ATTRIBUTE_TIME_STAMP, folderDescriptor.timeStamp)
+				return attributes
+			}
+
+			val file = uri.virtualFile
+			if (file != null) {
+				val attributes = newHashMap
+				if (requestedAttributes.contains(ATTRIBUTE_DIRECTORY))
+					attributes.put(ATTRIBUTE_DIRECTORY, file.directory)
+				if (requestedAttributes.contains(ATTRIBUTE_TIME_STAMP))
+					attributes.put(ATTRIBUTE_TIME_STAMP, file.timeStamp)
+				return attributes
+			}
+
+			return emptyMap
 		}
-		
+
+		protected def getFolderDescriptor(URI uri) {
+			writtenContents.entrySet.filter[ fileDescriptor |
+				val relativeURI = fileDescriptor.key.deresolve(uri)
+				relativeURI != fileDescriptor.key
+			].head?.value
+		}
+
 		override setAttributes(URI uri, Map<String, ?> attributes, Map<?, ?> options) throws IOException {
 		}
-		
+
+		def getChildren(URI uri) {
+			val file = uri.virtualFile
+			val children = if (file != null)
+					file.children.map[URI].toSet
+				else
+					newLinkedHashSet
+					
+			children += writtenContents.keySet.map[ uriToWrite |
+				val relativeURI = uriToWrite.deresolve(uri)
+				if (!relativeURI.empty && relativeURI != uriToWrite) {
+					relativeURI.trimSegments(relativeURI.segmentCount - 1).resolve(uri)	
+				}
+			].filterNull
+			
+			children -= deleted
+					
+			children
+		}
+
 	}
 }

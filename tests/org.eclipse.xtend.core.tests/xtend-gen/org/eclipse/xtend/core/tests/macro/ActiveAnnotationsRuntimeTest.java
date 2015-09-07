@@ -173,14 +173,14 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
         public void apply(final FileWorkspaceConfig it) {
           it.addProject(ActiveAnnotationsRuntimeTest.this.macroProject);
           it.addProject(ActiveAnnotationsRuntimeTest.this.clientProject);
-          Set<FileProjectConfig> _projects = it.getProjects();
+          Set<? extends FileProjectConfig> _projects = it.getProjects();
           final Procedure1<FileProjectConfig> _function = new Procedure1<FileProjectConfig>() {
             @Override
             public void apply(final FileProjectConfig it) {
               it.addSourceFolder("src");
             }
           };
-          IterableExtensions.<FileProjectConfig>forEach(_projects, _function);
+          IterableExtensions.forEach(_projects, _function);
         }
       };
       final FileWorkspaceConfig workspaceConfig = ObjectExtensions.<FileWorkspaceConfig>operator_doubleArrow(_fileWorkspaceConfig, _function);
