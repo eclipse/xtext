@@ -149,16 +149,21 @@ class JavaConverterTest extends AbstractXtendTestCase {
 	}
 
 	@Test def void testMethodDeclarationCase() throws Exception {
+		val java = "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}"
 
-		var XtendClass xtendClazz = toValidXtendClass(
-			"public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}"
-		)
+		var XtendClass xtendClazz = toValidXtendClass(java)
 
 		assertEquals("Simple methods count", 1, xtendClazz.getMembers().size())
 		var XtendFunction xtendMember = xtendClazz.method(0)
 		assertEquals(PUBLIC, xtendMember.getVisibility())
 		assertEquals("boolean", xtendMember.getReturnType().getSimpleName())
 		assertEquals("visit", xtendMember.getName())
+		assertEquals('''
+		class JavaToConvert {
+			def boolean visit(Object node) throws Error, Exception {
+				return true 
+			}
+		}'''.toString, java.toXtendCode)
 	}
 
 	@Test def void testNonFinalMethodParameterCase_01() throws Exception {
