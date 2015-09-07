@@ -568,15 +568,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		}'''.toXtendStatement)
 	}
 
-	@Test def void testIfElseCase_03() throws Exception {
-		assertEquals('''
-		if (true) return; else System.out.println()'''.toString, 
-		'''
-		if(true) 
-		    return;
-		  else
-		    System.out.println();'''.toXtendStatement)
-	}
+
 
 	@Test def void testStaticImportCase() throws Exception {
 
@@ -1057,7 +1049,20 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		}''')
 		assertNotNull(clazz)
 	}
-
+	
+	@Test def void testReturnVoidCase_01() throws Exception {
+		assertEquals('''
+		def void foo() {
+			if (true) return else System.out.println() 
+		}'''.toString, 
+		'''
+		public void foo() {
+			if(true) 
+			    return;
+			  else
+			    System.out.println();
+		}'''.toXtendClassBodyDeclr)
+	}
 	@Test def void testAnonymousClassCase() throws Exception {
 
 		var result = j2x.toXtend("Clazz", '''
