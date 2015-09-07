@@ -2679,7 +2679,9 @@ public class JavaASTFlattener extends ASTVisitor {
             child.accept(JavaASTFlattener.this);
             JavaASTFlattener.this.appendSpaceToBuffer();
             SingleVariableDeclaration _exception = node.getException();
-            _exception.getName();
+            SimpleName _name = _exception.getName();
+            String _simpleName = JavaASTFlattener.this._aSTFlattenerUtils.toSimpleName(_name);
+            JavaASTFlattener.this.appendToBuffer(_simpleName);
             JavaASTFlattener.this.appendToBuffer(") ");
             Block _body = node.getBody();
             _body.accept(JavaASTFlattener.this);
