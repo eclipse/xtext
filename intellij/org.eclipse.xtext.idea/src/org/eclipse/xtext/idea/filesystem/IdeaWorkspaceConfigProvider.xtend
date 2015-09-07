@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.idea.filesystem
 
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.module.Module
 import com.intellij.openapi.module.ModuleManager
 import com.intellij.openapi.project.Project
@@ -46,7 +47,9 @@ class IdeaWorkspaceConfig implements IWorkspaceConfig {
 	val Project project
 
 	override findProjectByName(String name) {
-		val module = ModuleManager.getInstance(project).findModuleByName(name)
+		val module = ApplicationManager.application.<Module>runReadAction[
+			ModuleManager.getInstance(project).findModuleByName(name)
+		]
 		if (module == null)
 			return null
 		if (!module.isUsable) 

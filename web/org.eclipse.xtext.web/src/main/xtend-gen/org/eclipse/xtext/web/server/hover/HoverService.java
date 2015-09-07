@@ -87,7 +87,7 @@ public class HoverService {
           HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
           IImageDescription _imageDescription = HoverService.this._iImageDescriptionProvider.getImageDescription(element);
           String _addIconDivs = HoverService.this.addIconDivs(_imageDescription, nameLabel);
-          final String titleHtml = HoverService.this.surroundWithDiv(_addIconDivs, "hover");
+          final String titleHtml = HoverService.this.surroundWithDiv(_addIconDivs, "xtext-hover");
           HoverService.this._operationCanceledManager.checkCanceled(cancelIndicator);
           String _elvis = null;
           String _documentation = HoverService.this._iEObjectDocumentationProvider.getDocumentation(element);
@@ -96,7 +96,7 @@ public class HoverService {
           } else {
             _elvis = "";
           }
-          final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "hover");
+          final String bodyHtml = HoverService.this.surroundWithDiv(_elvis, "xtext-hover");
           String _stateId = it.getStateId();
           return new HoverResult(_stateId, titleHtml, bodyHtml);
         } else {
