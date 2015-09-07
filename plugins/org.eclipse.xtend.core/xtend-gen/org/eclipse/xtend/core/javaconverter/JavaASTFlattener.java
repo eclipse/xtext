@@ -963,10 +963,9 @@ public class JavaASTFlattener extends ASTVisitor {
     return false;
   }
   
-  private void appendExtraDimensions(final int extraDimensions) {
-    for (int i = 0; (i < extraDimensions); i++) {
-      this.appendToBuffer("[]");
-    }
+  private StringBuffer appendExtraDimensions(final int extraDimensions) {
+    String _multiply = this.operator_multiply("[]", extraDimensions);
+    return this.appendToBuffer(_multiply);
   }
   
   @Override

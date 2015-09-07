@@ -233,7 +233,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    final XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
   }
   
