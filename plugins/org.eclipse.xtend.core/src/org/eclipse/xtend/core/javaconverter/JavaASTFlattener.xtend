@@ -229,10 +229,11 @@ class JavaASTFlattener extends ASTVisitor {
 
 	override boolean visit(Assignment node) {
 		val leftSide = node.getLeftHandSide()
-
+		var Type type = null
 		// Array write access
 		if (leftSide instanceof ArrayAccess) {
-
+			if (leftSide.array instanceof SimpleName)
+				type = findDeclaredType(leftSide.array as SimpleName)
 			val arrayName = computeArrayName(leftSide)
 			appendToBuffer("{ ")
 			val valName = '''_wrVal_«arrayName»'''
@@ -249,7 +250,7 @@ class JavaASTFlattener extends ASTVisitor {
 				leftSide.index.accept(this)
 				appendToBuffer(",")
 			}
-			node.rightHandSide.accept(this)
+			node.handleRightHandSide(type)
 			appendToBuffer(")")
 			if (node.needsReturnValue()) {
 				appendToBuffer(''' «valName».get(''')
@@ -262,11 +263,23 @@ class JavaASTFlattener extends ASTVisitor {
 			}
 			appendToBuffer("}")
 		} else {
+			if (leftSide instanceof SimpleName)
+				type = findDeclaredType(leftSide)
 			leftSide.accept(this)
 			appendToBuffer(node.getOperator().toString())
-			node.getRightHandSide().accept(this)
+			node.handleRightHandSide(type)
 		}
 		return false
+	}
+
+	def handleRightHandSide(Assignment a, Type type) {
+		if (type.needPrimitiveCast) {
+			appendToBuffer('(')
+			a.getRightHandSide().accept(this)
+			appendToBuffer(''') as «type»''')
+		} else {
+			a.getRightHandSide().accept(this)
+		}
 	}
 
 	override boolean visit(MarkerAnnotation node) {
@@ -542,7 +555,14 @@ class JavaASTFlattener extends ASTVisitor {
 		name.accept(this)
 		if (getInitializer() != null) {
 			appendToBuffer("=")
-			getInitializer.accept(this)
+			val type = findDeclaredType(name)
+			if (type.needPrimitiveCast) {
+				appendToBuffer('(')
+				getInitializer.accept(this)
+				appendToBuffer(''') as «type»''')
+			} else {
+				getInitializer.accept(this)
+			}
 		} else if (parent instanceof VariableDeclarationStatement) {
 			if ((parent as VariableDeclarationStatement).modifiers().isFinal) {
 				appendToBuffer("/* FIXME empty initializer for final variable is not supported */")

@@ -45,6 +45,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
 import org.eclipse.jdt.core.dom.PrefixExpression
 import org.eclipse.jdt.core.dom.PostfixExpression
+import org.eclipse.jdt.core.dom.PrimitiveType
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -238,18 +239,30 @@ class ASTFlattenerUtils {
 	}
 
 	def Type findDeclaredType(SimpleName simpleName) {
-		var scope = simpleName.findParentOfType(Block)
+		var ASTNode scope = simpleName.findDeclarationBlocks
 		while (scope != null) {
 			val type = scope.findDeclaredType(simpleName)
 			if (type != null) {
 				return type
 			}
-			scope = scope.findParentOfType(Block)
+			scope = scope.findDeclarationBlocks
 		}
+		
 		return null
 	}
+	
+	def private findDeclarationBlocks(ASTNode simpleName) {
+		var ASTNode block = simpleName.findParentOfType(Block)
+		if(block === null) {
+			block = simpleName.findParentOfType(MethodDeclaration)
+		}
+		if(block === null) {
+			block = simpleName.findParentOfType(TypeDeclaration)
+		}
+		return block
+	}
 
-	def private Type findDeclaredType(Block scope, SimpleName simpleName) {
+	def private Type findDeclaredType(ASTNode scope, SimpleName simpleName) {
 		val matchesFound = newArrayList
 		scope.accept(new ASTVisitor() {
 			override boolean visit(VariableDeclarationFragment node) {
@@ -269,13 +282,13 @@ class ASTFlattenerUtils {
 				}
 				return false
 			}
-
+			
 			override preVisit2(ASTNode node) {
 				matchesFound.empty
 			}
 
 			override boolean visit(SingleVariableDeclaration node) {
-				if (node.name.equals(simpleName)) {
+				if (node.name.identifier.equals(simpleName.identifier)) {
 					matchesFound.add(node.type)
 				}
 				return false
@@ -371,7 +384,14 @@ class ASTFlattenerUtils {
 		}
 		return null
 	}
-
+	
+	def boolean needPrimitiveCast(Type type) {
+		if(type instanceof PrimitiveType) {
+			return type.primitiveTypeCode==PrimitiveType.BYTE ||type.primitiveTypeCode==PrimitiveType.SHORT
+		}
+		return false
+	}
+	
 	def genericChildProperty(ASTNode node, String propertyName) {
 		val property = node.structuralPropertiesForType.filter(ChildPropertyDescriptor).filter[propertyName == id].head
 		if (property != null) {
