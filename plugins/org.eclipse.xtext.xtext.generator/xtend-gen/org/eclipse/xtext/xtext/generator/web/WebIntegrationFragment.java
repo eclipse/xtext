@@ -328,17 +328,14 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
       if (_isNullOrEmpty_1) {
         this.highlightingPath = (this.highlightingModuleName + ".js");
       }
-      TextFileAccess _generateJavaScript = this.generateJavaScript(langId);
-      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_1.getWebApp();
-      _generateJavaScript.writeTo(_webApp_1);
+      this.generateJavaScript(langId);
     }
     boolean _and_1 = false;
     if (!this.generateServlet) {
       _and_1 = false;
     } else {
-      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _webSrc = _projectConfig_2.getWebSrc();
+      IXtextProjectConfig _projectConfig_1 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webSrc = _projectConfig_1.getWebSrc();
       boolean _tripleNotEquals_1 = (_webSrc != null);
       _and_1 = _tripleNotEquals_1;
     }
@@ -349,8 +346,8 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateJettyLauncher) {
       _and_2 = false;
     } else {
-      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _webSrc_1 = _projectConfig_3.getWebSrc();
+      IXtextProjectConfig _projectConfig_2 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webSrc_1 = _projectConfig_2.getWebSrc();
       boolean _tripleNotEquals_2 = (_webSrc_1 != null);
       _and_2 = _tripleNotEquals_2;
     }
@@ -361,9 +358,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     if (!this.generateHtmlExample) {
       _and_3 = false;
     } else {
-      IXtextProjectConfig _projectConfig_4 = this.getProjectConfig();
-      IXtextGeneratorFileSystemAccess _webApp_2 = _projectConfig_4.getWebApp();
-      boolean _tripleNotEquals_3 = (_webApp_2 != null);
+      IXtextProjectConfig _projectConfig_3 = this.getProjectConfig();
+      IXtextGeneratorFileSystemAccess _webApp_1 = _projectConfig_3.getWebApp();
+      boolean _tripleNotEquals_3 = (_webApp_1 != null);
       _and_3 = _tripleNotEquals_3;
     }
     if (_and_3) {
@@ -400,7 +397,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     _addTypeToType.contributeTo(_webGenModule);
   }
   
-  protected TextFileAccess generateJavaScript(final String langId) {
+  protected void generateJavaScript(final String langId) {
     Grammar _grammar = this.getGrammar();
     final Set<String> keywords = GrammarUtil.getAllKeywords(_grammar);
     final Function1<String, Boolean> _function = new Function1<String, Boolean>() {
@@ -699,7 +696,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
           break;
       }
     }
-    return jsFile;
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    jsFile.writeTo(_webApp);
   }
   
   protected Collection<String> createOrionPatterns(final String langId, final Collection<String> keywords, final Collection<String> filteredKeywords) {
@@ -1270,7 +1269,7 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     return patterns;
   }
   
-  protected TextFileAccess generateIndexDoc() {
+  protected void generateIndexDoc() {
     final TextFileAccess indexFile = this.fileAccessFactory.createTextFile();
     indexFile.setPath("index.html");
     StringConcatenation _builder = new StringConcatenation();
@@ -1601,7 +1600,9 @@ public class WebIntegrationFragment extends AbstractGeneratorFragment2 {
     _builder.append("</html>");
     _builder.newLine();
     indexFile.setContent(_builder);
-    return indexFile;
+    IXtextProjectConfig _projectConfig = this.getProjectConfig();
+    IXtextGeneratorFileSystemAccess _webApp = _projectConfig.getWebApp();
+    indexFile.writeTo(_webApp);
   }
   
   protected void generateStyleSheet() {
