@@ -2537,23 +2537,54 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   @Test
   public void testBytePrimitive_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("byte b = -1");
-    final String java = this.toXtendClassBodyDeclr(_builder);
+    _builder.append("private byte b = -1");
+    final String x = this.toXtendClassBodyDeclr(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("byte b = (-1) as byte");
+    _builder_1.append("byte b=(-1) as byte");
     String _string = _builder_1.toString();
-    Assert.assertEquals(_string, java);
+    Assert.assertEquals(_string, x);
   }
   
   @Test
   public void testBytePrimitive_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("byte b = 1");
-    final String java = this.toXtendClassBodyDeclr(_builder);
+    _builder.append("private byte b = 1");
+    final String x = this.toXtendClassBodyDeclr(_builder);
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("byte b = 1 as byte");
+    _builder_1.append("byte b=(1) as byte");
     String _string = _builder_1.toString();
-    Assert.assertEquals(_string, java);
+    Assert.assertEquals(_string, x);
+  }
+  
+  @Test
+  public void testBytePrimitive_03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private byte b = 1;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void doStuff(byte bytes[]) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("byte b2 = 1;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("b = -2;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("b = (-5 + 3);");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bytes[0] = -8;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final XtendClass x = this.toValidXtendClass(_builder);
+    Assert.assertNotNull(x);
   }
   
   @Test

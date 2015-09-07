@@ -39,6 +39,7 @@ import org.eclipse.jdt.core.dom.Name;
 import org.eclipse.jdt.core.dom.NumberLiteral;
 import org.eclipse.jdt.core.dom.PostfixExpression;
 import org.eclipse.jdt.core.dom.PrefixExpression;
+import org.eclipse.jdt.core.dom.PrimitiveType;
 import org.eclipse.jdt.core.dom.QualifiedName;
 import org.eclipse.jdt.core.dom.ReturnStatement;
 import org.eclipse.jdt.core.dom.SimpleName;
@@ -499,7 +500,7 @@ public class ASTFlattenerUtils {
   }
   
   public Type findDeclaredType(final SimpleName simpleName) {
-    Block scope = this.<Block>findParentOfType(simpleName, Block.class);
+    ASTNode scope = this.findDeclarationBlocks(simpleName);
     while ((!Objects.equal(scope, null))) {
       {
         final Type type = this.findDeclaredType(scope, simpleName);
@@ -507,14 +508,27 @@ public class ASTFlattenerUtils {
         if (_notEquals) {
           return type;
         }
-        Block _findParentOfType = this.<Block>findParentOfType(scope, Block.class);
-        scope = _findParentOfType;
+        ASTNode _findDeclarationBlocks = this.findDeclarationBlocks(scope);
+        scope = _findDeclarationBlocks;
       }
     }
     return null;
   }
   
-  private Type findDeclaredType(final Block scope, final SimpleName simpleName) {
+  private ASTNode findDeclarationBlocks(final ASTNode simpleName) {
+    ASTNode block = this.<Block>findParentOfType(simpleName, Block.class);
+    if ((block == null)) {
+      MethodDeclaration _findParentOfType = this.<MethodDeclaration>findParentOfType(simpleName, MethodDeclaration.class);
+      block = _findParentOfType;
+    }
+    if ((block == null)) {
+      TypeDeclaration _findParentOfType_1 = this.<TypeDeclaration>findParentOfType(simpleName, TypeDeclaration.class);
+      block = _findParentOfType_1;
+    }
+    return block;
+  }
+  
+  private Type findDeclaredType(final ASTNode scope, final SimpleName simpleName) {
     final ArrayList<Type> matchesFound = CollectionLiterals.<Type>newArrayList();
     scope.accept(new ASTVisitor() {
       @Override
@@ -559,7 +573,9 @@ public class ASTFlattenerUtils {
       @Override
       public boolean visit(final SingleVariableDeclaration node) {
         SimpleName _name = node.getName();
-        boolean _equals = _name.equals(simpleName);
+        String _identifier = _name.getIdentifier();
+        String _identifier_1 = simpleName.getIdentifier();
+        boolean _equals = _identifier.equals(_identifier_1);
         if (_equals) {
           Type _type = node.getType();
           matchesFound.add(_type);
@@ -733,6 +749,23 @@ public class ASTFlattenerUtils {
       return ((List<ASTNode>) _structuralProperty);
     }
     return null;
+  }
+  
+  public boolean needPrimitiveCast(final Type type) {
+    if ((type instanceof PrimitiveType)) {
+      boolean _or = false;
+      PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType)type).getPrimitiveTypeCode();
+      boolean _equals = Objects.equal(_primitiveTypeCode, PrimitiveType.BYTE);
+      if (_equals) {
+        _or = true;
+      } else {
+        PrimitiveType.Code _primitiveTypeCode_1 = ((PrimitiveType)type).getPrimitiveTypeCode();
+        boolean _equals_1 = Objects.equal(_primitiveTypeCode_1, PrimitiveType.SHORT);
+        _or = _equals_1;
+      }
+      return _or;
+    }
+    return false;
   }
   
   public ASTNode genericChildProperty(final ASTNode node, final String propertyName) {

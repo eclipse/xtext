@@ -1347,13 +1347,27 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 	}
 	
 	@Test def void testBytePrimitive_01() throws Exception {
-		val java = '''byte b = -1'''.toXtendClassBodyDeclr
-		assertEquals('''byte b = (-1) as byte'''.toString, java)
+		val x = '''private byte b = -1'''.toXtendClassBodyDeclr
+		assertEquals('''byte b=(-1) as byte'''.toString, x)
 	}
 	
 	@Test def void testBytePrimitive_02() throws Exception {
-		val java = '''byte b = 1'''.toXtendClassBodyDeclr
-		assertEquals('''byte b = 1 as byte'''.toString, java)
+		val x = '''private byte b = 1'''.toXtendClassBodyDeclr
+		assertEquals('''byte b=(1) as byte'''.toString, x)
+	}
+	
+	@Test def void testBytePrimitive_03() throws Exception {
+		val x = '''
+		class Foo {
+			private byte b = 1;
+			public void doStuff(byte bytes[]) {
+				byte b2 = 1;
+				b = -2;
+				b = (-5 + 3);
+				bytes[0] = -8;
+			}
+		}'''.toValidXtendClass
+		assertNotNull(x)
 	}
 
 	@Test def void testTryCatchCase() throws Exception {

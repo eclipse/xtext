@@ -328,7 +328,14 @@ public class JavaASTFlattener extends ASTVisitor {
   @Override
   public boolean visit(final Assignment node) {
     final Expression leftSide = node.getLeftHandSide();
+    Type type = null;
     if ((leftSide instanceof ArrayAccess)) {
+      Expression _array = ((ArrayAccess)leftSide).getArray();
+      if ((_array instanceof SimpleName)) {
+        Expression _array_1 = ((ArrayAccess)leftSide).getArray();
+        Type _findDeclaredType = this._aSTFlattenerUtils.findDeclaredType(((SimpleName) _array_1));
+        type = _findDeclaredType;
+      }
       final String arrayName = this.computeArrayName(((ArrayAccess)leftSide));
       this.appendToBuffer("{ ");
       StringConcatenation _builder = new StringConcatenation();
@@ -344,8 +351,8 @@ public class JavaASTFlattener extends ASTVisitor {
       _builder_2.append(valName, "");
       _builder_2.append("=");
       this.appendToBuffer(_builder_2.toString());
-      Expression _array = ((ArrayAccess)leftSide).getArray();
-      _array.accept(this);
+      Expression _array_2 = ((ArrayAccess)leftSide).getArray();
+      _array_2.accept(this);
       Expression _index = ((ArrayAccess)leftSide).getIndex();
       boolean _isConstantArrayIndex = this._aSTFlattenerUtils.isConstantArrayIndex(_index);
       boolean _not = (!_isConstantArrayIndex);
@@ -375,8 +382,7 @@ public class JavaASTFlattener extends ASTVisitor {
         _index_2.accept(this);
         this.appendToBuffer(",");
       }
-      Expression _rightHandSide = node.getRightHandSide();
-      _rightHandSide.accept(this);
+      this.handleRightHandSide(node, type);
       this.appendToBuffer(")");
       boolean _needsReturnValue = this._aSTFlattenerUtils.needsReturnValue(node);
       if (_needsReturnValue) {
@@ -400,14 +406,39 @@ public class JavaASTFlattener extends ASTVisitor {
       }
       this.appendToBuffer("}");
     } else {
+      if ((leftSide instanceof SimpleName)) {
+        Type _findDeclaredType_1 = this._aSTFlattenerUtils.findDeclaredType(((SimpleName)leftSide));
+        type = _findDeclaredType_1;
+      }
       leftSide.accept(this);
       Assignment.Operator _operator = node.getOperator();
       String _string = _operator.toString();
       this.appendToBuffer(_string);
-      Expression _rightHandSide_1 = node.getRightHandSide();
-      _rightHandSide_1.accept(this);
+      this.handleRightHandSide(node, type);
     }
     return false;
+  }
+  
+  public StringBuffer handleRightHandSide(final Assignment a, final Type type) {
+    StringBuffer _xifexpression = null;
+    boolean _needPrimitiveCast = this._aSTFlattenerUtils.needPrimitiveCast(type);
+    if (_needPrimitiveCast) {
+      StringBuffer _xblockexpression = null;
+      {
+        this.appendToBuffer("(");
+        Expression _rightHandSide = a.getRightHandSide();
+        _rightHandSide.accept(this);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(") as ");
+        _builder.append(type, "");
+        _xblockexpression = this.appendToBuffer(_builder.toString());
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      Expression _rightHandSide = a.getRightHandSide();
+      _rightHandSide.accept(this);
+    }
+    return _xifexpression;
   }
   
   @Override
@@ -931,8 +962,21 @@ public class JavaASTFlattener extends ASTVisitor {
     boolean _notEquals = (!Objects.equal(_initializer, null));
     if (_notEquals) {
       this.appendToBuffer("=");
-      Expression _initializer_1 = it.getInitializer();
-      _initializer_1.accept(this);
+      SimpleName _name_1 = it.getName();
+      final Type type = this._aSTFlattenerUtils.findDeclaredType(_name_1);
+      boolean _needPrimitiveCast = this._aSTFlattenerUtils.needPrimitiveCast(type);
+      if (_needPrimitiveCast) {
+        this.appendToBuffer("(");
+        Expression _initializer_1 = it.getInitializer();
+        _initializer_1.accept(this);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append(") as ");
+        _builder.append(type, "");
+        this.appendToBuffer(_builder.toString());
+      } else {
+        Expression _initializer_2 = it.getInitializer();
+        _initializer_2.accept(this);
+      }
     } else {
       ASTNode _parent = it.getParent();
       if ((_parent instanceof VariableDeclarationStatement)) {

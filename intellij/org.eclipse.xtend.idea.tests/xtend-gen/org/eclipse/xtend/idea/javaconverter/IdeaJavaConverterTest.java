@@ -179,6 +179,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testBytePrimitive_02();
   }
   
+  public void testBytePrimitive_03() throws Exception {
+    delegate.testBytePrimitive_03();
+  }
+  
   public void testCastCase() throws Exception {
     delegate.testCastCase();
   }
