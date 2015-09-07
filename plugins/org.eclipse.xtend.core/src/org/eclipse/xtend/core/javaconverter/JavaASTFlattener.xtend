@@ -1536,7 +1536,7 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer(" catch (")
 				child.accept(this)
 				appendSpaceToBuffer
-				node.exception.name
+				appendToBuffer(node.exception.name.toSimpleName)
 				appendToBuffer(") ")
 				node.body.accept(this)
 			]
