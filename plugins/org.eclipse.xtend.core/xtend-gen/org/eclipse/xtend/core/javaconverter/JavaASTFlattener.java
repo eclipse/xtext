@@ -1704,6 +1704,13 @@ public class JavaASTFlattener extends ASTVisitor {
             _xblockexpression_2 = this.appendToBuffer(")");
           }
           _xifexpression_1 = _xblockexpression_2;
+        } else {
+          this.appendSpaceToBuffer();
+          String _string = operator.toString();
+          String _multiply = this.operator_multiply(_string, 2);
+          this.appendToBuffer(_multiply);
+          this.appendSpaceToBuffer();
+          rightSide.accept(this);
         }
         _switchResult = _xifexpression_1;
       }
@@ -1725,8 +1732,8 @@ public class JavaASTFlattener extends ASTVisitor {
     if (!_matched) {
       {
         this.appendSpaceToBuffer();
-        String _string = operator.toString();
-        this.appendToBuffer(_string);
+        String _string_1 = operator.toString();
+        this.appendToBuffer(_string_1);
         this.appendSpaceToBuffer();
         rightSide.accept(this);
       }
