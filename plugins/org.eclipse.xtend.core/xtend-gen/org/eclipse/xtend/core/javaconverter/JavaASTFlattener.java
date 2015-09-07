@@ -1246,17 +1246,21 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer(")");
     int _extraDimensions = it.getExtraDimensions();
     this.appendExtraDimensions(_extraDimensions);
+    List throwsTypes = CollectionLiterals.<Object>newArrayList();
     boolean _java8orHigher = this.java8orHigher();
     boolean _not_3 = (!_java8orHigher);
     if (_not_3) {
       List _thrownExceptions = it.thrownExceptions();
-      boolean _isEmpty_1 = _thrownExceptions.isEmpty();
-      boolean _not_4 = (!_isEmpty_1);
-      if (_not_4) {
-        this.appendToBuffer(" throws ");
-        List _thrownExceptions_1 = it.thrownExceptions();
-        this.visitAllSeparatedByComma(_thrownExceptions_1);
-      }
+      throwsTypes = _thrownExceptions;
+    } else {
+      List<ASTNode> _genericChildListProperty = this._aSTFlattenerUtils.genericChildListProperty(it, "thrownExceptionTypes");
+      throwsTypes = _genericChildListProperty;
+    }
+    boolean _isEmpty_1 = throwsTypes.isEmpty();
+    boolean _not_4 = (!_isEmpty_1);
+    if (_not_4) {
+      this.appendToBuffer(" throws ");
+      this.visitAllSeparatedByComma(throwsTypes);
     }
     this.appendSpaceToBuffer();
     Block _body = it.getBody();
@@ -1700,6 +1704,13 @@ public class JavaASTFlattener extends ASTVisitor {
             _xblockexpression_2 = this.appendToBuffer(")");
           }
           _xifexpression_1 = _xblockexpression_2;
+        } else {
+          this.appendSpaceToBuffer();
+          String _string = operator.toString();
+          String _multiply = this.operator_multiply(_string, 2);
+          this.appendToBuffer(_multiply);
+          this.appendSpaceToBuffer();
+          rightSide.accept(this);
         }
         _switchResult = _xifexpression_1;
       }
@@ -1721,8 +1732,8 @@ public class JavaASTFlattener extends ASTVisitor {
     if (!_matched) {
       {
         this.appendSpaceToBuffer();
-        String _string = operator.toString();
-        this.appendToBuffer(_string);
+        String _string_1 = operator.toString();
+        this.appendToBuffer(_string_1);
         this.appendSpaceToBuffer();
         rightSide.accept(this);
       }
@@ -2679,7 +2690,9 @@ public class JavaASTFlattener extends ASTVisitor {
             child.accept(JavaASTFlattener.this);
             JavaASTFlattener.this.appendSpaceToBuffer();
             SingleVariableDeclaration _exception = node.getException();
-            _exception.getName();
+            SimpleName _name = _exception.getName();
+            String _simpleName = JavaASTFlattener.this._aSTFlattenerUtils.toSimpleName(_name);
+            JavaASTFlattener.this.appendToBuffer(_simpleName);
             JavaASTFlattener.this.appendToBuffer(") ");
             Block _body = node.getBody();
             _body.accept(JavaASTFlattener.this);

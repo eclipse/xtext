@@ -163,6 +163,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testBitwiseComplementCase();
   }
   
+  public void testBooleanBitwiseOperatorsCase() throws Exception {
+    delegate.testBooleanBitwiseOperatorsCase();
+  }
+  
   public void testBug462099() throws Exception {
     delegate.testBug462099();
   }
@@ -333,6 +337,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
   
   public void testPrefixPlusMinusSimpleArrayCase() throws Exception {
     delegate.testPrefixPlusMinusSimpleArrayCase();
+  }
+  
+  public void testReturnCase_01() throws Exception {
+    delegate.testReturnCase_01();
   }
   
   public void testReturnVoidCase() throws Exception {

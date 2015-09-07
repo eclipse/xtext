@@ -250,8 +250,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testMethodDeclarationCase() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass(
-      "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}");
+    final String java = "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}";
+    XtendClass xtendClazz = this.toValidXtendClass(java);
     EList<XtendMember> _members = xtendClazz.getMembers();
     int _size = _members.size();
     Assert.assertEquals("Simple methods count", 1, _size);
@@ -263,6 +263,22 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("boolean", _simpleName);
     String _name = xtendMember.getName();
     Assert.assertEquals("visit", _name);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def boolean visit(Object node) throws Error, Exception {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return true ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    String _string = _builder.toString();
+    String _xtendCode = this.toXtendCode(java);
+    Assert.assertEquals(_string, _xtendCode);
   }
   
   @Test
@@ -1906,6 +1922,51 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testReturnCase_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public String foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if(true) ");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("return \"s\";");
+    _builder.newLine();
+    _builder.append("\t\t  ");
+    _builder.append("else");
+    _builder.newLine();
+    _builder.append("\t\t    ");
+    _builder.append("return \"d\";");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final String java = _builder.toString();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def String foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (true) return \"s\"  else return \"d\" ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _xtendCode = this.toXtendCode(java);
+    Assert.assertEquals(_string, _xtendCode);
+    XtendClass _validXtendClass = this.toValidXtendClass(java);
+    Assert.assertNotNull(_validXtendClass);
+  }
+  
+  @Test
   public void testAnonymousClassCase() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.awt.event.ActionEvent;");
@@ -2488,6 +2549,62 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("if ((1.bitwiseOr(2)) > 0) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    Assert.assertEquals(_string, body);
+  }
+  
+  @Test
+  public void testBooleanBitwiseOperatorsCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("boolean foo = true & false;");
+    _builder.newLine();
+    _builder.append("public void doBitwiseOperation() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (true | false) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("if (true ^ false) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final String java = _builder.toString();
+    String body = this.toXtendClassBodyDeclr(java);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package boolean foo=true && false");
+    _builder_1.newLine();
+    _builder_1.append("def void doBitwiseOperation() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("if (true || false) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("if (true.xor(false)) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("return;");

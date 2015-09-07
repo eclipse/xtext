@@ -706,11 +706,15 @@ class JavaASTFlattener extends ASTVisitor {
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(getExtraDimensions())
+		var List throwsTypes = newArrayList
 		if (!java8orHigher()) {
-			if (!thrownExceptions.isEmpty()) {
-				appendToBuffer(" throws ")
-				thrownExceptions.visitAllSeparatedByComma
-			}
+			throwsTypes = thrownExceptions
+		} else {
+			throwsTypes = it.genericChildListProperty('thrownExceptionTypes')
+		}
+		if (!throwsTypes.isEmpty()) {
+			appendToBuffer(" throws ")
+			throwsTypes.visitAllSeparatedByComma
 		}
 		appendSpaceToBuffer
 		if (getBody() != null) {
@@ -955,6 +959,11 @@ class JavaASTFlattener extends ASTVisitor {
 					appendToBuffer('''.bitwise«if(operator == InfixExpression.Operator.AND) "And" else "Or"»(''')
 					rightSide.accept(this)
 					appendToBuffer(")")
+				} else {
+					appendSpaceToBuffer
+					appendToBuffer(operator.toString() * 2)
+					appendSpaceToBuffer
+					rightSide.accept(this)
 				}
 			}
 			case InfixExpression.Operator.EQUALS: {
@@ -1536,7 +1545,7 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer(" catch (")
 				child.accept(this)
 				appendSpaceToBuffer
-				node.exception.name
+				appendToBuffer(node.exception.name.toSimpleName)
 				appendToBuffer(") ")
 				node.body.accept(this)
 			]
