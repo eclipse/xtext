@@ -35,11 +35,11 @@ class FileWorkspaceConfig implements IWorkspaceConfig {
 		UriUtil.createFolderURI(root)
 	}
 	
-	def getProjects() {
+	override Set<? extends FileProjectConfig> getProjects() {
 		projects.values.toSet
 	}
 
-	override findProjectByName(String name) {
+	override FileProjectConfig findProjectByName(String name) {
 		projects.get(name)
 	}
 
