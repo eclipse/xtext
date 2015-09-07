@@ -250,8 +250,8 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   
   @Test
   public void testMethodDeclarationCase() throws Exception {
-    XtendClass xtendClazz = this.toValidXtendClass(
-      "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}");
+    final String java = "public class JavaToConvert { public boolean visit(final Object node) throws Error, Exception { return true;}}";
+    XtendClass xtendClazz = this.toValidXtendClass(java);
     EList<XtendMember> _members = xtendClazz.getMembers();
     int _size = _members.size();
     Assert.assertEquals("Simple methods count", 1, _size);
@@ -263,6 +263,22 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     Assert.assertEquals("boolean", _simpleName);
     String _name = xtendMember.getName();
     Assert.assertEquals("visit", _name);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def boolean visit(Object node) throws Error, Exception {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return true ");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    String _string = _builder.toString();
+    String _xtendCode = this.toXtendCode(java);
+    Assert.assertEquals(_string, _xtendCode);
   }
   
   @Test
