@@ -26,7 +26,7 @@ public interface FileSystemSupport {
 	/**
 	 * @param path
 	 * @return the children of the folder the given path points to; 
-	 * 		   empty iterable if the path points to a non existent resource or to an existent file
+	 * 		   empty iterable if the path points to a non existent file or folder
 	 * @exception IllegalArgumentException if it is not possible to get children of a given path for some reason 
 	 */
 	Iterable<? extends Path> getChildren(Path path);
@@ -73,7 +73,7 @@ public interface FileSystemSupport {
 	 * 
 	 * @param path the path
 	 * @return an input stream containing the contents of the file
-	 * @exception IllegalArgumentException if the path points a non existent resource or a folder
+	 * @exception IllegalArgumentException if the path points to a non existent file
 	 */
 	CharSequence getContents(Path path);
 	
@@ -82,12 +82,14 @@ public interface FileSystemSupport {
 	 * 
 	 * @param path the path
 	 * @return an input stream containing the contents of the file
-	 * @exception IllegalArgumentException if the path points a non existent resource or a folder
+	 * @exception IllegalArgumentException if the path points to a non existent file
 	 */
 	InputStream getContentsAsStream(Path path);
 	
 	/**
+	 * <p>
 	 * Returns the URI representing the given path.
+	 * </p>
 	 * 
 	 * <p>
 	 * <b>Warning</b>: Don't use this method to get write access.
@@ -95,7 +97,7 @@ public interface FileSystemSupport {
 	 * 
 	 * @param path
 	 *            the path
-	 * @return the URI representing the given path
+	 * @return the URI representing the given path or <code>null</code> if the path points to a non existent file or a folder.
 	 */
 	URI toURI(Path path);
 }
