@@ -8,6 +8,8 @@
 package org.eclipse.xtext.idea.filesystem;
 
 import com.google.common.base.Objects;
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
@@ -15,6 +17,7 @@ import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.List;
@@ -34,8 +37,15 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
   
   @Override
   public IProjectConfig findProjectByName(final String name) {
-    ModuleManager _instance = ModuleManager.getInstance(this.project);
-    final Module module = _instance.findModuleByName(name);
+    Application _application = ApplicationManager.getApplication();
+    final Computable<Module> _function = new Computable<Module>() {
+      @Override
+      public Module compute() {
+        ModuleManager _instance = ModuleManager.getInstance(IdeaWorkspaceConfig.this.project);
+        return _instance.findModuleByName(name);
+      }
+    };
+    final Module module = _application.<Module>runReadAction(_function);
     boolean _equals = Objects.equal(module, null);
     if (_equals) {
       return null;

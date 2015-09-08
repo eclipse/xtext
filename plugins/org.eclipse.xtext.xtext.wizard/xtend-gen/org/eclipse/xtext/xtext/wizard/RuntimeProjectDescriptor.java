@@ -967,7 +967,15 @@ public class RuntimeProjectDescriptor extends TestedProjectDescriptor {
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("\t");
-        _builder.append("generateExample = true");
+        _builder.append("generateServlet = true");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("generateJettyLauncher = true");
+        _builder.newLine();
+        _builder.append("\t\t\t");
+        _builder.append("\t");
+        _builder.append("generateHtmlExample = true");
         _builder.newLine();
         _builder.append("\t\t\t");
         _builder.append("}");

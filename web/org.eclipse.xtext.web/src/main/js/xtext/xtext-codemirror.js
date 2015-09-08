@@ -60,6 +60,9 @@
  *     {location.protocol}//{location.host}{baseUrl}xtext-service
  * showErrorDialogs = false {Boolean}
  *     Whether errors should be displayed in popup dialogs.
+ * syntaxDefinition {String}
+ *     If the 'mode' option is not set, the default mode 'xtext/{xtextLang}' is used. Set this option to
+ *     'none' to suppress this behavior and disable syntax highlighting.
  * textUpdateDelay = 500 {Number}
  *     The number of milliseconds to wait after a text change before Xtext services are invoked.
  * xtextLang {String}
@@ -160,7 +163,7 @@ define([
 	CodeMirrorServiceBuilder.prototype.setupSyntaxHighlighting = function() {
 		var options = this.services.options;
 		// If the mode option is set, syntax highlighting has already been configured by CM
-		if (!options.mode && options.xtextLang) {
+		if (!options.mode && options.syntaxDefinition != 'none' && options.xtextLang) {
 			this.editor.setOption('mode', 'xtext/' + options.xtextLang);
 		}
 	}

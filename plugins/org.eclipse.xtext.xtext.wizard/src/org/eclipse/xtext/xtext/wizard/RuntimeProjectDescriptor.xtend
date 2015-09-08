@@ -316,7 +316,9 @@ class RuntimeProjectDescriptor extends TestedProjectDescriptor {
 							// web integration
 							fragment = web.WebIntegrationFragment auto-inject {
 								framework = "Ace"
-								generateExample = true
+								generateServlet = true
+								generateJettyLauncher = true
+								generateHtmlExample = true
 							}
 						«ENDIF»
 					}
