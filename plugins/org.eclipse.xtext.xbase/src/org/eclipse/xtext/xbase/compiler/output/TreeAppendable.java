@@ -385,7 +385,12 @@ public class TreeAppendable implements ITreeAppendable, IAcceptor<String>, CharS
 			return appendTreeAppendable((ITreeAppendable)content);
 		}
 		closeLastChild();
-		appendIndented(content.toString());
+		if (content == null) {
+			appendIndented("null");
+			log.warn("null was passed to treeappendable", new NullPointerException());
+		} else {
+			appendIndented(content.toString());
+		}
 		return this;
 	}
 
