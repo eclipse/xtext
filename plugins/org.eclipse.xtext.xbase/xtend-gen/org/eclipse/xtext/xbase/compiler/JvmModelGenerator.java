@@ -271,7 +271,8 @@ public class JvmModelGenerator implements IGenerator {
       }
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       this.generateTypeParameterDeclaration(it, childAppendable, config);
       EList<JvmTypeParameter> _typeParameters = it.getTypeParameters();
       boolean _isEmpty = _typeParameters.isEmpty();
@@ -382,7 +383,8 @@ public class JvmModelGenerator implements IGenerator {
       childAppendable.append("enum ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       childAppendable.append(" ");
       this.generateExtendsClause(it, childAppendable, config);
       ITreeAppendable _append = childAppendable.append("{");
@@ -458,7 +460,8 @@ public class JvmModelGenerator implements IGenerator {
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     this.generateAnnotations(_annotations, appendable, true, config);
     String _simpleName = it.getSimpleName();
-    appendable.append(_simpleName);
+    String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+    appendable.append(_makeJavaIdentifier);
   }
   
   protected ITreeAppendable _generateBody(final JvmAnnotationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -472,7 +475,8 @@ public class JvmModelGenerator implements IGenerator {
       childAppendable.append("@interface ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       childAppendable.append(" {");
       Iterable<JvmMember> _membersToBeCompiled = this.getMembersToBeCompiled(it);
       Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_membersToBeCompiled, JvmDeclaredType.class);
@@ -516,7 +520,8 @@ public class JvmModelGenerator implements IGenerator {
     tracedAppendable.append(" ");
     ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
     String _simpleName = it.getSimpleName();
-    _traceSignificant.append(_simpleName);
+    String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+    _traceSignificant.append(_makeJavaIdentifier);
     tracedAppendable.append("()");
     this.generateDefaultExpression(it, tracedAppendable, config);
     tracedAppendable.append(";");
@@ -951,7 +956,8 @@ public class JvmModelGenerator implements IGenerator {
       tracedAppendable.append(" ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       this.generateInitialization(it, tracedAppendable, config);
       _xblockexpression = tracedAppendable.append(";");
     }
@@ -980,7 +986,8 @@ public class JvmModelGenerator implements IGenerator {
       tracedAppendable.append(" ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       tracedAppendable.append("(");
       this.generateParameters(it, tracedAppendable, config);
       tracedAppendable.append(")");
@@ -1019,7 +1026,8 @@ public class JvmModelGenerator implements IGenerator {
       this.generateTypeParameterDeclaration(it, tracedAppendable, config);
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(tracedAppendable, it);
       String _simpleName = it.getSimpleName();
-      _traceSignificant.append(_simpleName);
+      String _makeJavaIdentifier = this.makeJavaIdentifier(_simpleName);
+      _traceSignificant.append(_makeJavaIdentifier);
       tracedAppendable.append("(");
       this.generateParameters(it, tracedAppendable, config);
       tracedAppendable.append(")");
@@ -1942,7 +1950,8 @@ public class JvmModelGenerator implements IGenerator {
         appendable.append(_declaringType);
         appendable.append(".");
         String _simpleName = it.getSimpleName();
-        appendable.append(_simpleName);
+        String _makeJavaIdentifier = JvmModelGenerator.this.makeJavaIdentifier(_simpleName);
+        appendable.append(_makeJavaIdentifier);
       }
     };
     this._loopExtensions.<JvmEnumerationLiteral>forEachWithShortcut(appendable, _values, _function);
