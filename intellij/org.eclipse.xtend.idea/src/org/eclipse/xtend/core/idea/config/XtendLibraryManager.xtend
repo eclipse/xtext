@@ -40,26 +40,27 @@ class XtendLibraryManager {
 	@Inject XtendLibraryDescription xtendLibDescr
 	static MavenId XTEND_LIB_MAVEN_ID
 
-	def ensureXtendLibAvailable(ModifiableRootModel rootModel, Module module) {
-		ensureXtendLibAvailable(rootModel, module, null)
+	def ensureXtendLibAvailable(ModifiableRootModel rootModel) {
+		ensureXtendLibAvailable(rootModel, null)
 	}
 
-	def ensureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
-		val project = module.project
+	def ensureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
+		val project = rootModel.project
 		if (project.initialized) {
 			DumbService.getInstance(project).runWhenSmart [
-				doEnsureXtendLibAvailable(rootModel, module, context)
+				doEnsureXtendLibAvailable(rootModel, context)
 			]
 		} else {
 			StartupManager.getInstance(project).registerPostStartupActivity [
-				doEnsureXtendLibAvailable(rootModel, module, context)
+				doEnsureXtendLibAvailable(rootModel, context)
 			]
 		}
 	}
 
-	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, Module module, PsiFile context) {
+	protected def void doEnsureXtendLibAvailable(ModifiableRootModel rootModel, PsiFile context) {
+		val module = rootModel.module
 		val scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module)
-		val psiClass = JavaPsiFacade.getInstance(module.project).findClass(Data.name, scope)
+		val psiClass = JavaPsiFacade.getInstance(rootModel.project).findClass(Data.name, scope)
 		if (psiClass == null) {
 			if (module.isMavenizedModule) {
 				module.addMavenDependency(context)

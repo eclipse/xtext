@@ -65,7 +65,7 @@ class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportProvider
 		val xtendSupport = xtendSupportConfigurableProvider.get
 		val conf = xtendSupport.createOrGetXtendFacetConf(module)
 		xtendSupport.presetGradleOutputDirectories(conf.state,module)
-		xtendSupport.createOutputFolders(conf.state,rootModel)
+		xtendSupport.createOutputFolders(rootModel,conf.state)
 	}
 
 }
