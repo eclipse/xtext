@@ -39,7 +39,7 @@ class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
 		unrelatedProject = createPluginProject("unrelated")
 	}
 	
-	@Test def void testWorkingCopyOwber_01() {
+	@Test def void testWorkingCopyOwner_01() {
 		val file = unrelatedProject.getFile("src/foo/MyClass.xtend")
 		createFile(file.fullPath, '''
 			package foo
@@ -51,7 +51,7 @@ class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
 		assertNull("no source expected as, xtend file is in unrelated project", newWorkingCopyOwner.findSource('MyClass','foo'))
 	}
 	
-	@Test def void testWorkingCopyOwber_02() {
+	@Test def void testWorkingCopyOwner_02() {
 		workbenchTestHelper.createFile("foo/MyClass.xtend", '''
 			package foo
 			class MyClass {
@@ -61,7 +61,8 @@ class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
 		waitForBuild
 		assertEquals('''
 			package foo;
-			public class MyClass{}'''.toString,newWorkingCopyOwner.findSource('MyClass','foo'))
+			public static class MyClass{
+			}'''.toString,newWorkingCopyOwner.findSource('MyClass','foo'))
 	}
 	
 	protected def newWorkingCopyOwner() {
