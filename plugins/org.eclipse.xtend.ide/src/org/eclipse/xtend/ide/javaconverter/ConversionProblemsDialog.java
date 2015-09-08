@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.javaconverter;
 
+import static com.google.common.collect.Sets.*;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -126,18 +128,26 @@ public class ConversionProblemsDialog extends Dialog {
 		GridData gd = new GridData(GridData.FILL_HORIZONTAL | GridData.FILL_VERTICAL);
 		javaFilesPane.setLayoutData(gd);
 		javaFilesPane.setText("Files with unrecoverable problems");
-		javaFilesTable = new Table(javaFilesPane, SWT.CHECK | SWT.H_SCROLL | SWT.V_SCROLL);
+		javaFilesTable = new Table(javaFilesPane, SWT.MULTI | SWT.CHECK | SWT.H_SCROLL | SWT.V_SCROLL);
 		javaFilesTable.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (e.detail == SWT.CHECK) {
 					if (e.item instanceof TableItem) {
-						TableItem ti = (TableItem) e.item;
-						if (!ti.getChecked())
-							excluded.add((ICompilationUnit) ti.getData());
-						else
-							excluded.remove(ti.getData());
+						TableItem checkedItem = (TableItem) e.item;
+						Set<TableItem> selectedItems = newHashSet(javaFilesTable.getSelection());
+						for(TableItem ti: selectedItems) {
+							ti.setChecked(checkedItem.getChecked());
+						}
+						selectedItems.add(checkedItem);
+						for(TableItem ti: selectedItems) {
+							if (!ti.getChecked())
+								excluded.add((ICompilationUnit) ti.getData());
+							else
+								excluded.remove(ti.getData());
+						}
 					}
+					
 				} else {
 					handleMemberSelect(e.item);
 				}
