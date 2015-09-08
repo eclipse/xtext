@@ -61,7 +61,7 @@ class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
 		waitForBuild
 		assertEquals('''
 			package foo;
-			public static class MyClass{
+			public class MyClass{
 			}'''.toString,newWorkingCopyOwner.findSource('MyClass','foo'))
 	}
 	
