@@ -62,7 +62,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testWorkingCopyOwber_01() {
+  public void testWorkingCopyOwner_01() {
     try {
       final IFile file = this.unrelatedProject.getFile("src/foo/MyClass.xtend");
       IPath _fullPath = file.getFullPath();
@@ -86,7 +86,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testWorkingCopyOwber_02() {
+  public void testWorkingCopyOwner_02() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo");
@@ -102,7 +102,9 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo;");
       _builder_1.newLine();
-      _builder_1.append("public class MyClass{}");
+      _builder_1.append("public static class MyClass{");
+      _builder_1.newLine();
+      _builder_1.append("}");
       String _string = _builder_1.toString();
       WorkingCopyOwner _newWorkingCopyOwner = this.newWorkingCopyOwner();
       String _findSource = _newWorkingCopyOwner.findSource("MyClass", "foo");

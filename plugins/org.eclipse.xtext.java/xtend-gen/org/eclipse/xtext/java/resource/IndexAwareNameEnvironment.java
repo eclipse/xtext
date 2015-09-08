@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader;
 import org.eclipse.jdt.internal.compiler.env.INameEnvironment;
@@ -15,7 +16,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.ISelectable;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -28,7 +30,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class IndexAwareNameEnvironment implements INameEnvironment {
   private final ClassLoader classLoader;
   
-  private final ISelectable indexAccesss;
+  private final IResourceDescriptions resourceDescriptions;
   
   private final EObjectDescriptionBasedStubGenerator stubGenerator;
   
@@ -58,12 +60,15 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
       if (_containsKey) {
         return this.cache.get(className);
       }
-      Iterable<IEObjectDescription> _exportedObjects = this.indexAccesss.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
+      Iterable<IEObjectDescription> _exportedObjects = this.resourceDescriptions.getExportedObjects(TypesPackage.Literals.JVM_DECLARED_TYPE, className, false);
       final IEObjectDescription candidate = IterableExtensions.<IEObjectDescription>head(_exportedObjects);
       NameEnvironmentAnswer result = null;
       boolean _notEquals = (!Objects.equal(candidate, null));
       if (_notEquals) {
-        final String source = this.stubGenerator.getJavaStubSource(candidate);
+        URI _eObjectURI = candidate.getEObjectURI();
+        URI _trimFragment = _eObjectURI.trimFragment();
+        final IResourceDescription resourceDescription = this.resourceDescriptions.getResourceDescription(_trimFragment);
+        final String source = this.stubGenerator.getJavaStubSource(candidate, resourceDescription);
         char[] _charArray = source.toCharArray();
         String _string = className.toString("/");
         String _plus = (_string + ".java");
@@ -113,10 +118,10 @@ public class IndexAwareNameEnvironment implements INameEnvironment {
     return Character.isLowerCase((_head).charValue());
   }
   
-  public IndexAwareNameEnvironment(final ClassLoader classLoader, final ISelectable indexAccesss, final EObjectDescriptionBasedStubGenerator stubGenerator) {
+  public IndexAwareNameEnvironment(final ClassLoader classLoader, final IResourceDescriptions resourceDescriptions, final EObjectDescriptionBasedStubGenerator stubGenerator) {
     super();
     this.classLoader = classLoader;
-    this.indexAccesss = indexAccesss;
+    this.resourceDescriptions = resourceDescriptions;
     this.stubGenerator = stubGenerator;
   }
 }
