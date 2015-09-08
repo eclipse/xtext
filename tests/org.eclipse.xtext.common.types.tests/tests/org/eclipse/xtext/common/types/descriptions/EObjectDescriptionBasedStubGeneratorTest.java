@@ -42,12 +42,12 @@ public class EObjectDescriptionBasedStubGeneratorTest {
 		EObjectDescription _annotation = new EObjectDescription(QualifiedName.create("foo","Bar"), TypesFactory.eINSTANCE.createJvmAnnotationType(), Collections.<String,String>emptyMap());
 		IResourceDescription emptyResource = BuilderStateFactory.eINSTANCE.createResourceDescription();
 
-		assertEquals("package foo;\npublic static class Bar{\n}",gen.getJavaStubSource(_class, emptyResource));
-		assertEquals("package foo;\npublic static class Bar<A,B>{\n}",gen.getJavaStubSource(_class_with_typeParam, emptyResource));
+		assertEquals("package foo;\npublic class Bar{\n}",gen.getJavaStubSource(_class, emptyResource));
+		assertEquals("package foo;\npublic class Bar<A,B>{\n}",gen.getJavaStubSource(_class_with_typeParam, emptyResource));
 		assertNull(gen.getJavaStubSource(_nested_class, emptyResource));
-		assertEquals("package foo;\npublic static interface Bar{\n}",gen.getJavaStubSource(_interface, emptyResource));
-		assertEquals("package foo;\npublic static enum Bar{\n}",gen.getJavaStubSource(_enum, emptyResource));
-		assertEquals("package foo;\npublic static @interface Bar{\n}",gen.getJavaStubSource(_annotation, emptyResource));
+		assertEquals("package foo;\npublic interface Bar{\n}",gen.getJavaStubSource(_interface, emptyResource));
+		assertEquals("package foo;\npublic enum Bar{\n}",gen.getJavaStubSource(_enum, emptyResource));
+		assertEquals("package foo;\npublic @interface Bar{\n}",gen.getJavaStubSource(_annotation, emptyResource));
 	}
 	
 	@Test 
@@ -80,14 +80,14 @@ public class EObjectDescriptionBasedStubGeneratorTest {
 			}
 		};
 		assertEquals("package foo;\n"
-				+ "public static class Bar{\n"
+				+ "public class Bar{\n"
+				+ "public static class Baz0{\n"
+				+ "}\n"
 				+ "public static class Baz1{\n"
 				+ "public static class FooBar0{\n"
 				+ "}\n"
 				+ "public static class FooBar0{\n"
 				+ "}\n"
-				+ "}\n"
-				+ "public static class Baz0{\n"
 				+ "}\n"
 				+ "}"
 				, gen.getJavaStubSource(_top, resourceDescription));

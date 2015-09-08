@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 
 /**
@@ -30,7 +31,7 @@ public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
 		if(isNestedType(description) || !isJvmDeclaredType(description)) {
 			return null;
 		}
-		Multimap<QualifiedName, IEObjectDescription> owner2nested = HashMultimap.create();
+		Multimap<QualifiedName, IEObjectDescription> owner2nested = LinkedHashMultimap.create();
 		for(IEObjectDescription other: resourceDescription.getExportedObjects()) {
 			if(isJvmDeclaredType(other) && isNestedType(other))
 				owner2nested.put(getOwnerClassName(other.getQualifiedName()), other);
@@ -47,7 +48,9 @@ public class EObjectDescriptionBasedStubGenerator implements IStubGenerator {
 
 	protected void appendType(final IEObjectDescription description, Multimap<QualifiedName, IEObjectDescription> owner2nested,
 			StringBuilder classSignatureBuilder) {
-		classSignatureBuilder.append("\npublic static ");
+		classSignatureBuilder.append("\npublic ");
+		if(isNestedType(description))
+			classSignatureBuilder.append("static ");
 		if (description.getEClass() == TypesPackage.Literals.JVM_GENERIC_TYPE) {
 			if (description.getUserData(JvmTypesResourceDescriptionStrategy.IS_INTERFACE) != null) {
 				classSignatureBuilder.append("interface ");
