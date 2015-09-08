@@ -250,8 +250,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		''')
 	}
 	@Test def void testBasicForStatementCase_04() throws Exception {
-		assertEquals(
-		'''
+		assertEquals('''
 		class JavaToConvert {
 			def void visit() {
 				for (val int a=1, val int b=2; true; ) {
@@ -266,9 +265,27 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			}
 		'''))
 	}
-	
-	@Test def void testExtendedForStatementCase_01() throws Exception {
 
+	@Test def void testBasicForStatementCase_05() throws Exception {
+		val javaCode = '''
+		public class JavaToConvert {
+				public void visit() {
+					for(char c=0; c<10; ++c) {
+					}
+				}
+		}
+		'''
+		toValidXtendClass(javaCode)
+		assertEquals('''
+		class JavaToConvert {
+			def void visit() {
+				for (var char c=(0) as char; c < 10; {c=(c + 1) as char}) {
+				}
+			}
+		}'''.toString, toXtendCode(javaCode))
+	}
+
+	@Test def void testExtendedForStatementCase_01() throws Exception {
 		toValidXtendClass('''
 			import java.util.List;
 			public class JavaToConvert {
@@ -278,7 +295,6 @@ class JavaConverterTest extends AbstractXtendTestCase {
 				}
 			}
 		''')
-
 	}
 
 	@Test def void testOverride() throws Exception {
@@ -830,7 +846,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 			'private List<String> l=Arrays.asList(new String[] { "AType", "RootRule" });')
 		assertEquals('List<String> l=Arrays.asList((#["AType", "RootRule"] as String[]))', xtendCode)
 	}
-
+	
 	@Test def void testArrayShiftDimensionCase() throws Exception {
 		val xtendCode = '''
 			private int ar[] = new int[1];
@@ -956,7 +972,7 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		assertEquals("a", xtendMember.getName())
 		assertTrue(xtendMember.getInitialValue() instanceof RichString)
 		assertTrue((clazz.getMembers().get(2) as XtendField).getInitialValue() instanceof RichString)
-		assertEquals("static package String a='''«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»'''",
+		assertEquals("static package String a='''«(i - i)»«i»4=«({i=i - 1})»1=«(i++)»«i»'''",
 			toXtendClassBodyDeclr("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;"))
 	}
 
@@ -1260,12 +1276,14 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 						case 3: {
 						}
 					}
+				}
 				public void doStuff2() {
 					switch (1) {
 						case 1:
 						case 2:
 							System.out.println();
 						case 3:
+							System.out.println();
 					}
 				}
 				public void doStuff3() {
@@ -1281,8 +1299,30 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 		assertNotNull(clazz)
 	}
 
+	@Test def void testThrowExpressionCase() throws Exception {
+		val java = 
+		'''
+		class Foo {
+			void foo(byte[] bytes) {
+				if (true) throw new RuntimeException();
+				bytes[1] = (byte) 2;
+			}
+		}'''
+		var clazz = toValidXtendClass(java)
+		assertNotNull(clazz)
+		
+		assertEquals(
+		'''
+		package class Foo {
+			def package void foo(byte[] bytes) {
+				if (true) throw new RuntimeException();
+				{ val _wrVal_bytes=bytes _wrVal_bytes.set(1,2 as byte)} 
+			}
+		}'''.toString, java.toXtendCode)
+	}
+	
 	@Test def void testXORExpressionCase() throws Exception {
-		var clazz = toValidXtendClass(
+		val java = 
 			'''
 		public class XorCase {
 			public void doXorOperation() {
@@ -1302,8 +1342,30 @@ public String loadingURI='''classpath:/«('''«someVar»LoadingResourceWithError'''
 				}
 			}
 			
-		}''')
+		}'''
+		var clazz = toValidXtendClass(java)
 		assertNotNull(clazz)
+		
+		assertEquals(
+		'''
+		class XorCase {
+			def void doXorOperation() {
+				var boolean b=true 
+				if (true.xor(b)) {
+					return;
+				}
+				if (b.xor(b)) {
+					return;
+				}
+				if (b.xor(false)) {
+					return;
+				}
+				var int i=1 
+				if (((1.bitwiseXor(2).bitwiseXor(4)) + (i.bitwiseXor(2)) - (3.bitwiseXor(i)).bitwiseXor(2)) > i) {
+					return;
+				}
+			}
+		}'''.toString, java.toXtendCode)
 	}
 	
 	@Test def void testFinalVariableEmptyInitializer() throws Exception {

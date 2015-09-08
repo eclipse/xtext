@@ -159,6 +159,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testBasicForStatementCase_04();
   }
   
+  public void testBasicForStatementCase_05() throws Exception {
+    delegate.testBasicForStatementCase_05();
+  }
+  
   public void testBitwiseComplementCase() throws Exception {
     delegate.testBitwiseComplementCase();
   }
@@ -461,6 +465,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
   
   public void testSynchronizedStatement() throws Exception {
     delegate.testSynchronizedStatement();
+  }
+  
+  public void testThrowExpressionCase() throws Exception {
+    delegate.testThrowExpressionCase();
   }
   
   public void testTryCatchCase() throws Exception {

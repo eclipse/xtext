@@ -247,16 +247,16 @@ class ASTFlattenerUtils {
 			}
 			scope = scope.findDeclarationBlocks
 		}
-		
+
 		return null
 	}
-	
+
 	def private findDeclarationBlocks(ASTNode simpleName) {
 		var ASTNode block = simpleName.findParentOfType(Block)
-		if(block === null) {
+		if (block === null) {
 			block = simpleName.findParentOfType(MethodDeclaration)
 		}
-		if(block === null) {
+		if (block === null) {
 			block = simpleName.findParentOfType(TypeDeclaration)
 		}
 		return block
@@ -282,7 +282,7 @@ class ASTFlattenerUtils {
 				}
 				return false
 			}
-			
+
 			override preVisit2(ASTNode node) {
 				matchesFound.empty
 			}
@@ -384,14 +384,15 @@ class ASTFlattenerUtils {
 		}
 		return null
 	}
-	
+
 	def boolean needPrimitiveCast(Type type) {
-		if(type instanceof PrimitiveType) {
-			return type.primitiveTypeCode==PrimitiveType.BYTE ||type.primitiveTypeCode==PrimitiveType.SHORT
+		if (type instanceof PrimitiveType) {
+			return type.primitiveTypeCode == PrimitiveType.CHAR || type.primitiveTypeCode == PrimitiveType.BYTE ||
+				type.primitiveTypeCode == PrimitiveType.SHORT
 		}
 		return false
 	}
-	
+
 	def genericChildProperty(ASTNode node, String propertyName) {
 		val property = node.structuralPropertiesForType.filter(ChildPropertyDescriptor).filter[propertyName == id].head
 		if (property != null) {

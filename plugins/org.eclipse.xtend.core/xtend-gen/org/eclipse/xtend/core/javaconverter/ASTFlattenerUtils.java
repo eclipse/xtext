@@ -754,14 +754,22 @@ public class ASTFlattenerUtils {
   public boolean needPrimitiveCast(final Type type) {
     if ((type instanceof PrimitiveType)) {
       boolean _or = false;
+      boolean _or_1 = false;
       PrimitiveType.Code _primitiveTypeCode = ((PrimitiveType)type).getPrimitiveTypeCode();
-      boolean _equals = Objects.equal(_primitiveTypeCode, PrimitiveType.BYTE);
+      boolean _equals = Objects.equal(_primitiveTypeCode, PrimitiveType.CHAR);
       if (_equals) {
-        _or = true;
+        _or_1 = true;
       } else {
         PrimitiveType.Code _primitiveTypeCode_1 = ((PrimitiveType)type).getPrimitiveTypeCode();
-        boolean _equals_1 = Objects.equal(_primitiveTypeCode_1, PrimitiveType.SHORT);
-        _or = _equals_1;
+        boolean _equals_1 = Objects.equal(_primitiveTypeCode_1, PrimitiveType.BYTE);
+        _or_1 = _equals_1;
+      }
+      if (_or_1) {
+        _or = true;
+      } else {
+        PrimitiveType.Code _primitiveTypeCode_2 = ((PrimitiveType)type).getPrimitiveTypeCode();
+        boolean _equals_2 = Objects.equal(_primitiveTypeCode_2, PrimitiveType.SHORT);
+        _or = _equals_2;
       }
       return _or;
     }
