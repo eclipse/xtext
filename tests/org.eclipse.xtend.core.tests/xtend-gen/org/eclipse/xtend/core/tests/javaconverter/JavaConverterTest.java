@@ -497,6 +497,48 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testBasicForStatementCase_05() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class JavaToConvert {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("public void visit() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("for(char c=0; c<10; ++c) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final String javaCode = _builder.toString();
+    this.toValidXtendClass(javaCode);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class JavaToConvert {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void visit() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("for (var char c=(0) as char; c < 10; {c=(c + 1) as char}) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _xtendCode = this.toXtendCode(javaCode);
+    Assert.assertEquals(_string, _xtendCode);
+  }
+  
+  @Test
   public void testExtendedForStatementCase_01() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List;");
@@ -1756,7 +1798,7 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     XExpression _initialValue_1 = ((XtendField) _get_1).getInitialValue();
     Assert.assertTrue((_initialValue_1 instanceof RichString));
     String _xtendClassBodyDeclr = this.toXtendClassBodyDeclr("static String a = (i-i)+i+\"4=\"+(--i)+\"1=\"+(i++)+i;");
-    Assert.assertEquals("static package String a=\'\'\'«(i - i)»«i»4=«((i=i - 1))»1=«(i++)»«i»\'\'\'", _xtendClassBodyDeclr);
+    Assert.assertEquals("static package String a=\'\'\'«(i - i)»«i»4=«({i=i - 1})»1=«(i++)»«i»\'\'\'", _xtendClassBodyDeclr);
   }
   
   @Test
@@ -2340,6 +2382,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("public void doStuff2() {");
     _builder.newLine();
     _builder.append("\t\t");
@@ -2356,6 +2401,9 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("case 3:");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("System.out.println();");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -2393,6 +2441,48 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("}");
     XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
+  }
+  
+  @Test
+  public void testThrowExpressionCase() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("void foo(byte[] bytes) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("if (true) throw new RuntimeException();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bytes[1] = (byte) 2;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    final String java = _builder.toString();
+    XtendClass clazz = this.toValidXtendClass(java);
+    Assert.assertNotNull(clazz);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def package void foo(byte[] bytes) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (true) throw new RuntimeException();");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("{ val _wrVal_bytes=bytes _wrVal_bytes.set(1,2 as byte)} ");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _xtendCode = this.toXtendCode(java);
+    Assert.assertEquals(_string, _xtendCode);
   }
   
   @Test
@@ -2451,8 +2541,64 @@ public class JavaConverterTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
-    XtendClass clazz = this.toValidXtendClass(_builder);
+    final String java = _builder.toString();
+    XtendClass clazz = this.toValidXtendClass(java);
     Assert.assertNotNull(clazz);
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class XorCase {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void doXorOperation() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("var boolean b=true ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (true.xor(b)) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (b.xor(b)) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (b.xor(false)) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("var int i=1 ");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("if (((1.bitwiseXor(2).bitwiseXor(4)) + (i.bitwiseXor(2)) - (3.bitwiseXor(i)).bitwiseXor(2)) > i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t\t");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    String _string = _builder_1.toString();
+    String _xtendCode = this.toXtendCode(java);
+    Assert.assertEquals(_string, _xtendCode);
   }
   
   @Test

@@ -234,44 +234,52 @@ class JavaASTFlattener extends ASTVisitor {
 		if (leftSide instanceof ArrayAccess) {
 			if (leftSide.array instanceof SimpleName)
 				type = findDeclaredType(leftSide.array as SimpleName)
-			val arrayName = computeArrayName(leftSide)
-			appendToBuffer("{ ")
-			val valName = '''_wrVal_«arrayName»'''
-			var idxName = '''_wrIndx_«arrayName»'''
-
-			appendToBuffer('''val «valName»=''')
-			leftSide.array.accept(this)
-			if (!leftSide.index.isConstantArrayIndex) {
-				appendToBuffer(''' val «idxName»=''')
-				leftSide.getIndex().accept(this)
-				appendToBuffer(''' «valName».set(«idxName»,''')
-			} else {
-				appendToBuffer(''' «valName».set(''')
-				leftSide.index.accept(this)
-				appendToBuffer(",")
-			}
-			node.handleRightHandSide(type)
-			appendToBuffer(")")
-			if (node.needsReturnValue()) {
-				appendToBuffer(''' «valName».get(''')
-				if (!leftSide.index.isConstantArrayIndex) {
-					appendToBuffer('''«idxName»''')
-				} else {
-					leftSide.getIndex().accept(this)
-				}
-				appendToBuffer(')')
-			}
-			appendToBuffer("}")
+			node.handleAssignment(leftSide, type)
 		} else {
 			if (leftSide instanceof SimpleName)
 				type = findDeclaredType(leftSide)
-			leftSide.accept(this)
-			appendToBuffer(node.getOperator().toString())
-			node.handleRightHandSide(type)
+			node.handleAssignment(leftSide, type)
 		}
 		return false
 	}
+	
+	def void handleAssignment(Assignment node, ASTNode leftSide, Type type) {
+		leftSide.accept(this)
+		appendToBuffer(node.getOperator().toString())
+		node.handleRightHandSide(type)
+	}
 
+	def void handleAssignment(Assignment node, ArrayAccess leftSide, Type type) {
+		val arrayName = computeArrayName(leftSide)
+		appendToBuffer("{ ")
+		val valName = '''_wrVal_«arrayName»'''
+		var idxName = '''_wrIndx_«arrayName»'''
+
+		appendToBuffer('''val «valName»=''')
+		leftSide.array.accept(this)
+		if (!leftSide.index.isConstantArrayIndex) {
+			appendToBuffer(''' val «idxName»=''')
+			leftSide.getIndex().accept(this)
+			appendToBuffer(''' «valName».set(«idxName»,''')
+		} else {
+			appendToBuffer(''' «valName».set(''')
+			leftSide.index.accept(this)
+			appendToBuffer(",")
+		}
+		node.handleRightHandSide(type)
+		appendToBuffer(")")
+		if (node.needsReturnValue()) {
+			appendToBuffer(''' «valName».get(''')
+			if (!leftSide.index.isConstantArrayIndex) {
+				appendToBuffer('''«idxName»''')
+			} else {
+				leftSide.getIndex().accept(this)
+			}
+			appendToBuffer(')')
+		}
+		appendToBuffer("}")
+	}
+	
 	def handleRightHandSide(Assignment a, Type type) {
 		if (type.needPrimitiveCast) {
 			appendToBuffer('(')
@@ -1133,43 +1141,47 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(PrefixExpression node) {
-		val dummyAST = AST.newAST(node.AST.apiLevel)
+		val operand = node.operand
 		switch (node.operator) {
 			case Operator.DECREMENT,
 			case Operator.INCREMENT: {
-				if (node.operand instanceof ArrayAccess) {
-					val pfOperand = node.operand as ArrayAccess
-
+				if (operand instanceof ArrayAccess) {
 					/*	
 					 * val _tempIndex = (i = i - 1)
 					 * ints.set(_tempIndex,ints.get(_tempIndex) - 1)
 					 ints.get(_tempIndex) */
-					val arrayName = computeArrayName(pfOperand)
+					val arrayName = computeArrayName(operand)
 					val idxName = '''_tPreInx_«arrayName»'''
 					var op = "-"
 					if (node.operator == Operator.INCREMENT) {
 						op = "+"
 					}
 					appendToBuffer('''{val «idxName»=''')
-					pfOperand.index.accept(this)
+					operand.index.accept(this)
 					appendToBuffer(''' val «idxName»_res=«arrayName».get(«idxName»)«op»1''')
 					appendToBuffer(''' «arrayName».set(«idxName», «idxName»_res)  «idxName»_res}''')
 					return false
 				} else {
+					val dummyAST = AST.newAST(node.AST.apiLevel)
 					val assigment = dummyAST.newAssignment()
 					val infixOp = dummyAST.newInfixExpression
-					infixOp.leftOperand = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+					infixOp.leftOperand = ASTNode.copySubtree(dummyAST, operand) as Expression
 					if (node.operator == Operator.DECREMENT) {
 						infixOp.operator = InfixExpression.Operator.MINUS
 					} else {
 						infixOp.operator = InfixExpression.Operator.PLUS
 					}
 					infixOp.rightOperand = dummyAST.newNumberLiteral("1")
-					assigment.leftHandSide = ASTNode.copySubtree(dummyAST, node.operand) as Expression
+					val leftSide = ASTNode.copySubtree(dummyAST, operand) as Expression
+					assigment.leftHandSide = leftSide
 					assigment.rightHandSide = infixOp
-					val parent = dummyAST.newParenthesizedExpression
-					parent.expression = assigment
-					parent.accept(this)
+					appendToBuffer('{')
+					var Type type = null
+					if (operand instanceof SimpleName) {
+						type = findDeclaredType(operand)
+					}
+					assigment.handleAssignment(leftSide, type)
+					appendToBuffer('}')
 					return false
 				}
 			}
@@ -1286,6 +1298,9 @@ class JavaASTFlattener extends ASTVisitor {
 	override boolean visit(ThrowStatement node) {
 		appendToBuffer("throw ")
 		node.getExpression().accept(this)
+		if(!(node.parent instanceof Block)){
+			appendToBuffer(';')
+		}
 		return false
 	}
 
@@ -1740,7 +1755,14 @@ class JavaASTFlattener extends ASTVisitor {
 				appendToBuffer(',')
 			} else {
 				appendToBuffer(':')
-			}
+				val probablyReturns = (statements.last instanceof ReturnStatement) ||
+					(statements.last instanceof Block) &&
+						((statements.last as Block).statements.last instanceof ReturnStatement)
+				if (!isLastCase && !(probablyReturns)) {
+							appendToBuffer('''/* FIXME unsupported fall-through */''')
+							node.addProblem("Unsupported fall-through case in switch expression")
+						}
+					}
 
 			val surround = (isLastCase && statements.empty) ||
 				(!statements.empty && !(statements.get(0) instanceof Block))
