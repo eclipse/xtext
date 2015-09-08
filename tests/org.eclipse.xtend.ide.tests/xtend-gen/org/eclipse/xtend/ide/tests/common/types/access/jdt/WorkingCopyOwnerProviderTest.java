@@ -102,7 +102,7 @@ public class WorkingCopyOwnerProviderTest extends AbstractXtendUITestCase {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("package foo;");
       _builder_1.newLine();
-      _builder_1.append("public static class MyClass{");
+      _builder_1.append("public class MyClass{");
       _builder_1.newLine();
       _builder_1.append("}");
       String _string = _builder_1.toString();
