@@ -63,7 +63,9 @@ public class GradleBuildFileUtility {
       return;
     }
     final boolean android = this.isAndroidGradleModule(module);
-    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildFile, "buildscript");
+    final GrClosableBlock buildScript = this.createOrGetMethodCall(buildFile, "buildscript");
+    GrClosableBlock _createOrGetMethodCall = this.createOrGetMethodCall(buildScript, "repositories");
+    this.createStatementIfNotExists(_createOrGetMethodCall, "jcenter()");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("classpath \'org.xtend:xtend");
     String _xifexpression = null;
@@ -74,7 +76,7 @@ public class GradleBuildFileUtility {
     _builder.append("-gradle-plugin:");
     _builder.append(this.xtendGradlePluginVersion, "");
     _builder.append("\' ");
-    this.addDependency(_createOrGetMethodCall, _builder.toString());
+    this.addDependency(buildScript, _builder.toString());
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("apply plugin: \'org.xtend.xtend");
     String _xifexpression_1 = null;

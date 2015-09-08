@@ -34,8 +34,11 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript {
+		    repositories {
+		        jcenter()
+		    }
 		    dependencies {
-		        classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
+		        classpath 'org.xtend:xtend-gradle-plugin:0.4.7'
 		    }
 		}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
@@ -54,8 +57,12 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 		assertEquals('''
 		buildscript{dependencies{
-		    classpath 'org.xtend:xtend-gradle-plugin:«util.xtendGradlePluginVersion»'
-		}}
+		    classpath 'org.xtend:xtend-gradle-plugin:0.4.7'
+		}
+		    repositories {
+		        jcenter()
+		    }
+		}
 		apply plugin: 'org.xtend.xtend' '''.toString.trim, buildFile.text)
 
 	}
@@ -93,11 +100,16 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 
 	def assertTree(GroovyFile buildFile) {
 		assertEquals(2, buildFile.getStatements().length)
-		assertTrue(buildFile.statements.get(0) instanceof GrMethodCallExpression)
-		val bs = buildFile.statements.get(0) as GrMethodCallExpression
+		val bsCol = buildFile.statements.filter(GrMethodCallExpression).filter[invokedExpression.text == 'buildscript']
+		assertEquals(1,bsCol.size)
+		val bs = bsCol.head
 		assertEquals('buildscript', bs.invokedExpression.text)
-		val dps = bs.closureArguments.head.children.filter(GrMethodCallExpression).head
-		assertEquals('dependencies', dps.invokedExpression.text)
+		
+		val children = bs.closureArguments.head.children.filter(GrMethodCallExpression)
+		assertEquals(2,children.size)
+		
+		val dps = children.filter[invokedExpression.text == 'dependencies'].head
+		assertNotNull(dps)
 		assertEquals(3, dps.children.length)
 		val closureBlock = dps.closureArguments.head
 		assertEquals(1, closureBlock.statements.length)
@@ -106,5 +118,11 @@ class GradleBuildFileUtilTest extends LightXtendTest {
 		assertNotNull(clEntry)
 		assertEquals('classpath', clEntry.invokedExpression.text)
 		assertTrue(clEntry.argumentList.text.startsWith("'org.xtend:xtend-gradle-plugin:"))
+		
+		val repos = children.filter[invokedExpression.text == 'repositories'].head
+		assertNotNull(repos)
+		
+		val jcenterEntry = repos.closureArguments.head.statements.filter(GrMethodCallExpression).head
+		assertEquals('jcenter', jcenterEntry.invokedExpression.text)
 	}
 }

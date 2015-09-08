@@ -185,7 +185,7 @@ class XtendIntentionsProvider extends IdeaIntentionsProvider {
 			val module = ModuleUtil.findModuleForPsiElement(file)
 			if (module !== null) {
 				val model = ModuleRootManager.getInstance(module).modifiableModel
-				libraryManager.ensureXtendLibAvailable(model, module, file)
+				libraryManager.ensureXtendLibAvailable(model, file)
 				model.commit
 			}
 		}

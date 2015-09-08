@@ -332,7 +332,7 @@ public class XtendIntentionsProvider extends IdeaIntentionsProvider {
       if ((module != null)) {
         ModuleRootManager _instance = ModuleRootManager.getInstance(module);
         final ModifiableRootModel model = _instance.getModifiableModel();
-        this.libraryManager.ensureXtendLibAvailable(model, module, file);
+        this.libraryManager.ensureXtendLibAvailable(model, file);
         model.commit();
       }
     }
