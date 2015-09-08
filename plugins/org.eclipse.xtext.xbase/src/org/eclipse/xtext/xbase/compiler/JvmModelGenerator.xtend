@@ -163,7 +163,7 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			childAppendable.append("class ")
 		}
-		childAppendable.traceSignificant(it).append(simpleName)
+		childAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		generateTypeParameterDeclaration(childAppendable, config)
 		if (typeParameters.empty)
 			childAppendable.append(" ")
@@ -203,7 +203,7 @@ class JvmModelGenerator implements IGenerator {
 		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("enum ")
-		childAppendable.traceSignificant(it).append(simpleName)
+		childAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		childAppendable.append(" ")
 		generateExtendsClause(childAppendable, config)
 		childAppendable.append("{").increaseIndentation
@@ -226,7 +226,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.newLine
 		generateJavaDoc(appendable, config)
 		annotations.generateAnnotations(appendable, true, config)
-		appendable.append(simpleName)
+		appendable.append(simpleName.makeJavaIdentifier)
 		// TODO: constructor args
 	}
 	
@@ -236,7 +236,7 @@ class JvmModelGenerator implements IGenerator {
 		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("@interface ")
-		childAppendable.traceSignificant(it).append(simpleName)
+		childAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		childAppendable.append(" {")
 		for (innerType: membersToBeCompiled.filter(JvmDeclaredType)) {
 			val innerTypeAppendable = childAppendable.trace(innerType)
@@ -261,7 +261,7 @@ class JvmModelGenerator implements IGenerator {
 		generateModifier(tracedAppendable, config)
 		returnType.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
-		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		tracedAppendable.append("()")
 		generateDefaultExpression(tracedAppendable, config)
 		tracedAppendable.append(";")
@@ -451,7 +451,7 @@ class JvmModelGenerator implements IGenerator {
 		generateModifier(tracedAppendable, config)
 		type.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
-		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		generateInitialization(tracedAppendable, config)
 		tracedAppendable.append(";")
 	}
@@ -470,7 +470,7 @@ class JvmModelGenerator implements IGenerator {
 			returnType.serializeSafely("Object", tracedAppendable)
 		}
 		tracedAppendable.append(" ")
-		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		tracedAppendable.append("(")
 		generateParameters(tracedAppendable, config)
 		tracedAppendable.append(")")
@@ -493,7 +493,7 @@ class JvmModelGenerator implements IGenerator {
 		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		generateTypeParameterDeclaration(tracedAppendable, config)
-		tracedAppendable.traceSignificant(it).append(simpleName)
+		tracedAppendable.traceSignificant(it).append(simpleName.makeJavaIdentifier)
 		tracedAppendable.append("(")
 		generateParameters(tracedAppendable, config)
 		tracedAppendable.append(")")
@@ -930,7 +930,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(declaringType)
 			appendable.append(".")
-			appendable.append(simpleName)
+			appendable.append(simpleName.makeJavaIdentifier)
 		])
 	} 
 		
