@@ -762,6 +762,8 @@ public class XtendJvmModelInferrer extends AbstractModelInferrer {
 	}
 
 	protected void transform(XtendEnumLiteral literal, JvmEnumerationType container) {
+		if (literal.getName() == null)
+			return;
 		JvmEnumerationLiteral jvmLiteral = typesFactory.createJvmEnumerationLiteral();
 		associator.associatePrimary(literal, jvmLiteral);
 		jvmLiteral.setSimpleName(literal.getName());
