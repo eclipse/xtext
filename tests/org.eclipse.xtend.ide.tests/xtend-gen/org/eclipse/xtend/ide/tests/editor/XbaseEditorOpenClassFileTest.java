@@ -554,8 +554,8 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   public String getEditorContents(final IJavaElement javaElement) {
     try {
       final IEditorPart editor = JavaUI.openInEditor(javaElement);
-      IRewriteTarget _adapter = (IRewriteTarget) editor.getAdapter(IRewriteTarget.class);
-      IDocument _document = _adapter.getDocument();
+      Object _adapter = editor.getAdapter(IRewriteTarget.class);
+      IDocument _document = ((IRewriteTarget) _adapter).getDocument();
       final String text = _document.get();
       this.helper.closeEditor(editor, false);
       return text;
