@@ -120,6 +120,6 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
     XbaseGeneratorConfigurationState _state = conf.getState();
     xtendSupport.presetGradleOutputDirectories(_state, module);
     XbaseGeneratorConfigurationState _state_1 = conf.getState();
-    xtendSupport.createOutputFolders(_state_1, rootModel);
+    xtendSupport.createOutputFolders(rootModel, _state_1);
   }
 }

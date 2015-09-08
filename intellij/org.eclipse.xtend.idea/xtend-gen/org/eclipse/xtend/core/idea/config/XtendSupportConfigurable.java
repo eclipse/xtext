@@ -69,13 +69,14 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   @Override
   public void addSupport(final Module module, final ModifiableRootModel rootModel, final ModifiableModelsProvider modifiableModelsProvider) {
     final XtendFacetConfiguration conf = this.createOrGetXtendFacetConf(module);
-    this.setupOutputConfiguration(module, conf, rootModel);
+    this.setupOutputConfiguration(rootModel, conf);
     XbaseGeneratorConfigurationState _state = conf.getState();
-    this.createOutputFolders(_state, rootModel);
-    this.xtendLibManager.ensureXtendLibAvailable(rootModel, module);
+    this.createOutputFolders(rootModel, _state);
+    this.xtendLibManager.ensureXtendLibAvailable(rootModel);
   }
   
-  public void setupOutputConfiguration(final Module module, final XtendFacetConfiguration conf, final ModifiableRootModel rootModel) {
+  public void setupOutputConfiguration(final ModifiableRootModel rootModel, final XtendFacetConfiguration conf) {
+    final Module module = rootModel.getModule();
     final GroovyFile buildFile = this._gradleBuildFileUtility.locateBuildFile(module);
     boolean _and = false;
     boolean _isGradleedModule = this._gradleBuildFileUtility.isGradleedModule(module);
@@ -97,7 +98,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
       this.presetGradleOutputDirectories(_state, module);
     } else {
       XbaseGeneratorConfigurationState _state_1 = conf.getState();
-      this.presetPlainJavaOutputDirectories(_state_1, module);
+      this.presetPlainJavaOutputDirectories(_state_1, rootModel);
     }
   }
   
@@ -153,8 +154,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     }
   }
   
-  public void presetPlainJavaOutputDirectories(final XbaseGeneratorConfigurationState state, final Module module) {
-    final ModuleRootManager moduleManager = ModuleRootManager.getInstance(module);
+  public void presetPlainJavaOutputDirectories(final XbaseGeneratorConfigurationState state, final ModifiableRootModel model) {
     final Function1<SourceFolder, Boolean> _function = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
@@ -174,7 +174,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
         return Boolean.valueOf(_and);
       }
     };
-    final VirtualFile mainSrc = this.findSourceFolder(moduleManager, _function);
+    final VirtualFile mainSrc = this.findSourceFolder(model, _function);
     final Function1<SourceFolder, Boolean> _function_1 = new Function1<SourceFolder, Boolean>() {
       @Override
       public Boolean apply(final SourceFolder it) {
@@ -193,13 +193,13 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
         return Boolean.valueOf(_and);
       }
     };
-    final VirtualFile testSrc = this.findSourceFolder(moduleManager, _function_1);
+    final VirtualFile testSrc = this.findSourceFolder(model, _function_1);
     boolean _notEquals = (!Objects.equal(mainSrc, null));
     if (_notEquals) {
       String _siblingPath = this.siblingPath(mainSrc, "xtend-gen");
       state.setOutputDirectory(_siblingPath);
     } else {
-      final VirtualFile contentRoot = this.findBestContentRoot(moduleManager);
+      final VirtualFile contentRoot = this.findBestContentRoot(model);
       String _path = contentRoot.getPath();
       String _plus = (_path + Character.valueOf(VfsUtil.VFS_SEPARATOR_CHAR));
       String _plus_1 = (_plus + "xtend-gen");
@@ -215,7 +215,7 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
     }
   }
   
-  public void createOutputFolders(final XbaseGeneratorConfigurationState state, final ModifiableRootModel rootModel) {
+  public void createOutputFolders(final ModifiableRootModel rootModel, final XbaseGeneratorConfigurationState state) {
     try {
       String _outputDirectory = state.getOutputDirectory();
       VirtualFile xtendGenMain = VfsUtil.createDirectoryIfMissing(_outputDirectory);
@@ -223,19 +223,24 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
       if (_notEquals) {
         this.addAsSourceFolder(rootModel, xtendGenMain, JavaSourceRootType.SOURCE);
       }
+      String _outputDirectory_1 = state.getOutputDirectory();
       String _testOutputDirectory = state.getTestOutputDirectory();
-      VirtualFile xtendGenTest = VfsUtil.createDirectoryIfMissing(_testOutputDirectory);
-      boolean _notEquals_1 = (!Objects.equal(xtendGenTest, null));
+      boolean _notEquals_1 = (!Objects.equal(_outputDirectory_1, _testOutputDirectory));
       if (_notEquals_1) {
-        this.addAsSourceFolder(rootModel, xtendGenTest, JavaSourceRootType.TEST_SOURCE);
+        String _testOutputDirectory_1 = state.getTestOutputDirectory();
+        VirtualFile xtendGenTest = VfsUtil.createDirectoryIfMissing(_testOutputDirectory_1);
+        boolean _notEquals_2 = (!Objects.equal(xtendGenTest, null));
+        if (_notEquals_2) {
+          this.addAsSourceFolder(rootModel, xtendGenTest, JavaSourceRootType.TEST_SOURCE);
+        }
       }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  private VirtualFile findBestContentRoot(final ModuleRootManager moduleManager) {
-    final Module module = moduleManager.getModule();
+  private VirtualFile findBestContentRoot(final ModifiableRootModel model) {
+    final Module module = model.getModule();
     Project _project = module.getProject();
     VirtualFile contentRoot = _project.getBaseDir();
     VirtualFile _moduleFile = module.getModuleFile();
@@ -250,19 +255,19 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
         return contentRoot;
       }
     }
-    VirtualFile[] _contentRoots = moduleManager.getContentRoots();
+    VirtualFile[] _contentRoots = model.getContentRoots();
     boolean _isEmpty = ((List<VirtualFile>)Conversions.doWrapArray(_contentRoots)).isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
-      VirtualFile[] _contentRoots_1 = moduleManager.getContentRoots();
+      VirtualFile[] _contentRoots_1 = model.getContentRoots();
       VirtualFile _head = IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots_1)));
       contentRoot = _head;
     }
     return contentRoot;
   }
   
-  private VirtualFile findSourceFolder(final ModuleRootManager manager, final Function1<? super SourceFolder, ? extends Boolean> fun) {
-    ContentEntry[] _contentEntries = manager.getContentEntries();
+  private VirtualFile findSourceFolder(final ModifiableRootModel rootModel, final Function1<? super SourceFolder, ? extends Boolean> fun) {
+    ContentEntry[] _contentEntries = rootModel.getContentEntries();
     final Function1<ContentEntry, Boolean> _function = new Function1<ContentEntry, Boolean>() {
       @Override
       public Boolean apply(final ContentEntry it) {
@@ -287,22 +292,25 @@ public class XtendSupportConfigurable extends FrameworkSupportInModuleConfigurab
   }
   
   public void addAsSourceFolder(final ModifiableRootModel rootModel, final VirtualFile xtendGenMain, final JavaSourceRootType type) {
-    Module _module = rootModel.getModule();
-    Project _project = _module.getProject();
-    ProjectRootManager _instance = ProjectRootManager.getInstance(_project);
-    final ProjectFileIndex projectFileIndex = _instance.getFileIndex();
-    JpsJavaExtensionService _instance_1 = JpsJavaExtensionService.getInstance();
-    final JavaSourceRootProperties properties = _instance_1.createSourceRootProperties("", true);
-    final VirtualFile contentRootFile = projectFileIndex.getContentRootForFile(xtendGenMain);
+    VirtualFile[] _contentRoots = rootModel.getContentRoots();
+    final Function1<VirtualFile, Boolean> _function = new Function1<VirtualFile, Boolean>() {
+      @Override
+      public Boolean apply(final VirtualFile it) {
+        return Boolean.valueOf(VfsUtil.isAncestor(it, xtendGenMain, true));
+      }
+    };
+    final VirtualFile contentRootFile = IterableExtensions.<VirtualFile>findFirst(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)), _function);
     ContentEntry[] _contentEntries = rootModel.getContentEntries();
-    final Function1<ContentEntry, Boolean> _function = new Function1<ContentEntry, Boolean>() {
+    final Function1<ContentEntry, Boolean> _function_1 = new Function1<ContentEntry, Boolean>() {
       @Override
       public Boolean apply(final ContentEntry it) {
         VirtualFile _file = it.getFile();
         return Boolean.valueOf(Objects.equal(_file, contentRootFile));
       }
     };
-    final ContentEntry contentRoot = IterableExtensions.<ContentEntry>findFirst(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function);
+    final ContentEntry contentRoot = IterableExtensions.<ContentEntry>findFirst(((Iterable<ContentEntry>)Conversions.doWrapArray(_contentEntries)), _function_1);
+    JpsJavaExtensionService _instance = JpsJavaExtensionService.getInstance();
+    final JavaSourceRootProperties properties = _instance.createSourceRootProperties("", true);
     if (contentRoot!=null) {
       contentRoot.<JavaSourceRootProperties>addSourceFolder(xtendGenMain, type, properties);
     }

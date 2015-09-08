@@ -74,19 +74,19 @@ public class XtendLibraryManager {
   
   private static MavenId XTEND_LIB_MAVEN_ID;
   
-  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module) {
-    this.ensureXtendLibAvailable(rootModel, module, null);
+  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel) {
+    this.ensureXtendLibAvailable(rootModel, null);
   }
   
-  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module, final PsiFile context) {
-    final Project project = module.getProject();
+  public void ensureXtendLibAvailable(final ModifiableRootModel rootModel, final PsiFile context) {
+    final Project project = rootModel.getProject();
     boolean _isInitialized = project.isInitialized();
     if (_isInitialized) {
       DumbService _instance = DumbService.getInstance(project);
       final Runnable _function = new Runnable() {
         @Override
         public void run() {
-          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, module, context);
+          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, context);
         }
       };
       _instance.runWhenSmart(_function);
@@ -95,16 +95,17 @@ public class XtendLibraryManager {
       final Runnable _function_1 = new Runnable() {
         @Override
         public void run() {
-          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, module, context);
+          XtendLibraryManager.this.doEnsureXtendLibAvailable(rootModel, context);
         }
       };
       _instance_1.registerPostStartupActivity(_function_1);
     }
   }
   
-  protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, final Module module, final PsiFile context) {
+  protected void doEnsureXtendLibAvailable(final ModifiableRootModel rootModel, final PsiFile context) {
+    final Module module = rootModel.getModule();
     final GlobalSearchScope scope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module);
-    Project _project = module.getProject();
+    Project _project = rootModel.getProject();
     JavaPsiFacade _instance = JavaPsiFacade.getInstance(_project);
     String _name = Data.class.getName();
     final PsiClass psiClass = _instance.findClass(_name, scope);

@@ -53,7 +53,7 @@ public class XtendLibraryManagerTest extends LightXtendTest {
         final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
           @Override
           public void consume(final ModifiableRootModel rootModel) {
-            XtendLibraryManagerTest.this.manager.ensureXtendLibAvailable(rootModel, module);
+            XtendLibraryManagerTest.this.manager.ensureXtendLibAvailable(rootModel);
           }
         };
         ModuleRootModificationUtil.updateModel(module, _function);
