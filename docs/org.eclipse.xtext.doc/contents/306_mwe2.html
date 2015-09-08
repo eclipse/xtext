@@ -301,7 +301,7 @@ SampleClass {
 <p>If one wants to define string properties that are actual reusable parts for other properties, she may use defined variables inside other literals like this: </p>
 
 <pre><code class="language-mwe2">var aString = "part"
-var anotherString = "reuse the ${part} here"
+var anotherString = "reuse the ${aString} here"
 </code></pre>
 
 <p>This is especially useful for file paths in workflows as one would usually want to define some common root directories only once in the workflow and reuse this fragment across certain other file locations.</p>
