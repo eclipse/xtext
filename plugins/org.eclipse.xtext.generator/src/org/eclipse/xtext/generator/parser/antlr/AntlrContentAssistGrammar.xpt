@@ -105,6 +105,7 @@ import «gaFQName()»;
 
 «DEFINE rule(Grammar original) FOR ParserRule»
 «IF isCalled(original,this)»
+«IF isValidEntryRule()-»
 // Entry rule «entryRuleName()»
 «entryRuleName()» 
 «IF definesHiddenTokens-»
@@ -113,9 +114,9 @@ import «gaFQName()»;
 }
 «ENDIF-»
 :
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
 	 «ruleName()»
-{ after(grammarAccess.«grammarElementAccess(this)»); } 
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); } 
 	 EOF 
 ;
 «IF definesHiddenTokens-»
@@ -123,8 +124,9 @@ finally {
 	myHiddenTokenState.restore();
 }
 «ENDIF-»
+«ENDIF-»
 
-// Rule «name»
+// Rule «originalElement().name»
 «ruleName()»
     @init {
 «IF definesHiddenTokens-»  
@@ -146,7 +148,7 @@ finally {
 
 «DEFINE rule(Grammar original) FOR EnumRule»
 «IF isCalled(original,this)»
-// Rule «name»
+// Rule «originalElement().name»
 «ruleName()»
     @init {
 		int stackSize = keepStackSize();
@@ -162,7 +164,7 @@ finally {
 
 «DEFINE rule(Grammar original) FOR Alternatives»
 «IF isCalled(original, containingRule())-»
-rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,20 +180,20 @@ finally {
 «DEFINE rule(Grammar original) FOR UnorderedGroup»
 «IF isCalled(original, containingRule())-»
 «LET elements.reject(e|e.isOptionalCardinality()).size AS mandatoryContent»
-rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
     @init {
     	int stackSize = keepStackSize();
-		getUnorderedGroupHelper().enter(grammarAccess.«gaRuleElementAccessor()»);
+		getUnorderedGroupHelper().enter(grammarAccess.«originalElement().gaRuleElementAccessor()»);
     }
 :
-	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__0
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__0
 	«IF mandatoryContent!=0»
-	{getUnorderedGroupHelper().canLeave(grammarAccess.«gaRuleElementAccessor()»)}?
+	{getUnorderedGroupHelper().canLeave(grammarAccess.«originalElement().gaRuleElementAccessor()»)}?
 	«ELSE»?
 	«ENDIF»
 ;
 finally {
-	getUnorderedGroupHelper().leave(grammarAccess.«gaRuleElementAccessor()»);
+	getUnorderedGroupHelper().leave(grammarAccess.«originalElement().gaRuleElementAccessor()»);
 	restoreStackSize(stackSize);
 }
 
@@ -203,7 +205,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ruleImpl FOR UnorderedGroup»
-rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__Impl
 	@init {
 		int stackSize = keepStackSize();
 		boolean selected = false;
@@ -212,9 +214,9 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 		(
 «FOREACH elements AS element ITERATOR it»
 			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.«gaRuleElementAccessor()», «it.counter0»)}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»)}?=>(
 					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.«gaRuleElementAccessor()», «it.counter0»);
+	 				  getUnorderedGroupHelper().select(grammarAccess.«originalElement().gaRuleElementAccessor()», «it.counter0»);
 	 				}
 	 				{
 	 				  selected = true;
@@ -222,15 +224,15 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 					(
 					«IF element.isMultipleCardinality()-»
 					(«ENDIF»
-						{ before(grammarAccess.«element.grammarElementAccess()»); }
+						{ before(grammarAccess.«element.originalElement().grammarElementAccess()»); }
 						(«EXPAND ebnf2 FOR element»)
-						{ after(grammarAccess.«element.grammarElementAccess()»); }
+						{ after(grammarAccess.«element.originalElement().grammarElementAccess()»); }
 					«IF element.isMultipleCardinality()-»
 					)
 					(
-						{ before(grammarAccess.«element.grammarElementAccess()»); }
+						{ before(grammarAccess.«element.originalElement().grammarElementAccess()»); }
 						((«EXPAND ebnf2 FOR element»)=>«EXPAND ebnf2 FOR element»)*
-						{ after(grammarAccess.«element.grammarElementAccess()»); }
+						{ after(grammarAccess.«element.originalElement().grammarElementAccess()»); }
 					)«ENDIF-»
 					)
  				)
@@ -240,20 +242,20 @@ rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
 ;
 finally {
 	if (selected)
-		getUnorderedGroupHelper().returnFromSelection(grammarAccess.«gaRuleElementAccessor()»);
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.«originalElement().gaRuleElementAccessor()»);
 	restoreStackSize(stackSize);
 }
 «ENDDEFINE»
 
 «DEFINE ruleImpl(int index) FOR UnorderedGroup»
-rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__«index»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__«index»
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__Impl
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__Impl
 «IF elements.size > index + 1-»
-	rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__«index + 1»?
+	«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__«index + 1»?
 «ENDIF-» 
 ;
 finally {
@@ -267,7 +269,7 @@ finally {
 
 «DEFINE rule(Grammar original) FOR Assignment»
 «IF isCalled(original, containingRule())-»
-rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»
+«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»
     @init {
 		int stackSize = keepStackSize();
     }
@@ -287,21 +289,21 @@ finally {
 «ENDDEFINE»
 
 «DEFINE ruleImpl(Group group, int index) FOR List[AbstractElement]»
-rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»
+«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»
     @init {
 		int stackSize = keepStackSize();
     }
 :
-	rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»__Impl
+	«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»__Impl
 «IF size > 1-»
-	rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index + 1»
+	«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index + 1»
 «ENDIF-» 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
 
-rule__«group.containingRule().gaRuleIdentifyer()»__«group.gaElementIdentifyer()»__«index»__Impl
+«group.containingRule().caRuleName()»__«group.originalElement().gaElementIdentifyer()»__«index»__Impl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -329,40 +331,46 @@ finally {
 «IF !isOptionalCardinality() && isMultipleCardinality()-»
 (
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 («EXPAND ebnf2»)
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 )
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 («EXPAND ebnf2»)*
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 )
 )
 «ELSE-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 «IF mustBeParenthesized()»(«EXPAND ebnf2»)«ELSE»«EXPAND ebnf2»«ENDIF»«cardinality»
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»«EXPAND paramConfig»); }
 )
 «ENDIF-»
 «ENDDEFINE»
 
+«DEFINE paramConfig FOR AbstractElement-»
+«IF containingRule().alternatives == this && ParserRule.isInstance(containingRule()) && !containingRule().originalElement().parameters.isEmpty-»
+, «containingRule().parameterConfig()-»
+«ENDIF-»
+«ENDDEFINE-»
+
 «DEFINE ebnf2 FOR AbstractElement»ERROR «metaType.name» not matched«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Alternatives-»rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»«ENDDEFINE»
+«DEFINE ebnf2 FOR Alternatives-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
 
-«DEFINE ebnf2 FOR UnorderedGroup-»rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»«ENDDEFINE»
+«DEFINE ebnf2 FOR UnorderedGroup-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Assignment-»rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»«ENDDEFINE»
+«DEFINE ebnf2 FOR Assignment-»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»«ENDDEFINE»
 
-«DEFINE ebnf2 FOR Group»rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__0«ENDDEFINE»
+«DEFINE ebnf2 FOR Group»«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»__0«ENDDEFINE»
 
 «DEFINE assignmentEbnf FOR AbstractElement-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
 «EXPAND ebnf»
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
 )
 «ENDDEFINE»
 
@@ -380,9 +388,9 @@ finally {
 
 «DEFINE assignmentEbnf FOR CrossReference-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
 «EXPAND crossrefEbnf(this) FOR terminal-»
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
 )
 «ENDDEFINE»
 
@@ -392,9 +400,9 @@ finally {
 
 «DEFINE crossrefEbnf(CrossReference ref) FOR RuleCall-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
 «EXPAND crossrefEbnf(ref) FOR rule-»
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
 )
 «ENDDEFINE»
 
@@ -403,7 +411,7 @@ finally {
 «ENDDEFINE»
 
 «DEFINE crossrefEbnf(CrossReference ref) FOR ParserRule-»
-«IF !isDatatypeRule()-»
+«IF !originalElement().isDatatypeRule()-»
 «ERROR "crossrefEbnf is not supported for ParserRule that is not a datatype rule"»
 «ELSE-»
 	«ruleName()-»
@@ -420,17 +428,17 @@ finally {
 
 «DEFINE assignmentEbnf FOR Alternatives-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
-(rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»)
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
+(«containingRule().caRuleName()»__«originalElement().gaElementIdentifyer()»)
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
 )
 «ENDDEFINE»
 
 «DEFINE assignmentEbnf FOR RuleCall-»
 (
-{ before(grammarAccess.«grammarElementAccess(this)»); }
+{ before(grammarAccess.«originalElement().grammarElementAccess()»); }
 «EXPAND assignmentEbnf(this) FOR rule-»
-{ after(grammarAccess.«grammarElementAccess(this)»); }
+{ after(grammarAccess.«originalElement().grammarElementAccess()»); }
 )
 «ENDDEFINE»
 
