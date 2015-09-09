@@ -8,12 +8,21 @@
 package org.eclipse.xtext.resource.impl
 
 import com.google.common.annotations.Beta
+import java.io.Externalizable
+import java.io.IOException
+import java.io.ObjectInput
+import java.io.ObjectOutput
+import java.io.Serializable
+import java.util.ArrayList
+import java.util.HashMap
 import java.util.Map
 import java.util.concurrent.ConcurrentHashMap
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.resource.ResourceSet
+import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.resource.IResourceDescriptions
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager
+import org.eclipse.xtext.resource.persistence.SerializableResourceDescription
 import org.eclipse.xtext.util.internal.EmfAdaptable
 
 /**
@@ -28,7 +37,7 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
  * @since 2.9
  */
 @Beta
-@EmfAdaptable class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions {
+@EmfAdaptable class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions, Externalizable {
 	
 	protected ConcurrentHashMap<String, ResourceDescriptionsData> chunk2resourceDescriptions = new ConcurrentHashMap;
 	
@@ -106,4 +115,34 @@ import org.eclipse.xtext.util.internal.EmfAdaptable
 		return chunk2resourceDescriptions.get(containerHandle)
 	}
 	
+	override readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+		val numChunks = in.readInt
+		for(i: 0..<numChunks) {
+			val chunkName = in.readUTF
+			val numDescriptions = in.readInt
+			val descriptions = new ArrayList(numDescriptions)
+			for(j: 0..<numDescriptions) 
+				descriptions.add(in.readObject as IResourceDescription)
+			chunk2resourceDescriptions.put(chunkName, new ResourceDescriptionsData(descriptions))
+		}
+	}
+	
+	override writeExternal(ObjectOutput out) throws IOException {
+		val copy = new HashMap(chunk2resourceDescriptions)
+		out.writeInt(copy.entrySet.size)
+		copy.entrySet.forEach[
+			out.writeUTF(key)
+			val descriptions = value.allResourceDescriptions.map[
+				if(it instanceof Serializable)
+					it
+				else 
+					SerializableResourceDescription.createCopy(it)
+			] 
+			out.writeInt(descriptions.size)
+			descriptions.forEach[
+				out.writeObject(it)
+			]
+		]
+	}
 }
+	
