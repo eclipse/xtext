@@ -8,18 +8,22 @@
 package org.eclipse.xtext.build
 
 import com.google.common.collect.HashMultimap
+import com.google.common.collect.Lists
 import com.google.common.collect.Multimap
+import java.io.Externalizable
+import java.io.IOException
+import java.io.ObjectInput
+import java.io.ObjectOutput
+import java.util.HashSet
+import java.util.List
+import java.util.Set
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
-import java.util.HashSet
-import java.util.Set
-import com.google.common.collect.Lists
-import java.util.List
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@FinalFieldsConstructor class Source2GeneratedMapping {
+@FinalFieldsConstructor class Source2GeneratedMapping implements Externalizable {
 	
 	val Multimap<URI, URI> source2generated
 	val Multimap<URI, URI> generated2source
@@ -68,4 +72,27 @@ import java.util.List
 		return Lists.newArrayList(generated2source.keySet)
 	}
 	
+	override readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+		val numEntries = in.readInt
+		for(i: 0..<numEntries) {
+			val source = URI.createURI(in.readUTF)
+			val numGenerated = in.readInt
+			for(j: 0..<numGenerated) {
+				val generated = URI.createURI(in.readUTF)
+				addSource2Generated(source, generated)
+			}
+		}
+	}
+	
+	override writeExternal(ObjectOutput out) throws IOException {
+		val entries = source2generated.asMap.entrySet
+		out.writeInt(entries.size)
+		entries.forEach [
+			out.writeUTF(key.toString)
+			out.writeInt(value.size)
+			value.forEach[
+				out.writeUTF(toString)
+			]
+		]		
+	}
 }

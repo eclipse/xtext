@@ -23,6 +23,11 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.components.AbstractProjectComponent;
+import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.State;
+import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.components.StoragePathMacros;
+import com.intellij.openapi.components.StorageScheme;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.event.DocumentAdapter;
@@ -64,6 +69,7 @@ import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -80,6 +86,7 @@ import org.eclipse.xtext.build.Source2GeneratedMapping;
 import org.eclipse.xtext.common.types.descriptions.TypeResourceDescription;
 import org.eclipse.xtext.idea.build.BuildEvent;
 import org.eclipse.xtext.idea.build.BuildProgressReporter;
+import org.eclipse.xtext.idea.build.XtextAutoBuilderComponentState;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
 import org.eclipse.xtext.idea.facet.AbstractFacetType;
 import org.eclipse.xtext.idea.facet.FacetProvider;
@@ -103,15 +110,17 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@State(name = "XtextAutoBuilderState", storages = { @Storage(id = "other", file = StoragePathMacros.PROJECT_FILE), @Storage(id = "dir", file = (StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml"), scheme = StorageScheme.DIRECTORY_BASED) })
 @Log
 @SuppressWarnings("all")
-public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
+public class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
   public static class MutableCancelIndicator implements CancelIndicator {
     private volatile boolean canceled;
     
@@ -1138,6 +1147,68 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   public ChunkedResourceDescriptions getIndexState() {
     return this.chunkedResourceDescriptions;
+  }
+  
+  @Inject
+  private XtextAutoBuilderComponentState.Codec codec;
+  
+  @Override
+  public XtextAutoBuilderComponentState getState() {
+    XtextAutoBuilderComponentState _xblockexpression = null;
+    {
+      Set<Map.Entry<Module, Source2GeneratedMapping>> _entrySet = this.module2GeneratedMapping.entrySet();
+      final Function1<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>> _function = new Function1<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>>() {
+        @Override
+        public Pair<String, Source2GeneratedMapping> apply(final Map.Entry<Module, Source2GeneratedMapping> it) {
+          String _elvis = null;
+          Module _key = it.getKey();
+          String _name = null;
+          if (_key!=null) {
+            _name=_key.getName();
+          }
+          if (_name != null) {
+            _elvis = _name;
+          } else {
+            _elvis = "";
+          }
+          Source2GeneratedMapping _value = it.getValue();
+          return Pair.<String, Source2GeneratedMapping>of(_elvis, _value);
+        }
+      };
+      Iterable<Pair<String, Source2GeneratedMapping>> _map = IterableExtensions.<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>>map(_entrySet, _function);
+      final HashMap<String, Source2GeneratedMapping> serializableMap = CollectionLiterals.<String, Source2GeneratedMapping>newHashMap(((Pair<? extends String, ? extends Source2GeneratedMapping>[])Conversions.unwrapArray(_map, Pair.class)));
+      _xblockexpression = this.codec.encode(this.chunkedResourceDescriptions, serializableMap);
+    }
+    return _xblockexpression;
+  }
+  
+  @Override
+  public void loadState(final XtextAutoBuilderComponentState state) {
+    ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
+    this.chunkedResourceDescriptions = _decodeIndex;
+    final Map<String, Source2GeneratedMapping> serializedMap = this.codec.decodeModuleToGenerated(state);
+    Set<Map.Entry<String, Source2GeneratedMapping>> _entrySet = serializedMap.entrySet();
+    final Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>> _function = new Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>() {
+      @Override
+      public Pair<Module, Source2GeneratedMapping> apply(final Map.Entry<String, Source2GeneratedMapping> it) {
+        Pair<Module, Source2GeneratedMapping> _xifexpression = null;
+        String _key = it.getKey();
+        boolean _isEmpty = _key.isEmpty();
+        if (_isEmpty) {
+          _xifexpression = null;
+        } else {
+          ModuleManager _instance = ModuleManager.getInstance(XtextAutoBuilderComponent.this.project);
+          String _key_1 = it.getKey();
+          Module _findModuleByName = _instance.findModuleByName(_key_1);
+          Source2GeneratedMapping _value = it.getValue();
+          _xifexpression = Pair.<Module, Source2GeneratedMapping>of(_findModuleByName, _value);
+        }
+        return _xifexpression;
+      }
+    };
+    Iterable<Pair<Module, Source2GeneratedMapping>> _map = IterableExtensions.<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>map(_entrySet, _function);
+    HashMap<Module, Source2GeneratedMapping> _newHashMap = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap(((Pair<? extends Module, ? extends Source2GeneratedMapping>[])Conversions.unwrapArray(_map, Pair.class)));
+    this.module2GeneratedMapping = _newHashMap;
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);
