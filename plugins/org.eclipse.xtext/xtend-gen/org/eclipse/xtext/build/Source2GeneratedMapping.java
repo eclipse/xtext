@@ -10,12 +10,19 @@ package org.eclipse.xtext.build;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -24,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  */
 @FinalFieldsConstructor
 @SuppressWarnings("all")
-public class Source2GeneratedMapping {
+public class Source2GeneratedMapping implements Externalizable {
   private final Multimap<URI, URI> source2generated;
   
   private final Multimap<URI, URI> generated2source;
@@ -86,6 +93,64 @@ public class Source2GeneratedMapping {
   public List<URI> getAllGenerated() {
     Set<URI> _keySet = this.generated2source.keySet();
     return Lists.<URI>newArrayList(_keySet);
+  }
+  
+  @Override
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    final int numEntries = in.readInt();
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, numEntries, true);
+    for (final Integer i : _doubleDotLessThan) {
+      {
+        String _readUTF = in.readUTF();
+        final URI source = URI.createURI(_readUTF);
+        final int numGenerated = in.readInt();
+        ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, numGenerated, true);
+        for (final Integer j : _doubleDotLessThan_1) {
+          {
+            String _readUTF_1 = in.readUTF();
+            final URI generated = URI.createURI(_readUTF_1);
+            this.addSource2Generated(source, generated);
+          }
+        }
+      }
+    }
+  }
+  
+  @Override
+  public void writeExternal(final ObjectOutput out) throws IOException {
+    Map<URI, Collection<URI>> _asMap = this.source2generated.asMap();
+    final Set<Map.Entry<URI, Collection<URI>>> entries = _asMap.entrySet();
+    int _size = entries.size();
+    out.writeInt(_size);
+    final Procedure1<Map.Entry<URI, Collection<URI>>> _function = new Procedure1<Map.Entry<URI, Collection<URI>>>() {
+      @Override
+      public void apply(final Map.Entry<URI, Collection<URI>> it) {
+        try {
+          URI _key = it.getKey();
+          String _string = _key.toString();
+          out.writeUTF(_string);
+          Collection<URI> _value = it.getValue();
+          int _size = _value.size();
+          out.writeInt(_size);
+          Collection<URI> _value_1 = it.getValue();
+          final Procedure1<URI> _function = new Procedure1<URI>() {
+            @Override
+            public void apply(final URI it) {
+              try {
+                String _string = it.toString();
+                out.writeUTF(_string);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
+            }
+          };
+          IterableExtensions.<URI>forEach(_value_1, _function);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    IterableExtensions.<Map.Entry<URI, Collection<URI>>>forEach(entries, _function);
   }
   
   public Source2GeneratedMapping(final Multimap<URI, URI> source2generated, final Multimap<URI, URI> generated2source) {

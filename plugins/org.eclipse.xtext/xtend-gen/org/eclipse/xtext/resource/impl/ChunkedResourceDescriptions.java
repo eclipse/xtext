@@ -10,9 +10,17 @@ package org.eclipse.xtext.resource.impl;
 import com.google.common.annotations.Beta;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -25,9 +33,13 @@ import org.eclipse.xtext.resource.ISelectable;
 import org.eclipse.xtext.resource.containers.ProjectDescriptionBasedContainerManager;
 import org.eclipse.xtext.resource.impl.AbstractCompoundSelectable;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsData;
+import org.eclipse.xtext.resource.persistence.SerializableResourceDescription;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.ExclusiveRange;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * A IResourceDescriptions implementation that holds its resource description in chunks, each identified by a string.
@@ -43,7 +55,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @Beta
 @EmfAdaptable
 @SuppressWarnings("all")
-public class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions {
+public class ChunkedResourceDescriptions extends AbstractCompoundSelectable implements IResourceDescriptions, Externalizable {
   public static class ChunkedResourceDescriptionsAdapter extends AdapterImpl {
     private ChunkedResourceDescriptions element;
     
@@ -168,6 +180,75 @@ public class ChunkedResourceDescriptions extends AbstractCompoundSelectable impl
   
   public ResourceDescriptionsData getContainer(final String containerHandle) {
     return this.chunk2resourceDescriptions.get(containerHandle);
+  }
+  
+  @Override
+  public void readExternal(final ObjectInput in) throws IOException, ClassNotFoundException {
+    final int numChunks = in.readInt();
+    ExclusiveRange _doubleDotLessThan = new ExclusiveRange(0, numChunks, true);
+    for (final Integer i : _doubleDotLessThan) {
+      {
+        final String chunkName = in.readUTF();
+        final int numDescriptions = in.readInt();
+        final ArrayList<IResourceDescription> descriptions = new ArrayList<IResourceDescription>(numDescriptions);
+        ExclusiveRange _doubleDotLessThan_1 = new ExclusiveRange(0, numDescriptions, true);
+        for (final Integer j : _doubleDotLessThan_1) {
+          Object _readObject = in.readObject();
+          descriptions.add(((IResourceDescription) _readObject));
+        }
+        ResourceDescriptionsData _resourceDescriptionsData = new ResourceDescriptionsData(descriptions);
+        this.chunk2resourceDescriptions.put(chunkName, _resourceDescriptionsData);
+      }
+    }
+  }
+  
+  @Override
+  public void writeExternal(final ObjectOutput out) throws IOException {
+    final HashMap<String, ResourceDescriptionsData> copy = new HashMap<String, ResourceDescriptionsData>(this.chunk2resourceDescriptions);
+    Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet = copy.entrySet();
+    int _size = _entrySet.size();
+    out.writeInt(_size);
+    Set<Map.Entry<String, ResourceDescriptionsData>> _entrySet_1 = copy.entrySet();
+    final Procedure1<Map.Entry<String, ResourceDescriptionsData>> _function = new Procedure1<Map.Entry<String, ResourceDescriptionsData>>() {
+      @Override
+      public void apply(final Map.Entry<String, ResourceDescriptionsData> it) {
+        try {
+          String _key = it.getKey();
+          out.writeUTF(_key);
+          ResourceDescriptionsData _value = it.getValue();
+          Iterable<IResourceDescription> _allResourceDescriptions = _value.getAllResourceDescriptions();
+          final Function1<IResourceDescription, Object> _function = new Function1<IResourceDescription, Object>() {
+            @Override
+            public Object apply(final IResourceDescription it) {
+              Object _xifexpression = null;
+              if ((it instanceof Serializable)) {
+                _xifexpression = ((Object)it);
+              } else {
+                _xifexpression = SerializableResourceDescription.createCopy(it);
+              }
+              return ((Object)_xifexpression);
+            }
+          };
+          final Iterable<Object> descriptions = IterableExtensions.<IResourceDescription, Object>map(_allResourceDescriptions, _function);
+          int _size = IterableExtensions.size(descriptions);
+          out.writeInt(_size);
+          final Procedure1<Object> _function_1 = new Procedure1<Object>() {
+            @Override
+            public void apply(final Object it) {
+              try {
+                out.writeObject(it);
+              } catch (Throwable _e) {
+                throw Exceptions.sneakyThrow(_e);
+              }
+            }
+          };
+          IterableExtensions.<Object>forEach(descriptions, _function_1);
+        } catch (Throwable _e) {
+          throw Exceptions.sneakyThrow(_e);
+        }
+      }
+    };
+    IterableExtensions.<Map.Entry<String, ResourceDescriptionsData>>forEach(_entrySet_1, _function);
   }
   
   public static ChunkedResourceDescriptions findInEmfObject(final Notifier emfObject) {
