@@ -8,7 +8,9 @@
 package org.eclipse.xtext.ide.editor.contentassist.antlr;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
@@ -20,12 +22,15 @@ import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.Parameter;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ide.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.util.XtextSwitch;
+import org.eclipse.xtext.xtext.ConditionEvaluator;
+import org.eclipse.xtext.xtext.ParameterConfigHelper;
 
 import com.google.common.collect.Sets;
 
@@ -39,11 +44,19 @@ public class FollowElementCalculator extends XtextSwitch<Boolean> {
 	
 	private Collection<RuleCall> visitedRuleCalls = Sets.newHashSet();
 	
+	private int parameterConfig = 0;
+	
+	private Set<Parameter> currentConfig = null;
+	
 	/**
 	 * @since 2.9
 	 */
 	public void setAcceptor(IFollowElementAcceptor acceptor) {
 		this.acceptor = acceptor;
+	}
+	
+	public void setParameterConfig(int parameterConfig) {
+		this.parameterConfig = parameterConfig;
 	}
 	
 	public void doSwitch(UnorderedGroup group, List<AbstractElement> handledAlternatives) {
@@ -95,10 +108,26 @@ public class FollowElementCalculator extends XtextSwitch<Boolean> {
 	@Override
 	public Boolean caseGroup(Group object) {
 		boolean more = true;
-		for(AbstractElement element: object.getElements()) {
-			more = more && doSwitch(element);
+		if (object.getGuardCondition() != null) {
+			Set<Parameter> parameterValues = getParameterValues(object);
+			more = new ConditionEvaluator(parameterValues).evaluate(object.getGuardCondition());
+		}
+		if (more) {
+			for(AbstractElement element: object.getElements()) {
+				more = more && doSwitch(element);
+			}
 		}
 		return more || isOptional(object);
+	}
+	
+	private Set<Parameter> getParameterValues(AbstractElement object) {
+		Set<Parameter> parameterValues = Collections.emptySet();
+		if (currentConfig != null) {
+			parameterValues = currentConfig;
+		} else {
+			parameterValues = ParameterConfigHelper.getAssignedParameters(object, parameterConfig);
+		}
+		return parameterValues;
 	}
 	
 	@Override
@@ -139,9 +168,19 @@ public class FollowElementCalculator extends XtextSwitch<Boolean> {
 		if (!visitedRuleCalls.add(object))
 			return isOptional(object);
 		acceptor.accept(object);
-		Boolean result = doSwitch(object.getRule()) || isOptional(object);
-		visitedRuleCalls.remove(object);
-		return result;
+		Set<Parameter> oldConfig = currentConfig;
+		try {
+			if (!object.getArguments().isEmpty()) {
+				currentConfig = ParameterConfigHelper.getAssignedArguments(object, getParameterValues(object));
+			} else {
+				currentConfig = Collections.emptySet();
+			}
+			Boolean result = doSwitch(object.getRule()) || isOptional(object);
+			visitedRuleCalls.remove(object);
+			return result;
+		} finally {
+			currentConfig = oldConfig;
+		}
 	}
 	
 	@Override

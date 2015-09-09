@@ -209,7 +209,7 @@ public class RuleNames {
 			throw new IllegalArgumentException(result);
 		}
 		if (paramConfig != 0) {
-			result = "norm" + paramConfig + "_" + result.substring(idx);
+			result = (idx == 4 ? "norm" : "normSuper") + paramConfig + "_" + result.substring(idx);
 		}
 		return result;
 	}

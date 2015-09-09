@@ -25,23 +25,18 @@ import org.eclipse.xtext.AbstractElement
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.CompoundElement
 import org.eclipse.xtext.Condition
-import org.eclipse.xtext.Conjunction
-import org.eclipse.xtext.Disjunction
 import org.eclipse.xtext.EnumRule
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.GrammarUtil
 import org.eclipse.xtext.Group
-import org.eclipse.xtext.LiteralCondition
-import org.eclipse.xtext.Negation
 import org.eclipse.xtext.Parameter
-import org.eclipse.xtext.ParameterReference
 import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.RuleCall
 import org.eclipse.xtext.RuleNames
 import org.eclipse.xtext.TerminalRule
 import org.eclipse.xtext.XtextPackage
-import org.eclipse.xtext.util.XtextSwitch
 import org.eclipse.xtext.util.internal.EmfAdaptable
+import org.eclipse.xtext.xtext.ConditionEvaluator
 import org.eclipse.xtext.xtext.UsedRulesFinder
 
 import static extension org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues.*
@@ -202,27 +197,7 @@ class FlattenedGrammarAccess {
 				}
 
 				def private boolean evaluate(Condition condition) {
-					var result = new XtextSwitch<Boolean>() {
-						override caseDisjunction(Disjunction object) {
-							return doSwitch(object.getLeft()) || doSwitch(object.getRight())
-						}
-
-						override caseConjunction(Conjunction object) {
-							return doSwitch(object.getLeft()) && doSwitch(object.getRight())
-						}
-
-						override caseNegation(Negation object) {
-							return !doSwitch(object.getValue())
-						}
-
-						override caseParameterReference(ParameterReference object) {
-							return paramValues.contains(object.getParameter())
-						}
-
-						override caseLiteralCondition(LiteralCondition object) {
-							return object.isTrue()
-						}
-					}.doSwitch(condition)
+					var result = new ConditionEvaluator(paramValues).evaluate(condition)
 					return result
 				}
 			}

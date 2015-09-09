@@ -77,6 +77,9 @@ public class EntryPointFinder {
 		}
 		if (result.getGrammarElement() instanceof RuleCall) {
 			RuleCall rc = (RuleCall) result.getGrammarElement();
+			if (!rc.getArguments().isEmpty()) {
+				return true;
+			}
 			Assignment assignment = GrammarUtil.containingAssignment(rc);
 			if (assignment != null
 					&& (GrammarUtil.isMultipleCardinality(assignment) || (assignment.eContainer() instanceof AbstractElement && GrammarUtil
