@@ -34,23 +34,17 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.Condition;
-import org.eclipse.xtext.Conjunction;
-import org.eclipse.xtext.Disjunction;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
-import org.eclipse.xtext.LiteralCondition;
 import org.eclipse.xtext.NamedArgument;
-import org.eclipse.xtext.Negation;
 import org.eclipse.xtext.Parameter;
-import org.eclipse.xtext.ParameterReference;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.RuleNames;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.util.internal.EmfAdaptable;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -59,6 +53,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xtext.ConditionEvaluator;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
 import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
@@ -402,56 +397,9 @@ public class FlattenedGrammarAccess {
           }
           
           boolean evaluate(final Condition condition) {
-            Boolean result = new XtextSwitch<Boolean>() {
-              @Override
-              public Boolean caseDisjunction(final Disjunction object) {
-                boolean _or = false;
-                Condition _left = object.getLeft();
-                Boolean _doSwitch = this.doSwitch(_left);
-                if ((_doSwitch).booleanValue()) {
-                  _or = true;
-                } else {
-                  Condition _right = object.getRight();
-                  Boolean _doSwitch_1 = this.doSwitch(_right);
-                  _or = (_doSwitch_1).booleanValue();
-                }
-                return Boolean.valueOf(_or);
-              }
-              
-              @Override
-              public Boolean caseConjunction(final Conjunction object) {
-                boolean _and = false;
-                Condition _left = object.getLeft();
-                Boolean _doSwitch = this.doSwitch(_left);
-                if (!(_doSwitch).booleanValue()) {
-                  _and = false;
-                } else {
-                  Condition _right = object.getRight();
-                  Boolean _doSwitch_1 = this.doSwitch(_right);
-                  _and = (_doSwitch_1).booleanValue();
-                }
-                return Boolean.valueOf(_and);
-              }
-              
-              @Override
-              public Boolean caseNegation(final Negation object) {
-                Condition _value = object.getValue();
-                Boolean _doSwitch = this.doSwitch(_value);
-                return Boolean.valueOf((!(_doSwitch).booleanValue()));
-              }
-              
-              @Override
-              public Boolean caseParameterReference(final ParameterReference object) {
-                Parameter _parameter = object.getParameter();
-                return Boolean.valueOf(paramValues.contains(_parameter));
-              }
-              
-              @Override
-              public Boolean caseLiteralCondition(final LiteralCondition object) {
-                return Boolean.valueOf(object.isTrue());
-              }
-            }.doSwitch(condition);
-            return (result).booleanValue();
+            ConditionEvaluator _conditionEvaluator = new ConditionEvaluator(paramValues);
+            boolean result = _conditionEvaluator.evaluate(condition);
+            return result;
           }
         };
         AbstractElement _alternatives = orig.getAlternatives();

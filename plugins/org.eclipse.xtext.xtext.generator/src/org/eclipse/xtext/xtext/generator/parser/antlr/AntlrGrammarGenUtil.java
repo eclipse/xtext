@@ -107,6 +107,13 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * @since 2.9
 	 */
+	public static int getParameterConfig(ParserRule rule) {
+		return RuleWithParameterValues.getParamConfig(rule);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
 		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule((ParserRule) getOriginalElement(rule));
 		if ((skipCurrent || !currentAsParam) && rule.getParameters().isEmpty()) {

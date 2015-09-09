@@ -69,6 +69,12 @@ public class FollowElementComputer {
 			}
 		};
 		for(FollowElement element: followElements) {
+			List<Integer> paramStack = element.getParamStack();
+			if (!paramStack.isEmpty()) {
+				calculator.setParameterConfig(paramStack.get(paramStack.size() - 1));
+			} else {
+				calculator.setParameterConfig(0);
+			}
 			computeFollowElements(calculator, element);
 		}
 	}

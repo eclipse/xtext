@@ -18,8 +18,25 @@ ruleName(AbstractRule this) :
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getRuleName(org.eclipse.xtext.AbstractRule)
 ;
 
+// the name as it will be generated into the content assist parser
+caRuleName(AbstractRule rule):
+	rule.ruleName().patched()
+;
+
+// for backwards compatibility reasons we insert the __ here
+// also it ensures that we do not have a clash between a real parser rule of the form
+// MyRule__grammarElement_0_1
+// and a grammar element in the rule MyRule which is rare at best
+private String patched(String ruleName):
+	ruleName.startsWith("rule") ? "rule__" + ruleName.subString(4, ruleName.length).toFirstUpper() : ruleName
+;
+
 originalElement(EObject this):
 	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getOriginalElement(org.eclipse.emf.ecore.EObject)
+;
+
+parameterConfig(ParserRule this):
+	JAVA org.eclipse.xtext.generator.parser.antlr.AntlrGrammarGenUtil.getParameterConfig(org.eclipse.xtext.ParserRule)
 ;
 
 parameterList(ParserRule this, boolean debug) : 

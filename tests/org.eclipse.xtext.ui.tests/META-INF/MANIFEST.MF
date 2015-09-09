@@ -238,5 +238,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.enumrules.serializer,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.serializer,
  org.eclipse.xtext.ui.tests.quickfix.serializer,
- org.eclipse.xtext.ui.tests.refactoring.serializer
+ org.eclipse.xtext.ui.tests.refactoring.serializer,
+ org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage,
+ org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.parametersTestLanguage.util
 

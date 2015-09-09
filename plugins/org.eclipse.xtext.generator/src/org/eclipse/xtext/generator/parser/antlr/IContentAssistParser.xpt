@@ -61,7 +61,7 @@ import «gaFQName()»;
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-«EXPAND ruleName FOREACH allAlternatives().union(allGroups()).union(allAssignments()).union(allUnorderedGroups())-»
+«EXPAND ruleName FOREACH originalElement().allAlternatives().union(originalElement().allGroups()).union(originalElement().allAssignments()).union(originalElement().allUnorderedGroups())-»
 				}
 			};
 		}
@@ -72,7 +72,7 @@ import «gaFQName()»;
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			«getInternalParserClassName()» typedParser = («getInternalParserClassName()») parser;
-			typedParser.«allParserRules().first().entryRuleName()»();
+			typedParser.«allParserRules().first().originalElement().entryRuleName()»();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
@@ -100,17 +100,17 @@ import «gaFQName()»;
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Alternatives-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Assignment-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Group-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__0");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»__0");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR UnorderedGroup-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»

@@ -25,7 +25,7 @@ public class ParametersTestLanguageExParser extends org.eclipse.xtext.parser.ant
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "ParserRuleFragmentsEx";
+		return "ParserRuleParameters";
 	}
 	
 	public ParametersTestLanguageExGrammarAccess getGrammarAccess() {

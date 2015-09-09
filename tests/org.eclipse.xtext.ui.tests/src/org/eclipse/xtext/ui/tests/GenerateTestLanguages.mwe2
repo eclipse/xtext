@@ -147,6 +147,18 @@ Workflow {
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 		}
 		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ParametersTestLanguageEx.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragmentsAntlrCA {}
+		}
+		language = { 
+			uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/TwoParametersTestLanguage.xtext"
+			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
+		}
+		language = { 
 			uri="classpath:/org/eclipse/xtext/ui/tests/editor/outline/OutlineTestLanguage.xtext"
 			fragment = @org.eclipse.xtext.ui.tests.TestLanguagesFragments {}
 			fragment = builder.BuilderIntegrationFragment {}

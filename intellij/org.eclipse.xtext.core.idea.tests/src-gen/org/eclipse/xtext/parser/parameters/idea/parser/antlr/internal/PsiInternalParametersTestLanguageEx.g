@@ -43,27 +43,10 @@ import com.intellij.lang.PsiBuilder;
 
 	@Override
 	protected String getFirstRuleName() {
-		return "ParserRuleFragmentsEx";
+		return "ParserRuleParameters";
 	}
 
 }
-
-//Entry rule entryRuleParserRuleFragmentsEx
-entryRuleParserRuleFragmentsEx:
-	{ markComposite(elementTypeProvider.getParserRuleFragmentsExElementType()); }
-	ruleParserRuleFragmentsEx
-	EOF;
-
-// Rule ParserRuleFragmentsEx
-ruleParserRuleFragmentsEx:
-	{
-		markComposite(elementTypeProvider.getParserRuleFragmentsEx_ParserRuleParametersParserRuleCallElementType());
-	}
-	ruleParserRuleParameters
-	{
-		doneComposite();
-	}
-;
 
 //Entry rule entryRuleParserRuleParameters
 entryRuleParserRuleParameters:
@@ -73,17 +56,63 @@ entryRuleParserRuleParameters:
 
 // Rule ParserRuleParameters
 ruleParserRuleParameters:
+	{
+		markComposite(elementTypeProvider.getParserRuleParameters_ParserRuleParametersParserRuleCallElementType());
+	}
+	superParserRuleParameters
+	{
+		doneComposite();
+	}
+;
+
+//Entry rule entryRuleScenario1
+entryRuleScenario1:
+	{ markComposite(elementTypeProvider.getScenario1ElementType()); }
+	ruleScenario1
+	EOF;
+
+// Rule Scenario1
+ruleScenario1:
+	{
+		markComposite(elementTypeProvider.getScenario1_Scenario1ParserRuleCallElementType());
+	}
+	superScenario1
+	{
+		doneComposite();
+	}
+;
+
+
+// Rule Scenario1
+norm1_Scenario1:
+	{
+		markComposite(elementTypeProvider.getScenario1_Scenario1ParserRuleCallElementType());
+	}
+	normSuper1_Scenario1
+	{
+		doneComposite();
+	}
+;
+
+//Entry rule entrySuperParserRuleParameters
+entrySuperParserRuleParameters:
+	{ markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParametersElementType()); }
+	superParserRuleParameters
+	EOF;
+
+// Rule ParserRuleParameters
+superParserRuleParameters:
 	(
 		(
 			{
-				precedeComposite(elementTypeProvider.getParserRuleParameters_ParserRuleParametersAction_0ElementType());
+				precedeComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ParserRuleParametersAction_0ElementType());
 				doneComposite();
 			}
 		)
 		(
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitOneKeyword_1_0_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitOneKeyword_1_0_0ElementType());
 				}
 				otherlv_1='#1'
 				{
@@ -92,7 +121,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario1ParserRuleCall_1_0_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario1ParserRuleCall_1_0_1_0ElementType());
 						}
 						lv_scenario_2_0=norm1_Scenario1
 						{
@@ -104,7 +133,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitTwoKeyword_1_1_0ElementType());
 				}
 				otherlv_3='#2'
 				{
@@ -113,7 +142,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario1ParserRuleCall_1_1_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario1ParserRuleCall_1_1_1_0ElementType());
 						}
 						lv_scenario_4_0=ruleScenario1
 						{
@@ -125,7 +154,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitThreeKeyword_1_2_0ElementType());
 				}
 				otherlv_5='#3'
 				{
@@ -134,7 +163,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_2_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_2_1_0ElementType());
 						}
 						lv_scenario_6_0=norm1_Scenario2
 						{
@@ -146,7 +175,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitFourKeyword_1_3_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitFourKeyword_1_3_0ElementType());
 				}
 				otherlv_7='#4'
 				{
@@ -155,7 +184,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_3_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_3_1_0ElementType());
 						}
 						lv_scenario_8_0=ruleScenario2
 						{
@@ -177,7 +206,7 @@ ruleParserRuleParameters:
 				)=>
 				(
 					{
-						markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0ElementType());
+						markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitFiveKeyword_1_4_0_0ElementType());
 					}
 					otherlv_9='#5'
 					{
@@ -186,7 +215,7 @@ ruleParserRuleParameters:
 					(
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_4_0_1_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_4_0_1_0ElementType());
 							}
 							lv_scenario_10_0=norm1_Scenario2
 							{
@@ -209,7 +238,7 @@ ruleParserRuleParameters:
 				)=>
 				(
 					{
-						markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0ElementType());
+						markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitSixKeyword_1_5_0_0ElementType());
 					}
 					otherlv_11='#6'
 					{
@@ -218,7 +247,7 @@ ruleParserRuleParameters:
 					(
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_5_0_1_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_5_0_1_0ElementType());
 							}
 							lv_scenario_12_0=ruleScenario2
 							{
@@ -231,7 +260,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitSevenKeyword_1_6_0ElementType());
 				}
 				otherlv_13='#7'
 				{
@@ -240,7 +269,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario3ParserRuleCall_1_6_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario3ParserRuleCall_1_6_1_0ElementType());
 						}
 						lv_scenario_14_0=norm1_Scenario3
 						{
@@ -252,7 +281,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitEightKeyword_1_7_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitEightKeyword_1_7_0ElementType());
 				}
 				otherlv_15='#8'
 				{
@@ -261,7 +290,7 @@ ruleParserRuleParameters:
 				(
 					(
 						{
-							markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario3ParserRuleCall_1_7_1_0ElementType());
+							markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario3ParserRuleCall_1_7_1_0ElementType());
 						}
 						lv_scenario_16_0=ruleScenario3
 						{
@@ -273,7 +302,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitNineKeyword_1_8_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitNineKeyword_1_8_0ElementType());
 				}
 				otherlv_17='#9'
 				{
@@ -287,7 +316,7 @@ ruleParserRuleParameters:
 						)=>
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_8_1_0_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario4ParserRuleCall_1_8_1_0_0ElementType());
 							}
 							lv_scenario_18_0=norm1_Scenario4
 							{
@@ -300,7 +329,7 @@ ruleParserRuleParameters:
 						(
 							(
 								{
-									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_8_1_1_0_0ElementType());
+									markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_8_1_1_0_0ElementType());
 								}
 								lv_scenario_19_0=norm1_Scenario2
 								{
@@ -310,7 +339,7 @@ ruleParserRuleParameters:
 						)
 						(
 							{
-								markLeaf(elementTypeProvider.getParserRuleParameters_KeywordKeyword_1_8_1_1_1ElementType());
+								markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1ElementType());
 							}
 							otherlv_20='keyword'
 							{
@@ -323,7 +352,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitOneDigitZeroKeyword_1_9_0ElementType());
 				}
 				otherlv_21='#10'
 				{
@@ -337,7 +366,7 @@ ruleParserRuleParameters:
 						)=>
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_9_1_0_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario4ParserRuleCall_1_9_1_0_0ElementType());
 							}
 							lv_scenario_22_0=norm1_Scenario4
 							{
@@ -350,7 +379,7 @@ ruleParserRuleParameters:
 						(
 							(
 								{
-									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_9_1_1_0_0ElementType());
+									markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_9_1_1_0_0ElementType());
 								}
 								lv_scenario_23_0=ruleScenario2
 								{
@@ -360,7 +389,7 @@ ruleParserRuleParameters:
 						)
 						(
 							{
-								markLeaf(elementTypeProvider.getParserRuleParameters_KeywordKeyword_1_9_1_1_1ElementType());
+								markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1ElementType());
 							}
 							otherlv_24='keyword'
 							{
@@ -373,7 +402,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitOneDigitOneKeyword_1_10_0ElementType());
 				}
 				otherlv_25='#11'
 				{
@@ -387,7 +416,7 @@ ruleParserRuleParameters:
 						)=>
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_10_1_0_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario4ParserRuleCall_1_10_1_0_0ElementType());
 							}
 							lv_scenario_26_0=ruleScenario4
 							{
@@ -400,7 +429,7 @@ ruleParserRuleParameters:
 						(
 							(
 								{
-									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_10_1_1_0_0ElementType());
+									markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_10_1_1_0_0ElementType());
 								}
 								lv_scenario_27_0=norm1_Scenario2
 								{
@@ -410,7 +439,7 @@ ruleParserRuleParameters:
 						)
 						(
 							{
-								markLeaf(elementTypeProvider.getParserRuleParameters_KeywordKeyword_1_10_1_1_1ElementType());
+								markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1ElementType());
 							}
 							otherlv_28='keyword'
 							{
@@ -423,7 +452,7 @@ ruleParserRuleParameters:
 			    |
 			(
 				{
-					markLeaf(elementTypeProvider.getParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0ElementType());
+					markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_NumberSignDigitOneDigitTwoKeyword_1_11_0ElementType());
 				}
 				otherlv_29='#12'
 				{
@@ -437,7 +466,7 @@ ruleParserRuleParameters:
 						)=>
 						(
 							{
-								markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario4ParserRuleCall_1_11_1_0_0ElementType());
+								markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario4ParserRuleCall_1_11_1_0_0ElementType());
 							}
 							lv_scenario_30_0=ruleScenario4
 							{
@@ -450,7 +479,7 @@ ruleParserRuleParameters:
 						(
 							(
 								{
-									markComposite(elementTypeProvider.getParserRuleParameters_ScenarioScenario2ParserRuleCall_1_11_1_1_0_0ElementType());
+									markComposite(elementTypeProvider.getParametersTestLanguageParserRuleParameters_ScenarioScenario2ParserRuleCall_1_11_1_1_0_0ElementType());
 								}
 								lv_scenario_31_0=ruleScenario2
 								{
@@ -460,7 +489,7 @@ ruleParserRuleParameters:
 						)
 						(
 							{
-								markLeaf(elementTypeProvider.getParserRuleParameters_KeywordKeyword_1_11_1_1_1ElementType());
+								markLeaf(elementTypeProvider.getParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1ElementType());
 							}
 							otherlv_32='keyword'
 							{
@@ -474,18 +503,18 @@ ruleParserRuleParameters:
 	)
 ;
 
-//Entry rule entryRuleScenario1
-entryRuleScenario1:
-	{ markComposite(elementTypeProvider.getScenario1ElementType()); }
-	ruleScenario1
+//Entry rule entrySuperScenario1
+entrySuperScenario1:
+	{ markComposite(elementTypeProvider.getParametersTestLanguageScenario1ElementType()); }
+	superScenario1
 	EOF;
 
 // Rule Scenario1
-ruleScenario1:
+superScenario1:
 	(
 		(
 			{
-				markLeaf(elementTypeProvider.getScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
+				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_SecondIDTerminalRuleCall_1_0_0ElementType());
 			}
 			lv_second_0_0=RULE_ID
 			{
@@ -497,11 +526,11 @@ ruleScenario1:
 
 
 // Rule Scenario1
-norm1_Scenario1:
+normSuper1_Scenario1:
 	(
 		(
 			{
-				markLeaf(elementTypeProvider.getScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
+				markLeaf(elementTypeProvider.getParametersTestLanguageScenario1_FirstIDTerminalRuleCall_0_0_0ElementType());
 			}
 			lv_first_0_0=RULE_ID
 			{

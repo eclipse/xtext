@@ -13,7 +13,9 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtext.AbstractRule
 import org.eclipse.xtext.Parameter
+import org.eclipse.xtext.ParserRule
 import org.eclipse.xtext.util.internal.EmfAdaptable
+import org.eclipse.xtext.xtext.ParameterConfigHelper
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -41,6 +43,11 @@ class RuleWithParameterValues {
 
 	def static Set<Parameter> getParamValues(AbstractRule copy) {
 		return findInEmfObject(copy).getParamValues()
+	}
+	
+	def static int getParamConfig(AbstractRule copy) {
+		val values = findInEmfObject(copy)
+		return ParameterConfigHelper.getParameterConfig(values.paramValues, values.original as ParserRule)
 	}
 
 }

@@ -9,6 +9,10 @@ grammar org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx with org.ec
 
 import "http://www.eclipse.org/2015/tmf/xtext/parameters"
  
-ParserRuleFragmentsEx returns ParserRuleParameters: 
-	ParserRuleParameters
+ParserRuleParameters returns ParserRuleParameters: 
+	super::ParserRuleParameters
+;
+
+Scenario1<Param> returns Scenario:
+	super::Scenario1<Param>
 ;
