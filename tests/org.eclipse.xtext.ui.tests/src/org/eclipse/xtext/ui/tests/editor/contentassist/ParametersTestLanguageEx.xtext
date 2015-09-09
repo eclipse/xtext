@@ -5,7 +5,8 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.parameters.ParametersTestLanguageEx with org.eclipse.xtext.parser.parameters.ParametersTestLanguage
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguageEx 
+	with org.eclipse.xtext.ui.tests.editor.contentassist.ParametersTestLanguage
 
 import "http://www.eclipse.org/2015/tmf/xtext/parameters"
  
