@@ -17,7 +17,6 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.util.UriUtil;
 import org.eclipse.xtext.workspace.FileProjectConfig;
-import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -58,13 +57,14 @@ public class FileWorkspaceConfig implements IWorkspaceConfig {
     return UriUtil.createFolderURI(this.root);
   }
   
-  public Set<FileProjectConfig> getProjects() {
+  @Override
+  public Set<? extends FileProjectConfig> getProjects() {
     Collection<FileProjectConfig> _values = this.projects.values();
     return IterableExtensions.<FileProjectConfig>toSet(_values);
   }
   
   @Override
-  public IProjectConfig findProjectByName(final String name) {
+  public FileProjectConfig findProjectByName(final String name) {
     return this.projects.get(name);
   }
   

@@ -12,6 +12,7 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.openapi.vfs.encoding.EncodingRegistry;
 import java.nio.charset.Charset;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil;
@@ -28,21 +29,8 @@ public class IdeaEncodingProvider implements IEncodingProvider {
       IEncodingProvider.Runtime _runtime = new IEncodingProvider.Runtime();
       return _runtime.getEncoding(uri);
     }
-    VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
-    URI parent = uri;
-    while ((Objects.equal(file, null) && (parent.segmentCount() > 0))) {
-      {
-        URI _trimSegments = parent.trimSegments(1);
-        parent = _trimSegments;
-        VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(parent);
-        file = _virtualFile;
-      }
-    }
     String _elvis = null;
-    Charset _charset = null;
-    if (file!=null) {
-      _charset=file.getCharset();
-    }
+    Charset _charset = this.getCharset(uri);
     String _name = null;
     if (_charset!=null) {
       _name=_charset.name();
@@ -53,5 +41,43 @@ public class IdeaEncodingProvider implements IEncodingProvider {
       _elvis = "UTF-8";
     }
     return _elvis;
+  }
+  
+  protected Charset getCharset(final URI uri) {
+    Charset _elvis = null;
+    VirtualFile _findVirtualFile = this.findVirtualFile(uri);
+    Charset _charset = null;
+    if (_findVirtualFile!=null) {
+      _charset=_findVirtualFile.getCharset();
+    }
+    if (_charset != null) {
+      _elvis = _charset;
+    } else {
+      EncodingRegistry _instance = EncodingRegistry.getInstance();
+      Charset _defaultCharset = _instance.getDefaultCharset();
+      _elvis = _defaultCharset;
+    }
+    return _elvis;
+  }
+  
+  protected VirtualFile findVirtualFile(final URI uri) {
+    VirtualFile _xblockexpression = null;
+    {
+      if ((uri == null)) {
+        return null;
+      }
+      final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+      if ((file != null)) {
+        return file;
+      }
+      int _segmentCount = uri.segmentCount();
+      boolean _equals = (_segmentCount == 0);
+      if (_equals) {
+        return null;
+      }
+      URI _trimSegments = uri.trimSegments(1);
+      _xblockexpression = this.findVirtualFile(_trimSegments);
+    }
+    return _xblockexpression;
   }
 }

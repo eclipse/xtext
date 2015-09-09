@@ -205,8 +205,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       File _file_1 = new File(".");
       File _canonicalFile = _file_1.getCanonicalFile();
       final String projectPath = _canonicalFile.getName();
@@ -245,8 +245,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
@@ -308,8 +308,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
@@ -369,8 +369,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
@@ -430,8 +430,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
@@ -491,8 +491,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();
@@ -556,8 +556,8 @@ public class TestBatchCompiler {
       URI _path = config.getPath();
       String _fileString = _path.toFileString();
       Assert.assertEquals(_plus, _fileString);
-      Set<FileProjectConfig> _projects = config.getProjects();
-      final FileProjectConfig project = IterableExtensions.<FileProjectConfig>head(_projects);
+      Set<? extends FileProjectConfig> _projects = config.getProjects();
+      final FileProjectConfig project = IterableExtensions.head(_projects);
       String _name = project.getName();
       Assert.assertEquals("prj1", _name);
       final OutputConfiguration output = this.batchCompiler.getOutputConfiguration();

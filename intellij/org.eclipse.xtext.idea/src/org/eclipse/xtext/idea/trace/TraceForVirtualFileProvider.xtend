@@ -32,6 +32,7 @@ import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfig
 import org.eclipse.xtext.idea.resource.VirtualFileURIUtil
 import org.eclipse.xtext.util.TextRegion
 import org.eclipse.xtext.workspace.IProjectConfig
+import org.eclipse.xtext.idea.filesystem.IdeaWorkspaceConfigProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -203,7 +204,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		return new AbsoluteURI(VirtualFileURIUtil.getURI(file))
 	}
 	
-	override protected getProjectConfig(VirtualFileInProject sourceFile) {
+	override protected IdeaModuleConfig getProjectConfig(VirtualFileInProject sourceFile) {
 		return new IdeaWorkspaceConfig(sourceFile.project).findProjectContaining(VirtualFileURIUtil.getURI(sourceFile.file))
 	}
 	
@@ -215,7 +216,9 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		val result = super.getTraceToTarget(sourceFile, absoluteSourceResource, projectConfig)
 		if (result !== null) {
 			val outputConfigurationProvider = getServiceProvider(absoluteSourceResource).get(IdeaOutputConfigurationProvider)
+			val workspaceConfigProvider = getServiceProvider(absoluteSourceResource).get(IdeaWorkspaceConfigProvider)
 			result.outputConfigurationProvider = outputConfigurationProvider
+			result.workspaceConfigProvider = workspaceConfigProvider 
 		}
 		return result
 	}
@@ -227,7 +230,7 @@ class TraceForVirtualFileProvider extends AbstractTraceForURIProvider<VirtualFil
 		if (jarRoot != null) {
 			result.jarRoot = jarRoot			
 		} else {
-			result.module = (file.projectConfig as IdeaModuleConfig)?.module
+			result.localProjectConfig = file.projectConfig
 		}
 		return result;
 	}

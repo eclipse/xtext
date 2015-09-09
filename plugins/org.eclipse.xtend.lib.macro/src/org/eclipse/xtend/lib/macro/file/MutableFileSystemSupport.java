@@ -22,7 +22,7 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 
 	/**
 	 * Writes the given contents to the given path.
-	 * It will create the file if it doesn't exist, and create folders for all parents if the don't exist.
+	 * It will create the file if it doesn't exist, and create folders for all parents if they don't exist.
 	 * 
 	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing. 
 	 * 
@@ -43,6 +43,11 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	void setContentsAsStream(Path path, InputStream source);
 	
 	/**
+	 * <p>
+	 * This method will be removed in future versions.
+	 * Methods {@link #setContents} and {@link #setContentsAsStream(Path, InputStream)} create folders for all parents if they don't exist.
+	 * </p>
+	 * 
 	 * Creates a directory for the given path and all its parents if necessary.
 	 * 
 	 * Implementors may decide to perform this method asynchronously. Clients should not rely on invocation timing.
@@ -50,6 +55,7 @@ public interface MutableFileSystemSupport extends FileSystemSupport {
 	 * @param path the path to the file
 	 * @since 2.7
 	 */
+	@Deprecated
 	void mkdir(Path path);
 	
 	/**

@@ -10,10 +10,10 @@ package org.eclipse.xtext.idea.filesystem;
 import com.google.common.base.Objects;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -21,22 +21,50 @@ import com.intellij.openapi.util.Computable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.Data;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.filesystem.IdeaModuleConfig;
 import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @Data
 @SuppressWarnings("all")
 public class IdeaWorkspaceConfig implements IWorkspaceConfig {
+  private final static Logger LOGGER = Logger.getInstance(IdeaWorkspaceConfig.class);
+  
   private final Project project;
   
   @Override
-  public IProjectConfig findProjectByName(final String name) {
+  public Set<? extends IProjectConfig> getProjects() {
+    Application _application = ApplicationManager.getApplication();
+    final Computable<Module[]> _function = new Computable<Module[]>() {
+      @Override
+      public Module[] compute() {
+        ModuleManager _instance = ModuleManager.getInstance(IdeaWorkspaceConfig.this.project);
+        return _instance.getModules();
+      }
+    };
+    Module[] _runReadAction = _application.<Module[]>runReadAction(_function);
+    final Function1<Module, IdeaModuleConfig> _function_1 = new Function1<Module, IdeaModuleConfig>() {
+      @Override
+      public IdeaModuleConfig apply(final Module it) {
+        return IdeaWorkspaceConfig.this.toIdeaModuleConfig(it);
+      }
+    };
+    List<IdeaModuleConfig> _map = ListExtensions.<Module, IdeaModuleConfig>map(((List<Module>)Conversions.doWrapArray(_runReadAction)), _function_1);
+    return IterableExtensions.<IdeaModuleConfig>toSet(_map);
+  }
+  
+  @Override
+  public IdeaModuleConfig findProjectByName(final String name) {
     Application _application = ApplicationManager.getApplication();
     final Computable<Module> _function = new Computable<Module>() {
       @Override
@@ -45,21 +73,25 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
         return _instance.findModuleByName(name);
       }
     };
-    final Module module = _application.<Module>runReadAction(_function);
+    Module _runReadAction = _application.<Module>runReadAction(_function);
+    return this.toIdeaModuleConfig(_runReadAction);
+  }
+  
+  protected IdeaModuleConfig toIdeaModuleConfig(final Module module) {
     boolean _equals = Objects.equal(module, null);
     if (_equals) {
       return null;
     }
-    boolean _isUsable = this.isUsable(module);
-    boolean _not = (!_isUsable);
-    if (_not) {
+    final VirtualFile contentRoot = this.getDefaultContentRoot(module);
+    boolean _equals_1 = Objects.equal(contentRoot, null);
+    if (_equals_1) {
       return null;
     }
-    return new IdeaModuleConfig(module);
+    return new IdeaModuleConfig(module, contentRoot);
   }
   
   @Override
-  public IProjectConfig findProjectContaining(final URI member) {
+  public IdeaModuleConfig findProjectContaining(final URI member) {
     VirtualFileManager _instance = VirtualFileManager.getInstance();
     String _string = member.toString();
     final VirtualFile file = _instance.findFileByUrl(_string);
@@ -68,25 +100,37 @@ public class IdeaWorkspaceConfig implements IWorkspaceConfig {
       return null;
     }
     ProjectRootManager _instance_1 = ProjectRootManager.getInstance(this.project);
-    ProjectFileIndex _fileIndex = _instance_1.getFileIndex();
-    final Module module = _fileIndex.getModuleForFile(file);
+    final ProjectFileIndex fileIndex = _instance_1.getFileIndex();
+    final Module module = fileIndex.getModuleForFile(file);
     boolean _equals_1 = Objects.equal(module, null);
     if (_equals_1) {
       return null;
     }
-    boolean _isUsable = this.isUsable(module);
-    boolean _not = (!_isUsable);
-    if (_not) {
+    final VirtualFile contentRoot = fileIndex.getContentRootForFile(file);
+    boolean _equals_2 = Objects.equal(contentRoot, null);
+    if (_equals_2) {
       return null;
     }
-    return new IdeaModuleConfig(module);
+    final VirtualFile defaultContentRoot = this.getDefaultContentRoot(module);
+    boolean _notEquals = (!Objects.equal(contentRoot, defaultContentRoot));
+    if (_notEquals) {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("The file (");
+      _builder.append(member, "");
+      _builder.append(") should belong to the first content root (");
+      _builder.append(defaultContentRoot, "");
+      _builder.append(") but belongs to ");
+      _builder.append(contentRoot, "");
+      _builder.append(".");
+      IdeaWorkspaceConfig.LOGGER.error(_builder);
+    }
+    return new IdeaModuleConfig(module, contentRoot);
   }
   
-  private boolean isUsable(final Module module) {
+  protected VirtualFile getDefaultContentRoot(final Module module) {
     ModuleRootManager _instance = ModuleRootManager.getInstance(module);
-    ContentEntry[] _contentEntries = _instance.getContentEntries();
-    boolean _isEmpty = ((List<ContentEntry>)Conversions.doWrapArray(_contentEntries)).isEmpty();
-    return (!_isEmpty);
+    VirtualFile[] _contentRoots = _instance.getContentRoots();
+    return IterableExtensions.<VirtualFile>head(((Iterable<VirtualFile>)Conversions.doWrapArray(_contentRoots)));
   }
   
   public IdeaWorkspaceConfig(final Project project) {

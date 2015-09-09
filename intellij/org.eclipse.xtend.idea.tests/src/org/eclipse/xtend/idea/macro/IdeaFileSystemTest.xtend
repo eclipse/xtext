@@ -8,18 +8,21 @@
 package org.eclipse.xtend.idea.macro
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import com.intellij.testFramework.PsiTestCase
 import java.io.IOException
 import org.eclipse.xtend.core.idea.lang.XtendLanguage
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport
 import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest
+import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 import org.eclipse.xtend.lib.macro.file.MutableFileSystemSupport
 import org.eclipse.xtend.lib.macro.file.Path
 import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider
+import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider.VirtualFileBasedUriHandler
 import org.eclipse.xtext.idea.tests.TestDecorator
+import org.eclipse.xtext.resource.XtextResourceSet
 
 import static extension com.intellij.openapi.roots.ModuleRootModificationUtil.*
-import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -28,15 +31,20 @@ import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 class IdeaFileSystemTest extends PsiTestCase {
 
 	@Inject IdeaResourceSetProvider ideaResourceSetProvider
+	
+	@Inject Provider<IdeaFileSystemSupport> fileSystemSupportProvider
 
 	val Delegate delegate = new Delegate(this)
+	
+	XtextResourceSet resourceSet
 
 	override protected setUp() throws Exception {
 		super.setUp()
 		XtendLanguage.INSTANCE.injectMembers(this)
-		delegate.fileSystemSupport = new IdeaFileSystemSupport => [
-			context = ideaResourceSetProvider.get(module)
-		]
+		resourceSet = ideaResourceSetProvider.get(module)
+		val fileSystemSupport = fileSystemSupportProvider.get
+		fileSystemSupport.context = resourceSet
+		delegate.fileSystemSupport = fileSystemSupport
 	}
 
 	override protected createMainModule() throws IOException {
@@ -44,10 +52,9 @@ class IdeaFileSystemTest extends PsiTestCase {
 	}
 
 	override protected createModule(String moduleName) {
-		val moduleDir = project.baseDir.createChildDirectory(moduleName)
-		val srcDir = moduleDir.createChildDirectory('src')
-
 		val module = super.createModule(moduleName)
+		val moduleDir = createChildDirectory(project.baseDir, moduleName)
+		val srcDir = createChildDirectory(moduleDir, 'src')
 		module.updateModel [ rootModel |
 			val contentEntry = rootModel.addContentEntry(moduleDir)
 			contentEntry.addSourceFolder(srcDir, false)
@@ -63,13 +70,14 @@ class IdeaFileSystemTest extends PsiTestCase {
 		def void setFileSystemSupport(MutableFileSystemSupport fileSystemSupport) {
 			fs = fileSystemSupport
 		}
-
-		override testGetWorkspaceChildren() {
-			assertEquals(Path.ROOT.children.join('[', ', ', ']')[it.segments.join('.')], 1, Path.ROOT.children.size)
-
-			createModule('bar')
-
-			assertEquals(Path.ROOT.children.join('[', ', ', ']')[it.segments.join('.')], 2, Path.ROOT.children.size)
+		
+		override protected createProject(String name) {
+			createModule(name)
+		}
+		
+		override assertToURI(Path file, String expectedContent) {
+			VirtualFileBasedUriHandler.find(resourceSet).flushToDisk
+			super.assertToURI(file, expectedContent)
 		}
 
 	}

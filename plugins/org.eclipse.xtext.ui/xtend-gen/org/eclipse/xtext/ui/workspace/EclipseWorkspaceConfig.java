@@ -8,14 +8,18 @@
 package org.eclipse.xtext.ui.workspace;
 
 import com.google.common.base.Objects;
+import java.util.Set;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor;
+import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfigProvider;
-import org.eclipse.xtext.workspace.IProjectConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfig;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @FinalFieldsConstructor
 @SuppressWarnings("all")
@@ -25,7 +29,29 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   private final IWorkspaceRoot workspaceRoot;
   
   @Override
-  public IProjectConfig findProjectByName(final String name) {
+  public Set<? extends EclipseProjectConfig> getProjects() {
+    IProject[] _projects = this.workspaceRoot.getProjects();
+    final Function1<IProject, Boolean> _function = new Function1<IProject, Boolean>() {
+      @Override
+      public Boolean apply(final IProject it) {
+        IProject _project = it.getProject();
+        return Boolean.valueOf(_project.exists());
+      }
+    };
+    Iterable<IProject> _filter = IterableExtensions.<IProject>filter(((Iterable<IProject>)Conversions.doWrapArray(_projects)), _function);
+    final Function1<IProject, EclipseProjectConfig> _function_1 = new Function1<IProject, EclipseProjectConfig>() {
+      @Override
+      public EclipseProjectConfig apply(final IProject it) {
+        IProject _project = it.getProject();
+        return EclipseWorkspaceConfig.this.provider.getProjectConfig(_project);
+      }
+    };
+    Iterable<EclipseProjectConfig> _map = IterableExtensions.<IProject, EclipseProjectConfig>map(_filter, _function_1);
+    return IterableExtensions.<EclipseProjectConfig>toSet(_map);
+  }
+  
+  @Override
+  public EclipseProjectConfig findProjectByName(final String name) {
     try {
       final IProject project = this.workspaceRoot.getProject(name);
       boolean _exists = project.exists();
@@ -44,7 +70,7 @@ public class EclipseWorkspaceConfig implements IWorkspaceConfig {
   }
   
   @Override
-  public IProjectConfig findProjectContaining(final URI member) {
+  public EclipseProjectConfig findProjectContaining(final URI member) {
     boolean _isPlatformResource = member.isPlatformResource();
     if (_isPlatformResource) {
       String _segment = member.segment(1);
