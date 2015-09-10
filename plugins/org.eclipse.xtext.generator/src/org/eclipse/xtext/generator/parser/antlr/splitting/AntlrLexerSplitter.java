@@ -43,7 +43,9 @@ public class AntlrLexerSplitter {
 
 	private StringBuilder stringBuilder;
 	private final Scanner scanner;
-
+	
+	private boolean allowDFAStaticClasses;
+	
 	public AntlrLexerSplitter(String content) {
 		scanner = new Scanner(content);
 	}
@@ -70,7 +72,10 @@ public class AntlrLexerSplitter {
 		}
 		copyTail();
 		String result = stringBuilder.toString();
-		result = new LexerSpecialStateTransitionSplitter(false).transform(result);
+		LexerSpecialStateTransitionSplitter lexerSplitter;
+		lexerSplitter = new LexerSpecialStateTransitionSplitter(false);
+		lexerSplitter.setAllowDFAStaticClasses(allowDFAStaticClasses);
+		result = lexerSplitter.transform(result);
 		return result;
 	}
 
@@ -212,6 +217,20 @@ public class AntlrLexerSplitter {
 			if(scanner.hasNextLine())
 				stringBuilder.append("\n");
 		}
+	}
+	
+	/**
+	 * @since 2.9 
+	 */
+	public boolean isAllowDFAStaticClasses() {
+		return allowDFAStaticClasses;
+	}
+
+	/**
+	 * @since 2.9
+	 */
+	public void setAllowDFAStaticClasses(boolean value) {
+		this.allowDFAStaticClasses = value;
 	}
 
 	static public class ExtractedMethod {
