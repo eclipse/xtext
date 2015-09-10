@@ -158,10 +158,10 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   @Extension
   protected TokenSetProvider _tokenSetProvider;
   
-  @Inject
+  @Inject(optional = true)
   private IContentAssistParser contentAssistParser;
   
-  @Inject
+  @Inject(optional = true)
   private FollowElementComputer followElementComputer;
   
   private ExecutorService pool = Executors.newFixedThreadPool(3);
@@ -198,6 +198,9 @@ public abstract class AbstractCompletionContributor extends CompletionContributo
   }
   
   protected void extend(final CompletionType type, final TokenSet[] tokenSets, final EStructuralFeature feature, final CompletionProvider<CompletionParameters> contrib) {
+    if ((this.followElementComputer == null)) {
+      throw new IllegalStateException("followElementComputer is not injected, probably IDE project is missing");
+    }
     Grammar _grammar = this.grammarAccess.getGrammar();
     final IFollowElementAcceptor _function = new IFollowElementAcceptor() {
       @Override
