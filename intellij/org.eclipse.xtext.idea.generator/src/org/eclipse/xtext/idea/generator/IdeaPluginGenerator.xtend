@@ -125,6 +125,7 @@ class IdeaPluginGenerator extends Xtend2GeneratorFragment {
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.BlockFactory', 'org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory')
 			bindFactory.addTypeToType('org.eclipse.xtext.idea.formatting.ChildAttributesProvider', 'org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider')
 			bindFactory.addTypeToType('org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider', 'org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider')
+			bindFactory.addTypeToType('org.eclipse.xtext.idea.findusages.IReferenceSearcher', 'org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher')
 		}
 		val bindings = bindFactory.bindings
 
