@@ -714,7 +714,7 @@ class JavaASTFlattener extends ASTVisitor {
 		parameters.visitAllSeparatedByComma
 		appendToBuffer(")")
 		appendExtraDimensions(getExtraDimensions())
-		var List throwsTypes = newArrayList
+		var List<? extends ASTNode> throwsTypes = newArrayList
 		if (!java8orHigher()) {
 			throwsTypes = thrownExceptions
 		} else {
