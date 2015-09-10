@@ -63,7 +63,7 @@ class TraceBasedExceptionFilter extends ExceptionFilter {
 							val lineNumber = document.getLineNumber(rangeMarker.startOffset)
 							DocumentUtil.getFirstNonSpaceCharOffset(document, lineNumber)
 						]
-						val location = trace.getBestAssociatedLocation(new TextRegion(nonSpaceCharOffset, nonSpaceCharOffset))
+						val location = trace.getBestAssociatedLocation(new TextRegion(nonSpaceCharOffset, 0))
 						if (location != null) {
 							val sourceFileDescriptor = new OpenFileDescriptor(
 								location.platformResource.project,

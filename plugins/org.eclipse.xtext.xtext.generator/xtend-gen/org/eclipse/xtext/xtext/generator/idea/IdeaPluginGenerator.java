@@ -213,6 +213,9 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_18 = TypeReference.typeRef("org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider");
       TypeReference _typeRef_19 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider");
       bindFactory.addTypeToType(_typeRef_18, _typeRef_19);
+      TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher");
+      TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher");
+      bindFactory.addTypeToType(_typeRef_20, _typeRef_21);
     }
     ILanguageConfig _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();

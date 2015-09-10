@@ -26,6 +26,8 @@ import org.eclipse.xtext.idea.DefaultIdeaModule;
 import org.eclipse.xtext.idea.common.types.DerivedMemberAwarePsiModelAssociations;
 import org.eclipse.xtext.idea.common.types.StubBasedTypeScopeProvider;
 import org.eclipse.xtext.idea.facet.AbstractFacetConfiguration;
+import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
+import org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -133,6 +135,11 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
 	public Class<? extends IBracePairProvider> bindIBracePairProvider() {
 		return XbaseBracePairProvider.class;
+	}
+	
+	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+	public Class<? extends IReferenceSearcher> bindIReferenceSearcher() {
+		return JvmElementAwareReferenceSearcher.class;
 	}
 	
 }

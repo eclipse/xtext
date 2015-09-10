@@ -67,6 +67,10 @@ public class AbstractEntitiesIdeaModule extends org.eclipse.xtext.idea.DefaultId
 	public Class<? extends org.eclipse.xtext.ide.editor.bracketmatching.IBracePairProvider> bindIBracePairProvider() {
 		return org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider.class;
 	}
+	// contributed by org.eclipse.xtext.idea.generator.IdeaPluginGenerator
+	public Class<? extends org.eclipse.xtext.idea.findusages.IReferenceSearcher> bindIReferenceSearcher() {
+		return org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher.class;
+	}
 	
 	
 }
