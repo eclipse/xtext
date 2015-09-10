@@ -101,7 +101,7 @@ public class TraceBasedExceptionFilter extends ExceptionFilter {
               }
             };
             final Integer nonSpaceCharOffset = _application.<Integer>runReadAction(_function_1);
-            TextRegion _textRegion = new TextRegion((nonSpaceCharOffset).intValue(), (nonSpaceCharOffset).intValue());
+            TextRegion _textRegion = new TextRegion((nonSpaceCharOffset).intValue(), 0);
             final ILocationInVirtualFile location = trace.getBestAssociatedLocation(_textRegion);
             boolean _notEquals_3 = (!Objects.equal(location, null));
             if (_notEquals_3) {
