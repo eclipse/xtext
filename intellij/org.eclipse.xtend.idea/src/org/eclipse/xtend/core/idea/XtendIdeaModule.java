@@ -42,8 +42,6 @@ import org.eclipse.xtext.ide.editor.syntaxcoloring.ISemanticHighlightingCalculat
 import org.eclipse.xtext.idea.editorActions.AutoEditBlockProvider;
 import org.eclipse.xtext.idea.editorActions.TokenSetProvider;
 import org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider;
-import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
-import org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher;
 import org.eclipse.xtext.idea.formatting.BlockFactory;
 import org.eclipse.xtext.idea.formatting.ChildAttributesProvider;
 import org.eclipse.xtext.idea.highlighting.IHighlightingConfiguration;
@@ -168,10 +166,6 @@ public class XtendIdeaModule extends AbstractXtendIdeaModule {
 	@SingletonBinding
 	public Class<? extends BaseXtextFindUsageProvider> bindBaseXtextFindUsageProvider() {
 		return XtendFindUsageProvider.class;
-	}
-	
-	public Class<? extends IReferenceSearcher> bindIReferenceSearcher() {
-		return JvmElementAwareReferenceSearcher.class;
 	}
 	
 }
