@@ -128,7 +128,7 @@ class GrammarAccessExtensions {
 	}
 
 	dispatch def localVar(RuleCall it) {
-		'this_' + (rule.originalElement as AbstractRule).name + '_' + containingParserRule.contentsAsList.indexOf(it)
+		'this_' + rule.originalElement.name + '_' + containingParserRule.contentsAsList.indexOf(it)
 	}
 
 	dispatch def localVar(AbstractElement it) {

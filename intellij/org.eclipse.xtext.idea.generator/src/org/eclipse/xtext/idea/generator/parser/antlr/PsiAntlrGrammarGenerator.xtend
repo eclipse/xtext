@@ -96,7 +96,7 @@ class PsiAntlrGrammarGenerator extends AbstractAntlrGrammarWithActionsGenerator 
 		
 			@Override
 			protected String getFirstRuleName() {
-				return "«(allParserRules.head.originalElement as AbstractRule).name»";
+				return "«allParserRules.head.originalElement.name»";
 			}
 		
 		}
