@@ -99,9 +99,17 @@ class IdeaResourceSetProvider {
 					var file = getOrCreateVirtualFile(uri)
 					val contentDescriptor = localWritten.get(uri)
 					val newContent = contentDescriptor.content
-					val oldContent = file.contentsToByteArray
-					if (!Arrays.equals(newContent, oldContent))
-						file.setBinaryContent(newContent, -1, contentDescriptor.timeStamp, requestor)
+					
+					val cachedDocument = FileDocumentManager.instance.getCachedDocument(file)
+					if (cachedDocument != null) {
+						val oldContent = cachedDocument.text.getBytes(file.charset)
+						if (!Arrays.equals(newContent, oldContent))
+							cachedDocument.text = new String(newContent, file.charset)
+					} else {
+						val oldContent = file.contentsToByteArray
+						if (!Arrays.equals(newContent, oldContent))
+							file.setBinaryContent(newContent, -1, contentDescriptor.timeStamp, requestor)
+					}
 				}
 				for (uri : localDeleted) {
 					val file = getVirtualFile(uri)
