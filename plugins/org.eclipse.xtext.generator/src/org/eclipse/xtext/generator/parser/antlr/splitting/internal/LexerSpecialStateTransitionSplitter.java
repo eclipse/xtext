@@ -27,8 +27,7 @@ public class LexerSpecialStateTransitionSplitter {
 			
 	public static final Pattern CASE_PATTERN = Pattern.compile(
 			"(^\\s*case\\s+(\\d+)\\s*:(\\s*))" +// case # -> $1, $2, $3
-			"([^;]*;" + // int .. = input.LA(..) -> $4
-			"(\\s*int\\s+index[^;]*;\\s*input\\.rewind\\(\\)\\s*;)?)" +  // $5
+			"([^;]*;(\\s*int\\s+index[^;]*;\\s*input\\.rewind\\(\\)\\s*;)?)" + // int .. = input.LA(..); ... -> $4 $5
 			"\\s*s = -1;"  + // local var init
 			"(\\s*if.*?;\\}(\\s*else if.*?;\\})*(\\s*else s.*?;)?(\\s*input\\.seek[^;]*;)?)" + // $6
 			"\\s*(if\\s*\\(\\s*s\\s*>=0\\s*\\)\\s*return\\s*s;\\s*" + // if ( s>=0 ) return s; $10
