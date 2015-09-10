@@ -51,7 +51,7 @@ class IdeaResourceSetProvider {
 		val resourceSet = resourceSetProvider.get
 		resourceSet.classpathURIContext = module
 		resourceSet.URIConverter.URIHandlers.clear
-		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler())
+		resourceSet.URIConverter.URIHandlers.add(new VirtualFileBasedUriHandler)
 
 		val desc = projectDescriptionProvider.getProjectDescription(module)
 		desc.attachToEmfObject(resourceSet)
@@ -95,21 +95,15 @@ class IdeaResourceSetProvider {
 				return;
 			}
 			ApplicationManager.application.runWriteAction [
+				FileDocumentManager.instance.saveAllDocuments
+
 				for (uri : localWritten.keySet) {
 					var file = getOrCreateVirtualFile(uri)
 					val contentDescriptor = localWritten.get(uri)
 					val newContent = contentDescriptor.content
-					
-					val cachedDocument = FileDocumentManager.instance.getCachedDocument(file)
-					if (cachedDocument != null) {
-						val oldContent = cachedDocument.text.getBytes(file.charset)
-						if (!Arrays.equals(newContent, oldContent))
-							cachedDocument.text = new String(newContent, file.charset)
-					} else {
-						val oldContent = file.contentsToByteArray
-						if (!Arrays.equals(newContent, oldContent))
-							file.setBinaryContent(newContent, -1, contentDescriptor.timeStamp, requestor)
-					}
+					val oldContent = file.contentsToByteArray
+					if (!Arrays.equals(newContent, oldContent))
+						file.setBinaryContent(newContent, -1, contentDescriptor.timeStamp, requestor)
 				}
 				for (uri : localDeleted) {
 					val file = getVirtualFile(uri)

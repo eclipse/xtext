@@ -140,34 +140,20 @@ public class IdeaResourceSetProvider {
         @Override
         public void run() {
           try {
+            FileDocumentManager _instance = FileDocumentManager.getInstance();
+            _instance.saveAllDocuments();
             Set<URI> _keySet = localWritten.keySet();
             for (final URI uri : _keySet) {
               {
                 VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
                 final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor contentDescriptor = localWritten.get(uri);
                 final byte[] newContent = contentDescriptor.content;
-                FileDocumentManager _instance = FileDocumentManager.getInstance();
-                final Document cachedDocument = _instance.getCachedDocument(file);
-                boolean _notEquals = (!Objects.equal(cachedDocument, null));
-                if (_notEquals) {
-                  String _text = cachedDocument.getText();
-                  Charset _charset = file.getCharset();
-                  final byte[] oldContent = _text.getBytes(_charset);
-                  boolean _equals = Arrays.equals(newContent, oldContent);
-                  boolean _not = (!_equals);
-                  if (_not) {
-                    Charset _charset_1 = file.getCharset();
-                    String _string = new String(newContent, _charset_1);
-                    cachedDocument.setText(_string);
-                  }
-                } else {
-                  final byte[] oldContent_1 = file.contentsToByteArray();
-                  boolean _equals_1 = Arrays.equals(newContent, oldContent_1);
-                  boolean _not_1 = (!_equals_1);
-                  if (_not_1) {
-                    Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
-                    file.setBinaryContent(newContent, (-1), contentDescriptor.timeStamp, _requestor);
-                  }
+                final byte[] oldContent = file.contentsToByteArray();
+                boolean _equals = Arrays.equals(newContent, oldContent);
+                boolean _not = (!_equals);
+                if (_not) {
+                  Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
+                  file.setBinaryContent(newContent, (-1), contentDescriptor.timeStamp, _requestor);
                 }
               }
             }
