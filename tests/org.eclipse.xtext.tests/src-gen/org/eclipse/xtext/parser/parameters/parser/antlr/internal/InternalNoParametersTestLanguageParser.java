@@ -2622,7 +2622,7 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "entryRuleIdOrKeyword"
-    // InternalNoParametersTestLanguage.g:926:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF ;
+    // InternalNoParametersTestLanguage.g:934:1: entryRuleIdOrKeyword returns [String current=null] : iv_ruleIdOrKeyword= ruleIdOrKeyword EOF ;
     public final String entryRuleIdOrKeyword() throws RecognitionException {
         String current = null;
 
@@ -2630,14 +2630,14 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
 
 
         try {
-            // InternalNoParametersTestLanguage.g:927:2: (iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF )
-            // InternalNoParametersTestLanguage.g:928:2: iv_ruleIdOrKeyword= ruleIdOrKeyword[false] EOF
+            // InternalNoParametersTestLanguage.g:935:2: (iv_ruleIdOrKeyword= ruleIdOrKeyword EOF )
+            // InternalNoParametersTestLanguage.g:936:2: iv_ruleIdOrKeyword= ruleIdOrKeyword EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdOrKeywordRule()); 
             }
             pushFollow(FollowSets000.FOLLOW_1);
-            iv_ruleIdOrKeyword=ruleIdOrKeyword(false);
+            iv_ruleIdOrKeyword=ruleIdOrKeyword();
 
             state._fsp--;
             if (state.failed) return current;
@@ -2662,8 +2662,51 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
 
 
     // $ANTLR start "ruleIdOrKeyword"
-    // InternalNoParametersTestLanguage.g:935:1: ruleIdOrKeyword[boolean p_Keyword] returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) ;
-    public final AntlrDatatypeRuleToken ruleIdOrKeyword(boolean p_Keyword) throws RecognitionException {
+    // InternalNoParametersTestLanguage.g:943:1: ruleIdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= RULE_ID ;
+    public final AntlrDatatypeRuleToken ruleIdOrKeyword() throws RecognitionException {
+        AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+        Token this_ID_0=null;
+
+         enterRule(); 
+            
+        try {
+            // InternalNoParametersTestLanguage.g:946:28: (this_ID_0= RULE_ID )
+            // InternalNoParametersTestLanguage.g:947:5: this_ID_0= RULE_ID
+            {
+            this_ID_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              		current.merge(this_ID_0);
+                  
+            }
+            if ( state.backtracking==0 ) {
+               
+                  newLeafNode(this_ID_0, grammarAccess.getIdOrKeywordAccess().getIDTerminalRuleCall_1()); 
+                  
+            }
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleIdOrKeyword"
+
+
+    // $ANTLR start "norm1_IdOrKeyword"
+    // InternalNoParametersTestLanguage.g:963:1: norm1_IdOrKeyword returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'keyword' | this_ID_1= RULE_ID ) ;
+    public final AntlrDatatypeRuleToken norm1_IdOrKeyword() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token kw=null;
@@ -2672,14 +2715,14 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
          enterRule(); 
             
         try {
-            // InternalNoParametersTestLanguage.g:938:28: ( ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID ) )
-            // InternalNoParametersTestLanguage.g:939:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // InternalNoParametersTestLanguage.g:966:28: ( (kw= 'keyword' | this_ID_1= RULE_ID ) )
+            // InternalNoParametersTestLanguage.g:967:1: (kw= 'keyword' | this_ID_1= RULE_ID )
             {
-            // InternalNoParametersTestLanguage.g:939:1: ( ({...}? => (kw= 'keyword' ) ) | this_ID_1= RULE_ID )
+            // InternalNoParametersTestLanguage.g:967:1: (kw= 'keyword' | this_ID_1= RULE_ID )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( LA13_0 == 20 && p_Keyword ) {
+            if ( (LA13_0==20) ) {
                 alt13=1;
             }
             else if ( (LA13_0==RULE_ID) ) {
@@ -2694,17 +2737,7 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
             }
             switch (alt13) {
                 case 1 :
-                    // InternalNoParametersTestLanguage.g:939:2: ({...}? => (kw= 'keyword' ) )
-                    {
-                    // InternalNoParametersTestLanguage.g:939:2: ({...}? => (kw= 'keyword' ) )
-                    // InternalNoParametersTestLanguage.g:939:3: {...}? => (kw= 'keyword' )
-                    {
-                    if ( ! p_Keyword ) {
-                        if (state.backtracking>0) {state.failed=true; return current;}
-                        throw new FailedPredicateException(input, "ruleIdOrKeyword", "p_Keyword");
-                    }
-                    // InternalNoParametersTestLanguage.g:939:17: (kw= 'keyword' )
-                    // InternalNoParametersTestLanguage.g:940:2: kw= 'keyword'
+                    // InternalNoParametersTestLanguage.g:968:2: kw= 'keyword'
                     {
                     kw=(Token)match(input,20,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2715,15 +2748,9 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
                     }
 
                     }
-
-
-                    }
-
-
-                    }
                     break;
                 case 2 :
-                    // InternalNoParametersTestLanguage.g:947:10: this_ID_1= RULE_ID
+                    // InternalNoParametersTestLanguage.g:974:10: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2758,7 +2785,7 @@ public class InternalNoParametersTestLanguageParser extends AbstractInternalAntl
         }
         return current;
     }
-    // $ANTLR end "ruleIdOrKeyword"
+    // $ANTLR end "norm1_IdOrKeyword"
 
     // $ANTLR start synpred1_InternalNoParametersTestLanguage
     public final void synpred1_InternalNoParametersTestLanguage_fragment() throws RecognitionException {   

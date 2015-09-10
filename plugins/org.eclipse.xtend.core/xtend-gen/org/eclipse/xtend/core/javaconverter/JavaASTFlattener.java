@@ -1254,7 +1254,7 @@ public class JavaASTFlattener extends ASTVisitor {
     this.appendToBuffer(")");
     int _extraDimensions = it.getExtraDimensions();
     this.appendExtraDimensions(_extraDimensions);
-    List throwsTypes = CollectionLiterals.<Object>newArrayList();
+    List<? extends ASTNode> throwsTypes = CollectionLiterals.<ASTNode>newArrayList();
     boolean _java8orHigher = this.java8orHigher();
     boolean _not_3 = (!_java8orHigher);
     if (_not_3) {

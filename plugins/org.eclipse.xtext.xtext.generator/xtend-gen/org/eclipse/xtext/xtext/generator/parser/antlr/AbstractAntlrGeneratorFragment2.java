@@ -107,8 +107,7 @@ public abstract class AbstractAntlrGeneratorFragment2 extends AbstractGeneratorF
     boolean _hasProductionRules = this.hasProductionRules(_grammar);
     boolean _not = (!_hasProductionRules);
     if (_not) {
-      throw new IllegalArgumentException(
-        "You may not generate an ANTLR parser for a grammar without production rules.");
+      throw new IllegalArgumentException("You may not generate an ANTLR parser for a grammar without production rules.");
     }
   }
   

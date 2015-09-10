@@ -33,6 +33,9 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalElement;
+import org.eclipse.xtext.xtext.generator.normalization.OriginalGrammar;
+import org.eclipse.xtext.xtext.generator.normalization.RuleWithParameterValues;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -51,15 +54,80 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getRuleName(AbstractRule rule) {
-		String result = RuleNames.getRuleNames(rule).getAntlrRuleName(rule);
-		return result;
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues != null) {
+			return rule.getName();
+		}
+		RuleNames ruleNames = RuleNames.getRuleNames(rule);
+		return ruleNames.getAntlrRuleName(rule);
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static String getEntryRuleName(ParserRule rule) {
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues != null) {
+			if (parameterValues.getParamValues().isEmpty()) {
+				AbstractRule original = parameterValues.getOriginal();
+				RuleNames ruleNames = RuleNames.getRuleNames(original);
+				return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(original));
+			}
+			return null;
+		} else {
+			RuleNames ruleNames = RuleNames.getRuleNames(rule);
+			return "entry" + Strings.toFirstUpper(ruleNames.getAntlrRuleName(rule));
+		}
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static boolean isValidEntryRule(ParserRule rule) {
+		if (rule.isFragment()) {
+			return false;
+		}
+		RuleWithParameterValues parameterValues = RuleWithParameterValues.findInEmfObject(rule);
+		if (parameterValues.getParamValues().isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T getOriginalElement(T obj) {
+		if (obj instanceof AbstractRule) {
+			AbstractRule result = RuleWithParameterValues.tryGetOriginalRule((AbstractRule) obj);
+			if (result != null)
+				return (T) result;
+			return obj;
+		}
+		if (obj instanceof Grammar) {
+			OriginalGrammar originalGrammar = OriginalGrammar.findInEmfObject(obj);
+			return (T) originalGrammar.getOriginal();
+		}
+		if (obj instanceof AbstractElement) {
+			OriginalElement original = OriginalElement.findInEmfObject(obj);
+			return (T) original.getOriginal();
+		}
+		throw new IllegalArgumentException(String.valueOf(obj));
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public static int getParameterConfig(ParserRule rule) {
+		return RuleWithParameterValues.getParamConfig(rule);
 	}
 	
 	/**
 	 * @since 2.9
 	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
-		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule(rule);
+		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule(getOriginalElement(rule));
 		if ((skipCurrent || !currentAsParam) && rule.getParameters().isEmpty()) {
 			return "";
 		}
@@ -89,7 +157,7 @@ public class AntlrGrammarGenUtil {
 	public static String getArgumentList(final RuleCall ruleCall, final Boolean skipCurrent) {
 		final List<NamedArgument> arguments = ruleCall.getArguments();
 		AbstractRule abstractRule = ruleCall.getRule();
-		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule(abstractRule);
+		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule(getOriginalElement(abstractRule));
 		if (arguments.isEmpty()) {
 			if (needsCurrent) {
 				return "[$current]";
@@ -245,7 +313,7 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getQualifiedNameAsString(RuleCall ruleCall) {
-		AbstractRule rule = ruleCall.getRule();
+		AbstractRule rule = getOriginalElement(ruleCall).getRule();
 		String result = RuleNames.getRuleNames(rule).getQualifiedName(rule);
 		return '"' + result + '"';
 	}

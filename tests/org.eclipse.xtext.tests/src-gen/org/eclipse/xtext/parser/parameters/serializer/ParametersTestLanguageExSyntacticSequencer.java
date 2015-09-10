@@ -20,18 +20,18 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected ParametersTestLanguageExGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q;
-	protected AbstractElementAlias match_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q;
-	protected AbstractElementAlias match_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q;
-	protected AbstractElementAlias match_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q;
+	protected AbstractElementAlias match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1_q;
+	protected AbstractElementAlias match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1_q;
+	protected AbstractElementAlias match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1_q;
+	protected AbstractElementAlias match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ParametersTestLanguageExGrammarAccess) access;
-		match_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_10_1_1_1());
-		match_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_11_1_1_1());
-		match_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_8_1_1_1());
-		match_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParserRuleParametersAccess().getKeywordKeyword_1_9_1_1_1());
+		match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getKeywordKeyword_1_10_1_1_1());
+		match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getKeywordKeyword_1_11_1_1_1());
+		match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getKeywordKeyword_1_8_1_1_1());
+		match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1_q = new TokenAlias(false, true, grammarAccess.getParametersTestLanguageParserRuleParametersAccess().getKeywordKeyword_1_9_1_1_1());
 	}
 	
 	@Override
@@ -46,14 +46,14 @@ public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacti
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q.equals(syntax))
-				emit_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q.equals(syntax))
-				emit_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q.equals(syntax))
-				emit_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q.equals(syntax))
-				emit_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1_q.equals(syntax))
+				emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1_q.equals(syntax))
+				emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1_q.equals(syntax))
+				emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1_q.equals(syntax))
+				emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -65,7 +65,7 @@ public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacti
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
 	 */
-	protected void emit_ParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_10_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -76,7 +76,7 @@ public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacti
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
 	 */
-	protected void emit_ParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_11_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -87,7 +87,7 @@ public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacti
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
 	 */
-	protected void emit_ParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_8_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -98,7 +98,7 @@ public class ParametersTestLanguageExSyntacticSequencer extends AbstractSyntacti
 	 * This ambiguous syntax occurs at:
 	 *     scenario=Scenario2 (ambiguity) (rule end)
 	 */
-	protected void emit_ParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_ParametersTestLanguageParserRuleParameters_KeywordKeyword_1_9_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

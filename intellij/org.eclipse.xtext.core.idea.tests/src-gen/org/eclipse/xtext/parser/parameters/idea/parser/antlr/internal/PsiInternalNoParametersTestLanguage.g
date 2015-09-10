@@ -734,23 +734,31 @@ ruleIdOrKeyword_False:
 //Entry rule entryRuleIdOrKeyword
 entryRuleIdOrKeyword:
 	{ markComposite(elementTypeProvider.getIdOrKeywordElementType()); }
-	ruleIdOrKeyword[false]
+	ruleIdOrKeyword
 	EOF;
 
 // Rule IdOrKeyword
-ruleIdOrKeyword[boolean p_Keyword] 
-:
+ruleIdOrKeyword:
+	{
+		markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());
+	}
+	this_ID_0=RULE_ID
+	{
+		doneLeaf(this_ID_0);
+	}
+;
+
+
+// Rule IdOrKeyword
+norm1_IdOrKeyword:
 	(
-		(
-			{p_Keyword}?=>({
-				markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
-			}
-			kw='keyword'
-			{
-				doneLeaf(kw);
-			}
-			)
-		)
+		{
+			markLeaf(elementTypeProvider.getIdOrKeyword_KeywordKeyword_0_0ElementType());
+		}
+		kw='keyword'
+		{
+			doneLeaf(kw);
+		}
 		    |
 		{
 			markLeaf(elementTypeProvider.getIdOrKeyword_IDTerminalRuleCall_1ElementType());

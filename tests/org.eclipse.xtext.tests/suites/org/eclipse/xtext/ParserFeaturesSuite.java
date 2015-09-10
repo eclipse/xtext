@@ -9,6 +9,7 @@ package org.eclipse.xtext;
 
 import org.eclipse.xtext.grammarinheritance.SuperCallSuite;
 import org.eclipse.xtext.parser.fragments.FragmentsSuite;
+import org.eclipse.xtext.parser.parameters.ParametersSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -19,7 +20,8 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	FragmentsSuite.class,
-	SuperCallSuite.class
+	SuperCallSuite.class,
+	ParametersSuite.class
 })
 public class ParserFeaturesSuite {
 

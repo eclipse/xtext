@@ -33,6 +33,8 @@ import org.eclipse.xtext.generator.parser.antlr.splitting.SyntacticPredicateFixu
 import org.eclipse.xtext.generator.parser.antlr.splitting.UnorderedGroupsSplitter;
 import org.eclipse.xtext.generator.parser.packrat.PackratParserFragment;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.generator.normalization.FlattenedGrammarAccess;
+import org.eclipse.xtext.xtext.generator.normalization.RuleFilter;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
@@ -122,8 +124,11 @@ public abstract class AbstractAntlrGeneratorFragment extends AbstractGeneratorFr
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		checkGrammar(grammar);
-		RuleNames.ensureAdapterInstalled(grammar);
-		super.generate(grammar, ctx);
+		
+		RuleFilter filter = new RuleFilter();
+		RuleNames ruleNames = RuleNames.getRuleNames(grammar, true);
+		Grammar flattened = new FlattenedGrammarAccess(ruleNames, filter).getFlattenedGrammar();
+		super.generate(flattened, ctx);
 	}
 
 	/**

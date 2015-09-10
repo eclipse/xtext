@@ -74,7 +74,7 @@ import «gaFQName()»;
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-«EXPAND ruleName FOREACH helper.getAllAlternatives(this).union(helper.getAllGroups(this)).union(helper.getAllAssignments(this)).union(helper.getAllUnorderedGroups(this)).typeSelect(AbstractElement)-»
+«EXPAND ruleName FOREACH helper.getAllAlternatives(originalElement()).union(helper.getAllGroups(originalElement())).union(helper.getAllAssignments(originalElement())).union(helper.getAllUnorderedGroups(originalElement())).typeSelect(AbstractElement)-»
 				}
 			};
 		}
@@ -85,7 +85,7 @@ import «gaFQName()»;
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			«helper.getInternalContentAssistParserClassName(this)» typedParser = («helper.getInternalContentAssistParserClassName(this)») parser;
-			typedParser.«allParserRules().first().entryRuleName()»();
+			typedParser.«allParserRules().first().originalElement().entryRuleName()»();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);
@@ -126,7 +126,7 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 	
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
-«IF allTerminalRules().exists(r | r.name.toUpperCase() == "WS" )-»
+«IF allTerminalRules().originalElement().exists(r | r.name.toUpperCase() == "WS" )-»
 		// TODO Review assumption
 		return token.getType() == «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_WS;
 «ELSE-»
@@ -137,7 +137,7 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 
 	@Override
 	protected int getBeginTokenType() {
-«LET allTerminalRules().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
+«LET allTerminalRules().originalElement().select(r | {"BEGIN", "INDENT", "OPEN"}.contains(r.name.toUpperCase())) AS open-»
 «IF open.size == 1-»
 		// TODO Review assumption
 		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».«open.first().ruleName()»;
@@ -150,10 +150,10 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 
 	@Override
 	protected int getEndTokenType() {
-«LET allTerminalRules().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
+«LET allTerminalRules().originalElement().select(r | {"END", "DEDENT", "CLOSE"}.contains(r.name.toUpperCase())) AS close-»
 «IF close.size == 1-»
 		// TODO Review assumption
-		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».RULE_«close.first().ruleName()»;
+		return «helper.getInternalContentAssistParserClassName(this).toSimpleName()».«close.first().ruleName()»;
 «ELSE-»
 		// TODO Implement me
 		throw new UnsupportedOperationException("Implement me");
@@ -176,17 +176,17 @@ import «helper.getInternalContentAssistParserClassName(this)»;
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Alternatives-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Assignment-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR Group-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»__0");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»__0");
 «ENDDEFINE»
 
 «DEFINE ruleName FOR UnorderedGroup-»
-					put(grammarAccess.«grammarElementAccess()», "rule__«containingRule().gaRuleIdentifyer()»__«gaElementIdentifyer()»");
+					put(grammarAccess.«grammarElementAccess()», "«containingRule().caRuleName()»__«gaElementIdentifyer()»");
 «ENDDEFINE»

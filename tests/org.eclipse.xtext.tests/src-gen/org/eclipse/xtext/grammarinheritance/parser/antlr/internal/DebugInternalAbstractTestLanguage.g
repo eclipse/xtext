@@ -38,7 +38,7 @@ RULE_ID :
 	)*
 ;
 
-RULE_INT :
+fragment RULE_INT :
 	'0' .. '9'+
 ;
 

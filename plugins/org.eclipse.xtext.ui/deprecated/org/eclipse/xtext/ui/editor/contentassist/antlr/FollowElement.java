@@ -23,6 +23,7 @@ public class FollowElement {
 	private List<AbstractElement> trace;
 	private List<AbstractElement> localTrace;
 	private int lookAhead;
+	private List<Integer> paramStack;
 	private List<LookAheadTerminal> lookAheadTerminals;
 	private List<AbstractElement> handledUnorderedGroupElements;
 	
@@ -48,6 +49,20 @@ public class FollowElement {
 	
 	public void setLookAhead(int lookAhead) {
 		this.lookAhead = lookAhead;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public List<Integer> getParamStack() {
+		return paramStack;
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	public void setParamStack(List<Integer> paramStack) {
+		this.paramStack = paramStack;
 	}
 	
 	public List<LookAheadTerminal> getLookAheadTerminals() {
@@ -81,6 +96,7 @@ public class FollowElement {
 		result = prime * result + ((currentGrammarElement == null) ? 0 : currentGrammarElement.hashCode());
 		result = prime * result + ((localTrace == null) ? 0 : localTrace.hashCode());
 		result = prime * result + lookAhead;
+		result = prime * result + ((paramStack == null) ? 0 : paramStack.hashCode());
 		result = prime * result + ((lookAheadTerminals == null) ? 0 : lookAheadTerminals.hashCode());
 		result = prime * result + ((trace == null) ? 0 : trace.hashCode());
 		result = prime * result + ((handledUnorderedGroupElements == null) ? 0 : handledUnorderedGroupElements.hashCode());
@@ -109,6 +125,12 @@ public class FollowElement {
 		else if (!localTrace.equals(other.localTrace))
 			return false;
 		if (lookAhead != other.lookAhead)
+			return false;
+		if (paramStack == null) {
+			if (other.paramStack != null)
+				return false;
+		}
+		else if (!paramStack.equals(other.paramStack))
 			return false;
 		if (lookAheadTerminals == null) {
 			if (other.lookAheadTerminals != null)

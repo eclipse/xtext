@@ -9,7 +9,6 @@ package org.eclipse.xtext.ide.editor.contentassist.antlr.internal;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.ide.editor.contentassist.antlr.LookaheadKeyword;
 import org.eclipse.xtext.ide.editor.contentassist.antlr.ObservableXtextTokenStream;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
+import org.eclipse.xtext.parser.antlr.TokenTool;
 
 import com.google.common.collect.Iterators;
 import com.google.common.collect.LinkedHashMultimap;
@@ -77,6 +77,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			result.setGrammarElement(current);
 			result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
 			result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
+			result.setParamStack(Lists.newArrayList(paramStack));
 			if (current instanceof UnorderedGroup) {
 				if (indexToHandledElements != null) {
 					int index = grammarElements.lastIndexOf(current);
@@ -105,6 +106,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	
 	protected final List<EObject> grammarElements;
 	protected final List<EObject> localTrace;
+	protected final List<Integer> paramStack;
 	protected int stackSize;
 	protected final Set<FollowElement> followElements;
 	protected ObservableXtextTokenStream.StreamListener delegate;
@@ -129,23 +131,16 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		super(input, state);
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSet<FollowElement>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean add(FollowElement e) {
-				if (e == null)
-					return false;
-				return super.add(e);
-			}
-		};
+		this.paramStack = new ArrayList<Integer>();
+		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
 	}
 	
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSet<FollowElement>();
+		this.followElements = new LinkedHashSetWithoutNull<FollowElement>();
+		this.paramStack = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -174,6 +169,18 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		grammarElements.add(grammarElement);
 		localTrace.add(grammarElement);
+	}
+
+	public void before(EObject grammarElement, int paramConfig) {
+		before(grammarElement);
+		paramStack.add(paramConfig);
+	}
+	
+	public void after(EObject grammarElement, int paramConfig) {
+		int old = paramStack.remove(paramStack.size() - 1);
+		if (old != paramConfig) {
+			throw new IllegalStateException(paramConfig + "!=" + old);
+		}
 	}
 
 	public void after(EObject grammarElement) {
@@ -503,7 +510,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 		LookAheadTerminalRuleCall result = new LookAheadTerminalRuleCall();
 		result.setToken(token);
-		String ruleName = tokenName.substring(5);
+		String ruleName = TokenTool.getLexerRuleName(tokenName);
 		if (terminalRules == null)
 			terminalRules = GrammarUtil.allTerminalRules(grammar);
 		for (TerminalRule rule : terminalRules) {
@@ -528,6 +535,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			logger.debug("  firstMarker: " + firstMarker);
 			logger.debug("  currentMarker: " + currentMarker);
 			logger.debug("  lookAheadAddOn: " + lookAheadAddOn);
+			logger.debug("  params: " + paramStack);
 			logger.debug("  predictionLevel: " + predictionLevel);
 			logger.debug("  stackSize: " + stackSize);
 			logger.debug("  backtracking: " + state.backtracking);
@@ -642,6 +650,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	public List<EObject> getLocalTrace() {
 		return localTrace;
+	}
+	
+	public List<Integer> getParamStack() {
+		return paramStack;
 	}
 	
 	public RecoveryListener getRecoveryListener() {
