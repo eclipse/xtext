@@ -127,6 +127,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testArrayCreationCase2();
   }
   
+  public void testArrayDimensionOnFragmentAsParameter() throws Exception {
+    delegate.testArrayDimensionOnFragmentAsParameter();
+  }
+  
   public void testArrayPrefixMinusCase() throws Exception {
     delegate.testArrayPrefixMinusCase();
   }
@@ -155,8 +159,16 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testBasicForStatementCase_04();
   }
   
+  public void testBasicForStatementCase_05() throws Exception {
+    delegate.testBasicForStatementCase_05();
+  }
+  
   public void testBitwiseComplementCase() throws Exception {
     delegate.testBitwiseComplementCase();
+  }
+  
+  public void testBooleanBitwiseOperatorsCase() throws Exception {
+    delegate.testBooleanBitwiseOperatorsCase();
   }
   
   public void testBug462099() throws Exception {
@@ -165,6 +177,18 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
   
   public void testBug462100() throws Exception {
     delegate.testBug462100();
+  }
+  
+  public void testBytePrimitive_01() throws Exception {
+    delegate.testBytePrimitive_01();
+  }
+  
+  public void testBytePrimitive_02() throws Exception {
+    delegate.testBytePrimitive_02();
+  }
+  
+  public void testBytePrimitive_03() throws Exception {
+    delegate.testBytePrimitive_03();
   }
   
   public void testCastCase() throws Exception {
@@ -279,8 +303,12 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testMultiDeclaration();
   }
   
-  public void testNonFinalMethodParameterCase() throws Exception {
-    delegate.testNonFinalMethodParameterCase();
+  public void testNonFinalMethodParameterCase_01() throws Exception {
+    delegate.testNonFinalMethodParameterCase_01();
+  }
+  
+  public void testNonFinalMethodParameterCase_02() throws Exception {
+    delegate.testNonFinalMethodParameterCase_02();
   }
   
   public void testNumberLiteralCase() throws Exception {
@@ -315,8 +343,16 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
     delegate.testPrefixPlusMinusSimpleArrayCase();
   }
   
+  public void testReturnCase_01() throws Exception {
+    delegate.testReturnCase_01();
+  }
+  
   public void testReturnVoidCase() throws Exception {
     delegate.testReturnVoidCase();
+  }
+  
+  public void testReturnVoidCase_01() throws Exception {
+    delegate.testReturnVoidCase_01();
   }
   
   public void testRichStringCase() throws Exception {
@@ -429,6 +465,10 @@ public class IdeaJavaConverterTest extends AbstractModelTestCase {
   
   public void testSynchronizedStatement() throws Exception {
     delegate.testSynchronizedStatement();
+  }
+  
+  public void testThrowExpressionCase() throws Exception {
+    delegate.testThrowExpressionCase();
   }
   
   public void testTryCatchCase() throws Exception {

@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.idea.config;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.module.Module;
@@ -19,6 +20,7 @@ import org.eclipse.xtend.core.idea.config.XtendLibraryManager;
 import org.eclipse.xtend.idea.LightXtendTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyFile;
@@ -61,13 +63,20 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("buildscript {");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("repositories {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("jcenter()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
     _builder.append("dependencies {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(this.util.xtendGradlePluginVersion, "        ");
-    _builder.append("\'");
-    _builder.newLineIfNotEmpty();
+    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.7\'");
+    _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
@@ -105,11 +114,20 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     _builder.append("buildscript{dependencies{");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:");
-    _builder.append(this.util.xtendGradlePluginVersion, "    ");
-    _builder.append("\'");
-    _builder.newLineIfNotEmpty();
-    _builder.append("}}");
+    _builder.append("classpath \'org.xtend:xtend-gradle-plugin:0.4.7\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("repositories {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("jcenter()");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
     _builder.newLine();
     _builder.append("apply plugin: \'org.xtend.xtend\' ");
     String _string = _builder.toString();
@@ -196,40 +214,76 @@ public class GradleBuildFileUtilTest extends LightXtendTest {
     int _length = _statements.length;
     TestCase.assertEquals(2, _length);
     GrStatement[] _statements_1 = buildFile.getStatements();
-    Object _get = _statements_1[0];
-    TestCase.assertTrue((_get instanceof GrMethodCallExpression));
-    GrStatement[] _statements_2 = buildFile.getStatements();
-    GrStatement _get_1 = _statements_2[0];
-    final GrMethodCallExpression bs = ((GrMethodCallExpression) _get_1);
+    Iterable<GrMethodCallExpression> _filter = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_statements_1)), GrMethodCallExpression.class);
+    final Function1<GrMethodCallExpression, Boolean> _function = new Function1<GrMethodCallExpression, Boolean>() {
+      @Override
+      public Boolean apply(final GrMethodCallExpression it) {
+        GrExpression _invokedExpression = it.getInvokedExpression();
+        String _text = _invokedExpression.getText();
+        return Boolean.valueOf(Objects.equal(_text, "buildscript"));
+      }
+    };
+    final Iterable<GrMethodCallExpression> bsCol = IterableExtensions.<GrMethodCallExpression>filter(_filter, _function);
+    int _size = IterableExtensions.size(bsCol);
+    TestCase.assertEquals(1, _size);
+    final GrMethodCallExpression bs = IterableExtensions.<GrMethodCallExpression>head(bsCol);
     GrExpression _invokedExpression = bs.getInvokedExpression();
     String _text = _invokedExpression.getText();
     TestCase.assertEquals("buildscript", _text);
     GrClosableBlock[] _closureArguments = bs.getClosureArguments();
     GrClosableBlock _head = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments)));
     PsiElement[] _children = _head.getChildren();
-    Iterable<GrMethodCallExpression> _filter = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_children)), GrMethodCallExpression.class);
-    final GrMethodCallExpression dps = IterableExtensions.<GrMethodCallExpression>head(_filter);
-    GrExpression _invokedExpression_1 = dps.getInvokedExpression();
-    String _text_1 = _invokedExpression_1.getText();
-    TestCase.assertEquals("dependencies", _text_1);
+    final Iterable<GrMethodCallExpression> children = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_children)), GrMethodCallExpression.class);
+    int _size_1 = IterableExtensions.size(children);
+    TestCase.assertEquals(2, _size_1);
+    final Function1<GrMethodCallExpression, Boolean> _function_1 = new Function1<GrMethodCallExpression, Boolean>() {
+      @Override
+      public Boolean apply(final GrMethodCallExpression it) {
+        GrExpression _invokedExpression = it.getInvokedExpression();
+        String _text = _invokedExpression.getText();
+        return Boolean.valueOf(Objects.equal(_text, "dependencies"));
+      }
+    };
+    Iterable<GrMethodCallExpression> _filter_1 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_1);
+    final GrMethodCallExpression dps = IterableExtensions.<GrMethodCallExpression>head(_filter_1);
+    TestCase.assertNotNull(dps);
     PsiElement[] _children_1 = dps.getChildren();
     int _length_1 = _children_1.length;
     TestCase.assertEquals(3, _length_1);
     GrClosableBlock[] _closureArguments_1 = dps.getClosureArguments();
     final GrClosableBlock closureBlock = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_1)));
-    GrStatement[] _statements_3 = closureBlock.getStatements();
-    int _length_2 = _statements_3.length;
+    GrStatement[] _statements_2 = closureBlock.getStatements();
+    int _length_2 = _statements_2.length;
     TestCase.assertEquals(1, _length_2);
-    GrStatement[] _statements_4 = closureBlock.getStatements();
-    Iterable<GrApplicationStatement> _filter_1 = Iterables.<GrApplicationStatement>filter(((Iterable<?>)Conversions.doWrapArray(_statements_4)), GrApplicationStatement.class);
-    final GrApplicationStatement clEntry = IterableExtensions.<GrApplicationStatement>head(_filter_1);
+    GrStatement[] _statements_3 = closureBlock.getStatements();
+    Iterable<GrApplicationStatement> _filter_2 = Iterables.<GrApplicationStatement>filter(((Iterable<?>)Conversions.doWrapArray(_statements_3)), GrApplicationStatement.class);
+    final GrApplicationStatement clEntry = IterableExtensions.<GrApplicationStatement>head(_filter_2);
     TestCase.assertNotNull(clEntry);
-    GrExpression _invokedExpression_2 = clEntry.getInvokedExpression();
-    String _text_2 = _invokedExpression_2.getText();
-    TestCase.assertEquals("classpath", _text_2);
+    GrExpression _invokedExpression_1 = clEntry.getInvokedExpression();
+    String _text_1 = _invokedExpression_1.getText();
+    TestCase.assertEquals("classpath", _text_1);
     GrCommandArgumentList _argumentList = clEntry.getArgumentList();
-    String _text_3 = _argumentList.getText();
-    boolean _startsWith = _text_3.startsWith("\'org.xtend:xtend-gradle-plugin:");
+    String _text_2 = _argumentList.getText();
+    boolean _startsWith = _text_2.startsWith("\'org.xtend:xtend-gradle-plugin:");
     TestCase.assertTrue(_startsWith);
+    final Function1<GrMethodCallExpression, Boolean> _function_2 = new Function1<GrMethodCallExpression, Boolean>() {
+      @Override
+      public Boolean apply(final GrMethodCallExpression it) {
+        GrExpression _invokedExpression = it.getInvokedExpression();
+        String _text = _invokedExpression.getText();
+        return Boolean.valueOf(Objects.equal(_text, "repositories"));
+      }
+    };
+    Iterable<GrMethodCallExpression> _filter_3 = IterableExtensions.<GrMethodCallExpression>filter(children, _function_2);
+    final GrMethodCallExpression repos = IterableExtensions.<GrMethodCallExpression>head(_filter_3);
+    TestCase.assertNotNull(repos);
+    GrClosableBlock[] _closureArguments_2 = repos.getClosureArguments();
+    GrClosableBlock _head_1 = IterableExtensions.<GrClosableBlock>head(((Iterable<GrClosableBlock>)Conversions.doWrapArray(_closureArguments_2)));
+    GrStatement[] _statements_4 = _head_1.getStatements();
+    Iterable<GrMethodCallExpression> _filter_4 = Iterables.<GrMethodCallExpression>filter(((Iterable<?>)Conversions.doWrapArray(_statements_4)), GrMethodCallExpression.class);
+    final GrMethodCallExpression jcenterEntry = IterableExtensions.<GrMethodCallExpression>head(_filter_4);
+    GrExpression _invokedExpression_2 = jcenterEntry.getInvokedExpression();
+    String _text_3 = _invokedExpression_2.getText();
+    TestCase.assertEquals("jcenter", _text_3);
   }
 }

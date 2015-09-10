@@ -116,10 +116,11 @@ public class XtendGradleFrameworkSupportProvider extends GradleFrameworkSupportP
       script.addRepositoriesDefinition(_builder_2.toString());
     }
     final XtendSupportConfigurable xtendSupport = this.xtendSupportConfigurableProvider.get();
-    final XtendFacetConfiguration conf = xtendSupport.createOrGetXtendFacetConf(module);
+    Module _module = rootModel.getModule();
+    final XtendFacetConfiguration conf = xtendSupport.createOrGetXtendFacetConf(_module);
     XbaseGeneratorConfigurationState _state = conf.getState();
-    xtendSupport.presetGradleOutputDirectories(_state, module);
+    xtendSupport.presetGradleOutputDirectories(_state, rootModel);
     XbaseGeneratorConfigurationState _state_1 = conf.getState();
-    xtendSupport.createOutputFolders(_state_1, rootModel);
+    xtendSupport.createOutputFolders(rootModel, _state_1);
   }
 }

@@ -99,13 +99,13 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.append("throw new IllegalAccessException()");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("} catch (IOException ) {");
+    _builder.append("} catch (IOException e) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("e.printStackTrace() ");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("} catch (IllegalAccessException ) {");
+    _builder.append("} catch (IllegalAccessException e) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("e.printStackTrace() ");
@@ -233,7 +233,7 @@ public class Java8ConverterTest extends JavaConverterTest {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    final XtendClass clazz = this.toValidXtendClass(_builder.toString());
+    final XtendClass clazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(clazz);
   }
   

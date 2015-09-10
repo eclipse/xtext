@@ -43,6 +43,9 @@ import org.eclipse.jdt.core.dom.TypeDeclarationStatement
 import org.eclipse.jdt.core.dom.VariableDeclarationExpression
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement
+import org.eclipse.jdt.core.dom.PrefixExpression
+import org.eclipse.jdt.core.dom.PostfixExpression
+import org.eclipse.jdt.core.dom.PrimitiveType
 
 /**
  * @author dhuebner - Initial contribution and API
@@ -236,18 +239,30 @@ class ASTFlattenerUtils {
 	}
 
 	def Type findDeclaredType(SimpleName simpleName) {
-		var scope = simpleName.findParentOfType(Block)
+		var ASTNode scope = simpleName.findDeclarationBlocks
 		while (scope != null) {
 			val type = scope.findDeclaredType(simpleName)
 			if (type != null) {
 				return type
 			}
-			scope = scope.findParentOfType(Block)
+			scope = scope.findDeclarationBlocks
 		}
+
 		return null
 	}
 
-	def private Type findDeclaredType(Block scope, SimpleName simpleName) {
+	def private findDeclarationBlocks(ASTNode simpleName) {
+		var ASTNode block = simpleName.findParentOfType(Block)
+		if (block === null) {
+			block = simpleName.findParentOfType(MethodDeclaration)
+		}
+		if (block === null) {
+			block = simpleName.findParentOfType(TypeDeclaration)
+		}
+		return block
+	}
+
+	def private Type findDeclaredType(ASTNode scope, SimpleName simpleName) {
 		val matchesFound = newArrayList
 		scope.accept(new ASTVisitor() {
 			override boolean visit(VariableDeclarationFragment node) {
@@ -273,7 +288,7 @@ class ASTFlattenerUtils {
 			}
 
 			override boolean visit(SingleVariableDeclaration node) {
-				if (node.name.equals(simpleName)) {
+				if (node.name.identifier.equals(simpleName.identifier)) {
 					matchesFound.add(node.type)
 				}
 				return false
@@ -283,11 +298,25 @@ class ASTFlattenerUtils {
 		return matchesFound.head
 	}
 
-	def private Iterable<Assignment> findAssigmentsInBlock(Block scope, (Assignment)=>Boolean constraint) {
+	def private Iterable<Expression> findAssigmentsInBlock(Block scope, (Expression)=>Boolean constraint) {
 		val assigments = newHashSet()
 		if (scope != null) {
 			scope.accept(new ASTVisitor() {
 				override visit(Assignment node) {
+					if (constraint.apply(node)) {
+						assigments.add(node)
+					}
+					return true
+				}
+
+				override visit(PrefixExpression node) {
+					if (constraint.apply(node)) {
+						assigments.add(node)
+					}
+					return true
+				}
+
+				override visit(PostfixExpression node) {
 					if (constraint.apply(node)) {
 						assigments.add(node)
 					}
@@ -301,11 +330,19 @@ class ASTFlattenerUtils {
 	def Boolean isAssignedInBody(Block scope, VariableDeclarationFragment fieldDeclFragment) {
 		return !scope.findAssigmentsInBlock(
 		[
-			if (leftHandSide instanceof Name) {
-				val simpleName = (leftHandSide as Name)
-				val binding = simpleName.resolveBinding()
+			var Expression name = null
+			switch it {
+				Assignment:
+					name = leftHandSide
+				PrefixExpression:
+					name = operand
+				PostfixExpression:
+					name = operand
+			}
+			if (name instanceof Name) {
+				val binding = name.resolveBinding()
 				if (binding instanceof IVariableBinding) {
-					return binding.field && fieldDeclFragment.name.identifier.equals(simpleName.toSimpleName)
+					return binding.field && fieldDeclFragment.name.identifier.equals(name.toSimpleName)
 				}
 			}
 			return false
@@ -315,8 +352,17 @@ class ASTFlattenerUtils {
 	def Boolean isAssignedInBody(Block scope, SimpleName nameToLookFor) {
 		return !scope.findAssigmentsInBlock(
 		[
-			if (leftHandSide instanceof SimpleName) {
-				return nameToLookFor.identifier.equals((leftHandSide as SimpleName).identifier)
+			var Expression simpleName = null
+			switch it {
+				Assignment:
+					simpleName = leftHandSide
+				PrefixExpression:
+					simpleName = operand
+				PostfixExpression:
+					simpleName = operand
+			}
+			if (simpleName instanceof SimpleName) {
+				return simpleName != null && nameToLookFor.identifier.equals(simpleName.identifier)
 			}
 			return false
 		]).empty
@@ -337,6 +383,14 @@ class ASTFlattenerUtils {
 			return node.getStructuralProperty(property) as List<ASTNode>
 		}
 		return null
+	}
+
+	def boolean needPrimitiveCast(Type type) {
+		if (type instanceof PrimitiveType) {
+			return type.primitiveTypeCode == PrimitiveType.CHAR || type.primitiveTypeCode == PrimitiveType.BYTE ||
+				type.primitiveTypeCode == PrimitiveType.SHORT
+		}
+		return false
 	}
 
 	def genericChildProperty(ASTNode node, String propertyName) {

@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.descriptions.EObjectDescriptionBasedStubGenerator;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.util.Strings;
@@ -56,8 +57,10 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 				while (exportedObjects.hasNext()) {
 					IEObjectDescription candidate = exportedObjects.next();
 					URI uri = candidate.getEObjectURI();
-					if (uri.isPlatformResource() && URI.decode(uri.segment(1)).equals(javaProject.getElementName()))
-						return getSource(typeName, packageName, candidate, resourceSet);
+					if (uri.isPlatformResource() && URI.decode(uri.segment(1)).equals(javaProject.getElementName())) {
+						IResourceDescription resourceDescription = descriptions.getResourceDescription(uri.trimFragment());
+						return getSource(typeName, packageName, candidate, resourceSet, resourceDescription);
+					}
 				}
 				return super.findSource(typeName, packageName);
 			}
@@ -75,6 +78,7 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 	
 	/**
 	 * @deprecated This method is not used anymore. It is not necessary that a resource, that contains derived jvm types, is on the project's classpath. 
+	 * @since 2.9
 	 */
 	@Deprecated
 	protected boolean isOnClassPath(IJavaProject javaProject, IStorage storage) {
@@ -87,8 +91,11 @@ public class WorkingCopyOwnerProvider implements IWorkingCopyOwnerProvider {
 		return false;
 	}
 
-	protected String getSource(String typeName, String packageName, IEObjectDescription next, ResourceSet resourceset) {
-		return stubGenerator.getJavaStubSource(next);
+	/**
+	 * @since 2.9
+	 */
+	protected String getSource(String typeName, String packageName, IEObjectDescription next, ResourceSet resourceset, IResourceDescription resourceDescription) {
+		return stubGenerator.getJavaStubSource(next, resourceDescription);
 	}
 
 	protected QualifiedName toQualifiedName(String packageName, String typeName) {

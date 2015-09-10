@@ -55,8 +55,8 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	@Inject protected IGrammarAccess grammarAccess
 	@Inject protected extension TokenSetProvider
 	
-	@Inject IContentAssistParser contentAssistParser
-	@Inject FollowElementComputer followElementComputer
+	@Inject(optional=true) IContentAssistParser contentAssistParser
+	@Inject(optional=true) FollowElementComputer followElementComputer
 	
 	ExecutorService pool = Executors.newFixedThreadPool(3)
 	
@@ -87,6 +87,9 @@ abstract class AbstractCompletionContributor extends CompletionContributor {
 	}
 	
 	protected def extend(CompletionType type, TokenSet[] tokenSets, EStructuralFeature feature, CompletionProvider<CompletionParameters> contrib) {
+		if (followElementComputer === null)
+			throw new IllegalStateException('followElementComputer is not injected, probably IDE project is missing')		
+			
 		followElementComputer.collectAbstractElements(grammarAccess.grammar, feature) [
 			extend(type, tokenSets, it, contrib)
 		]

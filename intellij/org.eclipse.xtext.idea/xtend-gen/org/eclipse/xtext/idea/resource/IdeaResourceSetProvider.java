@@ -30,6 +30,7 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.log4j.Logger;
@@ -50,8 +51,11 @@ import org.eclipse.xtext.resource.impl.ProjectDescription;
 import org.eclipse.xtext.util.LazyStringInputStream;
 import org.eclipse.xtext.util.internal.Log;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Singleton
@@ -59,6 +63,31 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class IdeaResourceSetProvider {
   public static class VirtualFileBasedUriHandler implements URIHandler {
+    @Accessors
+    public static class ContentDescriptor {
+      private byte[] content;
+      
+      private long timeStamp;
+      
+      @Pure
+      public byte[] getContent() {
+        return this.content;
+      }
+      
+      public void setContent(final byte[] content) {
+        this.content = content;
+      }
+      
+      @Pure
+      public long getTimeStamp() {
+        return this.timeStamp;
+      }
+      
+      public void setTimeStamp(final long timeStamp) {
+        this.timeStamp = timeStamp;
+      }
+    }
+    
     public static IdeaResourceSetProvider.VirtualFileBasedUriHandler find(final Notifier notifier) {
       ResourceSet _resourceSet = EcoreUtil2.getResourceSet(notifier);
       URIConverter _uRIConverter = _resourceSet.getURIConverter();
@@ -68,7 +97,7 @@ public class IdeaResourceSetProvider {
     }
     
     @Accessors
-    private Map<URI, byte[]> writtenContents = CollectionLiterals.<URI, byte[]>newHashMap();
+    private Map<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> writtenContents = CollectionLiterals.<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>newHashMap();
     
     @Accessors
     private Set<URI> deleted = CollectionLiterals.<URI>newHashSet();
@@ -89,8 +118,8 @@ public class IdeaResourceSetProvider {
         String _plus_1 = ("deleting: " + _join_1);
         IdeaResourceSetProvider.LOG.debug(_plus_1);
       }
-      final Map<URI, byte[]> localWritten = this.writtenContents;
-      HashMap<URI, byte[]> _newHashMap = CollectionLiterals.<URI, byte[]>newHashMap();
+      final Map<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> localWritten = this.writtenContents;
+      HashMap<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> _newHashMap = CollectionLiterals.<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>newHashMap();
       this.writtenContents = _newHashMap;
       final Set<URI> localDeleted = this.deleted;
       HashSet<URI> _newHashSet = CollectionLiterals.<URI>newHashSet();
@@ -111,18 +140,34 @@ public class IdeaResourceSetProvider {
         @Override
         public void run() {
           try {
-            final long timeStamp = System.currentTimeMillis();
             Set<URI> _keySet = localWritten.keySet();
             for (final URI uri : _keySet) {
               {
                 VirtualFile file = VirtualFileURIUtil.getOrCreateVirtualFile(uri);
-                final byte[] newContent = localWritten.get(uri);
-                final byte[] oldContent = file.contentsToByteArray();
-                boolean _equals = Arrays.equals(newContent, oldContent);
-                boolean _not = (!_equals);
-                if (_not) {
-                  Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
-                  file.setBinaryContent(newContent, (-1), timeStamp, _requestor);
+                final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor contentDescriptor = localWritten.get(uri);
+                final byte[] newContent = contentDescriptor.content;
+                FileDocumentManager _instance = FileDocumentManager.getInstance();
+                final Document cachedDocument = _instance.getCachedDocument(file);
+                boolean _notEquals = (!Objects.equal(cachedDocument, null));
+                if (_notEquals) {
+                  String _text = cachedDocument.getText();
+                  Charset _charset = file.getCharset();
+                  final byte[] oldContent = _text.getBytes(_charset);
+                  boolean _equals = Arrays.equals(newContent, oldContent);
+                  boolean _not = (!_equals);
+                  if (_not) {
+                    Charset _charset_1 = file.getCharset();
+                    String _string = new String(newContent, _charset_1);
+                    cachedDocument.setText(_string);
+                  }
+                } else {
+                  final byte[] oldContent_1 = file.contentsToByteArray();
+                  boolean _equals_1 = Arrays.equals(newContent, oldContent_1);
+                  boolean _not_1 = (!_equals_1);
+                  if (_not_1) {
+                    Object _requestor = VirtualFileBasedUriHandler.this.getRequestor();
+                    file.setBinaryContent(newContent, (-1), contentDescriptor.timeStamp, _requestor);
+                  }
                 }
               }
             }
@@ -164,8 +209,8 @@ public class IdeaResourceSetProvider {
       }
       boolean _containsKey = this.writtenContents.containsKey(uri);
       if (_containsKey) {
-        byte[] _get = this.writtenContents.get(uri);
-        return new ByteArrayInputStream(_get);
+        IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor _get = this.writtenContents.get(uri);
+        return new ByteArrayInputStream(_get.content);
       }
       final VirtualFile virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
       boolean _equals = Objects.equal(virtualFile, null);
@@ -203,7 +248,11 @@ public class IdeaResourceSetProvider {
           super.close();
           final byte[] bytes = this.toByteArray();
           VirtualFileBasedUriHandler.this.deleted.remove(uri);
-          VirtualFileBasedUriHandler.this.writtenContents.put(uri, bytes);
+          final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor contentDescriptor = new IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor();
+          contentDescriptor.content = bytes;
+          long _currentTimeMillis = System.currentTimeMillis();
+          contentDescriptor.timeStamp = _currentTimeMillis;
+          VirtualFileBasedUriHandler.this.writtenContents.put(uri, contentDescriptor);
         }
       };
     }
@@ -228,6 +277,11 @@ public class IdeaResourceSetProvider {
       if (_containsKey) {
         return true;
       }
+      IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor _folderDescriptor = this.getFolderDescriptor(uri);
+      boolean _notEquals = (!Objects.equal(_folderDescriptor, null));
+      if (_notEquals) {
+        return true;
+      }
       VirtualFile _virtualFile = VirtualFileURIUtil.getVirtualFile(uri);
       boolean _exists = false;
       if (_virtualFile!=null) {
@@ -238,19 +292,161 @@ public class IdeaResourceSetProvider {
     
     @Override
     public Map<String, ?> getAttributes(final URI uri, final Map<?, ?> options) {
+      boolean _contains = this.deleted.contains(uri);
+      if (_contains) {
+        return CollectionLiterals.<String, Object>emptyMap();
+      }
+      Object _get = options.get(URIConverter.OPTION_REQUESTED_ATTRIBUTES);
+      final Set<String> requestedAttributes = ((Set<String>) _get);
+      boolean _or = false;
+      boolean _equals = Objects.equal(requestedAttributes, null);
+      if (_equals) {
+        _or = true;
+      } else {
+        boolean _isEmpty = requestedAttributes.isEmpty();
+        _or = _isEmpty;
+      }
+      if (_or) {
+        return CollectionLiterals.<String, Object>emptyMap();
+      }
+      final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor fileDescriptor = this.writtenContents.get(uri);
+      boolean _notEquals = (!Objects.equal(fileDescriptor, null));
+      if (_notEquals) {
+        final HashMap<String, Object> attributes = CollectionLiterals.<String, Object>newHashMap();
+        boolean _contains_1 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
+        if (_contains_1) {
+          attributes.put(URIConverter.ATTRIBUTE_DIRECTORY, Boolean.valueOf(false));
+        }
+        boolean _contains_2 = requestedAttributes.contains(URIConverter.ATTRIBUTE_TIME_STAMP);
+        if (_contains_2) {
+          attributes.put(URIConverter.ATTRIBUTE_TIME_STAMP, Long.valueOf(fileDescriptor.timeStamp));
+        }
+        return attributes;
+      }
+      final IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor folderDescriptor = this.getFolderDescriptor(uri);
+      boolean _notEquals_1 = (!Objects.equal(folderDescriptor, null));
+      if (_notEquals_1) {
+        final HashMap<String, Object> attributes_1 = CollectionLiterals.<String, Object>newHashMap();
+        boolean _contains_3 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
+        if (_contains_3) {
+          attributes_1.put(URIConverter.ATTRIBUTE_DIRECTORY, Boolean.valueOf(true));
+        }
+        boolean _contains_4 = requestedAttributes.contains(URIConverter.ATTRIBUTE_TIME_STAMP);
+        if (_contains_4) {
+          attributes_1.put(URIConverter.ATTRIBUTE_TIME_STAMP, Long.valueOf(folderDescriptor.timeStamp));
+        }
+        return attributes_1;
+      }
+      final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+      boolean _notEquals_2 = (!Objects.equal(file, null));
+      if (_notEquals_2) {
+        final HashMap<String, Object> attributes_2 = CollectionLiterals.<String, Object>newHashMap();
+        boolean _contains_5 = requestedAttributes.contains(URIConverter.ATTRIBUTE_DIRECTORY);
+        if (_contains_5) {
+          boolean _isDirectory = file.isDirectory();
+          attributes_2.put(URIConverter.ATTRIBUTE_DIRECTORY, Boolean.valueOf(_isDirectory));
+        }
+        boolean _contains_6 = requestedAttributes.contains(URIConverter.ATTRIBUTE_TIME_STAMP);
+        if (_contains_6) {
+          long _timeStamp = file.getTimeStamp();
+          attributes_2.put(URIConverter.ATTRIBUTE_TIME_STAMP, Long.valueOf(_timeStamp));
+        }
+        return attributes_2;
+      }
       return CollectionLiterals.<String, Object>emptyMap();
+    }
+    
+    protected IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor getFolderDescriptor(final URI uri) {
+      Set<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>> _entrySet = this.writtenContents.entrySet();
+      final Function1<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>, Boolean> _function = new Function1<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>, Boolean>() {
+        @Override
+        public Boolean apply(final Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> fileDescriptor) {
+          boolean _xblockexpression = false;
+          {
+            URI _key = fileDescriptor.getKey();
+            final URI relativeURI = _key.deresolve(uri);
+            URI _key_1 = fileDescriptor.getKey();
+            _xblockexpression = (!Objects.equal(relativeURI, _key_1));
+          }
+          return Boolean.valueOf(_xblockexpression);
+        }
+      };
+      Iterable<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>> _filter = IterableExtensions.<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>>filter(_entrySet, _function);
+      Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> _head = IterableExtensions.<Map.Entry<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor>>head(_filter);
+      IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor _value = null;
+      if (_head!=null) {
+        _value=_head.getValue();
+      }
+      return _value;
     }
     
     @Override
     public void setAttributes(final URI uri, final Map<String, ?> attributes, final Map<?, ?> options) throws IOException {
     }
     
+    public Set<URI> getChildren(final URI uri) {
+      Set<URI> _xblockexpression = null;
+      {
+        final VirtualFile file = VirtualFileURIUtil.getVirtualFile(uri);
+        Set<URI> _xifexpression = null;
+        boolean _notEquals = (!Objects.equal(file, null));
+        if (_notEquals) {
+          VirtualFile[] _children = file.getChildren();
+          final Function1<VirtualFile, URI> _function = new Function1<VirtualFile, URI>() {
+            @Override
+            public URI apply(final VirtualFile it) {
+              return VirtualFileURIUtil.getURI(it);
+            }
+          };
+          List<URI> _map = ListExtensions.<VirtualFile, URI>map(((List<VirtualFile>)Conversions.doWrapArray(_children)), _function);
+          _xifexpression = IterableExtensions.<URI>toSet(_map);
+        } else {
+          _xifexpression = CollectionLiterals.<URI>newLinkedHashSet();
+        }
+        final Set<URI> children = _xifexpression;
+        Set<URI> _keySet = this.writtenContents.keySet();
+        final Function1<URI, URI> _function_1 = new Function1<URI, URI>() {
+          @Override
+          public URI apply(final URI uriToWrite) {
+            URI _xblockexpression = null;
+            {
+              final URI relativeURI = uriToWrite.deresolve(uri);
+              URI _xifexpression = null;
+              boolean _and = false;
+              boolean _isEmpty = relativeURI.isEmpty();
+              boolean _not = (!_isEmpty);
+              if (!_not) {
+                _and = false;
+              } else {
+                boolean _notEquals = (!Objects.equal(relativeURI, uriToWrite));
+                _and = _notEquals;
+              }
+              if (_and) {
+                int _segmentCount = relativeURI.segmentCount();
+                int _minus = (_segmentCount - 1);
+                URI _trimSegments = relativeURI.trimSegments(_minus);
+                _xifexpression = _trimSegments.resolve(uri);
+              }
+              _xblockexpression = _xifexpression;
+            }
+            return _xblockexpression;
+          }
+        };
+        Iterable<URI> _map_1 = IterableExtensions.<URI, URI>map(_keySet, _function_1);
+        Iterable<URI> _filterNull = IterableExtensions.<URI>filterNull(_map_1);
+        Iterables.<URI>addAll(children, _filterNull);
+        Iterables.removeAll(children, this.deleted);
+        _xblockexpression = children;
+      }
+      return _xblockexpression;
+    }
+    
     @Pure
-    public Map<URI, byte[]> getWrittenContents() {
+    public Map<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> getWrittenContents() {
       return this.writtenContents;
     }
     
-    public void setWrittenContents(final Map<URI, byte[]> writtenContents) {
+    public void setWrittenContents(final Map<URI, IdeaResourceSetProvider.VirtualFileBasedUriHandler.ContentDescriptor> writtenContents) {
       this.writtenContents = writtenContents;
     }
     

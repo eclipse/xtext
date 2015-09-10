@@ -33,7 +33,7 @@ class XtendLibraryManagerTest extends LightXtendTest {
 		super.setUp()
 		this.libraryAdder = [ module |
 			ModuleRootModificationUtil.updateModel(module, [ rootModel |
-				manager.ensureXtendLibAvailable(rootModel, module)
+				manager.ensureXtendLibAvailable(rootModel)
 			])
 		]
 	}

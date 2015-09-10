@@ -8,6 +8,7 @@
 package org.eclipse.xtend.idea.macro;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ContentEntry;
@@ -18,8 +19,6 @@ import com.intellij.testFramework.PlatformTestCase;
 import com.intellij.testFramework.PsiTestCase;
 import com.intellij.util.Consumer;
 import java.io.IOException;
-import java.util.List;
-import junit.framework.TestCase;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend.core.idea.macro.IdeaFileSystemSupport;
 import org.eclipse.xtend.core.tests.macro.JavaIoFileSystemTest;
@@ -30,10 +29,6 @@ import org.eclipse.xtext.idea.resource.IdeaResourceSetProvider;
 import org.eclipse.xtext.idea.tests.TestDecorator;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -51,32 +46,15 @@ public class IdeaFileSystemTest extends PsiTestCase {
     }
     
     @Override
-    public void testGetWorkspaceChildren() {
-      Iterable<? extends Path> _children = this.fs.getChildren(Path.ROOT);
-      final Function1<Path, CharSequence> _function = new Function1<Path, CharSequence>() {
-        @Override
-        public CharSequence apply(final Path it) {
-          List<String> _segments = it.getSegments();
-          return IterableExtensions.join(_segments, ".");
-        }
-      };
-      String _join = IterableExtensions.join(_children, "[", ", ", "]", _function);
-      Iterable<? extends Path> _children_1 = this.fs.getChildren(Path.ROOT);
-      int _size = IterableExtensions.size(_children_1);
-      TestCase.assertEquals(_join, 1, _size);
-      this._ideaFileSystemTest.createModule("bar");
-      Iterable<? extends Path> _children_2 = this.fs.getChildren(Path.ROOT);
-      final Function1<Path, CharSequence> _function_1 = new Function1<Path, CharSequence>() {
-        @Override
-        public CharSequence apply(final Path it) {
-          List<String> _segments = it.getSegments();
-          return IterableExtensions.join(_segments, ".");
-        }
-      };
-      String _join_1 = IterableExtensions.join(_children_2, "[", ", ", "]", _function_1);
-      Iterable<? extends Path> _children_3 = this.fs.getChildren(Path.ROOT);
-      int _size_1 = IterableExtensions.size(_children_3);
-      TestCase.assertEquals(_join_1, 2, _size_1);
+    protected Object createProject(final String name) {
+      return this._ideaFileSystemTest.createModule(name);
+    }
+    
+    @Override
+    public void assertToURI(final Path file, final String expectedContent) {
+      IdeaResourceSetProvider.VirtualFileBasedUriHandler _find = IdeaResourceSetProvider.VirtualFileBasedUriHandler.find(this._ideaFileSystemTest.resourceSet);
+      _find.flushToDisk();
+      super.assertToURI(file, expectedContent);
     }
     
     public Delegate(final IdeaFileSystemTest _ideaFileSystemTest) {
@@ -88,23 +66,23 @@ public class IdeaFileSystemTest extends PsiTestCase {
   @Inject
   private IdeaResourceSetProvider ideaResourceSetProvider;
   
+  @Inject
+  private Provider<IdeaFileSystemSupport> fileSystemSupportProvider;
+  
   private final IdeaFileSystemTest.Delegate delegate = new IdeaFileSystemTest.Delegate(this);
+  
+  private XtextResourceSet resourceSet;
   
   @Override
   protected void setUp() throws Exception {
     super.setUp();
     XtendLanguage.INSTANCE.injectMembers(this);
-    IdeaFileSystemSupport _ideaFileSystemSupport = new IdeaFileSystemSupport();
-    final Procedure1<IdeaFileSystemSupport> _function = new Procedure1<IdeaFileSystemSupport>() {
-      @Override
-      public void apply(final IdeaFileSystemSupport it) {
-        Module _module = IdeaFileSystemTest.this.getModule();
-        XtextResourceSet _get = IdeaFileSystemTest.this.ideaResourceSetProvider.get(_module);
-        it.setContext(_get);
-      }
-    };
-    IdeaFileSystemSupport _doubleArrow = ObjectExtensions.<IdeaFileSystemSupport>operator_doubleArrow(_ideaFileSystemSupport, _function);
-    this.delegate.setFileSystemSupport(_doubleArrow);
+    Module _module = this.getModule();
+    XtextResourceSet _get = this.ideaResourceSetProvider.get(_module);
+    this.resourceSet = _get;
+    final IdeaFileSystemSupport fileSystemSupport = this.fileSystemSupportProvider.get();
+    fileSystemSupport.setContext(this.resourceSet);
+    this.delegate.setFileSystemSupport(fileSystemSupport);
   }
   
   @Override
@@ -116,11 +94,11 @@ public class IdeaFileSystemTest extends PsiTestCase {
   protected Module createModule(final String moduleName) {
     Module _xblockexpression = null;
     {
+      final Module module = super.createModule(moduleName);
       Project _project = this.getProject();
       VirtualFile _baseDir = _project.getBaseDir();
       final VirtualFile moduleDir = PlatformTestCase.createChildDirectory(_baseDir, moduleName);
       final VirtualFile srcDir = PlatformTestCase.createChildDirectory(moduleDir, "src");
-      final Module module = super.createModule(moduleName);
       final Consumer<ModifiableRootModel> _function = new Consumer<ModifiableRootModel>() {
         @Override
         public void consume(final ModifiableRootModel rootModel) {
@@ -134,35 +112,87 @@ public class IdeaFileSystemTest extends PsiTestCase {
     return _xblockexpression;
   }
   
+  public void testDeleteWorkspace() {
+    delegate.testDeleteWorkspace();
+  }
+  
   public void testGetFileChildren() {
     delegate.testGetFileChildren();
+  }
+  
+  public void testGetFileURI() {
+    delegate.testGetFileURI();
   }
   
   public void testGetFolderChildren() {
     delegate.testGetFolderChildren();
   }
   
+  public void testGetFolderURI() {
+    delegate.testGetFolderURI();
+  }
+  
   public void testGetProjectChildren() {
     delegate.testGetProjectChildren();
   }
   
-  public void testGetURI() {
-    delegate.testGetURI();
+  public void testGetProjectURI() {
+    delegate.testGetProjectURI();
+  }
+  
+  public void testGetWorkspaceCharset() {
+    delegate.testGetWorkspaceCharset();
   }
   
   public void testGetWorkspaceChildren() {
     delegate.testGetWorkspaceChildren();
   }
   
-  public void testMakeandDeleteFile() {
-    delegate.testMakeandDeleteFile();
+  public void testGetWorkspaceContent() {
+    delegate.testGetWorkspaceContent();
   }
   
-  public void testMakeandDeleteFolder() {
-    delegate.testMakeandDeleteFolder();
+  public void testGetWorkspaceContentAsSteam() {
+    delegate.testGetWorkspaceContentAsSteam();
   }
   
-  public void testModificationStamp() {
-    delegate.testModificationStamp();
+  public void testGetWorkspaceLastModification() {
+    delegate.testGetWorkspaceLastModification();
+  }
+  
+  public void testGetWorkspaceURI() {
+    delegate.testGetWorkspaceURI();
+  }
+  
+  public void testMakeAndDeleteFile() {
+    delegate.testMakeAndDeleteFile();
+  }
+  
+  public void testMakeAndDeleteFolder() {
+    delegate.testMakeAndDeleteFolder();
+  }
+  
+  public void testModificationStamp_01() {
+    delegate.testModificationStamp_01();
+  }
+  
+  public void testModificationStamp_02() {
+    delegate.testModificationStamp_02();
+  }
+  
+  public void testSetWorkspaceContents() {
+    delegate.testSetWorkspaceContents();
+  }
+  
+  public void testSetWorkspaceContentsAsStream() {
+    delegate.testSetWorkspaceContentsAsStream();
+  }
+  
+  public void testWorkspaceIsFile() {
+    delegate.testWorkspaceIsFile();
+  }
+  
+  public void testWorkspaceIsFolder() {
+    delegate.testWorkspaceIsFolder();
   }
 }

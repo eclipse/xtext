@@ -17,6 +17,11 @@ import com.intellij.facet.ProjectWideFacetListenersRegistry
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.AbstractProjectComponent
+import com.intellij.openapi.components.PersistentStateComponent
+import com.intellij.openapi.components.State
+import com.intellij.openapi.components.Storage
+import com.intellij.openapi.components.StoragePathMacros
+import com.intellij.openapi.components.StorageScheme
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.editor.event.DocumentAdapter
 import com.intellij.openapi.editor.event.DocumentEvent
@@ -79,7 +84,19 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable {
+@State(
+	name='XtextAutoBuilderState', 
+	storages = #[
+		@Storage(
+			id="other", 
+			file = StoragePathMacros.PROJECT_FILE
+		),
+		@Storage(
+			id = "dir", 
+			file = StoragePathMacros.PROJECT_CONFIG_DIR + "/xtextAutoBuilderState.xml", 
+			scheme = StorageScheme.DIRECTORY_BASED
+		)])
+@Log class XtextAutoBuilderComponent extends AbstractProjectComponent implements Disposable, PersistentStateComponent<XtextAutoBuilderComponentState> {
 	
 	volatile boolean disposed
 	
@@ -643,6 +660,26 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		def setCanceled(boolean canceled) {
 			this.canceled = canceled
 		}
-		
 	}
+	
+	@Inject XtextAutoBuilderComponentState.Codec codec
+	
+	override getState() {
+		val serializableMap = newHashMap(module2GeneratedMapping.entrySet.map[
+			key?.name ?: '' -> value
+		])
+		codec.encode(chunkedResourceDescriptions, serializableMap)
+	}
+	
+	override loadState(XtextAutoBuilderComponentState state) {
+		chunkedResourceDescriptions = codec.decodeIndex(state)
+		val serializedMap = codec.decodeModuleToGenerated(state) 
+		module2GeneratedMapping = newHashMap(serializedMap.entrySet.map[
+			if(key.empty) 
+				null 
+			else 
+			    ModuleManager.getInstance(project).findModuleByName(key) -> value
+		]) 
+	}
+	
 }

@@ -11,6 +11,10 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.xtext.parser.IEncodingProvider
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.vfs.VirtualFileManager
+import com.intellij.openapi.vfs.encoding.EncodingRegistry
+
+import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.intellij.openapi.vfs.VirtualFile
 
 /**
  * 
@@ -20,16 +24,28 @@ class IdeaEncodingProvider implements IEncodingProvider {
 	override getEncoding(URI uri) {
 		val fileManager = ApplicationManager.getApplication().getComponent(VirtualFileManager);
 		// fall back when no file manager exists (parsing tests)
-		if (fileManager == null) {
+		if (fileManager == null)
 			return new IEncodingProvider.Runtime().getEncoding(uri)
-		}
-		var file = VirtualFileURIUtil.getVirtualFile(uri)
-		var parent = uri
-		while (file == null && parent.segmentCount > 0) {
-			parent = parent.trimSegments(1)
-			file = VirtualFileURIUtil.getVirtualFile(parent)
-		}
-		return file?.charset?.name ?: 'UTF-8'
+
+		return uri.charset?.name ?: 'UTF-8'
+	}
+	
+	protected def getCharset(URI uri) {
+		uri.findVirtualFile?.charset ?: EncodingRegistry.instance.defaultCharset
+	}
+	
+	protected def VirtualFile findVirtualFile(URI uri) {
+		if (uri === null)
+			return null
+			
+		val file = uri.virtualFile
+		if (file !== null)
+			return file
+		
+		if (uri.segmentCount == 0)
+			return null
+			
+		uri.trimSegments(1).findVirtualFile
 	}
 	
 }

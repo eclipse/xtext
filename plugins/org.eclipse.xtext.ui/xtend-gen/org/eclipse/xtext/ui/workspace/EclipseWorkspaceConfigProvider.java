@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.ui.workspace.EclipseProjectConfig;
 import org.eclipse.xtext.ui.workspace.EclipseWorkspaceConfig;
 import org.eclipse.xtext.ui.workspace.JdtProjectConfig;
-import org.eclipse.xtext.workspace.IWorkspaceConfig;
 import org.eclipse.xtext.workspace.IWorkspaceConfigProvider;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -34,7 +33,7 @@ public class EclipseWorkspaceConfigProvider implements IWorkspaceConfigProvider 
   private IJdtHelper jdtHelper;
   
   @Override
-  public IWorkspaceConfig getWorkspaceConfig(final ResourceSet context) {
+  public EclipseWorkspaceConfig getWorkspaceConfig(final ResourceSet context) {
     IWorkspaceRoot _root = this.workspace.getRoot();
     return new EclipseWorkspaceConfig(this, _root);
   }
