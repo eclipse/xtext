@@ -7,8 +7,15 @@
  */
 package org.eclipse.xtend.idea.autobuild;
 
+import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.inject.Provider;
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetConfiguration;
+import com.intellij.facet.FacetManager;
+import com.intellij.facet.FacetType;
+import com.intellij.facet.FacetTypeId;
+import com.intellij.facet.FacetTypeRegistry;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.ModifiableModuleModel;
@@ -21,6 +28,7 @@ import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.roots.impl.ModifiableModelCommitter;
 import com.intellij.openapi.roots.ui.configuration.actions.ModuleDeleteProvider;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.PsiTestCase;
 import java.io.InputStream;
@@ -29,18 +37,25 @@ import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtend.core.idea.facet.XtendFacetConfiguration;
 import org.eclipse.xtend.core.idea.lang.XtendLanguage;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.idea.build.XtextAutoBuilderComponent;
+import org.eclipse.xtext.idea.tests.LibraryUtil;
 import org.eclipse.xtext.idea.tests.LightToolingTest;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.impl.ChunkedResourceDescriptions;
+import org.eclipse.xtext.util.Files;
+import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigurationState;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -291,6 +306,87 @@ public class MultiModuleTest extends PsiTestCase {
     }
   }
   
+  public void testTwoModulesDifferentLanguageVersion() {
+    try {
+      Module _createModule = this.createModule("moduleA");
+      final Procedure1<Module> _function = new Procedure1<Module>() {
+        @Override
+        public void apply(final Module it) {
+          MultiModuleTest.this.setJavaTargetVersion(it, LanguageLevel.JDK_1_7);
+          LibraryUtil.addXtendLibrary(it);
+        }
+      };
+      final Module moduleA = ObjectExtensions.<Module>operator_doubleArrow(_createModule, _function);
+      Module _createModule_1 = this.createModule("moduleB");
+      final Procedure1<Module> _function_1 = new Procedure1<Module>() {
+        @Override
+        public void apply(final Module it) {
+          MultiModuleTest.this.setJavaTargetVersion(it, LanguageLevel.JDK_1_8);
+          LibraryUtil.addXtendLibrary(it);
+        }
+      };
+      final Module moduleB = ObjectExtensions.<Module>operator_doubleArrow(_createModule_1, _function_1);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class ClassA {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("val f = [boolean it | 42]");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final PsiFile classA = this.createFile(moduleA, "ClassA.xtend", _builder.toString());
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class ClassB {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("val f = [boolean it | 42]");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      final PsiFile classB = this.createFile(moduleB, "ClassB.xtend", _builder_1.toString());
+      VirtualFile _virtualFile = classA.getVirtualFile();
+      VirtualFile _parent = null;
+      if (_virtualFile!=null) {
+        _parent=_virtualFile.getParent();
+      }
+      VirtualFile _findChild = null;
+      if (_parent!=null) {
+        _findChild=_parent.findChild("xtend-gen");
+      }
+      VirtualFile _findChild_1 = null;
+      if (_findChild!=null) {
+        _findChild_1=_findChild.findChild("ClassA.java");
+      }
+      final VirtualFile generatedA = _findChild_1;
+      VirtualFile _virtualFile_1 = classB.getVirtualFile();
+      VirtualFile _parent_1 = null;
+      if (_virtualFile_1!=null) {
+        _parent_1=_virtualFile_1.getParent();
+      }
+      VirtualFile _findChild_2 = null;
+      if (_parent_1!=null) {
+        _findChild_2=_parent_1.findChild("xtend-gen");
+      }
+      VirtualFile _findChild_3 = null;
+      if (_findChild_2!=null) {
+        _findChild_3=_findChild_2.findChild("ClassB.java");
+      }
+      final VirtualFile generatedB = _findChild_3;
+      TestCase.assertNotNull(generatedA);
+      TestCase.assertNotNull(generatedB);
+      InputStream _inputStream = generatedA.getInputStream();
+      final String aString = Files.readStreamIntoString(_inputStream);
+      boolean _contains = aString.contains("->");
+      TestCase.assertFalse(aString, _contains);
+      InputStream _inputStream_1 = generatedB.getInputStream();
+      final String bString = Files.readStreamIntoString(_inputStream_1);
+      boolean _contains_1 = bString.contains("->");
+      TestCase.assertTrue(bString, _contains_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public void assertFileContains(final VirtualFile file, final String string) {
     try {
       InputStream _inputStream = file.getInputStream();
@@ -300,6 +396,27 @@ public class MultiModuleTest extends PsiTestCase {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected void setJavaTargetVersion(final Module module, final LanguageLevel level) {
+    FacetTypeRegistry _instance = FacetTypeRegistry.getInstance();
+    FacetType[] _facetTypes = _instance.getFacetTypes();
+    final Function1<FacetType<?, ?>, Boolean> _function = new Function1<FacetType<?, ?>, Boolean>() {
+      @Override
+      public Boolean apply(final FacetType<?, ?> it) {
+        String _stringId = it.getStringId();
+        String _iD = XtendLanguage.INSTANCE.getID();
+        return Boolean.valueOf(Objects.equal(_stringId, _iD));
+      }
+    };
+    final FacetType<?, ?> facetType = IterableExtensions.<FacetType<?, ?>>findFirst(((Iterable<FacetType<?, ?>>)Conversions.doWrapArray(_facetTypes)), _function);
+    FacetManager _instance_1 = FacetManager.getInstance(module);
+    FacetTypeId<? extends Facet> _id = facetType.getId();
+    final Facet facet = _instance_1.getFacetByType(_id);
+    FacetConfiguration _configuration = facet.getConfiguration();
+    XbaseGeneratorConfigurationState _state = ((XtendFacetConfiguration) _configuration).getState();
+    String _presentableText = level.getPresentableText();
+    _state.setTargetJavaVersion(_presentableText);
   }
   
   @Override

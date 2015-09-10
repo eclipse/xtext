@@ -14,7 +14,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
- @Accessors
+@Accessors
 class XbaseGeneratorConfigurationState extends GeneratorConfigurationState {
 	String targetJavaVersion
 
