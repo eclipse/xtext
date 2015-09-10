@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.common.types;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.psi.PsiElement;
@@ -27,6 +28,28 @@ public class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations
   
   @Override
   public PsiElement getPsiElement(final EObject object) {
+    PsiElement _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(object, null);
+      if (_equals) {
+        return null;
+      }
+      EObject _convertToSource = this.convertToSource(object);
+      final PsiElement psiElement = super.getPsiElement(_convertToSource);
+      PsiElement _xifexpression = null;
+      boolean _equals_1 = Objects.equal(psiElement, null);
+      if (_equals_1) {
+        EObject _eContainer = object.eContainer();
+        _xifexpression = this.getPsiElement(_eContainer);
+      } else {
+        _xifexpression = psiElement;
+      }
+      _xblockexpression = _xifexpression;
+    }
+    return _xblockexpression;
+  }
+  
+  protected EObject convertToSource(final EObject object) {
     EObject _elvis = null;
     EObject _primarySourceElement = this.jvmModelAssociations.getPrimarySourceElement(object);
     if (_primarySourceElement != null) {
@@ -34,6 +57,6 @@ public class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations
     } else {
       _elvis = object;
     }
-    return super.getPsiElement(_elvis);
+    return _elvis;
   }
 }
