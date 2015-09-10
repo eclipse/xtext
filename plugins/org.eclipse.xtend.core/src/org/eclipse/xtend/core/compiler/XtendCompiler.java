@@ -51,7 +51,7 @@ import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfigProvider;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.Later;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -80,7 +80,7 @@ public class XtendCompiler extends XbaseCompiler {
 	private XtendGenerator jvmModelGenerator;
 	
 	@Inject 
-	private GeneratorConfigProvider generatorConfigProvider;
+	private IGeneratorConfigProvider generatorConfigProvider;
 	
 	@Inject
 	private IXtendJvmAssociations associations;
