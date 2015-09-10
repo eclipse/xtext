@@ -311,6 +311,20 @@ public class FlattenedGrammarAccess {
             }
             if ((eObject instanceof AbstractElement)) {
               OriginalElement original = new OriginalElement(((AbstractElement)eObject));
+              EClass _eClass = ((AbstractElement)eObject).eClass();
+              EClass _eClass_1 = result.eClass();
+              boolean _notEquals = (!Objects.equal(_eClass, _eClass_1));
+              if (_notEquals) {
+                EClass _eClass_2 = result.eClass();
+                String _name = _eClass_2.getName();
+                String _plus = ("copy is: \'" + _name);
+                String _plus_1 = (_plus + "\' but original was: \'");
+                EClass _eClass_3 = ((AbstractElement)eObject).eClass();
+                String _name_1 = _eClass_3.getName();
+                String _plus_2 = (_plus_1 + _name_1);
+                String _plus_3 = (_plus_2 + "\'");
+                throw new IllegalStateException(_plus_3);
+              }
               original.attachToEmfObject(result);
             }
             return result;

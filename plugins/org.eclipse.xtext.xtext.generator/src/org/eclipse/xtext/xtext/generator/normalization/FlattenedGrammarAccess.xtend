@@ -170,6 +170,9 @@ class FlattenedGrammarAccess {
 					}
 					if (eObject instanceof AbstractElement) {
 						var original = new OriginalElement(eObject)
+						if (eObject.eClass != result.eClass) {
+							throw new IllegalStateException("copy is: '" + result.eClass.name + "' but original was: '" + eObject.eClass.name + "'")
+						}
 						original.attachToEmfObject(result)
 					}
 					return result

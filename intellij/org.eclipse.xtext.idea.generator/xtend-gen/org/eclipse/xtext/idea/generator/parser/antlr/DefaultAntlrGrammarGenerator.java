@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.AbstractElement;
@@ -281,8 +280,8 @@ public class DefaultAntlrGrammarGenerator {
   protected String compileEBNF(final AbstractRule it, final AntlrOptions options) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("// Rule ");
-    EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(it);
-    String _name = ((AbstractRule) _originalElement).getName();
+    AbstractRule _originalElement = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
+    String _name = _originalElement.getName();
     _builder.append(_name, "");
     _builder.newLineIfNotEmpty();
     String _ruleName = this._grammarAccessExtensions.ruleName(it);
@@ -296,8 +295,8 @@ public class DefaultAntlrGrammarGenerator {
       if (!(it instanceof ParserRule)) {
         _and = false;
       } else {
-        EObject _originalElement_1 = AntlrGrammarGenUtil.getOriginalElement(it);
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((AbstractRule) _originalElement_1));
+        AbstractRule _originalElement_1 = AntlrGrammarGenUtil.<AbstractRule>getOriginalElement(it);
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement_1);
         _and = _isDatatypeRule;
       }
       if (_and) {
@@ -668,8 +667,8 @@ public class DefaultAntlrGrammarGenerator {
     {
       final AbstractRule rule = it.getRule();
       if ((rule instanceof ParserRule)) {
-        EObject _originalElement = AntlrGrammarGenUtil.getOriginalElement(rule);
-        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(((AbstractRule) _originalElement));
+        ParserRule _originalElement = AntlrGrammarGenUtil.<ParserRule>getOriginalElement(((ParserRule)rule));
+        boolean _isDatatypeRule = GrammarUtil.isDatatypeRule(_originalElement);
         boolean _not = (!_isDatatypeRule);
         if (_not) {
           throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule");

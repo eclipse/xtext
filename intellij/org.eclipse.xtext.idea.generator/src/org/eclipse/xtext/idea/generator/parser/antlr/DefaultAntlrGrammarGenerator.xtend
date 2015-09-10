@@ -151,9 +151,9 @@ class DefaultAntlrGrammarGenerator {
 	}
 	
 	protected def String compileEBNF(AbstractRule it, AntlrOptions options) '''
-		// Rule «(originalElement as AbstractRule).name»
+		// Rule «originalElement.name»
 		«ruleName»«compileInit(options)»:
-			«IF it instanceof ParserRule && (originalElement as AbstractRule).datatypeRule»
+			«IF it instanceof ParserRule && originalElement.datatypeRule»
 				«dataTypeEbnf(alternatives, true)»
 			«ELSE»
 				«ebnf(alternatives, options, true)»
@@ -259,7 +259,7 @@ class DefaultAntlrGrammarGenerator {
 	protected dispatch def String crossrefEbnf(RuleCall it, CrossReference ref, boolean supportActions) {
 		val rule = rule
 		if (rule instanceof ParserRule) {
-			if (!(rule.originalElement as AbstractRule).datatypeRule) {
+			if (!rule.originalElement.datatypeRule) {
 				throw new IllegalStateException("crossrefEbnf is not supported for ParserRule that is not a datatype rule")
 			}
 		}

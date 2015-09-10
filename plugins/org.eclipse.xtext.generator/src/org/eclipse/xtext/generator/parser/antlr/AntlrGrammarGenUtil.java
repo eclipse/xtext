@@ -97,20 +97,21 @@ public class AntlrGrammarGenUtil {
 	/**
 	 * @since 2.9
 	 */
-	public static EObject getOriginalElement(EObject obj) {
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T getOriginalElement(T obj) {
 		if (obj instanceof AbstractRule) {
 			AbstractRule result = RuleWithParameterValues.tryGetOriginalRule((AbstractRule) obj);
 			if (result != null)
-				return result;
+				return (T) result;
 			return obj;
 		}
 		if (obj instanceof Grammar) {
 			OriginalGrammar originalGrammar = OriginalGrammar.findInEmfObject(obj);
-			return originalGrammar.getOriginal();
+			return (T) originalGrammar.getOriginal();
 		}
 		if (obj instanceof AbstractElement) {
 			OriginalElement original = OriginalElement.findInEmfObject(obj);
-			return original.getOriginal();
+			return (T) original.getOriginal();
 		}
 		throw new IllegalArgumentException(String.valueOf(obj));
 	}
@@ -126,7 +127,7 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getParameterList(ParserRule rule, Boolean skipCurrent) {
-		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule((ParserRule) getOriginalElement(rule));
+		boolean currentAsParam = rule.isFragment() && !GrammarUtil.isDatatypeRule(getOriginalElement(rule));
 		if ((skipCurrent || !currentAsParam) && rule.getParameters().isEmpty()) {
 			return "";
 		}
@@ -156,7 +157,7 @@ public class AntlrGrammarGenUtil {
 	public static String getArgumentList(final RuleCall ruleCall, final Boolean skipCurrent) {
 		final List<NamedArgument> arguments = ruleCall.getArguments();
 		AbstractRule abstractRule = ruleCall.getRule();
-		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule((ParserRule) getOriginalElement(abstractRule));
+		boolean needsCurrent = !skipCurrent && GrammarUtil.isEObjectFragmentRule(abstractRule) && !GrammarUtil.isDatatypeRule(getOriginalElement(abstractRule));
 		if (arguments.isEmpty()) {
 			if (needsCurrent) {
 				return "[$current]";
@@ -312,7 +313,7 @@ public class AntlrGrammarGenUtil {
 	 * @since 2.9
 	 */
 	public static String getQualifiedNameAsString(RuleCall ruleCall) {
-		AbstractRule rule = ((RuleCall) getOriginalElement(ruleCall)).getRule();
+		AbstractRule rule = getOriginalElement(ruleCall).getRule();
 		String result = RuleNames.getRuleNames(rule).getQualifiedName(rule);
 		return '"' + result + '"';
 	}
