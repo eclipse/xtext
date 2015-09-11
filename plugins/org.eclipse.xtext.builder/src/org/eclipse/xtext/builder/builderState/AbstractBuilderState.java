@@ -13,9 +13,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.IJobManager;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -66,7 +70,16 @@ public abstract class AbstractBuilderState extends AbstractResourceDescriptionCh
 
 	protected void ensureLoaded() {
 		if (!isLoaded) {
-			load();
+			// prevent deadlock by wrapping load into a workspace lock
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=475368
+			IJobManager manager = Job.getJobManager();
+			IWorkspaceRoot rule = ResourcesPlugin.getWorkspace().getRoot();
+			try {
+				manager.beginRule(rule, null);
+				load();
+			} finally {
+				manager.endRule(rule);
+			}
 		}
 	}
 
