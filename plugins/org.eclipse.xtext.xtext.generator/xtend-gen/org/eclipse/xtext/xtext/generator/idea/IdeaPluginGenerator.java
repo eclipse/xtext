@@ -216,6 +216,9 @@ public class IdeaPluginGenerator extends AbstractGeneratorFragment2 {
       TypeReference _typeRef_20 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.IReferenceSearcher");
       TypeReference _typeRef_21 = TypeReference.typeRef("org.eclipse.xtext.idea.findusages.JvmElementAwareReferenceSearcher");
       bindFactory.addTypeToType(_typeRef_20, _typeRef_21);
+      TypeReference _typeRef_22 = TypeReference.typeRef("org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider");
+      TypeReference _typeRef_23 = TypeReference.typeRef("org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider");
+      bindFactory.addTypeToType(_typeRef_22, _typeRef_23);
     }
     ILanguageConfig _language_2 = this.getLanguage();
     GuiceModuleAccess _ideaGenModule = _language_2.getIdeaGenModule();

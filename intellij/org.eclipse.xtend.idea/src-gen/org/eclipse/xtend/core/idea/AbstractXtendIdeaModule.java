@@ -39,7 +39,9 @@ import org.eclipse.xtext.parser.antlr.LexerBindings;
 import org.eclipse.xtext.psi.IPsiModelAssociations;
 import org.eclipse.xtext.service.LanguageSpecific;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.idea.bracketmatching.XbaseBracePairProvider;
+import org.eclipse.xtext.xbase.idea.facet.XbaseGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.idea.formatting.XbaseBlockFactory;
 import org.eclipse.xtext.xbase.idea.formatting.XbaseChildAttributesProvider;
 import org.eclipse.xtext.xbase.idea.highlighting.XbaseHighlightingConfiguration;
@@ -140,6 +142,11 @@ public abstract class AbstractXtendIdeaModule extends DefaultIdeaModule {
 	// contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
 	public Class<? extends IReferenceSearcher> bindIReferenceSearcher() {
 		return JvmElementAwareReferenceSearcher.class;
+	}
+
+    // contributed by org.eclipse.xtext.xtext.generator.idea.IdeaPluginGenerator
+    public Class<? extends IGeneratorConfigProvider> bindIGeneratorConfigProvider() {
+		return XbaseGeneratorConfigProvider.class;
 	}
 	
 }
