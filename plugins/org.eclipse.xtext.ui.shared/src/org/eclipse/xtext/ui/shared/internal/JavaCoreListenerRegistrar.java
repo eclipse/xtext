@@ -28,7 +28,12 @@ public class JavaCoreListenerRegistrar implements IEagerContribution {
 	@Override
 	public void initialize() {
 		JavaCore.addElementChangedListener(classpathChangeListener);
-		storage2UriMapperJavaImpl.asyncInitializeCache();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				storage2UriMapperJavaImpl.initializeCache();
+			}
+		}).start();
 		JavaCore.addElementChangedListener(storage2UriMapperJavaImpl);
 	}
 
