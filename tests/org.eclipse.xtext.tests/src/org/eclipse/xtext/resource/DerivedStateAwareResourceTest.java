@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
+import org.eclipse.xtext.service.OperationCanceledError;
 import org.eclipse.xtext.service.OperationCanceledManager;
 import org.junit.Test;
 
@@ -97,6 +99,80 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		// there is one exception error
 		assertEquals(1, resource.getErrors().size());
 		assertTrue(((ExceptionDiagnostic)resource.getErrors().get(0)).getException() instanceof IllegalStateException);
+	}
+	
+	@Test public void testOperationCanceledExceptionOnInstall() {
+		TestedResource resource = new TestedResource();
+		resource.setIsLoaded();
+		resource.setDerivedStateComputer(new IDerivedStateComputer() {
+			
+			private boolean canceled = true;
+			
+			@Override
+			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
+				resource.getContents().add(EcoreFactory.eINSTANCE.createEObject());
+				if (canceled) {
+					canceled = false;
+					throw new OperationCanceledException();
+				}
+			}
+
+			@Override
+			public void discardDerivedState(DerivedStateAwareResource resource) {
+				resource.getContents().clear();
+			}
+		});
 		
+		assertFalse(resource.isFullyInitialized());
+		assertTrue(resource.doGetContents().isEmpty());
+		
+		try {
+			resource.getContents();
+			fail("exception expected");
+		} catch (OperationCanceledError e) {
+			// expected
+		}
+		assertFalse(resource.isFullyInitialized());
+		assertTrue(resource.doGetContents().isEmpty());
+		assertTrue(resource.getErrors().isEmpty());
+		
+		resource.getContents();
+		assertTrue(resource.isFullyInitialized());
+		assertFalse(resource.doGetContents().isEmpty());
+		assertTrue(resource.getErrors().isEmpty());
+	}
+	
+	@Test public void testOperationCanceledExceptionOnInstallAndDiscard() {
+		TestedResource resource = new TestedResource();
+		resource.setIsLoaded();
+		resource.setDerivedStateComputer(new IDerivedStateComputer() {
+			
+			@Override
+			public void installDerivedState(DerivedStateAwareResource resource, boolean resolve) {
+				resource.getContents().add(EcoreFactory.eINSTANCE.createEObject());
+				throw new OperationCanceledException();
+			}
+
+			@Override
+			public void discardDerivedState(DerivedStateAwareResource resource) {
+				throw new OperationCanceledException();
+			}
+		});
+		
+		assertFalse(resource.isFullyInitialized());
+		assertTrue(resource.doGetContents().isEmpty());
+		
+		try {
+			resource.getContents();
+			fail("exception expected");
+		} catch (IllegalStateException e) {
+			// expected
+		}
+		
+		assertTrue(resource.isFullyInitialized());
+		assertFalse(resource.getContents().isEmpty());
+
+		assertEquals(1, resource.getErrors().size());
+		assertTrue(((ExceptionDiagnostic)resource.getErrors().get(0)).getException() instanceof IllegalStateException);
 	}
 }
