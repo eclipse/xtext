@@ -805,13 +805,8 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 			ICompletionProposalAcceptor acceptor) {
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
-			final Set<URI> seenProposals = Sets.newHashSet();
-
 			@Override
 			public boolean apply(IEObjectDescription input) {
-				if (!seenProposals.add(input.getEObjectURI())) {
-					return false;
-				}
 				return input.getEClass() == XtextPackage.Literals.TERMINAL_RULE;
 			}
 		});
@@ -831,12 +826,8 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 		final Assignment containingAssignment = GrammarUtil.containingAssignment(model);
 		CrossReference crossReference = (CrossReference) assignment.getTerminal();
 		lookupCrossReference(crossReference, context, acceptor, new Predicate<IEObjectDescription>() {
-			final Set<URI> seenProposals = Sets.newHashSet();
 			@Override
 			public boolean apply(IEObjectDescription input) {
-				if (!seenProposals.add(input.getEObjectURI())) {
-					return false;
-				}
 				if (input.getEClass() == XtextPackage.Literals.TERMINAL_RULE) {
 					EObject object = resolve(input, context);
 					if (object instanceof TerminalRule) {
@@ -878,12 +869,28 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 	@Override
 	protected Function<IEObjectDescription, ICompletionProposal> getProposalFactory(String ruleName, ContentAssistContext contentAssistContext) {
 		final Grammar grammar = GrammarUtil.getGrammar(contentAssistContext.getCurrentModel());
-		return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
-			@Override
-			public ICompletionProposal apply(IEObjectDescription candidate) {
-				return super.apply(new EnclosingGrammarAwareDescription(candidate, grammar));
-			}
-		};
+		if (grammarAccess.getRuleIDRule().getName().equals(ruleName)) {
+			return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+				private Set<URI> seenProposals = Sets.newHashSet();
+				@Override
+				public ICompletionProposal apply(IEObjectDescription candidate) {
+					ICompletionProposal result = super.apply(new EnclosingGrammarAwareDescription(candidate, grammar));
+					if (result != null) {
+						if (!seenProposals.add(candidate.getEObjectURI())) {
+							return null;
+						}
+					}
+					return result;
+				}
+			};
+		} else {
+			return new DefaultProposalCreator(contentAssistContext, ruleName, getQualifiedNameConverter()) {
+				@Override
+				public ICompletionProposal apply(IEObjectDescription candidate) {
+					return super.apply(new EnclosingGrammarAwareDescription(candidate, grammar));
+				}
+			};
+		}
 	}
 
 	private EObject resolve(IEObjectDescription input, final ContentAssistContext context) {
