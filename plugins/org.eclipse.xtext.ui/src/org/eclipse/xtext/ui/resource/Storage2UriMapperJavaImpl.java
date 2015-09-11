@@ -19,15 +19,22 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.internal.resources.WorkManager;
+import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ElementChangedEvent;
@@ -374,7 +381,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	
 	@Override
 	public void elementChanged(ElementChangedEvent event) {
-		initializeCache();
+		initializeCache(true);
 		Set<IJavaProject> javaProjectsWithClasspathChange = getJavaProjectsWithClasspathChange(event.getDelta());
 		if(!javaProjectsWithClasspathChange.isEmpty()) {
 			for(IJavaProject project: javaProjectsWithClasspathChange) {
@@ -409,6 +416,7 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	}
 	
 	private volatile boolean isInitialized = false;
+	private AtomicReference<CountDownLatch> initializerGuard = new AtomicReference<CountDownLatch>();
 
 	/**
 	 * @since 2.4
@@ -484,17 +492,140 @@ public class Storage2UriMapperJavaImpl implements IStorage2UriMapperJdtExtension
 	 */
 	@Override
 	public void initializeCache() {
+		initializeCache(false);
+	}
+	
+	/**
+	 * Schedules cache initialization to be performed in the background.
+	 * Cache init needs a WS lock, though.
+	 * 
+	 * @since 2.9
+	 */
+	public void asyncInitializeCache() {
 		if(!isInitialized) {
-			synchronized (this) {
-				if(!isInitialized) {
-					for(IProject project: workspace.getRoot().getProjects()) {
-						if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
-							IJavaProject javaProject = JavaCore.create(project);
-							updateCache(javaProject);
-						}
-					}
-					isInitialized = true;
+			useNewThreadToInitialize(false);
+		}
+	}
+
+	private boolean isWorkspaceLockedByCurrentThread() {
+		try {
+			WorkManager workManager = ((Workspace) workspace).getWorkManager();
+			return workManager.isLockAlreadyAcquired();
+		} catch(CoreException e) {
+			return false;
+		}
+	}
+	
+	private void initializeCache(boolean wait) {
+		if(!isInitialized) {
+			/*
+			 * IWorkspace.run(IWorkspaceRunnable, ISchedulingRule, int, IProgressMonitor)
+			 * accepts a scheduling rule to allow a workspace runnable to be postponed
+			 * when another plain job with the same SR is still running (and vice versa),
+			 * but the main lock during the run is the one of the Workmanager.
+			 * Even if the there is no current rule on the manager, the workspace may be currently
+			 * locked by this thread. If that is already the case, initialize the cache
+			 * immedidatly, otherwise postpone the initialization to another thread.  
+			 */
+			// basically two scenarios: the current thread has the build rule or ws-root rule
+			// that is, we can init directly
+			if (isWorkspaceLockedByCurrentThread()) {
+				// perform initialization from the current thread and everything should be fine
+				// since we already have the WS lock
+				try {
+					doInitializeCache();
+				} catch (CoreException e) {
+					log.error(e.getMessage(), e);
 				}
+				// this may have happend while another thread is already waiting to aquire the WS root
+				// release the guard to let potentially waiting threads continue as early as possible 
+				CountDownLatch guard = initializerGuard.get();
+				if (guard != null) {
+					// notify waiting threads
+					guard.countDown();
+				}
+			} else {
+				// or we need to defer the initialization
+				useNewThreadToInitialize(wait);
+			}
+		}
+	}
+
+	/**
+	 * If no thread has been spawned so far, spawns a new one that will perform the cache init.
+	 * Optionally waits for the cache initialization to be performed in a another thread.
+	 */
+	private void useNewThreadToInitialize(boolean wait) {
+		if (wait && isWorkspaceLockedByCurrentThread()) {
+			// may not wait if we currently hold a conflicting rule
+			throw new IllegalStateException("Cannot wait for the thread to finish if we currently hold the WS lock");
+		}
+		CountDownLatch myGuard = initializerGuard.get();
+		// check if there was already a thread scheduled
+		if (myGuard == null) {
+			// no guard found so far
+			final CountDownLatch newGuard = new CountDownLatch(1);
+			if (initializerGuard.compareAndSet(null, newGuard)) {
+				// still no other thread created a guard in the (short) meantime 
+				myGuard = newGuard;
+				// aquire the WS rule in an own thread and perform the initialization from there
+				startInitializerThread(newGuard);
+			} else {
+				// use the guard that was created by another thread
+				myGuard = initializerGuard.get();
+			}
+		}
+		if (myGuard == null) {
+			throw new IllegalStateException();
+		}
+		if (wait) {
+			try {
+				// optionally wait for the initialization to finish
+				myGuard.await();
+			} catch (InterruptedException e) {
+				// ignore
+			}
+		}
+	}
+
+	private void startInitializerThread(final CountDownLatch countDown) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					doInitializeCache();
+				} catch (CoreException e) {
+					log.error(e.getMessage(), e);
+				} finally {
+					// mark the initialization as done
+					countDown.countDown();
+				}
+			}
+		}).start();
+	}
+
+	private void doInitializeCache() throws CoreException {
+		if(!isInitialized) {
+			IWorkspaceRunnable runnable = new IWorkspaceRunnable() {
+				@Override
+				public void run(IProgressMonitor monitor) throws CoreException {
+					if(!isInitialized) {
+						for(IProject project: workspace.getRoot().getProjects()) {
+							if(project.isAccessible() && JavaProject.hasJavaNature(project)) {
+								IJavaProject javaProject = JavaCore.create(project);
+								updateCache(javaProject);
+							}
+						}
+						isInitialized = true;
+					}
+				}
+			};
+			// while the tree is locked, workspace.run may not be used but we are sure that we do already
+			// hold the workspace lock - save to just run the action code
+			if (workspace.isTreeLocked()) {
+				runnable.run(null);
+			} else {
+				workspace.run(runnable, null, IWorkspace.AVOID_UPDATE, null);
 			}
 		}
 	}
