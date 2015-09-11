@@ -220,6 +220,9 @@ public abstract class AbstractTraceRegion {
 		outer: for (int i = 0; i < locations.size(); i++) { // avoid concurrent modification exceptions
 			Pair<ILocationData, AbstractTraceRegion> nextPair = locations.get(i);
 			ILocationData nextLocation = nextPair.getFirst();
+			if (nextLocation.getOffset() == nextLocation.getLength() && nextLocation.getOffset() == 0) {
+				continue;
+			}
 			AbstractTraceRegion nextRegion = nextPair.getSecond();
 			if (current != null) {
 				// equal region - add mapped location

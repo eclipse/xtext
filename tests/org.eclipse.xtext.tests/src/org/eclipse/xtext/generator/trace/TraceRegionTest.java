@@ -424,4 +424,12 @@ public class TraceRegionTest extends Assert {
 		assertEquals(2, associatedLocation.getLineNumber());
 		assertEquals(3, associatedLocation.getEndLineNumber());
 	}
+	
+	@Test
+	public void testInvertFor_06() {
+		SourceRelativeURI path = newURI("a");
+		TraceRegion root = new TraceRegion(1, 2, 3, 4, true, 0, 0, 0, 0, null, path);
+		List<AbstractTraceRegion> invertedList = root.invertFor(path, newURI("b"));
+		assertTrue(invertedList.isEmpty());
+	}
 }

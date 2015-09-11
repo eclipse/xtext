@@ -23,7 +23,19 @@ class DerivedMemberAwarePsiModelAssociations extends PsiModelAssociations {
 	extension IJvmModelAssociations jvmModelAssociations
 
 	override getPsiElement(EObject object) {
-		super.getPsiElement(object.primarySourceElement ?: object)
+		if (object == null)
+			return null	
+		
+		val psiElement = super.getPsiElement(convertToSource(object))
+		if (psiElement == null)
+			// TODO: a hack just to be symmetric with Eclipse in the case if a primary source element is not set
+			object.eContainer.psiElement
+		else
+			psiElement
+	}
+
+	protected def convertToSource(EObject object) {
+		object.primarySourceElement ?: object
 	}
 
 }
