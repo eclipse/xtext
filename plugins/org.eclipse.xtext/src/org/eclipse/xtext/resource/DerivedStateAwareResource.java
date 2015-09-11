@@ -211,15 +211,14 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 		return super.getEObjectForURIFragmentRootSegment(uriFragmentRootSegment);
 	}
 	
-
 	public void discardDerivedState() {
 		if (isLoaded && fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
-				if (derivedStateComputer != null)
-					derivedStateComputer.discardDerivedState(this);
+				doDiscardDerivedState();
 				fullyInitialized = false;
 			} finally {
+				// fullyInitialized should remain true, so we don't try initializing again on error.
 				isInitializing = false;
 				getCache().clear(this);
 			}
@@ -230,6 +229,8 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 		if (!isLoaded)
 			throw new IllegalStateException("The resource must be loaded, before installDerivedState can be called.");
 		if (!fullyInitialized && !isInitializing && !isLoadedFromStorage()) {
+			//set fully initialized to true, so we don't try initializing again on error. 
+			boolean newFullyInitialized = true;
 			try {
 				isInitializing = true;
 				if (derivedStateComputer != null) {
@@ -241,7 +242,9 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 						derivedStateComputer.installDerivedState(this, preIndexingPhase);
 					} catch (Throwable e) {
 						if (operationCanceledManager.isOperationCanceledException(e)) {
-							derivedStateComputer.discardDerivedState(this);
+							doDiscardDerivedState();
+							// on cancellation we should try to initialize again next time   
+							newFullyInitialized = false;
 							operationCanceledManager.propagateAsErrorIfCancelException(e);
 						}
 						throw Throwables.propagate(e);
@@ -251,8 +254,7 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 				getErrors().add(new ExceptionDiagnostic(e));
 				throw e;
 			} finally {
-				//always set fully initialized to true, so we don't try initializing again on error. 
-				fullyInitialized = true;
+				fullyInitialized = newFullyInitialized;
 				isInitializing = false;
 				try {
 					getCache().clear(this);
@@ -261,6 +263,22 @@ public class DerivedStateAwareResource extends StorageAwareResource {
 					LOG.error(e.getMessage(), e);
 				}
 			}
+		}
+	}
+	
+	/**
+	 * @since 2.9
+	 */
+	protected void doDiscardDerivedState() {
+		if (derivedStateComputer == null)
+			return;
+		try {
+			derivedStateComputer.discardDerivedState(this);
+		} catch (Throwable e) {
+			if (operationCanceledManager.isOperationCanceledException(e)) {
+				throw new IllegalStateException("IDerivedStateComputer#discardDerivedState should not check whether the current operation is canceled.", e);
+			}
+			throw Throwables.propagate(e);
 		}
 	}
 	

@@ -512,6 +512,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 							handler.flushToDisk
 						} finally {
 							ignoreIncomingEvents = false
+							buildProgressReporter.rehighlight
 						}
 					], app.defaultModalityState)
 					chunkedResourceDescriptions.setContainer(module.name, result.indexState.resourceDescriptions)
