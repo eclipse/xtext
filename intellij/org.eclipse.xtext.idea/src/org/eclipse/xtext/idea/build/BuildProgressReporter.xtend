@@ -48,8 +48,6 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 	}
 
 	def void clearProgress() {
-		rehighlight
-		
 		if (unitTestMode || project.isDisposed)
 			return;
 
@@ -57,7 +55,7 @@ class BuildProgressReporter implements BuildRequest.IPostValidationCallback {
 		problemsView.clearOldMessages(affectedScope, sessionId)
 	}
 	
-	protected def void rehighlight() {
+	def void rehighlight() {
 		val filesToRehighlight = affectedScope.affectedFiles.filter[shouldRehighlight]
 		if (filesToRehighlight.empty)
 			return;

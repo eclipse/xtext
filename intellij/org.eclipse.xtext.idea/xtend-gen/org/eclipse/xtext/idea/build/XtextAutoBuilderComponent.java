@@ -902,6 +902,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
                   handler.flushToDisk();
                 } finally {
                   XtextAutoBuilderComponent.this.ignoreIncomingEvents = false;
+                  buildProgressReporter.rehighlight();
                 }
               }
             };

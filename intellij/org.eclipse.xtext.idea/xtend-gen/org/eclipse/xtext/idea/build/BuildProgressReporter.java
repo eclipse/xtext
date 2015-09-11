@@ -55,7 +55,6 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
   }
   
   public void clearProgress() {
-    this.rehighlight();
     boolean _or = false;
     boolean _isUnitTestMode = this.isUnitTestMode();
     if (_isUnitTestMode) {
@@ -73,7 +72,7 @@ public class BuildProgressReporter implements BuildRequest.IPostValidationCallba
     _problemsView_1.clearOldMessages(this.affectedScope, this.sessionId);
   }
   
-  protected void rehighlight() {
+  public void rehighlight() {
     HashSet<URI> _affectedFiles = this.affectedScope.getAffectedFiles();
     final Function1<URI, Boolean> _function = new Function1<URI, Boolean>() {
       @Override
