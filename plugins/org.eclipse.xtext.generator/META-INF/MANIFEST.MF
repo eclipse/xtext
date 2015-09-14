@@ -61,7 +61,7 @@ Export-Package: org.eclipse.xtext.generator,
  org.eclipse.xtext.ui.generator.quickfix,
  org.eclipse.xtext.ui.generator.refactoring;x-internal:=true,
  org.eclipse.xtext.ui.generator.templates
-Require-Bundle: org.eclipse.xtext.xtext.generator;resolution:=optional,
+Require-Bundle: org.eclipse.xtext.xtext.generator;resolution:=optional;visibility:=reexport,
  org.eclipse.xtext.util;resolution:=optional;x-installation:=greedy,
  org.eclipse.xtend;bundle-version="1.1.0";visibility:=reexport,
  org.eclipse.xpand;bundle-version="1.1.0";visibility:=reexport,
