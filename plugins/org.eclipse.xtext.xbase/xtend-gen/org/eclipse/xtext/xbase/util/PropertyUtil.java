@@ -8,17 +8,10 @@
 package org.eclipse.xtext.xbase.util;
 
 import java.beans.Introspector;
-import java.util.Collections;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -41,20 +34,22 @@ public class PropertyUtil {
   public static String getPropertyName(final JvmFeature feature, final String methodName, final int getterParams, final int setterParams) {
     String _xifexpression = null;
     if ((feature instanceof JvmOperation)) {
-      Pair<String, Integer> _mappedTo = Pair.<String, Integer>of("get", Integer.valueOf(getterParams));
-      Pair<String, Integer> _mappedTo_1 = Pair.<String, Integer>of("set", Integer.valueOf(setterParams));
-      Pair<String, Integer> _mappedTo_2 = Pair.<String, Integer>of("is", Integer.valueOf(getterParams));
-      final Function1<Pair<String, Integer>, String> _function = new Function1<Pair<String, Integer>, String>() {
-        @Override
-        public String apply(final Pair<String, Integer> it) {
-          String _key = it.getKey();
-          Integer _value = it.getValue();
-          return PropertyUtil.getPropertyName(((JvmOperation)feature), methodName, _key, (_value).intValue());
-        }
-      };
-      List<String> _map = ListExtensions.<Pair<String, Integer>, String>map(Collections.<Pair<String, Integer>>unmodifiableList(CollectionLiterals.<Pair<String, Integer>>newArrayList(_mappedTo, _mappedTo_1, _mappedTo_2)), _function);
-      Iterable<String> _filterNull = IterableExtensions.<String>filterNull(_map);
-      _xifexpression = IterableExtensions.<String>head(_filterNull);
+      String _elvis = null;
+      String _elvis_1 = null;
+      String _propertyName = PropertyUtil.getPropertyName(((JvmOperation)feature), methodName, "get", getterParams);
+      if (_propertyName != null) {
+        _elvis_1 = _propertyName;
+      } else {
+        String _propertyName_1 = PropertyUtil.getPropertyName(((JvmOperation)feature), methodName, "set", setterParams);
+        _elvis_1 = _propertyName_1;
+      }
+      if (_elvis_1 != null) {
+        _elvis = _elvis_1;
+      } else {
+        String _propertyName_2 = PropertyUtil.getPropertyName(((JvmOperation)feature), methodName, "is", getterParams);
+        _elvis = _propertyName_2;
+      }
+      _xifexpression = _elvis;
     }
     return _xifexpression;
   }

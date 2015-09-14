@@ -28,11 +28,9 @@ class PropertyUtil {
 
 	def static String getPropertyName(JvmFeature feature, String methodName, int getterParams, int setterParams) {
 		if (feature instanceof JvmOperation)
-			#[
-				'get' -> getterParams,
-				'set' -> setterParams,
-				'is' -> getterParams
-			].map[feature.getPropertyName(methodName, key, value)].filterNull.head
+			feature.getPropertyName(methodName, 'get', getterParams) ?:
+			feature.getPropertyName(methodName, 'set', setterParams) ?:
+			feature.getPropertyName(methodName, 'is', getterParams)
 	}
 
 	protected static def getPropertyName(
@@ -42,7 +40,7 @@ class PropertyUtil {
 		int params
 	) {
 		val prefixLength = prefix.length
-		if (startsWithPrefix(methodName, prefix, prefixLength) && operation.parameters.size === params)
+		if (methodName.startsWithPrefix(prefix, prefixLength) && operation.parameters.size === params)
 			methodName.substring(prefixLength).decapitalize
 	}
 

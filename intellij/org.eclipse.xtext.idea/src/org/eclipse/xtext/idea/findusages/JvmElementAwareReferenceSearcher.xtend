@@ -17,8 +17,10 @@ import java.util.Set
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping
 
 import static extension org.eclipse.xtext.xbase.util.PropertyUtil.*
 
@@ -27,6 +29,8 @@ import static extension org.eclipse.xtext.xbase.util.PropertyUtil.*
  */
 @Singleton
 class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
+
+	@Inject extension OperatorMapping
 
 	@Inject extension IJvmModelAssociations
 
@@ -60,11 +64,28 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 			words += word
 	}
 
-	protected def void collectWords(EObject jvmElement, (String)=>void acceptor) {
-		if (jvmElement instanceof JvmIdentifiableElement)
-			acceptor.apply(jvmElement.simpleName)
+	protected def dispatch void collectWords(EObject jvmElement, (String)=>void acceptor) {
+		// do nothing	
+	}
 
-		if (jvmElement instanceof JvmFeature)
+	protected def dispatch void collectWords(Void jvmElement, (String)=>void acceptor) {
+		// do nothing
+	}
+
+	protected def dispatch void collectWords(JvmIdentifiableElement jvmElement, (String)=>void acceptor) {
+		acceptor.apply(jvmElement.simpleName)
+	}
+
+	protected def dispatch void collectWords(JvmFeature jvmElement, (String)=>void acceptor) {
+		acceptor.apply(jvmElement.simpleName)
+		
+		val simpleOperator = QualifiedName.create(jvmElement.simpleName).operator
+		if (simpleOperator != null) {
+			acceptor.apply(simpleOperator.toString)
+			val compoundOperator = simpleOperator.compoundOperator
+			if (compoundOperator != null)
+				acceptor.apply(compoundOperator.toString)
+		} else
 			acceptor.apply(jvmElement.propertyName)
 	}
 
