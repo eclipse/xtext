@@ -80,6 +80,7 @@ import static org.eclipse.xtext.idea.build.BuildEvent.Type.*
 
 import static extension com.intellij.openapi.vfs.VfsUtilCore.*
 import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
+import com.google.common.collect.Maps
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -675,12 +676,17 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	override loadState(XtextAutoBuilderComponentState state) {
 		chunkedResourceDescriptions = codec.decodeIndex(state)
 		val serializedMap = codec.decodeModuleToGenerated(state) 
-		module2GeneratedMapping = newHashMap(serializedMap.entrySet.map[
-			if(key.empty) 
-				null 
-			else 
-			    ModuleManager.getInstance(project).findModuleByName(key) -> value
-		]) 
+		module2GeneratedMapping = Maps.newHashMapWithExpectedSize(serializedMap.size)
+		for (moduleName : serializedMap.keySet) {
+			val module = ModuleManager.getInstance(project).findModuleByName(moduleName)
+			if (module === null) {
+				// module doesn't exist any longer
+				if (LOG.isInfoEnabled)
+					LOG.info("Couldn't find module '"+moduleName+"' discarding associated mapping.")
+			} else {
+				module2GeneratedMapping.put(module, serializedMap.get(moduleName))
+			}
+		}
 	}
 	
 }
