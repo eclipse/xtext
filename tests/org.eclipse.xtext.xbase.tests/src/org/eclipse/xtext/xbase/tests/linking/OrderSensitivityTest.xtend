@@ -11,13 +11,12 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Ignore
 import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow
  */
-class OrderSensitivityTests extends AbstractXbaseTestCase {
+class OrderSensitivityTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testOverloadedMethods_01() {
@@ -39,25 +38,21 @@ class OrderSensitivityTests extends AbstractXbaseTestCase {
 		doTestOverloadedAndExpect("testdata.ordersensitivity.CaseB", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)")
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
 	@Test
 	def void testOverloadedClosureMethods_01() {
 		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "'hello'", "RunnerWithResult")
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
 	@Test
 	def void testOverloadedClosureMethods_02() {
 		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "'hello'", "RunnerWithResult")
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
 	@Test
 	def void testOverloadedClosureMethods_03() {
 		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "System::out.println()", "Runner")
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
 	@Test
 	def void testOverloadedClosureMethods_04() {
 		doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "System::out.println()", "Runner")
@@ -87,11 +82,6 @@ class OrderSensitivityTests extends AbstractXbaseTestCase {
 		assertEquals('''«declarator».run(«declarator»$«expectation»)'''.toString, feature.identifier)
 		
 	}
-	
-//	override protected expression(CharSequence string) throws Exception {
-//		expression(string, true)
-//	}
-	
 }
 
 
