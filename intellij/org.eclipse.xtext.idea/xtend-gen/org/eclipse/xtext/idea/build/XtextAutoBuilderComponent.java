@@ -9,6 +9,7 @@ package org.eclipse.xtext.idea.build;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -1188,28 +1189,25 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
     this.chunkedResourceDescriptions = _decodeIndex;
     final Map<String, Source2GeneratedMapping> serializedMap = this.codec.decodeModuleToGenerated(state);
-    Set<Map.Entry<String, Source2GeneratedMapping>> _entrySet = serializedMap.entrySet();
-    final Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>> _function = new Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>() {
-      @Override
-      public Pair<Module, Source2GeneratedMapping> apply(final Map.Entry<String, Source2GeneratedMapping> it) {
-        Pair<Module, Source2GeneratedMapping> _xifexpression = null;
-        String _key = it.getKey();
-        boolean _isEmpty = _key.isEmpty();
-        if (_isEmpty) {
-          _xifexpression = null;
+    int _size = serializedMap.size();
+    HashMap<Module, Source2GeneratedMapping> _newHashMapWithExpectedSize = Maps.<Module, Source2GeneratedMapping>newHashMapWithExpectedSize(_size);
+    this.module2GeneratedMapping = _newHashMapWithExpectedSize;
+    Set<String> _keySet = serializedMap.keySet();
+    for (final String moduleName : _keySet) {
+      {
+        ModuleManager _instance = ModuleManager.getInstance(this.project);
+        final Module module = _instance.findModuleByName(moduleName);
+        if ((module == null)) {
+          boolean _isInfoEnabled = XtextAutoBuilderComponent.LOG.isInfoEnabled();
+          if (_isInfoEnabled) {
+            XtextAutoBuilderComponent.LOG.info((("Couldn\'t find module \'" + moduleName) + "\' discarding associated mapping."));
+          }
         } else {
-          ModuleManager _instance = ModuleManager.getInstance(XtextAutoBuilderComponent.this.project);
-          String _key_1 = it.getKey();
-          Module _findModuleByName = _instance.findModuleByName(_key_1);
-          Source2GeneratedMapping _value = it.getValue();
-          _xifexpression = Pair.<Module, Source2GeneratedMapping>of(_findModuleByName, _value);
+          Source2GeneratedMapping _get = serializedMap.get(moduleName);
+          this.module2GeneratedMapping.put(module, _get);
         }
-        return _xifexpression;
       }
-    };
-    Iterable<Pair<Module, Source2GeneratedMapping>> _map = IterableExtensions.<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>map(_entrySet, _function);
-    HashMap<Module, Source2GeneratedMapping> _newHashMap = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap(((Pair<? extends Module, ? extends Source2GeneratedMapping>[])Conversions.unwrapArray(_map, Pair.class)));
-    this.module2GeneratedMapping = _newHashMap;
+    }
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);
