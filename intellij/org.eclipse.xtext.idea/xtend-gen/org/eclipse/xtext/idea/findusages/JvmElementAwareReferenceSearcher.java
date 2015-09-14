@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.idea.findusages;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.intellij.lang.Language;
@@ -16,17 +17,18 @@ import com.intellij.psi.search.SearchRequestCollector;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
+import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.idea.findusages.IReferenceSearcher;
 import org.eclipse.xtext.psi.PsiEObject;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.util.PropertyUtil;
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -41,7 +43,7 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
   @Override
   public void processQuery(final ReferencesSearch.SearchParameters queryParameters, final Processor<PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
-    final Set<String> words = this.getWords(element);
+    final Set<String> words = this.collectWords(element);
     boolean _isEmpty = words.isEmpty();
     if (_isEmpty) {
       return;
@@ -55,35 +57,44 @@ public class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
     }
   }
   
-  protected Set<String> getWords(final PsiElement element) {
-    if ((element instanceof PsiEObject)) {
-      EObject _eObject = ((PsiEObject)element).getEObject();
-      Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(_eObject);
-      final Function1<EObject, String> _function = new Function1<EObject, String>() {
+  protected Set<String> collectWords(final PsiElement element) {
+    HashSet<String> _xblockexpression = null;
+    {
+      final HashSet<String> words = CollectionLiterals.<String>newHashSet();
+      final Procedure1<String> _function = new Procedure1<String>() {
         @Override
-        public String apply(final EObject it) {
-          return JvmElementAwareReferenceSearcher.this.getWord(it);
+        public void apply(final String word) {
+          JvmElementAwareReferenceSearcher.this.accept(words, word);
         }
       };
-      Iterable<String> _map = IterableExtensions.<EObject, String>map(_jvmElements, _function);
-      final Function1<String, Boolean> _function_1 = new Function1<String, Boolean>() {
-        @Override
-        public Boolean apply(final String it) {
-          boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(it);
-          return Boolean.valueOf((!_isNullOrEmpty));
+      final Procedure1<String> acceptor = _function;
+      if ((element instanceof PsiEObject)) {
+        EObject _eObject = ((PsiEObject)element).getEObject();
+        Set<EObject> _jvmElements = this._iJvmModelAssociations.getJvmElements(_eObject);
+        for (final EObject jvmElement : _jvmElements) {
+          this.collectWords(jvmElement, acceptor);
         }
-      };
-      Iterable<String> _filter = IterableExtensions.<String>filter(_map, _function_1);
-      return IterableExtensions.<String>toSet(_filter);
+      }
+      _xblockexpression = words;
     }
-    return CollectionLiterals.<String>emptySet();
+    return _xblockexpression;
   }
   
-  protected String getWord(final EObject jvmElement) {
-    String _xifexpression = null;
-    if ((jvmElement instanceof JvmIdentifiableElement)) {
-      _xifexpression = ((JvmIdentifiableElement)jvmElement).getSimpleName();
+  protected void accept(final Set<String> words, final String word) {
+    boolean _notEquals = (!Objects.equal(word, null));
+    if (_notEquals) {
+      words.add(word);
     }
-    return _xifexpression;
+  }
+  
+  protected void collectWords(final EObject jvmElement, final Procedure1<? super String> acceptor) {
+    if ((jvmElement instanceof JvmIdentifiableElement)) {
+      String _simpleName = ((JvmIdentifiableElement)jvmElement).getSimpleName();
+      acceptor.apply(_simpleName);
+    }
+    if ((jvmElement instanceof JvmFeature)) {
+      String _propertyName = PropertyUtil.getPropertyName(((JvmFeature)jvmElement));
+      acceptor.apply(_propertyName);
+    }
   }
 }
