@@ -254,6 +254,9 @@ String gaRuleAccessorLocalVarName(ParserRule rule):
 String gaRuleAccessorLocalVarName(TerminalRule rule):
 	"t" + rule.gaRuleIdentifyer();
 	
+String gaRuleAccessorLocalVarName(EnumRule rule):
+	"e" + rule.gaRuleIdentifyer();
+	
 String getClassName(EObject obj):
 	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getClassName(org.eclipse.emf.ecore.EObject);
 	
