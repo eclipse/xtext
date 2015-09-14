@@ -69,7 +69,6 @@ import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.MessageBusConnection;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -110,7 +109,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -167,10 +165,10 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   private ChunkedResourceDescriptions chunkedResourceDescriptions;
   
-  private Map<Module, Source2GeneratedMapping> module2GeneratedMapping = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap();
+  private Map<String, Source2GeneratedMapping> moduleName2GeneratedMapping = CollectionLiterals.<String, Source2GeneratedMapping>newHashMap();
   
   public Iterable<URI> getGeneratedSources(final URI source) {
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -183,7 +181,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   }
   
   public Iterable<URI> getSource4GeneratedSource(final URI generated) {
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -297,7 +295,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       public void moduleRemoved(final Project project, final Module module) {
         String _name = module.getName();
         XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_name);
-        XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+        String _name_1 = module.getName();
+        XtextAutoBuilderComponent.this.moduleName2GeneratedMapping.remove(_name_1);
       }
       
       @Override
@@ -306,7 +305,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           {
             String _fun = oldNameProvider.fun(module);
             XtextAutoBuilderComponent.this.chunkedResourceDescriptions.removeContainer(_fun);
-            XtextAutoBuilderComponent.this.module2GeneratedMapping.remove(module);
+            String _name = module.getName();
+            XtextAutoBuilderComponent.this.moduleName2GeneratedMapping.remove(_name);
             XtextAutoBuilderComponent.this.doCleanBuild(module);
           }
         }
@@ -486,7 +486,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.alarm.cancelAllRequests();
     ChunkedResourceDescriptions _get = this.chunkedResourceDescriptionsProvider.get();
     this.chunkedResourceDescriptions = _get;
-    Collection<Source2GeneratedMapping> _values = this.module2GeneratedMapping.values();
+    Collection<Source2GeneratedMapping> _values = this.moduleName2GeneratedMapping.values();
     final Function1<Source2GeneratedMapping, List<URI>> _function = new Function1<Source2GeneratedMapping, List<URI>>() {
       @Override
       public List<URI> apply(final Source2GeneratedMapping it) {
@@ -497,7 +497,7 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     Iterable<URI> _flatten = Iterables.<URI>concat(_map);
     List<URI> _list = IterableExtensions.<URI>toList(_flatten);
     this.safeDeleteUris(_list);
-    this.module2GeneratedMapping.clear();
+    this.moduleName2GeneratedMapping.clear();
     this.queueAllResources();
     this.doRunBuild();
   }
@@ -509,7 +509,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
     this.alarm.cancelAllRequests();
     String _name = module.getName();
     this.chunkedResourceDescriptions.removeContainer(_name);
-    final Source2GeneratedMapping before = this.module2GeneratedMapping.remove(module);
+    String _name_1 = module.getName();
+    final Source2GeneratedMapping before = this.moduleName2GeneratedMapping.remove(_name_1);
     boolean _notEquals = (!Objects.equal(before, null));
     if (_notEquals) {
       List<URI> _allGenerated = before.getAllGenerated();
@@ -804,7 +805,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
       for (final Module module : sortedModules) {
         {
           Source2GeneratedMapping _elvis = null;
-          Source2GeneratedMapping _get = this.module2GeneratedMapping.get(module);
+          String _name = module.getName();
+          Source2GeneratedMapping _get = this.moduleName2GeneratedMapping.get(_name);
           if (_get != null) {
             _elvis = _get;
           } else {
@@ -813,8 +815,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
           }
           final Source2GeneratedMapping fileMappings = _elvis;
           ResourceDescriptionsData _elvis_1 = null;
-          String _name = module.getName();
-          ResourceDescriptionsData _container = this.chunkedResourceDescriptions.getContainer(_name);
+          String _name_1 = module.getName();
+          ResourceDescriptionsData _container = this.chunkedResourceDescriptions.getContainer(_name_1);
           if (_container != null) {
             _elvis_1 = _container;
           } else {
@@ -852,8 +854,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             _or = _and;
           }
           if (_or) {
-            String _name_1 = module.getName();
-            String _plus = ("Skipping module \'" + _name_1);
+            String _name_2 = module.getName();
+            String _plus = ("Skipping module \'" + _name_2);
             String _plus_1 = (_plus + "\'. Nothing to do here.");
             XtextAutoBuilderComponent.LOG.info(_plus_1);
           } else {
@@ -908,13 +910,14 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
             };
             ModalityState _defaultModalityState = app.getDefaultModalityState();
             app.invokeAndWait(_function_3, _defaultModalityState);
-            String _name_2 = module.getName();
+            String _name_3 = module.getName();
             IndexState _indexState = result.getIndexState();
             ResourceDescriptionsData _resourceDescriptions = _indexState.getResourceDescriptions();
-            this.chunkedResourceDescriptions.setContainer(_name_2, _resourceDescriptions);
+            this.chunkedResourceDescriptions.setContainer(_name_3, _resourceDescriptions);
+            String _name_4 = module.getName();
             IndexState _indexState_1 = result.getIndexState();
             Source2GeneratedMapping _fileMappings = _indexState_1.getFileMappings();
-            this.module2GeneratedMapping.put(module, _fileMappings);
+            this.moduleName2GeneratedMapping.put(_name_4, _fileMappings);
             List<IResourceDescription.Delta> _affectedResources = result.getAffectedResources();
             deltas.addAll(_affectedResources);
             Iterables.removeAll(unProcessedEvents, events);
@@ -980,7 +983,8 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   protected void collectChanges(final Set<BuildEvent> events, final Module module, final HashSet<URI> changedUris, final HashSet<URI> deletedUris, final ArrayList<IResourceDescription.Delta> deltas) {
     final Application app = ApplicationManager.getApplication();
-    final Source2GeneratedMapping fileMappings = this.module2GeneratedMapping.get(module);
+    String _name = module.getName();
+    final Source2GeneratedMapping fileMappings = this.moduleName2GeneratedMapping.get(_name);
     for (final BuildEvent event : events) {
       BuildEvent.Type _type = event.getType();
       if (_type != null) {
@@ -1155,61 +1159,15 @@ public class XtextAutoBuilderComponent extends AbstractProjectComponent implemen
   
   @Override
   public XtextAutoBuilderComponentState getState() {
-    XtextAutoBuilderComponentState _xblockexpression = null;
-    {
-      Set<Map.Entry<Module, Source2GeneratedMapping>> _entrySet = this.module2GeneratedMapping.entrySet();
-      final Function1<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>> _function = new Function1<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>>() {
-        @Override
-        public Pair<String, Source2GeneratedMapping> apply(final Map.Entry<Module, Source2GeneratedMapping> it) {
-          String _elvis = null;
-          Module _key = it.getKey();
-          String _name = null;
-          if (_key!=null) {
-            _name=_key.getName();
-          }
-          if (_name != null) {
-            _elvis = _name;
-          } else {
-            _elvis = "";
-          }
-          Source2GeneratedMapping _value = it.getValue();
-          return Pair.<String, Source2GeneratedMapping>of(_elvis, _value);
-        }
-      };
-      Iterable<Pair<String, Source2GeneratedMapping>> _map = IterableExtensions.<Map.Entry<Module, Source2GeneratedMapping>, Pair<String, Source2GeneratedMapping>>map(_entrySet, _function);
-      final HashMap<String, Source2GeneratedMapping> serializableMap = CollectionLiterals.<String, Source2GeneratedMapping>newHashMap(((Pair<? extends String, ? extends Source2GeneratedMapping>[])Conversions.unwrapArray(_map, Pair.class)));
-      _xblockexpression = this.codec.encode(this.chunkedResourceDescriptions, serializableMap);
-    }
-    return _xblockexpression;
+    return this.codec.encode(this.chunkedResourceDescriptions, this.moduleName2GeneratedMapping);
   }
   
   @Override
   public void loadState(final XtextAutoBuilderComponentState state) {
     ChunkedResourceDescriptions _decodeIndex = this.codec.decodeIndex(state);
     this.chunkedResourceDescriptions = _decodeIndex;
-    final Map<String, Source2GeneratedMapping> serializedMap = this.codec.decodeModuleToGenerated(state);
-    Set<Map.Entry<String, Source2GeneratedMapping>> _entrySet = serializedMap.entrySet();
-    final Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>> _function = new Function1<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>() {
-      @Override
-      public Pair<Module, Source2GeneratedMapping> apply(final Map.Entry<String, Source2GeneratedMapping> it) {
-        Pair<Module, Source2GeneratedMapping> _xifexpression = null;
-        String _key = it.getKey();
-        boolean _isEmpty = _key.isEmpty();
-        if (_isEmpty) {
-          _xifexpression = null;
-        } else {
-          ModuleManager _instance = ModuleManager.getInstance(XtextAutoBuilderComponent.this.project);
-          String _key_1 = it.getKey();
-          Module _findModuleByName = _instance.findModuleByName(_key_1);
-          Source2GeneratedMapping _value = it.getValue();
-          _xifexpression = Pair.<Module, Source2GeneratedMapping>of(_findModuleByName, _value);
-        }
-        return _xifexpression;
-      }
-    };
-    Iterable<Pair<Module, Source2GeneratedMapping>> _map = IterableExtensions.<Map.Entry<String, Source2GeneratedMapping>, Pair<Module, Source2GeneratedMapping>>map(_entrySet, _function);
-    HashMap<Module, Source2GeneratedMapping> _newHashMap = CollectionLiterals.<Module, Source2GeneratedMapping>newHashMap(((Pair<? extends Module, ? extends Source2GeneratedMapping>[])Conversions.unwrapArray(_map, Pair.class)));
-    this.module2GeneratedMapping = _newHashMap;
+    Map<String, Source2GeneratedMapping> _decodeModuleToGenerated = this.codec.decodeModuleToGenerated(state);
+    this.moduleName2GeneratedMapping = _decodeModuleToGenerated;
   }
   
   private final static Logger LOG = Logger.getLogger(XtextAutoBuilderComponent.class);

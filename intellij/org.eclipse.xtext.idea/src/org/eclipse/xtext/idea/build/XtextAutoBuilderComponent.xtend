@@ -123,14 +123,14 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	ChunkedResourceDescriptions chunkedResourceDescriptions
 	
-	Map<Module, Source2GeneratedMapping> module2GeneratedMapping = newHashMap()
+	Map<String, Source2GeneratedMapping> moduleName2GeneratedMapping = newHashMap()
 	
 	def Iterable<URI> getGeneratedSources(URI source) {
-		return module2GeneratedMapping.values.map[getGenerated(source)].flatten.toList
+		return moduleName2GeneratedMapping.values.map[getGenerated(source)].flatten.toList
 	}
 	
 	def Iterable<URI> getSource4GeneratedSource(URI generated) {
-		return module2GeneratedMapping.values.map[getSource(generated)].flatten.toList
+		return moduleName2GeneratedMapping.values.map[getSource(generated)].flatten.toList
 	}
 	
 	new(Project project) {
@@ -206,13 +206,13 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			
 			override moduleRemoved(Project project, Module module) {
 				chunkedResourceDescriptions.removeContainer(module.name)
-				module2GeneratedMapping.remove(module)
+				moduleName2GeneratedMapping.remove(module.name)
 			}
 			
 			override modulesRenamed(Project project, List<Module> modules, Function<Module, String> oldNameProvider) {
 				for (module : modules) {
 					chunkedResourceDescriptions.removeContainer(oldNameProvider.fun(module))
-					module2GeneratedMapping.remove(module)
+					moduleName2GeneratedMapping.remove(module.name)
 					doCleanBuild(module)
 				}
 			}
@@ -316,8 +316,8 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 		alarm.cancelAllRequests
 		chunkedResourceDescriptions = chunkedResourceDescriptionsProvider.get
-		safeDeleteUris(module2GeneratedMapping.values.map[allGenerated].flatten.toList)
-		module2GeneratedMapping.clear
+		safeDeleteUris(moduleName2GeneratedMapping.values.map[allGenerated].flatten.toList)
+		moduleName2GeneratedMapping.clear
 		queueAllResources
 		doRunBuild
 	}
@@ -328,7 +328,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 		}
 		alarm.cancelAllRequests
 		chunkedResourceDescriptions.removeContainer(module.name)
-		val before = module2GeneratedMapping.remove(module)
+		val before = moduleName2GeneratedMapping.remove(module.name)
 		if (before != null) {
 			safeDeleteUris(before.allGenerated)
 		}
@@ -476,7 +476,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 			val sortedModules = new ArrayList(moduleGraph.nodes)
 			ModuleCompilerUtil.sortModules(project, sortedModules)
 			for (module: sortedModules) {
-				val fileMappings = module2GeneratedMapping.get(module) ?: new Source2GeneratedMapping
+				val fileMappings = moduleName2GeneratedMapping.get(module.name) ?: new Source2GeneratedMapping
 				val moduleDescriptions = chunkedResourceDescriptions.getContainer(module.name) ?: new ResourceDescriptionsData(emptyList)
 				val changedUris = newHashSet
 				val deletedUris = newHashSet
@@ -516,7 +516,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 						}
 					], app.defaultModalityState)
 					chunkedResourceDescriptions.setContainer(module.name, result.indexState.resourceDescriptions)
-					module2GeneratedMapping.put(module, result.indexState.fileMappings)
+					moduleName2GeneratedMapping.put(module.name, result.indexState.fileMappings)
 					deltas.addAll(result.affectedResources)
 					unProcessedEvents -= events
 				}
@@ -564,7 +564,7 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	
 	protected def collectChanges(Set<BuildEvent> events, Module module, HashSet<URI> changedUris, HashSet<URI> deletedUris, ArrayList<Delta> deltas) {
 		val app = ApplicationManager.application
-		val fileMappings = module2GeneratedMapping.get(module)
+		val fileMappings = moduleName2GeneratedMapping.get(module.name)
 		for (event : events) {
 			switch event.type {
 				case MODIFIED,
@@ -666,21 +666,12 @@ import static extension org.eclipse.xtext.idea.resource.VirtualFileURIUtil.*
 	@Inject XtextAutoBuilderComponentState.Codec codec
 	
 	override getState() {
-		val serializableMap = newHashMap(module2GeneratedMapping.entrySet.map[
-			key?.name ?: '' -> value
-		])
-		codec.encode(chunkedResourceDescriptions, serializableMap)
+		codec.encode(chunkedResourceDescriptions, moduleName2GeneratedMapping)
 	}
 	
 	override loadState(XtextAutoBuilderComponentState state) {
 		chunkedResourceDescriptions = codec.decodeIndex(state)
-		val serializedMap = codec.decodeModuleToGenerated(state) 
-		module2GeneratedMapping = newHashMap(serializedMap.entrySet.map[
-			if(key.empty) 
-				null 
-			else 
-			    ModuleManager.getInstance(project).findModuleByName(key) -> value
-		]) 
+		moduleName2GeneratedMapping = codec.decodeModuleToGenerated(state) 
 	}
 	
 }
