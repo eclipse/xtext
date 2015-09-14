@@ -1470,11 +1470,19 @@ public class JavaASTFlattener extends ASTVisitor {
   
   @Override
   public boolean visit(final CastExpression node) {
+    ASTNode _parent = node.getParent();
+    final boolean parantesis = (!(_parent instanceof Assignment));
+    if (parantesis) {
+      this.appendToBuffer("(");
+    }
     Expression _expression = node.getExpression();
     _expression.accept(this);
     this.appendToBuffer(" as ");
     Type _type = node.getType();
     _type.accept(this);
+    if (parantesis) {
+      this.appendToBuffer(")");
+    }
     return false;
   }
   

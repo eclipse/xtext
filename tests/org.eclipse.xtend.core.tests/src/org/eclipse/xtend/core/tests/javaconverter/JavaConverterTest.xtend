@@ -551,10 +551,21 @@ class JavaConverterTest extends AbstractXtendTestCase {
 		}'''.toString, xtendCode)
 	}
 
-	@Test def void testCastCase() throws Exception {
+	@Test def void testCastCase_01() throws Exception {
 
 		var XtendClass xtendClazz = toValidXtendClass(
 			"public class TestCast { void doStuff() { Object o = (Object)this;}")
+		assertNotNull(xtendClazz)
+	}
+
+	@Test def void testCastCase_02() throws Exception {
+		var xtendClazz = toValidXtendClass(
+		'''
+		public class TestCast {
+			public void foo(long value) {
+				int x = (int) (value >>> 56) & 0xFF;
+			}
+		}''')
 		assertNotNull(xtendClazz)
 	}
 

@@ -1030,9 +1030,28 @@ public class JavaConverterTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testCastCase() throws Exception {
+  public void testCastCase_01() throws Exception {
     XtendClass xtendClazz = this.toValidXtendClass(
       "public class TestCast { void doStuff() { Object o = (Object)this;}");
+    Assert.assertNotNull(xtendClazz);
+  }
+  
+  @Test
+  public void testCastCase_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class TestCast {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public void foo(long value) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("int x = (int) (value >>> 56) & 0xFF;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    XtendClass xtendClazz = this.toValidXtendClass(_builder);
     Assert.assertNotNull(xtendClazz);
   }
   
