@@ -844,9 +844,9 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private final QuantityExclusionTest2Elements pQuantityExclusionTest2;
 	private final ValueExclusionTest1Elements pValueExclusionTest1;
 	private final ValueExclusionTest2Elements pValueExclusionTest2;
-	private final ValueExclusionTestEn0Elements unknownRuleValueExclusionTestEn0;
-	private final ValueExclusionTestEn1Elements unknownRuleValueExclusionTestEn1;
-	private final ValueExclusionTestEn2Elements unknownRuleValueExclusionTestEn2;
+	private final ValueExclusionTestEn0Elements eValueExclusionTestEn0;
+	private final ValueExclusionTestEn1Elements eValueExclusionTestEn1;
+	private final ValueExclusionTestEn2Elements eValueExclusionTestEn2;
 	private final NodeExclusion1Elements pNodeExclusion1;
 	private final NodeExclusion2Elements pNodeExclusion2;
 	private final NodeExclusion1ListElements pNodeExclusion1List;
@@ -880,9 +880,9 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 		this.pQuantityExclusionTest2 = new QuantityExclusionTest2Elements();
 		this.pValueExclusionTest1 = new ValueExclusionTest1Elements();
 		this.pValueExclusionTest2 = new ValueExclusionTest2Elements();
-		this.unknownRuleValueExclusionTestEn0 = new ValueExclusionTestEn0Elements();
-		this.unknownRuleValueExclusionTestEn1 = new ValueExclusionTestEn1Elements();
-		this.unknownRuleValueExclusionTestEn2 = new ValueExclusionTestEn2Elements();
+		this.eValueExclusionTestEn0 = new ValueExclusionTestEn0Elements();
+		this.eValueExclusionTestEn1 = new ValueExclusionTestEn1Elements();
+		this.eValueExclusionTestEn2 = new ValueExclusionTestEn2Elements();
 		this.pNodeExclusion1 = new NodeExclusion1Elements();
 		this.pNodeExclusion2 = new NodeExclusion2Elements();
 		this.pNodeExclusion1List = new NodeExclusion1ListElements();
@@ -1114,7 +1114,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn0 returns ValueExclusionTestEn:
 	//	lit0;
 	public ValueExclusionTestEn0Elements getValueExclusionTestEn0Access() {
-		return unknownRuleValueExclusionTestEn0;
+		return eValueExclusionTestEn0;
 	}
 	
 	public EnumRule getValueExclusionTestEn0Rule() {
@@ -1124,7 +1124,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn1 returns ValueExclusionTestEn:
 	//	lit1;
 	public ValueExclusionTestEn1Elements getValueExclusionTestEn1Access() {
-		return unknownRuleValueExclusionTestEn1;
+		return eValueExclusionTestEn1;
 	}
 	
 	public EnumRule getValueExclusionTestEn1Rule() {
@@ -1134,7 +1134,7 @@ public class ContextFinderTestLanguageGrammarAccess extends AbstractGrammarEleme
 	//enum ValueExclusionTestEn2 returns ValueExclusionTestEn:
 	//	lit2;
 	public ValueExclusionTestEn2Elements getValueExclusionTestEn2Access() {
-		return unknownRuleValueExclusionTestEn2;
+		return eValueExclusionTestEn2;
 	}
 	
 	public EnumRule getValueExclusionTestEn2Rule() {

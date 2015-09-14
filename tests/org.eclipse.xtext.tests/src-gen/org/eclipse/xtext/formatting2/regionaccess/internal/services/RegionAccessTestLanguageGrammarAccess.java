@@ -522,7 +522,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	private final ParenthesizedElements pParenthesized;
 	private final MixedElements pMixed;
 	private final DatatypeElements pDatatype;
-	private final EnumElements unknownRuleEnum;
+	private final EnumElements eEnum;
 	
 	private final Grammar grammar;
 
@@ -545,7 +545,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 		this.pParenthesized = new ParenthesizedElements();
 		this.pMixed = new MixedElements();
 		this.pDatatype = new DatatypeElements();
-		this.unknownRuleEnum = new EnumElements();
+		this.eEnum = new EnumElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -700,7 +700,7 @@ public class RegionAccessTestLanguageGrammarAccess extends AbstractGrammarElemen
 	//enum Enum:
 	//	lit1 | lit2;
 	public EnumElements getEnumAccess() {
-		return unknownRuleEnum;
+		return eEnum;
 	}
 	
 	public EnumRule getEnumRule() {
