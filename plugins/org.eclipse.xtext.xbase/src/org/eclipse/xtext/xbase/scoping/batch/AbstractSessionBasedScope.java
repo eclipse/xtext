@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
-import java.beans.Introspector;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
@@ -15,7 +14,6 @@ import java.util.Locale;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmFeature;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -24,6 +22,7 @@ import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.typesystem.override.IResolvedFeatures;
+import org.eclipse.xtext.xbase.util.PropertyUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -107,16 +106,7 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected String toProperty(String methodName, JvmFeature feature, int getterParams, int setterParams) {
-		if (feature instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) feature;
-			if (methodName.length() > 3 && (methodName.startsWith("get") && operation.getParameters().size() == getterParams || methodName.startsWith("set") && operation.getParameters().size() == setterParams) && Character.isUpperCase(methodName.charAt(3))) {
-				return Introspector.decapitalize(methodName.substring(3));
-			}
-			if (methodName.length() > 3 && methodName.startsWith("is") && Character.isUpperCase(methodName.charAt(2)) && operation.getParameters().size() == getterParams) {
-				return Introspector.decapitalize(methodName.substring(2));
-			}
-		}
-		return null;
+		return PropertyUtil.getPropertyName(feature, methodName, getterParams, setterParams);
 	}
 	
 	/**

@@ -13,10 +13,14 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 import com.intellij.psi.search.searches.ReferencesSearch.SearchParameters
 import com.intellij.util.Processor
+import java.util.Set
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmFeature
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.psi.PsiEObject
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+
+import static extension org.eclipse.xtext.xbase.util.PropertyUtil.*
 
 /**
  * @author kosyakov - Initial contribution and API
@@ -28,7 +32,7 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 
 	override processQuery(SearchParameters queryParameters, Processor<PsiReference> consumer) {
 		val element = queryParameters.elementToSearch
-		val words = element.words
+		val words = element.collectWords
 		if (words.empty)
 			return;
 
@@ -42,16 +46,26 @@ class JvmElementAwareReferenceSearcher implements IReferenceSearcher {
 			)
 	}
 
-	protected def getWords(PsiElement element) {
+	protected def Set<String> collectWords(PsiElement element) {
+		val words = newHashSet
+		val acceptor = [String word|words.accept(word)]
 		if (element instanceof PsiEObject)
-			return element.EObject.jvmElements.map[word].filter[!nullOrEmpty].toSet
-
-		return emptySet
+			for (jvmElement : element.EObject.jvmElements)
+				jvmElement.collectWords(acceptor)
+		words
 	}
 
-	protected def getWord(EObject jvmElement) {
+	protected def void accept(Set<String> words, String word) {
+		if (word != null)
+			words += word
+	}
+
+	protected def void collectWords(EObject jvmElement, (String)=>void acceptor) {
 		if (jvmElement instanceof JvmIdentifiableElement)
-			jvmElement.simpleName
+			acceptor.apply(jvmElement.simpleName)
+
+		if (jvmElement instanceof JvmFeature)
+			acceptor.apply(jvmElement.propertyName)
 	}
 
 }
