@@ -833,9 +833,14 @@ class JavaASTFlattener extends ASTVisitor {
 	}
 
 	override boolean visit(CastExpression node) {
+		val parantesis = !(node.parent instanceof Assignment)
+		if(parantesis)
+			appendToBuffer('(')
 		node.getExpression().accept(this)
 		appendToBuffer(" as ")
 		node.getType().accept(this)
+		if(parantesis)
+			appendToBuffer(')')
 		return false
 	}
 
