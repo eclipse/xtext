@@ -1082,6 +1082,11 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
     return ("t" + _gaRuleIdentifier);
   }
   
+  protected String _gaRuleAccessorLocalVarName(final EnumRule rule) {
+    String _gaRuleIdentifier = this._grammarAccessExtensions.gaRuleIdentifier(rule);
+    return ("e" + _gaRuleIdentifier);
+  }
+  
   protected StringConcatenationClient loadElementStatement(final AbstractElement ele) {
     StringConcatenationClient _client = new StringConcatenationClient() {
       @Override
@@ -1169,7 +1174,9 @@ public class GrammarAccessFragment2 extends AbstractGeneratorFragment2 {
   }
   
   protected String gaRuleAccessorLocalVarName(final AbstractRule rule) {
-    if (rule instanceof ParserRule) {
+    if (rule instanceof EnumRule) {
+      return _gaRuleAccessorLocalVarName((EnumRule)rule);
+    } else if (rule instanceof ParserRule) {
       return _gaRuleAccessorLocalVarName((ParserRule)rule);
     } else if (rule instanceof TerminalRule) {
       return _gaRuleAccessorLocalVarName((TerminalRule)rule);

@@ -2102,7 +2102,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	private final TransientObjectElements pTransientObject;
 	private final TransientObjectSubElements pTransientObjectSub;
 	private final TransientSerializeables1Elements pTransientSerializeables1;
-	private final TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
+	private final TransientSerializeables1EnumElements eTransientSerializeables1Enum;
 	private final StaticSimplificationElements pStaticSimplification;
 	private final TwoVersionElements pTwoVersion;
 	private final TwoVersionNo1Elements pTwoVersionNo1;
@@ -2147,7 +2147,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		this.pTransientObject = new TransientObjectElements();
 		this.pTransientObjectSub = new TransientObjectSubElements();
 		this.pTransientSerializeables1 = new TransientSerializeables1Elements();
-		this.unknownRuleTransientSerializeables1Enum = new TransientSerializeables1EnumElements();
+		this.eTransientSerializeables1Enum = new TransientSerializeables1EnumElements();
 		this.pStaticSimplification = new StaticSimplificationElements();
 		this.pTwoVersion = new TwoVersionElements();
 		this.pTwoVersionNo1 = new TwoVersionNo1Elements();
@@ -2480,7 +2480,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//enum TransientSerializeables1Enum:
 	//	lit1 | lit2;
 	public TransientSerializeables1EnumElements getTransientSerializeables1EnumAccess() {
-		return unknownRuleTransientSerializeables1Enum;
+		return eTransientSerializeables1Enum;
 	}
 	
 	public EnumRule getTransientSerializeables1EnumRule() {
