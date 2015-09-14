@@ -124,7 +124,6 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		});
 		
 		assertFalse(resource.isFullyInitialized());
-		assertTrue(resource.doGetContents().isEmpty());
 		
 		try {
 			resource.getContents();
@@ -133,12 +132,10 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 			// expected
 		}
 		assertFalse(resource.isFullyInitialized());
-		assertTrue(resource.doGetContents().isEmpty());
 		assertTrue(resource.getErrors().isEmpty());
 		
-		resource.getContents();
+		assertFalse(resource.getContents().isEmpty());
 		assertTrue(resource.isFullyInitialized());
-		assertFalse(resource.doGetContents().isEmpty());
 		assertTrue(resource.getErrors().isEmpty());
 	}
 	
@@ -160,7 +157,6 @@ public class DerivedStateAwareResourceTest extends AbstractXtextTests {
 		});
 		
 		assertFalse(resource.isFullyInitialized());
-		assertTrue(resource.doGetContents().isEmpty());
 		
 		try {
 			resource.getContents();
